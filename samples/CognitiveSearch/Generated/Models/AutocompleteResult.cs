@@ -44,6 +44,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AutocompleteResult"/> for deserialization. </summary>
+        internal AutocompleteResult()
+        {
+        }
+
         /// <summary> A value indicating the percentage of the index that was considered by the autocomplete request, or null if minimumCoverage was not specified in the request. </summary>
         public double? Coverage { get; }
         /// <summary> The list of returned Autocompleted items. </summary>

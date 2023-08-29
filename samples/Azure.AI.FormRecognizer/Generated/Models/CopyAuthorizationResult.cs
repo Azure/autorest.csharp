@@ -50,6 +50,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="CopyAuthorizationResult"/> for deserialization. </summary>
+        internal CopyAuthorizationResult()
+        {
+        }
+
         /// <summary> Model identifier. </summary>
         public string ModelId { get; set; }
         /// <summary> Token claim used to authorize the request. </summary>

@@ -45,6 +45,11 @@ namespace MgmtLRO.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="BarListResult"/> for deserialization. </summary>
+        internal BarListResult()
+        {
+        }
+
         /// <summary> The list of bars. </summary>
         public IReadOnlyList<BarData> Value { get; }
         /// <summary> The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes. </summary>

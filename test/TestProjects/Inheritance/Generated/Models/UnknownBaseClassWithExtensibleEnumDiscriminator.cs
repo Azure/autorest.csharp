@@ -23,5 +23,10 @@ namespace Inheritance.Models
         {
             DiscriminatorProperty = discriminatorProperty;
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownBaseClassWithExtensibleEnumDiscriminator"/> for deserialization. </summary>
+        internal UnknownBaseClassWithExtensibleEnumDiscriminator()
+        {
+        }
     }
 }

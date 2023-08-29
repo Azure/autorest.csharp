@@ -41,6 +41,11 @@ namespace required_optional.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ClassWrapper"/> for deserialization. </summary>
+        internal ClassWrapper()
+        {
+        }
+
         /// <summary> Gets the value. </summary>
         public Product Value { get; }
     }

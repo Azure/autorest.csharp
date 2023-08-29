@@ -47,6 +47,11 @@ namespace CognitiveSearch.Models
             Type = type ?? "freshness";
         }
 
+        /// <summary> Initializes a new instance of <see cref="FreshnessScoringFunction"/> for deserialization. </summary>
+        internal FreshnessScoringFunction()
+        {
+        }
+
         /// <summary> Parameter values for the freshness scoring function. </summary>
         public FreshnessScoringParameters Parameters { get; set; }
     }

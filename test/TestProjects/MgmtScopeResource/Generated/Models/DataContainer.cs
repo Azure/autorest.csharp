@@ -41,6 +41,11 @@ namespace MgmtScopeResource.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DataContainer"/> for deserialization. </summary>
+        internal DataContainer()
+        {
+        }
+
         /// <summary> Log Analytics workspace information. </summary>
         public WorkspaceInfo Workspace { get; }
     }

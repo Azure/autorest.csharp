@@ -42,6 +42,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ManagementPolicySchema"/> for deserialization. </summary>
+        internal ManagementPolicySchema()
+        {
+        }
+
         /// <summary> The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </summary>
         public IList<ManagementPolicyRule> Rules { get; }
     }

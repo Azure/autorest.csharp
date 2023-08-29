@@ -51,6 +51,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.ShingleTokenFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="ShingleTokenFilter"/> for deserialization. </summary>
+        internal ShingleTokenFilter()
+        {
+        }
+
         /// <summary> The maximum shingle size. Default and minimum value is 2. </summary>
         public int? MaxShingleSize { get; set; }
         /// <summary> The minimum shingle size. Default and minimum value is 2. Must be less than the value of maxShingleSize. </summary>

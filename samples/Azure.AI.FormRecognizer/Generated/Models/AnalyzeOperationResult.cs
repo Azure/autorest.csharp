@@ -47,6 +47,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AnalyzeOperationResult"/> for deserialization. </summary>
+        internal AnalyzeOperationResult()
+        {
+        }
+
         /// <summary> Operation status. </summary>
         public OperationStatus Status { get; }
         /// <summary> Date and time (UTC) when the analyze operation was submitted. </summary>

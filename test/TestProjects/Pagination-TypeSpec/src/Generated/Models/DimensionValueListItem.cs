@@ -36,6 +36,11 @@ namespace Pagination.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DimensionValueListItem"/> for deserialization. </summary>
+        internal DimensionValueListItem()
+        {
+        }
+
         /// <summary> Gets the value. </summary>
         public IReadOnlyList<string> Value { get; }
     }

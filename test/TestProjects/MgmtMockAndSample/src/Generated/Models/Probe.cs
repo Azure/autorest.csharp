@@ -47,6 +47,11 @@ namespace MgmtMockAndSample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Probe"/> for deserialization. </summary>
+        internal Probe()
+        {
+        }
+
         /// <summary> Indicate whether the probe is disabled. </summary>
         public bool DisableProbe { get; set; }
         /// <summary> Number of seconds after the App Instance has started before probes are initiated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes. </summary>

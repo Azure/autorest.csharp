@@ -46,6 +46,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SearchServiceError"/> for deserialization. </summary>
+        internal SearchServiceError()
+        {
+        }
+
         /// <summary> One of a server-defined set of error codes. </summary>
         public string Code { get; }
         /// <summary> A human-readable representation of the error. </summary>

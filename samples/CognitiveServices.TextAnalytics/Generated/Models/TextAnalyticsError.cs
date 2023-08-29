@@ -52,6 +52,11 @@ namespace CognitiveServices.TextAnalytics.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TextAnalyticsError"/> for deserialization. </summary>
+        internal TextAnalyticsError()
+        {
+        }
+
         /// <summary> Error code. </summary>
         public ErrorCodeValue Code { get; }
         /// <summary> Error message. </summary>

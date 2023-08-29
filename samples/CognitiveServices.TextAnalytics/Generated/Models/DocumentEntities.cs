@@ -54,6 +54,11 @@ namespace CognitiveServices.TextAnalytics.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DocumentEntities"/> for deserialization. </summary>
+        internal DocumentEntities()
+        {
+        }
+
         /// <summary> Unique, non-empty document identifier. </summary>
         public string Id { get; }
         /// <summary> Recognized entities in the document. </summary>

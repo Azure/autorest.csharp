@@ -47,6 +47,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.KeepTokenFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="KeepTokenFilter"/> for deserialization. </summary>
+        internal KeepTokenFilter()
+        {
+        }
+
         /// <summary> The list of words to keep. </summary>
         public IList<string> KeepWords { get; }
         /// <summary> A value indicating whether to lower case all words first. Default is false. </summary>

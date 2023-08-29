@@ -45,6 +45,11 @@ namespace MgmtScopeResource.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ResourceLinkProperties"/> for deserialization. </summary>
+        internal ResourceLinkProperties()
+        {
+        }
+
         /// <summary> The fully qualified ID of the source resource in the link. </summary>
         public string SourceId { get; }
         /// <summary> The fully qualified ID of the target resource in the link. </summary>

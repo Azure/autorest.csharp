@@ -42,6 +42,11 @@ namespace MgmtDiscriminator.Models
             Name = name;
         }
 
+        /// <summary> Initializes a new instance of <see cref="OriginGroupOverrideAction"/> for deserialization. </summary>
+        internal OriginGroupOverrideAction()
+        {
+        }
+
         /// <summary> Defines the parameters for the action. </summary>
         public OriginGroupOverrideActionParameters Parameters { get; set; }
     }

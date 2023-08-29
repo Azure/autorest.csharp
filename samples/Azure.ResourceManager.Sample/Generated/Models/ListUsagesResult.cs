@@ -56,6 +56,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ListUsagesResult"/> for deserialization. </summary>
+        internal ListUsagesResult()
+        {
+        }
+
         /// <summary>
         /// The list of compute resource usages.
         /// Serialized Name: ListUsagesResult.value

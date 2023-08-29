@@ -39,6 +39,11 @@ namespace CognitiveSearch.Models
             AdditionalProperties = additionalProperties;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SearchResult"/> for deserialization. </summary>
+        internal SearchResult()
+        {
+        }
+
         /// <summary> The relevance score of the document compared to other documents returned by the query. </summary>
         public double Score { get; }
         /// <summary> Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query. </summary>

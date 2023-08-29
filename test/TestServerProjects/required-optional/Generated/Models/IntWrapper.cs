@@ -37,6 +37,11 @@ namespace required_optional.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="IntWrapper"/> for deserialization. </summary>
+        internal IntWrapper()
+        {
+        }
+
         /// <summary> Gets the value. </summary>
         public int Value { get; }
     }

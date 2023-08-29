@@ -43,6 +43,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="OutputFieldMappingEntry"/> for deserialization. </summary>
+        internal OutputFieldMappingEntry()
+        {
+        }
+
         /// <summary> The name of the output defined by the skill. </summary>
         public string Name { get; set; }
         /// <summary> The target name of the output. It is optional and default to name. </summary>

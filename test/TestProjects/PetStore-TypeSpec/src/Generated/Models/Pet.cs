@@ -41,6 +41,11 @@ namespace PetStore.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Pet"/> for deserialization. </summary>
+        internal Pet()
+        {
+        }
+
         /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
         /// <summary> Gets or sets the tag. </summary>

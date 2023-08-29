@@ -51,6 +51,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="CopyRequest"/> for deserialization. </summary>
+        internal CopyRequest()
+        {
+        }
+
         /// <summary> Azure Resource Id of the target Form Recognizer resource where the model is copied to. </summary>
         public string TargetResourceId { get; }
         /// <summary> Location of the target Azure resource. A valid Azure region name supported by Cognitive Services. </summary>

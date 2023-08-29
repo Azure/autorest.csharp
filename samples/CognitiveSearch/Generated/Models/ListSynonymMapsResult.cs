@@ -42,6 +42,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ListSynonymMapsResult"/> for deserialization. </summary>
+        internal ListSynonymMapsResult()
+        {
+        }
+
         /// <summary> The synonym maps in the Search service. </summary>
         public IReadOnlyList<SynonymMap> SynonymMaps { get; }
     }

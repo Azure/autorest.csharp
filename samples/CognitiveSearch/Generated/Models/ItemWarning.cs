@@ -49,6 +49,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ItemWarning"/> for deserialization. </summary>
+        internal ItemWarning()
+        {
+        }
+
         /// <summary> The key of the item which generated a warning. </summary>
         public string Key { get; }
         /// <summary> The message describing the warning that occurred while processing the item. </summary>

@@ -36,6 +36,11 @@ namespace MgmtScopeResource.Models
             WhatIfSettings = whatIfSettings;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DeploymentWhatIfProperties"/> for deserialization. </summary>
+        internal DeploymentWhatIfProperties()
+        {
+        }
+
         /// <summary> Optional What-If operation settings. </summary>
         internal DeploymentWhatIfSettings WhatIfSettings { get; set; }
         /// <summary> The format of the What-If results. </summary>

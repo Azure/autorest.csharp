@@ -78,6 +78,11 @@ namespace MgmtParamOrdering
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="WorkspaceData"/> for deserialization. </summary>
+        internal WorkspaceData()
+        {
+        }
+
         /// <summary> The immutable id associated with this workspace. </summary>
         public string WorkspaceId { get; }
         /// <summary> The description of this workspace. </summary>

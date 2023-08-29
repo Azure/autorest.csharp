@@ -61,6 +61,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Skills.Custom.WebApiSkill";
         }
 
+        /// <summary> Initializes a new instance of <see cref="WebApiSkill"/> for deserialization. </summary>
+        internal WebApiSkill()
+        {
+        }
+
         /// <summary> The url for the Web API. </summary>
         public string Uri { get; set; }
         /// <summary> The headers required to make the http request. </summary>

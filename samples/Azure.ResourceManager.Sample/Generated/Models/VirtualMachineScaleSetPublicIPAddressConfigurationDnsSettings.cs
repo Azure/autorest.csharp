@@ -50,6 +50,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings()
+        {
+        }
+
         /// <summary>
         /// The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings.domainNameLabel

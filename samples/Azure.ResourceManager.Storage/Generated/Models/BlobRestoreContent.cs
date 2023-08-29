@@ -46,6 +46,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="BlobRestoreContent"/> for deserialization. </summary>
+        internal BlobRestoreContent()
+        {
+        }
+
         /// <summary> Restore blob to the specified time. </summary>
         public DateTimeOffset TimeToRestore { get; set; }
         /// <summary> Blob ranges to restore. </summary>

@@ -41,6 +41,11 @@ namespace MgmtSafeFlatten.Models
             Name = name;
         }
 
+        /// <summary> Initializes a new instance of <see cref="LayerOneBarType"/> for deserialization. </summary>
+        internal LayerOneBarType()
+        {
+        }
+
         /// <summary> Defines the parameters for the type. </summary>
         public string Parameters { get; set; }
     }

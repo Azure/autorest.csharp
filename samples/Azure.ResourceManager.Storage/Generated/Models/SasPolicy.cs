@@ -45,6 +45,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SasPolicy"/> for deserialization. </summary>
+        internal SasPolicy()
+        {
+        }
+
         /// <summary> The SAS expiration period, DD.HH:MM:SS. </summary>
         public string SasExpirationPeriod { get; set; }
         /// <summary> The SAS expiration action. Can only be Log. </summary>

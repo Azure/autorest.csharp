@@ -42,6 +42,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="IndexBatch"/> for deserialization. </summary>
+        internal IndexBatch()
+        {
+        }
+
         /// <summary> The actions in the batch. </summary>
         public IList<IndexAction> Actions { get; }
     }

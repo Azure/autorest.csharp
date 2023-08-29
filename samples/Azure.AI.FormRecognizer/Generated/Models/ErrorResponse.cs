@@ -41,6 +41,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ErrorResponse"/> for deserialization. </summary>
+        internal ErrorResponse()
+        {
+        }
+
         /// <summary> Gets the error. </summary>
         public ErrorInformation Error { get; }
     }

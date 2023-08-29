@@ -67,6 +67,11 @@ namespace Azure.ResourceManager.Sample.Models
             Tags = tags;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineImageResource"/> for deserialization. </summary>
+        internal VirtualMachineImageResource()
+        {
+        }
+
         /// <summary>
         /// The name of the resource.
         /// Serialized Name: VirtualMachineImageResource.name

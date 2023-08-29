@@ -31,6 +31,11 @@ namespace _Type.Property.ValueTypes.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="FloatProperty"/> for deserialization. </summary>
+        internal FloatProperty()
+        {
+        }
+
         /// <summary> Property. </summary>
         public float Property { get; set; }
     }

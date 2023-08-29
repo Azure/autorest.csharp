@@ -51,6 +51,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMInstanceRequiredIDs"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetVMInstanceRequiredIDs()
+        {
+        }
+
         /// <summary>
         /// The virtual machine scale set instance ids.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceRequiredIDs.instanceIds

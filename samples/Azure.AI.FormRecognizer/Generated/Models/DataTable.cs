@@ -50,6 +50,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DataTable"/> for deserialization. </summary>
+        internal DataTable()
+        {
+        }
+
         /// <summary> Number of rows. </summary>
         public int Rows { get; }
         /// <summary> Number of columns. </summary>

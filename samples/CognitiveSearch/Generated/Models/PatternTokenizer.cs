@@ -45,6 +45,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.PatternTokenizer";
         }
 
+        /// <summary> Initializes a new instance of <see cref="PatternTokenizer"/> for deserialization. </summary>
+        internal PatternTokenizer()
+        {
+        }
+
         /// <summary> A regular expression pattern to match token separators. Default is an expression that matches one or more whitespace characters. </summary>
         public string Pattern { get; set; }
         /// <summary> Regular expression flags. </summary>

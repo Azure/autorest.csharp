@@ -41,6 +41,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AzureFilesIdentityBasedAuthentication"/> for deserialization. </summary>
+        internal AzureFilesIdentityBasedAuthentication()
+        {
+        }
+
         /// <summary> Indicates the directory service used. </summary>
         public DirectoryServiceOption DirectoryServiceOptions { get; set; }
         /// <summary> Required if choose AD. </summary>

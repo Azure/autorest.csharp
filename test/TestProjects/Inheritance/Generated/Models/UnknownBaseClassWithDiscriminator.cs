@@ -36,5 +36,10 @@ namespace Inheritance.Models
         {
             DiscriminatorProperty = discriminatorProperty ?? "Unknown";
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownBaseClassWithDiscriminator"/> for deserialization. </summary>
+        internal UnknownBaseClassWithDiscriminator()
+        {
+        }
     }
 }

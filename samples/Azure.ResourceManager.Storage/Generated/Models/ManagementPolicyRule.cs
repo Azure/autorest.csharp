@@ -52,6 +52,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ManagementPolicyRule"/> for deserialization. </summary>
+        internal ManagementPolicyRule()
+        {
+        }
+
         /// <summary> Rule is enabled if set to true. </summary>
         public bool? Enabled { get; set; }
         /// <summary> A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy. </summary>

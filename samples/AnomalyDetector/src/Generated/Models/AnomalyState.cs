@@ -37,6 +37,11 @@ namespace AnomalyDetector.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AnomalyState"/> for deserialization. </summary>
+        internal AnomalyState()
+        {
+        }
+
         /// <summary> The timestamp for this anomaly. </summary>
         public DateTimeOffset Timestamp { get; }
         /// <summary> The detailed value of this anomalous timestamp. </summary>

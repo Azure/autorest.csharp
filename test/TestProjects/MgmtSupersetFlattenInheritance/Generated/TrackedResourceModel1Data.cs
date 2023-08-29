@@ -47,6 +47,11 @@ namespace MgmtSupersetFlattenInheritance
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TrackedResourceModel1Data"/> for deserialization. </summary>
+        internal TrackedResourceModel1Data()
+        {
+        }
+
         /// <summary> Gets or sets the foo. </summary>
         public string Foo { get; set; }
     }

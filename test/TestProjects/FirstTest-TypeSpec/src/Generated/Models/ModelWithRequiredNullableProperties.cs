@@ -39,6 +39,11 @@ namespace FirstTestTypeSpec.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ModelWithRequiredNullableProperties"/> for deserialization. </summary>
+        internal ModelWithRequiredNullableProperties()
+        {
+        }
+
         /// <summary> required nullable primitive type. </summary>
         public int? RequiredNullablePrimitive { get; set; }
         /// <summary> required nullable extensible enum type. </summary>

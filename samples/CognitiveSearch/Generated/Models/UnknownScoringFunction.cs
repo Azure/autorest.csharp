@@ -26,5 +26,10 @@ namespace CognitiveSearch.Models
         {
             Type = type ?? "Unknown";
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownScoringFunction"/> for deserialization. </summary>
+        internal UnknownScoringFunction()
+        {
+        }
     }
 }

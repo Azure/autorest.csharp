@@ -35,6 +35,11 @@ namespace LroBasicTypeSpec.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Thing"/> for deserialization. </summary>
+        internal Thing()
+        {
+        }
+
         /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
     }

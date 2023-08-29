@@ -61,6 +61,11 @@ namespace Azure.NewProject.TypeSpec.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Thing"/> for deserialization. </summary>
+        internal Thing()
+        {
+        }
+
         /// <summary> name of the Thing. </summary>
         public string Name { get; set; }
         /// <summary> required Union. </summary>

@@ -25,5 +25,10 @@ namespace MgmtMockAndSample.Models
         {
             RuleType = ruleType;
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownFirewallPolicyRule"/> for deserialization. </summary>
+        internal UnknownFirewallPolicyRule()
+        {
+        }
     }
 }

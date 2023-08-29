@@ -57,6 +57,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupListResult"/> for deserialization. </summary>
+        internal DedicatedHostGroupListResult()
+        {
+        }
+
         /// <summary>
         /// The list of dedicated host groups
         /// Serialized Name: DedicatedHostGroupListResult.value

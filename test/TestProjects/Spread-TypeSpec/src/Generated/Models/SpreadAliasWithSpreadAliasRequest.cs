@@ -39,6 +39,11 @@ namespace SpreadTypeSpec.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithSpreadAliasRequest"/> for deserialization. </summary>
+        internal SpreadAliasWithSpreadAliasRequest()
+        {
+        }
+
         /// <summary> name of the Thing. </summary>
         public string Name { get; }
         /// <summary> age of the Thing. </summary>

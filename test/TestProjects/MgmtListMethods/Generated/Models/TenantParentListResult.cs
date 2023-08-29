@@ -45,6 +45,11 @@ namespace MgmtListMethods.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TenantParentListResult"/> for deserialization. </summary>
+        internal TenantParentListResult()
+        {
+        }
+
         /// <summary> The list of fakes. </summary>
         public IReadOnlyList<TenantParentData> Value { get; }
         /// <summary> The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes. </summary>

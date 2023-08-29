@@ -50,6 +50,11 @@ namespace MgmtDiscriminator.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="RemoteAddressMatchConditionParameters"/> for deserialization. </summary>
+        internal RemoteAddressMatchConditionParameters()
+        {
+        }
+
         /// <summary> Gets or sets the type name. </summary>
         public RemoteAddressMatchConditionParametersTypeName TypeName { get; set; }
         /// <summary> Describes operator to be matched. </summary>

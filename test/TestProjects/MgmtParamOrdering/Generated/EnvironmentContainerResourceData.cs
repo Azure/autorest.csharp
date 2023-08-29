@@ -53,6 +53,11 @@ namespace MgmtParamOrdering
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="EnvironmentContainerResourceData"/> for deserialization. </summary>
+        internal EnvironmentContainerResourceData()
+        {
+        }
+
         /// <summary> Additional attributes of the entity. </summary>
         public EnvironmentContainer Properties { get; set; }
     }

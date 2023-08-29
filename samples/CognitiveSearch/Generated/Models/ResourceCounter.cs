@@ -39,6 +39,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ResourceCounter"/> for deserialization. </summary>
+        internal ResourceCounter()
+        {
+        }
+
         /// <summary> The resource usage amount. </summary>
         public long Usage { get; }
         /// <summary> The resource amount quota. </summary>

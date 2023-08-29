@@ -26,5 +26,10 @@ namespace PetStore.Models
         internal UnknownFish(string kind, int size, Dictionary<string, BinaryData> rawData) : base(kind, size, rawData)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownFish"/> for deserialization. </summary>
+        internal UnknownFish()
+        {
+        }
     }
 }

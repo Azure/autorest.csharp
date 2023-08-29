@@ -45,6 +45,11 @@ namespace MgmtMultipleParentResource.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SubParentsListResult"/> for deserialization. </summary>
+        internal SubParentsListResult()
+        {
+        }
+
         /// <summary> The list of run commands. </summary>
         public IReadOnlyList<SubParentData> Value { get; }
         /// <summary> The uri to fetch the next page of run commands. </summary>

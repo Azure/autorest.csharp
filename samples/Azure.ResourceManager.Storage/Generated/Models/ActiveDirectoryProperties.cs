@@ -66,6 +66,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ActiveDirectoryProperties"/> for deserialization. </summary>
+        internal ActiveDirectoryProperties()
+        {
+        }
+
         /// <summary> Specifies the primary domain that the AD DNS server is authoritative for. </summary>
         public string DomainName { get; set; }
         /// <summary> Specifies the NetBIOS domain name. </summary>

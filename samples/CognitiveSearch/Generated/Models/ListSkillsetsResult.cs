@@ -42,6 +42,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ListSkillsetsResult"/> for deserialization. </summary>
+        internal ListSkillsetsResult()
+        {
+        }
+
         /// <summary> The skillsets defined in the Search service. </summary>
         public IReadOnlyList<Skillset> Skillsets { get; }
     }

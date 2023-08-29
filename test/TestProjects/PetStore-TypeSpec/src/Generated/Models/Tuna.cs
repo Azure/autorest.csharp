@@ -32,6 +32,11 @@ namespace PetStore.Models
             Fat = fat;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Tuna"/> for deserialization. </summary>
+        internal Tuna()
+        {
+        }
+
         /// <summary> The amount of fat of the tuna. </summary>
         public int Fat { get; }
     }

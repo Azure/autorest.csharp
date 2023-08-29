@@ -48,6 +48,11 @@ namespace body_complex.Models
             Fishtype = fishtype ?? "salmon";
         }
 
+        /// <summary> Initializes a new instance of <see cref="Salmon"/> for deserialization. </summary>
+        internal Salmon()
+        {
+        }
+
         /// <summary> Gets or sets the location. </summary>
         public string Location { get; set; }
         /// <summary> Gets or sets the iswild. </summary>

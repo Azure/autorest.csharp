@@ -52,6 +52,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ScoringProfile"/> for deserialization. </summary>
+        internal ScoringProfile()
+        {
+        }
+
         /// <summary> The name of the scoring profile. </summary>
         public string Name { get; set; }
         /// <summary> Parameters that boost scoring based on text matches in certain index fields. </summary>

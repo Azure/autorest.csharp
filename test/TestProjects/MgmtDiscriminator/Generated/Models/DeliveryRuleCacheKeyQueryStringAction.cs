@@ -42,6 +42,11 @@ namespace MgmtDiscriminator.Models
             Name = name;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleCacheKeyQueryStringAction"/> for deserialization. </summary>
+        internal DeliveryRuleCacheKeyQueryStringAction()
+        {
+        }
+
         /// <summary> Defines the parameters for the action. </summary>
         public CacheKeyQueryStringActionParameters Parameters { get; set; }
     }

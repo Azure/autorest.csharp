@@ -33,6 +33,11 @@ namespace _Type.Property.Optionality.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="RequiredAndOptionalProperty"/> for deserialization. </summary>
+        internal RequiredAndOptionalProperty()
+        {
+        }
+
         /// <summary> optional string property. </summary>
         public string OptionalProperty { get; set; }
         /// <summary> required int property. </summary>

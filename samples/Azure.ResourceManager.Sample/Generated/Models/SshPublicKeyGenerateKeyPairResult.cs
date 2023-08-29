@@ -72,6 +72,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeyGenerateKeyPairResult"/> for deserialization. </summary>
+        internal SshPublicKeyGenerateKeyPairResult()
+        {
+        }
+
         /// <summary>
         /// Private key portion of the key pair used to authenticate to a virtual machine through ssh. The private key is returned in RFC3447 format and should be treated as a secret.
         /// Serialized Name: SshPublicKeyGenerateKeyPairResult.privateKey

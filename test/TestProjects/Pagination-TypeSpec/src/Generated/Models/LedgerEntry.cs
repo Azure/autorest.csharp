@@ -39,6 +39,11 @@ namespace Pagination.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="LedgerEntry"/> for deserialization. </summary>
+        internal LedgerEntry()
+        {
+        }
+
         /// <summary> Contents of the ledger entry. </summary>
         public string Contents { get; }
         /// <summary> Gets the collection id. </summary>

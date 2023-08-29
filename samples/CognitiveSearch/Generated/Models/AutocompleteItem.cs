@@ -46,6 +46,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AutocompleteItem"/> for deserialization. </summary>
+        internal AutocompleteItem()
+        {
+        }
+
         /// <summary> The completed term. </summary>
         public string Text { get; }
         /// <summary> The query along with the completed term. </summary>

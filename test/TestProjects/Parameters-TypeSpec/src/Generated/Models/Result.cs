@@ -35,6 +35,11 @@ namespace ParametersCadl.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Result"/> for deserialization. </summary>
+        internal Result()
+        {
+        }
+
         /// <summary> Gets the id. </summary>
         public string Id { get; }
     }

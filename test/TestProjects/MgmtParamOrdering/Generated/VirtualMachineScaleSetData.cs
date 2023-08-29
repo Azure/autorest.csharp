@@ -48,6 +48,11 @@ namespace MgmtParamOrdering
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetData"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetData()
+        {
+        }
+
         /// <summary> The virtual machine scale set zones. NOTE: Availability zones can only be set when you create the scale set. </summary>
         public IList<string> Zones { get; }
     }

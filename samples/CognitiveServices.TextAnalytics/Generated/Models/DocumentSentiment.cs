@@ -63,6 +63,11 @@ namespace CognitiveServices.TextAnalytics.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DocumentSentiment"/> for deserialization. </summary>
+        internal DocumentSentiment()
+        {
+        }
+
         /// <summary> Unique, non-empty document identifier. </summary>
         public string Id { get; }
         /// <summary> Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). </summary>

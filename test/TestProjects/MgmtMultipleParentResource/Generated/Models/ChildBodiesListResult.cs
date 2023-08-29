@@ -45,6 +45,11 @@ namespace MgmtMultipleParentResource.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ChildBodiesListResult"/> for deserialization. </summary>
+        internal ChildBodiesListResult()
+        {
+        }
+
         /// <summary> The list of run commands. </summary>
         public IReadOnlyList<ChildBodyData> Value { get; }
         /// <summary> The uri to fetch the next page of run commands. </summary>

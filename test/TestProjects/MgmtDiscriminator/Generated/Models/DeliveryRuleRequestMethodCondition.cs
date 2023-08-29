@@ -42,6 +42,11 @@ namespace MgmtDiscriminator.Models
             Name = name;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleRequestMethodCondition"/> for deserialization. </summary>
+        internal DeliveryRuleRequestMethodCondition()
+        {
+        }
+
         /// <summary> Defines the parameters for the condition. </summary>
         public RequestMethodMatchConditionParameters Parameters { get; set; }
     }

@@ -36,6 +36,11 @@ namespace _Type.Property.ValueTypes.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="CollectionsIntProperty"/> for deserialization. </summary>
+        internal CollectionsIntProperty()
+        {
+        }
+
         /// <summary> Property. </summary>
         public IList<int> Property { get; }
     }

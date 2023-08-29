@@ -37,6 +37,11 @@ namespace constants.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="NoModelAsStringRequiredTwoValueNoDefault"/> for deserialization. </summary>
+        internal NoModelAsStringRequiredTwoValueNoDefault()
+        {
+        }
+
         /// <summary> Gets the parameter. </summary>
         public NoModelAsStringRequiredTwoValueNoDefaultEnum Parameter { get; }
     }

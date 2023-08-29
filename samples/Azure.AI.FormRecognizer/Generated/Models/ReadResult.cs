@@ -59,6 +59,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ReadResult"/> for deserialization. </summary>
+        internal ReadResult()
+        {
+        }
+
         /// <summary> The 1-based page number in the input document. </summary>
         public int Page { get; }
         /// <summary> The general orientation of the text in clockwise direction, measured in degrees between (-180, 180]. </summary>

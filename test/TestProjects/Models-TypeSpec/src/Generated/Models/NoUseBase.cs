@@ -35,6 +35,11 @@ namespace ModelsTypeSpec.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="NoUseBase"/> for deserialization. </summary>
+        internal NoUseBase()
+        {
+        }
+
         /// <summary> base model property. </summary>
         public string BaseModelProp { get; }
     }

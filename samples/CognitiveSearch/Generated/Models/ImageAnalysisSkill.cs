@@ -53,6 +53,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Skills.Vision.ImageAnalysisSkill";
         }
 
+        /// <summary> Initializes a new instance of <see cref="ImageAnalysisSkill"/> for deserialization. </summary>
+        internal ImageAnalysisSkill()
+        {
+        }
+
         /// <summary> A value indicating which language code to use. Default is en. </summary>
         public ImageAnalysisSkillLanguage? DefaultLanguageCode { get; set; }
         /// <summary> A list of visual features. </summary>

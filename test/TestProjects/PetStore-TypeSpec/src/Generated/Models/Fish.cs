@@ -39,6 +39,11 @@ namespace PetStore.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Fish"/> for deserialization. </summary>
+        internal Fish()
+        {
+        }
+
         /// <summary> Discriminator. </summary>
         internal string Kind { get; set; }
         /// <summary> The size of the fish. </summary>

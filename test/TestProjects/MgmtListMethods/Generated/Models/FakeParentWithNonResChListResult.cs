@@ -45,6 +45,11 @@ namespace MgmtListMethods.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="FakeParentWithNonResChListResult"/> for deserialization. </summary>
+        internal FakeParentWithNonResChListResult()
+        {
+        }
+
         /// <summary> List. </summary>
         public IReadOnlyList<FakeParentWithNonResChData> Value { get; }
         /// <summary> The URI to fetch the next page. Call ListNext() with this URI to fetch the next page. </summary>

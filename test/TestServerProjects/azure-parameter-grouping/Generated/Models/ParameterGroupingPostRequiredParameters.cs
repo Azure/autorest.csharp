@@ -49,6 +49,11 @@ namespace azure_parameter_grouping.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostRequiredParameters"/> for deserialization. </summary>
+        internal ParameterGroupingPostRequiredParameters()
+        {
+        }
+
         /// <summary> Gets or sets the custom header. </summary>
         public string CustomHeader { get; set; }
         /// <summary> Query parameter with default. </summary>

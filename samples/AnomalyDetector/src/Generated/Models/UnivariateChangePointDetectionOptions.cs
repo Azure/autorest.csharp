@@ -74,6 +74,11 @@ namespace AnomalyDetector.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="UnivariateChangePointDetectionOptions"/> for deserialization. </summary>
+        internal UnivariateChangePointDetectionOptions()
+        {
+        }
+
         /// <summary>
         /// Time series data points. Points should be sorted by timestamp in ascending
         /// order to match the change point detection result.

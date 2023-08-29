@@ -45,6 +45,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ModelsSummary"/> for deserialization. </summary>
+        internal ModelsSummary()
+        {
+        }
+
         /// <summary> Current count of trained custom models. </summary>
         public int Count { get; }
         /// <summary> Max number of models that can be trained for this account. </summary>

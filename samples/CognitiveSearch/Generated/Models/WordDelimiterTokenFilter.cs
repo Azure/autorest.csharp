@@ -60,6 +60,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.WordDelimiterTokenFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="WordDelimiterTokenFilter"/> for deserialization. </summary>
+        internal WordDelimiterTokenFilter()
+        {
+        }
+
         /// <summary> A value indicating whether to generate part words. If set, causes parts of words to be generated; for example "AzureSearch" becomes "Azure" "Search". Default is true. </summary>
         public bool? GenerateWordParts { get; set; }
         /// <summary> A value indicating whether to generate number subwords. Default is true. </summary>

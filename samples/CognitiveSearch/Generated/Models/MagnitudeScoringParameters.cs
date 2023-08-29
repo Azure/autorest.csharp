@@ -43,6 +43,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="MagnitudeScoringParameters"/> for deserialization. </summary>
+        internal MagnitudeScoringParameters()
+        {
+        }
+
         /// <summary> The field value at which boosting starts. </summary>
         public double BoostingRangeStart { get; set; }
         /// <summary> The field value at which boosting ends. </summary>

@@ -47,6 +47,11 @@ namespace MgmtListMethods
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="FakeParentWithAncestorWithLocData"/> for deserialization. </summary>
+        internal FakeParentWithAncestorWithLocData()
+        {
+        }
+
         /// <summary> specifies the bar. </summary>
         public string Bar { get; set; }
     }

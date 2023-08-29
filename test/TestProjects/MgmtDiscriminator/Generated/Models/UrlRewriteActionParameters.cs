@@ -52,6 +52,11 @@ namespace MgmtDiscriminator.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="UrlRewriteActionParameters"/> for deserialization. </summary>
+        internal UrlRewriteActionParameters()
+        {
+        }
+
         /// <summary> Gets or sets the type name. </summary>
         public UrlRewriteActionParametersTypeName TypeName { get; set; }
         /// <summary> define a request URI pattern that identifies the type of requests that may be rewritten. If value is blank, all strings are matched. </summary>

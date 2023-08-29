@@ -35,6 +35,11 @@ namespace Azure.NewProject.TypeSpec.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Friend"/> for deserialization. </summary>
+        internal Friend()
+        {
+        }
+
         /// <summary> name of the NotFriend. </summary>
         public string Name { get; set; }
     }

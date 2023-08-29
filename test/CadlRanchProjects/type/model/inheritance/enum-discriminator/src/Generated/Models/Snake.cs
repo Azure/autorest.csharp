@@ -39,6 +39,11 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Snake"/> for deserialization. </summary>
+        internal Snake()
+        {
+        }
+
         /// <summary> discriminator property. </summary>
         internal SnakeKind Kind { get; set; }
         /// <summary> Length of the snake. </summary>

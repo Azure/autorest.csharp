@@ -57,6 +57,11 @@ namespace MgmtRenameRules.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionListResult"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetExtensionListResult()
+        {
+        }
+
         /// <summary>
         /// The list of VM scale set extensions.
         /// Serialized Name: VirtualMachineScaleSetExtensionListResult.value

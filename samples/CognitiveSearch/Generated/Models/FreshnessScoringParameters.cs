@@ -37,6 +37,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="FreshnessScoringParameters"/> for deserialization. </summary>
+        internal FreshnessScoringParameters()
+        {
+        }
+
         /// <summary> The expiration period after which boosting will stop for a particular document. </summary>
         public TimeSpan BoostingDuration { get; set; }
     }

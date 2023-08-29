@@ -51,6 +51,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Suggester"/> for deserialization. </summary>
+        internal Suggester()
+        {
+        }
+
         /// <summary> The name of the suggester. </summary>
         public string Name { get; set; }
         /// <summary> A value indicating the capabilities of the suggester. </summary>

@@ -97,6 +97,11 @@ namespace Azure.ResourceManager.Sample
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionData"/> for deserialization. </summary>
+        internal VirtualMachineExtensionData()
+        {
+        }
+
         /// <summary>
         /// How the extension handler should be forced to update even if the extension configuration has not changed.
         /// Serialized Name: VirtualMachineExtension.properties.forceUpdateTag

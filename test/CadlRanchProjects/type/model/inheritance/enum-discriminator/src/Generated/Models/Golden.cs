@@ -27,5 +27,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         internal Golden(DogKind kind, int weight, Dictionary<string, BinaryData> rawData) : base(kind, weight, rawData)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="Golden"/> for deserialization. </summary>
+        internal Golden()
+        {
+        }
     }
 }

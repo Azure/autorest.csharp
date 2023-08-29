@@ -35,6 +35,11 @@ namespace additionalProperties.Models
             Friendly = friendly;
         }
 
+        /// <summary> Initializes a new instance of <see cref="CatAPTrue"/> for deserialization. </summary>
+        internal CatAPTrue()
+        {
+        }
+
         /// <summary> Gets or sets the friendly. </summary>
         public bool? Friendly { get; set; }
     }

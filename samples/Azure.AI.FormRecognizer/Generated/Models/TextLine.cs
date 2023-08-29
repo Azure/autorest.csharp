@@ -54,6 +54,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TextLine"/> for deserialization. </summary>
+        internal TextLine()
+        {
+        }
+
         /// <summary> The text content of the line. </summary>
         public string Text { get; }
         /// <summary> Bounding box of an extracted line. </summary>

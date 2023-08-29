@@ -44,5 +44,10 @@ namespace CognitiveSearch.Models
         {
             OdataType = odataType ?? "#Microsoft.Skills.Util.ShaperSkill";
         }
+
+        /// <summary> Initializes a new instance of <see cref="ShaperSkill"/> for deserialization. </summary>
+        internal ShaperSkill()
+        {
+        }
     }
 }

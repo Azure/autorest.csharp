@@ -45,6 +45,11 @@ namespace MgmtParamOrdering.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostListResult"/> for deserialization. </summary>
+        internal DedicatedHostListResult()
+        {
+        }
+
         /// <summary> The list of dedicated hosts. </summary>
         public IReadOnlyList<DedicatedHostData> Value { get; }
         /// <summary> The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts. </summary>

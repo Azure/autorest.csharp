@@ -45,6 +45,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="LeaseShareContent"/> for deserialization. </summary>
+        internal LeaseShareContent()
+        {
+        }
+
         /// <summary> Specifies the lease action. Can be one of the available actions. </summary>
         public LeaseShareAction Action { get; }
         /// <summary> Identifies the lease. Can be specified in any valid GUID string format. </summary>

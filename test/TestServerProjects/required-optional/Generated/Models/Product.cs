@@ -39,6 +39,11 @@ namespace required_optional.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Product"/> for deserialization. </summary>
+        internal Product()
+        {
+        }
+
         /// <summary> Gets the id. </summary>
         public int Id { get; }
         /// <summary> Gets or sets the name. </summary>

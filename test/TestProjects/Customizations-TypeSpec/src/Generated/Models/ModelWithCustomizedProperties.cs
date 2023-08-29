@@ -85,5 +85,10 @@ namespace CustomizationsInTsp.Models
             GoodListOfDictionaryName = goodListOfDictionaryName;
             _rawData = rawData;
         }
+
+        /// <summary> Initializes a new instance of <see cref="ModelWithCustomizedProperties"/> for deserialization. </summary>
+        internal ModelWithCustomizedProperties()
+        {
+        }
     }
 }

@@ -50,6 +50,11 @@ namespace body_complex.Models
             Fishtype = fishtype ?? "shark";
         }
 
+        /// <summary> Initializes a new instance of <see cref="Shark"/> for deserialization. </summary>
+        internal Shark()
+        {
+        }
+
         /// <summary> Gets or sets the age. </summary>
         public int? Age { get; set; }
         /// <summary> Gets or sets the birthday. </summary>

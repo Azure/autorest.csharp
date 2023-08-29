@@ -31,6 +31,11 @@ namespace Encode.Datetime.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="UnixTimestampDatetimeProperty"/> for deserialization. </summary>
+        internal UnixTimestampDatetimeProperty()
+        {
+        }
+
         /// <summary> Gets or sets the value. </summary>
         public DateTimeOffset Value { get; set; }
     }

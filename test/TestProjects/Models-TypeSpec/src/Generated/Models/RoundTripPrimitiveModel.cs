@@ -70,6 +70,11 @@ namespace ModelsTypeSpec.Models
             RequiredCollectionWithNullableFloatElement = requiredCollectionWithNullableFloatElement;
         }
 
+        /// <summary> Initializes a new instance of <see cref="RoundTripPrimitiveModel"/> for deserialization. </summary>
+        internal RoundTripPrimitiveModel()
+        {
+        }
+
         /// <summary> Required string, illustrating a reference type property. </summary>
         public string RequiredString { get; set; }
         /// <summary> Required int, illustrating a value type property. </summary>

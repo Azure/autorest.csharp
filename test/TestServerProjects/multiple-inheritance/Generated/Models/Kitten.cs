@@ -40,6 +40,11 @@ namespace multiple_inheritance.Models
             EatsMiceYet = eatsMiceYet;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Kitten"/> for deserialization. </summary>
+        internal Kitten()
+        {
+        }
+
         /// <summary> Gets or sets the eats mice yet. </summary>
         public bool? EatsMiceYet { get; set; }
     }

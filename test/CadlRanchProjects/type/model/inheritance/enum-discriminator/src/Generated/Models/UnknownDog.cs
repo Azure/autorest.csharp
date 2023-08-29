@@ -26,5 +26,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         internal UnknownDog(DogKind kind, int weight, Dictionary<string, BinaryData> rawData) : base(kind, weight, rawData)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownDog"/> for deserialization. </summary>
+        internal UnknownDog()
+        {
+        }
     }
 }

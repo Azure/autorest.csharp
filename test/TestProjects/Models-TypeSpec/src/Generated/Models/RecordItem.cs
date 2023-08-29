@@ -28,5 +28,10 @@ namespace ModelsTypeSpec.Models
         internal RecordItem(IList<CollectionItem> requiredList, Dictionary<string, BinaryData> rawData) : base(requiredList, rawData)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="RecordItem"/> for deserialization. </summary>
+        internal RecordItem()
+        {
+        }
     }
 }

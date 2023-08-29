@@ -43,6 +43,11 @@ namespace MgmtDiscriminator.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="UrlSigningActionParameters"/> for deserialization. </summary>
+        internal UrlSigningActionParameters()
+        {
+        }
+
         /// <summary> Gets or sets the type name. </summary>
         public UrlSigningActionParametersTypeName TypeName { get; set; }
         /// <summary> Algorithm to use for URL signing. </summary>

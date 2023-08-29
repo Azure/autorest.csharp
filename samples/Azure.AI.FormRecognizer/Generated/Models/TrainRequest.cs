@@ -45,6 +45,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TrainRequest"/> for deserialization. </summary>
+        internal TrainRequest()
+        {
+        }
+
         /// <summary> Source path containing the training documents. </summary>
         public string Source { get; }
         /// <summary> Filter to apply to the documents in the source path for training. </summary>

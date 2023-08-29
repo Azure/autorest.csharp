@@ -89,6 +89,11 @@ namespace Azure.ResourceManager.Sample.Models
             Disallowed = disallowed;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineImage"/> for deserialization. </summary>
+        internal VirtualMachineImage()
+        {
+        }
+
         /// <summary>
         /// Used for establishing the purchase context of any 3rd Party artifact through MarketPlace.
         /// Serialized Name: VirtualMachineImage.properties.plan

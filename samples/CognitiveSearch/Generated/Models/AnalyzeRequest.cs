@@ -51,6 +51,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AnalyzeRequest"/> for deserialization. </summary>
+        internal AnalyzeRequest()
+        {
+        }
+
         /// <summary> The text to break into tokens. </summary>
         public string Text { get; }
         /// <summary> The name of the analyzer to use to break the given text. If this parameter is not specified, you must specify a tokenizer instead. The tokenizer and analyzer parameters are mutually exclusive. </summary>

@@ -39,6 +39,11 @@ namespace FirstTestTypeSpec.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ModelWithFormat"/> for deserialization. </summary>
+        internal ModelWithFormat()
+        {
+        }
+
         /// <summary> url format. </summary>
         public Uri SourceUrl { get; }
         /// <summary> uuid format. </summary>

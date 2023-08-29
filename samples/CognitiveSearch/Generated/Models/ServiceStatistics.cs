@@ -46,6 +46,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ServiceStatistics"/> for deserialization. </summary>
+        internal ServiceStatistics()
+        {
+        }
+
         /// <summary> Service level resource counters. </summary>
         public ServiceCounters Counters { get; }
         /// <summary> Service level general limits. </summary>

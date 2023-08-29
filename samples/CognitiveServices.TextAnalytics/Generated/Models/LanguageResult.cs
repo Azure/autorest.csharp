@@ -54,6 +54,11 @@ namespace CognitiveServices.TextAnalytics.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="LanguageResult"/> for deserialization. </summary>
+        internal LanguageResult()
+        {
+        }
+
         /// <summary> Response by document. </summary>
         public IReadOnlyList<DocumentLanguage> Documents { get; }
         /// <summary> Errors by document id. </summary>

@@ -53,6 +53,11 @@ namespace xml_service.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ContainerProperties"/> for deserialization. </summary>
+        internal ContainerProperties()
+        {
+        }
+
         /// <summary> Gets the last modified. </summary>
         public DateTimeOffset LastModified { get; }
         /// <summary> Gets the etag. </summary>

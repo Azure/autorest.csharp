@@ -49,6 +49,11 @@ namespace body_formdata_urlencoded.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema"/> for deserialization. </summary>
+        internal PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema()
+        {
+        }
+
         /// <summary> Constant part of a formdata body. </summary>
         public PostContentSchemaGrantType GrantType { get; }
         /// <summary> Indicates the name of your Azure container registry. </summary>

@@ -43,6 +43,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="RestorePolicyProperties"/> for deserialization. </summary>
+        internal RestorePolicyProperties()
+        {
+        }
+
         /// <summary> Blob restore is enabled if set to true. </summary>
         public bool Enabled { get; set; }
         /// <summary> how long this blob can be restored. It should be great than zero and less than DeleteRetentionPolicy.days. </summary>

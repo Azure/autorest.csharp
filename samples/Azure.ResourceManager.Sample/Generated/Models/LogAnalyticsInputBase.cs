@@ -85,6 +85,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="LogAnalyticsInputBase"/> for deserialization. </summary>
+        internal LogAnalyticsInputBase()
+        {
+        }
+
         /// <summary>
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri

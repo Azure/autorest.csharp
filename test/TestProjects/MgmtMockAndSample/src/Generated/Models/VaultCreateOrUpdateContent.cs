@@ -51,6 +51,11 @@ namespace MgmtMockAndSample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VaultCreateOrUpdateContent"/> for deserialization. </summary>
+        internal VaultCreateOrUpdateContent()
+        {
+        }
+
         /// <summary> The supported Azure location where the key vault should be created. </summary>
         public AzureLocation Location { get; }
         /// <summary> The tags that will be assigned to the key vault. </summary>

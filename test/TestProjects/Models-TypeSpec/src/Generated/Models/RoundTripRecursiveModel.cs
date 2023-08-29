@@ -37,6 +37,11 @@ namespace ModelsTypeSpec.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="RoundTripRecursiveModel"/> for deserialization. </summary>
+        internal RoundTripRecursiveModel()
+        {
+        }
+
         /// <summary> Message. </summary>
         public string Message { get; set; }
         /// <summary> Required Record. </summary>

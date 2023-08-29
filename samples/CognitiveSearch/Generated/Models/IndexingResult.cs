@@ -51,6 +51,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="IndexingResult"/> for deserialization. </summary>
+        internal IndexingResult()
+        {
+        }
+
         /// <summary> The key of a document that was in the indexing request. </summary>
         public string Key { get; }
         /// <summary> The error message explaining why the indexing operation failed for the document identified by the key; null if indexing succeeded. </summary>

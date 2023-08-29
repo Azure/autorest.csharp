@@ -31,6 +31,11 @@ namespace Projection.ProjectedName.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="JsonProjectedNameModel"/> for deserialization. </summary>
+        internal JsonProjectedNameModel()
+        {
+        }
+
         /// <summary> Pass in true. </summary>
         public bool DefaultName { get; }
     }

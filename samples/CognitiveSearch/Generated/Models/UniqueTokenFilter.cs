@@ -41,6 +41,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.UniqueTokenFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="UniqueTokenFilter"/> for deserialization. </summary>
+        internal UniqueTokenFilter()
+        {
+        }
+
         /// <summary> A value indicating whether to remove duplicates only at the same position. Default is false. </summary>
         public bool? OnlyOnSamePosition { get; set; }
     }

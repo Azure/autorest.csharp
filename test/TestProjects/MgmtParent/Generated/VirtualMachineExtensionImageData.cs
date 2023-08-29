@@ -47,6 +47,11 @@ namespace MgmtParent
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionImageData"/> for deserialization. </summary>
+        internal VirtualMachineExtensionImageData()
+        {
+        }
+
         /// <summary> specifies the bar. </summary>
         public string Bar { get; set; }
     }

@@ -48,6 +48,11 @@ namespace CognitiveServices.TextAnalytics.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="MultiLanguageInput"/> for deserialization. </summary>
+        internal MultiLanguageInput()
+        {
+        }
+
         /// <summary> A unique, non-empty document identifier. </summary>
         public string Id { get; }
         /// <summary> The input text to process. </summary>

@@ -49,6 +49,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.CommonGramTokenFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="CommonGramTokenFilter"/> for deserialization. </summary>
+        internal CommonGramTokenFilter()
+        {
+        }
+
         /// <summary> The set of common words. </summary>
         public IList<string> CommonWords { get; }
         /// <summary> A value indicating whether common words matching will be case insensitive. Default is false. </summary>

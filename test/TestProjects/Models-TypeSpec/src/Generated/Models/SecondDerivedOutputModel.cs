@@ -30,6 +30,11 @@ namespace ModelsTypeSpec.Models
             Second = second;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SecondDerivedOutputModel"/> for deserialization. </summary>
+        internal SecondDerivedOutputModel()
+        {
+        }
+
         /// <summary> Gets the second. </summary>
         public bool Second { get; }
     }

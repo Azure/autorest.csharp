@@ -45,6 +45,11 @@ namespace MgmtPropertyBag.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="BarListResult"/> for deserialization. </summary>
+        internal BarListResult()
+        {
+        }
+
         /// <summary> The list of bar. </summary>
         public IReadOnlyList<BarData> Value { get; }
         /// <summary> The uri to fetch the next page of bar. Call ListNext() with this to fetch the next page. </summary>

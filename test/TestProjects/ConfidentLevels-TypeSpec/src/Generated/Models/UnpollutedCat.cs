@@ -37,6 +37,11 @@ namespace ConfidentLevelsInTsp.Models
             Meow = meow;
         }
 
+        /// <summary> Initializes a new instance of <see cref="UnpollutedCat"/> for deserialization. </summary>
+        internal UnpollutedCat()
+        {
+        }
+
         /// <summary> Meow. </summary>
         public string Meow { get; set; }
     }

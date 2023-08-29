@@ -43,6 +43,11 @@ namespace AnomalyDetector.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="MultivariateDetectionResult"/> for deserialization. </summary>
+        internal MultivariateDetectionResult()
+        {
+        }
+
         /// <summary> Result identifier, which is used to fetch the results of an inference call. </summary>
         public Guid ResultId { get; }
         /// <summary> Multivariate anomaly detection status. </summary>

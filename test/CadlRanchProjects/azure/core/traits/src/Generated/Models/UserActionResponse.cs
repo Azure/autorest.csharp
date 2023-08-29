@@ -35,6 +35,11 @@ namespace _Specs_.Azure.Core.Traits.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="UserActionResponse"/> for deserialization. </summary>
+        internal UserActionResponse()
+        {
+        }
+
         /// <summary> User action result. </summary>
         public string UserActionResult { get; }
     }

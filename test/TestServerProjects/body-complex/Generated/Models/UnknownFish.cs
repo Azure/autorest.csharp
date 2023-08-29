@@ -29,5 +29,10 @@ namespace body_complex.Models
         {
             Fishtype = fishtype ?? "Unknown";
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownFish"/> for deserialization. </summary>
+        internal UnknownFish()
+        {
+        }
     }
 }

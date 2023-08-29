@@ -60,6 +60,11 @@ namespace MgmtPropertyChooser.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtension"/> for deserialization. </summary>
+        internal VirtualMachineExtension()
+        {
+        }
+
         /// <summary> How the extension handler should be forced to update even if the extension configuration has not changed. </summary>
         public string ForceUpdateTag { get; set; }
         /// <summary> The name of the extension handler publisher. </summary>

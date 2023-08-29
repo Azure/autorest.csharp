@@ -43,6 +43,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.LengthTokenFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="LengthTokenFilter"/> for deserialization. </summary>
+        internal LengthTokenFilter()
+        {
+        }
+
         /// <summary> The minimum length in characters. Default is 0. Maximum is 300. Must be less than the value of max. </summary>
         public int? Min { get; set; }
         /// <summary> The maximum length in characters. Default and maximum is 300. </summary>

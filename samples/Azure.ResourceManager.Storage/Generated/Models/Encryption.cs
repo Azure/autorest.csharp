@@ -45,6 +45,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Encryption"/> for deserialization. </summary>
+        internal Encryption()
+        {
+        }
+
         /// <summary> List of services which support encryption. </summary>
         public EncryptionServices Services { get; set; }
         /// <summary> The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage, Microsoft.Keyvault. </summary>

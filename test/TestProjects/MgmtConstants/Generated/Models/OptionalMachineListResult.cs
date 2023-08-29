@@ -45,6 +45,11 @@ namespace MgmtConstants.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="OptionalMachineListResult"/> for deserialization. </summary>
+        internal OptionalMachineListResult()
+        {
+        }
+
         /// <summary> The list of virtual machines. </summary>
         public IReadOnlyList<OptionalMachineData> Value { get; }
         /// <summary> The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines. </summary>

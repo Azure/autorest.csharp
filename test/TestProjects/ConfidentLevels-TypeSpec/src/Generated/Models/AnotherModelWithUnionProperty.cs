@@ -35,6 +35,11 @@ namespace ConfidentLevelsInTsp.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AnotherModelWithUnionProperty"/> for deserialization. </summary>
+        internal AnotherModelWithUnionProperty()
+        {
+        }
+
         /// <summary> This is a union property. </summary>
         public object UnionProperty { get; }
     }

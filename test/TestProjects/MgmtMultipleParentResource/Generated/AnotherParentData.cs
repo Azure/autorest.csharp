@@ -59,6 +59,11 @@ namespace MgmtMultipleParentResource
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AnotherParentData"/> for deserialization. </summary>
+        internal AnotherParentData()
+        {
+        }
+
         /// <summary> Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete. </summary>
         public bool? AsyncExecution { get; set; }
         /// <summary> Specifies the user account on the VM when executing the run command. </summary>

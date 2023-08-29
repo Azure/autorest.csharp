@@ -35,6 +35,11 @@ namespace Parameters.Spread.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SpreadAsRequestParameterRequest"/> for deserialization. </summary>
+        internal SpreadAsRequestParameterRequest()
+        {
+        }
+
         /// <summary> Gets the name. </summary>
         public string Name { get; }
     }

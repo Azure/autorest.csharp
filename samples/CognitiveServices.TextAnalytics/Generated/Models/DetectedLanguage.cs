@@ -50,6 +50,11 @@ namespace CognitiveServices.TextAnalytics.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DetectedLanguage"/> for deserialization. </summary>
+        internal DetectedLanguage()
+        {
+        }
+
         /// <summary> Long name of a detected language (e.g. English, French). </summary>
         public string Name { get; }
         /// <summary> A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr). </summary>

@@ -53,6 +53,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="StorageSkuInformation"/> for deserialization. </summary>
+        internal StorageSkuInformation()
+        {
+        }
+
         /// <summary> The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType. </summary>
         public StorageSkuName Name { get; }
         /// <summary> The SKU tier. This is based on the SKU name. </summary>

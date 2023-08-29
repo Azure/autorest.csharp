@@ -42,6 +42,11 @@ namespace ConfidentLevelsInTsp.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="IndirectSelfReferenceModel"/> for deserialization. </summary>
+        internal IndirectSelfReferenceModel()
+        {
+        }
+
         /// <summary> Something not important. </summary>
         public string Something { get; }
         /// <summary> Reference back. </summary>

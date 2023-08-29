@@ -71,5 +71,10 @@ namespace Azure.ResourceManager.Sample.Models
         internal ThrottledRequestsContent(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime, bool? groupByThrottlePolicy, bool? groupByOperationName, bool? groupByResourceName, Dictionary<string, BinaryData> rawData) : base(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, rawData)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="ThrottledRequestsContent"/> for deserialization. </summary>
+        internal ThrottledRequestsContent()
+        {
+        }
     }
 }

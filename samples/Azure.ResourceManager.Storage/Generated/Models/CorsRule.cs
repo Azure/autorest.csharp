@@ -61,6 +61,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="CorsRule"/> for deserialization. </summary>
+        internal CorsRule()
+        {
+        }
+
         /// <summary> Required if CorsRule element is present. A list of origin domains that will be allowed via CORS, or "*" to allow all domains. </summary>
         public IList<string> AllowedOrigins { get; }
         /// <summary> Required if CorsRule element is present. A list of HTTP methods that are allowed to be executed by the origin. </summary>

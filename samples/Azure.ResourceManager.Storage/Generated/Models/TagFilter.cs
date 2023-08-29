@@ -51,6 +51,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TagFilter"/> for deserialization. </summary>
+        internal TagFilter()
+        {
+        }
+
         /// <summary> This is the filter tag name, it can have 1 - 128 characters. </summary>
         public string Name { get; set; }
         /// <summary> This is the comparison operator which is used for object comparison and filtering. Only == (equality operator) is currently supported. </summary>

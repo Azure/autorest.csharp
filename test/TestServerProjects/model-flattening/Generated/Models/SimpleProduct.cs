@@ -44,6 +44,11 @@ namespace model_flattening.Models
             OdataValue = odataValue;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SimpleProduct"/> for deserialization. </summary>
+        internal SimpleProduct()
+        {
+        }
+
         /// <summary> Display name of product. </summary>
         public string MaxProductDisplayName { get; set; }
         /// <summary> Capacity of product. For example, 4 people. </summary>

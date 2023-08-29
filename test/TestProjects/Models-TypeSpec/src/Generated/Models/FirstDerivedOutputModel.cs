@@ -30,6 +30,11 @@ namespace ModelsTypeSpec.Models
             First = first;
         }
 
+        /// <summary> Initializes a new instance of <see cref="FirstDerivedOutputModel"/> for deserialization. </summary>
+        internal FirstDerivedOutputModel()
+        {
+        }
+
         /// <summary> Gets the first. </summary>
         public bool First { get; }
     }

@@ -31,6 +31,11 @@ namespace Projection.ProjectedName.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="LanguageProjectedNameModel"/> for deserialization. </summary>
+        internal LanguageProjectedNameModel()
+        {
+        }
+
         /// <summary> Pass in true. </summary>
         public bool CSName { get; }
     }

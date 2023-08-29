@@ -48,6 +48,11 @@ namespace MgmtPartialResource
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ConfigurationProfileAssignmentData"/> for deserialization. </summary>
+        internal ConfigurationProfileAssignmentData()
+        {
+        }
+
         /// <summary> Properties of the configuration profile assignment. </summary>
         public ConfigurationProfileAssignmentProperties Properties { get; set; }
     }

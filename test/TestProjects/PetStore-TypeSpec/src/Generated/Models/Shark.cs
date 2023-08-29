@@ -36,6 +36,11 @@ namespace PetStore.Models
             Bite = bite;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Shark"/> for deserialization. </summary>
+        internal Shark()
+        {
+        }
+
         /// <summary> The bite of the shark. </summary>
         public string Bite { get; }
     }

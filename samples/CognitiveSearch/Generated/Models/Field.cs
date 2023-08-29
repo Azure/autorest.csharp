@@ -69,6 +69,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Field"/> for deserialization. </summary>
+        internal Field()
+        {
+        }
+
         /// <summary> The name of the field, which must be unique within the fields collection of the index or parent field. </summary>
         public string Name { get; set; }
         /// <summary> The data type of the field. </summary>

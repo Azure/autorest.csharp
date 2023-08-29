@@ -42,6 +42,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.ElisionTokenFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="ElisionTokenFilter"/> for deserialization. </summary>
+        internal ElisionTokenFilter()
+        {
+        }
+
         /// <summary> The set of articles to remove. </summary>
         public IList<string> Articles { get; }
     }

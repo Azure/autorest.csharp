@@ -49,6 +49,11 @@ namespace MgmtPropertyChooser.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="MgmtPropertyChooserResourceData"/> for deserialization. </summary>
+        internal MgmtPropertyChooserResourceData()
+        {
+        }
+
         /// <summary> Resource location. </summary>
         public string Location { get; set; }
         /// <summary> Resource tags. </summary>

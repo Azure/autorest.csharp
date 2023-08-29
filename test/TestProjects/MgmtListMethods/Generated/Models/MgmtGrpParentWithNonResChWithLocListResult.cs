@@ -45,6 +45,11 @@ namespace MgmtListMethods.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="MgmtGrpParentWithNonResChWithLocListResult"/> for deserialization. </summary>
+        internal MgmtGrpParentWithNonResChWithLocListResult()
+        {
+        }
+
         /// <summary> List. </summary>
         public IReadOnlyList<MgmtGrpParentWithNonResChWithLocData> Value { get; }
         /// <summary> The URI to fetch the next page. Call ListNext() with this URI to fetch the next page. </summary>

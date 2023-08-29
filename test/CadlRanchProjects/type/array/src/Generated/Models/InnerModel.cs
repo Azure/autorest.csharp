@@ -38,6 +38,11 @@ namespace _Type._Array.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="InnerModel"/> for deserialization. </summary>
+        internal InnerModel()
+        {
+        }
+
         /// <summary> Required string property. </summary>
         public string Property { get; set; }
         /// <summary> Gets the children. </summary>

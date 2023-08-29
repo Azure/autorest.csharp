@@ -48,6 +48,11 @@ namespace SpreadTypeSpec.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithOptionalPropsRequest"/> for deserialization. </summary>
+        internal SpreadAliasWithOptionalPropsRequest()
+        {
+        }
+
         /// <summary> name of the Thing. </summary>
         public string Name { get; }
         /// <summary> optional property of the Thing. </summary>

@@ -44,6 +44,11 @@ namespace MgmtExactMatchFlattenInheritance.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel2"/> for deserialization. </summary>
+        internal AzureResourceFlattenModel2()
+        {
+        }
+
         /// <summary> New property. </summary>
         public int? Foo { get; set; }
     }

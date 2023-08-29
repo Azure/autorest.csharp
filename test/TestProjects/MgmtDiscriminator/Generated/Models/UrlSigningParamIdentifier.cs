@@ -45,6 +45,11 @@ namespace MgmtDiscriminator.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="UrlSigningParamIdentifier"/> for deserialization. </summary>
+        internal UrlSigningParamIdentifier()
+        {
+        }
+
         /// <summary> Indicates the purpose of the parameter. </summary>
         public ParamIndicator ParamIndicator { get; set; }
         /// <summary> Parameter name. </summary>

@@ -54,6 +54,11 @@ namespace AnomalyDetector.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="MultivariateLastDetectionOptions"/> for deserialization. </summary>
+        internal MultivariateLastDetectionOptions()
+        {
+        }
+
         /// <summary>
         /// This contains the inference data, including the name, timestamps(ISO 8601) and
         /// values of variables.

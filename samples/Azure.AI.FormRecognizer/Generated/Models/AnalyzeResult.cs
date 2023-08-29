@@ -56,6 +56,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AnalyzeResult"/> for deserialization. </summary>
+        internal AnalyzeResult()
+        {
+        }
+
         /// <summary> Version of schema used for this result. </summary>
         public string Version { get; }
         /// <summary> Text extracted from the input. </summary>

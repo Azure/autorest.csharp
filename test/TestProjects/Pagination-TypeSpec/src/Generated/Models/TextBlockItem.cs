@@ -42,6 +42,11 @@ namespace Pagination.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TextBlockItem"/> for deserialization. </summary>
+        internal TextBlockItem()
+        {
+        }
+
         /// <summary> Block Item Id. It will be uuid. </summary>
         public string BlockItemId { get; }
         /// <summary> Block item description. </summary>

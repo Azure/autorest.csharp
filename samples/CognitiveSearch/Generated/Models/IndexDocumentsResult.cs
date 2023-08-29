@@ -42,6 +42,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="IndexDocumentsResult"/> for deserialization. </summary>
+        internal IndexDocumentsResult()
+        {
+        }
+
         /// <summary> The list of status information for each document in the indexing request. </summary>
         public IReadOnlyList<IndexingResult> Results { get; }
     }

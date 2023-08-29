@@ -26,5 +26,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal UnknownBird(string kind, int wingspan, Dictionary<string, BinaryData> rawData) : base(kind, wingspan, rawData)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownBird"/> for deserialization. </summary>
+        internal UnknownBird()
+        {
+        }
     }
 }

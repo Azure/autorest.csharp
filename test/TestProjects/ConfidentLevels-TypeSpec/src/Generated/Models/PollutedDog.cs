@@ -42,6 +42,11 @@ namespace ConfidentLevelsInTsp.Models
             Color = color;
         }
 
+        /// <summary> Initializes a new instance of <see cref="PollutedDog"/> for deserialization. </summary>
+        internal PollutedDog()
+        {
+        }
+
         /// <summary> Woof. </summary>
         public string Woof { get; set; }
         /// <summary> Color, could be specified by a string or by an array of int as RGB. </summary>

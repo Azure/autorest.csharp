@@ -45,6 +45,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.EdgeNGramTokenFilterV2";
         }
 
+        /// <summary> Initializes a new instance of <see cref="EdgeNGramTokenFilterV2"/> for deserialization. </summary>
+        internal EdgeNGramTokenFilterV2()
+        {
+        }
+
         /// <summary> The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram. </summary>
         public int? MinGram { get; set; }
         /// <summary> The maximum n-gram length. Default is 2. Maximum is 300. </summary>

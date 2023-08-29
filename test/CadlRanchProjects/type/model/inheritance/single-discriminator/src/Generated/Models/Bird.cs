@@ -39,6 +39,11 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Bird"/> for deserialization. </summary>
+        internal Bird()
+        {
+        }
+
         /// <summary> Gets or sets the kind. </summary>
         internal string Kind { get; set; }
         /// <summary> Gets or sets the wingspan. </summary>

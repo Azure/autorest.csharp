@@ -42,6 +42,11 @@ namespace MgmtMockAndSample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VaultAccessPolicyProperties"/> for deserialization. </summary>
+        internal VaultAccessPolicyProperties()
+        {
+        }
+
         /// <summary> An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID. </summary>
         public IList<AccessPolicyEntry> AccessPolicies { get; }
     }

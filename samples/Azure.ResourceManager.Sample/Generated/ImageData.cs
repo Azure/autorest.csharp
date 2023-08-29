@@ -68,6 +68,11 @@ namespace Azure.ResourceManager.Sample
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ImageData"/> for deserialization. </summary>
+        internal ImageData()
+        {
+        }
+
         /// <summary>
         /// The source virtual machine from which Image is created.
         /// Serialized Name: Image.properties.sourceVirtualMachine

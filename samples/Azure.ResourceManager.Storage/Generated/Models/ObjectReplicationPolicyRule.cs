@@ -50,6 +50,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ObjectReplicationPolicyRule"/> for deserialization. </summary>
+        internal ObjectReplicationPolicyRule()
+        {
+        }
+
         /// <summary> Rule Id is auto-generated for each new rule on destination account. It is required for put policy on source account. </summary>
         public string RuleId { get; set; }
         /// <summary> Required. Source container name. </summary>

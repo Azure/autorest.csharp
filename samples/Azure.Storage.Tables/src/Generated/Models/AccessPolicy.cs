@@ -49,6 +49,11 @@ namespace Azure.Storage.Tables.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AccessPolicy"/> for deserialization. </summary>
+        internal AccessPolicy()
+        {
+        }
+
         /// <summary> the date-time the policy is active. </summary>
         public DateTimeOffset Start { get; set; }
         /// <summary> the date-time the policy expires. </summary>

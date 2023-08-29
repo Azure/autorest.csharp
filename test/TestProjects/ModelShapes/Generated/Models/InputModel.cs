@@ -92,6 +92,11 @@ namespace ModelShapes.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="InputModel"/> for deserialization. </summary>
+        internal InputModel()
+        {
+        }
+
         /// <summary> Gets the required string. </summary>
         public string RequiredString { get; }
         /// <summary> Gets the required int. </summary>

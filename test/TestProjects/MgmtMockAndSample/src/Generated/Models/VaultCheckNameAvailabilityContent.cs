@@ -44,6 +44,11 @@ namespace MgmtMockAndSample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VaultCheckNameAvailabilityContent"/> for deserialization. </summary>
+        internal VaultCheckNameAvailabilityContent()
+        {
+        }
+
         /// <summary> The vault name. </summary>
         public string Name { get; }
         /// <summary> The type of resource, Microsoft.KeyVault/vaults. </summary>

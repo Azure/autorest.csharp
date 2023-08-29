@@ -47,6 +47,11 @@ namespace body_complex.Models
             Fishtype = fishtype ?? "goblin";
         }
 
+        /// <summary> Initializes a new instance of <see cref="Goblinshark"/> for deserialization. </summary>
+        internal Goblinshark()
+        {
+        }
+
         /// <summary> Gets or sets the jawsize. </summary>
         public int? Jawsize { get; set; }
         /// <summary> Colors possible. </summary>

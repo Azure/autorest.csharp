@@ -29,5 +29,10 @@ namespace ConfidentLevelsInTsp.Models
         internal UnknownPollutedPet(string kind, string name, Dictionary<string, BinaryData> rawData) : base(kind, name, rawData)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownPollutedPet"/> for deserialization. </summary>
+        internal UnknownPollutedPet()
+        {
+        }
     }
 }

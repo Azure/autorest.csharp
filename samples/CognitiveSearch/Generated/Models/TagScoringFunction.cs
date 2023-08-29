@@ -47,6 +47,11 @@ namespace CognitiveSearch.Models
             Type = type ?? "tag";
         }
 
+        /// <summary> Initializes a new instance of <see cref="TagScoringFunction"/> for deserialization. </summary>
+        internal TagScoringFunction()
+        {
+        }
+
         /// <summary> Parameter values for the tag scoring function. </summary>
         public TagScoringParameters Parameters { get; set; }
     }

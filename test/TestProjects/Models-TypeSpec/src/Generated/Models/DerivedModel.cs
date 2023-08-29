@@ -33,6 +33,11 @@ namespace ModelsTypeSpec.Models
             RequiredList = requiredList;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DerivedModel"/> for deserialization. </summary>
+        internal DerivedModel()
+        {
+        }
+
         /// <summary> Required collection. </summary>
         public IList<CollectionItem> RequiredList { get; }
     }

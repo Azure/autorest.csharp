@@ -51,6 +51,11 @@ namespace additionalProperties.Models
             MoreAdditionalProperties = moreAdditionalProperties;
         }
 
+        /// <summary> Initializes a new instance of <see cref="PetAPInPropertiesWithAPString"/> for deserialization. </summary>
+        internal PetAPInPropertiesWithAPString()
+        {
+        }
+
         /// <summary> Gets or sets the id. </summary>
         public int Id { get; set; }
         /// <summary> Gets or sets the name. </summary>

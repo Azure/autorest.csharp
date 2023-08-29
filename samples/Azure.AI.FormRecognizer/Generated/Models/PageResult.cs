@@ -46,6 +46,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="PageResult"/> for deserialization. </summary>
+        internal PageResult()
+        {
+        }
+
         /// <summary> Page number. </summary>
         public int Page { get; }
         /// <summary> Cluster identifier. </summary>

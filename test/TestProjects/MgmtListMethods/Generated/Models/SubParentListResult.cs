@@ -45,6 +45,11 @@ namespace MgmtListMethods.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SubParentListResult"/> for deserialization. </summary>
+        internal SubParentListResult()
+        {
+        }
+
         /// <summary> List. </summary>
         public IReadOnlyList<SubParentData> Value { get; }
         /// <summary> The URI to fetch the next page. Call ListNext() with this URI to fetch the next page. </summary>

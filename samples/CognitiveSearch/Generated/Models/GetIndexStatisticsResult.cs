@@ -41,6 +41,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="GetIndexStatisticsResult"/> for deserialization. </summary>
+        internal GetIndexStatisticsResult()
+        {
+        }
+
         /// <summary> The number of documents in the index. </summary>
         public long DocumentCount { get; }
         /// <summary> The amount of storage in bytes consumed by the index. </summary>

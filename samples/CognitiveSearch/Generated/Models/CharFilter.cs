@@ -47,6 +47,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="CharFilter"/> for deserialization. </summary>
+        internal CharFilter()
+        {
+        }
+
         /// <summary> Identifies the concrete type of the char filter. </summary>
         internal string OdataType { get; set; }
         /// <summary> The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </summary>

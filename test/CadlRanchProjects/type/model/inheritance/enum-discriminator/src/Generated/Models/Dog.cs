@@ -39,6 +39,11 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Dog"/> for deserialization. </summary>
+        internal Dog()
+        {
+        }
+
         /// <summary> discriminator property. </summary>
         internal DogKind Kind { get; set; }
         /// <summary> Weight of the dog. </summary>

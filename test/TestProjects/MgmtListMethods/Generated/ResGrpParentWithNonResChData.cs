@@ -47,6 +47,11 @@ namespace MgmtListMethods
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ResGrpParentWithNonResChData"/> for deserialization. </summary>
+        internal ResGrpParentWithNonResChData()
+        {
+        }
+
         /// <summary> specifies the bar. </summary>
         public string Bar { get; set; }
     }

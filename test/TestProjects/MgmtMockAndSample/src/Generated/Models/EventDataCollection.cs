@@ -44,6 +44,11 @@ namespace MgmtMockAndSample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="EventDataCollection"/> for deserialization. </summary>
+        internal EventDataCollection()
+        {
+        }
+
         /// <summary> this list that includes the Azure audit logs. </summary>
         public IReadOnlyList<EventData> Value { get; }
         /// <summary> Provides the link to retrieve the next set of events. </summary>

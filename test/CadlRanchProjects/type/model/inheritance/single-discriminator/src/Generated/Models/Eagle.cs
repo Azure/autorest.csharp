@@ -37,6 +37,11 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             Partner = partner;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Eagle"/> for deserialization. </summary>
+        internal Eagle()
+        {
+        }
+
         /// <summary>
         /// Gets the friends
         /// Please note <see cref="Bird"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.

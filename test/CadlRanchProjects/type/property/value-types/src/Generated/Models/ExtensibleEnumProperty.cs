@@ -31,6 +31,11 @@ namespace _Type.Property.ValueTypes.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ExtensibleEnumProperty"/> for deserialization. </summary>
+        internal ExtensibleEnumProperty()
+        {
+        }
+
         /// <summary> Property. </summary>
         public InnerEnum Property { get; set; }
     }

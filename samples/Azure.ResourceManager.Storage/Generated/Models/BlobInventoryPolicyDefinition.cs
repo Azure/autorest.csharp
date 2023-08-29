@@ -56,6 +56,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicyDefinition"/> for deserialization. </summary>
+        internal BlobInventoryPolicyDefinition()
+        {
+        }
+
         /// <summary> An object that defines the filter set. </summary>
         public BlobInventoryPolicyFilter Filters { get; set; }
         /// <summary> This is a required field, it specifies the format for the inventory files. </summary>

@@ -48,6 +48,11 @@ namespace MgmtLRO
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="FakeData"/> for deserialization. </summary>
+        internal FakeData()
+        {
+        }
+
         /// <summary> The instance view of a resource. </summary>
         public FakeProperties Properties { get; set; }
     }

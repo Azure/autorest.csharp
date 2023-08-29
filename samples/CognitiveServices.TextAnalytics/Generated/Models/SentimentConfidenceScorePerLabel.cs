@@ -45,6 +45,11 @@ namespace CognitiveServices.TextAnalytics.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SentimentConfidenceScorePerLabel"/> for deserialization. </summary>
+        internal SentimentConfidenceScorePerLabel()
+        {
+        }
+
         /// <summary> Gets the positive. </summary>
         public double Positive { get; }
         /// <summary> Gets the neutral. </summary>

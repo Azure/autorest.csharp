@@ -96,6 +96,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="StorageAccountCreateOrUpdateContent"/> for deserialization. </summary>
+        internal StorageAccountCreateOrUpdateContent()
+        {
+        }
+
         /// <summary> Required. Gets or sets the SKU name. </summary>
         public StorageSku Sku { get; }
         /// <summary> Required. Indicates the type of storage account. </summary>

@@ -54,6 +54,11 @@ namespace CognitiveServices.TextAnalytics.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="KeyPhraseResult"/> for deserialization. </summary>
+        internal KeyPhraseResult()
+        {
+        }
+
         /// <summary> Response by document. </summary>
         public IReadOnlyList<DocumentKeyPhrases> Documents { get; }
         /// <summary> Errors by document id. </summary>

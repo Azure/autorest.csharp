@@ -46,6 +46,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="BlobRestoreRange"/> for deserialization. </summary>
+        internal BlobRestoreRange()
+        {
+        }
+
         /// <summary> Blob start range. This is inclusive. Empty means account start. </summary>
         public string StartRange { get; set; }
         /// <summary> Blob end range. This is exclusive. Empty means account end. </summary>

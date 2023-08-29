@@ -42,6 +42,11 @@ namespace MgmtDiscriminator.Models
             Name = name;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleRouteConfigurationOverrideAction"/> for deserialization. </summary>
+        internal DeliveryRuleRouteConfigurationOverrideAction()
+        {
+        }
+
         /// <summary> Defines the parameters for the action. </summary>
         public RouteConfigurationOverrideActionParameters Parameters { get; set; }
     }

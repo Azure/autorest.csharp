@@ -53,6 +53,11 @@ namespace CognitiveServices.TextAnalytics.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Match"/> for deserialization. </summary>
+        internal Match()
+        {
+        }
+
         /// <summary> If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned. </summary>
         public double ConfidenceScore { get; }
         /// <summary> Entity text as appears in the request. </summary>

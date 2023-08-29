@@ -52,6 +52,11 @@ namespace MgmtMockAndSample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="MhsmPrivateLinkResource"/> for deserialization. </summary>
+        internal MhsmPrivateLinkResource()
+        {
+        }
+
         /// <summary> Group identifier of private link resource. </summary>
         public string GroupId { get; }
         /// <summary> Required member names of private link resource. </summary>

@@ -47,6 +47,11 @@ namespace MgmtListMethods
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SubParentWithLocData"/> for deserialization. </summary>
+        internal SubParentWithLocData()
+        {
+        }
+
         /// <summary> specifies the bar. </summary>
         public string Bar { get; set; }
     }

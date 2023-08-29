@@ -96,6 +96,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="OSDisk"/> for deserialization. </summary>
+        internal OSDisk()
+        {
+        }
+
         /// <summary>
         /// This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Windows** &lt;br&gt;&lt;br&gt; **Linux**
         /// Serialized Name: OSDisk.osType

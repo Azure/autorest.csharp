@@ -43,6 +43,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AzureActiveDirectoryApplicationCredentials"/> for deserialization. </summary>
+        internal AzureActiveDirectoryApplicationCredentials()
+        {
+        }
+
         /// <summary> An AAD Application ID that was granted the required access permissions to the Azure Key Vault that is to be used when encrypting your data at rest. The Application ID should not be confused with the Object ID for your AAD Application. </summary>
         public string ApplicationId { get; set; }
         /// <summary> The authentication key of the specified AAD application. </summary>

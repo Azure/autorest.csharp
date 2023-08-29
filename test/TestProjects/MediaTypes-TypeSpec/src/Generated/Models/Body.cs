@@ -35,6 +35,11 @@ namespace MultipleMediaTypes.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Body"/> for deserialization. </summary>
+        internal Body()
+        {
+        }
+
         /// <summary> Gets the id. </summary>
         public string Id { get; }
     }

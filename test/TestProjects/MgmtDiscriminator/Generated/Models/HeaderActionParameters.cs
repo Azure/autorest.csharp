@@ -51,6 +51,11 @@ namespace MgmtDiscriminator.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="HeaderActionParameters"/> for deserialization. </summary>
+        internal HeaderActionParameters()
+        {
+        }
+
         /// <summary> Gets or sets the type name. </summary>
         public HeaderActionParametersTypeName TypeName { get; set; }
         /// <summary> Action to perform. </summary>

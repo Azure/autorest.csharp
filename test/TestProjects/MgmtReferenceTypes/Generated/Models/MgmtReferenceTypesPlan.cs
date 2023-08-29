@@ -57,6 +57,11 @@ namespace Azure.ResourceManager.Fake.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="MgmtReferenceTypesPlan"/> for deserialization. </summary>
+        internal MgmtReferenceTypesPlan()
+        {
+        }
+
         /// <summary> A user defined name of the 3rd Party Artifact that is being procured. </summary>
         public string Name { get; set; }
         /// <summary> The publisher of the 3rd Party Artifact that is being bought. E.g. NewRelic. </summary>

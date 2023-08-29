@@ -42,5 +42,10 @@ namespace body_complex.Models
         {
             Fishtype = fishtype ?? "cookiecuttershark";
         }
+
+        /// <summary> Initializes a new instance of <see cref="Cookiecuttershark"/> for deserialization. </summary>
+        internal Cookiecuttershark()
+        {
+        }
     }
 }

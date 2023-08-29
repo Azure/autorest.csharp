@@ -49,6 +49,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.PatternReplaceTokenFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="PatternReplaceTokenFilter"/> for deserialization. </summary>
+        internal PatternReplaceTokenFilter()
+        {
+        }
+
         /// <summary> A regular expression pattern. </summary>
         public string Pattern { get; set; }
         /// <summary> The replacement text. </summary>

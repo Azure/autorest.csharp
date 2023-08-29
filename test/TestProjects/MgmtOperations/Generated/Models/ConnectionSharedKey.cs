@@ -49,6 +49,11 @@ namespace MgmtOperations.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ConnectionSharedKey"/> for deserialization. </summary>
+        internal ConnectionSharedKey()
+        {
+        }
+
         /// <summary> The virtual network connection shared key value. </summary>
         public string Value { get; set; }
     }

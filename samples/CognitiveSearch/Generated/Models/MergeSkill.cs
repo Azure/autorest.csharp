@@ -49,6 +49,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Skills.Text.MergeSkill";
         }
 
+        /// <summary> Initializes a new instance of <see cref="MergeSkill"/> for deserialization. </summary>
+        internal MergeSkill()
+        {
+        }
+
         /// <summary> The tag indicates the start of the merged text. By default, the tag is an empty space. </summary>
         public string InsertPreTag { get; set; }
         /// <summary> The tag indicates the end of the merged text. By default, the tag is an empty space. </summary>

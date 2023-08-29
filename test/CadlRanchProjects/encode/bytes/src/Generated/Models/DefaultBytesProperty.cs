@@ -35,6 +35,11 @@ namespace Encode.Bytes.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DefaultBytesProperty"/> for deserialization. </summary>
+        internal DefaultBytesProperty()
+        {
+        }
+
         /// <summary>
         /// Gets or sets the value
         /// <para>

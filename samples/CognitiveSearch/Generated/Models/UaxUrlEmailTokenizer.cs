@@ -41,6 +41,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.UaxUrlEmailTokenizer";
         }
 
+        /// <summary> Initializes a new instance of <see cref="UaxUrlEmailTokenizer"/> for deserialization. </summary>
+        internal UaxUrlEmailTokenizer()
+        {
+        }
+
         /// <summary> The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters. </summary>
         public int? MaxTokenLength { get; set; }
     }

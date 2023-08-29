@@ -41,6 +41,11 @@ namespace extensible_enums_swagger.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Pet"/> for deserialization. </summary>
+        internal Pet()
+        {
+        }
+
         /// <summary> name. </summary>
         public string Name { get; set; }
         /// <summary> Type of Pet. </summary>

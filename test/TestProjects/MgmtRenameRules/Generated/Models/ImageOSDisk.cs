@@ -82,6 +82,11 @@ namespace MgmtRenameRules.Models
             OSState = osState;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ImageOSDisk"/> for deserialization. </summary>
+        internal ImageOSDisk()
+        {
+        }
+
         /// <summary>
         /// This property allows you to specify the type of the OS that is included in the disk if creating a VM from a custom image. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Windows** &lt;br&gt;&lt;br&gt; **Linux**
         /// Serialized Name: ImageOSDisk.osType

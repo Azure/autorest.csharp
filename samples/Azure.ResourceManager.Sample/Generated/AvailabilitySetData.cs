@@ -80,6 +80,11 @@ namespace Azure.ResourceManager.Sample
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetData"/> for deserialization. </summary>
+        internal AvailabilitySetData()
+        {
+        }
+
         /// <summary>
         /// Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'.
         /// Serialized Name: AvailabilitySet.sku

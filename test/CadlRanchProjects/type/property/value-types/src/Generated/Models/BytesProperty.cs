@@ -35,6 +35,11 @@ namespace _Type.Property.ValueTypes.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="BytesProperty"/> for deserialization. </summary>
+        internal BytesProperty()
+        {
+        }
+
         /// <summary>
         /// Property
         /// <para>

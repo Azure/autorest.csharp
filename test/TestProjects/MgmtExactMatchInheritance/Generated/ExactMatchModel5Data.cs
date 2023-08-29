@@ -44,6 +44,11 @@ namespace MgmtExactMatchInheritance
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel5Data"/> for deserialization. </summary>
+        internal ExactMatchModel5Data()
+        {
+        }
+
         /// <summary> Gets or sets the new. </summary>
         public string New { get; set; }
     }

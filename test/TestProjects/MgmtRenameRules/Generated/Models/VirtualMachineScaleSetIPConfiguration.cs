@@ -103,6 +103,11 @@ namespace MgmtRenameRules.Models
             LoadBalancerInboundNatPools = loadBalancerInboundNatPools;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetIPConfiguration"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetIPConfiguration()
+        {
+        }
+
         /// <summary>
         /// The IP configuration name.
         /// Serialized Name: VirtualMachineScaleSetIPConfiguration.name

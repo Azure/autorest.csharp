@@ -54,6 +54,11 @@ namespace body_complex.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Fish"/> for deserialization. </summary>
+        internal Fish()
+        {
+        }
+
         /// <summary> Gets or sets the fishtype. </summary>
         internal string Fishtype { get; set; }
         /// <summary> Gets or sets the species. </summary>

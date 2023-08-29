@@ -51,6 +51,11 @@ namespace Azure.ResourceManager.Fake.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="MgmtReferenceTypesSku"/> for deserialization. </summary>
+        internal MgmtReferenceTypesSku()
+        {
+        }
+
         /// <summary> The name of the SKU. Ex - P3. It is typically a letter+number code. </summary>
         public string Name { get; set; }
         /// <summary> This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT. </summary>

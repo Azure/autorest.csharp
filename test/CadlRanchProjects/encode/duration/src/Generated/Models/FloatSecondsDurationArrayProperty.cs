@@ -36,6 +36,11 @@ namespace Encode.Duration.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="FloatSecondsDurationArrayProperty"/> for deserialization. </summary>
+        internal FloatSecondsDurationArrayProperty()
+        {
+        }
+
         /// <summary> Gets the value. </summary>
         public IList<TimeSpan> Value { get; }
     }

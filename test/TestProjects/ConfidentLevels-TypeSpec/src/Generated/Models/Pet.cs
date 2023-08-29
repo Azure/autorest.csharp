@@ -43,6 +43,11 @@ namespace ConfidentLevelsInTsp.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Pet"/> for deserialization. </summary>
+        internal Pet()
+        {
+        }
+
         /// <summary> Discriminator. </summary>
         internal string Kind { get; set; }
         /// <summary> The name of the pet. </summary>

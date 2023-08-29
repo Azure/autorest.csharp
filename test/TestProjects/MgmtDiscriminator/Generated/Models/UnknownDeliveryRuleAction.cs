@@ -24,5 +24,10 @@ namespace MgmtDiscriminator.Models
         {
             Name = name;
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownDeliveryRuleAction"/> for deserialization. </summary>
+        internal UnknownDeliveryRuleAction()
+        {
+        }
     }
 }

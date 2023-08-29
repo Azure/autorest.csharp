@@ -27,5 +27,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal TRex(string kind, int size, Dictionary<string, BinaryData> rawData) : base(kind, size, rawData)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="TRex"/> for deserialization. </summary>
+        internal TRex()
+        {
+        }
     }
 }

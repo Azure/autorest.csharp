@@ -41,6 +41,11 @@ namespace MgmtMockAndSample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSampleSku"/> for deserialization. </summary>
+        internal MgmtMockAndSampleSku()
+        {
+        }
+
         /// <summary> SKU family name. </summary>
         public MgmtMockAndSampleSkuFamily Family { get; set; }
         /// <summary> SKU name to specify whether the key vault is a standard vault or a premium vault. </summary>

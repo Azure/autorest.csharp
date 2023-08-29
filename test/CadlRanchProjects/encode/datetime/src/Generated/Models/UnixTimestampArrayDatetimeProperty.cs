@@ -36,6 +36,11 @@ namespace Encode.Datetime.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="UnixTimestampArrayDatetimeProperty"/> for deserialization. </summary>
+        internal UnixTimestampArrayDatetimeProperty()
+        {
+        }
+
         /// <summary> Gets the value. </summary>
         public IList<DateTimeOffset> Value { get; }
     }

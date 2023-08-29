@@ -47,6 +47,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="KeywordMarkerTokenFilter"/> for deserialization. </summary>
+        internal KeywordMarkerTokenFilter()
+        {
+        }
+
         /// <summary> A list of words to mark as keywords. </summary>
         public IList<string> Keywords { get; }
         /// <summary> A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false. </summary>

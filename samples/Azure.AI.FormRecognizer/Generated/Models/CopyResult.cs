@@ -41,6 +41,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="CopyResult"/> for deserialization. </summary>
+        internal CopyResult()
+        {
+        }
+
         /// <summary> Identifier of the target model. </summary>
         public Guid ModelId { get; }
         /// <summary> Errors returned during the copy operation. </summary>

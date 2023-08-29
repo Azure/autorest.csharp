@@ -34,5 +34,10 @@ namespace CustomizationsInTsp.Models
             AdditionalNullableSerializableProperty = additionalNullableSerializableProperty;
             _rawData = rawData;
         }
+
+        /// <summary> Initializes a new instance of <see cref="ModelToAddAdditionalSerializableProperty"/> for deserialization. </summary>
+        internal ModelToAddAdditionalSerializableProperty()
+        {
+        }
     }
 }

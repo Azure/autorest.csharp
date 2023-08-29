@@ -47,6 +47,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="CopyOperationResult"/> for deserialization. </summary>
+        internal CopyOperationResult()
+        {
+        }
+
         /// <summary> Operation status. </summary>
         public OperationStatus Status { get; }
         /// <summary> Date and time (UTC) when the copy operation was submitted. </summary>

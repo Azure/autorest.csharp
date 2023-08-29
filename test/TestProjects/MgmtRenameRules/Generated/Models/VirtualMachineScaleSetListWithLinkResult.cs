@@ -57,6 +57,11 @@ namespace MgmtRenameRules.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListWithLinkResult"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetListWithLinkResult()
+        {
+        }
+
         /// <summary>
         /// The list of virtual machine scale sets.
         /// Serialized Name: VirtualMachineScaleSetListWithLinkResult.value

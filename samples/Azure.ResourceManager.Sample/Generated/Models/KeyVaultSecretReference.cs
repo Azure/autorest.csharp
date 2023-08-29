@@ -62,6 +62,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="KeyVaultSecretReference"/> for deserialization. </summary>
+        internal KeyVaultSecretReference()
+        {
+        }
+
         /// <summary>
         /// The URL referencing a secret in a Key Vault.
         /// Serialized Name: KeyVaultSecretReference.secretUrl

@@ -55,6 +55,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicyRule"/> for deserialization. </summary>
+        internal BlobInventoryPolicyRule()
+        {
+        }
+
         /// <summary> Rule is enabled when set to true. </summary>
         public bool Enabled { get; set; }
         /// <summary> A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy. </summary>

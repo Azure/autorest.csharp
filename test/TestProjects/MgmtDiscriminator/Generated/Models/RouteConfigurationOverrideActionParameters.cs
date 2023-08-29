@@ -39,6 +39,11 @@ namespace MgmtDiscriminator.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="RouteConfigurationOverrideActionParameters"/> for deserialization. </summary>
+        internal RouteConfigurationOverrideActionParameters()
+        {
+        }
+
         /// <summary> Gets or sets the type name. </summary>
         public RouteConfigurationOverrideActionParametersTypeName TypeName { get; set; }
         /// <summary> A reference to the origin group override configuration. Leave empty to use the default origin group on route. </summary>

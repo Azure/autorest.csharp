@@ -40,6 +40,11 @@ namespace AuthoringTypeSpec.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="JobWarning"/> for deserialization. </summary>
+        internal JobWarning()
+        {
+        }
+
         /// <summary> The warning code. </summary>
         public string Code { get; }
         /// <summary> The warning message. </summary>

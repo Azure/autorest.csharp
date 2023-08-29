@@ -23,5 +23,10 @@ namespace TypeSchemaMapping.Models
         {
             DiscriminatorProperty = discriminatorProperty ?? "Unknown";
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownAbstractModel"/> for deserialization. </summary>
+        internal UnknownAbstractModel()
+        {
+        }
     }
 }

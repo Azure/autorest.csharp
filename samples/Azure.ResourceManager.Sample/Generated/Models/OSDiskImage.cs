@@ -46,6 +46,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="OSDiskImage"/> for deserialization. </summary>
+        internal OSDiskImage()
+        {
+        }
+
         /// <summary>
         /// The operating system of the osDiskImage.
         /// Serialized Name: OSDiskImage.operatingSystem

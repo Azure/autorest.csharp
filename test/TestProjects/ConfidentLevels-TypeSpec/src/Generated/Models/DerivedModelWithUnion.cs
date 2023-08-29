@@ -36,6 +36,11 @@ namespace ConfidentLevelsInTsp.Models
             UnionProperty = unionProperty;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DerivedModelWithUnion"/> for deserialization. </summary>
+        internal DerivedModelWithUnion()
+        {
+        }
+
         /// <summary> The union property. </summary>
         public object UnionProperty { get; }
     }

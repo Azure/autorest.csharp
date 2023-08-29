@@ -49,6 +49,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.PathHierarchyTokenizerV2";
         }
 
+        /// <summary> Initializes a new instance of <see cref="PathHierarchyTokenizerV2"/> for deserialization. </summary>
+        internal PathHierarchyTokenizerV2()
+        {
+        }
+
         /// <summary> The delimiter character to use. Default is "/". </summary>
         public char? Delimiter { get; set; }
         /// <summary> A value that, if set, replaces the delimiter character. Default is "/". </summary>

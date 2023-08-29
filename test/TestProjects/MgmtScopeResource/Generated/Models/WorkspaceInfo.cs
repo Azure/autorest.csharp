@@ -51,6 +51,11 @@ namespace MgmtScopeResource.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="WorkspaceInfo"/> for deserialization. </summary>
+        internal WorkspaceInfo()
+        {
+        }
+
         /// <summary> Azure Resource Manager identifier of the Log Analytics Workspace. </summary>
         public string Id { get; }
         /// <summary> Location of the Log Analytics workspace. </summary>

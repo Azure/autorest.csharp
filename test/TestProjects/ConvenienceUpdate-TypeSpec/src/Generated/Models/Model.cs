@@ -35,6 +35,11 @@ namespace ConvenienceInCadl.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Model"/> for deserialization. </summary>
+        internal Model()
+        {
+        }
+
         /// <summary> Gets or sets the id. </summary>
         public string Id { get; set; }
     }

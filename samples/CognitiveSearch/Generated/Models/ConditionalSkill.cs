@@ -44,5 +44,10 @@ namespace CognitiveSearch.Models
         {
             OdataType = odataType ?? "#Microsoft.Skills.Util.ConditionalSkill";
         }
+
+        /// <summary> Initializes a new instance of <see cref="ConditionalSkill"/> for deserialization. </summary>
+        internal ConditionalSkill()
+        {
+        }
     }
 }

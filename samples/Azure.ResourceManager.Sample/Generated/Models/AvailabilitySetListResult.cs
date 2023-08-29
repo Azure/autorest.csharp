@@ -57,6 +57,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetListResult"/> for deserialization. </summary>
+        internal AvailabilitySetListResult()
+        {
+        }
+
         /// <summary>
         /// The list of availability sets
         /// Serialized Name: AvailabilitySetListResult.value

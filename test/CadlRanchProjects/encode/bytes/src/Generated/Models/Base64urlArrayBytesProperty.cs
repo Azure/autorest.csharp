@@ -36,6 +36,11 @@ namespace Encode.Bytes.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Base64urlArrayBytesProperty"/> for deserialization. </summary>
+        internal Base64urlArrayBytesProperty()
+        {
+        }
+
         /// <summary>
         /// Gets the value
         /// <para>

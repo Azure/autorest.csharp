@@ -51,6 +51,11 @@ namespace MgmtHierarchicalNonResource.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="GalleryImageIdentifier"/> for deserialization. </summary>
+        internal GalleryImageIdentifier()
+        {
+        }
+
         /// <summary> The name of the gallery image definition publisher. </summary>
         public string Publisher { get; }
         /// <summary> The name of the gallery image definition offer. </summary>

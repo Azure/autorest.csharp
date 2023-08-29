@@ -41,6 +41,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.KeywordTokenizer";
         }
 
+        /// <summary> Initializes a new instance of <see cref="KeywordTokenizer"/> for deserialization. </summary>
+        internal KeywordTokenizer()
+        {
+        }
+
         /// <summary> The read buffer size in bytes. Default is 256. </summary>
         public int? BufferSize { get; set; }
     }

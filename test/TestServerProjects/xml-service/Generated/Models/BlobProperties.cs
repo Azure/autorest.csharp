@@ -97,6 +97,11 @@ namespace xml_service.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="BlobProperties"/> for deserialization. </summary>
+        internal BlobProperties()
+        {
+        }
+
         /// <summary> Gets the last modified. </summary>
         public DateTimeOffset LastModified { get; }
         /// <summary> Gets the etag. </summary>

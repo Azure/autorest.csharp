@@ -45,6 +45,11 @@ namespace body_complex.Models
             Fishtype = fishtype ?? "sawshark";
         }
 
+        /// <summary> Initializes a new instance of <see cref="Sawshark"/> for deserialization. </summary>
+        internal Sawshark()
+        {
+        }
+
         /// <summary> Gets or sets the picture. </summary>
         public byte[] Picture { get; set; }
     }

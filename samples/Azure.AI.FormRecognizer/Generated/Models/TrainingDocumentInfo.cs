@@ -55,6 +55,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TrainingDocumentInfo"/> for deserialization. </summary>
+        internal TrainingDocumentInfo()
+        {
+        }
+
         /// <summary> Training document name. </summary>
         public string DocumentName { get; }
         /// <summary> Total number of pages trained. </summary>

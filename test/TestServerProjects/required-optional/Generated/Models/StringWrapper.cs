@@ -41,6 +41,11 @@ namespace required_optional.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="StringWrapper"/> for deserialization. </summary>
+        internal StringWrapper()
+        {
+        }
+
         /// <summary> Gets the value. </summary>
         public string Value { get; }
     }

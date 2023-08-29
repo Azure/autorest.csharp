@@ -50,6 +50,11 @@ namespace MgmtMockAndSample
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ManagedHsmData"/> for deserialization. </summary>
+        internal ManagedHsmData()
+        {
+        }
+
         /// <summary> Properties of the managed HSM. </summary>
         public ManagedHsmProperties Properties { get; set; }
         /// <summary> SKU details. </summary>

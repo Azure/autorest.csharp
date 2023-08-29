@@ -45,6 +45,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="FieldMapping"/> for deserialization. </summary>
+        internal FieldMapping()
+        {
+        }
+
         /// <summary> The name of the field in the data source. </summary>
         public string SourceFieldName { get; set; }
         /// <summary> The name of the target field in the index. Same as the source field name by default. </summary>

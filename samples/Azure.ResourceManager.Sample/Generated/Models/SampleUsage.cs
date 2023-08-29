@@ -76,6 +76,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SampleUsage"/> for deserialization. </summary>
+        internal SampleUsage()
+        {
+        }
+
         /// <summary>
         /// An enum describing the unit of usage measurement.
         /// Serialized Name: SampleUsage.unit

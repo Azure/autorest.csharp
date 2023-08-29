@@ -40,6 +40,11 @@ namespace _Type.Property.Nullable.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="CollectionsModelProperty"/> for deserialization. </summary>
+        internal CollectionsModelProperty()
+        {
+        }
+
         /// <summary> Required property. </summary>
         public string RequiredProperty { get; }
         /// <summary> Property. </summary>

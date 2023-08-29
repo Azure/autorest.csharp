@@ -60,6 +60,11 @@ namespace Azure.Storage.Tables.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="CorsRule"/> for deserialization. </summary>
+        internal CorsRule()
+        {
+        }
+
         /// <summary> The origin domains that are permitted to make a request against the storage service via CORS. The origin domain is the domain from which the request originates. Note that the origin must be an exact case-sensitive match with the origin that the user age sends to the service. You can also use the wildcard character '*' to allow all origin domains to make requests via CORS. </summary>
         public string AllowedOrigins { get; set; }
         /// <summary> The methods (HTTP request verbs) that the origin domain may use for a CORS request. (comma separated). </summary>

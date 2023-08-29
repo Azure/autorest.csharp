@@ -41,6 +41,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.TruncateTokenFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="TruncateTokenFilter"/> for deserialization. </summary>
+        internal TruncateTokenFilter()
+        {
+        }
+
         /// <summary> The length at which terms will be truncated. Default and maximum is 300. </summary>
         public int? Length { get; set; }
     }

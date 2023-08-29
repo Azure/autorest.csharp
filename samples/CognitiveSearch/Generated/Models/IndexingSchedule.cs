@@ -39,6 +39,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="IndexingSchedule"/> for deserialization. </summary>
+        internal IndexingSchedule()
+        {
+        }
+
         /// <summary> The interval of time between indexer executions. </summary>
         public TimeSpan Interval { get; set; }
         /// <summary> The time when an indexer should start running. </summary>

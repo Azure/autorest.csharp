@@ -23,5 +23,10 @@ namespace CognitiveSearch.Models
         {
             OdataType = odataType ?? "Unknown";
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownDataDeletionDetectionPolicy"/> for deserialization. </summary>
+        internal UnknownDataDeletionDetectionPolicy()
+        {
+        }
     }
 }

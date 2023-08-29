@@ -39,6 +39,11 @@ namespace ProtocolMethodsInRestClient.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Grouped"/> for deserialization. </summary>
+        internal Grouped()
+        {
+        }
+
         /// <summary> First in group. </summary>
         public string First { get; set; }
         /// <summary> Second in group. </summary>

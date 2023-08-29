@@ -42,6 +42,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AnalyzeResult"/> for deserialization. </summary>
+        internal AnalyzeResult()
+        {
+        }
+
         /// <summary> The list of tokens returned by the analyzer specified in the request. </summary>
         public IReadOnlyList<TokenInfo> Tokens { get; }
     }

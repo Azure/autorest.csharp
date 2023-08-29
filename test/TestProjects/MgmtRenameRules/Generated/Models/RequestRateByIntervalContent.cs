@@ -83,6 +83,11 @@ namespace MgmtRenameRules.Models
             IntervalLength = intervalLength;
         }
 
+        /// <summary> Initializes a new instance of <see cref="RequestRateByIntervalContent"/> for deserialization. </summary>
+        internal RequestRateByIntervalContent()
+        {
+        }
+
         /// <summary>
         /// Interval value in minutes used to create LogAnalytics call rate logs.
         /// Serialized Name: RequestRateByIntervalInput.intervalLength

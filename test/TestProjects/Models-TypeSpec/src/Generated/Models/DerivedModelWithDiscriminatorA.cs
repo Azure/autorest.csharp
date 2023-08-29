@@ -37,6 +37,11 @@ namespace ModelsTypeSpec.Models
             RequiredString = requiredString;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DerivedModelWithDiscriminatorA"/> for deserialization. </summary>
+        internal DerivedModelWithDiscriminatorA()
+        {
+        }
+
         /// <summary> Required string. </summary>
         public string RequiredString { get; set; }
     }

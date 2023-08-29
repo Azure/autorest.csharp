@@ -43,6 +43,11 @@ namespace MgmtDiscriminator.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="CacheKeyQueryStringActionParameters"/> for deserialization. </summary>
+        internal CacheKeyQueryStringActionParameters()
+        {
+        }
+
         /// <summary> Gets or sets the type name. </summary>
         public CacheKeyQueryStringActionParametersTypeName TypeName { get; set; }
         /// <summary> Caching behavior for the requests. </summary>

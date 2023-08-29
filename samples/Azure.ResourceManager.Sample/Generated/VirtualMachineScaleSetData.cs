@@ -139,6 +139,11 @@ namespace Azure.ResourceManager.Sample
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetData"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetData()
+        {
+        }
+
         /// <summary>
         /// The virtual machine scale set sku.
         /// Serialized Name: VirtualMachineScaleSet.sku

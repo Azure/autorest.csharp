@@ -31,6 +31,11 @@ namespace _Type.Property.ValueTypes.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="BooleanProperty"/> for deserialization. </summary>
+        internal BooleanProperty()
+        {
+        }
+
         /// <summary> Property. </summary>
         public bool Property { get; set; }
     }

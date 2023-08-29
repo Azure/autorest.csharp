@@ -42,6 +42,11 @@ namespace MgmtParamOrdering.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMInstanceRequiredIDs"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetVMInstanceRequiredIDs()
+        {
+        }
+
         /// <summary> The virtual machine scale set instance ids. </summary>
         public IList<string> InstanceIds { get; }
     }

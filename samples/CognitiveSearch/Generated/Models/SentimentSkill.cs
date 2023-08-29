@@ -47,6 +47,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Skills.Text.SentimentSkill";
         }
 
+        /// <summary> Initializes a new instance of <see cref="SentimentSkill"/> for deserialization. </summary>
+        internal SentimentSkill()
+        {
+        }
+
         /// <summary> A value indicating which language code to use. Default is en. </summary>
         public SentimentSkillLanguage? DefaultLanguageCode { get; set; }
     }

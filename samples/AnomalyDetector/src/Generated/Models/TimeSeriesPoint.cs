@@ -33,6 +33,11 @@ namespace AnomalyDetector.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TimeSeriesPoint"/> for deserialization. </summary>
+        internal TimeSeriesPoint()
+        {
+        }
+
         /// <summary> Optional argument, timestamp of a data point (ISO8601 format). </summary>
         public DateTimeOffset? Timestamp { get; set; }
         /// <summary> The measurement of that point, should be float. </summary>

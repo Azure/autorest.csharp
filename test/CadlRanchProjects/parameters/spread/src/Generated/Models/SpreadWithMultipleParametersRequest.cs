@@ -60,6 +60,11 @@ namespace Parameters.Spread.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SpreadWithMultipleParametersRequest"/> for deserialization. </summary>
+        internal SpreadWithMultipleParametersRequest()
+        {
+        }
+
         /// <summary> Gets the prop 1. </summary>
         public string Prop1 { get; }
         /// <summary> Gets the prop 2. </summary>

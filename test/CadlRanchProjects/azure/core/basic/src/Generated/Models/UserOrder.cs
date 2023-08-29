@@ -41,6 +41,11 @@ namespace _Specs_.Azure.Core.Basic.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="UserOrder"/> for deserialization. </summary>
+        internal UserOrder()
+        {
+        }
+
         /// <summary> The user's id. </summary>
         public int Id { get; }
         /// <summary> The user's id. </summary>

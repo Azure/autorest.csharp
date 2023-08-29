@@ -47,6 +47,11 @@ namespace CognitiveSearch.Models
             Type = type ?? "distance";
         }
 
+        /// <summary> Initializes a new instance of <see cref="DistanceScoringFunction"/> for deserialization. </summary>
+        internal DistanceScoringFunction()
+        {
+        }
+
         /// <summary> Parameter values for the distance scoring function. </summary>
         public DistanceScoringParameters Parameters { get; set; }
     }

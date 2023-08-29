@@ -36,6 +36,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
             Smart = smart;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Siamese"/> for deserialization. </summary>
+        internal Siamese()
+        {
+        }
+
         /// <summary> Gets or sets the smart. </summary>
         public bool Smart { get; set; }
     }

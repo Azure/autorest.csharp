@@ -42,6 +42,11 @@ namespace MgmtDiscriminator.Models
             Name = name;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleCacheExpirationAction"/> for deserialization. </summary>
+        internal DeliveryRuleCacheExpirationAction()
+        {
+        }
+
         /// <summary> Defines the parameters for the action. </summary>
         public CacheExpirationActionParameters Parameters { get; set; }
     }

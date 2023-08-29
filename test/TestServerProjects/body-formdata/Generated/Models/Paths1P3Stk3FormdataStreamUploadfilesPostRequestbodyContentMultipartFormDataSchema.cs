@@ -43,6 +43,11 @@ namespace body_formdata.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema"/> for deserialization. </summary>
+        internal Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema()
+        {
+        }
+
         /// <summary> Files to upload. </summary>
         public IReadOnlyList<Stream> FileContent { get; }
     }

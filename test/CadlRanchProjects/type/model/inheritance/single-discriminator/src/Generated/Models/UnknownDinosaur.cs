@@ -26,5 +26,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal UnknownDinosaur(string kind, int size, Dictionary<string, BinaryData> rawData) : base(kind, size, rawData)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownDinosaur"/> for deserialization. </summary>
+        internal UnknownDinosaur()
+        {
+        }
     }
 }

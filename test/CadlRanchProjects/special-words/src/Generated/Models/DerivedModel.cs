@@ -39,6 +39,11 @@ namespace SpecialWords.Models
             For = @for;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DerivedModel"/> for deserialization. </summary>
+        internal DerivedModel()
+        {
+        }
+
         /// <summary> Gets or sets the derived name. </summary>
         public string DerivedName { get; set; }
         /// <summary> Gets or sets the for. </summary>

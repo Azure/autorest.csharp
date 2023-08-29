@@ -39,6 +39,11 @@ namespace _Type.Property.Nullable.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="StringProperty"/> for deserialization. </summary>
+        internal StringProperty()
+        {
+        }
+
         /// <summary> Required property. </summary>
         public string RequiredProperty { get; }
         /// <summary> Property. </summary>

@@ -33,6 +33,11 @@ namespace ModelsTypeSpec.Models
             RequiredInt = requiredInt;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DerivedModelWithDiscriminatorB"/> for deserialization. </summary>
+        internal DerivedModelWithDiscriminatorB()
+        {
+        }
+
         /// <summary> Required int. </summary>
         public int RequiredInt { get; set; }
     }

@@ -53,6 +53,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="EncryptionKey"/> for deserialization. </summary>
+        internal EncryptionKey()
+        {
+        }
+
         /// <summary> The name of your Azure Key Vault key to be used to encrypt your data at rest. </summary>
         public string KeyVaultKeyName { get; set; }
         /// <summary> The version of your Azure Key Vault key to be used to encrypt your data at rest. </summary>

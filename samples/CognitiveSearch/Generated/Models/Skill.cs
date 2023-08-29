@@ -59,6 +59,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Skill"/> for deserialization. </summary>
+        internal Skill()
+        {
+        }
+
         /// <summary> Identifies the concrete type of the skill. </summary>
         internal string OdataType { get; set; }
         /// <summary> The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character '#'. </summary>

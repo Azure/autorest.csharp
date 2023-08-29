@@ -45,6 +45,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="LeaseContainerContent"/> for deserialization. </summary>
+        internal LeaseContainerContent()
+        {
+        }
+
         /// <summary> Specifies the lease action. Can be one of the available actions. </summary>
         public LeaseContainerRequestAction Action { get; }
         /// <summary> Identifies the lease. Can be specified in any valid GUID string format. </summary>

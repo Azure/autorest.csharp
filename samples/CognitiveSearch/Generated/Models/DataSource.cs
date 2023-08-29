@@ -71,6 +71,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DataSource"/> for deserialization. </summary>
+        internal DataSource()
+        {
+        }
+
         /// <summary> The name of the datasource. </summary>
         public string Name { get; set; }
         /// <summary> The description of the datasource. </summary>

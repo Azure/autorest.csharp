@@ -39,6 +39,11 @@ namespace SpreadTypeSpec.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithCollectionsRequest"/> for deserialization. </summary>
+        internal SpreadAliasWithCollectionsRequest()
+        {
+        }
+
         /// <summary> required list. </summary>
         public IList<string> RequiredStringList { get; }
         /// <summary> optional list. </summary>

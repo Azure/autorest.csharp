@@ -31,6 +31,11 @@ namespace Encode.Duration.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="FloatSecondsDurationProperty"/> for deserialization. </summary>
+        internal FloatSecondsDurationProperty()
+        {
+        }
+
         /// <summary> Gets or sets the value. </summary>
         public TimeSpan Value { get; set; }
     }

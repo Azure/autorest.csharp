@@ -50,6 +50,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicySchema"/> for deserialization. </summary>
+        internal BlobInventoryPolicySchema()
+        {
+        }
+
         /// <summary> Policy is enabled if set to true. </summary>
         public bool Enabled { get; set; }
         /// <summary> The valid value is Inventory. </summary>

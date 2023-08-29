@@ -43,6 +43,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.SnowballTokenFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="SnowballTokenFilter"/> for deserialization. </summary>
+        internal SnowballTokenFilter()
+        {
+        }
+
         /// <summary> The language to use. </summary>
         public SnowballTokenFilterLanguage Language { get; set; }
     }

@@ -45,6 +45,11 @@ namespace MgmtExtensionCommonRestOperation.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TypeTwoListResult"/> for deserialization. </summary>
+        internal TypeTwoListResult()
+        {
+        }
+
         /// <summary> The list of of type twos. </summary>
         public IReadOnlyList<TypeTwoData> Value { get; }
         /// <summary> The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs. </summary>

@@ -72,6 +72,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="PurchasePlan"/> for deserialization. </summary>
+        internal PurchasePlan()
+        {
+        }
+
         /// <summary>
         /// The publisher ID.
         /// Serialized Name: PurchasePlan.publisher

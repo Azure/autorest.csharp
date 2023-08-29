@@ -51,6 +51,11 @@ namespace MgmtRenameRules.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmInstanceRequiredIds"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetVmInstanceRequiredIds()
+        {
+        }
+
         /// <summary>
         /// The virtual machine scale set instance ids.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceRequiredIDs.instanceIds

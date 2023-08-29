@@ -44,6 +44,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="StorageAccountCheckNameAvailabilityContent"/> for deserialization. </summary>
+        internal StorageAccountCheckNameAvailabilityContent()
+        {
+        }
+
         /// <summary> The storage account name. </summary>
         public string Name { get; }
         /// <summary> The type of resource, Microsoft.Storage/storageAccounts. </summary>

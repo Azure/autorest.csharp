@@ -49,6 +49,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="NetworkRuleSet"/> for deserialization. </summary>
+        internal NetworkRuleSet()
+        {
+        }
+
         /// <summary> Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, "Logging, Metrics"), or None to bypass none of those traffics. </summary>
         public Bypass? Bypass { get; set; }
         /// <summary> Sets the resource access rules. </summary>

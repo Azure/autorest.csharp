@@ -80,6 +80,11 @@ namespace AnomalyDetector.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="MultivariateBatchDetectionOptions"/> for deserialization. </summary>
+        internal MultivariateBatchDetectionOptions()
+        {
+        }
+
         /// <summary>
         /// Source link to the input data to indicate an accessible Azure storage Uri,
         /// either pointed to an Azure blob storage folder, or pointed to a CSV file in

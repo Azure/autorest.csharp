@@ -31,6 +31,11 @@ namespace ApiVersionInTsp.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DetectionResult"/> for deserialization. </summary>
+        internal DetectionResult()
+        {
+        }
+
         /// <summary> Result identifier, which is used to fetch the results of an inference call. </summary>
         public Guid ResultId { get; }
     }

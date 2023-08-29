@@ -49,6 +49,11 @@ namespace CognitiveServices.TextAnalytics.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="RequestStatistics"/> for deserialization. </summary>
+        internal RequestStatistics()
+        {
+        }
+
         /// <summary> Number of documents submitted in the request. </summary>
         public int DocumentsCount { get; }
         /// <summary> Number of valid documents. This excludes empty, over-size limit or non-supported languages documents. </summary>

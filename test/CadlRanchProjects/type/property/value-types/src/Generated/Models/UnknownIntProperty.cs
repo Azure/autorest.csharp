@@ -35,6 +35,11 @@ namespace _Type.Property.ValueTypes.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="UnknownIntProperty"/> for deserialization. </summary>
+        internal UnknownIntProperty()
+        {
+        }
+
         /// <summary>
         /// Property
         /// <para>

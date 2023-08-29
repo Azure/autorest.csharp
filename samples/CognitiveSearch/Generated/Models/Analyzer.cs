@@ -47,6 +47,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Analyzer"/> for deserialization. </summary>
+        internal Analyzer()
+        {
+        }
+
         /// <summary> Identifies the concrete type of the analyzer. </summary>
         internal string OdataType { get; set; }
         /// <summary> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </summary>

@@ -41,6 +41,11 @@ namespace paging.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="PagingGetMultiplePagesWithOffsetOptions"/> for deserialization. </summary>
+        internal PagingGetMultiplePagesWithOffsetOptions()
+        {
+        }
+
         /// <summary> Sets the maximum number of items to return in the response. </summary>
         public int? Maxresults { get; set; }
         /// <summary> Offset of return value. </summary>

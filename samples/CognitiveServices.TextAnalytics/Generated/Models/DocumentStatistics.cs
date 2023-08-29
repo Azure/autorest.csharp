@@ -41,6 +41,11 @@ namespace CognitiveServices.TextAnalytics.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DocumentStatistics"/> for deserialization. </summary>
+        internal DocumentStatistics()
+        {
+        }
+
         /// <summary> Number of text elements recognized in the document. </summary>
         public int CharactersCount { get; }
         /// <summary> Number of transactions for the document. </summary>

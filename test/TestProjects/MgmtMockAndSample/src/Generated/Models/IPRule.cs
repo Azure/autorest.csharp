@@ -41,6 +41,11 @@ namespace MgmtMockAndSample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="IPRule"/> for deserialization. </summary>
+        internal IPRule()
+        {
+        }
+
         /// <summary> An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78). </summary>
         public string Value { get; set; }
     }

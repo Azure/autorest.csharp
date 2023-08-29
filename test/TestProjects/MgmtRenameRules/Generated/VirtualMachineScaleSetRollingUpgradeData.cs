@@ -67,6 +67,11 @@ namespace MgmtRenameRules
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetRollingUpgradeData"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetRollingUpgradeData()
+        {
+        }
+
         /// <summary>
         /// The rolling upgrade policies applied for this upgrade.
         /// Serialized Name: RollingUpgradeStatusInfo.properties.policy

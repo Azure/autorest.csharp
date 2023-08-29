@@ -48,6 +48,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.StopwordsTokenFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="StopwordsTokenFilter"/> for deserialization. </summary>
+        internal StopwordsTokenFilter()
+        {
+        }
+
         /// <summary> The list of stopwords. This property and the stopwords list property cannot both be set. </summary>
         public IList<string> Stopwords { get; }
         /// <summary> A predefined list of stopwords to use. This property and the stopwords property cannot both be set. Default is English. </summary>

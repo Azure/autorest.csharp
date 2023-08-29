@@ -46,6 +46,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DeletedShare"/> for deserialization. </summary>
+        internal DeletedShare()
+        {
+        }
+
         /// <summary> Required. Identify the name of the deleted share that will be restored. </summary>
         public string DeletedShareName { get; }
         /// <summary> Required. Identify the version of the deleted share that will be restored. </summary>

@@ -54,6 +54,11 @@ namespace CognitiveServices.TextAnalytics.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DocumentKeyPhrases"/> for deserialization. </summary>
+        internal DocumentKeyPhrases()
+        {
+        }
+
         /// <summary> Unique, non-empty document identifier. </summary>
         public string Id { get; }
         /// <summary> A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document. </summary>

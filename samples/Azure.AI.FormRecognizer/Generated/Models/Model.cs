@@ -45,6 +45,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Model"/> for deserialization. </summary>
+        internal Model()
+        {
+        }
+
         /// <summary> Basic custom model information. </summary>
         public ModelInfo ModelInfo { get; }
         /// <summary> Keys extracted by the custom model. </summary>

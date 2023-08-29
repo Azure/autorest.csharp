@@ -57,6 +57,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupListResult"/> for deserialization. </summary>
+        internal ProximityPlacementGroupListResult()
+        {
+        }
+
         /// <summary>
         /// The list of proximity placement groups
         /// Serialized Name: ProximityPlacementGroupListResult.value

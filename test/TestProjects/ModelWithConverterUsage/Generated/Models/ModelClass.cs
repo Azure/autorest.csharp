@@ -41,6 +41,11 @@ namespace ModelWithConverterUsage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ModelClass"/> for deserialization. </summary>
+        internal ModelClass()
+        {
+        }
+
         /// <summary> Gets or sets the string property. </summary>
         public string StringProperty { get; set; }
         /// <summary> More Letters. </summary>

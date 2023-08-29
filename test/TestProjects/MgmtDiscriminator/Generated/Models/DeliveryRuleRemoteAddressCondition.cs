@@ -42,6 +42,11 @@ namespace MgmtDiscriminator.Models
             Name = name;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleRemoteAddressCondition"/> for deserialization. </summary>
+        internal DeliveryRuleRemoteAddressCondition()
+        {
+        }
+
         /// <summary> Defines the parameters for the condition. </summary>
         public RemoteAddressMatchConditionParameters Parameters { get; set; }
     }

@@ -49,6 +49,11 @@ namespace body_formdata_urlencoded.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema"/> for deserialization. </summary>
+        internal Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema()
+        {
+        }
+
         /// <summary> Can take a value of dog, or cat, or fish. </summary>
         public PetType PetType { get; }
         /// <summary> Can take a value of meat, or fish, or plant. </summary>

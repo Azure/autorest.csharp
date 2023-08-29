@@ -46,6 +46,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AutomaticOSUpgradeProperties"/> for deserialization. </summary>
+        internal AutomaticOSUpgradeProperties()
+        {
+        }
+
         /// <summary>
         /// Specifies whether automatic OS upgrade is supported on the image.
         /// Serialized Name: AutomaticOSUpgradeProperties.automaticOSUpgradeSupported

@@ -49,6 +49,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TextWord"/> for deserialization. </summary>
+        internal TextWord()
+        {
+        }
+
         /// <summary> The text content of the word. </summary>
         public string Text { get; }
         /// <summary> Bounding box of an extracted word. </summary>

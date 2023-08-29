@@ -57,6 +57,11 @@ namespace MgmtMockAndSample
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="MhsmPrivateEndpointConnectionData"/> for deserialization. </summary>
+        internal MhsmPrivateEndpointConnectionData()
+        {
+        }
+
         /// <summary> Modified whenever there is a change in the state of private endpoint connection. </summary>
         public string Etag { get; set; }
         /// <summary> Properties of the private endpoint object. </summary>

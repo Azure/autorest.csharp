@@ -34,6 +34,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
             Age = age;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Cat"/> for deserialization. </summary>
+        internal Cat()
+        {
+        }
+
         /// <summary> Gets the age. </summary>
         public int Age { get; }
     }

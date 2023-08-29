@@ -47,6 +47,11 @@ namespace MgmtOperations
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetGrandChildData"/> for deserialization. </summary>
+        internal AvailabilitySetGrandChildData()
+        {
+        }
+
         /// <summary> specifies the bar. </summary>
         public string Bar { get; set; }
     }

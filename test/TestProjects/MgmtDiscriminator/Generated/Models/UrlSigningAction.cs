@@ -42,6 +42,11 @@ namespace MgmtDiscriminator.Models
             Name = name;
         }
 
+        /// <summary> Initializes a new instance of <see cref="UrlSigningAction"/> for deserialization. </summary>
+        internal UrlSigningAction()
+        {
+        }
+
         /// <summary> Defines the parameters for the action. </summary>
         public UrlSigningActionParameters Parameters { get; set; }
     }

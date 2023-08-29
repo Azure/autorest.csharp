@@ -45,6 +45,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="FormFieldsReport"/> for deserialization. </summary>
+        internal FormFieldsReport()
+        {
+        }
+
         /// <summary> Training field name. </summary>
         public string FieldName { get; }
         /// <summary> Estimated extraction accuracy for this field. </summary>

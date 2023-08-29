@@ -58,6 +58,11 @@ namespace Azure.Storage.Tables.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Logging"/> for deserialization. </summary>
+        internal Logging()
+        {
+        }
+
         /// <summary> The version of Storage Analytics to configure. </summary>
         public string Version { get; set; }
         /// <summary> Indicates whether all delete requests should be logged. </summary>

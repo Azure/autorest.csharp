@@ -57,6 +57,11 @@ namespace MgmtRenameRules.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ImageListResult"/> for deserialization. </summary>
+        internal ImageListResult()
+        {
+        }
+
         /// <summary>
         /// The list of Images.
         /// Serialized Name: ImageListResult.value

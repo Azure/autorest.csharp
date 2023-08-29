@@ -37,6 +37,11 @@ namespace Pagination.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TextBlocklist"/> for deserialization. </summary>
+        internal TextBlocklist()
+        {
+        }
+
         /// <summary> Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~. </summary>
         public string BlocklistName { get; }
         /// <summary> Text blocklist description. </summary>

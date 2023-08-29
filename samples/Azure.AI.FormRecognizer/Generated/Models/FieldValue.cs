@@ -68,6 +68,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="FieldValue"/> for deserialization. </summary>
+        internal FieldValue()
+        {
+        }
+
         /// <summary> Type of field value. </summary>
         public FieldValueType Type { get; }
         /// <summary> String value. </summary>

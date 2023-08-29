@@ -35,6 +35,11 @@ namespace _Type.Model.Usage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="InputRecord"/> for deserialization. </summary>
+        internal InputRecord()
+        {
+        }
+
         /// <summary> Gets the required prop. </summary>
         public string RequiredProp { get; }
     }

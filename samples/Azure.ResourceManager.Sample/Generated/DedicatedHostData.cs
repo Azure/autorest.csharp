@@ -102,6 +102,11 @@ namespace Azure.ResourceManager.Sample
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostData"/> for deserialization. </summary>
+        internal DedicatedHostData()
+        {
+        }
+
         /// <summary>
         /// SKU of the dedicated host for Hardware Generation and VM family. Only name is required to be set. List Microsoft.Compute SKUs for a list of possible values.
         /// Serialized Name: DedicatedHost.sku

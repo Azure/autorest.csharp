@@ -42,6 +42,11 @@ namespace CognitiveServices.TextAnalytics.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="MultiLanguageBatchInput"/> for deserialization. </summary>
+        internal MultiLanguageBatchInput()
+        {
+        }
+
         /// <summary> The set of documents to process as part of this batch. </summary>
         public IList<MultiLanguageInput> Documents { get; }
     }

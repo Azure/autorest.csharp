@@ -43,6 +43,11 @@ namespace FlattenedParameters.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema"/> for deserialization. </summary>
+        internal Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema()
+        {
+        }
+
         /// <summary> Gets the required. </summary>
         public string Required { get; }
         /// <summary> Gets or sets the non required. </summary>

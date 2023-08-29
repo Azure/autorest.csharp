@@ -37,6 +37,11 @@ namespace ConfidentLevelsInTsp.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ModelWithFloatLiteralTypeProperty"/> for deserialization. </summary>
+        internal ModelWithFloatLiteralTypeProperty()
+        {
+        }
+
         /// <summary> The name. </summary>
         public string Name { get; }
         /// <summary> The id. </summary>

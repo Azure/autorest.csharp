@@ -122,6 +122,11 @@ namespace Azure.ResourceManager.Storage
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="StorageAccountData"/> for deserialization. </summary>
+        internal StorageAccountData()
+        {
+        }
+
         /// <summary> Gets the SKU. </summary>
         public StorageSku Sku { get; }
         /// <summary> Gets the Kind. </summary>

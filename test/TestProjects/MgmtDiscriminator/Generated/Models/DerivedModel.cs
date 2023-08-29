@@ -40,6 +40,11 @@ namespace MgmtDiscriminator.Models
             RequiredCollection = requiredCollection;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DerivedModel"/> for deserialization. </summary>
+        internal DerivedModel()
+        {
+        }
+
         /// <summary> Gets the required collection. </summary>
         public IList<string> RequiredCollection { get; }
     }

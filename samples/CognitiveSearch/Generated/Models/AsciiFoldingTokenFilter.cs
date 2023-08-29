@@ -41,6 +41,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.AsciiFoldingTokenFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="AsciiFoldingTokenFilter"/> for deserialization. </summary>
+        internal AsciiFoldingTokenFilter()
+        {
+        }
+
         /// <summary> A value indicating whether the original token will be kept. Default is false. </summary>
         public bool? PreserveOriginal { get; set; }
     }

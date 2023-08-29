@@ -56,6 +56,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="OrchestrationServiceStateContent"/> for deserialization. </summary>
+        internal OrchestrationServiceStateContent()
+        {
+        }
+
         /// <summary>
         /// The name of the service.
         /// Serialized Name: OrchestrationServiceStateInput.serviceName

@@ -75,6 +75,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ServiceSasContent"/> for deserialization. </summary>
+        internal ServiceSasContent()
+        {
+        }
+
         /// <summary> The canonical path to the signed resource. </summary>
         public string CanonicalizedResource { get; }
         /// <summary> The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s). </summary>

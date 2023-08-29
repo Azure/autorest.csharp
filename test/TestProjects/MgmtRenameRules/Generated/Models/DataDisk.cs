@@ -106,6 +106,11 @@ namespace MgmtRenameRules.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DataDisk"/> for deserialization. </summary>
+        internal DataDisk()
+        {
+        }
+
         /// <summary>
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: DataDisk.lun

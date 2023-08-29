@@ -53,6 +53,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="DictionaryDecompounderTokenFilter"/> for deserialization. </summary>
+        internal DictionaryDecompounderTokenFilter()
+        {
+        }
+
         /// <summary> The list of words to match against. </summary>
         public IList<string> WordList { get; }
         /// <summary> The minimum word size. Only words longer than this get processed. Default is 5. Maximum is 300. </summary>

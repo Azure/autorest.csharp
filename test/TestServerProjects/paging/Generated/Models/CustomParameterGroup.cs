@@ -46,6 +46,11 @@ namespace paging.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="CustomParameterGroup"/> for deserialization. </summary>
+        internal CustomParameterGroup()
+        {
+        }
+
         /// <summary> Sets the api version to use. </summary>
         public string ApiVersion { get; }
         /// <summary> Sets the tenant to use. </summary>

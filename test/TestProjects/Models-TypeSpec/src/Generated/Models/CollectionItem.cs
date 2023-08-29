@@ -35,6 +35,11 @@ namespace ModelsTypeSpec.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="CollectionItem"/> for deserialization. </summary>
+        internal CollectionItem()
+        {
+        }
+
         /// <summary> Required model record. </summary>
         public IDictionary<string, RecordItem> RequiredModelRecord { get; }
     }

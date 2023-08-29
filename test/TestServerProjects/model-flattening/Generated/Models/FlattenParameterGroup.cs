@@ -58,6 +58,11 @@ namespace model_flattening.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="FlattenParameterGroup"/> for deserialization. </summary>
+        internal FlattenParameterGroup()
+        {
+        }
+
         /// <summary> Product name with value 'groupproduct'. </summary>
         public string Name { get; }
         /// <summary> Simple body product to put. </summary>

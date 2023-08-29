@@ -45,6 +45,11 @@ namespace MgmtParamOrdering.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListResult"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetListResult()
+        {
+        }
+
         /// <summary> The list of virtual machine scale sets. </summary>
         public IReadOnlyList<VirtualMachineScaleSetData> Value { get; }
         /// <summary> The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS. </summary>

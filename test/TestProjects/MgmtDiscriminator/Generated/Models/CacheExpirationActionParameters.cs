@@ -47,6 +47,11 @@ namespace MgmtDiscriminator.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="CacheExpirationActionParameters"/> for deserialization. </summary>
+        internal CacheExpirationActionParameters()
+        {
+        }
+
         /// <summary> Gets or sets the type name. </summary>
         public CacheExpirationActionParametersTypeName TypeName { get; set; }
         /// <summary> Caching behavior for the requests. </summary>

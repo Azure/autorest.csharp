@@ -41,6 +41,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TagScoringParameters"/> for deserialization. </summary>
+        internal TagScoringParameters()
+        {
+        }
+
         /// <summary> The name of the parameter passed in search queries to specify the list of tags to compare against the target field. </summary>
         public string TagsParameter { get; set; }
     }

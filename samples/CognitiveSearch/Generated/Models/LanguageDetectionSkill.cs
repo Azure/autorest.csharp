@@ -44,5 +44,10 @@ namespace CognitiveSearch.Models
         {
             OdataType = odataType ?? "#Microsoft.Skills.Text.LanguageDetectionSkill";
         }
+
+        /// <summary> Initializes a new instance of <see cref="LanguageDetectionSkill"/> for deserialization. </summary>
+        internal LanguageDetectionSkill()
+        {
+        }
     }
 }

@@ -43,6 +43,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ManagementPolicyDefinition"/> for deserialization. </summary>
+        internal ManagementPolicyDefinition()
+        {
+        }
+
         /// <summary> An object that defines the action set. </summary>
         public ManagementPolicyAction Actions { get; set; }
         /// <summary> An object that defines the filter set. </summary>

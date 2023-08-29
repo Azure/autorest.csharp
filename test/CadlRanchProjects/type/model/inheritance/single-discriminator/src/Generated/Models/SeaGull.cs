@@ -27,5 +27,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal SeaGull(string kind, int wingspan, Dictionary<string, BinaryData> rawData) : base(kind, wingspan, rawData)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="SeaGull"/> for deserialization. </summary>
+        internal SeaGull()
+        {
+        }
     }
 }

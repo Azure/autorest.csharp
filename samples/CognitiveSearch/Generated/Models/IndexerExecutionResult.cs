@@ -69,6 +69,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="IndexerExecutionResult"/> for deserialization. </summary>
+        internal IndexerExecutionResult()
+        {
+        }
+
         /// <summary> The outcome of this indexer execution. </summary>
         public IndexerExecutionStatus Status { get; }
         /// <summary> The error message indicating the top-level error, if any. </summary>

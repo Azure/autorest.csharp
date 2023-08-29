@@ -46,6 +46,11 @@ namespace xml_service.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SignedIdentifier"/> for deserialization. </summary>
+        internal SignedIdentifier()
+        {
+        }
+
         /// <summary> a unique id. </summary>
         public string Id { get; set; }
         /// <summary> The access policy. </summary>

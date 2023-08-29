@@ -47,6 +47,11 @@ namespace MgmtSupersetInheritance
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SupersetModel4Data"/> for deserialization. </summary>
+        internal SupersetModel4Data()
+        {
+        }
+
         /// <summary> Gets or sets the new. </summary>
         public string New { get; set; }
     }

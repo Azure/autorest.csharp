@@ -42,6 +42,11 @@ namespace MgmtDiscriminator.Models
             Name = name;
         }
 
+        /// <summary> Initializes a new instance of <see cref="UrlRedirectAction"/> for deserialization. </summary>
+        internal UrlRedirectAction()
+        {
+        }
+
         /// <summary> Defines the parameters for the action. </summary>
         public UrlRedirectActionParameters Parameters { get; set; }
     }

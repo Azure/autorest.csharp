@@ -71,6 +71,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ServiceCounters"/> for deserialization. </summary>
+        internal ServiceCounters()
+        {
+        }
+
         /// <summary> Total number of documents across all indexes in the service. </summary>
         public ResourceCounter DocumentCounter { get; }
         /// <summary> Total number of indexes. </summary>

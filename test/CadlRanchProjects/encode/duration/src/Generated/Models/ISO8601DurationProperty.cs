@@ -31,6 +31,11 @@ namespace Encode.Duration.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ISO8601DurationProperty"/> for deserialization. </summary>
+        internal ISO8601DurationProperty()
+        {
+        }
+
         /// <summary> Gets or sets the value. </summary>
         public TimeSpan Value { get; set; }
     }

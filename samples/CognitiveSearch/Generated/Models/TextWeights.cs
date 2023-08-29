@@ -41,6 +41,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TextWeights"/> for deserialization. </summary>
+        internal TextWeights()
+        {
+        }
+
         /// <summary> The dictionary of per-field weights to boost document scoring. The keys are field names and the values are the weights for each field. </summary>
         public IDictionary<string, double> Weights { get; }
     }

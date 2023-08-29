@@ -47,6 +47,11 @@ namespace MgmtSingletonResource
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ParentResourceData"/> for deserialization. </summary>
+        internal ParentResourceData()
+        {
+        }
+
         /// <summary> Gets or sets the new. </summary>
         public string New { get; set; }
     }

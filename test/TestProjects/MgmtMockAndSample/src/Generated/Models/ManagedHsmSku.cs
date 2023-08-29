@@ -41,6 +41,11 @@ namespace MgmtMockAndSample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ManagedHsmSku"/> for deserialization. </summary>
+        internal ManagedHsmSku()
+        {
+        }
+
         /// <summary> SKU Family of the managed HSM Pool. </summary>
         public ManagedHsmSkuFamily Family { get; set; }
         /// <summary> SKU of the managed HSM Pool. </summary>

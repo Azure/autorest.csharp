@@ -51,6 +51,11 @@ namespace MgmtDiscriminator.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="UrlRedirectActionParameters"/> for deserialization. </summary>
+        internal UrlRedirectActionParameters()
+        {
+        }
+
         /// <summary> Gets or sets the type name. </summary>
         public UrlRedirectActionParametersTypeName TypeName { get; set; }
         /// <summary> The redirect type the rule will use when redirecting traffic. </summary>

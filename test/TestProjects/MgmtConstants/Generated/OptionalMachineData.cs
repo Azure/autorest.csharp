@@ -50,6 +50,11 @@ namespace MgmtConstants
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="OptionalMachineData"/> for deserialization. </summary>
+        internal OptionalMachineData()
+        {
+        }
+
         /// <summary> Describes Protocol and thumbprint of Windows Remote Management listener. </summary>
         public ModelWithRequiredConstant Listener { get; set; }
         /// <summary> Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied. </summary>

@@ -35,6 +35,11 @@ namespace _Type.Property.Nullable.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="InnerModel"/> for deserialization. </summary>
+        internal InnerModel()
+        {
+        }
+
         /// <summary> Inner model property. </summary>
         public string Property { get; }
     }

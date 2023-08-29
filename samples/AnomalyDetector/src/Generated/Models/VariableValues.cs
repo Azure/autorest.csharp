@@ -46,6 +46,11 @@ namespace AnomalyDetector.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VariableValues"/> for deserialization. </summary>
+        internal VariableValues()
+        {
+        }
+
         /// <summary> Variable name of last detection request. </summary>
         public string Variable { get; }
         /// <summary> Timestamps of last detection request. </summary>

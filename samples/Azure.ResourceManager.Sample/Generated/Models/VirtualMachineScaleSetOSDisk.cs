@@ -93,6 +93,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetOSDisk"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetOSDisk()
+        {
+        }
+
         /// <summary>
         /// The disk name.
         /// Serialized Name: VirtualMachineScaleSetOSDisk.name

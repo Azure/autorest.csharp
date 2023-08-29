@@ -149,6 +149,11 @@ namespace MgmtRenameRules
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmData"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetVmData()
+        {
+        }
+
         /// <summary>
         /// The virtual machine instance ID.
         /// Serialized Name: VirtualMachineScaleSetVM.instanceId

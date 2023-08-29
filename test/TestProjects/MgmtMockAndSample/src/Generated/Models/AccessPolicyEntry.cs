@@ -52,6 +52,11 @@ namespace MgmtMockAndSample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AccessPolicyEntry"/> for deserialization. </summary>
+        internal AccessPolicyEntry()
+        {
+        }
+
         /// <summary> The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. </summary>
         public Guid TenantId { get; set; }
         /// <summary> The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies. </summary>

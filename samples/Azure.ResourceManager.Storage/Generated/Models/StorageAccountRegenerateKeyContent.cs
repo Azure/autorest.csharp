@@ -41,6 +41,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="StorageAccountRegenerateKeyContent"/> for deserialization. </summary>
+        internal StorageAccountRegenerateKeyContent()
+        {
+        }
+
         /// <summary> The name of storage keys that want to be regenerated, possible values are key1, key2, kerb1, kerb2. </summary>
         public string KeyName { get; }
     }

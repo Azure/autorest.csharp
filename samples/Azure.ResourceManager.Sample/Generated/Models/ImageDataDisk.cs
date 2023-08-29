@@ -72,6 +72,11 @@ namespace Azure.ResourceManager.Sample.Models
             Lun = lun;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ImageDataDisk"/> for deserialization. </summary>
+        internal ImageDataDisk()
+        {
+        }
+
         /// <summary>
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: ImageDataDisk.lun

@@ -45,6 +45,11 @@ namespace MgmtScopeResource.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ResourceLinkResult"/> for deserialization. </summary>
+        internal ResourceLinkResult()
+        {
+        }
+
         /// <summary> An array of resource links. </summary>
         public IReadOnlyList<ResourceLinkData> Value { get; }
         /// <summary> The URL to use for getting the next set of results. </summary>

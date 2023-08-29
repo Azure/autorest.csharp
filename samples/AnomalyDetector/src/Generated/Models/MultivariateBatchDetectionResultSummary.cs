@@ -51,6 +51,11 @@ namespace AnomalyDetector.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="MultivariateBatchDetectionResultSummary"/> for deserialization. </summary>
+        internal MultivariateBatchDetectionResultSummary()
+        {
+        }
+
         /// <summary> Status of detection results. One of CREATED, RUNNING, READY, and FAILED. </summary>
         public MultivariateBatchDetectionStatus Status { get; }
         /// <summary> Error message when detection is failed. </summary>

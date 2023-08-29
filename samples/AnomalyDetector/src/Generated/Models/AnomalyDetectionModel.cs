@@ -42,6 +42,11 @@ namespace AnomalyDetector.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AnomalyDetectionModel"/> for deserialization. </summary>
+        internal AnomalyDetectionModel()
+        {
+        }
+
         /// <summary> Model identifier. </summary>
         public Guid ModelId { get; }
         /// <summary> Date and time (UTC) when the model was created. </summary>

@@ -45,6 +45,11 @@ namespace MgmtMockAndSample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DiskEncryptionSetList"/> for deserialization. </summary>
+        internal DiskEncryptionSetList()
+        {
+        }
+
         /// <summary> A list of disk encryption sets. </summary>
         public IReadOnlyList<DiskEncryptionSetData> Value { get; }
         /// <summary> The uri to fetch the next page of disk encryption sets. Call ListNext() with this to fetch the next page of disk encryption sets. </summary>

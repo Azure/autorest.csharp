@@ -58,6 +58,11 @@ namespace CognitiveServices.TextAnalytics.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SentenceSentiment"/> for deserialization. </summary>
+        internal SentenceSentiment()
+        {
+        }
+
         /// <summary> The sentence text. </summary>
         public string Text { get; }
         /// <summary> The predicted Sentiment for the sentence. </summary>

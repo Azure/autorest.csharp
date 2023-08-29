@@ -64,6 +64,11 @@ namespace CognitiveServices.TextAnalytics.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="LinkedEntity"/> for deserialization. </summary>
+        internal LinkedEntity()
+        {
+        }
+
         /// <summary> Entity Linking formal name. </summary>
         public string Name { get; }
         /// <summary> List of instances this entity appears in the text. </summary>

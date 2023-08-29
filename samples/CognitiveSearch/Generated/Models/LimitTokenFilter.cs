@@ -43,6 +43,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.LimitTokenFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="LimitTokenFilter"/> for deserialization. </summary>
+        internal LimitTokenFilter()
+        {
+        }
+
         /// <summary> The maximum number of tokens to produce. Default is 1. </summary>
         public int? MaxTokenCount { get; set; }
         /// <summary> A value indicating whether all tokens from the input must be consumed even if maxTokenCount is reached. Default is false. </summary>

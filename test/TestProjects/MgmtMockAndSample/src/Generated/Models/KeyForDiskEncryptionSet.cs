@@ -44,6 +44,11 @@ namespace MgmtMockAndSample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="KeyForDiskEncryptionSet"/> for deserialization. </summary>
+        internal KeyForDiskEncryptionSet()
+        {
+        }
+
         /// <summary> Resource id of the KeyVault containing the key or secret. This property is optional and cannot be used if the KeyVault subscription is not the same as the Disk Encryption Set subscription. </summary>
         internal WritableSubResource SourceVault { get; set; }
         /// <summary> Gets or sets Id. </summary>

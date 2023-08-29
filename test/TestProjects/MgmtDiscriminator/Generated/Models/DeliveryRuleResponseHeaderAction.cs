@@ -42,6 +42,11 @@ namespace MgmtDiscriminator.Models
             Name = name;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleResponseHeaderAction"/> for deserialization. </summary>
+        internal DeliveryRuleResponseHeaderAction()
+        {
+        }
+
         /// <summary> Defines the parameters for the action. </summary>
         public HeaderActionParameters Parameters { get; set; }
     }

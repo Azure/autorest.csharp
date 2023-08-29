@@ -36,6 +36,11 @@ namespace ModelsTypeSpec.Models
             RequiredList = requiredList;
         }
 
+        /// <summary> Initializes a new instance of <see cref="RoundTripOnNoUse"/> for deserialization. </summary>
+        internal RoundTripOnNoUse()
+        {
+        }
+
         /// <summary> Required collection. </summary>
         public IList<CollectionItem> RequiredList { get; }
     }

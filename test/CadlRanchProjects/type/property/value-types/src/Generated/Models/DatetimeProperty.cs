@@ -31,6 +31,11 @@ namespace _Type.Property.ValueTypes.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DatetimeProperty"/> for deserialization. </summary>
+        internal DatetimeProperty()
+        {
+        }
+
         /// <summary> Property. </summary>
         public DateTimeOffset Property { get; set; }
     }

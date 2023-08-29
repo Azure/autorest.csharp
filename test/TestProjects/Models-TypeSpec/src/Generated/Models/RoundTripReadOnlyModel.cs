@@ -99,6 +99,11 @@ namespace ModelsTypeSpec.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="RoundTripReadOnlyModel"/> for deserialization. </summary>
+        internal RoundTripReadOnlyModel()
+        {
+        }
+
         /// <summary> Required string, illustrating a readonly reference type property. </summary>
         public string RequiredReadonlyString { get; }
         /// <summary> Required int, illustrating a readonly value type property. </summary>

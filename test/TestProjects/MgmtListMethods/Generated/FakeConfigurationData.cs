@@ -47,6 +47,11 @@ namespace MgmtListMethods
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="FakeConfigurationData"/> for deserialization. </summary>
+        internal FakeConfigurationData()
+        {
+        }
+
         /// <summary> Value of the configuration. </summary>
         public string ConfigValue { get; set; }
     }

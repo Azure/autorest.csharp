@@ -48,6 +48,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.PatternAnalyzer";
         }
 
+        /// <summary> Initializes a new instance of <see cref="PatternAnalyzer"/> for deserialization. </summary>
+        internal PatternAnalyzer()
+        {
+        }
+
         /// <summary> A value indicating whether terms should be lower-cased. Default is true. </summary>
         public bool? LowerCaseTerms { get; set; }
         /// <summary> A regular expression pattern to match token separators. Default is an expression that matches one or more whitespace characters. </summary>

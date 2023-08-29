@@ -77,6 +77,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPublicIPAddressConfiguration"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetPublicIPAddressConfiguration()
+        {
+        }
+
         /// <summary>
         /// The publicIP address configuration name.
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.name

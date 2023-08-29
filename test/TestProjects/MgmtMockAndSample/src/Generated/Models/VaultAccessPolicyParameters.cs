@@ -48,6 +48,11 @@ namespace MgmtMockAndSample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VaultAccessPolicyParameters"/> for deserialization. </summary>
+        internal VaultAccessPolicyParameters()
+        {
+        }
+
         /// <summary> The resource type of the access policy. </summary>
         public AzureLocation? Location { get; }
         /// <summary> Properties of the access policy. </summary>

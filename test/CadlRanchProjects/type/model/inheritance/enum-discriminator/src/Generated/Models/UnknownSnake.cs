@@ -26,5 +26,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         internal UnknownSnake(SnakeKind kind, int length, Dictionary<string, BinaryData> rawData) : base(kind, length, rawData)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownSnake"/> for deserialization. </summary>
+        internal UnknownSnake()
+        {
+        }
     }
 }

@@ -62,6 +62,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListOSUpgradeHistory"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetListOSUpgradeHistory()
+        {
+        }
+
         /// <summary>
         /// The list of OS upgrades performed on the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.value

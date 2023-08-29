@@ -47,6 +47,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="KeyValueElement"/> for deserialization. </summary>
+        internal KeyValueElement()
+        {
+        }
+
         /// <summary> The text content of the key or value. </summary>
         public string Text { get; }
         /// <summary> Bounding box of the key or value. </summary>

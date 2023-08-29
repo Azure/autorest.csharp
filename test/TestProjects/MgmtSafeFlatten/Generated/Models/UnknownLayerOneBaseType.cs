@@ -23,5 +23,10 @@ namespace MgmtSafeFlatten.Models
         {
             Name = name;
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownLayerOneBaseType"/> for deserialization. </summary>
+        internal UnknownLayerOneBaseType()
+        {
+        }
     }
 }

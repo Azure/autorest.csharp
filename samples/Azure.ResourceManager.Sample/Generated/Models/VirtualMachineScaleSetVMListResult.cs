@@ -57,6 +57,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMListResult"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetVMListResult()
+        {
+        }
+
         /// <summary>
         /// The list of virtual machine scale sets VMs.
         /// Serialized Name: VirtualMachineScaleSetVMListResult.value

@@ -41,6 +41,11 @@ namespace ConfidentLevelsInTsp.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="UsualModel"/> for deserialization. </summary>
+        internal UsualModel()
+        {
+        }
+
         /// <summary> The name. </summary>
         public string Name { get; }
         /// <summary> The age. </summary>

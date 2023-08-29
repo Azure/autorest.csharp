@@ -48,6 +48,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="InputFieldMappingEntry"/> for deserialization. </summary>
+        internal InputFieldMappingEntry()
+        {
+        }
+
         /// <summary> The name of the input. </summary>
         public string Name { get; set; }
         /// <summary> The source of the input. </summary>

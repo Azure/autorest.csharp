@@ -37,6 +37,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="KeyPolicy"/> for deserialization. </summary>
+        internal KeyPolicy()
+        {
+        }
+
         /// <summary> The key expiration period in days. </summary>
         public int KeyExpirationPeriodInDays { get; set; }
     }

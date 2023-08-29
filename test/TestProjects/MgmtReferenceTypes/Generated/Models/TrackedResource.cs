@@ -43,6 +43,11 @@ namespace Azure.ResourceManager.Fake.Models
             Location = location;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TrackedResource"/> for deserialization. </summary>
+        internal TrackedResource()
+        {
+        }
+
         /// <summary> Resource tags. </summary>
         public IDictionary<string, string> Tags { get; }
         /// <summary> The geo-location where the resource lives. </summary>

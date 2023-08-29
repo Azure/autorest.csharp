@@ -48,6 +48,11 @@ namespace MgmtLRO
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="BarData"/> for deserialization. </summary>
+        internal BarData()
+        {
+        }
+
         /// <summary> The instance view of a resource. </summary>
         internal BarProperties Properties { get; set; }
         /// <summary> Update Domain count. </summary>

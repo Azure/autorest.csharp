@@ -45,6 +45,11 @@ namespace MgmtOperations.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetGrandChildListResult"/> for deserialization. </summary>
+        internal AvailabilitySetGrandChildListResult()
+        {
+        }
+
         /// <summary> The list of availability sets. </summary>
         public IReadOnlyList<AvailabilitySetGrandChildData> Value { get; }
         /// <summary> The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets. </summary>

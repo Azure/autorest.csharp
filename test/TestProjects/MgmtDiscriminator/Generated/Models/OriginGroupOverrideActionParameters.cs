@@ -46,6 +46,11 @@ namespace MgmtDiscriminator.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="OriginGroupOverrideActionParameters"/> for deserialization. </summary>
+        internal OriginGroupOverrideActionParameters()
+        {
+        }
+
         /// <summary> Gets or sets the type name. </summary>
         public OriginGroupOverrideActionParametersTypeName TypeName { get; set; }
         /// <summary> defines the OriginGroup that would override the DefaultOriginGroup. </summary>

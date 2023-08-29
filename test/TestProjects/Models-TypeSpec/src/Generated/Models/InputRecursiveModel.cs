@@ -37,6 +37,11 @@ namespace ModelsTypeSpec.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="InputRecursiveModel"/> for deserialization. </summary>
+        internal InputRecursiveModel()
+        {
+        }
+
         /// <summary> Message. </summary>
         public string Message { get; }
         /// <summary> Required Record. </summary>

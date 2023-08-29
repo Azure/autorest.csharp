@@ -42,6 +42,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.StopAnalyzer";
         }
 
+        /// <summary> Initializes a new instance of <see cref="StopAnalyzer"/> for deserialization. </summary>
+        internal StopAnalyzer()
+        {
+        }
+
         /// <summary> A list of stopwords. </summary>
         public IList<string> Stopwords { get; }
     }

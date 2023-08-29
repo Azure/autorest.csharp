@@ -51,6 +51,11 @@ namespace MgmtScopeResource.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="WhatIfChange"/> for deserialization. </summary>
+        internal WhatIfChange()
+        {
+        }
+
         /// <summary> Resource ID. </summary>
         public string ResourceId { get; }
         /// <summary> Type of change that will be made to the resource when the deployment is executed. </summary>

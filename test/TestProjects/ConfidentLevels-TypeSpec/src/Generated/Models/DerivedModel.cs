@@ -32,6 +32,11 @@ namespace ConfidentLevelsInTsp.Models
             Age = age;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DerivedModel"/> for deserialization. </summary>
+        internal DerivedModel()
+        {
+        }
+
         /// <summary> The age. </summary>
         public int? Age { get; set; }
     }

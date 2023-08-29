@@ -40,6 +40,11 @@ namespace AnomalyDetector.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ErrorResponse"/> for deserialization. </summary>
+        internal ErrorResponse()
+        {
+        }
+
         /// <summary> The error code. </summary>
         public string Code { get; set; }
         /// <summary> The message explaining the error reported by the service. </summary>

@@ -43,6 +43,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="IPRule"/> for deserialization. </summary>
+        internal IPRule()
+        {
+        }
+
         /// <summary> Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed. </summary>
         public string IPAddressOrRange { get; set; }
         /// <summary> The action of IP ACL rule. </summary>

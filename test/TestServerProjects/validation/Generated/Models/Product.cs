@@ -61,6 +61,11 @@ namespace validation.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Product"/> for deserialization. </summary>
+        internal Product()
+        {
+        }
+
         /// <summary> Non required array of unique items from 0 to 6 elements. </summary>
         public IList<string> DisplayNames { get; }
         /// <summary> Non required int betwen 0 and 100 exclusive. </summary>

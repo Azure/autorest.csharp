@@ -45,6 +45,11 @@ namespace MgmtSafeFlatten.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TypeOneListResult"/> for deserialization. </summary>
+        internal TypeOneListResult()
+        {
+        }
+
         /// <summary> The list of of typeones. </summary>
         public IReadOnlyList<TypeOneData> Value { get; }
         /// <summary> The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs. </summary>

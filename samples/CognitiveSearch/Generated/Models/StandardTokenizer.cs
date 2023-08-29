@@ -41,6 +41,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.StandardTokenizer";
         }
 
+        /// <summary> Initializes a new instance of <see cref="StandardTokenizer"/> for deserialization. </summary>
+        internal StandardTokenizer()
+        {
+        }
+
         /// <summary> The maximum token length. Default is 255. Tokens longer than the maximum length are split. </summary>
         public int? MaxTokenLength { get; set; }
     }

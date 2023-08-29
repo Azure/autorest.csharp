@@ -48,6 +48,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ManagementPolicyFilter"/> for deserialization. </summary>
+        internal ManagementPolicyFilter()
+        {
+        }
+
         /// <summary> An array of strings for prefixes to be match. </summary>
         public IList<string> PrefixMatch { get; }
         /// <summary> An array of predefined enum values. Currently blockBlob supports all tiering and delete actions. Only delete actions are supported for appendBlob. </summary>

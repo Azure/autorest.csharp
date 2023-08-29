@@ -27,5 +27,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal Goose(string kind, int wingspan, Dictionary<string, BinaryData> rawData) : base(kind, wingspan, rawData)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="Goose"/> for deserialization. </summary>
+        internal Goose()
+        {
+        }
     }
 }

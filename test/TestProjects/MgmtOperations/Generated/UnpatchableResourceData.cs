@@ -47,6 +47,11 @@ namespace MgmtOperations
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="UnpatchableResourceData"/> for deserialization. </summary>
+        internal UnpatchableResourceData()
+        {
+        }
+
         /// <summary> specifies the foo. </summary>
         public string Foo { get; set; }
     }

@@ -45,6 +45,11 @@ namespace MgmtSingletonResource.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ParentResourceListResult"/> for deserialization. </summary>
+        internal ParentResourceListResult()
+        {
+        }
+
         /// <summary> The list of parent resource. </summary>
         public IReadOnlyList<ParentResourceData> Value { get; }
         /// <summary> The URI to fetch the next page. </summary>

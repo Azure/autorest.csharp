@@ -71,6 +71,11 @@ namespace Azure.ResourceManager.Sample
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionImageData"/> for deserialization. </summary>
+        internal VirtualMachineExtensionImageData()
+        {
+        }
+
         /// <summary>
         /// The operating system this extension supports.
         /// Serialized Name: VirtualMachineExtensionImage.properties.operatingSystem

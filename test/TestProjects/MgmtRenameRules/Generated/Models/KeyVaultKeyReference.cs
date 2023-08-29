@@ -62,6 +62,11 @@ namespace MgmtRenameRules.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="KeyVaultKeyReference"/> for deserialization. </summary>
+        internal KeyVaultKeyReference()
+        {
+        }
+
         /// <summary>
         /// The URL referencing a key encryption key in Key Vault.
         /// Serialized Name: KeyVaultKeyReference.keyUrl

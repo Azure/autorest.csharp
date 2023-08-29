@@ -83,6 +83,11 @@ namespace Azure.ResourceManager.Sample.Models
             EnableIPForwarding = enableIPForwarding;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetNetworkConfiguration"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetNetworkConfiguration()
+        {
+        }
+
         /// <summary>
         /// The network configuration name.
         /// Serialized Name: VirtualMachineScaleSetNetworkConfiguration.name

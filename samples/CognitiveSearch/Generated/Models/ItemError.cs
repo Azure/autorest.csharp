@@ -53,6 +53,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ItemError"/> for deserialization. </summary>
+        internal ItemError()
+        {
+        }
+
         /// <summary> The key of the item for which indexing failed. </summary>
         public string Key { get; }
         /// <summary> The message describing the error that occurred while processing the item. </summary>

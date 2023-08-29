@@ -57,6 +57,11 @@ namespace Azure.ResourceManager.Sample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeysGroupListResult"/> for deserialization. </summary>
+        internal SshPublicKeysGroupListResult()
+        {
+        }
+
         /// <summary>
         /// The list of SSH public keys
         /// Serialized Name: SshPublicKeysGroupListResult.value

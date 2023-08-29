@@ -42,6 +42,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ListIndexersResult"/> for deserialization. </summary>
+        internal ListIndexersResult()
+        {
+        }
+
         /// <summary> The indexers in the Search service. </summary>
         public IReadOnlyList<Indexer> Indexers { get; }
     }

@@ -108,6 +108,11 @@ namespace AnomalyDetector.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="UnivariateLastDetectionResult"/> for deserialization. </summary>
+        internal UnivariateLastDetectionResult()
+        {
+        }
+
         /// <summary>
         /// Frequency extracted from the series, zero means no recurrent pattern has been
         /// found.

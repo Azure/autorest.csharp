@@ -31,6 +31,11 @@ namespace CustomizationsInTsp.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ModelToMakeInternal"/> for deserialization. </summary>
+        internal ModelToMakeInternal()
+        {
+        }
+
         /// <summary> Required int. </summary>
         public int RequiredInt { get; set; }
     }

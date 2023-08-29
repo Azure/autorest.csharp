@@ -47,6 +47,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.PatternCaptureTokenFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="PatternCaptureTokenFilter"/> for deserialization. </summary>
+        internal PatternCaptureTokenFilter()
+        {
+        }
+
         /// <summary> A list of patterns to match against each token. </summary>
         public IList<string> Patterns { get; }
         /// <summary> A value indicating whether to return the original token even if one of the patterns matches. Default is true. </summary>

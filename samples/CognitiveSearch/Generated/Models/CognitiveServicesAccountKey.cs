@@ -42,6 +42,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.CognitiveServicesByKey";
         }
 
+        /// <summary> Initializes a new instance of <see cref="CognitiveServicesAccountKey"/> for deserialization. </summary>
+        internal CognitiveServicesAccountKey()
+        {
+        }
+
         /// <summary> The key used to provision the cognitive service resource attached to a skillset. </summary>
         public string Key { get; set; }
     }

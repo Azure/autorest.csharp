@@ -35,6 +35,11 @@ namespace _Type.Union.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ModelWithNamedUnionProperty"/> for deserialization. </summary>
+        internal ModelWithNamedUnionProperty()
+        {
+        }
+
         /// <summary> Gets the named union. </summary>
         public object NamedUnion { get; }
     }

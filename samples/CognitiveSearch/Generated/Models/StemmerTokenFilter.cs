@@ -43,6 +43,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.StemmerTokenFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="StemmerTokenFilter"/> for deserialization. </summary>
+        internal StemmerTokenFilter()
+        {
+        }
+
         /// <summary> The language to use. </summary>
         public StemmerTokenFilterLanguage Language { get; set; }
     }

@@ -60,6 +60,11 @@ namespace xml_service.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ListContainersResponse"/> for deserialization. </summary>
+        internal ListContainersResponse()
+        {
+        }
+
         /// <summary> Gets the service endpoint. </summary>
         public string ServiceEndpoint { get; }
         /// <summary> Gets the prefix. </summary>

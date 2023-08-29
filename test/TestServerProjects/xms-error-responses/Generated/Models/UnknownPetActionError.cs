@@ -25,5 +25,10 @@ namespace xms_error_responses.Models
         {
             ErrorType = errorType ?? "Unknown";
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownPetActionError"/> for deserialization. </summary>
+        internal UnknownPetActionError()
+        {
+        }
     }
 }

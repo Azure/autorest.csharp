@@ -53,6 +53,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ScoringFunction"/> for deserialization. </summary>
+        internal ScoringFunction()
+        {
+        }
+
         /// <summary> Indicates the type of function to use. Valid values include magnitude, freshness, distance, and tag. The function type must be lower case. </summary>
         internal string Type { get; set; }
         /// <summary> The name of the field used as input to the scoring function. </summary>

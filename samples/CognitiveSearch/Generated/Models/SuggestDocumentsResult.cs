@@ -44,6 +44,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SuggestDocumentsResult"/> for deserialization. </summary>
+        internal SuggestDocumentsResult()
+        {
+        }
+
         /// <summary> The sequence of results returned by the query. </summary>
         public IReadOnlyList<SuggestResult> Results { get; }
         /// <summary> A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not set in the request. </summary>

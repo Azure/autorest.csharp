@@ -52,6 +52,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="KeyValuePair"/> for deserialization. </summary>
+        internal KeyValuePair()
+        {
+        }
+
         /// <summary> A user defined label for the key/value pair entry. </summary>
         public string Label { get; }
         /// <summary> Information about the extracted key in a key-value pair. </summary>

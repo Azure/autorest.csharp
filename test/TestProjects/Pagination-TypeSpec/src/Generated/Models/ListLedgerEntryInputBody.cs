@@ -39,6 +39,11 @@ namespace Pagination.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ListLedgerEntryInputBody"/> for deserialization. </summary>
+        internal ListLedgerEntryInputBody()
+        {
+        }
+
         /// <summary> Required string. </summary>
         public string RequiredString { get; }
         /// <summary> Required int. </summary>

@@ -44,6 +44,11 @@ namespace MgmtHierarchicalNonResource.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SharedGalleryImageVersionList"/> for deserialization. </summary>
+        internal SharedGalleryImageVersionList()
+        {
+        }
+
         /// <summary> A list of shared gallery images versions. </summary>
         public IReadOnlyList<SharedGalleryImageVersion> Value { get; }
         /// <summary> The uri to fetch the next page of shared gallery image versions. Call ListNext() with this to fetch the next page of shared gallery image versions. </summary>

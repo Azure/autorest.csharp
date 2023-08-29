@@ -51,6 +51,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Skills.Text.SplitSkill";
         }
 
+        /// <summary> Initializes a new instance of <see cref="SplitSkill"/> for deserialization. </summary>
+        internal SplitSkill()
+        {
+        }
+
         /// <summary> A value indicating which language code to use. Default is en. </summary>
         public SplitSkillLanguage? DefaultLanguageCode { get; set; }
         /// <summary> A value indicating which split mode to perform. </summary>

@@ -35,6 +35,11 @@ namespace Authentication.OAuth2.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="InvalidAuth"/> for deserialization. </summary>
+        internal InvalidAuth()
+        {
+        }
+
         /// <summary> Gets the error. </summary>
         public string Error { get; }
     }

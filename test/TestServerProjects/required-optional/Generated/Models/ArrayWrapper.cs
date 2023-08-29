@@ -42,6 +42,11 @@ namespace required_optional.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ArrayWrapper"/> for deserialization. </summary>
+        internal ArrayWrapper()
+        {
+        }
+
         /// <summary> Gets the value. </summary>
         public IList<string> Value { get; }
     }

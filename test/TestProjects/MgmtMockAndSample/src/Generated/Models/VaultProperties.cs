@@ -88,6 +88,11 @@ namespace MgmtMockAndSample.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VaultProperties"/> for deserialization. </summary>
+        internal VaultProperties()
+        {
+        }
+
         /// <summary> Time elapsed for task. </summary>
         public TimeSpan? Duration { get; set; }
         /// <summary> The date and time when the cluster creating. </summary>

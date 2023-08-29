@@ -41,6 +41,11 @@ namespace multiple_inheritance.Models
             Hisses = hisses;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Cat"/> for deserialization. </summary>
+        internal Cat()
+        {
+        }
+
         /// <summary> Gets or sets the likes milk. </summary>
         public bool? LikesMilk { get; set; }
         /// <summary> Gets or sets the meows. </summary>

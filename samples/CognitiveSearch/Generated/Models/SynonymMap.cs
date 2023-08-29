@@ -53,6 +53,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SynonymMap"/> for deserialization. </summary>
+        internal SynonymMap()
+        {
+        }
+
         /// <summary> The name of the synonym map. </summary>
         public string Name { get; set; }
         /// <summary> The format of the synonym map. Only the 'solr' format is currently supported. </summary>

@@ -27,5 +27,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         internal Cobra(SnakeKind kind, int length, Dictionary<string, BinaryData> rawData) : base(kind, length, rawData)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="Cobra"/> for deserialization. </summary>
+        internal Cobra()
+        {
+        }
     }
 }

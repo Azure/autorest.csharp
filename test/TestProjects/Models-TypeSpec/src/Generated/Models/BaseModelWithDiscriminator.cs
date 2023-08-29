@@ -41,6 +41,11 @@ namespace ModelsTypeSpec.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="BaseModelWithDiscriminator"/> for deserialization. </summary>
+        internal BaseModelWithDiscriminator()
+        {
+        }
+
         /// <summary> Discriminator. </summary>
         internal string DiscriminatorProperty { get; set; }
         /// <summary> Optional property on base. </summary>

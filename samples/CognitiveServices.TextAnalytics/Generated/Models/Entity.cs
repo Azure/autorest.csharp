@@ -60,6 +60,11 @@ namespace CognitiveServices.TextAnalytics.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Entity"/> for deserialization. </summary>
+        internal Entity()
+        {
+        }
+
         /// <summary> Entity text as appears in the request. </summary>
         public string Text { get; }
         /// <summary> Entity type, such as Person/Location/Org/SSN etc. </summary>

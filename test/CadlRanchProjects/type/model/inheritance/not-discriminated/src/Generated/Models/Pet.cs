@@ -35,6 +35,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Pet"/> for deserialization. </summary>
+        internal Pet()
+        {
+        }
+
         /// <summary> Gets the name. </summary>
         public string Name { get; }
     }

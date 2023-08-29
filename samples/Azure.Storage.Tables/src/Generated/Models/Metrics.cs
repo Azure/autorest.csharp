@@ -43,6 +43,11 @@ namespace Azure.Storage.Tables.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Metrics"/> for deserialization. </summary>
+        internal Metrics()
+        {
+        }
+
         /// <summary> The version of Storage Analytics to configure. </summary>
         public string Version { get; set; }
         /// <summary> Indicates whether metrics are enabled for the Queue service. </summary>

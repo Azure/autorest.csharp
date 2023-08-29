@@ -25,5 +25,10 @@ namespace body_complex.Models
         {
             Kind = kind;
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownMyBaseType"/> for deserialization. </summary>
+        internal UnknownMyBaseType()
+        {
+        }
     }
 }

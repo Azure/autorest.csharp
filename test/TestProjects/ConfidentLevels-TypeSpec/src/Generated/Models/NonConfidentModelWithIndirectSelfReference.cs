@@ -38,6 +38,11 @@ namespace ConfidentLevelsInTsp.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="NonConfidentModelWithIndirectSelfReference"/> for deserialization. </summary>
+        internal NonConfidentModelWithIndirectSelfReference()
+        {
+        }
+
         /// <summary> The name. </summary>
         public string Name { get; }
         /// <summary> The self reference. </summary>

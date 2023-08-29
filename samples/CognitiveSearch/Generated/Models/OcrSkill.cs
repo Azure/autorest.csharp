@@ -51,6 +51,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Skills.Vision.OcrSkill";
         }
 
+        /// <summary> Initializes a new instance of <see cref="OcrSkill"/> for deserialization. </summary>
+        internal OcrSkill()
+        {
+        }
+
         /// <summary> A value indicating which algorithm to use for extracting text. Default is printed. </summary>
         public TextExtractionAlgorithm? TextExtractionAlgorithm { get; set; }
         /// <summary> A value indicating which language code to use. Default is en. </summary>

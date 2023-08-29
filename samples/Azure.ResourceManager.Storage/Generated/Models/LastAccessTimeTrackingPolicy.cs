@@ -45,6 +45,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="LastAccessTimeTrackingPolicy"/> for deserialization. </summary>
+        internal LastAccessTimeTrackingPolicy()
+        {
+        }
+
         /// <summary> When set to true last access time based tracking is enabled. </summary>
         public bool Enable { get; set; }
         /// <summary> Name of the policy. The valid value is AccessTimeTracking. This field is currently read only. </summary>

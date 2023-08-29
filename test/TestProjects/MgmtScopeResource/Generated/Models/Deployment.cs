@@ -46,6 +46,11 @@ namespace MgmtScopeResource.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Deployment"/> for deserialization. </summary>
+        internal Deployment()
+        {
+        }
+
         /// <summary> The location to store the deployment data. </summary>
         public string Location { get; set; }
         /// <summary> The deployment properties. </summary>

@@ -98,6 +98,11 @@ namespace ModelShapes.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="MixedModel"/> for deserialization. </summary>
+        internal MixedModel()
+        {
+        }
+
         /// <summary> Gets or sets the required string. </summary>
         public string RequiredString { get; set; }
         /// <summary> Gets or sets the required int. </summary>

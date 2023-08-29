@@ -45,6 +45,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualNetworkRule"/> for deserialization. </summary>
+        internal VirtualNetworkRule()
+        {
+        }
+
         /// <summary> Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}. </summary>
         public string VirtualNetworkResourceId { get; set; }
         /// <summary> The action of virtual network rule. </summary>

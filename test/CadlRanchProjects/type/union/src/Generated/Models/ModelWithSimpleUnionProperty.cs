@@ -35,6 +35,11 @@ namespace _Type.Union.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ModelWithSimpleUnionProperty"/> for deserialization. </summary>
+        internal ModelWithSimpleUnionProperty()
+        {
+        }
+
         /// <summary> Gets the simple union. </summary>
         public object SimpleUnion { get; }
     }

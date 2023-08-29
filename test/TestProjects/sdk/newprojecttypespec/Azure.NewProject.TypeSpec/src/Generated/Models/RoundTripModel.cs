@@ -98,6 +98,11 @@ namespace Azure.NewProject.TypeSpec.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="RoundTripModel"/> for deserialization. </summary>
+        internal RoundTripModel()
+        {
+        }
+
         /// <summary> Required string, illustrating a reference type property. </summary>
         public string RequiredString { get; set; }
         /// <summary> Required int, illustrating a value type property. </summary>

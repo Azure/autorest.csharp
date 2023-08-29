@@ -35,6 +35,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="InternalModel"/> for deserialization. </summary>
+        internal InternalModel()
+        {
+        }
+
         /// <summary> Gets the name. </summary>
         public string Name { get; }
     }

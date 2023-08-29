@@ -45,6 +45,11 @@ namespace MgmtPropertyChooser.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineListResult"/> for deserialization. </summary>
+        internal VirtualMachineListResult()
+        {
+        }
+
         /// <summary> The list of virtual machines. </summary>
         public IReadOnlyList<VirtualMachineData> Value { get; }
         /// <summary> The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines. </summary>

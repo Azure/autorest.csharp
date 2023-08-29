@@ -27,5 +27,10 @@ namespace ModelsTypeSpec.Models
         internal UnknownBaseModelWithDiscriminator(string discriminatorProperty, string optionalPropertyOnBase, int requiredPropertyOnBase, Dictionary<string, BinaryData> rawData) : base(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase, rawData)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownBaseModelWithDiscriminator"/> for deserialization. </summary>
+        internal UnknownBaseModelWithDiscriminator()
+        {
+        }
     }
 }

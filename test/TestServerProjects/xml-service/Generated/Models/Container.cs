@@ -49,6 +49,11 @@ namespace xml_service.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Container"/> for deserialization. </summary>
+        internal Container()
+        {
+        }
+
         /// <summary> Gets the name. </summary>
         public string Name { get; }
         /// <summary> Properties of a container. </summary>

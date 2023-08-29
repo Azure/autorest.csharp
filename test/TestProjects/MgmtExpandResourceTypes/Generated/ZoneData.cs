@@ -72,6 +72,11 @@ namespace MgmtExpandResourceTypes
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ZoneData"/> for deserialization. </summary>
+        internal ZoneData()
+        {
+        }
+
         /// <summary> The etag of the zone. </summary>
         public string Etag { get; set; }
         /// <summary> The maximum number of record sets that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored. </summary>

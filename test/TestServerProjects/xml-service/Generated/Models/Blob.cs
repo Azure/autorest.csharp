@@ -58,6 +58,11 @@ namespace xml_service.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Blob"/> for deserialization. </summary>
+        internal Blob()
+        {
+        }
+
         /// <summary> Gets the name. </summary>
         public string Name { get; }
         /// <summary> Gets the deleted. </summary>

@@ -47,6 +47,11 @@ namespace CognitiveSearch.Models
             Type = type ?? "magnitude";
         }
 
+        /// <summary> Initializes a new instance of <see cref="MagnitudeScoringFunction"/> for deserialization. </summary>
+        internal MagnitudeScoringFunction()
+        {
+        }
+
         /// <summary> Parameter values for the magnitude scoring function. </summary>
         public MagnitudeScoringParameters Parameters { get; set; }
     }

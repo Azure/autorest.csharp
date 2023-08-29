@@ -70,6 +70,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DataTableCell"/> for deserialization. </summary>
+        internal DataTableCell()
+        {
+        }
+
         /// <summary> Row index of the cell. </summary>
         public int RowIndex { get; }
         /// <summary> Column index of the cell. </summary>

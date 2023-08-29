@@ -47,6 +47,11 @@ namespace MgmtExtensionCommonRestOperation
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TypeTwoData"/> for deserialization. </summary>
+        internal TypeTwoData()
+        {
+        }
+
         /// <summary> The details of the type. </summary>
         public string MyType { get; set; }
     }

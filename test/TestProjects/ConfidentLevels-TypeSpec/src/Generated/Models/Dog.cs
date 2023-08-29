@@ -37,6 +37,11 @@ namespace ConfidentLevelsInTsp.Models
             Woof = woof;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Dog"/> for deserialization. </summary>
+        internal Dog()
+        {
+        }
+
         /// <summary> Woof. </summary>
         public string Woof { get; set; }
     }

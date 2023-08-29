@@ -39,6 +39,11 @@ namespace Azure.Storage.Tables.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="RetentionPolicy"/> for deserialization. </summary>
+        internal RetentionPolicy()
+        {
+        }
+
         /// <summary> Indicates whether a retention policy is enabled for the storage service. </summary>
         public bool Enabled { get; set; }
         /// <summary> Indicates the number of days that metrics or logging or soft-deleted data should be retained. All data older than this value will be deleted. </summary>

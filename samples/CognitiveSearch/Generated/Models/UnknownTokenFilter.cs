@@ -24,5 +24,10 @@ namespace CognitiveSearch.Models
         {
             OdataType = odataType ?? "Unknown";
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownTokenFilter"/> for deserialization. </summary>
+        internal UnknownTokenFilter()
+        {
+        }
     }
 }

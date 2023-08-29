@@ -53,6 +53,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="TokenInfo"/> for deserialization. </summary>
+        internal TokenInfo()
+        {
+        }
+
         /// <summary> The token returned by the analyzer. </summary>
         public string Token { get; }
         /// <summary> The index of the first character of the token in the input text. </summary>

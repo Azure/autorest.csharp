@@ -55,6 +55,11 @@ namespace AnomalyDetector.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AnomalyValue"/> for deserialization. </summary>
+        internal AnomalyValue()
+        {
+        }
+
         /// <summary> True if an anomaly is detected at the current timestamp. </summary>
         public bool IsAnomaly { get; }
         /// <summary>

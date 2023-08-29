@@ -41,6 +41,11 @@ namespace azure_special_properties.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="HeaderCustomNamedRequestIdParamGroupingParameters"/> for deserialization. </summary>
+        internal HeaderCustomNamedRequestIdParamGroupingParameters()
+        {
+        }
+
         /// <summary> The fooRequestId. </summary>
         public string FooClientRequestId { get; }
     }

@@ -84,6 +84,11 @@ namespace MgmtMockAndSample
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyData"/> for deserialization. </summary>
+        internal FirewallPolicyData()
+        {
+        }
+
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>
         public string Etag { get; }
         /// <summary> The identity of the firewall policy. </summary>

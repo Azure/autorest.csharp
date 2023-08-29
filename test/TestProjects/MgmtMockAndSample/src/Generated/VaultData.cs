@@ -57,6 +57,11 @@ namespace MgmtMockAndSample
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="VaultData"/> for deserialization. </summary>
+        internal VaultData()
+        {
+        }
+
         /// <summary> Azure location of the key vault resource. </summary>
         public AzureLocation? Location { get; }
         /// <summary> Tags assigned to the key vault resource. </summary>

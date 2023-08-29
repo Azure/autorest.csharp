@@ -33,5 +33,10 @@ namespace CustomNamespace
             DaysOfWeek = daysOfWeek;
             _rawData = rawData;
         }
+
+        /// <summary> Initializes a new instance of <see cref="CustomizedModel"/> for deserialization. </summary>
+        internal CustomizedModel()
+        {
+        }
     }
 }

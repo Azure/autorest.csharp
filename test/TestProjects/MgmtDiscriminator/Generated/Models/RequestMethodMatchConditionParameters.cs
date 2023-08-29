@@ -50,6 +50,11 @@ namespace MgmtDiscriminator.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="RequestMethodMatchConditionParameters"/> for deserialization. </summary>
+        internal RequestMethodMatchConditionParameters()
+        {
+        }
+
         /// <summary> Gets or sets the type name. </summary>
         public RequestMethodMatchConditionParametersTypeName TypeName { get; set; }
         /// <summary> Describes operator to be matched. </summary>

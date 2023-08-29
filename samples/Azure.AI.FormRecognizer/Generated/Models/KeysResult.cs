@@ -41,6 +41,11 @@ namespace Azure.AI.FormRecognizer.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="KeysResult"/> for deserialization. </summary>
+        internal KeysResult()
+        {
+        }
+
         /// <summary> Object mapping clusterIds to a list of keys. </summary>
         public IReadOnlyDictionary<string, IList<string>> Clusters { get; }
     }

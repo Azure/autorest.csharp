@@ -81,6 +81,11 @@ namespace Azure.ResourceManager.Sample
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupData"/> for deserialization. </summary>
+        internal ProximityPlacementGroupData()
+        {
+        }
+
         /// <summary>
         /// The extended location of the custom IP prefix.
         /// Serialized Name: ProximityPlacementGroup.extendedLocation

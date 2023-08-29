@@ -54,6 +54,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Skills.Text.EntityRecognitionSkill";
         }
 
+        /// <summary> Initializes a new instance of <see cref="EntityRecognitionSkill"/> for deserialization. </summary>
+        internal EntityRecognitionSkill()
+        {
+        }
+
         /// <summary> A list of entity categories that should be extracted. </summary>
         public IList<EntityCategory> Categories { get; }
         /// <summary> A value indicating which language code to use. Default is en. </summary>

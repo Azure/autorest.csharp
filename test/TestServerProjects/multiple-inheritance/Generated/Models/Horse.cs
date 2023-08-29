@@ -37,6 +37,11 @@ namespace multiple_inheritance.Models
             IsAShowHorse = isAShowHorse;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Horse"/> for deserialization. </summary>
+        internal Horse()
+        {
+        }
+
         /// <summary> Gets or sets the is a show horse. </summary>
         public bool? IsAShowHorse { get; set; }
     }

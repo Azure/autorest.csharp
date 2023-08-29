@@ -54,6 +54,11 @@ namespace CognitiveServices.TextAnalytics.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="SentimentResponse"/> for deserialization. </summary>
+        internal SentimentResponse()
+        {
+        }
+
         /// <summary> Sentiment analysis per document. </summary>
         public IReadOnlyList<DocumentSentiment> Documents { get; }
         /// <summary> Errors by document id. </summary>

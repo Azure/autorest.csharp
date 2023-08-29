@@ -26,5 +26,10 @@ namespace ModelsTypeSpec.Models
         internal UnknownSingleBase(string kind, int size, Dictionary<string, BinaryData> rawData) : base(kind, size, rawData)
         {
         }
+
+        /// <summary> Initializes a new instance of <see cref="UnknownSingleBase"/> for deserialization. </summary>
+        internal UnknownSingleBase()
+        {
+        }
     }
 }

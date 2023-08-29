@@ -59,6 +59,11 @@ namespace AuthoringTypeSpec.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DeploymentJob"/> for deserialization. </summary>
+        internal DeploymentJob()
+        {
+        }
+
         /// <summary> The job ID. </summary>
         public string JobId { get; }
         /// <summary> The creation date time of the job. </summary>

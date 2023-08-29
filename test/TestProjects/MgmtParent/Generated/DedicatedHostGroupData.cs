@@ -47,6 +47,11 @@ namespace MgmtParent
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupData"/> for deserialization. </summary>
+        internal DedicatedHostGroupData()
+        {
+        }
+
         /// <summary> specifies the foo. </summary>
         public string Foo { get; set; }
     }

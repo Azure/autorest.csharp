@@ -31,6 +31,11 @@ namespace _Type.Property.ValueTypes.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DurationProperty"/> for deserialization. </summary>
+        internal DurationProperty()
+        {
+        }
+
         /// <summary> Property. </summary>
         public TimeSpan Property { get; set; }
     }

@@ -46,6 +46,11 @@ namespace body_complex.Models
             Fishtype = fishtype ?? "smart_salmon";
         }
 
+        /// <summary> Initializes a new instance of <see cref="SmartSalmon"/> for deserialization. </summary>
+        internal SmartSalmon()
+        {
+        }
+
         /// <summary> Gets or sets the college degree. </summary>
         public string CollegeDegree { get; set; }
         /// <summary> Additional Properties. </summary>

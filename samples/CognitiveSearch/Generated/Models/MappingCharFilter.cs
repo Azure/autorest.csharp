@@ -45,6 +45,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.MappingCharFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="MappingCharFilter"/> for deserialization. </summary>
+        internal MappingCharFilter()
+        {
+        }
+
         /// <summary> A list of mappings of the following format: "a=&gt;b" (all occurrences of the character "a" will be replaced with character "b"). </summary>
         public IList<string> Mappings { get; }
     }

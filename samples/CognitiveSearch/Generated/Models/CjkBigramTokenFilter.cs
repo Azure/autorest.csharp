@@ -44,6 +44,11 @@ namespace CognitiveSearch.Models
             OdataType = odataType ?? "#Microsoft.Azure.Search.CjkBigramTokenFilter";
         }
 
+        /// <summary> Initializes a new instance of <see cref="CjkBigramTokenFilter"/> for deserialization. </summary>
+        internal CjkBigramTokenFilter()
+        {
+        }
+
         /// <summary> The scripts to ignore. </summary>
         public IList<CjkBigramTokenFilterScripts> IgnoreScripts { get; }
         /// <summary> A value indicating whether to output both unigrams and bigrams (if true), or just bigrams (if false). Default is false. </summary>

@@ -62,6 +62,11 @@ namespace CognitiveSearch.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="AutocompleteRequest"/> for deserialization. </summary>
+        internal AutocompleteRequest()
+        {
+        }
+
         /// <summary> The search text on which to base autocomplete results. </summary>
         public string SearchText { get; }
         /// <summary> Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms. </summary>

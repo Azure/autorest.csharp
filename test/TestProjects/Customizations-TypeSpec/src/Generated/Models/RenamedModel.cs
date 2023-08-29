@@ -33,6 +33,11 @@ namespace CustomizationsInTsp.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="RenamedModel"/> for deserialization. </summary>
+        internal RenamedModel()
+        {
+        }
+
         /// <summary> Required int. </summary>
         public int RequiredInt { get; set; }
     }

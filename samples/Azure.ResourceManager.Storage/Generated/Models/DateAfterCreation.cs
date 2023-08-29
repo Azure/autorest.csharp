@@ -37,6 +37,11 @@ namespace Azure.ResourceManager.Storage.Models
             _rawData = rawData;
         }
 
+        /// <summary> Initializes a new instance of <see cref="DateAfterCreation"/> for deserialization. </summary>
+        internal DateAfterCreation()
+        {
+        }
+
         /// <summary> Value indicating the age in days after creation. </summary>
         public float DaysAfterCreationGreaterThan { get; set; }
     }
