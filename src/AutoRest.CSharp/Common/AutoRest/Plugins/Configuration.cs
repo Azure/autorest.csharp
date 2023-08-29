@@ -17,6 +17,10 @@ namespace AutoRest.CSharp.Input
     {
         internal static readonly string ProjectFolderDefault = "../";
 
+        private static readonly object InitLock = new object();
+
+        private static bool IsInitialized = false;
+
         public static class Options
         {
             public const string OutputFolder = "output-folder";
@@ -94,72 +98,85 @@ namespace AutoRest.CSharp.Input
             MgmtConfiguration mgmtConfiguration,
             MgmtTestConfiguration? mgmtTestConfiguration)
         {
-            _outputFolder = outputFolder;
-            _namespace = ns;
-            _libraryName = libraryName;
-            _sharedSourceFolders = sharedSourceFolders;
-            SaveInputs = saveInputs;
-            AzureArm = azureArm;
-            PublicClients = publicClients || AzureArm;
-            ModelNamespace = azureArm || modelNamespace;
-            HeadAsBoolean = headAsBoolean;
-            SkipCSProjPackageReference = skipCSProjPackageReference;
-            Generation1ConvenienceClient = generation1ConvenienceClient;
-            SingleTopLevelClient = singleTopLevelClient;
-            GenerateModelFactory = generateModelFactory;
-            PublicDiscriminatorProperty = publicDiscriminatorProperty;
-            DeserializeNullCollectionAsNullValue = deserializeNullCollectionAsNullValue;
-            UnreferencedTypesHandling = unreferencedTypesHandling;
-            UseOverloadsBetweenProtocolAndConvenience = useOverloadsBetweenProtocolAndConvenience;
-            KeepNonOverloadableProtocolSignature = keepNonOverloadableProtocolSignature;
-            ShouldTreatBase64AsBinaryData = (!azureArm && !generation1ConvenienceClient) ? shouldTreatBase64AsBinaryData : false;
-            UseCoreDataFactoryReplacements = useCoreDataFactoryReplacements;
-            projectFolder ??= ProjectFolderDefault;
-            if (Path.IsPathRooted(projectFolder))
+            if (IsInitialized)
             {
-                _absoluteProjectFolder = projectFolder;
-                projectFolder = Path.GetRelativePath(outputFolder, projectFolder);
+                return;
             }
-            else
+            lock (InitLock)
             {
-                _absoluteProjectFolder = Path.GetFullPath(Path.Combine(outputFolder, projectFolder));
-            }
-
-            ExistingProjectFolder = existingProjectFolder == null ? DownloadLatestContract(_absoluteProjectFolder) : Path.GetFullPath(Path.Combine(_absoluteProjectFolder, existingProjectFolder));
-            var isAzureProject = ns.StartsWith("Azure.") || ns.StartsWith("Microsoft.Azure");
-            // we only check the combination for Azure projects whose namespace starts with "Azure." or "Microsoft.Azure."
-            // issue: https://github.com/Azure/autorest.csharp/issues/3179
-            if (publicClients && generation1ConvenienceClient && isAzureProject)
-            {
-                var binaryLocation = typeof(Configuration).Assembly.Location;
-                if (!binaryLocation.EndsWith(Path.Combine("artifacts", "bin", "AutoRest.CSharp", "Debug", "net6.0", "AutoRest.CSharp.dll")))
+                if (IsInitialized)
                 {
-                    if (_absoluteProjectFolder is not null)
+                    return;
+                }
+                IsInitialized = true;
+
+                _outputFolder = outputFolder;
+                _namespace = ns;
+                _libraryName = libraryName;
+                _sharedSourceFolders = sharedSourceFolders;
+                SaveInputs = saveInputs;
+                AzureArm = azureArm;
+                PublicClients = publicClients || AzureArm;
+                ModelNamespace = azureArm || modelNamespace;
+                HeadAsBoolean = headAsBoolean;
+                SkipCSProjPackageReference = skipCSProjPackageReference;
+                Generation1ConvenienceClient = generation1ConvenienceClient;
+                SingleTopLevelClient = singleTopLevelClient;
+                GenerateModelFactory = generateModelFactory;
+                PublicDiscriminatorProperty = publicDiscriminatorProperty;
+                DeserializeNullCollectionAsNullValue = deserializeNullCollectionAsNullValue;
+                UnreferencedTypesHandling = unreferencedTypesHandling;
+                UseOverloadsBetweenProtocolAndConvenience = useOverloadsBetweenProtocolAndConvenience;
+                KeepNonOverloadableProtocolSignature = keepNonOverloadableProtocolSignature;
+                ShouldTreatBase64AsBinaryData = (!azureArm && !generation1ConvenienceClient) ? shouldTreatBase64AsBinaryData : false;
+                UseCoreDataFactoryReplacements = useCoreDataFactoryReplacements;
+                projectFolder ??= ProjectFolderDefault;
+                if (Path.IsPathRooted(projectFolder))
+                {
+                    _absoluteProjectFolder = projectFolder;
+                    projectFolder = Path.GetRelativePath(outputFolder, projectFolder);
+                }
+                else
+                {
+                    _absoluteProjectFolder = Path.GetFullPath(Path.Combine(outputFolder, projectFolder));
+                }
+
+                ExistingProjectFolder = existingProjectFolder == null ? DownloadLatestContract(_absoluteProjectFolder) : Path.GetFullPath(Path.Combine(_absoluteProjectFolder, existingProjectFolder));
+                var isAzureProject = ns.StartsWith("Azure.") || ns.StartsWith("Microsoft.Azure");
+                // we only check the combination for Azure projects whose namespace starts with "Azure." or "Microsoft.Azure."
+                // issue: https://github.com/Azure/autorest.csharp/issues/3179
+                if (publicClients && generation1ConvenienceClient && isAzureProject)
+                {
+                    var binaryLocation = typeof(Configuration).Assembly.Location;
+                    if (!binaryLocation.EndsWith(Path.Combine("artifacts", "bin", "AutoRest.CSharp", "Debug", "net6.0", "AutoRest.CSharp.dll")))
                     {
-                        //TODO Remove after resolving https://github.com/Azure/autorest.csharp/issues/3151
-                        var absoluteProjectFolderSPlit = new HashSet<string>(_absoluteProjectFolder.Split(Path.DirectorySeparatorChar), StringComparer.Ordinal);
-                        if (!absoluteProjectFolderSPlit.Contains("src") ||
-                            (!absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.Spark") &&
-                            !absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.Monitoring") &&
-                            !absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.ManagedPrivateEndpoints") &&
-                            !absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.Artifacts") &&
-                            !absoluteProjectFolderSPlit.Contains("Azure.Communication.PhoneNumbers")))
-                            throw new Exception($"Unsupported combination of settings both {Options.PublicClients} and {Options.Generation1ConvenienceClient} cannot be true at the same time.");
+                        if (_absoluteProjectFolder is not null)
+                        {
+                            //TODO Remove after resolving https://github.com/Azure/autorest.csharp/issues/3151
+                            var absoluteProjectFolderSPlit = new HashSet<string>(_absoluteProjectFolder.Split(Path.DirectorySeparatorChar), StringComparer.Ordinal);
+                            if (!absoluteProjectFolderSPlit.Contains("src") ||
+                                (!absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.Spark") &&
+                                !absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.Monitoring") &&
+                                !absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.ManagedPrivateEndpoints") &&
+                                !absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.Artifacts") &&
+                                !absoluteProjectFolderSPlit.Contains("Azure.Communication.PhoneNumbers")))
+                                throw new Exception($"Unsupported combination of settings both {Options.PublicClients} and {Options.Generation1ConvenienceClient} cannot be true at the same time.");
+                        }
                     }
                 }
-            }
 
-            _relativeProjectFolder = projectFolder;
-            _protocolMethodList = protocolMethodList;
-            SkipSerializationFormatXml = skipSerializationFormatXml;
-            DisablePaginationTopRenaming = disablePaginationTopRenaming;
-            _oldModelFactoryEntries = modelFactoryForHlc;
-            _mgmtConfiguration = mgmtConfiguration;
-            MgmtTestConfiguration = mgmtTestConfiguration;
-            _suppressAbstractBaseClasses = suppressAbstractBaseClasses;
-            _modelsToTreatEmptyStringAsNull = new HashSet<string>(modelsToTreatEmptyStringAsNull);
-            _intrinsicTypesToTreatEmptyStringAsNull.UnionWith(additionalIntrinsicTypesToTreatEmptyStringAsNull);
-            _methodsToKeepClientDefaultValue = methodsToKeepClientDefaultValue ?? Array.Empty<string>();
+                _relativeProjectFolder = projectFolder;
+                _protocolMethodList = protocolMethodList;
+                SkipSerializationFormatXml = skipSerializationFormatXml;
+                DisablePaginationTopRenaming = disablePaginationTopRenaming;
+                _oldModelFactoryEntries = modelFactoryForHlc;
+                _mgmtConfiguration = mgmtConfiguration;
+                MgmtTestConfiguration = mgmtTestConfiguration;
+                _suppressAbstractBaseClasses = suppressAbstractBaseClasses;
+                _modelsToTreatEmptyStringAsNull = new HashSet<string>(modelsToTreatEmptyStringAsNull);
+                _intrinsicTypesToTreatEmptyStringAsNull.UnionWith(additionalIntrinsicTypesToTreatEmptyStringAsNull);
+                _methodsToKeepClientDefaultValue = methodsToKeepClientDefaultValue ?? Array.Empty<string>();
+            }
         }
 
         private static string? DownloadLatestContract(string projectFolder)
