@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
         public IReadOnlyList<LowLevelClient> RestClients { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
-        public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(_models.Values);
+        public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(Models);
         public IEnumerable<string> AccessOverrideModels => Enums.Where(e => e.IsAccessibilityOverride).Select(e => e.Declaration.Name)
             .Concat(Models.Where(m => m.IsAccessibilityOverride).Select(m => m.Declaration.Name));
 

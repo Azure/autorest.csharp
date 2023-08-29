@@ -59,7 +59,8 @@ import {
     InputIntrinsicType,
     InputUnknownType,
     isInputEnumType,
-    isInputLiteralType
+    isInputLiteralType,
+    isInputModelType
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { Usage } from "../type/usage.js";
@@ -646,6 +647,9 @@ export function getInputType(
                     literalTypeContext,
                     source
                 );
+                if (model.Namespace === "Azure.Core.Foundations" && model.Name === "Error" && isInputModelType(inputType)) {
+                    inputType.Accessibility = undefined;
+                }
                 const inputProp = {
                     Name: name,
                     SerializedName: serializedName,
