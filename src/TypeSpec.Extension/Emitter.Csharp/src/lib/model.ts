@@ -554,7 +554,7 @@ export function getInputType(
             models.set(name, model);
 
             // Resolve properties after model is added to the map to resolve possible circular dependencies
-            addModelProperties(m, model, m.properties, properties);
+            addModelProperties(model, m.properties, properties);
 
             // add the derived models into the list
             if (m.derivedModels !== undefined && m.derivedModels.length > 0) {
