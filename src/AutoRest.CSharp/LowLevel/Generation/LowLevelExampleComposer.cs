@@ -328,7 +328,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 // This is a corner case in swagger DPG when body is a primitive type constant.
                 // In matching legacy data plane case, public method has no body parameter
                 // See StringClient.PutMbcs
-                var dataValueExpression = operationMethods.RequestBodyType is InputPrimitiveType && operationMethods.Operation.Parameters.Single(p => p.Location == RequestLocation.Body).DefaultValue is {} defaultValue
+                var dataValueExpression = operationMethods.RequestBodyType is InputPrimitiveType && operationMethods.Operation.Parameters.FirstOrDefault(p => p is { Location: RequestLocation.Body, DefaultValue: {}}) is {DefaultValue: {} defaultValue}
                     ? new ConstantExpression(BuilderHelpers.ParseConstant(defaultValue.Value, _typeFactory.CreateType(defaultValue.Type)))
                     : ComposeProtocolCSharpTypeInstance(allParameters, GetTypeSerialization(operationMethods.RequestBodyType), null, new HashSet<ObjectType>());
 
