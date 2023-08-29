@@ -16,20 +16,14 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.ManagedHsmProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ManagedHsmProperties"/>. </summary>
         public ManagedHsmProperties()
         {
             InitialAdminObjectIds = new ChangeTrackingList<string>();
             PrivateEndpointConnections = new ChangeTrackingList<MhsmPrivateEndpointConnectionItem>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.ManagedHsmProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ManagedHsmProperties"/>. </summary>
         /// <param name="settings"> The settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object. </param>
         /// <param name="protectedSettings"> The protected settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object. </param>
         /// <param name="rawMessage"> The raw message content. </param>

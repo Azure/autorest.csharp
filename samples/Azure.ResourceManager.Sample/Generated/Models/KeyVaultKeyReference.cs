@@ -20,10 +20,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.KeyVaultKeyReference
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyVaultKeyReference"/>. </summary>
         /// <param name="keyUri">
         /// The URL referencing a key encryption key in Key Vault.
         /// Serialized Name: KeyVaultKeyReference.keyUrl
@@ -42,10 +39,7 @@ namespace Azure.ResourceManager.Sample.Models
             SourceVault = sourceVault;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.KeyVaultKeyReference
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyVaultKeyReference"/>. </summary>
         /// <param name="keyUri">
         /// The URL referencing a key encryption key in Key Vault.
         /// Serialized Name: KeyVaultKeyReference.keyUrl

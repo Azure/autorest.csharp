@@ -15,10 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.SentimentConfidenceScorePerLabel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SentimentConfidenceScorePerLabel"/>. </summary>
         /// <param name="positive"></param>
         /// <param name="neutral"></param>
         /// <param name="negative"></param>
@@ -29,10 +26,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Negative = negative;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.SentimentConfidenceScorePerLabel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SentimentConfidenceScorePerLabel"/>. </summary>
         /// <param name="positive"></param>
         /// <param name="neutral"></param>
         /// <param name="negative"></param>

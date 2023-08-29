@@ -19,10 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SshPublicKeyGenerateKeyPairResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeyGenerateKeyPairResult"/>. </summary>
         /// <param name="privateKey">
         /// Private key portion of the key pair used to authenticate to a virtual machine through ssh. The private key is returned in RFC3447 format and should be treated as a secret.
         /// Serialized Name: SshPublicKeyGenerateKeyPairResult.privateKey
@@ -47,10 +44,7 @@ namespace Azure.ResourceManager.Sample.Models
             Id = id;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SshPublicKeyGenerateKeyPairResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeyGenerateKeyPairResult"/>. </summary>
         /// <param name="privateKey">
         /// Private key portion of the key pair used to authenticate to a virtual machine through ssh. The private key is returned in RFC3447 format and should be treated as a secret.
         /// Serialized Name: SshPublicKeyGenerateKeyPairResult.privateKey

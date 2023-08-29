@@ -16,10 +16,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.AutocompleteItem
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AutocompleteItem"/>. </summary>
         /// <param name="text"> The completed term. </param>
         /// <param name="queryPlusText"> The query along with the completed term. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> or <paramref name="queryPlusText"/> is null. </exception>
@@ -32,10 +29,7 @@ namespace CognitiveSearch.Models
             QueryPlusText = queryPlusText;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.AutocompleteItem
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AutocompleteItem"/>. </summary>
         /// <param name="text"> The completed term. </param>
         /// <param name="queryPlusText"> The query along with the completed term. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

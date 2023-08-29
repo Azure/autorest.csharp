@@ -16,10 +16,7 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultProperties"/>. </summary>
         /// <param name="tenantId"> The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. </param>
         /// <param name="sku"> SKU details. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sku"/> is null. </exception>
@@ -34,10 +31,7 @@ namespace MgmtMockAndSample.Models
             PrivateEndpointConnections = new ChangeTrackingList<PrivateEndpointConnectionItem>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultProperties"/>. </summary>
         /// <param name="duration"> Time elapsed for task. </param>
         /// <param name="createOn"> The date and time when the cluster creating. </param>
         /// <param name="tenantId"> The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. </param>

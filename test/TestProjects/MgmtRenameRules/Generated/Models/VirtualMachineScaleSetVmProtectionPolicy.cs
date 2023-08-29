@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetVmProtectionPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmProtectionPolicy"/>. </summary>
         public VirtualMachineScaleSetVmProtectionPolicy()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetVmProtectionPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmProtectionPolicy"/>. </summary>
         /// <param name="protectFromScaleIn">
         /// Indicates that the virtual machine scale set VM shouldn't be considered for deletion during a scale-in operation.
         /// Serialized Name: VirtualMachineScaleSetVMProtectionPolicy.protectFromScaleIn

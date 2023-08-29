@@ -16,10 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StorageAccountRegenerateKeyContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageAccountRegenerateKeyContent"/>. </summary>
         /// <param name="keyName"> The name of storage keys that want to be regenerated, possible values are key1, key2, kerb1, kerb2. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="keyName"/> is null. </exception>
         public StorageAccountRegenerateKeyContent(string keyName)
@@ -29,10 +26,7 @@ namespace Azure.ResourceManager.Storage.Models
             KeyName = keyName;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StorageAccountRegenerateKeyContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageAccountRegenerateKeyContent"/>. </summary>
         /// <param name="keyName"> The name of storage keys that want to be regenerated, possible values are key1, key2, kerb1, kerb2. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal StorageAccountRegenerateKeyContent(string keyName, Dictionary<string, BinaryData> rawData)

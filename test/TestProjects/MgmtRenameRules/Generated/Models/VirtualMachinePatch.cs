@@ -19,19 +19,13 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachinePatch : UpdateResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachinePatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachinePatch"/>. </summary>
         public VirtualMachinePatch()
         {
             Zones = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachinePatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachinePatch"/>. </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags

@@ -15,18 +15,12 @@ namespace paging.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::paging.Models.ProductProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProductProperties"/>. </summary>
         internal ProductProperties()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::paging.Models.ProductProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProductProperties"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

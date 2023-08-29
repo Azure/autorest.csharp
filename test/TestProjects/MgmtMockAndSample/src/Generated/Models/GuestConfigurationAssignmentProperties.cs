@@ -16,18 +16,12 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.GuestConfigurationAssignmentProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GuestConfigurationAssignmentProperties"/>. </summary>
         public GuestConfigurationAssignmentProperties()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.GuestConfigurationAssignmentProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GuestConfigurationAssignmentProperties"/>. </summary>
         /// <param name="targetResourceId"> VM resource Id. </param>
         /// <param name="complianceStatus"> A value indicating compliance status of the machine for the assigned guest configuration. </param>
         /// <param name="lastComplianceStatusChecked"> Date and time when last compliance status was checked. </param>

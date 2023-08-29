@@ -13,18 +13,12 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> ResourceNavigationLink resource. </summary>
     public partial class ResourceNavigationLink : SubResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ResourceNavigationLink
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceNavigationLink"/>. </summary>
         public ResourceNavigationLink()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ResourceNavigationLink
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceNavigationLink"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>

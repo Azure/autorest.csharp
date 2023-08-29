@@ -17,19 +17,13 @@ namespace MgmtXmlDeserialization.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtXmlDeserialization.Models.XmlCollection
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="XmlCollection"/>. </summary>
         internal XmlCollection()
         {
             Value = new ChangeTrackingList<XmlInstanceData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtXmlDeserialization.Models.XmlCollection
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="XmlCollection"/>. </summary>
         /// <param name="value"> Page values. </param>
         /// <param name="count"> Total record count number across all pages. </param>
         /// <param name="nextLink"> Next page link if any. </param>

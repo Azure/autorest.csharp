@@ -18,20 +18,14 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class DedicatedHostGroupPatch : UpdateResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostGroupPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupPatch"/>. </summary>
         public DedicatedHostGroupPatch()
         {
             Zones = new ChangeTrackingList<string>();
             Hosts = new ChangeTrackingList<Resources.Models.SubResource>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostGroupPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupPatch"/>. </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags

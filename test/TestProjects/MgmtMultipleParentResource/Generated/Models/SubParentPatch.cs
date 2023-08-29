@@ -13,18 +13,12 @@ namespace MgmtMultipleParentResource.Models
     /// <summary> Describes a Virtual Machine run command. </summary>
     public partial class SubParentPatch : UpdateResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMultipleParentResource.Models.SubParentPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SubParentPatch"/>. </summary>
         public SubParentPatch()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMultipleParentResource.Models.SubParentPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SubParentPatch"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="asyncExecution"> Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete. </param>
         /// <param name="runAsUser"> Specifies the user account on the VM when executing the run command. </param>

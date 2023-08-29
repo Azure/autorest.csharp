@@ -15,18 +15,12 @@ namespace MgmtCustomizations.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtCustomizations.Models.PetStoreProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PetStoreProperties"/>. </summary>
         public PetStoreProperties()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtCustomizations.Models.PetStoreProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PetStoreProperties"/>. </summary>
         /// <param name="order"> The order. </param>
         /// <param name="pet">
         /// A pet

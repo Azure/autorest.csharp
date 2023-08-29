@@ -18,10 +18,7 @@ namespace body_formdata.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::body_formdata.Models.Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema"/>. </summary>
         /// <param name="fileContent"> Files to upload. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileContent"/> is null. </exception>
         internal Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema(IEnumerable<Stream> fileContent)
@@ -31,10 +28,7 @@ namespace body_formdata.Models
             FileContent = fileContent.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_formdata.Models.Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema"/>. </summary>
         /// <param name="fileContent"> Files to upload. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema(IReadOnlyList<Stream> fileContent, Dictionary<string, BinaryData> rawData)

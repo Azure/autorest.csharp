@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.AdditionalUnattendContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AdditionalUnattendContent"/>. </summary>
         public AdditionalUnattendContent()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.AdditionalUnattendContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AdditionalUnattendContent"/>. </summary>
         /// <param name="passName">
         /// The pass name. Currently, the only allowable value is OobeSystem.
         /// Serialized Name: AdditionalUnattendContent.passName

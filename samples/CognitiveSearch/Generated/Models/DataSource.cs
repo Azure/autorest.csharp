@@ -16,10 +16,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.DataSource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DataSource"/>. </summary>
         /// <param name="name"> The name of the datasource. </param>
         /// <param name="type"> The type of the datasource. </param>
         /// <param name="credentials"> Credentials for the datasource. </param>
@@ -37,10 +34,7 @@ namespace CognitiveSearch.Models
             Container = container;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.DataSource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DataSource"/>. </summary>
         /// <param name="name"> The name of the datasource. </param>
         /// <param name="description"> The description of the datasource. </param>
         /// <param name="type"> The type of the datasource. </param>

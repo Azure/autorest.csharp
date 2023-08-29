@@ -21,19 +21,13 @@ namespace MgmtExtensionResource
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExtensionResource.PolicyDefinitionData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PolicyDefinitionData"/>. </summary>
         public PolicyDefinitionData()
         {
             Parameters = new ChangeTrackingDictionary<string, ParameterDefinitionsValue>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExtensionResource.PolicyDefinitionData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PolicyDefinitionData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

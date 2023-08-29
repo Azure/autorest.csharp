@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.LeaseShareResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LeaseShareResponse"/>. </summary>
         internal LeaseShareResponse()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.LeaseShareResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LeaseShareResponse"/>. </summary>
         /// <param name="leaseId"> Returned unique lease ID that must be included with any request to delete the share, or to renew, change, or release the lease. </param>
         /// <param name="leaseTimeSeconds"> Approximate time remaining in the lease period, in seconds. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

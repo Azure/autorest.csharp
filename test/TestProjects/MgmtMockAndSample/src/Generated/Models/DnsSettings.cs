@@ -16,19 +16,13 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.DnsSettings
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DnsSettings"/>. </summary>
         public DnsSettings()
         {
             Servers = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.DnsSettings
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DnsSettings"/>. </summary>
         /// <param name="servers"> List of Custom DNS Servers. </param>
         /// <param name="enableProxy"> Enable DNS Proxy on Firewalls attached to the Firewall Policy. </param>
         /// <param name="requireProxyForNetworkRules"> FQDNs in Network Rules are supported when set to true. </param>

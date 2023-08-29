@@ -15,18 +15,12 @@ namespace Azure.Network.Management.Interface.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.PublicIPAddressSku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PublicIPAddressSku"/>. </summary>
         public PublicIPAddressSku()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.PublicIPAddressSku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PublicIPAddressSku"/>. </summary>
         /// <param name="name"> Name of a public IP address SKU. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal PublicIPAddressSku(PublicIPAddressSkuName? name, Dictionary<string, BinaryData> rawData)

@@ -19,19 +19,13 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostAvailableCapacity
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostAvailableCapacity"/>. </summary>
         internal DedicatedHostAvailableCapacity()
         {
             AllocatableVMs = new ChangeTrackingList<DedicatedHostAllocatableVM>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostAvailableCapacity
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostAvailableCapacity"/>. </summary>
         /// <param name="allocatableVMs">
         /// The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host.
         /// Serialized Name: DedicatedHostAvailableCapacity.allocatableVMs

@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.SubResourceReadOnly
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResourceReadOnly"/>. </summary>
         public SubResourceReadOnly()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.SubResourceReadOnly
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResourceReadOnly"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResourceReadOnly.id

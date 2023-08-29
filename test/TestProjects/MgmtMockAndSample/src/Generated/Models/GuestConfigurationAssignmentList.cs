@@ -17,19 +17,13 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.GuestConfigurationAssignmentList
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GuestConfigurationAssignmentList"/>. </summary>
         internal GuestConfigurationAssignmentList()
         {
             Value = new ChangeTrackingList<GuestConfigurationAssignmentData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.GuestConfigurationAssignmentList
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GuestConfigurationAssignmentList"/>. </summary>
         /// <param name="value"> Result of the list guest configuration assignment operation. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal GuestConfigurationAssignmentList(IReadOnlyList<GuestConfigurationAssignmentData> value, Dictionary<string, BinaryData> rawData)

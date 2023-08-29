@@ -10,10 +10,7 @@ namespace required_optional.Models
     /// <summary> Model factory for models. </summary>
     public static partial class RequiredOptionalModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::required_optional.Models.Product
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <returns> A new <see cref="Models.Product"/> instance for mocking. </returns>

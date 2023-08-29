@@ -16,10 +16,7 @@ namespace model_flattening.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::model_flattening.Models.FlattenParameterGroup
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FlattenParameterGroup"/>. </summary>
         /// <param name="name"> Product name with value 'groupproduct'. </param>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="productId"/> is null. </exception>
@@ -32,10 +29,7 @@ namespace model_flattening.Models
             ProductId = productId;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::model_flattening.Models.FlattenParameterGroup
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FlattenParameterGroup"/>. </summary>
         /// <param name="name"> Product name with value 'groupproduct'. </param>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>

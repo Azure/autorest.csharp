@@ -16,10 +16,7 @@ namespace ModelWithConverterUsage.Models
     {
         private readonly Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::ModelWithConverterUsage.Models.ModelStruct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelStruct"/>. </summary>
         /// <param name="modelProperty"> . </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelProperty"/> is null. </exception>
         public ModelStruct(string modelProperty)
@@ -29,10 +26,7 @@ namespace ModelWithConverterUsage.Models
             ModelProperty = modelProperty;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::ModelWithConverterUsage.Models.ModelStruct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelStruct"/>. </summary>
         /// <param name="modelProperty"> . </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelStruct(string modelProperty, Dictionary<string, BinaryData> rawData)

@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.RollingUpgradeProgressInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RollingUpgradeProgressInfo"/>. </summary>
         internal RollingUpgradeProgressInfo()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.RollingUpgradeProgressInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RollingUpgradeProgressInfo"/>. </summary>
         /// <param name="successfulInstanceCount">
         /// The number of instances that have been successfully upgraded.
         /// Serialized Name: RollingUpgradeProgressInfo.successfulInstanceCount

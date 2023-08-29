@@ -17,10 +17,7 @@ namespace MgmtLRO.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtLROModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtLRO.FakeData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FakeData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -36,10 +33,7 @@ namespace MgmtLRO.Models
             return new FakeData(id, name, resourceType, systemData, tags, location, properties, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtLRO.Models.FakePostResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FakePostResult"/>. </summary>
         /// <param name="fakePostResultBar"></param>
         /// <returns> A new <see cref="Models.FakePostResult"/> instance for mocking. </returns>
         public static FakePostResult FakePostResult(string fakePostResultBar = null)
@@ -47,10 +41,7 @@ namespace MgmtLRO.Models
             return new FakePostResult(fakePostResultBar != null ? new FakePostResultProperties(fakePostResultBar, new Dictionary<string, BinaryData>()) : null, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtLRO.BarData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BarData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

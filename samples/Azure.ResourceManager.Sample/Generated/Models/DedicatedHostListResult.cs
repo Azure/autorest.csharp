@@ -21,10 +21,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostListResult"/>. </summary>
         /// <param name="value">
         /// The list of dedicated hosts
         /// Serialized Name: DedicatedHostListResult.value
@@ -37,10 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostListResult"/>. </summary>
         /// <param name="value">
         /// The list of dedicated hosts
         /// Serialized Name: DedicatedHostListResult.value

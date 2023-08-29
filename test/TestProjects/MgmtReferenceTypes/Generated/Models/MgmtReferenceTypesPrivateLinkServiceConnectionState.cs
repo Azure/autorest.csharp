@@ -17,19 +17,13 @@ namespace Azure.ResourceManager.Fake.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.MgmtReferenceTypesPrivateLinkServiceConnectionState
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtReferenceTypesPrivateLinkServiceConnectionState"/>. </summary>
         [InitializationConstructor]
         public MgmtReferenceTypesPrivateLinkServiceConnectionState()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.MgmtReferenceTypesPrivateLinkServiceConnectionState
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtReferenceTypesPrivateLinkServiceConnectionState"/>. </summary>
         /// <param name="status"> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </param>
         /// <param name="description"> The reason for approval/rejection of the connection. </param>
         /// <param name="actionsRequired"> A message indicating if changes on the service provider require any updates on the consumer. </param>

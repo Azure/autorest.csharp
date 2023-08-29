@@ -16,10 +16,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.SearchError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SearchError"/>. </summary>
         /// <param name="message"> A human-readable representation of the error. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         internal SearchError(string message)
@@ -30,10 +27,7 @@ namespace CognitiveSearch.Models
             Details = new ChangeTrackingList<SearchError>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.SearchError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SearchError"/>. </summary>
         /// <param name="code"> One of a server-defined set of error codes. </param>
         /// <param name="message"> A human-readable representation of the error. </param>
         /// <param name="details"> An array of details about specific errors that led to this reported error. </param>

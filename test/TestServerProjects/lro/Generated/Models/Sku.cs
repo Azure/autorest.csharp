@@ -15,18 +15,12 @@ namespace lro.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::lro.Models.Sku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Sku"/>. </summary>
         public Sku()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::lro.Models.Sku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Sku"/>. </summary>
         /// <param name="name"></param>
         /// <param name="id"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

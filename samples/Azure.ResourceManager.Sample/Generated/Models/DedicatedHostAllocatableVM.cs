@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostAllocatableVM
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostAllocatableVM"/>. </summary>
         internal DedicatedHostAllocatableVM()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostAllocatableVM
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostAllocatableVM"/>. </summary>
         /// <param name="vmSize">
         /// VM size in terms of which the unutilized capacity is represented.
         /// Serialized Name: DedicatedHostAllocatableVM.vmSize

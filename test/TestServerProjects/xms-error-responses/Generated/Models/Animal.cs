@@ -15,18 +15,12 @@ namespace xms_error_responses.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.Animal
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Animal"/>. </summary>
         internal Animal()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.Animal
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Animal"/>. </summary>
         /// <param name="aniType"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal Animal(string aniType, Dictionary<string, BinaryData> rawData)

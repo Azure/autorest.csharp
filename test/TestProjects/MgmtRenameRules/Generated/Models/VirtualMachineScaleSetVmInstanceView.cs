@@ -19,20 +19,14 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetVmInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmInstanceView"/>. </summary>
         internal VirtualMachineScaleSetVmInstanceView()
         {
             Disks = new ChangeTrackingList<DiskInstanceView>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetVmInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmInstanceView"/>. </summary>
         /// <param name="platformUpdateDomain">
         /// The Update Domain count.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceView.platformUpdateDomain

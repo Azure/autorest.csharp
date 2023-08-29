@@ -13,10 +13,7 @@ namespace additionalProperties.Models
     /// <summary> The PetAPString. </summary>
     public partial class PetAPString
     {
-        /// <summary>
-        /// Initializes a new instance of global::additionalProperties.Models.PetAPString
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PetAPString"/>. </summary>
         /// <param name="id"></param>
         public PetAPString(int id)
         {
@@ -24,10 +21,7 @@ namespace additionalProperties.Models
             AdditionalProperties = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::additionalProperties.Models.PetAPString
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PetAPString"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="status"></param>

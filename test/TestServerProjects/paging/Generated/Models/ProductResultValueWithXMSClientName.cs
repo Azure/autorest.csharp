@@ -16,19 +16,13 @@ namespace paging.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::paging.Models.ProductResultValueWithXMSClientName
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProductResultValueWithXMSClientName"/>. </summary>
         internal ProductResultValueWithXMSClientName()
         {
             Indexes = new ChangeTrackingList<Product>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::paging.Models.ProductResultValueWithXMSClientName
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProductResultValueWithXMSClientName"/>. </summary>
         /// <param name="indexes"></param>
         /// <param name="nextLink"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -15,20 +15,14 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.KeyPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyPolicy"/>. </summary>
         /// <param name="keyExpirationPeriodInDays"> The key expiration period in days. </param>
         public KeyPolicy(int keyExpirationPeriodInDays)
         {
             KeyExpirationPeriodInDays = keyExpirationPeriodInDays;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.KeyPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyPolicy"/>. </summary>
         /// <param name="keyExpirationPeriodInDays"> The key expiration period in days. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal KeyPolicy(int keyExpirationPeriodInDays, Dictionary<string, BinaryData> rawData)

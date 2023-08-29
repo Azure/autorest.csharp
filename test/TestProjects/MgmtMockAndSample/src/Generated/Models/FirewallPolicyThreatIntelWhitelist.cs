@@ -17,20 +17,14 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyThreatIntelWhitelist
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyThreatIntelWhitelist"/>. </summary>
         public FirewallPolicyThreatIntelWhitelist()
         {
             IpAddresses = new ChangeTrackingList<IPAddress>();
             Fqdns = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyThreatIntelWhitelist
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyThreatIntelWhitelist"/>. </summary>
         /// <param name="ipAddresses"> List of IP addresses for the ThreatIntel Whitelist. </param>
         /// <param name="fqdns"> List of FQDNs for the ThreatIntel Whitelist. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

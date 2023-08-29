@@ -15,18 +15,12 @@ namespace Azure.Network.Management.Interface.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.LoadBalancerSku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LoadBalancerSku"/>. </summary>
         public LoadBalancerSku()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.LoadBalancerSku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LoadBalancerSku"/>. </summary>
         /// <param name="name"> Name of a load balancer SKU. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal LoadBalancerSku(LoadBalancerSkuName? name, Dictionary<string, BinaryData> rawData)

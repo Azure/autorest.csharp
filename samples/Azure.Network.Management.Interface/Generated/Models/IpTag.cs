@@ -15,18 +15,12 @@ namespace Azure.Network.Management.Interface.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.IpTag
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IpTag"/>. </summary>
         public IpTag()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.IpTag
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IpTag"/>. </summary>
         /// <param name="ipTagType"> The IP tag type. Example: FirstPartyUsage. </param>
         /// <param name="tag"> The value of the IP tag associated with the public IP. Example: SQL. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

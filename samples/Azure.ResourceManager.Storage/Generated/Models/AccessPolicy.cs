@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.AccessPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AccessPolicy"/>. </summary>
         public AccessPolicy()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.AccessPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AccessPolicy"/>. </summary>
         /// <param name="startOn"> Start time of the access policy. </param>
         /// <param name="expiryOn"> Expiry time of the access policy. </param>
         /// <param name="permission"> List of abbreviated permissions. </param>

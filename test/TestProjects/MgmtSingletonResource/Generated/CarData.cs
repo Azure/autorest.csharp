@@ -17,18 +17,12 @@ namespace MgmtSingletonResource
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSingletonResource.CarData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CarData"/>. </summary>
         public CarData()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSingletonResource.CarData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CarData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

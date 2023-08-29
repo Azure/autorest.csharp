@@ -14,10 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene. </summary>
     public partial class NGramTokenFilterV2 : TokenFilter
     {
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.NGramTokenFilterV2
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NGramTokenFilterV2"/>. </summary>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public NGramTokenFilterV2(string name) : base(name)
@@ -27,10 +24,7 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.NGramTokenFilterV2";
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.NGramTokenFilterV2
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NGramTokenFilterV2"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="minGram"> The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram. </param>

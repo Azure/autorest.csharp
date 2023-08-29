@@ -19,10 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineInstanceView"/>. </summary>
         internal VirtualMachineInstanceView()
         {
             Disks = new ChangeTrackingList<DiskInstanceView>();
@@ -30,10 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineInstanceView"/>. </summary>
         /// <param name="platformUpdateDomain">
         /// Specifies the update domain of the virtual machine.
         /// Serialized Name: VirtualMachineInstanceView.platformUpdateDomain

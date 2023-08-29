@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ApiErrorBase
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ApiErrorBase"/>. </summary>
         internal ApiErrorBase()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ApiErrorBase
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ApiErrorBase"/>. </summary>
         /// <param name="code">
         /// The error code.
         /// Serialized Name: ApiErrorBase.code

@@ -16,20 +16,14 @@ namespace MgmtParamOrdering.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.Models.EnvironmentContainer
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EnvironmentContainer"/>. </summary>
         public EnvironmentContainer()
         {
             Properties = new ChangeTrackingDictionary<string, string>();
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.Models.EnvironmentContainer
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EnvironmentContainer"/>. </summary>
         /// <param name="description"> The asset description text. </param>
         /// <param name="properties"> The asset property dictionary. </param>
         /// <param name="tags"> Tag dictionary. Tags can be added, removed, and updated. </param>

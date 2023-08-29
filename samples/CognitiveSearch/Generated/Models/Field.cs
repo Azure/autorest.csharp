@@ -16,10 +16,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.Field
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Field"/>. </summary>
         /// <param name="name"> The name of the field, which must be unique within the fields collection of the index or parent field. </param>
         /// <param name="type"> The data type of the field. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -33,10 +30,7 @@ namespace CognitiveSearch.Models
             Fields = new ChangeTrackingList<Field>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.Field
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Field"/>. </summary>
         /// <param name="name"> The name of the field, which must be unique within the fields collection of the index or parent field. </param>
         /// <param name="type"> The data type of the field. </param>
         /// <param name="key"> A value indicating whether the field uniquely identifies documents in the index. Exactly one top-level field in each index must be chosen as the key field and it must be of type Edm.String. Key fields can be used to look up documents directly and update or delete specific documents. Default is false for simple fields and null for complex fields. </param>

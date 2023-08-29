@@ -21,19 +21,13 @@ namespace MgmtPartialResource
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPartialResource.PublicIPAddressData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PublicIPAddressData"/>. </summary>
         public PublicIPAddressData()
         {
             Zones = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPartialResource.PublicIPAddressData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PublicIPAddressData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

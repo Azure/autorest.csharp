@@ -16,19 +16,13 @@ namespace MgmtParamOrdering.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.Models.WorkspacePatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="WorkspacePatch"/>. </summary>
         public WorkspacePatch()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.Models.WorkspacePatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="WorkspacePatch"/>. </summary>
         /// <param name="tags"> The resource tags for the machine learning workspace. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal WorkspacePatch(IDictionary<string, string> tags, Dictionary<string, BinaryData> rawData)

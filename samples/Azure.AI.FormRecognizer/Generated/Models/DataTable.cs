@@ -17,10 +17,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.DataTable
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DataTable"/>. </summary>
         /// <param name="rows"> Number of rows. </param>
         /// <param name="columns"> Number of columns. </param>
         /// <param name="cells"> List of cells contained in the table. </param>
@@ -34,10 +31,7 @@ namespace Azure.AI.FormRecognizer.Models
             Cells = cells.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.DataTable
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DataTable"/>. </summary>
         /// <param name="rows"> Number of rows. </param>
         /// <param name="columns"> Number of columns. </param>
         /// <param name="cells"> List of cells contained in the table. </param>

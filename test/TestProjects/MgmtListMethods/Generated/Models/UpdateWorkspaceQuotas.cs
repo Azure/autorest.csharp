@@ -15,18 +15,12 @@ namespace MgmtListMethods.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtListMethods.Models.UpdateWorkspaceQuotas
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UpdateWorkspaceQuotas"/>. </summary>
         internal UpdateWorkspaceQuotas()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtListMethods.Models.UpdateWorkspaceQuotas
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UpdateWorkspaceQuotas"/>. </summary>
         /// <param name="id"> Specifies the resource ID. </param>
         /// <param name="updateWorkspaceQuotasType"> Specifies the resource type. </param>
         /// <param name="limit"> The maximum permitted quota of the resource. </param>

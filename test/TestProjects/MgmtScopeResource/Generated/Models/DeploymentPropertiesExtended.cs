@@ -15,18 +15,12 @@ namespace MgmtScopeResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentPropertiesExtended
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentPropertiesExtended"/>. </summary>
         internal DeploymentPropertiesExtended()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentPropertiesExtended
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentPropertiesExtended"/>. </summary>
         /// <param name="provisioningState"> Denotes the state of provisioning. </param>
         /// <param name="correlationId"> The correlation ID of the deployment. </param>
         /// <param name="timestamp"> The timestamp of the template deployment. </param>

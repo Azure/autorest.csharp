@@ -15,18 +15,12 @@ namespace MgmtSupersetFlattenInheritance.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.Models.CustomModel2
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CustomModel2"/>. </summary>
         public CustomModel2()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.Models.CustomModel2
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CustomModel2"/>. </summary>
         /// <param name="id"></param>
         /// <param name="bar"></param>
         /// <param name="idPropertiesId"></param>

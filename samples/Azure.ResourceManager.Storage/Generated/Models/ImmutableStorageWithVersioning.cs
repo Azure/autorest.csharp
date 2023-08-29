@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ImmutableStorageWithVersioning
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImmutableStorageWithVersioning"/>. </summary>
         public ImmutableStorageWithVersioning()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ImmutableStorageWithVersioning
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImmutableStorageWithVersioning"/>. </summary>
         /// <param name="enabled"> This is an immutable property, when set to true it enables object level immutability at the container level. </param>
         /// <param name="timeStamp"> Returns the date and time the object level immutability was enabled. </param>
         /// <param name="migrationState"> This property denotes the container level immutability to object level immutability migration state. </param>

@@ -15,18 +15,12 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.MhsmPrivateLinkServiceConnectionState
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MhsmPrivateLinkServiceConnectionState"/>. </summary>
         public MhsmPrivateLinkServiceConnectionState()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.MhsmPrivateLinkServiceConnectionState
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MhsmPrivateLinkServiceConnectionState"/>. </summary>
         /// <param name="status"> Indicates whether the connection has been approved, rejected or removed by the key vault owner. </param>
         /// <param name="description"> The reason for approval or rejection. </param>
         /// <param name="actionsRequired"> A message indicating if changes on the service provider require any updates on the consumer. </param>

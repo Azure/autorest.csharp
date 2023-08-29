@@ -15,18 +15,12 @@ namespace MgmtScopeResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentExportResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentExportResult"/>. </summary>
         internal DeploymentExportResult()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentExportResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentExportResult"/>. </summary>
         /// <param name="template"> The template content. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal DeploymentExportResult(BinaryData template, Dictionary<string, BinaryData> rawData)

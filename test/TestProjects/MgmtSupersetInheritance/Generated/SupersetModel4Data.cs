@@ -20,19 +20,13 @@ namespace MgmtSupersetInheritance
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetInheritance.SupersetModel4Data
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SupersetModel4Data"/>. </summary>
         /// <param name="location"> The location. </param>
         public SupersetModel4Data(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetInheritance.SupersetModel4Data
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SupersetModel4Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

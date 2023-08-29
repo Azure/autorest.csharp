@@ -16,20 +16,14 @@ namespace body_complex.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.DotFishMarket
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DotFishMarket"/>. </summary>
         internal DotFishMarket()
         {
             Salmons = new ChangeTrackingList<DotSalmon>();
             Fishes = new ChangeTrackingList<DotFish>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.DotFishMarket
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DotFishMarket"/>. </summary>
         /// <param name="sampleSalmon"></param>
         /// <param name="salmons"></param>
         /// <param name="sampleFish">

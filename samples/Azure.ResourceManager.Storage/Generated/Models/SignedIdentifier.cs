@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.SignedIdentifier
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SignedIdentifier"/>. </summary>
         public SignedIdentifier()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.SignedIdentifier
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SignedIdentifier"/>. </summary>
         /// <param name="id"> An unique identifier of the stored access policy. </param>
         /// <param name="accessPolicy"> Access policy. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

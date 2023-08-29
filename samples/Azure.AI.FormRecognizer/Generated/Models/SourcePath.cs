@@ -15,18 +15,12 @@ namespace Azure.AI.FormRecognizer.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.SourcePath
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SourcePath"/>. </summary>
         public SourcePath()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.SourcePath
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SourcePath"/>. </summary>
         /// <param name="source"> File source path. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal SourcePath(string source, Dictionary<string, BinaryData> rawData)

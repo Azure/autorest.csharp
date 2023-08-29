@@ -14,10 +14,7 @@ namespace multiple_inheritance.Models
     /// <summary> The Horse. </summary>
     public partial class Horse : Pet
     {
-        /// <summary>
-        /// Initializes a new instance of global::multiple_inheritance.Models.Horse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Horse"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Horse(string name) : base(name)
@@ -25,10 +22,7 @@ namespace multiple_inheritance.Models
             Argument.AssertNotNull(name, nameof(name));
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::multiple_inheritance.Models.Horse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Horse"/>. </summary>
         /// <param name="name"></param>
         /// <param name="isAShowHorse"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

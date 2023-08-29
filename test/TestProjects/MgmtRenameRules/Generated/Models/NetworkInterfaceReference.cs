@@ -16,18 +16,12 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class NetworkInterfaceReference : SubResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.NetworkInterfaceReference
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkInterfaceReference"/>. </summary>
         public NetworkInterfaceReference()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.NetworkInterfaceReference
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkInterfaceReference"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id

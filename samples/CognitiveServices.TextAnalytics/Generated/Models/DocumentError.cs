@@ -16,10 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.DocumentError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DocumentError"/>. </summary>
         /// <param name="id"> Document Id. </param>
         /// <param name="error"> Document Error. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="error"/> is null. </exception>
@@ -32,10 +29,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Error = error;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.DocumentError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DocumentError"/>. </summary>
         /// <param name="id"> Document Id. </param>
         /// <param name="error"> Document Error. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

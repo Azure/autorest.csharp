@@ -14,10 +14,7 @@ namespace model_flattening.Models
     /// <summary> The product documentation. </summary>
     public partial class SimpleProduct : BaseProduct
     {
-        /// <summary>
-        /// Initializes a new instance of global::model_flattening.Models.SimpleProduct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SimpleProduct"/>. </summary>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="productId"/> is null. </exception>
         public SimpleProduct(string productId) : base(productId)
@@ -25,10 +22,7 @@ namespace model_flattening.Models
             Argument.AssertNotNull(productId, nameof(productId));
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::model_flattening.Models.SimpleProduct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SimpleProduct"/>. </summary>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <param name="description"> Description of product. </param>
         /// <param name="maxProductDisplayName"> Display name of product. </param>

@@ -16,10 +16,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.FieldMapping
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FieldMapping"/>. </summary>
         /// <param name="sourceFieldName"> The name of the field in the data source. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sourceFieldName"/> is null. </exception>
         public FieldMapping(string sourceFieldName)
@@ -29,10 +26,7 @@ namespace CognitiveSearch.Models
             SourceFieldName = sourceFieldName;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.FieldMapping
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FieldMapping"/>. </summary>
         /// <param name="sourceFieldName"> The name of the field in the data source. </param>
         /// <param name="targetFieldName"> The name of the target field in the index. Same as the source field name by default. </param>
         /// <param name="mappingFunction"> A function to apply to each source field value before indexing. </param>

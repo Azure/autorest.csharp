@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class ImagePatch : UpdateResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ImagePatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImagePatch"/>. </summary>
         public ImagePatch()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ImagePatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImagePatch"/>. </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags

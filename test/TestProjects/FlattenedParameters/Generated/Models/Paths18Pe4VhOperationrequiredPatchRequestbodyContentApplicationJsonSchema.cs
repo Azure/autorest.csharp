@@ -16,10 +16,7 @@ namespace FlattenedParameters.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::FlattenedParameters.Models.Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         /// <param name="required"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
         public Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(string required)
@@ -29,10 +26,7 @@ namespace FlattenedParameters.Models
             Required = required;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::FlattenedParameters.Models.Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         /// <param name="required"></param>
         /// <param name="nonRequired"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

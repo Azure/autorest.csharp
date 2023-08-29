@@ -15,18 +15,12 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.SenderAuthorization
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SenderAuthorization"/>. </summary>
         internal SenderAuthorization()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.SenderAuthorization
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SenderAuthorization"/>. </summary>
         /// <param name="action"> the permissible actions. For instance: microsoft.support/supporttickets/write. </param>
         /// <param name="role"> the role of the user. For instance: Subscription Admin. </param>
         /// <param name="scope"> the scope. </param>

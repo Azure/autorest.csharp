@@ -17,10 +17,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.CorsOptions
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CorsOptions"/>. </summary>
         /// <param name="allowedOrigins"> The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended). </param>
         /// <exception cref="ArgumentNullException"> <paramref name="allowedOrigins"/> is null. </exception>
         public CorsOptions(IEnumerable<string> allowedOrigins)
@@ -30,10 +27,7 @@ namespace CognitiveSearch.Models
             AllowedOrigins = allowedOrigins.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.CorsOptions
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CorsOptions"/>. </summary>
         /// <param name="allowedOrigins"> The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended). </param>
         /// <param name="maxAgeInSeconds"> The duration for which browsers should cache CORS preflight responses. Defaults to 5 minutes. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

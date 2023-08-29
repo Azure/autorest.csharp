@@ -15,18 +15,12 @@ namespace additionalProperties.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::additionalProperties.Models.Error
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Error"/>. </summary>
         internal Error()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::additionalProperties.Models.Error
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Error"/>. </summary>
         /// <param name="status"></param>
         /// <param name="message"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

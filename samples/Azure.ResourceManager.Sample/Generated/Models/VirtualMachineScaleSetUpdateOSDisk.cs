@@ -19,19 +19,13 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetUpdateOSDisk
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateOSDisk"/>. </summary>
         public VirtualMachineScaleSetUpdateOSDisk()
         {
             VhdContainers = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetUpdateOSDisk
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateOSDisk"/>. </summary>
         /// <param name="caching">
         /// The caching type.
         /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.caching

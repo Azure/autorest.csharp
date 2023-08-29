@@ -15,18 +15,12 @@ namespace MgmtNoTypeReplacement.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtNoTypeReplacement.Models.MiddleResourceModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MiddleResourceModel"/>. </summary>
         public MiddleResourceModel()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtNoTypeReplacement.Models.MiddleResourceModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MiddleResourceModel"/>. </summary>
         /// <param name="foo"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal MiddleResourceModel(NoSubResourceModel2 foo, Dictionary<string, BinaryData> rawData)

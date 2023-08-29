@@ -15,18 +15,12 @@ namespace paging.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::paging.Models.PagingGetMultiplePagesLroOptions
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PagingGetMultiplePagesLroOptions"/>. </summary>
         public PagingGetMultiplePagesLroOptions()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::paging.Models.PagingGetMultiplePagesLroOptions
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PagingGetMultiplePagesLroOptions"/>. </summary>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

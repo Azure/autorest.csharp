@@ -15,10 +15,7 @@ namespace CognitiveSearch.Models
     /// <summary> Decomposes compound words found in many Germanic languages. This token filter is implemented using Apache Lucene. </summary>
     public partial class DictionaryDecompounderTokenFilter : TokenFilter
     {
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.DictionaryDecompounderTokenFilter
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DictionaryDecompounderTokenFilter"/>. </summary>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="wordList"> The list of words to match against. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="wordList"/> is null. </exception>
@@ -31,10 +28,7 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.DictionaryDecompounderTokenFilter
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DictionaryDecompounderTokenFilter"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="wordList"> The list of words to match against. </param>

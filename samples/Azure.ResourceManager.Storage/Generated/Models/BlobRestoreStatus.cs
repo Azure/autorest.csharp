@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.BlobRestoreStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobRestoreStatus"/>. </summary>
         internal BlobRestoreStatus()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.BlobRestoreStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobRestoreStatus"/>. </summary>
         /// <param name="status"> The status of blob restore progress. Possible values are: - InProgress: Indicates that blob restore is ongoing. - Complete: Indicates that blob restore has been completed successfully. - Failed: Indicates that blob restore is failed. </param>
         /// <param name="failureReason"> Failure reason when blob restore is failed. </param>
         /// <param name="restoreId"> Id for tracking blob restore request. </param>

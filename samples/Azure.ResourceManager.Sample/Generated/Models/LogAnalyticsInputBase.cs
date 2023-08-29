@@ -19,10 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.LogAnalyticsInputBase
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LogAnalyticsInputBase"/>. </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
@@ -45,10 +42,7 @@ namespace Azure.ResourceManager.Sample.Models
             ToTime = toTime;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.LogAnalyticsInputBase
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LogAnalyticsInputBase"/>. </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri

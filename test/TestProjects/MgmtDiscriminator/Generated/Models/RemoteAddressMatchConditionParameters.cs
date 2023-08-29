@@ -16,10 +16,7 @@ namespace MgmtDiscriminator.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.RemoteAddressMatchConditionParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RemoteAddressMatchConditionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="operator"> Describes operator to be matched. </param>
         public RemoteAddressMatchConditionParameters(RemoteAddressMatchConditionParametersTypeName typeName, RemoteAddressOperator @operator)
@@ -30,10 +27,7 @@ namespace MgmtDiscriminator.Models
             Transforms = new ChangeTrackingList<Transform>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.RemoteAddressMatchConditionParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RemoteAddressMatchConditionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="operator"> Describes operator to be matched. </param>
         /// <param name="negateCondition"> Describes if this is negate condition or not. </param>

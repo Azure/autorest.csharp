@@ -15,18 +15,12 @@ namespace Azure.Storage.Tables.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.StorageError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageError"/>. </summary>
         internal StorageError()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.StorageError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageError"/>. </summary>
         /// <param name="message"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal StorageError(string message, Dictionary<string, BinaryData> rawData)

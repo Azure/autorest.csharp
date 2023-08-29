@@ -16,10 +16,7 @@ namespace MgmtExtensionCommonRestOperation.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtExtensionCommonRestOperationModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExtensionCommonRestOperation.TypeOneData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TypeOneData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -35,10 +32,7 @@ namespace MgmtExtensionCommonRestOperation.Models
             return new TypeOneData(id, name, resourceType, systemData, tags, location, myType, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExtensionCommonRestOperation.TypeTwoData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TypeTwoData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

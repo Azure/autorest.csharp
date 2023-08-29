@@ -17,19 +17,13 @@ namespace MgmtExactMatchInheritance
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExactMatchInheritance.ExactMatchModel5Data
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel5Data"/>. </summary>
         /// <param name="location"> The location. </param>
         public ExactMatchModel5Data(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExactMatchInheritance.ExactMatchModel5Data
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel5Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

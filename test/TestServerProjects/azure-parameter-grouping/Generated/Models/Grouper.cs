@@ -15,18 +15,12 @@ namespace azure_parameter_grouping.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::azure_parameter_grouping.Models.Grouper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Grouper"/>. </summary>
         public Grouper()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::azure_parameter_grouping.Models.Grouper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Grouper"/>. </summary>
         /// <param name="groupedConstant"> A grouped parameter that is a constant. </param>
         /// <param name="groupedParameter"> Optional parameter part of a parameter grouping. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

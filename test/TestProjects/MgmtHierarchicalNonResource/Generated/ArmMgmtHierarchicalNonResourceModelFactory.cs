@@ -15,10 +15,7 @@ namespace MgmtHierarchicalNonResource.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtHierarchicalNonResourceModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.SharedGalleryData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SharedGalleryData"/>. </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>
@@ -28,10 +25,7 @@ namespace MgmtHierarchicalNonResource.Models
             return new SharedGalleryData(name, location, uniqueId, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.PirSharedGalleryResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PirSharedGalleryResource"/>. </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>
@@ -41,10 +35,7 @@ namespace MgmtHierarchicalNonResource.Models
             return new PirSharedGalleryResource(name, location, uniqueId, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.PirResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PirResource"/>. </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
         /// <returns> A new <see cref="Models.PirResource"/> instance for mocking. </returns>
@@ -53,10 +44,7 @@ namespace MgmtHierarchicalNonResource.Models
             return new PirResource(name, location, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.SharedGalleryImage
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SharedGalleryImage"/>. </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>
@@ -78,10 +66,7 @@ namespace MgmtHierarchicalNonResource.Models
             return new SharedGalleryImage(name, location, uniqueId, osType, osState, endOfLifeOn, identifier, recommended, disallowedDiskTypes != null ? new Disallowed(disallowedDiskTypes?.ToList(), new Dictionary<string, BinaryData>()) : null, hyperVGeneration, features?.ToList(), purchasePlan, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.GalleryImageIdentifier
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GalleryImageIdentifier"/>. </summary>
         /// <param name="publisher"> The name of the gallery image definition publisher. </param>
         /// <param name="offer"> The name of the gallery image definition offer. </param>
         /// <param name="sku"> The name of the gallery image definition SKU. </param>
@@ -91,10 +76,7 @@ namespace MgmtHierarchicalNonResource.Models
             return new GalleryImageIdentifier(publisher, offer, sku, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.RecommendedMachineConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RecommendedMachineConfiguration"/>. </summary>
         /// <param name="vCpus"> Describes the resource range. </param>
         /// <param name="memory"> Describes the resource range. </param>
         /// <returns> A new <see cref="Models.RecommendedMachineConfiguration"/> instance for mocking. </returns>
@@ -103,10 +85,7 @@ namespace MgmtHierarchicalNonResource.Models
             return new RecommendedMachineConfiguration(vCpus, memory, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.ResourceRange
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceRange"/>. </summary>
         /// <param name="min"> The minimum number of the resource. </param>
         /// <param name="max"> The maximum number of the resource. </param>
         /// <returns> A new <see cref="Models.ResourceRange"/> instance for mocking. </returns>
@@ -115,10 +94,7 @@ namespace MgmtHierarchicalNonResource.Models
             return new ResourceRange(min, max, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.GalleryImageFeature
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GalleryImageFeature"/>. </summary>
         /// <param name="name"> The name of the gallery image feature. </param>
         /// <param name="value"> The value of the gallery image feature. </param>
         /// <returns> A new <see cref="Models.GalleryImageFeature"/> instance for mocking. </returns>
@@ -127,10 +103,7 @@ namespace MgmtHierarchicalNonResource.Models
             return new GalleryImageFeature(name, value, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.ImagePurchasePlan
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImagePurchasePlan"/>. </summary>
         /// <param name="name"> The plan ID. </param>
         /// <param name="publisher"> The publisher ID. </param>
         /// <param name="product"> The product ID. </param>
@@ -140,10 +113,7 @@ namespace MgmtHierarchicalNonResource.Models
             return new ImagePurchasePlan(name, publisher, product, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.SharedGalleryImageVersion
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SharedGalleryImageVersion"/>. </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>

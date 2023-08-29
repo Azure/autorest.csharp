@@ -14,19 +14,13 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Virtual Network Tap resource. </summary>
     public partial class VirtualNetworkTap : Resource
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.VirtualNetworkTap
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualNetworkTap"/>. </summary>
         public VirtualNetworkTap()
         {
             NetworkInterfaceTapConfigurations = new ChangeTrackingList<NetworkInterfaceTapConfiguration>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.VirtualNetworkTap
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualNetworkTap"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>

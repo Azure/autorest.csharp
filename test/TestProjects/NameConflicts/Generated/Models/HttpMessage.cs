@@ -15,18 +15,12 @@ namespace NameConflicts.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::NameConflicts.Models.HttpMessage
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="HttpMessage"/>. </summary>
         public HttpMessage()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::NameConflicts.Models.HttpMessage
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="HttpMessage"/>. </summary>
         /// <param name="property"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal HttpMessage(string property, Dictionary<string, BinaryData> rawData)

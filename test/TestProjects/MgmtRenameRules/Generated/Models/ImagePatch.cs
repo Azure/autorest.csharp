@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class ImagePatch : UpdateResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ImagePatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImagePatch"/>. </summary>
         public ImagePatch()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ImagePatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImagePatch"/>. </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags

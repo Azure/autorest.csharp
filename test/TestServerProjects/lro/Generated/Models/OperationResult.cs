@@ -15,18 +15,12 @@ namespace lro.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::lro.Models.OperationResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OperationResult"/>. </summary>
         internal OperationResult()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::lro.Models.OperationResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OperationResult"/>. </summary>
         /// <param name="status"> The status of the request. </param>
         /// <param name="error"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

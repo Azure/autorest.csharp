@@ -17,10 +17,7 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class ThrottledRequestsContent : LogAnalyticsInputBase
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ThrottledRequestsContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ThrottledRequestsContent"/>. </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
@@ -39,10 +36,7 @@ namespace MgmtRenameRules.Models
             Argument.AssertNotNull(blobContainerSasUri, nameof(blobContainerSasUri));
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ThrottledRequestsContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ThrottledRequestsContent"/>. </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri

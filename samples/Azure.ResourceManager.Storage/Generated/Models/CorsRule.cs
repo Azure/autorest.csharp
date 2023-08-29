@@ -17,10 +17,7 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.CorsRule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CorsRule"/>. </summary>
         /// <param name="allowedOrigins"> Required if CorsRule element is present. A list of origin domains that will be allowed via CORS, or "*" to allow all domains. </param>
         /// <param name="allowedMethods"> Required if CorsRule element is present. A list of HTTP methods that are allowed to be executed by the origin. </param>
         /// <param name="maxAgeInSeconds"> Required if CorsRule element is present. The number of seconds that the client/browser should cache a preflight response. </param>
@@ -41,10 +38,7 @@ namespace Azure.ResourceManager.Storage.Models
             AllowedHeaders = allowedHeaders.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.CorsRule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CorsRule"/>. </summary>
         /// <param name="allowedOrigins"> Required if CorsRule element is present. A list of origin domains that will be allowed via CORS, or "*" to allow all domains. </param>
         /// <param name="allowedMethods"> Required if CorsRule element is present. A list of HTTP methods that are allowed to be executed by the origin. </param>
         /// <param name="maxAgeInSeconds"> Required if CorsRule element is present. The number of seconds that the client/browser should cache a preflight response. </param>

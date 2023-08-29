@@ -23,10 +23,7 @@ namespace Azure.ResourceManager.Sample
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.ProximityPlacementGroupData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupData"/>. </summary>
         /// <param name="location"> The location. </param>
         public ProximityPlacementGroupData(AzureLocation location) : base(location)
         {
@@ -35,10 +32,7 @@ namespace Azure.ResourceManager.Sample
             AvailabilitySets = new ChangeTrackingList<SubResourceWithColocationStatus>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.ProximityPlacementGroupData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

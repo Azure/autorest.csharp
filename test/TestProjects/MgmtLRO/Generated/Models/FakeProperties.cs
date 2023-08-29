@@ -15,18 +15,12 @@ namespace MgmtLRO.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtLRO.Models.FakeProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FakeProperties"/>. </summary>
         public FakeProperties()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtLRO.Models.FakeProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FakeProperties"/>. </summary>
         /// <param name="platformUpdateDomainCount"> Update Domain count. </param>
         /// <param name="platformFaultDomainCount"> Fault Domain count. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

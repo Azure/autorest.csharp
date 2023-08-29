@@ -18,19 +18,13 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineScaleSetUpdateNetworkConfiguration : SubResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdateNetworkConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateNetworkConfiguration"/>. </summary>
         public VirtualMachineScaleSetUpdateNetworkConfiguration()
         {
             IPConfigurations = new ChangeTrackingList<VirtualMachineScaleSetUpdateIPConfiguration>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdateNetworkConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateNetworkConfiguration"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id

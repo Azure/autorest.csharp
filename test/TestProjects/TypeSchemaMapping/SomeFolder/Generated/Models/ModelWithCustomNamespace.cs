@@ -15,18 +15,12 @@ namespace Very.Custom.Namespace.From.Swagger
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Very.Custom.Namespace.From.Swagger.ModelWithCustomNamespace
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithCustomNamespace"/>. </summary>
         internal ModelWithCustomNamespace()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Very.Custom.Namespace.From.Swagger.ModelWithCustomNamespace
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithCustomNamespace"/>. </summary>
         /// <param name="modelProperty"> . </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelWithCustomNamespace(string modelProperty, Dictionary<string, BinaryData> rawData)

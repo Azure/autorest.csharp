@@ -16,10 +16,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.TokenInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TokenInfo"/>. </summary>
         /// <param name="token"> The token returned by the analyzer. </param>
         /// <param name="startOffset"> The index of the first character of the token in the input text. </param>
         /// <param name="endOffset"> The index of the last character of the token in the input text. </param>
@@ -35,10 +32,7 @@ namespace CognitiveSearch.Models
             Position = position;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.TokenInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TokenInfo"/>. </summary>
         /// <param name="token"> The token returned by the analyzer. </param>
         /// <param name="startOffset"> The index of the first character of the token in the input text. </param>
         /// <param name="endOffset"> The index of the last character of the token in the input text. </param>

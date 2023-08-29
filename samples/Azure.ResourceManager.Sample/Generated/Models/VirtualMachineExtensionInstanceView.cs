@@ -19,20 +19,14 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineExtensionInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionInstanceView"/>. </summary>
         public VirtualMachineExtensionInstanceView()
         {
             Substatuses = new ChangeTrackingList<InstanceViewStatus>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineExtensionInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionInstanceView"/>. </summary>
         /// <param name="name">
         /// The virtual machine extension name.
         /// Serialized Name: VirtualMachineExtensionInstanceView.name

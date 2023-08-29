@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.RetrieveBootDiagnosticsDataResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RetrieveBootDiagnosticsDataResult"/>. </summary>
         internal RetrieveBootDiagnosticsDataResult()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.RetrieveBootDiagnosticsDataResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RetrieveBootDiagnosticsDataResult"/>. </summary>
         /// <param name="consoleScreenshotBlobUri">
         /// The console screenshot blob URI
         /// Serialized Name: RetrieveBootDiagnosticsDataResult.consoleScreenshotBlobUri

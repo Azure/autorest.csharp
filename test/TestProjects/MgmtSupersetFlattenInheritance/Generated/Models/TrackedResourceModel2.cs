@@ -17,19 +17,13 @@ namespace MgmtSupersetFlattenInheritance.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.Models.TrackedResourceModel2
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TrackedResourceModel2"/>. </summary>
         /// <param name="location"> The location. </param>
         public TrackedResourceModel2(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.Models.TrackedResourceModel2
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TrackedResourceModel2"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

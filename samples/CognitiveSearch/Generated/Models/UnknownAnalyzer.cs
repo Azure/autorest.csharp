@@ -13,10 +13,7 @@ namespace CognitiveSearch.Models
     /// <summary> The UnknownAnalyzer. </summary>
     internal partial class UnknownAnalyzer : Analyzer
     {
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.UnknownAnalyzer
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownAnalyzer"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the analyzer. </param>
         /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -15,18 +15,12 @@ namespace MgmtExactMatchFlattenInheritance.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExactMatchFlattenInheritance.Models.AzureResourceFlattenModel4
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel4"/>. </summary>
         public AzureResourceFlattenModel4()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExactMatchFlattenInheritance.Models.AzureResourceFlattenModel4
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel4"/>. </summary>
         /// <param name="foo"> New property. </param>
         /// <param name="id"></param>
         /// <param name="name"></param>

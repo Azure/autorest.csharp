@@ -15,18 +15,12 @@ namespace body_complex.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.DurationWrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DurationWrapper"/>. </summary>
         public DurationWrapper()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.DurationWrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DurationWrapper"/>. </summary>
         /// <param name="field"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal DurationWrapper(TimeSpan? field, Dictionary<string, BinaryData> rawData)

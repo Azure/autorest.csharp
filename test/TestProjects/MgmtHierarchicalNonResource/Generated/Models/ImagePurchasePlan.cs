@@ -15,18 +15,12 @@ namespace MgmtHierarchicalNonResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.ImagePurchasePlan
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImagePurchasePlan"/>. </summary>
         internal ImagePurchasePlan()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.ImagePurchasePlan
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImagePurchasePlan"/>. </summary>
         /// <param name="name"> The plan ID. </param>
         /// <param name="publisher"> The publisher ID. </param>
         /// <param name="product"> The product ID. </param>

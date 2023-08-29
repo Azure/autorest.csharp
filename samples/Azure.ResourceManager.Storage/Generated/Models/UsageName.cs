@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.UsageName
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UsageName"/>. </summary>
         internal UsageName()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.UsageName
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UsageName"/>. </summary>
         /// <param name="value"> Gets a string describing the resource name. </param>
         /// <param name="localizedValue"> Gets a localized string describing the resource name. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

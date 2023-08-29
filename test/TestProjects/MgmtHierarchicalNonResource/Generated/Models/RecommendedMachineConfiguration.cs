@@ -15,18 +15,12 @@ namespace MgmtHierarchicalNonResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.RecommendedMachineConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RecommendedMachineConfiguration"/>. </summary>
         internal RecommendedMachineConfiguration()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.RecommendedMachineConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RecommendedMachineConfiguration"/>. </summary>
         /// <param name="vCpus"> Describes the resource range. </param>
         /// <param name="memory"> Describes the resource range. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -17,19 +17,13 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.RoleAssignmentListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RoleAssignmentListResult"/>. </summary>
         internal RoleAssignmentListResult()
         {
             Value = new ChangeTrackingList<RoleAssignmentData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.RoleAssignmentListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RoleAssignmentListResult"/>. </summary>
         /// <param name="value"> Role assignment list. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -17,19 +17,13 @@ namespace MgmtListMethods.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtListMethods.Models.FakeConfigurationListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FakeConfigurationListResult"/>. </summary>
         public FakeConfigurationListResult()
         {
             Value = new ChangeTrackingList<FakeConfigurationData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtListMethods.Models.FakeConfigurationListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FakeConfigurationListResult"/>. </summary>
         /// <param name="value"> The list of Fake Configuration. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal FakeConfigurationListResult(IList<FakeConfigurationData> value, Dictionary<string, BinaryData> rawData)

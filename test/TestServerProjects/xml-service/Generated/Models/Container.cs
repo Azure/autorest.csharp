@@ -16,10 +16,7 @@ namespace xml_service.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.Container
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Container"/>. </summary>
         /// <param name="name"></param>
         /// <param name="properties"> Properties of a container. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="properties"/> is null. </exception>
@@ -33,10 +30,7 @@ namespace xml_service.Models
             Metadata = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.Container
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Container"/>. </summary>
         /// <param name="name"></param>
         /// <param name="properties"> Properties of a container. </param>
         /// <param name="metadata"> Dictionary of &lt;string&gt;. </param>

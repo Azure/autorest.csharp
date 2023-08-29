@@ -19,19 +19,13 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ImageStorageProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageStorageProfile"/>. </summary>
         public ImageStorageProfile()
         {
             DataDisks = new ChangeTrackingList<ImageDataDisk>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ImageStorageProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageStorageProfile"/>. </summary>
         /// <param name="osDisk">
         /// Specifies information about the operating system disk used by the virtual machine. &lt;br&gt;&lt;br&gt; For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
         /// Serialized Name: ImageStorageProfile.osDisk

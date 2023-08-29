@@ -20,10 +20,7 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetListOSUpgradeHistory
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListOSUpgradeHistory"/>. </summary>
         /// <param name="value">
         /// The list of OS upgrades performed on the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.value
@@ -36,10 +33,7 @@ namespace MgmtRenameRules.Models
             Value = value.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetListOSUpgradeHistory
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListOSUpgradeHistory"/>. </summary>
         /// <param name="value">
         /// The list of OS upgrades performed on the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.value

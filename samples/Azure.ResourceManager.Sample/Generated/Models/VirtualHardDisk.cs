@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualHardDisk
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualHardDisk"/>. </summary>
         public VirtualHardDisk()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualHardDisk
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualHardDisk"/>. </summary>
         /// <param name="uri">
         /// Specifies the virtual hard disk's uri.
         /// Serialized Name: VirtualHardDisk.uri

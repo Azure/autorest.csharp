@@ -18,19 +18,13 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class DedicatedHostPatch : UpdateResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostPatch"/>. </summary>
         public DedicatedHostPatch()
         {
             VirtualMachines = new ChangeTrackingList<Resources.Models.SubResource>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostPatch"/>. </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags

@@ -16,19 +16,13 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.MgmtMockAndSamplePrivateLinkResourceListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSamplePrivateLinkResourceListResult"/>. </summary>
         internal MgmtMockAndSamplePrivateLinkResourceListResult()
         {
             Value = new ChangeTrackingList<MgmtMockAndSamplePrivateLinkResource>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.MgmtMockAndSamplePrivateLinkResourceListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSamplePrivateLinkResourceListResult"/>. </summary>
         /// <param name="value"> Array of private link resources. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal MgmtMockAndSamplePrivateLinkResourceListResult(IReadOnlyList<MgmtMockAndSamplePrivateLinkResource> value, Dictionary<string, BinaryData> rawData)

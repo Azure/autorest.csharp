@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineReimageContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineReimageContent"/>. </summary>
         public VirtualMachineReimageContent()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineReimageContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineReimageContent"/>. </summary>
         /// <param name="tempDisk">
         /// Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk.
         /// Serialized Name: VirtualMachineReimageParameters.tempDisk

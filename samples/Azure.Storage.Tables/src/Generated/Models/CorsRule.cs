@@ -16,10 +16,7 @@ namespace Azure.Storage.Tables.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.CorsRule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CorsRule"/>. </summary>
         /// <param name="allowedOrigins"> The origin domains that are permitted to make a request against the storage service via CORS. The origin domain is the domain from which the request originates. Note that the origin must be an exact case-sensitive match with the origin that the user age sends to the service. You can also use the wildcard character '*' to allow all origin domains to make requests via CORS. </param>
         /// <param name="allowedMethods"> The methods (HTTP request verbs) that the origin domain may use for a CORS request. (comma separated). </param>
         /// <param name="allowedHeaders"> the request headers that the origin domain may specify on the CORS request. </param>
@@ -40,10 +37,7 @@ namespace Azure.Storage.Tables.Models
             MaxAgeInSeconds = maxAgeInSeconds;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.CorsRule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CorsRule"/>. </summary>
         /// <param name="allowedOrigins"> The origin domains that are permitted to make a request against the storage service via CORS. The origin domain is the domain from which the request originates. Note that the origin must be an exact case-sensitive match with the origin that the user age sends to the service. You can also use the wildcard character '*' to allow all origin domains to make requests via CORS. </param>
         /// <param name="allowedMethods"> The methods (HTTP request verbs) that the origin domain may use for a CORS request. (comma separated). </param>
         /// <param name="allowedHeaders"> the request headers that the origin domain may specify on the CORS request. </param>

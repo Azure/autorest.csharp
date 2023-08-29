@@ -10,10 +10,7 @@ namespace xms_error_responses.Models
     /// <summary> Model factory for models. </summary>
     public static partial class XmsErrorResponsesModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.Pet
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="aniType"></param>
         /// <param name="name"> Gets the Pet by id. </param>
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
@@ -22,10 +19,7 @@ namespace xms_error_responses.Models
             return new Pet(aniType, name, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.Animal
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Animal"/>. </summary>
         /// <param name="aniType"></param>
         /// <returns> A new <see cref="Models.Animal"/> instance for mocking. </returns>
         public static Animal Animal(string aniType = null)
@@ -33,10 +27,7 @@ namespace xms_error_responses.Models
             return new Animal(aniType, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.PetAction
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PetAction"/>. </summary>
         /// <param name="actionResponse"> action feedback. </param>
         /// <returns> A new <see cref="Models.PetAction"/> instance for mocking. </returns>
         public static PetAction PetAction(string actionResponse = null)
@@ -44,10 +35,7 @@ namespace xms_error_responses.Models
             return new PetAction(actionResponse, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.PetActionError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PetActionError"/>. </summary>
         /// <param name="actionResponse"> action feedback. </param>
         /// <param name="errorType"></param>
         /// <param name="errorMessage"> the error message. </param>
@@ -57,10 +45,7 @@ namespace xms_error_responses.Models
             return new PetActionError(actionResponse, errorType, errorMessage, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.PetSadError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PetSadError"/>. </summary>
         /// <param name="actionResponse"> action feedback. </param>
         /// <param name="errorMessage"> the error message. </param>
         /// <param name="reason"> why is the pet sad. </param>
@@ -70,10 +55,7 @@ namespace xms_error_responses.Models
             return new PetSadError(actionResponse, "PetSadError", errorMessage, reason, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.PetHungryOrThirstyError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PetHungryOrThirstyError"/>. </summary>
         /// <param name="actionResponse"> action feedback. </param>
         /// <param name="errorMessage"> the error message. </param>
         /// <param name="reason"> why is the pet sad. </param>

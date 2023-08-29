@@ -19,20 +19,14 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.DiskInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskInstanceView"/>. </summary>
         internal DiskInstanceView()
         {
             EncryptionSettings = new ChangeTrackingList<DiskEncryptionSettings>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.DiskInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskInstanceView"/>. </summary>
         /// <param name="name">
         /// The disk name.
         /// Serialized Name: DiskInstanceView.name

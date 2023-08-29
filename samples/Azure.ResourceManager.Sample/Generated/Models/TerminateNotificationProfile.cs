@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.TerminateNotificationProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TerminateNotificationProfile"/>. </summary>
         public TerminateNotificationProfile()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.TerminateNotificationProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TerminateNotificationProfile"/>. </summary>
         /// <param name="notBeforeTimeout">
         /// Configurable length of time a Virtual Machine being deleted will have to potentially approve the Terminate Scheduled Event before the event is auto approved (timed out). The configuration must be specified in ISO 8601 format, the default value is 5 minutes (PT5M)
         /// Serialized Name: TerminateNotificationProfile.notBeforeTimeout

@@ -17,10 +17,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.IndexBatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IndexBatch"/>. </summary>
         /// <param name="actions"> The actions in the batch. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="actions"/> is null. </exception>
         public IndexBatch(IEnumerable<IndexAction> actions)
@@ -30,10 +27,7 @@ namespace CognitiveSearch.Models
             Actions = actions.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.IndexBatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IndexBatch"/>. </summary>
         /// <param name="actions"> The actions in the batch. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal IndexBatch(IList<IndexAction> actions, Dictionary<string, BinaryData> rawData)

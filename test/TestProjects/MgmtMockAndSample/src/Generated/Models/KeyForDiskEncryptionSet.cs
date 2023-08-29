@@ -17,10 +17,7 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.KeyForDiskEncryptionSet
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyForDiskEncryptionSet"/>. </summary>
         /// <param name="keyUri"> Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="keyUri"/> is null. </exception>
         public KeyForDiskEncryptionSet(Uri keyUri)
@@ -30,10 +27,7 @@ namespace MgmtMockAndSample.Models
             KeyUri = keyUri;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.KeyForDiskEncryptionSet
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyForDiskEncryptionSet"/>. </summary>
         /// <param name="sourceVault"> Resource id of the KeyVault containing the key or secret. This property is optional and cannot be used if the KeyVault subscription is not the same as the Disk Encryption Set subscription. </param>
         /// <param name="keyUri"> Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

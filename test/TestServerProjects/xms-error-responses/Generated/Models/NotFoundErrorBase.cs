@@ -17,18 +17,12 @@ namespace xms_error_responses.Models
     /// </summary>
     internal partial class NotFoundErrorBase : BaseError
     {
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.NotFoundErrorBase
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NotFoundErrorBase"/>. </summary>
         internal NotFoundErrorBase()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.NotFoundErrorBase
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NotFoundErrorBase"/>. </summary>
         /// <param name="someBaseProp"></param>
         /// <param name="reason"></param>
         /// <param name="whatNotFound"></param>

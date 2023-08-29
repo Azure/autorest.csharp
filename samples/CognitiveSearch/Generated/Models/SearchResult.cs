@@ -13,10 +13,7 @@ namespace CognitiveSearch.Models
     /// <summary> Contains a document found by a search query, plus associated metadata. </summary>
     public partial class SearchResult
     {
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.SearchResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SearchResult"/>. </summary>
         /// <param name="score"> The relevance score of the document compared to other documents returned by the query. </param>
         internal SearchResult(double score)
         {
@@ -25,10 +22,7 @@ namespace CognitiveSearch.Models
             AdditionalProperties = new ChangeTrackingDictionary<string, object>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.SearchResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SearchResult"/>. </summary>
         /// <param name="score"> The relevance score of the document compared to other documents returned by the query. </param>
         /// <param name="highlights"> Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>

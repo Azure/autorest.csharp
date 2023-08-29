@@ -20,10 +20,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMInstanceRequiredIDs
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMInstanceRequiredIDs"/>. </summary>
         /// <param name="instanceIds">
         /// The virtual machine scale set instance ids.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceRequiredIDs.instanceIds
@@ -36,10 +33,7 @@ namespace Azure.ResourceManager.Sample.Models
             InstanceIds = instanceIds.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMInstanceRequiredIDs
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMInstanceRequiredIDs"/>. </summary>
         /// <param name="instanceIds">
         /// The virtual machine scale set instance ids.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceRequiredIDs.instanceIds

@@ -15,18 +15,12 @@ namespace MgmtSupersetInheritance.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetInheritance.Models.SupersetModel7SystemData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SupersetModel7SystemData"/>. </summary>
         internal SupersetModel7SystemData()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetInheritance.Models.SupersetModel7SystemData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SupersetModel7SystemData"/>. </summary>
         /// <param name="createdBy"> The identity that created the resource. </param>
         /// <param name="createdOn"> The timestamp of resource creation (UTC). </param>
         /// <param name="lastModifiedBy"> The identity that last modified the resource. </param>

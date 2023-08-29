@@ -16,19 +16,13 @@ namespace Azure.Network.Management.Interface.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.CloudErrorBody
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CloudErrorBody"/>. </summary>
         internal CloudErrorBody()
         {
             Details = new ChangeTrackingList<CloudErrorBody>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.CloudErrorBody
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CloudErrorBody"/>. </summary>
         /// <param name="code"> An identifier for the error. Codes are invariant and are intended to be consumed programmatically. </param>
         /// <param name="message"> A message describing the error, intended to be suitable for display in a user interface. </param>
         /// <param name="target"> The target of the particular error. For example, the name of the property in error. </param>

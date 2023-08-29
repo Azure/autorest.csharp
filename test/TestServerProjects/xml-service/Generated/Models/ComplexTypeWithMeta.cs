@@ -15,18 +15,12 @@ namespace xml_service.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.ComplexTypeWithMeta
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ComplexTypeWithMeta"/>. </summary>
         public ComplexTypeWithMeta()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.ComplexTypeWithMeta
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ComplexTypeWithMeta"/>. </summary>
         /// <param name="id"> The id of the res. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ComplexTypeWithMeta(string id, Dictionary<string, BinaryData> rawData)

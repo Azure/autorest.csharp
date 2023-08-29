@@ -15,10 +15,7 @@ namespace MgmtDiscriminator.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.CacheKeyQueryStringActionParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CacheKeyQueryStringActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="queryStringBehavior"> Caching behavior for the requests. </param>
         public CacheKeyQueryStringActionParameters(CacheKeyQueryStringActionParametersTypeName typeName, QueryStringBehavior queryStringBehavior)
@@ -27,10 +24,7 @@ namespace MgmtDiscriminator.Models
             QueryStringBehavior = queryStringBehavior;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.CacheKeyQueryStringActionParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CacheKeyQueryStringActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="queryStringBehavior"> Caching behavior for the requests. </param>
         /// <param name="queryParameters"> query parameters to include or exclude (comma separated). </param>

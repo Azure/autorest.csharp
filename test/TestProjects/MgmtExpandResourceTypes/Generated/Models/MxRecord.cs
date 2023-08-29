@@ -15,18 +15,12 @@ namespace MgmtExpandResourceTypes.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.MxRecord
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MxRecord"/>. </summary>
         public MxRecord()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.MxRecord
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MxRecord"/>. </summary>
         /// <param name="preference"> The preference value for this MX record. </param>
         /// <param name="exchange"> The domain name of the mail host for this MX record. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

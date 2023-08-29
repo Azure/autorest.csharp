@@ -16,10 +16,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.OutputFieldMappingEntry
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OutputFieldMappingEntry"/>. </summary>
         /// <param name="name"> The name of the output defined by the skill. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public OutputFieldMappingEntry(string name)
@@ -29,10 +26,7 @@ namespace CognitiveSearch.Models
             Name = name;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.OutputFieldMappingEntry
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OutputFieldMappingEntry"/>. </summary>
         /// <param name="name"> The name of the output defined by the skill. </param>
         /// <param name="targetName"> The target name of the output. It is optional and default to name. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

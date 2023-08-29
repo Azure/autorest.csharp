@@ -16,10 +16,7 @@ namespace MgmtDiscriminator.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.UrlSigningParamIdentifier
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UrlSigningParamIdentifier"/>. </summary>
         /// <param name="paramIndicator"> Indicates the purpose of the parameter. </param>
         /// <param name="paramName"> Parameter name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="paramName"/> is null. </exception>
@@ -31,10 +28,7 @@ namespace MgmtDiscriminator.Models
             ParamName = paramName;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.UrlSigningParamIdentifier
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UrlSigningParamIdentifier"/>. </summary>
         /// <param name="paramIndicator"> Indicates the purpose of the parameter. </param>
         /// <param name="paramName"> Parameter name. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

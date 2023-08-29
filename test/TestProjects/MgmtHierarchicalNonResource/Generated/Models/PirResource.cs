@@ -15,18 +15,12 @@ namespace MgmtHierarchicalNonResource.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.PirResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PirResource"/>. </summary>
         internal PirResource()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.PirResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PirResource"/>. </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

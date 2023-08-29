@@ -15,18 +15,12 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyRuleApplicationProtocol
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyRuleApplicationProtocol"/>. </summary>
         public FirewallPolicyRuleApplicationProtocol()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyRuleApplicationProtocol
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyRuleApplicationProtocol"/>. </summary>
         /// <param name="protocolType"> Protocol type. </param>
         /// <param name="port"> Port number for the protocol, cannot be greater than 64000. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

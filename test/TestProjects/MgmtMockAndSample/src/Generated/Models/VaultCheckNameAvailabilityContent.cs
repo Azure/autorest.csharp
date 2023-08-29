@@ -16,10 +16,7 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultCheckNameAvailabilityContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultCheckNameAvailabilityContent"/>. </summary>
         /// <param name="name"> The vault name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public VaultCheckNameAvailabilityContent(string name)
@@ -30,10 +27,7 @@ namespace MgmtMockAndSample.Models
             ResourceType = EncryptionType.MicrosoftKeyVaultVaults;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultCheckNameAvailabilityContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultCheckNameAvailabilityContent"/>. </summary>
         /// <param name="name"> The vault name. </param>
         /// <param name="resourceType"> The type of resource, Microsoft.KeyVault/vaults. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

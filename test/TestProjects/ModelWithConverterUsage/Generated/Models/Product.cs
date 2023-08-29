@@ -15,18 +15,12 @@ namespace ModelWithConverterUsage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::ModelWithConverterUsage.Models.Product
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         public Product()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::ModelWithConverterUsage.Models.Product
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         /// <param name="constProperty"> Constant string. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal Product(string constProperty, Dictionary<string, BinaryData> rawData)

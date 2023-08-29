@@ -13,18 +13,12 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Inbound NAT pool of the load balancer. </summary>
     public partial class InboundNatPool : SubResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.InboundNatPool
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="InboundNatPool"/>. </summary>
         public InboundNatPool()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.InboundNatPool
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="InboundNatPool"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of inbound NAT pools used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>

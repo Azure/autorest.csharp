@@ -17,19 +17,13 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.BlobServiceItems
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobServiceItems"/>. </summary>
         internal BlobServiceItems()
         {
             Value = new ChangeTrackingList<BlobServiceData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.BlobServiceItems
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobServiceItems"/>. </summary>
         /// <param name="value"> List of blob services returned. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal BlobServiceItems(IReadOnlyList<BlobServiceData> value, Dictionary<string, BinaryData> rawData)

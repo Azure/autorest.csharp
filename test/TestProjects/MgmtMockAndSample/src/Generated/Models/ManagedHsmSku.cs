@@ -15,10 +15,7 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.ManagedHsmSku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ManagedHsmSku"/>. </summary>
         /// <param name="family"> SKU Family of the managed HSM Pool. </param>
         /// <param name="name"> SKU of the managed HSM Pool. </param>
         public ManagedHsmSku(ManagedHsmSkuFamily family, ManagedHsmSkuName name)
@@ -27,10 +24,7 @@ namespace MgmtMockAndSample.Models
             Name = name;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.ManagedHsmSku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ManagedHsmSku"/>. </summary>
         /// <param name="family"> SKU Family of the managed HSM Pool. </param>
         /// <param name="name"> SKU of the managed HSM Pool. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -21,10 +21,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMListResult"/>. </summary>
         /// <param name="value">
         /// The list of virtual machine scale sets VMs.
         /// Serialized Name: VirtualMachineScaleSetVMListResult.value
@@ -37,10 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMListResult"/>. </summary>
         /// <param name="value">
         /// The list of virtual machine scale sets VMs.
         /// Serialized Name: VirtualMachineScaleSetVMListResult.value

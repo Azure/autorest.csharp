@@ -16,10 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.CopyRequest
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CopyRequest"/>. </summary>
         /// <param name="targetResourceId"> Azure Resource Id of the target Form Recognizer resource where the model is copied to. </param>
         /// <param name="targetResourceRegion"> Location of the target Azure resource. A valid Azure region name supported by Cognitive Services. </param>
         /// <param name="copyAuthorization"> Entity that encodes claims to authorize the copy request. </param>
@@ -35,10 +32,7 @@ namespace Azure.AI.FormRecognizer.Models
             CopyAuthorization = copyAuthorization;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.CopyRequest
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CopyRequest"/>. </summary>
         /// <param name="targetResourceId"> Azure Resource Id of the target Form Recognizer resource where the model is copied to. </param>
         /// <param name="targetResourceRegion"> Location of the target Azure resource. A valid Azure region name supported by Cognitive Services. </param>
         /// <param name="copyAuthorization"> Entity that encodes claims to authorize the copy request. </param>

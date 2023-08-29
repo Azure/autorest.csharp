@@ -16,19 +16,13 @@ namespace MgmtListMethods.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtListMethods.Models.UpdateWorkspaceQuotasResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UpdateWorkspaceQuotasResult"/>. </summary>
         internal UpdateWorkspaceQuotasResult()
         {
             Value = new ChangeTrackingList<UpdateWorkspaceQuotas>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtListMethods.Models.UpdateWorkspaceQuotasResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UpdateWorkspaceQuotasResult"/>. </summary>
         /// <param name="value"> The list of workspace quota update result. </param>
         /// <param name="nextLink"> The URI to fetch the next page of workspace quota update result. Call ListNext() with this to fetch the next page of Workspace Quota update result. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -20,19 +20,13 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineExtensionsListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionsListResult"/>. </summary>
         internal VirtualMachineExtensionsListResult()
         {
             Value = new ChangeTrackingList<VirtualMachineExtensionData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineExtensionsListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionsListResult"/>. </summary>
         /// <param name="value">
         /// The list of extensions
         /// Serialized Name: VirtualMachineExtensionsListResult.value

@@ -14,10 +14,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the QueryString condition for the delivery rule. </summary>
     public partial class DeliveryRuleQueryStringCondition : DeliveryRuleCondition
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleQueryStringCondition
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleQueryStringCondition"/>. </summary>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public DeliveryRuleQueryStringCondition(QueryStringMatchConditionParameters parameters)
@@ -28,10 +25,7 @@ namespace MgmtDiscriminator.Models
             Name = MatchVariable.QueryString;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleQueryStringCondition
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleQueryStringCondition"/>. </summary>
         /// <param name="name"> The name of the condition for the delivery rule. </param>
         /// <param name="foo"> For test. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>

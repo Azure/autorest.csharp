@@ -15,18 +15,12 @@ namespace Azure.Storage.Tables.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.TableResponseProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TableResponseProperties"/>. </summary>
         internal TableResponseProperties()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.TableResponseProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TableResponseProperties"/>. </summary>
         /// <param name="tableName"> The name of the table. </param>
         /// <param name="odataType"> The odata type of the table. </param>
         /// <param name="odataId"> The id of the table. </param>

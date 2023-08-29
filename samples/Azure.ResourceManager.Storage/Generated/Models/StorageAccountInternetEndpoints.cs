@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StorageAccountInternetEndpoints
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageAccountInternetEndpoints"/>. </summary>
         internal StorageAccountInternetEndpoints()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StorageAccountInternetEndpoints
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageAccountInternetEndpoints"/>. </summary>
         /// <param name="blob"> Gets the blob endpoint. </param>
         /// <param name="file"> Gets the file endpoint. </param>
         /// <param name="web"> Gets the web endpoint. </param>

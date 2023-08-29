@@ -15,18 +15,12 @@ namespace xml_service.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.ModelWithByteProperty
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithByteProperty"/>. </summary>
         public ModelWithByteProperty()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.ModelWithByteProperty
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithByteProperty"/>. </summary>
         /// <param name="bytes"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelWithByteProperty(byte[] bytes, Dictionary<string, BinaryData> rawData)

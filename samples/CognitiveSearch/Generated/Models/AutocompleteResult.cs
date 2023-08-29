@@ -17,10 +17,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.AutocompleteResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AutocompleteResult"/>. </summary>
         /// <param name="results"> The list of returned Autocompleted items. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="results"/> is null. </exception>
         internal AutocompleteResult(IEnumerable<AutocompleteItem> results)
@@ -30,10 +27,7 @@ namespace CognitiveSearch.Models
             Results = results.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.AutocompleteResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AutocompleteResult"/>. </summary>
         /// <param name="coverage"> A value indicating the percentage of the index that was considered by the autocomplete request, or null if minimumCoverage was not specified in the request. </param>
         /// <param name="results"> The list of returned Autocompleted items. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

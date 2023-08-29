@@ -19,18 +19,12 @@ namespace CognitiveSearch.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.CognitiveServicesAccount
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CognitiveServicesAccount"/>. </summary>
         public CognitiveServicesAccount()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.CognitiveServicesAccount
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CognitiveServicesAccount"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the cognitive service resource attached to a skillset. </param>
         /// <param name="description"> Description of the cognitive service resource attached to a skillset. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

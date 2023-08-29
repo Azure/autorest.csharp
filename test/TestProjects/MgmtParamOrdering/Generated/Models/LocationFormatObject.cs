@@ -16,18 +16,12 @@ namespace MgmtParamOrdering.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.Models.LocationFormatObject
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LocationFormatObject"/>. </summary>
         internal LocationFormatObject()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.Models.LocationFormatObject
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LocationFormatObject"/>. </summary>
         /// <param name="stringLocation"> This location should be a string. </param>
         /// <param name="objectLocation"> This location should be an AzureLocation. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

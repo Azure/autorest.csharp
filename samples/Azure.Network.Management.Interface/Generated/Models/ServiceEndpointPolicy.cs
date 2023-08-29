@@ -14,20 +14,14 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Service End point policy resource. </summary>
     public partial class ServiceEndpointPolicy : Resource
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ServiceEndpointPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ServiceEndpointPolicy"/>. </summary>
         public ServiceEndpointPolicy()
         {
             ServiceEndpointPolicyDefinitions = new ChangeTrackingList<ServiceEndpointPolicyDefinition>();
             Subnets = new ChangeTrackingList<Subnet>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ServiceEndpointPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ServiceEndpointPolicy"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>

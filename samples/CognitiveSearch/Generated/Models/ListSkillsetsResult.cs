@@ -17,10 +17,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ListSkillsetsResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ListSkillsetsResult"/>. </summary>
         /// <param name="skillsets"> The skillsets defined in the Search service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="skillsets"/> is null. </exception>
         internal ListSkillsetsResult(IEnumerable<Skillset> skillsets)
@@ -30,10 +27,7 @@ namespace CognitiveSearch.Models
             Skillsets = skillsets.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ListSkillsetsResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ListSkillsetsResult"/>. </summary>
         /// <param name="skillsets"> The skillsets defined in the Search service. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ListSkillsetsResult(IReadOnlyList<Skillset> skillsets, Dictionary<string, BinaryData> rawData)

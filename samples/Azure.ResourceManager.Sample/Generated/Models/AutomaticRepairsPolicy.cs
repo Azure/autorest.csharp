@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.AutomaticRepairsPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AutomaticRepairsPolicy"/>. </summary>
         public AutomaticRepairsPolicy()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.AutomaticRepairsPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AutomaticRepairsPolicy"/>. </summary>
         /// <param name="enabled">
         /// Specifies whether automatic repairs should be enabled on the virtual machine scale set. The default value is false.
         /// Serialized Name: AutomaticRepairsPolicy.enabled

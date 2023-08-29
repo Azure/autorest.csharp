@@ -16,10 +16,7 @@ namespace xml_service.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.BlobPrefix
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobPrefix"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal BlobPrefix(string name)
@@ -29,10 +26,7 @@ namespace xml_service.Models
             Name = name;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.BlobPrefix
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobPrefix"/>. </summary>
         /// <param name="name"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal BlobPrefix(string name, Dictionary<string, BinaryData> rawData)

@@ -17,19 +17,13 @@ namespace Azure.ResourceManager.Fake.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.KeyVaultProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyVaultProperties"/>. </summary>
         [InitializationConstructor]
         public KeyVaultProperties()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.KeyVaultProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyVaultProperties"/>. </summary>
         /// <param name="keyIdentifier"> Key vault uri to access the encryption key. </param>
         /// <param name="identity"> The client ID of the identity which will be used to access key vault. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

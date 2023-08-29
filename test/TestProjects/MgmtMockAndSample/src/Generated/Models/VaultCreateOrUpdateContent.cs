@@ -17,10 +17,7 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultCreateOrUpdateContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultCreateOrUpdateContent"/>. </summary>
         /// <param name="location"> The supported Azure location where the key vault should be created. </param>
         /// <param name="properties"> Properties of the vault. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
@@ -33,10 +30,7 @@ namespace MgmtMockAndSample.Models
             Properties = properties;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultCreateOrUpdateContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultCreateOrUpdateContent"/>. </summary>
         /// <param name="location"> The supported Azure location where the key vault should be created. </param>
         /// <param name="tags"> The tags that will be assigned to the key vault. </param>
         /// <param name="properties"> Properties of the vault. </param>

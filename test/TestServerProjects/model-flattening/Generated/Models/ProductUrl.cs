@@ -13,18 +13,12 @@ namespace model_flattening.Models
     /// <summary> The product URL. </summary>
     internal partial class ProductUrl : GenericUrl
     {
-        /// <summary>
-        /// Initializes a new instance of global::model_flattening.Models.ProductUrl
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProductUrl"/>. </summary>
         internal ProductUrl()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::model_flattening.Models.ProductUrl
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProductUrl"/>. </summary>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

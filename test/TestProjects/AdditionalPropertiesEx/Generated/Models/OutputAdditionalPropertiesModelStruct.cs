@@ -14,10 +14,7 @@ namespace AdditionalPropertiesEx.Models
     /// <summary> The OutputAdditionalPropertiesModelStruct. </summary>
     public readonly partial struct OutputAdditionalPropertiesModelStruct
     {
-        /// <summary>
-        /// Initializes a new instance of global::AdditionalPropertiesEx.Models.OutputAdditionalPropertiesModelStruct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OutputAdditionalPropertiesModelStruct"/>. </summary>
         /// <param name="id"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="additionalProperties"/> is null. </exception>

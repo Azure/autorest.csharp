@@ -16,10 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.LanguageInput
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LanguageInput"/>. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="text"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="text"/> is null. </exception>
@@ -32,10 +29,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Text = text;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.LanguageInput
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LanguageInput"/>. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="text"></param>
         /// <param name="countryHint"></param>

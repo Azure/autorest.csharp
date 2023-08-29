@@ -18,10 +18,7 @@ namespace MgmtScopeResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.ResourceLinkResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceLinkResult"/>. </summary>
         /// <param name="value"> An array of resource links. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal ResourceLinkResult(IEnumerable<ResourceLinkData> value)
@@ -31,10 +28,7 @@ namespace MgmtScopeResource.Models
             Value = value.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.ResourceLinkResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceLinkResult"/>. </summary>
         /// <param name="value"> An array of resource links. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

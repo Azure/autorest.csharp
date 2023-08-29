@@ -15,18 +15,12 @@ namespace custom_baseUrl_paging.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::custom_baseUrl_paging.Models.Product
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         internal Product()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::custom_baseUrl_paging.Models.Product
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         /// <param name="properties"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal Product(ProductProperties properties, Dictionary<string, BinaryData> rawData)

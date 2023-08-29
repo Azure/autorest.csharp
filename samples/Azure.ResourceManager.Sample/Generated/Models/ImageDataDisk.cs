@@ -17,10 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class ImageDataDisk : ImageDisk
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ImageDataDisk
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageDataDisk"/>. </summary>
         /// <param name="lun">
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: ImageDataDisk.lun
@@ -30,10 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             Lun = lun;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ImageDataDisk
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageDataDisk"/>. </summary>
         /// <param name="snapshot">
         /// The snapshot.
         /// Serialized Name: ImageDisk.snapshot

@@ -15,10 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.AnalyzeOperationResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AnalyzeOperationResult"/>. </summary>
         /// <param name="status"> Operation status. </param>
         /// <param name="createdDateTime"> Date and time (UTC) when the analyze operation was submitted. </param>
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
@@ -29,10 +26,7 @@ namespace Azure.AI.FormRecognizer.Models
             LastUpdatedDateTime = lastUpdatedDateTime;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.AnalyzeOperationResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AnalyzeOperationResult"/>. </summary>
         /// <param name="status"> Operation status. </param>
         /// <param name="createdDateTime"> Date and time (UTC) when the analyze operation was submitted. </param>
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>

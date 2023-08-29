@@ -16,10 +16,7 @@ namespace MgmtPartialResource.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtPartialResourceModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPartialResource.PublicIPAddressData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PublicIPAddressData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -44,10 +41,7 @@ namespace MgmtPartialResource.Models
             return new PublicIPAddressData(id, name, resourceType, systemData, sku, etag, zones?.ToList(), publicIPAllocationMethod, publicIPAddressVersion, ipAddress, idleTimeoutInMinutes, resourceGuid, servicePublicIPAddress, migrationPhase, linkedPublicIPAddress, deleteOption, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPartialResource.ConfigurationProfileAssignmentData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ConfigurationProfileAssignmentData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -63,10 +57,7 @@ namespace MgmtPartialResource.Models
             return new ConfigurationProfileAssignmentData(id, name, resourceType, systemData, tags, location, properties, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPartialResource.Models.ConfigurationProfileAssignmentProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ConfigurationProfileAssignmentProperties"/>. </summary>
         /// <param name="configurationProfile"> The Automanage configurationProfile ARM Resource URI. </param>
         /// <param name="targetId"> The target VM resource URI. </param>
         /// <param name="status"> The status of onboarding, which only appears in the response. </param>

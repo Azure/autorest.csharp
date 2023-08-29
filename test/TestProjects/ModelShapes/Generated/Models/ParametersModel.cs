@@ -15,18 +15,12 @@ namespace ModelShapes.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::ModelShapes.Models.ParametersModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ParametersModel"/>. </summary>
         public ParametersModel()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::ModelShapes.Models.ParametersModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ParametersModel"/>. </summary>
         /// <param name="code"></param>
         /// <param name="status"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

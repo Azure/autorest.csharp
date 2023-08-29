@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DiffDiskSettings
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DiffDiskSettings"/>. </summary>
         public DiffDiskSettings()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DiffDiskSettings
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DiffDiskSettings"/>. </summary>
         /// <param name="option">
         /// Specifies the ephemeral disk settings for operating system disk.
         /// Serialized Name: DiffDiskSettings.option

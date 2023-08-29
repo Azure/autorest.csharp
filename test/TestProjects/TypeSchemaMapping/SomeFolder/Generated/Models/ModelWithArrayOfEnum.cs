@@ -16,20 +16,14 @@ namespace TypeSchemaMapping.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::TypeSchemaMapping.Models.ModelWithArrayOfEnum
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithArrayOfEnum"/>. </summary>
         public ModelWithArrayOfEnum()
         {
             ArrayOfEnum = new ChangeTrackingList<EnumForModelWithArrayOfEnum>();
             ArrayOfEnumCustomizedToNullable = new ChangeTrackingList<EnumForModelWithArrayOfEnum?>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::TypeSchemaMapping.Models.ModelWithArrayOfEnum
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithArrayOfEnum"/>. </summary>
         /// <param name="arrayOfEnum"></param>
         /// <param name="arrayOfEnumCustomizedToNullable"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -13,10 +13,7 @@ namespace body_complex.Models
     /// <summary> The Sawshark. </summary>
     public partial class Sawshark : Shark
     {
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.Sawshark
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Sawshark"/>. </summary>
         /// <param name="length"></param>
         /// <param name="birthday"></param>
         public Sawshark(float length, DateTimeOffset birthday) : base(length, birthday)
@@ -24,10 +21,7 @@ namespace body_complex.Models
             Fishtype = "sawshark";
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.Sawshark
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Sawshark"/>. </summary>
         /// <param name="fishtype"></param>
         /// <param name="species"></param>
         /// <param name="length"></param>

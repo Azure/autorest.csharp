@@ -16,10 +16,7 @@ namespace MgmtDiscriminator.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.HeaderActionParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="HeaderActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="headerAction"> Action to perform. </param>
         /// <param name="headerName"> Name of the header to modify. </param>
@@ -33,10 +30,7 @@ namespace MgmtDiscriminator.Models
             HeaderName = headerName;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.HeaderActionParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="HeaderActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="headerAction"> Action to perform. </param>
         /// <param name="headerName"> Name of the header to modify. </param>

@@ -16,10 +16,7 @@ namespace model_flattening.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::model_flattening.Models.BaseProduct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseProduct"/>. </summary>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="productId"/> is null. </exception>
         public BaseProduct(string productId)
@@ -29,10 +26,7 @@ namespace model_flattening.Models
             ProductId = productId;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::model_flattening.Models.BaseProduct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseProduct"/>. </summary>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <param name="description"> Description of product. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

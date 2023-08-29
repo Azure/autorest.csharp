@@ -15,10 +15,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.MagnitudeScoringParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MagnitudeScoringParameters"/>. </summary>
         /// <param name="boostingRangeStart"> The field value at which boosting starts. </param>
         /// <param name="boostingRangeEnd"> The field value at which boosting ends. </param>
         public MagnitudeScoringParameters(double boostingRangeStart, double boostingRangeEnd)
@@ -27,10 +24,7 @@ namespace CognitiveSearch.Models
             BoostingRangeEnd = boostingRangeEnd;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.MagnitudeScoringParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MagnitudeScoringParameters"/>. </summary>
         /// <param name="boostingRangeStart"> The field value at which boosting starts. </param>
         /// <param name="boostingRangeEnd"> The field value at which boosting ends. </param>
         /// <param name="shouldBoostBeyondRangeByConstant"> A value indicating whether to apply a constant boost for field values beyond the range end value; default is false. </param>

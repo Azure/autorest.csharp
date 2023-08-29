@@ -16,19 +16,13 @@ namespace xml_service.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.StorageServiceProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageServiceProperties"/>. </summary>
         public StorageServiceProperties()
         {
             Cors = new ChangeTrackingList<CorsRule>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.StorageServiceProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageServiceProperties"/>. </summary>
         /// <param name="logging"> Azure Analytics Logging settings. </param>
         /// <param name="hourMetrics"> A summary of request statistics grouped by API in hourly aggregates for blobs. </param>
         /// <param name="minuteMetrics"> a summary of request statistics grouped by API in minute aggregates for blobs. </param>

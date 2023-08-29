@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.LinuxConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LinuxConfiguration"/>. </summary>
         public LinuxConfiguration()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.LinuxConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LinuxConfiguration"/>. </summary>
         /// <param name="disablePasswordAuthentication">
         /// Specifies whether password authentication should be disabled.
         /// Serialized Name: LinuxConfiguration.disablePasswordAuthentication

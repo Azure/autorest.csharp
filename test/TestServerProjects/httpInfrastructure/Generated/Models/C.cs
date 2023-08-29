@@ -15,18 +15,12 @@ namespace httpInfrastructure.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::httpInfrastructure.Models.C
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="C"/>. </summary>
         internal C()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::httpInfrastructure.Models.C
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="C"/>. </summary>
         /// <param name="httpCode"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal C(string httpCode, Dictionary<string, BinaryData> rawData)

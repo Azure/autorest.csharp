@@ -17,19 +17,13 @@ namespace Azure.ResourceManager.Fake.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.PrivateEndpoint
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateEndpoint"/>. </summary>
         [InitializationConstructor]
         public PrivateEndpoint()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.PrivateEndpoint
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateEndpoint"/>. </summary>
         /// <param name="id"> The ARM identifier for Private Endpoint. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         protected PrivateEndpoint(ResourceIdentifier id, Dictionary<string, BinaryData> rawData)

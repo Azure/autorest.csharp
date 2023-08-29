@@ -14,10 +14,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the url signing action for the delivery rule. </summary>
     public partial class UrlSigningAction : DeliveryRuleAction
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.UrlSigningAction
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UrlSigningAction"/>. </summary>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public UrlSigningAction(UrlSigningActionParameters parameters)
@@ -28,10 +25,7 @@ namespace MgmtDiscriminator.Models
             Name = DeliveryRuleActionType.UrlSigning;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.UrlSigningAction
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UrlSigningAction"/>. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>

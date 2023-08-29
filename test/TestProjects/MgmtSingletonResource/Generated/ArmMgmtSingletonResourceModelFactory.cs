@@ -16,10 +16,7 @@ namespace MgmtSingletonResource.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtSingletonResourceModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSingletonResource.CarData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CarData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -31,10 +28,7 @@ namespace MgmtSingletonResource.Models
             return new CarData(id, name, resourceType, systemData, horsepower, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSingletonResource.IgnitionData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IgnitionData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -46,10 +40,7 @@ namespace MgmtSingletonResource.Models
             return new IgnitionData(id, name, resourceType, systemData, pushButton, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSingletonResource.BrakeData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BrakeData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -61,10 +52,7 @@ namespace MgmtSingletonResource.Models
             return new BrakeData(id, name, resourceType, systemData, hitBrake, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSingletonResource.SingletonResourceData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SingletonResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -76,10 +64,7 @@ namespace MgmtSingletonResource.Models
             return new SingletonResourceData(id, name, resourceType, systemData, @new, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSingletonResource.ParentResourceData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ParentResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

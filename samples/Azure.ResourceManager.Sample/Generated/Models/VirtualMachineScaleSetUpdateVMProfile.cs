@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetUpdateVMProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateVMProfile"/>. </summary>
         public VirtualMachineScaleSetUpdateVMProfile()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetUpdateVMProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateVMProfile"/>. </summary>
         /// <param name="osProfile">
         /// The virtual machine scale set OS profile.
         /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.osProfile

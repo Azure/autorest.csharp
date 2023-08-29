@@ -16,19 +16,13 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ObjectReplicationPolicyFilter
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ObjectReplicationPolicyFilter"/>. </summary>
         public ObjectReplicationPolicyFilter()
         {
             PrefixMatch = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ObjectReplicationPolicyFilter
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ObjectReplicationPolicyFilter"/>. </summary>
         /// <param name="prefixMatch"> Optional. Filters the results to replicate only blobs whose names begin with the specified prefix. </param>
         /// <param name="minCreationTime"> Blobs created after the time will be replicated to the destination. It must be in datetime format 'yyyy-MM-ddTHH:mm:ssZ'. Example: 2020-02-19T16:05:00Z. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

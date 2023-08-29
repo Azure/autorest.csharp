@@ -21,10 +21,7 @@ namespace MgmtParamOrdering
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.EnvironmentContainerResourceData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EnvironmentContainerResourceData"/>. </summary>
         /// <param name="location"> The location. </param>
         /// <param name="properties"> Additional attributes of the entity. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
@@ -35,10 +32,7 @@ namespace MgmtParamOrdering
             Properties = properties;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.EnvironmentContainerResourceData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EnvironmentContainerResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

@@ -16,19 +16,13 @@ namespace Azure.Network.Management.Interface.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveRouteListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EffectiveRouteListResult"/>. </summary>
         internal EffectiveRouteListResult()
         {
             Value = new ChangeTrackingList<EffectiveRoute>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveRouteListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EffectiveRouteListResult"/>. </summary>
         /// <param name="value"> A list of effective routes. </param>
         /// <param name="nextLink"> The URL to get the next set of results. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

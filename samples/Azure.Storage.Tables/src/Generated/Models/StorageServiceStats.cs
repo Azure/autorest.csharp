@@ -15,18 +15,12 @@ namespace Azure.Storage.Tables.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.StorageServiceStats
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageServiceStats"/>. </summary>
         internal StorageServiceStats()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.StorageServiceStats
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageServiceStats"/>. </summary>
         /// <param name="geoReplication"> Geo-Replication information for the Secondary Storage Service. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal StorageServiceStats(GeoReplication geoReplication, Dictionary<string, BinaryData> rawData)

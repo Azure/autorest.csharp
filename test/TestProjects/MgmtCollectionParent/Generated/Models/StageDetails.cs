@@ -15,18 +15,12 @@ namespace MgmtCollectionParent.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtCollectionParent.Models.StageDetails
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StageDetails"/>. </summary>
         internal StageDetails()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtCollectionParent.Models.StageDetails
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StageDetails"/>. </summary>
         /// <param name="stageStatus"> Stage status. </param>
         /// <param name="stageName"> Stage name. </param>
         /// <param name="displayName"> Display name of the resource stage. </param>

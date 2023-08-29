@@ -17,10 +17,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.AnalyzeResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AnalyzeResult"/>. </summary>
         /// <param name="tokens"> The list of tokens returned by the analyzer specified in the request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tokens"/> is null. </exception>
         internal AnalyzeResult(IEnumerable<TokenInfo> tokens)
@@ -30,10 +27,7 @@ namespace CognitiveSearch.Models
             Tokens = tokens.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.AnalyzeResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AnalyzeResult"/>. </summary>
         /// <param name="tokens"> The list of tokens returned by the analyzer specified in the request. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal AnalyzeResult(IReadOnlyList<TokenInfo> tokens, Dictionary<string, BinaryData> rawData)

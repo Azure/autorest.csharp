@@ -16,10 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.LastAccessTimeTrackingPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LastAccessTimeTrackingPolicy"/>. </summary>
         /// <param name="enable"> When set to true last access time based tracking is enabled. </param>
         public LastAccessTimeTrackingPolicy(bool enable)
         {
@@ -27,10 +24,7 @@ namespace Azure.ResourceManager.Storage.Models
             BlobType = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.LastAccessTimeTrackingPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LastAccessTimeTrackingPolicy"/>. </summary>
         /// <param name="enable"> When set to true last access time based tracking is enabled. </param>
         /// <param name="name"> Name of the policy. The valid value is AccessTimeTracking. This field is currently read only. </param>
         /// <param name="trackingGranularityInDays"> The field specifies blob object tracking granularity in days, typically how often the blob object should be tracked.This field is currently read only with value as 1. </param>

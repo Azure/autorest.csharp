@@ -14,10 +14,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Private endpoint resource. </summary>
     public partial class PrivateEndpoint : Resource
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.PrivateEndpoint
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateEndpoint"/>. </summary>
         public PrivateEndpoint()
         {
             NetworkInterfaces = new ChangeTrackingList<NetworkInterface>();
@@ -25,10 +22,7 @@ namespace Azure.Network.Management.Interface.Models
             ManualPrivateLinkServiceConnections = new ChangeTrackingList<PrivateLinkServiceConnection>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.PrivateEndpoint
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateEndpoint"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>

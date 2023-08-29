@@ -17,19 +17,13 @@ namespace Azure.ResourceManager.Fake.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.CheckNameAvailabilityResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CheckNameAvailabilityResponse"/>. </summary>
         [InitializationConstructor]
         public CheckNameAvailabilityResponse()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.CheckNameAvailabilityResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CheckNameAvailabilityResponse"/>. </summary>
         /// <param name="nameAvailable"> Indicates if the resource name is available. </param>
         /// <param name="reason"> The reason why the given name is not available. </param>
         /// <param name="message"> Detailed reason why the given name is available. </param>

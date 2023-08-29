@@ -14,18 +14,12 @@ namespace MgmtExactMatchInheritance.Models
     /// <summary> The ExactMatchModel3. </summary>
     public partial class ExactMatchModel3 : ExactMatchModel8
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExactMatchInheritance.Models.ExactMatchModel3
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel3"/>. </summary>
         public ExactMatchModel3()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExactMatchInheritance.Models.ExactMatchModel3
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel3"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="bar"></param>

@@ -15,18 +15,12 @@ namespace MgmtDiscriminator.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.BaseModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
         public BaseModel()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.BaseModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
         /// <param name="optionalString"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal BaseModel(string optionalString, Dictionary<string, BinaryData> rawData)

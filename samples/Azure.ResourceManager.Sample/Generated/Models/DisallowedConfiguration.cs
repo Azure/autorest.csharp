@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DisallowedConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DisallowedConfiguration"/>. </summary>
         public DisallowedConfiguration()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DisallowedConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DisallowedConfiguration"/>. </summary>
         /// <param name="vmDiskType">
         /// VM disk types which are disallowed.
         /// Serialized Name: DisallowedConfiguration.vmDiskType

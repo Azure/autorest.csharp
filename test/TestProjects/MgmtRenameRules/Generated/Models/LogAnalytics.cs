@@ -19,18 +19,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.LogAnalytics
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LogAnalytics"/>. </summary>
         internal LogAnalytics()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.LogAnalytics
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LogAnalytics"/>. </summary>
         /// <param name="properties">
         /// LogAnalyticsOutput
         /// Serialized Name: LogAnalyticsOperationResult.properties

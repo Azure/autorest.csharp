@@ -16,10 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.SasPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SasPolicy"/>. </summary>
         /// <param name="sasExpirationPeriod"> The SAS expiration period, DD.HH:MM:SS. </param>
         /// <param name="expirationAction"> The SAS expiration action. Can only be Log. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sasExpirationPeriod"/> is null. </exception>
@@ -31,10 +28,7 @@ namespace Azure.ResourceManager.Storage.Models
             ExpirationAction = expirationAction;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.SasPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SasPolicy"/>. </summary>
         /// <param name="sasExpirationPeriod"> The SAS expiration period, DD.HH:MM:SS. </param>
         /// <param name="expirationAction"> The SAS expiration action. Can only be Log. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

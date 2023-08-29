@@ -13,10 +13,7 @@ namespace validation.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ValidationModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::validation.Models.Product
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         /// <param name="displayNames"> Non required array of unique items from 0 to 6 elements. </param>
         /// <param name="capacity"> Non required int betwen 0 and 100 exclusive. </param>
         /// <param name="image"> Image URL representing the product. </param>
@@ -33,10 +30,7 @@ namespace validation.Models
             return new Product(displayNames?.ToList(), capacity, image, child, constChild, constInt, constString, constStringAsEnum, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::validation.Models.ChildProduct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ChildProduct"/>. </summary>
         /// <param name="constProperty"> Constant string. </param>
         /// <param name="count"> Count. </param>
         /// <returns> A new <see cref="Models.ChildProduct"/> instance for mocking. </returns>
@@ -45,10 +39,7 @@ namespace validation.Models
             return new ChildProduct(constProperty, count, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::validation.Models.ConstantProduct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ConstantProduct"/>. </summary>
         /// <param name="constProperty"> Constant string. </param>
         /// <param name="constProperty2"> Constant string2. </param>
         /// <returns> A new <see cref="Models.ConstantProduct"/> instance for mocking. </returns>

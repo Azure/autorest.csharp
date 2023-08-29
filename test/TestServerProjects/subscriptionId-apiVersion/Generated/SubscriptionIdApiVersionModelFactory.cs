@@ -10,10 +10,7 @@ namespace subscriptionId_apiVersion.Models
     /// <summary> Model factory for models. </summary>
     public static partial class SubscriptionIdApiVersionModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::subscriptionId_apiVersion.Models.SampleResourceGroup
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SampleResourceGroup"/>. </summary>
         /// <param name="name"> resource group name 'testgroup101'. </param>
         /// <param name="location"> resource group location 'West US'. </param>
         /// <returns> A new <see cref="Models.SampleResourceGroup"/> instance for mocking. </returns>

@@ -20,19 +20,13 @@ namespace MgmtListMethods
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtListMethods.FakeParentWithAncestorWithNonResChWithLocData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FakeParentWithAncestorWithNonResChWithLocData"/>. </summary>
         /// <param name="location"> The location. </param>
         public FakeParentWithAncestorWithNonResChWithLocData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtListMethods.FakeParentWithAncestorWithNonResChWithLocData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FakeParentWithAncestorWithNonResChWithLocData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

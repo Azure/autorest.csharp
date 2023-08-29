@@ -17,18 +17,12 @@ namespace MgmtSupersetFlattenInheritance.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.Models.ResourceModel2
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceModel2"/>. </summary>
         public ResourceModel2()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.Models.ResourceModel2
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceModel2"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

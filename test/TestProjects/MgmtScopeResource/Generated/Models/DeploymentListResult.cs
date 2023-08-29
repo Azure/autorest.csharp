@@ -17,19 +17,13 @@ namespace MgmtScopeResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentListResult"/>. </summary>
         internal DeploymentListResult()
         {
             Value = new ChangeTrackingList<DeploymentExtendedData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentListResult"/>. </summary>
         /// <param name="value"> An array of deployments. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

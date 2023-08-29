@@ -17,10 +17,7 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.DocumentSentiment
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DocumentSentiment"/>. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="sentiment"> Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). </param>
         /// <param name="confidenceScores"> Document level sentiment confidence scores between 0 and 1 for each sentiment class. </param>
@@ -41,10 +38,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Warnings = warnings.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.DocumentSentiment
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DocumentSentiment"/>. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="sentiment"> Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the document payload. </param>

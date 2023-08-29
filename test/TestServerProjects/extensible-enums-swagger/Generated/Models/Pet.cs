@@ -15,20 +15,14 @@ namespace extensible_enums_swagger.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::extensible_enums_swagger.Models.Pet
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="intEnum"></param>
         public Pet(IntEnum intEnum)
         {
             IntEnum = intEnum;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::extensible_enums_swagger.Models.Pet
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="name"> name. </param>
         /// <param name="daysOfWeek"> Type of Pet. </param>
         /// <param name="intEnum"></param>

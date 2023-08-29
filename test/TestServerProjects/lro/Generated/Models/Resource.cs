@@ -16,19 +16,13 @@ namespace lro.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::lro.Models.Resource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Resource"/>. </summary>
         public Resource()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::lro.Models.Resource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Resource"/>. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="type"> Resource Type. </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>

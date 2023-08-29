@@ -16,19 +16,13 @@ namespace Azure.Storage.Tables.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.TableQueryResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TableQueryResponse"/>. </summary>
         internal TableQueryResponse()
         {
             Value = new ChangeTrackingList<TableResponseProperties>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.TableQueryResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TableQueryResponse"/>. </summary>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
         /// <param name="value"> List of tables. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.OrchestrationServiceSummary
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OrchestrationServiceSummary"/>. </summary>
         internal OrchestrationServiceSummary()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.OrchestrationServiceSummary
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OrchestrationServiceSummary"/>. </summary>
         /// <param name="serviceName">
         /// The name of the service.
         /// Serialized Name: OrchestrationServiceSummary.serviceName

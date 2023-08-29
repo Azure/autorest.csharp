@@ -18,10 +18,7 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineScaleSetUpdateIPConfiguration : SubResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdateIPConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateIPConfiguration"/>. </summary>
         public VirtualMachineScaleSetUpdateIPConfiguration()
         {
             ApplicationGatewayBackendAddressPools = new ChangeTrackingList<WritableSubResource>();
@@ -30,10 +27,7 @@ namespace MgmtRenameRules.Models
             LoadBalancerInboundNatPools = new ChangeTrackingList<WritableSubResource>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdateIPConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateIPConfiguration"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id

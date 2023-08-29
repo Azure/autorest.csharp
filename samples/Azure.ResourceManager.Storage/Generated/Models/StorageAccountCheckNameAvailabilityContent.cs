@@ -16,10 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StorageAccountCheckNameAvailabilityContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageAccountCheckNameAvailabilityContent"/>. </summary>
         /// <param name="name"> The storage account name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public StorageAccountCheckNameAvailabilityContent(string name)
@@ -30,10 +27,7 @@ namespace Azure.ResourceManager.Storage.Models
             ResourceType = Type.MicrosoftStorageStorageAccounts;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StorageAccountCheckNameAvailabilityContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageAccountCheckNameAvailabilityContent"/>. </summary>
         /// <param name="name"> The storage account name. </param>
         /// <param name="resourceType"> The type of resource, Microsoft.Storage/storageAccounts. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

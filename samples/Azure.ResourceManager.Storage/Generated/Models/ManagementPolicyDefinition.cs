@@ -16,10 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ManagementPolicyDefinition
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ManagementPolicyDefinition"/>. </summary>
         /// <param name="actions"> An object that defines the action set. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="actions"/> is null. </exception>
         public ManagementPolicyDefinition(ManagementPolicyAction actions)
@@ -29,10 +26,7 @@ namespace Azure.ResourceManager.Storage.Models
             Actions = actions;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ManagementPolicyDefinition
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ManagementPolicyDefinition"/>. </summary>
         /// <param name="actions"> An object that defines the action set. </param>
         /// <param name="filters"> An object that defines the filter set. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

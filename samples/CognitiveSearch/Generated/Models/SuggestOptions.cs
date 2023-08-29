@@ -16,10 +16,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.SuggestOptions
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SuggestOptions"/>. </summary>
         public SuggestOptions()
         {
             OrderBy = new ChangeTrackingList<string>();
@@ -27,10 +24,7 @@ namespace CognitiveSearch.Models
             Select = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.SuggestOptions
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SuggestOptions"/>. </summary>
         /// <param name="filter"> An OData expression that filters the documents considered for suggestions. </param>
         /// <param name="useFuzzyMatching"> A value indicating whether to use fuzzy matching for the suggestions query. Default is false. When set to true, the query will find terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestions queries are slower and consume more resources. </param>
         /// <param name="highlightPostTag"> A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting of suggestions is disabled. </param>

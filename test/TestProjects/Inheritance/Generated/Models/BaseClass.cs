@@ -16,18 +16,12 @@ namespace Inheritance.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Inheritance.Models.BaseClass
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseClass"/>. </summary>
         public BaseClass()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Inheritance.Models.BaseClass
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseClass"/>. </summary>
         /// <param name="baseClassProperty"></param>
         /// <param name="dfeString"> Any object. </param>
         /// <param name="dfeDouble"> Any object. </param>

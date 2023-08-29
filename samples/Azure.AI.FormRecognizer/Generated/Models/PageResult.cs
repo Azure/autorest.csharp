@@ -16,10 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.PageResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PageResult"/>. </summary>
         /// <param name="page"> Page number. </param>
         internal PageResult(int page)
         {
@@ -28,10 +25,7 @@ namespace Azure.AI.FormRecognizer.Models
             Tables = new ChangeTrackingList<DataTable>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.PageResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PageResult"/>. </summary>
         /// <param name="page"> Page number. </param>
         /// <param name="clusterId"> Cluster identifier. </param>
         /// <param name="keyValuePairs"> List of key-value pairs extracted from the page. </param>

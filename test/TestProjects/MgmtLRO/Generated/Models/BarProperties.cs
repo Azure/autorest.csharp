@@ -15,18 +15,12 @@ namespace MgmtLRO.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtLRO.Models.BarProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BarProperties"/>. </summary>
         public BarProperties()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtLRO.Models.BarProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BarProperties"/>. </summary>
         /// <param name="buzz"> Update Domain count. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal BarProperties(Guid? buzz, Dictionary<string, BinaryData> rawData)

@@ -16,10 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.DeletedShare
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeletedShare"/>. </summary>
         /// <param name="deletedShareName"> Required. Identify the name of the deleted share that will be restored. </param>
         /// <param name="deletedShareVersion"> Required. Identify the version of the deleted share that will be restored. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="deletedShareName"/> or <paramref name="deletedShareVersion"/> is null. </exception>
@@ -32,10 +29,7 @@ namespace Azure.ResourceManager.Storage.Models
             DeletedShareVersion = deletedShareVersion;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.DeletedShare
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeletedShare"/>. </summary>
         /// <param name="deletedShareName"> Required. Identify the name of the deleted share that will be restored. </param>
         /// <param name="deletedShareVersion"> Required. Identify the version of the deleted share that will be restored. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

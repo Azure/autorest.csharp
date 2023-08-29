@@ -16,19 +16,13 @@ namespace MgmtScopeResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.MarketplacesListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MarketplacesListResult"/>. </summary>
         internal MarketplacesListResult()
         {
             Value = new ChangeTrackingList<Marketplace>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.MarketplacesListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MarketplacesListResult"/>. </summary>
         /// <param name="value"> The list of marketplaces. </param>
         /// <param name="nextLink"> The link (url) to the next page of results. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

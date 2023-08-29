@@ -17,19 +17,13 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.MhsmPrivateEndpointConnectionsListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MhsmPrivateEndpointConnectionsListResult"/>. </summary>
         internal MhsmPrivateEndpointConnectionsListResult()
         {
             Value = new ChangeTrackingList<MhsmPrivateEndpointConnectionData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.MhsmPrivateEndpointConnectionsListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MhsmPrivateEndpointConnectionsListResult"/>. </summary>
         /// <param name="value"> The private endpoint connection associated with a managed HSM Pools. </param>
         /// <param name="nextLink"> The URL to get the next set of managed HSM Pools. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

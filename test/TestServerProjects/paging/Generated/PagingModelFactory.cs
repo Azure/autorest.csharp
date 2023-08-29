@@ -10,10 +10,7 @@ namespace paging.Models
     /// <summary> Model factory for models. </summary>
     public static partial class PagingModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::paging.Models.Product
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         /// <param name="properties"></param>
         /// <returns> A new <see cref="Models.Product"/> instance for mocking. </returns>
         public static Product Product(ProductProperties properties = null)
@@ -21,10 +18,7 @@ namespace paging.Models
             return new Product(properties, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::paging.Models.ProductProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProductProperties"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <returns> A new <see cref="Models.ProductProperties"/> instance for mocking. </returns>
@@ -33,10 +27,7 @@ namespace paging.Models
             return new ProductProperties(id, name, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::paging.Models.PagingGetMultiplePagesWithOffsetOptions
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PagingGetMultiplePagesWithOffsetOptions"/>. </summary>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="offset"> Offset of return value. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>

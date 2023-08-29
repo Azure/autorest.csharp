@@ -16,10 +16,7 @@ namespace xml_service.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.Logging
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Logging"/>. </summary>
         /// <param name="version"> The version of Storage Analytics to configure. </param>
         /// <param name="delete"> Indicates whether all delete requests should be logged. </param>
         /// <param name="read"> Indicates whether all read requests should be logged. </param>
@@ -38,10 +35,7 @@ namespace xml_service.Models
             RetentionPolicy = retentionPolicy;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.Logging
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Logging"/>. </summary>
         /// <param name="version"> The version of Storage Analytics to configure. </param>
         /// <param name="delete"> Indicates whether all delete requests should be logged. </param>
         /// <param name="read"> Indicates whether all read requests should be logged. </param>

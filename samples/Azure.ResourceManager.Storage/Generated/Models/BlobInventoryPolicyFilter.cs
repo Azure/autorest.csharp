@@ -16,20 +16,14 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.BlobInventoryPolicyFilter
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicyFilter"/>. </summary>
         public BlobInventoryPolicyFilter()
         {
             PrefixMatch = new ChangeTrackingList<string>();
             BlobTypes = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.BlobInventoryPolicyFilter
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicyFilter"/>. </summary>
         /// <param name="prefixMatch"> An array of strings for blob prefixes to be matched. </param>
         /// <param name="blobTypes"> An array of predefined enum values. Valid values include blockBlob, appendBlob, pageBlob. Hns accounts does not support pageBlobs. This field is required when definition.objectType property is set to 'Blob'. </param>
         /// <param name="includeBlobVersions"> Includes blob versions in blob inventory when value is set to true. The definition.schemaFields values 'VersionId and IsCurrentVersion' are required if this property is set to true, else they must be excluded. </param>

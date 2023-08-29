@@ -15,18 +15,12 @@ namespace MgmtLRO.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtLRO.Models.FakePostResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FakePostResult"/>. </summary>
         internal FakePostResult()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtLRO.Models.FakePostResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FakePostResult"/>. </summary>
         /// <param name="properties"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal FakePostResult(FakePostResultProperties properties, Dictionary<string, BinaryData> rawData)

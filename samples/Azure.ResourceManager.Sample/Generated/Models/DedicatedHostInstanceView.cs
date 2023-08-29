@@ -19,19 +19,13 @@ namespace Azure.ResourceManager.Sample.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostInstanceView"/>. </summary>
         internal DedicatedHostInstanceView()
         {
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostInstanceView"/>. </summary>
         /// <param name="assetId">
         /// Specifies the unique id of the dedicated physical machine on which the dedicated host resides.
         /// Serialized Name: DedicatedHostInstanceView.assetId

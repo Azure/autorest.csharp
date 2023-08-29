@@ -17,10 +17,7 @@ namespace ModelShapes.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::ModelShapes.Models.InputModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>
@@ -50,10 +47,7 @@ namespace ModelShapes.Models
             NonRequiredNullableIntList = new ChangeTrackingList<int>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::ModelShapes.Models.InputModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>

@@ -14,19 +14,13 @@ namespace MgmtParent.Models
     /// <summary> Specifies information about the dedicated host group that the dedicated host should be assigned to. Only tags may be updated. </summary>
     public partial class DedicatedHostGroupPatch : UpdateResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParent.Models.DedicatedHostGroupPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupPatch"/>. </summary>
         public DedicatedHostGroupPatch()
         {
             Zones = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParent.Models.DedicatedHostGroupPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupPatch"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="zones"> Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone. </param>
         /// <param name="platformFaultDomainCount"> Number of fault domains that the host group can span. </param>

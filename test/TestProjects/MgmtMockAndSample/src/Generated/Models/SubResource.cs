@@ -15,18 +15,12 @@ namespace MgmtMockAndSample.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.SubResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResource"/>. </summary>
         public SubResource()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.SubResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResource"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal SubResource(string id, Dictionary<string, BinaryData> rawData)

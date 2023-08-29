@@ -17,10 +17,7 @@ namespace ModelShapes.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::ModelShapes.Models.MixedModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MixedModel"/>. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>
@@ -52,10 +49,7 @@ namespace ModelShapes.Models
             RequiredReadonlyInt = requiredReadonlyInt;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::ModelShapes.Models.MixedModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MixedModel"/>. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>

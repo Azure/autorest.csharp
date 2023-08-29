@@ -15,18 +15,12 @@ namespace MgmtExpandResourceTypes.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.SoaRecord
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SoaRecord"/>. </summary>
         public SoaRecord()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.SoaRecord
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SoaRecord"/>. </summary>
         /// <param name="host"> The domain name of the authoritative name server for this SOA record. </param>
         /// <param name="email"> The email contact for this SOA record. </param>
         /// <param name="serialNumber"> The serial number for this SOA record. </param>

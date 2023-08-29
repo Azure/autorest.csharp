@@ -13,18 +13,12 @@ namespace MgmtParamOrdering.Models
     /// <summary> Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated. </summary>
     public partial class AvailabilitySetPatch : UpdateResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.Models.AvailabilitySetPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetPatch"/>. </summary>
         public AvailabilitySetPatch()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.Models.AvailabilitySetPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetPatch"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="platformUpdateDomainCount"> Update Domain count. </param>
         /// <param name="platformFaultDomainCount"> Fault Domain count. </param>

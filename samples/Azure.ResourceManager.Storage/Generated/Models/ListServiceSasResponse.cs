@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ListServiceSasResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ListServiceSasResponse"/>. </summary>
         internal ListServiceSasResponse()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ListServiceSasResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ListServiceSasResponse"/>. </summary>
         /// <param name="serviceSasToken"> List service SAS credentials of specific resource. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ListServiceSasResponse(string serviceSasToken, Dictionary<string, BinaryData> rawData)

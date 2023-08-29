@@ -15,19 +15,13 @@ namespace azure_special_properties.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::azure_special_properties.Models.Error
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Error"/>. </summary>
         internal Error()
         {
             ConstantId = ErrorConstantId._1;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::azure_special_properties.Models.Error
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Error"/>. </summary>
         /// <param name="status"></param>
         /// <param name="constantId"></param>
         /// <param name="message"></param>

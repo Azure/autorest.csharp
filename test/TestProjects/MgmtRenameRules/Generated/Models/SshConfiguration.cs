@@ -19,19 +19,13 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.SshConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SshConfiguration"/>. </summary>
         public SshConfiguration()
         {
             PublicKeys = new ChangeTrackingList<SshPublicKeyInfo>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.SshConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SshConfiguration"/>. </summary>
         /// <param name="publicKeys">
         /// The list of SSH public keys used to authenticate with linux based VMs.
         /// Serialized Name: SshConfiguration.publicKeys

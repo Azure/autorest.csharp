@@ -17,19 +17,13 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.EncryptionScopeListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EncryptionScopeListResult"/>. </summary>
         internal EncryptionScopeListResult()
         {
             Value = new ChangeTrackingList<EncryptionScopeData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.EncryptionScopeListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EncryptionScopeListResult"/>. </summary>
         /// <param name="value"> List of encryption scopes requested. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of encryption scopes. Returned when total number of requested encryption scopes exceeds the maximum page size. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

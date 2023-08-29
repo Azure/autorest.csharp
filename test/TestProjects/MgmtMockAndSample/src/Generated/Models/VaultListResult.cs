@@ -17,19 +17,13 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultListResult"/>. </summary>
         internal VaultListResult()
         {
             Value = new ChangeTrackingList<VaultData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultListResult"/>. </summary>
         /// <param name="value"> The list of vaults. </param>
         /// <param name="nextLink"> The URL to get the next set of vaults. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

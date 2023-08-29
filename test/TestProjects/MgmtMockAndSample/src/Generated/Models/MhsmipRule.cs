@@ -16,10 +16,7 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.MhsmipRule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MhsmipRule"/>. </summary>
         /// <param name="value"> An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78). </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public MhsmipRule(string value)
@@ -29,10 +26,7 @@ namespace MgmtMockAndSample.Models
             Value = value;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.MhsmipRule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MhsmipRule"/>. </summary>
         /// <param name="value"> An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78). </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal MhsmipRule(string value, Dictionary<string, BinaryData> rawData)

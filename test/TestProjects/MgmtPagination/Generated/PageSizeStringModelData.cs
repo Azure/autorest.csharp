@@ -15,18 +15,12 @@ namespace MgmtPagination
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPagination.PageSizeStringModelData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeStringModelData"/>. </summary>
         public PageSizeStringModelData()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPagination.PageSizeStringModelData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeStringModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>

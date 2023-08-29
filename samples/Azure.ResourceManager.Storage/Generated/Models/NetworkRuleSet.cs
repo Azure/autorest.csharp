@@ -16,10 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.NetworkRuleSet
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkRuleSet"/>. </summary>
         /// <param name="defaultAction"> Specifies the default action of allow or deny when no other rules match. </param>
         public NetworkRuleSet(DefaultAction defaultAction)
         {
@@ -29,10 +26,7 @@ namespace Azure.ResourceManager.Storage.Models
             DefaultAction = defaultAction;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.NetworkRuleSet
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkRuleSet"/>. </summary>
         /// <param name="bypass"> Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, "Logging, Metrics"), or None to bypass none of those traffics. </param>
         /// <param name="resourceAccessRules"> Sets the resource access rules. </param>
         /// <param name="virtualNetworkRules"> Sets the virtual network rules. </param>

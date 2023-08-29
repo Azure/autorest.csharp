@@ -16,10 +16,7 @@ namespace MgmtOperations.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtOperationsModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOperations.AvailabilitySetData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -35,10 +32,7 @@ namespace MgmtOperations.Models
             return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, bar, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOperations.Models.ConnectionSharedKey
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ConnectionSharedKey"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -54,10 +48,7 @@ namespace MgmtOperations.Models
             return new ConnectionSharedKey(id, name, resourceType, systemData, tags, location, value, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOperations.AvailabilitySetChildData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetChildData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -73,10 +64,7 @@ namespace MgmtOperations.Models
             return new AvailabilitySetChildData(id, name, resourceType, systemData, tags, location, bar, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOperations.AvailabilitySetGrandChildData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetGrandChildData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -92,10 +80,7 @@ namespace MgmtOperations.Models
             return new AvailabilitySetGrandChildData(id, name, resourceType, systemData, tags, location, bar, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOperations.Models.TestAvailabilitySet
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TestAvailabilitySet"/>. </summary>
         /// <param name="bar"> specifies the bar. </param>
         /// <returns> A new <see cref="Models.TestAvailabilitySet"/> instance for mocking. </returns>
         public static TestAvailabilitySet TestAvailabilitySet(string bar = null)
@@ -103,10 +88,7 @@ namespace MgmtOperations.Models
             return new TestAvailabilitySet(bar, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOperations.UnpatchableResourceData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UnpatchableResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

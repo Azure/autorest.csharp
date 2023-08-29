@@ -16,19 +16,13 @@ namespace MgmtListMethods.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtListMethods.Models.NonResourceChildListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NonResourceChildListResult"/>. </summary>
         internal NonResourceChildListResult()
         {
             Value = new ChangeTrackingList<NonResourceChild>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtListMethods.Models.NonResourceChildListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NonResourceChildListResult"/>. </summary>
         /// <param name="value"> The list of Non Resource Child. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal NonResourceChildListResult(IReadOnlyList<NonResourceChild> value, Dictionary<string, BinaryData> rawData)

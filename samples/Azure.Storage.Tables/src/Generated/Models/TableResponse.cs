@@ -13,18 +13,12 @@ namespace Azure.Storage.Tables.Models
     /// <summary> The response for a single table. </summary>
     public partial class TableResponse : TableResponseProperties
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.TableResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TableResponse"/>. </summary>
         internal TableResponse()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.TableResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TableResponse"/>. </summary>
         /// <param name="tableName"> The name of the table. </param>
         /// <param name="odataType"> The odata type of the table. </param>
         /// <param name="odataId"> The id of the table. </param>

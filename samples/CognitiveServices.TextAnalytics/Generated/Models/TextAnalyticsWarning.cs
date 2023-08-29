@@ -16,10 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.TextAnalyticsWarning
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TextAnalyticsWarning"/>. </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Warning message. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
@@ -31,10 +28,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Message = message;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.TextAnalyticsWarning
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TextAnalyticsWarning"/>. </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Warning message. </param>
         /// <param name="targetRef"> A JSON pointer reference indicating the target object. </param>

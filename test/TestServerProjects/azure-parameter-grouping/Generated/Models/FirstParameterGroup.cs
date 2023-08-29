@@ -15,18 +15,12 @@ namespace azure_parameter_grouping.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::azure_parameter_grouping.Models.FirstParameterGroup
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirstParameterGroup"/>. </summary>
         public FirstParameterGroup()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::azure_parameter_grouping.Models.FirstParameterGroup
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirstParameterGroup"/>. </summary>
         /// <param name="headerOne"></param>
         /// <param name="queryOne"> Query parameter with default. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -15,18 +15,12 @@ namespace MgmtSafeFlatten.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSafeFlatten.Models.TypeFour
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TypeFour"/>. </summary>
         internal TypeFour()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSafeFlatten.Models.TypeFour
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TypeFour"/>. </summary>
         /// <param name="myType"> The details of the type. </param>
         /// <param name="properties"> The single value prop. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -14,10 +14,7 @@ namespace xml_service.Models
     /// <summary> Model factory for models. </summary>
     public static partial class XmlServiceModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.ListContainersResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ListContainersResponse"/>. </summary>
         /// <param name="serviceEndpoint"></param>
         /// <param name="prefix"></param>
         /// <param name="marker"></param>
@@ -32,10 +29,7 @@ namespace xml_service.Models
             return new ListContainersResponse(serviceEndpoint, prefix, marker, maxResults, containers?.ToList(), nextMarker, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.Container
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Container"/>. </summary>
         /// <param name="name"></param>
         /// <param name="properties"> Properties of a container. </param>
         /// <param name="metadata"> Dictionary of &lt;string&gt;. </param>
@@ -47,10 +41,7 @@ namespace xml_service.Models
             return new Container(name, properties, metadata, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.ContainerProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ContainerProperties"/>. </summary>
         /// <param name="lastModified"></param>
         /// <param name="etag"></param>
         /// <param name="leaseStatus"></param>
@@ -63,10 +54,7 @@ namespace xml_service.Models
             return new ContainerProperties(lastModified, etag, leaseStatus, leaseState, leaseDuration, publicAccess, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.ListBlobsResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ListBlobsResponse"/>. </summary>
         /// <param name="serviceEndpoint"></param>
         /// <param name="containerName"></param>
         /// <param name="prefix"></param>
@@ -81,10 +69,7 @@ namespace xml_service.Models
             return new ListBlobsResponse(serviceEndpoint, containerName, prefix, marker, maxResults, delimiter, blobs, nextMarker, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.Blobs
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Blobs"/>. </summary>
         /// <param name="blobPrefix"></param>
         /// <param name="blob"></param>
         /// <returns> A new <see cref="Models.Blobs"/> instance for mocking. </returns>
@@ -96,10 +81,7 @@ namespace xml_service.Models
             return new Blobs(blobPrefix?.ToList(), blob?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.BlobPrefix
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobPrefix"/>. </summary>
         /// <param name="name"></param>
         /// <returns> A new <see cref="Models.BlobPrefix"/> instance for mocking. </returns>
         public static BlobPrefix BlobPrefix(string name = null)
@@ -107,10 +89,7 @@ namespace xml_service.Models
             return new BlobPrefix(name, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.Blob
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Blob"/>. </summary>
         /// <param name="name"></param>
         /// <param name="deleted"></param>
         /// <param name="snapshot"></param>
@@ -124,10 +103,7 @@ namespace xml_service.Models
             return new Blob(name, deleted, snapshot, properties, metadata, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.BlobProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobProperties"/>. </summary>
         /// <param name="lastModified"></param>
         /// <param name="etag"></param>
         /// <param name="contentLength"> Size in bytes. </param>
@@ -162,10 +138,7 @@ namespace xml_service.Models
             return new BlobProperties(lastModified, etag, contentLength, contentType, contentEncoding, contentLanguage, contentMD5, contentDisposition, cacheControl, blobSequenceNumber, blobType, leaseStatus, leaseState, leaseDuration, copyId, copyStatus, copySource, copyProgress, copyCompletionTime, copyStatusDescription, serverEncrypted, incrementalCopy, destinationSnapshot, deletedTime, remainingRetentionDays, accessTier, accessTierInferred, archiveStatus, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.JsonOutput
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="JsonOutput"/>. </summary>
         /// <param name="id"></param>
         /// <returns> A new <see cref="Models.JsonOutput"/> instance for mocking. </returns>
         public static JsonOutput JsonOutput(int? id = null)
@@ -173,10 +146,7 @@ namespace xml_service.Models
             return new JsonOutput(id, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.ObjectWithXMsTextProperty
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ObjectWithXMsTextProperty"/>. </summary>
         /// <param name="language"> Returned value should be 'english'. </param>
         /// <param name="content"> Returned value should be 'I am text'. </param>
         /// <returns> A new <see cref="Models.ObjectWithXMsTextProperty"/> instance for mocking. </returns>

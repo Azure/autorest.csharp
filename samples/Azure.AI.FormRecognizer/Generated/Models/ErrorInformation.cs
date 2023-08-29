@@ -16,10 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.ErrorInformation
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ErrorInformation"/>. </summary>
         /// <param name="code"></param>
         /// <param name="message"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="code"/> or <paramref name="message"/> is null. </exception>
@@ -32,10 +29,7 @@ namespace Azure.AI.FormRecognizer.Models
             Message = message;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.ErrorInformation
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ErrorInformation"/>. </summary>
         /// <param name="code"></param>
         /// <param name="message"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

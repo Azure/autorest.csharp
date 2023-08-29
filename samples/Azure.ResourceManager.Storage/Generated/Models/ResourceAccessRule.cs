@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ResourceAccessRule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceAccessRule"/>. </summary>
         public ResourceAccessRule()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ResourceAccessRule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceAccessRule"/>. </summary>
         /// <param name="tenantId"> Tenant Id. </param>
         /// <param name="resourceId"> Resource Id. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdateVmProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateVmProfile"/>. </summary>
         public VirtualMachineScaleSetUpdateVmProfile()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdateVmProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateVmProfile"/>. </summary>
         /// <param name="osProfile">
         /// The virtual machine scale set OS profile.
         /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.osProfile

@@ -16,20 +16,14 @@ namespace xml_service.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.AppleBarrel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AppleBarrel"/>. </summary>
         public AppleBarrel()
         {
             GoodApples = new ChangeTrackingList<string>();
             BadApples = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.AppleBarrel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AppleBarrel"/>. </summary>
         /// <param name="goodApples"></param>
         /// <param name="badApples"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

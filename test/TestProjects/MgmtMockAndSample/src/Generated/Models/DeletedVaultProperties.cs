@@ -16,19 +16,13 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.DeletedVaultProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeletedVaultProperties"/>. </summary>
         internal DeletedVaultProperties()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.DeletedVaultProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeletedVaultProperties"/>. </summary>
         /// <param name="vaultId"> The resource id of the original vault. </param>
         /// <param name="location"> The location of the original vault. </param>
         /// <param name="deletedOn"> The deleted date. </param>

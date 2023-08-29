@@ -15,18 +15,12 @@ namespace MgmtHierarchicalNonResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.GalleryImageFeature
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GalleryImageFeature"/>. </summary>
         internal GalleryImageFeature()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.GalleryImageFeature
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GalleryImageFeature"/>. </summary>
         /// <param name="name"> The name of the gallery image feature. </param>
         /// <param name="value"> The value of the gallery image feature. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -15,18 +15,12 @@ namespace Azure.Network.Management.Interface.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveNetworkSecurityGroupAssociation
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EffectiveNetworkSecurityGroupAssociation"/>. </summary>
         internal EffectiveNetworkSecurityGroupAssociation()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveNetworkSecurityGroupAssociation
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EffectiveNetworkSecurityGroupAssociation"/>. </summary>
         /// <param name="subnet"> The ID of the subnet if assigned. </param>
         /// <param name="networkInterface"> The ID of the network interface if assigned. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

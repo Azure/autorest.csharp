@@ -15,20 +15,14 @@ namespace validation.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::validation.Models.ConstantProduct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ConstantProduct"/>. </summary>
         public ConstantProduct()
         {
             ConstProperty = ConstantProductConstProperty.Constant;
             ConstProperty2 = ConstantProductConstProperty2.Constant2;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::validation.Models.ConstantProduct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ConstantProduct"/>. </summary>
         /// <param name="constProperty"> Constant string. </param>
         /// <param name="constProperty2"> Constant string2. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

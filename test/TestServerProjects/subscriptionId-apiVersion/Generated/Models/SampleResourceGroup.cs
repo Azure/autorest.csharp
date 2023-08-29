@@ -15,18 +15,12 @@ namespace subscriptionId_apiVersion.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::subscriptionId_apiVersion.Models.SampleResourceGroup
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SampleResourceGroup"/>. </summary>
         internal SampleResourceGroup()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::subscriptionId_apiVersion.Models.SampleResourceGroup
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SampleResourceGroup"/>. </summary>
         /// <param name="name"> resource group name 'testgroup101'. </param>
         /// <param name="location"> resource group location 'West US'. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -15,10 +15,7 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.MgmtMockAndSampleSku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSampleSku"/>. </summary>
         /// <param name="family"> SKU family name. </param>
         /// <param name="name"> SKU name to specify whether the key vault is a standard vault or a premium vault. </param>
         public MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily family, MgmtMockAndSampleSkuName name)
@@ -27,10 +24,7 @@ namespace MgmtMockAndSample.Models
             Name = name;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.MgmtMockAndSampleSku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSampleSku"/>. </summary>
         /// <param name="family"> SKU family name. </param>
         /// <param name="name"> SKU name to specify whether the key vault is a standard vault or a premium vault. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

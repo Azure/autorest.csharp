@@ -17,18 +17,12 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyLogAnalyticsWorkspace
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyLogAnalyticsWorkspace"/>. </summary>
         public FirewallPolicyLogAnalyticsWorkspace()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyLogAnalyticsWorkspace
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyLogAnalyticsWorkspace"/>. </summary>
         /// <param name="region"> Region to configure the Workspace. </param>
         /// <param name="workspaceId"> The workspace Id for Firewall Policy Insights. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

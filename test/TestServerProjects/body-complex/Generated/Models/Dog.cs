@@ -13,18 +13,12 @@ namespace body_complex.Models
     /// <summary> The Dog. </summary>
     public partial class Dog : Pet
     {
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.Dog
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Dog"/>. </summary>
         public Dog()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.Dog
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Dog"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="food"></param>

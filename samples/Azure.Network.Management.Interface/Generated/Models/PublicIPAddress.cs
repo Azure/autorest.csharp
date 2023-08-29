@@ -14,20 +14,14 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Public IP address resource. </summary>
     public partial class PublicIPAddress : Resource
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.PublicIPAddress
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PublicIPAddress"/>. </summary>
         public PublicIPAddress()
         {
             Zones = new ChangeTrackingList<string>();
             IpTags = new ChangeTrackingList<IpTag>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.PublicIPAddress
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PublicIPAddress"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>

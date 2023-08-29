@@ -16,19 +16,13 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.AutocompleteOptions
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AutocompleteOptions"/>. </summary>
         public AutocompleteOptions()
         {
             SearchFields = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.AutocompleteOptions
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AutocompleteOptions"/>. </summary>
         /// <param name="autocompleteMode"> Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms. </param>
         /// <param name="filter"> An OData expression that filters the documents used to produce completed terms for the Autocomplete result. </param>
         /// <param name="useFuzzyMatching"> A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will find terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources. </param>

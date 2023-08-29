@@ -19,10 +19,7 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings"/>. </summary>
         /// <param name="domainNameLabel">
         /// The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings.domainNameLabel
@@ -35,10 +32,7 @@ namespace MgmtRenameRules.Models
             DomainNameLabel = domainNameLabel;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings"/>. </summary>
         /// <param name="domainNameLabel">
         /// The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings.domainNameLabel

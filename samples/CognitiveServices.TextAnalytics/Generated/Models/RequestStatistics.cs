@@ -15,10 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.RequestStatistics
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RequestStatistics"/>. </summary>
         /// <param name="documentsCount"> Number of documents submitted in the request. </param>
         /// <param name="validDocumentsCount"> Number of valid documents. This excludes empty, over-size limit or non-supported languages documents. </param>
         /// <param name="erroneousDocumentsCount"> Number of invalid documents. This includes empty, over-size limit or non-supported languages documents. </param>
@@ -31,10 +28,7 @@ namespace CognitiveServices.TextAnalytics.Models
             TransactionsCount = transactionsCount;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.RequestStatistics
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RequestStatistics"/>. </summary>
         /// <param name="documentsCount"> Number of documents submitted in the request. </param>
         /// <param name="validDocumentsCount"> Number of valid documents. This excludes empty, over-size limit or non-supported languages documents. </param>
         /// <param name="erroneousDocumentsCount"> Number of invalid documents. This includes empty, over-size limit or non-supported languages documents. </param>

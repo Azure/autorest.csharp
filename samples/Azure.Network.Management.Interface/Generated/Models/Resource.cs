@@ -16,19 +16,13 @@ namespace Azure.Network.Management.Interface.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.Resource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Resource"/>. </summary>
         public Resource()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.Resource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Resource"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>

@@ -16,10 +16,7 @@ namespace MgmtHierarchicalNonResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.GalleryImageIdentifier
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GalleryImageIdentifier"/>. </summary>
         /// <param name="publisher"> The name of the gallery image definition publisher. </param>
         /// <param name="offer"> The name of the gallery image definition offer. </param>
         /// <param name="sku"> The name of the gallery image definition SKU. </param>
@@ -35,10 +32,7 @@ namespace MgmtHierarchicalNonResource.Models
             Sku = sku;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.GalleryImageIdentifier
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GalleryImageIdentifier"/>. </summary>
         /// <param name="publisher"> The name of the gallery image definition publisher. </param>
         /// <param name="offer"> The name of the gallery image definition offer. </param>
         /// <param name="sku"> The name of the gallery image definition SKU. </param>

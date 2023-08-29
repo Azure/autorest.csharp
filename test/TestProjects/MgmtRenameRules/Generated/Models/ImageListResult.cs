@@ -21,10 +21,7 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ImageListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageListResult"/>. </summary>
         /// <param name="value">
         /// The list of Images.
         /// Serialized Name: ImageListResult.value
@@ -37,10 +34,7 @@ namespace MgmtRenameRules.Models
             Value = value.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ImageListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageListResult"/>. </summary>
         /// <param name="value">
         /// The list of Images.
         /// Serialized Name: ImageListResult.value

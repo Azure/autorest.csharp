@@ -16,10 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.BlobInventoryPolicyRule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicyRule"/>. </summary>
         /// <param name="enabled"> Rule is enabled when set to true. </param>
         /// <param name="name"> A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy. </param>
         /// <param name="destination"> Container name where blob inventory files are stored. Must be pre-created. </param>
@@ -37,10 +34,7 @@ namespace Azure.ResourceManager.Storage.Models
             Definition = definition;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.BlobInventoryPolicyRule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicyRule"/>. </summary>
         /// <param name="enabled"> Rule is enabled when set to true. </param>
         /// <param name="name"> A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy. </param>
         /// <param name="destination"> Container name where blob inventory files are stored. Must be pre-created. </param>

@@ -15,18 +15,12 @@ namespace body_complex.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.Basic
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Basic"/>. </summary>
         public Basic()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.Basic
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Basic"/>. </summary>
         /// <param name="id"> Basic Id. </param>
         /// <param name="name"> Name property with a very long description that does not fit on a single line and a line break. </param>
         /// <param name="color"></param>

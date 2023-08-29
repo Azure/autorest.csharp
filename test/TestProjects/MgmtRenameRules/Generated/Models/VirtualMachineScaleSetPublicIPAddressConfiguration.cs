@@ -20,10 +20,7 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetPublicIPAddressConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPublicIPAddressConfiguration"/>. </summary>
         /// <param name="name">
         /// The publicIP address configuration name.
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.name
@@ -37,10 +34,7 @@ namespace MgmtRenameRules.Models
             IPTags = new ChangeTrackingList<VirtualMachineScaleSetIPTag>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetPublicIPAddressConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPublicIPAddressConfiguration"/>. </summary>
         /// <param name="name">
         /// The publicIP address configuration name.
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.name

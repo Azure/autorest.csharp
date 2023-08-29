@@ -15,18 +15,12 @@ namespace MgmtSafeFlatten.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSafeFlatten.Models.LayerOneSingle
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LayerOneSingle"/>. </summary>
         public LayerOneSingle()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSafeFlatten.Models.LayerOneSingle
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LayerOneSingle"/>. </summary>
         /// <param name="layerTwo"> The second single value prop. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal LayerOneSingle(LayerTwoSingle layerTwo, Dictionary<string, BinaryData> rawData)

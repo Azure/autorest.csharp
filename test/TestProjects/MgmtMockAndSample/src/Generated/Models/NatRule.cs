@@ -14,10 +14,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> Rule of type nat. </summary>
     public partial class NatRule : FirewallPolicyRule
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.NatRule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NatRule"/>. </summary>
         public NatRule()
         {
             IpProtocols = new ChangeTrackingList<FirewallPolicyRuleNetworkProtocol>();
@@ -28,10 +25,7 @@ namespace MgmtMockAndSample.Models
             RuleType = FirewallPolicyRuleType.NatRule;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.NatRule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NatRule"/>. </summary>
         /// <param name="name"> Name of the rule. </param>
         /// <param name="description"> Description of the rule. </param>
         /// <param name="ruleType"> Rule Type. </param>

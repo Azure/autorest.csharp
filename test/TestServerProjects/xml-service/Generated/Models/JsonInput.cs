@@ -15,18 +15,12 @@ namespace xml_service.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.JsonInput
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="JsonInput"/>. </summary>
         public JsonInput()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.JsonInput
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="JsonInput"/>. </summary>
         /// <param name="id"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal JsonInput(int? id, Dictionary<string, BinaryData> rawData)

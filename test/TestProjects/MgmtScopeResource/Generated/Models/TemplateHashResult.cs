@@ -15,18 +15,12 @@ namespace MgmtScopeResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.TemplateHashResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TemplateHashResult"/>. </summary>
         internal TemplateHashResult()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.TemplateHashResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TemplateHashResult"/>. </summary>
         /// <param name="minifiedTemplate"> The minified template string. </param>
         /// <param name="templateHash"> The template hash. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

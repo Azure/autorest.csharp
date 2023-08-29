@@ -16,19 +16,13 @@ namespace ExtensionClientName.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::ExtensionClientName.Models.RenamedSchema
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RenamedSchema"/>. </summary>
         public RenamedSchema()
         {
             RenamedProperty = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::ExtensionClientName.Models.RenamedSchema
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RenamedSchema"/>. </summary>
         /// <param name="renamedProperty"> A description about the set of tags. </param>
         /// <param name="renamedPropertyString"> A description about the set of tags. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

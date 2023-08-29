@@ -16,10 +16,7 @@ namespace multiple_inheritance.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::multiple_inheritance.Models.Pet
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Pet(string name)
@@ -29,10 +26,7 @@ namespace multiple_inheritance.Models
             Name = name;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::multiple_inheritance.Models.Pet
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="name"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal Pet(string name, Dictionary<string, BinaryData> rawData)

@@ -16,10 +16,7 @@ namespace Azure.Storage.Tables.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.SignedIdentifier
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SignedIdentifier"/>. </summary>
         /// <param name="id"> a unique id. </param>
         /// <param name="accessPolicy"> The access policy. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="accessPolicy"/> is null. </exception>
@@ -32,10 +29,7 @@ namespace Azure.Storage.Tables.Models
             AccessPolicy = accessPolicy;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.SignedIdentifier
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SignedIdentifier"/>. </summary>
         /// <param name="id"> a unique id. </param>
         /// <param name="accessPolicy"> The access policy. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

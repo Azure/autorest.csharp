@@ -17,19 +17,13 @@ namespace MgmtCustomizations.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtCustomizations.Models.PetStoreListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PetStoreListResult"/>. </summary>
         internal PetStoreListResult()
         {
             Value = new ChangeTrackingList<PetStoreData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtCustomizations.Models.PetStoreListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PetStoreListResult"/>. </summary>
         /// <param name="value"> The values. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal PetStoreListResult(IReadOnlyList<PetStoreData> value, Dictionary<string, BinaryData> rawData)

@@ -15,18 +15,12 @@ namespace TypeSchemaMapping.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::TypeSchemaMapping.Models.ModelWithCustomUsageViaAttribute
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithCustomUsageViaAttribute"/>. </summary>
         public ModelWithCustomUsageViaAttribute()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::TypeSchemaMapping.Models.ModelWithCustomUsageViaAttribute
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithCustomUsageViaAttribute"/>. </summary>
         /// <param name="modelProperty"> . </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelWithCustomUsageViaAttribute(string modelProperty, Dictionary<string, BinaryData> rawData)

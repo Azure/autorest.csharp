@@ -15,18 +15,12 @@ namespace Azure.Network.Management.Interface.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ApplicationGatewayBackendAddress
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ApplicationGatewayBackendAddress"/>. </summary>
         public ApplicationGatewayBackendAddress()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ApplicationGatewayBackendAddress
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ApplicationGatewayBackendAddress"/>. </summary>
         /// <param name="fqdn"> Fully qualified domain name (FQDN). </param>
         /// <param name="ipAddress"> IP address. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

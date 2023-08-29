@@ -19,10 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.PurchasePlan
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PurchasePlan"/>. </summary>
         /// <param name="publisher">
         /// The publisher ID.
         /// Serialized Name: PurchasePlan.publisher
@@ -47,10 +44,7 @@ namespace Azure.ResourceManager.Sample.Models
             Product = product;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.PurchasePlan
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PurchasePlan"/>. </summary>
         /// <param name="publisher">
         /// The publisher ID.
         /// Serialized Name: PurchasePlan.publisher

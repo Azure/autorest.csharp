@@ -17,10 +17,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.AnalyzeResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AnalyzeResult"/>. </summary>
         /// <param name="version"> Version of schema used for this result. </param>
         /// <param name="readResults"> Text extracted from the input. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="version"/> or <paramref name="readResults"/> is null. </exception>
@@ -36,10 +33,7 @@ namespace Azure.AI.FormRecognizer.Models
             Errors = new ChangeTrackingList<ErrorInformation>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.AnalyzeResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AnalyzeResult"/>. </summary>
         /// <param name="version"> Version of schema used for this result. </param>
         /// <param name="readResults"> Text extracted from the input. </param>
         /// <param name="pageResults"> Page-level information extracted from the input. </param>

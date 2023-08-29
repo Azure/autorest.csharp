@@ -15,18 +15,12 @@ namespace MgmtSupersetInheritance.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetInheritance.Models.SupersetModel2
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SupersetModel2"/>. </summary>
         public SupersetModel2()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetInheritance.Models.SupersetModel2
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SupersetModel2"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="supersetModel2Type"></param>

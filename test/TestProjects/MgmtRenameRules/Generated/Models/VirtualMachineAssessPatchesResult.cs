@@ -19,19 +19,13 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineAssessPatchesResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineAssessPatchesResult"/>. </summary>
         internal VirtualMachineAssessPatchesResult()
         {
             Patches = new ChangeTrackingList<VirtualMachineSoftwarePatchProperties>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineAssessPatchesResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineAssessPatchesResult"/>. </summary>
         /// <param name="status">
         /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: VirtualMachineAssessPatchesResult.status

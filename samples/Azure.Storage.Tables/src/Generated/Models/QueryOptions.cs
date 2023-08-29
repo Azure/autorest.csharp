@@ -16,18 +16,12 @@ namespace Azure.Storage.Tables.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.QueryOptions
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="QueryOptions"/>. </summary>
         public QueryOptions()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.QueryOptions
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="QueryOptions"/>. </summary>
         /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="top"> Maximum number of records to return. </param>
         /// <param name="select"> Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId". </param>

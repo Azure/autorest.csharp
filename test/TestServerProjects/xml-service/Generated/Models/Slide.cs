@@ -16,19 +16,13 @@ namespace xml_service.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.Slide
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Slide"/>. </summary>
         public Slide()
         {
             Items = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.Slide
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Slide"/>. </summary>
         /// <param name="type"></param>
         /// <param name="title"></param>
         /// <param name="items"></param>

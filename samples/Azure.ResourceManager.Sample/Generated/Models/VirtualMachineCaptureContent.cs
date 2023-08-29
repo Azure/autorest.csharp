@@ -19,10 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineCaptureContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineCaptureContent"/>. </summary>
         /// <param name="vhdPrefix">
         /// The captured virtual hard disk's name prefix.
         /// Serialized Name: VirtualMachineCaptureParameters.vhdPrefix
@@ -46,10 +43,7 @@ namespace Azure.ResourceManager.Sample.Models
             OverwriteVhds = overwriteVhds;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineCaptureContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineCaptureContent"/>. </summary>
         /// <param name="vhdPrefix">
         /// The captured virtual hard disk's name prefix.
         /// Serialized Name: VirtualMachineCaptureParameters.vhdPrefix

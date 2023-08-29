@@ -19,19 +19,13 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineSoftwarePatchProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineSoftwarePatchProperties"/>. </summary>
         internal VirtualMachineSoftwarePatchProperties()
         {
             Classifications = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineSoftwarePatchProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineSoftwarePatchProperties"/>. </summary>
         /// <param name="patchId">
         /// A unique identifier for the patch.
         /// Serialized Name: VirtualMachineSoftwarePatchProperties.patchId

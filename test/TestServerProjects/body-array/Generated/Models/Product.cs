@@ -15,18 +15,12 @@ namespace body_array.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::body_array.Models.Product
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         public Product()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_array.Models.Product
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         /// <param name="integer"></param>
         /// <param name="string"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

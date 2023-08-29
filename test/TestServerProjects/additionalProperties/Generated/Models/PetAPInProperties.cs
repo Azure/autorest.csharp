@@ -16,10 +16,7 @@ namespace additionalProperties.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::additionalProperties.Models.PetAPInProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PetAPInProperties"/>. </summary>
         /// <param name="id"></param>
         public PetAPInProperties(int id)
         {
@@ -27,10 +24,7 @@ namespace additionalProperties.Models
             AdditionalProperties = new ChangeTrackingDictionary<string, float>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::additionalProperties.Models.PetAPInProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PetAPInProperties"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="status"></param>

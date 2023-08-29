@@ -16,10 +16,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.TagScoringParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TagScoringParameters"/>. </summary>
         /// <param name="tagsParameter"> The name of the parameter passed in search queries to specify the list of tags to compare against the target field. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tagsParameter"/> is null. </exception>
         public TagScoringParameters(string tagsParameter)
@@ -29,10 +26,7 @@ namespace CognitiveSearch.Models
             TagsParameter = tagsParameter;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.TagScoringParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TagScoringParameters"/>. </summary>
         /// <param name="tagsParameter"> The name of the parameter passed in search queries to specify the list of tags to compare against the target field. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal TagScoringParameters(string tagsParameter, Dictionary<string, BinaryData> rawData)

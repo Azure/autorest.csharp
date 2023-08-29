@@ -15,18 +15,12 @@ namespace Inheritance.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Inheritance.Models.SomeProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SomeProperties"/>. </summary>
         public SomeProperties()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Inheritance.Models.SomeProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SomeProperties"/>. </summary>
         /// <param name="someProperty"></param>
         /// <param name="someOtherProperty"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

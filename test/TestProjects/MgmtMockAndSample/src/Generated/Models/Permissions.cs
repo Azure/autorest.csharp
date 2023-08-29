@@ -16,10 +16,7 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.Permissions
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Permissions"/>. </summary>
         public Permissions()
         {
             Keys = new ChangeTrackingList<KeyPermission>();
@@ -28,10 +25,7 @@ namespace MgmtMockAndSample.Models
             Storage = new ChangeTrackingList<StoragePermission>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.Permissions
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Permissions"/>. </summary>
         /// <param name="keys"> Permissions to keys. </param>
         /// <param name="secrets"> Permissions to secrets. </param>
         /// <param name="certificates"> Permissions to certificates. </param>

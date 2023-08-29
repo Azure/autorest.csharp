@@ -15,18 +15,12 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.RoleAssignmentCreateOrUpdateContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RoleAssignmentCreateOrUpdateContent"/>. </summary>
         public RoleAssignmentCreateOrUpdateContent()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.RoleAssignmentCreateOrUpdateContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RoleAssignmentCreateOrUpdateContent"/>. </summary>
         /// <param name="roleDefinitionId"> The role definition ID used in the role assignment. </param>
         /// <param name="principalId"> The principal ID assigned to the role. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group. </param>
         /// <param name="canDelegate"> The delegation flag used for creating a role assignment. </param>

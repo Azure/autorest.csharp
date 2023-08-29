@@ -15,10 +15,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.GetIndexStatisticsResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GetIndexStatisticsResult"/>. </summary>
         /// <param name="documentCount"> The number of documents in the index. </param>
         /// <param name="storageSize"> The amount of storage in bytes consumed by the index. </param>
         internal GetIndexStatisticsResult(long documentCount, long storageSize)
@@ -27,10 +24,7 @@ namespace CognitiveSearch.Models
             StorageSize = storageSize;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.GetIndexStatisticsResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GetIndexStatisticsResult"/>. </summary>
         /// <param name="documentCount"> The number of documents in the index. </param>
         /// <param name="storageSize"> The amount of storage in bytes consumed by the index. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

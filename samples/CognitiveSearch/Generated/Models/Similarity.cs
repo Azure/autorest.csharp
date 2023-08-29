@@ -19,18 +19,12 @@ namespace CognitiveSearch.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.Similarity
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Similarity"/>. </summary>
         public Similarity()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.Similarity
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Similarity"/>. </summary>
         /// <param name="odataType"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal Similarity(string odataType, Dictionary<string, BinaryData> rawData)

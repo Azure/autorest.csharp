@@ -15,18 +15,12 @@ namespace MgmtExtensionResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExtensionResource.Models.ValidateSomethingContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ValidateSomethingContent"/>. </summary>
         public ValidateSomethingContent()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExtensionResource.Models.ValidateSomethingContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ValidateSomethingContent"/>. </summary>
         /// <param name="something"> The something to validate. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ValidateSomethingContent(string something, Dictionary<string, BinaryData> rawData)

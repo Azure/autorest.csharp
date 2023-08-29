@@ -20,20 +20,14 @@ namespace MgmtParamOrdering
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.VirtualMachineScaleSetData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetData"/>. </summary>
         /// <param name="location"> The location. </param>
         public VirtualMachineScaleSetData(AzureLocation location) : base(location)
         {
             Zones = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.VirtualMachineScaleSetData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

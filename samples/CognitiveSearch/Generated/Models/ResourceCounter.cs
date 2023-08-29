@@ -15,20 +15,14 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ResourceCounter
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceCounter"/>. </summary>
         /// <param name="usage"> The resource usage amount. </param>
         internal ResourceCounter(long usage)
         {
             Usage = usage;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ResourceCounter
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceCounter"/>. </summary>
         /// <param name="usage"> The resource usage amount. </param>
         /// <param name="quota"> The resource amount quota. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

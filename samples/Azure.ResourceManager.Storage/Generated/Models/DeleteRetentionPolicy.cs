@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.DeleteRetentionPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeleteRetentionPolicy"/>. </summary>
         public DeleteRetentionPolicy()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.DeleteRetentionPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeleteRetentionPolicy"/>. </summary>
         /// <param name="enabled"> Indicates whether DeleteRetentionPolicy is enabled. </param>
         /// <param name="days"> Indicates the number of days that the deleted item should be retained. The minimum specified value can be 1 and the maximum value can be 365. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -16,10 +16,7 @@ namespace required_optional.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::required_optional.Models.ClassWrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ClassWrapper"/>. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ClassWrapper(Product value)
@@ -29,10 +26,7 @@ namespace required_optional.Models
             Value = value;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::required_optional.Models.ClassWrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ClassWrapper"/>. </summary>
         /// <param name="value"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ClassWrapper(Product value, Dictionary<string, BinaryData> rawData)

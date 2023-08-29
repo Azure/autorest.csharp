@@ -13,19 +13,13 @@ namespace body_complex.Models
     /// <summary> The MyDerivedType. </summary>
     public partial class MyDerivedType : MyBaseType
     {
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.MyDerivedType
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MyDerivedType"/>. </summary>
         internal MyDerivedType()
         {
             Kind = MyKind.Kind1;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.MyDerivedType
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MyDerivedType"/>. </summary>
         /// <param name="kind"></param>
         /// <param name="propB1"></param>
         /// <param name="propBH1"></param>

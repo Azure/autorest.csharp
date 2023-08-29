@@ -19,10 +19,7 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetInstanceView"/>. </summary>
         internal VirtualMachineScaleSetInstanceView()
         {
             Extensions = new ChangeTrackingList<VirtualMachineScaleSetVmExtensionsSummary>();
@@ -30,10 +27,7 @@ namespace MgmtRenameRules.Models
             OrchestrationServices = new ChangeTrackingList<OrchestrationServiceSummary>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetInstanceView"/>. </summary>
         /// <param name="virtualMachine">
         /// The instance view status summary for the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetInstanceView.virtualMachine

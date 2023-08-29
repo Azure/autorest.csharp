@@ -18,10 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.OrchestrationServiceStateContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OrchestrationServiceStateContent"/>. </summary>
         /// <param name="serviceName">
         /// The name of the service.
         /// Serialized Name: OrchestrationServiceStateInput.serviceName
@@ -36,10 +33,7 @@ namespace Azure.ResourceManager.Sample.Models
             Action = action;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.OrchestrationServiceStateContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OrchestrationServiceStateContent"/>. </summary>
         /// <param name="serviceName">
         /// The name of the service.
         /// Serialized Name: OrchestrationServiceStateInput.serviceName

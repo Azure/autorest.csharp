@@ -15,18 +15,12 @@ namespace lro.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::lro.Models.CloudError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CloudError"/>. </summary>
         internal CloudError()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::lro.Models.CloudError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CloudError"/>. </summary>
         /// <param name="code"></param>
         /// <param name="message"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

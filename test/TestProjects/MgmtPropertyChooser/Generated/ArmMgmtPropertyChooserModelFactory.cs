@@ -17,10 +17,7 @@ namespace MgmtPropertyChooser.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtPropertyChooserModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPropertyChooser.VirtualMachineData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -54,10 +51,7 @@ namespace MgmtPropertyChooser.Models
             return new VirtualMachineData(id, name, resourceType, systemData, tags, location, plan, resources?.ToList(), identity, identityWithRenamedProperty, identityWithDifferentPropertyType, identityWithNoUserIdentity, identityWithNoSystemIdentity, identityV3, zones?.ToList(), fakeResources?.ToList(), fakeSubResourceId != null ? ResourceManagerModelFactory.SubResource(fakeSubResourceId) : null, fakeWritableSubResourceId != null ? ResourceManagerModelFactory.WritableSubResource(fakeWritableSubResourceId) : null, provisioningState, licenseType, vmId, extensionsTimeBudget, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPropertyChooser.Models.VirtualMachineExtension
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtension"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -81,10 +75,7 @@ namespace MgmtPropertyChooser.Models
             return new VirtualMachineExtension(id, name, resourceType, systemData, tags, location, forceUpdateTag, publisher, typePropertiesType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPropertyChooser.Models.MgmtPropertyChooserResourceData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtPropertyChooserResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -99,10 +90,7 @@ namespace MgmtPropertyChooser.Models
             return new MgmtPropertyChooserResourceData(id, name, resourceType, systemData, location, tags, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPropertyChooser.Models.IdentityWithRenamedProperty
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IdentityWithRenamedProperty"/>. </summary>
         /// <param name="testPrincipalId"> The principal id of virtual machine identity. This property will only be provided for a system assigned identity. </param>
         /// <param name="tenantId"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>
         /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </param>
@@ -115,10 +103,7 @@ namespace MgmtPropertyChooser.Models
             return new IdentityWithRenamedProperty(testPrincipalId, tenantId, resourceIdentityType, userAssignedIdentities, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPropertyChooser.Models.IdentityWithDifferentPropertyType
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IdentityWithDifferentPropertyType"/>. </summary>
         /// <param name="principalId"> The principal id of virtual machine identity. This property will only be provided for a system assigned identity. </param>
         /// <param name="tenantId"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>
         /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </param>
@@ -131,10 +116,7 @@ namespace MgmtPropertyChooser.Models
             return new IdentityWithDifferentPropertyType(principalId, tenantId, resourceIdentityType, userAssignedIdentities, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPropertyChooser.Models.VirtualMachinePatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachinePatch"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="plan"> Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**. </param>
         /// <param name="identity"> The identity of the virtual machine, if configured. </param>

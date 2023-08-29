@@ -21,19 +21,13 @@ namespace Azure.ResourceManager.Sample
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineExtensionImageData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionImageData"/>. </summary>
         /// <param name="location"> The location. </param>
         public VirtualMachineExtensionImageData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineExtensionImageData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionImageData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

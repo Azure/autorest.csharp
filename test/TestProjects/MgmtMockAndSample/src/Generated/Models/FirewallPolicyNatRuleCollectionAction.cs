@@ -15,18 +15,12 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyNatRuleCollectionAction
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyNatRuleCollectionAction"/>. </summary>
         public FirewallPolicyNatRuleCollectionAction()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyNatRuleCollectionAction
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyNatRuleCollectionAction"/>. </summary>
         /// <param name="actionType"> The type of action. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal FirewallPolicyNatRuleCollectionAction(FirewallPolicyNatRuleCollectionActionType? actionType, Dictionary<string, BinaryData> rawData)

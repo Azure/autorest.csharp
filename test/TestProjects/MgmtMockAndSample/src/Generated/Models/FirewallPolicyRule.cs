@@ -21,18 +21,12 @@ namespace MgmtMockAndSample.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyRule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyRule"/>. </summary>
         protected FirewallPolicyRule()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyRule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyRule"/>. </summary>
         /// <param name="name"> Name of the rule. </param>
         /// <param name="description"> Description of the rule. </param>
         /// <param name="ruleType"> Rule Type. </param>

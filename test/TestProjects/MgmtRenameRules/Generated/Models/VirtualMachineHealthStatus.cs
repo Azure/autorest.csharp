@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineHealthStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineHealthStatus"/>. </summary>
         internal VirtualMachineHealthStatus()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineHealthStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineHealthStatus"/>. </summary>
         /// <param name="status">
         /// The health status information for the VM.
         /// Serialized Name: VirtualMachineHealthStatus.status

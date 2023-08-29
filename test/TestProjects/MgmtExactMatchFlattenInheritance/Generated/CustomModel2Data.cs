@@ -20,18 +20,12 @@ namespace MgmtExactMatchFlattenInheritance
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExactMatchFlattenInheritance.CustomModel2Data
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CustomModel2Data"/>. </summary>
         public CustomModel2Data()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExactMatchFlattenInheritance.CustomModel2Data
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CustomModel2Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

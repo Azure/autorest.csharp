@@ -18,19 +18,13 @@ namespace Azure.ResourceManager.Fake.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.PrivateEndpointConnectionData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateEndpointConnectionData"/>. </summary>
         [InitializationConstructor]
         public PrivateEndpointConnectionData()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.PrivateEndpointConnectionData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateEndpointConnectionData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

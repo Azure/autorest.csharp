@@ -15,18 +15,12 @@ namespace MgmtPropertyBag.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPropertyBag.Models.FooPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FooPatch"/>. </summary>
         public FooPatch()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPropertyBag.Models.FooPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FooPatch"/>. </summary>
         /// <param name="details"> The details of the resource. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal FooPatch(string details, Dictionary<string, BinaryData> rawData)

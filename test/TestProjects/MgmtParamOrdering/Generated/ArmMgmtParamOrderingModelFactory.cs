@@ -17,10 +17,7 @@ namespace MgmtParamOrdering.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtParamOrderingModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.AvailabilitySetData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -36,10 +33,7 @@ namespace MgmtParamOrdering.Models
             return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, bar, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.DedicatedHostGroupData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -55,10 +49,7 @@ namespace MgmtParamOrdering.Models
             return new DedicatedHostGroupData(id, name, resourceType, systemData, tags, location, foo, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.DedicatedHostData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -74,10 +65,7 @@ namespace MgmtParamOrdering.Models
             return new DedicatedHostData(id, name, resourceType, systemData, tags, location, foo, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.Models.DedicatedHostPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostPatch"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="platformFaultDomain"> Fault domain of the dedicated host within a dedicated host group. </param>
         /// <param name="autoReplaceOnFailure"> Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to 'true' when not provided. </param>
@@ -92,10 +80,7 @@ namespace MgmtParamOrdering.Models
             return new DedicatedHostPatch(tags, platformFaultDomain, autoReplaceOnFailure, hostId, provisioningOn, provisioningState, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.VirtualMachineExtensionImageData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionImageData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -111,10 +96,7 @@ namespace MgmtParamOrdering.Models
             return new VirtualMachineExtensionImageData(id, name, resourceType, systemData, tags, location, bar, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.EnvironmentContainerResourceData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EnvironmentContainerResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -130,10 +112,7 @@ namespace MgmtParamOrdering.Models
             return new EnvironmentContainerResourceData(id, name, resourceType, systemData, tags, location, properties, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.WorkspaceData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="WorkspaceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -164,10 +143,7 @@ namespace MgmtParamOrdering.Models
             return new WorkspaceData(id, name, resourceType, systemData, tags, location, workspaceId, description, friendlyName, keyVault, applicationInsights, containerRegistry, storageAccount, discoveryUri, provisioningState, hbiWorkspace, serviceProvisionedResourceGroup, privateLinkCount, imageBuildCompute, allowPublicAccessWhenBehindVnet, primaryUserAssignedIdentity, tenantId, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.VirtualMachineScaleSetData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -184,10 +160,7 @@ namespace MgmtParamOrdering.Models
             return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, zones?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.Models.VirtualMachineScaleSetInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetInstanceView"/>. </summary>
         /// <param name="virtualMachine"> The instance view status summary for the virtual machine scale set. </param>
         /// <returns> A new <see cref="Models.VirtualMachineScaleSetInstanceView"/> instance for mocking. </returns>
         public static VirtualMachineScaleSetInstanceView VirtualMachineScaleSetInstanceView(string virtualMachine = null)

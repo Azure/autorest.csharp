@@ -12,10 +12,7 @@ namespace model_flattening.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ModelFlatteningModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::model_flattening.Models.Resource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Resource"/>. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="type"> Resource Type. </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
@@ -29,10 +26,7 @@ namespace model_flattening.Models
             return new Resource(id, type, tags, location, name, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::model_flattening.Models.FlattenedProduct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FlattenedProduct"/>. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="type"> Resource Type. </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
@@ -50,10 +44,7 @@ namespace model_flattening.Models
             return new FlattenedProduct(id, type, tags, location, name, pName, typePropertiesType, provisioningStateValues, provisioningState, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::model_flattening.Models.ProductWrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProductWrapper"/>. </summary>
         /// <param name="value"> the product value. </param>
         /// <returns> A new <see cref="Models.ProductWrapper"/> instance for mocking. </returns>
         public static ProductWrapper ProductWrapper(string value = null)
@@ -61,10 +52,7 @@ namespace model_flattening.Models
             return new ProductWrapper(value, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::model_flattening.Models.FlattenParameterGroup
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FlattenParameterGroup"/>. </summary>
         /// <param name="name"> Product name with value 'groupproduct'. </param>
         /// <param name="simpleBodyProduct"> Simple body product to put. </param>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>

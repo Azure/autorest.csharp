@@ -15,18 +15,12 @@ namespace MgmtResourceName.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtResourceName.Models.ResourceOperation
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceOperation"/>. </summary>
         internal ResourceOperation()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtResourceName.Models.ResourceOperation
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceOperation"/>. </summary>
         /// <param name="name"> The operation name. </param>
         /// <param name="displayName"> The operation display name. </param>
         /// <param name="description"> The operation description. </param>

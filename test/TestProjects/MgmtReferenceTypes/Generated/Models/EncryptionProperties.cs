@@ -17,19 +17,13 @@ namespace Azure.ResourceManager.Fake.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.EncryptionProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EncryptionProperties"/>. </summary>
         [InitializationConstructor]
         public EncryptionProperties()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.EncryptionProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EncryptionProperties"/>. </summary>
         /// <param name="status"> Indicates whether or not the encryption is enabled for container registry. </param>
         /// <param name="keyVaultProperties"> Key vault properties. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

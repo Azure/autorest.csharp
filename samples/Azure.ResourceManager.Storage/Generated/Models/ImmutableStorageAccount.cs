@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ImmutableStorageAccount
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImmutableStorageAccount"/>. </summary>
         public ImmutableStorageAccount()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ImmutableStorageAccount
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImmutableStorageAccount"/>. </summary>
         /// <param name="enabled"> A boolean flag which enables account-level immutability. All the containers under such an account have object-level immutability enabled by default. </param>
         /// <param name="immutabilityPolicy"> Specifies the default account-level immutability policy which is inherited and applied to objects that do not possess an explicit immutability policy at the object level. The object-level immutability policy has higher precedence than the container-level immutability policy, which has a higher precedence than the account-level immutability policy. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

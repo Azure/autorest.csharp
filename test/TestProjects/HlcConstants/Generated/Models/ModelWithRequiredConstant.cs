@@ -15,10 +15,7 @@ namespace HlcConstants.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::HlcConstants.Models.ModelWithRequiredConstant
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithRequiredConstant"/>. </summary>
         public ModelWithRequiredConstant()
         {
             RequiredStringConstant = StringConstant.Default;
@@ -27,10 +24,7 @@ namespace HlcConstants.Models
             RequiredFloatConstant = FloatConstant._314;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::HlcConstants.Models.ModelWithRequiredConstant
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithRequiredConstant"/>. </summary>
         /// <param name="requiredStringConstant"> A constant based on string, the only allowable value is default. </param>
         /// <param name="requiredIntConstant"> A constant based on integer. </param>
         /// <param name="requiredBooleanConstant"> A constant based on boolean. </param>

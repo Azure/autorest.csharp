@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.MgmtRenameRulesSku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtRenameRulesSku"/>. </summary>
         public MgmtRenameRulesSku()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.MgmtRenameRulesSku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtRenameRulesSku"/>. </summary>
         /// <param name="name">
         /// The sku name.
         /// Serialized Name: Sku.name

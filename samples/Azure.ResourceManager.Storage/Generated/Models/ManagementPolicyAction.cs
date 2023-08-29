@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ManagementPolicyAction
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ManagementPolicyAction"/>. </summary>
         public ManagementPolicyAction()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ManagementPolicyAction
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ManagementPolicyAction"/>. </summary>
         /// <param name="baseBlob"> The management policy action for base blob. </param>
         /// <param name="snapshot"> The management policy action for snapshot. </param>
         /// <param name="version"> The management policy action for version. </param>

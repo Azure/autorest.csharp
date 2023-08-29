@@ -19,19 +19,13 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetNetworkConfigurationDnsSettings
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetNetworkConfigurationDnsSettings"/>. </summary>
         public VirtualMachineScaleSetNetworkConfigurationDnsSettings()
         {
             DnsServers = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetNetworkConfigurationDnsSettings
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetNetworkConfigurationDnsSettings"/>. </summary>
         /// <param name="dnsServers">
         /// List of DNS servers IP addresses
         /// Serialized Name: VirtualMachineScaleSetNetworkConfigurationDnsSettings.dnsServers

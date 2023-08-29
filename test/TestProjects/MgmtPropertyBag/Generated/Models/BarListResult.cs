@@ -18,10 +18,7 @@ namespace MgmtPropertyBag.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPropertyBag.Models.BarListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BarListResult"/>. </summary>
         /// <param name="value"> The list of bar. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal BarListResult(IEnumerable<BarData> value)
@@ -31,10 +28,7 @@ namespace MgmtPropertyBag.Models
             Value = value.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPropertyBag.Models.BarListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BarListResult"/>. </summary>
         /// <param name="value"> The list of bar. </param>
         /// <param name="nextLink"> The uri to fetch the next page of bar. Call ListNext() with this to fetch the next page. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

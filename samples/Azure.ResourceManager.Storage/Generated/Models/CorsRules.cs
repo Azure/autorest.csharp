@@ -16,19 +16,13 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.CorsRules
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CorsRules"/>. </summary>
         public CorsRules()
         {
             CorsRulesValue = new ChangeTrackingList<CorsRule>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.CorsRules
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CorsRules"/>. </summary>
         /// <param name="corsRulesValue"> The List of CORS rules. You can include up to five CorsRule elements in the request. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal CorsRules(IList<CorsRule> corsRulesValue, Dictionary<string, BinaryData> rawData)

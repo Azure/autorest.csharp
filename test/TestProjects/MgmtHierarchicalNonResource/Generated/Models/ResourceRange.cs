@@ -15,18 +15,12 @@ namespace MgmtHierarchicalNonResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.ResourceRange
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceRange"/>. </summary>
         internal ResourceRange()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.ResourceRange
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceRange"/>. </summary>
         /// <param name="min"> The minimum number of the resource. </param>
         /// <param name="max"> The maximum number of the resource. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

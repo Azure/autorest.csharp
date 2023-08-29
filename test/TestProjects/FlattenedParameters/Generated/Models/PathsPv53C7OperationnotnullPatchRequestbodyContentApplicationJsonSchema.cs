@@ -16,19 +16,13 @@ namespace FlattenedParameters.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::FlattenedParameters.Models.PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         public PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema()
         {
             Items = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::FlattenedParameters.Models.PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         /// <param name="items"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(IList<string> items, Dictionary<string, BinaryData> rawData)

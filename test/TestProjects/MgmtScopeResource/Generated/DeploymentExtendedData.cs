@@ -21,19 +21,13 @@ namespace MgmtScopeResource
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.DeploymentExtendedData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentExtendedData"/>. </summary>
         internal DeploymentExtendedData()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.DeploymentExtendedData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentExtendedData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

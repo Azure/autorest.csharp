@@ -15,18 +15,12 @@ namespace MgmtScopeResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentWhatIfSettings
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentWhatIfSettings"/>. </summary>
         public DeploymentWhatIfSettings()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentWhatIfSettings
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentWhatIfSettings"/>. </summary>
         /// <param name="resultFormat"> The format of the What-If results. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal DeploymentWhatIfSettings(WhatIfResultFormat? resultFormat, Dictionary<string, BinaryData> rawData)

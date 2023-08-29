@@ -16,20 +16,14 @@ namespace xml_service.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.Blobs
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Blobs"/>. </summary>
         internal Blobs()
         {
             BlobPrefix = new ChangeTrackingList<BlobPrefix>();
             Blob = new ChangeTrackingList<Blob>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.Blobs
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Blobs"/>. </summary>
         /// <param name="blobPrefix"></param>
         /// <param name="blob"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

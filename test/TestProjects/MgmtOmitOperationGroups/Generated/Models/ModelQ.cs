@@ -17,18 +17,12 @@ namespace MgmtOmitOperationGroups.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.ModelQ
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelQ"/>. </summary>
         public ModelQ()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.ModelQ
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelQ"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

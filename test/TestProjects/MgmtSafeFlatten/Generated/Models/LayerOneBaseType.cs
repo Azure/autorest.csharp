@@ -21,18 +21,12 @@ namespace MgmtSafeFlatten.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSafeFlatten.Models.LayerOneBaseType
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LayerOneBaseType"/>. </summary>
         protected LayerOneBaseType()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSafeFlatten.Models.LayerOneBaseType
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LayerOneBaseType"/>. </summary>
         /// <param name="name"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal LayerOneBaseType(LayerOneTypeName name, Dictionary<string, BinaryData> rawData)

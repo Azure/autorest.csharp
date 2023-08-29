@@ -17,10 +17,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ListIndexesResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ListIndexesResult"/>. </summary>
         /// <param name="indexes"> The indexes in the Search service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexes"/> is null. </exception>
         internal ListIndexesResult(IEnumerable<Index> indexes)
@@ -30,10 +27,7 @@ namespace CognitiveSearch.Models
             Indexes = indexes.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ListIndexesResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ListIndexesResult"/>. </summary>
         /// <param name="indexes"> The indexes in the Search service. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ListIndexesResult(IReadOnlyList<Index> indexes, Dictionary<string, BinaryData> rawData)

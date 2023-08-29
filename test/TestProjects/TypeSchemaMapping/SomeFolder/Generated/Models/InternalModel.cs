@@ -15,18 +15,12 @@ namespace TypeSchemaMapping.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::TypeSchemaMapping.Models.InternalModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="InternalModel"/>. </summary>
         internal InternalModel()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::TypeSchemaMapping.Models.InternalModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="InternalModel"/>. </summary>
         /// <param name="stringProperty"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal InternalModel(string stringProperty, Dictionary<string, BinaryData> rawData)

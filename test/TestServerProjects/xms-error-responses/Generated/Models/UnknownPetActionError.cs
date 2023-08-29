@@ -13,10 +13,7 @@ namespace xms_error_responses.Models
     /// <summary> The UnknownPetActionError. </summary>
     internal partial class UnknownPetActionError : PetActionError
     {
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.UnknownPetActionError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownPetActionError"/>. </summary>
         /// <param name="actionResponse"> action feedback. </param>
         /// <param name="errorType"></param>
         /// <param name="errorMessage"> the error message. </param>

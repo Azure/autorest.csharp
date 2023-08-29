@@ -14,10 +14,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Frontend IP address of the load balancer. </summary>
     public partial class FrontendIPConfiguration : SubResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.FrontendIPConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FrontendIPConfiguration"/>. </summary>
         public FrontendIPConfiguration()
         {
             Zones = new ChangeTrackingList<string>();
@@ -27,10 +24,7 @@ namespace Azure.Network.Management.Interface.Models
             LoadBalancingRules = new ChangeTrackingList<SubResource>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.FrontendIPConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FrontendIPConfiguration"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of frontend IP configurations used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>

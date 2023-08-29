@@ -17,19 +17,13 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.FileServiceItems
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FileServiceItems"/>. </summary>
         internal FileServiceItems()
         {
             Value = new ChangeTrackingList<FileServiceData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.FileServiceItems
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FileServiceItems"/>. </summary>
         /// <param name="value"> List of file services returned. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal FileServiceItems(IReadOnlyList<FileServiceData> value, Dictionary<string, BinaryData> rawData)

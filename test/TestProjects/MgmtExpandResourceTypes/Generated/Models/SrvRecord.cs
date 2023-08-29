@@ -15,18 +15,12 @@ namespace MgmtExpandResourceTypes.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.SrvRecord
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SrvRecord"/>. </summary>
         public SrvRecord()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.SrvRecord
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SrvRecord"/>. </summary>
         /// <param name="priority"> The priority value for this SRV record. </param>
         /// <param name="weight"> The weight value for this SRV record. </param>
         /// <param name="port"> The port value for this SRV record. </param>

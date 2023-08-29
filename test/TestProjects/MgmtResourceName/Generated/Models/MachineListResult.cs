@@ -17,19 +17,13 @@ namespace MgmtResourceName.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtResourceName.Models.MachineListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MachineListResult"/>. </summary>
         internal MachineListResult()
         {
             Value = new ChangeTrackingList<MachineData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtResourceName.Models.MachineListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MachineListResult"/>. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -15,18 +15,12 @@ namespace Azure.Storage.Tables.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.TableProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TableProperties"/>. </summary>
         public TableProperties()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.TableProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TableProperties"/>. </summary>
         /// <param name="tableName"> The name of the table to create. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal TableProperties(string tableName, Dictionary<string, BinaryData> rawData)

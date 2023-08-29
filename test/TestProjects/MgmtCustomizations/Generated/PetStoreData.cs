@@ -21,18 +21,12 @@ namespace MgmtCustomizations
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtCustomizations.PetStoreData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PetStoreData"/>. </summary>
         public PetStoreData()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtCustomizations.PetStoreData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PetStoreData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

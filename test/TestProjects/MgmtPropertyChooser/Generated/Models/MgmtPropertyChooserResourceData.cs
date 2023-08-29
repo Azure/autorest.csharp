@@ -17,10 +17,7 @@ namespace MgmtPropertyChooser.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPropertyChooser.Models.MgmtPropertyChooserResourceData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtPropertyChooserResourceData"/>. </summary>
         /// <param name="location"> Resource location. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         public MgmtPropertyChooserResourceData(string location)
@@ -31,10 +28,7 @@ namespace MgmtPropertyChooser.Models
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPropertyChooser.Models.MgmtPropertyChooserResourceData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtPropertyChooserResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

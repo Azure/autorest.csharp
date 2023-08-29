@@ -16,10 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.BlobRestoreRange
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobRestoreRange"/>. </summary>
         /// <param name="startRange"> Blob start range. This is inclusive. Empty means account start. </param>
         /// <param name="endRange"> Blob end range. This is exclusive. Empty means account end. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="startRange"/> or <paramref name="endRange"/> is null. </exception>
@@ -32,10 +29,7 @@ namespace Azure.ResourceManager.Storage.Models
             EndRange = endRange;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.BlobRestoreRange
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobRestoreRange"/>. </summary>
         /// <param name="startRange"> Blob start range. This is inclusive. Empty means account start. </param>
         /// <param name="endRange"> Blob end range. This is exclusive. Empty means account end. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

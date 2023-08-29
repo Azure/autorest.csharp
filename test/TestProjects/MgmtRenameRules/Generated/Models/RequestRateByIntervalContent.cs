@@ -17,10 +17,7 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class RequestRateByIntervalContent : LogAnalyticsInputBase
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.RequestRateByIntervalContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RequestRateByIntervalContent"/>. </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
@@ -45,10 +42,7 @@ namespace MgmtRenameRules.Models
             IntervalLength = intervalLength;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.RequestRateByIntervalContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RequestRateByIntervalContent"/>. </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri

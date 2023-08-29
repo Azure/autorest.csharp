@@ -17,10 +17,7 @@ namespace body_complex.Models
     /// </summary>
     public partial class Shark : Fish
     {
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.Shark
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Shark"/>. </summary>
         /// <param name="length"></param>
         /// <param name="birthday"></param>
         public Shark(float length, DateTimeOffset birthday) : base(length)
@@ -29,10 +26,7 @@ namespace body_complex.Models
             Fishtype = "shark";
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.Shark
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Shark"/>. </summary>
         /// <param name="fishtype"></param>
         /// <param name="species"></param>
         /// <param name="length"></param>

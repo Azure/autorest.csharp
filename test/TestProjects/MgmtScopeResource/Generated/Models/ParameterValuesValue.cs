@@ -15,18 +15,12 @@ namespace MgmtScopeResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.ParameterValuesValue
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterValuesValue"/>. </summary>
         public ParameterValuesValue()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.ParameterValuesValue
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterValuesValue"/>. </summary>
         /// <param name="value"> The value of the parameter. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ParameterValuesValue(BinaryData value, Dictionary<string, BinaryData> rawData)

@@ -17,19 +17,13 @@ namespace MgmtPartialResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPartialResource.Models.ConfigurationProfileAssignmentList
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ConfigurationProfileAssignmentList"/>. </summary>
         internal ConfigurationProfileAssignmentList()
         {
             Value = new ChangeTrackingList<ConfigurationProfileAssignmentData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPartialResource.Models.ConfigurationProfileAssignmentList
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ConfigurationProfileAssignmentList"/>. </summary>
         /// <param name="value"> Result of the list configuration profile assignment operation. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ConfigurationProfileAssignmentList(IReadOnlyList<ConfigurationProfileAssignmentData> value, Dictionary<string, BinaryData> rawData)

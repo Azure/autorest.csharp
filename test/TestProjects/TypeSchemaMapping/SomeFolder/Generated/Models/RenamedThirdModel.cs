@@ -16,18 +16,12 @@ namespace CustomNamespace
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CustomNamespace.RenamedThirdModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RenamedThirdModel"/>. </summary>
         public RenamedThirdModel()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CustomNamespace.RenamedThirdModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RenamedThirdModel"/>. </summary>
         /// <param name="customizedETagProperty"> ETag property. </param>
         /// <param name="customizedCreatedAtProperty"> Creation date. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

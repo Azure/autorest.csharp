@@ -21,10 +21,7 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineListResult"/>. </summary>
         /// <param name="value">
         /// The list of virtual machines.
         /// Serialized Name: VirtualMachineListResult.value
@@ -37,10 +34,7 @@ namespace MgmtRenameRules.Models
             Value = value.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineListResult"/>. </summary>
         /// <param name="value">
         /// The list of virtual machines.
         /// Serialized Name: VirtualMachineListResult.value

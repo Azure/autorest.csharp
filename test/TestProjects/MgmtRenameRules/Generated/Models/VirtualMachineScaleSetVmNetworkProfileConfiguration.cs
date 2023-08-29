@@ -19,19 +19,13 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetVmNetworkProfileConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmNetworkProfileConfiguration"/>. </summary>
         public VirtualMachineScaleSetVmNetworkProfileConfiguration()
         {
             NetworkInterfaceConfigurations = new ChangeTrackingList<VirtualMachineScaleSetNetworkConfiguration>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetVmNetworkProfileConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmNetworkProfileConfiguration"/>. </summary>
         /// <param name="networkInterfaceConfigurations">
         /// The list of network configurations.
         /// Serialized Name: VirtualMachineScaleSetVMNetworkProfileConfiguration.networkInterfaceConfigurations

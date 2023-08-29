@@ -16,10 +16,7 @@ namespace Azure.Storage.Tables.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.AccessPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AccessPolicy"/>. </summary>
         /// <param name="start"> the date-time the policy is active. </param>
         /// <param name="expiry"> the date-time the policy expires. </param>
         /// <param name="permission"> the permissions for the acl policy. </param>
@@ -33,10 +30,7 @@ namespace Azure.Storage.Tables.Models
             Permission = permission;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.AccessPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AccessPolicy"/>. </summary>
         /// <param name="start"> the date-time the policy is active. </param>
         /// <param name="expiry"> the date-time the policy expires. </param>
         /// <param name="permission"> the permissions for the acl policy. </param>

@@ -21,18 +21,12 @@ namespace body_complex.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.MyBaseType
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MyBaseType"/>. </summary>
         protected MyBaseType()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.MyBaseType
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MyBaseType"/>. </summary>
         /// <param name="kind"></param>
         /// <param name="propB1"></param>
         /// <param name="propBH1"></param>

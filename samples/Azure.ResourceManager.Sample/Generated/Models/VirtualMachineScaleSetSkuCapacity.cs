@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetSkuCapacity
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetSkuCapacity"/>. </summary>
         internal VirtualMachineScaleSetSkuCapacity()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetSkuCapacity
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetSkuCapacity"/>. </summary>
         /// <param name="minimum">
         /// The minimum capacity.
         /// Serialized Name: VirtualMachineScaleSetSkuCapacity.minimum

@@ -17,19 +17,13 @@ namespace MgmtCollectionParent.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtCollectionParent.Models.OrderResourceList
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OrderResourceList"/>. </summary>
         internal OrderResourceList()
         {
             Value = new ChangeTrackingList<OrderResourceData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtCollectionParent.Models.OrderResourceList
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OrderResourceList"/>. </summary>
         /// <param name="value"> List of order resources. </param>
         /// <param name="nextLink"> Link for the next set of order resources. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

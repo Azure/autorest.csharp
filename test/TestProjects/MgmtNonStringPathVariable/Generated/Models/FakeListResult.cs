@@ -18,10 +18,7 @@ namespace MgmtNonStringPathVariable.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtNonStringPathVariable.Models.FakeListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FakeListResult"/>. </summary>
         /// <param name="value"> The list of fakes. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal FakeListResult(IEnumerable<FakeData> value)
@@ -31,10 +28,7 @@ namespace MgmtNonStringPathVariable.Models
             Value = value.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtNonStringPathVariable.Models.FakeListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FakeListResult"/>. </summary>
         /// <param name="value"> The list of fakes. </param>
         /// <param name="nextLink"> The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

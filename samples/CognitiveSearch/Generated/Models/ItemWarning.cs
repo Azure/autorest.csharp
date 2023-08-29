@@ -16,10 +16,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ItemWarning
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ItemWarning"/>. </summary>
         /// <param name="message"> The message describing the warning that occurred while processing the item. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         internal ItemWarning(string message)
@@ -29,10 +26,7 @@ namespace CognitiveSearch.Models
             Message = message;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ItemWarning
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ItemWarning"/>. </summary>
         /// <param name="key"> The key of the item which generated a warning. </param>
         /// <param name="message"> The message describing the warning that occurred while processing the item. </param>
         /// <param name="name"> The name of the source at which the warning originated. For example, this could refer to a particular skill in the attached skillset. This may not be always available. </param>

@@ -17,19 +17,13 @@ namespace MgmtExpandResourceTypes.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.RecordSetListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RecordSetListResult"/>. </summary>
         internal RecordSetListResult()
         {
             Value = new ChangeTrackingList<RecordSetData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.RecordSetListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RecordSetListResult"/>. </summary>
         /// <param name="value"> Information about the record sets in the response. </param>
         /// <param name="nextLink"> The continuation token for the next page of results. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

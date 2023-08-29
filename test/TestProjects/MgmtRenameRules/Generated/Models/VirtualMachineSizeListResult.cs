@@ -19,19 +19,13 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineSizeListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineSizeListResult"/>. </summary>
         internal VirtualMachineSizeListResult()
         {
             Value = new ChangeTrackingList<VirtualMachineSize>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineSizeListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineSizeListResult"/>. </summary>
         /// <param name="value">
         /// The list of virtual machine sizes.
         /// Serialized Name: VirtualMachineSizeListResult.value

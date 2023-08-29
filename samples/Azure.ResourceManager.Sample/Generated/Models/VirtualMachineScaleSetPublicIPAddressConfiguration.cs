@@ -20,10 +20,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetPublicIPAddressConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPublicIPAddressConfiguration"/>. </summary>
         /// <param name="name">
         /// The publicIP address configuration name.
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.name
@@ -37,10 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
             IpTags = new ChangeTrackingList<VirtualMachineScaleSetIpTag>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetPublicIPAddressConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPublicIPAddressConfiguration"/>. </summary>
         /// <param name="name">
         /// The publicIP address configuration name.
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.name

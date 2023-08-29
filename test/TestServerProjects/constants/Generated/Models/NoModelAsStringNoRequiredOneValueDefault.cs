@@ -15,18 +15,12 @@ namespace constants.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::constants.Models.NoModelAsStringNoRequiredOneValueDefault
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NoModelAsStringNoRequiredOneValueDefault"/>. </summary>
         internal NoModelAsStringNoRequiredOneValueDefault()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::constants.Models.NoModelAsStringNoRequiredOneValueDefault
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NoModelAsStringNoRequiredOneValueDefault"/>. </summary>
         /// <param name="parameter"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal NoModelAsStringNoRequiredOneValueDefault(NoModelAsStringNoRequiredOneValueDefaultEnum? parameter, Dictionary<string, BinaryData> rawData)

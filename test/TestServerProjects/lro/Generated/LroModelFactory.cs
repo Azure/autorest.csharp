@@ -12,10 +12,7 @@ namespace lro.Models
     /// <summary> Model factory for models. </summary>
     public static partial class LroModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::lro.Models.Product
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="type"> Resource Type. </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
@@ -31,10 +28,7 @@ namespace lro.Models
             return new Product(id, type, tags, location, name, provisioningState, provisioningStateValues, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::lro.Models.Resource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Resource"/>. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="type"> Resource Type. </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
@@ -48,10 +42,7 @@ namespace lro.Models
             return new Resource(id, type, tags, location, name, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::lro.Models.SubProduct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SubProduct"/>. </summary>
         /// <param name="id"> Sub Resource Id. </param>
         /// <param name="provisioningState"></param>
         /// <param name="provisioningStateValues"></param>
@@ -61,10 +52,7 @@ namespace lro.Models
             return new SubProduct(id, provisioningState, provisioningStateValues, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::lro.Models.SubResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResource"/>. </summary>
         /// <param name="id"> Sub Resource Id. </param>
         /// <returns> A new <see cref="Models.SubResource"/> instance for mocking. </returns>
         public static SubResource SubResource(string id = null)

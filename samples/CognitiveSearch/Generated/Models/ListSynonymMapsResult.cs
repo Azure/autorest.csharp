@@ -17,10 +17,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ListSynonymMapsResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ListSynonymMapsResult"/>. </summary>
         /// <param name="synonymMaps"> The synonym maps in the Search service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="synonymMaps"/> is null. </exception>
         internal ListSynonymMapsResult(IEnumerable<SynonymMap> synonymMaps)
@@ -30,10 +27,7 @@ namespace CognitiveSearch.Models
             SynonymMaps = synonymMaps.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ListSynonymMapsResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ListSynonymMapsResult"/>. </summary>
         /// <param name="synonymMaps"> The synonym maps in the Search service. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ListSynonymMapsResult(IReadOnlyList<SynonymMap> synonymMaps, Dictionary<string, BinaryData> rawData)

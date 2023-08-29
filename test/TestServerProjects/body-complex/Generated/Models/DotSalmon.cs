@@ -13,19 +13,13 @@ namespace body_complex.Models
     /// <summary> The DotSalmon. </summary>
     public partial class DotSalmon : DotFish
     {
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.DotSalmon
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DotSalmon"/>. </summary>
         internal DotSalmon()
         {
             FishType = "DotSalmon";
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.DotSalmon
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DotSalmon"/>. </summary>
         /// <param name="fishType"></param>
         /// <param name="species"></param>
         /// <param name="location"></param>

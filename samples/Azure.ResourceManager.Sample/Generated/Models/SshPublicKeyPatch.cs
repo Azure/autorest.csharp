@@ -16,18 +16,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class SshPublicKeyPatch : UpdateResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SshPublicKeyPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeyPatch"/>. </summary>
         public SshPublicKeyPatch()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SshPublicKeyPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeyPatch"/>. </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags

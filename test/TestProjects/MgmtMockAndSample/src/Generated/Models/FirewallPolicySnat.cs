@@ -16,19 +16,13 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicySnat
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicySnat"/>. </summary>
         public FirewallPolicySnat()
         {
             PrivateRanges = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicySnat
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicySnat"/>. </summary>
         /// <param name="privateRanges"> List of private IP addresses/IP address ranges to not be SNAT. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal FirewallPolicySnat(IList<string> privateRanges, Dictionary<string, BinaryData> rawData)

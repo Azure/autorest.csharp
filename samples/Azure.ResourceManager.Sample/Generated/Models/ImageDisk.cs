@@ -20,18 +20,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ImageDisk
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageDisk"/>. </summary>
         public ImageDisk()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ImageDisk
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageDisk"/>. </summary>
         /// <param name="snapshot">
         /// The snapshot.
         /// Serialized Name: ImageDisk.snapshot

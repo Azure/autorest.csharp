@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SampleSku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SampleSku"/>. </summary>
         public SampleSku()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SampleSku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SampleSku"/>. </summary>
         /// <param name="name">
         /// The sku name.
         /// Serialized Name: SampleSku.name

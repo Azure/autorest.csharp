@@ -14,19 +14,13 @@ namespace body_complex.Models
     /// <summary> The Cat. </summary>
     public partial class Cat : Pet
     {
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.Cat
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Cat"/>. </summary>
         public Cat()
         {
             Hates = new ChangeTrackingList<Dog>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.Cat
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Cat"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="color"></param>

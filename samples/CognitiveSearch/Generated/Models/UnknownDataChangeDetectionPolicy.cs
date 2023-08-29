@@ -13,10 +13,7 @@ namespace CognitiveSearch.Models
     /// <summary> The UnknownDataChangeDetectionPolicy. </summary>
     internal partial class UnknownDataChangeDetectionPolicy : DataChangeDetectionPolicy
     {
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.UnknownDataChangeDetectionPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownDataChangeDetectionPolicy"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the data change detection policy. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal UnknownDataChangeDetectionPolicy(string odataType, Dictionary<string, BinaryData> rawData) : base(odataType, rawData)

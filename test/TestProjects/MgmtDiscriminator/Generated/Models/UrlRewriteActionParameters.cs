@@ -16,10 +16,7 @@ namespace MgmtDiscriminator.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.UrlRewriteActionParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UrlRewriteActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="sourcePattern"> define a request URI pattern that identifies the type of requests that may be rewritten. If value is blank, all strings are matched. </param>
         /// <param name="destination"> Define the relative URL to which the above requests will be rewritten by. </param>
@@ -34,10 +31,7 @@ namespace MgmtDiscriminator.Models
             Destination = destination;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.UrlRewriteActionParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UrlRewriteActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="sourcePattern"> define a request URI pattern that identifies the type of requests that may be rewritten. If value is blank, all strings are matched. </param>
         /// <param name="destination"> Define the relative URL to which the above requests will be rewritten by. </param>

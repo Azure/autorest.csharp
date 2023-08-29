@@ -16,10 +16,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ScoringProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ScoringProfile"/>. </summary>
         /// <param name="name"> The name of the scoring profile. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public ScoringProfile(string name)
@@ -30,10 +27,7 @@ namespace CognitiveSearch.Models
             Functions = new ChangeTrackingList<ScoringFunction>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ScoringProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ScoringProfile"/>. </summary>
         /// <param name="name"> The name of the scoring profile. </param>
         /// <param name="textWeights"> Parameters that boost scoring based on text matches in certain index fields. </param>
         /// <param name="functions">

@@ -17,18 +17,12 @@ namespace MgmtScopeResource
     /// </summary>
     public partial class GuestConfigurationAssignmentData : GuestConfigurationBaseResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.GuestConfigurationAssignmentData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GuestConfigurationAssignmentData"/>. </summary>
         public GuestConfigurationAssignmentData()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.GuestConfigurationAssignmentData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GuestConfigurationAssignmentData"/>. </summary>
         /// <param name="id"> ARM resource id of the guest configuration assignment. </param>
         /// <param name="name"> Name of the guest configuration assignment. </param>
         /// <param name="location"> Region where the VM is located. </param>

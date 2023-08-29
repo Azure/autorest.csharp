@@ -16,18 +16,12 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class ImageReference : SubResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ImageReference
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageReference"/>. </summary>
         public ImageReference()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ImageReference
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageReference"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id

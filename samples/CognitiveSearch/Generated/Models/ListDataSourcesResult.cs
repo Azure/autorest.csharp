@@ -17,10 +17,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ListDataSourcesResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ListDataSourcesResult"/>. </summary>
         /// <param name="dataSources"> The datasources in the Search service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="dataSources"/> is null. </exception>
         internal ListDataSourcesResult(IEnumerable<DataSource> dataSources)
@@ -30,10 +27,7 @@ namespace CognitiveSearch.Models
             DataSources = dataSources.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ListDataSourcesResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ListDataSourcesResult"/>. </summary>
         /// <param name="dataSources"> The datasources in the Search service. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ListDataSourcesResult(IReadOnlyList<DataSource> dataSources, Dictionary<string, BinaryData> rawData)

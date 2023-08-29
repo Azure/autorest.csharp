@@ -15,18 +15,12 @@ namespace MgmtOmitOperationGroups.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.ModelZ
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelZ"/>. </summary>
         public ModelZ()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.ModelZ
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelZ"/>. </summary>
         /// <param name="h"></param>
         /// <param name="i"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

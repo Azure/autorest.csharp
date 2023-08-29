@@ -20,10 +20,7 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetVmInstanceRequiredIds
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmInstanceRequiredIds"/>. </summary>
         /// <param name="instanceIds">
         /// The virtual machine scale set instance ids.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceRequiredIDs.instanceIds
@@ -36,10 +33,7 @@ namespace MgmtRenameRules.Models
             InstanceIds = instanceIds.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetVmInstanceRequiredIds
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmInstanceRequiredIds"/>. </summary>
         /// <param name="instanceIds">
         /// The virtual machine scale set instance ids.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceRequiredIDs.instanceIds

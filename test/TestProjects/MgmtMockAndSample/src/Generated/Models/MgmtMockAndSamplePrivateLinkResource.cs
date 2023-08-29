@@ -17,10 +17,7 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.MgmtMockAndSamplePrivateLinkResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSamplePrivateLinkResource"/>. </summary>
         public MgmtMockAndSamplePrivateLinkResource()
         {
             RequiredMembers = new ChangeTrackingList<string>();
@@ -28,10 +25,7 @@ namespace MgmtMockAndSample.Models
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.MgmtMockAndSamplePrivateLinkResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSamplePrivateLinkResource"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

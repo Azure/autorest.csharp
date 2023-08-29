@@ -17,10 +17,7 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.BlobInventoryPolicyDefinition
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicyDefinition"/>. </summary>
         /// <param name="format"> This is a required field, it specifies the format for the inventory files. </param>
         /// <param name="schedule"> This is a required field. This field is used to schedule an inventory formation. </param>
         /// <param name="objectType"> This is a required field. This field specifies the scope of the inventory created either at the blob or container level. </param>
@@ -36,10 +33,7 @@ namespace Azure.ResourceManager.Storage.Models
             SchemaFields = schemaFields.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.BlobInventoryPolicyDefinition
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicyDefinition"/>. </summary>
         /// <param name="filters"> An object that defines the filter set. </param>
         /// <param name="format"> This is a required field, it specifies the format for the inventory files. </param>
         /// <param name="schedule"> This is a required field. This field is used to schedule an inventory formation. </param>

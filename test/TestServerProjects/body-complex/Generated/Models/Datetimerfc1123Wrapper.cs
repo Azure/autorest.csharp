@@ -15,18 +15,12 @@ namespace body_complex.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.Datetimerfc1123Wrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Datetimerfc1123Wrapper"/>. </summary>
         public Datetimerfc1123Wrapper()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.Datetimerfc1123Wrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Datetimerfc1123Wrapper"/>. </summary>
         /// <param name="field"></param>
         /// <param name="now"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

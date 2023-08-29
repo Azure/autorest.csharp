@@ -17,19 +17,13 @@ namespace MgmtPartialResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPartialResource.Models.PublicIPAddressListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PublicIPAddressListResult"/>. </summary>
         internal PublicIPAddressListResult()
         {
             Value = new ChangeTrackingList<PublicIPAddressData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPartialResource.Models.PublicIPAddressListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PublicIPAddressListResult"/>. </summary>
         /// <param name="value"> A list of public IP addresses that exists in a resource group. </param>
         /// <param name="nextLink"> The URL to get the next set of results. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

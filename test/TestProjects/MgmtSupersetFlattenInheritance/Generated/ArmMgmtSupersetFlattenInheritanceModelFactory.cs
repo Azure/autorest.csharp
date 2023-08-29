@@ -16,10 +16,7 @@ namespace MgmtSupersetFlattenInheritance.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtSupersetFlattenInheritanceModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.Models.SubResourceModel1
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResourceModel1"/>. </summary>
         /// <param name="id"></param>
         /// <param name="foo"></param>
         /// <returns> A new <see cref="Models.SubResourceModel1"/> instance for mocking. </returns>
@@ -28,10 +25,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             return new SubResourceModel1(id, foo, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.Models.SubResourceModel2
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResourceModel2"/>. </summary>
         /// <param name="id"></param>
         /// <param name="idPropertiesId"></param>
         /// <param name="foo"></param>
@@ -41,10 +35,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             return new SubResourceModel2(id, idPropertiesId, foo, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.ResourceModel1Data
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceModel1Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -56,10 +47,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             return new ResourceModel1Data(id, name, resourceType, systemData, foo, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.Models.ResourceModel2
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceModel2"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -71,10 +59,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             return new ResourceModel2(id, name, resourceType, systemData, foo, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.TrackedResourceModel1Data
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TrackedResourceModel1Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -90,10 +75,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             return new TrackedResourceModel1Data(id, name, resourceType, systemData, tags, location, foo, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.Models.TrackedResourceModel2
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TrackedResourceModel2"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

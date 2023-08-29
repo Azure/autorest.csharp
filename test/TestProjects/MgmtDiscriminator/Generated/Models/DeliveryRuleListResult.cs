@@ -17,19 +17,13 @@ namespace MgmtDiscriminator.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleListResult"/>. </summary>
         internal DeliveryRuleListResult()
         {
             Value = new ChangeTrackingList<DeliveryRuleData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleListResult"/>. </summary>
         /// <param name="value"> The values. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal DeliveryRuleListResult(IReadOnlyList<DeliveryRuleData> value, Dictionary<string, BinaryData> rawData)

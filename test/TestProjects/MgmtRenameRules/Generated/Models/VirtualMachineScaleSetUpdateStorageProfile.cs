@@ -19,19 +19,13 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdateStorageProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateStorageProfile"/>. </summary>
         public VirtualMachineScaleSetUpdateStorageProfile()
         {
             DataDisks = new ChangeTrackingList<VirtualMachineScaleSetDataDisk>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdateStorageProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateStorageProfile"/>. </summary>
         /// <param name="imageReference">
         /// The image reference.
         /// Serialized Name: VirtualMachineScaleSetUpdateStorageProfile.imageReference

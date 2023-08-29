@@ -15,18 +15,12 @@ namespace NameConflicts.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::NameConflicts.Models.Request
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Request"/>. </summary>
         public Request()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::NameConflicts.Models.Request
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Request"/>. </summary>
         /// <param name="property"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal Request(string property, Dictionary<string, BinaryData> rawData)

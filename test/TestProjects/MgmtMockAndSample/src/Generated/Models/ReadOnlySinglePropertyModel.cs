@@ -15,18 +15,12 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.ReadOnlySinglePropertyModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ReadOnlySinglePropertyModel"/>. </summary>
         public ReadOnlySinglePropertyModel()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.ReadOnlySinglePropertyModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ReadOnlySinglePropertyModel"/>. </summary>
         /// <param name="readOnlySomething"> This is a read only string property. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ReadOnlySinglePropertyModel(string readOnlySomething, Dictionary<string, BinaryData> rawData)

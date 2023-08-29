@@ -19,19 +19,13 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ApiError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ApiError"/>. </summary>
         internal ApiError()
         {
             Details = new ChangeTrackingList<ApiErrorBase>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ApiError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ApiError"/>. </summary>
         /// <param name="details">
         /// The Api error details
         /// Serialized Name: ApiError.details

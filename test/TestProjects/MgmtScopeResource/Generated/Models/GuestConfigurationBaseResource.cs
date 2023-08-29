@@ -15,18 +15,12 @@ namespace MgmtScopeResource.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.GuestConfigurationBaseResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GuestConfigurationBaseResource"/>. </summary>
         public GuestConfigurationBaseResource()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.GuestConfigurationBaseResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GuestConfigurationBaseResource"/>. </summary>
         /// <param name="id"> ARM resource id of the guest configuration assignment. </param>
         /// <param name="name"> Name of the guest configuration assignment. </param>
         /// <param name="location"> Region where the VM is located. </param>

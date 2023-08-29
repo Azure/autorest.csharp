@@ -17,10 +17,7 @@ namespace MgmtNonStringPathVariable.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtNonStringPathVariableModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtNonStringPathVariable.FakeData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FakeData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -36,10 +33,7 @@ namespace MgmtNonStringPathVariable.Models
             return new FakeData(id, name, resourceType, systemData, tags, location, properties, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtNonStringPathVariable.BarData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BarData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

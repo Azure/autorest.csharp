@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineSize
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineSize"/>. </summary>
         internal VirtualMachineSize()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineSize
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineSize"/>. </summary>
         /// <param name="name">
         /// The name of the virtual machine size.
         /// Serialized Name: VirtualMachineSize.name

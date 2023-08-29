@@ -19,18 +19,12 @@ namespace CognitiveSearch.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.DataChangeDetectionPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DataChangeDetectionPolicy"/>. </summary>
         public DataChangeDetectionPolicy()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.DataChangeDetectionPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DataChangeDetectionPolicy"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the data change detection policy. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal DataChangeDetectionPolicy(string odataType, Dictionary<string, BinaryData> rawData)

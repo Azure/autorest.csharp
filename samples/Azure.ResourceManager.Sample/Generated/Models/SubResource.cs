@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SubResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResource"/>. </summary>
         public SubResource()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SubResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResource"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id

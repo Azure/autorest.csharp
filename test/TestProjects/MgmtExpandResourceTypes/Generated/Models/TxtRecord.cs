@@ -16,19 +16,13 @@ namespace MgmtExpandResourceTypes.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.TxtRecord
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TxtRecord"/>. </summary>
         public TxtRecord()
         {
             Value = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.TxtRecord
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TxtRecord"/>. </summary>
         /// <param name="value"> The text value of this TXT record. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal TxtRecord(IList<string> value, Dictionary<string, BinaryData> rawData)

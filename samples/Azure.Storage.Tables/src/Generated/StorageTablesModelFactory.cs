@@ -14,10 +14,7 @@ namespace Azure.Storage.Tables.Models
     /// <summary> Model factory for models. </summary>
     public static partial class StorageTablesModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.TableQueryResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TableQueryResponse"/>. </summary>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
         /// <param name="value"> List of tables. </param>
         /// <returns> A new <see cref="Models.TableQueryResponse"/> instance for mocking. </returns>
@@ -28,10 +25,7 @@ namespace Azure.Storage.Tables.Models
             return new TableQueryResponse(odataMetadata, value?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.TableResponseProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TableResponseProperties"/>. </summary>
         /// <param name="tableName"> The name of the table. </param>
         /// <param name="odataType"> The odata type of the table. </param>
         /// <param name="odataId"> The id of the table. </param>
@@ -42,10 +36,7 @@ namespace Azure.Storage.Tables.Models
             return new TableResponseProperties(tableName, odataType, odataId, odataEditLink, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.TableResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TableResponse"/>. </summary>
         /// <param name="tableName"> The name of the table. </param>
         /// <param name="odataType"> The odata type of the table. </param>
         /// <param name="odataId"> The id of the table. </param>
@@ -57,10 +48,7 @@ namespace Azure.Storage.Tables.Models
             return new TableResponse(tableName, odataType, odataId, odataEditLink, odataMetadata, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.TableEntityQueryResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TableEntityQueryResponse"/>. </summary>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
         /// <param name="value"> List of table entities. </param>
         /// <returns> A new <see cref="Models.TableEntityQueryResponse"/> instance for mocking. </returns>
@@ -71,10 +59,7 @@ namespace Azure.Storage.Tables.Models
             return new TableEntityQueryResponse(odataMetadata, value?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.StorageServiceStats
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageServiceStats"/>. </summary>
         /// <param name="geoReplication"> Geo-Replication information for the Secondary Storage Service. </param>
         /// <returns> A new <see cref="Models.StorageServiceStats"/> instance for mocking. </returns>
         public static StorageServiceStats StorageServiceStats(GeoReplication geoReplication = null)
@@ -82,10 +67,7 @@ namespace Azure.Storage.Tables.Models
             return new StorageServiceStats(geoReplication, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Storage.Tables.Models.GeoReplication
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GeoReplication"/>. </summary>
         /// <param name="status"> The status of the secondary location. </param>
         /// <param name="lastSyncTime"> A GMT date/time value, to the second. All primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for reads. </param>
         /// <returns> A new <see cref="Models.GeoReplication"/> instance for mocking. </returns>

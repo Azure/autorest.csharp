@@ -16,10 +16,7 @@ namespace MgmtScopeResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.WorkspaceInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="WorkspaceInfo"/>. </summary>
         /// <param name="id"> Azure Resource Manager identifier of the Log Analytics Workspace. </param>
         /// <param name="location"> Location of the Log Analytics workspace. </param>
         /// <param name="customerId"> Log Analytics workspace identifier. </param>
@@ -35,10 +32,7 @@ namespace MgmtScopeResource.Models
             CustomerId = customerId;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.WorkspaceInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="WorkspaceInfo"/>. </summary>
         /// <param name="id"> Azure Resource Manager identifier of the Log Analytics Workspace. </param>
         /// <param name="location"> Location of the Log Analytics workspace. </param>
         /// <param name="customerId"> Log Analytics workspace identifier. </param>

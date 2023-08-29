@@ -16,10 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.KeysResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeysResult"/>. </summary>
         /// <param name="clusters"> Object mapping clusterIds to a list of keys. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clusters"/> is null. </exception>
         internal KeysResult(IReadOnlyDictionary<string, IList<string>> clusters)
@@ -29,10 +26,7 @@ namespace Azure.AI.FormRecognizer.Models
             Clusters = clusters;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.KeysResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeysResult"/>. </summary>
         /// <param name="clusters"> Object mapping clusterIds to a list of keys. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal KeysResult(IReadOnlyDictionary<string, IList<string>> clusters, Dictionary<string, BinaryData> rawData)

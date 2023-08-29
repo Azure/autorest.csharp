@@ -17,19 +17,13 @@ namespace MgmtScopeResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.Marketplace
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Marketplace"/>. </summary>
         internal Marketplace()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.Marketplace
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Marketplace"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

@@ -17,10 +17,7 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class ImageOSDisk : ImageDisk
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ImageOSDisk
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageOSDisk"/>. </summary>
         /// <param name="osType">
         /// This property allows you to specify the type of the OS that is included in the disk if creating a VM from a custom image. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Windows** &lt;br&gt;&lt;br&gt; **Linux**
         /// Serialized Name: ImageOSDisk.osType
@@ -35,10 +32,7 @@ namespace MgmtRenameRules.Models
             OSState = osState;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ImageOSDisk
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageOSDisk"/>. </summary>
         /// <param name="snapshot">
         /// The snapshot.
         /// Serialized Name: ImageDisk.snapshot

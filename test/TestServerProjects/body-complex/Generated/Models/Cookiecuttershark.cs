@@ -13,10 +13,7 @@ namespace body_complex.Models
     /// <summary> The Cookiecuttershark. </summary>
     public partial class Cookiecuttershark : Shark
     {
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.Cookiecuttershark
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Cookiecuttershark"/>. </summary>
         /// <param name="length"></param>
         /// <param name="birthday"></param>
         public Cookiecuttershark(float length, DateTimeOffset birthday) : base(length, birthday)
@@ -24,10 +21,7 @@ namespace body_complex.Models
             Fishtype = "cookiecuttershark";
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.Cookiecuttershark
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Cookiecuttershark"/>. </summary>
         /// <param name="fishtype"></param>
         /// <param name="species"></param>
         /// <param name="length"></param>

@@ -15,18 +15,12 @@ namespace xml_service.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.ModelWithUrlProperty
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithUrlProperty"/>. </summary>
         public ModelWithUrlProperty()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.ModelWithUrlProperty
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithUrlProperty"/>. </summary>
         /// <param name="url"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelWithUrlProperty(Uri url, Dictionary<string, BinaryData> rawData)

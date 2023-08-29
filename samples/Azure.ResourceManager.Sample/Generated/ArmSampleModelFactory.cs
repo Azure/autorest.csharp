@@ -18,10 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmSampleModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.AvailabilitySetData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -62,10 +59,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, sku, platformUpdateDomainCount, platformFaultDomainCount, virtualMachines?.ToList(), proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, statuses?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.AvailabilitySetPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetPatch"/>. </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
@@ -104,10 +98,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new AvailabilitySetPatch(tags, sku, platformUpdateDomainCount, platformFaultDomainCount, virtualMachines?.ToList(), proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, statuses?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineSize
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineSize"/>. </summary>
         /// <param name="name">
         /// The name of the virtual machine size.
         /// Serialized Name: VirtualMachineSize.name
@@ -138,10 +129,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineSize(name, numberOfCores, osDiskSizeInMB, resourceDiskSizeInMB, memoryInMB, maxDataDiskCount, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.ProximityPlacementGroupData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -183,10 +171,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new ProximityPlacementGroupData(id, name, resourceType, systemData, tags, location, extendedLocation, proximityPlacementGroupType, virtualMachines?.ToList(), virtualMachineScaleSets?.ToList(), availabilitySets?.ToList(), colocationStatus, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.DedicatedHostGroupData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -233,10 +218,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new DedicatedHostGroupData(id, name, resourceType, systemData, tags, location, zones?.ToList(), hostUris?.ToList(), tenantId, platformFaultDomainCount, hosts?.ToList(), instanceViewHosts != null ? new DedicatedHostGroupInstanceView(instanceViewHosts?.ToList(), new Dictionary<string, BinaryData>()) : null, supportAutomaticPlacement, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SubResourceReadOnly
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResourceReadOnly"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResourceReadOnly.id
@@ -247,10 +229,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new SubResourceReadOnly(id, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostInstanceViewWithName
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostInstanceViewWithName"/>. </summary>
         /// <param name="assetId">
         /// Specifies the unique id of the dedicated physical machine on which the dedicated host resides.
         /// Serialized Name: DedicatedHostInstanceView.assetId
@@ -276,10 +255,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new DedicatedHostInstanceViewWithName(assetId, availableCapacityAllocatableVMs != null ? new DedicatedHostAvailableCapacity(availableCapacityAllocatableVMs?.ToList(), new Dictionary<string, BinaryData>()) : null, statuses?.ToList(), name, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostInstanceView"/>. </summary>
         /// <param name="assetId">
         /// Specifies the unique id of the dedicated physical machine on which the dedicated host resides.
         /// Serialized Name: DedicatedHostInstanceView.assetId
@@ -301,10 +277,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new DedicatedHostInstanceView(assetId, availableCapacityAllocatableVMs != null ? new DedicatedHostAvailableCapacity(availableCapacityAllocatableVMs?.ToList(), new Dictionary<string, BinaryData>()) : null, statuses?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostAllocatableVM
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostAllocatableVM"/>. </summary>
         /// <param name="vmSize">
         /// VM size in terms of which the unutilized capacity is represented.
         /// Serialized Name: DedicatedHostAllocatableVM.vmSize
@@ -319,10 +292,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new DedicatedHostAllocatableVM(vmSize, count, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostGroupPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupPatch"/>. </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
@@ -358,10 +328,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new DedicatedHostGroupPatch(tags, zones?.ToList(), platformFaultDomainCount, hosts?.ToList(), instanceViewHosts != null ? new DedicatedHostGroupInstanceView(instanceViewHosts?.ToList(), new Dictionary<string, BinaryData>()) : null, supportAutomaticPlacement, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.DedicatedHostData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -413,10 +380,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new DedicatedHostData(id, name, resourceType, systemData, tags, location, sku, platformFaultDomain, autoReplaceOnFailure, hostId, virtualMachines?.ToList(), licenseType, provisioningOn, provisioningState, instanceView, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostPatch"/>. </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
@@ -462,10 +426,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new DedicatedHostPatch(tags, platformFaultDomain, autoReplaceOnFailure, hostId, virtualMachines?.ToList(), licenseType, provisioningOn, provisioningState, instanceView, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.SshPublicKeyData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeyData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -484,10 +445,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new SshPublicKeyData(id, name, resourceType, systemData, tags, location, publicKey, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SshPublicKeyGenerateKeyPairResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeyGenerateKeyPairResult"/>. </summary>
         /// <param name="privateKey">
         /// Private key portion of the key pair used to authenticate to a virtual machine through ssh. The private key is returned in RFC3447 format and should be treated as a secret.
         /// Serialized Name: SshPublicKeyGenerateKeyPairResult.privateKey
@@ -506,10 +464,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new SshPublicKeyGenerateKeyPairResult(privateKey, publicKey, id, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineExtensionImageData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionImageData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -544,10 +499,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineExtensionImageData(id, name, resourceType, systemData, tags, location, operatingSystem, computeRole, handlerSchema, vmScaleSetEnabled, supportsMultipleExtensions, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineExtensionData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -602,10 +554,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineExtensionData(id, name, resourceType, systemData, tags, location, forceUpdateTag, publisher, extensionType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, instanceView, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DataDiskImage
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DataDiskImage"/>. </summary>
         /// <param name="lun">
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: DataDiskImage.lun
@@ -616,10 +565,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new DataDiskImage(lun, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SampleUsage
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SampleUsage"/>. </summary>
         /// <param name="unit">
         /// An enum describing the unit of usage measurement.
         /// Serialized Name: SampleUsage.unit
@@ -642,10 +588,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new SampleUsage(unit, currentValue, limit, name, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SampleUsageName
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SampleUsageName"/>. </summary>
         /// <param name="value">
         /// The name of the resource.
         /// Serialized Name: SampleUsageName.value
@@ -660,10 +603,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new SampleUsageName(value, localizedValue, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -777,10 +717,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineData(id, name, resourceType, systemData, tags, location, plan, resources?.ToList(), identity, zones?.ToList(), hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, priority, evictionPolicy, billingMaxPrice != null ? new BillingProfile(billingMaxPrice, new Dictionary<string, BinaryData>()) : null, hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ImageReference
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageReference"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id
@@ -811,10 +748,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new ImageReference(id, publisher, offer, sku, version, exactVersion, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DataDisk
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DataDisk"/>. </summary>
         /// <param name="lun">
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: DataDisk.lun
@@ -869,10 +803,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new DataDisk(lun, name, vhdUri != null ? new VirtualHardDisk(vhdUri, new Dictionary<string, BinaryData>()) : null, imageUri != null ? new VirtualHardDisk(imageUri, new Dictionary<string, BinaryData>()) : null, caching, writeAcceleratorEnabled, createOption, diskSizeGB, managedDisk, toBeDetached, diskIopsReadWrite, diskMBpsReadWrite, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineInstanceView"/>. </summary>
         /// <param name="platformUpdateDomain">
         /// Specifies the update domain of the virtual machine.
         /// Serialized Name: VirtualMachineInstanceView.platformUpdateDomain
@@ -947,10 +878,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineInstanceView(platformUpdateDomain, platformFaultDomain, computerName, osName, osVersion, hyperVGeneration, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), extensions?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus, new Dictionary<string, BinaryData>()) : null, bootDiagnostics, assignedHost, statuses?.ToList(), patchStatus, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineAgentInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineAgentInstanceView"/>. </summary>
         /// <param name="vmAgentVersion">
         /// The VM Agent full version.
         /// Serialized Name: VirtualMachineAgentInstanceView.vmAgentVersion
@@ -972,10 +900,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineAgentInstanceView(vmAgentVersion, extensionHandlers?.ToList(), statuses?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineExtensionHandlerInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionHandlerInstanceView"/>. </summary>
         /// <param name="virtualMachineExtensionHandlerInstanceViewType">
         /// Specifies the type of the extension; an example is "CustomScriptExtension".
         /// Serialized Name: VirtualMachineExtensionHandlerInstanceView.type
@@ -994,10 +919,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineExtensionHandlerInstanceView(virtualMachineExtensionHandlerInstanceViewType, typeHandlerVersion, status, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.MaintenanceRedeployStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MaintenanceRedeployStatus"/>. </summary>
         /// <param name="isCustomerInitiatedMaintenanceAllowed">
         /// True, if customer is allowed to perform Maintenance.
         /// Serialized Name: MaintenanceRedeployStatus.isCustomerInitiatedMaintenanceAllowed
@@ -1032,10 +954,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new MaintenanceRedeployStatus(isCustomerInitiatedMaintenanceAllowed, preMaintenanceWindowStartOn, preMaintenanceWindowEndOn, maintenanceWindowStartOn, maintenanceWindowEndOn, lastOperationResultCode, lastOperationMessage, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DiskInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskInstanceView"/>. </summary>
         /// <param name="name">
         /// The disk name.
         /// Serialized Name: DiskInstanceView.name
@@ -1057,10 +976,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new DiskInstanceView(name, encryptionSettings?.ToList(), statuses?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.BootDiagnosticsInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BootDiagnosticsInstanceView"/>. </summary>
         /// <param name="consoleScreenshotBlobUri">
         /// The console screenshot blob URI. &lt;br&gt;&lt;br&gt;NOTE: This will **not** be set if boot diagnostics is currently enabled with managed storage.
         /// Serialized Name: BootDiagnosticsInstanceView.consoleScreenshotBlobUri
@@ -1079,10 +995,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new BootDiagnosticsInstanceView(consoleScreenshotBlobUri, serialConsoleLogBlobUri, status, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachinePatchStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachinePatchStatus"/>. </summary>
         /// <param name="availablePatchSummary">
         /// The available patch summary of the latest assessment operation for the virtual machine.
         /// Serialized Name: VirtualMachinePatchStatus.availablePatchSummary
@@ -1097,10 +1010,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachinePatchStatus(availablePatchSummary, lastPatchInstallationSummary, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.AvailablePatchSummary
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailablePatchSummary"/>. </summary>
         /// <param name="status">
         /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: AvailablePatchSummary.status
@@ -1139,10 +1049,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new AvailablePatchSummary(status, assessmentActivityId, rebootPending, criticalAndSecurityPatchCount, otherPatchCount, startOn, lastModifiedOn, error, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ApiError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ApiError"/>. </summary>
         /// <param name="details">
         /// The Api error details
         /// Serialized Name: ApiError.details
@@ -1171,10 +1078,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new ApiError(details?.ToList(), innererror, code, target, message, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ApiErrorBase
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ApiErrorBase"/>. </summary>
         /// <param name="code">
         /// The error code.
         /// Serialized Name: ApiErrorBase.code
@@ -1193,10 +1097,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new ApiErrorBase(code, target, message, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.InnerError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="InnerError"/>. </summary>
         /// <param name="exceptiontype">
         /// The exception type.
         /// Serialized Name: InnerError.exceptiontype
@@ -1211,10 +1112,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new InnerError(exceptiontype, errordetail, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.LastPatchInstallationSummary
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LastPatchInstallationSummary"/>. </summary>
         /// <param name="status">
         /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: LastPatchInstallationSummary.status
@@ -1273,10 +1171,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new LastPatchInstallationSummary(status, installationActivityId, maintenanceWindowExceeded, rebootStatus, notSelectedPatchCount, excludedPatchCount, pendingPatchCount, installedPatchCount, failedPatchCount, startOn, lastModifiedOn, startedBy, error, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.ImageData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -1307,10 +1202,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new ImageData(id, name, resourceType, systemData, tags, location, sourceVirtualMachineId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId) : null, storageProfile, provisioningState, hyperVGeneration, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ImagePatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImagePatch"/>. </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
@@ -1339,10 +1231,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new ImagePatch(tags, sourceVirtualMachineId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId) : null, storageProfile, provisioningState, hyperVGeneration, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineCaptureResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineCaptureResult"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id
@@ -1371,10 +1260,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineCaptureResult(id, schema, contentVersion, parameters, resources?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachinePatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachinePatch"/>. </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
@@ -1481,10 +1367,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachinePatch(tags, plan, identity, zones?.ToList(), hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, priority, evictionPolicy, billingMaxPrice != null ? new BillingProfile(billingMaxPrice, new Dictionary<string, BinaryData>()) : null, hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.RetrieveBootDiagnosticsDataResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RetrieveBootDiagnosticsDataResult"/>. </summary>
         /// <param name="consoleScreenshotBlobUri">
         /// The console screenshot blob URI
         /// Serialized Name: RetrieveBootDiagnosticsDataResult.consoleScreenshotBlobUri
@@ -1499,10 +1382,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new RetrieveBootDiagnosticsDataResult(consoleScreenshotBlobUri, serialConsoleLogBlobUri, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineAssessPatchesResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineAssessPatchesResult"/>. </summary>
         /// <param name="status">
         /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: VirtualMachineAssessPatchesResult.status
@@ -1543,10 +1423,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineAssessPatchesResult(status, assessmentActivityId, rebootPending, criticalAndSecurityPatchCount, otherPatchCount, startOn, patches?.ToList(), error, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineSoftwarePatchProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineSoftwarePatchProperties"/>. </summary>
         /// <param name="patchId">
         /// A unique identifier for the patch.
         /// Serialized Name: VirtualMachineSoftwarePatchProperties.patchId
@@ -1595,10 +1472,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineSoftwarePatchProperties(patchId, name, version, kbid, classifications?.ToList(), rebootBehavior, activityId, publishedOn, lastModifiedOn, assessmentState, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineScaleSetData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -1687,10 +1561,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, sku, plan, identity, zones?.ToList(), upgradePolicy, automaticRepairsPolicy, virtualMachineProfile, provisioningState, overprovision, doNotRunExtensionsOnOverprovisionedVMs, uniqueId, singlePlacementGroup, zoneBalance, platformFaultDomainCount, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, scaleInRules != null ? new ScaleInPolicy(scaleInRules?.ToList(), new Dictionary<string, BinaryData>()) : null, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineScaleSetExtensionData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionData"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResourceReadOnly.id
@@ -1751,10 +1622,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineScaleSetExtensionData(id, name, resourceType, forceUpdateTag, publisher, extensionType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, provisionAfterExtensions?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetInstanceView"/>. </summary>
         /// <param name="virtualMachineStatusesSummary">
         /// The instance view status summary for the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetInstanceView.virtualMachine
@@ -1782,10 +1650,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineScaleSetInstanceView(virtualMachineStatusesSummary != null ? new VirtualMachineScaleSetInstanceViewStatusesSummary(virtualMachineStatusesSummary?.ToList(), new Dictionary<string, BinaryData>()) : null, extensions?.ToList(), statuses?.ToList(), orchestrationServices?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineStatusCodeCount
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineStatusCodeCount"/>. </summary>
         /// <param name="code">
         /// The instance view status code.
         /// Serialized Name: VirtualMachineStatusCodeCount.code
@@ -1800,10 +1665,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineStatusCodeCount(code, count, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMExtensionsSummary
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMExtensionsSummary"/>. </summary>
         /// <param name="name">
         /// The extension name.
         /// Serialized Name: VirtualMachineScaleSetVMExtensionsSummary.name
@@ -1820,10 +1682,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineScaleSetVMExtensionsSummary(name, statusesSummary?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.OrchestrationServiceSummary
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OrchestrationServiceSummary"/>. </summary>
         /// <param name="serviceName">
         /// The name of the service.
         /// Serialized Name: OrchestrationServiceSummary.serviceName
@@ -1838,10 +1697,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new OrchestrationServiceSummary(serviceName, serviceState, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetExtensionPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionPatch"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -1894,10 +1750,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineScaleSetExtensionPatch(id, name, resourceType, systemData, forceUpdateTag, publisher, typePropertiesType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, provisionAfterExtensions?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetSku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetSku"/>. </summary>
         /// <param name="resourceType">
         /// The type of resource the sku applies to.
         /// Serialized Name: VirtualMachineScaleSetSku.resourceType
@@ -1916,10 +1769,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineScaleSetSku(resourceType, sku, capacity, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetSkuCapacity
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetSkuCapacity"/>. </summary>
         /// <param name="minimum">
         /// The minimum capacity.
         /// Serialized Name: VirtualMachineScaleSetSkuCapacity.minimum
@@ -1942,10 +1792,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineScaleSetSkuCapacity(minimum, maximum, defaultCapacity, scaleType, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.UpgradeOperationHistoricalStatusInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UpgradeOperationHistoricalStatusInfo"/>. </summary>
         /// <param name="properties">
         /// Information about the properties of the upgrade operation.
         /// Serialized Name: UpgradeOperationHistoricalStatusInfo.properties
@@ -1964,10 +1811,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new UpgradeOperationHistoricalStatusInfo(properties, upgradeOperationHistoricalStatusInfoType, location, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.UpgradeOperationHistoricalStatusInfoProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UpgradeOperationHistoricalStatusInfoProperties"/>. </summary>
         /// <param name="runningStatus">
         /// Information about the overall status of the upgrade operation.
         /// Serialized Name: UpgradeOperationHistoricalStatusInfoProperties.runningStatus
@@ -1998,10 +1842,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new UpgradeOperationHistoricalStatusInfoProperties(runningStatus, progress, error, startedBy, targetImageReference, rollbackInfo, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.UpgradeOperationHistoryStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UpgradeOperationHistoryStatus"/>. </summary>
         /// <param name="code">
         /// Code indicating the current status of the upgrade.
         /// Serialized Name: UpgradeOperationHistoryStatus.code
@@ -2020,10 +1861,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new UpgradeOperationHistoryStatus(code, startOn, endOn, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.RollingUpgradeProgressInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RollingUpgradeProgressInfo"/>. </summary>
         /// <param name="successfulInstanceCount">
         /// The number of instances that have been successfully upgraded.
         /// Serialized Name: RollingUpgradeProgressInfo.successfulInstanceCount
@@ -2046,10 +1884,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new RollingUpgradeProgressInfo(successfulInstanceCount, failedInstanceCount, inProgressInstanceCount, pendingInstanceCount, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.RollbackStatusInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RollbackStatusInfo"/>. </summary>
         /// <param name="successfullyRolledbackInstanceCount">
         /// The number of instances which have been successfully rolled back.
         /// Serialized Name: RollbackStatusInfo.successfullyRolledbackInstanceCount
@@ -2068,10 +1903,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new RollbackStatusInfo(successfullyRolledbackInstanceCount, failedRolledbackInstanceCount, rollbackError, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineScaleSetRollingUpgradeData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetRollingUpgradeData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -2102,10 +1934,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineScaleSetRollingUpgradeData(id, name, resourceType, systemData, tags, location, policy, runningStatus, progress, error, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.RollingUpgradeRunningStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RollingUpgradeRunningStatus"/>. </summary>
         /// <param name="code">
         /// Code indicating the current status of the upgrade.
         /// Serialized Name: RollingUpgradeRunningStatus.code
@@ -2128,10 +1957,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new RollingUpgradeRunningStatus(code, startOn, lastAction, lastActionOn, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.RecoveryWalkResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RecoveryWalkResponse"/>. </summary>
         /// <param name="walkPerformed">
         /// Whether the recovery walk was performed
         /// Serialized Name: RecoveryWalkResponse.walkPerformed
@@ -2146,10 +1972,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new RecoveryWalkResponse(walkPerformed, nextPlatformUpdateDomain, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineScaleSetVMData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -2252,10 +2075,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineScaleSetVMData(id, name, resourceType, systemData, tags, location, instanceId, sku, plan, resources?.ToList(), zones?.ToList(), latestModelApplied, vmId, instanceView, hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, networkInterfaceConfigurations != null ? new VirtualMachineScaleSetVMNetworkProfileConfiguration(networkInterfaceConfigurations?.ToList(), new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, provisioningState, licenseType, modelDefinitionApplied, protectionPolicy, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMInstanceView"/>. </summary>
         /// <param name="platformUpdateDomain">
         /// The Update Domain count.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceView.platformUpdateDomain
@@ -2314,10 +2134,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineScaleSetVMInstanceView(platformUpdateDomain, platformFaultDomain, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), extensions?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus, new Dictionary<string, BinaryData>()) : null, bootDiagnostics, statuses?.ToList(), assignedHost, placementGroupId, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.RequestRateByIntervalContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RequestRateByIntervalContent"/>. </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
@@ -2352,10 +2169,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new RequestRateByIntervalContent(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, intervalLength, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.LogAnalyticsInputBase
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LogAnalyticsInputBase"/>. </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
@@ -2386,10 +2200,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new LogAnalyticsInputBase(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.LogAnalytics
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LogAnalytics"/>. </summary>
         /// <param name="logAnalyticsOutput">
         /// LogAnalyticsOutput
         /// Serialized Name: LogAnalyticsOperationResult.properties
@@ -2400,10 +2211,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new LogAnalytics(logAnalyticsOutput != null ? new LogAnalyticsOutput(logAnalyticsOutput, new Dictionary<string, BinaryData>()) : null, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ThrottledRequestsContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ThrottledRequestsContent"/>. </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri

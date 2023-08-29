@@ -15,18 +15,12 @@ namespace MgmtOperations.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOperations.Models.TestAvailabilitySet
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TestAvailabilitySet"/>. </summary>
         internal TestAvailabilitySet()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOperations.Models.TestAvailabilitySet
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TestAvailabilitySet"/>. </summary>
         /// <param name="bar"> specifies the bar. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal TestAvailabilitySet(string bar, Dictionary<string, BinaryData> rawData)

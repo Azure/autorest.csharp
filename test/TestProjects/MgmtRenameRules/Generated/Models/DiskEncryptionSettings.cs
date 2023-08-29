@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.DiskEncryptionSettings
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskEncryptionSettings"/>. </summary>
         public DiskEncryptionSettings()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.DiskEncryptionSettings
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskEncryptionSettings"/>. </summary>
         /// <param name="diskEncryptionKey">
         /// Specifies the location of the disk encryption key, which is a Key Vault Secret.
         /// Serialized Name: DiskEncryptionSettings.diskEncryptionKey

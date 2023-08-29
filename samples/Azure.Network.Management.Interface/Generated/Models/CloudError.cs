@@ -15,18 +15,12 @@ namespace Azure.Network.Management.Interface.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.CloudError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CloudError"/>. </summary>
         internal CloudError()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.CloudError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CloudError"/>. </summary>
         /// <param name="error"> Cloud error body. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal CloudError(CloudErrorBody error, Dictionary<string, BinaryData> rawData)

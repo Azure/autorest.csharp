@@ -19,19 +19,13 @@ namespace Azure.ResourceManager.Sample
     /// </summary>
     public partial class VirtualMachineScaleSetExtensionData : SubResourceReadOnly
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineScaleSetExtensionData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionData"/>. </summary>
         public VirtualMachineScaleSetExtensionData()
         {
             ProvisionAfterExtensions = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineScaleSetExtensionData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionData"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResourceReadOnly.id

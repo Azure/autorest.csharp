@@ -23,10 +23,7 @@ namespace Azure.ResourceManager.Sample
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineScaleSetVMData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMData"/>. </summary>
         /// <param name="location"> The location. </param>
         public VirtualMachineScaleSetVMData(AzureLocation location) : base(location)
         {
@@ -34,10 +31,7 @@ namespace Azure.ResourceManager.Sample
             Zones = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineScaleSetVMData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

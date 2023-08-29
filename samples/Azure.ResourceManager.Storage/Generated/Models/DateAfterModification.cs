@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.DateAfterModification
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DateAfterModification"/>. </summary>
         public DateAfterModification()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.DateAfterModification
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DateAfterModification"/>. </summary>
         /// <param name="daysAfterModificationGreaterThan"> Value indicating the age in days after last modification. </param>
         /// <param name="daysAfterLastAccessTimeGreaterThan"> Value indicating the age in days after last blob access. This property can only be used in conjunction with last access time tracking policy. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

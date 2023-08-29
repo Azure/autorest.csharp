@@ -13,10 +13,7 @@ namespace body_complex.Models
     /// <summary> The UnknownFish. </summary>
     internal partial class UnknownFish : Fish
     {
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.UnknownFish
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownFish"/>. </summary>
         /// <param name="fishtype"></param>
         /// <param name="species"></param>
         /// <param name="length"></param>

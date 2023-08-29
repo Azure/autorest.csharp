@@ -16,10 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ManagementPolicyRule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ManagementPolicyRule"/>. </summary>
         /// <param name="name"> A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy. </param>
         /// <param name="ruleType"> The valid value is Lifecycle. </param>
         /// <param name="definition"> An object that defines the Lifecycle rule. </param>
@@ -34,10 +31,7 @@ namespace Azure.ResourceManager.Storage.Models
             Definition = definition;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ManagementPolicyRule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ManagementPolicyRule"/>. </summary>
         /// <param name="enabled"> Rule is enabled if set to true. </param>
         /// <param name="name"> A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy. </param>
         /// <param name="ruleType"> The valid value is Lifecycle. </param>

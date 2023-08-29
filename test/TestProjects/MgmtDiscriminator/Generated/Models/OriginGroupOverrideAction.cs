@@ -14,10 +14,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the origin group override action for the delivery rule. </summary>
     public partial class OriginGroupOverrideAction : DeliveryRuleAction
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.OriginGroupOverrideAction
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OriginGroupOverrideAction"/>. </summary>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public OriginGroupOverrideAction(OriginGroupOverrideActionParameters parameters)
@@ -28,10 +25,7 @@ namespace MgmtDiscriminator.Models
             Name = DeliveryRuleActionType.OriginGroupOverride;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.OriginGroupOverrideAction
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OriginGroupOverrideAction"/>. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>

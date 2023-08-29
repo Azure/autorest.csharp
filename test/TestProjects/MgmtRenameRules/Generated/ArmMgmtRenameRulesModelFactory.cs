@@ -17,10 +17,7 @@ namespace MgmtRenameRules.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtRenameRulesModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.VirtualMachineData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -129,10 +126,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineData(id, name, resourceType, systemData, tags, location, plan, identity, zones?.ToList(), hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, priority, evictionPolicy, billingMaxPrice != null ? new BillingProfile(billingMaxPrice, new Dictionary<string, BinaryData>()) : null, hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ImageReference
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageReference"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id
@@ -163,10 +157,7 @@ namespace MgmtRenameRules.Models
             return new ImageReference(id, publisher, offer, sku, version, exactVersion, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.DataDisk
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DataDisk"/>. </summary>
         /// <param name="lun">
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: DataDisk.lun
@@ -221,10 +212,7 @@ namespace MgmtRenameRules.Models
             return new DataDisk(lun, name, vhdUri != null ? new VirtualHardDisk(vhdUri, new Dictionary<string, BinaryData>()) : null, imageUri != null ? new VirtualHardDisk(imageUri, new Dictionary<string, BinaryData>()) : null, caching, writeAcceleratorEnabled, createOption, diskSizeGB, managedDisk, toBeDetached, diskIopsReadWrite, diskMBpsReadWrite, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineInstanceView"/>. </summary>
         /// <param name="platformUpdateDomain">
         /// Specifies the update domain of the virtual machine.
         /// Serialized Name: VirtualMachineInstanceView.platformUpdateDomain
@@ -294,10 +282,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineInstanceView(platformUpdateDomain, platformFaultDomain, computerName, osName, osVersion, hyperVGeneration, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus, new Dictionary<string, BinaryData>()) : null, bootDiagnostics, assignedHost, statuses?.ToList(), patchStatus, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineAgentInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineAgentInstanceView"/>. </summary>
         /// <param name="vmAgentVersion">
         /// The VM Agent full version.
         /// Serialized Name: VirtualMachineAgentInstanceView.vmAgentVersion
@@ -319,10 +304,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineAgentInstanceView(vmAgentVersion, extensionHandlers?.ToList(), statuses?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineExtensionHandlerInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionHandlerInstanceView"/>. </summary>
         /// <param name="virtualMachineExtensionHandlerInstanceViewType">
         /// Specifies the type of the extension; an example is "CustomScriptExtension".
         /// Serialized Name: VirtualMachineExtensionHandlerInstanceView.type
@@ -341,10 +323,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineExtensionHandlerInstanceView(virtualMachineExtensionHandlerInstanceViewType, typeHandlerVersion, status, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.MaintenanceRedeployStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MaintenanceRedeployStatus"/>. </summary>
         /// <param name="isCustomerInitiatedMaintenanceAllowed">
         /// True, if customer is allowed to perform Maintenance.
         /// Serialized Name: MaintenanceRedeployStatus.isCustomerInitiatedMaintenanceAllowed
@@ -379,10 +358,7 @@ namespace MgmtRenameRules.Models
             return new MaintenanceRedeployStatus(isCustomerInitiatedMaintenanceAllowed, preMaintenanceWindowStartOn, preMaintenanceWindowEndOn, maintenanceWindowStartOn, maintenanceWindowEndOn, lastOperationResultCode, lastOperationMessage, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.DiskInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskInstanceView"/>. </summary>
         /// <param name="name">
         /// The disk name.
         /// Serialized Name: DiskInstanceView.name
@@ -404,10 +380,7 @@ namespace MgmtRenameRules.Models
             return new DiskInstanceView(name, encryptionSettings?.ToList(), statuses?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.BootDiagnosticsInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BootDiagnosticsInstanceView"/>. </summary>
         /// <param name="consoleScreenshotBlobUri">
         /// The console screenshot blob URI. &lt;br&gt;&lt;br&gt;NOTE: This will **not** be set if boot diagnostics is currently enabled with managed storage.
         /// Serialized Name: BootDiagnosticsInstanceView.consoleScreenshotBlobUri
@@ -426,10 +399,7 @@ namespace MgmtRenameRules.Models
             return new BootDiagnosticsInstanceView(consoleScreenshotBlobUri, serialConsoleLogBlobUri, status, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachinePatchStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachinePatchStatus"/>. </summary>
         /// <param name="availablePatchSummary">
         /// The available patch summary of the latest assessment operation for the virtual machine.
         /// Serialized Name: VirtualMachinePatchStatus.availablePatchSummary
@@ -444,10 +414,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachinePatchStatus(availablePatchSummary, lastPatchInstallationSummary, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.AvailablePatchSummary
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailablePatchSummary"/>. </summary>
         /// <param name="status">
         /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: AvailablePatchSummary.status
@@ -490,10 +457,7 @@ namespace MgmtRenameRules.Models
             return new AvailablePatchSummary(status, assessmentActivityId, rebootPending, criticalAndSecurityPatchCount, otherPatchCount, uri, startOn, lastModifiedOn, error, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ApiError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ApiError"/>. </summary>
         /// <param name="details">
         /// The Api error details
         /// Serialized Name: ApiError.details
@@ -522,10 +486,7 @@ namespace MgmtRenameRules.Models
             return new ApiError(details?.ToList(), innererror, code, target, message, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ApiErrorBase
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ApiErrorBase"/>. </summary>
         /// <param name="code">
         /// The error code.
         /// Serialized Name: ApiErrorBase.code
@@ -544,10 +505,7 @@ namespace MgmtRenameRules.Models
             return new ApiErrorBase(code, target, message, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.InnerError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="InnerError"/>. </summary>
         /// <param name="exceptiontype">
         /// The exception type.
         /// Serialized Name: InnerError.exceptiontype
@@ -562,10 +520,7 @@ namespace MgmtRenameRules.Models
             return new InnerError(exceptiontype, errordetail, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.LastPatchInstallationSummary
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LastPatchInstallationSummary"/>. </summary>
         /// <param name="status">
         /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: LastPatchInstallationSummary.status
@@ -624,10 +579,7 @@ namespace MgmtRenameRules.Models
             return new LastPatchInstallationSummary(status, installationActivityId, maintenanceWindowExceeded, rebootStatus, notSelectedPatchCount, excludedPatchCount, pendingPatchCount, installedPatchCount, failedPatchCount, startOn, lastModifiedOn, startedBy, error, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.ImageData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -658,10 +610,7 @@ namespace MgmtRenameRules.Models
             return new ImageData(id, name, resourceType, systemData, tags, location, sourceVirtualMachineId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId) : null, storageProfile, provisioningState, hyperVGeneration, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ImagePatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImagePatch"/>. </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
@@ -690,10 +639,7 @@ namespace MgmtRenameRules.Models
             return new ImagePatch(tags, sourceVirtualMachineId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId) : null, storageProfile, provisioningState, hyperVGeneration, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineCaptureResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineCaptureResult"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id
@@ -722,10 +668,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineCaptureResult(id, schema, contentVersion, parameters, resources?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachinePatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachinePatch"/>. </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
@@ -832,10 +775,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachinePatch(tags, plan, identity, zones?.ToList(), hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, priority, evictionPolicy, billingMaxPrice != null ? new BillingProfile(billingMaxPrice, new Dictionary<string, BinaryData>()) : null, hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineSize
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineSize"/>. </summary>
         /// <param name="name">
         /// The name of the virtual machine size.
         /// Serialized Name: VirtualMachineSize.name
@@ -866,10 +806,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineSize(name, numberOfCores, osDiskSizeInMB, resourceDiskSizeInMB, memoryInMB, maxDataDiskCount, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.RetrieveBootDiagnosticsDataResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RetrieveBootDiagnosticsDataResult"/>. </summary>
         /// <param name="consoleScreenshotBlobUri">
         /// The console screenshot blob URI
         /// Serialized Name: RetrieveBootDiagnosticsDataResult.consoleScreenshotBlobUri
@@ -884,10 +821,7 @@ namespace MgmtRenameRules.Models
             return new RetrieveBootDiagnosticsDataResult(consoleScreenshotBlobUri, serialConsoleLogBlobUri, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineAssessPatchesResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineAssessPatchesResult"/>. </summary>
         /// <param name="status">
         /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: VirtualMachineAssessPatchesResult.status
@@ -928,10 +862,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineAssessPatchesResult(status, assessmentActivityId, rebootPending, criticalAndSecurityPatchCount, otherPatchCount, startOn, patches?.ToList(), error, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineSoftwarePatchProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineSoftwarePatchProperties"/>. </summary>
         /// <param name="patchId">
         /// A unique identifier for the patch.
         /// Serialized Name: VirtualMachineSoftwarePatchProperties.patchId
@@ -980,10 +911,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineSoftwarePatchProperties(patchId, name, version, kbid, classifications?.ToList(), rebootBehavior, activityId, publishedOn, lastModifiedOn, assessmentState, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.VirtualMachineScaleSetData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -1084,10 +1012,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, sku, plan, identity, zones?.ToList(), ipsecSomething, testIPsec, p2sServer, upgradePolicy, automaticRepairsPolicy, virtualMachineProfile, provisioningState, overprovision, doNotRunExtensionsOnOverprovisionedVms, uniqueId, singlePlacementGroup, zoneBalance, platformFaultDomainCount, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, scaleInRules != null ? new ScaleInPolicy(scaleInRules?.ToList(), new Dictionary<string, BinaryData>()) : null, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.VirtualMachineScaleSetExtensionData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionData"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResourceReadOnly.id
@@ -1148,10 +1073,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineScaleSetExtensionData(id, name, resourceType, forceUpdateTag, publisher, typePropertiesType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, provisionAfterExtensions?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.SubResourceReadOnly
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResourceReadOnly"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResourceReadOnly.id
@@ -1162,10 +1084,7 @@ namespace MgmtRenameRules.Models
             return new SubResourceReadOnly(id, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetInstanceView"/>. </summary>
         /// <param name="virtualMachineStatusesSummary">
         /// The instance view status summary for the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetInstanceView.virtualMachine
@@ -1193,10 +1112,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineScaleSetInstanceView(virtualMachineStatusesSummary != null ? new VirtualMachineScaleSetInstanceViewStatusesSummary(virtualMachineStatusesSummary?.ToList(), new Dictionary<string, BinaryData>()) : null, extensions?.ToList(), statuses?.ToList(), orchestrationServices?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineStatusCodeCount
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineStatusCodeCount"/>. </summary>
         /// <param name="code">
         /// The instance view status code.
         /// Serialized Name: VirtualMachineStatusCodeCount.code
@@ -1211,10 +1127,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineStatusCodeCount(code, count, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetVmExtensionsSummary
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmExtensionsSummary"/>. </summary>
         /// <param name="name">
         /// The extension name.
         /// Serialized Name: VirtualMachineScaleSetVMExtensionsSummary.name
@@ -1231,10 +1144,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineScaleSetVmExtensionsSummary(name, statusesSummary?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.OrchestrationServiceSummary
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OrchestrationServiceSummary"/>. </summary>
         /// <param name="serviceName">
         /// The name of the service.
         /// Serialized Name: OrchestrationServiceSummary.serviceName
@@ -1249,10 +1159,7 @@ namespace MgmtRenameRules.Models
             return new OrchestrationServiceSummary(serviceName, serviceState, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetExtensionPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionPatch"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -1305,10 +1212,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineScaleSetExtensionPatch(id, name, resourceType, systemData, forceUpdateTag, publisher, typePropertiesType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, provisionAfterExtensions?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetSku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetSku"/>. </summary>
         /// <param name="resourceType">
         /// The type of resource the sku applies to.
         /// Serialized Name: VirtualMachineScaleSetSku.resourceType
@@ -1327,10 +1231,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineScaleSetSku(resourceType, sku, capacity, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetSkuCapacity
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetSkuCapacity"/>. </summary>
         /// <param name="minimum">
         /// The minimum capacity.
         /// Serialized Name: VirtualMachineScaleSetSkuCapacity.minimum
@@ -1353,10 +1254,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineScaleSetSkuCapacity(minimum, maximum, defaultCapacity, scaleType, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.UpgradeOperationHistoricalStatusInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UpgradeOperationHistoricalStatusInfo"/>. </summary>
         /// <param name="properties">
         /// Information about the properties of the upgrade operation.
         /// Serialized Name: UpgradeOperationHistoricalStatusInfo.properties
@@ -1375,10 +1273,7 @@ namespace MgmtRenameRules.Models
             return new UpgradeOperationHistoricalStatusInfo(properties, upgradeOperationHistoricalStatusInfoType, location, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.UpgradeOperationHistoricalStatusInfoProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UpgradeOperationHistoricalStatusInfoProperties"/>. </summary>
         /// <param name="runningStatus">
         /// Information about the overall status of the upgrade operation.
         /// Serialized Name: UpgradeOperationHistoricalStatusInfoProperties.runningStatus
@@ -1409,10 +1304,7 @@ namespace MgmtRenameRules.Models
             return new UpgradeOperationHistoricalStatusInfoProperties(runningStatus, progress, error, startedBy, targetImageReference, rollbackInfo, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.UpgradeOperationHistoryStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UpgradeOperationHistoryStatus"/>. </summary>
         /// <param name="code">
         /// Code indicating the current status of the upgrade.
         /// Serialized Name: UpgradeOperationHistoryStatus.code
@@ -1431,10 +1323,7 @@ namespace MgmtRenameRules.Models
             return new UpgradeOperationHistoryStatus(code, startOn, endOn, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.RollingUpgradeProgressInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RollingUpgradeProgressInfo"/>. </summary>
         /// <param name="successfulInstanceCount">
         /// The number of instances that have been successfully upgraded.
         /// Serialized Name: RollingUpgradeProgressInfo.successfulInstanceCount
@@ -1457,10 +1346,7 @@ namespace MgmtRenameRules.Models
             return new RollingUpgradeProgressInfo(successfulInstanceCount, failedInstanceCount, inProgressInstanceCount, pendingInstanceCount, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.RollbackStatusInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RollbackStatusInfo"/>. </summary>
         /// <param name="successfullyRolledbackInstanceCount">
         /// The number of instances which have been successfully rolled back.
         /// Serialized Name: RollbackStatusInfo.successfullyRolledbackInstanceCount
@@ -1479,10 +1365,7 @@ namespace MgmtRenameRules.Models
             return new RollbackStatusInfo(successfullyRolledbackInstanceCount, failedRolledbackInstanceCount, rollbackError, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.VirtualMachineScaleSetRollingUpgradeData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetRollingUpgradeData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -1513,10 +1396,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineScaleSetRollingUpgradeData(id, name, resourceType, systemData, tags, location, policy, runningStatus, progress, error, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.RollingUpgradeRunningStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RollingUpgradeRunningStatus"/>. </summary>
         /// <param name="code">
         /// Code indicating the current status of the upgrade.
         /// Serialized Name: RollingUpgradeRunningStatus.code
@@ -1539,10 +1419,7 @@ namespace MgmtRenameRules.Models
             return new RollingUpgradeRunningStatus(code, startOn, lastAction, lastActionOn, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.RecoveryWalkResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RecoveryWalkResponse"/>. </summary>
         /// <param name="walkPerformed">
         /// Whether the recovery walk was performed
         /// Serialized Name: RecoveryWalkResponse.walkPerformed
@@ -1557,10 +1434,7 @@ namespace MgmtRenameRules.Models
             return new RecoveryWalkResponse(walkPerformed, nextPlatformUpdateDomain, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.VirtualMachineScaleSetVmData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -1658,10 +1532,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineScaleSetVmData(id, name, resourceType, systemData, tags, location, instanceId, sku, plan, zones?.ToList(), latestModelApplied, vmId, instanceView, hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, networkInterfaceConfigurations != null ? new VirtualMachineScaleSetVmNetworkProfileConfiguration(networkInterfaceConfigurations?.ToList(), new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, provisioningState, licenseType, modelDefinitionApplied, protectionPolicy, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetVmInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmInstanceView"/>. </summary>
         /// <param name="platformUpdateDomain">
         /// The Update Domain count.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceView.platformUpdateDomain
@@ -1715,10 +1586,7 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineScaleSetVmInstanceView(platformUpdateDomain, platformFaultDomain, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus, new Dictionary<string, BinaryData>()) : null, bootDiagnostics, statuses?.ToList(), assignedHost, placementGroupId, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.RequestRateByIntervalContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RequestRateByIntervalContent"/>. </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
@@ -1753,10 +1621,7 @@ namespace MgmtRenameRules.Models
             return new RequestRateByIntervalContent(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, intervalLength, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.LogAnalyticsInputBase
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LogAnalyticsInputBase"/>. </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
@@ -1787,10 +1652,7 @@ namespace MgmtRenameRules.Models
             return new LogAnalyticsInputBase(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.LogAnalytics
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LogAnalytics"/>. </summary>
         /// <param name="logAnalyticsOutput">
         /// LogAnalyticsOutput
         /// Serialized Name: LogAnalyticsOperationResult.properties
@@ -1817,10 +1679,7 @@ namespace MgmtRenameRules.Models
             return new LogAnalytics(logAnalyticsOutput != null ? new LogAnalyticsOutput(logAnalyticsOutput, new Dictionary<string, BinaryData>()) : null, contentType, content, requestMethod, basePathUri, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.ThrottledRequestsContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ThrottledRequestsContent"/>. </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri

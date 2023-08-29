@@ -16,10 +16,7 @@ namespace xml_service.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.ContainerProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ContainerProperties"/>. </summary>
         /// <param name="lastModified"></param>
         /// <param name="etag"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="etag"/> is null. </exception>
@@ -31,10 +28,7 @@ namespace xml_service.Models
             Etag = etag;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.ContainerProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ContainerProperties"/>. </summary>
         /// <param name="lastModified"></param>
         /// <param name="etag"></param>
         /// <param name="leaseStatus"></param>

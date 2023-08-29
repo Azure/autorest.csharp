@@ -15,18 +15,12 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyTransportSecurity
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyTransportSecurity"/>. </summary>
         public FirewallPolicyTransportSecurity()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyTransportSecurity
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyTransportSecurity"/>. </summary>
         /// <param name="certificateAuthority"> The CA used for intermediate CA generation. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal FirewallPolicyTransportSecurity(FirewallPolicyCertificateAuthority certificateAuthority, Dictionary<string, BinaryData> rawData)

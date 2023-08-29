@@ -15,10 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.DocumentStatistics
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DocumentStatistics"/>. </summary>
         /// <param name="charactersCount"> Number of text elements recognized in the document. </param>
         /// <param name="transactionsCount"> Number of transactions for the document. </param>
         internal DocumentStatistics(int charactersCount, int transactionsCount)
@@ -27,10 +24,7 @@ namespace CognitiveServices.TextAnalytics.Models
             TransactionsCount = transactionsCount;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.DocumentStatistics
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DocumentStatistics"/>. </summary>
         /// <param name="charactersCount"> Number of text elements recognized in the document. </param>
         /// <param name="transactionsCount"> Number of transactions for the document. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

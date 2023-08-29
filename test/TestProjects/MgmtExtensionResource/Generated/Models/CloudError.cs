@@ -15,18 +15,12 @@ namespace MgmtExtensionResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExtensionResource.Models.CloudError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CloudError"/>. </summary>
         internal CloudError()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExtensionResource.Models.CloudError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CloudError"/>. </summary>
         /// <param name="errorResponse"> Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal CloudError(ErrorResponse errorResponse, Dictionary<string, BinaryData> rawData)

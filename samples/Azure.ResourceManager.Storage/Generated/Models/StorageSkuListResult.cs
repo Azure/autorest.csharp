@@ -16,19 +16,13 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StorageSkuListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageSkuListResult"/>. </summary>
         internal StorageSkuListResult()
         {
             Value = new ChangeTrackingList<StorageSkuInformation>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StorageSkuListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageSkuListResult"/>. </summary>
         /// <param name="value"> Get the list result of storage SKUs and their properties. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal StorageSkuListResult(IReadOnlyList<StorageSkuInformation> value, Dictionary<string, BinaryData> rawData)

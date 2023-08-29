@@ -18,10 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.AutomaticOSUpgradeProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AutomaticOSUpgradeProperties"/>. </summary>
         /// <param name="automaticOSUpgradeSupported">
         /// Specifies whether automatic OS upgrade is supported on the image.
         /// Serialized Name: AutomaticOSUpgradeProperties.automaticOSUpgradeSupported
@@ -31,10 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             AutomaticOSUpgradeSupported = automaticOSUpgradeSupported;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.AutomaticOSUpgradeProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AutomaticOSUpgradeProperties"/>. </summary>
         /// <param name="automaticOSUpgradeSupported">
         /// Specifies whether automatic OS upgrade is supported on the image.
         /// Serialized Name: AutomaticOSUpgradeProperties.automaticOSUpgradeSupported

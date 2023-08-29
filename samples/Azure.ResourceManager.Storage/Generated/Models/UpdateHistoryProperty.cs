@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.UpdateHistoryProperty
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UpdateHistoryProperty"/>. </summary>
         internal UpdateHistoryProperty()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.UpdateHistoryProperty
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UpdateHistoryProperty"/>. </summary>
         /// <param name="update"> The ImmutabilityPolicy update type of a blob container, possible values include: put, lock and extend. </param>
         /// <param name="immutabilityPeriodSinceCreationInDays"> The immutability period for the blobs in the container since the policy creation, in days. </param>
         /// <param name="timestamp"> Returns the date and time the ImmutabilityPolicy was updated. </param>

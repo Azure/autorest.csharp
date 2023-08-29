@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.LastPatchInstallationSummary
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LastPatchInstallationSummary"/>. </summary>
         internal LastPatchInstallationSummary()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.LastPatchInstallationSummary
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LastPatchInstallationSummary"/>. </summary>
         /// <param name="status">
         /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: LastPatchInstallationSummary.status

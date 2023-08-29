@@ -16,19 +16,13 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StorageAccountListKeysResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageAccountListKeysResult"/>. </summary>
         internal StorageAccountListKeysResult()
         {
             Keys = new ChangeTrackingList<StorageAccountKey>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StorageAccountListKeysResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageAccountListKeysResult"/>. </summary>
         /// <param name="keys"> Gets the list of storage account keys and their properties for the specified storage account. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal StorageAccountListKeysResult(IReadOnlyList<StorageAccountKey> keys, Dictionary<string, BinaryData> rawData)

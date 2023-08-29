@@ -20,19 +20,13 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VaultSecretGroup
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultSecretGroup"/>. </summary>
         public VaultSecretGroup()
         {
             VaultCertificates = new ChangeTrackingList<VaultCertificate>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VaultSecretGroup
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultSecretGroup"/>. </summary>
         /// <param name="sourceVault">
         /// The relative URL of the Key Vault containing all of the certificates in VaultCertificates.
         /// Serialized Name: VaultSecretGroup.sourceVault

@@ -14,10 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Defines a data change detection policy that captures changes based on the value of a high water mark column. </summary>
     public partial class HighWaterMarkChangeDetectionPolicy : DataChangeDetectionPolicy
     {
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.HighWaterMarkChangeDetectionPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="HighWaterMarkChangeDetectionPolicy"/>. </summary>
         /// <param name="highWaterMarkColumnName"> The name of the high water mark column. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="highWaterMarkColumnName"/> is null. </exception>
         public HighWaterMarkChangeDetectionPolicy(string highWaterMarkColumnName)
@@ -28,10 +25,7 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy";
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.HighWaterMarkChangeDetectionPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="HighWaterMarkChangeDetectionPolicy"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the data change detection policy. </param>
         /// <param name="highWaterMarkColumnName"> The name of the high water mark column. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

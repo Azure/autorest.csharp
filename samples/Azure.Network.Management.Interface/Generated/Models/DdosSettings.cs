@@ -15,18 +15,12 @@ namespace Azure.Network.Management.Interface.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.DdosSettings
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DdosSettings"/>. </summary>
         public DdosSettings()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.DdosSettings
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DdosSettings"/>. </summary>
         /// <param name="ddosCustomPolicy"> The DDoS custom policy associated with the public IP. </param>
         /// <param name="protectionCoverage"> The DDoS protection policy customizability of the public IP. Only standard coverage will have the ability to be customized. </param>
         /// <param name="protectedIP"> Enables DDoS protection on the public IP. </param>

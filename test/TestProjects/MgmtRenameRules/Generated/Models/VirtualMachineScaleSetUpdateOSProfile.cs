@@ -19,19 +19,13 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdateOSProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateOSProfile"/>. </summary>
         public VirtualMachineScaleSetUpdateOSProfile()
         {
             Secrets = new ChangeTrackingList<VaultSecretGroup>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdateOSProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateOSProfile"/>. </summary>
         /// <param name="customData">
         /// A base-64 encoded string of custom data.
         /// Serialized Name: VirtualMachineScaleSetUpdateOSProfile.customData

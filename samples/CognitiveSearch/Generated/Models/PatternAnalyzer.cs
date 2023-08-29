@@ -14,10 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Flexibly separates text into terms via a regular expression pattern. This analyzer is implemented using Apache Lucene. </summary>
     public partial class PatternAnalyzer : Analyzer
     {
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.PatternAnalyzer
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PatternAnalyzer"/>. </summary>
         /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public PatternAnalyzer(string name) : base(name)
@@ -28,10 +25,7 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.PatternAnalyzer";
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.PatternAnalyzer
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PatternAnalyzer"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the analyzer. </param>
         /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="lowerCaseTerms"> A value indicating whether terms should be lower-cased. Default is true. </param>

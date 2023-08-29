@@ -17,19 +17,13 @@ namespace MgmtExpandResourceTypes.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.DnsResourceReferenceContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DnsResourceReferenceContent"/>. </summary>
         public DnsResourceReferenceContent()
         {
             TargetResources = new ChangeTrackingList<WritableSubResource>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.DnsResourceReferenceContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DnsResourceReferenceContent"/>. </summary>
         /// <param name="targetResources"> A list of references to azure resources for which referencing dns records need to be queried. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal DnsResourceReferenceContent(IList<WritableSubResource> targetResources, Dictionary<string, BinaryData> rawData)

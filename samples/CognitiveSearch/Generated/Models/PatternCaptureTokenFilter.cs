@@ -15,10 +15,7 @@ namespace CognitiveSearch.Models
     /// <summary> Uses Java regexes to emit multiple tokens - one for each capture group in one or more patterns. This token filter is implemented using Apache Lucene. </summary>
     public partial class PatternCaptureTokenFilter : TokenFilter
     {
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.PatternCaptureTokenFilter
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PatternCaptureTokenFilter"/>. </summary>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="patterns"> A list of patterns to match against each token. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="patterns"/> is null. </exception>
@@ -31,10 +28,7 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.PatternCaptureTokenFilter";
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.PatternCaptureTokenFilter
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PatternCaptureTokenFilter"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="patterns"> A list of patterns to match against each token. </param>

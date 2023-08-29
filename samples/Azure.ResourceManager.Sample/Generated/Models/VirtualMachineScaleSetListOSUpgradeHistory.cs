@@ -21,10 +21,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetListOSUpgradeHistory
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListOSUpgradeHistory"/>. </summary>
         /// <param name="value">
         /// The list of OS upgrades performed on the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.value
@@ -37,10 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetListOSUpgradeHistory
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListOSUpgradeHistory"/>. </summary>
         /// <param name="value">
         /// The list of OS upgrades performed on the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.value

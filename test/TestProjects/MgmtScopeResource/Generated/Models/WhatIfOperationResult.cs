@@ -16,19 +16,13 @@ namespace MgmtScopeResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.WhatIfOperationResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="WhatIfOperationResult"/>. </summary>
         internal WhatIfOperationResult()
         {
             Changes = new ChangeTrackingList<WhatIfChange>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.WhatIfOperationResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="WhatIfOperationResult"/>. </summary>
         /// <param name="status"> Status of the What-If operation. </param>
         /// <param name="errorResponse"> Error when What-If operation fails. </param>
         /// <param name="changes"> List of resource changes predicted by What-If operation. </param>

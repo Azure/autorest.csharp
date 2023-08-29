@@ -17,10 +17,7 @@ namespace MgmtOperations.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOperations.Models.ConnectionSharedKey
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ConnectionSharedKey"/>. </summary>
         /// <param name="location"> The location. </param>
         /// <param name="value"> The virtual network connection shared key value. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -31,10 +28,7 @@ namespace MgmtOperations.Models
             Value = value;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOperations.Models.ConnectionSharedKey
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ConnectionSharedKey"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

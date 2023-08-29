@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.InnerError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="InnerError"/>. </summary>
         internal InnerError()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.InnerError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="InnerError"/>. </summary>
         /// <param name="exceptiontype">
         /// The exception type.
         /// Serialized Name: InnerError.exceptiontype

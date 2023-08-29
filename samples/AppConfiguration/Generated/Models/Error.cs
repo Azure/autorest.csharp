@@ -15,18 +15,12 @@ namespace AppConfiguration.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::AppConfiguration.Models.Error
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Error"/>. </summary>
         internal Error()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::AppConfiguration.Models.Error
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Error"/>. </summary>
         /// <param name="type"> The type of the error. </param>
         /// <param name="title"> A brief summary of the error. </param>
         /// <param name="name"> The name of the parameter that resulted in the error. </param>

@@ -17,10 +17,7 @@ namespace MgmtScopeResource.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtScopeResourceModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.FakePolicyAssignmentData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FakePolicyAssignmentData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -46,10 +43,7 @@ namespace MgmtScopeResource.Models
             return new FakePolicyAssignmentData(id, name, resourceType, systemData, location, identity, displayName, policyDefinitionId, scope, notScopes?.ToList(), parameters, description, metadata, enforcementMode, nonComplianceMessages?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.Deployment
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Deployment"/>. </summary>
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="properties"> The deployment properties. </param>
         /// <param name="tags"> Deployment tags. </param>
@@ -61,10 +55,7 @@ namespace MgmtScopeResource.Models
             return new Deployment(location, properties, tags, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentProperties"/>. </summary>
         /// <param name="template"> The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both. </param>
         /// <param name="parameters"> Name and value pairs that define the deployment parameters for the template. You use this element when you want to provide the parameter values directly in the request rather than link to an existing parameter file. Use either the parametersLink property or the parameters property, but not both. It can be a JObject or a well formed JSON string. </param>
         /// <param name="mode"> The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In Complete mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources. </param>
@@ -74,10 +65,7 @@ namespace MgmtScopeResource.Models
             return new DeploymentProperties(template, parameters, mode, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.DeploymentExtendedData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentExtendedData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -93,10 +81,7 @@ namespace MgmtScopeResource.Models
             return new DeploymentExtendedData(id, name, resourceType, systemData, location, properties, tags, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentPropertiesExtended
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentPropertiesExtended"/>. </summary>
         /// <param name="provisioningState"> Denotes the state of provisioning. </param>
         /// <param name="correlationId"> The correlation ID of the deployment. </param>
         /// <param name="timestamp"> The timestamp of the template deployment. </param>
@@ -111,10 +96,7 @@ namespace MgmtScopeResource.Models
             return new DeploymentPropertiesExtended(provisioningState, correlationId, timestamp, duration, outputs, parameters, mode, error != null ? new ErrorResponse(error, new Dictionary<string, BinaryData>()) : null, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentValidateResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentValidateResult"/>. </summary>
         /// <param name="error"> The deployment validation error. </param>
         /// <param name="properties"> The template deployment properties. </param>
         /// <returns> A new <see cref="Models.DeploymentValidateResult"/> instance for mocking. </returns>
@@ -123,10 +105,7 @@ namespace MgmtScopeResource.Models
             return new DeploymentValidateResult(error != null ? new ErrorResponse(error, new Dictionary<string, BinaryData>()) : null, properties, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentExportResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentExportResult"/>. </summary>
         /// <param name="template"> The template content. </param>
         /// <returns> A new <see cref="Models.DeploymentExportResult"/> instance for mocking. </returns>
         public static DeploymentExportResult DeploymentExportResult(BinaryData template = null)
@@ -134,10 +113,7 @@ namespace MgmtScopeResource.Models
             return new DeploymentExportResult(template, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentWhatIf
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentWhatIf"/>. </summary>
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="properties"> The deployment properties. </param>
         /// <returns> A new <see cref="Models.DeploymentWhatIf"/> instance for mocking. </returns>
@@ -146,10 +122,7 @@ namespace MgmtScopeResource.Models
             return new DeploymentWhatIf(location, properties, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentWhatIfProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentWhatIfProperties"/>. </summary>
         /// <param name="template"> The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both. </param>
         /// <param name="parameters"> Name and value pairs that define the deployment parameters for the template. You use this element when you want to provide the parameter values directly in the request rather than link to an existing parameter file. Use either the parametersLink property or the parameters property, but not both. It can be a JObject or a well formed JSON string. </param>
         /// <param name="mode"> The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In Complete mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources. </param>
@@ -160,10 +133,7 @@ namespace MgmtScopeResource.Models
             return new DeploymentWhatIfProperties(template, parameters, mode, whatIfResultFormat != null ? new DeploymentWhatIfSettings(whatIfResultFormat, new Dictionary<string, BinaryData>()) : null, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.WhatIfOperationResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="WhatIfOperationResult"/>. </summary>
         /// <param name="status"> Status of the What-If operation. </param>
         /// <param name="error"> Error when What-If operation fails. </param>
         /// <param name="changes"> List of resource changes predicted by What-If operation. </param>
@@ -175,10 +145,7 @@ namespace MgmtScopeResource.Models
             return new WhatIfOperationResult(status, error != null ? new ErrorResponse(error, new Dictionary<string, BinaryData>()) : null, changes?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.WhatIfChange
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="WhatIfChange"/>. </summary>
         /// <param name="resourceId"> Resource ID. </param>
         /// <param name="changeType"> Type of change that will be made to the resource when the deployment is executed. </param>
         /// <param name="unsupportedReason"> The explanation about why the resource is unsupported by What-If. </param>
@@ -190,10 +157,7 @@ namespace MgmtScopeResource.Models
             return new WhatIfChange(resourceId, changeType, unsupportedReason, before, after, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentOperation
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentOperation"/>. </summary>
         /// <param name="id"> Full deployment operation ID. </param>
         /// <param name="operationId"> Deployment operation ID. </param>
         /// <param name="properties"> Deployment properties. </param>
@@ -203,10 +167,7 @@ namespace MgmtScopeResource.Models
             return new DeploymentOperation(id, operationId, properties, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentOperationProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentOperationProperties"/>. </summary>
         /// <param name="provisioningOperation"> The name of the current provisioning operation. </param>
         /// <param name="provisioningState"> The state of the provisioning. </param>
         /// <param name="timestamp"> The date and time of the operation. </param>
@@ -223,10 +184,7 @@ namespace MgmtScopeResource.Models
             return new DeploymentOperationProperties(provisioningOperation, provisioningState, timestamp, duration, anotherDuration, serviceRequestId, statusCode, statusMessage, requestContent != null ? new HttpMessage(requestContent, new Dictionary<string, BinaryData>()) : null, responseContent != null ? new HttpMessage(responseContent, new Dictionary<string, BinaryData>()) : null, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.StatusMessage
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StatusMessage"/>. </summary>
         /// <param name="status"> Status of the deployment operation. </param>
         /// <param name="error"> The error reported by the operation. </param>
         /// <returns> A new <see cref="Models.StatusMessage"/> instance for mocking. </returns>
@@ -235,10 +193,7 @@ namespace MgmtScopeResource.Models
             return new StatusMessage(status, error != null ? new ErrorResponse(error, new Dictionary<string, BinaryData>()) : null, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.TemplateHashResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TemplateHashResult"/>. </summary>
         /// <param name="minifiedTemplate"> The minified template string. </param>
         /// <param name="templateHash"> The template hash. </param>
         /// <returns> A new <see cref="Models.TemplateHashResult"/> instance for mocking. </returns>
@@ -247,10 +202,7 @@ namespace MgmtScopeResource.Models
             return new TemplateHashResult(minifiedTemplate, templateHash, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.ResourceLinkData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceLinkData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -262,10 +214,7 @@ namespace MgmtScopeResource.Models
             return new ResourceLinkData(id, name, resourceType, systemData, properties, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.ResourceLinkProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceLinkProperties"/>. </summary>
         /// <param name="sourceId"> The fully qualified ID of the source resource in the link. </param>
         /// <param name="targetId"> The fully qualified ID of the target resource in the link. </param>
         /// <param name="notes"> Notes about the resource link. </param>
@@ -275,10 +224,7 @@ namespace MgmtScopeResource.Models
             return new ResourceLinkProperties(sourceId, targetId, notes, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.VMInsightsOnboardingStatusData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VMInsightsOnboardingStatusData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -295,10 +241,7 @@ namespace MgmtScopeResource.Models
             return new VMInsightsOnboardingStatusData(id, name, resourceType, systemData, resourceId, onboardingStatus, dataStatus, data?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DataContainer
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DataContainer"/>. </summary>
         /// <param name="workspace"> Log Analytics workspace information. </param>
         /// <returns> A new <see cref="Models.DataContainer"/> instance for mocking. </returns>
         public static DataContainer DataContainer(WorkspaceInfo workspace = null)
@@ -306,10 +249,7 @@ namespace MgmtScopeResource.Models
             return new DataContainer(workspace, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.WorkspaceInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="WorkspaceInfo"/>. </summary>
         /// <param name="id"> Azure Resource Manager identifier of the Log Analytics Workspace. </param>
         /// <param name="location"> Location of the Log Analytics workspace. </param>
         /// <param name="customerId"> Log Analytics workspace identifier. </param>
@@ -319,10 +259,7 @@ namespace MgmtScopeResource.Models
             return new WorkspaceInfo(id, location, customerId, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.GuestConfigurationAssignmentData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GuestConfigurationAssignmentData"/>. </summary>
         /// <param name="id"> ARM resource id of the guest configuration assignment. </param>
         /// <param name="name"> Name of the guest configuration assignment. </param>
         /// <param name="location"> Region where the VM is located. </param>
@@ -334,10 +271,7 @@ namespace MgmtScopeResource.Models
             return new GuestConfigurationAssignmentData(id, name, location, resourceType, properties, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.GuestConfigurationAssignmentProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GuestConfigurationAssignmentProperties"/>. </summary>
         /// <param name="targetResourceId"> VM resource Id. </param>
         /// <param name="complianceStatus"> A value indicating compliance status of the machine for the assigned guest configuration. </param>
         /// <param name="lastComplianceStatusChecked"> Date and time when last compliance status was checked. </param>
@@ -353,10 +287,7 @@ namespace MgmtScopeResource.Models
             return new GuestConfigurationAssignmentProperties(targetResourceId, complianceStatus, lastComplianceStatusChecked, latestReportId, parameterHash, context, assignmentHash, provisioningState, resourceType, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.GuestConfigurationBaseResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GuestConfigurationBaseResource"/>. </summary>
         /// <param name="id"> ARM resource id of the guest configuration assignment. </param>
         /// <param name="name"> Name of the guest configuration assignment. </param>
         /// <param name="location"> Region where the VM is located. </param>
@@ -367,10 +298,7 @@ namespace MgmtScopeResource.Models
             return new GuestConfigurationBaseResource(id, name, location, resourceType, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.Marketplace
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Marketplace"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

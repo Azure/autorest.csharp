@@ -15,20 +15,14 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.LeaseContainerContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LeaseContainerContent"/>. </summary>
         /// <param name="action"> Specifies the lease action. Can be one of the available actions. </param>
         public LeaseContainerContent(LeaseContainerRequestAction action)
         {
             Action = action;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.LeaseContainerContent
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LeaseContainerContent"/>. </summary>
         /// <param name="action"> Specifies the lease action. Can be one of the available actions. </param>
         /// <param name="leaseId"> Identifies the lease. Can be specified in any valid GUID string format. </param>
         /// <param name="breakPeriod"> Optional. For a break action, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. </param>

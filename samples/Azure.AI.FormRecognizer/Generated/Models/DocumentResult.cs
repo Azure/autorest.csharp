@@ -17,10 +17,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.DocumentResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DocumentResult"/>. </summary>
         /// <param name="docType"> Document type. </param>
         /// <param name="pageRange"> First and last page number where the document is found. </param>
         /// <param name="fields"> Dictionary of named field values. </param>
@@ -36,10 +33,7 @@ namespace Azure.AI.FormRecognizer.Models
             Fields = fields;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.DocumentResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DocumentResult"/>. </summary>
         /// <param name="docType"> Document type. </param>
         /// <param name="pageRange"> First and last page number where the document is found. </param>
         /// <param name="fields"> Dictionary of named field values. </param>

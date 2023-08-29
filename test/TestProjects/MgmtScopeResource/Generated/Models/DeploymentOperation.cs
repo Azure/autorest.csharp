@@ -15,18 +15,12 @@ namespace MgmtScopeResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentOperation
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentOperation"/>. </summary>
         internal DeploymentOperation()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentOperation
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentOperation"/>. </summary>
         /// <param name="id"> Full deployment operation ID. </param>
         /// <param name="operationId"> Deployment operation ID. </param>
         /// <param name="properties"> Deployment properties. </param>

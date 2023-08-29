@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.BootDiagnosticsInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BootDiagnosticsInstanceView"/>. </summary>
         internal BootDiagnosticsInstanceView()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.BootDiagnosticsInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BootDiagnosticsInstanceView"/>. </summary>
         /// <param name="consoleScreenshotBlobUri">
         /// The console screenshot blob URI. &lt;br&gt;&lt;br&gt;NOTE: This will **not** be set if boot diagnostics is currently enabled with managed storage.
         /// Serialized Name: BootDiagnosticsInstanceView.consoleScreenshotBlobUri

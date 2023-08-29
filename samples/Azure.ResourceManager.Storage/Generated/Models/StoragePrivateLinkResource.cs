@@ -17,20 +17,14 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StoragePrivateLinkResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StoragePrivateLinkResource"/>. </summary>
         public StoragePrivateLinkResource()
         {
             RequiredMembers = new ChangeTrackingList<string>();
             RequiredZoneNames = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StoragePrivateLinkResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StoragePrivateLinkResource"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

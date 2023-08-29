@@ -21,18 +21,12 @@ namespace TypeSchemaMapping.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::TypeSchemaMapping.Models.AbstractModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AbstractModel"/>. </summary>
         protected AbstractModel()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::TypeSchemaMapping.Models.AbstractModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AbstractModel"/>. </summary>
         /// <param name="discriminatorProperty"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal AbstractModel(string discriminatorProperty, Dictionary<string, BinaryData> rawData)

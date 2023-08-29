@@ -17,10 +17,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.IndexDocumentsResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IndexDocumentsResult"/>. </summary>
         /// <param name="results"> The list of status information for each document in the indexing request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="results"/> is null. </exception>
         internal IndexDocumentsResult(IEnumerable<IndexingResult> results)
@@ -30,10 +27,7 @@ namespace CognitiveSearch.Models
             Results = results.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.IndexDocumentsResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IndexDocumentsResult"/>. </summary>
         /// <param name="results"> The list of status information for each document in the indexing request. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal IndexDocumentsResult(IReadOnlyList<IndexingResult> results, Dictionary<string, BinaryData> rawData)

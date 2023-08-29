@@ -17,19 +17,13 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.DiskEncryptionSetPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskEncryptionSetPatch"/>. </summary>
         public DiskEncryptionSetPatch()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.DiskEncryptionSetPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskEncryptionSetPatch"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="identity"> Identity for the virtual machine. </param>
         /// <param name="encryptionType"> The type of key used to encrypt the data of the disk. </param>

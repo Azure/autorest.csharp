@@ -18,10 +18,7 @@ namespace MgmtParamOrdering.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.Models.VirtualMachineScaleSetListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListResult"/>. </summary>
         /// <param name="value"> The list of virtual machine scale sets. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal VirtualMachineScaleSetListResult(IEnumerable<VirtualMachineScaleSetData> value)
@@ -31,10 +28,7 @@ namespace MgmtParamOrdering.Models
             Value = value.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.Models.VirtualMachineScaleSetListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListResult"/>. </summary>
         /// <param name="value"> The list of virtual machine scale sets. </param>
         /// <param name="nextLink"> The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

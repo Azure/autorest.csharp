@@ -15,18 +15,12 @@ namespace MgmtOmitOperationGroups.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.Model4
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Model4"/>. </summary>
         internal Model4()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.Model4
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Model4"/>. </summary>
         /// <param name="id"></param>
         /// <param name="j"></param>
         /// <param name="modelz"></param>

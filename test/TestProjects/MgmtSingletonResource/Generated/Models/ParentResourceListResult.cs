@@ -18,10 +18,7 @@ namespace MgmtSingletonResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSingletonResource.Models.ParentResourceListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ParentResourceListResult"/>. </summary>
         /// <param name="value"> The list of parent resource. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal ParentResourceListResult(IEnumerable<ParentResourceData> value)
@@ -31,10 +28,7 @@ namespace MgmtSingletonResource.Models
             Value = value.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSingletonResource.Models.ParentResourceListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ParentResourceListResult"/>. </summary>
         /// <param name="value"> The list of parent resource. </param>
         /// <param name="nextLink"> The URI to fetch the next page. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

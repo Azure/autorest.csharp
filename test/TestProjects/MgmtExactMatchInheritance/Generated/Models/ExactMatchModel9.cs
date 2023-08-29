@@ -15,18 +15,12 @@ namespace MgmtExactMatchInheritance.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExactMatchInheritance.Models.ExactMatchModel9
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel9"/>. </summary>
         public ExactMatchModel9()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExactMatchInheritance.Models.ExactMatchModel9
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel9"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="exactMatchModel9Type"></param>

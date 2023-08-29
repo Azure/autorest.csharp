@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineStatusCodeCount
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineStatusCodeCount"/>. </summary>
         internal VirtualMachineStatusCodeCount()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineStatusCodeCount
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineStatusCodeCount"/>. </summary>
         /// <param name="code">
         /// The instance view status code.
         /// Serialized Name: VirtualMachineStatusCodeCount.code

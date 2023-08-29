@@ -16,19 +16,13 @@ namespace body_complex.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.DictionaryWrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DictionaryWrapper"/>. </summary>
         public DictionaryWrapper()
         {
             DefaultProgram = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.DictionaryWrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DictionaryWrapper"/>. </summary>
         /// <param name="defaultProgram"> Dictionary of &lt;string&gt;. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal DictionaryWrapper(IDictionary<string, string> defaultProgram, Dictionary<string, BinaryData> rawData)

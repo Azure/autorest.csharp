@@ -15,18 +15,12 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.DataSourceCredentials
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DataSourceCredentials"/>. </summary>
         public DataSourceCredentials()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.DataSourceCredentials
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DataSourceCredentials"/>. </summary>
         /// <param name="connectionString"> The connection string for the datasource. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal DataSourceCredentials(string connectionString, Dictionary<string, BinaryData> rawData)

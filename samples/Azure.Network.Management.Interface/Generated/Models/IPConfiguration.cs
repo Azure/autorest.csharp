@@ -13,18 +13,12 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> IP configuration. </summary>
     public partial class IPConfiguration : SubResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.IPConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IPConfiguration"/>. </summary>
         public IPConfiguration()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.IPConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IPConfiguration"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>

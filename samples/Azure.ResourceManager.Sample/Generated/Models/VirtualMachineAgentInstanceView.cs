@@ -19,20 +19,14 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineAgentInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineAgentInstanceView"/>. </summary>
         internal VirtualMachineAgentInstanceView()
         {
             ExtensionHandlers = new ChangeTrackingList<VirtualMachineExtensionHandlerInstanceView>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineAgentInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineAgentInstanceView"/>. </summary>
         /// <param name="vmAgentVersion">
         /// The VM Agent full version.
         /// Serialized Name: VirtualMachineAgentInstanceView.vmAgentVersion

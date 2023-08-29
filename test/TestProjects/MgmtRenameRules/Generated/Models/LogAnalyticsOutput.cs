@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.LogAnalyticsOutput
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LogAnalyticsOutput"/>. </summary>
         internal LogAnalyticsOutput()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.LogAnalyticsOutput
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LogAnalyticsOutput"/>. </summary>
         /// <param name="output">
         /// Output file Uri path to blob container.
         /// Serialized Name: LogAnalyticsOutput.output

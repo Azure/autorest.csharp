@@ -16,20 +16,14 @@ namespace Azure.Network.Management.Interface.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.NetworkInterfaceDnsSettings
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkInterfaceDnsSettings"/>. </summary>
         public NetworkInterfaceDnsSettings()
         {
             DnsServers = new ChangeTrackingList<string>();
             AppliedDnsServers = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.NetworkInterfaceDnsSettings
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkInterfaceDnsSettings"/>. </summary>
         /// <param name="dnsServers"> List of DNS servers IP addresses. Use 'AzureProvidedDNS' to switch to azure provided DNS resolution. 'AzureProvidedDNS' value cannot be combined with other IPs, it must be the only value in dnsServers collection. </param>
         /// <param name="appliedDnsServers"> If the VM that uses this NIC is part of an Availability Set, then this list will have the union of all DNS servers from all NICs that are part of the Availability Set. This property is what is configured on each of those VMs. </param>
         /// <param name="internalDnsNameLabel"> Relative DNS name for this NIC used for internal communications between VMs in the same virtual network. </param>

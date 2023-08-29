@@ -17,19 +17,13 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.MgmtMockAndSamplePrivateEndpointConnectionListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSamplePrivateEndpointConnectionListResult"/>. </summary>
         internal MgmtMockAndSamplePrivateEndpointConnectionListResult()
         {
             Value = new ChangeTrackingList<MgmtMockAndSamplePrivateEndpointConnectionData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.MgmtMockAndSamplePrivateEndpointConnectionListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSamplePrivateEndpointConnectionListResult"/>. </summary>
         /// <param name="value"> The list of private endpoint connections. </param>
         /// <param name="nextLink"> The URL to get the next set of private endpoint connections. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

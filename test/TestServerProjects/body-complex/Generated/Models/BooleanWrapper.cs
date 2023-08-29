@@ -15,18 +15,12 @@ namespace body_complex.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.BooleanWrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BooleanWrapper"/>. </summary>
         public BooleanWrapper()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.BooleanWrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BooleanWrapper"/>. </summary>
         /// <param name="fieldTrue"></param>
         /// <param name="fieldFalse"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

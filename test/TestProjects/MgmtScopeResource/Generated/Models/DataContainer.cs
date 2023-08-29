@@ -16,10 +16,7 @@ namespace MgmtScopeResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DataContainer
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DataContainer"/>. </summary>
         /// <param name="workspace"> Log Analytics workspace information. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="workspace"/> is null. </exception>
         internal DataContainer(WorkspaceInfo workspace)
@@ -29,10 +26,7 @@ namespace MgmtScopeResource.Models
             Workspace = workspace;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DataContainer
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DataContainer"/>. </summary>
         /// <param name="workspace"> Log Analytics workspace information. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal DataContainer(WorkspaceInfo workspace, Dictionary<string, BinaryData> rawData)

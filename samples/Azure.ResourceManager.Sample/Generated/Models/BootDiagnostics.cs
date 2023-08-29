@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.BootDiagnostics
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BootDiagnostics"/>. </summary>
         public BootDiagnostics()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.BootDiagnostics
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BootDiagnostics"/>. </summary>
         /// <param name="enabled">
         /// Whether boot diagnostics should be enabled on the Virtual Machine.
         /// Serialized Name: BootDiagnostics.enabled

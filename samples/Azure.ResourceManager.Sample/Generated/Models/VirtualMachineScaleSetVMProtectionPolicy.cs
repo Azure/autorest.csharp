@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMProtectionPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMProtectionPolicy"/>. </summary>
         public VirtualMachineScaleSetVMProtectionPolicy()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMProtectionPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMProtectionPolicy"/>. </summary>
         /// <param name="protectFromScaleIn">
         /// Indicates that the virtual machine scale set VM shouldn't be considered for deletion during a scale-in operation.
         /// Serialized Name: VirtualMachineScaleSetVMProtectionPolicy.protectFromScaleIn

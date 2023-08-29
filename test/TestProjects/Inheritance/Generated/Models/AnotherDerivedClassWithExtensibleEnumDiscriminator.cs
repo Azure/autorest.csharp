@@ -13,19 +13,13 @@ namespace Inheritance.Models
     /// <summary> The AnotherDerivedClassWithExtensibleEnumDiscriminator. </summary>
     public partial class AnotherDerivedClassWithExtensibleEnumDiscriminator : BaseClassWithExtensibleEnumDiscriminator
     {
-        /// <summary>
-        /// Initializes a new instance of global::Inheritance.Models.AnotherDerivedClassWithExtensibleEnumDiscriminator
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AnotherDerivedClassWithExtensibleEnumDiscriminator"/>. </summary>
         public AnotherDerivedClassWithExtensibleEnumDiscriminator()
         {
             DiscriminatorProperty = new BaseClassWithEntensibleEnumDiscriminatorEnum("random value");
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Inheritance.Models.AnotherDerivedClassWithExtensibleEnumDiscriminator
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AnotherDerivedClassWithExtensibleEnumDiscriminator"/>. </summary>
         /// <param name="discriminatorProperty"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal AnotherDerivedClassWithExtensibleEnumDiscriminator(BaseClassWithEntensibleEnumDiscriminatorEnum discriminatorProperty, Dictionary<string, BinaryData> rawData) : base(discriminatorProperty, rawData)

@@ -13,19 +13,13 @@ namespace xms_error_responses.Models
     /// <summary> The LinkNotFound. </summary>
     internal partial class LinkNotFound : NotFoundErrorBase
     {
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.LinkNotFound
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LinkNotFound"/>. </summary>
         internal LinkNotFound()
         {
             WhatNotFound = "InvalidResourceLink";
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.LinkNotFound
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LinkNotFound"/>. </summary>
         /// <param name="someBaseProp"></param>
         /// <param name="reason"></param>
         /// <param name="whatNotFound"></param>

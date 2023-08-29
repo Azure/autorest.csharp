@@ -13,18 +13,12 @@ namespace httpInfrastructure.Models
     /// <summary> The B. </summary>
     public partial class B : MyException
     {
-        /// <summary>
-        /// Initializes a new instance of global::httpInfrastructure.Models.B
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="B"/>. </summary>
         internal B()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::httpInfrastructure.Models.B
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="B"/>. </summary>
         /// <param name="statusCode"></param>
         /// <param name="textStatusCode"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

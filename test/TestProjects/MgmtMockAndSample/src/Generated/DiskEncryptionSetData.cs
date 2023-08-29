@@ -21,20 +21,14 @@ namespace MgmtMockAndSample
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.DiskEncryptionSetData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskEncryptionSetData"/>. </summary>
         public DiskEncryptionSetData()
         {
             PreviousKeys = new ChangeTrackingList<KeyForDiskEncryptionSet>();
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.DiskEncryptionSetData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskEncryptionSetData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

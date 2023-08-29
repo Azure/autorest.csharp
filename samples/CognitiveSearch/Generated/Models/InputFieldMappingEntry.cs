@@ -16,10 +16,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.InputFieldMappingEntry
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="InputFieldMappingEntry"/>. </summary>
         /// <param name="name"> The name of the input. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public InputFieldMappingEntry(string name)
@@ -30,10 +27,7 @@ namespace CognitiveSearch.Models
             Inputs = new ChangeTrackingList<InputFieldMappingEntry>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.InputFieldMappingEntry
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="InputFieldMappingEntry"/>. </summary>
         /// <param name="name"> The name of the input. </param>
         /// <param name="source"> The source of the input. </param>
         /// <param name="sourceContext"> The source context used for selecting recursive inputs. </param>

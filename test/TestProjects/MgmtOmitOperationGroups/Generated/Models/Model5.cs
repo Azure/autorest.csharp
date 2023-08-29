@@ -16,19 +16,13 @@ namespace MgmtOmitOperationGroups.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.Model5
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Model5"/>. </summary>
         public Model5()
         {
             Modelqs = new ChangeTrackingList<ModelQ>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.Model5
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Model5"/>. </summary>
         /// <param name="id"></param>
         /// <param name="k"></param>
         /// <param name="modelqs"></param>

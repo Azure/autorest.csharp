@@ -16,19 +16,13 @@ namespace paging.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::paging.Models.OdataProductResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OdataProductResult"/>. </summary>
         internal OdataProductResult()
         {
             Values = new ChangeTrackingList<Product>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::paging.Models.OdataProductResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OdataProductResult"/>. </summary>
         /// <param name="values"></param>
         /// <param name="odataNextLink"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

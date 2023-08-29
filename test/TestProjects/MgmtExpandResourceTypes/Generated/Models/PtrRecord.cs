@@ -15,18 +15,12 @@ namespace MgmtExpandResourceTypes.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.PtrRecord
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PtrRecord"/>. </summary>
         public PtrRecord()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.PtrRecord
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PtrRecord"/>. </summary>
         /// <param name="ptrdname"> The PTR target domain name for this PTR record. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal PtrRecord(string ptrdname, Dictionary<string, BinaryData> rawData)

@@ -13,10 +13,7 @@ namespace AdditionalPropertiesEx.Models
     /// <summary> Model factory for models. </summary>
     public static partial class AdditionalPropertiesExModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::AdditionalPropertiesEx.Models.InputAdditionalPropertiesModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="InputAdditionalPropertiesModel"/>. </summary>
         /// <param name="id"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.InputAdditionalPropertiesModel"/> instance for mocking. </returns>
@@ -27,10 +24,7 @@ namespace AdditionalPropertiesEx.Models
             return new InputAdditionalPropertiesModel(id, additionalProperties);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::AdditionalPropertiesEx.Models.OutputAdditionalPropertiesModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OutputAdditionalPropertiesModel"/>. </summary>
         /// <param name="id"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.OutputAdditionalPropertiesModel"/> instance for mocking. </returns>
@@ -41,10 +35,7 @@ namespace AdditionalPropertiesEx.Models
             return new OutputAdditionalPropertiesModel(id, additionalProperties);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::AdditionalPropertiesEx.Models.OutputAdditionalPropertiesModelStruct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OutputAdditionalPropertiesModelStruct"/>. </summary>
         /// <param name="id"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="additionalProperties"/> is null. </exception>

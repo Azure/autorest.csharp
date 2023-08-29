@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachinePatchStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachinePatchStatus"/>. </summary>
         internal VirtualMachinePatchStatus()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachinePatchStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachinePatchStatus"/>. </summary>
         /// <param name="availablePatchSummary">
         /// The available patch summary of the latest assessment operation for the virtual machine.
         /// Serialized Name: VirtualMachinePatchStatus.availablePatchSummary

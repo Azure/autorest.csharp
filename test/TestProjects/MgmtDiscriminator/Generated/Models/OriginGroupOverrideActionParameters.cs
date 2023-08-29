@@ -17,10 +17,7 @@ namespace MgmtDiscriminator.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.OriginGroupOverrideActionParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OriginGroupOverrideActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="originGroup"> defines the OriginGroup that would override the DefaultOriginGroup. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="originGroup"/> is null. </exception>
@@ -32,10 +29,7 @@ namespace MgmtDiscriminator.Models
             OriginGroup = originGroup;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.OriginGroupOverrideActionParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OriginGroupOverrideActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="originGroup"> defines the OriginGroup that would override the DefaultOriginGroup. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

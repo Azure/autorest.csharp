@@ -19,19 +19,13 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostGroupInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupInstanceView"/>. </summary>
         internal DedicatedHostGroupInstanceView()
         {
             Hosts = new ChangeTrackingList<DedicatedHostInstanceViewWithName>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostGroupInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupInstanceView"/>. </summary>
         /// <param name="hosts">
         /// List of instance view of the dedicated hosts under the dedicated host group.
         /// Serialized Name: DedicatedHostGroupInstanceView.hosts

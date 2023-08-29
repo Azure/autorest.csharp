@@ -15,18 +15,12 @@ namespace NameConflicts.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::NameConflicts.Models.Class
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Class"/>. </summary>
         public Class()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::NameConflicts.Models.Class
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Class"/>. </summary>
         /// <param name="abstract"></param>
         /// <param name="add"></param>
         /// <param name="alias"></param>

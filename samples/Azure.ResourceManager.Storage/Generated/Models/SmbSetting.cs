@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.SmbSetting
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SmbSetting"/>. </summary>
         public SmbSetting()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.SmbSetting
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SmbSetting"/>. </summary>
         /// <param name="multichannel"> Multichannel setting. Applies to Premium FileStorage only. </param>
         /// <param name="versions"> SMB protocol versions supported by server. Valid values are SMB2.1, SMB3.0, SMB3.1.1. Should be passed as a string with delimiter ';'. </param>
         /// <param name="authenticationMethods"> SMB authentication methods supported by server. Valid values are NTLMv2, Kerberos. Should be passed as a string with delimiter ';'. </param>

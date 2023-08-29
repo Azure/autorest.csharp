@@ -22,18 +22,12 @@ namespace Azure.ResourceManager.Storage
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.ImmutabilityPolicyData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImmutabilityPolicyData"/>. </summary>
         public ImmutabilityPolicyData()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.ImmutabilityPolicyData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImmutabilityPolicyData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

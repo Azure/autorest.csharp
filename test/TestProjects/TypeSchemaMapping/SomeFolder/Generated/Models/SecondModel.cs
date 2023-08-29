@@ -17,19 +17,13 @@ namespace TypeSchemaMapping.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::TypeSchemaMapping.Models.SecondModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SecondModel"/>. </summary>
         public SecondModel()
         {
             DictionaryProperty = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::TypeSchemaMapping.Models.SecondModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SecondModel"/>. </summary>
         /// <param name="intProperty"> . </param>
         /// <param name="dictionaryProperty"> . </param>
         /// <param name="daysOfWeek"> Day of week. </param>

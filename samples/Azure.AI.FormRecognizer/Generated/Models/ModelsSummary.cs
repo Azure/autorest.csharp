@@ -15,10 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.ModelsSummary
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelsSummary"/>. </summary>
         /// <param name="count"> Current count of trained custom models. </param>
         /// <param name="limit"> Max number of models that can be trained for this account. </param>
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the summary was last updated. </param>
@@ -29,10 +26,7 @@ namespace Azure.AI.FormRecognizer.Models
             LastUpdatedDateTime = lastUpdatedDateTime;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.ModelsSummary
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelsSummary"/>. </summary>
         /// <param name="count"> Current count of trained custom models. </param>
         /// <param name="limit"> Max number of models that can be trained for this account. </param>
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the summary was last updated. </param>

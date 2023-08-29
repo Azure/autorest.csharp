@@ -16,10 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.FieldValue
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FieldValue"/>. </summary>
         /// <param name="type"> Type of field value. </param>
         internal FieldValue(FieldValueType type)
         {
@@ -30,10 +27,7 @@ namespace Azure.AI.FormRecognizer.Models
             Elements = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.FieldValue
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FieldValue"/>. </summary>
         /// <param name="type"> Type of field value. </param>
         /// <param name="valueString"> String value. </param>
         /// <param name="valueDate"> Date value. </param>

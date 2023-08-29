@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ManagementPolicySnapShot
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ManagementPolicySnapShot"/>. </summary>
         public ManagementPolicySnapShot()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ManagementPolicySnapShot
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ManagementPolicySnapShot"/>. </summary>
         /// <param name="tierToCool"> The function to tier blob snapshot to cool storage. Support blob snapshot currently at Hot tier. </param>
         /// <param name="tierToArchive"> The function to tier blob snapshot to archive storage. Support blob snapshot currently at Hot or Cool tier. </param>
         /// <param name="delete"> The function to delete the blob snapshot. </param>

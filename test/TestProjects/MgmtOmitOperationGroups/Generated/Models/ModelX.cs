@@ -13,18 +13,12 @@ namespace MgmtOmitOperationGroups.Models
     /// <summary> The ModelX. </summary>
     public partial class ModelX : ModelY
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.ModelX
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelX"/>. </summary>
         public ModelX()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.ModelX
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelX"/>. </summary>
         /// <param name="e"></param>
         /// <param name="c"></param>
         /// <param name="d"></param>

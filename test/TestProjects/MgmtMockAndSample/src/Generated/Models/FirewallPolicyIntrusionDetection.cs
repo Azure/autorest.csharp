@@ -15,18 +15,12 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyIntrusionDetection
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyIntrusionDetection"/>. </summary>
         public FirewallPolicyIntrusionDetection()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyIntrusionDetection
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyIntrusionDetection"/>. </summary>
         /// <param name="mode"> Intrusion detection general state. </param>
         /// <param name="configuration"> Intrusion detection configuration properties. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

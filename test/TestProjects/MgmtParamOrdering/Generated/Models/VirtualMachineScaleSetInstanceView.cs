@@ -15,18 +15,12 @@ namespace MgmtParamOrdering.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.Models.VirtualMachineScaleSetInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetInstanceView"/>. </summary>
         internal VirtualMachineScaleSetInstanceView()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.Models.VirtualMachineScaleSetInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetInstanceView"/>. </summary>
         /// <param name="virtualMachine"> The instance view status summary for the virtual machine scale set. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal VirtualMachineScaleSetInstanceView(string virtualMachine, Dictionary<string, BinaryData> rawData)

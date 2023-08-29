@@ -15,18 +15,12 @@ namespace ModelNamespace
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::ModelNamespace.TestModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TestModel"/>. </summary>
         internal TestModel()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::ModelNamespace.TestModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TestModel"/>. </summary>
         /// <param name="code"></param>
         /// <param name="status"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

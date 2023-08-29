@@ -21,18 +21,12 @@ namespace MgmtCustomizations.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtCustomizations.Models.Pet
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         protected Pet()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtCustomizations.Models.Pet
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="kind"> The kind of the pet. </param>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="size">

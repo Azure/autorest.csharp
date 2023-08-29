@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.LogAnalytics
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LogAnalytics"/>. </summary>
         internal LogAnalytics()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.LogAnalytics
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LogAnalytics"/>. </summary>
         /// <param name="properties">
         /// LogAnalyticsOutput
         /// Serialized Name: LogAnalyticsOperationResult.properties

@@ -15,18 +15,12 @@ namespace body_dictionary.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::body_dictionary.Models.Widget
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Widget"/>. </summary>
         public Widget()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_dictionary.Models.Widget
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Widget"/>. </summary>
         /// <param name="integer"></param>
         /// <param name="string"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -15,20 +15,14 @@ namespace required_optional.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::required_optional.Models.IntWrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IntWrapper"/>. </summary>
         /// <param name="value"></param>
         public IntWrapper(int value)
         {
             Value = value;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::required_optional.Models.IntWrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IntWrapper"/>. </summary>
         /// <param name="value"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal IntWrapper(int value, Dictionary<string, BinaryData> rawData)

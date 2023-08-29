@@ -15,20 +15,14 @@ namespace xml_service.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.RetentionPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RetentionPolicy"/>. </summary>
         /// <param name="enabled"> Indicates whether a retention policy is enabled for the storage service. </param>
         public RetentionPolicy(bool enabled)
         {
             Enabled = enabled;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.RetentionPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RetentionPolicy"/>. </summary>
         /// <param name="enabled"> Indicates whether a retention policy is enabled for the storage service. </param>
         /// <param name="days"> Indicates the number of days that metrics or logging or soft-deleted data should be retained. All data older than this value will be deleted. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

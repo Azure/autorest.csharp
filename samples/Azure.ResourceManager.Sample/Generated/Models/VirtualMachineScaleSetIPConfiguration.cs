@@ -18,10 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetIPConfiguration : SubResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetIPConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetIPConfiguration"/>. </summary>
         /// <param name="name">
         /// The IP configuration name.
         /// Serialized Name: VirtualMachineScaleSetIPConfiguration.name
@@ -38,10 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
             LoadBalancerInboundNatPools = new ChangeTrackingList<WritableSubResource>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetIPConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetIPConfiguration"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id

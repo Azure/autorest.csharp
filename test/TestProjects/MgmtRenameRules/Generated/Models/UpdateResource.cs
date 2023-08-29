@@ -19,19 +19,13 @@ namespace MgmtRenameRules.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.UpdateResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UpdateResource"/>. </summary>
         public UpdateResource()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.UpdateResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UpdateResource"/>. </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags

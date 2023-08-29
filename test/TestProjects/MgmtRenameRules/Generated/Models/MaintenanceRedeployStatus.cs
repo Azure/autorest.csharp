@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.MaintenanceRedeployStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MaintenanceRedeployStatus"/>. </summary>
         internal MaintenanceRedeployStatus()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.MaintenanceRedeployStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MaintenanceRedeployStatus"/>. </summary>
         /// <param name="isCustomerInitiatedMaintenanceAllowed">
         /// True, if customer is allowed to perform Maintenance.
         /// Serialized Name: MaintenanceRedeployStatus.isCustomerInitiatedMaintenanceAllowed

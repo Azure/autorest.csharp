@@ -16,10 +16,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.AnalyzeRequest
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AnalyzeRequest"/>. </summary>
         /// <param name="text"> The text to break into tokens. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
         public AnalyzeRequest(string text)
@@ -31,10 +28,7 @@ namespace CognitiveSearch.Models
             CharFilters = new ChangeTrackingList<CharFilterName>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.AnalyzeRequest
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AnalyzeRequest"/>. </summary>
         /// <param name="text"> The text to break into tokens. </param>
         /// <param name="analyzer"> The name of the analyzer to use to break the given text. If this parameter is not specified, you must specify a tokenizer instead. The tokenizer and analyzer parameters are mutually exclusive. </param>
         /// <param name="tokenizer"> The name of the tokenizer to use to break the given text. If this parameter is not specified, you must specify an analyzer instead. The tokenizer and analyzer parameters are mutually exclusive. </param>

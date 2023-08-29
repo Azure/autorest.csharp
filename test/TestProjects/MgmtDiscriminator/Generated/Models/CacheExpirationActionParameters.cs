@@ -15,10 +15,7 @@ namespace MgmtDiscriminator.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.CacheExpirationActionParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CacheExpirationActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="cacheBehavior"> Caching behavior for the requests. </param>
         /// <param name="cacheType"> The level at which the content needs to be cached. </param>
@@ -29,10 +26,7 @@ namespace MgmtDiscriminator.Models
             CacheType = cacheType;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.CacheExpirationActionParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CacheExpirationActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="cacheBehavior"> Caching behavior for the requests. </param>
         /// <param name="cacheType"> The level at which the content needs to be cached. </param>

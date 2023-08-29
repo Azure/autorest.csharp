@@ -16,10 +16,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ServiceCounters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ServiceCounters"/>. </summary>
         /// <param name="documentCounter"> Total number of documents across all indexes in the service. </param>
         /// <param name="indexCounter"> Total number of indexes. </param>
         /// <param name="indexerCounter"> Total number of indexers. </param>
@@ -47,10 +44,7 @@ namespace CognitiveSearch.Models
             SkillsetCounter = skillsetCounter;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ServiceCounters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ServiceCounters"/>. </summary>
         /// <param name="documentCounter"> Total number of documents across all indexes in the service. </param>
         /// <param name="indexCounter"> Total number of indexes. </param>
         /// <param name="indexerCounter"> Total number of indexers. </param>

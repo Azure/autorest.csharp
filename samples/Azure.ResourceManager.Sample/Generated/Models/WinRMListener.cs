@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.WinRMListener
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="WinRMListener"/>. </summary>
         public WinRMListener()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.WinRMListener
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="WinRMListener"/>. </summary>
         /// <param name="protocol">
         /// Specifies the protocol of WinRM listener. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;**http** &lt;br&gt;&lt;br&gt; **https**
         /// Serialized Name: WinRMListener.protocol

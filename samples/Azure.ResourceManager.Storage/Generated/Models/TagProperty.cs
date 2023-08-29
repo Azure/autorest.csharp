@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.TagProperty
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TagProperty"/>. </summary>
         internal TagProperty()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.TagProperty
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TagProperty"/>. </summary>
         /// <param name="tag"> The tag value. </param>
         /// <param name="timestamp"> Returns the date and time the tag was added. </param>
         /// <param name="objectIdentifier"> Returns the Object ID of the user who added the tag. </param>

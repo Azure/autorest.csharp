@@ -15,18 +15,12 @@ namespace xml_service.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.RootWithRefAndNoMeta
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RootWithRefAndNoMeta"/>. </summary>
         public RootWithRefAndNoMeta()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.RootWithRefAndNoMeta
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RootWithRefAndNoMeta"/>. </summary>
         /// <param name="refToModel"> XML will use RefToModel. </param>
         /// <param name="something"> Something else (just to avoid flattening). </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

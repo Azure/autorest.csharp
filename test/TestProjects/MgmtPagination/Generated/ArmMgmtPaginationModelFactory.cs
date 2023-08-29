@@ -12,10 +12,7 @@ namespace MgmtPagination.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtPaginationModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPagination.PageSizeIntegerModelData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeIntegerModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>
@@ -25,10 +22,7 @@ namespace MgmtPagination.Models
             return new PageSizeIntegerModelData(id, name, resourceType, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPagination.PageSizeInt64ModelData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeInt64ModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>
@@ -38,10 +32,7 @@ namespace MgmtPagination.Models
             return new PageSizeInt64ModelData(id, name, resourceType, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPagination.PageSizeInt32ModelData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeInt32ModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>
@@ -51,10 +42,7 @@ namespace MgmtPagination.Models
             return new PageSizeInt32ModelData(id, name, resourceType, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPagination.PageSizeNumericModelData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeNumericModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>
@@ -64,10 +52,7 @@ namespace MgmtPagination.Models
             return new PageSizeNumericModelData(id, name, resourceType, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPagination.PageSizeFloatModelData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeFloatModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>
@@ -77,10 +62,7 @@ namespace MgmtPagination.Models
             return new PageSizeFloatModelData(id, name, resourceType, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPagination.PageSizeDoubleModelData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeDoubleModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>
@@ -90,10 +72,7 @@ namespace MgmtPagination.Models
             return new PageSizeDoubleModelData(id, name, resourceType, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPagination.PageSizeDecimalModelData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeDecimalModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>
@@ -103,10 +82,7 @@ namespace MgmtPagination.Models
             return new PageSizeDecimalModelData(id, name, resourceType, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPagination.PageSizeStringModelData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeStringModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>

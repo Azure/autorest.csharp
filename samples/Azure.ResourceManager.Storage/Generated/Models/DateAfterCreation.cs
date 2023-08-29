@@ -15,20 +15,14 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.DateAfterCreation
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DateAfterCreation"/>. </summary>
         /// <param name="daysAfterCreationGreaterThan"> Value indicating the age in days after creation. </param>
         public DateAfterCreation(float daysAfterCreationGreaterThan)
         {
             DaysAfterCreationGreaterThan = daysAfterCreationGreaterThan;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.DateAfterCreation
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DateAfterCreation"/>. </summary>
         /// <param name="daysAfterCreationGreaterThan"> Value indicating the age in days after creation. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal DateAfterCreation(float daysAfterCreationGreaterThan, Dictionary<string, BinaryData> rawData)

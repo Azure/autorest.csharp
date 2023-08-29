@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SampleUsageName
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SampleUsageName"/>. </summary>
         internal SampleUsageName()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SampleUsageName
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SampleUsageName"/>. </summary>
         /// <param name="value">
         /// The name of the resource.
         /// Serialized Name: SampleUsageName.value

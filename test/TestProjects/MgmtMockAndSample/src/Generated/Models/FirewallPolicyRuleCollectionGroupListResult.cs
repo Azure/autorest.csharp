@@ -17,19 +17,13 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyRuleCollectionGroupListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyRuleCollectionGroupListResult"/>. </summary>
         internal FirewallPolicyRuleCollectionGroupListResult()
         {
             Value = new ChangeTrackingList<FirewallPolicyRuleCollectionGroupData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyRuleCollectionGroupListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyRuleCollectionGroupListResult"/>. </summary>
         /// <param name="value"> List of FirewallPolicyRuleCollectionGroups in a FirewallPolicy. </param>
         /// <param name="nextLink"> URL to get the next set of results. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

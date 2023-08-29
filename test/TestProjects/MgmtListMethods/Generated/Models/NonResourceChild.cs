@@ -15,18 +15,12 @@ namespace MgmtListMethods.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtListMethods.Models.NonResourceChild
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NonResourceChild"/>. </summary>
         internal NonResourceChild()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtListMethods.Models.NonResourceChild
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NonResourceChild"/>. </summary>
         /// <param name="name"> Name. </param>
         /// <param name="numberOfCores"> Test Desc. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

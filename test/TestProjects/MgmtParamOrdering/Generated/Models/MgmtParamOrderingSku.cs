@@ -15,18 +15,12 @@ namespace MgmtParamOrdering.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.Models.MgmtParamOrderingSku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtParamOrderingSku"/>. </summary>
         public MgmtParamOrderingSku()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.Models.MgmtParamOrderingSku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtParamOrderingSku"/>. </summary>
         /// <param name="name"> The sku name. </param>
         /// <param name="tier"> Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**. </param>
         /// <param name="capacity"> Specifies the number of virtual machines in the scale set. </param>

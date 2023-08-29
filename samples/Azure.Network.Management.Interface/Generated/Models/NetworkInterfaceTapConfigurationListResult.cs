@@ -16,19 +16,13 @@ namespace Azure.Network.Management.Interface.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.NetworkInterfaceTapConfigurationListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkInterfaceTapConfigurationListResult"/>. </summary>
         internal NetworkInterfaceTapConfigurationListResult()
         {
             Value = new ChangeTrackingList<NetworkInterfaceTapConfiguration>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.NetworkInterfaceTapConfigurationListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkInterfaceTapConfigurationListResult"/>. </summary>
         /// <param name="value"> A list of tap configurations. </param>
         /// <param name="nextLink"> The URL to get the next set of results. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -15,18 +15,12 @@ namespace xms_error_responses.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.BaseError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseError"/>. </summary>
         internal BaseError()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.BaseError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseError"/>. </summary>
         /// <param name="someBaseProp"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal BaseError(string someBaseProp, Dictionary<string, BinaryData> rawData)

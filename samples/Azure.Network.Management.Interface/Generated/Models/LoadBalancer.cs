@@ -14,10 +14,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> LoadBalancer resource. </summary>
     public partial class LoadBalancer : Resource
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.LoadBalancer
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LoadBalancer"/>. </summary>
         public LoadBalancer()
         {
             FrontendIPConfigurations = new ChangeTrackingList<FrontendIPConfiguration>();
@@ -29,10 +26,7 @@ namespace Azure.Network.Management.Interface.Models
             OutboundRules = new ChangeTrackingList<OutboundRule>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.LoadBalancer
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LoadBalancer"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>

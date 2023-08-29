@@ -20,19 +20,13 @@ namespace MgmtOperations
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOperations.AvailabilitySetGrandChildData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetGrandChildData"/>. </summary>
         /// <param name="location"> The location. </param>
         public AvailabilitySetGrandChildData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOperations.AvailabilitySetGrandChildData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetGrandChildData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

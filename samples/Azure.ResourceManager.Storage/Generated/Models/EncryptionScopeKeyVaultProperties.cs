@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.EncryptionScopeKeyVaultProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EncryptionScopeKeyVaultProperties"/>. </summary>
         public EncryptionScopeKeyVaultProperties()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.EncryptionScopeKeyVaultProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EncryptionScopeKeyVaultProperties"/>. </summary>
         /// <param name="keyUri"> The object identifier for a key vault key object. When applied, the encryption scope will use the key referenced by the identifier to enable customer-managed key support on this encryption scope. </param>
         /// <param name="currentVersionedKeyIdentifier"> The object identifier of the current versioned Key Vault Key in use. </param>
         /// <param name="lastKeyRotationTimestamp"> Timestamp of last rotation of the Key Vault Key. </param>

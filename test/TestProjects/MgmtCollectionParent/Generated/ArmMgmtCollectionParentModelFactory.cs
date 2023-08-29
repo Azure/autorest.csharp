@@ -17,10 +17,7 @@ namespace MgmtCollectionParent.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtCollectionParentModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtCollectionParent.OrderResourceData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OrderResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -37,10 +34,7 @@ namespace MgmtCollectionParent.Models
             return new OrderResourceData(id, name, resourceType, systemData, orderItemIds?.ToList(), currentStage, orderStageHistory?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtCollectionParent.Models.StageDetails
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StageDetails"/>. </summary>
         /// <param name="stageStatus"> Stage status. </param>
         /// <param name="stageName"> Stage name. </param>
         /// <param name="displayName"> Display name of the resource stage. </param>

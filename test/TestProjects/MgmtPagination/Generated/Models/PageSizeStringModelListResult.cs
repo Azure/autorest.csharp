@@ -17,19 +17,13 @@ namespace MgmtPagination.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPagination.Models.PageSizeStringModelListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeStringModelListResult"/>. </summary>
         internal PageSizeStringModelListResult()
         {
             Value = new ChangeTrackingList<PageSizeStringModelData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPagination.Models.PageSizeStringModelListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeStringModelListResult"/>. </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -21,10 +21,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ImageListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageListResult"/>. </summary>
         /// <param name="images">
         /// The list of Images.
         /// Serialized Name: ImageListResult.value
@@ -37,10 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
             Images = images.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ImageListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageListResult"/>. </summary>
         /// <param name="images">
         /// The list of Images.
         /// Serialized Name: ImageListResult.value

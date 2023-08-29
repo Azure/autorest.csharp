@@ -19,10 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetInstanceView"/>. </summary>
         internal VirtualMachineScaleSetInstanceView()
         {
             Extensions = new ChangeTrackingList<VirtualMachineScaleSetVMExtensionsSummary>();
@@ -30,10 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             OrchestrationServices = new ChangeTrackingList<OrchestrationServiceSummary>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetInstanceView
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetInstanceView"/>. </summary>
         /// <param name="virtualMachine">
         /// The instance view status summary for the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetInstanceView.virtualMachine

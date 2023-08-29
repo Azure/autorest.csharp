@@ -17,19 +17,13 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StoragePrivateEndpointConnectionListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StoragePrivateEndpointConnectionListResult"/>. </summary>
         internal StoragePrivateEndpointConnectionListResult()
         {
             Value = new ChangeTrackingList<StoragePrivateEndpointConnectionData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StoragePrivateEndpointConnectionListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StoragePrivateEndpointConnectionListResult"/>. </summary>
         /// <param name="value"> Array of private endpoint connections. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal StoragePrivateEndpointConnectionListResult(IReadOnlyList<StoragePrivateEndpointConnectionData> value, Dictionary<string, BinaryData> rawData)

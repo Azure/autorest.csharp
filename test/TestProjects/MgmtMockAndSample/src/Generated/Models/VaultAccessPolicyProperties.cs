@@ -17,10 +17,7 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultAccessPolicyProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultAccessPolicyProperties"/>. </summary>
         /// <param name="accessPolicies"> An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accessPolicies"/> is null. </exception>
         public VaultAccessPolicyProperties(IEnumerable<AccessPolicyEntry> accessPolicies)
@@ -30,10 +27,7 @@ namespace MgmtMockAndSample.Models
             AccessPolicies = accessPolicies.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultAccessPolicyProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultAccessPolicyProperties"/>. </summary>
         /// <param name="accessPolicies"> An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal VaultAccessPolicyProperties(IList<AccessPolicyEntry> accessPolicies, Dictionary<string, BinaryData> rawData)

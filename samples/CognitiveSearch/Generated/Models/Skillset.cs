@@ -17,10 +17,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.Skillset
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Skillset"/>. </summary>
         /// <param name="name"> The name of the skillset. </param>
         /// <param name="description"> The description of the skillset. </param>
         /// <param name="skills">
@@ -40,10 +37,7 @@ namespace CognitiveSearch.Models
             Skills = skills.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.Skillset
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Skillset"/>. </summary>
         /// <param name="name"> The name of the skillset. </param>
         /// <param name="description"> The description of the skillset. </param>
         /// <param name="skills">

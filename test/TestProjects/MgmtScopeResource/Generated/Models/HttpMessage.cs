@@ -15,18 +15,12 @@ namespace MgmtScopeResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.HttpMessage
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="HttpMessage"/>. </summary>
         internal HttpMessage()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.HttpMessage
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="HttpMessage"/>. </summary>
         /// <param name="content"> HTTP message content. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal HttpMessage(BinaryData content, Dictionary<string, BinaryData> rawData)

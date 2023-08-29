@@ -15,18 +15,12 @@ namespace MgmtExtensionCommonRestOperation.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExtensionCommonRestOperation.Models.ErrorResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ErrorResponse"/>. </summary>
         internal ErrorResponse()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExtensionCommonRestOperation.Models.ErrorResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ErrorResponse"/>. </summary>
         /// <param name="error"> The details of the error. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ErrorResponse(string error, Dictionary<string, BinaryData> rawData)

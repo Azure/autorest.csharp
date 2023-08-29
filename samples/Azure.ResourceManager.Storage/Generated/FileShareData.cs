@@ -22,20 +22,14 @@ namespace Azure.ResourceManager.Storage
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.FileShareData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FileShareData"/>. </summary>
         public FileShareData()
         {
             Metadata = new ChangeTrackingDictionary<string, string>();
             SignedIdentifiers = new ChangeTrackingList<SignedIdentifier>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.FileShareData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FileShareData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

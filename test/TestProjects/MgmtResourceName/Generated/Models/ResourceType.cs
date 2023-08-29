@@ -16,19 +16,13 @@ namespace MgmtResourceName.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtResourceName.Models.ResourceType
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceType"/>. </summary>
         internal ResourceType()
         {
             Operations = new ChangeTrackingList<ResourceOperation>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtResourceName.Models.ResourceType
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceType"/>. </summary>
         /// <param name="name"> The resource type name. </param>
         /// <param name="displayName"> The resource type display name. </param>
         /// <param name="operations"> The resource type operations. </param>

@@ -16,20 +16,14 @@ namespace MgmtDiscriminator.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleProperties"/>. </summary>
         public DeliveryRuleProperties()
         {
             Actions = new ChangeTrackingList<DeliveryRuleAction>();
             ExtraMappingInfo = new ChangeTrackingDictionary<string, DeliveryRuleAction>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleProperties"/>. </summary>
         /// <param name="order"> The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied. </param>
         /// <param name="conditions">
         /// The condition that must be matched for the actions to be executed

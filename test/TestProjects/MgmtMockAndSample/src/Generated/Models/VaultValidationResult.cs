@@ -16,19 +16,13 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultValidationResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultValidationResult"/>. </summary>
         internal VaultValidationResult()
         {
             Issues = new ChangeTrackingList<VaultIssue>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultValidationResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultValidationResult"/>. </summary>
         /// <param name="issues"> The list of vaults. </param>
         /// <param name="result"> The result of the validation. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -15,18 +15,12 @@ namespace paging.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::paging.Models.OperationResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OperationResult"/>. </summary>
         internal OperationResult()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::paging.Models.OperationResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OperationResult"/>. </summary>
         /// <param name="status"> The status of the request. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal OperationResult(OperationResultStatus? status, Dictionary<string, BinaryData> rawData)

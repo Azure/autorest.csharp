@@ -18,10 +18,7 @@ namespace MgmtMultipleParentResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMultipleParentResource.Models.SubParentsListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SubParentsListResult"/>. </summary>
         /// <param name="value"> The list of run commands. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal SubParentsListResult(IEnumerable<SubParentData> value)
@@ -31,10 +28,7 @@ namespace MgmtMultipleParentResource.Models
             Value = value.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMultipleParentResource.Models.SubParentsListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SubParentsListResult"/>. </summary>
         /// <param name="value"> The list of run commands. </param>
         /// <param name="nextLink"> The uri to fetch the next page of run commands. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

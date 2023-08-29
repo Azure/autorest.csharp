@@ -15,18 +15,12 @@ namespace body_complex.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.IntWrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IntWrapper"/>. </summary>
         public IntWrapper()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.IntWrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IntWrapper"/>. </summary>
         /// <param name="field1"></param>
         /// <param name="field2"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

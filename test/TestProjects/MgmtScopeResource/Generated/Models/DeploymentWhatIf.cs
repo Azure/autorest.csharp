@@ -16,10 +16,7 @@ namespace MgmtScopeResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentWhatIf
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentWhatIf"/>. </summary>
         /// <param name="properties"> The deployment properties. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public DeploymentWhatIf(DeploymentWhatIfProperties properties)
@@ -29,10 +26,7 @@ namespace MgmtScopeResource.Models
             Properties = properties;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentWhatIf
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentWhatIf"/>. </summary>
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="properties"> The deployment properties. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

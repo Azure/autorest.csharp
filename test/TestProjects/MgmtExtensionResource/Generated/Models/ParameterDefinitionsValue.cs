@@ -16,19 +16,13 @@ namespace MgmtExtensionResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExtensionResource.Models.ParameterDefinitionsValue
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterDefinitionsValue"/>. </summary>
         public ParameterDefinitionsValue()
         {
             AllowedValues = new ChangeTrackingList<BinaryData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExtensionResource.Models.ParameterDefinitionsValue
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterDefinitionsValue"/>. </summary>
         /// <param name="parameterType"> The data type of the parameter. </param>
         /// <param name="allowedValues"> The allowed values for the parameter. </param>
         /// <param name="defaultValue"> The default value for the parameter if no value is provided. </param>

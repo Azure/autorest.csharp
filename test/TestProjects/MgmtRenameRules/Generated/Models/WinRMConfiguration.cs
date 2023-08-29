@@ -19,19 +19,13 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.WinRMConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="WinRMConfiguration"/>. </summary>
         public WinRMConfiguration()
         {
             Listeners = new ChangeTrackingList<WinRMListener>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.WinRMConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="WinRMConfiguration"/>. </summary>
         /// <param name="listeners">
         /// The list of Windows Remote Management listeners
         /// Serialized Name: WinRMConfiguration.listeners

@@ -17,10 +17,7 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.LanguageResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LanguageResult"/>. </summary>
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
@@ -36,10 +33,7 @@ namespace CognitiveServices.TextAnalytics.Models
             ModelVersion = modelVersion;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.LanguageResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LanguageResult"/>. </summary>
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the request payload. </param>

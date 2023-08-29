@@ -15,18 +15,12 @@ namespace azure_parameter_grouping.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::azure_parameter_grouping.Models.ParameterGroupingPostReservedWordsParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostReservedWordsParameters"/>. </summary>
         public ParameterGroupingPostReservedWordsParameters()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::azure_parameter_grouping.Models.ParameterGroupingPostReservedWordsParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostReservedWordsParameters"/>. </summary>
         /// <param name="from"> 'from' is a reserved word. Pass in 'bob' to pass. </param>
         /// <param name="accept"> 'accept' is a reserved word. Pass in 'yes' to pass. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -16,19 +16,13 @@ namespace Azure.Network.Management.Interface.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveNetworkSecurityGroupListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EffectiveNetworkSecurityGroupListResult"/>. </summary>
         internal EffectiveNetworkSecurityGroupListResult()
         {
             Value = new ChangeTrackingList<EffectiveNetworkSecurityGroup>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveNetworkSecurityGroupListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EffectiveNetworkSecurityGroupListResult"/>. </summary>
         /// <param name="value"> A list of effective network security groups. </param>
         /// <param name="nextLink"> The URL to get the next set of results. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

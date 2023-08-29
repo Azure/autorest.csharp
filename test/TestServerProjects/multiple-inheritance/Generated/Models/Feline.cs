@@ -15,18 +15,12 @@ namespace multiple_inheritance.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::multiple_inheritance.Models.Feline
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Feline"/>. </summary>
         public Feline()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::multiple_inheritance.Models.Feline
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Feline"/>. </summary>
         /// <param name="meows"></param>
         /// <param name="hisses"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

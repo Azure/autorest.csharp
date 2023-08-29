@@ -16,10 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StorageSkuInformation
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageSkuInformation"/>. </summary>
         /// <param name="name"> The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType. </param>
         internal StorageSkuInformation(StorageSkuName name)
         {
@@ -29,10 +26,7 @@ namespace Azure.ResourceManager.Storage.Models
             Restrictions = new ChangeTrackingList<Restriction>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StorageSkuInformation
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageSkuInformation"/>. </summary>
         /// <param name="name"> The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType. </param>
         /// <param name="tier"> The SKU tier. This is based on the SKU name. </param>
         /// <param name="resourceType"> The type of the resource, usually it is 'storageAccounts'. </param>

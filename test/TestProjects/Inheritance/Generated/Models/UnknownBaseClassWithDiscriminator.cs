@@ -14,10 +14,7 @@ namespace Inheritance.Models
     /// <summary> The UnknownBaseClassWithDiscriminator. </summary>
     internal partial class UnknownBaseClassWithDiscriminator : BaseClassWithDiscriminator
     {
-        /// <summary>
-        /// Initializes a new instance of global::Inheritance.Models.UnknownBaseClassWithDiscriminator
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownBaseClassWithDiscriminator"/>. </summary>
         /// <param name="baseClassProperty"></param>
         /// <param name="dfeString"> Any object. </param>
         /// <param name="dfeDouble"> Any object. </param>

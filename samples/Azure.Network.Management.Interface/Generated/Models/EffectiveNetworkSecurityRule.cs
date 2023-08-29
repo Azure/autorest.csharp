@@ -16,10 +16,7 @@ namespace Azure.Network.Management.Interface.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveNetworkSecurityRule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EffectiveNetworkSecurityRule"/>. </summary>
         internal EffectiveNetworkSecurityRule()
         {
             SourcePortRanges = new ChangeTrackingList<string>();
@@ -30,10 +27,7 @@ namespace Azure.Network.Management.Interface.Models
             ExpandedDestinationAddressPrefix = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveNetworkSecurityRule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EffectiveNetworkSecurityRule"/>. </summary>
         /// <param name="name"> The name of the security rule specified by the user (if created by the user). </param>
         /// <param name="protocol"> The network protocol this rule applies to. </param>
         /// <param name="sourcePortRange"> The source port or range. </param>

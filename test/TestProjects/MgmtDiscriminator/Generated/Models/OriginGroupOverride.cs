@@ -17,18 +17,12 @@ namespace MgmtDiscriminator.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.OriginGroupOverride
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OriginGroupOverride"/>. </summary>
         public OriginGroupOverride()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.OriginGroupOverride
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="OriginGroupOverride"/>. </summary>
         /// <param name="originGroup"> defines the OriginGroup that would override the DefaultOriginGroup on route. </param>
         /// <param name="forwardingProtocol"> Protocol this rule will use when forwarding traffic to backends. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

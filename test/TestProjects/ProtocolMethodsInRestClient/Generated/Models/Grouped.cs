@@ -15,20 +15,14 @@ namespace ProtocolMethodsInRestClient.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::ProtocolMethodsInRestClient.Models.Grouped
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Grouped"/>. </summary>
         /// <param name="second"> Second in group. </param>
         public Grouped(int second)
         {
             Second = second;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::ProtocolMethodsInRestClient.Models.Grouped
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Grouped"/>. </summary>
         /// <param name="first"> First in group. </param>
         /// <param name="second"> Second in group. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

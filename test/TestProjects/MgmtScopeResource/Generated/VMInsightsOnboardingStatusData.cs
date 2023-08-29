@@ -21,19 +21,13 @@ namespace MgmtScopeResource
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.VMInsightsOnboardingStatusData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VMInsightsOnboardingStatusData"/>. </summary>
         internal VMInsightsOnboardingStatusData()
         {
             Data = new ChangeTrackingList<DataContainer>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.VMInsightsOnboardingStatusData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VMInsightsOnboardingStatusData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

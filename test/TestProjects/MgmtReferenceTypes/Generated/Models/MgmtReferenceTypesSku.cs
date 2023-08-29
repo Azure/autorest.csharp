@@ -17,10 +17,7 @@ namespace Azure.ResourceManager.Fake.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.MgmtReferenceTypesSku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtReferenceTypesSku"/>. </summary>
         /// <param name="name"> The name of the SKU. Ex - P3. It is typically a letter+number code. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [InitializationConstructor]
@@ -31,10 +28,7 @@ namespace Azure.ResourceManager.Fake.Models
             Name = name;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.MgmtReferenceTypesSku
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtReferenceTypesSku"/>. </summary>
         /// <param name="name"> The name of the SKU. Ex - P3. It is typically a letter+number code. </param>
         /// <param name="tier"> This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT. </param>
         /// <param name="size"> The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. </param>

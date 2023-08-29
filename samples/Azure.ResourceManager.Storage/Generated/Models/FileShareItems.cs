@@ -17,19 +17,13 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.FileShareItems
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FileShareItems"/>. </summary>
         internal FileShareItems()
         {
             Value = new ChangeTrackingList<FileShareData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.FileShareItems
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FileShareItems"/>. </summary>
         /// <param name="value"> List of file shares returned. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of shares. Returned when total number of requested shares exceed maximum page size. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

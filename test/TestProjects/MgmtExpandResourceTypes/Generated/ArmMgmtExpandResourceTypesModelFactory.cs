@@ -18,10 +18,7 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtExpandResourceTypesModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.RecordSetData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RecordSetData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -58,10 +55,7 @@ namespace MgmtExpandResourceTypes.Models
             return new RecordSetData(id, name, resourceType, systemData, etag, metadata, ttl, fqdn, provisioningState, targetResourceId != null ? ResourceManagerModelFactory.WritableSubResource(targetResourceId) : null, aRecords?.ToList(), aaaaRecords?.ToList(), mxRecords?.ToList(), nsRecords?.ToList(), ptrRecords?.ToList(), srvRecords?.ToList(), txtRecords?.ToList(), cname != null ? new CnameRecord(cname, new Dictionary<string, BinaryData>()) : null, soaRecord, caaRecords?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.ZoneData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ZoneData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -90,10 +84,7 @@ namespace MgmtExpandResourceTypes.Models
             return new ZoneData(id, name, resourceType, systemData, tags, location, etag, maxNumberOfRecordSets, maxNumberOfRecordsPerRecordSet, numberOfRecordSets, nameServers?.ToList(), zoneType, machineType, storageType, memoryType, registrationVirtualNetworks?.ToList(), resolutionVirtualNetworks?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.DnsResourceReferenceResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DnsResourceReferenceResult"/>. </summary>
         /// <param name="dnsResourceReferences"> The result of dns resource reference request. A list of dns resource references for each of the azure resource in the request. </param>
         /// <returns> A new <see cref="Models.DnsResourceReferenceResult"/> instance for mocking. </returns>
         public static DnsResourceReferenceResult DnsResourceReferenceResult(IEnumerable<DnsResourceReference> dnsResourceReferences = null)
@@ -103,10 +94,7 @@ namespace MgmtExpandResourceTypes.Models
             return new DnsResourceReferenceResult(dnsResourceReferences?.ToList(), default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.DnsResourceReference
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DnsResourceReference"/>. </summary>
         /// <param name="dnsResources"> A list of dns Records. </param>
         /// <param name="targetResourceId"> A reference to an azure resource from where the dns resource value is taken. </param>
         /// <returns> A new <see cref="Models.DnsResourceReference"/> instance for mocking. </returns>

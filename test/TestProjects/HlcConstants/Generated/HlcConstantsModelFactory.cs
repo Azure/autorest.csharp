@@ -10,10 +10,7 @@ namespace HlcConstants.Models
     /// <summary> Model factory for models. </summary>
     public static partial class HlcConstantsModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::HlcConstants.Models.ModelWithRequiredConstant
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithRequiredConstant"/>. </summary>
         /// <param name="requiredStringConstant"> A constant based on string, the only allowable value is default. </param>
         /// <param name="requiredIntConstant"> A constant based on integer. </param>
         /// <param name="requiredBooleanConstant"> A constant based on boolean. </param>

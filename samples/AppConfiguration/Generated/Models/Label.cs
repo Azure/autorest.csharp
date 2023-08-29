@@ -15,18 +15,12 @@ namespace AppConfiguration.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::AppConfiguration.Models.Label
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Label"/>. </summary>
         internal Label()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::AppConfiguration.Models.Label
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Label"/>. </summary>
         /// <param name="name"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal Label(string name, Dictionary<string, BinaryData> rawData)

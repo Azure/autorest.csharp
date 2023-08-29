@@ -10,10 +10,7 @@ namespace AppConfiguration.Models
     /// <summary> Model factory for models. </summary>
     public static partial class AppConfigurationModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::AppConfiguration.Models.Key
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Key"/>. </summary>
         /// <param name="name"></param>
         /// <returns> A new <see cref="Models.Key"/> instance for mocking. </returns>
         public static Key Key(string name = null)
@@ -21,10 +18,7 @@ namespace AppConfiguration.Models
             return new Key(name, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::AppConfiguration.Models.Label
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Label"/>. </summary>
         /// <param name="name"></param>
         /// <returns> A new <see cref="Models.Label"/> instance for mocking. </returns>
         public static Label Label(string name = null)

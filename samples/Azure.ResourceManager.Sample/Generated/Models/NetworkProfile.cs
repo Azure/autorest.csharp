@@ -19,19 +19,13 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.NetworkProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkProfile"/>. </summary>
         public NetworkProfile()
         {
             NetworkInterfaces = new ChangeTrackingList<NetworkInterfaceReference>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.NetworkProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkProfile"/>. </summary>
         /// <param name="networkInterfaces">
         /// Specifies the list of resource Ids for the network interfaces associated with the virtual machine.
         /// Serialized Name: NetworkProfile.networkInterfaces

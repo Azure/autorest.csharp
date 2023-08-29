@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.InstanceViewStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="InstanceViewStatus"/>. </summary>
         public InstanceViewStatus()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.InstanceViewStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="InstanceViewStatus"/>. </summary>
         /// <param name="code">
         /// The status code.
         /// Serialized Name: InstanceViewStatus.code

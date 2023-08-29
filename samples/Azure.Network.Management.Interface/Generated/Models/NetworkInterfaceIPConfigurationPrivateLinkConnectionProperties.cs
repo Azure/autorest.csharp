@@ -16,19 +16,13 @@ namespace Azure.Network.Management.Interface.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties"/>. </summary>
         internal NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties()
         {
             Fqdns = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties"/>. </summary>
         /// <param name="groupId"> The group ID for current private link connection. </param>
         /// <param name="requiredMemberName"> The required member name for current private link connection. </param>
         /// <param name="fqdns"> List of FQDNs for current private link connection. </param>

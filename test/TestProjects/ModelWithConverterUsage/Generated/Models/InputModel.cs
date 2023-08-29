@@ -15,18 +15,12 @@ namespace ModelWithConverterUsage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::ModelWithConverterUsage.Models.InputModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
         public InputModel()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::ModelWithConverterUsage.Models.InputModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
         /// <param name="inputModelProperty"> Constant string. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal InputModel(string inputModelProperty, Dictionary<string, BinaryData> rawData)

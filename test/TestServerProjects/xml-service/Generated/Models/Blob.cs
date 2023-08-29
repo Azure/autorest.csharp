@@ -16,10 +16,7 @@ namespace xml_service.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.Blob
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Blob"/>. </summary>
         /// <param name="name"></param>
         /// <param name="deleted"></param>
         /// <param name="snapshot"></param>
@@ -38,10 +35,7 @@ namespace xml_service.Models
             Metadata = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.Blob
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Blob"/>. </summary>
         /// <param name="name"></param>
         /// <param name="deleted"></param>
         /// <param name="snapshot"></param>

@@ -21,10 +21,7 @@ namespace MgmtScopeResource
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.FakePolicyAssignmentData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FakePolicyAssignmentData"/>. </summary>
         public FakePolicyAssignmentData()
         {
             NotScopes = new ChangeTrackingList<string>();
@@ -32,10 +29,7 @@ namespace MgmtScopeResource
             NonComplianceMessages = new ChangeTrackingList<NonComplianceMessage>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.FakePolicyAssignmentData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FakePolicyAssignmentData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

@@ -17,19 +17,13 @@ namespace MgmtExtensionResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExtensionResource.Models.PolicyDefinitionListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PolicyDefinitionListResult"/>. </summary>
         internal PolicyDefinitionListResult()
         {
             Value = new ChangeTrackingList<PolicyDefinitionData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExtensionResource.Models.PolicyDefinitionListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PolicyDefinitionListResult"/>. </summary>
         /// <param name="value"> An array of policy definitions. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

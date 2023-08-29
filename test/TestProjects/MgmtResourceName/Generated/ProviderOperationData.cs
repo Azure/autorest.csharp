@@ -21,20 +21,14 @@ namespace MgmtResourceName
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtResourceName.ProviderOperationData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProviderOperationData"/>. </summary>
         internal ProviderOperationData()
         {
             ResourceTypes = new ChangeTrackingList<Models.ResourceType>();
             Operations = new ChangeTrackingList<ResourceOperation>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtResourceName.ProviderOperationData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProviderOperationData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

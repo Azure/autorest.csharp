@@ -20,10 +20,7 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetListSkusResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListSkusResult"/>. </summary>
         /// <param name="value">
         /// The list of skus available for the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListSkusResult.value
@@ -36,10 +33,7 @@ namespace MgmtRenameRules.Models
             Value = value.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetListSkusResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListSkusResult"/>. </summary>
         /// <param name="value">
         /// The list of skus available for the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListSkusResult.value

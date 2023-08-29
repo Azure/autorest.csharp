@@ -16,10 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.KeyValuePair
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyValuePair"/>. </summary>
         /// <param name="key"> Information about the extracted key in a key-value pair. </param>
         /// <param name="value"> Information about the extracted value in a key-value pair. </param>
         /// <param name="confidence"> Confidence value. </param>
@@ -34,10 +31,7 @@ namespace Azure.AI.FormRecognizer.Models
             Confidence = confidence;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.KeyValuePair
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyValuePair"/>. </summary>
         /// <param name="label"> A user defined label for the key/value pair entry. </param>
         /// <param name="key"> Information about the extracted key in a key-value pair. </param>
         /// <param name="value"> Information about the extracted value in a key-value pair. </param>

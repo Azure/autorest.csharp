@@ -15,18 +15,12 @@ namespace body_complex.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.DoubleWrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DoubleWrapper"/>. </summary>
         public DoubleWrapper()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_complex.Models.DoubleWrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DoubleWrapper"/>. </summary>
         /// <param name="field1"></param>
         /// <param name="field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

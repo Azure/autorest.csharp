@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ScheduledEventsProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ScheduledEventsProfile"/>. </summary>
         public ScheduledEventsProfile()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ScheduledEventsProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ScheduledEventsProfile"/>. </summary>
         /// <param name="terminateNotificationProfile">
         /// Specifies Terminate Scheduled Event related configurations.
         /// Serialized Name: ScheduledEventsProfile.terminateNotificationProfile

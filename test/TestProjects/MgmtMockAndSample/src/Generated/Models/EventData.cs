@@ -15,18 +15,12 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.EventData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EventData"/>. </summary>
         internal EventData()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.EventData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EventData"/>. </summary>
         /// <param name="authorization"> The sender authorization information. </param>
         /// <param name="tenantId"> the Azure tenant Id. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

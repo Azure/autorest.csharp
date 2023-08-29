@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.DiagnosticsProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DiagnosticsProfile"/>. </summary>
         public DiagnosticsProfile()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.DiagnosticsProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DiagnosticsProfile"/>. </summary>
         /// <param name="bootDiagnostics">
         /// Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. &lt;br&gt;&lt;br&gt; You can easily view the output of your console log. &lt;br&gt;&lt;br&gt; Azure also enables you to see a screenshot of the VM from the hypervisor.
         /// Serialized Name: DiagnosticsProfile.bootDiagnostics

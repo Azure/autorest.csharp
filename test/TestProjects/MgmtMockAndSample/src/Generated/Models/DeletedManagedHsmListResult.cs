@@ -17,19 +17,13 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.DeletedManagedHsmListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeletedManagedHsmListResult"/>. </summary>
         internal DeletedManagedHsmListResult()
         {
             Value = new ChangeTrackingList<DeletedManagedHsmData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.DeletedManagedHsmListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeletedManagedHsmListResult"/>. </summary>
         /// <param name="value"> The list of deleted managed HSM Pools. </param>
         /// <param name="nextLink"> The URL to get the next set of deleted managed HSM Pools. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

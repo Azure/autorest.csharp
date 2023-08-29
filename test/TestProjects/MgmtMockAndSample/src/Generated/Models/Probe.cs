@@ -15,20 +15,14 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.Probe
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Probe"/>. </summary>
         /// <param name="disableProbe"> Indicate whether the probe is disabled. </param>
         public Probe(bool disableProbe)
         {
             DisableProbe = disableProbe;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.Probe
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Probe"/>. </summary>
         /// <param name="disableProbe"> Indicate whether the probe is disabled. </param>
         /// <param name="initialDelaySeconds"> Number of seconds after the App Instance has started before probes are initiated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes. </param>
         /// <param name="periodSeconds"> How often (in seconds) to perform the probe. Minimum value is 1. </param>

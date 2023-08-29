@@ -16,10 +16,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.EncryptionKey
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EncryptionKey"/>. </summary>
         /// <param name="keyVaultKeyName"> The name of your Azure Key Vault key to be used to encrypt your data at rest. </param>
         /// <param name="keyVaultKeyVersion"> The version of your Azure Key Vault key to be used to encrypt your data at rest. </param>
         /// <param name="keyVaultUri"> The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be https://my-keyvault-name.vault.azure.net. </param>
@@ -35,10 +32,7 @@ namespace CognitiveSearch.Models
             KeyVaultUri = keyVaultUri;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.EncryptionKey
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="EncryptionKey"/>. </summary>
         /// <param name="keyVaultKeyName"> The name of your Azure Key Vault key to be used to encrypt your data at rest. </param>
         /// <param name="keyVaultKeyVersion"> The version of your Azure Key Vault key to be used to encrypt your data at rest. </param>
         /// <param name="keyVaultUri"> The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be https://my-keyvault-name.vault.azure.net. </param>

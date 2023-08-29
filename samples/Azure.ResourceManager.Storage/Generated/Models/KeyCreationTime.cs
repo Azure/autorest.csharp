@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.KeyCreationTime
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyCreationTime"/>. </summary>
         internal KeyCreationTime()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.KeyCreationTime
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyCreationTime"/>. </summary>
         /// <param name="key1"></param>
         /// <param name="key2"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

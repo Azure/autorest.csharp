@@ -18,10 +18,7 @@ namespace MgmtHierarchicalNonResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.SharedGalleryList
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SharedGalleryList"/>. </summary>
         /// <param name="value"> A list of shared galleries. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal SharedGalleryList(IEnumerable<SharedGalleryData> value)
@@ -31,10 +28,7 @@ namespace MgmtHierarchicalNonResource.Models
             Value = value.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.SharedGalleryList
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SharedGalleryList"/>. </summary>
         /// <param name="value"> A list of shared galleries. </param>
         /// <param name="nextLink"> The uri to fetch the next page of shared galleries. Call ListNext() with this to fetch the next page of shared galleries. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

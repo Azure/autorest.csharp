@@ -19,18 +19,12 @@ namespace CognitiveSearch.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.DataDeletionDetectionPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DataDeletionDetectionPolicy"/>. </summary>
         public DataDeletionDetectionPolicy()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.DataDeletionDetectionPolicy
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DataDeletionDetectionPolicy"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the data deletion detection policy. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal DataDeletionDetectionPolicy(string odataType, Dictionary<string, BinaryData> rawData)

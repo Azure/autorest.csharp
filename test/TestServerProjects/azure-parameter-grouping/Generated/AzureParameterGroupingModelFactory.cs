@@ -10,10 +10,7 @@ namespace azure_parameter_grouping.Models
     /// <summary> Model factory for models. </summary>
     public static partial class AzureParameterGroupingModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::azure_parameter_grouping.Models.ParameterGroupingPostRequiredParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostRequiredParameters"/>. </summary>
         /// <param name="customHeader"></param>
         /// <param name="query"> Query parameter with default. </param>
         /// <param name="path"> Path parameter. </param>

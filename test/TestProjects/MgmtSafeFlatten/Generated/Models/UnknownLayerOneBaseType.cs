@@ -13,10 +13,7 @@ namespace MgmtSafeFlatten.Models
     /// <summary> The UnknownLayerOneBaseType. </summary>
     internal partial class UnknownLayerOneBaseType : LayerOneBaseType
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSafeFlatten.Models.UnknownLayerOneBaseType
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownLayerOneBaseType"/>. </summary>
         /// <param name="name"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal UnknownLayerOneBaseType(LayerOneTypeName name, Dictionary<string, BinaryData> rawData) : base(name, rawData)

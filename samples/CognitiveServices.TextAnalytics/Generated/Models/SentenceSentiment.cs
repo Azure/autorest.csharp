@@ -16,10 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.SentenceSentiment
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SentenceSentiment"/>. </summary>
         /// <param name="text"> The sentence text. </param>
         /// <param name="sentiment"> The predicted Sentiment for the sentence. </param>
         /// <param name="confidenceScores"> The sentiment confidence score between 0 and 1 for the sentence for all classes. </param>
@@ -38,10 +35,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Length = length;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.SentenceSentiment
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SentenceSentiment"/>. </summary>
         /// <param name="text"> The sentence text. </param>
         /// <param name="sentiment"> The predicted Sentiment for the sentence. </param>
         /// <param name="confidenceScores"> The sentiment confidence score between 0 and 1 for the sentence for all classes. </param>

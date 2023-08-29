@@ -18,18 +18,12 @@ namespace MgmtNoTypeReplacement
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtNoTypeReplacement.NoTypeReplacementModel1Data
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NoTypeReplacementModel1Data"/>. </summary>
         public NoTypeReplacementModel1Data()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtNoTypeReplacement.NoTypeReplacementModel1Data
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NoTypeReplacementModel1Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

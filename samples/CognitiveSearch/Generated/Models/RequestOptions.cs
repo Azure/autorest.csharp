@@ -15,18 +15,12 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.RequestOptions
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RequestOptions"/>. </summary>
         public RequestOptions()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.RequestOptions
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RequestOptions"/>. </summary>
         /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal RequestOptions(Guid? xMsClientRequestId, Dictionary<string, BinaryData> rawData)

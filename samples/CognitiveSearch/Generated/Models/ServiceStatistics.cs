@@ -16,10 +16,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ServiceStatistics
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ServiceStatistics"/>. </summary>
         /// <param name="counters"> Service level resource counters. </param>
         /// <param name="limits"> Service level general limits. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="counters"/> or <paramref name="limits"/> is null. </exception>
@@ -32,10 +29,7 @@ namespace CognitiveSearch.Models
             Limits = limits;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ServiceStatistics
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ServiceStatistics"/>. </summary>
         /// <param name="counters"> Service level resource counters. </param>
         /// <param name="limits"> Service level general limits. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

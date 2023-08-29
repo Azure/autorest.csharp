@@ -13,18 +13,12 @@ namespace model_flattening.Models
     /// <summary> Flattened product. </summary>
     public partial class FlattenedProduct : Resource
     {
-        /// <summary>
-        /// Initializes a new instance of global::model_flattening.Models.FlattenedProduct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FlattenedProduct"/>. </summary>
         public FlattenedProduct()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::model_flattening.Models.FlattenedProduct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FlattenedProduct"/>. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="type"> Resource Type. </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>

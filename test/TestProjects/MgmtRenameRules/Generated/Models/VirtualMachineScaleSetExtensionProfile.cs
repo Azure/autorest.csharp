@@ -20,19 +20,13 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetExtensionProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionProfile"/>. </summary>
         public VirtualMachineScaleSetExtensionProfile()
         {
             Extensions = new ChangeTrackingList<VirtualMachineScaleSetExtensionData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetExtensionProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionProfile"/>. </summary>
         /// <param name="extensions">
         /// The virtual machine scale set child extension resources.
         /// Serialized Name: VirtualMachineScaleSetExtensionProfile.extensions

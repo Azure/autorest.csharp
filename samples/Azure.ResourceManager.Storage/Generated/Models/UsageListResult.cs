@@ -16,19 +16,13 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.UsageListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UsageListResult"/>. </summary>
         internal UsageListResult()
         {
             Value = new ChangeTrackingList<StorageUsage>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.UsageListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UsageListResult"/>. </summary>
         /// <param name="value"> Gets or sets the list of Storage Resource Usages. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal UsageListResult(IReadOnlyList<StorageUsage> value, Dictionary<string, BinaryData> rawData)

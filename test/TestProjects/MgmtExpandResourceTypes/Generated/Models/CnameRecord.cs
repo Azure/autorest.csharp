@@ -15,18 +15,12 @@ namespace MgmtExpandResourceTypes.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.CnameRecord
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CnameRecord"/>. </summary>
         public CnameRecord()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.CnameRecord
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CnameRecord"/>. </summary>
         /// <param name="cname"> The canonical name for this CNAME record. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal CnameRecord(string cname, Dictionary<string, BinaryData> rawData)

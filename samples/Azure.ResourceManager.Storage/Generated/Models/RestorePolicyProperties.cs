@@ -15,20 +15,14 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.RestorePolicyProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RestorePolicyProperties"/>. </summary>
         /// <param name="enabled"> Blob restore is enabled if set to true. </param>
         public RestorePolicyProperties(bool enabled)
         {
             Enabled = enabled;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.RestorePolicyProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RestorePolicyProperties"/>. </summary>
         /// <param name="enabled"> Blob restore is enabled if set to true. </param>
         /// <param name="days"> how long this blob can be restored. It should be great than zero and less than DeleteRetentionPolicy.days. </param>
         /// <param name="lastEnabledOn"> Deprecated in favor of minRestoreTime property. </param>

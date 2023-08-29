@@ -19,19 +19,13 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetInstanceViewStatusesSummary
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetInstanceViewStatusesSummary"/>. </summary>
         internal VirtualMachineScaleSetInstanceViewStatusesSummary()
         {
             StatusesSummary = new ChangeTrackingList<VirtualMachineStatusCodeCount>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetInstanceViewStatusesSummary
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetInstanceViewStatusesSummary"/>. </summary>
         /// <param name="statusesSummary">
         /// The extensions information.
         /// Serialized Name: VirtualMachineScaleSetInstanceViewStatusesSummary.statusesSummary

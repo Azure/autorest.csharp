@@ -15,18 +15,12 @@ namespace MgmtExpandResourceTypes.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.NsRecord
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NsRecord"/>. </summary>
         public NsRecord()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.NsRecord
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NsRecord"/>. </summary>
         /// <param name="nsdname"> The name server name for this NS record. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal NsRecord(string nsdname, Dictionary<string, BinaryData> rawData)

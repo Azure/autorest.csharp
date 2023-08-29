@@ -16,10 +16,7 @@ namespace MgmtScopeResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.ResourceLinkProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceLinkProperties"/>. </summary>
         /// <param name="targetId"> The fully qualified ID of the target resource in the link. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="targetId"/> is null. </exception>
         public ResourceLinkProperties(string targetId)
@@ -29,10 +26,7 @@ namespace MgmtScopeResource.Models
             TargetId = targetId;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtScopeResource.Models.ResourceLinkProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceLinkProperties"/>. </summary>
         /// <param name="sourceId"> The fully qualified ID of the source resource in the link. </param>
         /// <param name="targetId"> The fully qualified ID of the target resource in the link. </param>
         /// <param name="notes"> Notes about the resource link. </param>

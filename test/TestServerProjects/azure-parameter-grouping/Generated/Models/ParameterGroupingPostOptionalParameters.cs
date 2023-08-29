@@ -15,18 +15,12 @@ namespace azure_parameter_grouping.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::azure_parameter_grouping.Models.ParameterGroupingPostOptionalParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostOptionalParameters"/>. </summary>
         public ParameterGroupingPostOptionalParameters()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::azure_parameter_grouping.Models.ParameterGroupingPostOptionalParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostOptionalParameters"/>. </summary>
         /// <param name="customHeader"></param>
         /// <param name="query"> Query parameter with default. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

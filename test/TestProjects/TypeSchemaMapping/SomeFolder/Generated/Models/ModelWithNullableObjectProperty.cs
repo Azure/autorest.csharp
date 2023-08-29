@@ -16,18 +16,12 @@ namespace TypeSchemaMapping.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::TypeSchemaMapping.Models.ModelWithNullableObjectProperty
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithNullableObjectProperty"/>. </summary>
         public ModelWithNullableObjectProperty()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::TypeSchemaMapping.Models.ModelWithNullableObjectProperty
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithNullableObjectProperty"/>. </summary>
         /// <param name="modelProperty"> . </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelWithNullableObjectProperty(JsonElement modelProperty, Dictionary<string, BinaryData> rawData)

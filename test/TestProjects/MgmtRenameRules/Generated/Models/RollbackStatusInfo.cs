@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.RollbackStatusInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RollbackStatusInfo"/>. </summary>
         internal RollbackStatusInfo()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.RollbackStatusInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RollbackStatusInfo"/>. </summary>
         /// <param name="successfullyRolledbackInstanceCount">
         /// The number of instances which have been successfully rolled back.
         /// Serialized Name: RollbackStatusInfo.successfullyRolledbackInstanceCount

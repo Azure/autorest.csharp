@@ -15,20 +15,14 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.FreshnessScoringParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FreshnessScoringParameters"/>. </summary>
         /// <param name="boostingDuration"> The expiration period after which boosting will stop for a particular document. </param>
         public FreshnessScoringParameters(TimeSpan boostingDuration)
         {
             BoostingDuration = boostingDuration;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.FreshnessScoringParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FreshnessScoringParameters"/>. </summary>
         /// <param name="boostingDuration"> The expiration period after which boosting will stop for a particular document. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal FreshnessScoringParameters(TimeSpan boostingDuration, Dictionary<string, BinaryData> rawData)

@@ -14,18 +14,12 @@ namespace Inheritance.Models
     /// <summary> The ClassThatInheritsFromBaseClassAndSomeProperties. </summary>
     public partial class ClassThatInheritsFromBaseClassAndSomeProperties : BaseClass
     {
-        /// <summary>
-        /// Initializes a new instance of global::Inheritance.Models.ClassThatInheritsFromBaseClassAndSomeProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ClassThatInheritsFromBaseClassAndSomeProperties"/>. </summary>
         public ClassThatInheritsFromBaseClassAndSomeProperties()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Inheritance.Models.ClassThatInheritsFromBaseClassAndSomeProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ClassThatInheritsFromBaseClassAndSomeProperties"/>. </summary>
         /// <param name="baseClassProperty"></param>
         /// <param name="dfeString"> Any object. </param>
         /// <param name="dfeDouble"> Any object. </param>

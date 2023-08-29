@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdatePublicIPAddressConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdatePublicIPAddressConfiguration"/>. </summary>
         public VirtualMachineScaleSetUpdatePublicIPAddressConfiguration()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdatePublicIPAddressConfiguration
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdatePublicIPAddressConfiguration"/>. </summary>
         /// <param name="name">
         /// The publicIP address configuration name.
         /// Serialized Name: VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.name

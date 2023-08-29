@@ -16,10 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.MultiLanguageInput
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MultiLanguageInput"/>. </summary>
         /// <param name="id"> A unique, non-empty document identifier. </param>
         /// <param name="text"> The input text to process. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="text"/> is null. </exception>
@@ -32,10 +29,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Text = text;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.MultiLanguageInput
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MultiLanguageInput"/>. </summary>
         /// <param name="id"> A unique, non-empty document identifier. </param>
         /// <param name="text"> The input text to process. </param>
         /// <param name="language"> (Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use "en" for English; "es" for Spanish etc. If not set, use "en" for English as default. </param>

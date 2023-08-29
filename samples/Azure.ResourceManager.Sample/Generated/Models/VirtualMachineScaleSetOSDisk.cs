@@ -19,10 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetOSDisk
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetOSDisk"/>. </summary>
         /// <param name="createOption">
         /// Specifies how the virtual machines in the scale set should be created.&lt;br&gt;&lt;br&gt; The only allowed value is: **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.
         /// Serialized Name: VirtualMachineScaleSetOSDisk.createOption
@@ -33,10 +30,7 @@ namespace Azure.ResourceManager.Sample.Models
             VhdContainers = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetOSDisk
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetOSDisk"/>. </summary>
         /// <param name="name">
         /// The disk name.
         /// Serialized Name: VirtualMachineScaleSetOSDisk.name

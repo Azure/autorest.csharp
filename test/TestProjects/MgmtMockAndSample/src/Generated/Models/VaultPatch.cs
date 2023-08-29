@@ -16,19 +16,13 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultPatch"/>. </summary>
         public VaultPatch()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultPatch"/>. </summary>
         /// <param name="tags"> The tags that will be assigned to the key vault. </param>
         /// <param name="properties"> Properties of the vault. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

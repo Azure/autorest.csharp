@@ -16,19 +16,13 @@ namespace ModelShapes.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::ModelShapes.Models.MixedModelWithReadonlyProperty
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MixedModelWithReadonlyProperty"/>. </summary>
         public MixedModelWithReadonlyProperty()
         {
             ReadonlyListProperty = new ChangeTrackingList<ReadonlyModel>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::ModelShapes.Models.MixedModelWithReadonlyProperty
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MixedModelWithReadonlyProperty"/>. </summary>
         /// <param name="readonlyProperty"></param>
         /// <param name="readonlyListProperty"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

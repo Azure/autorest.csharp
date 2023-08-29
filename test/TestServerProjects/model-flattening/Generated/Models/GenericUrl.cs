@@ -15,18 +15,12 @@ namespace model_flattening.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::model_flattening.Models.GenericUrl
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GenericUrl"/>. </summary>
         internal GenericUrl()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::model_flattening.Models.GenericUrl
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="GenericUrl"/>. </summary>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal GenericUrl(string genericValue, Dictionary<string, BinaryData> rawData)

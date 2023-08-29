@@ -13,19 +13,13 @@ namespace MgmtCustomizations.Models
     /// <summary> A dog. </summary>
     public partial class Dog : Pet
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtCustomizations.Models.Dog
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Dog"/>. </summary>
         public Dog()
         {
             Kind = PetKind.Dog;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtCustomizations.Models.Dog
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Dog"/>. </summary>
         /// <param name="kind"> The kind of the pet. </param>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="size">

@@ -18,18 +18,12 @@ namespace MgmtOmitOperationGroups
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Model2Data
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Model2Data"/>. </summary>
         public Model2Data()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Model2Data
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Model2Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

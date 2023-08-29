@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.UpgradeOperationHistoryStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UpgradeOperationHistoryStatus"/>. </summary>
         internal UpgradeOperationHistoryStatus()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.UpgradeOperationHistoryStatus
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UpgradeOperationHistoryStatus"/>. </summary>
         /// <param name="code">
         /// Code indicating the current status of the upgrade.
         /// Serialized Name: UpgradeOperationHistoryStatus.code

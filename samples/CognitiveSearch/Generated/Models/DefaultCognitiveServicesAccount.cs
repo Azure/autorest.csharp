@@ -13,19 +13,13 @@ namespace CognitiveSearch.Models
     /// <summary> An empty object that represents the default cognitive service resource for a skillset. </summary>
     public partial class DefaultCognitiveServicesAccount : CognitiveServicesAccount
     {
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.DefaultCognitiveServicesAccount
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DefaultCognitiveServicesAccount"/>. </summary>
         public DefaultCognitiveServicesAccount()
         {
             OdataType = "#Microsoft.Azure.Search.DefaultCognitiveServices";
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.DefaultCognitiveServicesAccount
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DefaultCognitiveServicesAccount"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the cognitive service resource attached to a skillset. </param>
         /// <param name="description"> Description of the cognitive service resource attached to a skillset. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

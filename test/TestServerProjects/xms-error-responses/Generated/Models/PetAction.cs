@@ -15,18 +15,12 @@ namespace xms_error_responses.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.PetAction
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PetAction"/>. </summary>
         internal PetAction()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.PetAction
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PetAction"/>. </summary>
         /// <param name="actionResponse"> action feedback. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal PetAction(string actionResponse, Dictionary<string, BinaryData> rawData)

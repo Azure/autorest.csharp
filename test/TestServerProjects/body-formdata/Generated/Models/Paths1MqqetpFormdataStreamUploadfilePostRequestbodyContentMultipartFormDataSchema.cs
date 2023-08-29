@@ -17,10 +17,7 @@ namespace body_formdata.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::body_formdata.Models.Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema"/>. </summary>
         /// <param name="fileContent"> File to upload. </param>
         /// <param name="fileName"> File name to upload. Name has to be spelled exactly as written here. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileContent"/> or <paramref name="fileName"/> is null. </exception>
@@ -33,10 +30,7 @@ namespace body_formdata.Models
             FileName = fileName;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_formdata.Models.Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema"/>. </summary>
         /// <param name="fileContent"> File to upload. </param>
         /// <param name="fileName"> File name to upload. Name has to be spelled exactly as written here. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

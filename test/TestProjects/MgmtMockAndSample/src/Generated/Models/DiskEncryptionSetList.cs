@@ -18,10 +18,7 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.DiskEncryptionSetList
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskEncryptionSetList"/>. </summary>
         /// <param name="value"> A list of disk encryption sets. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal DiskEncryptionSetList(IEnumerable<DiskEncryptionSetData> value)
@@ -31,10 +28,7 @@ namespace MgmtMockAndSample.Models
             Value = value.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.DiskEncryptionSetList
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskEncryptionSetList"/>. </summary>
         /// <param name="value"> A list of disk encryption sets. </param>
         /// <param name="nextLink"> The uri to fetch the next page of disk encryption sets. Call ListNext() with this to fetch the next page of disk encryption sets. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

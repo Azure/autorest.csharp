@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DataDiskImage
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DataDiskImage"/>. </summary>
         public DataDiskImage()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DataDiskImage
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DataDiskImage"/>. </summary>
         /// <param name="lun">
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: DataDiskImage.lun

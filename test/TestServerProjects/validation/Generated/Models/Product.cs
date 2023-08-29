@@ -16,10 +16,7 @@ namespace validation.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::validation.Models.Product
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         /// <param name="child"> The product documentation. </param>
         /// <param name="constChild"> The product documentation. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="child"/> or <paramref name="constChild"/> is null. </exception>
@@ -35,10 +32,7 @@ namespace validation.Models
             ConstString = ProductConstString.Constant;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::validation.Models.Product
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         /// <param name="displayNames"> Non required array of unique items from 0 to 6 elements. </param>
         /// <param name="capacity"> Non required int betwen 0 and 100 exclusive. </param>
         /// <param name="image"> Image URL representing the product. </param>

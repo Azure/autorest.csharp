@@ -16,10 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.FormFieldsReport
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FormFieldsReport"/>. </summary>
         /// <param name="fieldName"> Training field name. </param>
         /// <param name="accuracy"> Estimated extraction accuracy for this field. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fieldName"/> is null. </exception>
@@ -31,10 +28,7 @@ namespace Azure.AI.FormRecognizer.Models
             Accuracy = accuracy;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.FormFieldsReport
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FormFieldsReport"/>. </summary>
         /// <param name="fieldName"> Training field name. </param>
         /// <param name="accuracy"> Estimated extraction accuracy for this field. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -17,19 +17,13 @@ namespace MgmtPropertyChooser.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPropertyChooser.Models.IdentityWithDifferentPropertyType
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IdentityWithDifferentPropertyType"/>. </summary>
         public IdentityWithDifferentPropertyType()
         {
             UserAssignedIdentities = new ChangeTrackingDictionary<string, UserAssignedIdentity>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtPropertyChooser.Models.IdentityWithDifferentPropertyType
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IdentityWithDifferentPropertyType"/>. </summary>
         /// <param name="principalId"> The principal id of virtual machine identity. This property will only be provided for a system assigned identity. </param>
         /// <param name="tenantId"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>
         /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </param>

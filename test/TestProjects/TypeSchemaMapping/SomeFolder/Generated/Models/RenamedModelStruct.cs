@@ -17,10 +17,7 @@ namespace CustomNamespace
     {
         private readonly Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CustomNamespace.RenamedModelStruct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RenamedModelStruct"/>. </summary>
         /// <param name="customizedFlattenedStringProperty"> . </param>
         /// <param name="propertyToField"> . </param>
         /// <param name="fruit"> Fruit. </param>
@@ -37,10 +34,7 @@ namespace CustomNamespace
             DaysOfWeek = daysOfWeek;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CustomNamespace.RenamedModelStruct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RenamedModelStruct"/>. </summary>
         /// <param name="customizedFlattenedStringProperty"> . </param>
         /// <param name="propertyToField"> . </param>
         /// <param name="fruit"> Fruit. </param>

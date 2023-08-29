@@ -15,20 +15,14 @@ namespace ModelWithConverterUsage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::ModelWithConverterUsage.Models.ModelClass
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelClass"/>. </summary>
         /// <param name="enumProperty"> More Letters. </param>
         public ModelClass(EnumProperty enumProperty)
         {
             EnumProperty = enumProperty;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::ModelWithConverterUsage.Models.ModelClass
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelClass"/>. </summary>
         /// <param name="stringProperty"></param>
         /// <param name="enumProperty"> More Letters. </param>
         /// <param name="objProperty"> The product documentation. </param>

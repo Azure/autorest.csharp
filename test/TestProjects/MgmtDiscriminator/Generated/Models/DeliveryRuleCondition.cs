@@ -21,18 +21,12 @@ namespace MgmtDiscriminator.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleCondition
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleCondition"/>. </summary>
         protected DeliveryRuleCondition()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleCondition
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleCondition"/>. </summary>
         /// <param name="name"> The name of the condition for the delivery rule. </param>
         /// <param name="foo"> For test. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

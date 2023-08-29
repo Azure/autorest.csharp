@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.MgmtRenameRulesPlan
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtRenameRulesPlan"/>. </summary>
         public MgmtRenameRulesPlan()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.MgmtRenameRulesPlan
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtRenameRulesPlan"/>. </summary>
         /// <param name="name">
         /// The plan ID.
         /// Serialized Name: Plan.name

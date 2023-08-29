@@ -13,18 +13,12 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> IP configuration profile child resource. </summary>
     public partial class IPConfigurationProfile : SubResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.IPConfigurationProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IPConfigurationProfile"/>. </summary>
         public IPConfigurationProfile()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.IPConfigurationProfile
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IPConfigurationProfile"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource. This name can be used to access the resource. </param>
         /// <param name="type"> Sub Resource type. </param>

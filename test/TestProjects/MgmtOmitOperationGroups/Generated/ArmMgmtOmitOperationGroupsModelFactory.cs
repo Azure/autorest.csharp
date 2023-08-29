@@ -16,10 +16,7 @@ namespace MgmtOmitOperationGroups.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtOmitOperationGroupsModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.ModelZ
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelZ"/>. </summary>
         /// <param name="h"></param>
         /// <param name="i"></param>
         /// <returns> A new <see cref="Models.ModelZ"/> instance for mocking. </returns>
@@ -28,10 +25,7 @@ namespace MgmtOmitOperationGroups.Models
             return new ModelZ(h, i, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.ModelQ
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelQ"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -43,10 +37,7 @@ namespace MgmtOmitOperationGroups.Models
             return new ModelQ(id, name, resourceType, systemData, m, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Model2Data
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Model2Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -61,10 +52,7 @@ namespace MgmtOmitOperationGroups.Models
             return new Model2Data(id, name, resourceType, systemData, b, modelx, f, g, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.Model4
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Model4"/>. </summary>
         /// <param name="id"></param>
         /// <param name="j"></param>
         /// <param name="modelz"></param>
@@ -74,10 +62,7 @@ namespace MgmtOmitOperationGroups.Models
             return new Model4(id, j, modelz, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.Model5
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Model5"/>. </summary>
         /// <param name="id"></param>
         /// <param name="k"></param>
         /// <param name="modelqs"></param>

@@ -15,20 +15,14 @@ namespace MgmtDiscriminator.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.RouteConfigurationOverrideActionParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RouteConfigurationOverrideActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         public RouteConfigurationOverrideActionParameters(RouteConfigurationOverrideActionParametersTypeName typeName)
         {
             TypeName = typeName;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.RouteConfigurationOverrideActionParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RouteConfigurationOverrideActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="originGroupOverride"> A reference to the origin group override configuration. Leave empty to use the default origin group on route. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

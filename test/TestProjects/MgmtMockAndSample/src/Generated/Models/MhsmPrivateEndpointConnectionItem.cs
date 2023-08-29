@@ -17,18 +17,12 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.MhsmPrivateEndpointConnectionItem
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MhsmPrivateEndpointConnectionItem"/>. </summary>
         internal MhsmPrivateEndpointConnectionItem()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.MhsmPrivateEndpointConnectionItem
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MhsmPrivateEndpointConnectionItem"/>. </summary>
         /// <param name="privateEndpoint"> Properties of the private endpoint object. </param>
         /// <param name="privateLinkServiceConnectionState"> Approval state of the private link connection. </param>
         /// <param name="provisioningState"> Provisioning state of the private endpoint connection. </param>

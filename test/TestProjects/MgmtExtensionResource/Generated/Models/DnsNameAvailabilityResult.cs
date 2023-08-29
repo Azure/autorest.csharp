@@ -15,18 +15,12 @@ namespace MgmtExtensionResource.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExtensionResource.Models.DnsNameAvailabilityResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DnsNameAvailabilityResult"/>. </summary>
         internal DnsNameAvailabilityResult()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtExtensionResource.Models.DnsNameAvailabilityResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DnsNameAvailabilityResult"/>. </summary>
         /// <param name="available"> Domain availability (True/False). </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal DnsNameAvailabilityResult(bool? available, Dictionary<string, BinaryData> rawData)

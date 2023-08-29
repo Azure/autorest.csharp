@@ -15,18 +15,12 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyInsights
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyInsights"/>. </summary>
         public FirewallPolicyInsights()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyInsights
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyInsights"/>. </summary>
         /// <param name="isEnabled"> A flag to indicate if the insights are enabled on the policy. </param>
         /// <param name="retentionDays"> Number of days the insights should be enabled on the policy. </param>
         /// <param name="logAnalyticsResources"> Workspaces needed to configure the Firewall Policy Insights. </param>

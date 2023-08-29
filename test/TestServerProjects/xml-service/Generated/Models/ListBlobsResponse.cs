@@ -16,10 +16,7 @@ namespace xml_service.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.ListBlobsResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ListBlobsResponse"/>. </summary>
         /// <param name="containerName"></param>
         /// <param name="prefix"></param>
         /// <param name="marker"></param>
@@ -46,10 +43,7 @@ namespace xml_service.Models
             NextMarker = nextMarker;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xml_service.Models.ListBlobsResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ListBlobsResponse"/>. </summary>
         /// <param name="serviceEndpoint"></param>
         /// <param name="containerName"></param>
         /// <param name="prefix"></param>

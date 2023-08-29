@@ -15,18 +15,12 @@ namespace model_flattening.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::model_flattening.Models.ProductWrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProductWrapper"/>. </summary>
         internal ProductWrapper()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::model_flattening.Models.ProductWrapper
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProductWrapper"/>. </summary>
         /// <param name="value"> the product value. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ProductWrapper(string value, Dictionary<string, BinaryData> rawData)

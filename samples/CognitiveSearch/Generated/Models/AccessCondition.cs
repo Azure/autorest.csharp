@@ -15,18 +15,12 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.AccessCondition
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AccessCondition"/>. </summary>
         public AccessCondition()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.AccessCondition
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AccessCondition"/>. </summary>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -13,18 +13,12 @@ namespace MgmtHierarchicalNonResource.Models
     /// <summary> Base information about the shared gallery resource in pir. </summary>
     public partial class PirSharedGalleryResource : PirResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.PirSharedGalleryResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PirSharedGalleryResource"/>. </summary>
         internal PirSharedGalleryResource()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.PirSharedGalleryResource
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PirSharedGalleryResource"/>. </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>

@@ -15,10 +15,7 @@ namespace MgmtDiscriminator.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.UrlRedirectActionParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UrlRedirectActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="redirectType"> The redirect type the rule will use when redirecting traffic. </param>
         public UrlRedirectActionParameters(UrlRedirectActionParametersTypeName typeName, RedirectType redirectType)
@@ -27,10 +24,7 @@ namespace MgmtDiscriminator.Models
             RedirectType = redirectType;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtDiscriminator.Models.UrlRedirectActionParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UrlRedirectActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="redirectType"> The redirect type the rule will use when redirecting traffic. </param>
         /// <param name="destinationProtocol"> Protocol to use for the redirect. The default value is MatchRequest. </param>

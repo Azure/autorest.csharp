@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StorageUsage
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageUsage"/>. </summary>
         internal StorageUsage()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StorageUsage
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageUsage"/>. </summary>
         /// <param name="unit"> Gets the unit of measurement. </param>
         /// <param name="currentValue"> Gets the current count of the allocated resources in the subscription. </param>
         /// <param name="limit"> Gets the maximum count of the resources that can be allocated in the subscription. </param>

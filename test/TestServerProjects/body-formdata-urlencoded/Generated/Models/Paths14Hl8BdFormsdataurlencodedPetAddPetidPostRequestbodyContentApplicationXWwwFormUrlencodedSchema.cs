@@ -15,10 +15,7 @@ namespace body_formdata_urlencoded.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::body_formdata_urlencoded.Models.Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema"/>. </summary>
         /// <param name="petType"> Can take a value of dog, or cat, or fish. </param>
         /// <param name="petFood"> Can take a value of meat, or fish, or plant. </param>
         /// <param name="petAge"> How many years is it old?. </param>
@@ -29,10 +26,7 @@ namespace body_formdata_urlencoded.Models
             PetAge = petAge;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::body_formdata_urlencoded.Models.Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema"/>. </summary>
         /// <param name="petType"> Can take a value of dog, or cat, or fish. </param>
         /// <param name="petFood"> Can take a value of meat, or fish, or plant. </param>
         /// <param name="petAge"> How many years is it old?. </param>

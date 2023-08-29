@@ -19,10 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SampleUsage
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SampleUsage"/>. </summary>
         /// <param name="currentValue">
         /// The current usage of the resource.
         /// Serialized Name: SampleUsage.currentValue
@@ -46,10 +43,7 @@ namespace Azure.ResourceManager.Sample.Models
             Name = name;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SampleUsage
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SampleUsage"/>. </summary>
         /// <param name="unit">
         /// An enum describing the unit of usage measurement.
         /// Serialized Name: SampleUsage.unit

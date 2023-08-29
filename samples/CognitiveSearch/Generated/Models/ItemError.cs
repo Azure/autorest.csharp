@@ -16,10 +16,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ItemError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ItemError"/>. </summary>
         /// <param name="errorMessage"> The message describing the error that occurred while processing the item. </param>
         /// <param name="statusCode"> The status code indicating why the indexing operation failed. Possible values include: 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="errorMessage"/> is null. </exception>
@@ -31,10 +28,7 @@ namespace CognitiveSearch.Models
             StatusCode = statusCode;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.ItemError
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ItemError"/>. </summary>
         /// <param name="key"> The key of the item for which indexing failed. </param>
         /// <param name="errorMessage"> The message describing the error that occurred while processing the item. </param>
         /// <param name="statusCode"> The status code indicating why the indexing operation failed. Possible values include: 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy. </param>

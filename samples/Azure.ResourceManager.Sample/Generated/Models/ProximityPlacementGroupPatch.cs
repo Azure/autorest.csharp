@@ -16,18 +16,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class ProximityPlacementGroupPatch : UpdateResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ProximityPlacementGroupPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupPatch"/>. </summary>
         public ProximityPlacementGroupPatch()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ProximityPlacementGroupPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupPatch"/>. </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags

@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ProtectedAppendWritesHistory
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProtectedAppendWritesHistory"/>. </summary>
         internal ProtectedAppendWritesHistory()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ProtectedAppendWritesHistory
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ProtectedAppendWritesHistory"/>. </summary>
         /// <param name="allowProtectedAppendWritesAll"> When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining legal hold protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. </param>
         /// <param name="timestamp"> Returns the date and time the tag was added. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

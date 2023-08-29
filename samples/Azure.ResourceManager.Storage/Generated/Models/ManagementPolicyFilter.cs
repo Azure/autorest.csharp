@@ -17,10 +17,7 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ManagementPolicyFilter
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ManagementPolicyFilter"/>. </summary>
         /// <param name="blobTypes"> An array of predefined enum values. Currently blockBlob supports all tiering and delete actions. Only delete actions are supported for appendBlob. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="blobTypes"/> is null. </exception>
         public ManagementPolicyFilter(IEnumerable<string> blobTypes)
@@ -32,10 +29,7 @@ namespace Azure.ResourceManager.Storage.Models
             BlobIndexMatch = new ChangeTrackingList<TagFilter>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ManagementPolicyFilter
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ManagementPolicyFilter"/>. </summary>
         /// <param name="prefixMatch"> An array of strings for prefixes to be match. </param>
         /// <param name="blobTypes"> An array of predefined enum values. Currently blockBlob supports all tiering and delete actions. Only delete actions are supported for appendBlob. </param>
         /// <param name="blobIndexMatch"> An array of blob index tag based filters, there can be at most 10 tag filters. </param>

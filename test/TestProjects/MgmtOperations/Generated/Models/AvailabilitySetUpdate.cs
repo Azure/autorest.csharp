@@ -13,18 +13,12 @@ namespace MgmtOperations.Models
     /// <summary> Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated. </summary>
     public partial class AvailabilitySetUpdate : UpdateResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOperations.Models.AvailabilitySetUpdate
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetUpdate"/>. </summary>
         public AvailabilitySetUpdate()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOperations.Models.AvailabilitySetUpdate
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetUpdate"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="platformUpdateDomainCount"> Update Domain count. </param>
         /// <param name="platformFaultDomainCount"> Fault Domain count. </param>

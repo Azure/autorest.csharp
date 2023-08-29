@@ -15,18 +15,12 @@ namespace MgmtOmitOperationGroups.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.ModelY
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelY"/>. </summary>
         public ModelY()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.ModelY
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelY"/>. </summary>
         /// <param name="e"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelY(string e, Dictionary<string, BinaryData> rawData)

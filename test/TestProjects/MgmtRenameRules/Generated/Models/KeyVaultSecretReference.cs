@@ -20,10 +20,7 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.KeyVaultSecretReference
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyVaultSecretReference"/>. </summary>
         /// <param name="secretUri">
         /// The URL referencing a secret in a Key Vault.
         /// Serialized Name: KeyVaultSecretReference.secretUrl
@@ -42,10 +39,7 @@ namespace MgmtRenameRules.Models
             SourceVault = sourceVault;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.KeyVaultSecretReference
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyVaultSecretReference"/>. </summary>
         /// <param name="secretUri">
         /// The URL referencing a secret in a Key Vault.
         /// Serialized Name: KeyVaultSecretReference.secretUrl

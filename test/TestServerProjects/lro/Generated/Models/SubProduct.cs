@@ -13,18 +13,12 @@ namespace lro.Models
     /// <summary> The SubProduct. </summary>
     public partial class SubProduct : SubResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::lro.Models.SubProduct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SubProduct"/>. </summary>
         public SubProduct()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::lro.Models.SubProduct
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SubProduct"/>. </summary>
         /// <param name="id"> Sub Resource Id. </param>
         /// <param name="provisioningState"></param>
         /// <param name="provisioningStateValues"></param>

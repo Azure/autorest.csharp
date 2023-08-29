@@ -18,10 +18,7 @@ namespace MgmtLRO.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtLRO.Models.BarListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BarListResult"/>. </summary>
         /// <param name="value"> The list of bars. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal BarListResult(IEnumerable<BarData> value)
@@ -31,10 +28,7 @@ namespace MgmtLRO.Models
             Value = value.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtLRO.Models.BarListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BarListResult"/>. </summary>
         /// <param name="value"> The list of bars. </param>
         /// <param name="nextLink"> The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

@@ -16,19 +16,13 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.DeletedManagedHsmProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeletedManagedHsmProperties"/>. </summary>
         internal DeletedManagedHsmProperties()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.DeletedManagedHsmProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="DeletedManagedHsmProperties"/>. </summary>
         /// <param name="mhsmId"> The resource id of the original managed HSM. </param>
         /// <param name="location"> The location of the original managed HSM. </param>
         /// <param name="deletedOn"> The deleted date. </param>

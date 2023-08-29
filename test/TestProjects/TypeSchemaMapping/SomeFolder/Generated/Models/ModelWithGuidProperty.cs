@@ -15,18 +15,12 @@ namespace TypeSchemaMapping.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::TypeSchemaMapping.Models.ModelWithGuidProperty
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithGuidProperty"/>. </summary>
         public ModelWithGuidProperty()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::TypeSchemaMapping.Models.ModelWithGuidProperty
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithGuidProperty"/>. </summary>
         /// <param name="modelProperty"> . </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelWithGuidProperty(Guid? modelProperty, Dictionary<string, BinaryData> rawData)

@@ -18,18 +18,12 @@ namespace MgmtRenameRules.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.RecoveryWalkResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RecoveryWalkResponse"/>. </summary>
         internal RecoveryWalkResponse()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtRenameRules.Models.RecoveryWalkResponse
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="RecoveryWalkResponse"/>. </summary>
         /// <param name="walkPerformed">
         /// Whether the recovery walk was performed
         /// Serialized Name: RecoveryWalkResponse.walkPerformed

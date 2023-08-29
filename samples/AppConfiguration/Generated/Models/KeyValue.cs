@@ -16,19 +16,13 @@ namespace AppConfiguration.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::AppConfiguration.Models.KeyValue
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyValue"/>. </summary>
         public KeyValue()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::AppConfiguration.Models.KeyValue
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyValue"/>. </summary>
         /// <param name="key"></param>
         /// <param name="label"></param>
         /// <param name="contentType"></param>

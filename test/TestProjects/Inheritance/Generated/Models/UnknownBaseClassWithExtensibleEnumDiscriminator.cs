@@ -13,10 +13,7 @@ namespace Inheritance.Models
     /// <summary> The UnknownBaseClassWithExtensibleEnumDiscriminator. </summary>
     internal partial class UnknownBaseClassWithExtensibleEnumDiscriminator : BaseClassWithExtensibleEnumDiscriminator
     {
-        /// <summary>
-        /// Initializes a new instance of global::Inheritance.Models.UnknownBaseClassWithExtensibleEnumDiscriminator
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownBaseClassWithExtensibleEnumDiscriminator"/>. </summary>
         /// <param name="discriminatorProperty"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal UnknownBaseClassWithExtensibleEnumDiscriminator(BaseClassWithEntensibleEnumDiscriminatorEnum discriminatorProperty, Dictionary<string, BinaryData> rawData) : base(discriminatorProperty, rawData)

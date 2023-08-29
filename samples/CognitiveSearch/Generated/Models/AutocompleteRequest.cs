@@ -16,10 +16,7 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.AutocompleteRequest
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AutocompleteRequest"/>. </summary>
         /// <param name="searchText"> The search text on which to base autocomplete results. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="searchText"/> or <paramref name="suggesterName"/> is null. </exception>
@@ -32,10 +29,7 @@ namespace CognitiveSearch.Models
             SuggesterName = suggesterName;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.AutocompleteRequest
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AutocompleteRequest"/>. </summary>
         /// <param name="searchText"> The search text on which to base autocomplete results. </param>
         /// <param name="autocompleteMode"> Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms. </param>
         /// <param name="filter"> An OData expression that filters the documents used to produce completed terms for the Autocomplete result. </param>

@@ -17,20 +17,14 @@ namespace Azure.ResourceManager.Fake.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.PrivateLinkResourceList
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateLinkResourceList"/>. </summary>
         [InitializationConstructor]
         public PrivateLinkResourceList()
         {
             Value = new ChangeTrackingList<PrivateLinkResourceData>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.PrivateLinkResourceList
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateLinkResourceList"/>. </summary>
         /// <param name="value"> Array of private link resources. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         protected PrivateLinkResourceList(IReadOnlyList<PrivateLinkResourceData> value, Dictionary<string, BinaryData> rawData)

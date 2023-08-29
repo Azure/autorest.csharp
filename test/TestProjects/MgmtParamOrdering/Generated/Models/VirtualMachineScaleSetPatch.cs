@@ -13,18 +13,12 @@ namespace MgmtParamOrdering.Models
     /// <summary> Describes a Virtual Machine Scale Set. </summary>
     public partial class VirtualMachineScaleSetPatch : UpdateResource
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.Models.VirtualMachineScaleSetPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPatch"/>. </summary>
         public VirtualMachineScaleSetPatch()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtParamOrdering.Models.VirtualMachineScaleSetPatch
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPatch"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="sku"> The virtual machine scale set sku. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

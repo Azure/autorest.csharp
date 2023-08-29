@@ -17,10 +17,7 @@ namespace MgmtSafeFlatten.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtSafeFlattenModelFactory
     {
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSafeFlatten.TypeOneData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TypeOneData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -43,10 +40,7 @@ namespace MgmtSafeFlatten.Models
             return new TypeOneData(id, name, resourceType, systemData, tags, location, myType, layerTwoMyProp != null ? new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp, new Dictionary<string, BinaryData>()), new Dictionary<string, BinaryData>()) : null, layerOneType, layerOneConflictId != null ? ResourceManagerModelFactory.WritableSubResource(layerOneConflictId) : null, default);
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSafeFlatten.TypeTwoData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TypeTwoData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

@@ -21,18 +21,12 @@ namespace Inheritance.Models
     {
         protected internal Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Inheritance.Models.BaseClassWithExtensibleEnumDiscriminator
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseClassWithExtensibleEnumDiscriminator"/>. </summary>
         protected BaseClassWithExtensibleEnumDiscriminator()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Inheritance.Models.BaseClassWithExtensibleEnumDiscriminator
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseClassWithExtensibleEnumDiscriminator"/>. </summary>
         /// <param name="discriminatorProperty"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal BaseClassWithExtensibleEnumDiscriminator(BaseClassWithEntensibleEnumDiscriminatorEnum discriminatorProperty, Dictionary<string, BinaryData> rawData)

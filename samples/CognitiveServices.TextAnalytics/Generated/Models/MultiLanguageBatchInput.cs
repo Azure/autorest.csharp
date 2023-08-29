@@ -17,10 +17,7 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.MultiLanguageBatchInput
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MultiLanguageBatchInput"/>. </summary>
         /// <param name="documents"> The set of documents to process as part of this batch. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="documents"/> is null. </exception>
         public MultiLanguageBatchInput(IEnumerable<MultiLanguageInput> documents)
@@ -30,10 +27,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Documents = documents.ToList();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.MultiLanguageBatchInput
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="MultiLanguageBatchInput"/>. </summary>
         /// <param name="documents"> The set of documents to process as part of this batch. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal MultiLanguageBatchInput(IList<MultiLanguageInput> documents, Dictionary<string, BinaryData> rawData)

@@ -15,18 +15,12 @@ namespace MgmtMockAndSample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.ExtremelyDeepSinglePropertyModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ExtremelyDeepSinglePropertyModel"/>. </summary>
         public ExtremelyDeepSinglePropertyModel()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.Models.ExtremelyDeepSinglePropertyModel
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ExtremelyDeepSinglePropertyModel"/>. </summary>
         /// <param name="extreme"> This is a single property of string. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ExtremelyDeepSinglePropertyModel(SuperDeepSinglePropertyModel extreme, Dictionary<string, BinaryData> rawData)

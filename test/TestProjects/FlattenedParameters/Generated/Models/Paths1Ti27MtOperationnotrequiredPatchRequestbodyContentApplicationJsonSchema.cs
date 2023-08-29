@@ -15,18 +15,12 @@ namespace FlattenedParameters.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::FlattenedParameters.Models.Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         public Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::FlattenedParameters.Models.Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         /// <param name="required"></param>
         /// <param name="nonRequired"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

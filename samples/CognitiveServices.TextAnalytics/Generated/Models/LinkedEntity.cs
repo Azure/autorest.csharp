@@ -17,10 +17,7 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.LinkedEntity
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LinkedEntity"/>. </summary>
         /// <param name="name"> Entity Linking formal name. </param>
         /// <param name="matches"> List of instances this entity appears in the text. </param>
         /// <param name="language"> Language used in the data source. </param>
@@ -42,10 +39,7 @@ namespace CognitiveServices.TextAnalytics.Models
             DataSource = dataSource;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.LinkedEntity
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="LinkedEntity"/>. </summary>
         /// <param name="name"> Entity Linking formal name. </param>
         /// <param name="matches"> List of instances this entity appears in the text. </param>
         /// <param name="language"> Language used in the data source. </param>

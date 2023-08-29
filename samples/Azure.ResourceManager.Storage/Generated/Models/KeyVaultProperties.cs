@@ -15,18 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.KeyVaultProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyVaultProperties"/>. </summary>
         public KeyVaultProperties()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.KeyVaultProperties
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyVaultProperties"/>. </summary>
         /// <param name="keyName"> The name of KeyVault key. </param>
         /// <param name="keyVersion"> The version of KeyVault key. </param>
         /// <param name="keyVaultUri"> The Uri of KeyVault. </param>

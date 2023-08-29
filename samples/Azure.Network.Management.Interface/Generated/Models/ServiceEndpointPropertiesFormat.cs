@@ -16,19 +16,13 @@ namespace Azure.Network.Management.Interface.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ServiceEndpointPropertiesFormat
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ServiceEndpointPropertiesFormat"/>. </summary>
         public ServiceEndpointPropertiesFormat()
         {
             Locations = new ChangeTrackingList<string>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ServiceEndpointPropertiesFormat
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ServiceEndpointPropertiesFormat"/>. </summary>
         /// <param name="service"> The type of the endpoint service. </param>
         /// <param name="locations"> A list of locations. </param>
         /// <param name="provisioningState"> The provisioning state of the service endpoint resource. </param>

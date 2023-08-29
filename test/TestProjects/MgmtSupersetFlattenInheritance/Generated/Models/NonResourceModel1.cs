@@ -15,18 +15,12 @@ namespace MgmtSupersetFlattenInheritance.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.Models.NonResourceModel1
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NonResourceModel1"/>. </summary>
         public NonResourceModel1()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.Models.NonResourceModel1
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NonResourceModel1"/>. </summary>
         /// <param name="bar"></param>
         /// <param name="id"></param>
         /// <param name="foo"></param>

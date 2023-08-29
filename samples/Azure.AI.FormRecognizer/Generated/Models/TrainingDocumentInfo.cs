@@ -17,10 +17,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.TrainingDocumentInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TrainingDocumentInfo"/>. </summary>
         /// <param name="documentName"> Training document name. </param>
         /// <param name="pages"> Total number of pages trained. </param>
         /// <param name="errors"> List of errors. </param>
@@ -37,10 +34,7 @@ namespace Azure.AI.FormRecognizer.Models
             Status = status;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.TrainingDocumentInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="TrainingDocumentInfo"/>. </summary>
         /// <param name="documentName"> Training document name. </param>
         /// <param name="pages"> Total number of pages trained. </param>
         /// <param name="errors"> List of errors. </param>

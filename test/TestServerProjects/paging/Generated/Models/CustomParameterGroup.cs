@@ -16,10 +16,7 @@ namespace paging.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::paging.Models.CustomParameterGroup
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CustomParameterGroup"/>. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
@@ -32,10 +29,7 @@ namespace paging.Models
             Tenant = tenant;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::paging.Models.CustomParameterGroup
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="CustomParameterGroup"/>. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

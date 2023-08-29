@@ -20,18 +20,12 @@ namespace MgmtXmlDeserialization
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtXmlDeserialization.XmlInstanceData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="XmlInstanceData"/>. </summary>
         public XmlInstanceData()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtXmlDeserialization.XmlInstanceData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="XmlInstanceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

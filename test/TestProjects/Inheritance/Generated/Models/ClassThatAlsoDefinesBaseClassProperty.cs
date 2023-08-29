@@ -15,18 +15,12 @@ namespace Inheritance.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Inheritance.Models.ClassThatAlsoDefinesBaseClassProperty
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ClassThatAlsoDefinesBaseClassProperty"/>. </summary>
         internal ClassThatAlsoDefinesBaseClassProperty()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Inheritance.Models.ClassThatAlsoDefinesBaseClassProperty
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="ClassThatAlsoDefinesBaseClassProperty"/>. </summary>
         /// <param name="baseClassProperty"></param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ClassThatAlsoDefinesBaseClassProperty(string baseClassProperty, Dictionary<string, BinaryData> rawData)

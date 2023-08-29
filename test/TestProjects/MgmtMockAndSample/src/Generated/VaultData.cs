@@ -21,10 +21,7 @@ namespace MgmtMockAndSample
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.VaultData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultData"/>. </summary>
         /// <param name="properties"> Properties of the vault. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         internal VaultData(VaultProperties properties)
@@ -35,10 +32,7 @@ namespace MgmtMockAndSample
             Properties = properties;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::MgmtMockAndSample.VaultData
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

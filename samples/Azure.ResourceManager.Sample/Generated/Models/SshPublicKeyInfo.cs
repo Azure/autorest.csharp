@@ -18,18 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SshPublicKeyInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeyInfo"/>. </summary>
         public SshPublicKeyInfo()
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SshPublicKeyInfo
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeyInfo"/>. </summary>
         /// <param name="path">
         /// Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys
         /// Serialized Name: SshPublicKey.path

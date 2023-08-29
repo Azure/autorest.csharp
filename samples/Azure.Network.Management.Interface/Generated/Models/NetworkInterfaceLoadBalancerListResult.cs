@@ -16,19 +16,13 @@ namespace Azure.Network.Management.Interface.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.NetworkInterfaceLoadBalancerListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkInterfaceLoadBalancerListResult"/>. </summary>
         internal NetworkInterfaceLoadBalancerListResult()
         {
             Value = new ChangeTrackingList<LoadBalancer>();
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.NetworkInterfaceLoadBalancerListResult
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkInterfaceLoadBalancerListResult"/>. </summary>
         /// <param name="value"> A list of load balancers. </param>
         /// <param name="nextLink"> The URL to get the next set of results. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>

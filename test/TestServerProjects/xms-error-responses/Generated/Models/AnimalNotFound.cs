@@ -13,19 +13,13 @@ namespace xms_error_responses.Models
     /// <summary> The AnimalNotFound. </summary>
     internal partial class AnimalNotFound : NotFoundErrorBase
     {
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.AnimalNotFound
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AnimalNotFound"/>. </summary>
         internal AnimalNotFound()
         {
             WhatNotFound = "AnimalNotFound";
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::xms_error_responses.Models.AnimalNotFound
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="AnimalNotFound"/>. </summary>
         /// <param name="someBaseProp"></param>
         /// <param name="reason"></param>
         /// <param name="whatNotFound"></param>

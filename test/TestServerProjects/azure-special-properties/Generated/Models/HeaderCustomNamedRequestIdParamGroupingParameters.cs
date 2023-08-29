@@ -16,10 +16,7 @@ namespace azure_special_properties.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::azure_special_properties.Models.HeaderCustomNamedRequestIdParamGroupingParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="HeaderCustomNamedRequestIdParamGroupingParameters"/>. </summary>
         /// <param name="fooClientRequestId"> The fooRequestId. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fooClientRequestId"/> is null. </exception>
         public HeaderCustomNamedRequestIdParamGroupingParameters(string fooClientRequestId)
@@ -29,10 +26,7 @@ namespace azure_special_properties.Models
             FooClientRequestId = fooClientRequestId;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::azure_special_properties.Models.HeaderCustomNamedRequestIdParamGroupingParameters
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="HeaderCustomNamedRequestIdParamGroupingParameters"/>. </summary>
         /// <param name="fooClientRequestId"> The fooRequestId. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal HeaderCustomNamedRequestIdParamGroupingParameters(string fooClientRequestId, Dictionary<string, BinaryData> rawData)

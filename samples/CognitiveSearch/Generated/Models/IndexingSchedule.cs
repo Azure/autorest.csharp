@@ -15,20 +15,14 @@ namespace CognitiveSearch.Models
     {
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.IndexingSchedule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IndexingSchedule"/>. </summary>
         /// <param name="interval"> The interval of time between indexer executions. </param>
         public IndexingSchedule(TimeSpan interval)
         {
             Interval = interval;
         }
 
-        /// <summary>
-        /// Initializes a new instance of global::CognitiveSearch.Models.IndexingSchedule
-        ///
-        /// </summary>
+        /// <summary> Initializes a new instance of <see cref="IndexingSchedule"/>. </summary>
         /// <param name="interval"> The interval of time between indexer executions. </param>
         /// <param name="startTime"> The time when an indexer should start running. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
