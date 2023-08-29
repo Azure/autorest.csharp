@@ -338,7 +338,7 @@ Examples:
             }
             if (schema.Declaration.IsAbstract && schema.Discriminator?.DefaultObjectType is not null)
             {
-                writer.Line($"[{typeof(AbstractHierarchyDeserializerAttribute)}(typeof({schema.Discriminator?.DefaultObjectType.Type}))]");
+                writer.Line($"[{typeof(AbstractTypeDeserializerAttribute)}(typeof({schema.Discriminator?.DefaultObjectType.Type}))]");
             }
         }
 

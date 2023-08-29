@@ -21,7 +21,7 @@
   <!-- All csproj dependencies. -->
   <ItemGroup>
     <PackageReference Update="NUnit" Version="3.13.2" />
-    <PackageReference Update="Azure.Core" Version="1.35.0-alpha.20230811.4" />
+    <PackageReference Update="Azure.Core" Version="1.35.0-alpha.20230829.2" />
     <PackageReference Update="Azure.Core.Experimental" Version="0.1.0-preview.18" />
     <PackageReference Update="Azure.ResourceManager" Version="1.8.0-alpha.20230829.3" />
     <PackageReference Update="Azure.Core.Expressions.DataFactory" Version="1.0.0-beta.4" />
