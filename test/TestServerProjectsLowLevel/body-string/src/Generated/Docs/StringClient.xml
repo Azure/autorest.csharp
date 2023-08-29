@@ -92,7 +92,7 @@ This sample shows how to call PutEmptyAsync with required request content.
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-var data = "<String>";
+var data = "";
 
 Response response = await client.PutEmptyAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
@@ -106,7 +106,7 @@ This sample shows how to call PutEmpty with required request content.
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-var data = "<String>";
+var data = "";
 
 Response response = client.PutEmpty(RequestContent.Create(data));
 Console.WriteLine(response.Status);

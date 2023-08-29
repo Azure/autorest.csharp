@@ -179,7 +179,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            var data = "<String>";
+            var data = "";
 
             Response response = client.PutEmpty(RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -192,7 +192,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            var data = "<String>";
+            var data = "";
 
             Response response = client.PutEmpty(RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -205,7 +205,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            var data = "<String>";
+            var data = "";
 
             Response response = await client.PutEmptyAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
@@ -218,7 +218,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            var data = "<String>";
+            var data = "";
 
             Response response = await client.PutEmptyAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
