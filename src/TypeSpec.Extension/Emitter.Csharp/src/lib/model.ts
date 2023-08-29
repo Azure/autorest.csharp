@@ -647,7 +647,11 @@ export function getInputType(
                     literalTypeContext,
                     source
                 );
-                if (model.Namespace === "Azure.Core.Foundations" && model.Name === "Error" && isInputModelType(inputType)) {
+                if (
+                    model.Namespace === "Azure.Core.Foundations" &&
+                    model.Name === "Error" &&
+                    isInputModelType(inputType)
+                ) {
                     inputType.Accessibility = undefined;
                 }
                 const inputProp = {
