@@ -433,6 +433,326 @@ namespace _Type.Union
             }
         }
 
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveStringAsync(CancellationToken)']/*" />
+        internal virtual async Task<Response<ModelWithSimpleUnionPropertyInResponse>> ReceiveStringAsync(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await ReceiveStringAsync(context).ConfigureAwait(false);
+            return Response.FromValue(ModelWithSimpleUnionPropertyInResponse.FromResponse(response), response);
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveString(CancellationToken)']/*" />
+        internal virtual Response<ModelWithSimpleUnionPropertyInResponse> ReceiveString(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = ReceiveString(context);
+            return Response.FromValue(ModelWithSimpleUnionPropertyInResponse.FromResponse(response), response);
+        }
+
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveStringAsync(RequestContext)']/*" />
+        public virtual async Task<Response> ReceiveStringAsync(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("UnionClient.ReceiveString");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateReceiveStringRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveString(RequestContext)']/*" />
+        public virtual Response ReceiveString(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("UnionClient.ReceiveString");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateReceiveStringRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveIntArrayAsync(CancellationToken)']/*" />
+        internal virtual async Task<Response<ModelWithSimpleUnionPropertyInResponse>> ReceiveIntArrayAsync(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await ReceiveIntArrayAsync(context).ConfigureAwait(false);
+            return Response.FromValue(ModelWithSimpleUnionPropertyInResponse.FromResponse(response), response);
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveIntArray(CancellationToken)']/*" />
+        internal virtual Response<ModelWithSimpleUnionPropertyInResponse> ReceiveIntArray(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = ReceiveIntArray(context);
+            return Response.FromValue(ModelWithSimpleUnionPropertyInResponse.FromResponse(response), response);
+        }
+
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveIntArrayAsync(RequestContext)']/*" />
+        public virtual async Task<Response> ReceiveIntArrayAsync(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("UnionClient.ReceiveIntArray");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateReceiveIntArrayRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveIntArray(RequestContext)']/*" />
+        public virtual Response ReceiveIntArray(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("UnionClient.ReceiveIntArray");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateReceiveIntArrayRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveFirstNamedUnionValueAsync(CancellationToken)']/*" />
+        internal virtual async Task<Response<ModelWithNamedUnionPropertyInResponse>> ReceiveFirstNamedUnionValueAsync(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await ReceiveFirstNamedUnionValueAsync(context).ConfigureAwait(false);
+            return Response.FromValue(ModelWithNamedUnionPropertyInResponse.FromResponse(response), response);
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveFirstNamedUnionValue(CancellationToken)']/*" />
+        internal virtual Response<ModelWithNamedUnionPropertyInResponse> ReceiveFirstNamedUnionValue(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = ReceiveFirstNamedUnionValue(context);
+            return Response.FromValue(ModelWithNamedUnionPropertyInResponse.FromResponse(response), response);
+        }
+
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveFirstNamedUnionValueAsync(RequestContext)']/*" />
+        public virtual async Task<Response> ReceiveFirstNamedUnionValueAsync(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("UnionClient.ReceiveFirstNamedUnionValue");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateReceiveFirstNamedUnionValueRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveFirstNamedUnionValue(RequestContext)']/*" />
+        public virtual Response ReceiveFirstNamedUnionValue(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("UnionClient.ReceiveFirstNamedUnionValue");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateReceiveFirstNamedUnionValueRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveSecondNamedUnionValueAsync(CancellationToken)']/*" />
+        internal virtual async Task<Response<ModelWithNamedUnionPropertyInResponse>> ReceiveSecondNamedUnionValueAsync(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await ReceiveSecondNamedUnionValueAsync(context).ConfigureAwait(false);
+            return Response.FromValue(ModelWithNamedUnionPropertyInResponse.FromResponse(response), response);
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveSecondNamedUnionValue(CancellationToken)']/*" />
+        internal virtual Response<ModelWithNamedUnionPropertyInResponse> ReceiveSecondNamedUnionValue(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = ReceiveSecondNamedUnionValue(context);
+            return Response.FromValue(ModelWithNamedUnionPropertyInResponse.FromResponse(response), response);
+        }
+
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveSecondNamedUnionValueAsync(RequestContext)']/*" />
+        public virtual async Task<Response> ReceiveSecondNamedUnionValueAsync(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("UnionClient.ReceiveSecondNamedUnionValue");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateReceiveSecondNamedUnionValueRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='ReceiveSecondNamedUnionValue(RequestContext)']/*" />
+        public virtual Response ReceiveSecondNamedUnionValue(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("UnionClient.ReceiveSecondNamedUnionValue");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateReceiveSecondNamedUnionValueRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateSendIntRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -494,6 +814,62 @@ namespace _Type.Union
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateReceiveStringRequest(RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/type/union/receive/string", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateReceiveIntArrayRequest(RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/type/union/receive/int-array", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateReceiveFirstNamedUnionValueRequest(RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/type/union/receive/model1", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateReceiveSecondNamedUnionValueRequest(RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/type/union/receive/model2", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
