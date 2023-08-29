@@ -405,10 +405,26 @@ namespace AutoRest.CSharp.Output.Models
         private MethodBodyStatement AddFlattenedBody(RequestExpression request)
         {
             var requestParts = new Dictionary<InputModelProperty, (InputParameter, Parameter)>();
+            var conversions = new List<MethodBodyStatement>();
             foreach (var (_, inputParameter, outputParameter, _) in _requestParts)
             {
                 if (inputParameter is { FlattenedBodyProperty: { } property } &&  outputParameter is not null )
                 {
+                    // Special case to match behaviour of the new ChangeTrackingList<> which would be considered uninitialized when empty
+                    // It is not clear if that is expected behavior or just coincidence
+                    if (property is { IsRequired: false, Type.IsNullable: false } && TypeFactory.IsCollectionType(outputParameter.Type))
+                    {
+                        var changeTrackingListType = TypeFactory.IsDictionary(outputParameter.Type)
+                            ? new CSharpType(typeof(ChangeTrackingDictionary<,>), outputParameter.Type.Arguments)
+                            : new CSharpType(typeof(ChangeTrackingList<>), outputParameter.Type.Arguments);
+
+                        var enumerable = new EnumerableExpression(outputParameter);
+                        conversions.Add(new IfStatement(Or(Equal(enumerable, Null), Not(enumerable.Any())))
+                        {
+                            new AssignValueStatement(enumerable, New.Instance(changeTrackingListType))
+                        });
+                    }
+
                     requestParts[property] = (inputParameter, outputParameter);
                 }
             }
@@ -422,6 +438,7 @@ namespace AutoRest.CSharp.Output.Models
             return new[]
             {
                 AddHeaders(request, true).AsStatement(),
+                conversions,
                 Var("content", New.Utf8JsonRequestContent(), out var content),
                 content.JsonWriter.WriteStartObject(),
                 JsonSerializationMethodsBuilder.WriteProperties(content.JsonWriter, serializations).AsStatement(),
@@ -435,7 +452,8 @@ namespace AutoRest.CSharp.Output.Models
             var serializedName = inputModelProperty.SerializedName;
             var value = GetValueForRequestPart(inputParameter, outputParameter);
             var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, outputParameter.Type, false);
-            var optionalViaNullability = inputModelProperty is { IsRequired: false, Type.IsNullable: false } && !TypeFactory.IsCollectionType(outputParameter.Type);
+            var isCollectionParameter = TypeFactory.IsCollectionType(outputParameter.Type);
+            var optionalViaNullability = inputModelProperty is { IsRequired: false, Type.IsNullable: false };
 
             return new JsonPropertySerialization(
                 outputParameter.Name,

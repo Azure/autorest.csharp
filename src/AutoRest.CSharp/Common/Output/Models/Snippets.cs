@@ -58,6 +58,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         public static BoolExpression Or(BoolExpression left, BoolExpression right) => new(new BinaryOperatorExpression("||", left.Untyped, right.Untyped));
         public static BoolExpression And(BoolExpression left, BoolExpression right) => new(new BinaryOperatorExpression("&&", left.Untyped, right.Untyped));
+        public static BoolExpression Not(BoolExpression operand) => new(new UnaryOperatorExpression("!", operand, false));
 
         public static MethodBodyStatement EmptyLine => new EmptyLineStatement();
         public static KeywordStatement Continue => new("continue", null);

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -109,24 +110,21 @@ namespace FlattenedParameters
             uri.AppendPath("/OperationNotNull/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            if (items == null || !items.Any())
+            {
+                items = new ChangeTrackingList<string>();
+            }
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             if (Optional.IsCollectionDefined(items))
             {
-                if (items != null)
+                content.JsonWriter.WritePropertyName("items"u8);
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in items)
                 {
-                    content.JsonWriter.WritePropertyName("items"u8);
-                    content.JsonWriter.WriteStartArray();
-                    foreach (var item in items)
-                    {
-                        content.JsonWriter.WriteStringValue(item);
-                    }
-                    content.JsonWriter.WriteEndArray();
+                    content.JsonWriter.WriteStringValue(item);
                 }
-                else
-                {
-                    content.JsonWriter.WriteNull("items");
-                }
+                content.JsonWriter.WriteEndArray();
             }
             content.JsonWriter.WriteEndObject();
             request.Content = content;

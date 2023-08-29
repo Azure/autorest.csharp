@@ -82,30 +82,32 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     yield return WriteProperties(utf8JsonWriter, property.PropertySerializations!).ToArray();
                     yield return utf8JsonWriter.WriteEndObject();
                 }
+                else if (property.SerializedType is { IsNullable: true })
+                {
+                    yield return InvokeOptional.WrapInIsDefined(
+                        property,
+                        new IfElseStatement(NotEqual(property.Value, Null),
+                            WriteProperty(utf8JsonWriter, property),
+                            utf8JsonWriter.WriteNull(property.SerializedName)
+                        )
+                    );
+                }
                 else
                 {
-                    yield return WriteProperty(utf8JsonWriter, property);
+                    yield return InvokeOptional.WrapInIsDefined(property, WriteProperty(utf8JsonWriter, property));
                 }
             }
         }
 
         private static MethodBodyStatement WriteProperty(Utf8JsonWriterExpression utf8JsonWriter, JsonPropertySerialization serialization)
         {
-            var writeProperty = new[]
+            return new[]
             {
                 utf8JsonWriter.WritePropertyName(serialization.SerializedName),
                 serialization.CustomSerializationMethodName is {} serializationMethodName
                     ? InvokeCustomSerializationMethod(serializationMethodName, utf8JsonWriter)
                     : SerializeExpression(utf8JsonWriter, serialization.ValueSerialization, serialization.Value)
             };
-
-            if (serialization.SerializedType is not { IsNullable: true })
-            {
-                return InvokeOptional.WrapInIsDefined(serialization, writeProperty);
-            }
-
-            var nullSafeWriteProperty = new IfElseStatement(NotEqual(serialization.Value, Null), writeProperty, utf8JsonWriter.WriteNull(serialization.SerializedName));
-            return InvokeOptional.WrapInIsDefined(serialization, nullSafeWriteProperty);
         }
 
         private static MethodBodyStatement SerializeAdditionalProperties(Utf8JsonWriterExpression utf8JsonWriter, JsonAdditionalPropertiesSerialization? additionalProperties)

@@ -517,6 +517,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteValueExpression(nullConditional.Inner);
                     writer.AppendRaw("?");
                     break;
+                case UnaryOperatorExpression(var op, var operand, var operandOnTheLeft):
+                    writer.AppendRawIf(op, !operandOnTheLeft);
+                    writer.WriteValueExpression(operand);
+                    writer.AppendRawIf(op, operandOnTheLeft);
+                    break;
                 case BinaryOperatorExpression(var op, var left, var right):
                     writer.WriteValueExpression(left);
                     writer.AppendRaw(" ").AppendRaw(op).AppendRaw(" ");

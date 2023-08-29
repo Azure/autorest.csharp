@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
@@ -12,6 +13,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 
     internal sealed record EnumerableExpression(ValueExpression Untyped) : TypedValueExpression(typeof(IEnumerable<>), Untyped)
     {
+        public BoolExpression Any() => new(new InvokeStaticMethodExpression(typeof(Enumerable), nameof(Enumerable.Any), new[]{Untyped}, CallAsExtension: true));
     }
 
     internal sealed record KeyValuePairExpression(ValueExpression Untyped) : TypedValueExpression(typeof(KeyValuePair<,>), Untyped)
