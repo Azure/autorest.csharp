@@ -51,8 +51,8 @@ namespace AutoRest.CSharp.Generation.Writers
             var hasXml = xmlSerialization != null;
 
             var typeOfT = model.IsUnknownDerivedType ? model.Inherits!.Implementation!.Type : model.Type;
-            CSharpType modelSerializableType = new CSharpType(typeof(IModelSerializable<>), typeOfT);
-            CSharpType modelJsonSerializableType = new CSharpType(typeof(IModelJsonSerializable<>), typeOfT);
+            CSharpType iModelSerializableType = new CSharpType(typeof(IModelSerializable<>), typeOfT);
+            CSharpType iModelJsonSerializableType = new CSharpType(typeof(IModelJsonSerializable<>), typeOfT);
 
             if (!hasJson && !hasXml)
             {
@@ -71,10 +71,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer
                     .AppendIf($": ", hasJson || hasXml)
                     .AppendIf($"{typeof(IUtf8JsonSerializable)}, ", hasJson)
-                    .AppendIf($"{modelJsonSerializableType}, ", hasJson)
+                    .AppendIf($"{iModelJsonSerializableType}, ", hasJson)
                     .AppendIf($"{typeof(IModelJsonSerializable<object>)}, ", hasJson && model.IsStruct)
                     .AppendIf($"{typeof(IXmlSerializable)}, ", hasXml)
-                    .AppendIf($"{modelSerializableType}, ", hasXml)
+                    .AppendIf($"{iModelSerializableType}, ", hasXml)
                     .RemoveTrailingComma();
 
                 writer.Line();
@@ -82,27 +82,27 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     if (xmlSerialization != null)
                     {
-                            WriteXmlSerialize(writer, xmlSerialization, modelSerializableType);
-                            WriteXmlDeserialize(writer, declaration, xmlSerialization, hasJson, modelSerializableType);
+                            WriteXmlSerialize(writer, xmlSerialization, iModelSerializableType);
+                            WriteXmlDeserialize(writer, declaration, xmlSerialization, hasJson, iModelSerializableType);
                     }
 
                     if (jsonSerialization != null)
                     {
-                            WriteJsonSerialize(writer, jsonSerialization, hasXml, modelSerializableType, modelJsonSerializableType);
-                            WriteJsonDeserialize(writer, declaration, jsonSerialization, hasXml, modelSerializableType, modelJsonSerializableType, model.IsUnknownDerivedType);
+                            WriteJsonSerialize(writer, jsonSerialization, hasXml, iModelSerializableType, iModelJsonSerializableType);
+                            WriteJsonDeserialize(writer, declaration, jsonSerialization, hasXml, iModelSerializableType, iModelJsonSerializableType, model.IsUnknownDerivedType);
                     }
 
-                    WriteIModelSerializableSerialize(writer, modelSerializableType, false, hasXml, hasJson);
-                    WriteIModelSerializableDeserialize(writer, modelSerializableType, false, hasXml, hasJson);
+                    WriteIModelSerializableSerialize(writer, iModelSerializableType, false, hasXml, hasJson);
+                    WriteIModelSerializableDeserialize(writer, iModelSerializableType, false, hasXml, hasJson);
                     if (model.IsStruct)
                     {
-                        WriteIModelSerializableSerialize(writer, modelSerializableType, true, hasXml, hasJson);
-                        WriteIModelSerializableDeserialize(writer, modelSerializableType, true, hasXml, hasJson);
+                        WriteIModelSerializableSerialize(writer, iModelSerializableType, true, hasXml, hasJson);
+                        WriteIModelSerializableDeserialize(writer, iModelSerializableType, true, hasXml, hasJson);
                     }
 
-                    FormattableString castString = hasXml && !model.IsStruct ? $"({modelSerializableType})" : (FormattableString)$"";
-                    WriteImplicitCastToRequestContent(writer, modelSerializableType.Arguments[0], castString, model.IsUnknownDerivedType, model.IsStruct);
-                    WriteExplicitCastFromResponse(writer, modelSerializableType.Arguments[0], model.IsStruct, model.IsUnknownDerivedType, hasXml);
+                    FormattableString castString = hasXml && !model.IsStruct ? $"({iModelSerializableType})" : (FormattableString)$"";
+                    WriteImplicitCastToRequestContent(writer, iModelSerializableType.Arguments[0], castString, model.IsUnknownDerivedType, model.IsStruct);
+                    WriteExplicitCastFromResponse(writer, iModelSerializableType.Arguments[0], model.IsStruct, model.IsUnknownDerivedType, hasXml);
 
                     foreach (var methodDefinition in model.Methods)
                     {
@@ -140,10 +140,10 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteXmlSerialize(CodeWriter writer, XmlObjectSerialization serialization, CSharpType modelSerializableType)
+        private static void WriteXmlSerialize(CodeWriter writer, XmlObjectSerialization serialization, CSharpType iModelSerializableType)
         {
-            WiteXmlSerializeImplementation(writer, serialization, modelSerializableType);
-            WriteIXmlSerializableSerialize(writer, serialization, modelSerializableType);
+            WiteXmlSerializeImplementation(writer, serialization, iModelSerializableType);
+            WriteIXmlSerializableSerialize(writer, serialization, iModelSerializableType);
         }
 
         private static void WriteValidateFormat(CodeWriter writer, CSharpType modelType)
@@ -152,14 +152,14 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteIXmlSerializableSerialize(CodeWriter writer, XmlObjectSerialization serialization, CSharpType modelSerializableType)
+        private static void WriteIXmlSerializableSerialize(CodeWriter writer, XmlObjectSerialization serialization, CSharpType iModelSerializableType)
         {
             writer.Append($"void {typeof(IXmlSerializable)}.{nameof(IXmlSerializable.Write)}({typeof(XmlWriter)} writer, {typeof(string)} nameHint)");
             writer.Line($" => Serialize(writer, nameHint, {DefaultWireOptionsString});");
             writer.Line();
         }
 
-        private static void WiteXmlSerializeImplementation(CodeWriter writer, XmlObjectSerialization serialization, CSharpType modelSerializableType)
+        private static void WiteXmlSerializeImplementation(CodeWriter writer, XmlObjectSerialization serialization, CSharpType iModelSerializableType)
         {
             CodeWriterDeclaration nameHint = new CodeWriterDeclaration("nameHint");
             writer.Append($"private void Serialize({typeof(XmlWriter)} writer, {typeof(string)} {nameHint:D}, {typeof(ModelSerializerOptions)} options)");
@@ -170,7 +170,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteXmlDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, XmlObjectSerialization serialization, bool hasJson, CSharpType modelSerializableType)
+        private static void WriteXmlDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, XmlObjectSerialization serialization, bool hasJson, CSharpType iModelSerializableType)
         {
             string deserializeMethod = $"Deserialize{declaration.Name}";
 
@@ -203,20 +203,20 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line($"return {deserializeMethod}(doc.RootElement, options);");
         }
 
-        private static void WriteJsonDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, JsonObjectSerialization serialization, bool hasXml, CSharpType modelSerializableType, CSharpType modelJsonSerializableType, bool isUnknownDerivedType)
+        private static void WriteJsonDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, JsonObjectSerialization serialization, bool hasXml, CSharpType iModelSerializableType, CSharpType iModelJsonSerializableType, bool isUnknownDerivedType)
         {
             string deserializeMethod = $"Deserialize{declaration.Name}";
 
             bool isStruct = serialization.ObjectType is not null && serialization.ObjectType.IsStruct;
 
-            WriteInternalDeserialize(writer, declaration, serialization, modelSerializableType, isUnknownDerivedType, deserializeMethod);
+            WriteInternalDeserialize(writer, declaration, serialization, iModelSerializableType, isUnknownDerivedType, deserializeMethod);
 
-            WriteIModelJsonSerializableDeserialize(writer, modelJsonSerializableType, deserializeMethod, false);
+            WriteIModelJsonSerializableDeserialize(writer, iModelJsonSerializableType, deserializeMethod, false);
 
             //add the IModelJsonSerializable<object> if its a struct
             if (isStruct)
             {
-                WriteIModelJsonSerializableDeserialize(writer, modelJsonSerializableType, deserializeMethod, true);
+                WriteIModelJsonSerializableDeserialize(writer, iModelJsonSerializableType, deserializeMethod, true);
             }
         }
 
@@ -255,23 +255,23 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteIModelJsonSerializableDeserialize(CodeWriter writer, CSharpType modelJsonSerializableType, string deserializeMethod, bool writeAsObject)
+        private static void WriteIModelJsonSerializableDeserialize(CodeWriter writer, CSharpType iModelJsonSerializableType, string deserializeMethod, bool writeAsObject)
         {
-            var modelType = writeAsObject ? typeof(object) : modelJsonSerializableType.Arguments[0];
-            var interfaceType = writeAsObject ? typeof(IModelJsonSerializable<object>) : modelJsonSerializableType;
+            var modelType = writeAsObject ? typeof(object) : iModelJsonSerializableType.Arguments[0];
+            var interfaceType = writeAsObject ? typeof(IModelJsonSerializable<object>) : iModelJsonSerializableType;
 
             using (writer.Scope($"{modelType} {interfaceType}.{nameof(IModelJsonSerializable<object>.Deserialize)}(ref {typeof(Utf8JsonReader)} reader, {typeof(ModelSerializerOptions)} options)"))
             {
-                WriteValidateFormat(writer, modelJsonSerializableType.Arguments[0]);
+                WriteValidateFormat(writer, iModelJsonSerializableType.Arguments[0]);
                 writer.Line($"using var doc = {typeof(JsonDocument)}.{nameof(JsonDocument.ParseValue)}(ref reader);");
                 writer.Line($"return {deserializeMethod}(doc.RootElement, options);");
             }
             writer.Line();
         }
 
-        private static void WriteInternalDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, JsonObjectSerialization serialization, CSharpType modelSerializableType, bool isUnknownDerivedType, string deserializeMethod)
+        private static void WriteInternalDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, JsonObjectSerialization serialization, CSharpType iModelSerializableType, bool isUnknownDerivedType, string deserializeMethod)
         {
-            FormattableString signatureLine = $"internal static {modelSerializableType.Arguments[0]} {deserializeMethod}({typeof(JsonElement)} element, {typeof(ModelSerializerOptions)} options = default)";
+            FormattableString signatureLine = $"internal static {iModelSerializableType.Arguments[0]} {deserializeMethod}({typeof(JsonElement)} element, {typeof(ModelSerializerOptions)} options = default)";
             if (isUnknownDerivedType)
             {
                 writer.Line($"{signatureLine} => Deserialize{serialization.ObjectType!.Inherits!.Name}(element, options);");
@@ -317,16 +317,16 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteIModelSerializableDeserialize(CodeWriter writer, CSharpType modelSerializableType, bool writeAsObject, bool hasXml, bool hasJson)
+        private static void WriteIModelSerializableDeserialize(CodeWriter writer, CSharpType iModelSerializableType, bool writeAsObject, bool hasXml, bool hasJson)
         {
-            var modelType = writeAsObject ? typeof(object) : modelSerializableType.Arguments[0];
-            var interfaceType = writeAsObject ? typeof(IModelSerializable<object>) : modelSerializableType;
+            var modelType = writeAsObject ? typeof(object) : iModelSerializableType.Arguments[0];
+            var interfaceType = writeAsObject ? typeof(IModelSerializable<object>) : iModelSerializableType;
 
-            string deserializeMethod = $"Deserialize{modelSerializableType.Arguments[0].Name}";
+            string deserializeMethod = $"Deserialize{iModelSerializableType.Arguments[0].Name}";
 
             using (writer.Scope($"{modelType} {interfaceType}.{nameof(IModelSerializable<object>.Deserialize)}({typeof(BinaryData)} data, {typeof(ModelSerializerOptions)} options)"))
             {
-                WriteValidateFormat(writer, modelSerializableType.Arguments[0]);
+                WriteValidateFormat(writer, iModelSerializableType.Arguments[0]);
 
                 if (hasXml && hasJson)
                 {
@@ -351,17 +351,17 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteJsonSerialize(CodeWriter writer, JsonObjectSerialization jsonSerialization, bool hasXml, CSharpType modelSerializableType, CSharpType modelJsonSerializableType)
+        private static void WriteJsonSerialize(CodeWriter writer, JsonObjectSerialization jsonSerialization, bool hasXml, CSharpType iModelSerializableType, CSharpType iModelJsonSerializableType)
         {
             bool isStruct = jsonSerialization.ObjectType is not null && jsonSerialization.ObjectType.IsStruct;
 
-            WriteIUtf8JsonSerializableSerialize(writer, modelJsonSerializableType);
+            WriteIUtf8JsonSerializableSerialize(writer, iModelJsonSerializableType);
 
-            WriteIModelJsonSerializableSerialize(writer, jsonSerialization, modelJsonSerializableType, false);
+            WriteIModelJsonSerializableSerialize(writer, jsonSerialization, iModelJsonSerializableType, false);
 
             if (isStruct)
             {
-                WriteIModelJsonSerializableSerialize(writer, jsonSerialization, modelJsonSerializableType, true);
+                WriteIModelJsonSerializableSerialize(writer, jsonSerialization, iModelJsonSerializableType, true);
             }
         }
 
@@ -387,13 +387,13 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteIModelSerializableSerialize(CodeWriter writer, CSharpType modelSerializableType, bool writeAsObject, bool hasXml, bool hasJson)
+        private static void WriteIModelSerializableSerialize(CodeWriter writer, CSharpType iModelSerializableType, bool writeAsObject, bool hasXml, bool hasJson)
         {
-            var interfaceType = writeAsObject ? typeof(IModelSerializable<object>) : modelSerializableType;
+            var interfaceType = writeAsObject ? typeof(IModelSerializable<object>) : iModelSerializableType;
 
             using (writer.Scope($"{typeof(BinaryData)} {interfaceType}.{nameof(IModelSerializable<object>.Serialize)}({typeof(ModelSerializerOptions)} options)"))
             {
-                WriteValidateFormat(writer, modelSerializableType.Arguments[0]);
+                WriteValidateFormat(writer, iModelSerializableType.Arguments[0]);
 
                 if (hasXml && hasJson)
                 {
@@ -441,21 +441,21 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line($"return {typeof(ModelSerializer)}.{nameof(ModelSerializer.SerializeCore)}(this, options);");
         }
 
-        private static void WriteIModelJsonSerializableSerialize(CodeWriter writer, JsonObjectSerialization jsonSerialization, CSharpType modelJsonSerializableType, bool writeAsObject)
+        private static void WriteIModelJsonSerializableSerialize(CodeWriter writer, JsonObjectSerialization jsonSerialization, CSharpType iModelJsonSerializableType, bool writeAsObject)
         {
-            var interfaceType = writeAsObject ? typeof(IModelJsonSerializable<object>) : modelJsonSerializableType;
+            var interfaceType = writeAsObject ? typeof(IModelJsonSerializable<object>) : iModelJsonSerializableType;
 
             using (writer.Scope($"void {interfaceType}.{nameof(IModelJsonSerializable<object>.Serialize)}({typeof(Utf8JsonWriter)} writer, {typeof(ModelSerializerOptions)} options)"))
             {
-                WriteValidateFormat(writer, modelJsonSerializableType.Arguments[0]);
+                WriteValidateFormat(writer, iModelJsonSerializableType.Arguments[0]);
                 writer.ToSerializeCall(jsonSerialization);
             }
             writer.Line();
         }
 
-        private static void WriteIUtf8JsonSerializableSerialize(CodeWriter writer, CSharpType modelJsonSerializableType)
+        private static void WriteIUtf8JsonSerializableSerialize(CodeWriter writer, CSharpType iModelJsonSerializableType)
         {
-            writer.Line($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer) => (({modelJsonSerializableType})this).Serialize(writer, {DefaultWireOptionsString});");
+            writer.Line($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer) => (({iModelJsonSerializableType})this).Serialize(writer, {DefaultWireOptionsString});");
             writer.Line();
         }
 
