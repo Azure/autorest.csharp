@@ -95,9 +95,9 @@ namespace AutoRest.CSharp.Generation.Writers
                             discriminatorProperty.IsReadOnly,
                             GetDiscriminatorValue(discriminatorProperty.Declaration.Type, discriminatorValue)));
                 }
-                else if (model.Declaration.IsAbstract)
+                else if (model.Declaration.IsAbstract && discriminator.DefaultObjectType is not null)
                 {
-                    model = (SerializableObjectType)discriminator.DefaultObjectType!;
+                    model = (SerializableObjectType)discriminator.DefaultObjectType;
                     ctor = model.SerializationConstructor;
                 }
 
