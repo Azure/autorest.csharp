@@ -20,7 +20,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             BaseConstructor = baseConstructor;
             if (createInternal)
             {
-
                 ConstructorInitializer? newCtorInitializer = signature.Initializer;
                 bool hasAdditionalProperties = signature.Parameters.Any(p => p.IsAdditionalProperties);
 

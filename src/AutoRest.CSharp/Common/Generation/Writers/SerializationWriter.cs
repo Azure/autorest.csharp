@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var hasJson = jsonSerialization != null;
             var hasXml = xmlSerialization != null;
 
-            var typeOfT = model.IsUnknownDerivedType ? model.EnumerateHierarchy().Skip(1).First().Type : model.Type;
+            var typeOfT = model.IsUnknownDerivedType ? model.Inherits!.Implementation!.Type : model.Type;
             CSharpType modelSerializableType = new CSharpType(typeof(IModelSerializable<>), typeOfT);
             CSharpType modelJsonSerializableType = new CSharpType(typeof(IModelJsonSerializable<>), typeOfT);
 
@@ -276,7 +276,7 @@ namespace AutoRest.CSharp.Generation.Writers
             FormattableString signatureLine = $"internal static {modelSerializableType.Arguments[0]} {deserializeMethod}({typeof(JsonElement)} element, {typeof(ModelSerializerOptions)} options = default)";
             if (isUnknownDerivedType)
             {
-                writer.Line($"{signatureLine} => Deserialize{declaration.Name.Remove(0, 7)}(element, options);");
+                writer.Line($"{signatureLine} => Deserialize{serialization.ObjectType!.Inherits!.Name}(element, options);");
             }
             else
             {

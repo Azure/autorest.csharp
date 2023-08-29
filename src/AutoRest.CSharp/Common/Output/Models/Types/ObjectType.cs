@@ -65,7 +65,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<ModelMethodDefinition> Methods => _methods ??= BuildMethods();
         public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
-        public bool IsPropertyBag => EnsurePropertyBag();
+        private bool? _isPropertyBag;
+        public bool IsPropertyBag => _isPropertyBag ??= EnsurePropertyBag();
 
         public ObjectTypeConstructor InitializationConstructor => _initializationConstructor ??= BuildInitializationConstructor();
 
