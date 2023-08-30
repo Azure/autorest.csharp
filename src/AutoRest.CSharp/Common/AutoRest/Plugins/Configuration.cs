@@ -19,8 +19,6 @@ namespace AutoRest.CSharp.Input
 
         private static readonly object InitLock = new object();
 
-        private static bool IsInitialized = false;
-
         public static class Options
         {
             public const string OutputFolder = "output-folder";
@@ -98,17 +96,8 @@ namespace AutoRest.CSharp.Input
             MgmtConfiguration mgmtConfiguration,
             MgmtTestConfiguration? mgmtTestConfiguration)
         {
-            if (IsInitialized)
-            {
-                return;
-            }
             lock (InitLock)
             {
-                if (IsInitialized)
-                {
-                    return;
-                }
-
                 _outputFolder = outputFolder;
                 _namespace = ns;
                 _libraryName = libraryName;
@@ -175,8 +164,6 @@ namespace AutoRest.CSharp.Input
                 _modelsToTreatEmptyStringAsNull = new HashSet<string>(modelsToTreatEmptyStringAsNull);
                 _intrinsicTypesToTreatEmptyStringAsNull.UnionWith(additionalIntrinsicTypesToTreatEmptyStringAsNull);
                 _methodsToKeepClientDefaultValue = methodsToKeepClientDefaultValue ?? Array.Empty<string>();
-
-                IsInitialized = true;
             }
         }
 
