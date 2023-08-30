@@ -39,19 +39,19 @@ jobs:
           npm ci
         displayName: "Install packages"
         workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-      - pwsh: ./eng/Generate.ps1
+      - pwsh: ./eng/Generate.ps1 Authoring-TypeSpec
         displayName: "Generate Codes"
         workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - pwsh: ./eng/ParsePRInfo.ps1 -SourceBranch $(System.PullRequest.SourceBranch)
         name: PRUrl
         displayName: "Build PR Url"
         workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-      # - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
-      #   parameters:
-      #     BaseRepoBranch: auto-update-autorest-${{ parameters.AutorestCSharpVersion }}
-      #     BaseRepoOwner: azure-sdk
-      #     CommitMsg: Update SDK codes ${{ parameters.filter }}
-      #     TargetRepoOwner: Azure
-      #     TargetRepoName: feature/v3
-      #     WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
-      #     ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
+      - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
+        parameters:
+          BaseRepoBranch: $(System.PullRequest.SourceBranch)
+          BaseRepoOwner: azure-sdk
+          CommitMsg: Update SDK codes ${{ parameters.filter }}
+          TargetRepoOwner: Azure
+          TargetRepoName: autorest.csharp
+          WorkingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
