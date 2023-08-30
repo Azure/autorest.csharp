@@ -42,6 +42,7 @@
     <Compile Include="$(AzureCoreSharedSources)OperationPoller.cs" LinkBase="Shared/Core" />
     <Compile Include="$(AzureCoreSharedSources)Optional.cs" LinkBase="Shared/Core" />
     <Compile Include="$(AzureCoreSharedSources)Page.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)PageableHelpers.cs" LinkBase="Shared/Core" />
     <Compile Include="$(AzureCoreSharedSources)ProtocolOperation.cs" LinkBase="Shared/Core" />
     <Compile Include="$(AzureCoreSharedSources)ProtocolOperationHelpers.cs" LinkBase="Shared/Core" />
     <Compile Include="$(AzureCoreSharedSources)RawRequestUriBuilder.cs" LinkBase="Shared/Core" />

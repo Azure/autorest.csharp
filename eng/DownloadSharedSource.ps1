@@ -51,6 +51,7 @@ $files = @('AsyncLockWithValue.cs', 'ClientDiagnostics.cs', 'DiagnosticScope.cs'
     'OperationFinalStateVia.cs',
     'Optional.cs',
     'Page.cs',
+    'PageableHelpers.cs',
     'ProtocolOperation.cs',
     'ProtocolOperationHelpers.cs',
     'RawRequestUriBuilder.cs',
