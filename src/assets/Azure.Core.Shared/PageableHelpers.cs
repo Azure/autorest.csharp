@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Core
 {
-    internal static class PageableHelpers
+    internal static partial class PageableHelpers
     {
         private static readonly byte[] DefaultItemPropertyName = Encoding.UTF8.GetBytes("value");
         private static readonly byte[] DefaultNextLinkPropertyName = Encoding.UTF8.GetBytes("nextLink");
