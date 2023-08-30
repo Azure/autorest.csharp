@@ -20,6 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Models
     internal class OperationSet : IReadOnlyCollection<Operation>, IEquatable<OperationSet>
     {
         private readonly OperationGroup? _operationGroup;
+        private readonly IReadOnlyDictionary<string, OperationSet> _rawRequestPathToOperationSets;
         private readonly TypeFactory _typeFactory;
 
         /// <summary>
@@ -34,9 +35,10 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public int Count => Operations.Count;
 
-        public OperationSet(string requestPath, OperationGroup? operationGroup, TypeFactory typeFactory)
+        public OperationSet(string requestPath, OperationGroup? operationGroup, IReadOnlyDictionary<string, OperationSet> rawRequestPathToOperationSets, TypeFactory typeFactory)
         {
             _operationGroup = operationGroup;
+            _rawRequestPathToOperationSets = rawRequestPathToOperationSets;
             _typeFactory = typeFactory;
             RequestPath = requestPath;
             Operations = new HashSet<Operation>();
@@ -111,7 +113,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             // therefore this must be a request path for a virtual resource
             // we find an operation with a prefix of this and take that many segment from its path as the request path of this operation set
             OperationSet? hintOperationSet = null;
-            foreach (var operationSet in MgmtContext.Library.RawRequestPathToOperationSets.Values)
+            foreach (var operationSet in _rawRequestPathToOperationSets.Values)
             {
                 // skip myself
                 if (operationSet == this)

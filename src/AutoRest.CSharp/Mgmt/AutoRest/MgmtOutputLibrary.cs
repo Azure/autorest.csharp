@@ -899,7 +899,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     requestPathList.Add(path);
                     if (!rawRequestPathToOperationSets.TryGetValue(path, out var operationSet))
                     {
-                        operationSet = new OperationSet(path, operationGroup, TypeFactory);
+                        operationSet = new OperationSet(path, operationGroup, rawRequestPathToOperationSets, TypeFactory);
                         rawRequestPathToOperationSets.Add(path, operationSet);
                     }
 
@@ -910,7 +910,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // add operation set for the partial resources here
             foreach (var path in Configuration.MgmtConfiguration.PartialResources.Keys)
             {
-                rawRequestPathToOperationSets.Add(path, new OperationSet(path, null, TypeFactory));
+                rawRequestPathToOperationSets.Add(path, new OperationSet(path, null, rawRequestPathToOperationSets, TypeFactory));
             }
 
             return rawRequestPathToOperationSets;

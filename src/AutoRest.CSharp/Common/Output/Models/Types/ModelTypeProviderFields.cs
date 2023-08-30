@@ -277,7 +277,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             Accessibility.Public => Public,
             Accessibility.Internal => Internal,
             Accessibility.Private => Private,
-            _ => throw new ArgumentOutOfRangeException()
+            _ => throw new ArgumentOutOfRangeException(existingMember.Name)
         };
 
         private static FormattableString? GetPropertyDefaultValue(CSharpType originalType, InputModelProperty inputModelProperty)
