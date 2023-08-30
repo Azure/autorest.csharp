@@ -108,7 +108,6 @@ namespace AutoRest.CSharp.Input
                 {
                     return;
                 }
-                IsInitialized = true;
 
                 _outputFolder = outputFolder;
                 _namespace = ns;
@@ -176,6 +175,8 @@ namespace AutoRest.CSharp.Input
                 _modelsToTreatEmptyStringAsNull = new HashSet<string>(modelsToTreatEmptyStringAsNull);
                 _intrinsicTypesToTreatEmptyStringAsNull.UnionWith(additionalIntrinsicTypesToTreatEmptyStringAsNull);
                 _methodsToKeepClientDefaultValue = methodsToKeepClientDefaultValue ?? Array.Empty<string>();
+
+                IsInitialized = true;
             }
         }
 
