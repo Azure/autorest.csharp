@@ -140,7 +140,7 @@ namespace Autorest.CSharp.Core
             string? itemPropertyName,
             string? nextLinkPropertyName,
             RequestContext? requestContext = null) where T : notnull
-            => await PageableHelpers.CreateAsyncPageable(waitUntil, message, createNextPageMethod, valueFactory, clientDiagnostics, pipeline, finalStateVia, scopeName, itemPropertyName, nextLinkPropertyName, requestContext);
+            => await PageableHelpers.CreateAsyncPageable(waitUntil, message, createNextPageMethod, valueFactory, clientDiagnostics, pipeline, finalStateVia, scopeName, itemPropertyName, nextLinkPropertyName, requestContext).ConfigureAwait(false);
 
         public static Operation<Pageable<T>> CreatePageable<T>(
             WaitUntil waitUntil,
