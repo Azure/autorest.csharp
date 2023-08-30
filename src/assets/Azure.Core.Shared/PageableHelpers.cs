@@ -166,7 +166,7 @@ namespace Azure.Core
             }
         }
 
-        private class AsyncPageableWrapper<T> : AsyncPageable<T> where T : notnull
+        internal class AsyncPageableWrapper<T> : AsyncPageable<T> where T : notnull
         {
             private readonly PageableImplementation<T> _implementation;
 
@@ -179,7 +179,7 @@ namespace Azure.Core
             public override IAsyncEnumerable<Page<T>> AsPages(string? continuationToken = null, int? pageSizeHint = null) => _implementation.AsPagesAsync(continuationToken, pageSizeHint, default);
         }
 
-        private class PageableWrapper<T> : Pageable<T> where T : notnull
+        internal class PageableWrapper<T> : Pageable<T> where T : notnull
         {
             private readonly PageableImplementation<T> _implementation;
 
@@ -192,7 +192,7 @@ namespace Azure.Core
             public override IEnumerable<Page<T>> AsPages(string? continuationToken = null, int? pageSizeHint = null) => _implementation.AsPages(continuationToken, pageSizeHint);
         }
 
-        private class PageableImplementation<T>
+        internal class PageableImplementation<T>
         {
             private readonly Response? _initialResponse;
             private readonly Func<int?, HttpMessage>? _createFirstPageRequest;
