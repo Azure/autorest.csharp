@@ -22,6 +22,7 @@ using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
 using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
+using Azure.ResourceManager.Resources.Models;
 using Configuration = AutoRest.CSharp.Input.Configuration;
 using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 
@@ -746,7 +747,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 frameworkType == typeof(ResourceType) ||
                 frameworkType == typeof(ContentType) ||
                 frameworkType == typeof(RequestMethod) ||
-                frameworkType == typeof(AzureLocation))
+                frameworkType == typeof(AzureLocation) ||
+                frameworkType == typeof(ExtendedLocationType))
             {
                 return $"new {frameworkType}({element}.GetString())";
             }
