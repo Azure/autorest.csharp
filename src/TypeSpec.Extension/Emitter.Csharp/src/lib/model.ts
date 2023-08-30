@@ -785,8 +785,6 @@ function setUsage(
         target.Usage = Usage.Output;
     } else if (sourceUsage === (UsageFlags.Input | UsageFlags.Output)) {
         target.Usage = Usage.RoundTrip;
-    } else {
-        target.Usage = Usage.None;
     }
 }
 
