@@ -35,10 +35,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         }
 
         private SignatureTypeProvider? _customization;
-        protected SignatureTypeProvider? Customization => _customization ??= CreateFromCompilation(_sourceInputModel?.Customization);
+        private SignatureTypeProvider? Customization => _customization ??= CreateFromCompilation(_sourceInputModel?.Customization);
 
         private SignatureTypeProvider? _previousContract;
-        protected SignatureTypeProvider? PreviousContract => _previousContract ??= CreateFromCompilation(_sourceInputModel?.PreviousContract);
+        private SignatureTypeProvider? PreviousContract => _previousContract ??= CreateFromCompilation(_sourceInputModel?.PreviousContract);
 
         // TODO: store the implementation of missing methods along with declaration
         public virtual IList<MethodSignature> Methods { get; }
@@ -51,25 +51,26 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         {
             get
             {
-                if (Methods != null && PreviousContract != null && PreviousContract.Methods != null)
+                if (Methods == null || PreviousContract?.Methods == null)
                 {
-                    IList<MethodSignature> missing;
-                    IList<(MethodSignature, MethodSignature, IList<MethodParameter>)> updated;
-                    if (Customization != null && Customization.Methods != null)
-                    {
-                        (missing, updated) = CompareMethods(Methods.Union(Customization!.Methods), PreviousContract.Methods);
-                    }
-                    else
-                    {
-                        (missing, updated) = CompareMethods(Methods, PreviousContract!.Methods);
-                    }
-                    return updated;
+                    return Array.Empty<(MethodSignature, MethodSignature, IList<MethodParameter>)>();
                 }
-                return Array.Empty<(MethodSignature, MethodSignature, IList<MethodParameter>)>();
+
+                IList<MethodSignature> missing;
+                IList<(MethodSignature, MethodSignature, IList<MethodParameter>)> updated;
+                if (Customization?.Methods != null)
+                {
+                    (missing, updated) = CompareMethods(Methods.Union(Customization!.Methods), PreviousContract.Methods);
+                }
+                else
+                {
+                    (missing, updated) = CompareMethods(Methods, PreviousContract!.Methods);
+                }
+                return updated;
             }
         }
 
-        protected (IList<MethodSignature> MissingMethods, IList<(MethodSignature CurrentMethodToCall, MethodSignature PreviousMethodToAdd, IList<MethodParameter> MissingParameters)> UpdatedMethods)
+        private (IList<MethodSignature> MissingMethods, IList<(MethodSignature CurrentMethodToCall, MethodSignature PreviousMethodToAdd, IList<MethodParameter> MissingParameters)> UpdatedMethods)
             CompareMethods(IEnumerable<MethodSignature> currentMethods, IEnumerable<MethodSignature> previousMethods)
         {
             var missing = new List<MethodSignature>();
