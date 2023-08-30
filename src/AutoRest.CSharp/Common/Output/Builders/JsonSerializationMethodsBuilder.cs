@@ -307,13 +307,20 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public static Method BuildDeserialize(TypeDeclarationOptions declaration, JsonObjectSerialization serialization)
         {
-            var methodName = $"Deserialize{declaration.Name}";
-            var element = new Parameter("element", null, typeof(JsonElement), null, Validation.None, null);
-            return new Method
-            (
-                new MethodSignature(methodName, null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[]{element}),
-                BuildDeserializeBody(element, serialization).ToArray()
-            );
+            try
+            {
+                var methodName = $"Deserialize{declaration.Name}";
+                var element = new Parameter("element", null, typeof(JsonElement), null, Validation.None, null);
+                return new Method
+                (
+                    new MethodSignature(methodName, null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[]{element}),
+                    BuildDeserializeBody(element, serialization).ToArray()
+                );
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"Failed to build deserialization method for {serialization.Type.Name}", ex);
+            }
         }
 
         public static Method BuildFromResponse(SerializableObjectType type, MethodSignatureModifiers modifiers)
