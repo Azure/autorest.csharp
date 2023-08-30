@@ -2117,16 +2117,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            basic_putValid:
-              parameters:
-                complexBody:
-                  name: abc
-                  color: Magenta
-                  id: 2
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutValid
@@ -2564,15 +2554,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            primitive_putInt:
-              parameters:
-                complexBody:
-                  field1: 2
-                  field2: -1
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutInt
@@ -2734,15 +2715,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            primitive_putLong:
-              parameters:
-                complexBody:
-                  field1: 1099511627775
-                  field2: -999511627788
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutLong
@@ -2904,15 +2876,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            primitive_putFloat:
-              parameters:
-                complexBody:
-                  field1: 1.05
-                  field2: -0.003
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutFloat
@@ -3074,15 +3037,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            primitive_putDouble:
-              parameters:
-                complexBody:
-                  field1: 3.e-100
-                  field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: -5.e-57
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutDouble
@@ -3244,15 +3198,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            primitive_putBool:
-              parameters:
-                complexBody:
-                  field_false: false
-                  field_true: true
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutBool
@@ -3414,15 +3359,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            primitive_putString:
-              parameters:
-                complexBody:
-                  empty: ''
-                  field: goodrequest
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutString
@@ -3584,15 +3520,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            primitive_putDate:
-              parameters:
-                complexBody:
-                  field: '0001-01-01'
-                  leap: '2016-02-29'
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutDate
@@ -3754,15 +3681,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            primitive_putDateTime:
-              parameters:
-                complexBody:
-                  field: '0001-01-01T12:00:00-04:00'
-                  now: '2015-05-18T11:38:00-08:00'
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutDateTime
@@ -3924,15 +3842,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            primitive_putDateTimeRfc1123:
-              parameters:
-                complexBody:
-                  field: Mon, 01 Jan 0001 12:00:00 GMT
-                  now: Mon, 18 May 2015 11:38:00 GMT
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutDateTimeRfc1123
@@ -4094,14 +4003,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            primitive_putDuration:
-              parameters:
-                complexBody:
-                  field: P123DT22H14M12.011S
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutDuration
@@ -4263,14 +4164,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            primitive_putByte:
-              parameters:
-                complexBody:
-                  field: hex(FF FE FD FC 00 FA F9 F8 F7 F6)
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutByte
@@ -4440,19 +4333,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            array_putValid:
-              parameters:
-                complexBody:
-                  array:
-                    - 1, 2, 3, 4
-                    - ''
-                    - null
-                    - '&S#$(*Y'
-                    - The quick brown fox jumps over the lazy dog
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutValid
@@ -4614,14 +4494,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            array_putEmpty:
-              parameters:
-                complexBody:
-                  array: []
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutEmpty
@@ -4858,19 +4730,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            dictionary_putValid:
-              parameters:
-                complexBody:
-                  defaultProgram:
-                    '': null
-                    bmp: mspaint
-                    exe: ''
-                    txt: notepad
-                    xls: excel
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutValid
@@ -5032,14 +4891,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            dictionary_putEmpty:
-              parameters:
-                complexBody:
-                  defaultProgram: {}
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutEmpty
@@ -5343,24 +5194,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            inheritance_putValid:
-              parameters:
-                complexBody:
-                  name: Siameee
-                  breed: persion
-                  color: green
-                  hates:
-                    - name: Potato
-                      food: tomato
-                      id: 1
-                    - name: Tomato
-                      food: french fries
-                      id: -1
-                  id: 2
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutValid
@@ -5595,37 +5428,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            polymorphism_putValid:
-              parameters:
-                complexBody:
-                  fishtype: salmon
-                  iswild: true
-                  length: 1
-                  location: alaska
-                  siblings:
-                    - age: 6
-                      birthday: '2012-01-05T01:00:00Z'
-                      fishtype: shark
-                      length: 20
-                      species: predator
-                    - age: 105
-                      birthday: '1900-01-05T01:00:00Z'
-                      fishtype: sawshark
-                      length: 10
-                      picture: //////4=
-                      species: dangerous
-                    - age: 1
-                      birthday: '2015-08-08T00:00:00Z'
-                      color: pinkish-gray
-                      fishtype: goblin
-                      jawsize: 5
-                      length: 30
-                      species: scary
-                  species: king
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutValid
@@ -5988,46 +5790,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            polymorphism_putComplicated:
-              parameters:
-                complexBody:
-                  additionalProperty1: 1
-                  additionalProperty2: false
-                  additionalProperty3: hello
-                  additionalProperty4:
-                    a: 1
-                    b: 2
-                  additionalProperty5:
-                    - 1
-                    - 3
-                  fishtype: smart_salmon
-                  iswild: true
-                  length: 1
-                  location: alaska
-                  siblings:
-                    - age: 6
-                      birthday: '2012-01-05T01:00:00Z'
-                      fishtype: shark
-                      length: 20
-                      species: predator
-                    - age: 105
-                      birthday: '1900-01-05T01:00:00Z'
-                      fishtype: sawshark
-                      length: 10
-                      picture: //////4=
-                      species: dangerous
-                    - age: 1
-                      birthday: '2015-08-08T00:00:00.000Z'
-                      color: pinkish-gray
-                      fishtype: goblin
-                      jawsize: 5
-                      length: 30
-                      species: scary
-                  species: king
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutComplicated
@@ -6126,37 +5888,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            polymorphism_putMissingDiscriminator:
-              parameters:
-                complexBody:
-                  fishtype: salmon
-                  iswild: true
-                  length: 1
-                  location: alaska
-                  siblings:
-                    - age: 6
-                      birthday: '2012-01-05T01:00:00Z'
-                      fishtype: shark
-                      length: 20
-                      species: predator
-                    - age: 105
-                      birthday: '1900-01-05T01:00:00Z'
-                      fishtype: sawshark
-                      length: 10
-                      picture: //////4=
-                      species: dangerous
-                    - age: 1
-                      birthday: '2012-01-05T01:00:00Z'
-                      color: pinkish-gray
-                      fishtype: goblin
-                      jawsize: 5
-                      length: 30
-                      species: scary
-                  species: king
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutMissingDiscriminator
@@ -6728,10 +6459,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            readonlyproperty_putValid:
-              $ref: ./examples/readonlyproperty_putValid.json
         language: !Languages 
           default:
             name: PutValid

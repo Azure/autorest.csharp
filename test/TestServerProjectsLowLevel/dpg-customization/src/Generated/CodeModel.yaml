@@ -311,13 +311,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-        extensions:
-          x-ms-examples:
-            dpg_getModel:
-              parameters:
-                mode: uat
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: GetModel
@@ -417,15 +410,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-        extensions:
-          x-ms-examples:
-            dpg_postModel:
-              parameters:
-                input:
-                  hello: test
-                mode: uat
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PostModel
@@ -495,12 +479,6 @@ operationGroups:
                 statusCodes:
                   - '200'
         extensions:
-          x-ms-examples:
-            dpg_nextLink:
-              parameters:
-                mode: prod
-              responses:
-                '200': {}
           x-ms-pageable:
             itemName: values
             nextLinkName: nextLink
@@ -576,12 +554,6 @@ operationGroups:
                 statusCodes:
                   - '200'
         extensions:
-          x-ms-examples:
-            dpg_lro:
-              parameters:
-                mode: prod
-              responses:
-                '200': {}
           x-ms-long-running-operation: true
         language: !Languages 
           default:
