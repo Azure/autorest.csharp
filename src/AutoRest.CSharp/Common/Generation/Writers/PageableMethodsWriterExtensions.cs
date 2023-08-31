@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
+using Autorest.CSharp.Core;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
@@ -57,11 +58,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     if (async)
                     {
-                        writer.Line($"return await {typeof(PageableHelpers)}.{nameof(PageableHelpers.CreateAsyncPageable)}({createPageableParameters.Join(", ")}).ConfigureAwait(false);");
+                        writer.Line($"return await {typeof(GeneratorPageableHelpers)}.{nameof(GeneratorPageableHelpers.CreateAsyncPageable)}({createPageableParameters.Join(", ")}).ConfigureAwait(false);");
                     }
                     else
                     {
-                        writer.Line($"return {typeof(PageableHelpers)}.{nameof(PageableHelpers.CreatePageable)}({createPageableParameters.Join(", ")});");
+                        writer.Line($"return {typeof(GeneratorPageableHelpers)}.{nameof(GeneratorPageableHelpers.CreatePageable)}({createPageableParameters.Join(", ")});");
                     }
                 }
             }
@@ -143,7 +144,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"{typeof(HttpMessage)} {nextPageRequestVariable:D}({KnownParameters.PageSizeHint.Type} {KnownParameters.PageSizeHint.Name}, {KnownParameters.NextLink.Type} {KnownParameters.NextLink.Name}) => {nextPageRequest};");
             }
 
-            return writer.Line($"return {typeof(PageableHelpers)}.{(async ? nameof(PageableHelpers.CreateAsyncPageable) : nameof(PageableHelpers.CreatePageable))}({createPageableParameters.Join(", ")});");
+            return writer.Line($"return {typeof(GeneratorPageableHelpers)}.{(async ? nameof(GeneratorPageableHelpers.CreateAsyncPageable) : nameof(GeneratorPageableHelpers.CreatePageable))}({createPageableParameters.Join(", ")});");
         }
 
         private static void AddTrailingPageableParameters(this List<FormattableString> createPageableParameters, IReadOnlyCollection<Parameter> methodParameters, string scopeName, string? itemPropertyName, string? nextLinkPropertyName)
@@ -239,7 +240,7 @@ namespace AutoRest.CSharp.Generation.Writers
             if (pageItemType.Equals(BinaryDataType))
             {
                 // When `JsonElement` provides access to its UTF8 buffer, change this code to create `BinaryData` from it.
-                // See also PageableHelpers.ParseResponseForBinaryData
+                // See also GeneratorPageableHelpers.ParseResponseForBinaryData
                 return $"(e, o) => {BinaryDataType}.{nameof(BinaryData.FromString)}(e.{nameof(JsonElement.GetRawText)}())";
             }
 
