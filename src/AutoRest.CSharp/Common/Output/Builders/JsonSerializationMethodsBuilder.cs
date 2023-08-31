@@ -16,6 +16,7 @@ using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
@@ -26,6 +27,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Builders
@@ -305,22 +307,17 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 ? new IfStatement(Equal(value, Null)) {utf8JsonWriter.WriteNullValue(), Continue}
                 : new MethodBodyStatement();
 
-        public static Method BuildDeserialize(TypeDeclarationOptions declaration, JsonObjectSerialization serialization)
+        public static Method? BuildDeserialize(TypeDeclarationOptions declaration, JsonObjectSerialization serialization, INamedTypeSymbol? existingType)
         {
-            try
+            var methodName = $"Deserialize{declaration.Name}";
+            var element = new Parameter("element", null, typeof(JsonElement), null, Validation.None, null);
+            var signature = new MethodSignature(methodName, null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[]{element});
+            if (SourceInputHelper.TryGetExistingMethod(existingType, signature, out _))
             {
-                var methodName = $"Deserialize{declaration.Name}";
-                var element = new Parameter("element", null, typeof(JsonElement), null, Validation.None, null);
-                return new Method
-                (
-                    new MethodSignature(methodName, null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[]{element}),
-                    BuildDeserializeBody(element, serialization).ToArray()
-                );
+                return null;
             }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException($"Failed to build deserialization method for {serialization.Type.Name}", ex);
-            }
+
+            return new Method(signature, BuildDeserializeBody(element, serialization).ToArray());
         }
 
         public static Method BuildFromResponse(SerializableObjectType type, MethodSignatureModifiers modifiers)
@@ -582,7 +579,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         {
                             type = new CSharpType(type.Arguments[0].FrameworkType);
                         }
-                        type = new CSharpType(typeof(Optional<>), type);
+                        type = new CSharpType(typeof(Azure.Core.Optional<>), type);
                     }
 
                     propertyVariables.Add(jsonProperty, new ObjectPropertyVariable(propertyDeclaration, type));
@@ -759,7 +756,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             var targetType = jsonPropertySerialization.ValueType;
             var sourceType = variable.Type;
-            if (!sourceType.IsFrameworkType || sourceType.FrameworkType != typeof(Optional<>))
+            if (!sourceType.IsFrameworkType || sourceType.FrameworkType != typeof(Azure.Core.Optional<>))
             {
                 return variable.Declaration;
             }

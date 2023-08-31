@@ -22,6 +22,8 @@ namespace AutoRest.CSharp.Common.Output.Models
         {
             public static ValueExpression ArgumentOutOfRangeException(EnumType enumType, Parameter valueParameter)
                 => Instance(typeof(ArgumentOutOfRangeException), Nameof(valueParameter), valueParameter, Literal($"Unknown {enumType.Declaration.Name} value."));
+            public static ValueExpression NotImplementedException(string name)
+                => Instance(typeof(NotImplementedException), Literal($"Method {name} is implemented in customized code."));
 
             public static EnumerableExpression Array(CSharpType? elementType) => new(new NewArrayExpression(elementType));
             public static EnumerableExpression Array(CSharpType? elementType, params ValueExpression[] items) => new(new NewArrayExpression(elementType, new ArrayInitializerExpression(items)));

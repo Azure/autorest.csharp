@@ -218,9 +218,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                     yield return JsonSerializationMethodsBuilder.BuildUtf8JsonSerializableWrite(serialization);
                 }
 
-                if (IncludeDeserializer)
+                if (IncludeDeserializer && JsonSerializationMethodsBuilder.BuildDeserialize(Declaration, serialization, ExistingType) is {} jsonDeserialize)
                 {
-                    yield return JsonSerializationMethodsBuilder.BuildDeserialize(Declaration, serialization);
+                    yield return jsonDeserialize;
                 }
             }
         }
