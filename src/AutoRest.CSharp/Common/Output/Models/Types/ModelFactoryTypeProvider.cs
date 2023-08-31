@@ -25,27 +25,38 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal sealed class ModelFactoryTypeProvider : SignatureTypeProvider
     {
+        private SourceInputModel? _sourceInputModel;
+
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
         private IList<MethodSignature>? _methods;
-        public override IList<MethodSignature> Methods => _methods ??= Models.Select(CreateMethod).ToList();
+        public override IList<MethodSignature> Methods => _methods ??= Models!.Select(CreateMethod).ToList();
 
-        public IEnumerable<SerializableObjectType> Models { get; }
+        public IEnumerable<SerializableObjectType>? Models { get; }
 
         public FormattableString Description => $"Model factory for models.";
 
         internal string FullName => $"{Type.Namespace}.{Type.Name}";
 
         private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> objectTypes, string defaultClientName, string defaultNamespace, SourceInputModel? sourceInputModel)
-            : base(defaultNamespace, $"{defaultClientName}ModelFactory".ToCleanName(), new List<MethodSignature>(), sourceInputModel)
+            : base(defaultNamespace, sourceInputModel)
         {
+            _sourceInputModel = sourceInputModel;
             Models = objectTypes;
-
             DefaultName = $"{defaultClientName}ModelFactory".ToCleanName();
             DefaultAccessibility = "public";
             ExistingModelFactoryMethods = typeof(ResourceManagerModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet();
             ExistingModelFactoryMethods.UnionWith(typeof(DataFactoryModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet());
+        }
+
+        private ModelFactoryTypeProvider(IList<MethodSignature> methods)
+            : base(string.Empty, null)
+        {
+            _methods = methods;
+            DefaultName = string.Empty;
+            DefaultAccessibility = "public";
+            ExistingModelFactoryMethods = new HashSet<MethodInfo>();
         }
 
         public static ModelFactoryTypeProvider? TryCreate(IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
@@ -87,6 +98,24 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
+
+        protected override SignatureTypeProvider? Customization => CreateFromCompilation(_sourceInputModel?.Customization);
+
+        protected override SignatureTypeProvider? PreviousContract => CreateFromCompilation(_sourceInputModel?.PreviousContract);
+
+        private SignatureTypeProvider? CreateFromCompilation(Compilation? compilation)
+        {
+            if (compilation is null)
+            {
+                return null;
+            }
+            var type = compilation.Assembly.GetTypeByMetadataName($"{DefaultNamespace}.{DefaultName}");
+            if (type is null)
+            {
+                return null;
+            }
+            return new ModelFactoryTypeProvider(MethodSignature.PopulateMethods(type));
+        }
 
         private (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignmentForSimpleProperty(CodeWriter writer, SerializableObjectType model, Parameter parameter, ObjectTypeProperty property)
         {

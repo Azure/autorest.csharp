@@ -22,30 +22,18 @@ using MethodParameter = AutoRest.CSharp.Output.Models.Shared.Parameter;
 
 namespace AutoRest.CSharp.Common.Output.Models.Types
 {
-    internal class SignatureTypeProvider : TypeProvider
+    internal abstract class SignatureTypeProvider : TypeProvider
     {
-        private SourceInputModel? _sourceInputModel;
-
-        protected SignatureTypeProvider(string defaultNamespace, string defaultName, IList<MethodSignature> methods, SourceInputModel? sourceInputModel = null) : base(defaultNamespace, sourceInputModel)
+        protected SignatureTypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
-            DefaultName = defaultName;
-            DefaultAccessibility = "public";
-            Methods = methods;
-            _sourceInputModel = sourceInputModel;
         }
 
-        private SignatureTypeProvider? _customization;
-        private SignatureTypeProvider? Customization => _customization ??= CreateFromCompilation(_sourceInputModel?.Customization);
+        protected abstract SignatureTypeProvider? Customization { get; }
 
-        private SignatureTypeProvider? _previousContract;
-        private SignatureTypeProvider? PreviousContract => _previousContract ??= CreateFromCompilation(_sourceInputModel?.PreviousContract);
+        protected abstract SignatureTypeProvider? PreviousContract { get; }
 
         // TODO: store the implementation of missing methods along with declaration
-        public virtual IList<MethodSignature> Methods { get; }
-
-        protected override string DefaultName { get; }
-
-        protected override string DefaultAccessibility { get; }
+        public abstract IList<MethodSignature> Methods { get; }
 
         public IList<(MethodSignature CurrentMethodToCall, MethodSignature PreviousMethodToAdd, IList<MethodParameter> MissingParameters)> MissingOverloadMethods
         {
@@ -133,20 +121,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             missingParameters = null;
             currentMethodToCall = null;
             return false;
-        }
-
-        private SignatureTypeProvider? CreateFromCompilation(Compilation? compilation)
-        {
-            if (compilation is null)
-            {
-                return null;
-            }
-            var type = compilation.Assembly.GetTypeByMetadataName($"{DefaultNamespace}.{DefaultName}");
-            if (type is null)
-            {
-                return null;
-            }
-            return new SignatureTypeProvider(DefaultNamespace, DefaultName, MethodSignature.PopulateMethods(type));
         }
 
         private bool CurrentContainAllPreviousParameters(MethodSignature previousMethod, MethodSignature currentMethod)
