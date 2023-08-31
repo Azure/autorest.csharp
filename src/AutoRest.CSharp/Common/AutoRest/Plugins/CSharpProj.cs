@@ -96,9 +96,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
             var codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
 
-            var config = Configuration.InitializeCSharpProjConfig(autoRest);
+            var config = Configuration.InitializeCSharpProjConfig(autoRest, codeModel.Language.Default.Name, codeModel.Language.Default.Name);
 
-            var context = new BuildContext(codeModel, null);
+            var context = new BuildContext(codeModel, null, config.LibraryName, config.Namespace);
             Execute(context.DefaultNamespace, async (filename, text) =>
             {
                 await autoRest.WriteFile(Path.Combine(config.RelativeProjectFolder, filename), text, "source-file-csharp");

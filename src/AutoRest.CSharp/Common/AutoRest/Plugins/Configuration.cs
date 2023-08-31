@@ -285,8 +285,8 @@ namespace AutoRest.CSharp.Input
         {
             Initialize(
                 outputFolder: GetOutputFolderOption(autoRest),
-                ns: autoRest.GetValue<string?>(Options.Namespace).GetAwaiter().GetResult() ?? defaultNamespace,
-                libraryName: autoRest.GetValue<string?>(Options.LibraryName).GetAwaiter().GetResult() ?? defaultLibraryName,
+                ns: GetNamespaceOption(autoRest, defaultNamespace),
+                libraryName: GetLibraryNameOption(autoRest, defaultLibraryName),
                 sharedSourceFolders: GetRequiredOption<string[]>(autoRest, Options.SharedSourceFolders).Select(TrimFileSuffix).ToArray(),
                 saveInputs: GetOptionBoolValue(autoRest, Options.SaveInputs),
                 azureArm: GetAzureArmOption(autoRest),
@@ -606,28 +606,31 @@ namespace AutoRest.CSharp.Input
             AbsoluteProjectFolder: AbsoluteProjectFolder,
             AzureArm: AzureArm,
             IsMgmtTestProject: MgmtTestConfiguration is not null,
+            LibraryName: LibraryName,
+            Namespace: Namespace,
             SkipCSProjPackageReference: SkipCSProjPackageReference,
             RelativeProjectFolder: RelativeProjectFolder,
             Generation1ConvenienceClient: Generation1ConvenienceClient
         );
 
         // load CSharpProj configuration from Autorest input
-        internal static CSharpProjConfiguration InitializeCSharpProjConfig(IPluginCommunication autoRest)
+        internal static CSharpProjConfiguration InitializeCSharpProjConfig(IPluginCommunication autoRest, string defaultLibraryName, string defaultNamespace)
         {
             string outputFolder = GetOutputFolderOption(autoRest);
-
             var projectFolder = GetProjectFolderOption(autoRest) ?? ProjectFolderDefault;
-
             (var absoluteProjectFolder, var relativeProjectFolder) = ParseProjectFolders(outputFolder, projectFolder);
 
             return new CSharpProjConfiguration(
                 AbsoluteProjectFolder: absoluteProjectFolder,
                 AzureArm: GetAzureArmOption(autoRest),
                 IsMgmtTestProject: MgmtTestConfiguration.HasMgmtTestConfiguration(autoRest),
+                LibraryName: GetLibraryNameOption(autoRest, defaultLibraryName),
+                Namespace: GetNamespaceOption(autoRest, defaultNamespace),
                 SkipCSProjPackageReference: GetSkipCSProjPackageReferenceOption(autoRest),
                 RelativeProjectFolder: relativeProjectFolder,
                 Generation1ConvenienceClient: GetGeneration1ConvenienceClientOption(autoRest)
             );
+            ;
         }
 
         internal static string GetOutputFolderOption(IPluginCommunication autoRest) => TrimFileSuffix(GetRequiredOption<string>(autoRest, Options.OutputFolder));
@@ -635,6 +638,8 @@ namespace AutoRest.CSharp.Input
         internal static bool GetAzureArmOption(IPluginCommunication autoRest) => GetOptionBoolValue(autoRest, Options.AzureArm);
         internal static bool GetSkipCSProjPackageReferenceOption(IPluginCommunication autoRest) => GetOptionBoolValue(autoRest, Options.SkipCSProjPackageReference);
         internal static bool GetGeneration1ConvenienceClientOption(IPluginCommunication autoRest) => GetOptionBoolValue(autoRest, Options.Generation1ConvenienceClient);
+        internal static string GetLibraryNameOption(IPluginCommunication autoRest, string defaultLibraryName) => autoRest.GetValue<string?>(Options.LibraryName).GetAwaiter().GetResult() ?? defaultLibraryName;
+        internal static string GetNamespaceOption(IPluginCommunication autoRest, string defaultNamespace) => autoRest.GetValue<string?>(Options.Namespace).GetAwaiter().GetResult() ?? defaultNamespace;
     }
 
     // configuration properties neede by CSharpProj
@@ -643,6 +648,8 @@ namespace AutoRest.CSharp.Input
         bool AzureArm,
         bool Generation1ConvenienceClient,
         bool IsMgmtTestProject,
+        string LibraryName,
+        string Namespace,
         string RelativeProjectFolder,
         bool SkipCSProjPackageReference
     );
