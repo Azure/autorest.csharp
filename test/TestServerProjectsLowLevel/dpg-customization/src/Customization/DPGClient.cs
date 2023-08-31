@@ -6,6 +6,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using dpg_customization_LowLevel.Models;
@@ -141,7 +142,7 @@ namespace dpg_customization_LowLevel
             Argument.AssertNotNull(mode, nameof(mode));
 
             var requestContext = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : default;
-            return PageableHelpers.CreateAsyncPageable
+            return GeneratorPageableHelpers.CreateAsyncPageable
             (
                 _ => CreateGetPagesRequest(mode, requestContext),
                 (_, nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, requestContext),
@@ -164,7 +165,7 @@ namespace dpg_customization_LowLevel
             Argument.AssertNotNull(mode, nameof(mode));
 
             var requestContext = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : default;
-            return PageableHelpers.CreatePageable
+            return GeneratorPageableHelpers.CreatePageable
             (
                 _ => CreateGetPagesRequest(mode, requestContext),
                 (_, nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, requestContext),

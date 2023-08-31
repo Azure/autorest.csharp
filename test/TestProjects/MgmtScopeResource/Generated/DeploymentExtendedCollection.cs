@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -222,7 +223,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _deploymentExtendedDeploymentsRestClient.CreateListAtScopeRequest(Id, filter, top);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deploymentExtendedDeploymentsRestClient.CreateListAtScopeNextPageRequest(nextLink, Id, filter, top);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new DeploymentExtendedResource(Client, DeploymentExtendedData.DeserializeDeploymentExtendedData(e)), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, "DeploymentExtendedCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new DeploymentExtendedResource(Client, DeploymentExtendedData.DeserializeDeploymentExtendedData(e)), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, "DeploymentExtendedCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -246,7 +247,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _deploymentExtendedDeploymentsRestClient.CreateListAtScopeRequest(Id, filter, top);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deploymentExtendedDeploymentsRestClient.CreateListAtScopeNextPageRequest(nextLink, Id, filter, top);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new DeploymentExtendedResource(Client, DeploymentExtendedData.DeserializeDeploymentExtendedData(e)), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, "DeploymentExtendedCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new DeploymentExtendedResource(Client, DeploymentExtendedData.DeserializeDeploymentExtendedData(e)), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, "DeploymentExtendedCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

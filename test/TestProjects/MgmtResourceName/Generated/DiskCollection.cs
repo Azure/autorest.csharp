@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -222,7 +223,7 @@ namespace MgmtResourceName
         public virtual AsyncPageable<Disk> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _diskRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new Disk(Client, DiskData.DeserializeDiskData(e)), _diskClientDiagnostics, Pipeline, "DiskCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new Disk(Client, DiskData.DeserializeDiskData(e)), _diskClientDiagnostics, Pipeline, "DiskCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +243,7 @@ namespace MgmtResourceName
         public virtual Pageable<Disk> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _diskRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new Disk(Client, DiskData.DeserializeDiskData(e)), _diskClientDiagnostics, Pipeline, "DiskCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new Disk(Client, DiskData.DeserializeDiskData(e)), _diskClientDiagnostics, Pipeline, "DiskCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

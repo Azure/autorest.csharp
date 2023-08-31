@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -148,7 +149,7 @@ namespace Azure.ResourceManager.Storage
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _deletedAccountRestClient.CreateListRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deletedAccountRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new DeletedAccountResource(Client, DeletedAccountData.DeserializeDeletedAccountData(e)), _deletedAccountClientDiagnostics, Pipeline, "DeletedAccountCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new DeletedAccountResource(Client, DeletedAccountData.DeserializeDeletedAccountData(e)), _deletedAccountClientDiagnostics, Pipeline, "DeletedAccountCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -170,7 +171,7 @@ namespace Azure.ResourceManager.Storage
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _deletedAccountRestClient.CreateListRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deletedAccountRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new DeletedAccountResource(Client, DeletedAccountData.DeserializeDeletedAccountData(e)), _deletedAccountClientDiagnostics, Pipeline, "DeletedAccountCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new DeletedAccountResource(Client, DeletedAccountData.DeserializeDeletedAccountData(e)), _deletedAccountClientDiagnostics, Pipeline, "DeletedAccountCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Threading;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -59,7 +60,7 @@ namespace MgmtPartialResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => PublicIPAddressRestClient.CreateListAllRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => PublicIPAddressRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), PublicIPAddressClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), PublicIPAddressClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace MgmtPartialResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => PublicIPAddressRestClient.CreateListAllRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => PublicIPAddressRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), PublicIPAddressClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), PublicIPAddressClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
         }
     }
 }

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -151,7 +152,7 @@ namespace MgmtCollectionParent
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _orderResourceRestClient.CreateListOrderAtResourceGroupLevelRequest(Id.SubscriptionId, Id.ResourceGroupName, skipToken);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _orderResourceRestClient.CreateListOrderAtResourceGroupLevelNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skipToken);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new OrderResource(Client, OrderResourceData.DeserializeOrderResourceData(e)), _orderResourceClientDiagnostics, Pipeline, "OrderResourceCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new OrderResource(Client, OrderResourceData.DeserializeOrderResourceData(e)), _orderResourceClientDiagnostics, Pipeline, "OrderResourceCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -174,7 +175,7 @@ namespace MgmtCollectionParent
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _orderResourceRestClient.CreateListOrderAtResourceGroupLevelRequest(Id.SubscriptionId, Id.ResourceGroupName, skipToken);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _orderResourceRestClient.CreateListOrderAtResourceGroupLevelNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skipToken);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new OrderResource(Client, OrderResourceData.DeserializeOrderResourceData(e)), _orderResourceClientDiagnostics, Pipeline, "OrderResourceCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new OrderResource(Client, OrderResourceData.DeserializeOrderResourceData(e)), _orderResourceClientDiagnostics, Pipeline, "OrderResourceCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

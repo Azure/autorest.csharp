@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -233,7 +234,7 @@ namespace Azure.ResourceManager.Sample
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineScaleSetVMRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _virtualMachineScaleSetVMRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new VirtualMachineScaleSetVMResource(Client, VirtualMachineScaleSetVMData.DeserializeVirtualMachineScaleSetVMData(e)), _virtualMachineScaleSetVMClientDiagnostics, Pipeline, "VirtualMachineScaleSetVMCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new VirtualMachineScaleSetVMResource(Client, VirtualMachineScaleSetVMData.DeserializeVirtualMachineScaleSetVMData(e)), _virtualMachineScaleSetVMClientDiagnostics, Pipeline, "VirtualMachineScaleSetVMCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -258,7 +259,7 @@ namespace Azure.ResourceManager.Sample
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineScaleSetVMRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _virtualMachineScaleSetVMRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, select, expand);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new VirtualMachineScaleSetVMResource(Client, VirtualMachineScaleSetVMData.DeserializeVirtualMachineScaleSetVMData(e)), _virtualMachineScaleSetVMClientDiagnostics, Pipeline, "VirtualMachineScaleSetVMCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new VirtualMachineScaleSetVMResource(Client, VirtualMachineScaleSetVMData.DeserializeVirtualMachineScaleSetVMData(e)), _virtualMachineScaleSetVMClientDiagnostics, Pipeline, "VirtualMachineScaleSetVMCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

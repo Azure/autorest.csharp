@@ -8,6 +8,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -140,7 +141,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAllRequest(filter, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAllNextPageRequest(nextLink, filter, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "TopLevelClientWithOperationClient.GetAll", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "TopLevelClientWithOperationClient.GetAll", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -165,7 +166,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAllRequest(filter, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetAllNextPageRequest(nextLink, filter, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "TopLevelClientWithOperationClient.GetAll", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "TopLevelClientWithOperationClient.GetAll", "value", "nextLink", context);
         }
 
         private Client1 _cachedClient1;

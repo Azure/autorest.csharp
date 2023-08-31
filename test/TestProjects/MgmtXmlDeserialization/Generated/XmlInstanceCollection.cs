@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -233,7 +234,7 @@ namespace MgmtXmlDeserialization
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _xmlInstanceXmlDeserializationRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _xmlInstanceXmlDeserializationRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new XmlInstanceResource(Client, XmlInstanceData.DeserializeXmlInstanceData(e)), _xmlInstanceXmlDeserializationClientDiagnostics, Pipeline, "XmlInstanceCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new XmlInstanceResource(Client, XmlInstanceData.DeserializeXmlInstanceData(e)), _xmlInstanceXmlDeserializationClientDiagnostics, Pipeline, "XmlInstanceCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -258,7 +259,7 @@ namespace MgmtXmlDeserialization
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _xmlInstanceXmlDeserializationRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _xmlInstanceXmlDeserializationRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new XmlInstanceResource(Client, XmlInstanceData.DeserializeXmlInstanceData(e)), _xmlInstanceXmlDeserializationClientDiagnostics, Pipeline, "XmlInstanceCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new XmlInstanceResource(Client, XmlInstanceData.DeserializeXmlInstanceData(e)), _xmlInstanceXmlDeserializationClientDiagnostics, Pipeline, "XmlInstanceCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

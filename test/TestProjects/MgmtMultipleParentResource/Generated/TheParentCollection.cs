@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -231,7 +232,7 @@ namespace MgmtMultipleParentResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _theParentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _theParentRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, expand);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new TheParentResource(Client, TheParentData.DeserializeTheParentData(e)), _theParentClientDiagnostics, Pipeline, "TheParentCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new TheParentResource(Client, TheParentData.DeserializeTheParentData(e)), _theParentClientDiagnostics, Pipeline, "TheParentCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -254,7 +255,7 @@ namespace MgmtMultipleParentResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _theParentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _theParentRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, expand);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new TheParentResource(Client, TheParentData.DeserializeTheParentData(e)), _theParentClientDiagnostics, Pipeline, "TheParentCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new TheParentResource(Client, TheParentData.DeserializeTheParentData(e)), _theParentClientDiagnostics, Pipeline, "TheParentCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

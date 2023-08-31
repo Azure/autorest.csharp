@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -230,7 +231,7 @@ namespace MgmtLRO
         public virtual AsyncPageable<FakeResource> GetAllAsync(string optionalParam = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, optionalParam);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new FakeResource(Client, FakeData.DeserializeFakeData(e)), _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new FakeResource(Client, FakeData.DeserializeFakeData(e)), _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -252,7 +253,7 @@ namespace MgmtLRO
         public virtual Pageable<FakeResource> GetAll(string optionalParam = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, optionalParam);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new FakeResource(Client, FakeData.DeserializeFakeData(e)), _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new FakeResource(Client, FakeData.DeserializeFakeData(e)), _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

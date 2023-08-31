@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -230,7 +231,7 @@ namespace MgmtMultipleParentResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _theParentSubParentChildChildrenRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _theParentSubParentChildChildrenRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new TheParentSubParentChildResource(Client, ChildBodyData.DeserializeChildBodyData(e)), _theParentSubParentChildChildrenClientDiagnostics, Pipeline, "TheParentSubParentChildCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new TheParentSubParentChildResource(Client, ChildBodyData.DeserializeChildBodyData(e)), _theParentSubParentChildChildrenClientDiagnostics, Pipeline, "TheParentSubParentChildCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -253,7 +254,7 @@ namespace MgmtMultipleParentResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _theParentSubParentChildChildrenRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _theParentSubParentChildChildrenRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new TheParentSubParentChildResource(Client, ChildBodyData.DeserializeChildBodyData(e)), _theParentSubParentChildChildrenClientDiagnostics, Pipeline, "TheParentSubParentChildCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new TheParentSubParentChildResource(Client, ChildBodyData.DeserializeChildBodyData(e)), _theParentSubParentChildChildrenClientDiagnostics, Pipeline, "TheParentSubParentChildCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

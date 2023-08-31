@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -230,7 +231,7 @@ namespace MgmtOperations
         public virtual AsyncPageable<AvailabilitySetResource> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _availabilitySetRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new AvailabilitySetResource(Client, AvailabilitySetData.DeserializeAvailabilitySetData(e)), _availabilitySetClientDiagnostics, Pipeline, "AvailabilitySetCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new AvailabilitySetResource(Client, AvailabilitySetData.DeserializeAvailabilitySetData(e)), _availabilitySetClientDiagnostics, Pipeline, "AvailabilitySetCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -252,7 +253,7 @@ namespace MgmtOperations
         public virtual Pageable<AvailabilitySetResource> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _availabilitySetRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new AvailabilitySetResource(Client, AvailabilitySetData.DeserializeAvailabilitySetData(e)), _availabilitySetClientDiagnostics, Pipeline, "AvailabilitySetCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new AvailabilitySetResource(Client, AvailabilitySetData.DeserializeAvailabilitySetData(e)), _availabilitySetClientDiagnostics, Pipeline, "AvailabilitySetCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -227,7 +228,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentWithLocRestClient.CreateListRequest(Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _tenantParentWithLocRestClient.CreateListNextPageRequest(nextLink, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new TenantParentWithLocResource(Client, TenantParentWithLocData.DeserializeTenantParentWithLocData(e)), _tenantParentWithLocClientDiagnostics, Pipeline, "TenantParentWithLocCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new TenantParentWithLocResource(Client, TenantParentWithLocData.DeserializeTenantParentWithLocData(e)), _tenantParentWithLocClientDiagnostics, Pipeline, "TenantParentWithLocCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -249,7 +250,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentWithLocRestClient.CreateListRequest(Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _tenantParentWithLocRestClient.CreateListNextPageRequest(nextLink, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new TenantParentWithLocResource(Client, TenantParentWithLocData.DeserializeTenantParentWithLocData(e)), _tenantParentWithLocClientDiagnostics, Pipeline, "TenantParentWithLocCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new TenantParentWithLocResource(Client, TenantParentWithLocData.DeserializeTenantParentWithLocData(e)), _tenantParentWithLocClientDiagnostics, Pipeline, "TenantParentWithLocCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

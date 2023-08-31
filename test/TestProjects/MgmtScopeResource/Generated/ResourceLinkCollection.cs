@@ -9,6 +9,7 @@ using System;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -216,7 +217,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _resourceLinkRestClient.CreateListAtSourceScopeRequest(_scope, filter);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _resourceLinkRestClient.CreateListAtSourceScopeNextPageRequest(nextLink, _scope, filter);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), _resourceLinkClientDiagnostics, Pipeline, "ResourceLinkCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), _resourceLinkClientDiagnostics, Pipeline, "ResourceLinkCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -239,7 +240,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _resourceLinkRestClient.CreateListAtSourceScopeRequest(_scope, filter);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _resourceLinkRestClient.CreateListAtSourceScopeNextPageRequest(nextLink, _scope, filter);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), _resourceLinkClientDiagnostics, Pipeline, "ResourceLinkCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), _resourceLinkClientDiagnostics, Pipeline, "ResourceLinkCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
