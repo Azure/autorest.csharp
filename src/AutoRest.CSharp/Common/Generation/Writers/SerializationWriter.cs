@@ -222,6 +222,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (!isUnknownDerivedType)
             {
+                writer.WriteMethodDocumentation(MethodSignature.GetExplicitFromResponse(modelType));
                 using (writer.Scope($"public static explicit operator {modelType}({typeof(Response)} response)"))
                 {
                     if (isStruct)
@@ -365,6 +366,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (!isUnknownDerivedType)
             {
+                writer.WriteMethodDocumentation(MethodSignature.GetImplicitToRequestContent(modelType));
                 using (writer.Scope($"public static implicit operator {typeof(RequestContent)}({modelType} model)"))
                 {
                     if (!isStruct)

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
+using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models
@@ -15,6 +16,20 @@ namespace AutoRest.CSharp.Output.Models
     internal record MethodSignature(string Name, string? Summary, string? Description, MethodSignatureModifiers Modifiers, CSharpType? ReturnType, FormattableString? ReturnDescription, IReadOnlyList<Parameter> Parameters, IReadOnlyList<CSharpAttribute>? Attributes = null, IReadOnlyList<CSharpType>? GenericArguments = null, IReadOnlyDictionary<CSharpType, FormattableString>? GenericParameterConstraints = null)
         : MethodSignatureBase(Name, Summary, Description, Modifiers, Parameters, Attributes ?? Array.Empty<CSharpAttribute>())
     {
+        public static MethodSignature GetImplicitToRequestContent(CSharpType type)
+        {
+            FormattableString summary = $"Converts a <see cref=\"{type.Name}\"/> into a <see cref=\"{typeof(RequestContent).Name}\"/>.";
+            Parameter[] parameters = new Parameter[] { new Parameter("model", $"The <see cref=\"{type.Name}\"/> to convert.", type, null, ValidationType.None, null) };
+            return new MethodSignature("ImplicitCast", summary.ToString(), null, MethodSignatureModifiers.Public, typeof(RequestContent), null, parameters);
+        }
+
+        public static MethodSignature GetExplicitFromResponse(CSharpType type)
+        {
+            FormattableString summary = $"Converts a <see cref=\"{typeof(Response).Name}\"/> into a <see cref=\"{type.Name}\"/>.";
+            Parameter[] parameters = new Parameter[] { new Parameter("response", $"The <see cref=\"{typeof(Response).Name}\"/> to convert.", type, null, ValidationType.None, null) };
+            return new MethodSignature("ExplicitCast", summary.ToString(), null, MethodSignatureModifiers.Public, type, null, parameters);
+        }
+
         public FormattableString? FormattableDescription => Description is null ? (FormattableString?)null : $"{Description}";
 
         public MethodSignature WithAsync(bool isAsync)
