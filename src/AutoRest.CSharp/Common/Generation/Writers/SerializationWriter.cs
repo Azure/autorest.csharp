@@ -15,7 +15,6 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
@@ -24,7 +23,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class SerializationWriter
     {
-        private static readonly FormattableString DefaultWireOptionsString = $"{typeof(ModelSerializerOptions)}.{nameof(ModelSerializerOptions.DefaultWireOptions)}";
+        internal static readonly FormattableString DefaultWireOptionsString = $"{typeof(ModelSerializerOptions)}.{nameof(ModelSerializerOptions.DefaultWireOptions)}";
 
         public void WriteSerialization(CodeWriter writer, TypeProvider schema)
         {

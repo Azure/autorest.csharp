@@ -7,14 +7,14 @@ using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Serialization;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
-using Azure.Core;
+using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         using (WriteValueNullCheck(writer, body.Value))
                         {
                             WriteHeaders(writer, clientMethod, request, content: true, fields);
-                            WriteSerializeContent(writer, request, body.Serialization, GetConstantOrParameter(body.Value, ignoreNullability: true, convertBinaryDataToArray: false));
+                            WriteSerializeContent(writer, request, body.Serialization, GetConstantOrParameter(body.Value, ignoreNullability: true, convertBinaryDataToArray: false), body.Value.Type);
                         }
 
                         break;
@@ -178,7 +178,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                 flattenedSchemaRequestBody.ObjectType.InitializationConstructor,
                                 initializers);
 
-                        WriteSerializeContent(writer, request, flattenedSchemaRequestBody.Serialization, $"{modelVariable:I}");
+                        WriteSerializeContent(writer, request, flattenedSchemaRequestBody.Serialization, $"{modelVariable:I}", flattenedSchemaRequestBody.ObjectType.Type);
                         break;
                     case UrlEncodedBody urlEncodedRequestBody:
                         var urlContent = new CodeWriterDeclaration("content");
@@ -243,17 +243,23 @@ namespace AutoRest.CSharp.Generation.Writers
         public static string CreateRequestMethodName(RestClientMethod method) => CreateRequestMethodName(method.Name);
         public static string CreateRequestMethodName(string name) => $"Create{name}Request";
 
-        private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration request, ObjectSerialization bodySerialization, FormattableString value)
+        private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration request, ObjectSerialization bodySerialization, FormattableString value, CSharpType type)
         {
             switch (bodySerialization)
             {
                 case JsonSerialization jsonSerialization:
                     {
-                        var content = new CodeWriterDeclaration("content");
-
-                        writer.Line($"var {content:D} = new {typeof(Utf8JsonRequestContent)}();");
-                        writer.ToSerializeCall(jsonSerialization, value, writerName: $"{content}.{nameof(Utf8JsonRequestContent.JsonWriter)}");
-                        writer.Line($"{request}.Content = {content};");
+                        if (type.IsIModelSerializable)
+                        {
+                            writer.Line($"{request}.Content = {value};");
+                        }
+                        else
+                        {
+                            var content = new CodeWriterDeclaration("content");
+                            writer.Line($"var {content:D} = new {typeof(Utf8JsonRequestContent)}();");
+                            writer.ToSerializeCall(jsonSerialization, value, writerName: $"{content}.{nameof(Utf8JsonRequestContent.JsonWriter)}", false);
+                            writer.Line($"{request}.Content = {content};");
+                        }
                         break;
                     }
                 case XmlElementSerialization xmlSerialization:

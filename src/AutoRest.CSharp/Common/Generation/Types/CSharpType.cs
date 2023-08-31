@@ -7,9 +7,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.Core.Serialization;
 
 namespace AutoRest.CSharp.Generation.Types
 {
@@ -101,8 +103,10 @@ namespace AutoRest.CSharp.Generation.Types
 
         public override bool Equals(object? obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
+            if (ReferenceEquals(null, obj))
+                return false;
+            if (ReferenceEquals(this, obj))
+                return true;
             return obj is CSharpType csType && Equals(csType, ignoreNullable: false);
         }
 
@@ -199,5 +203,39 @@ namespace AutoRest.CSharp.Generation.Types
             return name;
         }
 
+        private bool? _isIModelSerializable;
+        public bool IsIModelSerializable => _isIModelSerializable ??= GetIsIModelSerializable();
+
+        private bool GetIsIModelSerializable()
+        {
+            //TODO: Not sure why Azure.ResponseError in MgmtReferenceTypes is loaded as a MgmtObjectType and not a SystemObjectType
+            if (Name == "ResponseError" && Namespace == "Azure")
+                return false;
+
+            if (IsFrameworkType)
+                return DoesTypeImplementSerializableInterface(typeof(IModelSerializable<>));
+
+            return Arguments.Length == 0 && Implementation is SerializableObjectType;
+        }
+
+        private bool? _isIModelJsonSerializable;
+        public bool IsIModelJsonSerializable => _isIModelJsonSerializable ??= GetIsIModelJsonSerializable();
+
+        private bool GetIsIModelJsonSerializable()
+        {
+            //TODO: Not sure why Azure.ResponseError in MgmtReferenceTypes is loaded as a MgmtObjectType and not a SystemObjectType
+            if (Name == "ResponseError" && Namespace == "Azure")
+                return false;
+
+            if (IsFrameworkType)
+                return DoesTypeImplementSerializableInterface(typeof(IModelJsonSerializable<>));
+
+            return Arguments.Length == 0 && Implementation is SerializableObjectType objType && objType.JsonSerialization is not null;
+        }
+
+        private bool DoesTypeImplementSerializableInterface(Type interfaceType)
+        {
+            return FrameworkType.GetInterfaces().Any(i => i.Equals(interfaceType.MakeGenericType(FrameworkType)));
+        }
     }
 }

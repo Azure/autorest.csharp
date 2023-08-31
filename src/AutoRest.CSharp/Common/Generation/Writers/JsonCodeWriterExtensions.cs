@@ -64,14 +64,14 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line($"{writerName}.WriteEndObject();");
         }
 
-        public static void ToSerializeCall(this CodeWriter writer, JsonSerialization serialization, FormattableString name, FormattableString? writerName = null)
+        public static void ToSerializeCall(this CodeWriter writer, JsonSerialization serialization, FormattableString name, FormattableString? writerName = null, bool addOptions = true)
         {
             writerName ??= $"writer";
 
             switch (serialization)
             {
                 case JsonArraySerialization array:
-                    ToArraySerializeCall(writer, name, writerName, array);
+                    ToArraySerializeCall(writer, name, writerName, array, addOptions);
                     return;
 
                 case JsonDictionarySerialization dictionary:
@@ -93,7 +93,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.ToSerializeCall(
                             dictionary.ValueSerialization,
                             $"{dictionaryItemVariable:I}.Value",
-                            writerName);
+                            writerName,
+                            addOptions);
                     }
 
                     writer.Line($"{writerName}.WriteEndObject();");
@@ -248,7 +249,21 @@ namespace AutoRest.CSharp.Generation.Writers
                             return;
 
                         case ObjectType:
-                            //case ModelTypeProvider:
+                            if (valueSerialization.Type.IsIModelJsonSerializable)
+                            {
+                                writer.Append($"((IModelJsonSerializable<{valueSerialization.Type}>){name}).Serialize({writerName}");
+                                if (addOptions)
+                                {
+                                    writer.Append($", options");
+                                }
+                                else
+                                {
+                                    writer.Append($", {SerializationWriter.DefaultWireOptionsString}");
+                                }
+                                writer.Line($");");
+                                return;
+                            }
+
                             writer.Line($"{writerName}.WriteObjectValue({name:I});");
                             return;
 
@@ -289,7 +304,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line($"#endif");
         }
 
-        private static void ToArraySerializeCall(CodeWriter writer, FormattableString name, FormattableString? writerName, JsonArraySerialization array)
+        private static void ToArraySerializeCall(CodeWriter writer, FormattableString name, FormattableString? writerName, JsonArraySerialization array, bool addOptions = true)
         {
             writer.Line($"{writerName}.WriteStartArray();");
             var collectionItemVariable = new CodeWriterDeclaration("item");
@@ -307,7 +322,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.ToSerializeCall(
                     array.ValueSerialization,
                     $"{collectionItemVariable:I}",
-                    writerName);
+                    writerName,
+                    addOptions);
             }
 
             writer.Line($"{writerName}.WriteEndArray();");
