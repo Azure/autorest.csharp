@@ -49,7 +49,7 @@ namespace Azure.ResourceManager.Sample
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                writer.WriteObjectValue(StorageProfile);
+                ((IModelJsonSerializable<ImageStorageProfile>)StorageProfile).Serialize(writer, options);
             }
             if (Optional.IsDefined(HyperVGeneration))
             {

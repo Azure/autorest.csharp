@@ -31,7 +31,7 @@ namespace _Specs_.Azure.Core.Basic.Models
                 writer.WriteStartArray();
                 foreach (var item in Orders)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<UserOrder>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

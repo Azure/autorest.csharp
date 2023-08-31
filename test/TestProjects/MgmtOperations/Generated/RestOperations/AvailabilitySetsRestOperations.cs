@@ -54,9 +54,7 @@ namespace MgmtOperations
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(data);
-            request.Content = content;
+            request.Content = data;
             _userAgent.Apply(message);
             return message;
         }
@@ -140,9 +138,7 @@ namespace MgmtOperations
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(availabilitySetUpdate);
-            request.Content = content;
+            request.Content = availabilitySetUpdate;
             _userAgent.Apply(message);
             return message;
         }
@@ -384,9 +380,7 @@ namespace MgmtOperations
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(connectionSharedKey);
-            request.Content = content;
+            request.Content = connectionSharedKey;
             _userAgent.Apply(message);
             return message;
         }
@@ -538,9 +532,7 @@ namespace MgmtOperations
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(availabilitySetUpdate);
-            request.Content = content;
+            request.Content = availabilitySetUpdate;
             _userAgent.Apply(message);
             return message;
         }

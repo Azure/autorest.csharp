@@ -38,7 +38,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue(DnsSettings);
+                ((IModelJsonSerializable<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings>)DnsSettings).Serialize(writer, options);
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

@@ -49,7 +49,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                writer.WriteObjectValue(Subnet);
+                ((IModelJsonSerializable<Subnet>)Subnet).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(PrivateLinkServiceConnections))
             {
@@ -57,7 +57,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in PrivateLinkServiceConnections)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<PrivateLinkServiceConnection>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -67,7 +67,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ManualPrivateLinkServiceConnections)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<PrivateLinkServiceConnection>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

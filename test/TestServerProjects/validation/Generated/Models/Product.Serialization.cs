@@ -44,9 +44,9 @@ namespace validation.Models
                 writer.WriteStringValue(Image);
             }
             writer.WritePropertyName("child"u8);
-            writer.WriteObjectValue(Child);
+            ((IModelJsonSerializable<ChildProduct>)Child).Serialize(writer, options);
             writer.WritePropertyName("constChild"u8);
-            writer.WriteObjectValue(ConstChild);
+            ((IModelJsonSerializable<ConstantProduct>)ConstChild).Serialize(writer, options);
             writer.WritePropertyName("constInt"u8);
             writer.WriteNumberValue(ConstInt.ToSerialInt32());
             writer.WritePropertyName("constString"u8);

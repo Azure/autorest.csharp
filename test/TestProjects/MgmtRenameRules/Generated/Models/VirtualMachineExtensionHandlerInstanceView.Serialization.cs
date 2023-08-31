@@ -36,7 +36,7 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(Status))
             {
                 writer.WritePropertyName("status"u8);
-                writer.WriteObjectValue(Status);
+                ((IModelJsonSerializable<InstanceViewStatus>)Status).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

@@ -29,7 +29,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartArray();
             foreach (var item in Fields)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<Field>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             if (Optional.IsCollectionDefined(ScoringProfiles))
@@ -38,7 +38,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in ScoringProfiles)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<ScoringProfile>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -50,7 +50,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(CorsOptions))
             {
                 writer.WritePropertyName("corsOptions"u8);
-                writer.WriteObjectValue(CorsOptions);
+                ((IModelJsonSerializable<CorsOptions>)CorsOptions).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(Suggesters))
             {
@@ -58,7 +58,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Suggesters)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<Suggester>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -68,7 +68,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Analyzers)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<Analyzer>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -78,7 +78,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Tokenizers)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<Tokenizer>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -88,7 +88,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in TokenFilters)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<TokenFilter>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -98,19 +98,19 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in CharFilters)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<CharFilter>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(EncryptionKey))
             {
                 writer.WritePropertyName("encryptionKey"u8);
-                writer.WriteObjectValue(EncryptionKey);
+                ((IModelJsonSerializable<EncryptionKey>)EncryptionKey).Serialize(writer, options);
             }
             if (Optional.IsDefined(Similarity))
             {
                 writer.WritePropertyName("similarity"u8);
-                writer.WriteObjectValue(Similarity);
+                ((IModelJsonSerializable<Similarity>)Similarity).Serialize(writer, options);
             }
             if (Optional.IsDefined(ETag))
             {

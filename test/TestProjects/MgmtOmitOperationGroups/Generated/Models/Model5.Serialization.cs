@@ -34,7 +34,7 @@ namespace MgmtOmitOperationGroups.Models
                 writer.WriteStartArray();
                 foreach (var item in Modelqs)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<ModelQ>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

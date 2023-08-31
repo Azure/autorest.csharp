@@ -44,7 +44,7 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WriteStartArray();
                 foreach (var item in Lines)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<TextLine>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

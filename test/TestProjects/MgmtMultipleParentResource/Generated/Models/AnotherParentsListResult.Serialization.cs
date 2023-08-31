@@ -28,7 +28,7 @@ namespace MgmtMultipleParentResource.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<AnotherParentData>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))

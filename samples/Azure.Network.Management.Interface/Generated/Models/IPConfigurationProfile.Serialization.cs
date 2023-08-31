@@ -38,7 +38,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                writer.WriteObjectValue(Subnet);
+                ((IModelJsonSerializable<Subnet>)Subnet).Serialize(writer, options);
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

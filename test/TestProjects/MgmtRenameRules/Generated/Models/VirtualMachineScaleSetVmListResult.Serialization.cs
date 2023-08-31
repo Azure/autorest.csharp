@@ -28,7 +28,7 @@ namespace MgmtRenameRules.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<VirtualMachineScaleSetVmData>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))

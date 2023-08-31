@@ -28,7 +28,7 @@ namespace ModelsTypeSpec.Models
             foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
+                ((IModelJsonSerializable<RecordItem>)item.Value).Serialize(writer, options);
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

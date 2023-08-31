@@ -100,9 +100,7 @@ namespace multiple_inheritance
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(horse);
-            request.Content = content;
+            request.Content = horse;
             return message;
         }
 
@@ -224,9 +222,7 @@ namespace multiple_inheritance
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(pet);
-            request.Content = content;
+            request.Content = pet;
             return message;
         }
 
@@ -348,9 +344,7 @@ namespace multiple_inheritance
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(feline);
-            request.Content = content;
+            request.Content = feline;
             return message;
         }
 
@@ -472,9 +466,7 @@ namespace multiple_inheritance
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(cat);
-            request.Content = content;
+            request.Content = cat;
             return message;
         }
 
@@ -596,9 +588,7 @@ namespace multiple_inheritance
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(kitten);
-            request.Content = content;
+            request.Content = kitten;
             return message;
         }
 

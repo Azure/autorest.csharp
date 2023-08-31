@@ -36,7 +36,7 @@ namespace MgmtResourceName
                 writer.WriteStartArray();
                 foreach (var item in ResourceTypes)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<Models.ResourceType>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -46,7 +46,7 @@ namespace MgmtResourceName
                 writer.WriteStartArray();
                 foreach (var item in Operations)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<ResourceOperation>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

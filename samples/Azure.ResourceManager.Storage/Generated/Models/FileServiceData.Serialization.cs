@@ -30,17 +30,17 @@ namespace Azure.ResourceManager.Storage
             if (Optional.IsDefined(Cors))
             {
                 writer.WritePropertyName("cors"u8);
-                writer.WriteObjectValue(Cors);
+                ((IModelJsonSerializable<CorsRules>)Cors).Serialize(writer, options);
             }
             if (Optional.IsDefined(ShareDeleteRetentionPolicy))
             {
                 writer.WritePropertyName("shareDeleteRetentionPolicy"u8);
-                writer.WriteObjectValue(ShareDeleteRetentionPolicy);
+                ((IModelJsonSerializable<DeleteRetentionPolicy>)ShareDeleteRetentionPolicy).Serialize(writer, options);
             }
             if (Optional.IsDefined(ProtocolSettings))
             {
                 writer.WritePropertyName("protocolSettings"u8);
-                writer.WriteObjectValue(ProtocolSettings);
+                ((IModelJsonSerializable<ProtocolSettings>)ProtocolSettings).Serialize(writer, options);
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

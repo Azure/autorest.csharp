@@ -26,22 +26,22 @@ namespace Azure.ResourceManager.Storage.Models
             if (Optional.IsDefined(Blob))
             {
                 writer.WritePropertyName("blob"u8);
-                writer.WriteObjectValue(Blob);
+                ((IModelJsonSerializable<EncryptionService>)Blob).Serialize(writer, options);
             }
             if (Optional.IsDefined(File))
             {
                 writer.WritePropertyName("file"u8);
-                writer.WriteObjectValue(File);
+                ((IModelJsonSerializable<EncryptionService>)File).Serialize(writer, options);
             }
             if (Optional.IsDefined(Table))
             {
                 writer.WritePropertyName("table"u8);
-                writer.WriteObjectValue(Table);
+                ((IModelJsonSerializable<EncryptionService>)Table).Serialize(writer, options);
             }
             if (Optional.IsDefined(Queue))
             {
                 writer.WritePropertyName("queue"u8);
-                writer.WriteObjectValue(Queue);
+                ((IModelJsonSerializable<EncryptionService>)Queue).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

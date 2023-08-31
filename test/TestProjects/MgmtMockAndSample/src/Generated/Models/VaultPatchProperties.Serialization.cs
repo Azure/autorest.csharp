@@ -31,7 +31,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                ((IModelJsonSerializable<MgmtMockAndSampleSku>)Sku).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(AccessPolicies))
             {
@@ -39,7 +39,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in AccessPolicies)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<AccessPolicyEntry>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -86,7 +86,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(NetworkAcls))
             {
                 writer.WritePropertyName("networkAcls"u8);
-                writer.WriteObjectValue(NetworkAcls);
+                ((IModelJsonSerializable<NetworkRuleSet>)NetworkAcls).Serialize(writer, options);
             }
             if (Optional.IsDefined(PublicNetworkAccess))
             {

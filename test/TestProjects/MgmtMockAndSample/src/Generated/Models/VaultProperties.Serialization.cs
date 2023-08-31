@@ -36,14 +36,14 @@ namespace MgmtMockAndSample.Models
             writer.WritePropertyName("tenantId"u8);
             writer.WriteStringValue(TenantId);
             writer.WritePropertyName("sku"u8);
-            writer.WriteObjectValue(Sku);
+            ((IModelJsonSerializable<MgmtMockAndSampleSku>)Sku).Serialize(writer, options);
             if (Optional.IsCollectionDefined(AccessPolicies))
             {
                 writer.WritePropertyName("accessPolicies"u8);
                 writer.WriteStartArray();
                 foreach (var item in AccessPolicies)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<AccessPolicyEntry>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -100,7 +100,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(NetworkAcls))
             {
                 writer.WritePropertyName("networkAcls"u8);
-                writer.WriteObjectValue(NetworkAcls);
+                ((IModelJsonSerializable<NetworkRuleSet>)NetworkAcls).Serialize(writer, options);
             }
             if (Optional.IsDefined(ProvisioningState))
             {
@@ -115,17 +115,17 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(ReadWriteSingleStringProperty))
             {
                 writer.WritePropertyName("readWriteSingleStringProperty"u8);
-                writer.WriteObjectValue(ReadWriteSingleStringProperty);
+                ((IModelJsonSerializable<SinglePropertyModel>)ReadWriteSingleStringProperty).Serialize(writer, options);
             }
             if (Optional.IsDefined(ReadOnlySingleStringProperty))
             {
                 writer.WritePropertyName("readOnlySingleStringProperty"u8);
-                writer.WriteObjectValue(ReadOnlySingleStringProperty);
+                ((IModelJsonSerializable<ReadOnlySinglePropertyModel>)ReadOnlySingleStringProperty).Serialize(writer, options);
             }
             if (Optional.IsDefined(ExtremelyDeepStringProperty))
             {
                 writer.WritePropertyName("extremelyDeepStringProperty"u8);
-                writer.WriteObjectValue(ExtremelyDeepStringProperty);
+                ((IModelJsonSerializable<ExtremelyDeepSinglePropertyModel>)ExtremelyDeepStringProperty).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

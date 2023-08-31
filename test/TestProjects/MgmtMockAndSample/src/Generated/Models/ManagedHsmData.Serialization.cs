@@ -28,12 +28,12 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties);
+                ((IModelJsonSerializable<ManagedHsmProperties>)Properties).Serialize(writer, options);
             }
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                ((IModelJsonSerializable<ManagedHsmSku>)Sku).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(Tags))
             {

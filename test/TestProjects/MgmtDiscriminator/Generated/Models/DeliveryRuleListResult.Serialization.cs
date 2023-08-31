@@ -30,7 +30,7 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<DeliveryRuleData>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

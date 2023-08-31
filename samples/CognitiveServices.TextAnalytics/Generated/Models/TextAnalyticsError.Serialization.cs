@@ -35,7 +35,7 @@ namespace CognitiveServices.TextAnalytics.Models
             if (Optional.IsDefined(Innererror))
             {
                 writer.WritePropertyName("innererror"u8);
-                writer.WriteObjectValue(Innererror);
+                ((IModelJsonSerializable<InnerError>)Innererror).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(Details))
             {
@@ -43,7 +43,7 @@ namespace CognitiveServices.TextAnalytics.Models
                 writer.WriteStartArray();
                 foreach (var item in Details)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<TextAnalyticsError>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

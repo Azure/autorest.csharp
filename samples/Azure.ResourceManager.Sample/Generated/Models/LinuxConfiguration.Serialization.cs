@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(Ssh))
             {
                 writer.WritePropertyName("ssh"u8);
-                writer.WriteObjectValue(Ssh);
+                ((IModelJsonSerializable<SshConfiguration>)Ssh).Serialize(writer, options);
             }
             if (Optional.IsDefined(ProvisionVMAgent))
             {

@@ -46,7 +46,7 @@ namespace CognitiveServices.TextAnalytics.Models
             if (Optional.IsDefined(Innererror))
             {
                 writer.WritePropertyName("innererror"u8);
-                writer.WriteObjectValue(Innererror);
+                ((IModelJsonSerializable<InnerError>)Innererror).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

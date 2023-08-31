@@ -28,7 +28,7 @@ namespace MgmtNonStringPathVariable
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties);
+                ((IModelJsonSerializable<BarProperties>)Properties).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(Tags))
             {

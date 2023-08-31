@@ -42,7 +42,7 @@ namespace MgmtMockAndSample
                 writer.WriteEndObject();
             }
             writer.WritePropertyName("properties"u8);
-            writer.WriteObjectValue(Properties);
+            ((IModelJsonSerializable<VaultProperties>)Properties).Serialize(writer, options);
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);

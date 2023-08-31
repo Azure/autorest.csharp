@@ -36,7 +36,7 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WriteStartArray();
                 foreach (var item in KeyValuePairs)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<KeyValuePair>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -46,7 +46,7 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WriteStartArray();
                 foreach (var item in Tables)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<DataTable>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

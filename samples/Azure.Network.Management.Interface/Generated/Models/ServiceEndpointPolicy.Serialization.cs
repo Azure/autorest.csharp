@@ -52,7 +52,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ServiceEndpointPolicyDefinitions)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<ServiceEndpointPolicyDefinition>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

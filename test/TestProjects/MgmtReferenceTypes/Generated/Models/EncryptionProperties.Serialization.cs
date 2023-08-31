@@ -33,7 +33,7 @@ namespace Azure.ResourceManager.Fake.Models
             if (Optional.IsDefined(KeyVaultProperties))
             {
                 writer.WritePropertyName("keyVaultProperties"u8);
-                writer.WriteObjectValue(KeyVaultProperties);
+                ((IModelJsonSerializable<KeyVaultProperties>)KeyVaultProperties).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

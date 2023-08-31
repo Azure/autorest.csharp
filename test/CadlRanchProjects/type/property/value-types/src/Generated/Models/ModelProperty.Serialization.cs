@@ -24,7 +24,7 @@ namespace _Type.Property.ValueTypes.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("property"u8);
-            writer.WriteObjectValue(Property);
+            ((IModelJsonSerializable<InnerModel>)Property).Serialize(writer, options);
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
                 foreach (var property in _rawData)

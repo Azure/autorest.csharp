@@ -28,7 +28,7 @@ namespace MgmtListMethods.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<SubParentWithNonResChData>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))

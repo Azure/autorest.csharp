@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Statuses)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<InstanceViewStatus>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

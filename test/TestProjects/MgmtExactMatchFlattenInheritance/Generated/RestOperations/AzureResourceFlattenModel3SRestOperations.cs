@@ -127,9 +127,7 @@ namespace MgmtExactMatchFlattenInheritance
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(azureResourceFlattenModel3);
-            request.Content = content;
+            request.Content = azureResourceFlattenModel3;
             _userAgent.Apply(message);
             return message;
         }

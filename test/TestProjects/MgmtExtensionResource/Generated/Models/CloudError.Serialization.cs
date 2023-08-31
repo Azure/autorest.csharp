@@ -26,7 +26,7 @@ namespace MgmtExtensionResource.Models
             if (Optional.IsDefined(ErrorResponse))
             {
                 writer.WritePropertyName("error"u8);
-                writer.WriteObjectValue(ErrorResponse);
+                ((IModelJsonSerializable<ErrorResponse>)ErrorResponse).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

@@ -29,7 +29,7 @@ namespace paging.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<Product>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

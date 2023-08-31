@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in PublicKeys)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<SshPublicKeyInfo>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

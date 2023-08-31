@@ -26,7 +26,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Action))
             {
                 writer.WritePropertyName("action"u8);
-                writer.WriteObjectValue(Action);
+                ((IModelJsonSerializable<FirewallPolicyFilterRuleCollectionAction>)Action).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(Rules))
             {
@@ -34,7 +34,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Rules)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<FirewallPolicyRule>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

@@ -31,7 +31,7 @@ namespace AuthoringTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in Warnings)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<JobWarning>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("errors"u8);

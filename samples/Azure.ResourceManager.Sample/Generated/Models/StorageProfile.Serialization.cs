@@ -26,12 +26,12 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(ImageReference))
             {
                 writer.WritePropertyName("imageReference"u8);
-                writer.WriteObjectValue(ImageReference);
+                ((IModelJsonSerializable<ImageReference>)ImageReference).Serialize(writer, options);
             }
             if (Optional.IsDefined(OsDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                writer.WriteObjectValue(OsDisk);
+                ((IModelJsonSerializable<OSDisk>)OsDisk).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<DataDisk>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

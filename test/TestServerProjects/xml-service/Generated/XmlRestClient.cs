@@ -1711,9 +1711,7 @@ namespace xml_service
             uri.AppendPath("/xml/jsoninput", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(properties);
-            request.Content = content;
+            request.Content = properties;
             return message;
         }
 

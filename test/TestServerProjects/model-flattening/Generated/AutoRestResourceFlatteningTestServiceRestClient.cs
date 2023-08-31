@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.Core.Serialization;
 using model_flattening.Models;
 
 namespace model_flattening
@@ -54,7 +55,7 @@ namespace model_flattening
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in resourceArray)
                 {
-                    content.JsonWriter.WriteObjectValue(item);
+                    ((IModelJsonSerializable<Resource>)item).Serialize(content.JsonWriter, ModelSerializerOptions.DefaultWireOptions);
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
@@ -174,7 +175,7 @@ namespace model_flattening
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in resourceArray)
                 {
-                    content.JsonWriter.WriteObjectValue(item);
+                    ((IModelJsonSerializable<WrappedProduct>)item).Serialize(content.JsonWriter, ModelSerializerOptions.DefaultWireOptions);
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
@@ -295,7 +296,7 @@ namespace model_flattening
                 foreach (var item in resourceDictionary)
                 {
                     content.JsonWriter.WritePropertyName(item.Key);
-                    content.JsonWriter.WriteObjectValue(item.Value);
+                    ((IModelJsonSerializable<FlattenedProduct>)item.Value).Serialize(content.JsonWriter, ModelSerializerOptions.DefaultWireOptions);
                 }
                 content.JsonWriter.WriteEndObject();
                 request.Content = content;
@@ -411,9 +412,7 @@ namespace model_flattening
             if (resourceComplexObject != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(resourceComplexObject);
-                request.Content = content;
+                request.Content = resourceComplexObject;
             }
             return message;
         }
@@ -516,9 +515,7 @@ namespace model_flattening
             if (simpleBodyProduct != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(simpleBodyProduct);
-                request.Content = content;
+                request.Content = simpleBodyProduct;
             }
             return message;
         }
@@ -584,9 +581,7 @@ namespace model_flattening
                 GenericValue = genericValue,
                 OdataValue = odataValue
             };
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
-            request.Content = content;
+            request.Content = model;
             return message;
         }
 
@@ -675,9 +670,7 @@ namespace model_flattening
                 GenericValue = flattenParameterGroup.GenericValue,
                 OdataValue = flattenParameterGroup.OdataValue
             };
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
-            request.Content = content;
+            request.Content = model;
             return message;
         }
 

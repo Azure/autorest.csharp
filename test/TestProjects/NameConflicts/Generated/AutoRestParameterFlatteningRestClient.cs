@@ -54,9 +54,7 @@ namespace NameConflicts
             request0.Uri = uri0;
             request0.Headers.Add("Accept", "application/json");
             request0.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(@class);
-            request0.Content = content;
+            request0.Content = @class;
             return message0;
         }
 
@@ -285,9 +283,7 @@ namespace NameConflicts
             if (httpMessage != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(httpMessage);
-                request.Content = content;
+                request.Content = httpMessage;
             }
             return message;
         }
@@ -345,9 +341,7 @@ namespace NameConflicts
             if (request != null)
             {
                 request0.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(request);
-                request0.Content = content;
+                request0.Content = request;
             }
             return message;
         }
@@ -405,9 +399,7 @@ namespace NameConflicts
             if (response != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(response);
-                request.Content = content;
+                request.Content = response;
             }
             return message;
         }

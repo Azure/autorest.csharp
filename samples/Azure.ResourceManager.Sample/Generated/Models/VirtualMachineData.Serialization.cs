@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                writer.WriteObjectValue(Plan);
+                ((IModelJsonSerializable<SamplePlan>)Plan).Serialize(writer, options);
             }
             if (Optional.IsDefined(Identity))
             {
@@ -64,37 +64,37 @@ namespace Azure.ResourceManager.Sample
             if (Optional.IsDefined(HardwareProfile))
             {
                 writer.WritePropertyName("hardwareProfile"u8);
-                writer.WriteObjectValue(HardwareProfile);
+                ((IModelJsonSerializable<HardwareProfile>)HardwareProfile).Serialize(writer, options);
             }
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                writer.WriteObjectValue(StorageProfile);
+                ((IModelJsonSerializable<StorageProfile>)StorageProfile).Serialize(writer, options);
             }
             if (Optional.IsDefined(AdditionalCapabilities))
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
-                writer.WriteObjectValue(AdditionalCapabilities);
+                ((IModelJsonSerializable<AdditionalCapabilities>)AdditionalCapabilities).Serialize(writer, options);
             }
             if (Optional.IsDefined(OsProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                writer.WriteObjectValue(OsProfile);
+                ((IModelJsonSerializable<OSProfile>)OsProfile).Serialize(writer, options);
             }
             if (Optional.IsDefined(NetworkProfile))
             {
                 writer.WritePropertyName("networkProfile"u8);
-                writer.WriteObjectValue(NetworkProfile);
+                ((IModelJsonSerializable<NetworkProfile>)NetworkProfile).Serialize(writer, options);
             }
             if (Optional.IsDefined(SecurityProfile))
             {
                 writer.WritePropertyName("securityProfile"u8);
-                writer.WriteObjectValue(SecurityProfile);
+                ((IModelJsonSerializable<SecurityProfile>)SecurityProfile).Serialize(writer, options);
             }
             if (Optional.IsDefined(DiagnosticsProfile))
             {
                 writer.WritePropertyName("diagnosticsProfile"u8);
-                writer.WriteObjectValue(DiagnosticsProfile);
+                ((IModelJsonSerializable<DiagnosticsProfile>)DiagnosticsProfile).Serialize(writer, options);
             }
             if (Optional.IsDefined(AvailabilitySet))
             {
@@ -124,7 +124,7 @@ namespace Azure.ResourceManager.Sample
             if (Optional.IsDefined(BillingProfile))
             {
                 writer.WritePropertyName("billingProfile"u8);
-                writer.WriteObjectValue(BillingProfile);
+                ((IModelJsonSerializable<BillingProfile>)BillingProfile).Serialize(writer, options);
             }
             if (Optional.IsDefined(Host))
             {

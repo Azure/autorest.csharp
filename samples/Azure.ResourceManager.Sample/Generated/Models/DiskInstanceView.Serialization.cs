@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in EncryptionSettings)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<DiskEncryptionSettings>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -44,7 +44,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Statuses)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<InstanceViewStatus>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

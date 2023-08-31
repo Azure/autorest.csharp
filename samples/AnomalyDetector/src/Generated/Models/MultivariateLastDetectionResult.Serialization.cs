@@ -29,7 +29,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in VariableStates)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<VariableState>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -39,7 +39,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in Results)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<AnomalyState>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

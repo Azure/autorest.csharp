@@ -64,7 +64,7 @@ namespace MgmtScopeResource
                 foreach (var item in Parameters)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    ((IModelJsonSerializable<ParameterValuesValue>)item.Value).Serialize(writer, options);
                 }
                 writer.WriteEndObject();
             }
@@ -93,7 +93,7 @@ namespace MgmtScopeResource
                 writer.WriteStartArray();
                 foreach (var item in NonComplianceMessages)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<NonComplianceMessage>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

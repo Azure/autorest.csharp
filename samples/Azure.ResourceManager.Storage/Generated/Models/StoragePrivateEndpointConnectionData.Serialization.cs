@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Storage
             if (Optional.IsDefined(ConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                writer.WriteObjectValue(ConnectionState);
+                ((IModelJsonSerializable<StoragePrivateLinkServiceConnectionState>)ConnectionState).Serialize(writer, options);
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

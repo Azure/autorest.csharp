@@ -52,7 +52,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in SecurityRules)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<SecurityRule>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

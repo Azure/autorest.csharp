@@ -26,7 +26,7 @@ namespace MgmtParamOrdering.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                ((IModelJsonSerializable<MgmtParamOrderingSku>)Sku).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(Tags))
             {

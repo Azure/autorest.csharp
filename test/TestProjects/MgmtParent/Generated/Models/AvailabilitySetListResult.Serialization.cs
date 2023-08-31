@@ -28,7 +28,7 @@ namespace MgmtParent.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<AvailabilitySetData>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))

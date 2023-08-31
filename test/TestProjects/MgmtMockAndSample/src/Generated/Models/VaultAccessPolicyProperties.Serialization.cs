@@ -27,7 +27,7 @@ namespace MgmtMockAndSample.Models
             writer.WriteStartArray();
             foreach (var item in AccessPolicies)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<AccessPolicyEntry>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

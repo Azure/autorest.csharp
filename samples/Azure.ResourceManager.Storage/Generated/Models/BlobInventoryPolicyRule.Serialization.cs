@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WritePropertyName("destination"u8);
             writer.WriteStringValue(Destination);
             writer.WritePropertyName("definition"u8);
-            writer.WriteObjectValue(Definition);
+            ((IModelJsonSerializable<BlobInventoryPolicyDefinition>)Definition).Serialize(writer, options);
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
                 foreach (var property in _rawData)

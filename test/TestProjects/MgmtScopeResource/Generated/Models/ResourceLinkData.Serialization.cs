@@ -28,7 +28,7 @@ namespace MgmtScopeResource
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties);
+                ((IModelJsonSerializable<ResourceLinkProperties>)Properties).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

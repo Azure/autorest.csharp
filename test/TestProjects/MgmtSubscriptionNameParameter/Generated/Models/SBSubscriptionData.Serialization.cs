@@ -90,7 +90,7 @@ namespace MgmtSubscriptionNameParameter
             if (Optional.IsDefined(ClientAffineProperties))
             {
                 writer.WritePropertyName("clientAffineProperties"u8);
-                writer.WriteObjectValue(ClientAffineProperties);
+                ((IModelJsonSerializable<SBClientAffineProperties>)ClientAffineProperties).Serialize(writer, options);
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

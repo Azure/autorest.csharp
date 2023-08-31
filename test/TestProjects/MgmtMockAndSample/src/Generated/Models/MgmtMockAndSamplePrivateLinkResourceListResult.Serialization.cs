@@ -29,7 +29,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<MgmtMockAndSamplePrivateLinkResource>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

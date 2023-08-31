@@ -31,7 +31,7 @@ namespace MgmtOmitOperationGroups.Models
             if (Optional.IsDefined(Modelz))
             {
                 writer.WritePropertyName("modelz"u8);
-                writer.WriteObjectValue(Modelz);
+                ((IModelJsonSerializable<ModelZ>)Modelz).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

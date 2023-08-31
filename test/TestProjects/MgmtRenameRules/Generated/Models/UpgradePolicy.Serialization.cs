@@ -31,12 +31,12 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(RollingUpgradePolicy))
             {
                 writer.WritePropertyName("rollingUpgradePolicy"u8);
-                writer.WriteObjectValue(RollingUpgradePolicy);
+                ((IModelJsonSerializable<RollingUpgradePolicy>)RollingUpgradePolicy).Serialize(writer, options);
             }
             if (Optional.IsDefined(AutomaticOSUpgradePolicy))
             {
                 writer.WritePropertyName("automaticOSUpgradePolicy"u8);
-                writer.WriteObjectValue(AutomaticOSUpgradePolicy);
+                ((IModelJsonSerializable<AutomaticOSUpgradePolicy>)AutomaticOSUpgradePolicy).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

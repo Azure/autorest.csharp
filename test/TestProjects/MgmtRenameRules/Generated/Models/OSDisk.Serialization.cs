@@ -31,7 +31,7 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(EncryptionSettings))
             {
                 writer.WritePropertyName("encryptionSettings"u8);
-                writer.WriteObjectValue(EncryptionSettings);
+                ((IModelJsonSerializable<DiskEncryptionSettings>)EncryptionSettings).Serialize(writer, options);
             }
             if (Optional.IsDefined(Name))
             {
@@ -41,12 +41,12 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(Vhd))
             {
                 writer.WritePropertyName("vhd"u8);
-                writer.WriteObjectValue(Vhd);
+                ((IModelJsonSerializable<VirtualHardDisk>)Vhd).Serialize(writer, options);
             }
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                writer.WriteObjectValue(Image);
+                ((IModelJsonSerializable<VirtualHardDisk>)Image).Serialize(writer, options);
             }
             if (Optional.IsDefined(Caching))
             {
@@ -61,7 +61,7 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(DiffDiskSettings))
             {
                 writer.WritePropertyName("diffDiskSettings"u8);
-                writer.WriteObjectValue(DiffDiskSettings);
+                ((IModelJsonSerializable<DiffDiskSettings>)DiffDiskSettings).Serialize(writer, options);
             }
             writer.WritePropertyName("createOption"u8);
             writer.WriteStringValue(CreateOption.ToString());
@@ -73,7 +73,7 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue(ManagedDisk);
+                ((IModelJsonSerializable<ManagedDiskParameters>)ManagedDisk).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

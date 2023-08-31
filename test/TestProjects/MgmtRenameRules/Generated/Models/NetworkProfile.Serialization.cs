@@ -29,7 +29,7 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in NetworkInterfaces)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<NetworkInterfaceReference>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

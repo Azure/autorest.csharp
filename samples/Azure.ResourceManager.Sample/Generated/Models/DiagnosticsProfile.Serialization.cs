@@ -26,7 +26,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(BootDiagnostics))
             {
                 writer.WritePropertyName("bootDiagnostics"u8);
-                writer.WriteObjectValue(BootDiagnostics);
+                ((IModelJsonSerializable<BootDiagnostics>)BootDiagnostics).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartArray();
             foreach (var item in Rules)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<BlobInventoryPolicyRule>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

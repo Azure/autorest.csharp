@@ -36,7 +36,7 @@ namespace model_flattening.Models
             if (Optional.IsDefined(ParentError))
             {
                 writer.WritePropertyName("parentError"u8);
-                writer.WriteObjectValue(ParentError);
+                ((IModelJsonSerializable<Error>)ParentError).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

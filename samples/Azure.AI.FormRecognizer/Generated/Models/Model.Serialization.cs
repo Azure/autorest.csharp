@@ -24,16 +24,16 @@ namespace Azure.AI.FormRecognizer.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("modelInfo"u8);
-            writer.WriteObjectValue(ModelInfo);
+            ((IModelJsonSerializable<ModelInfo>)ModelInfo).Serialize(writer, options);
             if (Optional.IsDefined(Keys))
             {
                 writer.WritePropertyName("keys"u8);
-                writer.WriteObjectValue(Keys);
+                ((IModelJsonSerializable<KeysResult>)Keys).Serialize(writer, options);
             }
             if (Optional.IsDefined(TrainResult))
             {
                 writer.WritePropertyName("trainResult"u8);
-                writer.WriteObjectValue(TrainResult);
+                ((IModelJsonSerializable<TrainResult>)TrainResult).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

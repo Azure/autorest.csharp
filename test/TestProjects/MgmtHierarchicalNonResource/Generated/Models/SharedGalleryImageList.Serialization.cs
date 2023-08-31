@@ -27,7 +27,7 @@ namespace MgmtHierarchicalNonResource.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<SharedGalleryImage>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))

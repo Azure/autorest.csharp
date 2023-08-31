@@ -29,7 +29,7 @@ namespace MgmtListMethods.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<NonResourceChild>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

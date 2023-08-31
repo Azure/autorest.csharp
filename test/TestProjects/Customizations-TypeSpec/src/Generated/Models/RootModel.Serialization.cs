@@ -26,22 +26,22 @@ namespace CustomizationsInTsp.Models
             if (Optional.IsDefined(PropertyModelToMakeInternal))
             {
                 writer.WritePropertyName("propertyModelToMakeInternal"u8);
-                writer.WriteObjectValue(PropertyModelToMakeInternal);
+                ((IModelJsonSerializable<ModelToMakeInternal>)PropertyModelToMakeInternal).Serialize(writer, options);
             }
             if (Optional.IsDefined(PropertyModelToRename))
             {
                 writer.WritePropertyName("propertyModelToRename"u8);
-                writer.WriteObjectValue(PropertyModelToRename);
+                ((IModelJsonSerializable<RenamedModel>)PropertyModelToRename).Serialize(writer, options);
             }
             if (Optional.IsDefined(PropertyModelToChangeNamespace))
             {
                 writer.WritePropertyName("propertyModelToChangeNamespace"u8);
-                writer.WriteObjectValue(PropertyModelToChangeNamespace);
+                ((IModelJsonSerializable<ModelToChangeNamespace>)PropertyModelToChangeNamespace).Serialize(writer, options);
             }
             if (Optional.IsDefined(PropertyModelWithCustomizedProperties))
             {
                 writer.WritePropertyName("propertyModelWithCustomizedProperties"u8);
-                writer.WriteObjectValue(PropertyModelWithCustomizedProperties);
+                ((IModelJsonSerializable<ModelWithCustomizedProperties>)PropertyModelWithCustomizedProperties).Serialize(writer, options);
             }
             if (Optional.IsDefined(PropertyEnumToRename))
             {
@@ -61,7 +61,7 @@ namespace CustomizationsInTsp.Models
             if (Optional.IsDefined(PropertyModelToAddAdditionalSerializableProperty))
             {
                 writer.WritePropertyName("propertyModelToAddAdditionalSerializableProperty"u8);
-                writer.WriteObjectValue(PropertyModelToAddAdditionalSerializableProperty);
+                ((IModelJsonSerializable<ModelToAddAdditionalSerializableProperty>)PropertyModelToAddAdditionalSerializableProperty).Serialize(writer, options);
             }
             if (Optional.IsDefined(PropertyToMoveToCustomization))
             {

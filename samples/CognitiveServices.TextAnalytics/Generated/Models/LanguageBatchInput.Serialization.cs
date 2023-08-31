@@ -27,7 +27,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteStartArray();
             foreach (var item in Documents)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<LanguageInput>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

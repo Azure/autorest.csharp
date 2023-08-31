@@ -26,7 +26,7 @@ namespace Azure.ResourceManager.Storage.Models
             if (Optional.IsDefined(Smb))
             {
                 writer.WritePropertyName("smb"u8);
-                writer.WriteObjectValue(Smb);
+                ((IModelJsonSerializable<SmbSetting>)Smb).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

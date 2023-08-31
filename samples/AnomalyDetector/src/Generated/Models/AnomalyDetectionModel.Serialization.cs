@@ -30,7 +30,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(ModelInfo))
             {
                 writer.WritePropertyName("modelInfo"u8);
-                writer.WriteObjectValue(ModelInfo);
+                ((IModelJsonSerializable<ModelInfo>)ModelInfo).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

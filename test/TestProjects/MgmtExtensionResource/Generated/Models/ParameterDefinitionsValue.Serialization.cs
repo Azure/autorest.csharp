@@ -59,7 +59,7 @@ namespace MgmtExtensionResource.Models
             if (Optional.IsDefined(Metadata))
             {
                 writer.WritePropertyName("metadata"u8);
-                writer.WriteObjectValue(Metadata);
+                ((IModelJsonSerializable<ParameterDefinitionsValueMetadata>)Metadata).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

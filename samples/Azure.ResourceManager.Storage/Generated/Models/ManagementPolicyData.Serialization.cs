@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Storage
             if (Optional.IsDefined(Policy))
             {
                 writer.WritePropertyName("policy"u8);
-                writer.WriteObjectValue(Policy);
+                ((IModelJsonSerializable<ManagementPolicySchema>)Policy).Serialize(writer, options);
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

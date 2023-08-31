@@ -33,18 +33,18 @@ namespace CognitiveSearch.Models
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(Type.ToString());
             writer.WritePropertyName("credentials"u8);
-            writer.WriteObjectValue(Credentials);
+            ((IModelJsonSerializable<DataSourceCredentials>)Credentials).Serialize(writer, options);
             writer.WritePropertyName("container"u8);
-            writer.WriteObjectValue(Container);
+            ((IModelJsonSerializable<DataContainer>)Container).Serialize(writer, options);
             if (Optional.IsDefined(DataChangeDetectionPolicy))
             {
                 writer.WritePropertyName("dataChangeDetectionPolicy"u8);
-                writer.WriteObjectValue(DataChangeDetectionPolicy);
+                ((IModelJsonSerializable<DataChangeDetectionPolicy>)DataChangeDetectionPolicy).Serialize(writer, options);
             }
             if (Optional.IsDefined(DataDeletionDetectionPolicy))
             {
                 writer.WritePropertyName("dataDeletionDetectionPolicy"u8);
-                writer.WriteObjectValue(DataDeletionDetectionPolicy);
+                ((IModelJsonSerializable<DataDeletionDetectionPolicy>)DataDeletionDetectionPolicy).Serialize(writer, options);
             }
             if (Optional.IsDefined(ETag))
             {

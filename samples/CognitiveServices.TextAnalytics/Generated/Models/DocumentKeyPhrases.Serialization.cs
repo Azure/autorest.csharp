@@ -36,13 +36,13 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteStartArray();
             foreach (var item in Warnings)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<TextAnalyticsWarning>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(Statistics))
             {
                 writer.WritePropertyName("statistics"u8);
-                writer.WriteObjectValue(Statistics);
+                ((IModelJsonSerializable<DocumentStatistics>)Statistics).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

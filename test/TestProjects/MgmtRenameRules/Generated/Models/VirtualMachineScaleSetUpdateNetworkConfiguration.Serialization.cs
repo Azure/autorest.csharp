@@ -54,7 +54,7 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue(DnsSettings);
+                ((IModelJsonSerializable<VirtualMachineScaleSetNetworkConfigurationDnsSettings>)DnsSettings).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(IPConfigurations))
             {
@@ -62,7 +62,7 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in IPConfigurations)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<VirtualMachineScaleSetUpdateIPConfiguration>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

@@ -30,7 +30,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<RoleAssignmentData>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

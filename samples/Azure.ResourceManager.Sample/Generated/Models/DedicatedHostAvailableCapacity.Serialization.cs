@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in AllocatableVMs)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<DedicatedHostAllocatableVM>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

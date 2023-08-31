@@ -31,7 +31,7 @@ namespace MgmtExpandResourceTypes.Models
                 writer.WriteStartArray();
                 foreach (var item in DnsResourceReferences)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<DnsResourceReference>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

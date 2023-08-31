@@ -49,7 +49,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Protocols)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<FirewallPolicyRuleApplicationProtocol>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

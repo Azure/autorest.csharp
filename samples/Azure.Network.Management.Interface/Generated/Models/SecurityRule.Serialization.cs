@@ -76,7 +76,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in SourceApplicationSecurityGroups)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<ApplicationSecurityGroup>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -101,7 +101,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in DestinationApplicationSecurityGroups)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<ApplicationSecurityGroup>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

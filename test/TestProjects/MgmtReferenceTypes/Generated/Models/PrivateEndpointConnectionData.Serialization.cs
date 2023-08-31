@@ -31,12 +31,12 @@ namespace Azure.ResourceManager.Fake.Models
             if (Optional.IsDefined(PrivateEndpoint))
             {
                 writer.WritePropertyName("privateEndpoint"u8);
-                writer.WriteObjectValue(PrivateEndpoint);
+                ((IModelJsonSerializable<PrivateEndpoint>)PrivateEndpoint).Serialize(writer, options);
             }
             if (Optional.IsDefined(ConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                writer.WriteObjectValue(ConnectionState);
+                ((IModelJsonSerializable<MgmtReferenceTypesPrivateLinkServiceConnectionState>)ConnectionState).Serialize(writer, options);
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

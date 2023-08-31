@@ -38,7 +38,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(VirtualNetworkTap))
             {
                 writer.WritePropertyName("virtualNetworkTap"u8);
-                writer.WriteObjectValue(VirtualNetworkTap);
+                ((IModelJsonSerializable<VirtualNetworkTap>)VirtualNetworkTap).Serialize(writer, options);
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

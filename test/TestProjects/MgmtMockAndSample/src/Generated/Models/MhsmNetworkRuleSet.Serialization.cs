@@ -40,7 +40,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in IpRules)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<MhsmipRule>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

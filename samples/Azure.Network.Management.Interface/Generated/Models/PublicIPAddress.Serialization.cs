@@ -26,7 +26,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                ((IModelJsonSerializable<PublicIPAddressSku>)Sku).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -74,12 +74,12 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue(DnsSettings);
+                ((IModelJsonSerializable<PublicIPAddressDnsSettings>)DnsSettings).Serialize(writer, options);
             }
             if (Optional.IsDefined(DdosSettings))
             {
                 writer.WritePropertyName("ddosSettings"u8);
-                writer.WriteObjectValue(DdosSettings);
+                ((IModelJsonSerializable<DdosSettings>)DdosSettings).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(IpTags))
             {
@@ -87,7 +87,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in IpTags)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<IpTag>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -99,7 +99,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(PublicIPPrefix))
             {
                 writer.WritePropertyName("publicIPPrefix"u8);
-                writer.WriteObjectValue(PublicIPPrefix);
+                ((IModelJsonSerializable<SubResource>)PublicIPPrefix).Serialize(writer, options);
             }
             if (Optional.IsDefined(IdleTimeoutInMinutes))
             {

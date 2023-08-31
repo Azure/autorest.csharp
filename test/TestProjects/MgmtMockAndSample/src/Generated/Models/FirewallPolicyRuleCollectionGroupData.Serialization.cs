@@ -42,7 +42,7 @@ namespace MgmtMockAndSample
                 writer.WriteStartArray();
                 foreach (var item in RuleCollections)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<FirewallPolicyRuleCollection>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

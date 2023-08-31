@@ -31,7 +31,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(Conditions))
             {
                 writer.WritePropertyName("conditions"u8);
-                writer.WriteObjectValue(Conditions);
+                ((IModelJsonSerializable<DeliveryRuleCondition>)Conditions).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(Actions))
             {
@@ -39,7 +39,7 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Actions)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<DeliveryRuleAction>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -50,14 +50,14 @@ namespace MgmtDiscriminator.Models
                 foreach (var item in ExtraMappingInfo)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    ((IModelJsonSerializable<DeliveryRuleAction>)item.Value).Serialize(writer, options);
                 }
                 writer.WriteEndObject();
             }
             if (Optional.IsDefined(Pet))
             {
                 writer.WritePropertyName("pet"u8);
-                writer.WriteObjectValue(Pet);
+                ((IModelJsonSerializable<Pet>)Pet).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

@@ -26,7 +26,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                ((IModelJsonSerializable<LoadBalancerSku>)Sku).Serialize(writer, options);
             }
             if (Optional.IsDefined(Id))
             {
@@ -57,7 +57,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in FrontendIPConfigurations)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<FrontendIPConfiguration>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -67,7 +67,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in BackendAddressPools)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<BackendAddressPool>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -77,7 +77,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in LoadBalancingRules)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<LoadBalancingRule>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -87,7 +87,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in Probes)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<Probe>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -97,7 +97,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in InboundNatRules)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<InboundNatRule>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -107,7 +107,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in InboundNatPools)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<InboundNatPool>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -117,7 +117,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in OutboundRules)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<OutboundRule>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

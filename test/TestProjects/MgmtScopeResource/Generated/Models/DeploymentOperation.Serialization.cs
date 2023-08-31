@@ -26,7 +26,7 @@ namespace MgmtScopeResource.Models
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                writer.WriteObjectValue(Properties);
+                ((IModelJsonSerializable<DeploymentOperationProperties>)Properties).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

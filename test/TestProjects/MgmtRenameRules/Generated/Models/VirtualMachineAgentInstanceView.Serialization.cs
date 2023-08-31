@@ -34,7 +34,7 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in ExtensionHandlers)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<VirtualMachineExtensionHandlerInstanceView>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -44,7 +44,7 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in Statuses)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<InstanceViewStatus>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

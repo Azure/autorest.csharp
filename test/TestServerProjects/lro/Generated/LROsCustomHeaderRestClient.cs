@@ -48,9 +48,7 @@ namespace lro
             if (product != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(product);
-                request.Content = content;
+                request.Content = product;
             }
             return message;
         }
@@ -102,9 +100,7 @@ namespace lro
             if (product != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(product);
-                request.Content = content;
+                request.Content = product;
             }
             return message;
         }
@@ -156,9 +152,7 @@ namespace lro
             if (product != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(product);
-                request.Content = content;
+                request.Content = product;
             }
             return message;
         }
@@ -210,9 +204,7 @@ namespace lro
             if (product != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(product);
-                request.Content = content;
+                request.Content = product;
             }
             return message;
         }

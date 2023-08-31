@@ -56,9 +56,7 @@ namespace CognitiveServices.TextAnalytics
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(input);
-            request.Content = content;
+            request.Content = input;
             return message;
         }
 
@@ -142,9 +140,7 @@ namespace CognitiveServices.TextAnalytics
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(input);
-            request.Content = content;
+            request.Content = input;
             return message;
         }
 
@@ -228,9 +224,7 @@ namespace CognitiveServices.TextAnalytics
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(input);
-            request.Content = content;
+            request.Content = input;
             return message;
         }
 
@@ -314,9 +308,7 @@ namespace CognitiveServices.TextAnalytics
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(input);
-            request.Content = content;
+            request.Content = input;
             return message;
         }
 
@@ -400,9 +392,7 @@ namespace CognitiveServices.TextAnalytics
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, text/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(input);
-            request.Content = content;
+            request.Content = input;
             return message;
         }
 

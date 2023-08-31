@@ -24,9 +24,9 @@ namespace CognitiveSearch.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("counters"u8);
-            writer.WriteObjectValue(Counters);
+            ((IModelJsonSerializable<ServiceCounters>)Counters).Serialize(writer, options);
             writer.WritePropertyName("limits"u8);
-            writer.WriteObjectValue(Limits);
+            ((IModelJsonSerializable<ServiceLimits>)Limits).Serialize(writer, options);
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
                 foreach (var property in _rawData)

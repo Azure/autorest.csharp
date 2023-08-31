@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Storage.Models
             if (Optional.IsDefined(ImmutabilityPolicy))
             {
                 writer.WritePropertyName("immutabilityPolicy"u8);
-                writer.WriteObjectValue(ImmutabilityPolicy);
+                ((IModelJsonSerializable<AccountImmutabilityPolicyProperties>)ImmutabilityPolicy).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

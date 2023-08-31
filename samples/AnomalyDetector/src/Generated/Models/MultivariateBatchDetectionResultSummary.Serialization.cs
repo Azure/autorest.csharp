@@ -31,7 +31,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in Errors)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<ErrorResponse>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -41,12 +41,12 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in VariableStates)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<VariableState>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
             writer.WritePropertyName("setupInfo"u8);
-            writer.WriteObjectValue(SetupInfo);
+            ((IModelJsonSerializable<MultivariateBatchDetectionOptions>)SetupInfo).Serialize(writer, options);
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
                 foreach (var property in _rawData)

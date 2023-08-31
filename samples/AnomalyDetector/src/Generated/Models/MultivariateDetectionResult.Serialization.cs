@@ -24,12 +24,12 @@ namespace AnomalyDetector.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("summary"u8);
-            writer.WriteObjectValue(Summary);
+            ((IModelJsonSerializable<MultivariateBatchDetectionResultSummary>)Summary).Serialize(writer, options);
             writer.WritePropertyName("results"u8);
             writer.WriteStartArray();
             foreach (var item in Results)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<AnomalyState>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

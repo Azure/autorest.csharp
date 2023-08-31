@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample
 
             writer.WriteStartObject();
             writer.WritePropertyName("sku"u8);
-            writer.WriteObjectValue(Sku);
+            ((IModelJsonSerializable<SampleSku>)Sku).Serialize(writer, options);
             if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);

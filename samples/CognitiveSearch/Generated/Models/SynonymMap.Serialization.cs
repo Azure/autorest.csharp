@@ -32,7 +32,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(EncryptionKey))
             {
                 writer.WritePropertyName("encryptionKey"u8);
-                writer.WriteObjectValue(EncryptionKey);
+                ((IModelJsonSerializable<EncryptionKey>)EncryptionKey).Serialize(writer, options);
             }
             if (Optional.IsDefined(ETag))
             {

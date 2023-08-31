@@ -26,12 +26,12 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(ImageReference))
             {
                 writer.WritePropertyName("imageReference"u8);
-                writer.WriteObjectValue(ImageReference);
+                ((IModelJsonSerializable<ImageReference>)ImageReference).Serialize(writer, options);
             }
             if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                writer.WriteObjectValue(OSDisk);
+                ((IModelJsonSerializable<OSDisk>)OSDisk).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
@@ -39,7 +39,7 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<DataDisk>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

@@ -26,7 +26,7 @@ namespace body_complex.Models
             if (Optional.IsDefined(SampleSalmon))
             {
                 writer.WritePropertyName("sampleSalmon"u8);
-                writer.WriteObjectValue(SampleSalmon);
+                ((IModelJsonSerializable<DotSalmon>)SampleSalmon).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(Salmons))
             {
@@ -34,14 +34,14 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Salmons)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<DotSalmon>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(SampleFish))
             {
                 writer.WritePropertyName("sampleFish"u8);
-                writer.WriteObjectValue(SampleFish);
+                ((IModelJsonSerializable<DotFish>)SampleFish).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(Fishes))
             {
@@ -49,7 +49,7 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Fishes)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<DotFish>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

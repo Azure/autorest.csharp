@@ -31,12 +31,12 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(WindowsConfiguration))
             {
                 writer.WritePropertyName("windowsConfiguration"u8);
-                writer.WriteObjectValue(WindowsConfiguration);
+                ((IModelJsonSerializable<WindowsConfiguration>)WindowsConfiguration).Serialize(writer, options);
             }
             if (Optional.IsDefined(LinuxConfiguration))
             {
                 writer.WritePropertyName("linuxConfiguration"u8);
-                writer.WriteObjectValue(LinuxConfiguration);
+                ((IModelJsonSerializable<LinuxConfiguration>)LinuxConfiguration).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(Secrets))
             {
@@ -44,7 +44,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Secrets)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<VaultSecretGroup>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

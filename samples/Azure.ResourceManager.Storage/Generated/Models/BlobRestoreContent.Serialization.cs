@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartArray();
             foreach (var item in BlobRanges)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<BlobRestoreRange>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

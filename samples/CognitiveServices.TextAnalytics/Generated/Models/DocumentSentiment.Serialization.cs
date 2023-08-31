@@ -30,22 +30,22 @@ namespace CognitiveServices.TextAnalytics.Models
             if (Optional.IsDefined(Statistics))
             {
                 writer.WritePropertyName("statistics"u8);
-                writer.WriteObjectValue(Statistics);
+                ((IModelJsonSerializable<DocumentStatistics>)Statistics).Serialize(writer, options);
             }
             writer.WritePropertyName("confidenceScores"u8);
-            writer.WriteObjectValue(ConfidenceScores);
+            ((IModelJsonSerializable<SentimentConfidenceScorePerLabel>)ConfidenceScores).Serialize(writer, options);
             writer.WritePropertyName("sentences"u8);
             writer.WriteStartArray();
             foreach (var item in Sentences)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<SentenceSentiment>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("warnings"u8);
             writer.WriteStartArray();
             foreach (var item in Warnings)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<TextAnalyticsWarning>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

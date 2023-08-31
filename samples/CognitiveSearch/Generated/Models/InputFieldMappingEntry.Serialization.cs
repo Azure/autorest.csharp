@@ -41,7 +41,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Inputs)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<InputFieldMappingEntry>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

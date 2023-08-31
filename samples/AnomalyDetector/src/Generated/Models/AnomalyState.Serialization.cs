@@ -28,7 +28,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
-                writer.WriteObjectValue(Value);
+                ((IModelJsonSerializable<AnomalyValue>)Value).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(Errors))
             {
@@ -36,7 +36,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in Errors)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<ErrorResponse>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

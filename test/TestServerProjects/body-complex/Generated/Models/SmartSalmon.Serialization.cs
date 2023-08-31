@@ -53,7 +53,7 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Siblings)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<Fish>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

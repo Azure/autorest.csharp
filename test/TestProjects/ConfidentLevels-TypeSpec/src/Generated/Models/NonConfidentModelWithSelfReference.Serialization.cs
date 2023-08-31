@@ -29,7 +29,7 @@ namespace ConfidentLevelsInTsp.Models
             writer.WriteStartArray();
             foreach (var item in SelfReference)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<NonConfidentModelWithSelfReference>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("unionProperty"u8);

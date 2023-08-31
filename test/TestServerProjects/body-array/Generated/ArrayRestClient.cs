@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.Core.Serialization;
 using body_array.Models;
 
 namespace body_array
@@ -3625,7 +3626,7 @@ namespace body_array
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
-                content.JsonWriter.WriteObjectValue(item);
+                ((IModelJsonSerializable<Product>)item).Serialize(content.JsonWriter, ModelSerializerOptions.DefaultWireOptions);
             }
             content.JsonWriter.WriteEndArray();
             request.Content = content;

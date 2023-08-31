@@ -26,12 +26,12 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(DiskEncryptionKey))
             {
                 writer.WritePropertyName("diskEncryptionKey"u8);
-                writer.WriteObjectValue(DiskEncryptionKey);
+                ((IModelJsonSerializable<KeyVaultSecretReference>)DiskEncryptionKey).Serialize(writer, options);
             }
             if (Optional.IsDefined(KeyEncryptionKey))
             {
                 writer.WritePropertyName("keyEncryptionKey"u8);
-                writer.WriteObjectValue(KeyEncryptionKey);
+                ((IModelJsonSerializable<KeyVaultKeyReference>)KeyEncryptionKey).Serialize(writer, options);
             }
             if (Optional.IsDefined(Enabled))
             {

@@ -54,7 +54,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue(DnsSettings);
+                ((IModelJsonSerializable<VirtualMachineScaleSetNetworkConfigurationDnsSettings>)DnsSettings).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(IpConfigurations))
             {
@@ -62,7 +62,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in IpConfigurations)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<VirtualMachineScaleSetUpdateIPConfiguration>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

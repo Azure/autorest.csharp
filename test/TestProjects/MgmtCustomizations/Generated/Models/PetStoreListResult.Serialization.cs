@@ -30,7 +30,7 @@ namespace MgmtCustomizations.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<PetStoreData>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

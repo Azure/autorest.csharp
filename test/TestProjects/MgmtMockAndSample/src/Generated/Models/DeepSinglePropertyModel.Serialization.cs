@@ -26,7 +26,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Deep))
             {
                 writer.WritePropertyName("deep"u8);
-                writer.WriteObjectValue(Deep);
+                ((IModelJsonSerializable<SinglePropertyModel>)Deep).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

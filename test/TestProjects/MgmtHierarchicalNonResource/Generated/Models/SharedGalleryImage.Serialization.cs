@@ -43,17 +43,17 @@ namespace MgmtHierarchicalNonResource.Models
             if (Optional.IsDefined(Identifier))
             {
                 writer.WritePropertyName("identifier"u8);
-                writer.WriteObjectValue(Identifier);
+                ((IModelJsonSerializable<GalleryImageIdentifier>)Identifier).Serialize(writer, options);
             }
             if (Optional.IsDefined(Recommended))
             {
                 writer.WritePropertyName("recommended"u8);
-                writer.WriteObjectValue(Recommended);
+                ((IModelJsonSerializable<RecommendedMachineConfiguration>)Recommended).Serialize(writer, options);
             }
             if (Optional.IsDefined(Disallowed))
             {
                 writer.WritePropertyName("disallowed"u8);
-                writer.WriteObjectValue(Disallowed);
+                ((IModelJsonSerializable<Disallowed>)Disallowed).Serialize(writer, options);
             }
             if (Optional.IsDefined(HyperVGeneration))
             {
@@ -66,14 +66,14 @@ namespace MgmtHierarchicalNonResource.Models
                 writer.WriteStartArray();
                 foreach (var item in Features)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<GalleryImageFeature>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(PurchasePlan))
             {
                 writer.WritePropertyName("purchasePlan"u8);
-                writer.WriteObjectValue(PurchasePlan);
+                ((IModelJsonSerializable<ImagePurchasePlan>)PurchasePlan).Serialize(writer, options);
             }
             writer.WriteEndObject();
             writer.WritePropertyName("identifier"u8);

@@ -29,7 +29,7 @@ namespace MgmtRenameRules
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                writer.WriteObjectValue(Plan);
+                ((IModelJsonSerializable<MgmtRenameRulesPlan>)Plan).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -49,42 +49,42 @@ namespace MgmtRenameRules
             if (Optional.IsDefined(HardwareProfile))
             {
                 writer.WritePropertyName("hardwareProfile"u8);
-                writer.WriteObjectValue(HardwareProfile);
+                ((IModelJsonSerializable<HardwareProfile>)HardwareProfile).Serialize(writer, options);
             }
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                writer.WriteObjectValue(StorageProfile);
+                ((IModelJsonSerializable<StorageProfile>)StorageProfile).Serialize(writer, options);
             }
             if (Optional.IsDefined(AdditionalCapabilities))
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
-                writer.WriteObjectValue(AdditionalCapabilities);
+                ((IModelJsonSerializable<AdditionalCapabilities>)AdditionalCapabilities).Serialize(writer, options);
             }
             if (Optional.IsDefined(OSProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                writer.WriteObjectValue(OSProfile);
+                ((IModelJsonSerializable<OSProfile>)OSProfile).Serialize(writer, options);
             }
             if (Optional.IsDefined(SecurityProfile))
             {
                 writer.WritePropertyName("securityProfile"u8);
-                writer.WriteObjectValue(SecurityProfile);
+                ((IModelJsonSerializable<SecurityProfile>)SecurityProfile).Serialize(writer, options);
             }
             if (Optional.IsDefined(NetworkProfile))
             {
                 writer.WritePropertyName("networkProfile"u8);
-                writer.WriteObjectValue(NetworkProfile);
+                ((IModelJsonSerializable<NetworkProfile>)NetworkProfile).Serialize(writer, options);
             }
             if (Optional.IsDefined(NetworkProfileConfiguration))
             {
                 writer.WritePropertyName("networkProfileConfiguration"u8);
-                writer.WriteObjectValue(NetworkProfileConfiguration);
+                ((IModelJsonSerializable<VirtualMachineScaleSetVmNetworkProfileConfiguration>)NetworkProfileConfiguration).Serialize(writer, options);
             }
             if (Optional.IsDefined(DiagnosticsProfile))
             {
                 writer.WritePropertyName("diagnosticsProfile"u8);
-                writer.WriteObjectValue(DiagnosticsProfile);
+                ((IModelJsonSerializable<DiagnosticsProfile>)DiagnosticsProfile).Serialize(writer, options);
             }
             if (Optional.IsDefined(AvailabilitySet))
             {
@@ -99,7 +99,7 @@ namespace MgmtRenameRules
             if (Optional.IsDefined(ProtectionPolicy))
             {
                 writer.WritePropertyName("protectionPolicy"u8);
-                writer.WriteObjectValue(ProtectionPolicy);
+                ((IModelJsonSerializable<VirtualMachineScaleSetVmProtectionPolicy>)ProtectionPolicy).Serialize(writer, options);
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

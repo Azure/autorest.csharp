@@ -49,7 +49,7 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(PublicIPAddressConfiguration))
             {
                 writer.WritePropertyName("publicIPAddressConfiguration"u8);
-                writer.WriteObjectValue(PublicIPAddressConfiguration);
+                ((IModelJsonSerializable<VirtualMachineScaleSetUpdatePublicIPAddressConfiguration>)PublicIPAddressConfiguration).Serialize(writer, options);
             }
             if (Optional.IsDefined(PrivateIPAddressVersion))
             {

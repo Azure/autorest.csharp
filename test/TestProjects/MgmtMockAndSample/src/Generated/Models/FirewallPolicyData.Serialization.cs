@@ -50,12 +50,12 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(StartupProbe))
             {
                 writer.WritePropertyName("startupProbe"u8);
-                writer.WriteObjectValue(StartupProbe);
+                ((IModelJsonSerializable<Probe>)StartupProbe).Serialize(writer, options);
             }
             if (Optional.IsDefined(ReadinessProbe))
             {
                 writer.WritePropertyName("readinessProbe"u8);
-                writer.WriteObjectValue(ReadinessProbe);
+                ((IModelJsonSerializable<Probe>)ReadinessProbe).Serialize(writer, options);
             }
             if (Optional.IsDefined(DesiredStatusCode))
             {
@@ -70,37 +70,37 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(ThreatIntelWhitelist))
             {
                 writer.WritePropertyName("threatIntelWhitelist"u8);
-                writer.WriteObjectValue(ThreatIntelWhitelist);
+                ((IModelJsonSerializable<FirewallPolicyThreatIntelWhitelist>)ThreatIntelWhitelist).Serialize(writer, options);
             }
             if (Optional.IsDefined(Insights))
             {
                 writer.WritePropertyName("insights"u8);
-                writer.WriteObjectValue(Insights);
+                ((IModelJsonSerializable<FirewallPolicyInsights>)Insights).Serialize(writer, options);
             }
             if (Optional.IsDefined(Snat))
             {
                 writer.WritePropertyName("snat"u8);
-                writer.WriteObjectValue(Snat);
+                ((IModelJsonSerializable<FirewallPolicySnat>)Snat).Serialize(writer, options);
             }
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue(DnsSettings);
+                ((IModelJsonSerializable<DnsSettings>)DnsSettings).Serialize(writer, options);
             }
             if (Optional.IsDefined(IntrusionDetection))
             {
                 writer.WritePropertyName("intrusionDetection"u8);
-                writer.WriteObjectValue(IntrusionDetection);
+                ((IModelJsonSerializable<FirewallPolicyIntrusionDetection>)IntrusionDetection).Serialize(writer, options);
             }
             if (Optional.IsDefined(TransportSecurity))
             {
                 writer.WritePropertyName("transportSecurity"u8);
-                writer.WriteObjectValue(TransportSecurity);
+                ((IModelJsonSerializable<FirewallPolicyTransportSecurity>)TransportSecurity).Serialize(writer, options);
             }
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                ((IModelJsonSerializable<FirewallPolicySku>)Sku).Serialize(writer, options);
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

@@ -41,7 +41,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in BackendAddresses)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<ApplicationGatewayBackendAddress>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

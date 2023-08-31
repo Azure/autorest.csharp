@@ -39,7 +39,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in IpRules)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<IPRule>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -49,7 +49,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in VirtualNetworkRules)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<VirtualNetworkRule>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

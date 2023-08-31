@@ -50,9 +50,7 @@ namespace TypeSchemaMapping
             if (body != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(body);
-                request.Content = content;
+                request.Content = body;
             }
             return message;
         }
@@ -100,9 +98,7 @@ namespace TypeSchemaMapping
             if (body != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(body);
-                request.Content = content;
+                request.Content = body;
             }
             return message;
         }
@@ -160,9 +156,7 @@ namespace TypeSchemaMapping
             if (body != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(body);
-                request.Content = content;
+                request.Content = body;
             }
             return message;
         }
@@ -220,9 +214,7 @@ namespace TypeSchemaMapping
             if (body != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(body);
-                request.Content = content;
+                request.Content = body;
             }
             return message;
         }
@@ -280,9 +272,7 @@ namespace TypeSchemaMapping
             if (body != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(body);
-                request.Content = content;
+                request.Content = body;
             }
             return message;
         }

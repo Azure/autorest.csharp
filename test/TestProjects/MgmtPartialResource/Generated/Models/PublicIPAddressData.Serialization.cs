@@ -28,7 +28,7 @@ namespace MgmtPartialResource
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                ((IModelJsonSerializable<PublicIPAddressSku>)Sku).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -65,7 +65,7 @@ namespace MgmtPartialResource
             if (Optional.IsDefined(ServicePublicIPAddress))
             {
                 writer.WritePropertyName("servicePublicIPAddress"u8);
-                writer.WriteObjectValue(ServicePublicIPAddress);
+                ((IModelJsonSerializable<PublicIPAddressData>)ServicePublicIPAddress).Serialize(writer, options);
             }
             if (Optional.IsDefined(MigrationPhase))
             {
@@ -75,7 +75,7 @@ namespace MgmtPartialResource
             if (Optional.IsDefined(LinkedPublicIPAddress))
             {
                 writer.WritePropertyName("linkedPublicIPAddress"u8);
-                writer.WriteObjectValue(LinkedPublicIPAddress);
+                ((IModelJsonSerializable<PublicIPAddressData>)LinkedPublicIPAddress).Serialize(writer, options);
             }
             if (Optional.IsDefined(DeleteOption))
             {

@@ -35,7 +35,7 @@ namespace ModelWithConverterUsage.Models
             if (Optional.IsDefined(ObjProperty))
             {
                 writer.WritePropertyName("Obj_Property"u8);
-                writer.WriteObjectValue(ObjProperty);
+                ((IModelJsonSerializable<Product>)ObjProperty).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

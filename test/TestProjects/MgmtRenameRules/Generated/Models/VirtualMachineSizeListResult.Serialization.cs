@@ -29,7 +29,7 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<VirtualMachineSize>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

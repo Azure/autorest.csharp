@@ -29,7 +29,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Friends)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<Bird>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -40,14 +40,14 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                 foreach (var item in Hate)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    ((IModelJsonSerializable<Bird>)item.Value).Serialize(writer, options);
                 }
                 writer.WriteEndObject();
             }
             if (Optional.IsDefined(Partner))
             {
                 writer.WritePropertyName("partner"u8);
-                writer.WriteObjectValue(Partner);
+                ((IModelJsonSerializable<Bird>)Partner).Serialize(writer, options);
             }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);

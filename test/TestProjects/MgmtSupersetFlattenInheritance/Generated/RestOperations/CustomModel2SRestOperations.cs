@@ -125,9 +125,7 @@ namespace MgmtSupersetFlattenInheritance
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(customModel2);
-            request.Content = content;
+            request.Content = customModel2;
             _userAgent.Apply(message);
             return message;
         }

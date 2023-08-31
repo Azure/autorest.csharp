@@ -53,17 +53,17 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
-                writer.WriteObjectValue(NetworkSecurityGroup);
+                ((IModelJsonSerializable<NetworkSecurityGroup>)NetworkSecurityGroup).Serialize(writer, options);
             }
             if (Optional.IsDefined(RouteTable))
             {
                 writer.WritePropertyName("routeTable"u8);
-                writer.WriteObjectValue(RouteTable);
+                ((IModelJsonSerializable<RouteTable>)RouteTable).Serialize(writer, options);
             }
             if (Optional.IsDefined(NatGateway))
             {
                 writer.WritePropertyName("natGateway"u8);
-                writer.WriteObjectValue(NatGateway);
+                ((IModelJsonSerializable<SubResource>)NatGateway).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(ServiceEndpoints))
             {
@@ -71,7 +71,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ServiceEndpoints)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<ServiceEndpointPropertiesFormat>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -81,7 +81,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ServiceEndpointPolicies)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<ServiceEndpointPolicy>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -91,7 +91,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in Delegations)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<Delegation>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

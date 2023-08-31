@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                ((IModelJsonSerializable<SampleSku>)Sku).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(Tags))
             {

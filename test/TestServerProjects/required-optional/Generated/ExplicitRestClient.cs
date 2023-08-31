@@ -258,9 +258,7 @@ namespace required_optional
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(bodyParameter);
-            request.Content = content;
+            request.Content = bodyParameter;
             return message;
         }
 
@@ -321,9 +319,7 @@ namespace required_optional
             if (bodyParameter != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(bodyParameter);
-                request.Content = content;
+                request.Content = bodyParameter;
             }
             return message;
         }
@@ -579,9 +575,7 @@ namespace required_optional
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(bodyParameter);
-            request.Content = content;
+            request.Content = bodyParameter;
             return message;
         }
 
@@ -642,9 +636,7 @@ namespace required_optional
             if (bodyParameter != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(bodyParameter);
-                request.Content = content;
+                request.Content = bodyParameter;
             }
             return message;
         }
@@ -799,9 +791,7 @@ namespace required_optional
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(bodyParameter);
-            request.Content = content;
+            request.Content = bodyParameter;
             return message;
         }
 
@@ -862,9 +852,7 @@ namespace required_optional
             if (bodyParameter != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(bodyParameter);
-                request.Content = content;
+                request.Content = bodyParameter;
             }
             return message;
         }
@@ -912,9 +900,7 @@ namespace required_optional
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(bodyParameter);
-            request.Content = content;
+            request.Content = bodyParameter;
             return message;
         }
 
@@ -975,9 +961,7 @@ namespace required_optional
             if (bodyParameter != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(bodyParameter);
-                request.Content = content;
+                request.Content = bodyParameter;
             }
             return message;
         }
@@ -1148,9 +1132,7 @@ namespace required_optional
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(bodyParameter);
-            request.Content = content;
+            request.Content = bodyParameter;
             return message;
         }
 
@@ -1211,9 +1193,7 @@ namespace required_optional
             if (bodyParameter != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(bodyParameter);
-                request.Content = content;
+                request.Content = bodyParameter;
             }
             return message;
         }

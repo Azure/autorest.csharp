@@ -29,7 +29,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<LoadBalancer>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

@@ -26,7 +26,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WritePropertyName("id"u8);
             writer.WriteStringValue(Id);
             writer.WritePropertyName("error"u8);
-            writer.WriteObjectValue(Error);
+            ((IModelJsonSerializable<TextAnalyticsError>)Error).Serialize(writer, options);
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
                 foreach (var property in _rawData)

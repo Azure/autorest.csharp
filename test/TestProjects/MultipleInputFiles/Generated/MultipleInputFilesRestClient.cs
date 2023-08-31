@@ -47,9 +47,7 @@ namespace MultipleInputFiles
             uri.AppendPath("/operation1", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(value);
-            request.Content = content;
+            request.Content = value;
             return message;
         }
 
@@ -107,9 +105,7 @@ namespace MultipleInputFiles
             uri.AppendPath("/operation2", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(value);
-            request.Content = content;
+            request.Content = value;
             return message;
         }
 

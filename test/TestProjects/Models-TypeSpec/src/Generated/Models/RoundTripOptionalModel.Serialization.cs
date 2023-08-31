@@ -59,19 +59,19 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalModelList)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<CollectionItem>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(OptionalModel))
             {
                 writer.WritePropertyName("optionalModel"u8);
-                writer.WriteObjectValue(OptionalModel);
+                ((IModelJsonSerializable<DerivedModel>)OptionalModel).Serialize(writer, options);
             }
             if (Optional.IsDefined(OptionalModelWithPropertiesOnBase))
             {
                 writer.WritePropertyName("optionalModelWithPropertiesOnBase"u8);
-                writer.WriteObjectValue(OptionalModelWithPropertiesOnBase);
+                ((IModelJsonSerializable<DerivedModelWithProperties>)OptionalModelWithPropertiesOnBase).Serialize(writer, options);
             }
             if (Optional.IsDefined(OptionalFixedStringEnum))
             {
@@ -112,7 +112,7 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in OptionalModelRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    ((IModelJsonSerializable<RecordItem>)item.Value).Serialize(writer, options);
                 }
                 writer.WriteEndObject();
             }

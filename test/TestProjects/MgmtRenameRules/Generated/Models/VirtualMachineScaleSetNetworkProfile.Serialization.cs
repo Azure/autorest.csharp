@@ -35,7 +35,7 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in NetworkInterfaceConfigurations)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<VirtualMachineScaleSetNetworkConfiguration>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

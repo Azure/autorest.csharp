@@ -31,7 +31,7 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WriteStartArray();
                 foreach (var item in Errors)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<ErrorInformation>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

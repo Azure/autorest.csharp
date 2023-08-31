@@ -61,12 +61,12 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(VmAgent))
             {
                 writer.WritePropertyName("vmAgent"u8);
-                writer.WriteObjectValue(VmAgent);
+                ((IModelJsonSerializable<VirtualMachineAgentInstanceView>)VmAgent).Serialize(writer, options);
             }
             if (Optional.IsDefined(MaintenanceRedeployStatus))
             {
                 writer.WritePropertyName("maintenanceRedeployStatus"u8);
-                writer.WriteObjectValue(MaintenanceRedeployStatus);
+                ((IModelJsonSerializable<MaintenanceRedeployStatus>)MaintenanceRedeployStatus).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(Disks))
             {
@@ -74,7 +74,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Disks)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<DiskInstanceView>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -84,14 +84,14 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Extensions)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<VirtualMachineExtensionInstanceView>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(BootDiagnostics))
             {
                 writer.WritePropertyName("bootDiagnostics"u8);
-                writer.WriteObjectValue(BootDiagnostics);
+                ((IModelJsonSerializable<BootDiagnosticsInstanceView>)BootDiagnostics).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(Statuses))
             {
@@ -99,14 +99,14 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Statuses)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<InstanceViewStatus>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(PatchStatus))
             {
                 writer.WritePropertyName("patchStatus"u8);
-                writer.WriteObjectValue(PatchStatus);
+                ((IModelJsonSerializable<VirtualMachinePatchStatus>)PatchStatus).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

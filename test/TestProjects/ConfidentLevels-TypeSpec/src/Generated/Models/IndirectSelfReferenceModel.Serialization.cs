@@ -28,7 +28,7 @@ namespace ConfidentLevelsInTsp.Models
             if (Optional.IsDefined(Reference))
             {
                 writer.WritePropertyName("reference"u8);
-                writer.WriteObjectValue(Reference);
+                ((IModelJsonSerializable<NonConfidentModelWithSelfReference>)Reference).Serialize(writer, options);
             }
             writer.WritePropertyName("unionProperty"u8);
             writer.WriteObjectValue(UnionProperty);

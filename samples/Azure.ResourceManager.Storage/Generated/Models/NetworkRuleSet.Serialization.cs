@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in ResourceAccessRules)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<ResourceAccessRule>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -44,7 +44,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in VirtualNetworkRules)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<VirtualNetworkRule>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -54,7 +54,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in IpRules)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<IPRule>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

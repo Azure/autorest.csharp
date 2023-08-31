@@ -26,7 +26,7 @@ namespace MgmtParamOrdering
 
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
-            writer.WriteObjectValue(Properties);
+            ((IModelJsonSerializable<EnvironmentContainer>)Properties).Serialize(writer, options);
             if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags"u8);

@@ -27,7 +27,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteStartArray();
             foreach (var item in TrainingDocuments)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<TrainingDocumentInfo>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             if (Optional.IsCollectionDefined(Fields))
@@ -36,7 +36,7 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WriteStartArray();
                 foreach (var item in Fields)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<FormFieldsReport>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -51,7 +51,7 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WriteStartArray();
                 foreach (var item in Errors)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<ErrorInformation>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

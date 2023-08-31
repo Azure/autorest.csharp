@@ -30,7 +30,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Workspaces)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<FirewallPolicyLogAnalyticsWorkspace>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

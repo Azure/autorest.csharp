@@ -48,12 +48,12 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                writer.WriteObjectValue(Plan);
+                ((IModelJsonSerializable<PurchasePlan>)Plan).Serialize(writer, options);
             }
             if (Optional.IsDefined(OsDiskImage))
             {
                 writer.WritePropertyName("osDiskImage"u8);
-                writer.WriteObjectValue(OsDiskImage);
+                ((IModelJsonSerializable<OSDiskImage>)OsDiskImage).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(DataDiskImages))
             {
@@ -61,14 +61,14 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDiskImages)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<DataDiskImage>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(AutomaticOSUpgradeProperties))
             {
                 writer.WritePropertyName("automaticOSUpgradeProperties"u8);
-                writer.WriteObjectValue(AutomaticOSUpgradeProperties);
+                ((IModelJsonSerializable<AutomaticOSUpgradeProperties>)AutomaticOSUpgradeProperties).Serialize(writer, options);
             }
             if (Optional.IsDefined(HyperVGeneration))
             {
@@ -78,7 +78,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(Disallowed))
             {
                 writer.WritePropertyName("disallowed"u8);
-                writer.WriteObjectValue(Disallowed);
+                ((IModelJsonSerializable<DisallowedConfiguration>)Disallowed).Serialize(writer, options);
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

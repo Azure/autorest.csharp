@@ -26,12 +26,12 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
-                writer.WriteObjectValue(NetworkSecurityGroup);
+                ((IModelJsonSerializable<SubResource>)NetworkSecurityGroup).Serialize(writer, options);
             }
             if (Optional.IsDefined(Association))
             {
                 writer.WritePropertyName("association"u8);
-                writer.WriteObjectValue(Association);
+                ((IModelJsonSerializable<EffectiveNetworkSecurityGroupAssociation>)Association).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(EffectiveSecurityRules))
             {
@@ -39,7 +39,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in EffectiveSecurityRules)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<EffectiveNetworkSecurityRule>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

@@ -25,7 +25,7 @@ namespace MgmtMockAndSample.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
-            writer.WriteObjectValue(Properties);
+            ((IModelJsonSerializable<VaultAccessPolicyProperties>)Properties).Serialize(writer, options);
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
                 foreach (var property in _rawData)

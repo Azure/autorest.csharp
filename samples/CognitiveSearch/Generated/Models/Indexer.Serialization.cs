@@ -42,12 +42,12 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(Schedule))
             {
                 writer.WritePropertyName("schedule"u8);
-                writer.WriteObjectValue(Schedule);
+                ((IModelJsonSerializable<IndexingSchedule>)Schedule).Serialize(writer, options);
             }
             if (Optional.IsDefined(Parameters))
             {
                 writer.WritePropertyName("parameters"u8);
-                writer.WriteObjectValue(Parameters);
+                ((IModelJsonSerializable<IndexingParameters>)Parameters).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(FieldMappings))
             {
@@ -55,7 +55,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in FieldMappings)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<FieldMapping>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -65,7 +65,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in OutputFieldMappings)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<FieldMapping>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

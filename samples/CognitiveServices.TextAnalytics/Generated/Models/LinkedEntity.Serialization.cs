@@ -29,7 +29,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteStartArray();
             foreach (var item in Matches)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<Match>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("language"u8);

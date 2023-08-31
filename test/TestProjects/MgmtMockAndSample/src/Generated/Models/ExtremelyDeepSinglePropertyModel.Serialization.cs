@@ -26,7 +26,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Extreme))
             {
                 writer.WritePropertyName("extreme"u8);
-                writer.WriteObjectValue(Extreme);
+                ((IModelJsonSerializable<SuperDeepSinglePropertyModel>)Extreme).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

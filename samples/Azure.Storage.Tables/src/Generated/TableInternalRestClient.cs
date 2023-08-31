@@ -135,9 +135,7 @@ namespace Azure.Storage.Tables
             request.Headers.Add("DataServiceVersion", dataServiceVersion.ToString());
             request.Headers.Add("Accept", "application/json;odata=nometadata");
             request.Headers.Add("Content-Type", "application/json;odata=nometadata");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(tableProperties);
-            request.Content = content;
+            request.Content = tableProperties;
             return message;
         }
 

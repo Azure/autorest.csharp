@@ -49,7 +49,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
-                writer.WriteObjectValue(NetworkSecurityGroup);
+                ((IModelJsonSerializable<NetworkSecurityGroup>)NetworkSecurityGroup).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(IpConfigurations))
             {
@@ -57,14 +57,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in IpConfigurations)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<NetworkInterfaceIPConfiguration>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                writer.WriteObjectValue(DnsSettings);
+                ((IModelJsonSerializable<NetworkInterfaceDnsSettings>)DnsSettings).Serialize(writer, options);
             }
             if (Optional.IsDefined(EnableAcceleratedNetworking))
             {

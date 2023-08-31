@@ -29,14 +29,14 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in Tags)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<TagProperty>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(ProtectedAppendWritesHistory))
             {
                 writer.WritePropertyName("protectedAppendWritesHistory"u8);
-                writer.WriteObjectValue(ProtectedAppendWritesHistory);
+                ((IModelJsonSerializable<ProtectedAppendWritesHistory>)ProtectedAppendWritesHistory).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

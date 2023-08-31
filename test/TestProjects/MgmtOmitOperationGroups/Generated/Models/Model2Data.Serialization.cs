@@ -33,7 +33,7 @@ namespace MgmtOmitOperationGroups
             if (Optional.IsDefined(Modelx))
             {
                 writer.WritePropertyName("modelx"u8);
-                writer.WriteObjectValue(Modelx);
+                ((IModelJsonSerializable<ModelX>)Modelx).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

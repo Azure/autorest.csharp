@@ -35,7 +35,7 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in VaultCertificates)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<VaultCertificate>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

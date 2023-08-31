@@ -32,7 +32,7 @@ namespace Azure.AI.FormRecognizer.Models
             if (Optional.IsDefined(AnalyzeResult))
             {
                 writer.WritePropertyName("analyzeResult"u8);
-                writer.WriteObjectValue(AnalyzeResult);
+                ((IModelJsonSerializable<AnalyzeResult>)AnalyzeResult).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

@@ -50,7 +50,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue(ManagedDisk);
+                ((IModelJsonSerializable<VirtualMachineScaleSetManagedDiskParameters>)ManagedDisk).Serialize(writer, options);
             }
             if (Optional.IsDefined(DiskIopsReadWrite))
             {

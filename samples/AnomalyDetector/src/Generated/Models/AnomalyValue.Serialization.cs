@@ -35,7 +35,7 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in Interpretation)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<AnomalyInterpretation>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

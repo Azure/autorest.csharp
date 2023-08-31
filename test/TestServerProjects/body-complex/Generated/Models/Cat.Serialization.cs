@@ -34,7 +34,7 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Hates)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<Dog>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

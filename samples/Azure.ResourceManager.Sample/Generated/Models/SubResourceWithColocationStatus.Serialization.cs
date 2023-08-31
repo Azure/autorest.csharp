@@ -26,7 +26,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(ColocationStatus))
             {
                 writer.WritePropertyName("colocationStatus"u8);
-                writer.WriteObjectValue(ColocationStatus);
+                ((IModelJsonSerializable<InstanceViewStatus>)ColocationStatus).Serialize(writer, options);
             }
             if (Optional.IsDefined(Id))
             {

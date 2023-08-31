@@ -30,7 +30,7 @@ namespace MgmtExpandResourceTypes.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<RecordSetData>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

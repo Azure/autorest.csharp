@@ -70,9 +70,9 @@ namespace ModelsTypeSpec.Models
                 }
             }
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue(RequiredModel);
+            ((IModelJsonSerializable<BaseModel>)RequiredModel).Serialize(writer, options);
             writer.WritePropertyName("requiredModel2"u8);
-            writer.WriteObjectValue(RequiredModel2);
+            ((IModelJsonSerializable<BaseModel>)RequiredModel2).Serialize(writer, options);
             writer.WritePropertyName("requiredIntList"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredIntList)
@@ -91,7 +91,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredModelList)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<CollectionItem>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredModelRecord"u8);
@@ -99,7 +99,7 @@ namespace ModelsTypeSpec.Models
             foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
+                ((IModelJsonSerializable<RecordItem>)item.Value).Serialize(writer, options);
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredCollectionWithNullableFloatElement"u8);
@@ -132,7 +132,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in RequiredNullableModelList)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<CollectionItem>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -174,7 +174,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in NonRequiredModelList)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<CollectionItem>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
@@ -206,7 +206,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteStartArray();
                     foreach (var item in NonRequiredNullableModelList)
                     {
-                        writer.WriteObjectValue(item);
+                        ((IModelJsonSerializable<CollectionItem>)item).Serialize(writer, options);
                     }
                     writer.WriteEndArray();
                 }

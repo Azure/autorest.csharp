@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Hosts)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<DedicatedHostInstanceViewWithName>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

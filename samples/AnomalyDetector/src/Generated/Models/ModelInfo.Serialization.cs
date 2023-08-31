@@ -47,7 +47,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(AlignPolicy))
             {
                 writer.WritePropertyName("alignPolicy"u8);
-                writer.WriteObjectValue(AlignPolicy);
+                ((IModelJsonSerializable<AlignPolicy>)AlignPolicy).Serialize(writer, options);
             }
             if (Optional.IsDefined(Status))
             {
@@ -57,7 +57,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(DiagnosticsInfo))
             {
                 writer.WritePropertyName("diagnosticsInfo"u8);
-                writer.WriteObjectValue(DiagnosticsInfo);
+                ((IModelJsonSerializable<DiagnosticsInfo>)DiagnosticsInfo).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

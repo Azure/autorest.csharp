@@ -29,12 +29,12 @@ namespace Azure.ResourceManager.Sample
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                writer.WriteObjectValue(Sku);
+                ((IModelJsonSerializable<SampleSku>)Sku).Serialize(writer, options);
             }
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                writer.WriteObjectValue(Plan);
+                ((IModelJsonSerializable<SamplePlan>)Plan).Serialize(writer, options);
             }
             if (Optional.IsDefined(Identity))
             {
@@ -69,17 +69,17 @@ namespace Azure.ResourceManager.Sample
             if (Optional.IsDefined(UpgradePolicy))
             {
                 writer.WritePropertyName("upgradePolicy"u8);
-                writer.WriteObjectValue(UpgradePolicy);
+                ((IModelJsonSerializable<UpgradePolicy>)UpgradePolicy).Serialize(writer, options);
             }
             if (Optional.IsDefined(AutomaticRepairsPolicy))
             {
                 writer.WritePropertyName("automaticRepairsPolicy"u8);
-                writer.WriteObjectValue(AutomaticRepairsPolicy);
+                ((IModelJsonSerializable<AutomaticRepairsPolicy>)AutomaticRepairsPolicy).Serialize(writer, options);
             }
             if (Optional.IsDefined(VirtualMachineProfile))
             {
                 writer.WritePropertyName("virtualMachineProfile"u8);
-                writer.WriteObjectValue(VirtualMachineProfile);
+                ((IModelJsonSerializable<VirtualMachineScaleSetVMProfile>)VirtualMachineProfile).Serialize(writer, options);
             }
             if (Optional.IsDefined(Overprovision))
             {
@@ -119,12 +119,12 @@ namespace Azure.ResourceManager.Sample
             if (Optional.IsDefined(AdditionalCapabilities))
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
-                writer.WriteObjectValue(AdditionalCapabilities);
+                ((IModelJsonSerializable<AdditionalCapabilities>)AdditionalCapabilities).Serialize(writer, options);
             }
             if (Optional.IsDefined(ScaleInPolicy))
             {
                 writer.WritePropertyName("scaleInPolicy"u8);
-                writer.WriteObjectValue(ScaleInPolicy);
+                ((IModelJsonSerializable<ScaleInPolicy>)ScaleInPolicy).Serialize(writer, options);
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

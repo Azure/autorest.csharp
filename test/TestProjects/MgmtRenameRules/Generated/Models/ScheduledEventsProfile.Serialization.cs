@@ -26,7 +26,7 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(TerminateNotificationProfile))
             {
                 writer.WritePropertyName("terminateNotificationProfile"u8);
-                writer.WriteObjectValue(TerminateNotificationProfile);
+                ((IModelJsonSerializable<TerminateNotificationProfile>)TerminateNotificationProfile).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

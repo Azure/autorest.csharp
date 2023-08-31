@@ -27,7 +27,7 @@ namespace AnomalyDetector.Models
             writer.WriteStartArray();
             foreach (var item in Series)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<TimeSeriesPoint>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("granularity"u8);

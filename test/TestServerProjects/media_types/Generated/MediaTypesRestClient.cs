@@ -112,9 +112,7 @@ namespace media_types
             if (input != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(input);
-                request.Content = content;
+                request.Content = input;
             }
             return message;
         }
@@ -224,9 +222,7 @@ namespace media_types
             if (input != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(input);
-                request.Content = content;
+                request.Content = input;
             }
             return message;
         }

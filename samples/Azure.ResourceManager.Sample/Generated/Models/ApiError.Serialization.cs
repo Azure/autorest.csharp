@@ -29,14 +29,14 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Details)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<ApiErrorBase>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(Innererror))
             {
                 writer.WritePropertyName("innererror"u8);
-                writer.WriteObjectValue(Innererror);
+                ((IModelJsonSerializable<InnerError>)Innererror).Serialize(writer, options);
             }
             if (Optional.IsDefined(Code))
             {

@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Storage
             if (Optional.IsDefined(Cors))
             {
                 writer.WritePropertyName("cors"u8);
-                writer.WriteObjectValue(Cors);
+                ((IModelJsonSerializable<CorsRules>)Cors).Serialize(writer, options);
             }
             if (Optional.IsDefined(DefaultServiceVersion))
             {
@@ -40,7 +40,7 @@ namespace Azure.ResourceManager.Storage
             if (Optional.IsDefined(DeleteRetentionPolicy))
             {
                 writer.WritePropertyName("deleteRetentionPolicy"u8);
-                writer.WriteObjectValue(DeleteRetentionPolicy);
+                ((IModelJsonSerializable<DeleteRetentionPolicy>)DeleteRetentionPolicy).Serialize(writer, options);
             }
             if (Optional.IsDefined(IsVersioningEnabled))
             {
@@ -55,22 +55,22 @@ namespace Azure.ResourceManager.Storage
             if (Optional.IsDefined(ChangeFeed))
             {
                 writer.WritePropertyName("changeFeed"u8);
-                writer.WriteObjectValue(ChangeFeed);
+                ((IModelJsonSerializable<ChangeFeed>)ChangeFeed).Serialize(writer, options);
             }
             if (Optional.IsDefined(RestorePolicy))
             {
                 writer.WritePropertyName("restorePolicy"u8);
-                writer.WriteObjectValue(RestorePolicy);
+                ((IModelJsonSerializable<RestorePolicyProperties>)RestorePolicy).Serialize(writer, options);
             }
             if (Optional.IsDefined(ContainerDeleteRetentionPolicy))
             {
                 writer.WritePropertyName("containerDeleteRetentionPolicy"u8);
-                writer.WriteObjectValue(ContainerDeleteRetentionPolicy);
+                ((IModelJsonSerializable<DeleteRetentionPolicy>)ContainerDeleteRetentionPolicy).Serialize(writer, options);
             }
             if (Optional.IsDefined(LastAccessTimeTrackingPolicy))
             {
                 writer.WritePropertyName("lastAccessTimeTrackingPolicy"u8);
-                writer.WriteObjectValue(LastAccessTimeTrackingPolicy);
+                ((IModelJsonSerializable<LastAccessTimeTrackingPolicy>)LastAccessTimeTrackingPolicy).Serialize(writer, options);
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

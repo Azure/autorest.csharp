@@ -26,7 +26,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(AvailableCapacity))
             {
                 writer.WritePropertyName("availableCapacity"u8);
-                writer.WriteObjectValue(AvailableCapacity);
+                ((IModelJsonSerializable<DedicatedHostAvailableCapacity>)AvailableCapacity).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(Statuses))
             {
@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Statuses)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<InstanceViewStatus>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

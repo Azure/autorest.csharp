@@ -27,7 +27,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartArray();
             foreach (var item in Actions)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<IndexAction>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

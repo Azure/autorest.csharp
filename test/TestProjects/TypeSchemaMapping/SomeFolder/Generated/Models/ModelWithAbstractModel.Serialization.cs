@@ -26,7 +26,7 @@ namespace TypeSchemaMapping.Models
             if (Optional.IsDefined(AbstractModelProperty))
             {
                 writer.WritePropertyName("AbstractModelProperty"u8);
-                writer.WriteObjectValue(AbstractModelProperty);
+                ((IModelJsonSerializable<AbstractModel>)AbstractModelProperty).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

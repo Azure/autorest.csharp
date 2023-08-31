@@ -31,7 +31,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteStartArray();
             foreach (var item in Cells)
             {
-                writer.WriteObjectValue(item);
+                ((IModelJsonSerializable<DataTableCell>)item).Serialize(writer, options);
             }
             writer.WriteEndArray();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

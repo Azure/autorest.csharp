@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Storage
                 writer.WriteStartArray();
                 foreach (var item in Rules)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<ObjectReplicationPolicyRule>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

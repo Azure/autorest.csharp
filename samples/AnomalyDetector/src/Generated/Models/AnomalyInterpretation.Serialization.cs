@@ -36,7 +36,7 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(CorrelationChanges))
             {
                 writer.WritePropertyName("correlationChanges"u8);
-                writer.WriteObjectValue(CorrelationChanges);
+                ((IModelJsonSerializable<CorrelationChanges>)CorrelationChanges).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

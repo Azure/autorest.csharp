@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<VirtualMachineExtensionData>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

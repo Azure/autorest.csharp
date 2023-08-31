@@ -29,7 +29,7 @@ namespace _Type.Property.Optionality.Models
                 writer.WriteStartArray();
                 foreach (var item in Property)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<StringProperty>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

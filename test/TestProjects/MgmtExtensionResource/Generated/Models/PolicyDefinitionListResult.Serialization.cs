@@ -30,7 +30,7 @@ namespace MgmtExtensionResource.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    writer.WriteObjectValue(item);
+                    ((IModelJsonSerializable<PolicyDefinitionData>)item).Serialize(writer, options);
                 }
                 writer.WriteEndArray();
             }

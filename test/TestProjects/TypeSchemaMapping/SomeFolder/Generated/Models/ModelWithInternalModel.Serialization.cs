@@ -26,7 +26,7 @@ namespace TypeSchemaMapping.Models
             if (Optional.IsDefined(InternalProperty))
             {
                 writer.WritePropertyName("InternalProperty"u8);
-                writer.WriteObjectValue(InternalProperty);
+                ((IModelJsonSerializable<InternalModel>)InternalProperty).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

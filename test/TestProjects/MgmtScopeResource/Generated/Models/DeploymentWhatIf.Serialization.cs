@@ -29,7 +29,7 @@ namespace MgmtScopeResource.Models
                 writer.WriteStringValue(Location);
             }
             writer.WritePropertyName("properties"u8);
-            writer.WriteObjectValue(Properties);
+            ((IModelJsonSerializable<DeploymentWhatIfProperties>)Properties).Serialize(writer, options);
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
                 foreach (var property in _rawData)

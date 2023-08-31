@@ -40,7 +40,7 @@ namespace Azure.ResourceManager.Storage
             if (Optional.IsDefined(KeyVaultProperties))
             {
                 writer.WritePropertyName("keyVaultProperties"u8);
-                writer.WriteObjectValue(KeyVaultProperties);
+                ((IModelJsonSerializable<EncryptionScopeKeyVaultProperties>)KeyVaultProperties).Serialize(writer, options);
             }
             if (Optional.IsDefined(RequireInfrastructureEncryption))
             {

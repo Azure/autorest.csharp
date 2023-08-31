@@ -26,7 +26,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(CertificateAuthority))
             {
                 writer.WritePropertyName("certificateAuthority"u8);
-                writer.WriteObjectValue(CertificateAuthority);
+                ((IModelJsonSerializable<FirewallPolicyCertificateAuthority>)CertificateAuthority).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

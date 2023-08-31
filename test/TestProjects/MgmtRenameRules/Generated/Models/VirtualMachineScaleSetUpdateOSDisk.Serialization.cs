@@ -41,7 +41,7 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                writer.WriteObjectValue(Image);
+                ((IModelJsonSerializable<VirtualHardDisk>)Image).Serialize(writer, options);
             }
             if (Optional.IsCollectionDefined(VhdContainers))
             {
@@ -56,7 +56,7 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                writer.WriteObjectValue(ManagedDisk);
+                ((IModelJsonSerializable<VirtualMachineScaleSetManagedDiskParameters>)ManagedDisk).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

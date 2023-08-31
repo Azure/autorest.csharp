@@ -26,7 +26,7 @@ namespace Azure.ResourceManager.Storage.Models
             if (Optional.IsDefined(Services))
             {
                 writer.WritePropertyName("services"u8);
-                writer.WriteObjectValue(Services);
+                ((IModelJsonSerializable<EncryptionServices>)Services).Serialize(writer, options);
             }
             writer.WritePropertyName("keySource"u8);
             writer.WriteStringValue(KeySource.ToString());
@@ -38,12 +38,12 @@ namespace Azure.ResourceManager.Storage.Models
             if (Optional.IsDefined(KeyVaultProperties))
             {
                 writer.WritePropertyName("keyvaultproperties"u8);
-                writer.WriteObjectValue(KeyVaultProperties);
+                ((IModelJsonSerializable<KeyVaultProperties>)KeyVaultProperties).Serialize(writer, options);
             }
             if (Optional.IsDefined(EncryptionIdentity))
             {
                 writer.WritePropertyName("identity"u8);
-                writer.WriteObjectValue(EncryptionIdentity);
+                ((IModelJsonSerializable<EncryptionIdentity>)EncryptionIdentity).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

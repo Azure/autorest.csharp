@@ -32,7 +32,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(AccessCredentials))
             {
                 writer.WritePropertyName("accessCredentials"u8);
-                writer.WriteObjectValue(AccessCredentials);
+                ((IModelJsonSerializable<AzureActiveDirectoryApplicationCredentials>)AccessCredentials).Serialize(writer, options);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
