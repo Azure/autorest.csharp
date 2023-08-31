@@ -152,6 +152,8 @@ namespace MgmtOperations.Models
             return DeserializeConnectionSharedKey(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ConnectionSharedKey"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ConnectionSharedKey"/> to convert. </param>
         public static implicit operator RequestContent(ConnectionSharedKey model)
         {
             if (model is null)
@@ -162,6 +164,8 @@ namespace MgmtOperations.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ConnectionSharedKey"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ConnectionSharedKey(Response response)
         {
             if (response is null)

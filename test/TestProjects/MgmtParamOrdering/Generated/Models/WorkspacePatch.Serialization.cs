@@ -107,6 +107,8 @@ namespace MgmtParamOrdering.Models
             return DeserializeWorkspacePatch(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="WorkspacePatch"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="WorkspacePatch"/> to convert. </param>
         public static implicit operator RequestContent(WorkspacePatch model)
         {
             if (model is null)
@@ -117,6 +119,8 @@ namespace MgmtParamOrdering.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="WorkspacePatch"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator WorkspacePatch(Response response)
         {
             if (response is null)

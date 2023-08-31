@@ -107,6 +107,8 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeTerminateNotificationProfile(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="TerminateNotificationProfile"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="TerminateNotificationProfile"/> to convert. </param>
         public static implicit operator RequestContent(TerminateNotificationProfile model)
         {
             if (model is null)
@@ -117,6 +119,8 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="TerminateNotificationProfile"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator TerminateNotificationProfile(Response response)
         {
             if (response is null)

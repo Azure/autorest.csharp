@@ -212,6 +212,8 @@ namespace MgmtXmlDeserialization.Models
             }
         }
 
+        /// <summary> Converts a <see cref="XmlCollection"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="XmlCollection"/> to convert. </param>
         public static implicit operator RequestContent(XmlCollection model)
         {
             if (model is null)
@@ -222,6 +224,8 @@ namespace MgmtXmlDeserialization.Models
             return RequestContent.Create((IModelSerializable<XmlCollection>)model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="XmlCollection"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator XmlCollection(Response response)
         {
             if (response is null)

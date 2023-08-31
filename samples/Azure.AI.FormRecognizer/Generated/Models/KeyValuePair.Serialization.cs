@@ -116,6 +116,8 @@ namespace Azure.AI.FormRecognizer.Models
             return DeserializeKeyValuePair(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="KeyValuePair"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="KeyValuePair"/> to convert. </param>
         public static implicit operator RequestContent(KeyValuePair model)
         {
             if (model is null)
@@ -126,6 +128,8 @@ namespace Azure.AI.FormRecognizer.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="KeyValuePair"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator KeyValuePair(Response response)
         {
             if (response is null)

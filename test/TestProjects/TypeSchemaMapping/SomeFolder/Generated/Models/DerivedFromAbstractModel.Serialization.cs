@@ -89,6 +89,8 @@ namespace TypeSchemaMapping.Models
             return DeserializeDerivedFromAbstractModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DerivedFromAbstractModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DerivedFromAbstractModel"/> to convert. </param>
         public static implicit operator RequestContent(DerivedFromAbstractModel model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace TypeSchemaMapping.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DerivedFromAbstractModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DerivedFromAbstractModel(Response response)
         {
             if (response is null)

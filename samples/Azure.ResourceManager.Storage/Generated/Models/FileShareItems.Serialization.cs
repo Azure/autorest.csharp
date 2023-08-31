@@ -103,6 +103,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeFileShareItems(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FileShareItems"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FileShareItems"/> to convert. </param>
         public static implicit operator RequestContent(FileShareItems model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FileShareItems"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FileShareItems(Response response)
         {
             if (response is null)

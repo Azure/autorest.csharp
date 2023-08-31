@@ -119,6 +119,8 @@ namespace Azure.AI.FormRecognizer.Models
             return DeserializeModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Model"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Model"/> to convert. </param>
         public static implicit operator RequestContent(Model model)
         {
             if (model is null)
@@ -129,6 +131,8 @@ namespace Azure.AI.FormRecognizer.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Model"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Model(Response response)
         {
             if (response is null)

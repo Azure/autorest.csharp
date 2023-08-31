@@ -177,6 +177,8 @@ namespace MgmtRenameRules.Models
             return DeserializeWindowsConfiguration(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="WindowsConfiguration"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="WindowsConfiguration"/> to convert. </param>
         public static implicit operator RequestContent(WindowsConfiguration model)
         {
             if (model is null)
@@ -187,6 +189,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="WindowsConfiguration"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator WindowsConfiguration(Response response)
         {
             if (response is null)

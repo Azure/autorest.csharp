@@ -111,6 +111,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeKeyCreationTime(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="KeyCreationTime"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="KeyCreationTime"/> to convert. </param>
         public static implicit operator RequestContent(KeyCreationTime model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="KeyCreationTime"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator KeyCreationTime(Response response)
         {
             if (response is null)

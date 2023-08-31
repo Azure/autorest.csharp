@@ -87,6 +87,8 @@ namespace CognitiveSearch.Models
             return DeserializeIndexAction(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="IndexAction"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="IndexAction"/> to convert. </param>
         public static implicit operator RequestContent(IndexAction model)
         {
             if (model is null)
@@ -97,6 +99,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="IndexAction"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator IndexAction(Response response)
         {
             if (response is null)

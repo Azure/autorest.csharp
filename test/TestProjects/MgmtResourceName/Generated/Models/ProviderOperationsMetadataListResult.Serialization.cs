@@ -118,6 +118,8 @@ namespace MgmtResourceName.Models
             return DeserializeProviderOperationsMetadataListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ProviderOperationsMetadataListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ProviderOperationsMetadataListResult"/> to convert. </param>
         public static implicit operator RequestContent(ProviderOperationsMetadataListResult model)
         {
             if (model is null)
@@ -128,6 +130,8 @@ namespace MgmtResourceName.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ProviderOperationsMetadataListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ProviderOperationsMetadataListResult(Response response)
         {
             if (response is null)

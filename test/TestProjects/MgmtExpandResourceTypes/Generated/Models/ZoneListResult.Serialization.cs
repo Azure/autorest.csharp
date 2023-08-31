@@ -113,6 +113,8 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeZoneListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ZoneListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ZoneListResult"/> to convert. </param>
         public static implicit operator RequestContent(ZoneListResult model)
         {
             if (model is null)
@@ -123,6 +125,8 @@ namespace MgmtExpandResourceTypes.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ZoneListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ZoneListResult(Response response)
         {
             if (response is null)

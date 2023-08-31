@@ -89,6 +89,8 @@ namespace Projection.ProjectedName.Models
             return DeserializeJsonAndClientProjectedNameModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="JsonAndClientProjectedNameModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="JsonAndClientProjectedNameModel"/> to convert. </param>
         public static implicit operator RequestContent(JsonAndClientProjectedNameModel model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace Projection.ProjectedName.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="JsonAndClientProjectedNameModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator JsonAndClientProjectedNameModel(Response response)
         {
             if (response is null)

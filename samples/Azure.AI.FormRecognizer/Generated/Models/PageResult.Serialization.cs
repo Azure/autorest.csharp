@@ -154,6 +154,8 @@ namespace Azure.AI.FormRecognizer.Models
             return DeserializePageResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PageResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PageResult"/> to convert. </param>
         public static implicit operator RequestContent(PageResult model)
         {
             if (model is null)
@@ -164,6 +166,8 @@ namespace Azure.AI.FormRecognizer.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PageResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PageResult(Response response)
         {
             if (response is null)

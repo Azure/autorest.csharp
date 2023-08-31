@@ -133,6 +133,8 @@ namespace xms_error_responses.Models
             return DeserializePetHungryOrThirstyError(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PetHungryOrThirstyError"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PetHungryOrThirstyError"/> to convert. </param>
         public static implicit operator RequestContent(PetHungryOrThirstyError model)
         {
             if (model is null)
@@ -143,6 +145,8 @@ namespace xms_error_responses.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PetHungryOrThirstyError"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PetHungryOrThirstyError(Response response)
         {
             if (response is null)

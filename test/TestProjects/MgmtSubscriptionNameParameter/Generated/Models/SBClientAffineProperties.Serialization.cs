@@ -122,6 +122,8 @@ namespace MgmtSubscriptionNameParameter.Models
             return DeserializeSBClientAffineProperties(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SBClientAffineProperties"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SBClientAffineProperties"/> to convert. </param>
         public static implicit operator RequestContent(SBClientAffineProperties model)
         {
             if (model is null)
@@ -132,6 +134,8 @@ namespace MgmtSubscriptionNameParameter.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SBClientAffineProperties"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SBClientAffineProperties(Response response)
         {
             if (response is null)

@@ -140,6 +140,8 @@ namespace CognitiveServices.TextAnalytics.Models
             return DeserializeKeyPhraseResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="KeyPhraseResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="KeyPhraseResult"/> to convert. </param>
         public static implicit operator RequestContent(KeyPhraseResult model)
         {
             if (model is null)
@@ -150,6 +152,8 @@ namespace CognitiveServices.TextAnalytics.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="KeyPhraseResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator KeyPhraseResult(Response response)
         {
             if (response is null)

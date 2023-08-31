@@ -105,6 +105,8 @@ namespace xml_service.Models
             return DeserializeSlideshow(XElement.Load(data.ToStream()), options);
         }
 
+        /// <summary> Converts a <see cref="Slideshow"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Slideshow"/> to convert. </param>
         public static implicit operator RequestContent(Slideshow model)
         {
             if (model is null)
@@ -115,6 +117,8 @@ namespace xml_service.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Slideshow"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Slideshow(Response response)
         {
             if (response is null)

@@ -102,6 +102,8 @@ namespace MgmtExactMatchFlattenInheritance.Models
             return DeserializeAzureResourceFlattenModel3ListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="AzureResourceFlattenModel3ListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="AzureResourceFlattenModel3ListResult"/> to convert. </param>
         public static implicit operator RequestContent(AzureResourceFlattenModel3ListResult model)
         {
             if (model is null)
@@ -112,6 +114,8 @@ namespace MgmtExactMatchFlattenInheritance.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="AzureResourceFlattenModel3ListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator AzureResourceFlattenModel3ListResult(Response response)
         {
             if (response is null)

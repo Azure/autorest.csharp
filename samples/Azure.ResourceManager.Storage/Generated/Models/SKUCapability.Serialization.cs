@@ -93,6 +93,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeSKUCapability(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SKUCapability"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SKUCapability"/> to convert. </param>
         public static implicit operator RequestContent(SKUCapability model)
         {
             if (model is null)
@@ -103,6 +105,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SKUCapability"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SKUCapability(Response response)
         {
             if (response is null)

@@ -103,6 +103,8 @@ namespace ModelShapes.Models
             return DeserializeParametersModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ParametersModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ParametersModel"/> to convert. </param>
         public static implicit operator RequestContent(ParametersModel model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace ModelShapes.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ParametersModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ParametersModel(Response response)
         {
             if (response is null)

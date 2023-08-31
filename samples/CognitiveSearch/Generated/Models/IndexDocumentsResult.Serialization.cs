@@ -92,6 +92,8 @@ namespace CognitiveSearch.Models
             return DeserializeIndexDocumentsResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="IndexDocumentsResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="IndexDocumentsResult"/> to convert. </param>
         public static implicit operator RequestContent(IndexDocumentsResult model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="IndexDocumentsResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator IndexDocumentsResult(Response response)
         {
             if (response is null)

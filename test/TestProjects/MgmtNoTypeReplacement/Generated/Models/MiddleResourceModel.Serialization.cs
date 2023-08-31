@@ -96,6 +96,8 @@ namespace MgmtNoTypeReplacement.Models
             return DeserializeMiddleResourceModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MiddleResourceModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MiddleResourceModel"/> to convert. </param>
         public static implicit operator RequestContent(MiddleResourceModel model)
         {
             if (model is null)
@@ -106,6 +108,8 @@ namespace MgmtNoTypeReplacement.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MiddleResourceModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MiddleResourceModel(Response response)
         {
             if (response is null)

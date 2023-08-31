@@ -210,6 +210,8 @@ namespace MgmtMultipleParentResource.Models
             return DeserializeAnotherParentPatch(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="AnotherParentPatch"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="AnotherParentPatch"/> to convert. </param>
         public static implicit operator RequestContent(AnotherParentPatch model)
         {
             if (model is null)
@@ -220,6 +222,8 @@ namespace MgmtMultipleParentResource.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="AnotherParentPatch"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator AnotherParentPatch(Response response)
         {
             if (response is null)

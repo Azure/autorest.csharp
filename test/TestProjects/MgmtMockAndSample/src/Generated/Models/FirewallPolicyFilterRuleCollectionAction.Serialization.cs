@@ -96,6 +96,8 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyFilterRuleCollectionAction(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FirewallPolicyFilterRuleCollectionAction"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FirewallPolicyFilterRuleCollectionAction"/> to convert. </param>
         public static implicit operator RequestContent(FirewallPolicyFilterRuleCollectionAction model)
         {
             if (model is null)
@@ -106,6 +108,8 @@ namespace MgmtMockAndSample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FirewallPolicyFilterRuleCollectionAction"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FirewallPolicyFilterRuleCollectionAction(Response response)
         {
             if (response is null)

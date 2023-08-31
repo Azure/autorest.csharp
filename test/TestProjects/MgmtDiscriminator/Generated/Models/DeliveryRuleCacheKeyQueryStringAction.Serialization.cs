@@ -103,6 +103,8 @@ namespace MgmtDiscriminator.Models
             return DeserializeDeliveryRuleCacheKeyQueryStringAction(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DeliveryRuleCacheKeyQueryStringAction"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DeliveryRuleCacheKeyQueryStringAction"/> to convert. </param>
         public static implicit operator RequestContent(DeliveryRuleCacheKeyQueryStringAction model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace MgmtDiscriminator.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DeliveryRuleCacheKeyQueryStringAction"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DeliveryRuleCacheKeyQueryStringAction(Response response)
         {
             if (response is null)

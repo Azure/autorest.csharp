@@ -113,6 +113,8 @@ namespace MgmtConstants.Models
             return DeserializeModelWithRequiredConstant(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ModelWithRequiredConstant"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ModelWithRequiredConstant"/> to convert. </param>
         public static implicit operator RequestContent(ModelWithRequiredConstant model)
         {
             if (model is null)
@@ -123,6 +125,8 @@ namespace MgmtConstants.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ModelWithRequiredConstant"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ModelWithRequiredConstant(Response response)
         {
             if (response is null)

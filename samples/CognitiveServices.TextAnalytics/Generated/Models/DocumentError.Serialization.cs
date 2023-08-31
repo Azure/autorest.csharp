@@ -97,6 +97,8 @@ namespace CognitiveServices.TextAnalytics.Models
             return DeserializeDocumentError(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DocumentError"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DocumentError"/> to convert. </param>
         public static implicit operator RequestContent(DocumentError model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace CognitiveServices.TextAnalytics.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DocumentError"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DocumentError(Response response)
         {
             if (response is null)

@@ -106,6 +106,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             return DeserializeSnake(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Snake"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Snake"/> to convert. </param>
         public static implicit operator RequestContent(Snake model)
         {
             if (model is null)
@@ -116,6 +118,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Snake"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Snake(Response response)
         {
             if (response is null)

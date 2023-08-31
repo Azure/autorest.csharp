@@ -146,6 +146,8 @@ namespace Azure.Storage.Tables.Models
             }
         }
 
+        /// <summary> Converts a <see cref="StorageError"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="StorageError"/> to convert. </param>
         public static implicit operator RequestContent(StorageError model)
         {
             if (model is null)
@@ -156,6 +158,8 @@ namespace Azure.Storage.Tables.Models
             return RequestContent.Create((IModelSerializable<StorageError>)model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="StorageError"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator StorageError(Response response)
         {
             if (response is null)

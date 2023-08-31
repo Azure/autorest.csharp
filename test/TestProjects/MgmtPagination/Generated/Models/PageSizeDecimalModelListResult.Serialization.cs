@@ -103,6 +103,8 @@ namespace MgmtPagination.Models
             return DeserializePageSizeDecimalModelListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PageSizeDecimalModelListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PageSizeDecimalModelListResult"/> to convert. </param>
         public static implicit operator RequestContent(PageSizeDecimalModelListResult model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace MgmtPagination.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PageSizeDecimalModelListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PageSizeDecimalModelListResult(Response response)
         {
             if (response is null)

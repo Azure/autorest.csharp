@@ -142,6 +142,8 @@ namespace CognitiveSearch.Models
             return DeserializeMicrosoftLanguageStemmingTokenizer(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MicrosoftLanguageStemmingTokenizer"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MicrosoftLanguageStemmingTokenizer"/> to convert. </param>
         public static implicit operator RequestContent(MicrosoftLanguageStemmingTokenizer model)
         {
             if (model is null)
@@ -152,6 +154,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MicrosoftLanguageStemmingTokenizer"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MicrosoftLanguageStemmingTokenizer(Response response)
         {
             if (response is null)

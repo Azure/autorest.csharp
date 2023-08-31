@@ -163,6 +163,8 @@ namespace MgmtScopeResource
             return DeserializeDeploymentExtendedData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DeploymentExtendedData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DeploymentExtendedData"/> to convert. </param>
         public static implicit operator RequestContent(DeploymentExtendedData model)
         {
             if (model is null)
@@ -173,6 +175,8 @@ namespace MgmtScopeResource
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DeploymentExtendedData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DeploymentExtendedData(Response response)
         {
             if (response is null)

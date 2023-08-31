@@ -110,6 +110,8 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeListUsagesResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ListUsagesResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ListUsagesResult"/> to convert. </param>
         public static implicit operator RequestContent(ListUsagesResult model)
         {
             if (model is null)
@@ -120,6 +122,8 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ListUsagesResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ListUsagesResult(Response response)
         {
             if (response is null)

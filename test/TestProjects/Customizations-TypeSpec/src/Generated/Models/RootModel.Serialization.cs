@@ -216,6 +216,8 @@ namespace CustomizationsInTsp.Models
             return DeserializeRootModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="RootModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="RootModel"/> to convert. </param>
         public static implicit operator RequestContent(RootModel model)
         {
             if (model is null)
@@ -226,6 +228,8 @@ namespace CustomizationsInTsp.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="RootModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator RootModel(Response response)
         {
             if (response is null)

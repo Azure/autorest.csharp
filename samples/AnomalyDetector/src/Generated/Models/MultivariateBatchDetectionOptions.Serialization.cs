@@ -113,6 +113,8 @@ namespace AnomalyDetector.Models
             return DeserializeMultivariateBatchDetectionOptions(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MultivariateBatchDetectionOptions"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MultivariateBatchDetectionOptions"/> to convert. </param>
         public static implicit operator RequestContent(MultivariateBatchDetectionOptions model)
         {
             if (model is null)
@@ -123,6 +125,8 @@ namespace AnomalyDetector.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MultivariateBatchDetectionOptions"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MultivariateBatchDetectionOptions(Response response)
         {
             if (response is null)

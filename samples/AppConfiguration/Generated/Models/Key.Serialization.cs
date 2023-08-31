@@ -87,6 +87,8 @@ namespace AppConfiguration.Models
             return DeserializeKey(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Key"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Key"/> to convert. </param>
         public static implicit operator RequestContent(Key model)
         {
             if (model is null)
@@ -97,6 +99,8 @@ namespace AppConfiguration.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Key"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Key(Response response)
         {
             if (response is null)

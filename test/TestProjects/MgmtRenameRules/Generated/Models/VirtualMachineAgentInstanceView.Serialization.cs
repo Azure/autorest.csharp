@@ -142,6 +142,8 @@ namespace MgmtRenameRules.Models
             return DeserializeVirtualMachineAgentInstanceView(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachineAgentInstanceView"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineAgentInstanceView"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachineAgentInstanceView model)
         {
             if (model is null)
@@ -152,6 +154,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineAgentInstanceView"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachineAgentInstanceView(Response response)
         {
             if (response is null)

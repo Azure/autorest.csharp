@@ -99,6 +99,8 @@ namespace Pagination.Models
             return DeserializeDimensionValueListItem(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DimensionValueListItem"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DimensionValueListItem"/> to convert. </param>
         public static implicit operator RequestContent(DimensionValueListItem model)
         {
             if (model is null)
@@ -109,6 +111,8 @@ namespace Pagination.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DimensionValueListItem"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DimensionValueListItem(Response response)
         {
             if (response is null)

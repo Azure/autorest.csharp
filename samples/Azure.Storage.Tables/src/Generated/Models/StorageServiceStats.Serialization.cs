@@ -66,6 +66,8 @@ namespace Azure.Storage.Tables.Models
             return DeserializeStorageServiceStats(XElement.Load(data.ToStream()), options);
         }
 
+        /// <summary> Converts a <see cref="StorageServiceStats"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="StorageServiceStats"/> to convert. </param>
         public static implicit operator RequestContent(StorageServiceStats model)
         {
             if (model is null)
@@ -76,6 +78,8 @@ namespace Azure.Storage.Tables.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="StorageServiceStats"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator StorageServiceStats(Response response)
         {
             if (response is null)

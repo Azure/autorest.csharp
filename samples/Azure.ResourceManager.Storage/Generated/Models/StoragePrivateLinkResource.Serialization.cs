@@ -171,6 +171,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStoragePrivateLinkResource(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="StoragePrivateLinkResource"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="StoragePrivateLinkResource"/> to convert. </param>
         public static implicit operator RequestContent(StoragePrivateLinkResource model)
         {
             if (model is null)
@@ -181,6 +183,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="StoragePrivateLinkResource"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator StoragePrivateLinkResource(Response response)
         {
             if (response is null)

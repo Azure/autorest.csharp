@@ -92,6 +92,8 @@ namespace ModelsTypeSpec.Models
             return DeserializeBaseModelWithProperties(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="BaseModelWithProperties"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="BaseModelWithProperties"/> to convert. </param>
         public static implicit operator RequestContent(BaseModelWithProperties model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace ModelsTypeSpec.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="BaseModelWithProperties"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator BaseModelWithProperties(Response response)
         {
             if (response is null)

@@ -92,6 +92,8 @@ namespace xms_error_responses.Models
             return DeserializeBaseError(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="BaseError"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="BaseError"/> to convert. </param>
         public static implicit operator RequestContent(BaseError model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace xms_error_responses.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="BaseError"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator BaseError(Response response)
         {
             if (response is null)

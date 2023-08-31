@@ -111,6 +111,8 @@ namespace MgmtSafeFlatten.Models
             return DeserializeTypeTwoListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="TypeTwoListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="TypeTwoListResult"/> to convert. </param>
         public static implicit operator RequestContent(TypeTwoListResult model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace MgmtSafeFlatten.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="TypeTwoListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator TypeTwoListResult(Response response)
         {
             if (response is null)

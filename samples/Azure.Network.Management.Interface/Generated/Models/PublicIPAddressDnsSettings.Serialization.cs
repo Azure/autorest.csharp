@@ -114,6 +114,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializePublicIPAddressDnsSettings(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PublicIPAddressDnsSettings"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PublicIPAddressDnsSettings"/> to convert. </param>
         public static implicit operator RequestContent(PublicIPAddressDnsSettings model)
         {
             if (model is null)
@@ -124,6 +126,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PublicIPAddressDnsSettings"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PublicIPAddressDnsSettings(Response response)
         {
             if (response is null)

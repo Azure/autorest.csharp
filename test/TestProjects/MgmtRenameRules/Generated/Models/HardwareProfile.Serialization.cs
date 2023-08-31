@@ -96,6 +96,8 @@ namespace MgmtRenameRules.Models
             return DeserializeHardwareProfile(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="HardwareProfile"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="HardwareProfile"/> to convert. </param>
         public static implicit operator RequestContent(HardwareProfile model)
         {
             if (model is null)
@@ -106,6 +108,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="HardwareProfile"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator HardwareProfile(Response response)
         {
             if (response is null)

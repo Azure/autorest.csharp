@@ -266,6 +266,8 @@ namespace Inheritance.Models
             return DeserializeClassThatInheritsFromBaseClassWithDiscriminator(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ClassThatInheritsFromBaseClassWithDiscriminator"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ClassThatInheritsFromBaseClassWithDiscriminator"/> to convert. </param>
         public static implicit operator RequestContent(ClassThatInheritsFromBaseClassWithDiscriminator model)
         {
             if (model is null)
@@ -276,6 +278,8 @@ namespace Inheritance.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ClassThatInheritsFromBaseClassWithDiscriminator"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ClassThatInheritsFromBaseClassWithDiscriminator(Response response)
         {
             if (response is null)

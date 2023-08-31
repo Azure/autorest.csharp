@@ -103,6 +103,8 @@ namespace Inheritance.Models
             return DeserializeSomeProperties(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SomeProperties"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SomeProperties"/> to convert. </param>
         public static implicit operator RequestContent(SomeProperties model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace Inheritance.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SomeProperties"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SomeProperties(Response response)
         {
             if (response is null)

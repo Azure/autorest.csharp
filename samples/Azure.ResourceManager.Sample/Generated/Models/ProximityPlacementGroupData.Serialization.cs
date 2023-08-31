@@ -251,6 +251,8 @@ namespace Azure.ResourceManager.Sample
             return DeserializeProximityPlacementGroupData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ProximityPlacementGroupData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ProximityPlacementGroupData"/> to convert. </param>
         public static implicit operator RequestContent(ProximityPlacementGroupData model)
         {
             if (model is null)
@@ -261,6 +263,8 @@ namespace Azure.ResourceManager.Sample
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ProximityPlacementGroupData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ProximityPlacementGroupData(Response response)
         {
             if (response is null)

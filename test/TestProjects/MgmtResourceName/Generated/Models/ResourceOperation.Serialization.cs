@@ -144,6 +144,8 @@ namespace MgmtResourceName.Models
             return DeserializeResourceOperation(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ResourceOperation"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ResourceOperation"/> to convert. </param>
         public static implicit operator RequestContent(ResourceOperation model)
         {
             if (model is null)
@@ -154,6 +156,8 @@ namespace MgmtResourceName.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ResourceOperation"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ResourceOperation(Response response)
         {
             if (response is null)

@@ -103,6 +103,8 @@ namespace TypeSchemaMapping.Models
             return DeserializePublicModelWithInternalProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PublicModelWithInternalProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PublicModelWithInternalProperty"/> to convert. </param>
         public static implicit operator RequestContent(PublicModelWithInternalProperty model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace TypeSchemaMapping.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PublicModelWithInternalProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PublicModelWithInternalProperty(Response response)
         {
             if (response is null)

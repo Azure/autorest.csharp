@@ -220,6 +220,8 @@ namespace MgmtMockAndSample.Models
             return DeserializeMhsmPrivateLinkResource(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MhsmPrivateLinkResource"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MhsmPrivateLinkResource"/> to convert. </param>
         public static implicit operator RequestContent(MhsmPrivateLinkResource model)
         {
             if (model is null)
@@ -230,6 +232,8 @@ namespace MgmtMockAndSample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MhsmPrivateLinkResource"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MhsmPrivateLinkResource(Response response)
         {
             if (response is null)

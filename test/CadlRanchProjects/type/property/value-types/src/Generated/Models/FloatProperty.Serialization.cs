@@ -89,6 +89,8 @@ namespace _Type.Property.ValueTypes.Models
             return DeserializeFloatProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FloatProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FloatProperty"/> to convert. </param>
         public static implicit operator RequestContent(FloatProperty model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace _Type.Property.ValueTypes.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FloatProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FloatProperty(Response response)
         {
             if (response is null)

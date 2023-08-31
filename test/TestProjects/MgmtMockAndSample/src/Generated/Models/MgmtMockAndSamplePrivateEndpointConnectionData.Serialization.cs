@@ -208,6 +208,8 @@ namespace MgmtMockAndSample
             return DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MgmtMockAndSamplePrivateEndpointConnectionData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MgmtMockAndSamplePrivateEndpointConnectionData"/> to convert. </param>
         public static implicit operator RequestContent(MgmtMockAndSamplePrivateEndpointConnectionData model)
         {
             if (model is null)
@@ -218,6 +220,8 @@ namespace MgmtMockAndSample
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MgmtMockAndSamplePrivateEndpointConnectionData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MgmtMockAndSamplePrivateEndpointConnectionData(Response response)
         {
             if (response is null)

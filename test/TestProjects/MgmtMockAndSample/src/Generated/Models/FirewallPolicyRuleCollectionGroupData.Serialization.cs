@@ -180,6 +180,8 @@ namespace MgmtMockAndSample
             return DeserializeFirewallPolicyRuleCollectionGroupData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FirewallPolicyRuleCollectionGroupData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FirewallPolicyRuleCollectionGroupData"/> to convert. </param>
         public static implicit operator RequestContent(FirewallPolicyRuleCollectionGroupData model)
         {
             if (model is null)
@@ -190,6 +192,8 @@ namespace MgmtMockAndSample
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FirewallPolicyRuleCollectionGroupData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FirewallPolicyRuleCollectionGroupData(Response response)
         {
             if (response is null)

@@ -131,6 +131,8 @@ namespace MgmtScopeResource
             return DeserializeGuestConfigurationAssignmentData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="GuestConfigurationAssignmentData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="GuestConfigurationAssignmentData"/> to convert. </param>
         public static implicit operator RequestContent(GuestConfigurationAssignmentData model)
         {
             if (model is null)
@@ -141,6 +143,8 @@ namespace MgmtScopeResource
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="GuestConfigurationAssignmentData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator GuestConfigurationAssignmentData(Response response)
         {
             if (response is null)

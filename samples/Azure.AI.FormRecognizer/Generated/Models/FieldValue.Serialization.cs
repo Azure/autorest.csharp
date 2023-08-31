@@ -313,6 +313,8 @@ namespace Azure.AI.FormRecognizer.Models
             return DeserializeFieldValue(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FieldValue"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FieldValue"/> to convert. </param>
         public static implicit operator RequestContent(FieldValue model)
         {
             if (model is null)
@@ -323,6 +325,8 @@ namespace Azure.AI.FormRecognizer.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FieldValue"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FieldValue(Response response)
         {
             if (response is null)

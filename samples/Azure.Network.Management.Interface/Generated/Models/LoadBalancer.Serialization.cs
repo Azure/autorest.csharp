@@ -368,6 +368,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeLoadBalancer(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="LoadBalancer"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="LoadBalancer"/> to convert. </param>
         public static implicit operator RequestContent(LoadBalancer model)
         {
             if (model is null)
@@ -378,6 +380,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="LoadBalancer"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator LoadBalancer(Response response)
         {
             if (response is null)

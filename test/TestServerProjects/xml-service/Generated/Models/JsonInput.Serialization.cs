@@ -96,6 +96,8 @@ namespace xml_service.Models
             return DeserializeJsonInput(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="JsonInput"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="JsonInput"/> to convert. </param>
         public static implicit operator RequestContent(JsonInput model)
         {
             if (model is null)
@@ -106,6 +108,8 @@ namespace xml_service.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="JsonInput"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator JsonInput(Response response)
         {
             if (response is null)

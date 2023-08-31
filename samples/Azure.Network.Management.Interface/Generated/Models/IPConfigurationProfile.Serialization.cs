@@ -155,6 +155,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeIPConfigurationProfile(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="IPConfigurationProfile"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="IPConfigurationProfile"/> to convert. </param>
         public static implicit operator RequestContent(IPConfigurationProfile model)
         {
             if (model is null)
@@ -165,6 +167,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="IPConfigurationProfile"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator IPConfigurationProfile(Response response)
         {
             if (response is null)

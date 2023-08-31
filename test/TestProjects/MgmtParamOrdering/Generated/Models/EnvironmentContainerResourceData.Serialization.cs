@@ -153,6 +153,8 @@ namespace MgmtParamOrdering
             return DeserializeEnvironmentContainerResourceData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="EnvironmentContainerResourceData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="EnvironmentContainerResourceData"/> to convert. </param>
         public static implicit operator RequestContent(EnvironmentContainerResourceData model)
         {
             if (model is null)
@@ -163,6 +165,8 @@ namespace MgmtParamOrdering
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="EnvironmentContainerResourceData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator EnvironmentContainerResourceData(Response response)
         {
             if (response is null)

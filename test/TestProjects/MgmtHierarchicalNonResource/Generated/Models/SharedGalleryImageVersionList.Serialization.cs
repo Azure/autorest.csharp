@@ -110,6 +110,8 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializeSharedGalleryImageVersionList(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SharedGalleryImageVersionList"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SharedGalleryImageVersionList"/> to convert. </param>
         public static implicit operator RequestContent(SharedGalleryImageVersionList model)
         {
             if (model is null)
@@ -120,6 +122,8 @@ namespace MgmtHierarchicalNonResource.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SharedGalleryImageVersionList"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SharedGalleryImageVersionList(Response response)
         {
             if (response is null)

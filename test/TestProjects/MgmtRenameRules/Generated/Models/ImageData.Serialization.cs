@@ -212,6 +212,8 @@ namespace MgmtRenameRules
             return DeserializeImageData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ImageData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ImageData"/> to convert. </param>
         public static implicit operator RequestContent(ImageData model)
         {
             if (model is null)
@@ -222,6 +224,8 @@ namespace MgmtRenameRules
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ImageData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ImageData(Response response)
         {
             if (response is null)

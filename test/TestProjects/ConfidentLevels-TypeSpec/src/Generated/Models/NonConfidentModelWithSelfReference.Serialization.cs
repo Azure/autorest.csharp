@@ -115,6 +115,8 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializeNonConfidentModelWithSelfReference(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="NonConfidentModelWithSelfReference"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="NonConfidentModelWithSelfReference"/> to convert. </param>
         public static implicit operator RequestContent(NonConfidentModelWithSelfReference model)
         {
             if (model is null)
@@ -125,6 +127,8 @@ namespace ConfidentLevelsInTsp.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="NonConfidentModelWithSelfReference"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator NonConfidentModelWithSelfReference(Response response)
         {
             if (response is null)

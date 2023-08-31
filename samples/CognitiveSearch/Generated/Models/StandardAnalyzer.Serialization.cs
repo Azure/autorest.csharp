@@ -137,6 +137,8 @@ namespace CognitiveSearch.Models
             return DeserializeStandardAnalyzer(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="StandardAnalyzer"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="StandardAnalyzer"/> to convert. </param>
         public static implicit operator RequestContent(StandardAnalyzer model)
         {
             if (model is null)
@@ -147,6 +149,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="StandardAnalyzer"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator StandardAnalyzer(Response response)
         {
             if (response is null)

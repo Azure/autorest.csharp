@@ -97,6 +97,8 @@ namespace MgmtRenameRules.Models
             return DeserializeOrchestrationServiceStateContent(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="OrchestrationServiceStateContent"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="OrchestrationServiceStateContent"/> to convert. </param>
         public static implicit operator RequestContent(OrchestrationServiceStateContent model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="OrchestrationServiceStateContent"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator OrchestrationServiceStateContent(Response response)
         {
             if (response is null)

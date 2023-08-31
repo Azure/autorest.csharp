@@ -181,6 +181,8 @@ namespace Azure.ResourceManager.Storage
             return DeserializeFileServiceData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FileServiceData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FileServiceData"/> to convert. </param>
         public static implicit operator RequestContent(FileServiceData model)
         {
             if (model is null)
@@ -191,6 +193,8 @@ namespace Azure.ResourceManager.Storage
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FileServiceData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FileServiceData(Response response)
         {
             if (response is null)

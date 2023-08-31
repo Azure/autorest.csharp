@@ -108,6 +108,8 @@ namespace MgmtCollectionParent.Models
             return DeserializeOrderResourceList(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="OrderResourceList"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="OrderResourceList"/> to convert. </param>
         public static implicit operator RequestContent(OrderResourceList model)
         {
             if (model is null)
@@ -118,6 +120,8 @@ namespace MgmtCollectionParent.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="OrderResourceList"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator OrderResourceList(Response response)
         {
             if (response is null)

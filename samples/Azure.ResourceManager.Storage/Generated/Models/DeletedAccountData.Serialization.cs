@@ -159,6 +159,8 @@ namespace Azure.ResourceManager.Storage
             return DeserializeDeletedAccountData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DeletedAccountData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DeletedAccountData"/> to convert. </param>
         public static implicit operator RequestContent(DeletedAccountData model)
         {
             if (model is null)
@@ -169,6 +171,8 @@ namespace Azure.ResourceManager.Storage
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DeletedAccountData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DeletedAccountData(Response response)
         {
             if (response is null)

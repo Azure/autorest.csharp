@@ -89,6 +89,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStorageAccountRegenerateKeyContent(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="StorageAccountRegenerateKeyContent"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="StorageAccountRegenerateKeyContent"/> to convert. </param>
         public static implicit operator RequestContent(StorageAccountRegenerateKeyContent model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="StorageAccountRegenerateKeyContent"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator StorageAccountRegenerateKeyContent(Response response)
         {
             if (response is null)

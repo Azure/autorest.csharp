@@ -96,6 +96,8 @@ namespace MgmtMockAndSample.Models
             return DeserializeDeepSinglePropertyModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DeepSinglePropertyModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DeepSinglePropertyModel"/> to convert. </param>
         public static implicit operator RequestContent(DeepSinglePropertyModel model)
         {
             if (model is null)
@@ -106,6 +108,8 @@ namespace MgmtMockAndSample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DeepSinglePropertyModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DeepSinglePropertyModel(Response response)
         {
             if (response is null)

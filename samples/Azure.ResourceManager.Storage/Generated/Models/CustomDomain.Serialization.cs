@@ -104,6 +104,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeCustomDomain(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="CustomDomain"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="CustomDomain"/> to convert. </param>
         public static implicit operator RequestContent(CustomDomain model)
         {
             if (model is null)
@@ -114,6 +116,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="CustomDomain"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator CustomDomain(Response response)
         {
             if (response is null)

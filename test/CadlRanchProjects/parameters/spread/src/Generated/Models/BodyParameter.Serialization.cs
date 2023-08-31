@@ -89,6 +89,8 @@ namespace Parameters.Spread.Models
             return DeserializeBodyParameter(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="BodyParameter"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="BodyParameter"/> to convert. </param>
         public static implicit operator RequestContent(BodyParameter model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace Parameters.Spread.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="BodyParameter"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator BodyParameter(Response response)
         {
             if (response is null)

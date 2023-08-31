@@ -146,6 +146,8 @@ namespace TypeSchemaMapping.Models
             }
         }
 
+        /// <summary> Converts a <see cref="ModelWithCustomUsage"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ModelWithCustomUsage"/> to convert. </param>
         public static implicit operator RequestContent(ModelWithCustomUsage model)
         {
             if (model is null)
@@ -156,6 +158,8 @@ namespace TypeSchemaMapping.Models
             return RequestContent.Create((IModelSerializable<ModelWithCustomUsage>)model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ModelWithCustomUsage"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ModelWithCustomUsage(Response response)
         {
             if (response is null)

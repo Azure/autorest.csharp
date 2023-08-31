@@ -92,6 +92,8 @@ namespace paging.Models
             return DeserializeBodyParam(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="BodyParam"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="BodyParam"/> to convert. </param>
         public static implicit operator RequestContent(BodyParam model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace paging.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="BodyParam"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator BodyParam(Response response)
         {
             if (response is null)

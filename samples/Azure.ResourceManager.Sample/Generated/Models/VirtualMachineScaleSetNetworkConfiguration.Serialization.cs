@@ -216,6 +216,8 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineScaleSetNetworkConfiguration(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetNetworkConfiguration"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetNetworkConfiguration"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachineScaleSetNetworkConfiguration model)
         {
             if (model is null)
@@ -226,6 +228,8 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetNetworkConfiguration"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachineScaleSetNetworkConfiguration(Response response)
         {
             if (response is null)

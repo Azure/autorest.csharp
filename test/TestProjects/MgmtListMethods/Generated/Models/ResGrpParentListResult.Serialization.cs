@@ -111,6 +111,8 @@ namespace MgmtListMethods.Models
             return DeserializeResGrpParentListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ResGrpParentListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ResGrpParentListResult"/> to convert. </param>
         public static implicit operator RequestContent(ResGrpParentListResult model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace MgmtListMethods.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ResGrpParentListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ResGrpParentListResult(Response response)
         {
             if (response is null)

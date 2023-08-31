@@ -92,6 +92,8 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeNsRecord(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="NsRecord"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="NsRecord"/> to convert. </param>
         public static implicit operator RequestContent(NsRecord model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace MgmtExpandResourceTypes.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="NsRecord"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator NsRecord(Response response)
         {
             if (response is null)

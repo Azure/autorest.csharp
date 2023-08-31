@@ -135,6 +135,8 @@ namespace body_complex.Models
             return DeserializeMyBaseType(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MyBaseType"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MyBaseType"/> to convert. </param>
         public static implicit operator RequestContent(MyBaseType model)
         {
             if (model is null)
@@ -145,6 +147,8 @@ namespace body_complex.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MyBaseType"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MyBaseType(Response response)
         {
             if (response is null)

@@ -211,11 +211,15 @@ namespace CustomNamespace
             return DeserializeRenamedModelStruct(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="RenamedModelStruct"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="RenamedModelStruct"/> to convert. </param>
         public static implicit operator RequestContent(RenamedModelStruct model)
         {
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="RenamedModelStruct"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator RenamedModelStruct(Response response)
         {
             Argument.AssertNotNull(response, nameof(response));

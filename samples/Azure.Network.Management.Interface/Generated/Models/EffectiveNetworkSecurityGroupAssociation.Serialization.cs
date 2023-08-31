@@ -111,6 +111,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeEffectiveNetworkSecurityGroupAssociation(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="EffectiveNetworkSecurityGroupAssociation"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="EffectiveNetworkSecurityGroupAssociation"/> to convert. </param>
         public static implicit operator RequestContent(EffectiveNetworkSecurityGroupAssociation model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="EffectiveNetworkSecurityGroupAssociation"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator EffectiveNetworkSecurityGroupAssociation(Response response)
         {
             if (response is null)

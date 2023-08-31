@@ -194,6 +194,8 @@ namespace model_flattening.Models
             return DeserializeFlattenedProduct(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FlattenedProduct"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FlattenedProduct"/> to convert. </param>
         public static implicit operator RequestContent(FlattenedProduct model)
         {
             if (model is null)
@@ -204,6 +206,8 @@ namespace model_flattening.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FlattenedProduct"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FlattenedProduct(Response response)
         {
             if (response is null)

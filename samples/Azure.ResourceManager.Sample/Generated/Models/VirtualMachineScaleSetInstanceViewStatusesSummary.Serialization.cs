@@ -96,6 +96,8 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineScaleSetInstanceViewStatusesSummary(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetInstanceViewStatusesSummary"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetInstanceViewStatusesSummary"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachineScaleSetInstanceViewStatusesSummary model)
         {
             if (model is null)
@@ -106,6 +108,8 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetInstanceViewStatusesSummary"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachineScaleSetInstanceViewStatusesSummary(Response response)
         {
             if (response is null)

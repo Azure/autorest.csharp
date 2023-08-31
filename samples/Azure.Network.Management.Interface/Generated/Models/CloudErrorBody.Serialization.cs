@@ -139,6 +139,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeCloudErrorBody(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="CloudErrorBody"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="CloudErrorBody"/> to convert. </param>
         public static implicit operator RequestContent(CloudErrorBody model)
         {
             if (model is null)
@@ -149,6 +151,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="CloudErrorBody"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator CloudErrorBody(Response response)
         {
             if (response is null)

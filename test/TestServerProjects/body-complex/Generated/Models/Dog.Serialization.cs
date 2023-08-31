@@ -118,6 +118,8 @@ namespace body_complex.Models
             return DeserializeDog(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Dog"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Dog"/> to convert. </param>
         public static implicit operator RequestContent(Dog model)
         {
             if (model is null)
@@ -128,6 +130,8 @@ namespace body_complex.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Dog"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Dog(Response response)
         {
             if (response is null)

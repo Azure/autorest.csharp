@@ -119,6 +119,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeTagProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="TagProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="TagProperty"/> to convert. </param>
         public static implicit operator RequestContent(TagProperty model)
         {
             if (model is null)
@@ -129,6 +131,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="TagProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator TagProperty(Response response)
         {
             if (response is null)

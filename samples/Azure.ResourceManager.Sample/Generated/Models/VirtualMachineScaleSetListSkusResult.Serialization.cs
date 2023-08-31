@@ -110,6 +110,8 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineScaleSetListSkusResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetListSkusResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetListSkusResult"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachineScaleSetListSkusResult model)
         {
             if (model is null)
@@ -120,6 +122,8 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetListSkusResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachineScaleSetListSkusResult(Response response)
         {
             if (response is null)

@@ -120,6 +120,8 @@ namespace CognitiveSearch.Models
             return DeserializeEncryptionKey(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="EncryptionKey"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="EncryptionKey"/> to convert. </param>
         public static implicit operator RequestContent(EncryptionKey model)
         {
             if (model is null)
@@ -130,6 +132,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="EncryptionKey"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator EncryptionKey(Response response)
         {
             if (response is null)

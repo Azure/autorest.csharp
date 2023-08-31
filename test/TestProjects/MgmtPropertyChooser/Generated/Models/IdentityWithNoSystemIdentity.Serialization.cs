@@ -123,6 +123,8 @@ namespace MgmtPropertyChooser.Models
             return DeserializeIdentityWithNoSystemIdentity(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="IdentityWithNoSystemIdentity"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="IdentityWithNoSystemIdentity"/> to convert. </param>
         public static implicit operator RequestContent(IdentityWithNoSystemIdentity model)
         {
             if (model is null)
@@ -133,6 +135,8 @@ namespace MgmtPropertyChooser.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="IdentityWithNoSystemIdentity"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator IdentityWithNoSystemIdentity(Response response)
         {
             if (response is null)

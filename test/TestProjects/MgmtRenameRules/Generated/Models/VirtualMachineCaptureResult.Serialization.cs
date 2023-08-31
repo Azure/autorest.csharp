@@ -136,6 +136,8 @@ namespace MgmtRenameRules.Models
             return DeserializeVirtualMachineCaptureResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachineCaptureResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineCaptureResult"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachineCaptureResult model)
         {
             if (model is null)
@@ -146,6 +148,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineCaptureResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachineCaptureResult(Response response)
         {
             if (response is null)

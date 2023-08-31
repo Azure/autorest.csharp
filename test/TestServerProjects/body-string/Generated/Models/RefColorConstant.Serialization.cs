@@ -100,6 +100,8 @@ namespace body_string.Models
             return DeserializeRefColorConstant(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="RefColorConstant"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="RefColorConstant"/> to convert. </param>
         public static implicit operator RequestContent(RefColorConstant model)
         {
             if (model is null)
@@ -110,6 +112,8 @@ namespace body_string.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="RefColorConstant"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator RefColorConstant(Response response)
         {
             if (response is null)

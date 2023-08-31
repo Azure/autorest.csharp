@@ -102,6 +102,8 @@ namespace MgmtRenameRules.Models
             return DeserializeVirtualMachineScaleSetVmExtensionsSummary(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetVmExtensionsSummary"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetVmExtensionsSummary"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachineScaleSetVmExtensionsSummary model)
         {
             if (model is null)
@@ -112,6 +114,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetVmExtensionsSummary"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachineScaleSetVmExtensionsSummary(Response response)
         {
             if (response is null)

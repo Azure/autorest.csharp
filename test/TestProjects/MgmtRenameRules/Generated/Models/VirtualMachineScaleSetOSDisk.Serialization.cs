@@ -245,6 +245,8 @@ namespace MgmtRenameRules.Models
             return DeserializeVirtualMachineScaleSetOSDisk(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetOSDisk"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetOSDisk"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachineScaleSetOSDisk model)
         {
             if (model is null)
@@ -255,6 +257,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetOSDisk"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachineScaleSetOSDisk(Response response)
         {
             if (response is null)

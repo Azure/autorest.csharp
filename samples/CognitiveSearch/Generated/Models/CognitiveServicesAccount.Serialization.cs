@@ -110,6 +110,8 @@ namespace CognitiveSearch.Models
             return DeserializeCognitiveServicesAccount(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="CognitiveServicesAccount"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="CognitiveServicesAccount"/> to convert. </param>
         public static implicit operator RequestContent(CognitiveServicesAccount model)
         {
             if (model is null)
@@ -120,6 +122,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="CognitiveServicesAccount"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator CognitiveServicesAccount(Response response)
         {
             if (response is null)

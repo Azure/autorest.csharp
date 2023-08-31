@@ -87,6 +87,8 @@ namespace MgmtMockAndSample.Models
             return DeserializeReadOnlySinglePropertyModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ReadOnlySinglePropertyModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ReadOnlySinglePropertyModel"/> to convert. </param>
         public static implicit operator RequestContent(ReadOnlySinglePropertyModel model)
         {
             if (model is null)
@@ -97,6 +99,8 @@ namespace MgmtMockAndSample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ReadOnlySinglePropertyModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ReadOnlySinglePropertyModel(Response response)
         {
             if (response is null)

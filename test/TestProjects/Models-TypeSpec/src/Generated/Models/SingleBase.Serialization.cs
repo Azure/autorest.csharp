@@ -97,6 +97,8 @@ namespace ModelsTypeSpec.Models
             return DeserializeSingleBase(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SingleBase"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SingleBase"/> to convert. </param>
         public static implicit operator RequestContent(SingleBase model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace ModelsTypeSpec.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SingleBase"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SingleBase(Response response)
         {
             if (response is null)

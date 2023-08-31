@@ -190,6 +190,8 @@ namespace MgmtConstants
             return DeserializeOptionalMachineData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="OptionalMachineData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="OptionalMachineData"/> to convert. </param>
         public static implicit operator RequestContent(OptionalMachineData model)
         {
             if (model is null)
@@ -200,6 +202,8 @@ namespace MgmtConstants
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="OptionalMachineData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator OptionalMachineData(Response response)
         {
             if (response is null)

@@ -98,6 +98,8 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializePrivateEndpointConnectionList(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PrivateEndpointConnectionList"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PrivateEndpointConnectionList"/> to convert. </param>
         public static implicit operator RequestContent(PrivateEndpointConnectionList model)
         {
             if (model is null)
@@ -108,6 +110,8 @@ namespace Azure.ResourceManager.Fake.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PrivateEndpointConnectionList"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PrivateEndpointConnectionList(Response response)
         {
             if (response is null)

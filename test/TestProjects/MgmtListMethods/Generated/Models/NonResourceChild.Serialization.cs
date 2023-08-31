@@ -107,6 +107,8 @@ namespace MgmtListMethods.Models
             return DeserializeNonResourceChild(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="NonResourceChild"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="NonResourceChild"/> to convert. </param>
         public static implicit operator RequestContent(NonResourceChild model)
         {
             if (model is null)
@@ -117,6 +119,8 @@ namespace MgmtListMethods.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="NonResourceChild"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator NonResourceChild(Response response)
         {
             if (response is null)

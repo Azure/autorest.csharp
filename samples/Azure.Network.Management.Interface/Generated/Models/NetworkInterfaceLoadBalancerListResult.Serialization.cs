@@ -112,6 +112,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeNetworkInterfaceLoadBalancerListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="NetworkInterfaceLoadBalancerListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="NetworkInterfaceLoadBalancerListResult"/> to convert. </param>
         public static implicit operator RequestContent(NetworkInterfaceLoadBalancerListResult model)
         {
             if (model is null)
@@ -122,6 +124,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="NetworkInterfaceLoadBalancerListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator NetworkInterfaceLoadBalancerListResult(Response response)
         {
             if (response is null)

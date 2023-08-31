@@ -122,6 +122,8 @@ namespace xms_error_responses.Models
             return DeserializeAnimalNotFound(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="AnimalNotFound"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="AnimalNotFound"/> to convert. </param>
         public static implicit operator RequestContent(AnimalNotFound model)
         {
             if (model is null)
@@ -132,6 +134,8 @@ namespace xms_error_responses.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="AnimalNotFound"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator AnimalNotFound(Response response)
         {
             if (response is null)

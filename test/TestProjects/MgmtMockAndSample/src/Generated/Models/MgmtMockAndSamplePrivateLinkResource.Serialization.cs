@@ -196,6 +196,8 @@ namespace MgmtMockAndSample.Models
             return DeserializeMgmtMockAndSamplePrivateLinkResource(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MgmtMockAndSamplePrivateLinkResource"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MgmtMockAndSamplePrivateLinkResource"/> to convert. </param>
         public static implicit operator RequestContent(MgmtMockAndSamplePrivateLinkResource model)
         {
             if (model is null)
@@ -206,6 +208,8 @@ namespace MgmtMockAndSample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MgmtMockAndSamplePrivateLinkResource"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MgmtMockAndSamplePrivateLinkResource(Response response)
         {
             if (response is null)

@@ -162,6 +162,8 @@ namespace MgmtMockAndSample.Models
             return DeserializeMhsmNetworkRuleSet(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MhsmNetworkRuleSet"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MhsmNetworkRuleSet"/> to convert. </param>
         public static implicit operator RequestContent(MhsmNetworkRuleSet model)
         {
             if (model is null)
@@ -172,6 +174,8 @@ namespace MgmtMockAndSample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MhsmNetworkRuleSet"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MhsmNetworkRuleSet(Response response)
         {
             if (response is null)

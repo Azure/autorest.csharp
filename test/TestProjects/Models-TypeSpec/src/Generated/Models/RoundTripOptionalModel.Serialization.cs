@@ -387,6 +387,8 @@ namespace ModelsTypeSpec.Models
             return DeserializeRoundTripOptionalModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="RoundTripOptionalModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="RoundTripOptionalModel"/> to convert. </param>
         public static implicit operator RequestContent(RoundTripOptionalModel model)
         {
             if (model is null)
@@ -397,6 +399,8 @@ namespace ModelsTypeSpec.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="RoundTripOptionalModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator RoundTripOptionalModel(Response response)
         {
             if (response is null)

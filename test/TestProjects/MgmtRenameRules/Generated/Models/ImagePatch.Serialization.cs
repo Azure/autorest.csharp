@@ -174,6 +174,8 @@ namespace MgmtRenameRules.Models
             return DeserializeImagePatch(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ImagePatch"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ImagePatch"/> to convert. </param>
         public static implicit operator RequestContent(ImagePatch model)
         {
             if (model is null)
@@ -184,6 +186,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ImagePatch"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ImagePatch(Response response)
         {
             if (response is null)

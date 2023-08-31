@@ -111,6 +111,8 @@ namespace MgmtNonStringPathVariable.Models
             return DeserializeFakeProperties(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FakeProperties"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FakeProperties"/> to convert. </param>
         public static implicit operator RequestContent(FakeProperties model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace MgmtNonStringPathVariable.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FakeProperties"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FakeProperties(Response response)
         {
             if (response is null)

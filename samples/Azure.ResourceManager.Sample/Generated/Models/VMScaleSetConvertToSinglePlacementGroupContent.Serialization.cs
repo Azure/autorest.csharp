@@ -92,6 +92,8 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVMScaleSetConvertToSinglePlacementGroupContent(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VMScaleSetConvertToSinglePlacementGroupContent"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VMScaleSetConvertToSinglePlacementGroupContent"/> to convert. </param>
         public static implicit operator RequestContent(VMScaleSetConvertToSinglePlacementGroupContent model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VMScaleSetConvertToSinglePlacementGroupContent"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VMScaleSetConvertToSinglePlacementGroupContent(Response response)
         {
             if (response is null)

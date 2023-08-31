@@ -113,6 +113,8 @@ namespace AnomalyDetector.Models
             return DeserializeMultivariateDetectionResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MultivariateDetectionResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MultivariateDetectionResult"/> to convert. </param>
         public static implicit operator RequestContent(MultivariateDetectionResult model)
         {
             if (model is null)
@@ -123,6 +125,8 @@ namespace AnomalyDetector.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MultivariateDetectionResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MultivariateDetectionResult(Response response)
         {
             if (response is null)

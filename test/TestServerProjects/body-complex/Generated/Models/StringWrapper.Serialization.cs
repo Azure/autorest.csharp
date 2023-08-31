@@ -114,6 +114,8 @@ namespace body_complex.Models
             return DeserializeStringWrapper(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="StringWrapper"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="StringWrapper"/> to convert. </param>
         public static implicit operator RequestContent(StringWrapper model)
         {
             if (model is null)
@@ -124,6 +126,8 @@ namespace body_complex.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="StringWrapper"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator StringWrapper(Response response)
         {
             if (response is null)

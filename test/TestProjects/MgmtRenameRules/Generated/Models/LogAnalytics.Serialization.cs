@@ -155,6 +155,8 @@ namespace MgmtRenameRules.Models
             return DeserializeLogAnalytics(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="LogAnalytics"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="LogAnalytics"/> to convert. </param>
         public static implicit operator RequestContent(LogAnalytics model)
         {
             if (model is null)
@@ -165,6 +167,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="LogAnalytics"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator LogAnalytics(Response response)
         {
             if (response is null)

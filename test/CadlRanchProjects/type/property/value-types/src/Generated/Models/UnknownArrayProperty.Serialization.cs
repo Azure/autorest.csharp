@@ -93,6 +93,8 @@ namespace _Type.Property.ValueTypes.Models
             return DeserializeUnknownArrayProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="UnknownArrayProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="UnknownArrayProperty"/> to convert. </param>
         public static implicit operator RequestContent(UnknownArrayProperty model)
         {
             if (model is null)
@@ -103,6 +105,8 @@ namespace _Type.Property.ValueTypes.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="UnknownArrayProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator UnknownArrayProperty(Response response)
         {
             if (response is null)

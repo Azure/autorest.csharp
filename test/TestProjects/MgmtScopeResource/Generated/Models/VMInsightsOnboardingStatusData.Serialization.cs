@@ -192,6 +192,8 @@ namespace MgmtScopeResource
             return DeserializeVMInsightsOnboardingStatusData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VMInsightsOnboardingStatusData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VMInsightsOnboardingStatusData"/> to convert. </param>
         public static implicit operator RequestContent(VMInsightsOnboardingStatusData model)
         {
             if (model is null)
@@ -202,6 +204,8 @@ namespace MgmtScopeResource
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VMInsightsOnboardingStatusData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VMInsightsOnboardingStatusData(Response response)
         {
             if (response is null)

@@ -112,6 +112,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeNetworkInterfaceTapConfigurationListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="NetworkInterfaceTapConfigurationListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="NetworkInterfaceTapConfigurationListResult"/> to convert. </param>
         public static implicit operator RequestContent(NetworkInterfaceTapConfigurationListResult model)
         {
             if (model is null)
@@ -122,6 +124,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="NetworkInterfaceTapConfigurationListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator NetworkInterfaceTapConfigurationListResult(Response response)
         {
             if (response is null)

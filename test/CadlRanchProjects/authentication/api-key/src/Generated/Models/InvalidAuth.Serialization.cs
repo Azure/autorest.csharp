@@ -89,6 +89,8 @@ namespace Authentication.ApiKey.Models
             return DeserializeInvalidAuth(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="InvalidAuth"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="InvalidAuth"/> to convert. </param>
         public static implicit operator RequestContent(InvalidAuth model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace Authentication.ApiKey.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="InvalidAuth"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator InvalidAuth(Response response)
         {
             if (response is null)

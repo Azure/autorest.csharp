@@ -126,6 +126,8 @@ namespace MgmtScopeResource
             return DeserializeResourceLinkData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ResourceLinkData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ResourceLinkData"/> to convert. </param>
         public static implicit operator RequestContent(ResourceLinkData model)
         {
             if (model is null)
@@ -136,6 +138,8 @@ namespace MgmtScopeResource
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ResourceLinkData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ResourceLinkData(Response response)
         {
             if (response is null)

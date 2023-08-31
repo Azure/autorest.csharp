@@ -89,6 +89,8 @@ namespace _Type.Union.Models
             return DeserializeModelWithNamedUnionProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ModelWithNamedUnionProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ModelWithNamedUnionProperty"/> to convert. </param>
         public static implicit operator RequestContent(ModelWithNamedUnionProperty model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace _Type.Union.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ModelWithNamedUnionProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ModelWithNamedUnionProperty(Response response)
         {
             if (response is null)

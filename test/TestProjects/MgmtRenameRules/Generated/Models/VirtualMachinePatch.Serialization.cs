@@ -448,6 +448,8 @@ namespace MgmtRenameRules.Models
             return DeserializeVirtualMachinePatch(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachinePatch"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachinePatch"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachinePatch model)
         {
             if (model is null)
@@ -458,6 +460,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachinePatch"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachinePatch(Response response)
         {
             if (response is null)

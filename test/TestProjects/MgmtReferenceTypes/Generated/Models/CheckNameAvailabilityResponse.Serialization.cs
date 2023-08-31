@@ -124,6 +124,8 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeCheckNameAvailabilityResponse(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="CheckNameAvailabilityResponse"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="CheckNameAvailabilityResponse"/> to convert. </param>
         public static implicit operator RequestContent(CheckNameAvailabilityResponse model)
         {
             if (model is null)
@@ -134,6 +136,8 @@ namespace Azure.ResourceManager.Fake.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="CheckNameAvailabilityResponse"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator CheckNameAvailabilityResponse(Response response)
         {
             if (response is null)

@@ -247,6 +247,8 @@ namespace MgmtMultipleParentResource
             return DeserializeChildBodyData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ChildBodyData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ChildBodyData"/> to convert. </param>
         public static implicit operator RequestContent(ChildBodyData model)
         {
             if (model is null)
@@ -257,6 +259,8 @@ namespace MgmtMultipleParentResource
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ChildBodyData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ChildBodyData(Response response)
         {
             if (response is null)

@@ -92,6 +92,8 @@ namespace CognitiveSearch.Models
             return DeserializeDataSourceCredentials(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DataSourceCredentials"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DataSourceCredentials"/> to convert. </param>
         public static implicit operator RequestContent(DataSourceCredentials model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DataSourceCredentials"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DataSourceCredentials(Response response)
         {
             if (response is null)

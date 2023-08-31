@@ -105,6 +105,8 @@ namespace CognitiveSearch.Models
             return DeserializeSearchResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SearchResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SearchResult"/> to convert. </param>
         public static implicit operator RequestContent(SearchResult model)
         {
             if (model is null)
@@ -115,6 +117,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SearchResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SearchResult(Response response)
         {
             if (response is null)

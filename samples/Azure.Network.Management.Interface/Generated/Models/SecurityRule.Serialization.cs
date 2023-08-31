@@ -399,6 +399,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeSecurityRule(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SecurityRule"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SecurityRule"/> to convert. </param>
         public static implicit operator RequestContent(SecurityRule model)
         {
             if (model is null)
@@ -409,6 +411,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SecurityRule"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SecurityRule(Response response)
         {
             if (response is null)

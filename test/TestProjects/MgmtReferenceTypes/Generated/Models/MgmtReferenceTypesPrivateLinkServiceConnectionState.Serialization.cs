@@ -120,6 +120,8 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeMgmtReferenceTypesPrivateLinkServiceConnectionState(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MgmtReferenceTypesPrivateLinkServiceConnectionState"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MgmtReferenceTypesPrivateLinkServiceConnectionState"/> to convert. </param>
         public static implicit operator RequestContent(MgmtReferenceTypesPrivateLinkServiceConnectionState model)
         {
             if (model is null)
@@ -130,6 +132,8 @@ namespace Azure.ResourceManager.Fake.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MgmtReferenceTypesPrivateLinkServiceConnectionState"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MgmtReferenceTypesPrivateLinkServiceConnectionState(Response response)
         {
             if (response is null)

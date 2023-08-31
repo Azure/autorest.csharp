@@ -1273,6 +1273,8 @@ namespace NameConflicts.Models
             return DeserializeClass(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Class"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Class"/> to convert. </param>
         public static implicit operator RequestContent(Class model)
         {
             if (model is null)
@@ -1283,6 +1285,8 @@ namespace NameConflicts.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Class"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Class(Azure.Response response)
         {
             if (response is null)

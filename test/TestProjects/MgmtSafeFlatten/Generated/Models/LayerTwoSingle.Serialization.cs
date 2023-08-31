@@ -92,6 +92,8 @@ namespace MgmtSafeFlatten.Models
             return DeserializeLayerTwoSingle(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="LayerTwoSingle"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="LayerTwoSingle"/> to convert. </param>
         public static implicit operator RequestContent(LayerTwoSingle model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace MgmtSafeFlatten.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="LayerTwoSingle"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator LayerTwoSingle(Response response)
         {
             if (response is null)

@@ -111,6 +111,8 @@ namespace MgmtListMethods.Models
             return DeserializeFakeParentWithNonResChListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FakeParentWithNonResChListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FakeParentWithNonResChListResult"/> to convert. </param>
         public static implicit operator RequestContent(FakeParentWithNonResChListResult model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace MgmtListMethods.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FakeParentWithNonResChListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FakeParentWithNonResChListResult(Response response)
         {
             if (response is null)

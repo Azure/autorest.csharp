@@ -100,6 +100,8 @@ namespace MgmtScopeResource.Models
             return DeserializeDeploymentWhatIf(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DeploymentWhatIf"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DeploymentWhatIf"/> to convert. </param>
         public static implicit operator RequestContent(DeploymentWhatIf model)
         {
             if (model is null)
@@ -110,6 +112,8 @@ namespace MgmtScopeResource.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DeploymentWhatIf"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DeploymentWhatIf(Response response)
         {
             if (response is null)

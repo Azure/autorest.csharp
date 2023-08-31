@@ -211,6 +211,8 @@ namespace CognitiveSearch.Models
             return DeserializeSplitSkill(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SplitSkill"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SplitSkill"/> to convert. </param>
         public static implicit operator RequestContent(SplitSkill model)
         {
             if (model is null)
@@ -221,6 +223,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SplitSkill"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SplitSkill(Response response)
         {
             if (response is null)

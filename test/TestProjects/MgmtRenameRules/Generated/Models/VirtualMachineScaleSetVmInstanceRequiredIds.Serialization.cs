@@ -99,6 +99,8 @@ namespace MgmtRenameRules.Models
             return DeserializeVirtualMachineScaleSetVmInstanceRequiredIds(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetVmInstanceRequiredIds"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetVmInstanceRequiredIds"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachineScaleSetVmInstanceRequiredIds model)
         {
             if (model is null)
@@ -109,6 +111,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetVmInstanceRequiredIds"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachineScaleSetVmInstanceRequiredIds(Response response)
         {
             if (response is null)

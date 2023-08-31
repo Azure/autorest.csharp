@@ -178,6 +178,8 @@ namespace CognitiveSearch.Models
             return DeserializeSkill(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Skill"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Skill"/> to convert. </param>
         public static implicit operator RequestContent(Skill model)
         {
             if (model is null)
@@ -188,6 +190,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Skill"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Skill(Response response)
         {
             if (response is null)

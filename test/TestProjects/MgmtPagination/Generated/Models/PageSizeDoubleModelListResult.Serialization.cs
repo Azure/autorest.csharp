@@ -103,6 +103,8 @@ namespace MgmtPagination.Models
             return DeserializePageSizeDoubleModelListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PageSizeDoubleModelListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PageSizeDoubleModelListResult"/> to convert. </param>
         public static implicit operator RequestContent(PageSizeDoubleModelListResult model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace MgmtPagination.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PageSizeDoubleModelListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PageSizeDoubleModelListResult(Response response)
         {
             if (response is null)

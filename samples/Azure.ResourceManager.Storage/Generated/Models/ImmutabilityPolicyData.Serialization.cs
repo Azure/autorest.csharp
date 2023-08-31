@@ -191,6 +191,8 @@ namespace Azure.ResourceManager.Storage
             return DeserializeImmutabilityPolicyData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ImmutabilityPolicyData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ImmutabilityPolicyData"/> to convert. </param>
         public static implicit operator RequestContent(ImmutabilityPolicyData model)
         {
             if (model is null)
@@ -201,6 +203,8 @@ namespace Azure.ResourceManager.Storage
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ImmutabilityPolicyData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ImmutabilityPolicyData(Response response)
         {
             if (response is null)

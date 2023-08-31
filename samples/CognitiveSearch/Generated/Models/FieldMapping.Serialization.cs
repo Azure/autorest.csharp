@@ -115,6 +115,8 @@ namespace CognitiveSearch.Models
             return DeserializeFieldMapping(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FieldMapping"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FieldMapping"/> to convert. </param>
         public static implicit operator RequestContent(FieldMapping model)
         {
             if (model is null)
@@ -125,6 +127,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FieldMapping"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FieldMapping(Response response)
         {
             if (response is null)

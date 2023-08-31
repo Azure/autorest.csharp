@@ -104,6 +104,8 @@ namespace CognitiveSearch.Models
             return DeserializeIndexingSchedule(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="IndexingSchedule"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="IndexingSchedule"/> to convert. </param>
         public static implicit operator RequestContent(IndexingSchedule model)
         {
             if (model is null)
@@ -114,6 +116,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="IndexingSchedule"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator IndexingSchedule(Response response)
         {
             if (response is null)

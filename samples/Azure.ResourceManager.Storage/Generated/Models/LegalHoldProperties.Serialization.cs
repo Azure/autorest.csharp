@@ -131,6 +131,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeLegalHoldProperties(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="LegalHoldProperties"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="LegalHoldProperties"/> to convert. </param>
         public static implicit operator RequestContent(LegalHoldProperties model)
         {
             if (model is null)
@@ -141,6 +143,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="LegalHoldProperties"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator LegalHoldProperties(Response response)
         {
             if (response is null)

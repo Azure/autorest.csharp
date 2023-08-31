@@ -114,6 +114,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializePrivateLinkServiceConnectionState(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PrivateLinkServiceConnectionState"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PrivateLinkServiceConnectionState"/> to convert. </param>
         public static implicit operator RequestContent(PrivateLinkServiceConnectionState model)
         {
             if (model is null)
@@ -124,6 +126,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PrivateLinkServiceConnectionState"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PrivateLinkServiceConnectionState(Response response)
         {
             if (response is null)

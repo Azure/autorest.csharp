@@ -121,6 +121,8 @@ namespace MgmtSupersetInheritance
             return DeserializeSupersetModel7Data(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SupersetModel7Data"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SupersetModel7Data"/> to convert. </param>
         public static implicit operator RequestContent(SupersetModel7Data model)
         {
             if (model is null)
@@ -131,6 +133,8 @@ namespace MgmtSupersetInheritance
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SupersetModel7Data"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SupersetModel7Data(Response response)
         {
             if (response is null)

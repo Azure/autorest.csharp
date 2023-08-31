@@ -103,6 +103,8 @@ namespace MgmtNoTypeReplacement.Models
             return DeserializeNoTypeReplacementModel3ListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="NoTypeReplacementModel3ListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="NoTypeReplacementModel3ListResult"/> to convert. </param>
         public static implicit operator RequestContent(NoTypeReplacementModel3ListResult model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace MgmtNoTypeReplacement.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="NoTypeReplacementModel3ListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator NoTypeReplacementModel3ListResult(Response response)
         {
             if (response is null)

@@ -125,6 +125,8 @@ namespace MgmtExactMatchFlattenInheritance
             return DeserializeCustomModel3Data(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="CustomModel3Data"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="CustomModel3Data"/> to convert. </param>
         public static implicit operator RequestContent(CustomModel3Data model)
         {
             if (model is null)
@@ -135,6 +137,8 @@ namespace MgmtExactMatchFlattenInheritance
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="CustomModel3Data"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator CustomModel3Data(Response response)
         {
             if (response is null)

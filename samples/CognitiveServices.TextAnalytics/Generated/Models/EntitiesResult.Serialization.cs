@@ -140,6 +140,8 @@ namespace CognitiveServices.TextAnalytics.Models
             return DeserializeEntitiesResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="EntitiesResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="EntitiesResult"/> to convert. </param>
         public static implicit operator RequestContent(EntitiesResult model)
         {
             if (model is null)
@@ -150,6 +152,8 @@ namespace CognitiveServices.TextAnalytics.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="EntitiesResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator EntitiesResult(Response response)
         {
             if (response is null)

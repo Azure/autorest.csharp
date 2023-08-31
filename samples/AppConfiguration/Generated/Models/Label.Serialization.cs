@@ -87,6 +87,8 @@ namespace AppConfiguration.Models
             return DeserializeLabel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Label"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Label"/> to convert. </param>
         public static implicit operator RequestContent(Label model)
         {
             if (model is null)
@@ -97,6 +99,8 @@ namespace AppConfiguration.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Label"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Label(Response response)
         {
             if (response is null)

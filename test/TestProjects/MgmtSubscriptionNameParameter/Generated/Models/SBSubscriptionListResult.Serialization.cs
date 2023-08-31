@@ -118,6 +118,8 @@ namespace MgmtSubscriptionNameParameter.Models
             return DeserializeSBSubscriptionListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SBSubscriptionListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SBSubscriptionListResult"/> to convert. </param>
         public static implicit operator RequestContent(SBSubscriptionListResult model)
         {
             if (model is null)
@@ -128,6 +130,8 @@ namespace MgmtSubscriptionNameParameter.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SBSubscriptionListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SBSubscriptionListResult(Response response)
         {
             if (response is null)

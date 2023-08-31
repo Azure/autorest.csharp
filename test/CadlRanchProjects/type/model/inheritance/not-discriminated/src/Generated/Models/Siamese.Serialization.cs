@@ -105,6 +105,8 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
             return DeserializeSiamese(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Siamese"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Siamese"/> to convert. </param>
         public static implicit operator RequestContent(Siamese model)
         {
             if (model is null)
@@ -115,6 +117,8 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Siamese"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Siamese(Response response)
         {
             if (response is null)

@@ -465,6 +465,8 @@ namespace Azure.NewProject.TypeSpec.Models
             return DeserializeRoundTripModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="RoundTripModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="RoundTripModel"/> to convert. </param>
         public static implicit operator RequestContent(RoundTripModel model)
         {
             if (model is null)
@@ -475,6 +477,8 @@ namespace Azure.NewProject.TypeSpec.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="RoundTripModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator RoundTripModel(Response response)
         {
             if (response is null)

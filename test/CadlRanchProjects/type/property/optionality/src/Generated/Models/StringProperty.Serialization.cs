@@ -92,6 +92,8 @@ namespace _Type.Property.Optionality.Models
             return DeserializeStringProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="StringProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="StringProperty"/> to convert. </param>
         public static implicit operator RequestContent(StringProperty model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace _Type.Property.Optionality.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="StringProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator StringProperty(Response response)
         {
             if (response is null)

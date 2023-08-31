@@ -97,6 +97,8 @@ namespace FirstTestTypeSpec.Models
             return DeserializeModelWithFormat(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ModelWithFormat"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ModelWithFormat"/> to convert. </param>
         public static implicit operator RequestContent(ModelWithFormat model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace FirstTestTypeSpec.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ModelWithFormat"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ModelWithFormat(Response response)
         {
             if (response is null)

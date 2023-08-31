@@ -113,6 +113,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStorageAccountKey(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="StorageAccountKey"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="StorageAccountKey"/> to convert. </param>
         public static implicit operator RequestContent(StorageAccountKey model)
         {
             if (model is null)
@@ -123,6 +125,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="StorageAccountKey"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator StorageAccountKey(Response response)
         {
             if (response is null)

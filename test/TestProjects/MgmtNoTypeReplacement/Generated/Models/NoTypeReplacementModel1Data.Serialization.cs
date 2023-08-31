@@ -126,6 +126,8 @@ namespace MgmtNoTypeReplacement
             return DeserializeNoTypeReplacementModel1Data(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="NoTypeReplacementModel1Data"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="NoTypeReplacementModel1Data"/> to convert. </param>
         public static implicit operator RequestContent(NoTypeReplacementModel1Data model)
         {
             if (model is null)
@@ -136,6 +138,8 @@ namespace MgmtNoTypeReplacement
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="NoTypeReplacementModel1Data"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator NoTypeReplacementModel1Data(Response response)
         {
             if (response is null)

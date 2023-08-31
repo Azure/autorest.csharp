@@ -311,6 +311,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeFrontendIPConfiguration(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FrontendIPConfiguration"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FrontendIPConfiguration"/> to convert. </param>
         public static implicit operator RequestContent(FrontendIPConfiguration model)
         {
             if (model is null)
@@ -321,6 +323,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FrontendIPConfiguration"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FrontendIPConfiguration(Response response)
         {
             if (response is null)

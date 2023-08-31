@@ -97,6 +97,8 @@ namespace CognitiveSearch.Models
             return DeserializeDistanceScoringParameters(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DistanceScoringParameters"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DistanceScoringParameters"/> to convert. </param>
         public static implicit operator RequestContent(DistanceScoringParameters model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DistanceScoringParameters"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DistanceScoringParameters(Response response)
         {
             if (response is null)

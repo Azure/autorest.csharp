@@ -121,6 +121,8 @@ namespace MgmtExtensionResource
             return DeserializeSubSingletonData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SubSingletonData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SubSingletonData"/> to convert. </param>
         public static implicit operator RequestContent(SubSingletonData model)
         {
             if (model is null)
@@ -131,6 +133,8 @@ namespace MgmtExtensionResource
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SubSingletonData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SubSingletonData(Response response)
         {
             if (response is null)

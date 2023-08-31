@@ -152,6 +152,8 @@ namespace CognitiveSearch.Models
             return DeserializeEdgeNGramTokenizer(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="EdgeNGramTokenizer"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="EdgeNGramTokenizer"/> to convert. </param>
         public static implicit operator RequestContent(EdgeNGramTokenizer model)
         {
             if (model is null)
@@ -162,6 +164,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="EdgeNGramTokenizer"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator EdgeNGramTokenizer(Response response)
         {
             if (response is null)

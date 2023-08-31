@@ -103,6 +103,8 @@ namespace MgmtResourceName.Models
             return DeserializeDisplayResourceListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DisplayResourceListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DisplayResourceListResult"/> to convert. </param>
         public static implicit operator RequestContent(DisplayResourceListResult model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace MgmtResourceName.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DisplayResourceListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DisplayResourceListResult(Response response)
         {
             if (response is null)

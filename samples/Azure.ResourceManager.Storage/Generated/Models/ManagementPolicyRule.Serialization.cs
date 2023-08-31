@@ -120,6 +120,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeManagementPolicyRule(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ManagementPolicyRule"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ManagementPolicyRule"/> to convert. </param>
         public static implicit operator RequestContent(ManagementPolicyRule model)
         {
             if (model is null)
@@ -130,6 +132,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ManagementPolicyRule"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ManagementPolicyRule(Response response)
         {
             if (response is null)

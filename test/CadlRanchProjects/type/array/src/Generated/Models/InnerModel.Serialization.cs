@@ -114,6 +114,8 @@ namespace _Type._Array.Models
             return DeserializeInnerModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="InnerModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="InnerModel"/> to convert. </param>
         public static implicit operator RequestContent(InnerModel model)
         {
             if (model is null)
@@ -124,6 +126,8 @@ namespace _Type._Array.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="InnerModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator InnerModel(Response response)
         {
             if (response is null)

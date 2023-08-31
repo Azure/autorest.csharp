@@ -111,6 +111,8 @@ namespace MgmtLRO.Models
             return DeserializeBarListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="BarListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="BarListResult"/> to convert. </param>
         public static implicit operator RequestContent(BarListResult model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace MgmtLRO.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="BarListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator BarListResult(Response response)
         {
             if (response is null)

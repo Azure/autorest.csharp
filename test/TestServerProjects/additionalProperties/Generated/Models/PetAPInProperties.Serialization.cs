@@ -136,6 +136,8 @@ namespace additionalProperties.Models
             return DeserializePetAPInProperties(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PetAPInProperties"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PetAPInProperties"/> to convert. </param>
         public static implicit operator RequestContent(PetAPInProperties model)
         {
             if (model is null)
@@ -146,6 +148,8 @@ namespace additionalProperties.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PetAPInProperties"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PetAPInProperties(Response response)
         {
             if (response is null)

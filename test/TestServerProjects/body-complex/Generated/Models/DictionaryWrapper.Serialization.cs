@@ -114,6 +114,8 @@ namespace body_complex.Models
             return DeserializeDictionaryWrapper(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DictionaryWrapper"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DictionaryWrapper"/> to convert. </param>
         public static implicit operator RequestContent(DictionaryWrapper model)
         {
             if (model is null)
@@ -124,6 +126,8 @@ namespace body_complex.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DictionaryWrapper"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DictionaryWrapper(Response response)
         {
             if (response is null)

@@ -97,6 +97,8 @@ namespace Azure.AI.FormRecognizer.Models
             return DeserializeErrorInformation(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ErrorInformation"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ErrorInformation"/> to convert. </param>
         public static implicit operator RequestContent(ErrorInformation model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace Azure.AI.FormRecognizer.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ErrorInformation"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ErrorInformation(Response response)
         {
             if (response is null)

@@ -92,6 +92,8 @@ namespace Azure.AI.FormRecognizer.Models
             return DeserializeSourcePath(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SourcePath"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SourcePath"/> to convert. </param>
         public static implicit operator RequestContent(SourcePath model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace Azure.AI.FormRecognizer.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SourcePath"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SourcePath(Response response)
         {
             if (response is null)

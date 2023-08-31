@@ -279,6 +279,8 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializeSharedGalleryImage(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SharedGalleryImage"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SharedGalleryImage"/> to convert. </param>
         public static implicit operator RequestContent(SharedGalleryImage model)
         {
             if (model is null)
@@ -289,6 +291,8 @@ namespace MgmtHierarchicalNonResource.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SharedGalleryImage"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SharedGalleryImage(Response response)
         {
             if (response is null)

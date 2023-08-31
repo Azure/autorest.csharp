@@ -111,6 +111,8 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeWinRMListener(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="WinRMListener"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="WinRMListener"/> to convert. </param>
         public static implicit operator RequestContent(WinRMListener model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="WinRMListener"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator WinRMListener(Response response)
         {
             if (response is null)

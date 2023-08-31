@@ -282,6 +282,8 @@ namespace MgmtMockAndSample.Models
             return DeserializeVaultPatchProperties(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VaultPatchProperties"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VaultPatchProperties"/> to convert. </param>
         public static implicit operator RequestContent(VaultPatchProperties model)
         {
             if (model is null)
@@ -292,6 +294,8 @@ namespace MgmtMockAndSample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VaultPatchProperties"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VaultPatchProperties(Response response)
         {
             if (response is null)

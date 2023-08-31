@@ -104,6 +104,8 @@ namespace MgmtDiscriminator.Models
             return DeserializeRouteConfigurationOverrideActionParameters(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="RouteConfigurationOverrideActionParameters"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="RouteConfigurationOverrideActionParameters"/> to convert. </param>
         public static implicit operator RequestContent(RouteConfigurationOverrideActionParameters model)
         {
             if (model is null)
@@ -114,6 +116,8 @@ namespace MgmtDiscriminator.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="RouteConfigurationOverrideActionParameters"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator RouteConfigurationOverrideActionParameters(Response response)
         {
             if (response is null)

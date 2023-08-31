@@ -182,6 +182,8 @@ namespace MgmtRenameRules.Models
             return DeserializeMaintenanceRedeployStatus(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MaintenanceRedeployStatus"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MaintenanceRedeployStatus"/> to convert. </param>
         public static implicit operator RequestContent(MaintenanceRedeployStatus model)
         {
             if (model is null)
@@ -192,6 +194,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MaintenanceRedeployStatus"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MaintenanceRedeployStatus(Response response)
         {
             if (response is null)

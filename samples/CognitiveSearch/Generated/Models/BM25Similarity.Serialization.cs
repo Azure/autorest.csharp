@@ -119,6 +119,8 @@ namespace CognitiveSearch.Models
             return DeserializeBM25Similarity(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="BM25Similarity"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="BM25Similarity"/> to convert. </param>
         public static implicit operator RequestContent(BM25Similarity model)
         {
             if (model is null)
@@ -129,6 +131,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="BM25Similarity"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator BM25Similarity(Response response)
         {
             if (response is null)

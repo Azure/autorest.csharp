@@ -106,6 +106,8 @@ namespace FlattenedParameters.Models
             return DeserializePathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema"/> to convert. </param>
         public static implicit operator RequestContent(PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema model)
         {
             if (model is null)
@@ -116,6 +118,8 @@ namespace FlattenedParameters.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(Response response)
         {
             if (response is null)

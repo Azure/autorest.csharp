@@ -92,6 +92,8 @@ namespace CognitiveSearch.Models
             return DeserializeListIndexersResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ListIndexersResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ListIndexersResult"/> to convert. </param>
         public static implicit operator RequestContent(ListIndexersResult model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ListIndexersResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ListIndexersResult(Response response)
         {
             if (response is null)

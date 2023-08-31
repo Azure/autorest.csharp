@@ -130,6 +130,8 @@ namespace CognitiveSearch.Models
             return DeserializePatternCaptureTokenFilter(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PatternCaptureTokenFilter"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PatternCaptureTokenFilter"/> to convert. </param>
         public static implicit operator RequestContent(PatternCaptureTokenFilter model)
         {
             if (model is null)
@@ -140,6 +142,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PatternCaptureTokenFilter"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PatternCaptureTokenFilter(Response response)
         {
             if (response is null)

@@ -131,6 +131,8 @@ namespace _Type.Property.Nullable.Models
             return DeserializeCollectionsByteProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="CollectionsByteProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="CollectionsByteProperty"/> to convert. </param>
         public static implicit operator RequestContent(CollectionsByteProperty model)
         {
             if (model is null)
@@ -141,6 +143,8 @@ namespace _Type.Property.Nullable.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="CollectionsByteProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator CollectionsByteProperty(Response response)
         {
             if (response is null)

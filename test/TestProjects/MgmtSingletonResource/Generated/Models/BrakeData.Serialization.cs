@@ -125,6 +125,8 @@ namespace MgmtSingletonResource
             return DeserializeBrakeData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="BrakeData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="BrakeData"/> to convert. </param>
         public static implicit operator RequestContent(BrakeData model)
         {
             if (model is null)
@@ -135,6 +137,8 @@ namespace MgmtSingletonResource
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="BrakeData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator BrakeData(Response response)
         {
             if (response is null)

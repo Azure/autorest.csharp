@@ -147,6 +147,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeEndpoints(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Endpoints"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Endpoints"/> to convert. </param>
         public static implicit operator RequestContent(Endpoints model)
         {
             if (model is null)
@@ -157,6 +159,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Endpoints"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Endpoints(Response response)
         {
             if (response is null)

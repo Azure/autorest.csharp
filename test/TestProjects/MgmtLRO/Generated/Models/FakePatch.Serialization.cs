@@ -152,6 +152,8 @@ namespace MgmtLRO.Models
             return DeserializeFakePatch(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FakePatch"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FakePatch"/> to convert. </param>
         public static implicit operator RequestContent(FakePatch model)
         {
             if (model is null)
@@ -162,6 +164,8 @@ namespace MgmtLRO.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FakePatch"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FakePatch(Response response)
         {
             if (response is null)

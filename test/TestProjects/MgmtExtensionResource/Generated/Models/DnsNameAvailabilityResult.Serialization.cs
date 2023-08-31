@@ -96,6 +96,8 @@ namespace MgmtExtensionResource.Models
             return DeserializeDnsNameAvailabilityResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DnsNameAvailabilityResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DnsNameAvailabilityResult"/> to convert. </param>
         public static implicit operator RequestContent(DnsNameAvailabilityResult model)
         {
             if (model is null)
@@ -106,6 +108,8 @@ namespace MgmtExtensionResource.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DnsNameAvailabilityResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DnsNameAvailabilityResult(Response response)
         {
             if (response is null)

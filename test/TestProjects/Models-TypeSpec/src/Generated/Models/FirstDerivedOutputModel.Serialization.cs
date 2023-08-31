@@ -97,6 +97,8 @@ namespace ModelsTypeSpec.Models
             return DeserializeFirstDerivedOutputModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FirstDerivedOutputModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FirstDerivedOutputModel"/> to convert. </param>
         public static implicit operator RequestContent(FirstDerivedOutputModel model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace ModelsTypeSpec.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FirstDerivedOutputModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FirstDerivedOutputModel(Response response)
         {
             if (response is null)

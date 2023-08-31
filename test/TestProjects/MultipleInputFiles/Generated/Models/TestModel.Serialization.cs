@@ -103,6 +103,8 @@ namespace MultipleInputFiles.Models
             return DeserializeTestModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="TestModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="TestModel"/> to convert. </param>
         public static implicit operator RequestContent(TestModel model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace MultipleInputFiles.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="TestModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator TestModel(Response response)
         {
             if (response is null)

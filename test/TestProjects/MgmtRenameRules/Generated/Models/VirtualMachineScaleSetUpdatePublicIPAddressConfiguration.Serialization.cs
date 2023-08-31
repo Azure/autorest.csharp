@@ -137,6 +137,8 @@ namespace MgmtRenameRules.Models
             return DeserializeVirtualMachineScaleSetUpdatePublicIPAddressConfiguration(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetUpdatePublicIPAddressConfiguration"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetUpdatePublicIPAddressConfiguration"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachineScaleSetUpdatePublicIPAddressConfiguration model)
         {
             if (model is null)
@@ -147,6 +149,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetUpdatePublicIPAddressConfiguration"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachineScaleSetUpdatePublicIPAddressConfiguration(Response response)
         {
             if (response is null)

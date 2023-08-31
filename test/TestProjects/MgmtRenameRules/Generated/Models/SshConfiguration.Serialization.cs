@@ -106,6 +106,8 @@ namespace MgmtRenameRules.Models
             return DeserializeSshConfiguration(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SshConfiguration"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SshConfiguration"/> to convert. </param>
         public static implicit operator RequestContent(SshConfiguration model)
         {
             if (model is null)
@@ -116,6 +118,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SshConfiguration"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SshConfiguration(Response response)
         {
             if (response is null)

@@ -93,6 +93,8 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializePirResource(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PirResource"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PirResource"/> to convert. </param>
         public static implicit operator RequestContent(PirResource model)
         {
             if (model is null)
@@ -103,6 +105,8 @@ namespace MgmtHierarchicalNonResource.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PirResource"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PirResource(Response response)
         {
             if (response is null)

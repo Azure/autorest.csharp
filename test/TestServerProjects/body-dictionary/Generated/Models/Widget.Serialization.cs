@@ -107,6 +107,8 @@ namespace body_dictionary.Models
             return DeserializeWidget(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Widget"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Widget"/> to convert. </param>
         public static implicit operator RequestContent(Widget model)
         {
             if (model is null)
@@ -117,6 +119,8 @@ namespace body_dictionary.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Widget"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Widget(Response response)
         {
             if (response is null)

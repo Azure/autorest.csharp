@@ -126,6 +126,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeRoutingPreference(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="RoutingPreference"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="RoutingPreference"/> to convert. </param>
         public static implicit operator RequestContent(RoutingPreference model)
         {
             if (model is null)
@@ -136,6 +138,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="RoutingPreference"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator RoutingPreference(Response response)
         {
             if (response is null)

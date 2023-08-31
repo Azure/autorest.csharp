@@ -97,6 +97,8 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializeModelWithFloatLiteralTypeProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ModelWithFloatLiteralTypeProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ModelWithFloatLiteralTypeProperty"/> to convert. </param>
         public static implicit operator RequestContent(ModelWithFloatLiteralTypeProperty model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace ConfidentLevelsInTsp.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ModelWithFloatLiteralTypeProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ModelWithFloatLiteralTypeProperty(Response response)
         {
             if (response is null)

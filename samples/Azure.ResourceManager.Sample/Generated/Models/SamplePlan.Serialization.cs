@@ -125,6 +125,8 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeSamplePlan(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SamplePlan"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SamplePlan"/> to convert. </param>
         public static implicit operator RequestContent(SamplePlan model)
         {
             if (model is null)
@@ -135,6 +137,8 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SamplePlan"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SamplePlan(Response response)
         {
             if (response is null)

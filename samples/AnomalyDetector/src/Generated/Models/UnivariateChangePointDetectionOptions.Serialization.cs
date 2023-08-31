@@ -167,6 +167,8 @@ namespace AnomalyDetector.Models
             return DeserializeUnivariateChangePointDetectionOptions(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="UnivariateChangePointDetectionOptions"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="UnivariateChangePointDetectionOptions"/> to convert. </param>
         public static implicit operator RequestContent(UnivariateChangePointDetectionOptions model)
         {
             if (model is null)
@@ -177,6 +179,8 @@ namespace AnomalyDetector.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="UnivariateChangePointDetectionOptions"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator UnivariateChangePointDetectionOptions(Response response)
         {
             if (response is null)

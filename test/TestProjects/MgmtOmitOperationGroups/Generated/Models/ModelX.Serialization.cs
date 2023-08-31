@@ -114,6 +114,8 @@ namespace MgmtOmitOperationGroups.Models
             return DeserializeModelX(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ModelX"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ModelX"/> to convert. </param>
         public static implicit operator RequestContent(ModelX model)
         {
             if (model is null)
@@ -124,6 +126,8 @@ namespace MgmtOmitOperationGroups.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ModelX"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ModelX(Response response)
         {
             if (response is null)

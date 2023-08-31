@@ -133,6 +133,8 @@ namespace MgmtListMethods.Models
             return DeserializeUpdateWorkspaceQuotas(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="UpdateWorkspaceQuotas"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="UpdateWorkspaceQuotas"/> to convert. </param>
         public static implicit operator RequestContent(UpdateWorkspaceQuotas model)
         {
             if (model is null)
@@ -143,6 +145,8 @@ namespace MgmtListMethods.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="UpdateWorkspaceQuotas"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator UpdateWorkspaceQuotas(Response response)
         {
             if (response is null)

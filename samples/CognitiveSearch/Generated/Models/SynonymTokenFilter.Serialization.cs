@@ -145,6 +145,8 @@ namespace CognitiveSearch.Models
             return DeserializeSynonymTokenFilter(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SynonymTokenFilter"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SynonymTokenFilter"/> to convert. </param>
         public static implicit operator RequestContent(SynonymTokenFilter model)
         {
             if (model is null)
@@ -155,6 +157,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SynonymTokenFilter"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SynonymTokenFilter(Response response)
         {
             if (response is null)

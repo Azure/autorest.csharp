@@ -107,6 +107,8 @@ namespace xml_service.Models
             return DeserializeBlob(XElement.Load(data.ToStream()), options);
         }
 
+        /// <summary> Converts a <see cref="Blob"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Blob"/> to convert. </param>
         public static implicit operator RequestContent(Blob model)
         {
             if (model is null)
@@ -117,6 +119,8 @@ namespace xml_service.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Blob"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Blob(Response response)
         {
             if (response is null)

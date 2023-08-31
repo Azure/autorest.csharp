@@ -111,6 +111,8 @@ namespace MgmtMultipleParentResource.Models
             return DeserializeTheParentsListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="TheParentsListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="TheParentsListResult"/> to convert. </param>
         public static implicit operator RequestContent(TheParentsListResult model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace MgmtMultipleParentResource.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="TheParentsListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator TheParentsListResult(Response response)
         {
             if (response is null)

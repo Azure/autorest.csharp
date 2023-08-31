@@ -99,6 +99,8 @@ namespace _Type.Property.ValueTypes.Models
             return DeserializeCollectionsModelProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="CollectionsModelProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="CollectionsModelProperty"/> to convert. </param>
         public static implicit operator RequestContent(CollectionsModelProperty model)
         {
             if (model is null)
@@ -109,6 +111,8 @@ namespace _Type.Property.ValueTypes.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="CollectionsModelProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator CollectionsModelProperty(Response response)
         {
             if (response is null)

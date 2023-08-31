@@ -100,6 +100,8 @@ namespace Pagination.Models
             return DeserializeTextBlocklist(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="TextBlocklist"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="TextBlocklist"/> to convert. </param>
         public static implicit operator RequestContent(TextBlocklist model)
         {
             if (model is null)
@@ -110,6 +112,8 @@ namespace Pagination.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="TextBlocklist"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator TextBlocklist(Response response)
         {
             if (response is null)

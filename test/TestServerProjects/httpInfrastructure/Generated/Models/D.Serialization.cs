@@ -92,6 +92,8 @@ namespace httpInfrastructure.Models
             return DeserializeD(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="D"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="D"/> to convert. </param>
         public static implicit operator RequestContent(D model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace httpInfrastructure.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="D"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator D(Response response)
         {
             if (response is null)

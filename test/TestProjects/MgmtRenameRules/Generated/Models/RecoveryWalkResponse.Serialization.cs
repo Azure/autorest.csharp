@@ -101,6 +101,8 @@ namespace MgmtRenameRules.Models
             return DeserializeRecoveryWalkResponse(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="RecoveryWalkResponse"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="RecoveryWalkResponse"/> to convert. </param>
         public static implicit operator RequestContent(RecoveryWalkResponse model)
         {
             if (model is null)
@@ -111,6 +113,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="RecoveryWalkResponse"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator RecoveryWalkResponse(Response response)
         {
             if (response is null)

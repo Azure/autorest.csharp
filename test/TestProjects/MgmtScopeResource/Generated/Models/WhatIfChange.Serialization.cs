@@ -146,6 +146,8 @@ namespace MgmtScopeResource.Models
             return DeserializeWhatIfChange(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="WhatIfChange"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="WhatIfChange"/> to convert. </param>
         public static implicit operator RequestContent(WhatIfChange model)
         {
             if (model is null)
@@ -156,6 +158,8 @@ namespace MgmtScopeResource.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="WhatIfChange"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator WhatIfChange(Response response)
         {
             if (response is null)

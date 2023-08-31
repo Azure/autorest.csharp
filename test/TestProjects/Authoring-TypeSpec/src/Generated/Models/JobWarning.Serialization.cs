@@ -97,6 +97,8 @@ namespace AuthoringTypeSpec.Models
             return DeserializeJobWarning(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="JobWarning"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="JobWarning"/> to convert. </param>
         public static implicit operator RequestContent(JobWarning model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace AuthoringTypeSpec.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="JobWarning"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator JobWarning(Response response)
         {
             if (response is null)

@@ -118,6 +118,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStoragePrivateLinkServiceConnectionState(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="StoragePrivateLinkServiceConnectionState"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="StoragePrivateLinkServiceConnectionState"/> to convert. </param>
         public static implicit operator RequestContent(StoragePrivateLinkServiceConnectionState model)
         {
             if (model is null)
@@ -128,6 +130,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="StoragePrivateLinkServiceConnectionState"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator StoragePrivateLinkServiceConnectionState(Response response)
         {
             if (response is null)

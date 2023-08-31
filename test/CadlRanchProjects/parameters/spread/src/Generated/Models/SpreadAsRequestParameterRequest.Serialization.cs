@@ -89,6 +89,8 @@ namespace Parameters.Spread.Models
             return DeserializeSpreadAsRequestParameterRequest(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SpreadAsRequestParameterRequest"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SpreadAsRequestParameterRequest"/> to convert. </param>
         public static implicit operator RequestContent(SpreadAsRequestParameterRequest model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace Parameters.Spread.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SpreadAsRequestParameterRequest"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SpreadAsRequestParameterRequest(Response response)
         {
             if (response is null)

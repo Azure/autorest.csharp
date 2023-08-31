@@ -118,6 +118,8 @@ namespace MgmtExactMatchInheritance.Models
             return DeserializeExactMatchModel9(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ExactMatchModel9"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ExactMatchModel9"/> to convert. </param>
         public static implicit operator RequestContent(ExactMatchModel9 model)
         {
             if (model is null)
@@ -128,6 +130,8 @@ namespace MgmtExactMatchInheritance.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ExactMatchModel9"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ExactMatchModel9(Response response)
         {
             if (response is null)

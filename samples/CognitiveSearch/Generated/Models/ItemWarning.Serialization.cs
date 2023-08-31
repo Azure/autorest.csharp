@@ -111,6 +111,8 @@ namespace CognitiveSearch.Models
             return DeserializeItemWarning(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ItemWarning"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ItemWarning"/> to convert. </param>
         public static implicit operator RequestContent(ItemWarning model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ItemWarning"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ItemWarning(Response response)
         {
             if (response is null)

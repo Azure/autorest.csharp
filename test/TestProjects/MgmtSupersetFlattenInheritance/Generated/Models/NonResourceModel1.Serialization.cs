@@ -129,6 +129,8 @@ namespace MgmtSupersetFlattenInheritance.Models
             return DeserializeNonResourceModel1(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="NonResourceModel1"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="NonResourceModel1"/> to convert. </param>
         public static implicit operator RequestContent(NonResourceModel1 model)
         {
             if (model is null)
@@ -139,6 +141,8 @@ namespace MgmtSupersetFlattenInheritance.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="NonResourceModel1"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator NonResourceModel1(Response response)
         {
             if (response is null)

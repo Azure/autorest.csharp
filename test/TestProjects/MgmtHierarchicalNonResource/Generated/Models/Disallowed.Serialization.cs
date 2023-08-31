@@ -106,6 +106,8 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializeDisallowed(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Disallowed"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Disallowed"/> to convert. </param>
         public static implicit operator RequestContent(Disallowed model)
         {
             if (model is null)
@@ -116,6 +118,8 @@ namespace MgmtHierarchicalNonResource.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Disallowed"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Disallowed(Response response)
         {
             if (response is null)

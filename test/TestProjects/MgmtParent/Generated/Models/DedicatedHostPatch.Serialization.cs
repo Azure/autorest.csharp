@@ -174,6 +174,8 @@ namespace MgmtParent.Models
             return DeserializeDedicatedHostPatch(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DedicatedHostPatch"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DedicatedHostPatch"/> to convert. </param>
         public static implicit operator RequestContent(DedicatedHostPatch model)
         {
             if (model is null)
@@ -184,6 +186,8 @@ namespace MgmtParent.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DedicatedHostPatch"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DedicatedHostPatch(Response response)
         {
             if (response is null)

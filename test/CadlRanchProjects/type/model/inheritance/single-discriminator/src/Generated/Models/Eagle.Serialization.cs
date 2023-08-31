@@ -163,6 +163,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return DeserializeEagle(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Eagle"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Eagle"/> to convert. </param>
         public static implicit operator RequestContent(Eagle model)
         {
             if (model is null)
@@ -173,6 +175,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Eagle"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Eagle(Response response)
         {
             if (response is null)

@@ -114,6 +114,8 @@ namespace CognitiveSearch.Models
             return DeserializeIndexerExecutionInfo(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="IndexerExecutionInfo"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="IndexerExecutionInfo"/> to convert. </param>
         public static implicit operator RequestContent(IndexerExecutionInfo model)
         {
             if (model is null)
@@ -124,6 +126,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="IndexerExecutionInfo"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator IndexerExecutionInfo(Response response)
         {
             if (response is null)

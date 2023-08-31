@@ -121,6 +121,8 @@ namespace MgmtResourceName
             return DeserializeMemoryData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MemoryData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MemoryData"/> to convert. </param>
         public static implicit operator RequestContent(MemoryData model)
         {
             if (model is null)
@@ -131,6 +133,8 @@ namespace MgmtResourceName
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MemoryData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MemoryData(Response response)
         {
             if (response is null)

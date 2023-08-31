@@ -247,6 +247,8 @@ namespace MgmtMultipleParentResource
             return DeserializeSubParentData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SubParentData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SubParentData"/> to convert. </param>
         public static implicit operator RequestContent(SubParentData model)
         {
             if (model is null)
@@ -257,6 +259,8 @@ namespace MgmtMultipleParentResource
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SubParentData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SubParentData(Response response)
         {
             if (response is null)

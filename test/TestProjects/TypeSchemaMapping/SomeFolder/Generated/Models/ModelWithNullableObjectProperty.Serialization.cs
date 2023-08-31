@@ -92,6 +92,8 @@ namespace TypeSchemaMapping.Models
             return DeserializeModelWithNullableObjectProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ModelWithNullableObjectProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ModelWithNullableObjectProperty"/> to convert. </param>
         public static implicit operator RequestContent(ModelWithNullableObjectProperty model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace TypeSchemaMapping.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ModelWithNullableObjectProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ModelWithNullableObjectProperty(Response response)
         {
             if (response is null)

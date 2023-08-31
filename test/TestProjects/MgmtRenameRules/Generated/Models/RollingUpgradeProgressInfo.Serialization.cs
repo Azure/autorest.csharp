@@ -121,6 +121,8 @@ namespace MgmtRenameRules.Models
             return DeserializeRollingUpgradeProgressInfo(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="RollingUpgradeProgressInfo"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="RollingUpgradeProgressInfo"/> to convert. </param>
         public static implicit operator RequestContent(RollingUpgradeProgressInfo model)
         {
             if (model is null)
@@ -131,6 +133,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="RollingUpgradeProgressInfo"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator RollingUpgradeProgressInfo(Response response)
         {
             if (response is null)

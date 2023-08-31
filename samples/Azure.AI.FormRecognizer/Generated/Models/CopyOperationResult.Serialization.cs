@@ -120,6 +120,8 @@ namespace Azure.AI.FormRecognizer.Models
             return DeserializeCopyOperationResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="CopyOperationResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="CopyOperationResult"/> to convert. </param>
         public static implicit operator RequestContent(CopyOperationResult model)
         {
             if (model is null)
@@ -130,6 +132,8 @@ namespace Azure.AI.FormRecognizer.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="CopyOperationResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator CopyOperationResult(Response response)
         {
             if (response is null)

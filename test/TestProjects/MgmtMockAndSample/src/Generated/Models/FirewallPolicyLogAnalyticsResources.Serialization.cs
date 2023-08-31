@@ -122,6 +122,8 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyLogAnalyticsResources(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FirewallPolicyLogAnalyticsResources"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FirewallPolicyLogAnalyticsResources"/> to convert. </param>
         public static implicit operator RequestContent(FirewallPolicyLogAnalyticsResources model)
         {
             if (model is null)
@@ -132,6 +134,8 @@ namespace MgmtMockAndSample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FirewallPolicyLogAnalyticsResources"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FirewallPolicyLogAnalyticsResources(Response response)
         {
             if (response is null)

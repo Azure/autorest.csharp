@@ -97,6 +97,8 @@ namespace Pagination.Models
             return DeserializeListLedgerEntryInputBody(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ListLedgerEntryInputBody"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ListLedgerEntryInputBody"/> to convert. </param>
         public static implicit operator RequestContent(ListLedgerEntryInputBody model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace Pagination.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ListLedgerEntryInputBody"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ListLedgerEntryInputBody(Response response)
         {
             if (response is null)

@@ -89,6 +89,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Models
             return DeserializeSharedModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SharedModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SharedModel"/> to convert. </param>
         public static implicit operator RequestContent(SharedModel model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SharedModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SharedModel(Response response)
         {
             if (response is null)

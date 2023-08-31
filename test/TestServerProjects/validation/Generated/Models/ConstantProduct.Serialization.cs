@@ -97,6 +97,8 @@ namespace validation.Models
             return DeserializeConstantProduct(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ConstantProduct"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ConstantProduct"/> to convert. </param>
         public static implicit operator RequestContent(ConstantProduct model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace validation.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ConstantProduct"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ConstantProduct(Response response)
         {
             if (response is null)

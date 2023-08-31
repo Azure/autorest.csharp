@@ -435,6 +435,8 @@ namespace ModelShapes.Models
             return DeserializeOutputModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="OutputModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="OutputModel"/> to convert. </param>
         public static implicit operator RequestContent(OutputModel model)
         {
             if (model is null)
@@ -445,6 +447,8 @@ namespace ModelShapes.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="OutputModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator OutputModel(Response response)
         {
             if (response is null)

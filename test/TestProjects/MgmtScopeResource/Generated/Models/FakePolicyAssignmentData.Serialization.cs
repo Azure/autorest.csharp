@@ -301,6 +301,8 @@ namespace MgmtScopeResource
             return DeserializeFakePolicyAssignmentData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FakePolicyAssignmentData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FakePolicyAssignmentData"/> to convert. </param>
         public static implicit operator RequestContent(FakePolicyAssignmentData model)
         {
             if (model is null)
@@ -311,6 +313,8 @@ namespace MgmtScopeResource
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FakePolicyAssignmentData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FakePolicyAssignmentData(Response response)
         {
             if (response is null)

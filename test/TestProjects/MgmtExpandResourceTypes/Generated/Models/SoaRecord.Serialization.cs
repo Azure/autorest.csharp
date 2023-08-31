@@ -178,6 +178,8 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeSoaRecord(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SoaRecord"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SoaRecord"/> to convert. </param>
         public static implicit operator RequestContent(SoaRecord model)
         {
             if (model is null)
@@ -188,6 +190,8 @@ namespace MgmtExpandResourceTypes.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SoaRecord"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SoaRecord(Response response)
         {
             if (response is null)

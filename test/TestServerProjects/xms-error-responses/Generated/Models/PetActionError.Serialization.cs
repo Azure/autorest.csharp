@@ -121,6 +121,8 @@ namespace xms_error_responses.Models
             return DeserializePetActionError(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PetActionError"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PetActionError"/> to convert. </param>
         public static implicit operator RequestContent(PetActionError model)
         {
             if (model is null)
@@ -131,6 +133,8 @@ namespace xms_error_responses.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PetActionError"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PetActionError(Response response)
         {
             if (response is null)

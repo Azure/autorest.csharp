@@ -136,6 +136,8 @@ namespace Azure.Storage.Tables.Models
             return DeserializeTableResponse(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="TableResponse"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="TableResponse"/> to convert. </param>
         public static implicit operator RequestContent(TableResponse model)
         {
             if (model is null)
@@ -146,6 +148,8 @@ namespace Azure.Storage.Tables.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="TableResponse"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator TableResponse(Response response)
         {
             if (response is null)

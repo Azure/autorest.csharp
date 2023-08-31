@@ -136,6 +136,8 @@ namespace lro.Models
             return DeserializeResource(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Resource"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Resource"/> to convert. </param>
         public static implicit operator RequestContent(Resource model)
         {
             if (model is null)
@@ -146,6 +148,8 @@ namespace lro.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Resource"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Resource(Response response)
         {
             if (response is null)

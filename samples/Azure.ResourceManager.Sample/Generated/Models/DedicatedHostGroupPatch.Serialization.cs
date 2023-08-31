@@ -203,6 +203,8 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeDedicatedHostGroupPatch(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DedicatedHostGroupPatch"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DedicatedHostGroupPatch"/> to convert. </param>
         public static implicit operator RequestContent(DedicatedHostGroupPatch model)
         {
             if (model is null)
@@ -213,6 +215,8 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DedicatedHostGroupPatch"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DedicatedHostGroupPatch(Response response)
         {
             if (response is null)

@@ -160,6 +160,8 @@ namespace MgmtPartialResource
             return DeserializeConfigurationProfileAssignmentData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ConfigurationProfileAssignmentData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ConfigurationProfileAssignmentData"/> to convert. </param>
         public static implicit operator RequestContent(ConfigurationProfileAssignmentData model)
         {
             if (model is null)
@@ -170,6 +172,8 @@ namespace MgmtPartialResource
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ConfigurationProfileAssignmentData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ConfigurationProfileAssignmentData(Response response)
         {
             if (response is null)

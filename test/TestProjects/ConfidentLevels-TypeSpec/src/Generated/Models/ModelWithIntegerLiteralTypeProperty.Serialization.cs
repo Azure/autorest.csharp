@@ -97,6 +97,8 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializeModelWithIntegerLiteralTypeProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ModelWithIntegerLiteralTypeProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ModelWithIntegerLiteralTypeProperty"/> to convert. </param>
         public static implicit operator RequestContent(ModelWithIntegerLiteralTypeProperty model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace ConfidentLevelsInTsp.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ModelWithIntegerLiteralTypeProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ModelWithIntegerLiteralTypeProperty(Response response)
         {
             if (response is null)

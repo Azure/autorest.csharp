@@ -151,6 +151,8 @@ namespace Azure.ResourceManager.Storage
             return DeserializeBlobInventoryPolicyData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="BlobInventoryPolicyData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="BlobInventoryPolicyData"/> to convert. </param>
         public static implicit operator RequestContent(BlobInventoryPolicyData model)
         {
             if (model is null)
@@ -161,6 +163,8 @@ namespace Azure.ResourceManager.Storage
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="BlobInventoryPolicyData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator BlobInventoryPolicyData(Response response)
         {
             if (response is null)

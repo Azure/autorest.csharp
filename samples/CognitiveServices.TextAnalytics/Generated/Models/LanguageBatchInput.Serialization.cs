@@ -99,6 +99,8 @@ namespace CognitiveServices.TextAnalytics.Models
             return DeserializeLanguageBatchInput(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="LanguageBatchInput"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="LanguageBatchInput"/> to convert. </param>
         public static implicit operator RequestContent(LanguageBatchInput model)
         {
             if (model is null)
@@ -109,6 +111,8 @@ namespace CognitiveServices.TextAnalytics.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="LanguageBatchInput"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator LanguageBatchInput(Response response)
         {
             if (response is null)

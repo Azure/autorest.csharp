@@ -155,6 +155,8 @@ namespace MgmtExtensionCommonRestOperation
             return DeserializeTypeTwoData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="TypeTwoData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="TypeTwoData"/> to convert. </param>
         public static implicit operator RequestContent(TypeTwoData model)
         {
             if (model is null)
@@ -165,6 +167,8 @@ namespace MgmtExtensionCommonRestOperation
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="TypeTwoData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator TypeTwoData(Response response)
         {
             if (response is null)

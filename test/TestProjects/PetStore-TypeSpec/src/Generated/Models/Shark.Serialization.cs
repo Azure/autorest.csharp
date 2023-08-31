@@ -105,6 +105,8 @@ namespace PetStore.Models
             return DeserializeShark(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Shark"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Shark"/> to convert. </param>
         public static implicit operator RequestContent(Shark model)
         {
             if (model is null)
@@ -115,6 +117,8 @@ namespace PetStore.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Shark"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Shark(Response response)
         {
             if (response is null)

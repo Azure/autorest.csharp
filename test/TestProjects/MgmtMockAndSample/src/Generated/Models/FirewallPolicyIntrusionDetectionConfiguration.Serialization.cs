@@ -131,6 +131,8 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyIntrusionDetectionConfiguration(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FirewallPolicyIntrusionDetectionConfiguration"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FirewallPolicyIntrusionDetectionConfiguration"/> to convert. </param>
         public static implicit operator RequestContent(FirewallPolicyIntrusionDetectionConfiguration model)
         {
             if (model is null)
@@ -141,6 +143,8 @@ namespace MgmtMockAndSample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FirewallPolicyIntrusionDetectionConfiguration"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FirewallPolicyIntrusionDetectionConfiguration(Response response)
         {
             if (response is null)

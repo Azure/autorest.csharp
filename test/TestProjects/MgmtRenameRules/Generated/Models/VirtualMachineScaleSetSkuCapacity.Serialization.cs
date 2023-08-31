@@ -121,6 +121,8 @@ namespace MgmtRenameRules.Models
             return DeserializeVirtualMachineScaleSetSkuCapacity(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetSkuCapacity"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetSkuCapacity"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachineScaleSetSkuCapacity model)
         {
             if (model is null)
@@ -131,6 +133,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetSkuCapacity"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachineScaleSetSkuCapacity(Response response)
         {
             if (response is null)

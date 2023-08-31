@@ -138,6 +138,8 @@ namespace CognitiveSearch.Models
             return DeserializePatternTokenizer(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PatternTokenizer"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PatternTokenizer"/> to convert. </param>
         public static implicit operator RequestContent(PatternTokenizer model)
         {
             if (model is null)
@@ -148,6 +150,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PatternTokenizer"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PatternTokenizer(Response response)
         {
             if (response is null)

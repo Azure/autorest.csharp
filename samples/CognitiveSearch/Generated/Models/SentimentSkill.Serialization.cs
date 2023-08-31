@@ -173,6 +173,8 @@ namespace CognitiveSearch.Models
             return DeserializeSentimentSkill(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SentimentSkill"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SentimentSkill"/> to convert. </param>
         public static implicit operator RequestContent(SentimentSkill model)
         {
             if (model is null)
@@ -183,6 +185,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SentimentSkill"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SentimentSkill(Response response)
         {
             if (response is null)

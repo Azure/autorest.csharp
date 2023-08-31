@@ -89,6 +89,8 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeAutomaticOSUpgradeProperties(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="AutomaticOSUpgradeProperties"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="AutomaticOSUpgradeProperties"/> to convert. </param>
         public static implicit operator RequestContent(AutomaticOSUpgradeProperties model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="AutomaticOSUpgradeProperties"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator AutomaticOSUpgradeProperties(Response response)
         {
             if (response is null)

@@ -112,6 +112,8 @@ namespace MgmtScopeResource.Models
             return DeserializeDeploymentOperationsListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DeploymentOperationsListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DeploymentOperationsListResult"/> to convert. </param>
         public static implicit operator RequestContent(DeploymentOperationsListResult model)
         {
             if (model is null)
@@ -122,6 +124,8 @@ namespace MgmtScopeResource.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DeploymentOperationsListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DeploymentOperationsListResult(Response response)
         {
             if (response is null)

@@ -77,6 +77,8 @@ namespace xml_service.Models
             return DeserializeRootWithRefAndMeta(XElement.Load(data.ToStream()), options);
         }
 
+        /// <summary> Converts a <see cref="RootWithRefAndMeta"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="RootWithRefAndMeta"/> to convert. </param>
         public static implicit operator RequestContent(RootWithRefAndMeta model)
         {
             if (model is null)
@@ -87,6 +89,8 @@ namespace xml_service.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="RootWithRefAndMeta"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator RootWithRefAndMeta(Response response)
         {
             if (response is null)

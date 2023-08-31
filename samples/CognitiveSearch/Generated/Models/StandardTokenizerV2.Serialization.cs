@@ -112,6 +112,8 @@ namespace CognitiveSearch.Models
             return DeserializeStandardTokenizerV2(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="StandardTokenizerV2"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="StandardTokenizerV2"/> to convert. </param>
         public static implicit operator RequestContent(StandardTokenizerV2 model)
         {
             if (model is null)
@@ -122,6 +124,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="StandardTokenizerV2"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator StandardTokenizerV2(Response response)
         {
             if (response is null)

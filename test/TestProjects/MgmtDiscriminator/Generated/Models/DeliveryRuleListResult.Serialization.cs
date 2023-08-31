@@ -107,6 +107,8 @@ namespace MgmtDiscriminator.Models
             return DeserializeDeliveryRuleListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DeliveryRuleListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DeliveryRuleListResult"/> to convert. </param>
         public static implicit operator RequestContent(DeliveryRuleListResult model)
         {
             if (model is null)
@@ -117,6 +119,8 @@ namespace MgmtDiscriminator.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DeliveryRuleListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DeliveryRuleListResult(Response response)
         {
             if (response is null)

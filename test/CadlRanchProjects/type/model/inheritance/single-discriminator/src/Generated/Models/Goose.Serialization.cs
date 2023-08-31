@@ -97,6 +97,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return DeserializeGoose(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Goose"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Goose"/> to convert. </param>
         public static implicit operator RequestContent(Goose model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Goose"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Goose(Response response)
         {
             if (response is null)

@@ -102,6 +102,8 @@ namespace CognitiveSearch.Models
             return DeserializeSuggestDocumentsResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SuggestDocumentsResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SuggestDocumentsResult"/> to convert. </param>
         public static implicit operator RequestContent(SuggestDocumentsResult model)
         {
             if (model is null)
@@ -112,6 +114,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SuggestDocumentsResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SuggestDocumentsResult(Response response)
         {
             if (response is null)

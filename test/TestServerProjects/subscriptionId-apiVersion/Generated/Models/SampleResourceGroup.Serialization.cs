@@ -103,6 +103,8 @@ namespace subscriptionId_apiVersion.Models
             return DeserializeSampleResourceGroup(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SampleResourceGroup"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SampleResourceGroup"/> to convert. </param>
         public static implicit operator RequestContent(SampleResourceGroup model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace subscriptionId_apiVersion.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SampleResourceGroup"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SampleResourceGroup(Response response)
         {
             if (response is null)

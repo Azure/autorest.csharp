@@ -103,6 +103,8 @@ namespace MgmtDiscriminator.Models
             return DeserializeDeliveryRuleRouteConfigurationOverrideAction(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DeliveryRuleRouteConfigurationOverrideAction"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DeliveryRuleRouteConfigurationOverrideAction"/> to convert. </param>
         public static implicit operator RequestContent(DeliveryRuleRouteConfigurationOverrideAction model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace MgmtDiscriminator.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DeliveryRuleRouteConfigurationOverrideAction"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DeliveryRuleRouteConfigurationOverrideAction(Response response)
         {
             if (response is null)

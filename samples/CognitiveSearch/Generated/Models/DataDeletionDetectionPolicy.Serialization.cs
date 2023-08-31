@@ -98,6 +98,8 @@ namespace CognitiveSearch.Models
             return DeserializeDataDeletionDetectionPolicy(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DataDeletionDetectionPolicy"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DataDeletionDetectionPolicy"/> to convert. </param>
         public static implicit operator RequestContent(DataDeletionDetectionPolicy model)
         {
             if (model is null)
@@ -108,6 +110,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DataDeletionDetectionPolicy"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DataDeletionDetectionPolicy(Response response)
         {
             if (response is null)

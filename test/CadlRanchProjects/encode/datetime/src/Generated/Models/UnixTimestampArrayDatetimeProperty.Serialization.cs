@@ -99,6 +99,8 @@ namespace Encode.Datetime.Models
             return DeserializeUnixTimestampArrayDatetimeProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="UnixTimestampArrayDatetimeProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="UnixTimestampArrayDatetimeProperty"/> to convert. </param>
         public static implicit operator RequestContent(UnixTimestampArrayDatetimeProperty model)
         {
             if (model is null)
@@ -109,6 +111,8 @@ namespace Encode.Datetime.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="UnixTimestampArrayDatetimeProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator UnixTimestampArrayDatetimeProperty(Response response)
         {
             if (response is null)

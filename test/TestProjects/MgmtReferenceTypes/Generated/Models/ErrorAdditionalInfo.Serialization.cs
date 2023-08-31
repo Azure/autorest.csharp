@@ -99,6 +99,8 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeErrorAdditionalInfo(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ErrorAdditionalInfo"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ErrorAdditionalInfo"/> to convert. </param>
         public static implicit operator RequestContent(ErrorAdditionalInfo model)
         {
             if (model is null)
@@ -109,6 +111,8 @@ namespace Azure.ResourceManager.Fake.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ErrorAdditionalInfo"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ErrorAdditionalInfo(Response response)
         {
             if (response is null)

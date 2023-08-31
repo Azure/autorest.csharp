@@ -347,6 +347,8 @@ namespace MgmtParamOrdering
             return DeserializeWorkspaceData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="WorkspaceData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="WorkspaceData"/> to convert. </param>
         public static implicit operator RequestContent(WorkspaceData model)
         {
             if (model is null)
@@ -357,6 +359,8 @@ namespace MgmtParamOrdering
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="WorkspaceData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator WorkspaceData(Response response)
         {
             if (response is null)

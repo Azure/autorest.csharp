@@ -423,6 +423,8 @@ namespace Azure.ResourceManager.Sample
             return DeserializeVirtualMachineScaleSetData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetData"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachineScaleSetData model)
         {
             if (model is null)
@@ -433,6 +435,8 @@ namespace Azure.ResourceManager.Sample
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachineScaleSetData(Response response)
         {
             if (response is null)

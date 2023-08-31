@@ -115,6 +115,8 @@ namespace CognitiveSearch.Models
             return DeserializeMappingCharFilter(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MappingCharFilter"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MappingCharFilter"/> to convert. </param>
         public static implicit operator RequestContent(MappingCharFilter model)
         {
             if (model is null)
@@ -125,6 +127,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MappingCharFilter"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MappingCharFilter(Response response)
         {
             if (response is null)

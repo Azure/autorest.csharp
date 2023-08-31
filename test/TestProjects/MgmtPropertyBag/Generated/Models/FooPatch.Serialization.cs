@@ -92,6 +92,8 @@ namespace MgmtPropertyBag.Models
             return DeserializeFooPatch(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FooPatch"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FooPatch"/> to convert. </param>
         public static implicit operator RequestContent(FooPatch model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace MgmtPropertyBag.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FooPatch"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FooPatch(Response response)
         {
             if (response is null)

@@ -92,6 +92,8 @@ namespace MgmtOperations.Models
             return DeserializeTestAvailabilitySet(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="TestAvailabilitySet"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="TestAvailabilitySet"/> to convert. </param>
         public static implicit operator RequestContent(TestAvailabilitySet model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace MgmtOperations.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="TestAvailabilitySet"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator TestAvailabilitySet(Response response)
         {
             if (response is null)

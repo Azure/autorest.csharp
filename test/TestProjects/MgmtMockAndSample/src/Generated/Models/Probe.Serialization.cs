@@ -164,6 +164,8 @@ namespace MgmtMockAndSample.Models
             return DeserializeProbe(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Probe"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Probe"/> to convert. </param>
         public static implicit operator RequestContent(Probe model)
         {
             if (model is null)
@@ -174,6 +176,8 @@ namespace MgmtMockAndSample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Probe"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Probe(Response response)
         {
             if (response is null)

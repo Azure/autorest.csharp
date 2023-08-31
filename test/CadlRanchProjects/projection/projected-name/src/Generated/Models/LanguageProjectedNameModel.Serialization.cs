@@ -89,6 +89,8 @@ namespace Projection.ProjectedName.Models
             return DeserializeLanguageProjectedNameModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="LanguageProjectedNameModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="LanguageProjectedNameModel"/> to convert. </param>
         public static implicit operator RequestContent(LanguageProjectedNameModel model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace Projection.ProjectedName.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="LanguageProjectedNameModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator LanguageProjectedNameModel(Response response)
         {
             if (response is null)

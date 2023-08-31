@@ -97,6 +97,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeBlobRestoreRange(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="BlobRestoreRange"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="BlobRestoreRange"/> to convert. </param>
         public static implicit operator RequestContent(BlobRestoreRange model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="BlobRestoreRange"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator BlobRestoreRange(Response response)
         {
             if (response is null)

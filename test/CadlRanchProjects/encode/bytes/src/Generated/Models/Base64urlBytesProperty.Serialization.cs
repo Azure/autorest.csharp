@@ -89,6 +89,8 @@ namespace Encode.Bytes.Models
             return DeserializeBase64urlBytesProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Base64urlBytesProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Base64urlBytesProperty"/> to convert. </param>
         public static implicit operator RequestContent(Base64urlBytesProperty model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace Encode.Bytes.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Base64urlBytesProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Base64urlBytesProperty(Response response)
         {
             if (response is null)

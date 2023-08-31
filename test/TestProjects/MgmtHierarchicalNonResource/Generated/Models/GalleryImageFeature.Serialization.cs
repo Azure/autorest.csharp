@@ -103,6 +103,8 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializeGalleryImageFeature(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="GalleryImageFeature"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="GalleryImageFeature"/> to convert. </param>
         public static implicit operator RequestContent(GalleryImageFeature model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace MgmtHierarchicalNonResource.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="GalleryImageFeature"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator GalleryImageFeature(Response response)
         {
             if (response is null)

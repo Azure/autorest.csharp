@@ -99,6 +99,8 @@ namespace MgmtPagination
             return DeserializePageSizeInt32ModelData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PageSizeInt32ModelData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PageSizeInt32ModelData"/> to convert. </param>
         public static implicit operator RequestContent(PageSizeInt32ModelData model)
         {
             if (model is null)
@@ -109,6 +111,8 @@ namespace MgmtPagination
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PageSizeInt32ModelData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PageSizeInt32ModelData(Response response)
         {
             if (response is null)

@@ -141,6 +141,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeManagementPolicyBaseBlob(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ManagementPolicyBaseBlob"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ManagementPolicyBaseBlob"/> to convert. </param>
         public static implicit operator RequestContent(ManagementPolicyBaseBlob model)
         {
             if (model is null)
@@ -151,6 +153,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ManagementPolicyBaseBlob"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ManagementPolicyBaseBlob(Response response)
         {
             if (response is null)

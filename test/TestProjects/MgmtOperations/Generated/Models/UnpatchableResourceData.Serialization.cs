@@ -155,6 +155,8 @@ namespace MgmtOperations
             return DeserializeUnpatchableResourceData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="UnpatchableResourceData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="UnpatchableResourceData"/> to convert. </param>
         public static implicit operator RequestContent(UnpatchableResourceData model)
         {
             if (model is null)
@@ -165,6 +167,8 @@ namespace MgmtOperations
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="UnpatchableResourceData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator UnpatchableResourceData(Response response)
         {
             if (response is null)

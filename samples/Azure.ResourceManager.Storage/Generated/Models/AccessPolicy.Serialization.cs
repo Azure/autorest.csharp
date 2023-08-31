@@ -122,6 +122,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeAccessPolicy(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="AccessPolicy"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="AccessPolicy"/> to convert. </param>
         public static implicit operator RequestContent(AccessPolicy model)
         {
             if (model is null)
@@ -132,6 +134,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="AccessPolicy"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator AccessPolicy(Response response)
         {
             if (response is null)

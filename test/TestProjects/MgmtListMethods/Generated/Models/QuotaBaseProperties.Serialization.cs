@@ -133,6 +133,8 @@ namespace MgmtListMethods.Models
             return DeserializeQuotaBaseProperties(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="QuotaBaseProperties"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="QuotaBaseProperties"/> to convert. </param>
         public static implicit operator RequestContent(QuotaBaseProperties model)
         {
             if (model is null)
@@ -143,6 +145,8 @@ namespace MgmtListMethods.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="QuotaBaseProperties"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator QuotaBaseProperties(Response response)
         {
             if (response is null)

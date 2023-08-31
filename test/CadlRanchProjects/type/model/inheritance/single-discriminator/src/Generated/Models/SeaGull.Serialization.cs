@@ -97,6 +97,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return DeserializeSeaGull(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SeaGull"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SeaGull"/> to convert. </param>
         public static implicit operator RequestContent(SeaGull model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SeaGull"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SeaGull(Response response)
         {
             if (response is null)

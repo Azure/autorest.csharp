@@ -99,6 +99,8 @@ namespace MgmtMockAndSample.Models
             return DeserializeVaultAccessPolicyProperties(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VaultAccessPolicyProperties"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VaultAccessPolicyProperties"/> to convert. </param>
         public static implicit operator RequestContent(VaultAccessPolicyProperties model)
         {
             if (model is null)
@@ -109,6 +111,8 @@ namespace MgmtMockAndSample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VaultAccessPolicyProperties"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VaultAccessPolicyProperties(Response response)
         {
             if (response is null)

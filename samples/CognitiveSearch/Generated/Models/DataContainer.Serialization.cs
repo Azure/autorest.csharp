@@ -100,6 +100,8 @@ namespace CognitiveSearch.Models
             return DeserializeDataContainer(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DataContainer"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DataContainer"/> to convert. </param>
         public static implicit operator RequestContent(DataContainer model)
         {
             if (model is null)
@@ -110,6 +112,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DataContainer"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DataContainer(Response response)
         {
             if (response is null)

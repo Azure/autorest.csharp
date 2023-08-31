@@ -200,6 +200,8 @@ namespace MgmtRenameRules
             return DeserializeVirtualMachineScaleSetRollingUpgradeData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetRollingUpgradeData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetRollingUpgradeData"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachineScaleSetRollingUpgradeData model)
         {
             if (model is null)
@@ -210,6 +212,8 @@ namespace MgmtRenameRules
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetRollingUpgradeData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachineScaleSetRollingUpgradeData(Response response)
         {
             if (response is null)

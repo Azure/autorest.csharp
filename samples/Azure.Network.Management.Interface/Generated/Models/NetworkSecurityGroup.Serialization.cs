@@ -248,6 +248,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeNetworkSecurityGroup(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="NetworkSecurityGroup"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="NetworkSecurityGroup"/> to convert. </param>
         public static implicit operator RequestContent(NetworkSecurityGroup model)
         {
             if (model is null)
@@ -258,6 +260,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="NetworkSecurityGroup"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator NetworkSecurityGroup(Response response)
         {
             if (response is null)

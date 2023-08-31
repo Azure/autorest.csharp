@@ -129,6 +129,8 @@ namespace Parameters.Spread.Models
             return DeserializeSpreadWithMultipleParametersRequest(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SpreadWithMultipleParametersRequest"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SpreadWithMultipleParametersRequest"/> to convert. </param>
         public static implicit operator RequestContent(SpreadWithMultipleParametersRequest model)
         {
             if (model is null)
@@ -139,6 +141,8 @@ namespace Parameters.Spread.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SpreadWithMultipleParametersRequest"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SpreadWithMultipleParametersRequest(Response response)
         {
             if (response is null)

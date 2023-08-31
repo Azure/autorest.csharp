@@ -218,6 +218,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeServiceEndpointPolicy(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ServiceEndpointPolicy"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ServiceEndpointPolicy"/> to convert. </param>
         public static implicit operator RequestContent(ServiceEndpointPolicy model)
         {
             if (model is null)
@@ -228,6 +230,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ServiceEndpointPolicy"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ServiceEndpointPolicy(Response response)
         {
             if (response is null)

@@ -121,6 +121,8 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeDnsResourceReferenceResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DnsResourceReferenceResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DnsResourceReferenceResult"/> to convert. </param>
         public static implicit operator RequestContent(DnsResourceReferenceResult model)
         {
             if (model is null)
@@ -131,6 +133,8 @@ namespace MgmtExpandResourceTypes.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DnsResourceReferenceResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DnsResourceReferenceResult(Response response)
         {
             if (response is null)

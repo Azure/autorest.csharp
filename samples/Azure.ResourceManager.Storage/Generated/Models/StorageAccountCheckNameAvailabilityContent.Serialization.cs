@@ -97,6 +97,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStorageAccountCheckNameAvailabilityContent(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="StorageAccountCheckNameAvailabilityContent"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="StorageAccountCheckNameAvailabilityContent"/> to convert. </param>
         public static implicit operator RequestContent(StorageAccountCheckNameAvailabilityContent model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="StorageAccountCheckNameAvailabilityContent"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator StorageAccountCheckNameAvailabilityContent(Response response)
         {
             if (response is null)

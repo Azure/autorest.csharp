@@ -107,6 +107,8 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeMxRecord(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MxRecord"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MxRecord"/> to convert. </param>
         public static implicit operator RequestContent(MxRecord model)
         {
             if (model is null)
@@ -117,6 +119,8 @@ namespace MgmtExpandResourceTypes.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MxRecord"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MxRecord(Response response)
         {
             if (response is null)

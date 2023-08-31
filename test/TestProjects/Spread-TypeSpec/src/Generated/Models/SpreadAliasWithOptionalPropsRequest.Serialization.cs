@@ -158,6 +158,8 @@ namespace SpreadTypeSpec.Models
             return DeserializeSpreadAliasWithOptionalPropsRequest(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SpreadAliasWithOptionalPropsRequest"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SpreadAliasWithOptionalPropsRequest"/> to convert. </param>
         public static implicit operator RequestContent(SpreadAliasWithOptionalPropsRequest model)
         {
             if (model is null)
@@ -168,6 +170,8 @@ namespace SpreadTypeSpec.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SpreadAliasWithOptionalPropsRequest"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SpreadAliasWithOptionalPropsRequest(Response response)
         {
             if (response is null)

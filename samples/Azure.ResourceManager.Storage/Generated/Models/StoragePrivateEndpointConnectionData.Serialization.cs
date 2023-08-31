@@ -167,6 +167,8 @@ namespace Azure.ResourceManager.Storage
             return DeserializeStoragePrivateEndpointConnectionData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="StoragePrivateEndpointConnectionData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="StoragePrivateEndpointConnectionData"/> to convert. </param>
         public static implicit operator RequestContent(StoragePrivateEndpointConnectionData model)
         {
             if (model is null)
@@ -177,6 +179,8 @@ namespace Azure.ResourceManager.Storage
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="StoragePrivateEndpointConnectionData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator StoragePrivateEndpointConnectionData(Response response)
         {
             if (response is null)

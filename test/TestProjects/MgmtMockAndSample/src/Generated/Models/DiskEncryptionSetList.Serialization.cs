@@ -111,6 +111,8 @@ namespace MgmtMockAndSample.Models
             return DeserializeDiskEncryptionSetList(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DiskEncryptionSetList"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DiskEncryptionSetList"/> to convert. </param>
         public static implicit operator RequestContent(DiskEncryptionSetList model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace MgmtMockAndSample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DiskEncryptionSetList"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DiskEncryptionSetList(Response response)
         {
             if (response is null)

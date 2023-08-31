@@ -122,6 +122,8 @@ namespace xml_service.Models
             return DeserializeListBlobsResponse(XElement.Load(data.ToStream()), options);
         }
 
+        /// <summary> Converts a <see cref="ListBlobsResponse"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ListBlobsResponse"/> to convert. </param>
         public static implicit operator RequestContent(ListBlobsResponse model)
         {
             if (model is null)
@@ -132,6 +134,8 @@ namespace xml_service.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ListBlobsResponse"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ListBlobsResponse(Response response)
         {
             if (response is null)

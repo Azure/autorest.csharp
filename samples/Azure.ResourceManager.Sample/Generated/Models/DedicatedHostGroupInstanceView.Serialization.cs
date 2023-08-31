@@ -106,6 +106,8 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeDedicatedHostGroupInstanceView(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DedicatedHostGroupInstanceView"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DedicatedHostGroupInstanceView"/> to convert. </param>
         public static implicit operator RequestContent(DedicatedHostGroupInstanceView model)
         {
             if (model is null)
@@ -116,6 +118,8 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DedicatedHostGroupInstanceView"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DedicatedHostGroupInstanceView(Response response)
         {
             if (response is null)

@@ -258,6 +258,8 @@ namespace Inheritance.Models
             return DeserializeBaseClass(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="BaseClass"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="BaseClass"/> to convert. </param>
         public static implicit operator RequestContent(BaseClass model)
         {
             if (model is null)
@@ -268,6 +270,8 @@ namespace Inheritance.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="BaseClass"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator BaseClass(Response response)
         {
             if (response is null)

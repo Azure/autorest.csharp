@@ -104,6 +104,8 @@ namespace ModelsTypeSpec.Models
             return DeserializeInputRecursiveModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="InputRecursiveModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="InputRecursiveModel"/> to convert. </param>
         public static implicit operator RequestContent(InputRecursiveModel model)
         {
             if (model is null)
@@ -114,6 +116,8 @@ namespace ModelsTypeSpec.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="InputRecursiveModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator InputRecursiveModel(Response response)
         {
             if (response is null)

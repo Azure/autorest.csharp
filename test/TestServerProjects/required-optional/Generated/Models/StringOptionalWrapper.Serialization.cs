@@ -92,6 +92,8 @@ namespace required_optional.Models
             return DeserializeStringOptionalWrapper(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="StringOptionalWrapper"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="StringOptionalWrapper"/> to convert. </param>
         public static implicit operator RequestContent(StringOptionalWrapper model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace required_optional.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="StringOptionalWrapper"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator StringOptionalWrapper(Response response)
         {
             if (response is null)

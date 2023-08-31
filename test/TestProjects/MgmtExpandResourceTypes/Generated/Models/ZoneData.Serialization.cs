@@ -327,6 +327,8 @@ namespace MgmtExpandResourceTypes
             return DeserializeZoneData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ZoneData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ZoneData"/> to convert. </param>
         public static implicit operator RequestContent(ZoneData model)
         {
             if (model is null)
@@ -337,6 +339,8 @@ namespace MgmtExpandResourceTypes
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ZoneData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ZoneData(Response response)
         {
             if (response is null)

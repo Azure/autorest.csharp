@@ -117,6 +117,8 @@ namespace xml_service.Models
             return DeserializeContainerProperties(XElement.Load(data.ToStream()), options);
         }
 
+        /// <summary> Converts a <see cref="ContainerProperties"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ContainerProperties"/> to convert. </param>
         public static implicit operator RequestContent(ContainerProperties model)
         {
             if (model is null)
@@ -127,6 +129,8 @@ namespace xml_service.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ContainerProperties"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ContainerProperties(Response response)
         {
             if (response is null)

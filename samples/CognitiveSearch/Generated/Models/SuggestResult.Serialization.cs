@@ -78,6 +78,8 @@ namespace CognitiveSearch.Models
             return DeserializeSuggestResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SuggestResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SuggestResult"/> to convert. </param>
         public static implicit operator RequestContent(SuggestResult model)
         {
             if (model is null)
@@ -88,6 +90,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SuggestResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SuggestResult(Response response)
         {
             if (response is null)

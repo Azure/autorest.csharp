@@ -121,6 +121,8 @@ namespace MgmtPropertyBag
             return DeserializeFooData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FooData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FooData"/> to convert. </param>
         public static implicit operator RequestContent(FooData model)
         {
             if (model is null)
@@ -131,6 +133,8 @@ namespace MgmtPropertyBag
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FooData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FooData(Response response)
         {
             if (response is null)

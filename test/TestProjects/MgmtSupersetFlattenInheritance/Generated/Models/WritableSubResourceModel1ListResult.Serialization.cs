@@ -102,6 +102,8 @@ namespace MgmtSupersetFlattenInheritance.Models
             return DeserializeWritableSubResourceModel1ListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="WritableSubResourceModel1ListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="WritableSubResourceModel1ListResult"/> to convert. </param>
         public static implicit operator RequestContent(WritableSubResourceModel1ListResult model)
         {
             if (model is null)
@@ -112,6 +114,8 @@ namespace MgmtSupersetFlattenInheritance.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="WritableSubResourceModel1ListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator WritableSubResourceModel1ListResult(Response response)
         {
             if (response is null)

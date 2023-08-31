@@ -112,6 +112,8 @@ namespace MgmtDiscriminator.Models
             return DeserializeDeliveryRuleAction(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DeliveryRuleAction"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DeliveryRuleAction"/> to convert. </param>
         public static implicit operator RequestContent(DeliveryRuleAction model)
         {
             if (model is null)
@@ -122,6 +124,8 @@ namespace MgmtDiscriminator.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DeliveryRuleAction"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DeliveryRuleAction(Response response)
         {
             if (response is null)

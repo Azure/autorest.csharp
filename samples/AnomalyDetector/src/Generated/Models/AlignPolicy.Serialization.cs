@@ -126,6 +126,8 @@ namespace AnomalyDetector.Models
             return DeserializeAlignPolicy(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="AlignPolicy"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="AlignPolicy"/> to convert. </param>
         public static implicit operator RequestContent(AlignPolicy model)
         {
             if (model is null)
@@ -136,6 +138,8 @@ namespace AnomalyDetector.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="AlignPolicy"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator AlignPolicy(Response response)
         {
             if (response is null)

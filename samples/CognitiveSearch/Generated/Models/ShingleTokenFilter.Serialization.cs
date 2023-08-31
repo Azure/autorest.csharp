@@ -179,6 +179,8 @@ namespace CognitiveSearch.Models
             return DeserializeShingleTokenFilter(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ShingleTokenFilter"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ShingleTokenFilter"/> to convert. </param>
         public static implicit operator RequestContent(ShingleTokenFilter model)
         {
             if (model is null)
@@ -189,6 +191,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ShingleTokenFilter"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ShingleTokenFilter(Response response)
         {
             if (response is null)

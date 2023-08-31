@@ -109,6 +109,8 @@ namespace MgmtExactMatchInheritance.Models
             return DeserializeSeparateClass(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SeparateClass"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SeparateClass"/> to convert. </param>
         public static implicit operator RequestContent(SeparateClass model)
         {
             if (model is null)
@@ -119,6 +121,8 @@ namespace MgmtExactMatchInheritance.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SeparateClass"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SeparateClass(Response response)
         {
             if (response is null)

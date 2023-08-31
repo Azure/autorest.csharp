@@ -89,6 +89,8 @@ namespace Encode.Duration.Models
             return DeserializeFloatSecondsDurationProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FloatSecondsDurationProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FloatSecondsDurationProperty"/> to convert. </param>
         public static implicit operator RequestContent(FloatSecondsDurationProperty model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace Encode.Duration.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FloatSecondsDurationProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FloatSecondsDurationProperty(Response response)
         {
             if (response is null)

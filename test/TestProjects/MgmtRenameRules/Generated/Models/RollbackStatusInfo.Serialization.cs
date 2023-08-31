@@ -111,6 +111,8 @@ namespace MgmtRenameRules.Models
             return DeserializeRollbackStatusInfo(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="RollbackStatusInfo"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="RollbackStatusInfo"/> to convert. </param>
         public static implicit operator RequestContent(RollbackStatusInfo model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="RollbackStatusInfo"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator RollbackStatusInfo(Response response)
         {
             if (response is null)

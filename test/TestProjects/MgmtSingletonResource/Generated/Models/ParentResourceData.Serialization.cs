@@ -155,6 +155,8 @@ namespace MgmtSingletonResource
             return DeserializeParentResourceData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ParentResourceData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ParentResourceData"/> to convert. </param>
         public static implicit operator RequestContent(ParentResourceData model)
         {
             if (model is null)
@@ -165,6 +167,8 @@ namespace MgmtSingletonResource
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ParentResourceData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ParentResourceData(Response response)
         {
             if (response is null)

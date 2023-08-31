@@ -179,6 +179,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeNetworkRuleSet(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="NetworkRuleSet"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="NetworkRuleSet"/> to convert. </param>
         public static implicit operator RequestContent(NetworkRuleSet model)
         {
             if (model is null)
@@ -189,6 +191,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="NetworkRuleSet"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator NetworkRuleSet(Response response)
         {
             if (response is null)

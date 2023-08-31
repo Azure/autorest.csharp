@@ -89,6 +89,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeKeyPolicy(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="KeyPolicy"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="KeyPolicy"/> to convert. </param>
         public static implicit operator RequestContent(KeyPolicy model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="KeyPolicy"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator KeyPolicy(Response response)
         {
             if (response is null)

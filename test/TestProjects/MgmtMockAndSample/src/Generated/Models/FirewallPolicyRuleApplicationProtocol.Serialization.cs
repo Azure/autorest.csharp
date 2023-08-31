@@ -111,6 +111,8 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyRuleApplicationProtocol(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FirewallPolicyRuleApplicationProtocol"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FirewallPolicyRuleApplicationProtocol"/> to convert. </param>
         public static implicit operator RequestContent(FirewallPolicyRuleApplicationProtocol model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace MgmtMockAndSample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FirewallPolicyRuleApplicationProtocol"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FirewallPolicyRuleApplicationProtocol(Response response)
         {
             if (response is null)

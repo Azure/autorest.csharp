@@ -103,6 +103,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeLeaseShareResponse(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="LeaseShareResponse"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="LeaseShareResponse"/> to convert. </param>
         public static implicit operator RequestContent(LeaseShareResponse model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="LeaseShareResponse"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator LeaseShareResponse(Response response)
         {
             if (response is null)

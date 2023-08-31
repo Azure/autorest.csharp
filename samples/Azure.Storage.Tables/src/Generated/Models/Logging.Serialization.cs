@@ -95,6 +95,8 @@ namespace Azure.Storage.Tables.Models
             return DeserializeLogging(XElement.Load(data.ToStream()), options);
         }
 
+        /// <summary> Converts a <see cref="Logging"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Logging"/> to convert. </param>
         public static implicit operator RequestContent(Logging model)
         {
             if (model is null)
@@ -105,6 +107,8 @@ namespace Azure.Storage.Tables.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Logging"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Logging(Response response)
         {
             if (response is null)

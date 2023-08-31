@@ -172,6 +172,8 @@ namespace MgmtResourceName
             return DeserializeProviderOperationData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ProviderOperationData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ProviderOperationData"/> to convert. </param>
         public static implicit operator RequestContent(ProviderOperationData model)
         {
             if (model is null)
@@ -182,6 +184,8 @@ namespace MgmtResourceName
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ProviderOperationData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ProviderOperationData(Response response)
         {
             if (response is null)

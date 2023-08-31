@@ -155,6 +155,8 @@ namespace MgmtListMethods
             return DeserializeTenantTestData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="TenantTestData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="TenantTestData"/> to convert. </param>
         public static implicit operator RequestContent(TenantTestData model)
         {
             if (model is null)
@@ -165,6 +167,8 @@ namespace MgmtListMethods
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="TenantTestData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator TenantTestData(Response response)
         {
             if (response is null)

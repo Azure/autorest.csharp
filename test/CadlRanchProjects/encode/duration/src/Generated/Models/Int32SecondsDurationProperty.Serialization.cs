@@ -89,6 +89,8 @@ namespace Encode.Duration.Models
             return DeserializeInt32SecondsDurationProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Int32SecondsDurationProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Int32SecondsDurationProperty"/> to convert. </param>
         public static implicit operator RequestContent(Int32SecondsDurationProperty model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace Encode.Duration.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Int32SecondsDurationProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Int32SecondsDurationProperty(Response response)
         {
             if (response is null)

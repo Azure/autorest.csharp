@@ -89,6 +89,8 @@ namespace _Specs_.Azure.Core.Traits.Models
             return DeserializeUserActionResponse(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="UserActionResponse"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="UserActionResponse"/> to convert. </param>
         public static implicit operator RequestContent(UserActionResponse model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace _Specs_.Azure.Core.Traits.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="UserActionResponse"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator UserActionResponse(Response response)
         {
             if (response is null)

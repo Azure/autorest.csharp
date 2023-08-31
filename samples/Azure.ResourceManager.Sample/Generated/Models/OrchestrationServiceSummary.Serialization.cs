@@ -101,6 +101,8 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeOrchestrationServiceSummary(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="OrchestrationServiceSummary"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="OrchestrationServiceSummary"/> to convert. </param>
         public static implicit operator RequestContent(OrchestrationServiceSummary model)
         {
             if (model is null)
@@ -111,6 +113,8 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="OrchestrationServiceSummary"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator OrchestrationServiceSummary(Response response)
         {
             if (response is null)

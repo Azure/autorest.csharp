@@ -142,6 +142,8 @@ namespace MgmtMockAndSample.Models
             return DeserializeMhsmPrivateEndpointConnectionItem(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MhsmPrivateEndpointConnectionItem"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MhsmPrivateEndpointConnectionItem"/> to convert. </param>
         public static implicit operator RequestContent(MhsmPrivateEndpointConnectionItem model)
         {
             if (model is null)
@@ -152,6 +154,8 @@ namespace MgmtMockAndSample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MhsmPrivateEndpointConnectionItem"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MhsmPrivateEndpointConnectionItem(Response response)
         {
             if (response is null)

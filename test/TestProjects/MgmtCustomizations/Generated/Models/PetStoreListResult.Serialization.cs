@@ -107,6 +107,8 @@ namespace MgmtCustomizations.Models
             return DeserializePetStoreListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PetStoreListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PetStoreListResult"/> to convert. </param>
         public static implicit operator RequestContent(PetStoreListResult model)
         {
             if (model is null)
@@ -117,6 +119,8 @@ namespace MgmtCustomizations.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PetStoreListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PetStoreListResult(Response response)
         {
             if (response is null)

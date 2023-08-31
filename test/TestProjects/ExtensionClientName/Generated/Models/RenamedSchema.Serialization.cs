@@ -118,6 +118,8 @@ namespace ExtensionClientName.Models
             return DeserializeRenamedSchema(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="RenamedSchema"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="RenamedSchema"/> to convert. </param>
         public static implicit operator RequestContent(RenamedSchema model)
         {
             if (model is null)
@@ -128,6 +130,8 @@ namespace ExtensionClientName.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="RenamedSchema"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator RenamedSchema(Response response)
         {
             if (response is null)

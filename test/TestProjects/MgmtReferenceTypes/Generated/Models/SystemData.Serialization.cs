@@ -165,6 +165,8 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeSystemData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SystemData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SystemData"/> to convert. </param>
         public static implicit operator RequestContent(SystemData model)
         {
             if (model is null)
@@ -175,6 +177,8 @@ namespace Azure.ResourceManager.Fake.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SystemData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SystemData(Response response)
         {
             if (response is null)

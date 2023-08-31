@@ -235,6 +235,8 @@ namespace MgmtRenameRules.Models
             return DeserializeOSDisk(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="OSDisk"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="OSDisk"/> to convert. </param>
         public static implicit operator RequestContent(OSDisk model)
         {
             if (model is null)
@@ -245,6 +247,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="OSDisk"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator OSDisk(Response response)
         {
             if (response is null)

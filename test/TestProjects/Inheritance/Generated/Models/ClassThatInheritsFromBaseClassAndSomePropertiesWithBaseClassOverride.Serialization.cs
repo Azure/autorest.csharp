@@ -280,6 +280,8 @@ namespace Inheritance.Models
             return DeserializeClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride"/> to convert. </param>
         public static implicit operator RequestContent(ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride model)
         {
             if (model is null)
@@ -290,6 +292,8 @@ namespace Inheritance.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride(Response response)
         {
             if (response is null)

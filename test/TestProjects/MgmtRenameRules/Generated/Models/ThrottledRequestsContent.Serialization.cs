@@ -150,6 +150,8 @@ namespace MgmtRenameRules.Models
             return DeserializeThrottledRequestsContent(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ThrottledRequestsContent"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ThrottledRequestsContent"/> to convert. </param>
         public static implicit operator RequestContent(ThrottledRequestsContent model)
         {
             if (model is null)
@@ -160,6 +162,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ThrottledRequestsContent"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ThrottledRequestsContent(Response response)
         {
             if (response is null)

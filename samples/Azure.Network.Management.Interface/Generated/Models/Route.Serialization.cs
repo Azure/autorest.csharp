@@ -171,6 +171,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeRoute(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Route"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Route"/> to convert. </param>
         public static implicit operator RequestContent(Route model)
         {
             if (model is null)
@@ -181,6 +183,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Route"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Route(Response response)
         {
             if (response is null)

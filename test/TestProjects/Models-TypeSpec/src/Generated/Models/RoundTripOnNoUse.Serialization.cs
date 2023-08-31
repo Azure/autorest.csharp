@@ -107,6 +107,8 @@ namespace ModelsTypeSpec.Models
             return DeserializeRoundTripOnNoUse(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="RoundTripOnNoUse"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="RoundTripOnNoUse"/> to convert. </param>
         public static implicit operator RequestContent(RoundTripOnNoUse model)
         {
             if (model is null)
@@ -117,6 +119,8 @@ namespace ModelsTypeSpec.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="RoundTripOnNoUse"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator RoundTripOnNoUse(Response response)
         {
             if (response is null)

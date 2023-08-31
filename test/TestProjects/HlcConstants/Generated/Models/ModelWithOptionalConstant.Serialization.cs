@@ -141,6 +141,8 @@ namespace HlcConstants.Models
             return DeserializeModelWithOptionalConstant(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ModelWithOptionalConstant"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ModelWithOptionalConstant"/> to convert. </param>
         public static implicit operator RequestContent(ModelWithOptionalConstant model)
         {
             if (model is null)
@@ -151,6 +153,8 @@ namespace HlcConstants.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ModelWithOptionalConstant"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ModelWithOptionalConstant(Response response)
         {
             if (response is null)

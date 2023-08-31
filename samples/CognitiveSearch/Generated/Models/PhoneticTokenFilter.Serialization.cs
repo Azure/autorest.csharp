@@ -127,6 +127,8 @@ namespace CognitiveSearch.Models
             return DeserializePhoneticTokenFilter(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PhoneticTokenFilter"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PhoneticTokenFilter"/> to convert. </param>
         public static implicit operator RequestContent(PhoneticTokenFilter model)
         {
             if (model is null)
@@ -137,6 +139,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PhoneticTokenFilter"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PhoneticTokenFilter(Response response)
         {
             if (response is null)

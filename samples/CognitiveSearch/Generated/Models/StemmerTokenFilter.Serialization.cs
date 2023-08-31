@@ -105,6 +105,8 @@ namespace CognitiveSearch.Models
             return DeserializeStemmerTokenFilter(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="StemmerTokenFilter"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="StemmerTokenFilter"/> to convert. </param>
         public static implicit operator RequestContent(StemmerTokenFilter model)
         {
             if (model is null)
@@ -115,6 +117,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="StemmerTokenFilter"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator StemmerTokenFilter(Response response)
         {
             if (response is null)

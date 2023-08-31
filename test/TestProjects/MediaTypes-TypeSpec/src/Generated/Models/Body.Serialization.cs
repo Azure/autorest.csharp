@@ -89,6 +89,8 @@ namespace MultipleMediaTypes.Models
             return DeserializeBody(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Body"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Body"/> to convert. </param>
         public static implicit operator RequestContent(Body model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace MultipleMediaTypes.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Body"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Body(Response response)
         {
             if (response is null)

@@ -96,6 +96,8 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializePatchSettings(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PatchSettings"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PatchSettings"/> to convert. </param>
         public static implicit operator RequestContent(PatchSettings model)
         {
             if (model is null)
@@ -106,6 +108,8 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PatchSettings"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PatchSettings(Response response)
         {
             if (response is null)

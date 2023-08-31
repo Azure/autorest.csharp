@@ -130,6 +130,8 @@ namespace AnomalyDetector.Models
             return DeserializeAnomalyValue(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="AnomalyValue"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="AnomalyValue"/> to convert. </param>
         public static implicit operator RequestContent(AnomalyValue model)
         {
             if (model is null)
@@ -140,6 +142,8 @@ namespace AnomalyDetector.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="AnomalyValue"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator AnomalyValue(Response response)
         {
             if (response is null)

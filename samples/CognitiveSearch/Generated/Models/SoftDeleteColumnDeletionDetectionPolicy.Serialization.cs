@@ -111,6 +111,8 @@ namespace CognitiveSearch.Models
             return DeserializeSoftDeleteColumnDeletionDetectionPolicy(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SoftDeleteColumnDeletionDetectionPolicy"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SoftDeleteColumnDeletionDetectionPolicy"/> to convert. </param>
         public static implicit operator RequestContent(SoftDeleteColumnDeletionDetectionPolicy model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SoftDeleteColumnDeletionDetectionPolicy"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SoftDeleteColumnDeletionDetectionPolicy(Response response)
         {
             if (response is null)

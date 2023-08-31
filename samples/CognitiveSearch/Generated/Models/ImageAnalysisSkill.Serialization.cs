@@ -223,6 +223,8 @@ namespace CognitiveSearch.Models
             return DeserializeImageAnalysisSkill(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ImageAnalysisSkill"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ImageAnalysisSkill"/> to convert. </param>
         public static implicit operator RequestContent(ImageAnalysisSkill model)
         {
             if (model is null)
@@ -233,6 +235,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ImageAnalysisSkill"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ImageAnalysisSkill(Response response)
         {
             if (response is null)

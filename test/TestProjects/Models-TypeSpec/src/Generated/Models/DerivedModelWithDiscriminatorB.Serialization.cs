@@ -116,6 +116,8 @@ namespace ModelsTypeSpec.Models
             return DeserializeDerivedModelWithDiscriminatorB(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DerivedModelWithDiscriminatorB"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DerivedModelWithDiscriminatorB"/> to convert. </param>
         public static implicit operator RequestContent(DerivedModelWithDiscriminatorB model)
         {
             if (model is null)
@@ -126,6 +128,8 @@ namespace ModelsTypeSpec.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DerivedModelWithDiscriminatorB"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DerivedModelWithDiscriminatorB(Response response)
         {
             if (response is null)

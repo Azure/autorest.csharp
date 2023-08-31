@@ -136,6 +136,8 @@ namespace MgmtRenameRules.Models
             return DeserializeVirtualMachineScaleSetUpdateStorageProfile(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetUpdateStorageProfile"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetUpdateStorageProfile"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachineScaleSetUpdateStorageProfile model)
         {
             if (model is null)
@@ -146,6 +148,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetUpdateStorageProfile"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachineScaleSetUpdateStorageProfile(Response response)
         {
             if (response is null)

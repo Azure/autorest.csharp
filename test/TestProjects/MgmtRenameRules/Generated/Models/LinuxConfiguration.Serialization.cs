@@ -126,6 +126,8 @@ namespace MgmtRenameRules.Models
             return DeserializeLinuxConfiguration(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="LinuxConfiguration"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="LinuxConfiguration"/> to convert. </param>
         public static implicit operator RequestContent(LinuxConfiguration model)
         {
             if (model is null)
@@ -136,6 +138,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="LinuxConfiguration"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator LinuxConfiguration(Response response)
         {
             if (response is null)

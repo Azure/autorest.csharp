@@ -97,6 +97,8 @@ namespace xml_service.Models
             return DeserializeCorsRule(XElement.Load(data.ToStream()), options);
         }
 
+        /// <summary> Converts a <see cref="CorsRule"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="CorsRule"/> to convert. </param>
         public static implicit operator RequestContent(CorsRule model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace xml_service.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="CorsRule"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator CorsRule(Response response)
         {
             if (response is null)

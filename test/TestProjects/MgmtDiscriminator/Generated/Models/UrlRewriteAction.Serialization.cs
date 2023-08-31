@@ -103,6 +103,8 @@ namespace MgmtDiscriminator.Models
             return DeserializeUrlRewriteAction(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="UrlRewriteAction"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="UrlRewriteAction"/> to convert. </param>
         public static implicit operator RequestContent(UrlRewriteAction model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace MgmtDiscriminator.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="UrlRewriteAction"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator UrlRewriteAction(Response response)
         {
             if (response is null)

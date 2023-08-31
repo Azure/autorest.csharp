@@ -107,6 +107,8 @@ namespace model_flattening.Models
             return DeserializeProductWrapper(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ProductWrapper"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ProductWrapper"/> to convert. </param>
         public static implicit operator RequestContent(ProductWrapper model)
         {
             if (model is null)
@@ -117,6 +119,8 @@ namespace model_flattening.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ProductWrapper"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ProductWrapper(Response response)
         {
             if (response is null)

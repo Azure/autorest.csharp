@@ -89,6 +89,8 @@ namespace Encode.Bytes.Models
             return DeserializeDefaultBytesProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DefaultBytesProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DefaultBytesProperty"/> to convert. </param>
         public static implicit operator RequestContent(DefaultBytesProperty model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace Encode.Bytes.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DefaultBytesProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DefaultBytesProperty(Response response)
         {
             if (response is null)

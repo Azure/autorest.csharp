@@ -76,6 +76,8 @@ namespace Azure.Storage.Tables.Models
             return DeserializeRetentionPolicy(XElement.Load(data.ToStream()), options);
         }
 
+        /// <summary> Converts a <see cref="RetentionPolicy"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="RetentionPolicy"/> to convert. </param>
         public static implicit operator RequestContent(RetentionPolicy model)
         {
             if (model is null)
@@ -86,6 +88,8 @@ namespace Azure.Storage.Tables.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="RetentionPolicy"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator RetentionPolicy(Response response)
         {
             if (response is null)

@@ -111,6 +111,8 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializeRecommendedMachineConfiguration(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="RecommendedMachineConfiguration"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="RecommendedMachineConfiguration"/> to convert. </param>
         public static implicit operator RequestContent(RecommendedMachineConfiguration model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace MgmtHierarchicalNonResource.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="RecommendedMachineConfiguration"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator RecommendedMachineConfiguration(Response response)
         {
             if (response is null)

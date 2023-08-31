@@ -103,6 +103,8 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeSampleUsageName(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SampleUsageName"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SampleUsageName"/> to convert. </param>
         public static implicit operator RequestContent(SampleUsageName model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SampleUsageName"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SampleUsageName(Response response)
         {
             if (response is null)

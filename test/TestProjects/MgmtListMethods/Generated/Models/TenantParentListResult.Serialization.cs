@@ -111,6 +111,8 @@ namespace MgmtListMethods.Models
             return DeserializeTenantParentListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="TenantParentListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="TenantParentListResult"/> to convert. </param>
         public static implicit operator RequestContent(TenantParentListResult model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace MgmtListMethods.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="TenantParentListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator TenantParentListResult(Response response)
         {
             if (response is null)

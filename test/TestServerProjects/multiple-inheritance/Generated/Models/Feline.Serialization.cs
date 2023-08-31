@@ -111,6 +111,8 @@ namespace multiple_inheritance.Models
             return DeserializeFeline(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Feline"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Feline"/> to convert. </param>
         public static implicit operator RequestContent(Feline model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace multiple_inheritance.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Feline"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Feline(Response response)
         {
             if (response is null)

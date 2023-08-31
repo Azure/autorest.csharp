@@ -165,6 +165,8 @@ namespace CognitiveSearch.Models
             return DeserializeDataSource(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DataSource"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DataSource"/> to convert. </param>
         public static implicit operator RequestContent(DataSource model)
         {
             if (model is null)
@@ -175,6 +177,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DataSource"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DataSource(Response response)
         {
             if (response is null)

@@ -189,6 +189,8 @@ namespace Azure.ResourceManager.Storage
             return DeserializeObjectReplicationPolicyData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ObjectReplicationPolicyData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ObjectReplicationPolicyData"/> to convert. </param>
         public static implicit operator RequestContent(ObjectReplicationPolicyData model)
         {
             if (model is null)
@@ -199,6 +201,8 @@ namespace Azure.ResourceManager.Storage
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ObjectReplicationPolicyData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ObjectReplicationPolicyData(Response response)
         {
             if (response is null)

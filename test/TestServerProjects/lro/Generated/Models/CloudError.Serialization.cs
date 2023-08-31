@@ -107,6 +107,8 @@ namespace lro.Models
             return DeserializeCloudError(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="CloudError"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="CloudError"/> to convert. </param>
         public static implicit operator RequestContent(CloudError model)
         {
             if (model is null)
@@ -117,6 +119,8 @@ namespace lro.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="CloudError"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator CloudError(Response response)
         {
             if (response is null)

@@ -93,6 +93,8 @@ namespace CognitiveSearch.Models
             return DeserializeAutocompleteItem(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="AutocompleteItem"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="AutocompleteItem"/> to convert. </param>
         public static implicit operator RequestContent(AutocompleteItem model)
         {
             if (model is null)
@@ -103,6 +105,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="AutocompleteItem"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator AutocompleteItem(Response response)
         {
             if (response is null)

@@ -124,6 +124,8 @@ namespace MgmtExtensionResource.Models
             return DeserializeParameterDefinitionsValueMetadata(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ParameterDefinitionsValueMetadata"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ParameterDefinitionsValueMetadata"/> to convert. </param>
         public static implicit operator RequestContent(ParameterDefinitionsValueMetadata model)
         {
             if (model is null)
@@ -134,6 +136,8 @@ namespace MgmtExtensionResource.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ParameterDefinitionsValueMetadata"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ParameterDefinitionsValueMetadata(Response response)
         {
             if (response is null)

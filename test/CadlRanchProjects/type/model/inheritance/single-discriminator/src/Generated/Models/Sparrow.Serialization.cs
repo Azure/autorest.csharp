@@ -97,6 +97,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return DeserializeSparrow(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Sparrow"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Sparrow"/> to convert. </param>
         public static implicit operator RequestContent(Sparrow model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Sparrow"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Sparrow(Response response)
         {
             if (response is null)

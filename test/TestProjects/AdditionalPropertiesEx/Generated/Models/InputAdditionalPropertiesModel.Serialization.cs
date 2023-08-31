@@ -80,6 +80,8 @@ namespace AdditionalPropertiesEx.Models
             return DeserializeInputAdditionalPropertiesModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="InputAdditionalPropertiesModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="InputAdditionalPropertiesModel"/> to convert. </param>
         public static implicit operator RequestContent(InputAdditionalPropertiesModel model)
         {
             if (model is null)
@@ -90,6 +92,8 @@ namespace AdditionalPropertiesEx.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="InputAdditionalPropertiesModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator InputAdditionalPropertiesModel(Response response)
         {
             if (response is null)

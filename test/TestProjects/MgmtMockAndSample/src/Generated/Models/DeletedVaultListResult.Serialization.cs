@@ -118,6 +118,8 @@ namespace MgmtMockAndSample.Models
             return DeserializeDeletedVaultListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DeletedVaultListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DeletedVaultListResult"/> to convert. </param>
         public static implicit operator RequestContent(DeletedVaultListResult model)
         {
             if (model is null)
@@ -128,6 +130,8 @@ namespace MgmtMockAndSample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DeletedVaultListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DeletedVaultListResult(Response response)
         {
             if (response is null)

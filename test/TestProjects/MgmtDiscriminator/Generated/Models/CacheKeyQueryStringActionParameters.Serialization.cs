@@ -120,6 +120,8 @@ namespace MgmtDiscriminator.Models
             return DeserializeCacheKeyQueryStringActionParameters(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="CacheKeyQueryStringActionParameters"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="CacheKeyQueryStringActionParameters"/> to convert. </param>
         public static implicit operator RequestContent(CacheKeyQueryStringActionParameters model)
         {
             if (model is null)
@@ -130,6 +132,8 @@ namespace MgmtDiscriminator.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="CacheKeyQueryStringActionParameters"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator CacheKeyQueryStringActionParameters(Response response)
         {
             if (response is null)

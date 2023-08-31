@@ -68,6 +68,8 @@ namespace TypeSchemaMapping.Models
             return DeserializeModelWithGuidProperty(XElement.Load(data.ToStream()), options);
         }
 
+        /// <summary> Converts a <see cref="ModelWithGuidProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ModelWithGuidProperty"/> to convert. </param>
         public static implicit operator RequestContent(ModelWithGuidProperty model)
         {
             if (model is null)
@@ -78,6 +80,8 @@ namespace TypeSchemaMapping.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ModelWithGuidProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ModelWithGuidProperty(Response response)
         {
             if (response is null)

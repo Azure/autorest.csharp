@@ -112,6 +112,8 @@ namespace CognitiveSearch.Models
             return DeserializeUaxUrlEmailTokenizer(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="UaxUrlEmailTokenizer"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="UaxUrlEmailTokenizer"/> to convert. </param>
         public static implicit operator RequestContent(UaxUrlEmailTokenizer model)
         {
             if (model is null)
@@ -122,6 +124,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="UaxUrlEmailTokenizer"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator UaxUrlEmailTokenizer(Response response)
         {
             if (response is null)

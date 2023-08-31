@@ -119,6 +119,8 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializeDerivedModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DerivedModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DerivedModel"/> to convert. </param>
         public static implicit operator RequestContent(DerivedModel model)
         {
             if (model is null)
@@ -129,6 +131,8 @@ namespace ConfidentLevelsInTsp.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DerivedModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DerivedModel(Response response)
         {
             if (response is null)

@@ -296,6 +296,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeServiceSasContent(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ServiceSasContent"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ServiceSasContent"/> to convert. </param>
         public static implicit operator RequestContent(ServiceSasContent model)
         {
             if (model is null)
@@ -306,6 +308,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ServiceSasContent"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ServiceSasContent(Response response)
         {
             if (response is null)

@@ -103,6 +103,8 @@ namespace MgmtResourceName.Models
             return DeserializeNetworkResourceListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="NetworkResourceListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="NetworkResourceListResult"/> to convert. </param>
         public static implicit operator RequestContent(NetworkResourceListResult model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace MgmtResourceName.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="NetworkResourceListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator NetworkResourceListResult(Response response)
         {
             if (response is null)

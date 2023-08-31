@@ -65,6 +65,8 @@ namespace xml_service.Models
             return DeserializeBlobPrefix(XElement.Load(data.ToStream()), options);
         }
 
+        /// <summary> Converts a <see cref="BlobPrefix"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="BlobPrefix"/> to convert. </param>
         public static implicit operator RequestContent(BlobPrefix model)
         {
             if (model is null)
@@ -75,6 +77,8 @@ namespace xml_service.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="BlobPrefix"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator BlobPrefix(Response response)
         {
             if (response is null)

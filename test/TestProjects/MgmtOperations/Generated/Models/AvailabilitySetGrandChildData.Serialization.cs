@@ -155,6 +155,8 @@ namespace MgmtOperations
             return DeserializeAvailabilitySetGrandChildData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="AvailabilitySetGrandChildData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="AvailabilitySetGrandChildData"/> to convert. </param>
         public static implicit operator RequestContent(AvailabilitySetGrandChildData model)
         {
             if (model is null)
@@ -165,6 +167,8 @@ namespace MgmtOperations
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="AvailabilitySetGrandChildData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator AvailabilitySetGrandChildData(Response response)
         {
             if (response is null)

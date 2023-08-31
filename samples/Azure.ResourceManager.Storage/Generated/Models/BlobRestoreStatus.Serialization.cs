@@ -113,6 +113,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeBlobRestoreStatus(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="BlobRestoreStatus"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="BlobRestoreStatus"/> to convert. </param>
         public static implicit operator RequestContent(BlobRestoreStatus model)
         {
             if (model is null)
@@ -123,6 +125,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="BlobRestoreStatus"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator BlobRestoreStatus(Response response)
         {
             if (response is null)

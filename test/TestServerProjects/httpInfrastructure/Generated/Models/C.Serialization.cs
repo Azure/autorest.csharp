@@ -92,6 +92,8 @@ namespace httpInfrastructure.Models
             return DeserializeC(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="C"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="C"/> to convert. </param>
         public static implicit operator RequestContent(C model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace httpInfrastructure.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="C"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator C(Response response)
         {
             if (response is null)

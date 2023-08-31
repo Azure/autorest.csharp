@@ -180,6 +180,8 @@ namespace CognitiveSearch.Models
             return DeserializeMergeSkill(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MergeSkill"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MergeSkill"/> to convert. </param>
         public static implicit operator RequestContent(MergeSkill model)
         {
             if (model is null)
@@ -190,6 +192,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MergeSkill"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MergeSkill(Response response)
         {
             if (response is null)

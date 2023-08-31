@@ -107,6 +107,8 @@ namespace MgmtNonStringPathVariable.Models
             return DeserializeUpdateResource(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="UpdateResource"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="UpdateResource"/> to convert. </param>
         public static implicit operator RequestContent(UpdateResource model)
         {
             if (model is null)
@@ -117,6 +119,8 @@ namespace MgmtNonStringPathVariable.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="UpdateResource"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator UpdateResource(Response response)
         {
             if (response is null)

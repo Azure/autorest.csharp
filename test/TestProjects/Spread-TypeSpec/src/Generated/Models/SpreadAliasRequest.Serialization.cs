@@ -97,6 +97,8 @@ namespace SpreadTypeSpec.Models
             return DeserializeSpreadAliasRequest(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SpreadAliasRequest"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SpreadAliasRequest"/> to convert. </param>
         public static implicit operator RequestContent(SpreadAliasRequest model)
         {
             if (model is null)
@@ -107,6 +109,8 @@ namespace SpreadTypeSpec.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SpreadAliasRequest"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SpreadAliasRequest(Response response)
         {
             if (response is null)

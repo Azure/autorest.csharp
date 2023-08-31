@@ -282,6 +282,8 @@ namespace CognitiveSearch.Models
             return DeserializeField(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Field"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Field"/> to convert. </param>
         public static implicit operator RequestContent(Field model)
         {
             if (model is null)
@@ -292,6 +294,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Field"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Field(Response response)
         {
             if (response is null)

@@ -115,6 +115,8 @@ namespace Azure.AI.FormRecognizer.Models
             return DeserializeDataTable(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DataTable"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DataTable"/> to convert. </param>
         public static implicit operator RequestContent(DataTable model)
         {
             if (model is null)
@@ -125,6 +127,8 @@ namespace Azure.AI.FormRecognizer.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DataTable"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DataTable(Response response)
         {
             if (response is null)

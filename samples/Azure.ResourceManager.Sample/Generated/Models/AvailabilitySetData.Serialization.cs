@@ -261,6 +261,8 @@ namespace Azure.ResourceManager.Sample
             return DeserializeAvailabilitySetData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="AvailabilitySetData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="AvailabilitySetData"/> to convert. </param>
         public static implicit operator RequestContent(AvailabilitySetData model)
         {
             if (model is null)
@@ -271,6 +273,8 @@ namespace Azure.ResourceManager.Sample
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="AvailabilitySetData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator AvailabilitySetData(Response response)
         {
             if (response is null)

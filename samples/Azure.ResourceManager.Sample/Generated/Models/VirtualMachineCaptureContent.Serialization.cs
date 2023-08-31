@@ -105,6 +105,8 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineCaptureContent(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachineCaptureContent"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineCaptureContent"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachineCaptureContent model)
         {
             if (model is null)
@@ -115,6 +117,8 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineCaptureContent"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachineCaptureContent(Response response)
         {
             if (response is null)

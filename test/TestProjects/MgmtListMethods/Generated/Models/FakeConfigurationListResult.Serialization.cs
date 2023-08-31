@@ -107,6 +107,8 @@ namespace MgmtListMethods.Models
             return DeserializeFakeConfigurationListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="FakeConfigurationListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="FakeConfigurationListResult"/> to convert. </param>
         public static implicit operator RequestContent(FakeConfigurationListResult model)
         {
             if (model is null)
@@ -117,6 +119,8 @@ namespace MgmtListMethods.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="FakeConfigurationListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator FakeConfigurationListResult(Response response)
         {
             if (response is null)

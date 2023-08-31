@@ -129,6 +129,8 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeMgmtReferenceTypesPlan(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MgmtReferenceTypesPlan"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MgmtReferenceTypesPlan"/> to convert. </param>
         public static implicit operator RequestContent(MgmtReferenceTypesPlan model)
         {
             if (model is null)
@@ -139,6 +141,8 @@ namespace Azure.ResourceManager.Fake.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MgmtReferenceTypesPlan"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MgmtReferenceTypesPlan(Response response)
         {
             if (response is null)

@@ -183,6 +183,8 @@ namespace ModelsTypeSpec.Models
             return DeserializeRoundTripPrimitiveModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="RoundTripPrimitiveModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="RoundTripPrimitiveModel"/> to convert. </param>
         public static implicit operator RequestContent(RoundTripPrimitiveModel model)
         {
             if (model is null)
@@ -193,6 +195,8 @@ namespace ModelsTypeSpec.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="RoundTripPrimitiveModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator RoundTripPrimitiveModel(Response response)
         {
             if (response is null)

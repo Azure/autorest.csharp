@@ -170,6 +170,8 @@ namespace Azure.ResourceManager.Sample
             return DeserializeSshPublicKeyData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SshPublicKeyData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SshPublicKeyData"/> to convert. </param>
         public static implicit operator RequestContent(SshPublicKeyData model)
         {
             if (model is null)
@@ -180,6 +182,8 @@ namespace Azure.ResourceManager.Sample
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SshPublicKeyData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SshPublicKeyData(Response response)
         {
             if (response is null)

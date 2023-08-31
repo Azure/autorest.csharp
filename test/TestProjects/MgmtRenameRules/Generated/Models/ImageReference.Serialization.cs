@@ -142,6 +142,8 @@ namespace MgmtRenameRules.Models
             return DeserializeImageReference(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ImageReference"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ImageReference"/> to convert. </param>
         public static implicit operator RequestContent(ImageReference model)
         {
             if (model is null)
@@ -152,6 +154,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ImageReference"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ImageReference(Response response)
         {
             if (response is null)

@@ -96,6 +96,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeLoadBalancerSku(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="LoadBalancerSku"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="LoadBalancerSku"/> to convert. </param>
         public static implicit operator RequestContent(LoadBalancerSku model)
         {
             if (model is null)
@@ -106,6 +108,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="LoadBalancerSku"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator LoadBalancerSku(Response response)
         {
             if (response is null)

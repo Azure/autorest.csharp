@@ -127,6 +127,8 @@ namespace CognitiveSearch.Models
             return DeserializeNGramTokenFilterV2(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="NGramTokenFilterV2"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="NGramTokenFilterV2"/> to convert. </param>
         public static implicit operator RequestContent(NGramTokenFilterV2 model)
         {
             if (model is null)
@@ -137,6 +139,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="NGramTokenFilterV2"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator NGramTokenFilterV2(Response response)
         {
             if (response is null)

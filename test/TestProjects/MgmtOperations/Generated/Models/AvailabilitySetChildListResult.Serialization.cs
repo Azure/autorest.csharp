@@ -111,6 +111,8 @@ namespace MgmtOperations.Models
             return DeserializeAvailabilitySetChildListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="AvailabilitySetChildListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="AvailabilitySetChildListResult"/> to convert. </param>
         public static implicit operator RequestContent(AvailabilitySetChildListResult model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace MgmtOperations.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="AvailabilitySetChildListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator AvailabilitySetChildListResult(Response response)
         {
             if (response is null)

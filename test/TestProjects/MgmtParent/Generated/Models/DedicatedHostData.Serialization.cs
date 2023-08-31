@@ -155,6 +155,8 @@ namespace MgmtParent
             return DeserializeDedicatedHostData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DedicatedHostData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DedicatedHostData"/> to convert. </param>
         public static implicit operator RequestContent(DedicatedHostData model)
         {
             if (model is null)
@@ -165,6 +167,8 @@ namespace MgmtParent
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DedicatedHostData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DedicatedHostData(Response response)
         {
             if (response is null)

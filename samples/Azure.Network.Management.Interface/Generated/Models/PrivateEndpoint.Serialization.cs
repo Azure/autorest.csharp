@@ -252,6 +252,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializePrivateEndpoint(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PrivateEndpoint"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PrivateEndpoint"/> to convert. </param>
         public static implicit operator RequestContent(PrivateEndpoint model)
         {
             if (model is null)
@@ -262,6 +264,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PrivateEndpoint"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PrivateEndpoint(Response response)
         {
             if (response is null)

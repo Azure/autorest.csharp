@@ -293,6 +293,8 @@ namespace Azure.ResourceManager.Sample
             return DeserializeVirtualMachineExtensionData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachineExtensionData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineExtensionData"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachineExtensionData model)
         {
             if (model is null)
@@ -303,6 +305,8 @@ namespace Azure.ResourceManager.Sample
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineExtensionData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachineExtensionData(Response response)
         {
             if (response is null)

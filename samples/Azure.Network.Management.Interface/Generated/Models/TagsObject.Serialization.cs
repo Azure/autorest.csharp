@@ -107,6 +107,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeTagsObject(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="TagsObject"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="TagsObject"/> to convert. </param>
         public static implicit operator RequestContent(TagsObject model)
         {
             if (model is null)
@@ -117,6 +119,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="TagsObject"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator TagsObject(Response response)
         {
             if (response is null)

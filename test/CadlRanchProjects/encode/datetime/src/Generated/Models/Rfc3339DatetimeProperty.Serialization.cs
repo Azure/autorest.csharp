@@ -89,6 +89,8 @@ namespace Encode.Datetime.Models
             return DeserializeRfc3339DatetimeProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Rfc3339DatetimeProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Rfc3339DatetimeProperty"/> to convert. </param>
         public static implicit operator RequestContent(Rfc3339DatetimeProperty model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace Encode.Datetime.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Rfc3339DatetimeProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Rfc3339DatetimeProperty(Response response)
         {
             if (response is null)

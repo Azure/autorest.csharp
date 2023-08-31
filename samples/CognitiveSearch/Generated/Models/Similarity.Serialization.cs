@@ -99,6 +99,8 @@ namespace CognitiveSearch.Models
             return DeserializeSimilarity(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Similarity"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Similarity"/> to convert. </param>
         public static implicit operator RequestContent(Similarity model)
         {
             if (model is null)
@@ -109,6 +111,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Similarity"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Similarity(Response response)
         {
             if (response is null)

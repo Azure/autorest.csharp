@@ -258,6 +258,8 @@ namespace Inheritance.Models
             return DeserializeClassThatInheritsFromBaseClassAndRedefinesAProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ClassThatInheritsFromBaseClassAndRedefinesAProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ClassThatInheritsFromBaseClassAndRedefinesAProperty"/> to convert. </param>
         public static implicit operator RequestContent(ClassThatInheritsFromBaseClassAndRedefinesAProperty model)
         {
             if (model is null)
@@ -268,6 +270,8 @@ namespace Inheritance.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ClassThatInheritsFromBaseClassAndRedefinesAProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ClassThatInheritsFromBaseClassAndRedefinesAProperty(Response response)
         {
             if (response is null)

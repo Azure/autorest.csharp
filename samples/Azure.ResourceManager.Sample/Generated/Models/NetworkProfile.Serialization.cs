@@ -106,6 +106,8 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeNetworkProfile(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="NetworkProfile"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="NetworkProfile"/> to convert. </param>
         public static implicit operator RequestContent(NetworkProfile model)
         {
             if (model is null)
@@ -116,6 +118,8 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="NetworkProfile"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator NetworkProfile(Response response)
         {
             if (response is null)

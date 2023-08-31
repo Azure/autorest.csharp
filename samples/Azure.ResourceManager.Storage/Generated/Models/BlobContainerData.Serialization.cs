@@ -364,6 +364,8 @@ namespace Azure.ResourceManager.Storage
             return DeserializeBlobContainerData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="BlobContainerData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="BlobContainerData"/> to convert. </param>
         public static implicit operator RequestContent(BlobContainerData model)
         {
             if (model is null)
@@ -374,6 +376,8 @@ namespace Azure.ResourceManager.Storage
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="BlobContainerData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator BlobContainerData(Response response)
         {
             if (response is null)

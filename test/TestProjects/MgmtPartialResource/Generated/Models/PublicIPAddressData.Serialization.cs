@@ -294,6 +294,8 @@ namespace MgmtPartialResource
             return DeserializePublicIPAddressData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PublicIPAddressData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PublicIPAddressData"/> to convert. </param>
         public static implicit operator RequestContent(PublicIPAddressData model)
         {
             if (model is null)
@@ -304,6 +306,8 @@ namespace MgmtPartialResource
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PublicIPAddressData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PublicIPAddressData(Response response)
         {
             if (response is null)

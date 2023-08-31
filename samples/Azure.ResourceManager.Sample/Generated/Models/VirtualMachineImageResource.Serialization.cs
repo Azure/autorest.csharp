@@ -134,6 +134,8 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineImageResource(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachineImageResource"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineImageResource"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachineImageResource model)
         {
             if (model is null)
@@ -144,6 +146,8 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineImageResource"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachineImageResource(Response response)
         {
             if (response is null)

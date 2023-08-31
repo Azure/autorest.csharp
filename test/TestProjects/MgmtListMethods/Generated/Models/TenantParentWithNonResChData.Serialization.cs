@@ -155,6 +155,8 @@ namespace MgmtListMethods
             return DeserializeTenantParentWithNonResChData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="TenantParentWithNonResChData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="TenantParentWithNonResChData"/> to convert. </param>
         public static implicit operator RequestContent(TenantParentWithNonResChData model)
         {
             if (model is null)
@@ -165,6 +167,8 @@ namespace MgmtListMethods
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="TenantParentWithNonResChData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator TenantParentWithNonResChData(Response response)
         {
             if (response is null)

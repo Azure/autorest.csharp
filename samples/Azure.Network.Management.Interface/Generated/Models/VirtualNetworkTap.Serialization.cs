@@ -238,6 +238,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeVirtualNetworkTap(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualNetworkTap"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualNetworkTap"/> to convert. </param>
         public static implicit operator RequestContent(VirtualNetworkTap model)
         {
             if (model is null)
@@ -248,6 +250,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualNetworkTap"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualNetworkTap(Response response)
         {
             if (response is null)

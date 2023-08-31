@@ -106,6 +106,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return DeserializeDinosaur(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Dinosaur"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Dinosaur"/> to convert. </param>
         public static implicit operator RequestContent(Dinosaur model)
         {
             if (model is null)
@@ -116,6 +118,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Dinosaur"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Dinosaur(Response response)
         {
             if (response is null)

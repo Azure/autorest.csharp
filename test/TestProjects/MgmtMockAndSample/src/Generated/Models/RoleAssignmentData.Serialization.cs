@@ -173,6 +173,8 @@ namespace MgmtMockAndSample
             return DeserializeRoleAssignmentData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="RoleAssignmentData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="RoleAssignmentData"/> to convert. </param>
         public static implicit operator RequestContent(RoleAssignmentData model)
         {
             if (model is null)
@@ -183,6 +185,8 @@ namespace MgmtMockAndSample
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="RoleAssignmentData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator RoleAssignmentData(Response response)
         {
             if (response is null)

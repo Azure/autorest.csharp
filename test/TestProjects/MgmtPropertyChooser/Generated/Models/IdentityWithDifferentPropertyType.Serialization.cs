@@ -139,6 +139,8 @@ namespace MgmtPropertyChooser.Models
             return DeserializeIdentityWithDifferentPropertyType(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="IdentityWithDifferentPropertyType"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="IdentityWithDifferentPropertyType"/> to convert. </param>
         public static implicit operator RequestContent(IdentityWithDifferentPropertyType model)
         {
             if (model is null)
@@ -149,6 +151,8 @@ namespace MgmtPropertyChooser.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="IdentityWithDifferentPropertyType"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator IdentityWithDifferentPropertyType(Response response)
         {
             if (response is null)

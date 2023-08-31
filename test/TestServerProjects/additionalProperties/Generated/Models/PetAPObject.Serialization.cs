@@ -101,6 +101,8 @@ namespace additionalProperties.Models
             return DeserializePetAPObject(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="PetAPObject"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="PetAPObject"/> to convert. </param>
         public static implicit operator RequestContent(PetAPObject model)
         {
             if (model is null)
@@ -111,6 +113,8 @@ namespace additionalProperties.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="PetAPObject"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator PetAPObject(Response response)
         {
             if (response is null)

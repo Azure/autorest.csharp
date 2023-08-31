@@ -111,6 +111,8 @@ namespace MgmtListMethods.Models
             return DeserializeSubParentWithNonResChWithLocListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SubParentWithNonResChWithLocListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SubParentWithNonResChWithLocListResult"/> to convert. </param>
         public static implicit operator RequestContent(SubParentWithNonResChWithLocListResult model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace MgmtListMethods.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SubParentWithNonResChWithLocListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SubParentWithNonResChWithLocListResult(Response response)
         {
             if (response is null)

@@ -107,6 +107,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeSignedIdentifier(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="SignedIdentifier"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="SignedIdentifier"/> to convert. </param>
         public static implicit operator RequestContent(SignedIdentifier model)
         {
             if (model is null)
@@ -117,6 +119,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="SignedIdentifier"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator SignedIdentifier(Response response)
         {
             if (response is null)

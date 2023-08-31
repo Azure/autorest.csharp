@@ -242,6 +242,8 @@ namespace MgmtRenameRules.Models
             return DeserializeVirtualMachineScaleSetVmProfile(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetVmProfile"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetVmProfile"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachineScaleSetVmProfile model)
         {
             if (model is null)
@@ -252,6 +254,8 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetVmProfile"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachineScaleSetVmProfile(Response response)
         {
             if (response is null)

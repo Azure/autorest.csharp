@@ -92,6 +92,8 @@ namespace ModelShapes.Models
             return DeserializeReadonlyModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ReadonlyModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ReadonlyModel"/> to convert. </param>
         public static implicit operator RequestContent(ReadonlyModel model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace ModelShapes.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ReadonlyModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ReadonlyModel(Response response)
         {
             if (response is null)

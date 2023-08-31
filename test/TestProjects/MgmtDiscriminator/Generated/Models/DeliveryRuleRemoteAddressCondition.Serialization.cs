@@ -103,6 +103,8 @@ namespace MgmtDiscriminator.Models
             return DeserializeDeliveryRuleRemoteAddressCondition(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DeliveryRuleRemoteAddressCondition"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DeliveryRuleRemoteAddressCondition"/> to convert. </param>
         public static implicit operator RequestContent(DeliveryRuleRemoteAddressCondition model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace MgmtDiscriminator.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DeliveryRuleRemoteAddressCondition"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DeliveryRuleRemoteAddressCondition(Response response)
         {
             if (response is null)

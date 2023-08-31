@@ -255,6 +255,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeInboundNatRule(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="InboundNatRule"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="InboundNatRule"/> to convert. </param>
         public static implicit operator RequestContent(InboundNatRule model)
         {
             if (model is null)
@@ -265,6 +267,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="InboundNatRule"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator InboundNatRule(Response response)
         {
             if (response is null)

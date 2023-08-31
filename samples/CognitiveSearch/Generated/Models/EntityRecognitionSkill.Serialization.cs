@@ -244,6 +244,8 @@ namespace CognitiveSearch.Models
             return DeserializeEntityRecognitionSkill(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="EntityRecognitionSkill"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="EntityRecognitionSkill"/> to convert. </param>
         public static implicit operator RequestContent(EntityRecognitionSkill model)
         {
             if (model is null)
@@ -254,6 +256,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="EntityRecognitionSkill"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator EntityRecognitionSkill(Response response)
         {
             if (response is null)

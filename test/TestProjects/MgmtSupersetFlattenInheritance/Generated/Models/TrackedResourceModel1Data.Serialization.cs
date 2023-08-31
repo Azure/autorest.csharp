@@ -155,6 +155,8 @@ namespace MgmtSupersetFlattenInheritance
             return DeserializeTrackedResourceModel1Data(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="TrackedResourceModel1Data"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="TrackedResourceModel1Data"/> to convert. </param>
         public static implicit operator RequestContent(TrackedResourceModel1Data model)
         {
             if (model is null)
@@ -165,6 +167,8 @@ namespace MgmtSupersetFlattenInheritance
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="TrackedResourceModel1Data"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator TrackedResourceModel1Data(Response response)
         {
             if (response is null)

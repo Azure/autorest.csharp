@@ -121,6 +121,8 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeEncryptionService(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="EncryptionService"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="EncryptionService"/> to convert. </param>
         public static implicit operator RequestContent(EncryptionService model)
         {
             if (model is null)
@@ -131,6 +133,8 @@ namespace Azure.ResourceManager.Storage.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="EncryptionService"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator EncryptionService(Response response)
         {
             if (response is null)

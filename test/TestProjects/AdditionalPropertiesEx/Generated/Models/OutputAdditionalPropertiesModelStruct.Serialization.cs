@@ -114,11 +114,15 @@ namespace AdditionalPropertiesEx.Models
             return DeserializeOutputAdditionalPropertiesModelStruct(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="OutputAdditionalPropertiesModelStruct"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="OutputAdditionalPropertiesModelStruct"/> to convert. </param>
         public static implicit operator RequestContent(OutputAdditionalPropertiesModelStruct model)
         {
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="OutputAdditionalPropertiesModelStruct"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator OutputAdditionalPropertiesModelStruct(Response response)
         {
             Argument.AssertNotNull(response, nameof(response));

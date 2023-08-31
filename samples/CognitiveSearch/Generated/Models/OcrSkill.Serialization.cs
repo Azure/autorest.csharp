@@ -203,6 +203,8 @@ namespace CognitiveSearch.Models
             return DeserializeOcrSkill(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="OcrSkill"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="OcrSkill"/> to convert. </param>
         public static implicit operator RequestContent(OcrSkill model)
         {
             if (model is null)
@@ -213,6 +215,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="OcrSkill"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator OcrSkill(Response response)
         {
             if (response is null)

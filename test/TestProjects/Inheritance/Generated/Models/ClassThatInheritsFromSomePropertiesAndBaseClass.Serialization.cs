@@ -280,6 +280,8 @@ namespace Inheritance.Models
             return DeserializeClassThatInheritsFromSomePropertiesAndBaseClass(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ClassThatInheritsFromSomePropertiesAndBaseClass"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ClassThatInheritsFromSomePropertiesAndBaseClass"/> to convert. </param>
         public static implicit operator RequestContent(ClassThatInheritsFromSomePropertiesAndBaseClass model)
         {
             if (model is null)
@@ -290,6 +292,8 @@ namespace Inheritance.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ClassThatInheritsFromSomePropertiesAndBaseClass"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ClassThatInheritsFromSomePropertiesAndBaseClass(Response response)
         {
             if (response is null)

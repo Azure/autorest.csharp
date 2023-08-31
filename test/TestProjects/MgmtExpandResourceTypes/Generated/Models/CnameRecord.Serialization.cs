@@ -92,6 +92,8 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeCnameRecord(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="CnameRecord"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="CnameRecord"/> to convert. </param>
         public static implicit operator RequestContent(CnameRecord model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace MgmtExpandResourceTypes.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="CnameRecord"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator CnameRecord(Response response)
         {
             if (response is null)

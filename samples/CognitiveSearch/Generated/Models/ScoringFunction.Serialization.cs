@@ -132,6 +132,8 @@ namespace CognitiveSearch.Models
             return DeserializeScoringFunction(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ScoringFunction"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ScoringFunction"/> to convert. </param>
         public static implicit operator RequestContent(ScoringFunction model)
         {
             if (model is null)
@@ -142,6 +144,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ScoringFunction"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ScoringFunction(Response response)
         {
             if (response is null)

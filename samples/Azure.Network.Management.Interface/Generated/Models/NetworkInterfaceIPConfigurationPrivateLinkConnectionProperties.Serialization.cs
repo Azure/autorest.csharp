@@ -108,6 +108,8 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeNetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties"/> to convert. </param>
         public static implicit operator RequestContent(NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties model)
         {
             if (model is null)
@@ -118,6 +120,8 @@ namespace Azure.Network.Management.Interface.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(Response response)
         {
             if (response is null)

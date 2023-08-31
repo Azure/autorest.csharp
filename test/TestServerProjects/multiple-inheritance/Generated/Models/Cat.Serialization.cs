@@ -134,6 +134,8 @@ namespace multiple_inheritance.Models
             return DeserializeCat(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Cat"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Cat"/> to convert. </param>
         public static implicit operator RequestContent(Cat model)
         {
             if (model is null)
@@ -144,6 +146,8 @@ namespace multiple_inheritance.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Cat"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Cat(Response response)
         {
             if (response is null)

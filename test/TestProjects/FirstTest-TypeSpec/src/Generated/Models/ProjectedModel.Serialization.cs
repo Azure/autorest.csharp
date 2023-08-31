@@ -89,6 +89,8 @@ namespace FirstTestTypeSpec.Models
             return DeserializeProjectedModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ProjectedModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ProjectedModel"/> to convert. </param>
         public static implicit operator RequestContent(ProjectedModel model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace FirstTestTypeSpec.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ProjectedModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ProjectedModel(Response response)
         {
             if (response is null)

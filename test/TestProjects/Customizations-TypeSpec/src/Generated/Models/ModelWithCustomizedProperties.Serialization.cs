@@ -263,6 +263,8 @@ namespace CustomizationsInTsp.Models
             return DeserializeModelWithCustomizedProperties(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ModelWithCustomizedProperties"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ModelWithCustomizedProperties"/> to convert. </param>
         public static implicit operator RequestContent(ModelWithCustomizedProperties model)
         {
             if (model is null)
@@ -273,6 +275,8 @@ namespace CustomizationsInTsp.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ModelWithCustomizedProperties"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ModelWithCustomizedProperties(Response response)
         {
             if (response is null)

@@ -89,6 +89,8 @@ namespace Encode.Datetime.Models
             return DeserializeRfc7231DatetimeProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="Rfc7231DatetimeProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="Rfc7231DatetimeProperty"/> to convert. </param>
         public static implicit operator RequestContent(Rfc7231DatetimeProperty model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace Encode.Datetime.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="Rfc7231DatetimeProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator Rfc7231DatetimeProperty(Response response)
         {
             if (response is null)

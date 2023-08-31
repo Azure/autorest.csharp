@@ -92,6 +92,8 @@ namespace model_flattening.Models
             return DeserializeGenericUrl(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="GenericUrl"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="GenericUrl"/> to convert. </param>
         public static implicit operator RequestContent(GenericUrl model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace model_flattening.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="GenericUrl"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator GenericUrl(Response response)
         {
             if (response is null)

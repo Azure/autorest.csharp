@@ -131,6 +131,8 @@ namespace AnomalyDetector.Models
             return DeserializeMultivariateLastDetectionResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MultivariateLastDetectionResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MultivariateLastDetectionResult"/> to convert. </param>
         public static implicit operator RequestContent(MultivariateLastDetectionResult model)
         {
             if (model is null)
@@ -141,6 +143,8 @@ namespace AnomalyDetector.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MultivariateLastDetectionResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MultivariateLastDetectionResult(Response response)
         {
             if (response is null)

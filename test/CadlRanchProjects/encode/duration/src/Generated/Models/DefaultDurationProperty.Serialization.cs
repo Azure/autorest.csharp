@@ -89,6 +89,8 @@ namespace Encode.Duration.Models
             return DeserializeDefaultDurationProperty(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DefaultDurationProperty"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DefaultDurationProperty"/> to convert. </param>
         public static implicit operator RequestContent(DefaultDurationProperty model)
         {
             if (model is null)
@@ -99,6 +101,8 @@ namespace Encode.Duration.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DefaultDurationProperty"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DefaultDurationProperty(Response response)
         {
             if (response is null)

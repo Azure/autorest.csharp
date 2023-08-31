@@ -146,6 +146,8 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineScaleSetInstanceView(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetInstanceView"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetInstanceView"/> to convert. </param>
         public static implicit operator RequestContent(VirtualMachineScaleSetInstanceView model)
         {
             if (model is null)
@@ -156,6 +158,8 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetInstanceView"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VirtualMachineScaleSetInstanceView(Response response)
         {
             if (response is null)

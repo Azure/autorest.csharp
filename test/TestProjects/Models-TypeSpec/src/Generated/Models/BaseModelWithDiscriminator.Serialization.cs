@@ -118,6 +118,8 @@ namespace ModelsTypeSpec.Models
             return DeserializeBaseModelWithDiscriminator(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="BaseModelWithDiscriminator"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="BaseModelWithDiscriminator"/> to convert. </param>
         public static implicit operator RequestContent(BaseModelWithDiscriminator model)
         {
             if (model is null)
@@ -128,6 +130,8 @@ namespace ModelsTypeSpec.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="BaseModelWithDiscriminator"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator BaseModelWithDiscriminator(Response response)
         {
             if (response is null)

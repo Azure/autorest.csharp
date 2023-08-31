@@ -121,6 +121,8 @@ namespace MgmtSingletonResource
             return DeserializeCarData(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="CarData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="CarData"/> to convert. </param>
         public static implicit operator RequestContent(CarData model)
         {
             if (model is null)
@@ -131,6 +133,8 @@ namespace MgmtSingletonResource
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="CarData"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator CarData(Response response)
         {
             if (response is null)

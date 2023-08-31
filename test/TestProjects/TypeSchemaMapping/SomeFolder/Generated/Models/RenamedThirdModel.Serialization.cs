@@ -111,6 +111,8 @@ namespace CustomNamespace
             return DeserializeRenamedThirdModel(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="RenamedThirdModel"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="RenamedThirdModel"/> to convert. </param>
         public static implicit operator RequestContent(RenamedThirdModel model)
         {
             if (model is null)
@@ -121,6 +123,8 @@ namespace CustomNamespace
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="RenamedThirdModel"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator RenamedThirdModel(Response response)
         {
             if (response is null)

@@ -128,6 +128,8 @@ namespace CognitiveSearch.Models
             return DeserializeTagScoringFunction(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="TagScoringFunction"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="TagScoringFunction"/> to convert. </param>
         public static implicit operator RequestContent(TagScoringFunction model)
         {
             if (model is null)
@@ -138,6 +140,8 @@ namespace CognitiveSearch.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="TagScoringFunction"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator TagScoringFunction(Response response)
         {
             if (response is null)

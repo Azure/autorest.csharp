@@ -103,6 +103,8 @@ namespace MgmtResourceName.Models
             return DeserializeDiskListResult(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DiskListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DiskListResult"/> to convert. </param>
         public static implicit operator RequestContent(DiskListResult model)
         {
             if (model is null)
@@ -113,6 +115,8 @@ namespace MgmtResourceName.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DiskListResult"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DiskListResult(Response response)
         {
             if (response is null)

@@ -152,6 +152,8 @@ namespace AnomalyDetector.Models
             return DeserializeVariableState(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="VariableState"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VariableState"/> to convert. </param>
         public static implicit operator RequestContent(VariableState model)
         {
             if (model is null)
@@ -162,6 +164,8 @@ namespace AnomalyDetector.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VariableState"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator VariableState(Response response)
         {
             if (response is null)

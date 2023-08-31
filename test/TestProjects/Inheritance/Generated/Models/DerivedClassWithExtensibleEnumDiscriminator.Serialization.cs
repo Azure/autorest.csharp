@@ -91,6 +91,8 @@ namespace Inheritance.Models
             return DeserializeDerivedClassWithExtensibleEnumDiscriminator(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="DerivedClassWithExtensibleEnumDiscriminator"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DerivedClassWithExtensibleEnumDiscriminator"/> to convert. </param>
         public static implicit operator RequestContent(DerivedClassWithExtensibleEnumDiscriminator model)
         {
             if (model is null)
@@ -101,6 +103,8 @@ namespace Inheritance.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DerivedClassWithExtensibleEnumDiscriminator"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator DerivedClassWithExtensibleEnumDiscriminator(Response response)
         {
             if (response is null)

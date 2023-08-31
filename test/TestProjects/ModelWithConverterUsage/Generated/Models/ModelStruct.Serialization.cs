@@ -138,11 +138,15 @@ namespace ModelWithConverterUsage.Models
             return DeserializeModelStruct(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="ModelStruct"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="ModelStruct"/> to convert. </param>
         public static implicit operator RequestContent(ModelStruct model)
         {
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="ModelStruct"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator ModelStruct(Response response)
         {
             Argument.AssertNotNull(response, nameof(response));

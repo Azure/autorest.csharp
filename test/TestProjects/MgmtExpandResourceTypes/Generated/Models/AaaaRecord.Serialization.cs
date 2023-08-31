@@ -92,6 +92,8 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeAaaaRecord(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="AaaaRecord"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="AaaaRecord"/> to convert. </param>
         public static implicit operator RequestContent(AaaaRecord model)
         {
             if (model is null)
@@ -102,6 +104,8 @@ namespace MgmtExpandResourceTypes.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="AaaaRecord"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator AaaaRecord(Response response)
         {
             if (response is null)

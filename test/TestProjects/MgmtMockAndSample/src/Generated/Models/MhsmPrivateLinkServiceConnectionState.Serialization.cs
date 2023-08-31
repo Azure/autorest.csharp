@@ -122,6 +122,8 @@ namespace MgmtMockAndSample.Models
             return DeserializeMhsmPrivateLinkServiceConnectionState(doc.RootElement, options);
         }
 
+        /// <summary> Converts a <see cref="MhsmPrivateLinkServiceConnectionState"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MhsmPrivateLinkServiceConnectionState"/> to convert. </param>
         public static implicit operator RequestContent(MhsmPrivateLinkServiceConnectionState model)
         {
             if (model is null)
@@ -132,6 +134,8 @@ namespace MgmtMockAndSample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MhsmPrivateLinkServiceConnectionState"/>. </summary>
+        /// <param name="response"> The <see cref="Response"/> to convert. </param>
         public static explicit operator MhsmPrivateLinkServiceConnectionState(Response response)
         {
             if (response is null)
