@@ -24,9 +24,6 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class SerializationWriter
     {
-        public static readonly ModelWriter.MethodBodyImplementation JsonFromResponseMethod = WriteJsonFromResponseMethod;
-        public static readonly ModelWriter.MethodBodyImplementation JsonToRequestContentMethod = WriteJsonToRequestContentMethod;
-
         private static readonly FormattableString DefaultWireOptionsString = $"{typeof(ModelSerializerOptions)}.{nameof(ModelSerializerOptions.DefaultWireOptions)}";
 
         public void WriteSerialization(CodeWriter writer, TypeProvider schema)
@@ -457,23 +454,6 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             writer.Line($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer) => (({iModelJsonSerializableType})this).Serialize(writer, {DefaultWireOptionsString});");
             writer.Line();
-        }
-
-        private static void WriteJsonToRequestContentMethod(CodeWriter writer, ObjectType objectType)
-        {
-            var contentVariable = new CodeWriterDeclaration("content");
-            writer
-                .Line($"var {contentVariable:D} = new {typeof(Utf8JsonRequestContent)}();")
-                .Line($"{contentVariable:I}.{nameof(Utf8JsonRequestContent.JsonWriter)}.{nameof(Utf8JsonWriterExtensions.WriteObjectValue)}(this);")
-                .Line($"return {contentVariable:I};");
-        }
-
-        private static void WriteJsonFromResponseMethod(CodeWriter writer, ObjectType objectType)
-        {
-            var documentVariable = new CodeWriterDeclaration("document");
-            writer
-                .Line($"using var {documentVariable:D} = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}(response.{nameof(Response.Content)});")
-                .Line($"return Deserialize{objectType.Declaration.Name}({documentVariable:I}.{nameof(JsonDocument.RootElement)});");
         }
 
         public static void WriteEnumSerialization(CodeWriter writer, EnumType enumType)
