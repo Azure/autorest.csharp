@@ -112,3 +112,16 @@ Scenarios.Models_InputToRoundTripReadOnly = passOnSuccess([
         };
     }),
 ]);
+
+// Test only single base model
+Scenarios.Models_SingleBase = passOnSuccess([
+    mockapi.get("/single", (req) => {
+        return {
+            status: 200,
+            body: json({
+                kind: "foo",
+                size: 123
+            }),
+        };
+    }),
+]);

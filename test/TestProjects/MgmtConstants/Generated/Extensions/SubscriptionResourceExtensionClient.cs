@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Threading;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -60,7 +61,7 @@ namespace MgmtConstants
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => OptionalMachineOptionalsRestClient.CreateListAllRequest(Id.SubscriptionId, statusOnly);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => OptionalMachineOptionalsRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId, statusOnly);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), OptionalMachineOptionalsClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetOptionalMachines", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), OptionalMachineOptionalsClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetOptionalMachines", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -83,7 +84,7 @@ namespace MgmtConstants
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => OptionalMachineOptionalsRestClient.CreateListAllRequest(Id.SubscriptionId, statusOnly);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => OptionalMachineOptionalsRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId, statusOnly);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), OptionalMachineOptionalsClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetOptionalMachines", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), OptionalMachineOptionalsClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetOptionalMachines", "value", "nextLink", cancellationToken);
         }
     }
 }
