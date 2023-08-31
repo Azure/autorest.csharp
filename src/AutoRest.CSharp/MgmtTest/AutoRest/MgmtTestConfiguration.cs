@@ -54,11 +54,9 @@ namespace AutoRest.CSharp.Input
 
         internal static MgmtTestConfiguration? GetConfiguration(IPluginCommunication autoRest)
         {
-            var testGen = autoRest.GetValue<JsonElement?>(TestGenOptionsRoot).GetAwaiter().GetResult();
-            if (!Configuration.IsValidJsonElement(testGen))
-            {
+            if (!HasMgmtTestConfiguration(autoRest))
                 return null;
-            }
+
             return new MgmtTestConfiguration(
                 skippedOperations: autoRest.GetValue<string[]?>(string.Format(TestGenOptionsFormat, "skipped-operations")).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 sourceCodePath: autoRest.GetValue<JsonElement?>(string.Format(TestGenOptionsFormat, "source-path")).GetAwaiter().GetResult(),
@@ -99,6 +97,12 @@ namespace AutoRest.CSharp.Input
 
                 writer.WriteEndArray();
             }
+        }
+
+        internal static bool HasMgmtTestConfiguration(IPluginCommunication autoRest)
+        {
+            var testGen = autoRest.GetValue<JsonElement?>(TestGenOptionsRoot).GetAwaiter().GetResult();
+            return Configuration.IsValidJsonElement(testGen);
         }
     }
 }
