@@ -341,7 +341,7 @@ namespace AutoRest.CSharp.Output.Models
                     var propertyName = groupedByParameter.Type.Implementation switch
                     {
                         ModelTypeProvider modelType => modelType.Fields.GetFieldByParameterName(outputParameter.Name)?.Name,
-                        SchemaObjectType schemaObjectType => schemaObjectType.GetPropertyForGroupedParameter(groupedByParameterName).Declaration.Name,
+                        SchemaObjectType schemaObjectType => schemaObjectType.GetPropertyForGroupedParameter(outputParameter.Name).Declaration.Name,
                         _ => throw new InvalidOperationException($"Unexpected object type {groupedByParameter.Type.GetType()} for grouped parameter {outputParameter.Name}")
                     };
 
