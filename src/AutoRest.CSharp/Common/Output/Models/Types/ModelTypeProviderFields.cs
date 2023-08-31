@@ -275,6 +275,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static FieldModifiers GetAccessModifiers(ISymbol existingMember) => existingMember.DeclaredAccessibility switch
         {
             Accessibility.Public => Public,
+            Accessibility.Protected => Protected,
             Accessibility.Internal => Internal,
             Accessibility.Private => Private,
             _ => throw new ArgumentOutOfRangeException(existingMember.Name)

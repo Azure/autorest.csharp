@@ -338,14 +338,19 @@ namespace AutoRest.CSharp.Output.Models
                 case var _ when inputParameter.GroupedBy is {} groupedByInputParameter:
                     var groupedByParameterName = groupedByInputParameter.Name.ToVariableName();
                     var groupedByParameter = _parameters.Single(p => p.Name == groupedByParameterName);
-                    var property = ((ModelTypeProvider)groupedByParameter.Type.Implementation).Fields.GetFieldByParameterName(outputParameter.Name);
-
-                    if (property is null)
+                    var propertyName = groupedByParameter.Type.Implementation switch
                     {
-                        throw new InvalidOperationException($"Unable to find object property for grouped parameter {outputParameter.Name} in schema {groupedByParameter.Type.Name}");
+                        ModelTypeProvider modelType => modelType.Fields.GetFieldByParameterName(outputParameter.Name)?.Name,
+                        SchemaObjectType schemaObjectType => schemaObjectType.GetPropertyForGroupedParameter(groupedByParameterName).Declaration.Name,
+                        _ => throw new InvalidOperationException($"Unexpected object type {groupedByParameter.Type.GetType()} for grouped parameter {outputParameter.Name}")
+                    };
+
+                    if (propertyName is null)
+                    {
+                        throw new InvalidOperationException($"Unable to find object property for grouped parameter {outputParameter.Name} in {groupedByParameter.Type.Name}");
                     }
 
-                    return new MemberExpression(NullConditional(groupedByParameter), property.Name);
+                    return new MemberExpression(NullConditional(groupedByParameter), propertyName);
 
                 default:
                     return outputParameter;
