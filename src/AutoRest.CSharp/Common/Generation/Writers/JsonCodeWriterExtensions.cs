@@ -251,16 +251,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         case ObjectType:
                             if (valueSerialization.Type.IsIModelJsonSerializable)
                             {
-                                writer.Append($"((IModelJsonSerializable<{valueSerialization.Type}>){name}).Serialize({writerName}");
-                                if (addOptions)
-                                {
-                                    writer.Append($", options");
-                                }
-                                else
-                                {
-                                    writer.Append($", {SerializationWriter.DefaultWireOptionsString}");
-                                }
-                                writer.Line($");");
+                                WriteIModelSerializableCall(writer, name, writerName, addOptions, valueSerialization);
                                 return;
                             }
 
@@ -292,6 +283,27 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 default:
                     throw new NotSupportedException();
+            }
+        }
+
+        private static void WriteIModelSerializableCall(CodeWriter writer, FormattableString name, FormattableString? writerName, bool addOptions, JsonValueSerialization valueSerialization)
+        {
+            using (writer.Scope($"if ({name} is null)"))
+            {
+                writer.Line($"{writerName}.WriteNullValue();");
+            }
+            using (writer.Scope($"else"))
+            {
+                writer.Append($"((IModelJsonSerializable<{valueSerialization.Type}>){name}).Serialize({writerName}");
+                if (addOptions)
+                {
+                    writer.Append($", options");
+                }
+                else
+                {
+                    writer.Append($", {SerializationWriter.DefaultWireOptionsString}");
+                }
+                writer.Line($");");
             }
         }
 
