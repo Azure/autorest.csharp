@@ -28,7 +28,14 @@ namespace Azure.ResourceManager.Storage.Models
             if (Optional.IsDefined(ActiveDirectoryProperties))
             {
                 writer.WritePropertyName("activeDirectoryProperties"u8);
-                ((IModelJsonSerializable<ActiveDirectoryProperties>)ActiveDirectoryProperties).Serialize(writer, options);
+                if (ActiveDirectoryProperties is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ActiveDirectoryProperties>)ActiveDirectoryProperties).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(DefaultSharePermission))
             {

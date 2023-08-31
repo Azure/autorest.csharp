@@ -56,7 +56,14 @@ namespace Azure.ResourceManager.Storage
             if (Optional.IsDefined(ImmutableStorageWithVersioning))
             {
                 writer.WritePropertyName("immutableStorageWithVersioning"u8);
-                ((IModelJsonSerializable<ImmutableStorageWithVersioning>)ImmutableStorageWithVersioning).Serialize(writer, options);
+                if (ImmutableStorageWithVersioning is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ImmutableStorageWithVersioning>)ImmutableStorageWithVersioning).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(EnableNfsV3RootSquash))
             {

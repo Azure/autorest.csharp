@@ -29,7 +29,14 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in CorsRulesValue)
                 {
-                    ((IModelJsonSerializable<CorsRule>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<CorsRule>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

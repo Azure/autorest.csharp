@@ -50,12 +50,26 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(StartupProbe))
             {
                 writer.WritePropertyName("startupProbe"u8);
-                ((IModelJsonSerializable<Probe>)StartupProbe).Serialize(writer, options);
+                if (StartupProbe is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<Probe>)StartupProbe).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(ReadinessProbe))
             {
                 writer.WritePropertyName("readinessProbe"u8);
-                ((IModelJsonSerializable<Probe>)ReadinessProbe).Serialize(writer, options);
+                if (ReadinessProbe is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<Probe>)ReadinessProbe).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(DesiredStatusCode))
             {
@@ -70,37 +84,86 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(ThreatIntelWhitelist))
             {
                 writer.WritePropertyName("threatIntelWhitelist"u8);
-                ((IModelJsonSerializable<FirewallPolicyThreatIntelWhitelist>)ThreatIntelWhitelist).Serialize(writer, options);
+                if (ThreatIntelWhitelist is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<FirewallPolicyThreatIntelWhitelist>)ThreatIntelWhitelist).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Insights))
             {
                 writer.WritePropertyName("insights"u8);
-                ((IModelJsonSerializable<FirewallPolicyInsights>)Insights).Serialize(writer, options);
+                if (Insights is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<FirewallPolicyInsights>)Insights).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Snat))
             {
                 writer.WritePropertyName("snat"u8);
-                ((IModelJsonSerializable<FirewallPolicySnat>)Snat).Serialize(writer, options);
+                if (Snat is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<FirewallPolicySnat>)Snat).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                ((IModelJsonSerializable<DnsSettings>)DnsSettings).Serialize(writer, options);
+                if (DnsSettings is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<DnsSettings>)DnsSettings).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(IntrusionDetection))
             {
                 writer.WritePropertyName("intrusionDetection"u8);
-                ((IModelJsonSerializable<FirewallPolicyIntrusionDetection>)IntrusionDetection).Serialize(writer, options);
+                if (IntrusionDetection is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<FirewallPolicyIntrusionDetection>)IntrusionDetection).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(TransportSecurity))
             {
                 writer.WritePropertyName("transportSecurity"u8);
-                ((IModelJsonSerializable<FirewallPolicyTransportSecurity>)TransportSecurity).Serialize(writer, options);
+                if (TransportSecurity is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<FirewallPolicyTransportSecurity>)TransportSecurity).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                ((IModelJsonSerializable<FirewallPolicySku>)Sku).Serialize(writer, options);
+                if (Sku is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<FirewallPolicySku>)Sku).Serialize(writer, options);
+                }
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

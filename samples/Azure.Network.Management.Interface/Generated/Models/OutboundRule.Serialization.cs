@@ -46,14 +46,28 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in FrontendIPConfigurations)
                 {
-                    ((IModelJsonSerializable<SubResource>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<SubResource>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(BackendAddressPool))
             {
                 writer.WritePropertyName("backendAddressPool"u8);
-                ((IModelJsonSerializable<SubResource>)BackendAddressPool).Serialize(writer, options);
+                if (BackendAddressPool is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<SubResource>)BackendAddressPool).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Protocol))
             {

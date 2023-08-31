@@ -24,11 +24,25 @@ namespace Azure.ResourceManager.Storage.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("actions"u8);
-            ((IModelJsonSerializable<ManagementPolicyAction>)Actions).Serialize(writer, options);
+            if (Actions is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<ManagementPolicyAction>)Actions).Serialize(writer, options);
+            }
             if (Optional.IsDefined(Filters))
             {
                 writer.WritePropertyName("filters"u8);
-                ((IModelJsonSerializable<ManagementPolicyFilter>)Filters).Serialize(writer, options);
+                if (Filters is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ManagementPolicyFilter>)Filters).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

@@ -26,7 +26,14 @@ namespace Azure.ResourceManager.Storage.Models
             if (Optional.IsDefined(Multichannel))
             {
                 writer.WritePropertyName("multichannel"u8);
-                ((IModelJsonSerializable<Multichannel>)Multichannel).Serialize(writer, options);
+                if (Multichannel is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<Multichannel>)Multichannel).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Versions))
             {

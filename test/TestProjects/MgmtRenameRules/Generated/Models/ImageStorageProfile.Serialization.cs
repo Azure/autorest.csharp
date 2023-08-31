@@ -26,7 +26,14 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                ((IModelJsonSerializable<ImageOSDisk>)OSDisk).Serialize(writer, options);
+                if (OSDisk is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ImageOSDisk>)OSDisk).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
@@ -34,7 +41,14 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
-                    ((IModelJsonSerializable<ImageDataDisk>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<ImageDataDisk>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

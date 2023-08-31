@@ -49,7 +49,14 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                ((IModelJsonSerializable<Subnet>)Subnet).Serialize(writer, options);
+                if (Subnet is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<Subnet>)Subnet).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(PrivateLinkServiceConnections))
             {
@@ -57,7 +64,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in PrivateLinkServiceConnections)
                 {
-                    ((IModelJsonSerializable<PrivateLinkServiceConnection>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<PrivateLinkServiceConnection>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -67,7 +81,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in ManualPrivateLinkServiceConnections)
                 {
-                    ((IModelJsonSerializable<PrivateLinkServiceConnection>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<PrivateLinkServiceConnection>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

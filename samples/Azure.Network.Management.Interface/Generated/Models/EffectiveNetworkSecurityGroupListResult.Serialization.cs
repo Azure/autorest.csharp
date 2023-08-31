@@ -29,7 +29,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    ((IModelJsonSerializable<EffectiveNetworkSecurityGroup>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<EffectiveNetworkSecurityGroup>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

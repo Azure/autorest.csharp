@@ -33,12 +33,26 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(Vhd))
             {
                 writer.WritePropertyName("vhd"u8);
-                ((IModelJsonSerializable<VirtualHardDisk>)Vhd).Serialize(writer, options);
+                if (Vhd is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<VirtualHardDisk>)Vhd).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                ((IModelJsonSerializable<VirtualHardDisk>)Image).Serialize(writer, options);
+                if (Image is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<VirtualHardDisk>)Image).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Caching))
             {
@@ -60,7 +74,14 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                ((IModelJsonSerializable<ManagedDiskParameters>)ManagedDisk).Serialize(writer, options);
+                if (ManagedDisk is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ManagedDiskParameters>)ManagedDisk).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(ToBeDetached))
             {

@@ -44,19 +44,40 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in AdditionalUnattendContent)
                 {
-                    ((IModelJsonSerializable<AdditionalUnattendContent>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<AdditionalUnattendContent>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(PatchSettings))
             {
                 writer.WritePropertyName("patchSettings"u8);
-                ((IModelJsonSerializable<PatchSettings>)PatchSettings).Serialize(writer, options);
+                if (PatchSettings is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<PatchSettings>)PatchSettings).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(WinRM))
             {
                 writer.WritePropertyName("winRM"u8);
-                ((IModelJsonSerializable<WinRMConfiguration>)WinRM).Serialize(writer, options);
+                if (WinRM is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<WinRMConfiguration>)WinRM).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

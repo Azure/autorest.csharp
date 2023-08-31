@@ -26,22 +26,50 @@ namespace Azure.ResourceManager.Storage.Models
             if (Optional.IsDefined(Blob))
             {
                 writer.WritePropertyName("blob"u8);
-                ((IModelJsonSerializable<EncryptionService>)Blob).Serialize(writer, options);
+                if (Blob is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<EncryptionService>)Blob).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(File))
             {
                 writer.WritePropertyName("file"u8);
-                ((IModelJsonSerializable<EncryptionService>)File).Serialize(writer, options);
+                if (File is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<EncryptionService>)File).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Table))
             {
                 writer.WritePropertyName("table"u8);
-                ((IModelJsonSerializable<EncryptionService>)Table).Serialize(writer, options);
+                if (Table is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<EncryptionService>)Table).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Queue))
             {
                 writer.WritePropertyName("queue"u8);
-                ((IModelJsonSerializable<EncryptionService>)Queue).Serialize(writer, options);
+                if (Queue is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<EncryptionService>)Queue).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

@@ -29,7 +29,14 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in Listeners)
                 {
-                    ((IModelJsonSerializable<WinRMListener>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<WinRMListener>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

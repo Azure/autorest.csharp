@@ -28,7 +28,14 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(OriginGroupOverride))
             {
                 writer.WritePropertyName("originGroupOverride"u8);
-                ((IModelJsonSerializable<OriginGroupOverride>)OriginGroupOverride).Serialize(writer, options);
+                if (OriginGroupOverride is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<OriginGroupOverride>)OriginGroupOverride).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

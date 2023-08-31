@@ -55,7 +55,14 @@ namespace Azure.ResourceManager.Storage
             if (Optional.IsDefined(AzureFilesIdentityBasedAuthentication))
             {
                 writer.WritePropertyName("azureFilesIdentityBasedAuthentication"u8);
-                ((IModelJsonSerializable<AzureFilesIdentityBasedAuthentication>)AzureFilesIdentityBasedAuthentication).Serialize(writer, options);
+                if (AzureFilesIdentityBasedAuthentication is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<AzureFilesIdentityBasedAuthentication>)AzureFilesIdentityBasedAuthentication).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(EnableHttpsTrafficOnly))
             {
@@ -75,7 +82,14 @@ namespace Azure.ResourceManager.Storage
             if (Optional.IsDefined(RoutingPreference))
             {
                 writer.WritePropertyName("routingPreference"u8);
-                ((IModelJsonSerializable<RoutingPreference>)RoutingPreference).Serialize(writer, options);
+                if (RoutingPreference is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<RoutingPreference>)RoutingPreference).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(AllowBlobPublicAccess))
             {
@@ -115,7 +129,14 @@ namespace Azure.ResourceManager.Storage
             if (Optional.IsDefined(ImmutableStorageWithVersioning))
             {
                 writer.WritePropertyName("immutableStorageWithVersioning"u8);
-                ((IModelJsonSerializable<ImmutableStorageAccount>)ImmutableStorageWithVersioning).Serialize(writer, options);
+                if (ImmutableStorageWithVersioning is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ImmutableStorageAccount>)ImmutableStorageWithVersioning).Serialize(writer, options);
+                }
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

@@ -49,7 +49,14 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(PublicIPAddressConfiguration))
             {
                 writer.WritePropertyName("publicIPAddressConfiguration"u8);
-                ((IModelJsonSerializable<VirtualMachineScaleSetUpdatePublicIPAddressConfiguration>)PublicIPAddressConfiguration).Serialize(writer, options);
+                if (PublicIPAddressConfiguration is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<VirtualMachineScaleSetUpdatePublicIPAddressConfiguration>)PublicIPAddressConfiguration).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(PrivateIPAddressVersion))
             {

@@ -36,7 +36,14 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(Status))
             {
                 writer.WritePropertyName("status"u8);
-                ((IModelJsonSerializable<InstanceViewStatus>)Status).Serialize(writer, options);
+                if (Status is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<InstanceViewStatus>)Status).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

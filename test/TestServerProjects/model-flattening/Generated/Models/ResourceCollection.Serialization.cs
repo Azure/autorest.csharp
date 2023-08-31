@@ -26,7 +26,14 @@ namespace model_flattening.Models
             if (Optional.IsDefined(Productresource))
             {
                 writer.WritePropertyName("productresource"u8);
-                ((IModelJsonSerializable<FlattenedProduct>)Productresource).Serialize(writer, options);
+                if (Productresource is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<FlattenedProduct>)Productresource).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(Arrayofresources))
             {
@@ -34,7 +41,14 @@ namespace model_flattening.Models
                 writer.WriteStartArray();
                 foreach (var item in Arrayofresources)
                 {
-                    ((IModelJsonSerializable<FlattenedProduct>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<FlattenedProduct>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -45,7 +59,14 @@ namespace model_flattening.Models
                 foreach (var item in Dictionaryofresources)
                 {
                     writer.WritePropertyName(item.Key);
-                    ((IModelJsonSerializable<FlattenedProduct>)item.Value).Serialize(writer, options);
+                    if (item.Value is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<FlattenedProduct>)item.Value).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndObject();
             }

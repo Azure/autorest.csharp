@@ -29,9 +29,23 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WriteStringValue(Label);
             }
             writer.WritePropertyName("key"u8);
-            ((IModelJsonSerializable<KeyValueElement>)Key).Serialize(writer, options);
+            if (Key is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<KeyValueElement>)Key).Serialize(writer, options);
+            }
             writer.WritePropertyName("value"u8);
-            ((IModelJsonSerializable<KeyValueElement>)Value).Serialize(writer, options);
+            if (Value is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<KeyValueElement>)Value).Serialize(writer, options);
+            }
             writer.WritePropertyName("confidence"u8);
             writer.WriteNumberValue(Confidence);
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

@@ -29,7 +29,14 @@ namespace AppConfiguration.Models
                 writer.WriteStartArray();
                 foreach (var item in Items)
                 {
-                    ((IModelJsonSerializable<Label>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<Label>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

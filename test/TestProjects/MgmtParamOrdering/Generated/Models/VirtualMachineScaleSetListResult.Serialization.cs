@@ -28,7 +28,14 @@ namespace MgmtParamOrdering.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                ((IModelJsonSerializable<VirtualMachineScaleSetData>)item).Serialize(writer, options);
+                if (item is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<VirtualMachineScaleSetData>)item).Serialize(writer, options);
+                }
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))

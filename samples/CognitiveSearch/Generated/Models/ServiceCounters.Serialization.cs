@@ -24,19 +24,68 @@ namespace CognitiveSearch.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("documentCount"u8);
-            ((IModelJsonSerializable<ResourceCounter>)DocumentCounter).Serialize(writer, options);
+            if (DocumentCounter is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<ResourceCounter>)DocumentCounter).Serialize(writer, options);
+            }
             writer.WritePropertyName("indexesCount"u8);
-            ((IModelJsonSerializable<ResourceCounter>)IndexCounter).Serialize(writer, options);
+            if (IndexCounter is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<ResourceCounter>)IndexCounter).Serialize(writer, options);
+            }
             writer.WritePropertyName("indexersCount"u8);
-            ((IModelJsonSerializable<ResourceCounter>)IndexerCounter).Serialize(writer, options);
+            if (IndexerCounter is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<ResourceCounter>)IndexerCounter).Serialize(writer, options);
+            }
             writer.WritePropertyName("dataSourcesCount"u8);
-            ((IModelJsonSerializable<ResourceCounter>)DataSourceCounter).Serialize(writer, options);
+            if (DataSourceCounter is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<ResourceCounter>)DataSourceCounter).Serialize(writer, options);
+            }
             writer.WritePropertyName("storageSize"u8);
-            ((IModelJsonSerializable<ResourceCounter>)StorageSizeCounter).Serialize(writer, options);
+            if (StorageSizeCounter is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<ResourceCounter>)StorageSizeCounter).Serialize(writer, options);
+            }
             writer.WritePropertyName("synonymMaps"u8);
-            ((IModelJsonSerializable<ResourceCounter>)SynonymMapCounter).Serialize(writer, options);
+            if (SynonymMapCounter is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<ResourceCounter>)SynonymMapCounter).Serialize(writer, options);
+            }
             writer.WritePropertyName("skillsetCount"u8);
-            ((IModelJsonSerializable<ResourceCounter>)SkillsetCounter).Serialize(writer, options);
+            if (SkillsetCounter is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<ResourceCounter>)SkillsetCounter).Serialize(writer, options);
+            }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
                 foreach (var property in _rawData)

@@ -28,7 +28,14 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WritePropertyName("targetResourceRegion"u8);
             writer.WriteStringValue(TargetResourceRegion);
             writer.WritePropertyName("copyAuthorization"u8);
-            ((IModelJsonSerializable<CopyAuthorizationResult>)CopyAuthorization).Serialize(writer, options);
+            if (CopyAuthorization is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<CopyAuthorizationResult>)CopyAuthorization).Serialize(writer, options);
+            }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
                 foreach (var property in _rawData)

@@ -41,7 +41,14 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteStartArray();
             foreach (var item in Words)
             {
-                ((IModelJsonSerializable<TextWord>)item).Serialize(writer, options);
+                if (item is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<TextWord>)item).Serialize(writer, options);
+                }
             }
             writer.WriteEndArray();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

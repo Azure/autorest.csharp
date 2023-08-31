@@ -83,7 +83,14 @@ namespace MgmtXmlDeserialization.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    ((IModelJsonSerializable<XmlInstanceData>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<XmlInstanceData>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

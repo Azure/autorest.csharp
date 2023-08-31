@@ -29,7 +29,14 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Issues)
                 {
-                    ((IModelJsonSerializable<VaultIssue>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<VaultIssue>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

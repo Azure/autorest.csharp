@@ -55,7 +55,14 @@ namespace model_flattening
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in resourceArray)
                 {
-                    ((IModelJsonSerializable<Resource>)item).Serialize(content.JsonWriter, ModelSerializerOptions.DefaultWireOptions);
+                    if (item is null)
+                    {
+                        content.JsonWriter.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<Resource>)item).Serialize(content.JsonWriter, ModelSerializerOptions.DefaultWireOptions);
+                    }
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
@@ -175,7 +182,14 @@ namespace model_flattening
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in resourceArray)
                 {
-                    ((IModelJsonSerializable<WrappedProduct>)item).Serialize(content.JsonWriter, ModelSerializerOptions.DefaultWireOptions);
+                    if (item is null)
+                    {
+                        content.JsonWriter.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<WrappedProduct>)item).Serialize(content.JsonWriter, ModelSerializerOptions.DefaultWireOptions);
+                    }
                 }
                 content.JsonWriter.WriteEndArray();
                 request.Content = content;
@@ -296,7 +310,14 @@ namespace model_flattening
                 foreach (var item in resourceDictionary)
                 {
                     content.JsonWriter.WritePropertyName(item.Key);
-                    ((IModelJsonSerializable<FlattenedProduct>)item.Value).Serialize(content.JsonWriter, ModelSerializerOptions.DefaultWireOptions);
+                    if (item.Value is null)
+                    {
+                        content.JsonWriter.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<FlattenedProduct>)item.Value).Serialize(content.JsonWriter, ModelSerializerOptions.DefaultWireOptions);
+                    }
                 }
                 content.JsonWriter.WriteEndObject();
                 request.Content = content;

@@ -32,7 +32,14 @@ namespace _Type._Dictionary.Models
                 foreach (var item in Children)
                 {
                     writer.WritePropertyName(item.Key);
-                    ((IModelJsonSerializable<InnerModel>)item.Value).Serialize(writer, options);
+                    if (item.Value is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<InnerModel>)item.Value).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndObject();
             }

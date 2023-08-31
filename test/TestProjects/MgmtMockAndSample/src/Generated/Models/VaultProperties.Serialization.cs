@@ -36,14 +36,28 @@ namespace MgmtMockAndSample.Models
             writer.WritePropertyName("tenantId"u8);
             writer.WriteStringValue(TenantId);
             writer.WritePropertyName("sku"u8);
-            ((IModelJsonSerializable<MgmtMockAndSampleSku>)Sku).Serialize(writer, options);
+            if (Sku is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<MgmtMockAndSampleSku>)Sku).Serialize(writer, options);
+            }
             if (Optional.IsCollectionDefined(AccessPolicies))
             {
                 writer.WritePropertyName("accessPolicies"u8);
                 writer.WriteStartArray();
                 foreach (var item in AccessPolicies)
                 {
-                    ((IModelJsonSerializable<AccessPolicyEntry>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<AccessPolicyEntry>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -100,7 +114,14 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(NetworkAcls))
             {
                 writer.WritePropertyName("networkAcls"u8);
-                ((IModelJsonSerializable<NetworkRuleSet>)NetworkAcls).Serialize(writer, options);
+                if (NetworkAcls is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<NetworkRuleSet>)NetworkAcls).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(ProvisioningState))
             {
@@ -115,17 +136,38 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(ReadWriteSingleStringProperty))
             {
                 writer.WritePropertyName("readWriteSingleStringProperty"u8);
-                ((IModelJsonSerializable<SinglePropertyModel>)ReadWriteSingleStringProperty).Serialize(writer, options);
+                if (ReadWriteSingleStringProperty is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<SinglePropertyModel>)ReadWriteSingleStringProperty).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(ReadOnlySingleStringProperty))
             {
                 writer.WritePropertyName("readOnlySingleStringProperty"u8);
-                ((IModelJsonSerializable<ReadOnlySinglePropertyModel>)ReadOnlySingleStringProperty).Serialize(writer, options);
+                if (ReadOnlySingleStringProperty is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ReadOnlySinglePropertyModel>)ReadOnlySingleStringProperty).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(ExtremelyDeepStringProperty))
             {
                 writer.WritePropertyName("extremelyDeepStringProperty"u8);
-                ((IModelJsonSerializable<ExtremelyDeepSinglePropertyModel>)ExtremelyDeepStringProperty).Serialize(writer, options);
+                if (ExtremelyDeepStringProperty is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ExtremelyDeepSinglePropertyModel>)ExtremelyDeepStringProperty).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

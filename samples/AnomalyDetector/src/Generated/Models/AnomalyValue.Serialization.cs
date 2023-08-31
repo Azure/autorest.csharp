@@ -35,7 +35,14 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in Interpretation)
                 {
-                    ((IModelJsonSerializable<AnomalyInterpretation>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<AnomalyInterpretation>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

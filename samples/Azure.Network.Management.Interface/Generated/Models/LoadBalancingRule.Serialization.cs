@@ -38,17 +38,38 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(FrontendIPConfiguration))
             {
                 writer.WritePropertyName("frontendIPConfiguration"u8);
-                ((IModelJsonSerializable<SubResource>)FrontendIPConfiguration).Serialize(writer, options);
+                if (FrontendIPConfiguration is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<SubResource>)FrontendIPConfiguration).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(BackendAddressPool))
             {
                 writer.WritePropertyName("backendAddressPool"u8);
-                ((IModelJsonSerializable<SubResource>)BackendAddressPool).Serialize(writer, options);
+                if (BackendAddressPool is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<SubResource>)BackendAddressPool).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Probe))
             {
                 writer.WritePropertyName("probe"u8);
-                ((IModelJsonSerializable<SubResource>)Probe).Serialize(writer, options);
+                if (Probe is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<SubResource>)Probe).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Protocol))
             {

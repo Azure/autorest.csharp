@@ -31,13 +31,27 @@ namespace CognitiveSearch.Models
             writer.WriteStartArray();
             foreach (var item in Skills)
             {
-                ((IModelJsonSerializable<Skill>)item).Serialize(writer, options);
+                if (item is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<Skill>)item).Serialize(writer, options);
+                }
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(CognitiveServicesAccount))
             {
                 writer.WritePropertyName("cognitiveServices"u8);
-                ((IModelJsonSerializable<CognitiveServicesAccount>)CognitiveServicesAccount).Serialize(writer, options);
+                if (CognitiveServicesAccount is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<CognitiveServicesAccount>)CognitiveServicesAccount).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(ETag))
             {

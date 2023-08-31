@@ -26,17 +26,38 @@ namespace Azure.ResourceManager.Storage.Models
             if (Optional.IsDefined(TierToCool))
             {
                 writer.WritePropertyName("tierToCool"u8);
-                ((IModelJsonSerializable<DateAfterModification>)TierToCool).Serialize(writer, options);
+                if (TierToCool is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<DateAfterModification>)TierToCool).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(TierToArchive))
             {
                 writer.WritePropertyName("tierToArchive"u8);
-                ((IModelJsonSerializable<DateAfterModification>)TierToArchive).Serialize(writer, options);
+                if (TierToArchive is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<DateAfterModification>)TierToArchive).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Delete))
             {
                 writer.WritePropertyName("delete"u8);
-                ((IModelJsonSerializable<DateAfterModification>)Delete).Serialize(writer, options);
+                if (Delete is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<DateAfterModification>)Delete).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(EnableAutoTierToHotFromCool))
             {

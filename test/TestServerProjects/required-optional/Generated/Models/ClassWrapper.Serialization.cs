@@ -24,7 +24,14 @@ namespace required_optional.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
-            ((IModelJsonSerializable<Product>)Value).Serialize(writer, options);
+            if (Value is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<Product>)Value).Serialize(writer, options);
+            }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
                 foreach (var property in _rawData)

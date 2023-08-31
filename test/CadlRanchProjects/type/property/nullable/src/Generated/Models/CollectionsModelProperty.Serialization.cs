@@ -31,7 +31,14 @@ namespace _Type.Property.Nullable.Models
                 writer.WriteStartArray();
                 foreach (var item in NullableProperty)
                 {
-                    ((IModelJsonSerializable<InnerModel>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<InnerModel>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

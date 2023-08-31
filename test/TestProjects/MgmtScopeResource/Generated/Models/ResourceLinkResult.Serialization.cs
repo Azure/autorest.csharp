@@ -28,7 +28,14 @@ namespace MgmtScopeResource.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                ((IModelJsonSerializable<ResourceLinkData>)item).Serialize(writer, options);
+                if (item is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ResourceLinkData>)item).Serialize(writer, options);
+                }
             }
             writer.WriteEndArray();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

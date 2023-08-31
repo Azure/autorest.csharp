@@ -33,7 +33,14 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(MappingFunction))
             {
                 writer.WritePropertyName("mappingFunction"u8);
-                ((IModelJsonSerializable<FieldMappingFunction>)MappingFunction).Serialize(writer, options);
+                if (MappingFunction is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<FieldMappingFunction>)MappingFunction).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

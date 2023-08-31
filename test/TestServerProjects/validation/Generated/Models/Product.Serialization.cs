@@ -44,9 +44,23 @@ namespace validation.Models
                 writer.WriteStringValue(Image);
             }
             writer.WritePropertyName("child"u8);
-            ((IModelJsonSerializable<ChildProduct>)Child).Serialize(writer, options);
+            if (Child is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<ChildProduct>)Child).Serialize(writer, options);
+            }
             writer.WritePropertyName("constChild"u8);
-            ((IModelJsonSerializable<ConstantProduct>)ConstChild).Serialize(writer, options);
+            if (ConstChild is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<ConstantProduct>)ConstChild).Serialize(writer, options);
+            }
             writer.WritePropertyName("constInt"u8);
             writer.WriteNumberValue(ConstInt.ToSerialInt32());
             writer.WritePropertyName("constString"u8);

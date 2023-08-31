@@ -28,7 +28,14 @@ namespace MgmtListMethods.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                ((IModelJsonSerializable<ResGrpParentData>)item).Serialize(writer, options);
+                if (item is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ResGrpParentData>)item).Serialize(writer, options);
+                }
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))

@@ -26,12 +26,26 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
-                ((IModelJsonSerializable<SubResource>)NetworkSecurityGroup).Serialize(writer, options);
+                if (NetworkSecurityGroup is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<SubResource>)NetworkSecurityGroup).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Association))
             {
                 writer.WritePropertyName("association"u8);
-                ((IModelJsonSerializable<EffectiveNetworkSecurityGroupAssociation>)Association).Serialize(writer, options);
+                if (Association is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<EffectiveNetworkSecurityGroupAssociation>)Association).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(EffectiveSecurityRules))
             {
@@ -39,7 +53,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in EffectiveSecurityRules)
                 {
-                    ((IModelJsonSerializable<EffectiveNetworkSecurityRule>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<EffectiveNetworkSecurityRule>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

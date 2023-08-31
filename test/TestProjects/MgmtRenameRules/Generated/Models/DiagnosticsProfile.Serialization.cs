@@ -26,7 +26,14 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(BootDiagnostics))
             {
                 writer.WritePropertyName("bootDiagnostics"u8);
-                ((IModelJsonSerializable<BootDiagnostics>)BootDiagnostics).Serialize(writer, options);
+                if (BootDiagnostics is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<BootDiagnostics>)BootDiagnostics).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

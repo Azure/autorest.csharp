@@ -31,7 +31,14 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Configuration))
             {
                 writer.WritePropertyName("configuration"u8);
-                ((IModelJsonSerializable<FirewallPolicyIntrusionDetectionConfiguration>)Configuration).Serialize(writer, options);
+                if (Configuration is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<FirewallPolicyIntrusionDetectionConfiguration>)Configuration).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

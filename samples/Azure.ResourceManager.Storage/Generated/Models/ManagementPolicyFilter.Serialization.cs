@@ -46,7 +46,14 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in BlobIndexMatch)
                 {
-                    ((IModelJsonSerializable<TagFilter>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<TagFilter>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

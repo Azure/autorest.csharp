@@ -39,7 +39,14 @@ namespace MgmtResourceName.Models
                 writer.WriteStartArray();
                 foreach (var item in Operations)
                 {
-                    ((IModelJsonSerializable<ResourceOperation>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<ResourceOperation>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

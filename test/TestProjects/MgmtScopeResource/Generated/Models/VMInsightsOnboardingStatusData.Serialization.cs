@@ -48,7 +48,14 @@ namespace MgmtScopeResource
                 writer.WriteStartArray();
                 foreach (var item in Data)
                 {
-                    ((IModelJsonSerializable<DataContainer>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<DataContainer>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

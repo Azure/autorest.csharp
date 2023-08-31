@@ -34,7 +34,14 @@ namespace Azure.Storage.Tables.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    ((IModelJsonSerializable<TableResponseProperties>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<TableResponseProperties>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

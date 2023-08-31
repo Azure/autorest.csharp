@@ -41,12 +41,26 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(VmAgent))
             {
                 writer.WritePropertyName("vmAgent"u8);
-                ((IModelJsonSerializable<VirtualMachineAgentInstanceView>)VmAgent).Serialize(writer, options);
+                if (VmAgent is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<VirtualMachineAgentInstanceView>)VmAgent).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(MaintenanceRedeployStatus))
             {
                 writer.WritePropertyName("maintenanceRedeployStatus"u8);
-                ((IModelJsonSerializable<MaintenanceRedeployStatus>)MaintenanceRedeployStatus).Serialize(writer, options);
+                if (MaintenanceRedeployStatus is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<MaintenanceRedeployStatus>)MaintenanceRedeployStatus).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(Disks))
             {
@@ -54,14 +68,28 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in Disks)
                 {
-                    ((IModelJsonSerializable<DiskInstanceView>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<DiskInstanceView>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(BootDiagnostics))
             {
                 writer.WritePropertyName("bootDiagnostics"u8);
-                ((IModelJsonSerializable<BootDiagnosticsInstanceView>)BootDiagnostics).Serialize(writer, options);
+                if (BootDiagnostics is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<BootDiagnosticsInstanceView>)BootDiagnostics).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(Statuses))
             {
@@ -69,7 +97,14 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in Statuses)
                 {
-                    ((IModelJsonSerializable<InstanceViewStatus>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<InstanceViewStatus>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

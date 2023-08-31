@@ -26,12 +26,26 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(DiskEncryptionKey))
             {
                 writer.WritePropertyName("diskEncryptionKey"u8);
-                ((IModelJsonSerializable<KeyVaultSecretReference>)DiskEncryptionKey).Serialize(writer, options);
+                if (DiskEncryptionKey is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<KeyVaultSecretReference>)DiskEncryptionKey).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(KeyEncryptionKey))
             {
                 writer.WritePropertyName("keyEncryptionKey"u8);
-                ((IModelJsonSerializable<KeyVaultKeyReference>)KeyEncryptionKey).Serialize(writer, options);
+                if (KeyEncryptionKey is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<KeyVaultKeyReference>)KeyEncryptionKey).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Enabled))
             {

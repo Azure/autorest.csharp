@@ -61,7 +61,14 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WriteStartArray();
                 foreach (var item in ValueArray)
                 {
-                    ((IModelJsonSerializable<FieldValue>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<FieldValue>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -72,7 +79,14 @@ namespace Azure.AI.FormRecognizer.Models
                 foreach (var item in ValueObject)
                 {
                     writer.WritePropertyName(item.Key);
-                    ((IModelJsonSerializable<FieldValue>)item.Value).Serialize(writer, options);
+                    if (item.Value is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<FieldValue>)item.Value).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndObject();
             }

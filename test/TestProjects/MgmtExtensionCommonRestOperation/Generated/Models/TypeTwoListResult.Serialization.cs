@@ -28,7 +28,14 @@ namespace MgmtExtensionCommonRestOperation.Models
             writer.WriteStartArray();
             foreach (var item in Value)
             {
-                ((IModelJsonSerializable<TypeTwoData>)item).Serialize(writer, options);
+                if (item is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<TypeTwoData>)item).Serialize(writer, options);
+                }
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(NextLink))

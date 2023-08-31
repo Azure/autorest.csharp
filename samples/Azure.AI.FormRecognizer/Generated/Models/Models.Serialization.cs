@@ -26,7 +26,14 @@ namespace Azure.AI.FormRecognizer.Models
             if (Optional.IsDefined(Summary))
             {
                 writer.WritePropertyName("summary"u8);
-                ((IModelJsonSerializable<ModelsSummary>)Summary).Serialize(writer, options);
+                if (Summary is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ModelsSummary>)Summary).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(ModelList))
             {
@@ -34,7 +41,14 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WriteStartArray();
                 foreach (var item in ModelList)
                 {
-                    ((IModelJsonSerializable<ModelInfo>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<ModelInfo>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

@@ -58,7 +58,14 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(PrivateLinkServiceConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                ((IModelJsonSerializable<PrivateLinkServiceConnectionState>)PrivateLinkServiceConnectionState).Serialize(writer, options);
+                if (PrivateLinkServiceConnectionState is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<PrivateLinkServiceConnectionState>)PrivateLinkServiceConnectionState).Serialize(writer, options);
+                }
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

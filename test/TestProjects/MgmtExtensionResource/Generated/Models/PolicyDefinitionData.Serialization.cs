@@ -72,7 +72,14 @@ namespace MgmtExtensionResource
                 foreach (var item in Parameters)
                 {
                     writer.WritePropertyName(item.Key);
-                    ((IModelJsonSerializable<ParameterDefinitionsValue>)item.Value).Serialize(writer, options);
+                    if (item.Value is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<ParameterDefinitionsValue>)item.Value).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndObject();
             }

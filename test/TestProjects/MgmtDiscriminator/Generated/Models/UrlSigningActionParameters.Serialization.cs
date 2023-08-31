@@ -36,7 +36,14 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in ParameterNameOverride)
                 {
-                    ((IModelJsonSerializable<UrlSigningParamIdentifier>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<UrlSigningParamIdentifier>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

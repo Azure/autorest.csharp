@@ -26,12 +26,26 @@ namespace Azure.ResourceManager.Storage.Models
             if (Optional.IsDefined(MicrosoftEndpoints))
             {
                 writer.WritePropertyName("microsoftEndpoints"u8);
-                ((IModelJsonSerializable<StorageAccountMicrosoftEndpoints>)MicrosoftEndpoints).Serialize(writer, options);
+                if (MicrosoftEndpoints is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<StorageAccountMicrosoftEndpoints>)MicrosoftEndpoints).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(InternetEndpoints))
             {
                 writer.WritePropertyName("internetEndpoints"u8);
-                ((IModelJsonSerializable<StorageAccountInternetEndpoints>)InternetEndpoints).Serialize(writer, options);
+                if (InternetEndpoints is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<StorageAccountInternetEndpoints>)InternetEndpoints).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

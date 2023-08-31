@@ -3392,7 +3392,14 @@ namespace body_dictionary
             foreach (var item in arrayBody)
             {
                 content.JsonWriter.WritePropertyName(item.Key);
-                ((IModelJsonSerializable<Widget>)item.Value).Serialize(content.JsonWriter, ModelSerializerOptions.DefaultWireOptions);
+                if (item.Value is null)
+                {
+                    content.JsonWriter.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<Widget>)item.Value).Serialize(content.JsonWriter, ModelSerializerOptions.DefaultWireOptions);
+                }
             }
             content.JsonWriter.WriteEndObject();
             request.Content = content;

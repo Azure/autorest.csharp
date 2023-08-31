@@ -41,7 +41,14 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(ActiveKey))
             {
                 writer.WritePropertyName("activeKey"u8);
-                ((IModelJsonSerializable<KeyForDiskEncryptionSet>)ActiveKey).Serialize(writer, options);
+                if (ActiveKey is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<KeyForDiskEncryptionSet>)ActiveKey).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(RotationToLatestKeyVersionEnabled))
             {

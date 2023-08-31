@@ -64,7 +64,14 @@ namespace Azure.ResourceManager.Storage
                 writer.WriteStartArray();
                 foreach (var item in SignedIdentifiers)
                 {
-                    ((IModelJsonSerializable<SignedIdentifier>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<SignedIdentifier>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

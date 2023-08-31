@@ -28,7 +28,14 @@ namespace MgmtNoTypeReplacement
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo"u8);
-                ((IModelJsonSerializable<NoSubResourceModel>)Foo).Serialize(writer, options);
+                if (Foo is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<NoSubResourceModel>)Foo).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

@@ -26,7 +26,14 @@ namespace MgmtSafeFlatten.Models
             if (Optional.IsDefined(LayerTwo))
             {
                 writer.WritePropertyName("layerTwo"u8);
-                ((IModelJsonSerializable<LayerTwoSingle>)LayerTwo).Serialize(writer, options);
+                if (LayerTwo is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<LayerTwoSingle>)LayerTwo).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

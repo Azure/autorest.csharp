@@ -31,7 +31,14 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WriteStartArray();
                 foreach (var item in Errors)
                 {
-                    ((IModelJsonSerializable<ErrorInformation>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<ErrorInformation>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

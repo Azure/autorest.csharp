@@ -31,12 +31,26 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(RollingUpgradePolicy))
             {
                 writer.WritePropertyName("rollingUpgradePolicy"u8);
-                ((IModelJsonSerializable<RollingUpgradePolicy>)RollingUpgradePolicy).Serialize(writer, options);
+                if (RollingUpgradePolicy is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<RollingUpgradePolicy>)RollingUpgradePolicy).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(AutomaticOSUpgradePolicy))
             {
                 writer.WritePropertyName("automaticOSUpgradePolicy"u8);
-                ((IModelJsonSerializable<AutomaticOSUpgradePolicy>)AutomaticOSUpgradePolicy).Serialize(writer, options);
+                if (AutomaticOSUpgradePolicy is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<AutomaticOSUpgradePolicy>)AutomaticOSUpgradePolicy).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

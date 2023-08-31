@@ -46,12 +46,26 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(WindowsConfiguration))
             {
                 writer.WritePropertyName("windowsConfiguration"u8);
-                ((IModelJsonSerializable<WindowsConfiguration>)WindowsConfiguration).Serialize(writer, options);
+                if (WindowsConfiguration is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<WindowsConfiguration>)WindowsConfiguration).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(LinuxConfiguration))
             {
                 writer.WritePropertyName("linuxConfiguration"u8);
-                ((IModelJsonSerializable<LinuxConfiguration>)LinuxConfiguration).Serialize(writer, options);
+                if (LinuxConfiguration is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<LinuxConfiguration>)LinuxConfiguration).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(Secrets))
             {
@@ -59,7 +73,14 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in Secrets)
                 {
-                    ((IModelJsonSerializable<VaultSecretGroup>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<VaultSecretGroup>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

@@ -44,7 +44,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in Details)
                 {
-                    ((IModelJsonSerializable<CloudErrorBody>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<CloudErrorBody>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

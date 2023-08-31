@@ -49,7 +49,14 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
-                ((IModelJsonSerializable<NetworkSecurityGroup>)NetworkSecurityGroup).Serialize(writer, options);
+                if (NetworkSecurityGroup is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<NetworkSecurityGroup>)NetworkSecurityGroup).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(IpConfigurations))
             {
@@ -57,14 +64,28 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in IpConfigurations)
                 {
-                    ((IModelJsonSerializable<NetworkInterfaceIPConfiguration>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<NetworkInterfaceIPConfiguration>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
-                ((IModelJsonSerializable<NetworkInterfaceDnsSettings>)DnsSettings).Serialize(writer, options);
+                if (DnsSettings is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<NetworkInterfaceDnsSettings>)DnsSettings).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(EnableAcceleratedNetworking))
             {

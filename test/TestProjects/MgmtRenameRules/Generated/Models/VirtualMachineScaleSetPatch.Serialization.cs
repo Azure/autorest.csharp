@@ -28,12 +28,26 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                ((IModelJsonSerializable<MgmtRenameRulesSku>)Sku).Serialize(writer, options);
+                if (Sku is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<MgmtRenameRulesSku>)Sku).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                ((IModelJsonSerializable<MgmtRenameRulesPlan>)Plan).Serialize(writer, options);
+                if (Plan is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<MgmtRenameRulesPlan>)Plan).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Identity))
             {
@@ -56,17 +70,38 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(UpgradePolicy))
             {
                 writer.WritePropertyName("upgradePolicy"u8);
-                ((IModelJsonSerializable<UpgradePolicy>)UpgradePolicy).Serialize(writer, options);
+                if (UpgradePolicy is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<UpgradePolicy>)UpgradePolicy).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(AutomaticRepairsPolicy))
             {
                 writer.WritePropertyName("automaticRepairsPolicy"u8);
-                ((IModelJsonSerializable<AutomaticRepairsPolicy>)AutomaticRepairsPolicy).Serialize(writer, options);
+                if (AutomaticRepairsPolicy is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<AutomaticRepairsPolicy>)AutomaticRepairsPolicy).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(VirtualMachineProfile))
             {
                 writer.WritePropertyName("virtualMachineProfile"u8);
-                ((IModelJsonSerializable<VirtualMachineScaleSetUpdateVmProfile>)VirtualMachineProfile).Serialize(writer, options);
+                if (VirtualMachineProfile is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<VirtualMachineScaleSetUpdateVmProfile>)VirtualMachineProfile).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Overprovision))
             {
@@ -86,12 +121,26 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(AdditionalCapabilities))
             {
                 writer.WritePropertyName("additionalCapabilities"u8);
-                ((IModelJsonSerializable<AdditionalCapabilities>)AdditionalCapabilities).Serialize(writer, options);
+                if (AdditionalCapabilities is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<AdditionalCapabilities>)AdditionalCapabilities).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(ScaleInPolicy))
             {
                 writer.WritePropertyName("scaleInPolicy"u8);
-                ((IModelJsonSerializable<ScaleInPolicy>)ScaleInPolicy).Serialize(writer, options);
+                if (ScaleInPolicy is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ScaleInPolicy>)ScaleInPolicy).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(ProximityPlacementGroup))
             {

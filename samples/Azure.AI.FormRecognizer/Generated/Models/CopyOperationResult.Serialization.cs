@@ -32,7 +32,14 @@ namespace Azure.AI.FormRecognizer.Models
             if (Optional.IsDefined(CopyResult))
             {
                 writer.WritePropertyName("copyResult"u8);
-                ((IModelJsonSerializable<CopyResult>)CopyResult).Serialize(writer, options);
+                if (CopyResult is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<CopyResult>)CopyResult).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

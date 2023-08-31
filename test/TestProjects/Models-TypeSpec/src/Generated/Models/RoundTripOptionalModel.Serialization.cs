@@ -59,19 +59,40 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalModelList)
                 {
-                    ((IModelJsonSerializable<CollectionItem>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<CollectionItem>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(OptionalModel))
             {
                 writer.WritePropertyName("optionalModel"u8);
-                ((IModelJsonSerializable<DerivedModel>)OptionalModel).Serialize(writer, options);
+                if (OptionalModel is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<DerivedModel>)OptionalModel).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(OptionalModelWithPropertiesOnBase))
             {
                 writer.WritePropertyName("optionalModelWithPropertiesOnBase"u8);
-                ((IModelJsonSerializable<DerivedModelWithProperties>)OptionalModelWithPropertiesOnBase).Serialize(writer, options);
+                if (OptionalModelWithPropertiesOnBase is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<DerivedModelWithProperties>)OptionalModelWithPropertiesOnBase).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(OptionalFixedStringEnum))
             {
@@ -112,7 +133,14 @@ namespace ModelsTypeSpec.Models
                 foreach (var item in OptionalModelRecord)
                 {
                     writer.WritePropertyName(item.Key);
-                    ((IModelJsonSerializable<RecordItem>)item.Value).Serialize(writer, options);
+                    if (item.Value is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<RecordItem>)item.Value).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndObject();
             }

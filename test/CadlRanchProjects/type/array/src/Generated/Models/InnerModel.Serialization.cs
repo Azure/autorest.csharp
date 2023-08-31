@@ -31,7 +31,14 @@ namespace _Type._Array.Models
                 writer.WriteStartArray();
                 foreach (var item in Children)
                 {
-                    ((IModelJsonSerializable<InnerModel>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<InnerModel>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

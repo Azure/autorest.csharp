@@ -29,7 +29,14 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in SignatureOverrides)
                 {
-                    ((IModelJsonSerializable<FirewallPolicyIntrusionDetectionSignatureSpecification>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<FirewallPolicyIntrusionDetectionSignatureSpecification>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -39,7 +46,14 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in BypassTrafficSettings)
                 {
-                    ((IModelJsonSerializable<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

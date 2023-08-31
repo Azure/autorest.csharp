@@ -26,12 +26,26 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                ((IModelJsonSerializable<SubResource>)Subnet).Serialize(writer, options);
+                if (Subnet is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<SubResource>)Subnet).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(NetworkInterface))
             {
                 writer.WritePropertyName("networkInterface"u8);
-                ((IModelJsonSerializable<SubResource>)NetworkInterface).Serialize(writer, options);
+                if (NetworkInterface is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<SubResource>)NetworkInterface).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

@@ -26,7 +26,14 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Super))
             {
                 writer.WritePropertyName("super"u8);
-                ((IModelJsonSerializable<VeryDeepSinglePropertyModel>)Super).Serialize(writer, options);
+                if (Super is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<VeryDeepSinglePropertyModel>)Super).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

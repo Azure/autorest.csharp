@@ -26,7 +26,14 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Error))
             {
                 writer.WritePropertyName("error"u8);
-                ((IModelJsonSerializable<CloudErrorBody>)Error).Serialize(writer, options);
+                if (Error is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<CloudErrorBody>)Error).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

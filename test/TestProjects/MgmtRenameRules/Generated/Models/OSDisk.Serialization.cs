@@ -31,7 +31,14 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(EncryptionSettings))
             {
                 writer.WritePropertyName("encryptionSettings"u8);
-                ((IModelJsonSerializable<DiskEncryptionSettings>)EncryptionSettings).Serialize(writer, options);
+                if (EncryptionSettings is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<DiskEncryptionSettings>)EncryptionSettings).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Name))
             {
@@ -41,12 +48,26 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(Vhd))
             {
                 writer.WritePropertyName("vhd"u8);
-                ((IModelJsonSerializable<VirtualHardDisk>)Vhd).Serialize(writer, options);
+                if (Vhd is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<VirtualHardDisk>)Vhd).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                ((IModelJsonSerializable<VirtualHardDisk>)Image).Serialize(writer, options);
+                if (Image is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<VirtualHardDisk>)Image).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Caching))
             {
@@ -61,7 +82,14 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(DiffDiskSettings))
             {
                 writer.WritePropertyName("diffDiskSettings"u8);
-                ((IModelJsonSerializable<DiffDiskSettings>)DiffDiskSettings).Serialize(writer, options);
+                if (DiffDiskSettings is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<DiffDiskSettings>)DiffDiskSettings).Serialize(writer, options);
+                }
             }
             writer.WritePropertyName("createOption"u8);
             writer.WriteStringValue(CreateOption.ToString());
@@ -73,7 +101,14 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                ((IModelJsonSerializable<ManagedDiskParameters>)ManagedDisk).Serialize(writer, options);
+                if (ManagedDisk is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ManagedDiskParameters>)ManagedDisk).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

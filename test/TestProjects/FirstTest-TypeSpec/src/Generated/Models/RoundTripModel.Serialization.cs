@@ -53,7 +53,14 @@ namespace FirstTestTypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
-            ((IModelJsonSerializable<Thing>)RequiredModel).Serialize(writer, options);
+            if (RequiredModel is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<Thing>)RequiredModel).Serialize(writer, options);
+            }
             if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
@@ -179,7 +186,14 @@ namespace FirstTestTypeSpec.Models
                 writer.WriteEndObject();
             }
             writer.WritePropertyName("modelWithRequiredNullable"u8);
-            ((IModelJsonSerializable<ModelWithRequiredNullableProperties>)ModelWithRequiredNullable).Serialize(writer, options);
+            if (ModelWithRequiredNullable is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<ModelWithRequiredNullableProperties>)ModelWithRequiredNullable).Serialize(writer, options);
+            }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
                 foreach (var property in _rawData)

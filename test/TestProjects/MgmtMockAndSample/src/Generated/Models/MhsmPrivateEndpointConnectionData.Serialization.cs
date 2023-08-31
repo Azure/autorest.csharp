@@ -34,7 +34,14 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(Sku))
             {
                 writer.WritePropertyName("sku"u8);
-                ((IModelJsonSerializable<ManagedHsmSku>)Sku).Serialize(writer, options);
+                if (Sku is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ManagedHsmSku>)Sku).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -59,7 +66,14 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(PrivateLinkServiceConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                ((IModelJsonSerializable<MhsmPrivateLinkServiceConnectionState>)PrivateLinkServiceConnectionState).Serialize(writer, options);
+                if (PrivateLinkServiceConnectionState is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<MhsmPrivateLinkServiceConnectionState>)PrivateLinkServiceConnectionState).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(ProvisioningState))
             {

@@ -26,7 +26,14 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(OsDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                ((IModelJsonSerializable<ImageOSDisk>)OsDisk).Serialize(writer, options);
+                if (OsDisk is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ImageOSDisk>)OsDisk).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
@@ -34,7 +41,14 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
-                    ((IModelJsonSerializable<ImageDataDisk>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<ImageDataDisk>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

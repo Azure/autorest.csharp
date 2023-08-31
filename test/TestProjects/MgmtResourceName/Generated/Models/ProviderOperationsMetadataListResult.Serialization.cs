@@ -30,7 +30,14 @@ namespace MgmtResourceName.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    ((IModelJsonSerializable<ProviderOperationData>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<ProviderOperationData>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

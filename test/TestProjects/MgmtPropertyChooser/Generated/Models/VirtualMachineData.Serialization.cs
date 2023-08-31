@@ -39,12 +39,26 @@ namespace MgmtPropertyChooser
             if (Optional.IsDefined(IdentityWithRenamedProperty))
             {
                 writer.WritePropertyName("identityWithRenamedProperty"u8);
-                ((IModelJsonSerializable<IdentityWithRenamedProperty>)IdentityWithRenamedProperty).Serialize(writer, options);
+                if (IdentityWithRenamedProperty is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<IdentityWithRenamedProperty>)IdentityWithRenamedProperty).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(IdentityWithDifferentPropertyType))
             {
                 writer.WritePropertyName("identityWithDifferentPropertyType"u8);
-                ((IModelJsonSerializable<IdentityWithDifferentPropertyType>)IdentityWithDifferentPropertyType).Serialize(writer, options);
+                if (IdentityWithDifferentPropertyType is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<IdentityWithDifferentPropertyType>)IdentityWithDifferentPropertyType).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(IdentityWithNoUserIdentity))
             {
@@ -54,7 +68,14 @@ namespace MgmtPropertyChooser
             if (Optional.IsDefined(IdentityWithNoSystemIdentity))
             {
                 writer.WritePropertyName("identityWithNoSystemIdentity"u8);
-                ((IModelJsonSerializable<IdentityWithNoSystemIdentity>)IdentityWithNoSystemIdentity).Serialize(writer, options);
+                if (IdentityWithNoSystemIdentity is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<IdentityWithNoSystemIdentity>)IdentityWithNoSystemIdentity).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(IdentityV3))
             {

@@ -48,7 +48,14 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Siblings)
                 {
-                    ((IModelJsonSerializable<Fish>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<Fish>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

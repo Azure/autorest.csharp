@@ -43,17 +43,38 @@ namespace MgmtHierarchicalNonResource.Models
             if (Optional.IsDefined(Identifier))
             {
                 writer.WritePropertyName("identifier"u8);
-                ((IModelJsonSerializable<GalleryImageIdentifier>)Identifier).Serialize(writer, options);
+                if (Identifier is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<GalleryImageIdentifier>)Identifier).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Recommended))
             {
                 writer.WritePropertyName("recommended"u8);
-                ((IModelJsonSerializable<RecommendedMachineConfiguration>)Recommended).Serialize(writer, options);
+                if (Recommended is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<RecommendedMachineConfiguration>)Recommended).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Disallowed))
             {
                 writer.WritePropertyName("disallowed"u8);
-                ((IModelJsonSerializable<Disallowed>)Disallowed).Serialize(writer, options);
+                if (Disallowed is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<Disallowed>)Disallowed).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(HyperVGeneration))
             {
@@ -66,14 +87,28 @@ namespace MgmtHierarchicalNonResource.Models
                 writer.WriteStartArray();
                 foreach (var item in Features)
                 {
-                    ((IModelJsonSerializable<GalleryImageFeature>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<GalleryImageFeature>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(PurchasePlan))
             {
                 writer.WritePropertyName("purchasePlan"u8);
-                ((IModelJsonSerializable<ImagePurchasePlan>)PurchasePlan).Serialize(writer, options);
+                if (PurchasePlan is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ImagePurchasePlan>)PurchasePlan).Serialize(writer, options);
+                }
             }
             writer.WriteEndObject();
             writer.WritePropertyName("identifier"u8);

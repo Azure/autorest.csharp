@@ -29,7 +29,14 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in PublicKeys)
                 {
-                    ((IModelJsonSerializable<SshPublicKeyInfo>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<SshPublicKeyInfo>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

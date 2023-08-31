@@ -28,7 +28,14 @@ namespace AnomalyDetector.Models
             if (Optional.IsDefined(Value))
             {
                 writer.WritePropertyName("value"u8);
-                ((IModelJsonSerializable<AnomalyValue>)Value).Serialize(writer, options);
+                if (Value is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<AnomalyValue>)Value).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(Errors))
             {
@@ -36,7 +43,14 @@ namespace AnomalyDetector.Models
                 writer.WriteStartArray();
                 foreach (var item in Errors)
                 {
-                    ((IModelJsonSerializable<ErrorResponse>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<ErrorResponse>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

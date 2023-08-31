@@ -36,7 +36,14 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(LogAnalyticsResources))
             {
                 writer.WritePropertyName("logAnalyticsResources"u8);
-                ((IModelJsonSerializable<FirewallPolicyLogAnalyticsResources>)LogAnalyticsResources).Serialize(writer, options);
+                if (LogAnalyticsResources is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<FirewallPolicyLogAnalyticsResources>)LogAnalyticsResources).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

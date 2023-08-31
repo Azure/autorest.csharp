@@ -39,12 +39,26 @@ namespace MgmtConstants.Models
             if (Optional.IsDefined(Listener))
             {
                 writer.WritePropertyName("listener"u8);
-                ((IModelJsonSerializable<ModelWithRequiredConstant>)Listener).Serialize(writer, options);
+                if (Listener is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ModelWithRequiredConstant>)Listener).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Content))
             {
                 writer.WritePropertyName("content"u8);
-                ((IModelJsonSerializable<ModelWithOptionalConstant>)Content).Serialize(writer, options);
+                if (Content is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ModelWithOptionalConstant>)Content).Serialize(writer, options);
+                }
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

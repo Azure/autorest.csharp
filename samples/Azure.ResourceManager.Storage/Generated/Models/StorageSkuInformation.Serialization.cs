@@ -31,7 +31,14 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in Restrictions)
                 {
-                    ((IModelJsonSerializable<Restriction>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<Restriction>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

@@ -31,7 +31,14 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(Ssh))
             {
                 writer.WritePropertyName("ssh"u8);
-                ((IModelJsonSerializable<SshConfiguration>)Ssh).Serialize(writer, options);
+                if (Ssh is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<SshConfiguration>)Ssh).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(ProvisionVmAgent))
             {

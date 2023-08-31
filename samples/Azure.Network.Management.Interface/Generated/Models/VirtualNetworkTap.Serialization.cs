@@ -49,12 +49,26 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(DestinationNetworkInterfaceIPConfiguration))
             {
                 writer.WritePropertyName("destinationNetworkInterfaceIPConfiguration"u8);
-                ((IModelJsonSerializable<NetworkInterfaceIPConfiguration>)DestinationNetworkInterfaceIPConfiguration).Serialize(writer, options);
+                if (DestinationNetworkInterfaceIPConfiguration is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<NetworkInterfaceIPConfiguration>)DestinationNetworkInterfaceIPConfiguration).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(DestinationLoadBalancerFrontEndIPConfiguration))
             {
                 writer.WritePropertyName("destinationLoadBalancerFrontEndIPConfiguration"u8);
-                ((IModelJsonSerializable<FrontendIPConfiguration>)DestinationLoadBalancerFrontEndIPConfiguration).Serialize(writer, options);
+                if (DestinationLoadBalancerFrontEndIPConfiguration is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<FrontendIPConfiguration>)DestinationLoadBalancerFrontEndIPConfiguration).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(DestinationPort))
             {

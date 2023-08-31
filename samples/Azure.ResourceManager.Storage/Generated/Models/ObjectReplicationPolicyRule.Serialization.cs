@@ -35,7 +35,14 @@ namespace Azure.ResourceManager.Storage.Models
             if (Optional.IsDefined(Filters))
             {
                 writer.WritePropertyName("filters"u8);
-                ((IModelJsonSerializable<ObjectReplicationPolicyFilter>)Filters).Serialize(writer, options);
+                if (Filters is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ObjectReplicationPolicyFilter>)Filters).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

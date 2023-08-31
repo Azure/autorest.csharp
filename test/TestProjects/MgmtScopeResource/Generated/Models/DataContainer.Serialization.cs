@@ -24,7 +24,14 @@ namespace MgmtScopeResource.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("workspace"u8);
-            ((IModelJsonSerializable<WorkspaceInfo>)Workspace).Serialize(writer, options);
+            if (Workspace is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<WorkspaceInfo>)Workspace).Serialize(writer, options);
+            }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
                 foreach (var property in _rawData)

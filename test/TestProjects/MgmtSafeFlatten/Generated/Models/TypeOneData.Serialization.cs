@@ -34,12 +34,26 @@ namespace MgmtSafeFlatten
             if (Optional.IsDefined(LayerOne))
             {
                 writer.WritePropertyName("layerOne"u8);
-                ((IModelJsonSerializable<LayerOneSingle>)LayerOne).Serialize(writer, options);
+                if (LayerOne is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<LayerOneSingle>)LayerOne).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(LayerOneType))
             {
                 writer.WritePropertyName("layerOneType"u8);
-                ((IModelJsonSerializable<LayerOneBaseType>)LayerOneType).Serialize(writer, options);
+                if (LayerOneType is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<LayerOneBaseType>)LayerOneType).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(LayerOneConflict))
             {

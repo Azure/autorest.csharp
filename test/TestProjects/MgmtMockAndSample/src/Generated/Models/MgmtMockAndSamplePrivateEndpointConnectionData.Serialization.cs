@@ -41,7 +41,14 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(ConnectionState))
             {
                 writer.WritePropertyName("privateLinkServiceConnectionState"u8);
-                ((IModelJsonSerializable<MgmtMockAndSamplePrivateLinkServiceConnectionState>)ConnectionState).Serialize(writer, options);
+                if (ConnectionState is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<MgmtMockAndSamplePrivateLinkServiceConnectionState>)ConnectionState).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(ProvisioningState))
             {

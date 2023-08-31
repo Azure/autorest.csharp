@@ -88,7 +88,14 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in Fields)
                 {
-                    ((IModelJsonSerializable<Field>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<Field>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

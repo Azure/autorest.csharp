@@ -29,7 +29,14 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in NetworkInterfaces)
                 {
-                    ((IModelJsonSerializable<NetworkInterfaceReference>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<NetworkInterfaceReference>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

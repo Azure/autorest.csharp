@@ -33,18 +33,46 @@ namespace CognitiveSearch.Models
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(Type.ToString());
             writer.WritePropertyName("credentials"u8);
-            ((IModelJsonSerializable<DataSourceCredentials>)Credentials).Serialize(writer, options);
+            if (Credentials is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<DataSourceCredentials>)Credentials).Serialize(writer, options);
+            }
             writer.WritePropertyName("container"u8);
-            ((IModelJsonSerializable<DataContainer>)Container).Serialize(writer, options);
+            if (Container is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<DataContainer>)Container).Serialize(writer, options);
+            }
             if (Optional.IsDefined(DataChangeDetectionPolicy))
             {
                 writer.WritePropertyName("dataChangeDetectionPolicy"u8);
-                ((IModelJsonSerializable<DataChangeDetectionPolicy>)DataChangeDetectionPolicy).Serialize(writer, options);
+                if (DataChangeDetectionPolicy is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<DataChangeDetectionPolicy>)DataChangeDetectionPolicy).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(DataDeletionDetectionPolicy))
             {
                 writer.WritePropertyName("dataDeletionDetectionPolicy"u8);
-                ((IModelJsonSerializable<DataDeletionDetectionPolicy>)DataDeletionDetectionPolicy).Serialize(writer, options);
+                if (DataDeletionDetectionPolicy is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<DataDeletionDetectionPolicy>)DataDeletionDetectionPolicy).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(ETag))
             {

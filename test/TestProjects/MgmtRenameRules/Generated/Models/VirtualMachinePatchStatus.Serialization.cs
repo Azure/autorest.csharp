@@ -26,12 +26,26 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(AvailablePatchSummary))
             {
                 writer.WritePropertyName("availablePatchSummary"u8);
-                ((IModelJsonSerializable<AvailablePatchSummary>)AvailablePatchSummary).Serialize(writer, options);
+                if (AvailablePatchSummary is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<AvailablePatchSummary>)AvailablePatchSummary).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(LastPatchInstallationSummary))
             {
                 writer.WritePropertyName("lastPatchInstallationSummary"u8);
-                ((IModelJsonSerializable<LastPatchInstallationSummary>)LastPatchInstallationSummary).Serialize(writer, options);
+                if (LastPatchInstallationSummary is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<LastPatchInstallationSummary>)LastPatchInstallationSummary).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

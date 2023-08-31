@@ -91,7 +91,14 @@ namespace Azure.ResourceManager.Sample
             if (Optional.IsDefined(InstanceView))
             {
                 writer.WritePropertyName("instanceView"u8);
-                ((IModelJsonSerializable<VirtualMachineExtensionInstanceView>)InstanceView).Serialize(writer, options);
+                if (InstanceView is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<VirtualMachineExtensionInstanceView>)InstanceView).Serialize(writer, options);
+                }
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

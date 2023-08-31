@@ -26,12 +26,26 @@ namespace HlcConstants.Models
             if (Optional.IsDefined(RequiredConstantModel))
             {
                 writer.WritePropertyName("requiredConstantModel"u8);
-                ((IModelJsonSerializable<ModelWithRequiredConstant>)RequiredConstantModel).Serialize(writer, options);
+                if (RequiredConstantModel is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ModelWithRequiredConstant>)RequiredConstantModel).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(OptionalConstantModel))
             {
                 writer.WritePropertyName("optionalConstantModel"u8);
-                ((IModelJsonSerializable<ModelWithOptionalConstant>)OptionalConstantModel).Serialize(writer, options);
+                if (OptionalConstantModel is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ModelWithOptionalConstant>)OptionalConstantModel).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

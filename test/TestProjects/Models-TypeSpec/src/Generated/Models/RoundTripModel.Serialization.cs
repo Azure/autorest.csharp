@@ -80,7 +80,14 @@ namespace ModelsTypeSpec.Models
                 }
             }
             writer.WritePropertyName("requiredModel"u8);
-            ((IModelJsonSerializable<BaseModelWithDiscriminator>)RequiredModel).Serialize(writer, options);
+            if (RequiredModel is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<BaseModelWithDiscriminator>)RequiredModel).Serialize(writer, options);
+            }
             writer.WritePropertyName("requiredFixedStringEnum"u8);
             writer.WriteStringValue(RequiredFixedStringEnum.ToSerialString());
             writer.WritePropertyName("requiredFixedIntEnum"u8);
@@ -91,7 +98,14 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartArray();
             foreach (var item in RequiredList)
             {
-                ((IModelJsonSerializable<CollectionItem>)item).Serialize(writer, options);
+                if (item is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<CollectionItem>)item).Serialize(writer, options);
+                }
             }
             writer.WriteEndArray();
             writer.WritePropertyName("requiredIntRecord"u8);
@@ -115,7 +129,14 @@ namespace ModelsTypeSpec.Models
             foreach (var item in RequiredModelRecord)
             {
                 writer.WritePropertyName(item.Key);
-                ((IModelJsonSerializable<RecordItem>)item.Value).Serialize(writer, options);
+                if (item.Value is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<RecordItem>)item.Value).Serialize(writer, options);
+                }
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredBytes"u8);

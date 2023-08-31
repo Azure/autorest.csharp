@@ -24,7 +24,14 @@ namespace CognitiveSearch.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("tag"u8);
-            ((IModelJsonSerializable<TagScoringParameters>)Parameters).Serialize(writer, options);
+            if (Parameters is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<TagScoringParameters>)Parameters).Serialize(writer, options);
+            }
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(Type);
             writer.WritePropertyName("fieldName"u8);

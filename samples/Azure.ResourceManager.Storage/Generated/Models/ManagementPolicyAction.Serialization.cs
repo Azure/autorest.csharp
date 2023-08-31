@@ -26,17 +26,38 @@ namespace Azure.ResourceManager.Storage.Models
             if (Optional.IsDefined(BaseBlob))
             {
                 writer.WritePropertyName("baseBlob"u8);
-                ((IModelJsonSerializable<ManagementPolicyBaseBlob>)BaseBlob).Serialize(writer, options);
+                if (BaseBlob is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ManagementPolicyBaseBlob>)BaseBlob).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Snapshot))
             {
                 writer.WritePropertyName("snapshot"u8);
-                ((IModelJsonSerializable<ManagementPolicySnapShot>)Snapshot).Serialize(writer, options);
+                if (Snapshot is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ManagementPolicySnapShot>)Snapshot).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Version))
             {
                 writer.WritePropertyName("version"u8);
-                ((IModelJsonSerializable<ManagementPolicyVersion>)Version).Serialize(writer, options);
+                if (Version is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ManagementPolicyVersion>)Version).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

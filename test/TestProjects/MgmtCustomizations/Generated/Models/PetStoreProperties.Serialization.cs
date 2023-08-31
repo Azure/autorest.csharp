@@ -31,7 +31,14 @@ namespace MgmtCustomizations.Models
             if (Optional.IsDefined(Pet))
             {
                 writer.WritePropertyName("pet"u8);
-                ((IModelJsonSerializable<Pet>)Pet).Serialize(writer, options);
+                if (Pet is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<Pet>)Pet).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

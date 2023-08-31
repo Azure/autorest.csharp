@@ -26,12 +26,26 @@ namespace MgmtHierarchicalNonResource.Models
             if (Optional.IsDefined(VCpus))
             {
                 writer.WritePropertyName("vCPUs"u8);
-                ((IModelJsonSerializable<ResourceRange>)VCpus).Serialize(writer, options);
+                if (VCpus is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ResourceRange>)VCpus).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Memory))
             {
                 writer.WritePropertyName("memory"u8);
-                ((IModelJsonSerializable<ResourceRange>)Memory).Serialize(writer, options);
+                if (Memory is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ResourceRange>)Memory).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

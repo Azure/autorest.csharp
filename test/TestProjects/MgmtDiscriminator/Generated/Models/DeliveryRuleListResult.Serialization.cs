@@ -30,7 +30,14 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    ((IModelJsonSerializable<DeliveryRuleData>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<DeliveryRuleData>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

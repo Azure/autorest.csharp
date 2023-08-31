@@ -29,7 +29,14 @@ namespace custom_baseUrl_paging.Models
                 writer.WriteStartArray();
                 foreach (var item in Values)
                 {
-                    ((IModelJsonSerializable<Product>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<Product>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

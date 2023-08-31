@@ -26,7 +26,14 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Action))
             {
                 writer.WritePropertyName("action"u8);
-                ((IModelJsonSerializable<FirewallPolicyFilterRuleCollectionAction>)Action).Serialize(writer, options);
+                if (Action is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<FirewallPolicyFilterRuleCollectionAction>)Action).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(Rules))
             {
@@ -34,7 +41,14 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Rules)
                 {
-                    ((IModelJsonSerializable<FirewallPolicyRule>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<FirewallPolicyRule>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

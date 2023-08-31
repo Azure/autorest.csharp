@@ -43,7 +43,14 @@ namespace Azure.ResourceManager.Storage
                 writer.WriteStartArray();
                 foreach (var item in Rules)
                 {
-                    ((IModelJsonSerializable<ObjectReplicationPolicyRule>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<ObjectReplicationPolicyRule>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

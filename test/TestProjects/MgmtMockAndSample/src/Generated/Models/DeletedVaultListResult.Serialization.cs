@@ -30,7 +30,14 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    ((IModelJsonSerializable<DeletedVaultData>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<DeletedVaultData>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

@@ -28,7 +28,14 @@ namespace MgmtPartialResource
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                ((IModelJsonSerializable<ConfigurationProfileAssignmentProperties>)Properties).Serialize(writer, options);
+                if (Properties is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ConfigurationProfileAssignmentProperties>)Properties).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(Tags))
             {

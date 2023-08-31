@@ -26,7 +26,14 @@ namespace MgmtScopeResource.Models
             if (Optional.IsDefined(WhatIfSettings))
             {
                 writer.WritePropertyName("whatIfSettings"u8);
-                ((IModelJsonSerializable<DeploymentWhatIfSettings>)WhatIfSettings).Serialize(writer, options);
+                if (WhatIfSettings is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<DeploymentWhatIfSettings>)WhatIfSettings).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Template))
             {

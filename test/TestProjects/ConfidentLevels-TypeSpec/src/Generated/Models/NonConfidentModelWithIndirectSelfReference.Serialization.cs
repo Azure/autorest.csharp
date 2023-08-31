@@ -31,7 +31,14 @@ namespace ConfidentLevelsInTsp.Models
                 writer.WriteStartArray();
                 foreach (var item in Reference)
                 {
-                    ((IModelJsonSerializable<IndirectSelfReferenceModel>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<IndirectSelfReferenceModel>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

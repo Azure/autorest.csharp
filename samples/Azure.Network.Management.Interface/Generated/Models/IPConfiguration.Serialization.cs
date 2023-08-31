@@ -48,12 +48,26 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Subnet))
             {
                 writer.WritePropertyName("subnet"u8);
-                ((IModelJsonSerializable<Subnet>)Subnet).Serialize(writer, options);
+                if (Subnet is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<Subnet>)Subnet).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(PublicIPAddress))
             {
                 writer.WritePropertyName("publicIPAddress"u8);
-                ((IModelJsonSerializable<PublicIPAddress>)PublicIPAddress).Serialize(writer, options);
+                if (PublicIPAddress is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<PublicIPAddress>)PublicIPAddress).Serialize(writer, options);
+                }
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

@@ -26,22 +26,50 @@ namespace CustomizationsInTsp.Models
             if (Optional.IsDefined(PropertyModelToMakeInternal))
             {
                 writer.WritePropertyName("propertyModelToMakeInternal"u8);
-                ((IModelJsonSerializable<ModelToMakeInternal>)PropertyModelToMakeInternal).Serialize(writer, options);
+                if (PropertyModelToMakeInternal is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ModelToMakeInternal>)PropertyModelToMakeInternal).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(PropertyModelToRename))
             {
                 writer.WritePropertyName("propertyModelToRename"u8);
-                ((IModelJsonSerializable<RenamedModel>)PropertyModelToRename).Serialize(writer, options);
+                if (PropertyModelToRename is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<RenamedModel>)PropertyModelToRename).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(PropertyModelToChangeNamespace))
             {
                 writer.WritePropertyName("propertyModelToChangeNamespace"u8);
-                ((IModelJsonSerializable<ModelToChangeNamespace>)PropertyModelToChangeNamespace).Serialize(writer, options);
+                if (PropertyModelToChangeNamespace is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ModelToChangeNamespace>)PropertyModelToChangeNamespace).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(PropertyModelWithCustomizedProperties))
             {
                 writer.WritePropertyName("propertyModelWithCustomizedProperties"u8);
-                ((IModelJsonSerializable<ModelWithCustomizedProperties>)PropertyModelWithCustomizedProperties).Serialize(writer, options);
+                if (PropertyModelWithCustomizedProperties is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ModelWithCustomizedProperties>)PropertyModelWithCustomizedProperties).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(PropertyEnumToRename))
             {
@@ -61,7 +89,14 @@ namespace CustomizationsInTsp.Models
             if (Optional.IsDefined(PropertyModelToAddAdditionalSerializableProperty))
             {
                 writer.WritePropertyName("propertyModelToAddAdditionalSerializableProperty"u8);
-                ((IModelJsonSerializable<ModelToAddAdditionalSerializableProperty>)PropertyModelToAddAdditionalSerializableProperty).Serialize(writer, options);
+                if (PropertyModelToAddAdditionalSerializableProperty is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ModelToAddAdditionalSerializableProperty>)PropertyModelToAddAdditionalSerializableProperty).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(PropertyToMoveToCustomization))
             {

@@ -30,7 +30,14 @@ namespace MgmtScopeResource.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    ((IModelJsonSerializable<DeploymentExtendedData>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<DeploymentExtendedData>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

@@ -52,7 +52,14 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStartArray();
                 foreach (var item in Routes)
                 {
-                    ((IModelJsonSerializable<Route>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<Route>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

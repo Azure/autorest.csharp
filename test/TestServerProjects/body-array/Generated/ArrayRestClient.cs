@@ -3626,7 +3626,14 @@ namespace body_array
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
-                ((IModelJsonSerializable<Product>)item).Serialize(content.JsonWriter, ModelSerializerOptions.DefaultWireOptions);
+                if (item is null)
+                {
+                    content.JsonWriter.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<Product>)item).Serialize(content.JsonWriter, ModelSerializerOptions.DefaultWireOptions);
+                }
             }
             content.JsonWriter.WriteEndArray();
             request.Content = content;

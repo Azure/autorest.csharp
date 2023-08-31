@@ -35,7 +35,14 @@ namespace CognitiveServices.TextAnalytics.Models
             if (Optional.IsDefined(Innererror))
             {
                 writer.WritePropertyName("innererror"u8);
-                ((IModelJsonSerializable<InnerError>)Innererror).Serialize(writer, options);
+                if (Innererror is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<InnerError>)Innererror).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(Details))
             {
@@ -43,7 +50,14 @@ namespace CognitiveServices.TextAnalytics.Models
                 writer.WriteStartArray();
                 foreach (var item in Details)
                 {
-                    ((IModelJsonSerializable<TextAnalyticsError>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<TextAnalyticsError>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

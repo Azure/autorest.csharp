@@ -28,7 +28,14 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WritePropertyName("sentiment"u8);
             writer.WriteStringValue(Sentiment.ToSerialString());
             writer.WritePropertyName("confidenceScores"u8);
-            ((IModelJsonSerializable<SentimentConfidenceScorePerLabel>)ConfidenceScores).Serialize(writer, options);
+            if (ConfidenceScores is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<SentimentConfidenceScorePerLabel>)ConfidenceScores).Serialize(writer, options);
+            }
             writer.WritePropertyName("offset"u8);
             writer.WriteNumberValue(Offset);
             writer.WritePropertyName("length"u8);

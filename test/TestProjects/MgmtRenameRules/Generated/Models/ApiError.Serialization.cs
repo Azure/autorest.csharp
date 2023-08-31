@@ -29,14 +29,28 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in Details)
                 {
-                    ((IModelJsonSerializable<ApiErrorBase>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<ApiErrorBase>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(Innererror))
             {
                 writer.WritePropertyName("innererror"u8);
-                ((IModelJsonSerializable<InnerError>)Innererror).Serialize(writer, options);
+                if (Innererror is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<InnerError>)Innererror).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Code))
             {

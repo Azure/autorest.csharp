@@ -24,7 +24,14 @@ namespace MgmtDiscriminator.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("parameters"u8);
-            ((IModelJsonSerializable<RouteConfigurationOverrideActionParameters>)Parameters).Serialize(writer, options);
+            if (Parameters is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<RouteConfigurationOverrideActionParameters>)Parameters).Serialize(writer, options);
+            }
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

@@ -84,7 +84,14 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(NetworkAcls))
             {
                 writer.WritePropertyName("networkAcls"u8);
-                ((IModelJsonSerializable<MhsmNetworkRuleSet>)NetworkAcls).Serialize(writer, options);
+                if (NetworkAcls is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<MhsmNetworkRuleSet>)NetworkAcls).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(PublicNetworkAccess))
             {

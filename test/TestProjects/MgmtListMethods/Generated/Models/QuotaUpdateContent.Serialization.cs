@@ -29,7 +29,14 @@ namespace MgmtListMethods.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    ((IModelJsonSerializable<QuotaBaseProperties>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<QuotaBaseProperties>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

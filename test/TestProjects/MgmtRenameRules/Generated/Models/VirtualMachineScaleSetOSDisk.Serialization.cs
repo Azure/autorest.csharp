@@ -43,7 +43,14 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(DiffDiskSettings))
             {
                 writer.WritePropertyName("diffDiskSettings"u8);
-                ((IModelJsonSerializable<DiffDiskSettings>)DiffDiskSettings).Serialize(writer, options);
+                if (DiffDiskSettings is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<DiffDiskSettings>)DiffDiskSettings).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(DiskSizeGB))
             {
@@ -58,7 +65,14 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image"u8);
-                ((IModelJsonSerializable<VirtualHardDisk>)Image).Serialize(writer, options);
+                if (Image is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<VirtualHardDisk>)Image).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(VhdContainers))
             {
@@ -73,7 +87,14 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(ManagedDisk))
             {
                 writer.WritePropertyName("managedDisk"u8);
-                ((IModelJsonSerializable<VirtualMachineScaleSetManagedDiskParameters>)ManagedDisk).Serialize(writer, options);
+                if (ManagedDisk is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<VirtualMachineScaleSetManagedDiskParameters>)ManagedDisk).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(SecurityType))
             {

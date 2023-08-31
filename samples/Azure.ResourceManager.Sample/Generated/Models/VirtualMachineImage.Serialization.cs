@@ -48,12 +48,26 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
-                ((IModelJsonSerializable<PurchasePlan>)Plan).Serialize(writer, options);
+                if (Plan is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<PurchasePlan>)Plan).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(OsDiskImage))
             {
                 writer.WritePropertyName("osDiskImage"u8);
-                ((IModelJsonSerializable<OSDiskImage>)OsDiskImage).Serialize(writer, options);
+                if (OsDiskImage is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<OSDiskImage>)OsDiskImage).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(DataDiskImages))
             {
@@ -61,14 +75,28 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDiskImages)
                 {
-                    ((IModelJsonSerializable<DataDiskImage>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<DataDiskImage>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(AutomaticOSUpgradeProperties))
             {
                 writer.WritePropertyName("automaticOSUpgradeProperties"u8);
-                ((IModelJsonSerializable<AutomaticOSUpgradeProperties>)AutomaticOSUpgradeProperties).Serialize(writer, options);
+                if (AutomaticOSUpgradeProperties is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<AutomaticOSUpgradeProperties>)AutomaticOSUpgradeProperties).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(HyperVGeneration))
             {
@@ -78,7 +106,14 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(Disallowed))
             {
                 writer.WritePropertyName("disallowed"u8);
-                ((IModelJsonSerializable<DisallowedConfiguration>)Disallowed).Serialize(writer, options);
+                if (Disallowed is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<DisallowedConfiguration>)Disallowed).Serialize(writer, options);
+                }
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

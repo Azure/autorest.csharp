@@ -30,7 +30,14 @@ namespace Azure.ResourceManager.Storage
             if (Optional.IsDefined(Cors))
             {
                 writer.WritePropertyName("cors"u8);
-                ((IModelJsonSerializable<CorsRules>)Cors).Serialize(writer, options);
+                if (Cors is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<CorsRules>)Cors).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(DefaultServiceVersion))
             {
@@ -40,7 +47,14 @@ namespace Azure.ResourceManager.Storage
             if (Optional.IsDefined(DeleteRetentionPolicy))
             {
                 writer.WritePropertyName("deleteRetentionPolicy"u8);
-                ((IModelJsonSerializable<DeleteRetentionPolicy>)DeleteRetentionPolicy).Serialize(writer, options);
+                if (DeleteRetentionPolicy is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<DeleteRetentionPolicy>)DeleteRetentionPolicy).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(IsVersioningEnabled))
             {
@@ -55,22 +69,50 @@ namespace Azure.ResourceManager.Storage
             if (Optional.IsDefined(ChangeFeed))
             {
                 writer.WritePropertyName("changeFeed"u8);
-                ((IModelJsonSerializable<ChangeFeed>)ChangeFeed).Serialize(writer, options);
+                if (ChangeFeed is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ChangeFeed>)ChangeFeed).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(RestorePolicy))
             {
                 writer.WritePropertyName("restorePolicy"u8);
-                ((IModelJsonSerializable<RestorePolicyProperties>)RestorePolicy).Serialize(writer, options);
+                if (RestorePolicy is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<RestorePolicyProperties>)RestorePolicy).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(ContainerDeleteRetentionPolicy))
             {
                 writer.WritePropertyName("containerDeleteRetentionPolicy"u8);
-                ((IModelJsonSerializable<DeleteRetentionPolicy>)ContainerDeleteRetentionPolicy).Serialize(writer, options);
+                if (ContainerDeleteRetentionPolicy is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<DeleteRetentionPolicy>)ContainerDeleteRetentionPolicy).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(LastAccessTimeTrackingPolicy))
             {
                 writer.WritePropertyName("lastAccessTimeTrackingPolicy"u8);
-                ((IModelJsonSerializable<LastAccessTimeTrackingPolicy>)LastAccessTimeTrackingPolicy).Serialize(writer, options);
+                if (LastAccessTimeTrackingPolicy is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<LastAccessTimeTrackingPolicy>)LastAccessTimeTrackingPolicy).Serialize(writer, options);
+                }
             }
             writer.WriteEndObject();
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)

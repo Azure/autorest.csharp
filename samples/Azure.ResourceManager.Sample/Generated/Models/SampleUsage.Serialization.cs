@@ -30,7 +30,14 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WritePropertyName("limit"u8);
             writer.WriteNumberValue(Limit);
             writer.WritePropertyName("name"u8);
-            ((IModelJsonSerializable<SampleUsageName>)Name).Serialize(writer, options);
+            if (Name is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<SampleUsageName>)Name).Serialize(writer, options);
+            }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
                 foreach (var property in _rawData)

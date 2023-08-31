@@ -30,7 +30,14 @@ namespace MgmtPartialResource.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    ((IModelJsonSerializable<PublicIPAddressData>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<PublicIPAddressData>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

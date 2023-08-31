@@ -26,12 +26,26 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(ImageReference))
             {
                 writer.WritePropertyName("imageReference"u8);
-                ((IModelJsonSerializable<ImageReference>)ImageReference).Serialize(writer, options);
+                if (ImageReference is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ImageReference>)ImageReference).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                ((IModelJsonSerializable<VirtualMachineScaleSetOSDisk>)OSDisk).Serialize(writer, options);
+                if (OSDisk is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<VirtualMachineScaleSetOSDisk>)OSDisk).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
@@ -39,7 +53,14 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
-                    ((IModelJsonSerializable<VirtualMachineScaleSetDataDisk>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<VirtualMachineScaleSetDataDisk>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

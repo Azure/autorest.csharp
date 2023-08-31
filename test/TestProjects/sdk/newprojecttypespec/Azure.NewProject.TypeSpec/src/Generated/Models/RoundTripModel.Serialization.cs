@@ -43,7 +43,14 @@ namespace Azure.NewProject.TypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
-            ((IModelJsonSerializable<Thing>)RequiredModel).Serialize(writer, options);
+            if (RequiredModel is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<Thing>)RequiredModel).Serialize(writer, options);
+            }
             if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);

@@ -33,7 +33,14 @@ namespace Inheritance.Models
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("ModelProperty"u8);
-                ((IModelJsonSerializable<BaseClassWithExtensibleEnumDiscriminator>)ModelProperty).Serialize(writer, options);
+                if (ModelProperty is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<BaseClassWithExtensibleEnumDiscriminator>)ModelProperty).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

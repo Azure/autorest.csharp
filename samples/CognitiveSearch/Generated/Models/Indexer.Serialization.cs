@@ -42,12 +42,26 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(Schedule))
             {
                 writer.WritePropertyName("schedule"u8);
-                ((IModelJsonSerializable<IndexingSchedule>)Schedule).Serialize(writer, options);
+                if (Schedule is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<IndexingSchedule>)Schedule).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(Parameters))
             {
                 writer.WritePropertyName("parameters"u8);
-                ((IModelJsonSerializable<IndexingParameters>)Parameters).Serialize(writer, options);
+                if (Parameters is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<IndexingParameters>)Parameters).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(FieldMappings))
             {
@@ -55,7 +69,14 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in FieldMappings)
                 {
-                    ((IModelJsonSerializable<FieldMapping>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<FieldMapping>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }
@@ -65,7 +86,14 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in OutputFieldMappings)
                 {
-                    ((IModelJsonSerializable<FieldMapping>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<FieldMapping>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

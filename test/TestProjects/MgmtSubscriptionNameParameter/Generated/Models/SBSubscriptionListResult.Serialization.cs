@@ -30,7 +30,14 @@ namespace MgmtSubscriptionNameParameter.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    ((IModelJsonSerializable<SBSubscriptionData>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<SBSubscriptionData>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

@@ -26,7 +26,14 @@ namespace MgmtLRO.Models
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
-                ((IModelJsonSerializable<FakePostResultProperties>)Properties).Serialize(writer, options);
+                if (Properties is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<FakePostResultProperties>)Properties).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

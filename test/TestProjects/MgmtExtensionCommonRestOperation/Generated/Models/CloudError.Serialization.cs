@@ -26,7 +26,14 @@ namespace MgmtExtensionCommonRestOperation.Models
             if (Optional.IsDefined(ErrorResponse))
             {
                 writer.WritePropertyName("error"u8);
-                ((IModelJsonSerializable<ErrorResponse>)ErrorResponse).Serialize(writer, options);
+                if (ErrorResponse is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ErrorResponse>)ErrorResponse).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

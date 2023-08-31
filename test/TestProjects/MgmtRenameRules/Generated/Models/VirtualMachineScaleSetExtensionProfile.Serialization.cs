@@ -30,7 +30,14 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in Extensions)
                 {
-                    ((IModelJsonSerializable<VirtualMachineScaleSetExtensionData>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<VirtualMachineScaleSetExtensionData>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

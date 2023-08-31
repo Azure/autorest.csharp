@@ -26,7 +26,14 @@ namespace body_complex.Models
             if (Optional.IsDefined(SampleSalmon))
             {
                 writer.WritePropertyName("sampleSalmon"u8);
-                ((IModelJsonSerializable<DotSalmon>)SampleSalmon).Serialize(writer, options);
+                if (SampleSalmon is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<DotSalmon>)SampleSalmon).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(Salmons))
             {
@@ -34,14 +41,28 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Salmons)
                 {
-                    ((IModelJsonSerializable<DotSalmon>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<DotSalmon>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsDefined(SampleFish))
             {
                 writer.WritePropertyName("sampleFish"u8);
-                ((IModelJsonSerializable<DotFish>)SampleFish).Serialize(writer, options);
+                if (SampleFish is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<DotFish>)SampleFish).Serialize(writer, options);
+                }
             }
             if (Optional.IsCollectionDefined(Fishes))
             {
@@ -49,7 +70,14 @@ namespace body_complex.Models
                 writer.WriteStartArray();
                 foreach (var item in Fishes)
                 {
-                    ((IModelJsonSerializable<DotFish>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<DotFish>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

@@ -26,18 +26,39 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WritePropertyName("id"u8);
             writer.WriteStringValue(Id);
             writer.WritePropertyName("detectedLanguage"u8);
-            ((IModelJsonSerializable<DetectedLanguage>)DetectedLanguage).Serialize(writer, options);
+            if (DetectedLanguage is null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                ((IModelJsonSerializable<DetectedLanguage>)DetectedLanguage).Serialize(writer, options);
+            }
             writer.WritePropertyName("warnings"u8);
             writer.WriteStartArray();
             foreach (var item in Warnings)
             {
-                ((IModelJsonSerializable<TextAnalyticsWarning>)item).Serialize(writer, options);
+                if (item is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<TextAnalyticsWarning>)item).Serialize(writer, options);
+                }
             }
             writer.WriteEndArray();
             if (Optional.IsDefined(Statistics))
             {
                 writer.WritePropertyName("statistics"u8);
-                ((IModelJsonSerializable<DocumentStatistics>)Statistics).Serialize(writer, options);
+                if (Statistics is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<DocumentStatistics>)Statistics).Serialize(writer, options);
+                }
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {

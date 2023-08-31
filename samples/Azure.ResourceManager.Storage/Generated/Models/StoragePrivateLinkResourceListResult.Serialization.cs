@@ -29,7 +29,14 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
-                    ((IModelJsonSerializable<StoragePrivateLinkResource>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<StoragePrivateLinkResource>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }

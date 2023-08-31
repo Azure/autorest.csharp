@@ -26,7 +26,14 @@ namespace Azure.ResourceManager.Storage.Models
             if (Optional.IsDefined(Filters))
             {
                 writer.WritePropertyName("filters"u8);
-                ((IModelJsonSerializable<BlobInventoryPolicyFilter>)Filters).Serialize(writer, options);
+                if (Filters is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<BlobInventoryPolicyFilter>)Filters).Serialize(writer, options);
+                }
             }
             writer.WritePropertyName("format"u8);
             writer.WriteStringValue(Format.ToString());

@@ -45,7 +45,14 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(StorageProfile))
             {
                 writer.WritePropertyName("storageProfile"u8);
-                ((IModelJsonSerializable<ImageStorageProfile>)StorageProfile).Serialize(writer, options);
+                if (StorageProfile is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ImageStorageProfile>)StorageProfile).Serialize(writer, options);
+                }
             }
             if (Optional.IsDefined(HyperVGeneration))
             {

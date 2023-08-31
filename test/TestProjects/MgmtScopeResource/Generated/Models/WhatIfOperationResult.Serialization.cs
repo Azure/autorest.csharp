@@ -31,7 +31,14 @@ namespace MgmtScopeResource.Models
             if (Optional.IsDefined(ErrorResponse))
             {
                 writer.WritePropertyName("errorResponse"u8);
-                ((IModelJsonSerializable<ErrorResponse>)ErrorResponse).Serialize(writer, options);
+                if (ErrorResponse is null)
+                {
+                    writer.WriteNullValue();
+                }
+                else
+                {
+                    ((IModelJsonSerializable<ErrorResponse>)ErrorResponse).Serialize(writer, options);
+                }
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -41,7 +48,14 @@ namespace MgmtScopeResource.Models
                 writer.WriteStartArray();
                 foreach (var item in Changes)
                 {
-                    ((IModelJsonSerializable<WhatIfChange>)item).Serialize(writer, options);
+                    if (item is null)
+                    {
+                        writer.WriteNullValue();
+                    }
+                    else
+                    {
+                        ((IModelJsonSerializable<WhatIfChange>)item).Serialize(writer, options);
+                    }
                 }
                 writer.WriteEndArray();
             }
