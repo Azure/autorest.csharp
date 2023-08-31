@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.Core.Serialization;
 
 namespace Autorest.CSharp.Core
 {
@@ -19,6 +20,8 @@ namespace Autorest.CSharp.Core
     {
         private static readonly byte[] DefaultItemPropertyName = Encoding.UTF8.GetBytes("value");
         private static readonly byte[] DefaultNextLinkPropertyName = Encoding.UTF8.GetBytes("nextLink");
+
+        public delegate T ValueFactory<T>(JsonElement element, ModelSerializerOptions? options = default);
 
         public static AsyncPageable<T> CreateAsyncPageable<T>(
             Func<int?, HttpMessage>? createFirstPageRequest,
@@ -35,7 +38,7 @@ namespace Autorest.CSharp.Core
         public static AsyncPageable<T> CreateAsyncPageable<T>(
             Func<int?, HttpMessage>? createFirstPageRequest,
             Func<int?, string, HttpMessage>? createNextPageRequest,
-            Func<JsonElement, T> valueFactory,
+            ValueFactory<T> valueFactory,
             ClientDiagnostics clientDiagnostics,
             HttpPipeline pipeline,
             string scopeName,
@@ -43,13 +46,13 @@ namespace Autorest.CSharp.Core
             string? nextLinkPropertyName,
             CancellationToken cancellationToken) where T : notnull
         {
-            return new PageableHelpers.AsyncPageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, cancellationToken, null));
+            return new PageableHelpers.AsyncPageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, e => valueFactory(e), pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, cancellationToken, null));
         }
 
         public static AsyncPageable<T> CreateAsyncPageable<T>(
             Func<int?, HttpMessage>? createFirstPageRequest,
             Func<int?, string, HttpMessage>? createNextPageRequest,
-            Func<JsonElement, T> valueFactory,
+            ValueFactory<T> valueFactory,
             ClientDiagnostics clientDiagnostics,
             HttpPipeline pipeline,
             string scopeName,
@@ -57,13 +60,13 @@ namespace Autorest.CSharp.Core
             string? nextLinkPropertyName,
             RequestContext? requestContext = null) where T : notnull
         {
-            return new PageableHelpers.AsyncPageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, requestContext?.CancellationToken, requestContext?.ErrorOptions));
+            return new PageableHelpers.AsyncPageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, e => valueFactory(e), pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, requestContext?.CancellationToken, requestContext?.ErrorOptions));
         }
 
         public static AsyncPageable<T> CreateAsyncPageable<T>(
             Response initialResponse,
             Func<int?, string, HttpMessage>? createNextPageRequest,
-            Func<JsonElement, T> valueFactory,
+            ValueFactory<T> valueFactory,
             ClientDiagnostics clientDiagnostics,
             HttpPipeline pipeline,
             string scopeName,
@@ -71,7 +74,7 @@ namespace Autorest.CSharp.Core
             string? nextLinkPropertyName,
             CancellationToken cancellationToken) where T : notnull
         {
-            return new PageableHelpers.AsyncPageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(initialResponse, null, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, cancellationToken, null));
+            return new PageableHelpers.AsyncPageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(initialResponse, null, createNextPageRequest, e => valueFactory(e), pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, cancellationToken, null));
         }
 
         public static Pageable<T> CreatePageable<T>(
@@ -89,7 +92,7 @@ namespace Autorest.CSharp.Core
         public static Pageable<T> CreatePageable<T>(
             Func<int?, HttpMessage>? createFirstPageRequest,
             Func<int?, string, HttpMessage>? createNextPageRequest,
-            Func<JsonElement, T> valueFactory,
+            ValueFactory<T> valueFactory,
             ClientDiagnostics clientDiagnostics,
             HttpPipeline pipeline,
             string scopeName,
@@ -97,13 +100,13 @@ namespace Autorest.CSharp.Core
             string? nextLinkPropertyName,
             CancellationToken cancellationToken) where T : notnull
         {
-            return new PageableHelpers.PageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, cancellationToken, null));
+            return new PageableHelpers.PageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, e => valueFactory(e), pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, cancellationToken, null));
         }
 
         public static Pageable<T> CreatePageable<T>(
             Func<int?, HttpMessage>? createFirstPageRequest,
             Func<int?, string, HttpMessage>? createNextPageRequest,
-            Func<JsonElement, T> valueFactory,
+            ValueFactory<T> valueFactory,
             ClientDiagnostics clientDiagnostics,
             HttpPipeline pipeline,
             string scopeName,
@@ -111,13 +114,13 @@ namespace Autorest.CSharp.Core
             string? nextLinkPropertyName,
             RequestContext? requestContext = null) where T : notnull
         {
-            return new PageableHelpers.PageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, requestContext?.CancellationToken, requestContext?.ErrorOptions));
+            return new PageableHelpers.PageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, e => valueFactory(e), pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, requestContext?.CancellationToken, requestContext?.ErrorOptions));
         }
 
         public static Pageable<T> CreatePageable<T>(
             Response initialResponse,
             Func<int?, string, HttpMessage>? createNextPageRequest,
-            Func<JsonElement, T> valueFactory,
+            ValueFactory<T> valueFactory,
             ClientDiagnostics clientDiagnostics,
             HttpPipeline pipeline,
             string scopeName,
@@ -125,14 +128,14 @@ namespace Autorest.CSharp.Core
             string? nextLinkPropertyName,
             CancellationToken cancellationToken) where T : notnull
         {
-            return new PageableHelpers.PageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(initialResponse, null, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, cancellationToken, null));
+            return new PageableHelpers.PageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(initialResponse, null, createNextPageRequest, e => valueFactory(e), pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, cancellationToken, null));
         }
 
         public static async ValueTask<Operation<AsyncPageable<T>>> CreateAsyncPageable<T>(
             WaitUntil waitUntil,
             HttpMessage message,
             Func<int?, string, HttpMessage>? createNextPageMethod,
-            Func<JsonElement, T> valueFactory,
+            ValueFactory<T> valueFactory,
             ClientDiagnostics clientDiagnostics,
             HttpPipeline pipeline,
             OperationFinalStateVia finalStateVia,
@@ -140,13 +143,13 @@ namespace Autorest.CSharp.Core
             string? itemPropertyName,
             string? nextLinkPropertyName,
             RequestContext? requestContext = null) where T : notnull
-            => await PageableHelpers.CreateAsyncPageable(waitUntil, message, createNextPageMethod, valueFactory, clientDiagnostics, pipeline, finalStateVia, scopeName, itemPropertyName, nextLinkPropertyName, requestContext).ConfigureAwait(false);
+            => await PageableHelpers.CreateAsyncPageable(waitUntil, message, createNextPageMethod, e => valueFactory(e), clientDiagnostics, pipeline, finalStateVia, scopeName, itemPropertyName, nextLinkPropertyName, requestContext).ConfigureAwait(false);
 
         public static Operation<Pageable<T>> CreatePageable<T>(
             WaitUntil waitUntil,
             HttpMessage message,
             Func<int?, string, HttpMessage>? createNextPageMethod,
-            Func<JsonElement, T> valueFactory,
+            ValueFactory<T> valueFactory,
             ClientDiagnostics clientDiagnostics,
             HttpPipeline pipeline,
             OperationFinalStateVia finalStateVia,
@@ -154,7 +157,7 @@ namespace Autorest.CSharp.Core
             string? itemPropertyName,
             string? nextLinkPropertyName,
             RequestContext? requestContext = null) where T : notnull
-            => PageableHelpers.CreatePageable(waitUntil, message, createNextPageMethod, valueFactory, clientDiagnostics, pipeline, finalStateVia, scopeName, itemPropertyName, nextLinkPropertyName, requestContext);
+            => PageableHelpers.CreatePageable(waitUntil, message, createNextPageMethod, e => valueFactory(e), clientDiagnostics, pipeline, finalStateVia, scopeName, itemPropertyName, nextLinkPropertyName, requestContext);
 
         public static Pageable<T> CreateEnumerable<T>(
             Func<int?, Page<T>> firstPageFunc,
