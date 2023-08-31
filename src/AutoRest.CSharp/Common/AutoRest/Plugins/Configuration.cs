@@ -601,7 +601,7 @@ namespace AutoRest.CSharp.Input
         }
 
         // Fetch CSharpProj configuration from Configuration
-        internal static CSharpProjConfiguration ToCSharpProjConfiguration => new CSharpProjConfiguration
+        internal static CSharpProjConfiguration ToCSharpProjConfiguration() => new CSharpProjConfiguration
         (
             AbsoluteProjectFolder: AbsoluteProjectFolder,
             AzureArm: AzureArm,
