@@ -1,6 +1,8 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- TODO There seems to be an issue with AZC0002 need to investigate https://github.com/Azure/autorest.csharp/issues/3710 -->
+    <NoWarn>$(NoWarn);AZC0002</NoWarn>
   </PropertyGroup>
+ 
   <Import Project="..\..\Directory.Build.props" />
 </Project>

@@ -7,6 +7,7 @@
 
 namespace AnomalyDetector.Models
 {
+    /// <summary> the time granularity of the data points. </summary>
     public enum TimeGranularity
     {
         /// <summary> yearly. </summary>
