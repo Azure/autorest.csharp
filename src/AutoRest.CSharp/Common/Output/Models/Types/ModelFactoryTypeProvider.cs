@@ -99,23 +99,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
 
-        protected override SignatureTypeProvider? Customization => CreateFromCompilation(_sourceInputModel?.Customization);
+        protected override SignatureTypeProvider? Customization => new ModelFactoryTypeProvider(PopulateMethodsFromCompilation(_sourceInputModel?.Customization));
 
-        protected override SignatureTypeProvider? PreviousContract => CreateFromCompilation(_sourceInputModel?.PreviousContract);
-
-        private SignatureTypeProvider? CreateFromCompilation(Compilation? compilation)
-        {
-            if (compilation is null)
-            {
-                return null;
-            }
-            var type = compilation.Assembly.GetTypeByMetadataName($"{DefaultNamespace}.{DefaultName}");
-            if (type is null)
-            {
-                return null;
-            }
-            return new ModelFactoryTypeProvider(MethodSignature.PopulateMethods(type));
-        }
+        protected override SignatureTypeProvider? PreviousContract => new ModelFactoryTypeProvider(PopulateMethodsFromCompilation(_sourceInputModel?.PreviousContract));
 
         private (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignmentForSimpleProperty(CodeWriter writer, SerializableObjectType model, Parameter parameter, ObjectTypeProperty property)
         {
