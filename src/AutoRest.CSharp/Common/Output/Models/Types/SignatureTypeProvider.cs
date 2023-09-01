@@ -58,6 +58,95 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             }
         }
 
+        protected IList<MethodSignature> PopulateMethodsFromCompilation(Compilation? compilation)
+        {
+            if (compilation is null)
+            {
+                return new List<MethodSignature>();
+            }
+            var type = compilation.Assembly.GetTypeByMetadataName($"{DefaultNamespace}.{DefaultName}");
+            if (type is null)
+            {
+                return new List<MethodSignature>();
+            }
+            return PopulateMethods(type);
+        }
+
+        private IList<MethodSignature> PopulateMethods(INamedTypeSymbol? typeSymbol)
+        {
+            var result = new List<MethodSignature>();
+            if (typeSymbol is null)
+            {
+                // TODO: handle missing type
+                return result;
+            }
+            var methods = typeSymbol!.GetMembers().OfType<IMethodSymbol>();
+            foreach (var method in methods)
+            {
+                ;
+                if (MgmtContext.TypeFactory.TryCreateType(method.ReturnType, out var returnType))
+                {
+                    // TODO: handle missing parameter type from MgmtOutputLibrary
+                    var parameters = new List<MethodParameter>();
+                    foreach (var parameter in method.Parameters)
+                    {
+                        var methodParameter = MethodParameter.FromParameterSymbol(parameter);
+                        if (methodParameter is not null)
+                        {
+                            parameters.Add(methodParameter);
+                        }
+                    }
+                    result.Add(new MethodSignature(method.Name, null, null, MapModifiers(method), returnType, null, parameters));
+                }
+                else
+                {
+                    // TODO: handle missing method return type from MgmtOutputLibrary
+                }
+            }
+            return result;
+        }
+
+        private static MethodSignatureModifiers MapModifiers(IMethodSymbol methodSymbol)
+        {
+            var modifiers = MethodSignatureModifiers.None;
+            var accessibility = methodSymbol.DeclaredAccessibility;
+            switch (accessibility)
+            {
+                case Accessibility.Public:
+                    modifiers |= MethodSignatureModifiers.Public;
+                    break;
+                case Accessibility.Internal:
+                    modifiers |= MethodSignatureModifiers.Internal;
+                    break;
+                case Accessibility.Private:
+                    modifiers |= MethodSignatureModifiers.Private;
+                    break;
+                case Accessibility.Protected:
+                    modifiers |= MethodSignatureModifiers.Protected;
+                    break;
+                case Accessibility.ProtectedAndInternal:
+                    modifiers |= MethodSignatureModifiers.Protected | MethodSignatureModifiers.Internal;
+                    break;
+            }
+            if (methodSymbol.IsStatic)
+            {
+                modifiers |= MethodSignatureModifiers.Static;
+            }
+            if (methodSymbol.IsAsync)
+            {
+                modifiers |= MethodSignatureModifiers.Async;
+            }
+            if (methodSymbol.IsVirtual)
+            {
+                modifiers |= MethodSignatureModifiers.Virtual;
+            }
+            if (methodSymbol.IsOverride)
+            {
+                modifiers |= MethodSignatureModifiers.Override;
+            }
+            return modifiers;
+        }
+
         private (IList<MethodSignature> MissingMethods, IList<(MethodSignature CurrentMethodToCall, MethodSignature PreviousMethodToAdd, IList<MethodParameter> MissingParameters)> UpdatedMethods)
             CompareMethods(IEnumerable<MethodSignature> currentMethods, IEnumerable<MethodSignature> previousMethods)
         {
