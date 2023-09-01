@@ -8,6 +8,7 @@ using Azure.Core;
 
 namespace AnomalyDetector.Univariate;
 
+@doc("The impute mode.")
 enum ImputeMode {
   Auto: "auto",
   Previous: "previous",
@@ -32,6 +33,7 @@ enum AnomalyDetectorErrorCodes {
   "InvalidImputeFixedValue",
 }
 
+@doc("the time granularity of the data points.")
 @fixed
 enum TimeGranularity {
   Yearly: "yearly",

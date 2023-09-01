@@ -76,10 +76,6 @@
     <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <NoWarn>$(NoWarn);NU5105,AZC0001</NoWarn>
-  </PropertyGroup>
-
   <Target Name="_ValidateSourceFileNames"
           BeforeTargets="CoreBuild">
     <ItemGroup>
