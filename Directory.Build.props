@@ -7,6 +7,7 @@
     <CentralPackagesFile>$(MSBuildThisFileDirectory)Packages.Data.props</CentralPackagesFile>
     <AzureCoreSharedSources>$(MSBuildThisFileDirectory)/src/assets/Azure.Core.Shared/</AzureCoreSharedSources>
     <ShouldUseCentralVersions Condition="'$(ShouldUseCentralVersions)' == ''">true</ShouldUseCentralVersions>
+    <NoWarn Condition="'$(IsTestGenerationTestProject)' == 'true'">$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
 
   <!-- Setup default project properties -->
