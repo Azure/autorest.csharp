@@ -112,7 +112,7 @@ export function mapTypeSpecTypeToCSharpInputTypeKind(
     }
 }
 
-function getCSharpInputTypeKindByIntrinsicModelName(
+export function getCSharpInputTypeKindByIntrinsicModelName(
     name: string,
     format?: string,
     encode?: EncodeData
@@ -474,6 +474,50 @@ export function getInputType(
     }
 
     function getInputModelForModel(m: Model): InputModelType {
+        // m = getEffectiveSchemaType(context, m) as Model;
+        // const name = getModelName(context, m);
+        // let model = models.get(name);
+        // if (!model) {
+        //     const baseModel = getInputModelBaseType(m.baseModel);
+        //     const properties: InputModelProperty[] = [];
+
+        //     const discriminator = getDiscriminator(program, m);
+        //     model = {
+        //         Name: name,
+        //         Namespace: getFullNamespaceString(m.namespace),
+        //         Accessibility: isInternal(context, m) ? "internal" : undefined,
+        //         Deprecated: getDeprecated(program, m),
+        //         Description: getDoc(program, m),
+        //         IsNullable: false,
+        //         DiscriminatorPropertyName: discriminator?.propertyName,
+        //         DiscriminatorValue: getDiscriminatorValue(m, baseModel),
+        //         BaseModel: baseModel,
+        //         Usage: Usage.None,
+        //         Properties: properties // DerivedModels should be the last assigned to model, if no derived models, properties should be the last
+        //     } as InputModelType;
+
+        //     models.set(name, model);
+
+        //     // Resolve properties after model is added to the map to resolve possible circular dependencies
+        //     addModelProperties(model, m.properties, properties);
+
+        //     // add the derived models into the list
+        //     if (m.derivedModels !== undefined && m.derivedModels.length > 0) {
+        //         model.DerivedModels = [];
+        //         for (const dm of m.derivedModels) {
+        //             const derivedModel = getInputType(
+        //                 context,
+        //                 getFormattedType(program, dm),
+        //                 models,
+        //                 enums
+        //             );
+        //             model.DerivedModels.push(derivedModel as InputModelType);
+        //         }
+        //     }
+        // }
+
+        // return model;
+
         return fromSdkModelType(context.modelsMap!.get(m) as SdkModelType, context.program, models, enums);
     }
 

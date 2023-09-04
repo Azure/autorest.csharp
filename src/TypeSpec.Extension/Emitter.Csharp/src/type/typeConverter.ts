@@ -1,17 +1,22 @@
-import { IntrinsicType, Program, UsageFlags, getDeprecated, getDiscriminator } from "@typespec/compiler";
+import { IntrinsicType, Program, UsageFlags, getDeprecated, getDiscriminator, Type } from "@typespec/compiler";
 import { Usage } from "./usage.js";
-import { SdkType, SdkModelPropertyType, SdkBodyModelPropertyType, SdkModelType, SdkEnumType, SdkEnumValueType, SdkDictionaryType, SdkConstantType, SdkBuiltInType } from "@azure-tools/typespec-client-generator-core";
+import { SdkType, SdkModelPropertyType, SdkBodyModelPropertyType, SdkModelType, SdkEnumType, SdkEnumValueType, SdkDictionaryType, SdkConstantType, SdkBuiltInType, SdkArrayType, SdkDatetimeType } from "@azure-tools/typespec-client-generator-core";
 import { InputDictionaryType, InputEnumType, InputListType, InputLiteralType, InputModelType, InputNullType, InputPrimitiveType, InputType, InputUnknownType } from "./inputType.js";
 import { InputModelProperty } from "./inputModelProperty.js";
 import { Visibility } from "@typespec/http";
 import { InputEnumTypeValue } from "./inputEnumTypeValue.js";
-import { LiteralTypeContext } from "./literalTypeContext.js";
+import { getCSharpInputTypeKindByIntrinsicModelName, mapTypeSpecTypeToCSharpInputTypeKind } from "../lib/model.js";
+import { InputTypeKind } from "./inputTypeKind.js";
 
 export function fromSdkType(sdkType: SdkType, program: Program, models: Map<string, InputModelType>, enums: Map<string, InputEnumType>): InputType {
     if (sdkType.kind === "model") return fromSdkModelType(sdkType, program, models, enums);
     if (sdkType.kind === "enum") return fromSdkEnumType(sdkType, program, enums);
     if (sdkType.kind === "dict") return fromSdkDictionaryType(sdkType, program, models, enums);
     if (sdkType.kind === "array") return fromSdkArrayType(sdkType, program, models, enums);
+    if (sdkType.kind === "constant") return fromSdkConstantType(sdkType);
+    if (["any"].includes(sdkType.kind)) return fromSdkBuiltInType(sdkType as SdkBuiltInType);
+    if (sdkType.kind === "datetime") return fromSdkDatetimeType(sdkType);
+    if (sdkType.__raw.kind === "Scalar") return fromScalarType(sdkType);
     return {} as InputType;
 }
 
@@ -60,7 +65,30 @@ export function fromSdkEnumType(enumType: SdkEnumType, program: Program, enums: 
     return inputEnumType;
 }
 
+export function fromSdkDatetimeType(datetimeType: SdkDatetimeType): InputPrimitiveType {
+    return {
+        Name: datetimeType.kind,
+        Kind: InputTypeKind.DateTimeRFC3339,
+        IsNullable: false
+    } as InputPrimitiveType;
+}
+
 export function fromSdkBuiltInType(builtInType: SdkBuiltInType): InputType {
+    function getDefaultValue(type: Type): any {
+        switch (type.kind) {
+            case "String":
+                return type.value;
+            case "Number":
+                return type.value;
+            case "Boolean":
+                return type.value;
+            case "Tuple":
+                return type.values.map(getDefaultValue);
+            default:
+                return undefined;
+        }
+    }
+
     if (builtInType.kind === "any") { // TO-DO: intrinsic type will return kind "any"?
         switch ((builtInType.__raw as IntrinsicType).name) {
             case "unknown":
@@ -79,13 +107,48 @@ export function fromSdkBuiltInType(builtInType: SdkBuiltInType): InputType {
                 throw new Error(`Unsupported type ${(builtInType.__raw as IntrinsicType).name}`);
         }
     }
+    else if (builtInType.kind === "string" || builtInType.kind === "boolean" || builtInType.kind === "int32" || builtInType.kind === "float32") {
+        const builtInKind: InputTypeKind = mapTypeSpecTypeToCSharpInputTypeKind(
+            builtInType.__raw,
+            builtInType.kind,
+            undefined // To-Do: type incompatable
+        );
+        const rawValueType = {
+            Name: builtInType.__raw.kind,
+            Kind: builtInKind,
+            IsNullable: false
+        } as InputPrimitiveType;
+        return {
+            Name: "Literal",
+            LiteralValueType: rawValueType, // TO-DO: Need a way to customize the added type
+            Value: getDefaultValue(builtInType.__raw), // TO-DO: SdkBuiltInType lacks of default value
+            IsNullable: false
+        } as InputLiteralType;
+    }
+    else if (["url", "uri"].includes(builtInType.kind)) {
+        return {
+            Name: builtInType.kind,
+            Kind: InputTypeKind.Uri,
+            IsNullable: false
+        } as InputPrimitiveType;
+    }
+    throw Error(`Unknown kind ${builtInType.kind}`); // TO-DO: knownValues not implemented
 }
 
-export function fromSdkConstantType(constantType: SdkConstantType, literalContext?: LiteralTypeContext): InputLiteralType {
+export function fromScalarType(scalarType: SdkType): InputPrimitiveType {
     return {
-        Name: "Literal",
-        LiteralValueType: constantType.valueType
-    } as InputLiteralType;
+        Name: scalarType.kind,
+        Kind: getCSharpInputTypeKindByIntrinsicModelName(
+            scalarType.kind,
+            scalarType.kind,
+            undefined // To-DO: encode not compitable
+        ),
+        IsNullable: false
+    } as InputPrimitiveType;
+}
+
+export function fromSdkConstantType(constantType: SdkConstantType): InputLiteralType {
+    return fromSdkBuiltInType(constantType.valueType) as InputLiteralType;
 }
 
 export function fromSdkEnumValueType(enumValueType: SdkEnumValueType): InputEnumTypeValue {
@@ -104,10 +167,10 @@ export function fromSdkDictionaryType(dictionaryType: SdkDictionaryType, program
     } as InputDictionaryType;
 }
 
-export function fromSdkArrayType(arrayType: SdkType, program: Program, models: Map<string, InputModelType>, enums: Map<string, InputEnumType>) : InputListType {
+export function fromSdkArrayType(arrayType: SdkArrayType, program: Program, models: Map<string, InputModelType>, enums: Map<string, InputEnumType>) : InputListType {
     return {
         Name: "Array",
-        ElementType: fromSdkType(arrayType, program, models, enums)
+        ElementType: fromSdkType(arrayType.valueType, program, models, enums)
     } as InputListType;
 }
 
@@ -126,10 +189,11 @@ export function fromSdkModelPropertyType(propertyType: SdkModelPropertyType, pro
     return {
         Name: propertyType.nameInClient,
         SerializedName: serializedName,
-        Description: propertyType.description,
+        Description: propertyType.description ?? "",
         Type: fromSdkType(propertyType.type, program, models, enums),
         IsRequired: isRequired,
         IsReadOnly: isReadOnly,
         IsDiscriminator: isDiscriminator
     } as InputModelProperty;
 }
+
