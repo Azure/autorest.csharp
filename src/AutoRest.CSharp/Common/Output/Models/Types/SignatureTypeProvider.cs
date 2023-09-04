@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
                 IList<MethodSignature> missing;
                 IList<(MethodSignature, MethodSignature, IList<MethodParameter>)> updated;
-                if (Customization?.Methods != null)
+                if (Customization?.Methods.Count > 0)
                 {
                     (missing, updated) = CompareMethods(Methods.Union(Customization!.Methods), PreviousContract.Methods);
                 }
