@@ -64,24 +64,5 @@ namespace AutoRest.CSharp.Common.Input
 
             return property;
         }
-
-        private static SerializationFormat GetSerializationFormat(InputType propertyType)
-        {
-            InputTypeKind? typeKind = propertyType switch
-            {
-                InputPrimitiveType primitiveType => primitiveType.Kind,
-                _ => null
-            };
-
-            if (typeKind is null)
-                return SerializationFormat.Default;
-
-            return typeKind switch
-            {
-                InputTypeKind.BytesBase64Url => SerializationFormat.Bytes_Base64Url,
-                InputTypeKind.Bytes => SerializationFormat.Bytes_Base64,
-                _ => SerializationFormat.Default
-            };
-        }
     }
 }
