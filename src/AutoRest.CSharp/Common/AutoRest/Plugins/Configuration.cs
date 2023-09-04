@@ -153,7 +153,7 @@ namespace AutoRest.CSharp.Input
             _methodsToKeepClientDefaultValue = methodsToKeepClientDefaultValue ?? Array.Empty<string>();
         }
 
-        private static (string AbsoluteProjectFolder, string RelativeProjectFolder) ParseProjectFolders(string outputFolder, string projectFolder)
+        internal static (string AbsoluteProjectFolder, string RelativeProjectFolder) ParseProjectFolders(string outputFolder, string projectFolder)
         {
             if (Path.IsPathRooted(projectFolder))
             {
@@ -613,43 +613,12 @@ namespace AutoRest.CSharp.Input
             Generation1ConvenienceClient: Generation1ConvenienceClient
         );
 
-        // load CSharpProj configuration from Autorest input
-        internal static CSharpProjConfiguration InitializeCSharpProjConfig(IPluginCommunication autoRest, string defaultLibraryName, string defaultNamespace)
-        {
-            string outputFolder = GetOutputFolderOption(autoRest);
-            var projectFolder = GetProjectFolderOption(autoRest) ?? ProjectFolderDefault;
-            (var absoluteProjectFolder, var relativeProjectFolder) = ParseProjectFolders(outputFolder, projectFolder);
-
-            return new CSharpProjConfiguration(
-                AbsoluteProjectFolder: absoluteProjectFolder,
-                AzureArm: GetAzureArmOption(autoRest),
-                IsMgmtTestProject: MgmtTestConfiguration.HasMgmtTestConfiguration(autoRest),
-                LibraryName: GetLibraryNameOption(autoRest, defaultLibraryName),
-                Namespace: GetNamespaceOption(autoRest, defaultNamespace),
-                SkipCSProjPackageReference: GetSkipCSProjPackageReferenceOption(autoRest),
-                RelativeProjectFolder: relativeProjectFolder,
-                Generation1ConvenienceClient: GetGeneration1ConvenienceClientOption(autoRest)
-            );
-        }
-
-        private static string GetOutputFolderOption(IPluginCommunication autoRest) => TrimFileSuffix(GetRequiredOption<string>(autoRest, Options.OutputFolder));
-        private static string? GetProjectFolderOption(IPluginCommunication autoRest) => autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult();
-        private static bool GetAzureArmOption(IPluginCommunication autoRest) => GetOptionBoolValue(autoRest, Options.AzureArm);
-        private static bool GetSkipCSProjPackageReferenceOption(IPluginCommunication autoRest) => GetOptionBoolValue(autoRest, Options.SkipCSProjPackageReference);
-        private static bool GetGeneration1ConvenienceClientOption(IPluginCommunication autoRest) => GetOptionBoolValue(autoRest, Options.Generation1ConvenienceClient);
-        private static string GetLibraryNameOption(IPluginCommunication autoRest, string defaultLibraryName) => autoRest.GetValue<string?>(Options.LibraryName).GetAwaiter().GetResult() ?? defaultLibraryName;
-        private static string GetNamespaceOption(IPluginCommunication autoRest, string defaultNamespace) => autoRest.GetValue<string?>(Options.Namespace).GetAwaiter().GetResult() ?? defaultNamespace;
+        internal static string GetOutputFolderOption(IPluginCommunication autoRest) => TrimFileSuffix(GetRequiredOption<string>(autoRest, Options.OutputFolder));
+        internal static string? GetProjectFolderOption(IPluginCommunication autoRest) => autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult();
+        internal static bool GetAzureArmOption(IPluginCommunication autoRest) => GetOptionBoolValue(autoRest, Options.AzureArm);
+        internal static bool GetSkipCSProjPackageReferenceOption(IPluginCommunication autoRest) => GetOptionBoolValue(autoRest, Options.SkipCSProjPackageReference);
+        internal static bool GetGeneration1ConvenienceClientOption(IPluginCommunication autoRest) => GetOptionBoolValue(autoRest, Options.Generation1ConvenienceClient);
+        internal static string GetLibraryNameOption(IPluginCommunication autoRest, string defaultLibraryName) => autoRest.GetValue<string?>(Options.LibraryName).GetAwaiter().GetResult() ?? defaultLibraryName;
+        internal static string GetNamespaceOption(IPluginCommunication autoRest, string defaultNamespace) => autoRest.GetValue<string?>(Options.Namespace).GetAwaiter().GetResult() ?? defaultNamespace;
     }
-
-    // configuration properties neede by CSharpProj
-    public record CSharpProjConfiguration(
-        string AbsoluteProjectFolder,
-        bool AzureArm,
-        bool Generation1ConvenienceClient,
-        bool IsMgmtTestProject,
-        string LibraryName,
-        string Namespace,
-        string RelativeProjectFolder,
-        bool SkipCSProjPackageReference
-    );
 }

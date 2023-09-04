@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Input
 {
     internal class MgmtTestConfiguration
     {
-        private const string TestGenOptionsRoot = "testgen";
+        internal const string TestGenOptionsRoot = "testgen";
         private const string TestGenOptionsFormat = $"{TestGenOptionsRoot}.{{0}}";
 
         public string? SourceCodePath { get; }
