@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Common.Input
             description = BuilderHelpers.EscapeXmlDocDescription(description);
             propertyType = propertyType ?? throw new JsonException($"{nameof(InputModelProperty)} must have a property type.");
 
-            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, isRequired, isReadOnly, isDiscriminator, GetSerializationFormat(propertyType));
+            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, isRequired, isReadOnly, isDiscriminator);
             if (id != null)
             {
                 resolver.AddReference(id, property);

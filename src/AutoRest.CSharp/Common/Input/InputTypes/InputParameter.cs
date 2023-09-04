@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Common.Input;
@@ -24,8 +25,7 @@ internal record InputParameter(
     bool SkipUrlEncoding,
     bool Explode,
     string? ArraySerializationDelimiter,
-    string? HeaderCollectionPrefix,
-    SerializationFormat SerializationFormat)
+    string? HeaderCollectionPrefix)
 {
     public InputParameter() : this(
         Name: string.Empty,
@@ -45,7 +45,75 @@ internal record InputParameter(
         SkipUrlEncoding: false,
         Explode: false,
         ArraySerializationDelimiter: null,
-        HeaderCollectionPrefix: null,
-        SerializationFormat: SerializationFormat.Default)
+        HeaderCollectionPrefix: null)
     { }
+
+    internal InputParameter(
+        string name,
+        string nameInRequest,
+        string? description,
+        InputType type,
+        RequestLocation location,
+        InputConstant? defaultValue,
+        VirtualParameter? virtualParameter,
+        InputParameter? groupedBy,
+        InputOperationParameterKind kind,
+        bool isRequired,
+        bool isApiVersion,
+        bool isResourceParameter,
+        bool isContentType,
+        bool isEndpoint,
+        bool skipUrlEncoding,
+        bool explode,
+        string? arraySerializationDelimiter,
+        string? headerCollectionPrefix,
+        SerializationFormat serializationFormat) : this(
+            name,
+            nameInRequest,
+            description,
+            type,
+            location,
+            defaultValue,
+            virtualParameter,
+            groupedBy,
+            kind,
+            isRequired,
+            isApiVersion,
+            isResourceParameter,
+            isContentType,
+            isEndpoint,
+            skipUrlEncoding,
+            explode,
+            arraySerializationDelimiter,
+            headerCollectionPrefix)
+    {
+        _serializationFormat = serializationFormat;
+    }
+
+    private SerializationFormat? _serializationFormat;
+    public SerializationFormat SerializationFormat => _serializationFormat ??= GetSerializationFormat(Type, Location);
+
+    private static SerializationFormat GetSerializationFormat(InputType parameterType, RequestLocation requestLocation)
+    {
+        var affectType = parameterType switch
+        {
+            InputListType listType => listType.ElementType,
+            InputDictionaryType dictionaryType => dictionaryType.ValueType,
+            _ => parameterType
+        };
+        if (affectType is InputPrimitiveType { Kind: InputTypeKind.DateTime })
+        {
+            if (requestLocation == RequestLocation.Header)
+            {
+                return SerializationFormat.DateTime_RFC7231;
+            }
+
+            if (requestLocation == RequestLocation.Body)
+            {
+                return SerializationFormat.DateTime_RFC3339;
+            }
+        }
+
+        return SerializationBuilder.GetSerializationFormat(affectType);
+    }
 }
