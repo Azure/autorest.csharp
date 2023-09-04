@@ -5,6 +5,9 @@ namespace Authentication.Union
 {
     public partial class UnionClient
     {
+        /// <summary>
+        /// Gets the scopes required for authentication.
+        /// </summary>
         public static string[] TokenScopes => AuthorizationScopes;
     }
 }

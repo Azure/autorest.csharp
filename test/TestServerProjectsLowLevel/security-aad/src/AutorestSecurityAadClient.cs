@@ -12,8 +12,14 @@ using Azure.Core.Pipeline;
 
 namespace security_aad_LowLevel
 {
+    /// <summary>
+    /// An autorest security aad client.
+    /// </summary>
     public partial class AutorestSecurityAadClient
     {
+        /// <summary>
+        /// Gets the TokenScopes.
+        /// </summary>
         public static string[] TokenScopes => AuthorizationScopes;
     }
 }

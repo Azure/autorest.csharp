@@ -1,6 +1,6 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"> 
   <ItemGroup>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354" Condition="'$(IncludeStyleCopAnalyzers)' != 'false'">
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354" Condition="'$(IsTestGenerationSrcProject)' != 'false'">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -9,7 +9,7 @@
     </AdditionalFiles>
   </ItemGroup>
 
-  <ItemGroup Condition="!$(MSBuildProjectName.StartsWith('AutoRest.')) And '$(IsTestGenerationTestProjet)' != 'true'">
+  <ItemGroup Condition="!$(MSBuildProjectName.StartsWith('AutoRest.')) And '$(IsTestGenerationTestProject)' != 'true'">
     <!-- Need to list out each include individually to support the new project which includes one of these files by name -->
     <Compile Include="$(AzureCoreSharedSources)Multipart/MultipartContent.cs" LinkBase="Shared/Core/Multipart" />
     <Compile Include="$(AzureCoreSharedSources)Multipart/MultipartFormDataContent.cs" LinkBase="Shared/Core/Multipart" />
@@ -33,7 +33,6 @@
     <Compile Include="$(AzureCoreSharedSources)IUtf8JsonSerializable.cs" LinkBase="Shared/Core" />    
     <Compile Include="$(AzureCoreSharedSources)IXmlSerializable.cs" LinkBase="Shared/Core" />
     <Compile Include="$(AzureCoreSharedSources)JsonElementExtensions.cs" LinkBase="Shared/Core" />
-    <Compile Include="$(AzureCoreSharedSources)LowLevelPageableHelpers.cs" LinkBase="Shared/Core" />
     <Compile Include="$(AzureCoreSharedSources)NextLinkOperationImplementation.cs" LinkBase="Shared/Core" />
     <Compile Include="$(AzureCoreSharedSources)OperationFinalStateVia.cs" LinkBase="Shared/Core" />
     <Compile Include="$(AzureCoreSharedSources)OperationInternal.cs" LinkBase="Shared/Core" />
@@ -69,9 +68,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)/src/assets/Management.Shared/**/*.cs" Link="Shared/Management/%(RecursiveDir)/%(Filename)%(Extension)" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <NoWarn>$(NoWarn);NU5105</NoWarn>
-  </PropertyGroup>
+  <ItemGroup Condition="'$(IsTestGenerationSrcProject)' == 'true'">
+    <!-- Include analyzers so that we see issues in this repo before we do a regen preview-->
+    <PackageReference Include="Azure.ClientSdk.Analyzers" />
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" />
+    <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" />
+  </ItemGroup>
 
   <Target Name="_ValidateSourceFileNames"
           BeforeTargets="CoreBuild">
