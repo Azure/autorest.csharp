@@ -2951,5 +2951,71 @@ null
 
             Response<BaseModelWithDiscriminator> response = await client.AnalyzeConversationAsync();
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetSingleBase()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            Response response = client.GetSingleBase(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("size").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetSingleBase_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            Response response = client.GetSingleBase(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("size").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetSingleBase_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            Response response = await client.GetSingleBaseAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("size").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetSingleBase_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            Response response = await client.GetSingleBaseAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("size").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetSingleBase_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            var result = await client.GetSingleBaseAsync();
+        }
     }
 }

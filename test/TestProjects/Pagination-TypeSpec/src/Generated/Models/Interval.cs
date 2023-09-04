@@ -10,6 +10,7 @@ using System.ComponentModel;
 
 namespace Pagination.Models
 {
+    /// <summary> The interval. </summary>
     public readonly partial struct Interval : IEquatable<Interval>
     {
         private readonly string _value;

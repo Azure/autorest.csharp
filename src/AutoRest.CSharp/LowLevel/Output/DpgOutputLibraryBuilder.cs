@@ -91,7 +91,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             //only want to create one instance of the default derived per polymorphic set
             ModelTypeProvider? defaultDerivedType = null;
-            bool isBasePolyType = derivedTypesArray.Count > 0 && model.DiscriminatorPropertyName is not null;
+            bool isBasePolyType = model.DiscriminatorPropertyName is not null;
             bool isChildPolyType = model.DiscriminatorValue is not null;
             if (isBasePolyType || isChildPolyType)
             {

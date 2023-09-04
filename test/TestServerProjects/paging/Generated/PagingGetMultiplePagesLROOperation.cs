@@ -8,6 +8,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -74,12 +75,12 @@ namespace paging
 
         AsyncPageable<Product> IOperationSource<AsyncPageable<Product>>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            return PageableHelpers.CreateAsyncPageable(response, _nextPageFunc, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingGetMultiplePagesLROOperation", "values", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(response, _nextPageFunc, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingGetMultiplePagesLROOperation", "values", "nextLink", cancellationToken);
         }
 
         ValueTask<AsyncPageable<Product>> IOperationSource<AsyncPageable<Product>>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            return new ValueTask<AsyncPageable<Product>>(PageableHelpers.CreateAsyncPageable(response, _nextPageFunc, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingGetMultiplePagesLROOperation", "values", "nextLink", cancellationToken));
+            return new ValueTask<AsyncPageable<Product>>(GeneratorPageableHelpers.CreateAsyncPageable(response, _nextPageFunc, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingGetMultiplePagesLROOperation", "values", "nextLink", cancellationToken));
         }
     }
 }
