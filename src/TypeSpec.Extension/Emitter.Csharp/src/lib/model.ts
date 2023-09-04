@@ -66,17 +66,19 @@ import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
 import {
     SdkContext,
+    SdkEnumType,
+    SdkModelType,
     getClientType,
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
-import { capitalize, getModelName, getNameForTemplate } from "./utils.js";
+import { capitalize, getModelName } from "./utils.js";
 import { FormattedType } from "../type/formattedType.js";
 import { LiteralTypeContext } from "../type/literalTypeContext.js";
+import { fromSdkEnumType, fromSdkModelType } from "../type/typeConverter.js";
 /**
  * Map calType to csharp InputTypeKind
  */
 export function mapTypeSpecTypeToCSharpInputTypeKind(
-    context: SdkContext,
     typespecType: Type,
     format?: string,
     encode?: EncodeData
@@ -377,7 +379,6 @@ export function getInputType(
         // For literal types, we just want to emit them directly as well.
         const type = formattedType.type;
         const builtInKind: InputTypeKind = mapTypeSpecTypeToCSharpInputTypeKind(
-            context,
             type,
             formattedType.format,
             formattedType.encode
@@ -437,57 +438,7 @@ export function getInputType(
         e: Enum,
         addToCollection: boolean = true
     ): InputEnumType {
-        let enumType = enums.get(e.name);
-        if (!enumType) {
-            if (e.members.size === 0) {
-                throw new Error(
-                    `Enum type '${e.name}' doesn't define any values.`
-                );
-            }
-            const allowValues: InputEnumTypeValue[] = [];
-            const enumValueType = enumMemberType(
-                e.members.entries().next().value[1]
-            );
-
-            for (const key of e.members.keys()) {
-                const option = e.members.get(key);
-                if (!option) {
-                    throw Error(`No member value for $key`);
-                }
-                if (enumValueType !== enumMemberType(option)) {
-                    throw new Error(
-                        "The enum member value type is not consistent."
-                    );
-                }
-                const member = {
-                    Name: key,
-                    Value: option.value ?? option?.name,
-                    Description: getDoc(program, option)
-                } as InputEnumTypeValue;
-                allowValues.push(member);
-            }
-
-            enumType = {
-                Name: e.name,
-                Namespace: getFullNamespaceString(e.namespace),
-                Accessibility: undefined, //TODO: need to add accessibility
-                Deprecated: getDeprecated(program, e),
-                Description: getDoc(program, e) ?? "",
-                EnumValueType: enumValueType,
-                AllowedValues: allowValues,
-                IsExtensible: !isFixed(program, e),
-                IsNullable: false
-            } as InputEnumType;
-            if (addToCollection) enums.set(e.name, enumType);
-        }
-        return enumType;
-
-        function enumMemberType(member: EnumMember): string {
-            if (typeof member.value === "number") {
-                return "Float32";
-            }
-            return "String";
-        }
+        return fromSdkEnumType(context.modelsMap!.get(e) as SdkEnumType, context.program, enums, addToCollection);
     }
 
     function getInputTypeForArray(elementType: Type): InputListType {
@@ -523,49 +474,7 @@ export function getInputType(
     }
 
     function getInputModelForModel(m: Model): InputModelType {
-        m = getEffectiveSchemaType(context, m) as Model;
-        const name = getModelName(context, m);
-        let model = models.get(name);
-        if (!model) {
-            const baseModel = getInputModelBaseType(m.baseModel);
-            const properties: InputModelProperty[] = [];
-
-            const discriminator = getDiscriminator(program, m);
-            model = {
-                Name: name,
-                Namespace: getFullNamespaceString(m.namespace),
-                Accessibility: isInternal(context, m) ? "internal" : undefined,
-                Deprecated: getDeprecated(program, m),
-                Description: getDoc(program, m),
-                IsNullable: false,
-                DiscriminatorPropertyName: discriminator?.propertyName,
-                DiscriminatorValue: getDiscriminatorValue(m, baseModel),
-                BaseModel: baseModel,
-                Usage: Usage.None,
-                Properties: properties // DerivedModels should be the last assigned to model, if no derived models, properties should be the last
-            } as InputModelType;
-
-            models.set(name, model);
-
-            // Resolve properties after model is added to the map to resolve possible circular dependencies
-            addModelProperties(model, m.properties, properties);
-
-            // add the derived models into the list
-            if (m.derivedModels !== undefined && m.derivedModels.length > 0) {
-                model.DerivedModels = [];
-                for (const dm of m.derivedModels) {
-                    const derivedModel = getInputType(
-                        context,
-                        getFormattedType(program, dm),
-                        models,
-                        enums
-                    );
-                    model.DerivedModels.push(derivedModel as InputModelType);
-                }
-            }
-        }
-
-        return model;
+        return fromSdkModelType(context.modelsMap!.get(m) as SdkModelType, context.program, models, enums);
     }
 
     function getDiscriminatorValue(

@@ -8,7 +8,8 @@ import {
     listOperationGroups,
     listOperationsInOperationGroup,
     SdkOperationGroup,
-    SdkContext
+    SdkContext,
+    getAllModels
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -174,6 +175,10 @@ export function createModelForService(
     lroMonitorOperations = getAllLroMonitorOperations(routes, sdkContext);
     const clients: InputClient[] = [];
     const dpgClients = listClients(sdkContext);
+
+    if (!sdkContext.operationModelsMap) {
+        getAllModels(sdkContext);
+    }
     for (const client of dpgClients) {
         clients.push(emitClient(client));
         const dpgOperationGroups = listOperationGroups(sdkContext, client);
@@ -261,7 +266,7 @@ export function createModelForService(
                 getHttpOperation(program, op)
             );
             const inputOperation: InputOperation = loadOperation(
-                context,
+                sdkContext,
                 httpOperation,
                 url,
                 urlParameters,

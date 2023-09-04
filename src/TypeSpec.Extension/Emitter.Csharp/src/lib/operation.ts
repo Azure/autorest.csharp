@@ -66,7 +66,7 @@ import {
 import { capitalize } from "./utils.js";
 
 export function loadOperation(
-    context: EmitContext<NetEmitterOptions>,
+    sdkContext: SdkContext,
     operation: HttpOperation,
     uri: string,
     urlParameters: InputParameter[] | undefined = undefined,
@@ -74,8 +74,6 @@ export function loadOperation(
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputOperation {
-    const program = context.program;
-    const sdkContext = createSdkContext(context);
     const {
         path: fullPath,
         operation: op,
@@ -83,9 +81,9 @@ export function loadOperation(
         parameters: typespecParameters
     } = operation;
     logger.info(`load operation: ${op.name}, path:${fullPath} `);
-    const resourceOperation = getResourceOperation(program, op);
-    const desc = getDoc(program, op);
-    const summary = getSummary(program, op);
+    const resourceOperation = getResourceOperation(sdkContext.program, op);
+    const desc = getDoc(sdkContext.program, op);
+    const summary = getSummary(sdkContext.program, op);
     const externalDocs = getExternalDocs(sdkContext, op);
 
     const parameters: InputParameter[] = [];
@@ -197,7 +195,7 @@ export function loadOperation(
             resourceOperation?.resourceType.name ??
             getOperationGroupName(sdkContext, op, serviceNamespaceType),
         Summary: summary,
-        Deprecated: getDeprecated(program, op),
+        Deprecated: getDeprecated(sdkContext.program, op),
         Description: desc,
         Accessibility: isInternal(sdkContext, op) ? "internal" : undefined,
         Parameters: parameters,
@@ -230,7 +228,7 @@ export function loadOperation(
         const typespecType = param.type;
         const inputType: InputType = getInputType(
             context,
-            getFormattedType(program, param),
+            getFormattedType(sdkContext.program, param),
             models,
             enums
         );
@@ -258,7 +256,7 @@ export function loadOperation(
         return {
             Name: param.name,
             NameInRequest: name,
-            Description: getDoc(program, param),
+            Description: getDoc(sdkContext.program, param),
             Type: inputType,
             Location: requestLocation,
             DefaultValue: defaultValue,
@@ -286,7 +284,7 @@ export function loadOperation(
         const type = body.kind === "Model" ? body : body.type;
         const inputType: InputType = getInputType(
             context,
-            getFormattedType(program, body),
+            getFormattedType(sdkContext.program, body),
             models,
             enums
         );
@@ -296,7 +294,7 @@ export function loadOperation(
         return {
             Name: body.name,
             NameInRequest: body.name,
-            Description: getDoc(program, body),
+            Description: getDoc(sdkContext.program, body),
             Type: inputType,
             Location: requestLocation,
             IsRequired: body.kind === "Model" ? true : !body.optional,
@@ -328,7 +326,7 @@ export function loadOperation(
             if (resourceOperation && resourceOperation.operation !== "list") {
                 type = getInputType(
                     context,
-                    getFormattedType(program, resourceOperation.resourceType),
+                    getFormattedType(sdkContext.program, resourceOperation.resourceType),
                     models,
                     enums
                 );
@@ -336,7 +334,7 @@ export function loadOperation(
                 const typespecType = getEffectiveSchemaType(context, body.type);
                 const inputType: InputType = getInputType(
                     context,
-                    getFormattedType(program, typespecType),
+                    getFormattedType(sdkContext.program, typespecType),
                     models,
                     enums
                 );
@@ -351,10 +349,10 @@ export function loadOperation(
                 responseHeaders.push({
                     Name: key,
                     NameInResponse: headers[key].name,
-                    Description: getDoc(program, headers[key]) ?? "",
+                    Description: getDoc(sdkContext.program, headers[key]) ?? "",
                     Type: getInputType(
                         context,
-                        getFormattedType(program, headers[key].type),
+                        getFormattedType(sdkContext.program, headers[key].type),
                         models,
                         enums
                     )
@@ -367,7 +365,7 @@ export function loadOperation(
             BodyType: type,
             BodyMediaType: BodyMediaType.Json,
             Headers: responseHeaders,
-            IsErrorResponse: isErrorModel(program, response.type)
+            IsErrorResponse: isErrorModel(sdkContext.program, response.type)
         } as OperationResponse;
     }
 
