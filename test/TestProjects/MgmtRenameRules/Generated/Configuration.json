@@ -12,7 +12,7 @@
   "KeepOrphanedModels": [
     "VmDiskType"
   ],
-  "RawRenameRules": {
+  "RawAcronymMapping": {
     "Os": "OS",
     "Ip": "IP",
     "Ips": "IPs",
