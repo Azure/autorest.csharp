@@ -265,7 +265,7 @@ namespace AutoRest.CSharp.Input
                 operationPositions: autoRest.GetValue<JsonElement?>("operation-positions").GetAwaiter().GetResult(),
                 requestPathToSingletonResource: autoRest.GetValue<JsonElement?>("request-path-to-singleton-resource").GetAwaiter().GetResult(),
                 overrideOperationName: autoRest.GetValue<JsonElement?>("override-operation-name").GetAwaiter().GetResult(),
-                renameRules: GetAcronymMappingConfig(autoRest),
+                acronymMapping: GetAcronymMappingConfig(autoRest),
                 renamePropertyBag: autoRest.GetValue<JsonElement?>("rename-property-bag").GetAwaiter().GetResult(),
                 formatByNameRules: autoRest.GetValue<JsonElement?>("format-by-name-rules").GetAwaiter().GetResult(),
                 renameMapping: autoRest.GetValue<JsonElement?>("rename-mapping").GetAwaiter().GetResult(),
