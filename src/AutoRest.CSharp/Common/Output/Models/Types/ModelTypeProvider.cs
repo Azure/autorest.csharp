@@ -176,7 +176,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var declaredName = property.Declaration.Name;
                     var paramName = declaredName.ToVariableName();
                     var serializedName = inputModelProperty.SerializedName ?? inputModelProperty.Name;
-                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, property.ValueType, false, inputModelProperty.SerializationFormat);
+                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, property.ValueType, false, property.SerializationFormat);
 
                     yield return new JsonPropertySerialization(
                         paramName,
@@ -316,7 +316,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
             foreach (var field in Fields)
-                yield return new ObjectTypeProperty(field, Fields.GetInputByField(field), this, field.SerializationFormat);
+                yield return new ObjectTypeProperty(field, Fields.GetInputByField(field), this);
         }
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
