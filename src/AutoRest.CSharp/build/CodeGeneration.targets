@@ -2,8 +2,9 @@
 
   <PropertyGroup>
     <PowerShellExe Condition="'$(PowerShellExe)' == ''">pwsh</PowerShellExe>
-    <TypeSpecProjectSyncScriptPath Condition="'$(TypeSpecProjectSyncScriptPath)' == ''">$(MSBuildProjectDirectory)/../../../../eng/common/scripts/TypeSpec-Project-Sync.ps1</TypeSpecProjectSyncScriptPath>
-    <TypeSpecProjectGenerateScriptPath Condition="'$(TypeSpecProjectGenerateScriptPath)' == ''">$(MSBuildProjectDirectory)/../../../../eng/common/scripts/TypeSpec-Project-Generate.ps1</TypeSpecProjectGenerateScriptPath>
+    <EngRoot>$(MSBuildProjectDirectory)/../../../../eng</EngRoot>
+    <TypeSpecProjectSyncScriptPath Condition="'$(TypeSpecProjectSyncScriptPath)' == ''">$(EngRoot)/common/scripts/TypeSpec-Project-Sync.ps1</TypeSpecProjectSyncScriptPath>
+    <TypeSpecProjectGenerateScriptPath Condition="'$(TypeSpecProjectGenerateScriptPath)' == ''">$(EngRoot)/common/scripts/TypeSpec-Project-Generate.ps1</TypeSpecProjectGenerateScriptPath>
     <_DefaultInputName Condition="Exists('$(MSBuildProjectDirectory)/autorest.md')">$(MSBuildProjectDirectory)/autorest.md</_DefaultInputName>
     <TypeSpecInput Condition="Exists('$(MSBuildProjectDirectory)/../tsp-location.yaml') and $(MSBuildProjectDirectory.EndsWith('src'))">$(MSBuildProjectDirectory)/../tsp-location.yaml</TypeSpecInput>
     <AutoRestInput Condition="'$(AutoRestInput)' == ''">$(_DefaultInputName)</AutoRestInput>
@@ -35,9 +36,20 @@
     <_SaveInputs Condition="'$(SaveInputs)' == 'true'">-SaveInputs</_SaveInputs>
     <_TypespecAdditionalOptions Condition="'$(TypespecAdditionalOptions)' != ''">-TypespecAdditionalOptions "$(TypespecAdditionalOptions)"</_TypespecAdditionalOptions>
     <_SpecRepoRoot Condition="'$(SpecRepoRoot)' != ''">"$(SpecRepoRoot)"</_SpecRepoRoot>
+
+    <ServiceDirectoryPath>$(MSBuildProjectDirectory)/../..</ServiceDirectoryPath>
+    <ServiceDirectory>$([System.IO.Path]::GetFileName($([System.IO.Path]::GetFullPath($(ServiceDirectoryPath)))))</ServiceDirectory>
+    <ExportApiScript>$(EngRoot)/scripts/Export-API.ps1</ExportApiScript>
+    <ExportApiCommand>$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(ExportApiScript) $(ServiceDirectory)</ExportApiCommand>
   </PropertyGroup>
 
-  <Target Name="GenerateCode" DependsOnTargets="_GenerateCodeForAutorest;_GenerateCodeForTypeSpec"/>
+  <Target Name="GenerateCode" DependsOnTargets="_ExportApi"/>
+
+  <Target Name="_ExportApi" DependsOnTargets="_GenerateCodeForAutorest;_GenerateCodeForTypeSpec">
+    <Message Condition="'$(_GenerateCode)' == 'true' AND Exists('$(ExportApiScript)')" Text="----- Running '$(ExportApiCommand)' -----" />
+    <Exec Condition="'$(_GenerateCode)' == 'true' AND Exists('$(ExportApiScript)')" Command="$(ExportApiCommand)" />
+  </Target>
+
   <Target Name="_GenerateCodeForAutorest" Condition="'$(_GenerateCode)' == 'true' AND Exists('$(AutoRestInput)')">
     <ReadLinesFromFile File="$(AutoRestInput)">
       <Output TaskParameter="Lines" ItemName="AutoRestInputLines"/>
