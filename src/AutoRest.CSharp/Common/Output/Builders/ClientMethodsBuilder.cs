@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Output.Models
                 yield return (operation.Paging, operation.LongRunning) switch
                 {
                     (not null, not null) => new LroPagingOperationMethodsBuilder(args, operation.Paging, operation.LongRunning),
-                    (not null, null) => new PagingOperationMethodsBuilder(args, operation.Paging),
+                    (not null, null) => args.StatusCodeSwitchBuilder.PageItemType is {} pageItemType ? new PagingOperationMethodsBuilder(args, operation.Paging, pageItemType) : new OperationMethodsBuilder(args),
                     (null, not null) => new LroOperationMethodsBuilder(args, operation.LongRunning),
                     (null, null) when operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean => new HeadAsBooleanOperationMethodsBuilder(args),
                     _ => new OperationMethodsBuilder(args)

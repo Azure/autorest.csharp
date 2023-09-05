@@ -11,7 +11,6 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Common.Output.Models.Statements;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -48,7 +47,7 @@ namespace AutoRest.CSharp.Output.Models
             var isLro = operation.LongRunning is not null;
             var successStatusCodes = new List<int>();
 
-            var successResponses = new List<(CSharpType? Type, ObjectSerialization? Serialization, IReadOnlyList<int> StatusCodes)>();
+            var successInputResponses = new List<(InputType? Type, BodyMediaType? BodyMediaType, IEnumerable<int> StatusCodes)>();
             foreach (var (statusCodes, bodyType, bodyMediaType, _, isErrorResponse) in operation.Responses)
             {
                 if (isErrorResponse)
@@ -59,46 +58,44 @@ namespace AutoRest.CSharp.Output.Models
                 successStatusCodes.AddRange(statusCodes);
                 if (bodyType == null)
                 {
-                    successResponses.Add((null, null, statusCodes));
+                    successInputResponses.Add((null, null, statusCodes));
                 }
                 else if (bodyMediaType == BodyMediaType.Text)
                 {
-                    successResponses.Add((typeof(string), null, statusCodes));
+                    successInputResponses.Add((InputPrimitiveType.String, null, statusCodes));
                 }
-                else if (bodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
+                else if (bodyType is InputPrimitiveType { Kind: InputTypeKind.Stream } streamInputType)
                 {
-                    successResponses.Add((typeof(Stream), null, statusCodes));
+                    successInputResponses.Add((streamInputType, null, statusCodes));
                 }
                 else
                 {
-                    var responseType = TypeFactory.GetOutputType(typeFactory.CreateType(bodyType));
-                    var serialization = SerializationBuilder.Build(bodyMediaType, bodyType, responseType);
-                    successResponses.Add((responseType, serialization, statusCodes));
+                    successInputResponses.Add((bodyType, bodyMediaType, statusCodes));
                 }
             }
 
-            if (FindResourceDataType(operation, library) is {} resourceDataType && successResponses.Any())
+            if (FindResourceDataType(operation, library) is {} resourceDataType && successInputResponses.Any())
             {
-                var responseBodyTypeName = successResponses[0].Type?.Name;
+                var responseBodyTypeName = successInputResponses[0].Type?.Name;
                 if (responseBodyTypeName == resourceDataType.Name && operation.Responses.Any(r => r.BodyType is {} type && resourceDataType.EqualsIgnoreNullable(typeFactory.CreateType(type))))
                 {
-                    successResponses.Add((null, null, new[]{404}));
+                    successInputResponses.Add((null, successInputResponses[0].BodyMediaType, new[]{404}));
                 }
             }
 
-            successResponses = successResponses
+            successInputResponses = successInputResponses
                 .GroupBy(r => r.Type)
-                .Select(g => (g.Key, g.First().Serialization, (IReadOnlyList<int>)g.SelectMany(r => r.StatusCodes).Distinct().ToArray()))
+                .Select(g => (g.Key, g.First().BodyMediaType, g.SelectMany(r => r.StatusCodes).Distinct()))
                 .ToList();
 
-            var commonResponseType = successResponses.Count(r => r.Type is not null) switch
+            var commonResponseInputType = successInputResponses.Count(r => r.Type is not null) switch
             {
                 0 => null,
-                1 => successResponses.First(r => r.Type is not null).Type,
-                _ => typeof(object)
+                1 => successInputResponses.First(r => r.Type is not null).Type,
+                _ => InputPrimitiveType.Object
             };
 
-            var pageItemType = GetPageItemType(commonResponseType, operation);
+            var pageItemInputType = GetPageItemType(commonResponseInputType, operation);
 
             if (isLro && (Configuration.AzureArm || Configuration.Generation1ConvenienceClient))
             {
@@ -107,8 +104,30 @@ namespace AutoRest.CSharp.Output.Models
                     .SelectMany(r => r.StatusCodes)
                     .ToList();
 
-                successResponses = new(){ (null, null, successStatusCodes.Distinct().ToList()) };
-                commonResponseType = null;
+                successInputResponses = new(){ (null, BodyMediaType.None, successStatusCodes.Distinct().ToList()) };
+                commonResponseInputType = null;
+            }
+
+            var commonResponseType = commonResponseInputType is null
+                ? null
+                : TypeFactory.GetOutputType(typeFactory.CreateType(commonResponseInputType));
+            var pageItemType = pageItemInputType is null
+                ? null
+                : TypeFactory.GetOutputType(typeFactory.CreateType(pageItemInputType));
+
+            var successResponses = new List<(CSharpType? Type, ObjectSerialization? Serialization, IReadOnlyList<int> StatusCodes)>();
+            foreach (var (inputType, bodyMediaType, statusCodes) in successInputResponses)
+            {
+                if (inputType is null)
+                {
+                    successResponses.Add((null, null, statusCodes.ToList()));
+                }
+                else
+                {
+                    var type = TypeFactory.GetOutputType(typeFactory.CreateType(inputType));
+                    var serialization = bodyMediaType.HasValue ? SerializationBuilder.Build(bodyMediaType.Value, inputType, type) : null;
+                    successResponses.Add((type, serialization, statusCodes.ToList()));
+                }
             }
 
             return new StatusCodeSwitchBuilder
@@ -212,7 +231,7 @@ namespace AutoRest.CSharp.Output.Models
             };
         }
 
-        private static CSharpType? GetPageItemType(CSharpType? responseType, InputOperation operation)
+        private static InputType? GetPageItemType(InputType? responseType, InputOperation operation)
         {
             if (operation.Paging is not {} paging)
             {
@@ -224,19 +243,29 @@ namespace AutoRest.CSharp.Output.Models
                 throw new InvalidOperationException($"Method {operation.Name} is pageable and has to have a return value");
             }
 
-            if (responseType.IsFrameworkType || responseType.Implementation is not SerializableObjectType modelType)
+            if (responseType is InputListType listType)
             {
-                return TypeFactory.IsList(responseType) ? TypeFactory.GetElementType(responseType) : responseType;
+                return listType.ElementType;
             }
 
-            var property = modelType.GetPropertyBySerializedName(paging.ItemName ?? "value");
-            var propertyType = property.ValueType.WithNullable(false);
-            if (!TypeFactory.IsList(propertyType))
+            if (responseType is not InputModelType modelType)
             {
-                throw new InvalidOperationException($"'{modelType.Declaration.Name}.{property.Declaration.Name}' property must be a collection of items");
+                return responseType;
             }
 
-            return TypeFactory.GetElementType(property.ValueType);
+            var itemName = paging.ItemName ?? "value";
+            if (modelType.Properties.FirstOrDefault(p => p.SerializedName == itemName) is not {} property)
+            {
+                return null;
+            }
+
+            if (property.Type is not InputListType listPropertyType)
+            {
+                throw new InvalidOperationException($"'{modelType.Name}.{property.Name}' property must be a collection of items");
+            }
+
+            return listPropertyType.ElementType;
+
         }
 
         private static CSharpType GetRestClientConvenienceReturnType(CSharpType? responseType, CSharpType? headerModelType)

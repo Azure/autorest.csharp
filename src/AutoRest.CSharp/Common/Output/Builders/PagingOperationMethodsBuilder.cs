@@ -20,10 +20,10 @@ namespace AutoRest.CSharp.Output.Models
     {
         private CSharpType PageItemType { get; }
 
-        public PagingOperationMethodsBuilder(OperationMethodsBuilderBaseArgs args, OperationPaging paging)
+        public PagingOperationMethodsBuilder(OperationMethodsBuilderBaseArgs args, OperationPaging paging, CSharpType pageItemType)
             : base(args, paging, args.StatusCodeSwitchBuilder)
         {
-            PageItemType = args.StatusCodeSwitchBuilder.PageItemType ?? throw new InvalidOperationException($"Method {args.Operation.Name} is pageable and has to have a return value");
+            PageItemType = pageItemType;
         }
 
         protected override MethodBodyStatement CreateProtocolMethodBody(MethodSignatureBase createMessageSignature, MethodSignature? createNextPageMessageSignature, bool async)
