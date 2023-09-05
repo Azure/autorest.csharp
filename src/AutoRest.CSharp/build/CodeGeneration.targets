@@ -37,16 +37,15 @@
     <_TypespecAdditionalOptions Condition="'$(TypespecAdditionalOptions)' != ''">-TypespecAdditionalOptions "$(TypespecAdditionalOptions)"</_TypespecAdditionalOptions>
     <_SpecRepoRoot Condition="'$(SpecRepoRoot)' != ''">"$(SpecRepoRoot)"</_SpecRepoRoot>
 
-    <ServiceDirectoryPath>$(MSBuildProjectDirectory)/../..</ServiceDirectoryPath>
-    <ServiceDirectory>$([System.IO.Path]::GetFileName($([System.IO.Path]::GetFullPath($(ServiceDirectoryPath)))))</ServiceDirectory>
+    <ExportApiServiceDirectoryPath>$(MSBuildProjectDirectory)/../..</ExportApiServiceDirectoryPath>
+    <ExportApiServiceDirectory>$([System.IO.Path]::GetFileName($([System.IO.Path]::GetFullPath($(ExportApiServiceDirectoryPath)))))</ExportApiServiceDirectory>
     <ExportApiScript>$(EngRoot)/scripts/Export-API.ps1</ExportApiScript>
-    <ExportApiCommand>$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(ExportApiScript) $(ServiceDirectory)</ExportApiCommand>
+    <ExportApiCommand>$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(ExportApiScript) $(ExportApiServiceDirectory)</ExportApiCommand>
   </PropertyGroup>
 
   <Target Name="GenerateCode" DependsOnTargets="_ExportApi"/>
 
   <Target Name="_ExportApi" DependsOnTargets="_GenerateCodeForAutorest;_GenerateCodeForTypeSpec">
-    <Message Condition="'$(_GenerateCode)' == 'true' AND Exists('$(ExportApiScript)')" Text="----- Running '$(ExportApiCommand)' -----" />
     <Exec Condition="'$(_GenerateCode)' == 'true' AND Exists('$(ExportApiScript)')" Command="$(ExportApiCommand)" />
   </Target>
 
