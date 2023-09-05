@@ -1,11 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
 
+using System.Linq;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
-using MgmtRenameRules.Models;
 using NUnit.Framework;
-using System.Linq;
 
 namespace AutoRest.TestServer.Tests.Mgmt
 {
