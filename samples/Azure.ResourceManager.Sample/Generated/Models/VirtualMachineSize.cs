@@ -53,7 +53,7 @@ namespace Azure.ResourceManager.Sample.Models
         {
             Name = name;
             NumberOfCores = numberOfCores;
-            OsDiskSizeInMB = osDiskSizeInMB;
+            OSDiskSizeInMB = osDiskSizeInMB;
             ResourceDiskSizeInMB = resourceDiskSizeInMB;
             MemoryInMB = memoryInMB;
             MaxDataDiskCount = maxDataDiskCount;
@@ -74,7 +74,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The OS disk size, in MB, allowed by the virtual machine size.
         /// Serialized Name: VirtualMachineSize.osDiskSizeInMB
         /// </summary>
-        public int? OsDiskSizeInMB { get; }
+        public int? OSDiskSizeInMB { get; }
         /// <summary>
         /// The resource disk size, in MB, allowed by the virtual machine size.
         /// Serialized Name: VirtualMachineSize.resourceDiskSizeInMB

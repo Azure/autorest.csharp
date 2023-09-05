@@ -56,7 +56,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The OS disk.
         /// Serialized Name: VirtualMachineScaleSetUpdateStorageProfile.osDisk
         /// </summary>
-        public VirtualMachineScaleSetUpdateOSDisk OsDisk { get; set; }
+        public VirtualMachineScaleSetUpdateOSDisk OSDisk { get; set; }
         /// <summary>
         /// The data disks.
         /// Serialized Name: VirtualMachineScaleSetUpdateStorageProfile.dataDisks
