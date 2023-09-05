@@ -10,18 +10,16 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineScaleSetVMInstanceRequiredIDs : IUtf8JsonSerializable
+    public partial class VmScaleSetConvertToSinglePlacementGroupContent : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("instanceIds"u8);
-            writer.WriteStartArray();
-            foreach (var item in InstanceIds)
+            if (Optional.IsDefined(ActivePlacementGroupId))
             {
-                writer.WriteStringValue(item);
+                writer.WritePropertyName("activePlacementGroupId"u8);
+                writer.WriteStringValue(ActivePlacementGroupId);
             }
-            writer.WriteEndArray();
             writer.WriteEndObject();
         }
     }

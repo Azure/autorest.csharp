@@ -11,14 +11,14 @@ namespace Azure.ResourceManager.Sample.Models
     /// The protection policy of a virtual machine scale set VM.
     /// Serialized Name: VirtualMachineScaleSetVMProtectionPolicy
     /// </summary>
-    public partial class VirtualMachineScaleSetVMProtectionPolicy
+    public partial class VirtualMachineScaleSetVmProtectionPolicy
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMProtectionPolicy. </summary>
-        public VirtualMachineScaleSetVMProtectionPolicy()
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmProtectionPolicy. </summary>
+        public VirtualMachineScaleSetVmProtectionPolicy()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMProtectionPolicy. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmProtectionPolicy. </summary>
         /// <param name="protectFromScaleIn">
         /// Indicates that the virtual machine scale set VM shouldn't be considered for deletion during a scale-in operation.
         /// Serialized Name: VirtualMachineScaleSetVMProtectionPolicy.protectFromScaleIn
@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Indicates that model updates or actions (including scale-in) initiated on the virtual machine scale set should not be applied to the virtual machine scale set VM.
         /// Serialized Name: VirtualMachineScaleSetVMProtectionPolicy.protectFromScaleSetActions
         /// </param>
-        internal VirtualMachineScaleSetVMProtectionPolicy(bool? protectFromScaleIn, bool? protectFromScaleSetActions)
+        internal VirtualMachineScaleSetVmProtectionPolicy(bool? protectFromScaleIn, bool? protectFromScaleSetActions)
         {
             ProtectFromScaleIn = protectFromScaleIn;
             ProtectFromScaleSetActions = protectFromScaleSetActions;

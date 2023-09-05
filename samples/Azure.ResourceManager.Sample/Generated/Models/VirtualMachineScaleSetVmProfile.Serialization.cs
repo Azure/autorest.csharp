@@ -10,15 +10,15 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineScaleSetVMProfile : IUtf8JsonSerializable
+    public partial class VirtualMachineScaleSetVmProfile : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(OsProfile))
+            if (Optional.IsDefined(OSProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                writer.WriteObjectValue(OsProfile);
+                writer.WriteObjectValue(OSProfile);
             }
             if (Optional.IsDefined(StorageProfile))
             {
@@ -73,7 +73,7 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineScaleSetVMProfile DeserializeVirtualMachineScaleSetVMProfile(JsonElement element)
+        internal static VirtualMachineScaleSetVmProfile DeserializeVirtualMachineScaleSetVmProfile(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -188,7 +188,7 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVMProfile(osProfile.Value, storageProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, extensionProfile.Value, licenseType.Value, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, scheduledEventsProfile.Value);
+            return new VirtualMachineScaleSetVmProfile(osProfile.Value, storageProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, extensionProfile.Value, licenseType.Value, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, scheduledEventsProfile.Value);
         }
     }
 }

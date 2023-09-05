@@ -10,15 +10,15 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VMScaleSetConvertToSinglePlacementGroupContent : IUtf8JsonSerializable
+    public partial class VirtualMachineScaleSetVmReimageContent : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ActivePlacementGroupId))
+            if (Optional.IsDefined(TempDisk))
             {
-                writer.WritePropertyName("activePlacementGroupId"u8);
-                writer.WriteStringValue(ActivePlacementGroupId);
+                writer.WritePropertyName("tempDisk"u8);
+                writer.WriteBooleanValue(TempDisk.Value);
             }
             writer.WriteEndObject();
         }

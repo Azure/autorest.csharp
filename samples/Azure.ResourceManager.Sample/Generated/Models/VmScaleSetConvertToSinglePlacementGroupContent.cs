@@ -8,13 +8,13 @@
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
-    /// The VMScaleSetConvertToSinglePlacementGroupInput.
+    /// The VmScaleSetConvertToSinglePlacementGroupInput.
     /// Serialized Name: VMScaleSetConvertToSinglePlacementGroupInput
     /// </summary>
-    public partial class VMScaleSetConvertToSinglePlacementGroupContent
+    public partial class VmScaleSetConvertToSinglePlacementGroupContent
     {
-        /// <summary> Initializes a new instance of VMScaleSetConvertToSinglePlacementGroupContent. </summary>
-        public VMScaleSetConvertToSinglePlacementGroupContent()
+        /// <summary> Initializes a new instance of VmScaleSetConvertToSinglePlacementGroupContent. </summary>
+        public VmScaleSetConvertToSinglePlacementGroupContent()
         {
         }
 

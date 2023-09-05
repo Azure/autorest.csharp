@@ -11,9 +11,9 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineScaleSetVMExtensionsSummary
+    public partial class VirtualMachineScaleSetVmExtensionsSummary
     {
-        internal static VirtualMachineScaleSetVMExtensionsSummary DeserializeVirtualMachineScaleSetVMExtensionsSummary(JsonElement element)
+        internal static VirtualMachineScaleSetVmExtensionsSummary DeserializeVirtualMachineScaleSetVmExtensionsSummary(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVMExtensionsSummary(name.Value, Optional.ToList(statusesSummary));
+            return new VirtualMachineScaleSetVmExtensionsSummary(name.Value, Optional.ToList(statusesSummary));
         }
     }
 }

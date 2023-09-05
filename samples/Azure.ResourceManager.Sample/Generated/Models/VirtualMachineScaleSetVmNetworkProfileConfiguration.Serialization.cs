@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    internal partial class VirtualMachineScaleSetVMNetworkProfileConfiguration : IUtf8JsonSerializable
+    internal partial class VirtualMachineScaleSetVmNetworkProfileConfiguration : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineScaleSetVMNetworkProfileConfiguration DeserializeVirtualMachineScaleSetVMNetworkProfileConfiguration(JsonElement element)
+        internal static VirtualMachineScaleSetVmNetworkProfileConfiguration DeserializeVirtualMachineScaleSetVmNetworkProfileConfiguration(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -53,7 +53,7 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVMNetworkProfileConfiguration(Optional.ToList(networkInterfaceConfigurations));
+            return new VirtualMachineScaleSetVmNetworkProfileConfiguration(Optional.ToList(networkInterfaceConfigurations));
         }
     }
 }

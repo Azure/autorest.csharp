@@ -75,7 +75,7 @@ namespace Azure.ResourceManager.Sample.Models
         internal VirtualMachineImage(string id, string name, AzureLocation location, IDictionary<string, string> tags, PurchasePlan plan, OSDiskImage osDiskImage, IList<DataDiskImage> dataDiskImages, AutomaticOSUpgradeProperties automaticOSUpgradeProperties, HyperVGeneration? hyperVGeneration, DisallowedConfiguration disallowed) : base(id, name, location, tags)
         {
             Plan = plan;
-            OsDiskImage = osDiskImage;
+            OSDiskImage = osDiskImage;
             DataDiskImages = dataDiskImages;
             AutomaticOSUpgradeProperties = automaticOSUpgradeProperties;
             HyperVGeneration = hyperVGeneration;
@@ -91,17 +91,17 @@ namespace Azure.ResourceManager.Sample.Models
         /// Contains the os disk image information.
         /// Serialized Name: VirtualMachineImage.properties.osDiskImage
         /// </summary>
-        internal OSDiskImage OsDiskImage { get; set; }
+        internal OSDiskImage OSDiskImage { get; set; }
         /// <summary>
         /// The operating system of the osDiskImage.
         /// Serialized Name: OSDiskImage.operatingSystem
         /// </summary>
-        public OperatingSystemType? OsDiskImageOperatingSystem
+        public OperatingSystemType? OSDiskImageOperatingSystem
         {
-            get => OsDiskImage is null ? default(OperatingSystemType?) : OsDiskImage.OperatingSystem;
+            get => OSDiskImage is null ? default(OperatingSystemType?) : OSDiskImage.OperatingSystem;
             set
             {
-                OsDiskImage = value.HasValue ? new OSDiskImage(value.Value) : null;
+                OSDiskImage = value.HasValue ? new OSDiskImage(value.Value) : null;
             }
         }
 

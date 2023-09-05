@@ -72,7 +72,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// </param>
         internal OSDisk(OperatingSystemType? osType, DiskEncryptionSettings encryptionSettings, string name, VirtualHardDisk vhd, VirtualHardDisk image, CachingType? caching, bool? writeAcceleratorEnabled, DiffDiskSettings diffDiskSettings, DiskCreateOptionType createOption, int? diskSizeGB, ManagedDiskParameters managedDisk)
         {
-            OsType = osType;
+            OSType = osType;
             EncryptionSettings = encryptionSettings;
             Name = name;
             Vhd = vhd;
@@ -89,7 +89,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Windows** &lt;br&gt;&lt;br&gt; **Linux**
         /// Serialized Name: OSDisk.osType
         /// </summary>
-        public OperatingSystemType? OsType { get; set; }
+        public OperatingSystemType? OSType { get; set; }
         /// <summary>
         /// Specifies the encryption settings for the OS Disk. &lt;br&gt;&lt;br&gt; Minimum api-version: 2015-06-15
         /// Serialized Name: OSDisk.encryptionSettings

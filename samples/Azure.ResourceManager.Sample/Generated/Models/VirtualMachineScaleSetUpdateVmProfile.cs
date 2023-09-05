@@ -11,10 +11,10 @@ namespace Azure.ResourceManager.Sample.Models
     /// Describes a virtual machine scale set virtual machine profile.
     /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile
     /// </summary>
-    public partial class VirtualMachineScaleSetUpdateVMProfile
+    public partial class VirtualMachineScaleSetUpdateVmProfile
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateVMProfile. </summary>
-        public VirtualMachineScaleSetUpdateVMProfile()
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateVmProfile. </summary>
+        public VirtualMachineScaleSetUpdateVmProfile()
         {
         }
 
@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The virtual machine scale set OS profile.
         /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.osProfile
         /// </summary>
-        public VirtualMachineScaleSetUpdateOSProfile OsProfile { get; set; }
+        public VirtualMachineScaleSetUpdateOSProfile OSProfile { get; set; }
         /// <summary>
         /// The virtual machine scale set storage profile.
         /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.storageProfile

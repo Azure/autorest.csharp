@@ -14,15 +14,15 @@ namespace Azure.ResourceManager.Sample.Models
     /// Extensions summary for virtual machines of a virtual machine scale set.
     /// Serialized Name: VirtualMachineScaleSetVMExtensionsSummary
     /// </summary>
-    public partial class VirtualMachineScaleSetVMExtensionsSummary
+    public partial class VirtualMachineScaleSetVmExtensionsSummary
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMExtensionsSummary. </summary>
-        internal VirtualMachineScaleSetVMExtensionsSummary()
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmExtensionsSummary. </summary>
+        internal VirtualMachineScaleSetVmExtensionsSummary()
         {
             StatusesSummary = new ChangeTrackingList<VirtualMachineStatusCodeCount>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMExtensionsSummary. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmExtensionsSummary. </summary>
         /// <param name="name">
         /// The extension name.
         /// Serialized Name: VirtualMachineScaleSetVMExtensionsSummary.name
@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The extensions information.
         /// Serialized Name: VirtualMachineScaleSetVMExtensionsSummary.statusesSummary
         /// </param>
-        internal VirtualMachineScaleSetVMExtensionsSummary(string name, IReadOnlyList<VirtualMachineStatusCodeCount> statusesSummary)
+        internal VirtualMachineScaleSetVmExtensionsSummary(string name, IReadOnlyList<VirtualMachineStatusCodeCount> statusesSummary)
         {
             Name = name;
             StatusesSummary = statusesSummary;

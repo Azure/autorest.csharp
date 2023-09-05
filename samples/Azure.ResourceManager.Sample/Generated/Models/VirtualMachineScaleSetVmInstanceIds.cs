@@ -14,10 +14,10 @@ namespace Azure.ResourceManager.Sample.Models
     /// Specifies a list of virtual machine instance IDs from the VM scale set.
     /// Serialized Name: VirtualMachineScaleSetVMInstanceIDs
     /// </summary>
-    public partial class VirtualMachineScaleSetVMInstanceIDs
+    public partial class VirtualMachineScaleSetVmInstanceIds
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMInstanceIDs. </summary>
-        public VirtualMachineScaleSetVMInstanceIDs()
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmInstanceIds. </summary>
+        public VirtualMachineScaleSetVmInstanceIds()
         {
             InstanceIds = new ChangeTrackingList<string>();
         }

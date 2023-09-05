@@ -52,7 +52,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         private Type? FindTypeByName(string name)
         {
-            var allTypes = Assembly.GetExecutingAssembly().GetTypes();
+            var allTypes = MyTypes();
             return allTypes.FirstOrDefault(t => t.Name == name);
         }
     }

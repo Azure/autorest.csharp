@@ -12,24 +12,24 @@ using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    internal partial class VirtualMachineScaleSetVMListResult
+    internal partial class VirtualMachineScaleSetVmListResult
     {
-        internal static VirtualMachineScaleSetVMListResult DeserializeVirtualMachineScaleSetVMListResult(JsonElement element)
+        internal static VirtualMachineScaleSetVmListResult DeserializeVirtualMachineScaleSetVmListResult(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            IReadOnlyList<VirtualMachineScaleSetVMData> value = default;
+            IReadOnlyList<VirtualMachineScaleSetVmData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
                 {
-                    List<VirtualMachineScaleSetVMData> array = new List<VirtualMachineScaleSetVMData>();
+                    List<VirtualMachineScaleSetVmData> array = new List<VirtualMachineScaleSetVmData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineScaleSetVMData.DeserializeVirtualMachineScaleSetVMData(item));
+                        array.Add(VirtualMachineScaleSetVmData.DeserializeVirtualMachineScaleSetVmData(item));
                     }
                     value = array;
                     continue;
@@ -40,7 +40,7 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVMListResult(value, nextLink.Value);
+            return new VirtualMachineScaleSetVmListResult(value, nextLink.Value);
         }
     }
 }

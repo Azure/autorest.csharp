@@ -10,15 +10,15 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineScaleSetIpTag : IUtf8JsonSerializable
+    public partial class VirtualMachineScaleSetIPTag : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(IpTagType))
+            if (Optional.IsDefined(IPTagType))
             {
                 writer.WritePropertyName("ipTagType"u8);
-                writer.WriteStringValue(IpTagType);
+                writer.WriteStringValue(IPTagType);
             }
             if (Optional.IsDefined(Tag))
             {
@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineScaleSetIpTag DeserializeVirtualMachineScaleSetIpTag(JsonElement element)
+        internal static VirtualMachineScaleSetIPTag DeserializeVirtualMachineScaleSetIPTag(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -49,7 +49,7 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetIpTag(ipTagType.Value, tag.Value);
+            return new VirtualMachineScaleSetIPTag(ipTagType.Value, tag.Value);
         }
     }
 }

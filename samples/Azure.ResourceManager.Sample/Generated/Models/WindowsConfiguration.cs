@@ -23,7 +23,7 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> Initializes a new instance of WindowsConfiguration. </summary>
-        /// <param name="provisionVMAgent">
+        /// <param name="provisionVmAgent">
         /// Indicates whether virtual machine agent should be provisioned on the virtual machine. &lt;br&gt;&lt;br&gt; When this property is not specified in the request body, default behavior is to set it to true.  This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.
         /// Serialized Name: WindowsConfiguration.provisionVMAgent
         /// </param>
@@ -47,9 +47,9 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the Windows Remote Management listeners. This enables remote Windows PowerShell.
         /// Serialized Name: WindowsConfiguration.winRM
         /// </param>
-        internal WindowsConfiguration(bool? provisionVMAgent, bool? enableAutomaticUpdates, string timeZone, IList<AdditionalUnattendContent> additionalUnattendContent, PatchSettings patchSettings, WinRMConfiguration winRM)
+        internal WindowsConfiguration(bool? provisionVmAgent, bool? enableAutomaticUpdates, string timeZone, IList<AdditionalUnattendContent> additionalUnattendContent, PatchSettings patchSettings, WinRMConfiguration winRM)
         {
-            ProvisionVMAgent = provisionVMAgent;
+            ProvisionVmAgent = provisionVmAgent;
             EnableAutomaticUpdates = enableAutomaticUpdates;
             TimeZone = timeZone;
             AdditionalUnattendContent = additionalUnattendContent;
@@ -61,7 +61,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Indicates whether virtual machine agent should be provisioned on the virtual machine. &lt;br&gt;&lt;br&gt; When this property is not specified in the request body, default behavior is to set it to true.  This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.
         /// Serialized Name: WindowsConfiguration.provisionVMAgent
         /// </summary>
-        public bool? ProvisionVMAgent { get; set; }
+        public bool? ProvisionVmAgent { get; set; }
         /// <summary>
         /// Indicates whether Automatic Updates is enabled for the Windows virtual machine. Default value is true. &lt;br&gt;&lt;br&gt; For virtual machine scale sets, this property can be updated and updates will take effect on OS reprovisioning.
         /// Serialized Name: WindowsConfiguration.enableAutomaticUpdates

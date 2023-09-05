@@ -10,16 +10,18 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineScaleSetVMReimageContent : IUtf8JsonSerializable
+    public partial class VirtualMachineScaleSetVmInstanceRequiredIds : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(TempDisk))
+            writer.WritePropertyName("instanceIds"u8);
+            writer.WriteStartArray();
+            foreach (var item in InstanceIds)
             {
-                writer.WritePropertyName("tempDisk"u8);
-                writer.WriteBooleanValue(TempDisk.Value);
+                writer.WriteStringValue(item);
             }
+            writer.WriteEndArray();
             writer.WriteEndObject();
         }
     }

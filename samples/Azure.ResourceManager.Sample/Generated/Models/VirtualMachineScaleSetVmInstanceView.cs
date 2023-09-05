@@ -14,17 +14,17 @@ namespace Azure.ResourceManager.Sample.Models
     /// The instance view of a virtual machine scale set VM.
     /// Serialized Name: VirtualMachineScaleSetVMInstanceView
     /// </summary>
-    public partial class VirtualMachineScaleSetVMInstanceView
+    public partial class VirtualMachineScaleSetVmInstanceView
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMInstanceView. </summary>
-        internal VirtualMachineScaleSetVMInstanceView()
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmInstanceView. </summary>
+        internal VirtualMachineScaleSetVmInstanceView()
         {
             Disks = new ChangeTrackingList<DiskInstanceView>();
             Extensions = new ChangeTrackingList<VirtualMachineExtensionInstanceView>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMInstanceView. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmInstanceView. </summary>
         /// <param name="platformUpdateDomain">
         /// The Update Domain count.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceView.platformUpdateDomain
@@ -73,7 +73,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The placement group in which the VM is running. If the VM is deallocated it will not have a placementGroupId.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceView.placementGroupId
         /// </param>
-        internal VirtualMachineScaleSetVMInstanceView(int? platformUpdateDomain, int? platformFaultDomain, string rdpThumbPrint, VirtualMachineAgentInstanceView vmAgent, MaintenanceRedeployStatus maintenanceRedeployStatus, IReadOnlyList<DiskInstanceView> disks, IReadOnlyList<VirtualMachineExtensionInstanceView> extensions, VirtualMachineHealthStatus vmHealth, BootDiagnosticsInstanceView bootDiagnostics, IReadOnlyList<InstanceViewStatus> statuses, string assignedHost, string placementGroupId)
+        internal VirtualMachineScaleSetVmInstanceView(int? platformUpdateDomain, int? platformFaultDomain, string rdpThumbPrint, VirtualMachineAgentInstanceView vmAgent, MaintenanceRedeployStatus maintenanceRedeployStatus, IReadOnlyList<DiskInstanceView> disks, IReadOnlyList<VirtualMachineExtensionInstanceView> extensions, VirtualMachineHealthStatus vmHealth, BootDiagnosticsInstanceView bootDiagnostics, IReadOnlyList<InstanceViewStatus> statuses, string assignedHost, string placementGroupId)
         {
             PlatformUpdateDomain = platformUpdateDomain;
             PlatformFaultDomain = platformFaultDomain;

@@ -20,7 +20,7 @@ namespace Azure.ResourceManager.Sample.Models
                 return null;
             }
             Optional<VirtualMachineScaleSetInstanceViewStatusesSummary> virtualMachine = default;
-            Optional<IReadOnlyList<VirtualMachineScaleSetVMExtensionsSummary>> extensions = default;
+            Optional<IReadOnlyList<VirtualMachineScaleSetVmExtensionsSummary>> extensions = default;
             Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
             Optional<IReadOnlyList<OrchestrationServiceSummary>> orchestrationServices = default;
             foreach (var property in element.EnumerateObject())
@@ -40,10 +40,10 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    List<VirtualMachineScaleSetVMExtensionsSummary> array = new List<VirtualMachineScaleSetVMExtensionsSummary>();
+                    List<VirtualMachineScaleSetVmExtensionsSummary> array = new List<VirtualMachineScaleSetVmExtensionsSummary>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineScaleSetVMExtensionsSummary.DeserializeVirtualMachineScaleSetVMExtensionsSummary(item));
+                        array.Add(VirtualMachineScaleSetVmExtensionsSummary.DeserializeVirtualMachineScaleSetVmExtensionsSummary(item));
                     }
                     extensions = array;
                     continue;

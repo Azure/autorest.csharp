@@ -14,7 +14,7 @@ using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class VirtualMachineScaleSetVMData : IUtf8JsonSerializable
+    public partial class VirtualMachineScaleSetVmData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -54,10 +54,10 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("additionalCapabilities"u8);
                 writer.WriteObjectValue(AdditionalCapabilities);
             }
-            if (Optional.IsDefined(OsProfile))
+            if (Optional.IsDefined(OSProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                writer.WriteObjectValue(OsProfile);
+                writer.WriteObjectValue(OSProfile);
             }
             if (Optional.IsDefined(SecurityProfile))
             {
@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Sample
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineScaleSetVMData DeserializeVirtualMachineScaleSetVMData(JsonElement element)
+        internal static VirtualMachineScaleSetVmData DeserializeVirtualMachineScaleSetVmData(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -117,20 +117,20 @@ namespace Azure.ResourceManager.Sample
             Optional<SystemData> systemData = default;
             Optional<bool> latestModelApplied = default;
             Optional<string> vmId = default;
-            Optional<VirtualMachineScaleSetVMInstanceView> instanceView = default;
+            Optional<VirtualMachineScaleSetVmInstanceView> instanceView = default;
             Optional<HardwareProfile> hardwareProfile = default;
             Optional<StorageProfile> storageProfile = default;
             Optional<AdditionalCapabilities> additionalCapabilities = default;
             Optional<OSProfile> osProfile = default;
             Optional<SecurityProfile> securityProfile = default;
             Optional<NetworkProfile> networkProfile = default;
-            Optional<VirtualMachineScaleSetVMNetworkProfileConfiguration> networkProfileConfiguration = default;
+            Optional<VirtualMachineScaleSetVmNetworkProfileConfiguration> networkProfileConfiguration = default;
             Optional<DiagnosticsProfile> diagnosticsProfile = default;
             Optional<WritableSubResource> availabilitySet = default;
             Optional<string> provisioningState = default;
             Optional<string> licenseType = default;
             Optional<string> modelDefinitionApplied = default;
-            Optional<VirtualMachineScaleSetVMProtectionPolicy> protectionPolicy = default;
+            Optional<VirtualMachineScaleSetVmProtectionPolicy> protectionPolicy = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("instanceId"u8))
@@ -256,7 +256,7 @@ namespace Azure.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            instanceView = VirtualMachineScaleSetVMInstanceView.DeserializeVirtualMachineScaleSetVMInstanceView(property0.Value);
+                            instanceView = VirtualMachineScaleSetVmInstanceView.DeserializeVirtualMachineScaleSetVmInstanceView(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("hardwareProfile"u8))
@@ -319,7 +319,7 @@ namespace Azure.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            networkProfileConfiguration = VirtualMachineScaleSetVMNetworkProfileConfiguration.DeserializeVirtualMachineScaleSetVMNetworkProfileConfiguration(property0.Value);
+                            networkProfileConfiguration = VirtualMachineScaleSetVmNetworkProfileConfiguration.DeserializeVirtualMachineScaleSetVmNetworkProfileConfiguration(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("diagnosticsProfile"u8))
@@ -361,14 +361,14 @@ namespace Azure.ResourceManager.Sample
                             {
                                 continue;
                             }
-                            protectionPolicy = VirtualMachineScaleSetVMProtectionPolicy.DeserializeVirtualMachineScaleSetVMProtectionPolicy(property0.Value);
+                            protectionPolicy = VirtualMachineScaleSetVmProtectionPolicy.DeserializeVirtualMachineScaleSetVmProtectionPolicy(property0.Value);
                             continue;
                         }
                     }
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVMData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, instanceId.Value, sku.Value, plan.Value, Optional.ToList(resources), Optional.ToList(zones), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value);
+            return new VirtualMachineScaleSetVmData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, instanceId.Value, sku.Value, plan.Value, Optional.ToList(resources), Optional.ToList(zones), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value);
         }
     }
 }

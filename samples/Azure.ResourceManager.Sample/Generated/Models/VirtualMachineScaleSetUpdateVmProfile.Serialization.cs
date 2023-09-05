@@ -10,15 +10,15 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineScaleSetUpdateVMProfile : IUtf8JsonSerializable
+    public partial class VirtualMachineScaleSetUpdateVmProfile : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(OsProfile))
+            if (Optional.IsDefined(OSProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                writer.WriteObjectValue(OsProfile);
+                writer.WriteObjectValue(OSProfile);
             }
             if (Optional.IsDefined(StorageProfile))
             {

@@ -14,21 +14,21 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary>
-    /// A class representing the VirtualMachineScaleSetVM data model.
+    /// A class representing the VirtualMachineScaleSetVm data model.
     /// Describes a virtual machine scale set virtual machine.
     /// Serialized Name: VirtualMachineScaleSetVM
     /// </summary>
-    public partial class VirtualMachineScaleSetVMData : TrackedResourceData
+    public partial class VirtualMachineScaleSetVmData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMData. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmData. </summary>
         /// <param name="location"> The location. </param>
-        public VirtualMachineScaleSetVMData(AzureLocation location) : base(location)
+        public VirtualMachineScaleSetVmData(AzureLocation location) : base(location)
         {
             Resources = new ChangeTrackingList<VirtualMachineExtensionData>();
             Zones = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMData. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -119,7 +119,7 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the protection policy of the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.protectionPolicy
         /// </param>
-        internal VirtualMachineScaleSetVMData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string instanceId, SampleSku sku, SamplePlan plan, IReadOnlyList<VirtualMachineExtensionData> resources, IReadOnlyList<string> zones, bool? latestModelApplied, string vmId, VirtualMachineScaleSetVMInstanceView instanceView, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, SecurityProfile securityProfile, NetworkProfile networkProfile, VirtualMachineScaleSetVMNetworkProfileConfiguration networkProfileConfiguration, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, string provisioningState, string licenseType, string modelDefinitionApplied, VirtualMachineScaleSetVMProtectionPolicy protectionPolicy) : base(id, name, resourceType, systemData, tags, location)
+        internal VirtualMachineScaleSetVmData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string instanceId, SampleSku sku, SamplePlan plan, IReadOnlyList<VirtualMachineExtensionData> resources, IReadOnlyList<string> zones, bool? latestModelApplied, string vmId, VirtualMachineScaleSetVmInstanceView instanceView, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, SecurityProfile securityProfile, NetworkProfile networkProfile, VirtualMachineScaleSetVmNetworkProfileConfiguration networkProfileConfiguration, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, string provisioningState, string licenseType, string modelDefinitionApplied, VirtualMachineScaleSetVmProtectionPolicy protectionPolicy) : base(id, name, resourceType, systemData, tags, location)
         {
             InstanceId = instanceId;
             Sku = sku;
@@ -132,7 +132,7 @@ namespace Azure.ResourceManager.Sample
             HardwareProfile = hardwareProfile;
             StorageProfile = storageProfile;
             AdditionalCapabilities = additionalCapabilities;
-            OsProfile = osProfile;
+            OSProfile = osProfile;
             SecurityProfile = securityProfile;
             NetworkProfile = networkProfile;
             NetworkProfileConfiguration = networkProfileConfiguration;
@@ -183,7 +183,7 @@ namespace Azure.ResourceManager.Sample
         /// The virtual machine instance view.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.instanceView
         /// </summary>
-        public VirtualMachineScaleSetVMInstanceView InstanceView { get; }
+        public VirtualMachineScaleSetVmInstanceView InstanceView { get; }
         /// <summary>
         /// Specifies the hardware settings for the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.hardwareProfile
@@ -233,7 +233,7 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the operating system settings for the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.osProfile
         /// </summary>
-        public OSProfile OsProfile { get; set; }
+        public OSProfile OSProfile { get; set; }
         /// <summary>
         /// Specifies the Security related profile settings for the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.securityProfile
@@ -277,7 +277,7 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the network profile configuration of the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.networkProfileConfiguration
         /// </summary>
-        internal VirtualMachineScaleSetVMNetworkProfileConfiguration NetworkProfileConfiguration { get; set; }
+        internal VirtualMachineScaleSetVmNetworkProfileConfiguration NetworkProfileConfiguration { get; set; }
         /// <summary>
         /// The list of network configurations.
         /// Serialized Name: VirtualMachineScaleSetVMNetworkProfileConfiguration.networkInterfaceConfigurations
@@ -287,7 +287,7 @@ namespace Azure.ResourceManager.Sample
             get
             {
                 if (NetworkProfileConfiguration is null)
-                    NetworkProfileConfiguration = new VirtualMachineScaleSetVMNetworkProfileConfiguration();
+                    NetworkProfileConfiguration = new VirtualMachineScaleSetVmNetworkProfileConfiguration();
                 return NetworkProfileConfiguration.NetworkInterfaceConfigurations;
             }
         }
@@ -348,6 +348,6 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the protection policy of the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.protectionPolicy
         /// </summary>
-        public VirtualMachineScaleSetVMProtectionPolicy ProtectionPolicy { get; set; }
+        public VirtualMachineScaleSetVmProtectionPolicy ProtectionPolicy { get; set; }
     }
 }

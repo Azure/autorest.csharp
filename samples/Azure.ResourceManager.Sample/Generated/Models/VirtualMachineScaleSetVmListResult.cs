@@ -17,22 +17,22 @@ namespace Azure.ResourceManager.Sample.Models
     /// The List Virtual Machine Scale Set VMs operation response.
     /// Serialized Name: VirtualMachineScaleSetVMListResult
     /// </summary>
-    internal partial class VirtualMachineScaleSetVMListResult
+    internal partial class VirtualMachineScaleSetVmListResult
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMListResult. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmListResult. </summary>
         /// <param name="value">
         /// The list of virtual machine scale sets VMs.
         /// Serialized Name: VirtualMachineScaleSetVMListResult.value
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal VirtualMachineScaleSetVMListResult(IEnumerable<VirtualMachineScaleSetVMData> value)
+        internal VirtualMachineScaleSetVmListResult(IEnumerable<VirtualMachineScaleSetVmData> value)
         {
             Argument.AssertNotNull(value, nameof(value));
 
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMListResult. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmListResult. </summary>
         /// <param name="value">
         /// The list of virtual machine scale sets VMs.
         /// Serialized Name: VirtualMachineScaleSetVMListResult.value
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs
         /// Serialized Name: VirtualMachineScaleSetVMListResult.nextLink
         /// </param>
-        internal VirtualMachineScaleSetVMListResult(IReadOnlyList<VirtualMachineScaleSetVMData> value, string nextLink)
+        internal VirtualMachineScaleSetVmListResult(IReadOnlyList<VirtualMachineScaleSetVmData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
@@ -51,7 +51,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The list of virtual machine scale sets VMs.
         /// Serialized Name: VirtualMachineScaleSetVMListResult.value
         /// </summary>
-        public IReadOnlyList<VirtualMachineScaleSetVMData> Value { get; }
+        public IReadOnlyList<VirtualMachineScaleSetVmData> Value { get; }
         /// <summary>
         /// The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs
         /// Serialized Name: VirtualMachineScaleSetVMListResult.nextLink

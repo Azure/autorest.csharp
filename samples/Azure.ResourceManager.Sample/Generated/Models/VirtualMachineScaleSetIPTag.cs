@@ -11,14 +11,14 @@ namespace Azure.ResourceManager.Sample.Models
     /// Contains the IP tag associated with the public IP address.
     /// Serialized Name: VirtualMachineScaleSetIpTag
     /// </summary>
-    public partial class VirtualMachineScaleSetIpTag
+    public partial class VirtualMachineScaleSetIPTag
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetIpTag. </summary>
-        public VirtualMachineScaleSetIpTag()
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetIPTag. </summary>
+        public VirtualMachineScaleSetIPTag()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetIpTag. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetIPTag. </summary>
         /// <param name="ipTagType">
         /// IP tag type. Example: FirstPartyUsage.
         /// Serialized Name: VirtualMachineScaleSetIpTag.ipTagType
@@ -27,9 +27,9 @@ namespace Azure.ResourceManager.Sample.Models
         /// IP tag associated with the public IP. Example: SQL, Storage etc.
         /// Serialized Name: VirtualMachineScaleSetIpTag.tag
         /// </param>
-        internal VirtualMachineScaleSetIpTag(string ipTagType, string tag)
+        internal VirtualMachineScaleSetIPTag(string ipTagType, string tag)
         {
-            IpTagType = ipTagType;
+            IPTagType = ipTagType;
             Tag = tag;
         }
 
@@ -37,7 +37,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// IP tag type. Example: FirstPartyUsage.
         /// Serialized Name: VirtualMachineScaleSetIpTag.ipTagType
         /// </summary>
-        public string IpTagType { get; set; }
+        public string IPTagType { get; set; }
         /// <summary>
         /// IP tag associated with the public IP. Example: SQL, Storage etc.
         /// Serialized Name: VirtualMachineScaleSetIpTag.tag

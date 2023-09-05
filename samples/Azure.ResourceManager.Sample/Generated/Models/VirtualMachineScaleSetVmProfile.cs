@@ -11,14 +11,14 @@ namespace Azure.ResourceManager.Sample.Models
     /// Describes a virtual machine scale set virtual machine profile.
     /// Serialized Name: VirtualMachineScaleSetVMProfile
     /// </summary>
-    public partial class VirtualMachineScaleSetVMProfile
+    public partial class VirtualMachineScaleSetVmProfile
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMProfile. </summary>
-        public VirtualMachineScaleSetVMProfile()
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmProfile. </summary>
+        public VirtualMachineScaleSetVmProfile()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMProfile. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmProfile. </summary>
         /// <param name="osProfile">
         /// Specifies the operating system settings for the virtual machines in the scale set.
         /// Serialized Name: VirtualMachineScaleSetVMProfile.osProfile
@@ -63,9 +63,9 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies Scheduled Event related configurations.
         /// Serialized Name: VirtualMachineScaleSetVMProfile.scheduledEventsProfile
         /// </param>
-        internal VirtualMachineScaleSetVMProfile(VirtualMachineScaleSetOSProfile osProfile, VirtualMachineScaleSetStorageProfile storageProfile, VirtualMachineScaleSetNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, VirtualMachinePriorityType? priority, VirtualMachineEvictionPolicyType? evictionPolicy, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile)
+        internal VirtualMachineScaleSetVmProfile(VirtualMachineScaleSetOSProfile osProfile, VirtualMachineScaleSetStorageProfile storageProfile, VirtualMachineScaleSetNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, VirtualMachinePriorityType? priority, VirtualMachineEvictionPolicyType? evictionPolicy, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile)
         {
-            OsProfile = osProfile;
+            OSProfile = osProfile;
             StorageProfile = storageProfile;
             NetworkProfile = networkProfile;
             SecurityProfile = securityProfile;
@@ -82,7 +82,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the operating system settings for the virtual machines in the scale set.
         /// Serialized Name: VirtualMachineScaleSetVMProfile.osProfile
         /// </summary>
-        public VirtualMachineScaleSetOSProfile OsProfile { get; set; }
+        public VirtualMachineScaleSetOSProfile OSProfile { get; set; }
         /// <summary>
         /// Specifies the storage settings for the virtual machine disks.
         /// Serialized Name: VirtualMachineScaleSetVMProfile.storageProfile
