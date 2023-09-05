@@ -15,7 +15,7 @@
 
 ## Rename rules
 
-A mechanism of renaming is introduced in the generator to unify the casing of some words.
+A mechanism of acronym mapping is introduced in the generator to unify the casing of acronyms.
 
 ```yaml
 acronym-mapping:
