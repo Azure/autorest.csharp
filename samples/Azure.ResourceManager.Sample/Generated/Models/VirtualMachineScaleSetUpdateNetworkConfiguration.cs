@@ -20,7 +20,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateNetworkConfiguration. </summary>
         public VirtualMachineScaleSetUpdateNetworkConfiguration()
         {
-            IpConfigurations = new ChangeTrackingList<VirtualMachineScaleSetUpdateIPConfiguration>();
+            IPConfigurations = new ChangeTrackingList<VirtualMachineScaleSetUpdateIPConfiguration>();
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateNetworkConfiguration. </summary>
@@ -63,7 +63,7 @@ namespace Azure.ResourceManager.Sample.Models
             EnableAcceleratedNetworking = enableAcceleratedNetworking;
             NetworkSecurityGroup = networkSecurityGroup;
             DnsSettings = dnsSettings;
-            IpConfigurations = ipConfigurations;
+            IPConfigurations = ipConfigurations;
             EnableIPForwarding = enableIPForwarding;
         }
 
@@ -122,7 +122,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The virtual machine scale set IP Configuration.
         /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.properties.ipConfigurations
         /// </summary>
-        public IList<VirtualMachineScaleSetUpdateIPConfiguration> IpConfigurations { get; }
+        public IList<VirtualMachineScaleSetUpdateIPConfiguration> IPConfigurations { get; }
         /// <summary>
         /// Whether IP forwarding enabled on this NIC.
         /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.properties.enableIPForwarding

@@ -38,7 +38,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 operationPositions: default,
                 requestPathToSingletonResource: default,
                 overrideOperationName: default,
-                renameRules: default,
+                acronymMapping: default,
                 formatByNameRules: default,
                 renameMapping: default,
                 parameterRenameMapping: default,

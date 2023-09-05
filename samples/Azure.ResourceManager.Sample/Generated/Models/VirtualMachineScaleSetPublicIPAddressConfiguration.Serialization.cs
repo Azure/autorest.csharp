@@ -31,11 +31,11 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("dnsSettings"u8);
                 writer.WriteObjectValue(DnsSettings);
             }
-            if (Optional.IsCollectionDefined(IpTags))
+            if (Optional.IsCollectionDefined(IPTags))
             {
                 writer.WritePropertyName("ipTags"u8);
                 writer.WriteStartArray();
-                foreach (var item in IpTags)
+                foreach (var item in IPTags)
                 {
                     writer.WriteObjectValue(item);
                 }
@@ -64,7 +64,7 @@ namespace Azure.ResourceManager.Sample.Models
             string name = default;
             Optional<int> idleTimeoutInMinutes = default;
             Optional<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings> dnsSettings = default;
-            Optional<IList<VirtualMachineScaleSetIpTag>> ipTags = default;
+            Optional<IList<VirtualMachineScaleSetIPTag>> ipTags = default;
             Optional<WritableSubResource> publicIPPrefix = default;
             Optional<IPVersion> publicIPAddressVersion = default;
             foreach (var property in element.EnumerateObject())
@@ -107,10 +107,10 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            List<VirtualMachineScaleSetIpTag> array = new List<VirtualMachineScaleSetIpTag>();
+                            List<VirtualMachineScaleSetIPTag> array = new List<VirtualMachineScaleSetIPTag>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(VirtualMachineScaleSetIpTag.DeserializeVirtualMachineScaleSetIpTag(item));
+                                array.Add(VirtualMachineScaleSetIPTag.DeserializeVirtualMachineScaleSetIPTag(item));
                             }
                             ipTags = array;
                             continue;
