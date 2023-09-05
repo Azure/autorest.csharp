@@ -6,6 +6,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using dpg_customization_LowLevel.Models;
@@ -25,7 +26,7 @@ namespace dpg_customization_LowLevel
             try
             {
                 RequestContext requestContext = new RequestContext { CancellationToken = cancellationToken };
-                Response response = await GetModelAsync(mode, requestContext);
+                Response response = await GetModelAsync(mode, requestContext).ConfigureAwait(false);
                 return Response.FromValue(Product.FromResponse(response), response);
             }
             catch (Exception e)
@@ -68,7 +69,7 @@ namespace dpg_customization_LowLevel
             RequestContext requestContext = new RequestContext();
             requestContext.CancellationToken = cancellationToken;
 
-            Response response = await PostModelAsync("model", Input.ToRequestContent(input), requestContext);
+            Response response = await PostModelAsync("model", Input.ToRequestContent(input), requestContext).ConfigureAwait(false);
             return Response.FromValue(Product.FromResponse(response), response);
         }
 
@@ -141,7 +142,7 @@ namespace dpg_customization_LowLevel
             Argument.AssertNotNull(mode, nameof(mode));
 
             var requestContext = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : default;
-            return PageableHelpers.CreateAsyncPageable
+            return GeneratorPageableHelpers.CreateAsyncPageable
             (
                 _ => CreateGetPagesRequest(mode, requestContext),
                 (_, nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, requestContext),
@@ -164,7 +165,7 @@ namespace dpg_customization_LowLevel
             Argument.AssertNotNull(mode, nameof(mode));
 
             var requestContext = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : default;
-            return PageableHelpers.CreatePageable
+            return GeneratorPageableHelpers.CreatePageable
             (
                 _ => CreateGetPagesRequest(mode, requestContext),
                 (_, nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, requestContext),
