@@ -40,7 +40,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 overrideOperationName: default,
                 renameRules: default,
                 formatByNameRules: default,
-                renameMapping: default,
+                acronymMapping: default,
                 parameterRenameMapping: default,
                 irregularPluralWords: default,
                 mergeOperations: default,

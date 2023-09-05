@@ -111,7 +111,7 @@ namespace AutoRest.CSharp.Input
             JsonElement? renameRules = default,
             JsonElement? renamePropertyBag = default,
             JsonElement? formatByNameRules = default,
-            JsonElement? renameMapping = default,
+            JsonElement? acronymMapping = default,
             JsonElement? parameterRenameMapping = default,
             JsonElement? irregularPluralWords = default,
             JsonElement? mergeOperations = default,
@@ -135,7 +135,7 @@ namespace AutoRest.CSharp.Input
             RawRenameRules = DeserializeDictionary<string, string>(renameRules);
             RenamePropertyBag = DeserializeDictionary<string, string>(renamePropertyBag);
             FormatByNameRules = DeserializeDictionary<string, string>(formatByNameRules);
-            RenameMapping = DeserializeDictionary<string, string>(renameMapping);
+            RenameMapping = DeserializeDictionary<string, string>(acronymMapping);
             ParameterRenameMapping = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(parameterRenameMapping);
             IrregularPluralWords = DeserializeDictionary<string, string>(irregularPluralWords);
             PartialResources = DeserializeDictionary<string, string>(partialResources);
@@ -268,7 +268,6 @@ namespace AutoRest.CSharp.Input
                 acronymMapping: GetAcronymMappingConfig(autoRest),
                 renamePropertyBag: autoRest.GetValue<JsonElement?>("rename-property-bag").GetAwaiter().GetResult(),
                 formatByNameRules: autoRest.GetValue<JsonElement?>("format-by-name-rules").GetAwaiter().GetResult(),
-                renameMapping: autoRest.GetValue<JsonElement?>("rename-mapping").GetAwaiter().GetResult(),
                 parameterRenameMapping: autoRest.GetValue<JsonElement?>("parameter-rename-mapping").GetAwaiter().GetResult(),
                 irregularPluralWords: autoRest.GetValue<JsonElement?>("irregular-plural-words").GetAwaiter().GetResult(),
                 mergeOperations: autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
@@ -358,7 +357,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(RawRenameRules), out var renameRules);
             root.TryGetProperty(nameof(RenamePropertyBag), out var renamePropertyBag);
             root.TryGetProperty(nameof(FormatByNameRules), out var formatByNameRules);
-            root.TryGetProperty(nameof(RenameMapping), out var renameMapping);
+            root.TryGetProperty(nameof(RenameMapping), out var acronymMapping);
             root.TryGetProperty(nameof(ParameterRenameMapping), out var parameterRenameMapping);
             root.TryGetProperty(nameof(IrregularPluralWords), out var irregularPluralWords);
             root.TryGetProperty(nameof(OverrideOperationName), out var operationIdToName);
@@ -418,7 +417,7 @@ namespace AutoRest.CSharp.Input
                 renameRules: renameRules,
                 renamePropertyBag: renamePropertyBag,
                 formatByNameRules: formatByNameRules,
-                renameMapping: renameMapping,
+                acronymMapping: acronymMapping,
                 parameterRenameMapping: parameterRenameMapping,
                 irregularPluralWords: irregularPluralWords,
                 mergeOperations: mergeOperations,
