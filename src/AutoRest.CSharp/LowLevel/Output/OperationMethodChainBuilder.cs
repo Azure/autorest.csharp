@@ -408,13 +408,6 @@ namespace AutoRest.CSharp.Output.Models
 
         private void BuildParameters()
         {
-            SerializationFormat GetSerializationFormat(InputParameter parameter)
-            {
-                return parameter.SerializationFormat == SerializationFormat.Default
-                        ? SerializationBuilder.GetSerializationFormat(parameter.Type)
-                        : parameter.SerializationFormat;
-            }
-
             var operationParameters = RestClientBuilder.FilterOperationAllParameters(Operation.Parameters);
 
             var requiredPathParameters = new Dictionary<string, InputParameter>();
@@ -447,7 +440,7 @@ namespace AutoRest.CSharp.Output.Models
                         requestConditionHeaders |= header;
                         requestConditionRequestParameter ??= operationParameter;
                         requestConditionSerializationFormat = requestConditionSerializationFormat == SerializationFormat.Default
-                            ? GetSerializationFormat(operationParameter)
+                            ? operationParameter.SerializationFormat
                             : requestConditionSerializationFormat;
 
                         break;
