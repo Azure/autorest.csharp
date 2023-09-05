@@ -56,32 +56,13 @@ namespace AutoRest.CSharp.Common.Input
             description = BuilderHelpers.EscapeXmlDocDescription(description);
             propertyType = propertyType ?? throw new JsonException($"{nameof(InputModelProperty)} must have a property type.");
 
-            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, isRequired, isReadOnly, isDiscriminator, GetSerializationFormat(propertyType));
+            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, isRequired, isReadOnly, isDiscriminator);
             if (id != null)
             {
                 resolver.AddReference(id, property);
             }
 
             return property;
-        }
-
-        private static SerializationFormat GetSerializationFormat(InputType propertyType)
-        {
-            InputTypeKind? typeKind = propertyType switch
-            {
-                InputPrimitiveType primitiveType => primitiveType.Kind,
-                _ => null
-            };
-
-            if (typeKind is null)
-                return SerializationFormat.Default;
-
-            return typeKind switch
-            {
-                InputTypeKind.BytesBase64Url => SerializationFormat.Bytes_Base64Url,
-                InputTypeKind.Bytes => SerializationFormat.Bytes_Base64,
-                _ => SerializationFormat.Default
-            };
         }
     }
 }
