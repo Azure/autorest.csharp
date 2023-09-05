@@ -48,48 +48,6 @@ internal record InputParameter(
         HeaderCollectionPrefix: null)
     { }
 
-    //internal InputParameter(
-    //    string name,
-    //    string nameInRequest,
-    //    string? description,
-    //    InputType type,
-    //    RequestLocation location,
-    //    InputConstant? defaultValue,
-    //    VirtualParameter? virtualParameter,
-    //    InputParameter? groupedBy,
-    //    InputOperationParameterKind kind,
-    //    bool isRequired,
-    //    bool isApiVersion,
-    //    bool isResourceParameter,
-    //    bool isContentType,
-    //    bool isEndpoint,
-    //    bool skipUrlEncoding,
-    //    bool explode,
-    //    string? arraySerializationDelimiter,
-    //    string? headerCollectionPrefix,
-    //    SerializationFormat serializationFormat) : this(
-    //        name,
-    //        nameInRequest,
-    //        description,
-    //        type,
-    //        location,
-    //        defaultValue,
-    //        virtualParameter,
-    //        groupedBy,
-    //        kind,
-    //        isRequired,
-    //        isApiVersion,
-    //        isResourceParameter,
-    //        isContentType,
-    //        isEndpoint,
-    //        skipUrlEncoding,
-    //        explode,
-    //        arraySerializationDelimiter,
-    //        headerCollectionPrefix)
-    //{
-    //    _serializationFormat = serializationFormat;
-    //}
-
     private SerializationFormat? _serializationFormat;
     public SerializationFormat SerializationFormat => _serializationFormat ??= GetSerializationFormat(Type, Location);
 
