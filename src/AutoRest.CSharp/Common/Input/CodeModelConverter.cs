@@ -122,26 +122,25 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         public InputParameter CreateOperationParameter(RequestParameter input) => new(
-            name: input.Language.Default.Name,
-            nameInRequest: input.Language.Default.SerializedName ?? input.Language.Default.Name,
-            description: input.Language.Default.Description,
-            type: CreateType(input),
-            location: GetRequestLocation(input),
-            defaultValue: GetDefaultValue(input),
-            isRequired: input.IsRequired,
-            groupedBy: input.GroupedBy != null ? _parametersCache[input.GroupedBy]() : null,
-            kind: GetOperationParameterKind(input),
-            isApiVersion: input.IsApiVersion,
-            isResourceParameter: Convert.ToBoolean(input.Extensions.GetValue<string>("x-ms-resource-identifier")),
-            isContentType: input.Origin == "modelerfour:synthesized/content-type",
-            isEndpoint: input.Origin == "modelerfour:synthesized/host",
-            arraySerializationDelimiter: GetArraySerializationDelimiter(input),
-            explode: input.Protocol.Http is HttpParameter { Explode: true },
-            skipUrlEncoding: input.Extensions?.SkipEncoding ?? false,
-            headerCollectionPrefix: input.Extensions?.HeaderCollectionPrefix,
-            virtualParameter: input is VirtualParameter vp &&
-                (vp is { Schema: not ConstantSchema } or { Required: not true }) ? vp : null, // optional constant parameter can be virtual parameter
-            serializationFormat: BuilderHelpers.GetSerializationFormat(input.Schema)
+            Name: input.Language.Default.Name,
+            NameInRequest: input.Language.Default.SerializedName ?? input.Language.Default.Name,
+            Description: input.Language.Default.Description,
+            Type: CreateType(input),
+            Location: GetRequestLocation(input),
+            DefaultValue: GetDefaultValue(input),
+            IsRequired: input.IsRequired,
+            GroupedBy: input.GroupedBy != null ? _parametersCache[input.GroupedBy]() : null,
+            Kind: GetOperationParameterKind(input),
+            IsApiVersion: input.IsApiVersion,
+            IsResourceParameter: Convert.ToBoolean(input.Extensions.GetValue<string>("x-ms-resource-identifier")),
+            IsContentType: input.Origin == "modelerfour:synthesized/content-type",
+            IsEndpoint: input.Origin == "modelerfour:synthesized/host",
+            ArraySerializationDelimiter: GetArraySerializationDelimiter(input),
+            Explode: input.Protocol.Http is HttpParameter { Explode: true },
+            SkipUrlEncoding: input.Extensions?.SkipEncoding ?? false,
+            HeaderCollectionPrefix: input.Extensions?.HeaderCollectionPrefix,
+            VirtualParameter: input is VirtualParameter vp &&
+                (vp is { Schema: not ConstantSchema } or { Required: not true }) ? vp : null // optional constant parameter can be virtual parameter
         );
 
         public OperationResponse CreateOperationResponse(ServiceResponse response) => new(

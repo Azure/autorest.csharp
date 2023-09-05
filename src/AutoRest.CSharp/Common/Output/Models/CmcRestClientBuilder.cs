@@ -161,25 +161,24 @@ namespace AutoRest.CSharp.Output.Models
         private static InputParameter CreateInputParameter(RequestParameter requestParameter)
         {
             return new(
-                    name: requestParameter.Language.Default.Name,
-                    nameInRequest: requestParameter.Language.Default.SerializedName ?? requestParameter.Language.Default.Name,
-                    description: requestParameter.Language.Default.Description,
-                    type: CodeModelConverter.CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, null) with { IsNullable = requestParameter.IsNullable || !requestParameter.IsRequired },
-                    location: CodeModelConverter.GetRequestLocation(requestParameter),
-                    defaultValue: GetDefaultValue(requestParameter),
-                    isRequired: requestParameter.IsRequired,
-                    groupedBy: requestParameter.GroupedBy != null ? CreateInputParameter(requestParameter.GroupedBy) : null,
-                    kind: CodeModelConverter.GetOperationParameterKind(requestParameter),
-                    isApiVersion: requestParameter.Origin == "modelerfour:synthesized/api-version",
-                    isResourceParameter: Convert.ToBoolean(requestParameter.Extensions.GetValue<string>("x-ms-resource-identifier")),
-                    isContentType: requestParameter.Origin == "modelerfour:synthesized/content-type",
-                    isEndpoint: requestParameter.Origin == "modelerfour:synthesized/host",
-                    arraySerializationDelimiter: GetArraySerializationDelimiter(requestParameter),
-                    explode: requestParameter.Protocol.Http is HttpParameter { Explode: true },
-                    skipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
-                    headerCollectionPrefix: requestParameter.Extensions?.HeaderCollectionPrefix,
-                    virtualParameter: requestParameter is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null,
-                    serializationFormat: BuilderHelpers.GetSerializationFormat(requestParameter.Schema)
+                    Name: requestParameter.Language.Default.Name,
+                    NameInRequest: requestParameter.Language.Default.SerializedName ?? requestParameter.Language.Default.Name,
+                    Description: requestParameter.Language.Default.Description,
+                    Type: CodeModelConverter.CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, null) with { IsNullable = requestParameter.IsNullable || !requestParameter.IsRequired },
+                    Location: CodeModelConverter.GetRequestLocation(requestParameter),
+                    DefaultValue: GetDefaultValue(requestParameter),
+                    IsRequired: requestParameter.IsRequired,
+                    GroupedBy: requestParameter.GroupedBy != null ? CreateInputParameter(requestParameter.GroupedBy) : null,
+                    Kind: CodeModelConverter.GetOperationParameterKind(requestParameter),
+                    IsApiVersion: requestParameter.Origin == "modelerfour:synthesized/api-version",
+                    IsResourceParameter: Convert.ToBoolean(requestParameter.Extensions.GetValue<string>("x-ms-resource-identifier")),
+                    IsContentType: requestParameter.Origin == "modelerfour:synthesized/content-type",
+                    IsEndpoint: requestParameter.Origin == "modelerfour:synthesized/host",
+                    ArraySerializationDelimiter: GetArraySerializationDelimiter(requestParameter),
+                    Explode: requestParameter.Protocol.Http is HttpParameter { Explode: true },
+                    SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
+                    HeaderCollectionPrefix: requestParameter.Extensions?.HeaderCollectionPrefix,
+                    VirtualParameter: requestParameter is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null
                 );
         }
 
