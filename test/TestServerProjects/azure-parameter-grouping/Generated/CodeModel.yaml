@@ -27,7 +27,7 @@ schemas: !Schemas
           name: Integer
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_15
+    - !NumberSchema &ref_18
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -56,7 +56,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_16
+    - !StringSchema &ref_19
       type: string
       apiVersions:
         - !ApiVersion 
@@ -67,7 +67,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_21
+    - !ConstantSchema &ref_24
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -77,7 +77,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_23
+    - !ConstantSchema &ref_26
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -87,6 +87,19 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
+    - !ConstantSchema &ref_15
+      type: constant
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      value: !ConstantValue 
+        value: foo
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: EncryptionAlgorithmType
+          description: ''
+      protocol: !Protocols {}
   groups:
     - !GroupSchema &ref_2
       type: group
@@ -94,7 +107,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_1
           originalParameter:
-            - !Parameter &ref_18
+            - !Parameter &ref_21
               schema: *ref_1
               groupedBy: !Parameter &ref_4
                 schema: *ref_2
@@ -124,7 +137,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_3
           originalParameter:
-            - !Parameter &ref_19
+            - !Parameter &ref_22
               schema: *ref_3
               groupedBy: *ref_4
               implementation: Method
@@ -146,7 +159,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_1
           originalParameter:
-            - !Parameter &ref_20
+            - !Parameter &ref_23
               schema: *ref_1
               groupedBy: *ref_4
               implementation: Method
@@ -170,7 +183,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_5
           originalParameter:
-            - !Parameter &ref_22
+            - !Parameter &ref_25
               schema: *ref_5
               groupedBy: *ref_4
               implementation: Method
@@ -204,7 +217,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_1
           originalParameter:
-            - !Parameter &ref_26
+            - !Parameter &ref_29
               schema: *ref_1
               groupedBy: !Parameter &ref_7
                 schema: *ref_6
@@ -233,7 +246,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_3
           originalParameter:
-            - !Parameter &ref_27
+            - !Parameter &ref_30
               schema: *ref_3
               groupedBy: *ref_7
               implementation: Method
@@ -265,7 +278,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_1
           originalParameter:
-            - !Parameter &ref_28
+            - !Parameter &ref_31
               schema: *ref_1
               groupedBy: !Parameter &ref_9
                 schema: *ref_8
@@ -294,7 +307,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_1
           originalParameter:
-            - !Parameter &ref_29
+            - !Parameter &ref_32
               schema: *ref_1
               groupedBy: *ref_9
               implementation: Method
@@ -326,7 +339,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_1
           originalParameter:
-            - !Parameter &ref_30
+            - !Parameter &ref_33
               schema: *ref_1
               groupedBy: !Parameter &ref_11
                 schema: *ref_10
@@ -346,7 +359,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: header
-            - !Parameter &ref_34
+            - !Parameter &ref_37
               schema: *ref_1
               groupedBy: !Parameter &ref_12
                 schema: *ref_10
@@ -375,7 +388,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_3
           originalParameter:
-            - !Parameter &ref_31
+            - !Parameter &ref_34
               schema: *ref_3
               groupedBy: *ref_11
               implementation: Method
@@ -388,7 +401,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: query
-            - !Parameter &ref_35
+            - !Parameter &ref_38
               schema: *ref_3
               groupedBy: *ref_12
               implementation: Method
@@ -420,7 +433,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_1
           originalParameter:
-            - !Parameter &ref_32
+            - !Parameter &ref_35
               schema: *ref_1
               groupedBy: !Parameter &ref_14
                 schema: *ref_13
@@ -449,7 +462,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_3
           originalParameter:
-            - !Parameter &ref_33
+            - !Parameter &ref_36
               schema: *ref_3
               groupedBy: *ref_14
               implementation: Method
@@ -475,15 +488,76 @@ schemas: !Schemas
           name: ParameterGroupingPostMultiParamGroupsSecondParamGroup
           description: Parameter group
       protocol: !Protocols {}
+    - !GroupSchema &ref_16
+      type: group
+      properties:
+        - !GroupProperty 
+          schema: *ref_15
+          originalParameter:
+            - !Parameter &ref_39
+              schema: *ref_15
+              groupedBy: !Parameter &ref_17
+                schema: *ref_16
+                implementation: Method
+                language: !Languages 
+                  default:
+                    name: grouper
+                    description: Parameter group
+                protocol: !Protocols {}
+              implementation: Method
+              extensions: {}
+              language: !Languages 
+                default:
+                  name: groupedConstant
+                  description: A grouped parameter that is a constant.
+                  serializedName: groupedConstant
+              protocol: !Protocols 
+                http: !HttpParameter 
+                  in: header
+          serializedName: groupedConstant
+          language: !Languages 
+            default:
+              name: groupedConstant
+              description: A grouped parameter that is a constant.
+          protocol: !Protocols {}
+        - !GroupProperty 
+          schema: *ref_1
+          originalParameter:
+            - !Parameter &ref_40
+              schema: *ref_1
+              groupedBy: *ref_17
+              implementation: Method
+              extensions: {}
+              language: !Languages 
+                default:
+                  name: groupedParameter
+                  description: Optional parameter part of a parameter grouping.
+                  serializedName: groupedParameter
+              protocol: !Protocols 
+                http: !HttpParameter 
+                  in: header
+          serializedName: groupedParameter
+          language: !Languages 
+            default:
+              name: groupedParameter
+              description: Optional parameter part of a parameter grouping.
+          protocol: !Protocols {}
+      usage:
+        - input
+      language: !Languages 
+        default:
+          name: Grouper
+          description: Parameter group
+      protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_25
+    - !ObjectSchema &ref_28
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
         - !Property 
-          schema: *ref_15
+          schema: *ref_18
           serializedName: status
           language: !Languages 
             default:
@@ -491,7 +565,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_16
+          schema: *ref_19
           serializedName: message
           language: !Languages 
             default:
@@ -509,7 +583,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
 globalParameters:
-  - !Parameter &ref_17
+  - !Parameter &ref_20
     schema: *ref_0
     clientDefaultValue: http://localhost:3000
     implementation: Client
@@ -535,15 +609,15 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
-          - *ref_18
-          - *ref_19
           - *ref_20
+          - *ref_21
+          - *ref_22
+          - *ref_23
         requestMediaTypes:
-          application/json: !Request &ref_24
+          application/json: !Request &ref_27
             parameters:
               - !Parameter 
-                schema: *ref_21
+                schema: *ref_24
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -555,9 +629,9 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - *ref_22
+              - *ref_25
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -585,7 +659,7 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_24
+          - *ref_27
         signatureParameters: []
         responses:
           - !Response 
@@ -599,7 +673,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_25
+            schema: *ref_28
             language: !Languages 
               default:
                 name: ''
@@ -622,14 +696,14 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
-          - *ref_26
-          - *ref_27
+          - *ref_20
+          - *ref_29
+          - *ref_30
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -666,7 +740,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_25
+            schema: *ref_28
             language: !Languages 
               default:
                 name: ''
@@ -689,14 +763,14 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
-          - *ref_28
-          - *ref_29
+          - *ref_20
+          - *ref_31
+          - *ref_32
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -733,7 +807,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_25
+            schema: *ref_28
             language: !Languages 
               default:
                 name: ''
@@ -756,16 +830,16 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
-          - *ref_30
-          - *ref_31
-          - *ref_32
+          - *ref_20
           - *ref_33
+          - *ref_34
+          - *ref_35
+          - *ref_36
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -804,7 +878,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_25
+            schema: *ref_28
             language: !Languages 
               default:
                 name: ''
@@ -827,14 +901,14 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_17
-          - *ref_34
-          - *ref_35
+          - *ref_20
+          - *ref_37
+          - *ref_38
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -871,7 +945,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_25
+            schema: *ref_28
             language: !Languages 
               default:
                 name: ''
@@ -887,6 +961,73 @@ operationGroups:
           default:
             name: PostSharedParameterGroupObject
             description: Post parameters with a shared parameter group object
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: parameterGrouping_groupWithConstant
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_20
+          - *ref_39
+          - *ref_40
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_26
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - *ref_17
+            signatureParameters:
+              - *ref_17
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /parameterGrouping/groupWithConstant
+                method: put
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_28
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GroupWithConstant
+            description: Parameter group with a constant. Pass in 'foo' for groupedConstant and 'bar' for groupedParameter.
         protocol: !Protocols {}
     language: !Languages 
       default:

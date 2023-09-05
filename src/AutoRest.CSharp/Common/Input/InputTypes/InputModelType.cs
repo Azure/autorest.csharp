@@ -17,6 +17,8 @@ namespace AutoRest.CSharp.Common.Input
         /// </summary>
         public bool IsPropertyBag { get; init; } = false;
 
+        public bool IsAnonymousModel { get; init; } = false;
+
         public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
 
         public IEnumerable<InputModelType> GetAllBaseModels() => EnumerateBase(BaseModel);
