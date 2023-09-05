@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
-            IpTags = new ChangeTrackingList<VirtualMachineScaleSetIpTag>();
+            IPTags = new ChangeTrackingList<VirtualMachineScaleSetIPTag>();
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetPublicIPAddressConfiguration. </summary>
@@ -57,12 +57,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: 'IPv4' and 'IPv6'.
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.publicIPAddressVersion
         /// </param>
-        internal VirtualMachineScaleSetPublicIPAddressConfiguration(string name, int? idleTimeoutInMinutes, VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetIpTag> ipTags, WritableSubResource publicIPPrefix, IPVersion? publicIPAddressVersion)
+        internal VirtualMachineScaleSetPublicIPAddressConfiguration(string name, int? idleTimeoutInMinutes, VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetIPTag> ipTags, WritableSubResource publicIPPrefix, IPVersion? publicIPAddressVersion)
         {
             Name = name;
             IdleTimeoutInMinutes = idleTimeoutInMinutes;
             DnsSettings = dnsSettings;
-            IpTags = ipTags;
+            IPTags = ipTags;
             PublicIPPrefix = publicIPPrefix;
             PublicIPAddressVersion = publicIPAddressVersion;
         }
@@ -96,7 +96,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The list of IP tags associated with the public IP address.
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.ipTags
         /// </summary>
-        public IList<VirtualMachineScaleSetIpTag> IpTags { get; }
+        public IList<VirtualMachineScaleSetIPTag> IPTags { get; }
         /// <summary>
         /// The PublicIPPrefix from which to allocate publicIP addresses.
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.publicIPPrefix
