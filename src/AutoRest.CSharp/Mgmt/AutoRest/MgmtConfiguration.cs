@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
 using System;
@@ -69,21 +69,21 @@ namespace AutoRest.CSharp.Input
             }
         }
 
-        public record RenameRuleTarget(string Value, string? ParameterValue)
+        public record AcronymMappingTarget(string Value, string? ParameterValue)
         {
-            internal static RenameRuleTarget Parse(string rawValue)
+            internal static AcronymMappingTarget Parse(string rawValue)
             {
                 var spans = rawValue.AsSpan();
                 var index = spans.IndexOf('|');
                 if (index < 0)
-                    return new RenameRuleTarget(rawValue, null);
+                    return new AcronymMappingTarget(rawValue, null);
 
-                return new RenameRuleTarget(spans.Slice(0, index).ToString(), spans.Slice(index, rawValue.Length - index).ToString());
+                return new AcronymMappingTarget(spans.Slice(0, index).ToString(), spans.Slice(index, rawValue.Length - index).ToString());
             }
         }
 
-        private static IReadOnlyDictionary<string, RenameRuleTarget> ParseRenameRules(IReadOnlyDictionary<string, string> renameRules)
-            => renameRules.ToDictionary(kv => kv.Key, kv => RenameRuleTarget.Parse(kv.Value));
+        private static IReadOnlyDictionary<string, AcronymMappingTarget> ParseAcronymMapping(IReadOnlyDictionary<string, string> acronymMapping)
+            => acronymMapping.ToDictionary(kv => kv.Key, kv => AcronymMappingTarget.Parse(kv.Value));
 
         public MgmtConfiguration(
             IReadOnlyList<string> operationGroupsToOmit,
@@ -108,10 +108,10 @@ namespace AutoRest.CSharp.Input
             JsonElement? requestPathToSingletonResource = default,
             JsonElement? overrideOperationName = default,
             JsonElement? operationPositions = default,
-            JsonElement? renameRules = default,
+            JsonElement? acronymMapping = default,
             JsonElement? renamePropertyBag = default,
             JsonElement? formatByNameRules = default,
-            JsonElement? acronymMapping = default,
+            JsonElement? renameMapping = default,
             JsonElement? parameterRenameMapping = default,
             JsonElement? irregularPluralWords = default,
             JsonElement? mergeOperations = default,
@@ -132,10 +132,10 @@ namespace AutoRest.CSharp.Input
             RequestPathToScopeResourceTypes = DeserializeDictionary<string, string[]>(requestPathToScopeResourceTypes);
             RequestPathToSingletonResource = DeserializeDictionary<string, string>(requestPathToSingletonResource);
             OverrideOperationName = DeserializeDictionary<string, string>(overrideOperationName);
-            RawRenameRules = DeserializeDictionary<string, string>(renameRules);
+            RawAcronymMapping = DeserializeDictionary<string, string>(acronymMapping);
             RenamePropertyBag = DeserializeDictionary<string, string>(renamePropertyBag);
             FormatByNameRules = DeserializeDictionary<string, string>(formatByNameRules);
-            RenameMapping = DeserializeDictionary<string, string>(acronymMapping);
+            RenameMapping = DeserializeDictionary<string, string>(renameMapping);
             ParameterRenameMapping = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(parameterRenameMapping);
             IrregularPluralWords = DeserializeDictionary<string, string>(irregularPluralWords);
             PartialResources = DeserializeDictionary<string, string>(partialResources);
@@ -205,9 +205,9 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyDictionary<string, string> RequestPathToSingletonResource { get; }
         public IReadOnlyDictionary<string, string> OverrideOperationName { get; }
         public IReadOnlyDictionary<string, string> RenamePropertyBag { get; }
-        private IReadOnlyDictionary<string, string> RawRenameRules { get; }
-        private IReadOnlyDictionary<string, RenameRuleTarget>? _renameRules;
-        public IReadOnlyDictionary<string, RenameRuleTarget> RenameRules => _renameRules ??= ParseRenameRules(RawRenameRules);
+        private IReadOnlyDictionary<string, string> RawAcronymMapping { get; }
+        private IReadOnlyDictionary<string, AcronymMappingTarget>? _acronymMapping;
+        public IReadOnlyDictionary<string, AcronymMappingTarget> AcronymMapping => _acronymMapping ??= ParseAcronymMapping(RawAcronymMapping);
         public IReadOnlyDictionary<string, string> FormatByNameRules { get; }
         public IReadOnlyDictionary<string, string> RenameMapping { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> ParameterRenameMapping { get; }
@@ -268,6 +268,7 @@ namespace AutoRest.CSharp.Input
                 acronymMapping: GetAcronymMappingConfig(autoRest),
                 renamePropertyBag: autoRest.GetValue<JsonElement?>("rename-property-bag").GetAwaiter().GetResult(),
                 formatByNameRules: autoRest.GetValue<JsonElement?>("format-by-name-rules").GetAwaiter().GetResult(),
+                renameMapping: autoRest.GetValue<JsonElement?>("rename-mapping").GetAwaiter().GetResult(),
                 parameterRenameMapping: autoRest.GetValue<JsonElement?>("parameter-rename-mapping").GetAwaiter().GetResult(),
                 irregularPluralWords: autoRest.GetValue<JsonElement?>("irregular-plural-words").GetAwaiter().GetResult(),
                 mergeOperations: autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
@@ -311,7 +312,7 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(RequestPathToResourceType), RequestPathToResourceType);
             WriteNonEmptySettings(writer, nameof(RequestPathToScopeResourceTypes), RequestPathToScopeResourceTypes);
             WriteNonEmptySettings(writer, nameof(RequestPathToSingletonResource), RequestPathToSingletonResource);
-            WriteNonEmptySettings(writer, nameof(RawRenameRules), RawRenameRules);
+            WriteNonEmptySettings(writer, nameof(RawAcronymMapping), RawAcronymMapping);
             WriteNonEmptySettings(writer, nameof(RenamePropertyBag), RenamePropertyBag);
             WriteNonEmptySettings(writer, nameof(FormatByNameRules), FormatByNameRules);
             WriteNonEmptySettings(writer, nameof(RenameMapping), RenameMapping);
@@ -354,10 +355,10 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(RequestPathToScopeResourceTypes), out var requestPathToScopeResourceTypes);
             root.TryGetProperty(nameof(OperationPositions), out var operationPositions);
             root.TryGetProperty(nameof(RequestPathToSingletonResource), out var requestPathToSingletonResource);
-            root.TryGetProperty(nameof(RawRenameRules), out var renameRules);
+            root.TryGetProperty(nameof(RawAcronymMapping), out var acronymMapping);
             root.TryGetProperty(nameof(RenamePropertyBag), out var renamePropertyBag);
             root.TryGetProperty(nameof(FormatByNameRules), out var formatByNameRules);
-            root.TryGetProperty(nameof(RenameMapping), out var acronymMapping);
+            root.TryGetProperty(nameof(RenameMapping), out var renameMapping);
             root.TryGetProperty(nameof(ParameterRenameMapping), out var parameterRenameMapping);
             root.TryGetProperty(nameof(IrregularPluralWords), out var irregularPluralWords);
             root.TryGetProperty(nameof(OverrideOperationName), out var operationIdToName);
@@ -414,10 +415,10 @@ namespace AutoRest.CSharp.Input
                 operationPositions: operationPositions,
                 requestPathToSingletonResource: requestPathToSingletonResource,
                 overrideOperationName: operationIdToName,
-                renameRules: renameRules,
+                acronymMapping: acronymMapping,
                 renamePropertyBag: renamePropertyBag,
                 formatByNameRules: formatByNameRules,
-                acronymMapping: acronymMapping,
+                renameMapping: renameMapping,
                 parameterRenameMapping: parameterRenameMapping,
                 irregularPluralWords: irregularPluralWords,
                 mergeOperations: mergeOperations,

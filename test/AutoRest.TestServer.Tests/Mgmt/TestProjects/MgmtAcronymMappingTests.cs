@@ -6,10 +6,10 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
-    public class MgmtRenameRulesTests : TestProjectTests
+    public class MgmtAcronymMappingTests : TestProjectTests
     {
-        public MgmtRenameRulesTests()
-            : base("MgmtRenameRules")
+        public MgmtAcronymMappingTests()
+            : base("MgmtAcronymMapping")
         {
             TagResourceExceptions.Add(typeof(VirtualMachineScaleSetRollingUpgradeResource));
         }

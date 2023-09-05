@@ -1,7 +1,7 @@
 # Management SDK polishing configurations
 
 - [Management SDK polishing configurations](#management-sdk-polishing-configurations)
-  - [Rename rules](#rename-rules)
+  - [Acronym mapping](#acronym-mapping)
   - [Change format by name rules](#change-format-by-name-rules)
   - [Rename mapping](#rename-mapping)
     - [Rename a type](#rename-a-type)
@@ -13,7 +13,7 @@
   - [Keep Plural Enums](#keep-plural-enums)
   - [Suppress Abstract Base Class](#suppress-abstract-base-class)
 
-## Rename rules
+## Acronym mapping
 
 A mechanism of acronym mapping is introduced in the generator to unify the casing of acronyms.
 
@@ -25,7 +25,7 @@ acronym-mapping:
 
 The above configuration will search case sensitively in the public API of generated resources/collections/models, and replace the occurrences to the corresponding value to keep the casing of some acronyms unified across the generated SDK.
 
-The `rename-rules` configuration also supports parameter name because in some cases the default logic to get the variable name form from a property name might be problematic. For instance, we usually could have a class like this:
+The `acronym-mapping` configuration also supports parameter name because in some cases the default logic to get the variable name form from a property name might be problematic. For instance, we usually could have a class like this:
 ```csharp
 public partial class PublicIPAddress
 {
