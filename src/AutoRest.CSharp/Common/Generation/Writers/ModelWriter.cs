@@ -74,6 +74,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     if (schema.RawDataProperty is not null)
                     {
+                        writer.WriteXmlDocumentationSummary($"{schema.RawDataProperty.ParameterDescription}");
                         writer.Line($"{schema.RawDataProperty.Declaration.Accessibility} {schema.RawDataProperty.ValueType} {schema.RawDataProperty.Declaration.Name};");
                         writer.Line();
                     }
