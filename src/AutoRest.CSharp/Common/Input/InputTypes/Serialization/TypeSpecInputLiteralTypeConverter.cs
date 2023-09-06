@@ -27,14 +27,14 @@ namespace AutoRest.CSharp.Common.Input
         {
             var isFirstProperty = id == null && name == null;
             bool isNullable = false;
-            Object? value = null;
+            object? value = null;
             InputType? type = null;
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputListType.Name), ref name)
-                    || reader.TryReadBoolean(nameof(InputListType.IsNullable), ref isNullable)
+                    || reader.TryReadString(nameof(InputLiteralType.Name), ref name)
+                    || reader.TryReadBoolean(nameof(InputLiteralType.IsNullable), ref isNullable)
                     || reader.TryReadWithConverter(nameof(InputLiteralType.LiteralValueType), options, ref type);
 
                 if (isKnownProperty)

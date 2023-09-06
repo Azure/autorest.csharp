@@ -115,15 +115,7 @@ namespace AutoRest.CSharp.Input
             ShouldTreatBase64AsBinaryData = (!azureArm && !generation1ConvenienceClient) ? shouldTreatBase64AsBinaryData : false;
             UseCoreDataFactoryReplacements = useCoreDataFactoryReplacements;
             projectFolder ??= ProjectFolderDefault;
-            if (Path.IsPathRooted(projectFolder))
-            {
-                _absoluteProjectFolder = projectFolder;
-                projectFolder = Path.GetRelativePath(outputFolder, projectFolder);
-            }
-            else
-            {
-                _absoluteProjectFolder = Path.GetFullPath(Path.Combine(outputFolder, projectFolder));
-            }
+            (_absoluteProjectFolder, _relativeProjectFolder) = ParseProjectFolders(outputFolder, projectFolder);
 
             ExistingProjectFolder = existingProjectFolder == null ? DownloadLatestContract(_absoluteProjectFolder) : Path.GetFullPath(Path.Combine(_absoluteProjectFolder, existingProjectFolder));
             var isAzureProject = ns.StartsWith("Azure.") || ns.StartsWith("Microsoft.Azure");
@@ -149,7 +141,6 @@ namespace AutoRest.CSharp.Input
                 }
             }
 
-            _relativeProjectFolder = projectFolder;
             _protocolMethodList = protocolMethodList;
             SkipSerializationFormatXml = skipSerializationFormatXml;
             DisablePaginationTopRenaming = disablePaginationTopRenaming;
@@ -160,6 +151,18 @@ namespace AutoRest.CSharp.Input
             _modelsToTreatEmptyStringAsNull = new HashSet<string>(modelsToTreatEmptyStringAsNull);
             _intrinsicTypesToTreatEmptyStringAsNull.UnionWith(additionalIntrinsicTypesToTreatEmptyStringAsNull);
             _methodsToKeepClientDefaultValue = methodsToKeepClientDefaultValue ?? Array.Empty<string>();
+        }
+
+        internal static (string AbsoluteProjectFolder, string RelativeProjectFolder) ParseProjectFolders(string outputFolder, string projectFolder)
+        {
+            if (Path.IsPathRooted(projectFolder))
+            {
+                return (projectFolder, Path.GetRelativePath(outputFolder, projectFolder));
+            }
+            else
+            {
+                return (Path.GetFullPath(Path.Combine(outputFolder, projectFolder)), projectFolder);
+            }
         }
 
         private static string? DownloadLatestContract(string projectFolder)
@@ -281,17 +284,17 @@ namespace AutoRest.CSharp.Input
         public static void Initialize(IPluginCommunication autoRest, string defaultNamespace, string defaultLibraryName)
         {
             Initialize(
-                outputFolder: TrimFileSuffix(GetRequiredOption<string>(autoRest, Options.OutputFolder)),
-                ns: autoRest.GetValue<string?>(Options.Namespace).GetAwaiter().GetResult() ?? defaultNamespace,
-                libraryName: autoRest.GetValue<string?>(Options.LibraryName).GetAwaiter().GetResult() ?? defaultLibraryName,
+                outputFolder: GetOutputFolderOption(autoRest),
+                ns: GetNamespaceOption(autoRest, defaultNamespace),
+                libraryName: GetLibraryNameOption(autoRest, defaultLibraryName),
                 sharedSourceFolders: GetRequiredOption<string[]>(autoRest, Options.SharedSourceFolders).Select(TrimFileSuffix).ToArray(),
                 saveInputs: GetOptionBoolValue(autoRest, Options.SaveInputs),
-                azureArm: GetOptionBoolValue(autoRest, Options.AzureArm),
+                azureArm: GetAzureArmOption(autoRest),
                 publicClients: GetOptionBoolValue(autoRest, Options.PublicClients),
                 modelNamespace: GetOptionBoolValue(autoRest, Options.ModelNamespace),
                 headAsBoolean: GetOptionBoolValue(autoRest, Options.HeadAsBoolean),
-                skipCSProjPackageReference: GetOptionBoolValue(autoRest, Options.SkipCSProjPackageReference),
-                generation1ConvenienceClient: GetOptionBoolValue(autoRest, Options.Generation1ConvenienceClient),
+                skipCSProjPackageReference: GetSkipCSProjPackageReferenceOption(autoRest),
+                generation1ConvenienceClient: GetGeneration1ConvenienceClientOption(autoRest),
                 singleTopLevelClient: GetOptionBoolValue(autoRest, Options.SingleTopLevelClient),
                 skipSerializationFormatXml: GetOptionBoolValue(autoRest, Options.SkipSerializationFormatXml),
                 disablePaginationTopRenaming: GetOptionBoolValue(autoRest, Options.DisablePaginationTopRenaming),
@@ -303,7 +306,7 @@ namespace AutoRest.CSharp.Input
                 useOverloadsBetweenProtocolAndConvenience: GetOptionBoolValue(autoRest, Options.UseOverloadsBetweenProtocolAndConvenience),
                 keepNonOverloadableProtocolSignature: GetOptionBoolValue(autoRest, Options.KeepNonOverloadableProtocolSignature),
                 useCoreDataFactoryReplacements: GetOptionBoolValue(autoRest, Options.UseCoreDataFactoryReplacements),
-                projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
+                projectFolder: GetProjectFolderOption(autoRest),
                 existingProjectFolder: autoRest.GetValue<string?>(Options.ExistingProjectfolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 suppressAbstractBaseClasses: autoRest.GetValue<string[]?>(Options.SuppressAbstractBaseClasses).GetAwaiter().GetResult() ?? Array.Empty<string>(),
@@ -596,5 +599,26 @@ namespace AutoRest.CSharp.Input
 
             return null;
         }
+
+        // Fetch CSharpProj configuration from Configuration
+        internal static CSharpProjConfiguration ToCSharpProjConfiguration() => new CSharpProjConfiguration
+        (
+            AbsoluteProjectFolder: AbsoluteProjectFolder,
+            AzureArm: AzureArm,
+            IsMgmtTestProject: MgmtTestConfiguration is not null,
+            LibraryName: LibraryName,
+            Namespace: Namespace,
+            SkipCSProjPackageReference: SkipCSProjPackageReference,
+            RelativeProjectFolder: RelativeProjectFolder,
+            Generation1ConvenienceClient: Generation1ConvenienceClient
+        );
+
+        internal static string GetOutputFolderOption(IPluginCommunication autoRest) => TrimFileSuffix(GetRequiredOption<string>(autoRest, Options.OutputFolder));
+        internal static string? GetProjectFolderOption(IPluginCommunication autoRest) => autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult();
+        internal static bool GetAzureArmOption(IPluginCommunication autoRest) => GetOptionBoolValue(autoRest, Options.AzureArm);
+        internal static bool GetSkipCSProjPackageReferenceOption(IPluginCommunication autoRest) => GetOptionBoolValue(autoRest, Options.SkipCSProjPackageReference);
+        internal static bool GetGeneration1ConvenienceClientOption(IPluginCommunication autoRest) => GetOptionBoolValue(autoRest, Options.Generation1ConvenienceClient);
+        internal static string GetLibraryNameOption(IPluginCommunication autoRest, string defaultLibraryName) => autoRest.GetValue<string?>(Options.LibraryName).GetAwaiter().GetResult() ?? defaultLibraryName;
+        internal static string GetNamespaceOption(IPluginCommunication autoRest, string defaultNamespace) => autoRest.GetValue<string?>(Options.Namespace).GetAwaiter().GetResult() ?? defaultNamespace;
     }
 }

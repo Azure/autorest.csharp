@@ -12,7 +12,7 @@ using System.Globalization;
 namespace Azure.NewProject.TypeSpec.Models
 {
     /// <summary> The Thing_requiredLiteralInt. </summary>
-    public readonly partial struct ThingRequiredLiteralInt : IEquatable<ThingRequiredLiteralInt>
+    internal readonly partial struct ThingRequiredLiteralInt : IEquatable<ThingRequiredLiteralInt>
     {
         private readonly int _value;
 

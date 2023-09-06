@@ -151,7 +151,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePut400Request()
+        internal HttpMessage CreatePut400Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -161,18 +161,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Put400Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Put400Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut400Request();
+            using var message = CreatePut400Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -182,10 +186,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Put400(CancellationToken cancellationToken = default)
+        public Response Put400(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut400Request();
+            using var message = CreatePut400Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -194,7 +199,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePatch400Request()
+        internal HttpMessage CreatePatch400Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -204,18 +209,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Patch400Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Patch400Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch400Request();
+            using var message = CreatePatch400Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -225,10 +234,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Patch400(CancellationToken cancellationToken = default)
+        public Response Patch400(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch400Request();
+            using var message = CreatePatch400Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -237,7 +247,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePost400Request()
+        internal HttpMessage CreatePost400Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -247,18 +257,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Post400Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Post400Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost400Request();
+            using var message = CreatePost400Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -268,10 +282,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post400(CancellationToken cancellationToken = default)
+        public Response Post400(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost400Request();
+            using var message = CreatePost400Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -280,7 +295,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreateDelete400Request()
+        internal HttpMessage CreateDelete400Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -290,18 +305,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Delete400Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Delete400Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateDelete400Request();
+            using var message = CreateDelete400Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -311,10 +330,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete400(CancellationToken cancellationToken = default)
+        public Response Delete400(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateDelete400Request();
+            using var message = CreateDelete400Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -479,7 +499,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePut404Request()
+        internal HttpMessage CreatePut404Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -489,18 +509,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/failure/client/404", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 404 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Put404Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Put404Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut404Request();
+            using var message = CreatePut404Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -510,10 +534,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 404 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Put404(CancellationToken cancellationToken = default)
+        public Response Put404(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut404Request();
+            using var message = CreatePut404Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -522,7 +547,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePatch405Request()
+        internal HttpMessage CreatePatch405Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -532,18 +557,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/failure/client/405", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 405 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Patch405Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Patch405Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch405Request();
+            using var message = CreatePatch405Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -553,10 +582,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 405 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Patch405(CancellationToken cancellationToken = default)
+        public Response Patch405(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch405Request();
+            using var message = CreatePatch405Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -565,7 +595,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePost406Request()
+        internal HttpMessage CreatePost406Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -575,18 +605,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/failure/client/406", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 406 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Post406Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Post406Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost406Request();
+            using var message = CreatePost406Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -596,10 +630,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 406 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post406(CancellationToken cancellationToken = default)
+        public Response Post406(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost406Request();
+            using var message = CreatePost406Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -608,7 +643,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreateDelete407Request()
+        internal HttpMessage CreateDelete407Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -618,18 +653,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/failure/client/407", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 407 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Delete407Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Delete407Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateDelete407Request();
+            using var message = CreateDelete407Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -639,10 +678,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 407 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete407(CancellationToken cancellationToken = default)
+        public Response Delete407(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateDelete407Request();
+            using var message = CreateDelete407Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -651,7 +691,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePut409Request()
+        internal HttpMessage CreatePut409Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -661,18 +701,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/failure/client/409", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 409 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Put409Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Put409Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut409Request();
+            using var message = CreatePut409Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -682,10 +726,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 409 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Put409(CancellationToken cancellationToken = default)
+        public Response Put409(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut409Request();
+            using var message = CreatePut409Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -850,7 +895,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePut413Request()
+        internal HttpMessage CreatePut413Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -860,18 +905,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/failure/client/413", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 413 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Put413Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Put413Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut413Request();
+            using var message = CreatePut413Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -881,10 +930,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 413 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Put413(CancellationToken cancellationToken = default)
+        public Response Put413(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut413Request();
+            using var message = CreatePut413Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -893,7 +943,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePatch414Request()
+        internal HttpMessage CreatePatch414Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -903,18 +953,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/failure/client/414", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 414 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Patch414Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Patch414Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch414Request();
+            using var message = CreatePatch414Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -924,10 +978,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 414 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Patch414(CancellationToken cancellationToken = default)
+        public Response Patch414(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch414Request();
+            using var message = CreatePatch414Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -936,7 +991,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePost415Request()
+        internal HttpMessage CreatePost415Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -946,18 +1001,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/failure/client/415", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 415 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Post415Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Post415Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost415Request();
+            using var message = CreatePost415Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -967,10 +1026,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 415 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post415(CancellationToken cancellationToken = default)
+        public Response Post415(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost415Request();
+            using var message = CreatePost415Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1018,7 +1078,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreateDelete417Request()
+        internal HttpMessage CreateDelete417Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1028,18 +1088,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/failure/client/417", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 417 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Delete417Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Delete417Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateDelete417Request();
+            using var message = CreateDelete417Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1049,10 +1113,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 417 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete417(CancellationToken cancellationToken = default)
+        public Response Delete417(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateDelete417Request();
+            using var message = CreateDelete417Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

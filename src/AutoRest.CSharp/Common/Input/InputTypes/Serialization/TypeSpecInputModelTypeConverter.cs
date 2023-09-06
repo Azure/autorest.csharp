@@ -30,6 +30,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             var isFirstProperty = id == null && name == null;
             var properties = new List<InputModelProperty>();
+            var derivedModels = new List<InputModelType>();
             bool isNullable = false;
             string? ns = null;
             string? accessibility = null;
@@ -52,7 +53,8 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputModelType.Usage), ref usageString)
                     || reader.TryReadString(nameof(InputModelType.DiscriminatorPropertyName), ref discriminatorPropertyName)
                     || reader.TryReadString(nameof(InputModelType.DiscriminatorValue), ref discriminatorValue)
-                    || reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel);
+                    || reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel)
+                    || reader.TryReadBoolean(nameof(InputModelType.IsNullable), ref isNullable);
 
                 if (isKnownProperty)
                 {
@@ -61,9 +63,14 @@ namespace AutoRest.CSharp.Common.Input
 
                 if (reader.GetString() == nameof(InputModelType.Properties))
                 {
-                    model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, isNullable, resolver);
+                    model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, derivedModels, isNullable, resolver);
                     reader.Read();
                     CreateProperties(ref reader, properties, options);
+                }
+                else if (reader.GetString() == nameof(InputModelType.DerivedModels))
+                {
+                    reader.Read();
+                    CreateDerivedModels(ref reader, derivedModels, options);
                     if (reader.TokenType != JsonTokenType.EndObject)
                     {
                         throw new JsonException($"{nameof(InputModelType)}.{nameof(InputModelType.Properties)} must be the last defined property.");
@@ -75,23 +82,51 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, isNullable, resolver);
+            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, derivedModels, isNullable, resolver);
         }
 
-        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyValue, InputModelType? baseModel, List<InputModelProperty> properties, bool isNullable, ReferenceResolver resolver)
+        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyName, InputModelType? baseModel, List<InputModelProperty> properties, List<InputModelType> derivedModels, bool isNullable, ReferenceResolver resolver)
         {
-            name = name ?? throw new JsonException("Model must have name");
+            if (name == null)
+                throw new JsonException("Model must have name");
+
+            bool isAnonymousModel = false;
+            if (name.Length == 0)
+            {
+                name = id ?? throw new JsonException("Model must have id"); // we just use id as the name of the model
+                isAnonymousModel = true;
+            }
+
             InputModelTypeUsage usage = InputModelTypeUsage.None;
             if (usageString != null)
             {
                 Enum.TryParse<InputModelTypeUsage>(usageString, ignoreCase: true, out usage);
             }
-            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, new List<InputModelType>(), discriminatorValue, discriminatorPropertyValue, IsNullable: isNullable);
+            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, derivedModels, discriminatorValue, discriminatorPropertyName, isNullable)
+            {
+                IsAnonymousModel = isAnonymousModel
+            };
             if (id != null)
             {
                 resolver.AddReference(id, model);
             }
             return model;
+        }
+
+        private static void CreateDerivedModels(ref Utf8JsonReader reader, ICollection<InputModelType> derivedModels, JsonSerializerOptions options)
+        {
+            if (reader.TokenType != JsonTokenType.StartArray)
+            {
+                throw new JsonException();
+            }
+            reader.Read();
+
+            while (reader.TokenType != JsonTokenType.EndArray)
+            {
+                var dm = reader.ReadWithConverter<InputModelType>(options);
+                derivedModels.Add(dm ?? throw new JsonException($"null {nameof(InputModelType)} is not allowed"));
+            }
+            reader.Read();
         }
 
         private static void CreateProperties(ref Utf8JsonReader reader, ICollection<InputModelProperty> properties, JsonSerializerOptions options)
@@ -105,7 +140,7 @@ namespace AutoRest.CSharp.Common.Input
             while (reader.TokenType != JsonTokenType.EndArray)
             {
                 var property = reader.ReadWithConverter<InputModelProperty>(options);
-                properties.Add(property ?? throw new JsonException($"null {nameof(InputModelProperty)} isn't allowed"));
+                properties.Add(property ?? throw new JsonException($"null {nameof(InputModelProperty)} is not allowed"));
             }
             reader.Read();
         }

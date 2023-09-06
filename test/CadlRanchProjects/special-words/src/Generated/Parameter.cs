@@ -45,6 +45,7 @@ namespace SpecialWords
             _apiVersion = apiVersion;
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
@@ -79,6 +80,7 @@ namespace SpecialWords
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
@@ -113,6 +115,7 @@ namespace SpecialWords
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
@@ -147,6 +150,7 @@ namespace SpecialWords
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
