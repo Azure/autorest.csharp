@@ -9,7 +9,7 @@ namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
     /// The Usage Names.
-    /// Serialized Name: SampleUsageName
+    /// Serialized Name: UsageName
     /// </summary>
     public partial class SampleUsageName
     {
@@ -21,11 +21,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of SampleUsageName. </summary>
         /// <param name="value">
         /// The name of the resource.
-        /// Serialized Name: SampleUsageName.value
+        /// Serialized Name: UsageName.value
         /// </param>
         /// <param name="localizedValue">
         /// The localized name of the resource.
-        /// Serialized Name: SampleUsageName.localizedValue
+        /// Serialized Name: UsageName.localizedValue
         /// </param>
         internal SampleUsageName(string value, string localizedValue)
         {
@@ -35,12 +35,12 @@ namespace Azure.ResourceManager.Sample.Models
 
         /// <summary>
         /// The name of the resource.
-        /// Serialized Name: SampleUsageName.value
+        /// Serialized Name: UsageName.value
         /// </summary>
         public string Value { get; }
         /// <summary>
         /// The localized name of the resource.
-        /// Serialized Name: SampleUsageName.localizedValue
+        /// Serialized Name: UsageName.localizedValue
         /// </summary>
         public string LocalizedValue { get; }
     }
