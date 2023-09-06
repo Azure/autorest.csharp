@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         internal static readonly ObjectTypeProperty RawData = GetRawDataWithAccessor("private");
 
         internal static ObjectTypeProperty GetRawDataWithAccessor(string accessor) => new ObjectTypeProperty(
-            new MemberDeclarationOptions(accessor, "_rawData", typeof(Dictionary<string, BinaryData>)),
+            new MemberDeclarationOptions(accessor, "_serializedAdditionalRawData", typeof(Dictionary<string, BinaryData>)),
             "Keeps track of any properties unknown to the library",
             false,
             null);

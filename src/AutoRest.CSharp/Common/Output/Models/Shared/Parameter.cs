@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -19,7 +18,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
     internal record Parameter(string Name, string? Description, CSharpType Type, Constant? DefaultValue, ValidationType Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, bool IsPropertyBag = false, bool IsAdditionalProperties = false)
     {
         internal static readonly Parameter RawData = new Parameter(
-                "rawData",
+                "serializedAdditionalRawData",
                 "Keeps track of any properties unknown to the library",
                 typeof(Dictionary<string, BinaryData>),
                 null,

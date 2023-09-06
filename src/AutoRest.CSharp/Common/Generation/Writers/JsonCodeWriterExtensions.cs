@@ -51,9 +51,9 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else if (serialization.ObjectType is not null && serialization.ObjectType.HasRawDataInHeirarchy)
             {
-                using (writer.Scope($"if (_rawData is not null && {IsFormatJson})"))
+                using (writer.Scope($"if ({ObjectTypeProperty.RawData.Declaration.Name} is not null && {IsFormatJson})"))
                 {
-                    using (writer.Scope($"foreach (var property in _rawData)"))
+                    using (writer.Scope($"foreach (var property in {ObjectTypeProperty.RawData.Declaration.Name})"))
                     {
                         writer.Line($"writer.{nameof(Utf8JsonWriter.WritePropertyName)}(property.Key);");
                         WriteRawJson(writer, $"property.Value", writerName);
@@ -690,7 +690,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else if (serialization.ObjectType is not null && serialization.ObjectType.HasRawDataInHeirarchy)
             {
-                writer.Line($"{Parameter.RawData.Type} rawData = new {Parameter.RawData.Type}();");
+                writer.Line($"{Parameter.RawData.Type} {Parameter.RawData.Name} = new {Parameter.RawData.Type}();");
             }
 
             var itemVariable = new CodeWriterDeclaration("property");
@@ -708,7 +708,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     // add raw data TODO consolidate with additionalProperties
                     using (writer.Scope($"if ({IsFormatJson})"))
                     {
-                        writer.Line($"rawData.Add({itemVariable}.Name, {typeof(BinaryData)}.{nameof(BinaryData.FromString)}({itemVariable}.Value.{nameof(JsonElement.GetRawText)}()));");
+                        writer.Line($"{Parameter.RawData.Name}.Add({itemVariable}.Name, {typeof(BinaryData)}.{nameof(BinaryData.FromString)}({itemVariable}.Value.{nameof(JsonElement.GetRawText)}()));");
                         writer.Line($"continue;");
                     }
                 }
@@ -736,7 +736,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (parameters.Length > 0)
                     writer.Append($", ");
 
-                writer.Append($"rawData");
+                writer.Append($"{Parameter.RawData.Name}");
             }
             writer.Append($");");
         }
