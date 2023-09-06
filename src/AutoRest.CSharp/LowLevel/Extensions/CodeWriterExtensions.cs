@@ -36,19 +36,19 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             if (frameworkType != null)
             {
                 // handle framework type
-                return writer.AppendFrameworkTypeValue(exampleValue, frameworkType, serializationFormat);
+                return writer.AppendFrameworkTypeValue(exampleValue, frameworkType, serializationFormat, includeCollectionInitialization);
             }
 
             // handle implementation
             return writer.AppendTypeProviderValue(type, exampleValue);
         }
 
-        private static CodeWriter AppendFrameworkTypeValue(this CodeWriter writer, InputExampleValue exampleValue, Type frameworkType, SerializationFormat serializationFormat)
+        private static CodeWriter AppendFrameworkTypeValue(this CodeWriter writer, InputExampleValue exampleValue, Type frameworkType, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
         {
             // handle objects - we usually do not generate object types, but for some rare cases (such as union type) we generate object.
             if (frameworkType == typeof(object))
             {
-                return writer.AppendAnonymousObject(exampleValue);
+                return writer.AppendAnonymousObject(exampleValue, includeCollectionInitialization);
             }
 
             // handle RequestContent
@@ -207,7 +207,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             else
             {
                 return writer.Append($"{typeof(RequestContent)}.Create(")
-                    .AppendAnonymousObject(value)
+                    .AppendAnonymousObject(value, true)
                     .AppendRaw(")");
             }
         }
@@ -246,16 +246,20 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             // the second as the value type
             var valueType = dictionaryType.Arguments[1];
             var initialization = includeCollectionInitialization ? (FormattableString)$"new {TypeFactory.GetImplementationType(dictionaryType)}()" : $"";
-            using (writer.Scope(initialization, newLine: false))
+            writer.Append(initialization);
+            if (keyValues.Any())
             {
-                foreach ((var key, var value) in keyValues)
+                using (writer.Scope($"", newLine: false))
                 {
-                    // write key
-                    writer.AppendRaw("[");
-                    writer.AppendInputExampleValue(InputExampleValue.Value(InputPrimitiveType.String, key), keyType, SerializationFormat.Default);
-                    writer.AppendRaw("] = ");
-                    writer.AppendInputExampleValue(value, valueType, serializationFormat, includeCollectionInitialization);
-                    writer.LineRaw(", ");
+                    foreach (var (key, value) in keyValues)
+                    {
+                        // write key
+                        writer.AppendRaw("[");
+                        writer.AppendInputExampleValue(InputExampleValue.Value(InputPrimitiveType.String, key), keyType, SerializationFormat.Default);
+                        writer.AppendRaw("] = ");
+                        writer.AppendInputExampleValue(value, valueType, serializationFormat, includeCollectionInitialization);
+                        writer.LineRaw(", ");
+                    }
                 }
             }
             return writer;
@@ -265,48 +269,20 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
         {
             // determine which method on BinaryData we want to use to serialize this BinaryData
             string method = exampleValue is InputExampleRawValue exampleRawValue && exampleRawValue.RawValue is string ? "FromString" : "FromObjectAsJson";
-            writer.Append($"{typeof(BinaryData)}.{method}(");
-            writer.AppendAnonymousObject(exampleValue);
-            return writer.AppendRaw(")");
+            return writer.Append($"{typeof(BinaryData)}.{method}(")
+                .AppendAnonymousObject(exampleValue, true)
+                .AppendRaw(")");
         }
 
-        private static CodeWriter AppendAnonymousObject(this CodeWriter writer, InputExampleValue exampleValue)
+        private static CodeWriter AppendAnonymousObject(this CodeWriter writer, InputExampleValue exampleValue, bool includeCollectionInitialization = true) => exampleValue switch
         {
-            switch (exampleValue)
-            {
-                case InputExampleRawValue rawValue:
-                    if (rawValue.RawValue == null)
-                    {
-                        return writer.LineRaw("null");
-                    }
-                    else
-                    {
-                        return writer.AppendFrameworkTypeValue(exampleValue, rawValue.RawValue.GetType(), SerializationFormat.Default);
-                    }
-                case InputExampleListValue listValue:
-                    return writer.AppendListValue(typeof(object), listValue, SerializationFormat.Default);
-                case InputExampleObjectValue objectValue:
-                    if (objectValue.Values.Any())
-                    {
-                        using (writer.Scope($"new {typeof(Dictionary<string, object>)}()", newLine: false))
-                        {
-                            foreach ((var key, var value) in objectValue.Values)
-                            {
-                                writer.Append($"[{key:L}] = ")
-                                    .AppendAnonymousObject(value)
-                                    .AppendRaw(",");
-                            }
-                        }
-                        return writer;
-                    }
-                    else
-                    {
-                        return writer.Append($"new {typeof(Dictionary<string, object>)}()");
-                    }
-                default:
-                    throw new InvalidOperationException($"unhandled case {exampleValue}");
-            }
-        }
+            InputExampleRawValue rawValue => rawValue.RawValue == null ?
+                            writer.LineRaw("null") :
+                            writer.AppendFrameworkTypeValue(exampleValue, rawValue.RawValue.GetType(), SerializationFormat.Default, includeCollectionInitialization),
+            InputExampleListValue listValue => writer.AppendListValue(typeof(object), listValue, SerializationFormat.Default),
+            InputExampleObjectValue objectValue => writer.AppendDictionaryValue(typeof(Dictionary<string, object>), objectValue, SerializationFormat.Default, includeCollectionInitialization),
+            _ => throw new InvalidOperationException($"unhandled case {exampleValue}")
+        };
 
         private static bool IsStringLikeType(CSharpType type) => type.IsFrameworkType && (_newInstanceInitializedTypes.Contains(type.FrameworkType) || _parsableInitializedTypes.Contains(type.FrameworkType));
 
