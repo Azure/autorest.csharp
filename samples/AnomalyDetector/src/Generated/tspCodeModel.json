@@ -9,7 +9,6 @@
   {
    "$id": "2",
    "Name": "APIVersion",
-   "Namespace": "AnomalyDetector",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -18,6 +17,7 @@
      "Value": "v1.1"
     }
    ],
+   "Namespace": "AnomalyDetector",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "None"
@@ -25,8 +25,6 @@
   {
    "$id": "4",
    "Name": "TimeGranularity",
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -75,6 +73,8 @@
      "Value": "none"
     }
    ],
+   "Namespace": "AnomalyDetector.Univariate",
+   "Description": "",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Input"
@@ -82,8 +82,6 @@
   {
    "$id": "14",
    "Name": "ImputeMode",
-   "Namespace": "AnomalyDetector.Univariate",
-   "Description": "",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -117,6 +115,8 @@
      "Value": "notFill"
     }
    ],
+   "Namespace": "AnomalyDetector.Univariate",
+   "Description": "",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Input"
@@ -124,8 +124,6 @@
   {
    "$id": "21",
    "Name": "MultivariateBatchDetectionStatus",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -149,6 +147,8 @@
      "Value": "FAILED"
     }
    ],
+   "Namespace": "AnomalyDetector.Multivariate",
+   "Description": "",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Output"
@@ -156,8 +156,6 @@
   {
    "$id": "26",
    "Name": "DataSchema",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -173,6 +171,8 @@
      "Description": "MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default DataSchema is OneTable."
     }
    ],
+   "Namespace": "AnomalyDetector.Multivariate",
+   "Description": "Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -180,8 +180,6 @@
   {
    "$id": "29",
    "Name": "AlignMode",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -195,6 +193,8 @@
      "Value": "Outer"
     }
    ],
+   "Namespace": "AnomalyDetector.Multivariate",
+   "Description": "",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -202,8 +202,6 @@
   {
    "$id": "32",
    "Name": "FillNAMethod",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -232,6 +230,8 @@
      "Value": "Fixed"
     }
    ],
+   "Namespace": "AnomalyDetector.Multivariate",
+   "Description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -239,8 +239,6 @@
   {
    "$id": "38",
    "Name": "ModelStatus",
-   "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -264,6 +262,8 @@
      "Value": "FAILED"
     }
    ],
+   "Namespace": "AnomalyDetector.Multivariate",
+   "Description": "",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"

@@ -2134,5 +2134,103 @@ namespace ModelsTypeSpec.Samples
 
             var result = await client.GetSingleBaseAsync();
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GenericType()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            var data = new
+            {
+                kind = "Int32Values",
+                values = new[] {
+        1234
+    },
+                value = 1234,
+                field = "<field>",
+            };
+
+            Response response = client.GenericType(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GenericType_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            var data = new
+            {
+                kind = "Int32Values",
+                values = new[] {
+        1234
+    },
+                value = 1234,
+                field = "<field>",
+            };
+
+            Response response = client.GenericType(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GenericType_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            var data = new
+            {
+                kind = "Int32Values",
+                values = new[] {
+        1234
+    },
+                value = 1234,
+                field = "<field>",
+            };
+
+            Response response = await client.GenericTypeAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GenericType_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            var data = new
+            {
+                kind = "Int32Values",
+                values = new[] {
+        1234
+    },
+                value = 1234,
+                field = "<field>",
+            };
+
+            Response response = await client.GenericTypeAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GenericType_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            var input = new Int32ValuesFacet("<field>", new int[]
+            {
+    1234
+            }, 1234);
+            var result = await client.GenericTypeAsync(input);
+        }
     }
 }

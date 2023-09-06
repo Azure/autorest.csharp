@@ -8,8 +8,6 @@
   {
    "$id": "2",
    "Name": "Versions",
-   "Namespace": "Server.Path.Multiple",
-   "Description": "Service versions",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -19,6 +17,8 @@
      "Description": "Version 1.0"
     }
    ],
+   "Namespace": "Server.Path.Multiple",
+   "Description": "Service versions",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "None"

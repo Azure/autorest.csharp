@@ -559,7 +559,9 @@ export function getInputType(
                             models,
                             enums
                         );
-                        model.DerivedModels.push(derivedModel as InputModelType);
+                        model.DerivedModels.push(
+                            derivedModel as InputModelType
+                        );
                     }
                 }
             }
