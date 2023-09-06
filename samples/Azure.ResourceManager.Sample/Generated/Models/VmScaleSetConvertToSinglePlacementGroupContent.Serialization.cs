@@ -14,11 +14,11 @@ using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VMScaleSetConvertToSinglePlacementGroupContent : IUtf8JsonSerializable, IModelJsonSerializable<VMScaleSetConvertToSinglePlacementGroupContent>
+    public partial class VmScaleSetConvertToSinglePlacementGroupContent : IUtf8JsonSerializable, IModelJsonSerializable<VmScaleSetConvertToSinglePlacementGroupContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VMScaleSetConvertToSinglePlacementGroupContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VmScaleSetConvertToSinglePlacementGroupContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VMScaleSetConvertToSinglePlacementGroupContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<VmScaleSetConvertToSinglePlacementGroupContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        internal static VMScaleSetConvertToSinglePlacementGroupContent DeserializeVMScaleSetConvertToSinglePlacementGroupContent(JsonElement element, ModelSerializerOptions options = default)
+        internal static VmScaleSetConvertToSinglePlacementGroupContent DeserializeVmScaleSetConvertToSinglePlacementGroupContent(JsonElement element, ModelSerializerOptions options = default)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
 
@@ -66,35 +66,35 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new VMScaleSetConvertToSinglePlacementGroupContent(activePlacementGroupId.Value, rawData);
+            return new VmScaleSetConvertToSinglePlacementGroupContent(activePlacementGroupId.Value, rawData);
         }
 
-        VMScaleSetConvertToSinglePlacementGroupContent IModelJsonSerializable<VMScaleSetConvertToSinglePlacementGroupContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VmScaleSetConvertToSinglePlacementGroupContent IModelJsonSerializable<VmScaleSetConvertToSinglePlacementGroupContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVMScaleSetConvertToSinglePlacementGroupContent(doc.RootElement, options);
+            return DeserializeVmScaleSetConvertToSinglePlacementGroupContent(doc.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VMScaleSetConvertToSinglePlacementGroupContent>.Serialize(ModelSerializerOptions options)
+        BinaryData IModelSerializable<VmScaleSetConvertToSinglePlacementGroupContent>.Serialize(ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             return ModelSerializer.SerializeCore(this, options);
         }
 
-        VMScaleSetConvertToSinglePlacementGroupContent IModelSerializable<VMScaleSetConvertToSinglePlacementGroupContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        VmScaleSetConvertToSinglePlacementGroupContent IModelSerializable<VmScaleSetConvertToSinglePlacementGroupContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.Parse(data);
-            return DeserializeVMScaleSetConvertToSinglePlacementGroupContent(doc.RootElement, options);
+            return DeserializeVmScaleSetConvertToSinglePlacementGroupContent(doc.RootElement, options);
         }
 
-        /// <summary> Converts a <see cref="VMScaleSetConvertToSinglePlacementGroupContent"/> into a <see cref="RequestContent"/>. </summary>
-        /// <param name="model"> The <see cref="VMScaleSetConvertToSinglePlacementGroupContent"/> to convert. </param>
-        public static implicit operator RequestContent(VMScaleSetConvertToSinglePlacementGroupContent model)
+        /// <summary> Converts a <see cref="VmScaleSetConvertToSinglePlacementGroupContent"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VmScaleSetConvertToSinglePlacementGroupContent"/> to convert. </param>
+        public static implicit operator RequestContent(VmScaleSetConvertToSinglePlacementGroupContent model)
         {
             if (model is null)
             {
@@ -104,9 +104,9 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
-        /// <summary> Converts a <see cref="Response"/> into a <see cref="VMScaleSetConvertToSinglePlacementGroupContent"/>. </summary>
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VmScaleSetConvertToSinglePlacementGroupContent"/>. </summary>
         /// <param name="response"> The <see cref="Response"/> to convert. </param>
-        public static explicit operator VMScaleSetConvertToSinglePlacementGroupContent(Response response)
+        public static explicit operator VmScaleSetConvertToSinglePlacementGroupContent(Response response)
         {
             if (response is null)
             {
@@ -114,7 +114,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
-            return DeserializeVMScaleSetConvertToSinglePlacementGroupContent(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeVmScaleSetConvertToSinglePlacementGroupContent(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

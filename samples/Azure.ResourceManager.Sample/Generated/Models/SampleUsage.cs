@@ -13,7 +13,7 @@ namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
     /// Describes Compute Resource Usage.
-    /// Serialized Name: SampleUsage
+    /// Serialized Name: Usage
     /// </summary>
     public partial class SampleUsage
     {
@@ -23,15 +23,15 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of <see cref="SampleUsage"/>. </summary>
         /// <param name="currentValue">
         /// The current usage of the resource.
-        /// Serialized Name: SampleUsage.currentValue
+        /// Serialized Name: Usage.currentValue
         /// </param>
         /// <param name="limit">
         /// The maximum permitted usage of the resource.
-        /// Serialized Name: SampleUsage.limit
+        /// Serialized Name: Usage.limit
         /// </param>
         /// <param name="name">
         /// The name of the type of usage.
-        /// Serialized Name: SampleUsage.name
+        /// Serialized Name: Usage.name
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal SampleUsage(int currentValue, long limit, SampleUsageName name)
@@ -47,19 +47,19 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of <see cref="SampleUsage"/>. </summary>
         /// <param name="unit">
         /// An enum describing the unit of usage measurement.
-        /// Serialized Name: SampleUsage.unit
+        /// Serialized Name: Usage.unit
         /// </param>
         /// <param name="currentValue">
         /// The current usage of the resource.
-        /// Serialized Name: SampleUsage.currentValue
+        /// Serialized Name: Usage.currentValue
         /// </param>
         /// <param name="limit">
         /// The maximum permitted usage of the resource.
-        /// Serialized Name: SampleUsage.limit
+        /// Serialized Name: Usage.limit
         /// </param>
         /// <param name="name">
         /// The name of the type of usage.
-        /// Serialized Name: SampleUsage.name
+        /// Serialized Name: Usage.name
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal SampleUsage(UsageUnit unit, int currentValue, long limit, SampleUsageName name, Dictionary<string, BinaryData> rawData)
@@ -78,22 +78,22 @@ namespace Azure.ResourceManager.Sample.Models
 
         /// <summary>
         /// An enum describing the unit of usage measurement.
-        /// Serialized Name: SampleUsage.unit
+        /// Serialized Name: Usage.unit
         /// </summary>
         public UsageUnit Unit { get; }
         /// <summary>
         /// The current usage of the resource.
-        /// Serialized Name: SampleUsage.currentValue
+        /// Serialized Name: Usage.currentValue
         /// </summary>
         public int CurrentValue { get; }
         /// <summary>
         /// The maximum permitted usage of the resource.
-        /// Serialized Name: SampleUsage.limit
+        /// Serialized Name: Usage.limit
         /// </summary>
         public long Limit { get; }
         /// <summary>
         /// The name of the type of usage.
-        /// Serialized Name: SampleUsage.name
+        /// Serialized Name: Usage.name
         /// </summary>
         public SampleUsageName Name { get; }
     }

@@ -40,10 +40,10 @@ namespace Azure.ResourceManager.Sample.Models
                     ((IModelJsonSerializable<SshConfiguration>)Ssh).Serialize(writer, options);
                 }
             }
-            if (Optional.IsDefined(ProvisionVMAgent))
+            if (Optional.IsDefined(ProvisionVmAgent))
             {
                 writer.WritePropertyName("provisionVMAgent"u8);
-                writer.WriteBooleanValue(ProvisionVMAgent.Value);
+                writer.WriteBooleanValue(ProvisionVmAgent.Value);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
@@ -70,7 +70,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
             Optional<bool> disablePasswordAuthentication = default;
             Optional<SshConfiguration> ssh = default;
-            Optional<bool> provisionVMAgent = default;
+            Optional<bool> provisionVmAgent = default;
             Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    provisionVMAgent = property.Value.GetBoolean();
+                    provisionVmAgent = property.Value.GetBoolean();
                     continue;
                 }
                 if (options.Format == ModelSerializerFormat.Json)
@@ -107,7 +107,7 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new LinuxConfiguration(Optional.ToNullable(disablePasswordAuthentication), ssh.Value, Optional.ToNullable(provisionVMAgent), rawData);
+            return new LinuxConfiguration(Optional.ToNullable(disablePasswordAuthentication), ssh.Value, Optional.ToNullable(provisionVmAgent), rawData);
         }
 
         LinuxConfiguration IModelJsonSerializable<LinuxConfiguration>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

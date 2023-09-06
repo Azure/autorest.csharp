@@ -74,7 +74,7 @@ namespace Azure.ResourceManager.Sample
         /// Specifies whether the Virtual Machine Scale Set should be overprovisioned.
         /// Serialized Name: VirtualMachineScaleSet.properties.overprovision
         /// </param>
-        /// <param name="doNotRunExtensionsOnOverprovisionedVMs">
+        /// <param name="doNotRunExtensionsOnOverprovisionedVms">
         /// When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.
         /// Serialized Name: VirtualMachineScaleSet.properties.doNotRunExtensionsOnOverprovisionedVMs
         /// </param>
@@ -111,7 +111,7 @@ namespace Azure.ResourceManager.Sample
         /// Serialized Name: VirtualMachineScaleSet.properties.scaleInPolicy
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, SampleSku sku, SamplePlan plan, ManagedServiceIdentity identity, IList<string> zones, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetVMProfile virtualMachineProfile, string provisioningState, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVMs, string uniqueId, bool? singlePlacementGroup, bool? zoneBalance, int? platformFaultDomainCount, WritableSubResource proximityPlacementGroup, WritableSubResource hostGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
+        internal VirtualMachineScaleSetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, SampleSku sku, SamplePlan plan, ManagedServiceIdentity identity, IList<string> zones, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetVmProfile virtualMachineProfile, string provisioningState, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVms, string uniqueId, bool? singlePlacementGroup, bool? zoneBalance, int? platformFaultDomainCount, WritableSubResource proximityPlacementGroup, WritableSubResource hostGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Sku = sku;
             Plan = plan;
@@ -122,7 +122,7 @@ namespace Azure.ResourceManager.Sample
             VirtualMachineProfile = virtualMachineProfile;
             ProvisioningState = provisioningState;
             Overprovision = overprovision;
-            DoNotRunExtensionsOnOverprovisionedVMs = doNotRunExtensionsOnOverprovisionedVMs;
+            DoNotRunExtensionsOnOverprovisionedVms = doNotRunExtensionsOnOverprovisionedVms;
             UniqueId = uniqueId;
             SinglePlacementGroup = singlePlacementGroup;
             ZoneBalance = zoneBalance;
@@ -173,7 +173,7 @@ namespace Azure.ResourceManager.Sample
         /// The virtual machine profile.
         /// Serialized Name: VirtualMachineScaleSet.properties.virtualMachineProfile
         /// </summary>
-        public VirtualMachineScaleSetVMProfile VirtualMachineProfile { get; set; }
+        public VirtualMachineScaleSetVmProfile VirtualMachineProfile { get; set; }
         /// <summary>
         /// The provisioning state, which only appears in the response.
         /// Serialized Name: VirtualMachineScaleSet.properties.provisioningState
@@ -188,7 +188,7 @@ namespace Azure.ResourceManager.Sample
         /// When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.
         /// Serialized Name: VirtualMachineScaleSet.properties.doNotRunExtensionsOnOverprovisionedVMs
         /// </summary>
-        public bool? DoNotRunExtensionsOnOverprovisionedVMs { get; set; }
+        public bool? DoNotRunExtensionsOnOverprovisionedVms { get; set; }
         /// <summary>
         /// Specifies the ID which uniquely identifies a Virtual Machine Scale Set.
         /// Serialized Name: VirtualMachineScaleSet.properties.uniqueId

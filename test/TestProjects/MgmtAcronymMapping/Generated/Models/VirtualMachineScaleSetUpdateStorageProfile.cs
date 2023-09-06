@@ -43,7 +43,7 @@ namespace MgmtAcronymMapping.Models
         internal VirtualMachineScaleSetUpdateStorageProfile(ImageReference imageReference, VirtualMachineScaleSetUpdateOSDisk osDisk, IList<VirtualMachineScaleSetDataDisk> dataDisks, Dictionary<string, BinaryData> rawData)
         {
             ImageReference = imageReference;
-            OsDisk = osDisk;
+            OSDisk = osDisk;
             DataDisks = dataDisks;
             _rawData = rawData;
         }
@@ -57,7 +57,7 @@ namespace MgmtAcronymMapping.Models
         /// The OS disk.
         /// Serialized Name: VirtualMachineScaleSetUpdateStorageProfile.osDisk
         /// </summary>
-        public VirtualMachineScaleSetUpdateOSDisk OsDisk { get; set; }
+        public VirtualMachineScaleSetUpdateOSDisk OSDisk { get; set; }
         /// <summary>
         /// The data disks.
         /// Serialized Name: VirtualMachineScaleSetUpdateStorageProfile.dataDisks

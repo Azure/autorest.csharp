@@ -17,25 +17,25 @@ namespace MgmtAcronymMapping.Models
     /// The List Virtual Machine Scale Set VMs operation response.
     /// Serialized Name: VirtualMachineScaleSetVMListResult
     /// </summary>
-    internal partial class VirtualMachineScaleSetVMListResult
+    internal partial class VirtualMachineScaleSetVmListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMListResult"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmListResult"/>. </summary>
         /// <param name="value">
         /// The list of virtual machine scale sets VMs.
         /// Serialized Name: VirtualMachineScaleSetVMListResult.value
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal VirtualMachineScaleSetVMListResult(IEnumerable<VirtualMachineScaleSetVMData> value)
+        internal VirtualMachineScaleSetVmListResult(IEnumerable<VirtualMachineScaleSetVmData> value)
         {
             Argument.AssertNotNull(value, nameof(value));
 
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMListResult"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmListResult"/>. </summary>
         /// <param name="value">
         /// The list of virtual machine scale sets VMs.
         /// Serialized Name: VirtualMachineScaleSetVMListResult.value
@@ -45,15 +45,15 @@ namespace MgmtAcronymMapping.Models
         /// Serialized Name: VirtualMachineScaleSetVMListResult.nextLink
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetVMListResult(IReadOnlyList<VirtualMachineScaleSetVMData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        internal VirtualMachineScaleSetVmListResult(IReadOnlyList<VirtualMachineScaleSetVmData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
             _rawData = rawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMListResult"/> for deserialization. </summary>
-        internal VirtualMachineScaleSetVMListResult()
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmListResult"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetVmListResult()
         {
         }
 
@@ -61,7 +61,7 @@ namespace MgmtAcronymMapping.Models
         /// The list of virtual machine scale sets VMs.
         /// Serialized Name: VirtualMachineScaleSetVMListResult.value
         /// </summary>
-        public IReadOnlyList<VirtualMachineScaleSetVMData> Value { get; }
+        public IReadOnlyList<VirtualMachineScaleSetVmData> Value { get; }
         /// <summary>
         /// The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs
         /// Serialized Name: VirtualMachineScaleSetVMListResult.nextLink

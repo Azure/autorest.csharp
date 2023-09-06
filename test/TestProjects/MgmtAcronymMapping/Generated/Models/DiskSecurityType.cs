@@ -27,8 +27,8 @@ namespace MgmtAcronymMapping.Models
 
         private const string TrustedLaunchValue = "TrustedLaunch";
         private const string ConfidentialVmGuestStateOnlyEncryptedWithPlatformKeyValue = "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey";
-        private const string ConfidentialVMDiskEncryptedWithPlatformKeyValue = "ConfidentialVM_DiskEncryptedWithPlatformKey";
-        private const string ConfidentialVMDiskEncryptedWithCustomerKeyValue = "ConfidentialVM_DiskEncryptedWithCustomerKey";
+        private const string ConfidentialVmDiskEncryptedWithPlatformKeyValue = "ConfidentialVM_DiskEncryptedWithPlatformKey";
+        private const string ConfidentialVmDiskEncryptedWithCustomerKeyValue = "ConfidentialVM_DiskEncryptedWithCustomerKey";
 
         /// <summary>
         /// Trusted Launch provides security features such as secure boot and virtual Trusted Platform Module (vTPM)
@@ -44,12 +44,12 @@ namespace MgmtAcronymMapping.Models
         /// Indicates Confidential VM disk with both OS disk and VM guest state encrypted with a platform managed key
         /// Serialized Name: DiskSecurityTypes.ConfidentialVM_DiskEncryptedWithPlatformKey
         /// </summary>
-        public static DiskSecurityType ConfidentialVMDiskEncryptedWithPlatformKey { get; } = new DiskSecurityType(ConfidentialVMDiskEncryptedWithPlatformKeyValue);
+        public static DiskSecurityType ConfidentialVmDiskEncryptedWithPlatformKey { get; } = new DiskSecurityType(ConfidentialVmDiskEncryptedWithPlatformKeyValue);
         /// <summary>
         /// Indicates Confidential VM disk with both OS disk and VM guest state encrypted with a customer managed key
         /// Serialized Name: DiskSecurityTypes.ConfidentialVM_DiskEncryptedWithCustomerKey
         /// </summary>
-        public static DiskSecurityType ConfidentialVMDiskEncryptedWithCustomerKey { get; } = new DiskSecurityType(ConfidentialVMDiskEncryptedWithCustomerKeyValue);
+        public static DiskSecurityType ConfidentialVmDiskEncryptedWithCustomerKey { get; } = new DiskSecurityType(ConfidentialVmDiskEncryptedWithCustomerKeyValue);
         /// <summary> Determines if two <see cref="DiskSecurityType"/> values are the same. </summary>
         public static bool operator ==(DiskSecurityType left, DiskSecurityType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="DiskSecurityType"/> values are not the same. </summary>

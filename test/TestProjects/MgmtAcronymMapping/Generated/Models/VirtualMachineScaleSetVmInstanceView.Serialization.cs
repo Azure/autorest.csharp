@@ -14,11 +14,11 @@ using Azure.Core.Serialization;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class VirtualMachineScaleSetVMInstanceView : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetVMInstanceView>
+    public partial class VirtualMachineScaleSetVmInstanceView : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetVmInstanceView>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetVMInstanceView>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetVmInstanceView>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VirtualMachineScaleSetVMInstanceView>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<VirtualMachineScaleSetVmInstanceView>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -128,7 +128,7 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineScaleSetVMInstanceView DeserializeVirtualMachineScaleSetVMInstanceView(JsonElement element, ModelSerializerOptions options = default)
+        internal static VirtualMachineScaleSetVmInstanceView DeserializeVirtualMachineScaleSetVmInstanceView(JsonElement element, ModelSerializerOptions options = default)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
 
@@ -257,35 +257,35 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVMInstanceView(Optional.ToNullable(platformUpdateDomain), Optional.ToNullable(platformFaultDomain), rdpThumbPrint.Value, vmAgent.Value, maintenanceRedeployStatus.Value, Optional.ToList(disks), vmHealth.Value, bootDiagnostics.Value, Optional.ToList(statuses), assignedHost.Value, placementGroupId.Value, rawData);
+            return new VirtualMachineScaleSetVmInstanceView(Optional.ToNullable(platformUpdateDomain), Optional.ToNullable(platformFaultDomain), rdpThumbPrint.Value, vmAgent.Value, maintenanceRedeployStatus.Value, Optional.ToList(disks), vmHealth.Value, bootDiagnostics.Value, Optional.ToList(statuses), assignedHost.Value, placementGroupId.Value, rawData);
         }
 
-        VirtualMachineScaleSetVMInstanceView IModelJsonSerializable<VirtualMachineScaleSetVMInstanceView>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineScaleSetVmInstanceView IModelJsonSerializable<VirtualMachineScaleSetVmInstanceView>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetVMInstanceView(doc.RootElement, options);
+            return DeserializeVirtualMachineScaleSetVmInstanceView(doc.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetVMInstanceView>.Serialize(ModelSerializerOptions options)
+        BinaryData IModelSerializable<VirtualMachineScaleSetVmInstanceView>.Serialize(ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             return ModelSerializer.SerializeCore(this, options);
         }
 
-        VirtualMachineScaleSetVMInstanceView IModelSerializable<VirtualMachineScaleSetVMInstanceView>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        VirtualMachineScaleSetVmInstanceView IModelSerializable<VirtualMachineScaleSetVmInstanceView>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineScaleSetVMInstanceView(doc.RootElement, options);
+            return DeserializeVirtualMachineScaleSetVmInstanceView(doc.RootElement, options);
         }
 
-        /// <summary> Converts a <see cref="VirtualMachineScaleSetVMInstanceView"/> into a <see cref="RequestContent"/>. </summary>
-        /// <param name="model"> The <see cref="VirtualMachineScaleSetVMInstanceView"/> to convert. </param>
-        public static implicit operator RequestContent(VirtualMachineScaleSetVMInstanceView model)
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetVmInstanceView"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetVmInstanceView"/> to convert. </param>
+        public static implicit operator RequestContent(VirtualMachineScaleSetVmInstanceView model)
         {
             if (model is null)
             {
@@ -295,9 +295,9 @@ namespace MgmtAcronymMapping.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
-        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetVMInstanceView"/>. </summary>
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetVmInstanceView"/>. </summary>
         /// <param name="response"> The <see cref="Response"/> to convert. </param>
-        public static explicit operator VirtualMachineScaleSetVMInstanceView(Response response)
+        public static explicit operator VirtualMachineScaleSetVmInstanceView(Response response)
         {
             if (response is null)
             {
@@ -305,7 +305,7 @@ namespace MgmtAcronymMapping.Models
             }
 
             using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
-            return DeserializeVirtualMachineScaleSetVMInstanceView(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeVirtualMachineScaleSetVmInstanceView(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

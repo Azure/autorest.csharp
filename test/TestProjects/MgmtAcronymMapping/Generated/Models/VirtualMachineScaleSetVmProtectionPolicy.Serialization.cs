@@ -14,11 +14,11 @@ using Azure.Core.Serialization;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class VirtualMachineScaleSetVMProtectionPolicy : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetVMProtectionPolicy>
+    public partial class VirtualMachineScaleSetVmProtectionPolicy : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetVmProtectionPolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetVMProtectionPolicy>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetVmProtectionPolicy>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VirtualMachineScaleSetVMProtectionPolicy>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<VirtualMachineScaleSetVmProtectionPolicy>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -48,7 +48,7 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineScaleSetVMProtectionPolicy DeserializeVirtualMachineScaleSetVMProtectionPolicy(JsonElement element, ModelSerializerOptions options = default)
+        internal static VirtualMachineScaleSetVmProtectionPolicy DeserializeVirtualMachineScaleSetVmProtectionPolicy(JsonElement element, ModelSerializerOptions options = default)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
 
@@ -85,35 +85,35 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVMProtectionPolicy(Optional.ToNullable(protectFromScaleIn), Optional.ToNullable(protectFromScaleSetActions), rawData);
+            return new VirtualMachineScaleSetVmProtectionPolicy(Optional.ToNullable(protectFromScaleIn), Optional.ToNullable(protectFromScaleSetActions), rawData);
         }
 
-        VirtualMachineScaleSetVMProtectionPolicy IModelJsonSerializable<VirtualMachineScaleSetVMProtectionPolicy>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineScaleSetVmProtectionPolicy IModelJsonSerializable<VirtualMachineScaleSetVmProtectionPolicy>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetVMProtectionPolicy(doc.RootElement, options);
+            return DeserializeVirtualMachineScaleSetVmProtectionPolicy(doc.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetVMProtectionPolicy>.Serialize(ModelSerializerOptions options)
+        BinaryData IModelSerializable<VirtualMachineScaleSetVmProtectionPolicy>.Serialize(ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             return ModelSerializer.SerializeCore(this, options);
         }
 
-        VirtualMachineScaleSetVMProtectionPolicy IModelSerializable<VirtualMachineScaleSetVMProtectionPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        VirtualMachineScaleSetVmProtectionPolicy IModelSerializable<VirtualMachineScaleSetVmProtectionPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineScaleSetVMProtectionPolicy(doc.RootElement, options);
+            return DeserializeVirtualMachineScaleSetVmProtectionPolicy(doc.RootElement, options);
         }
 
-        /// <summary> Converts a <see cref="VirtualMachineScaleSetVMProtectionPolicy"/> into a <see cref="RequestContent"/>. </summary>
-        /// <param name="model"> The <see cref="VirtualMachineScaleSetVMProtectionPolicy"/> to convert. </param>
-        public static implicit operator RequestContent(VirtualMachineScaleSetVMProtectionPolicy model)
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetVmProtectionPolicy"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetVmProtectionPolicy"/> to convert. </param>
+        public static implicit operator RequestContent(VirtualMachineScaleSetVmProtectionPolicy model)
         {
             if (model is null)
             {
@@ -123,9 +123,9 @@ namespace MgmtAcronymMapping.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
-        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetVMProtectionPolicy"/>. </summary>
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetVmProtectionPolicy"/>. </summary>
         /// <param name="response"> The <see cref="Response"/> to convert. </param>
-        public static explicit operator VirtualMachineScaleSetVMProtectionPolicy(Response response)
+        public static explicit operator VirtualMachineScaleSetVmProtectionPolicy(Response response)
         {
             if (response is null)
             {
@@ -133,7 +133,7 @@ namespace MgmtAcronymMapping.Models
             }
 
             using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
-            return DeserializeVirtualMachineScaleSetVMProtectionPolicy(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeVirtualMachineScaleSetVmProtectionPolicy(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

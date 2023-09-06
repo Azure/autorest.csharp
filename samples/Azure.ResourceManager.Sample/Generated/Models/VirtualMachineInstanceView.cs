@@ -99,8 +99,8 @@ namespace Azure.ResourceManager.Sample.Models
             PlatformUpdateDomain = platformUpdateDomain;
             PlatformFaultDomain = platformFaultDomain;
             ComputerName = computerName;
-            OsName = osName;
-            OsVersion = osVersion;
+            OSName = osName;
+            OSVersion = osVersion;
             HyperVGeneration = hyperVGeneration;
             RdpThumbPrint = rdpThumbPrint;
             VmAgent = vmAgent;
@@ -134,12 +134,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The Operating System running on the virtual machine.
         /// Serialized Name: VirtualMachineInstanceView.osName
         /// </summary>
-        public string OsName { get; }
+        public string OSName { get; }
         /// <summary>
         /// The version of Operating System running on the virtual machine.
         /// Serialized Name: VirtualMachineInstanceView.osVersion
         /// </summary>
-        public string OsVersion { get; }
+        public string OSVersion { get; }
         /// <summary>
         /// Specifies the HyperVGeneration Type associated with a resource
         /// Serialized Name: VirtualMachineInstanceView.hyperVGeneration

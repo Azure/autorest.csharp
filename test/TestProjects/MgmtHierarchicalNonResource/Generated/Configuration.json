@@ -12,5 +12,9 @@
   "skip-csproj-packagereference": true,
   "RequestPathToResourceData": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}": "SharedGallery"
+  },
+  "RawAcronymMapping": {
+    "VCPU": "VCpu",
+    "VCPUs": "VCpus"
   }
 }

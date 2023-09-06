@@ -16,38 +16,38 @@ namespace Azure.ResourceManager.Sample.Models
     /// Specifies a list of virtual machine instance IDs from the VM scale set.
     /// Serialized Name: VirtualMachineScaleSetVMInstanceRequiredIDs
     /// </summary>
-    public partial class VirtualMachineScaleSetVMInstanceRequiredIDs
+    public partial class VirtualMachineScaleSetVmInstanceRequiredIds
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMInstanceRequiredIDs"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmInstanceRequiredIds"/>. </summary>
         /// <param name="instanceIds">
         /// The virtual machine scale set instance ids.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceRequiredIDs.instanceIds
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceIds"/> is null. </exception>
-        public VirtualMachineScaleSetVMInstanceRequiredIDs(IEnumerable<string> instanceIds)
+        public VirtualMachineScaleSetVmInstanceRequiredIds(IEnumerable<string> instanceIds)
         {
             Argument.AssertNotNull(instanceIds, nameof(instanceIds));
 
             InstanceIds = instanceIds.ToList();
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMInstanceRequiredIDs"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmInstanceRequiredIds"/>. </summary>
         /// <param name="instanceIds">
         /// The virtual machine scale set instance ids.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceRequiredIDs.instanceIds
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetVMInstanceRequiredIDs(IList<string> instanceIds, Dictionary<string, BinaryData> rawData)
+        internal VirtualMachineScaleSetVmInstanceRequiredIds(IList<string> instanceIds, Dictionary<string, BinaryData> rawData)
         {
             InstanceIds = instanceIds;
             _rawData = rawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMInstanceRequiredIDs"/> for deserialization. </summary>
-        internal VirtualMachineScaleSetVMInstanceRequiredIDs()
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmInstanceRequiredIds"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetVmInstanceRequiredIds()
         {
         }
 

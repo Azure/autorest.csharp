@@ -17,11 +17,11 @@ using MgmtAcronymMapping.Models;
 
 namespace MgmtAcronymMapping
 {
-    public partial class VirtualMachineScaleSetVMData : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetVMData>
+    public partial class VirtualMachineScaleSetVmData : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetVmData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetVMData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetVmData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VirtualMachineScaleSetVMData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<VirtualMachineScaleSetVmData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -89,16 +89,16 @@ namespace MgmtAcronymMapping
                     ((IModelJsonSerializable<AdditionalCapabilities>)AdditionalCapabilities).Serialize(writer, options);
                 }
             }
-            if (Optional.IsDefined(OsProfile))
+            if (Optional.IsDefined(OSProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                if (OsProfile is null)
+                if (OSProfile is null)
                 {
                     writer.WriteNullValue();
                 }
                 else
                 {
-                    ((IModelJsonSerializable<OSProfile>)OsProfile).Serialize(writer, options);
+                    ((IModelJsonSerializable<OSProfile>)OSProfile).Serialize(writer, options);
                 }
             }
             if (Optional.IsDefined(SecurityProfile))
@@ -134,7 +134,7 @@ namespace MgmtAcronymMapping
                 }
                 else
                 {
-                    ((IModelJsonSerializable<VirtualMachineScaleSetVMNetworkProfileConfiguration>)NetworkProfileConfiguration).Serialize(writer, options);
+                    ((IModelJsonSerializable<VirtualMachineScaleSetVmNetworkProfileConfiguration>)NetworkProfileConfiguration).Serialize(writer, options);
                 }
             }
             if (Optional.IsDefined(DiagnosticsProfile))
@@ -168,7 +168,7 @@ namespace MgmtAcronymMapping
                 }
                 else
                 {
-                    ((IModelJsonSerializable<VirtualMachineScaleSetVMProtectionPolicy>)ProtectionPolicy).Serialize(writer, options);
+                    ((IModelJsonSerializable<VirtualMachineScaleSetVmProtectionPolicy>)ProtectionPolicy).Serialize(writer, options);
                 }
             }
             writer.WriteEndObject();
@@ -187,7 +187,7 @@ namespace MgmtAcronymMapping
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineScaleSetVMData DeserializeVirtualMachineScaleSetVMData(JsonElement element, ModelSerializerOptions options = default)
+        internal static VirtualMachineScaleSetVmData DeserializeVirtualMachineScaleSetVmData(JsonElement element, ModelSerializerOptions options = default)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
 
@@ -207,20 +207,20 @@ namespace MgmtAcronymMapping
             Optional<SystemData> systemData = default;
             Optional<bool> latestModelApplied = default;
             Optional<string> vmId = default;
-            Optional<VirtualMachineScaleSetVMInstanceView> instanceView = default;
+            Optional<VirtualMachineScaleSetVmInstanceView> instanceView = default;
             Optional<HardwareProfile> hardwareProfile = default;
             Optional<StorageProfile> storageProfile = default;
             Optional<AdditionalCapabilities> additionalCapabilities = default;
             Optional<OSProfile> osProfile = default;
             Optional<SecurityProfile> securityProfile = default;
             Optional<NetworkProfile> networkProfile = default;
-            Optional<VirtualMachineScaleSetVMNetworkProfileConfiguration> networkProfileConfiguration = default;
+            Optional<VirtualMachineScaleSetVmNetworkProfileConfiguration> networkProfileConfiguration = default;
             Optional<DiagnosticsProfile> diagnosticsProfile = default;
             Optional<WritableSubResource> availabilitySet = default;
             Optional<string> provisioningState = default;
             Optional<string> licenseType = default;
             Optional<string> modelDefinitionApplied = default;
-            Optional<VirtualMachineScaleSetVMProtectionPolicy> protectionPolicy = default;
+            Optional<VirtualMachineScaleSetVmProtectionPolicy> protectionPolicy = default;
             Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
@@ -333,7 +333,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            instanceView = VirtualMachineScaleSetVMInstanceView.DeserializeVirtualMachineScaleSetVMInstanceView(property0.Value);
+                            instanceView = VirtualMachineScaleSetVmInstanceView.DeserializeVirtualMachineScaleSetVmInstanceView(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("hardwareProfile"u8))
@@ -396,7 +396,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            networkProfileConfiguration = VirtualMachineScaleSetVMNetworkProfileConfiguration.DeserializeVirtualMachineScaleSetVMNetworkProfileConfiguration(property0.Value);
+                            networkProfileConfiguration = VirtualMachineScaleSetVmNetworkProfileConfiguration.DeserializeVirtualMachineScaleSetVmNetworkProfileConfiguration(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("diagnosticsProfile"u8))
@@ -438,7 +438,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            protectionPolicy = VirtualMachineScaleSetVMProtectionPolicy.DeserializeVirtualMachineScaleSetVMProtectionPolicy(property0.Value);
+                            protectionPolicy = VirtualMachineScaleSetVmProtectionPolicy.DeserializeVirtualMachineScaleSetVmProtectionPolicy(property0.Value);
                             continue;
                         }
                     }
@@ -450,35 +450,35 @@ namespace MgmtAcronymMapping
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVMData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, instanceId.Value, sku.Value, plan.Value, Optional.ToList(zones), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value, rawData);
+            return new VirtualMachineScaleSetVmData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, instanceId.Value, sku.Value, plan.Value, Optional.ToList(zones), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value, rawData);
         }
 
-        VirtualMachineScaleSetVMData IModelJsonSerializable<VirtualMachineScaleSetVMData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineScaleSetVmData IModelJsonSerializable<VirtualMachineScaleSetVmData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetVMData(doc.RootElement, options);
+            return DeserializeVirtualMachineScaleSetVmData(doc.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetVMData>.Serialize(ModelSerializerOptions options)
+        BinaryData IModelSerializable<VirtualMachineScaleSetVmData>.Serialize(ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             return ModelSerializer.SerializeCore(this, options);
         }
 
-        VirtualMachineScaleSetVMData IModelSerializable<VirtualMachineScaleSetVMData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        VirtualMachineScaleSetVmData IModelSerializable<VirtualMachineScaleSetVmData>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineScaleSetVMData(doc.RootElement, options);
+            return DeserializeVirtualMachineScaleSetVmData(doc.RootElement, options);
         }
 
-        /// <summary> Converts a <see cref="VirtualMachineScaleSetVMData"/> into a <see cref="RequestContent"/>. </summary>
-        /// <param name="model"> The <see cref="VirtualMachineScaleSetVMData"/> to convert. </param>
-        public static implicit operator RequestContent(VirtualMachineScaleSetVMData model)
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetVmData"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetVmData"/> to convert. </param>
+        public static implicit operator RequestContent(VirtualMachineScaleSetVmData model)
         {
             if (model is null)
             {
@@ -488,9 +488,9 @@ namespace MgmtAcronymMapping
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
-        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetVMData"/>. </summary>
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetVmData"/>. </summary>
         /// <param name="response"> The <see cref="Response"/> to convert. </param>
-        public static explicit operator VirtualMachineScaleSetVMData(Response response)
+        public static explicit operator VirtualMachineScaleSetVmData(Response response)
         {
             if (response is null)
             {
@@ -498,7 +498,7 @@ namespace MgmtAcronymMapping
             }
 
             using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
-            return DeserializeVirtualMachineScaleSetVMData(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeVirtualMachineScaleSetVmData(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -23,11 +23,11 @@ namespace Azure.ResourceManager.Sample.Models
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(AllocatableVMs))
+            if (Optional.IsCollectionDefined(AllocatableVms))
             {
                 writer.WritePropertyName("allocatableVMs"u8);
                 writer.WriteStartArray();
-                foreach (var item in AllocatableVMs)
+                foreach (var item in AllocatableVms)
                 {
                     if (item is null)
                     {
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
                     }
                     else
                     {
-                        ((IModelJsonSerializable<DedicatedHostAllocatableVM>)item).Serialize(writer, options);
+                        ((IModelJsonSerializable<DedicatedHostAllocatableVm>)item).Serialize(writer, options);
                     }
                 }
                 writer.WriteEndArray();
@@ -63,7 +63,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<IReadOnlyList<DedicatedHostAllocatableVM>> allocatableVMs = default;
+            Optional<IReadOnlyList<DedicatedHostAllocatableVm>> allocatableVms = default;
             Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
@@ -73,12 +73,12 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    List<DedicatedHostAllocatableVM> array = new List<DedicatedHostAllocatableVM>();
+                    List<DedicatedHostAllocatableVm> array = new List<DedicatedHostAllocatableVm>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DedicatedHostAllocatableVM.DeserializeDedicatedHostAllocatableVM(item));
+                        array.Add(DedicatedHostAllocatableVm.DeserializeDedicatedHostAllocatableVm(item));
                     }
-                    allocatableVMs = array;
+                    allocatableVms = array;
                     continue;
                 }
                 if (options.Format == ModelSerializerFormat.Json)
@@ -87,7 +87,7 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new DedicatedHostAvailableCapacity(Optional.ToList(allocatableVMs), rawData);
+            return new DedicatedHostAvailableCapacity(Optional.ToList(allocatableVms), rawData);
         }
 
         DedicatedHostAvailableCapacity IModelJsonSerializable<DedicatedHostAvailableCapacity>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

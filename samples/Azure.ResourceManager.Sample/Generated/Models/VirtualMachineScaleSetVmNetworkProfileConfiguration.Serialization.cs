@@ -14,11 +14,11 @@ using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    internal partial class VirtualMachineScaleSetVMNetworkProfileConfiguration : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetVMNetworkProfileConfiguration>
+    internal partial class VirtualMachineScaleSetVmNetworkProfileConfiguration : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetVmNetworkProfileConfiguration>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetVMNetworkProfileConfiguration>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetVmNetworkProfileConfiguration>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VirtualMachineScaleSetVMNetworkProfileConfiguration>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<VirtualMachineScaleSetVmNetworkProfileConfiguration>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -55,7 +55,7 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineScaleSetVMNetworkProfileConfiguration DeserializeVirtualMachineScaleSetVMNetworkProfileConfiguration(JsonElement element, ModelSerializerOptions options = default)
+        internal static VirtualMachineScaleSetVmNetworkProfileConfiguration DeserializeVirtualMachineScaleSetVmNetworkProfileConfiguration(JsonElement element, ModelSerializerOptions options = default)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
 
@@ -87,35 +87,35 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVMNetworkProfileConfiguration(Optional.ToList(networkInterfaceConfigurations), rawData);
+            return new VirtualMachineScaleSetVmNetworkProfileConfiguration(Optional.ToList(networkInterfaceConfigurations), rawData);
         }
 
-        VirtualMachineScaleSetVMNetworkProfileConfiguration IModelJsonSerializable<VirtualMachineScaleSetVMNetworkProfileConfiguration>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineScaleSetVmNetworkProfileConfiguration IModelJsonSerializable<VirtualMachineScaleSetVmNetworkProfileConfiguration>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetVMNetworkProfileConfiguration(doc.RootElement, options);
+            return DeserializeVirtualMachineScaleSetVmNetworkProfileConfiguration(doc.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetVMNetworkProfileConfiguration>.Serialize(ModelSerializerOptions options)
+        BinaryData IModelSerializable<VirtualMachineScaleSetVmNetworkProfileConfiguration>.Serialize(ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             return ModelSerializer.SerializeCore(this, options);
         }
 
-        VirtualMachineScaleSetVMNetworkProfileConfiguration IModelSerializable<VirtualMachineScaleSetVMNetworkProfileConfiguration>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        VirtualMachineScaleSetVmNetworkProfileConfiguration IModelSerializable<VirtualMachineScaleSetVmNetworkProfileConfiguration>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineScaleSetVMNetworkProfileConfiguration(doc.RootElement, options);
+            return DeserializeVirtualMachineScaleSetVmNetworkProfileConfiguration(doc.RootElement, options);
         }
 
-        /// <summary> Converts a <see cref="VirtualMachineScaleSetVMNetworkProfileConfiguration"/> into a <see cref="RequestContent"/>. </summary>
-        /// <param name="model"> The <see cref="VirtualMachineScaleSetVMNetworkProfileConfiguration"/> to convert. </param>
-        public static implicit operator RequestContent(VirtualMachineScaleSetVMNetworkProfileConfiguration model)
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetVmNetworkProfileConfiguration"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetVmNetworkProfileConfiguration"/> to convert. </param>
+        public static implicit operator RequestContent(VirtualMachineScaleSetVmNetworkProfileConfiguration model)
         {
             if (model is null)
             {
@@ -125,9 +125,9 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
-        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetVMNetworkProfileConfiguration"/>. </summary>
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetVmNetworkProfileConfiguration"/>. </summary>
         /// <param name="response"> The <see cref="Response"/> to convert. </param>
-        public static explicit operator VirtualMachineScaleSetVMNetworkProfileConfiguration(Response response)
+        public static explicit operator VirtualMachineScaleSetVmNetworkProfileConfiguration(Response response)
         {
             if (response is null)
             {
@@ -135,7 +135,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
-            return DeserializeVirtualMachineScaleSetVMNetworkProfileConfiguration(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeVirtualMachineScaleSetVmNetworkProfileConfiguration(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

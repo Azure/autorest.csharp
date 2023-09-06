@@ -23,10 +23,10 @@ namespace MgmtAcronymMapping.Models
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(ProvisionVMAgent))
+            if (Optional.IsDefined(ProvisionVmAgent))
             {
                 writer.WritePropertyName("provisionVMAgent"u8);
-                writer.WriteBooleanValue(ProvisionVMAgent.Value);
+                writer.WriteBooleanValue(ProvisionVmAgent.Value);
             }
             if (Optional.IsDefined(EnableAutomaticUpdates))
             {
@@ -102,7 +102,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<bool> provisionVMAgent = default;
+            Optional<bool> provisionVmAgent = default;
             Optional<bool> enableAutomaticUpdates = default;
             Optional<string> timeZone = default;
             Optional<IList<AdditionalUnattendContent>> additionalUnattendContent = default;
@@ -117,7 +117,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    provisionVMAgent = property.Value.GetBoolean();
+                    provisionVmAgent = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("enableAutomaticUpdates"u8))
@@ -172,7 +172,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new WindowsConfiguration(Optional.ToNullable(provisionVMAgent), Optional.ToNullable(enableAutomaticUpdates), timeZone.Value, Optional.ToList(additionalUnattendContent), patchSettings.Value, winRM.Value, rawData);
+            return new WindowsConfiguration(Optional.ToNullable(provisionVmAgent), Optional.ToNullable(enableAutomaticUpdates), timeZone.Value, Optional.ToList(additionalUnattendContent), patchSettings.Value, winRM.Value, rawData);
         }
 
         WindowsConfiguration IModelJsonSerializable<WindowsConfiguration>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

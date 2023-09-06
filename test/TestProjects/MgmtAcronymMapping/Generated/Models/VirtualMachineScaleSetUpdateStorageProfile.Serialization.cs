@@ -35,16 +35,16 @@ namespace MgmtAcronymMapping.Models
                     ((IModelJsonSerializable<ImageReference>)ImageReference).Serialize(writer, options);
                 }
             }
-            if (Optional.IsDefined(OsDisk))
+            if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                if (OsDisk is null)
+                if (OSDisk is null)
                 {
                     writer.WriteNullValue();
                 }
                 else
                 {
-                    ((IModelJsonSerializable<VirtualMachineScaleSetUpdateOSDisk>)OsDisk).Serialize(writer, options);
+                    ((IModelJsonSerializable<VirtualMachineScaleSetUpdateOSDisk>)OSDisk).Serialize(writer, options);
                 }
             }
             if (Optional.IsCollectionDefined(DataDisks))

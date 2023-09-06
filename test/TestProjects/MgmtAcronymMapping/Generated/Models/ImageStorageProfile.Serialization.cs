@@ -23,16 +23,16 @@ namespace MgmtAcronymMapping.Models
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(OsDisk))
+            if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                if (OsDisk is null)
+                if (OSDisk is null)
                 {
                     writer.WriteNullValue();
                 }
                 else
                 {
-                    ((IModelJsonSerializable<ImageOSDisk>)OsDisk).Serialize(writer, options);
+                    ((IModelJsonSerializable<ImageOSDisk>)OSDisk).Serialize(writer, options);
                 }
             }
             if (Optional.IsCollectionDefined(DataDisks))

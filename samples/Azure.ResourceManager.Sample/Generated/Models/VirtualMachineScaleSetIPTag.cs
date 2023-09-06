@@ -14,17 +14,17 @@ namespace Azure.ResourceManager.Sample.Models
     /// Contains the IP tag associated with the public IP address.
     /// Serialized Name: VirtualMachineScaleSetIpTag
     /// </summary>
-    public partial class VirtualMachineScaleSetIpTag
+    public partial class VirtualMachineScaleSetIPTag
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetIpTag"/>. </summary>
-        public VirtualMachineScaleSetIpTag()
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetIPTag"/>. </summary>
+        public VirtualMachineScaleSetIPTag()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetIpTag"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetIPTag"/>. </summary>
         /// <param name="ipTagType">
         /// IP tag type. Example: FirstPartyUsage.
         /// Serialized Name: VirtualMachineScaleSetIpTag.ipTagType
@@ -34,9 +34,9 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: VirtualMachineScaleSetIpTag.tag
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetIpTag(string ipTagType, string tag, Dictionary<string, BinaryData> rawData)
+        internal VirtualMachineScaleSetIPTag(string ipTagType, string tag, Dictionary<string, BinaryData> rawData)
         {
-            IpTagType = ipTagType;
+            IPTagType = ipTagType;
             Tag = tag;
             _rawData = rawData;
         }
@@ -45,7 +45,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// IP tag type. Example: FirstPartyUsage.
         /// Serialized Name: VirtualMachineScaleSetIpTag.ipTagType
         /// </summary>
-        public string IpTagType { get; set; }
+        public string IPTagType { get; set; }
         /// <summary>
         /// IP tag associated with the public IP. Example: SQL, Storage etc.
         /// Serialized Name: VirtualMachineScaleSetIpTag.tag

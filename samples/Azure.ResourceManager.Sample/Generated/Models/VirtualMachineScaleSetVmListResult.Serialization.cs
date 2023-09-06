@@ -15,11 +15,11 @@ using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    internal partial class VirtualMachineScaleSetVMListResult : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetVMListResult>
+    internal partial class VirtualMachineScaleSetVmListResult : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetVmListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetVMListResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetVmListResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VirtualMachineScaleSetVMListResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<VirtualMachineScaleSetVmListResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 else
                 {
-                    ((IModelJsonSerializable<VirtualMachineScaleSetVMData>)item).Serialize(writer, options);
+                    ((IModelJsonSerializable<VirtualMachineScaleSetVmData>)item).Serialize(writer, options);
                 }
             }
             writer.WriteEndArray();
@@ -58,7 +58,7 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineScaleSetVMListResult DeserializeVirtualMachineScaleSetVMListResult(JsonElement element, ModelSerializerOptions options = default)
+        internal static VirtualMachineScaleSetVmListResult DeserializeVirtualMachineScaleSetVmListResult(JsonElement element, ModelSerializerOptions options = default)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
 
@@ -66,17 +66,17 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            IReadOnlyList<VirtualMachineScaleSetVMData> value = default;
+            IReadOnlyList<VirtualMachineScaleSetVmData> value = default;
             Optional<string> nextLink = default;
             Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
                 {
-                    List<VirtualMachineScaleSetVMData> array = new List<VirtualMachineScaleSetVMData>();
+                    List<VirtualMachineScaleSetVmData> array = new List<VirtualMachineScaleSetVmData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineScaleSetVMData.DeserializeVirtualMachineScaleSetVMData(item));
+                        array.Add(VirtualMachineScaleSetVmData.DeserializeVirtualMachineScaleSetVmData(item));
                     }
                     value = array;
                     continue;
@@ -92,35 +92,35 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVMListResult(value, nextLink.Value, rawData);
+            return new VirtualMachineScaleSetVmListResult(value, nextLink.Value, rawData);
         }
 
-        VirtualMachineScaleSetVMListResult IModelJsonSerializable<VirtualMachineScaleSetVMListResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineScaleSetVmListResult IModelJsonSerializable<VirtualMachineScaleSetVmListResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetVMListResult(doc.RootElement, options);
+            return DeserializeVirtualMachineScaleSetVmListResult(doc.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetVMListResult>.Serialize(ModelSerializerOptions options)
+        BinaryData IModelSerializable<VirtualMachineScaleSetVmListResult>.Serialize(ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             return ModelSerializer.SerializeCore(this, options);
         }
 
-        VirtualMachineScaleSetVMListResult IModelSerializable<VirtualMachineScaleSetVMListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        VirtualMachineScaleSetVmListResult IModelSerializable<VirtualMachineScaleSetVmListResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineScaleSetVMListResult(doc.RootElement, options);
+            return DeserializeVirtualMachineScaleSetVmListResult(doc.RootElement, options);
         }
 
-        /// <summary> Converts a <see cref="VirtualMachineScaleSetVMListResult"/> into a <see cref="RequestContent"/>. </summary>
-        /// <param name="model"> The <see cref="VirtualMachineScaleSetVMListResult"/> to convert. </param>
-        public static implicit operator RequestContent(VirtualMachineScaleSetVMListResult model)
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetVmListResult"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetVmListResult"/> to convert. </param>
+        public static implicit operator RequestContent(VirtualMachineScaleSetVmListResult model)
         {
             if (model is null)
             {
@@ -130,9 +130,9 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
-        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetVMListResult"/>. </summary>
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetVmListResult"/>. </summary>
         /// <param name="response"> The <see cref="Response"/> to convert. </param>
-        public static explicit operator VirtualMachineScaleSetVMListResult(Response response)
+        public static explicit operator VirtualMachineScaleSetVmListResult(Response response)
         {
             if (response is null)
             {
@@ -140,7 +140,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
-            return DeserializeVirtualMachineScaleSetVMListResult(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeVirtualMachineScaleSetVmListResult(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

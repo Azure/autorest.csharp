@@ -14,17 +14,17 @@ namespace Azure.ResourceManager.Sample.Models
     /// Represents the dedicated host unutilized capacity in terms of a specific VM size.
     /// Serialized Name: DedicatedHostAllocatableVM
     /// </summary>
-    public partial class DedicatedHostAllocatableVM
+    public partial class DedicatedHostAllocatableVm
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary> Initializes a new instance of <see cref="DedicatedHostAllocatableVM"/>. </summary>
-        internal DedicatedHostAllocatableVM()
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostAllocatableVm"/>. </summary>
+        internal DedicatedHostAllocatableVm()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="DedicatedHostAllocatableVM"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostAllocatableVm"/>. </summary>
         /// <param name="vmSize">
         /// VM size in terms of which the unutilized capacity is represented.
         /// Serialized Name: DedicatedHostAllocatableVM.vmSize
@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: DedicatedHostAllocatableVM.count
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DedicatedHostAllocatableVM(string vmSize, double? count, Dictionary<string, BinaryData> rawData)
+        internal DedicatedHostAllocatableVm(string vmSize, double? count, Dictionary<string, BinaryData> rawData)
         {
             VmSize = vmSize;
             Count = count;

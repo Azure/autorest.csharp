@@ -14,17 +14,17 @@ namespace Azure.ResourceManager.Sample.Models
     /// Describes a virtual machine scale set virtual machine profile.
     /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile
     /// </summary>
-    public partial class VirtualMachineScaleSetUpdateVMProfile
+    public partial class VirtualMachineScaleSetUpdateVmProfile
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateVMProfile"/>. </summary>
-        public VirtualMachineScaleSetUpdateVMProfile()
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateVmProfile"/>. </summary>
+        public VirtualMachineScaleSetUpdateVmProfile()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateVMProfile"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateVmProfile"/>. </summary>
         /// <param name="osProfile">
         /// The virtual machine scale set OS profile.
         /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.osProfile
@@ -62,9 +62,9 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.scheduledEventsProfile
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetUpdateVMProfile(VirtualMachineScaleSetUpdateOSProfile osProfile, VirtualMachineScaleSetUpdateStorageProfile storageProfile, VirtualMachineScaleSetUpdateNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile, Dictionary<string, BinaryData> rawData)
+        internal VirtualMachineScaleSetUpdateVmProfile(VirtualMachineScaleSetUpdateOSProfile osProfile, VirtualMachineScaleSetUpdateStorageProfile storageProfile, VirtualMachineScaleSetUpdateNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile, Dictionary<string, BinaryData> rawData)
         {
-            OsProfile = osProfile;
+            OSProfile = osProfile;
             StorageProfile = storageProfile;
             NetworkProfile = networkProfile;
             SecurityProfile = securityProfile;
@@ -80,7 +80,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The virtual machine scale set OS profile.
         /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.osProfile
         /// </summary>
-        public VirtualMachineScaleSetUpdateOSProfile OsProfile { get; set; }
+        public VirtualMachineScaleSetUpdateOSProfile OSProfile { get; set; }
         /// <summary>
         /// The virtual machine scale set storage profile.
         /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.storageProfile

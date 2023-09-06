@@ -27,7 +27,7 @@ namespace MgmtAcronymMapping.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="WindowsConfiguration"/>. </summary>
-        /// <param name="provisionVMAgent">
+        /// <param name="provisionVmAgent">
         /// Indicates whether virtual machine agent should be provisioned on the virtual machine. &lt;br&gt;&lt;br&gt; When this property is not specified in the request body, default behavior is to set it to true.  This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.
         /// Serialized Name: WindowsConfiguration.provisionVMAgent
         /// </param>
@@ -52,9 +52,9 @@ namespace MgmtAcronymMapping.Models
         /// Serialized Name: WindowsConfiguration.winRM
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal WindowsConfiguration(bool? provisionVMAgent, bool? enableAutomaticUpdates, string timeZone, IList<AdditionalUnattendContent> additionalUnattendContent, PatchSettings patchSettings, WinRMConfiguration winRM, Dictionary<string, BinaryData> rawData)
+        internal WindowsConfiguration(bool? provisionVmAgent, bool? enableAutomaticUpdates, string timeZone, IList<AdditionalUnattendContent> additionalUnattendContent, PatchSettings patchSettings, WinRMConfiguration winRM, Dictionary<string, BinaryData> rawData)
         {
-            ProvisionVMAgent = provisionVMAgent;
+            ProvisionVmAgent = provisionVmAgent;
             EnableAutomaticUpdates = enableAutomaticUpdates;
             TimeZone = timeZone;
             AdditionalUnattendContent = additionalUnattendContent;
@@ -67,7 +67,7 @@ namespace MgmtAcronymMapping.Models
         /// Indicates whether virtual machine agent should be provisioned on the virtual machine. &lt;br&gt;&lt;br&gt; When this property is not specified in the request body, default behavior is to set it to true.  This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.
         /// Serialized Name: WindowsConfiguration.provisionVMAgent
         /// </summary>
-        public bool? ProvisionVMAgent { get; set; }
+        public bool? ProvisionVmAgent { get; set; }
         /// <summary>
         /// Indicates whether Automatic Updates is enabled for the Windows virtual machine. Default value is true. &lt;br&gt;&lt;br&gt; For virtual machine scale sets, this property can be updated and updates will take effect on OS reprovisioning.
         /// Serialized Name: WindowsConfiguration.enableAutomaticUpdates

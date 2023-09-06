@@ -21,7 +21,7 @@ namespace MgmtAcronymMapping.Models
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateNetworkConfiguration"/>. </summary>
         public VirtualMachineScaleSetUpdateNetworkConfiguration()
         {
-            IpConfigurations = new ChangeTrackingList<VirtualMachineScaleSetUpdateIPConfiguration>();
+            IPConfigurations = new ChangeTrackingList<VirtualMachineScaleSetUpdateIPConfiguration>();
         }
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateNetworkConfiguration"/>. </summary>
@@ -65,7 +65,7 @@ namespace MgmtAcronymMapping.Models
             EnableAcceleratedNetworking = enableAcceleratedNetworking;
             NetworkSecurityGroup = networkSecurityGroup;
             DnsSettings = dnsSettings;
-            IpConfigurations = ipConfigurations;
+            IPConfigurations = ipConfigurations;
             EnableIPForwarding = enableIPForwarding;
         }
 
@@ -124,7 +124,7 @@ namespace MgmtAcronymMapping.Models
         /// The virtual machine scale set IP Configuration.
         /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.properties.ipConfigurations
         /// </summary>
-        public IList<VirtualMachineScaleSetUpdateIPConfiguration> IpConfigurations { get; }
+        public IList<VirtualMachineScaleSetUpdateIPConfiguration> IPConfigurations { get; }
         /// <summary>
         /// Whether IP forwarding enabled on this NIC.
         /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.properties.enableIPForwarding

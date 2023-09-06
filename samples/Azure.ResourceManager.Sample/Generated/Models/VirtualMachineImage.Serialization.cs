@@ -57,16 +57,16 @@ namespace Azure.ResourceManager.Sample.Models
                     ((IModelJsonSerializable<PurchasePlan>)Plan).Serialize(writer, options);
                 }
             }
-            if (Optional.IsDefined(OsDiskImage))
+            if (Optional.IsDefined(OSDiskImage))
             {
                 writer.WritePropertyName("osDiskImage"u8);
-                if (OsDiskImage is null)
+                if (OSDiskImage is null)
                 {
                     writer.WriteNullValue();
                 }
                 else
                 {
-                    ((IModelJsonSerializable<OSDiskImage>)OsDiskImage).Serialize(writer, options);
+                    ((IModelJsonSerializable<OSDiskImage>)OSDiskImage).Serialize(writer, options);
                 }
             }
             if (Optional.IsCollectionDefined(DataDiskImages))

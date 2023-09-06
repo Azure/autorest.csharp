@@ -100,7 +100,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 else
                 {
-                    ((IModelJsonSerializable<VirtualMachineScaleSetUpdateVMProfile>)VirtualMachineProfile).Serialize(writer, options);
+                    ((IModelJsonSerializable<VirtualMachineScaleSetUpdateVmProfile>)VirtualMachineProfile).Serialize(writer, options);
                 }
             }
             if (Optional.IsDefined(Overprovision))
@@ -108,10 +108,10 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("overprovision"u8);
                 writer.WriteBooleanValue(Overprovision.Value);
             }
-            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVMs))
+            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
             {
                 writer.WritePropertyName("doNotRunExtensionsOnOverprovisionedVMs"u8);
-                writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVMs.Value);
+                writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVms.Value);
             }
             if (Optional.IsDefined(SinglePlacementGroup))
             {
@@ -177,9 +177,9 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<IDictionary<string, string>> tags = default;
             Optional<UpgradePolicy> upgradePolicy = default;
             Optional<AutomaticRepairsPolicy> automaticRepairsPolicy = default;
-            Optional<VirtualMachineScaleSetUpdateVMProfile> virtualMachineProfile = default;
+            Optional<VirtualMachineScaleSetUpdateVmProfile> virtualMachineProfile = default;
             Optional<bool> overprovision = default;
-            Optional<bool> doNotRunExtensionsOnOverprovisionedVMs = default;
+            Optional<bool> doNotRunExtensionsOnOverprovisionedVms = default;
             Optional<bool> singlePlacementGroup = default;
             Optional<AdditionalCapabilities> additionalCapabilities = default;
             Optional<ScaleInPolicy> scaleInPolicy = default;
@@ -261,7 +261,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            virtualMachineProfile = VirtualMachineScaleSetUpdateVMProfile.DeserializeVirtualMachineScaleSetUpdateVMProfile(property0.Value);
+                            virtualMachineProfile = VirtualMachineScaleSetUpdateVmProfile.DeserializeVirtualMachineScaleSetUpdateVmProfile(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("overprovision"u8))
@@ -279,7 +279,7 @@ namespace Azure.ResourceManager.Sample.Models
                             {
                                 continue;
                             }
-                            doNotRunExtensionsOnOverprovisionedVMs = property0.Value.GetBoolean();
+                            doNotRunExtensionsOnOverprovisionedVms = property0.Value.GetBoolean();
                             continue;
                         }
                         if (property0.NameEquals("singlePlacementGroup"u8))
@@ -327,7 +327,7 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetPatch(Optional.ToDictionary(tags), sku.Value, plan.Value, identity, upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVMs), Optional.ToNullable(singlePlacementGroup), additionalCapabilities.Value, scaleInPolicy.Value, proximityPlacementGroup, rawData);
+            return new VirtualMachineScaleSetPatch(Optional.ToDictionary(tags), sku.Value, plan.Value, identity, upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVms), Optional.ToNullable(singlePlacementGroup), additionalCapabilities.Value, scaleInPolicy.Value, proximityPlacementGroup, rawData);
         }
 
         VirtualMachineScaleSetPatch IModelJsonSerializable<VirtualMachineScaleSetPatch>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

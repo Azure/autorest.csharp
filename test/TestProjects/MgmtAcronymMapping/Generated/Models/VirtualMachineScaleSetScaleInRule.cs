@@ -26,8 +26,8 @@ namespace MgmtAcronymMapping.Models
         }
 
         private const string DefaultValue = "Default";
-        private const string OldestVMValue = "OldestVM";
-        private const string NewestVMValue = "NewestVM";
+        private const string OldestVmValue = "OldestVM";
+        private const string NewestVmValue = "NewestVM";
 
         /// <summary>
         /// Default
@@ -38,12 +38,12 @@ namespace MgmtAcronymMapping.Models
         /// OldestVM
         /// Serialized Name: VirtualMachineScaleSetScaleInRules.OldestVM
         /// </summary>
-        public static VirtualMachineScaleSetScaleInRule OldestVM { get; } = new VirtualMachineScaleSetScaleInRule(OldestVMValue);
+        public static VirtualMachineScaleSetScaleInRule OldestVm { get; } = new VirtualMachineScaleSetScaleInRule(OldestVmValue);
         /// <summary>
         /// NewestVM
         /// Serialized Name: VirtualMachineScaleSetScaleInRules.NewestVM
         /// </summary>
-        public static VirtualMachineScaleSetScaleInRule NewestVM { get; } = new VirtualMachineScaleSetScaleInRule(NewestVMValue);
+        public static VirtualMachineScaleSetScaleInRule NewestVm { get; } = new VirtualMachineScaleSetScaleInRule(NewestVmValue);
         /// <summary> Determines if two <see cref="VirtualMachineScaleSetScaleInRule"/> values are the same. </summary>
         public static bool operator ==(VirtualMachineScaleSetScaleInRule left, VirtualMachineScaleSetScaleInRule right) => left.Equals(right);
         /// <summary> Determines if two <see cref="VirtualMachineScaleSetScaleInRule"/> values are not the same. </summary>

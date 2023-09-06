@@ -14,25 +14,25 @@ using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineScaleSetVMProfile : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetVMProfile>
+    public partial class VirtualMachineScaleSetVmProfile : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetVmProfile>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetVMProfile>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetVmProfile>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VirtualMachineScaleSetVMProfile>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<VirtualMachineScaleSetVmProfile>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(OsProfile))
+            if (Optional.IsDefined(OSProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                if (OsProfile is null)
+                if (OSProfile is null)
                 {
                     writer.WriteNullValue();
                 }
                 else
                 {
-                    ((IModelJsonSerializable<VirtualMachineScaleSetOSProfile>)OsProfile).Serialize(writer, options);
+                    ((IModelJsonSerializable<VirtualMachineScaleSetOSProfile>)OSProfile).Serialize(writer, options);
                 }
             }
             if (Optional.IsDefined(StorageProfile))
@@ -149,7 +149,7 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineScaleSetVMProfile DeserializeVirtualMachineScaleSetVMProfile(JsonElement element, ModelSerializerOptions options = default)
+        internal static VirtualMachineScaleSetVmProfile DeserializeVirtualMachineScaleSetVmProfile(JsonElement element, ModelSerializerOptions options = default)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
 
@@ -272,35 +272,35 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVMProfile(osProfile.Value, storageProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, extensionProfile.Value, licenseType.Value, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, scheduledEventsProfile.Value, rawData);
+            return new VirtualMachineScaleSetVmProfile(osProfile.Value, storageProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, extensionProfile.Value, licenseType.Value, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, scheduledEventsProfile.Value, rawData);
         }
 
-        VirtualMachineScaleSetVMProfile IModelJsonSerializable<VirtualMachineScaleSetVMProfile>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineScaleSetVmProfile IModelJsonSerializable<VirtualMachineScaleSetVmProfile>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetVMProfile(doc.RootElement, options);
+            return DeserializeVirtualMachineScaleSetVmProfile(doc.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetVMProfile>.Serialize(ModelSerializerOptions options)
+        BinaryData IModelSerializable<VirtualMachineScaleSetVmProfile>.Serialize(ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             return ModelSerializer.SerializeCore(this, options);
         }
 
-        VirtualMachineScaleSetVMProfile IModelSerializable<VirtualMachineScaleSetVMProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        VirtualMachineScaleSetVmProfile IModelSerializable<VirtualMachineScaleSetVmProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineScaleSetVMProfile(doc.RootElement, options);
+            return DeserializeVirtualMachineScaleSetVmProfile(doc.RootElement, options);
         }
 
-        /// <summary> Converts a <see cref="VirtualMachineScaleSetVMProfile"/> into a <see cref="RequestContent"/>. </summary>
-        /// <param name="model"> The <see cref="VirtualMachineScaleSetVMProfile"/> to convert. </param>
-        public static implicit operator RequestContent(VirtualMachineScaleSetVMProfile model)
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetVmProfile"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetVmProfile"/> to convert. </param>
+        public static implicit operator RequestContent(VirtualMachineScaleSetVmProfile model)
         {
             if (model is null)
             {
@@ -310,9 +310,9 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
-        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetVMProfile"/>. </summary>
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetVmProfile"/>. </summary>
         /// <param name="response"> The <see cref="Response"/> to convert. </param>
-        public static explicit operator VirtualMachineScaleSetVMProfile(Response response)
+        public static explicit operator VirtualMachineScaleSetVmProfile(Response response)
         {
             if (response is null)
             {
@@ -320,7 +320,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
-            return DeserializeVirtualMachineScaleSetVMProfile(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeVirtualMachineScaleSetVmProfile(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

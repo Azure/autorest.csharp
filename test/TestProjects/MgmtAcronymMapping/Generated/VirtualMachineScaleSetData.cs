@@ -58,11 +58,11 @@ namespace MgmtAcronymMapping
         /// The IPsec
         /// Serialized Name: VirtualMachineScaleSet.properties.ipsecSomething
         /// </param>
-        /// <param name="testIPSec">
+        /// <param name="testIPsec">
         /// The IPsec
         /// Serialized Name: VirtualMachineScaleSet.properties.testIPSec
         /// </param>
-        /// <param name="p2SServer">
+        /// <param name="p2sServer">
         /// The P2S Server
         /// Serialized Name: VirtualMachineScaleSet.properties.p2sServer
         /// </param>
@@ -86,7 +86,7 @@ namespace MgmtAcronymMapping
         /// Specifies whether the Virtual Machine Scale Set should be overprovisioned.
         /// Serialized Name: VirtualMachineScaleSet.properties.overprovision
         /// </param>
-        /// <param name="doNotRunExtensionsOnOverprovisionedVMs">
+        /// <param name="doNotRunExtensionsOnOverprovisionedVms">
         /// When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.
         /// Serialized Name: VirtualMachineScaleSet.properties.doNotRunExtensionsOnOverprovisionedVMs
         /// </param>
@@ -123,21 +123,21 @@ namespace MgmtAcronymMapping
         /// Serialized Name: VirtualMachineScaleSet.properties.scaleInPolicy
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, MgmtAcronymMappingSku sku, MgmtAcronymMappingPlan plan, ManagedServiceIdentity identity, IList<string> zones, string ipsecSomething, string testIPSec, string p2SServer, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetVMProfile virtualMachineProfile, string provisioningState, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVMs, string uniqueId, bool? singlePlacementGroup, bool? zoneBalance, int? platformFaultDomainCount, WritableSubResource proximityPlacementGroup, WritableSubResource hostGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
+        internal VirtualMachineScaleSetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, MgmtAcronymMappingSku sku, MgmtAcronymMappingPlan plan, ManagedServiceIdentity identity, IList<string> zones, string ipsecSomething, string testIPsec, string p2sServer, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetVmProfile virtualMachineProfile, string provisioningState, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVms, string uniqueId, bool? singlePlacementGroup, bool? zoneBalance, int? platformFaultDomainCount, WritableSubResource proximityPlacementGroup, WritableSubResource hostGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Sku = sku;
             Plan = plan;
             Identity = identity;
             Zones = zones;
-            IpsecSomething = ipsecSomething;
-            TestIPSec = testIPSec;
-            P2SServer = p2SServer;
+            IPsecSomething = ipsecSomething;
+            TestIPsec = testIPsec;
+            P2SServer = p2sServer;
             UpgradePolicy = upgradePolicy;
             AutomaticRepairsPolicy = automaticRepairsPolicy;
             VirtualMachineProfile = virtualMachineProfile;
             ProvisioningState = provisioningState;
             Overprovision = overprovision;
-            DoNotRunExtensionsOnOverprovisionedVMs = doNotRunExtensionsOnOverprovisionedVMs;
+            DoNotRunExtensionsOnOverprovisionedVms = doNotRunExtensionsOnOverprovisionedVms;
             UniqueId = uniqueId;
             SinglePlacementGroup = singlePlacementGroup;
             ZoneBalance = zoneBalance;
@@ -178,12 +178,12 @@ namespace MgmtAcronymMapping
         /// The IPsec
         /// Serialized Name: VirtualMachineScaleSet.properties.ipsecSomething
         /// </summary>
-        public string IpsecSomething { get; set; }
+        public string IPsecSomething { get; set; }
         /// <summary>
         /// The IPsec
         /// Serialized Name: VirtualMachineScaleSet.properties.testIPSec
         /// </summary>
-        public string TestIPSec { get; set; }
+        public string TestIPsec { get; set; }
         /// <summary>
         /// The P2S Server
         /// Serialized Name: VirtualMachineScaleSet.properties.p2sServer
@@ -203,7 +203,7 @@ namespace MgmtAcronymMapping
         /// The virtual machine profile.
         /// Serialized Name: VirtualMachineScaleSet.properties.virtualMachineProfile
         /// </summary>
-        public VirtualMachineScaleSetVMProfile VirtualMachineProfile { get; set; }
+        public VirtualMachineScaleSetVmProfile VirtualMachineProfile { get; set; }
         /// <summary>
         /// The provisioning state, which only appears in the response.
         /// Serialized Name: VirtualMachineScaleSet.properties.provisioningState
@@ -218,7 +218,7 @@ namespace MgmtAcronymMapping
         /// When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.
         /// Serialized Name: VirtualMachineScaleSet.properties.doNotRunExtensionsOnOverprovisionedVMs
         /// </summary>
-        public bool? DoNotRunExtensionsOnOverprovisionedVMs { get; set; }
+        public bool? DoNotRunExtensionsOnOverprovisionedVms { get; set; }
         /// <summary>
         /// Specifies the ID which uniquely identifies a Virtual Machine Scale Set.
         /// Serialized Name: VirtualMachineScaleSet.properties.uniqueId

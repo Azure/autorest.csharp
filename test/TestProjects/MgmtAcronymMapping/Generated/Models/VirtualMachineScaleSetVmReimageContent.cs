@@ -14,20 +14,20 @@ namespace MgmtAcronymMapping.Models
     /// Describes a Virtual Machine Scale Set VM Reimage Parameters.
     /// Serialized Name: VirtualMachineScaleSetVMReimageParameters
     /// </summary>
-    public partial class VirtualMachineScaleSetVMReimageContent : VirtualMachineReimageContent
+    public partial class VirtualMachineScaleSetVmReimageContent : VirtualMachineReimageContent
     {
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMReimageContent"/>. </summary>
-        public VirtualMachineScaleSetVMReimageContent()
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmReimageContent"/>. </summary>
+        public VirtualMachineScaleSetVmReimageContent()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMReimageContent"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmReimageContent"/>. </summary>
         /// <param name="tempDisk">
         /// Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk.
         /// Serialized Name: VirtualMachineReimageParameters.tempDisk
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetVMReimageContent(bool? tempDisk, Dictionary<string, BinaryData> rawData) : base(tempDisk, rawData)
+        internal VirtualMachineScaleSetVmReimageContent(bool? tempDisk, Dictionary<string, BinaryData> rawData) : base(tempDisk, rawData)
         {
         }
     }

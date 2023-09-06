@@ -104,16 +104,16 @@ namespace MgmtAcronymMapping
                     ((IModelJsonSerializable<AdditionalCapabilities>)AdditionalCapabilities).Serialize(writer, options);
                 }
             }
-            if (Optional.IsDefined(OsProfile))
+            if (Optional.IsDefined(OSProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                if (OsProfile is null)
+                if (OSProfile is null)
                 {
                     writer.WriteNullValue();
                 }
                 else
                 {
-                    ((IModelJsonSerializable<OSProfile>)OsProfile).Serialize(writer, options);
+                    ((IModelJsonSerializable<OSProfile>)OSProfile).Serialize(writer, options);
                 }
             }
             if (Optional.IsDefined(NetworkProfile))

@@ -33,16 +33,16 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the ssh key configuration for a Linux OS.
         /// Serialized Name: LinuxConfiguration.ssh
         /// </param>
-        /// <param name="provisionVMAgent">
+        /// <param name="provisionVmAgent">
         /// Indicates whether virtual machine agent should be provisioned on the virtual machine. &lt;br&gt;&lt;br&gt; When this property is not specified in the request body, default behavior is to set it to true.  This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.
         /// Serialized Name: LinuxConfiguration.provisionVMAgent
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LinuxConfiguration(bool? disablePasswordAuthentication, SshConfiguration ssh, bool? provisionVMAgent, Dictionary<string, BinaryData> rawData)
+        internal LinuxConfiguration(bool? disablePasswordAuthentication, SshConfiguration ssh, bool? provisionVmAgent, Dictionary<string, BinaryData> rawData)
         {
             DisablePasswordAuthentication = disablePasswordAuthentication;
             Ssh = ssh;
-            ProvisionVMAgent = provisionVMAgent;
+            ProvisionVmAgent = provisionVmAgent;
             _rawData = rawData;
         }
 
@@ -74,6 +74,6 @@ namespace Azure.ResourceManager.Sample.Models
         /// Indicates whether virtual machine agent should be provisioned on the virtual machine. &lt;br&gt;&lt;br&gt; When this property is not specified in the request body, default behavior is to set it to true.  This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.
         /// Serialized Name: LinuxConfiguration.provisionVMAgent
         /// </summary>
-        public bool? ProvisionVMAgent { get; set; }
+        public bool? ProvisionVmAgent { get; set; }
     }
 }

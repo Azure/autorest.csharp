@@ -15,23 +15,23 @@ using MgmtAcronymMapping.Models;
 namespace MgmtAcronymMapping
 {
     /// <summary>
-    /// A class representing the VirtualMachineScaleSetVM data model.
+    /// A class representing the VirtualMachineScaleSetVm data model.
     /// Describes a virtual machine scale set virtual machine.
     /// Serialized Name: VirtualMachineScaleSetVM
     /// </summary>
-    public partial class VirtualMachineScaleSetVMData : TrackedResourceData
+    public partial class VirtualMachineScaleSetVmData : TrackedResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMData"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmData"/>. </summary>
         /// <param name="location"> The location. </param>
-        public VirtualMachineScaleSetVMData(AzureLocation location) : base(location)
+        public VirtualMachineScaleSetVmData(AzureLocation location) : base(location)
         {
             Zones = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMData"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -119,7 +119,7 @@ namespace MgmtAcronymMapping
         /// Serialized Name: VirtualMachineScaleSetVM.properties.protectionPolicy
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetVMData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string instanceId, MgmtAcronymMappingSku sku, MgmtAcronymMappingPlan plan, IReadOnlyList<string> zones, bool? latestModelApplied, string vmId, VirtualMachineScaleSetVMInstanceView instanceView, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, SecurityProfile securityProfile, NetworkProfile networkProfile, VirtualMachineScaleSetVMNetworkProfileConfiguration networkProfileConfiguration, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, string provisioningState, string licenseType, string modelDefinitionApplied, VirtualMachineScaleSetVMProtectionPolicy protectionPolicy, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
+        internal VirtualMachineScaleSetVmData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string instanceId, MgmtAcronymMappingSku sku, MgmtAcronymMappingPlan plan, IReadOnlyList<string> zones, bool? latestModelApplied, string vmId, VirtualMachineScaleSetVmInstanceView instanceView, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, SecurityProfile securityProfile, NetworkProfile networkProfile, VirtualMachineScaleSetVmNetworkProfileConfiguration networkProfileConfiguration, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, string provisioningState, string licenseType, string modelDefinitionApplied, VirtualMachineScaleSetVmProtectionPolicy protectionPolicy, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             InstanceId = instanceId;
             Sku = sku;
@@ -131,7 +131,7 @@ namespace MgmtAcronymMapping
             HardwareProfile = hardwareProfile;
             StorageProfile = storageProfile;
             AdditionalCapabilities = additionalCapabilities;
-            OsProfile = osProfile;
+            OSProfile = osProfile;
             SecurityProfile = securityProfile;
             NetworkProfile = networkProfile;
             NetworkProfileConfiguration = networkProfileConfiguration;
@@ -144,8 +144,8 @@ namespace MgmtAcronymMapping
             _rawData = rawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMData"/> for deserialization. </summary>
-        internal VirtualMachineScaleSetVMData()
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmData"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetVmData()
         {
         }
 
@@ -183,7 +183,7 @@ namespace MgmtAcronymMapping
         /// The virtual machine instance view.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.instanceView
         /// </summary>
-        public VirtualMachineScaleSetVMInstanceView InstanceView { get; }
+        public VirtualMachineScaleSetVmInstanceView InstanceView { get; }
         /// <summary>
         /// Specifies the hardware settings for the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.hardwareProfile
@@ -233,7 +233,7 @@ namespace MgmtAcronymMapping
         /// Specifies the operating system settings for the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.osProfile
         /// </summary>
-        public OSProfile OsProfile { get; set; }
+        public OSProfile OSProfile { get; set; }
         /// <summary>
         /// Specifies the Security related profile settings for the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.securityProfile
@@ -277,7 +277,7 @@ namespace MgmtAcronymMapping
         /// Specifies the network profile configuration of the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.networkProfileConfiguration
         /// </summary>
-        internal VirtualMachineScaleSetVMNetworkProfileConfiguration NetworkProfileConfiguration { get; set; }
+        internal VirtualMachineScaleSetVmNetworkProfileConfiguration NetworkProfileConfiguration { get; set; }
         /// <summary>
         /// The list of network configurations.
         /// Serialized Name: VirtualMachineScaleSetVMNetworkProfileConfiguration.networkInterfaceConfigurations
@@ -287,7 +287,7 @@ namespace MgmtAcronymMapping
             get
             {
                 if (NetworkProfileConfiguration is null)
-                    NetworkProfileConfiguration = new VirtualMachineScaleSetVMNetworkProfileConfiguration();
+                    NetworkProfileConfiguration = new VirtualMachineScaleSetVmNetworkProfileConfiguration();
                 return NetworkProfileConfiguration.NetworkInterfaceConfigurations;
             }
         }
@@ -348,6 +348,6 @@ namespace MgmtAcronymMapping
         /// Specifies the protection policy of the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.protectionPolicy
         /// </summary>
-        public VirtualMachineScaleSetVMProtectionPolicy ProtectionPolicy { get; set; }
+        public VirtualMachineScaleSetVmProtectionPolicy ProtectionPolicy { get; set; }
     }
 }

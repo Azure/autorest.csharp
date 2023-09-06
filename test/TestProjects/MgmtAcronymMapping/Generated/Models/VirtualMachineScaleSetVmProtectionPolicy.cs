@@ -14,17 +14,17 @@ namespace MgmtAcronymMapping.Models
     /// The protection policy of a virtual machine scale set VM.
     /// Serialized Name: VirtualMachineScaleSetVMProtectionPolicy
     /// </summary>
-    public partial class VirtualMachineScaleSetVMProtectionPolicy
+    public partial class VirtualMachineScaleSetVmProtectionPolicy
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMProtectionPolicy"/>. </summary>
-        public VirtualMachineScaleSetVMProtectionPolicy()
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmProtectionPolicy"/>. </summary>
+        public VirtualMachineScaleSetVmProtectionPolicy()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMProtectionPolicy"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmProtectionPolicy"/>. </summary>
         /// <param name="protectFromScaleIn">
         /// Indicates that the virtual machine scale set VM shouldn't be considered for deletion during a scale-in operation.
         /// Serialized Name: VirtualMachineScaleSetVMProtectionPolicy.protectFromScaleIn
@@ -34,7 +34,7 @@ namespace MgmtAcronymMapping.Models
         /// Serialized Name: VirtualMachineScaleSetVMProtectionPolicy.protectFromScaleSetActions
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetVMProtectionPolicy(bool? protectFromScaleIn, bool? protectFromScaleSetActions, Dictionary<string, BinaryData> rawData)
+        internal VirtualMachineScaleSetVmProtectionPolicy(bool? protectFromScaleIn, bool? protectFromScaleSetActions, Dictionary<string, BinaryData> rawData)
         {
             ProtectFromScaleIn = protectFromScaleIn;
             ProtectFromScaleSetActions = protectFromScaleSetActions;

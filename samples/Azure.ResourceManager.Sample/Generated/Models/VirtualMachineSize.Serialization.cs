@@ -33,10 +33,10 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("numberOfCores"u8);
                 writer.WriteNumberValue(NumberOfCores.Value);
             }
-            if (Optional.IsDefined(OsDiskSizeInMB))
+            if (Optional.IsDefined(OSDiskSizeInMB))
             {
                 writer.WritePropertyName("osDiskSizeInMB"u8);
-                writer.WriteNumberValue(OsDiskSizeInMB.Value);
+                writer.WriteNumberValue(OSDiskSizeInMB.Value);
             }
             if (Optional.IsDefined(ResourceDiskSizeInMB))
             {

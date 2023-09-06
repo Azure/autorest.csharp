@@ -23,16 +23,16 @@ namespace MgmtHierarchicalNonResource.Models
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(VCPUs))
+            if (Optional.IsDefined(VCpus))
             {
                 writer.WritePropertyName("vCPUs"u8);
-                if (VCPUs is null)
+                if (VCpus is null)
                 {
                     writer.WriteNullValue();
                 }
                 else
                 {
-                    ((IModelJsonSerializable<ResourceRange>)VCPUs).Serialize(writer, options);
+                    ((IModelJsonSerializable<ResourceRange>)VCpus).Serialize(writer, options);
                 }
             }
             if (Optional.IsDefined(Memory))
@@ -70,7 +70,7 @@ namespace MgmtHierarchicalNonResource.Models
             {
                 return null;
             }
-            Optional<ResourceRange> vcpUs = default;
+            Optional<ResourceRange> vCpus = default;
             Optional<ResourceRange> memory = default;
             Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -81,7 +81,7 @@ namespace MgmtHierarchicalNonResource.Models
                     {
                         continue;
                     }
-                    vcpUs = ResourceRange.DeserializeResourceRange(property.Value);
+                    vCpus = ResourceRange.DeserializeResourceRange(property.Value);
                     continue;
                 }
                 if (property.NameEquals("memory"u8))
@@ -99,7 +99,7 @@ namespace MgmtHierarchicalNonResource.Models
                     continue;
                 }
             }
-            return new RecommendedMachineConfiguration(vcpUs.Value, memory.Value, rawData);
+            return new RecommendedMachineConfiguration(vCpus.Value, memory.Value, rawData);
         }
 
         RecommendedMachineConfiguration IModelJsonSerializable<RecommendedMachineConfiguration>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

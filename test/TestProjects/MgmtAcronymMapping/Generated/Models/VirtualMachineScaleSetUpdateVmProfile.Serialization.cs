@@ -14,25 +14,25 @@ using Azure.Core.Serialization;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class VirtualMachineScaleSetUpdateVMProfile : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetUpdateVMProfile>
+    public partial class VirtualMachineScaleSetUpdateVmProfile : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetUpdateVmProfile>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetUpdateVMProfile>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetUpdateVmProfile>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VirtualMachineScaleSetUpdateVMProfile>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<VirtualMachineScaleSetUpdateVmProfile>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(OsProfile))
+            if (Optional.IsDefined(OSProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                if (OsProfile is null)
+                if (OSProfile is null)
                 {
                     writer.WriteNullValue();
                 }
                 else
                 {
-                    ((IModelJsonSerializable<VirtualMachineScaleSetUpdateOSProfile>)OsProfile).Serialize(writer, options);
+                    ((IModelJsonSerializable<VirtualMachineScaleSetUpdateOSProfile>)OSProfile).Serialize(writer, options);
                 }
             }
             if (Optional.IsDefined(StorageProfile))
@@ -139,7 +139,7 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineScaleSetUpdateVMProfile DeserializeVirtualMachineScaleSetUpdateVMProfile(JsonElement element, ModelSerializerOptions options = default)
+        internal static VirtualMachineScaleSetUpdateVmProfile DeserializeVirtualMachineScaleSetUpdateVmProfile(JsonElement element, ModelSerializerOptions options = default)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
 
@@ -242,35 +242,35 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetUpdateVMProfile(osProfile.Value, storageProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, extensionProfile.Value, licenseType.Value, billingProfile.Value, scheduledEventsProfile.Value, rawData);
+            return new VirtualMachineScaleSetUpdateVmProfile(osProfile.Value, storageProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, extensionProfile.Value, licenseType.Value, billingProfile.Value, scheduledEventsProfile.Value, rawData);
         }
 
-        VirtualMachineScaleSetUpdateVMProfile IModelJsonSerializable<VirtualMachineScaleSetUpdateVMProfile>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineScaleSetUpdateVmProfile IModelJsonSerializable<VirtualMachineScaleSetUpdateVmProfile>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetUpdateVMProfile(doc.RootElement, options);
+            return DeserializeVirtualMachineScaleSetUpdateVmProfile(doc.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetUpdateVMProfile>.Serialize(ModelSerializerOptions options)
+        BinaryData IModelSerializable<VirtualMachineScaleSetUpdateVmProfile>.Serialize(ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             return ModelSerializer.SerializeCore(this, options);
         }
 
-        VirtualMachineScaleSetUpdateVMProfile IModelSerializable<VirtualMachineScaleSetUpdateVMProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        VirtualMachineScaleSetUpdateVmProfile IModelSerializable<VirtualMachineScaleSetUpdateVmProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineScaleSetUpdateVMProfile(doc.RootElement, options);
+            return DeserializeVirtualMachineScaleSetUpdateVmProfile(doc.RootElement, options);
         }
 
-        /// <summary> Converts a <see cref="VirtualMachineScaleSetUpdateVMProfile"/> into a <see cref="RequestContent"/>. </summary>
-        /// <param name="model"> The <see cref="VirtualMachineScaleSetUpdateVMProfile"/> to convert. </param>
-        public static implicit operator RequestContent(VirtualMachineScaleSetUpdateVMProfile model)
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetUpdateVmProfile"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetUpdateVmProfile"/> to convert. </param>
+        public static implicit operator RequestContent(VirtualMachineScaleSetUpdateVmProfile model)
         {
             if (model is null)
             {
@@ -280,9 +280,9 @@ namespace MgmtAcronymMapping.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
-        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetUpdateVMProfile"/>. </summary>
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetUpdateVmProfile"/>. </summary>
         /// <param name="response"> The <see cref="Response"/> to convert. </param>
-        public static explicit operator VirtualMachineScaleSetUpdateVMProfile(Response response)
+        public static explicit operator VirtualMachineScaleSetUpdateVmProfile(Response response)
         {
             if (response is null)
             {
@@ -290,7 +290,7 @@ namespace MgmtAcronymMapping.Models
             }
 
             using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
-            return DeserializeVirtualMachineScaleSetUpdateVMProfile(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeVirtualMachineScaleSetUpdateVmProfile(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

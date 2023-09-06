@@ -14,11 +14,11 @@ using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class DedicatedHostAllocatableVM : IUtf8JsonSerializable, IModelJsonSerializable<DedicatedHostAllocatableVM>
+    public partial class DedicatedHostAllocatableVm : IUtf8JsonSerializable, IModelJsonSerializable<DedicatedHostAllocatableVm>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DedicatedHostAllocatableVM>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DedicatedHostAllocatableVm>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<DedicatedHostAllocatableVM>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<DedicatedHostAllocatableVm>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -48,7 +48,7 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        internal static DedicatedHostAllocatableVM DeserializeDedicatedHostAllocatableVM(JsonElement element, ModelSerializerOptions options = default)
+        internal static DedicatedHostAllocatableVm DeserializeDedicatedHostAllocatableVm(JsonElement element, ModelSerializerOptions options = default)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
 
@@ -81,35 +81,35 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new DedicatedHostAllocatableVM(vmSize.Value, Optional.ToNullable(count), rawData);
+            return new DedicatedHostAllocatableVm(vmSize.Value, Optional.ToNullable(count), rawData);
         }
 
-        DedicatedHostAllocatableVM IModelJsonSerializable<DedicatedHostAllocatableVM>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        DedicatedHostAllocatableVm IModelJsonSerializable<DedicatedHostAllocatableVm>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDedicatedHostAllocatableVM(doc.RootElement, options);
+            return DeserializeDedicatedHostAllocatableVm(doc.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DedicatedHostAllocatableVM>.Serialize(ModelSerializerOptions options)
+        BinaryData IModelSerializable<DedicatedHostAllocatableVm>.Serialize(ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             return ModelSerializer.SerializeCore(this, options);
         }
 
-        DedicatedHostAllocatableVM IModelSerializable<DedicatedHostAllocatableVM>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        DedicatedHostAllocatableVm IModelSerializable<DedicatedHostAllocatableVm>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.Parse(data);
-            return DeserializeDedicatedHostAllocatableVM(doc.RootElement, options);
+            return DeserializeDedicatedHostAllocatableVm(doc.RootElement, options);
         }
 
-        /// <summary> Converts a <see cref="DedicatedHostAllocatableVM"/> into a <see cref="RequestContent"/>. </summary>
-        /// <param name="model"> The <see cref="DedicatedHostAllocatableVM"/> to convert. </param>
-        public static implicit operator RequestContent(DedicatedHostAllocatableVM model)
+        /// <summary> Converts a <see cref="DedicatedHostAllocatableVm"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="DedicatedHostAllocatableVm"/> to convert. </param>
+        public static implicit operator RequestContent(DedicatedHostAllocatableVm model)
         {
             if (model is null)
             {
@@ -119,9 +119,9 @@ namespace Azure.ResourceManager.Sample.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
-        /// <summary> Converts a <see cref="Response"/> into a <see cref="DedicatedHostAllocatableVM"/>. </summary>
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="DedicatedHostAllocatableVm"/>. </summary>
         /// <param name="response"> The <see cref="Response"/> to convert. </param>
-        public static explicit operator DedicatedHostAllocatableVM(Response response)
+        public static explicit operator DedicatedHostAllocatableVm(Response response)
         {
             if (response is null)
             {
@@ -129,7 +129,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
-            return DeserializeDedicatedHostAllocatableVM(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeDedicatedHostAllocatableVm(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

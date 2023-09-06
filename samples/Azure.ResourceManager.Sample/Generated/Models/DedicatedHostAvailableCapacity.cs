@@ -23,18 +23,18 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of <see cref="DedicatedHostAvailableCapacity"/>. </summary>
         internal DedicatedHostAvailableCapacity()
         {
-            AllocatableVMs = new ChangeTrackingList<DedicatedHostAllocatableVM>();
+            AllocatableVms = new ChangeTrackingList<DedicatedHostAllocatableVm>();
         }
 
         /// <summary> Initializes a new instance of <see cref="DedicatedHostAvailableCapacity"/>. </summary>
-        /// <param name="allocatableVMs">
+        /// <param name="allocatableVms">
         /// The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host.
         /// Serialized Name: DedicatedHostAvailableCapacity.allocatableVMs
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DedicatedHostAvailableCapacity(IReadOnlyList<DedicatedHostAllocatableVM> allocatableVMs, Dictionary<string, BinaryData> rawData)
+        internal DedicatedHostAvailableCapacity(IReadOnlyList<DedicatedHostAllocatableVm> allocatableVms, Dictionary<string, BinaryData> rawData)
         {
-            AllocatableVMs = allocatableVMs;
+            AllocatableVms = allocatableVms;
             _rawData = rawData;
         }
 
@@ -42,6 +42,6 @@ namespace Azure.ResourceManager.Sample.Models
         /// The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host.
         /// Serialized Name: DedicatedHostAvailableCapacity.allocatableVMs
         /// </summary>
-        public IReadOnlyList<DedicatedHostAllocatableVM> AllocatableVMs { get; }
+        public IReadOnlyList<DedicatedHostAllocatableVm> AllocatableVms { get; }
     }
 }

@@ -77,12 +77,12 @@ namespace MgmtHierarchicalNonResource.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="RecommendedMachineConfiguration"/>. </summary>
-        /// <param name="vcpUs"> Describes the resource range. </param>
+        /// <param name="vCpus"> Describes the resource range. </param>
         /// <param name="memory"> Describes the resource range. </param>
         /// <returns> A new <see cref="Models.RecommendedMachineConfiguration"/> instance for mocking. </returns>
-        public static RecommendedMachineConfiguration RecommendedMachineConfiguration(ResourceRange vcpUs = null, ResourceRange memory = null)
+        public static RecommendedMachineConfiguration RecommendedMachineConfiguration(ResourceRange vCpus = null, ResourceRange memory = null)
         {
-            return new RecommendedMachineConfiguration(vcpUs, memory, default);
+            return new RecommendedMachineConfiguration(vCpus, memory, default);
         }
 
         /// <summary> Initializes a new instance of <see cref="ResourceRange"/>. </summary>
