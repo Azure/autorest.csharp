@@ -1,4 +1,4 @@
-import { IntrinsicType, Program, UsageFlags, getDeprecated, getDiscriminator, Type } from "@typespec/compiler";
+import { IntrinsicType, Program, UsageFlags, getDeprecated, getDiscriminator, Type, DateTimeKnownEncoding } from "@typespec/compiler";
 import { Usage } from "./usage.js";
 import { SdkType, SdkModelPropertyType, SdkBodyModelPropertyType, SdkModelType, SdkEnumType, SdkEnumValueType, SdkDictionaryType, SdkConstantType, SdkBuiltInType, SdkArrayType, SdkDatetimeType } from "@azure-tools/typespec-client-generator-core";
 import { InputDictionaryType, InputEnumType, InputListType, InputLiteralType, InputModelType, InputNullType, InputPrimitiveType, InputType, InputUnknownType } from "./inputType.js";
@@ -32,12 +32,19 @@ export function fromSdkModelType(modelType: SdkModelType, program: Program, mode
             IsNullable: modelType.nullable,
             DiscriminatorPropertyName: getDiscriminator(program, modelType.__raw)?.propertyName, // TO-DO: SdkModelType lacks of DiscriminatorPropertyName
             DiscriminatorValue: modelType.discriminatorValue,
-            BaseModel: modelType.baseModel,
+            BaseModel: modelType.baseModel ? fromSdkModelType(modelType.baseModel, program, models, enums): undefined,
             Usage: fromUsageFlags(modelType.usage)
         } as InputModelType;
 
         models.set(modelType.name, inputModelType);
-        inputModelType.Properties = modelType.properties.map(p => fromSdkModelPropertyType(p, program, models, enums));
+
+        inputModelType.Properties = modelType.properties.filter(p => !(p as SdkBodyModelPropertyType).discriminator || !modelType.baseModel).map(p => fromSdkModelPropertyType(p, program, models, enums));
+        const index = inputModelType.Properties.findIndex(p => p.IsDiscriminator);
+        if (index !== 0 && index !== -1) {
+            const discriminator = inputModelType.Properties.splice(index, 1)[0];
+            inputModelType.Properties.unshift(discriminator);
+        }
+
         if (modelType.discriminatedSubtypes) {
             inputModelType.DerivedModels = Object.values(modelType.discriminatedSubtypes).map(m => fromSdkModelType(m, program, models, enums));
         }
@@ -58,6 +65,7 @@ export function fromSdkEnumType(enumType: SdkEnumType, program: Program, enums: 
             EnumValueType: enumValueType,
             AllowedValues: enumType.values.map(v => fromSdkEnumValueType(v)),
             IsExtensible: enumType.isFixed ? false : true,
+            IsNullable: false,
             Usage: fromUsageFlags(enumType.usage)
         } as InputEnumType;
         if (addToCollection) enums.set(enumType.name, inputEnumType);
@@ -66,9 +74,16 @@ export function fromSdkEnumType(enumType: SdkEnumType, program: Program, enums: 
 }
 
 export function fromSdkDatetimeType(datetimeType: SdkDatetimeType): InputPrimitiveType {
+    function fromDateTimeKnownEncoding(encoding: DateTimeKnownEncoding): InputTypeKind {
+        switch (encoding) {
+            case "rfc3339": return InputTypeKind.DateTimeRFC3339;
+            case "rfc7231": return InputTypeKind.DateTimeRFC7231;
+            case "unixTimestamp": return InputTypeKind.DateTimeUnix;
+        }
+    }
     return {
         Name: datetimeType.kind,
-        Kind: InputTypeKind.DateTimeRFC3339,
+        Kind: fromDateTimeKnownEncoding(datetimeType.encode),
         IsNullable: false
     } as InputPrimitiveType;
 }
@@ -143,7 +158,7 @@ export function fromScalarType(scalarType: SdkType): InputPrimitiveType {
             scalarType.kind,
             undefined // To-DO: encode not compitable
         ),
-        IsNullable: false
+        IsNullable: scalarType.nullable
     } as InputPrimitiveType;
 }
 
@@ -163,14 +178,16 @@ export function fromSdkDictionaryType(dictionaryType: SdkDictionaryType, program
     return {
         Name: "Dictionary",
         KeyType: fromSdkType(dictionaryType.keyType, program, models, enums),
-        ValueType: fromSdkType(dictionaryType.valueType, program, models, enums)
+        ValueType: fromSdkType(dictionaryType.valueType, program, models, enums),
+        IsNullable: dictionaryType.nullable
     } as InputDictionaryType;
 }
 
 export function fromSdkArrayType(arrayType: SdkArrayType, program: Program, models: Map<string, InputModelType>, enums: Map<string, InputEnumType>) : InputListType {
     return {
         Name: "Array",
-        ElementType: fromSdkType(arrayType.valueType, program, models, enums)
+        ElementType: fromSdkType(arrayType.valueType, program, models, enums),
+        IsNullable: arrayType.nullable
     } as InputListType;
 }
 
