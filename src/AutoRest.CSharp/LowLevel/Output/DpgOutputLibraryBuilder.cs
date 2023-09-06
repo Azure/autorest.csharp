@@ -138,8 +138,7 @@ namespace AutoRest.CSharp.Output.Models
             var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(ns.Name) || resourceParameters.Any() || !string.IsNullOrEmpty(ns.Parent);
             var clientName = isSubClient ? clientNamePrefix : clientNamePrefix + ClientBuilder.GetClientSuffix();
 
-            INamedTypeSymbol? existingType;
-            if (sourceInputModel == null || (existingType = sourceInputModel.FindForType(clientNamespace, clientName)) == null)
+            if (sourceInputModel?.FindForType(clientNamespace, clientName) is not {} existingType)
             {
                 return new ClientInfo(ns.Name, clientName, clientNamespace, clientDescription, operations, clientParameters, resourceParameters);
             }

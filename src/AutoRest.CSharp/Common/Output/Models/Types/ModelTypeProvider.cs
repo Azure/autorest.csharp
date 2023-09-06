@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _modelTypeMapping = sourceInputModel?.CreateForModel(ExistingType);
             _inputModelUsage = UpdateInputModelUsage(inputModel, _modelTypeMapping);
             _inputModelSerialization = UpdateInputSerialization(inputModel, _modelTypeMapping);
-            _inputModelProperties = UpdateInputModelProperties(inputModel, GetSourceBaseType());
+            _inputModelProperties = UpdateInputModelProperties(inputModel, GetSourceBaseType(), Declaration.Namespace, sourceInputModel);
         }
 
         private static InputModelTypeUsage UpdateInputModelUsage(InputModelType inputModel, ModelTypeMapping? modelTypeMapping)
@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return serialization;
         }
 
-        private static IReadOnlyList<InputModelProperty> UpdateInputModelProperties(InputModelType inputModel, INamedTypeSymbol? existingBaseType)
+        private static IReadOnlyList<InputModelProperty> UpdateInputModelProperties(InputModelType inputModel, INamedTypeSymbol? existingBaseType, string ns, SourceInputModel? sourceInputModel)
         {
             if (inputModel.BaseModel is not {} baseModel)
             {
@@ -132,9 +132,16 @@ namespace AutoRest.CSharp.Output.Models.Types
             var properties = inputModel.Properties.ToList();
             var compositionModels = inputModel.CompositionModels;
 
-            if (existingBaseType is not null && existingBaseType.Name != baseModel.Name)
+            if (existingBaseType is not null && existingBaseType.Name != baseModel.Name && !SymbolEqualityComparer.Default.Equals(sourceInputModel?.FindForType(ns, GetValidIdentifier(baseModel.Name)), existingBaseType))
             {
+                // First try to find composite type by name
+                // If failed, try find existing type with CodeGenModel that has expected name
                 var baseTypeReplacement = inputModel.CompositionModels.FirstOrDefault(m => m.Name == existingBaseType.Name);
+                if (baseTypeReplacement is null && sourceInputModel is not null)
+                {
+                    baseTypeReplacement = inputModel.CompositionModels.FirstOrDefault(m => SymbolEqualityComparer.Default.Equals(sourceInputModel.FindForType(ns, GetValidIdentifier(m.Name)), existingBaseType));
+                }
+
                 if (baseTypeReplacement is null)
                 {
                     throw new InvalidOperationException($"Base type `{existingBaseType.Name}` is not one of the `{inputModel.Name}` composite types.");
