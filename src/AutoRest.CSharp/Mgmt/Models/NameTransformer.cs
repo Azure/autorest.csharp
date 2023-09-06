@@ -17,20 +17,20 @@ namespace AutoRest.CSharp.Mgmt.Models
     internal class NameTransformer
     {
         private static NameTransformer? _instance;
-        public static NameTransformer Instance => _instance ??= new NameTransformer(Configuration.MgmtConfiguration.RenameRules);
+        public static NameTransformer Instance => _instance ??= new NameTransformer(Configuration.MgmtConfiguration.AcronymMapping);
 
-        private IReadOnlyDictionary<string, RenameRuleTarget> _renameRules;
+        private IReadOnlyDictionary<string, AcronymMappingTarget> _acronymMapping;
         private Regex _regex;
         private ConcurrentDictionary<string, NameInfo> _wordCache;
 
         /// <summary>
         /// Instanciate a NameTransformer which uses the dictionary to transform the abbreviations in this word to correct casing
         /// </summary>
-        /// <param name="renameRules"></param>
-        internal NameTransformer(IReadOnlyDictionary<string, RenameRuleTarget> renameRules)
+        /// <param name="acronymMapping"></param>
+        internal NameTransformer(IReadOnlyDictionary<string, AcronymMappingTarget> acronymMapping)
         {
-            _renameRules = renameRules;
-            _regex = BuildRegex(renameRules.Keys);
+            _acronymMapping = acronymMapping;
+            _regex = BuildRegex(acronymMapping.Keys);
             _wordCache = new ConcurrentDictionary<string, NameInfo>();
         }
 
@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 return result;
 
             // escape the following logic if we do not have any rules
-            if (_renameRules.Count == 0)
+            if (_acronymMapping.Count == 0)
             {
                 result = new NameInfo(name, name);
                 _wordCache.TryAdd(name, result);
@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             {
                 // in our regular expression, the content we want to find is in the second group
                 var matchGroup = match.Groups[2];
-                var replaceValue = _renameRules[matchGroup.Value];
+                var replaceValue = _acronymMapping[matchGroup.Value];
                 // append everything between the beginning and the index of this match
                 var everythingBeforeMatch = strToMatch.Substring(0, matchGroup.Index);
                 // append everything before myself
