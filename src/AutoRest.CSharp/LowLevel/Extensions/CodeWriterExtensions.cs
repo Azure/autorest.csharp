@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.Json;
 using System.Xml;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
@@ -24,26 +23,14 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
 {
     internal static class CodeWriterExtensions
     {
-        /// <summary>
-        /// Write an ExampleValue, using the given type as a hint.
-        /// If the type is not provided, a type will be created from TypeFactory instead
-        /// In a case that a property's type is replaced, we will have to provide the actual type otherwise the type from TypeFactory will always be the one that is replaced.
-        /// </summary>
-        /// <param name="writer"></param>
-        /// <param name="exampleValue"></param>
-        /// <param name="type"></param>
-        /// <param name="includeCollectionInitialization"></param>
-        /// <returns></returns>
-        public static CodeWriter AppendInputExampleValue(this CodeWriter writer, InputExampleValue exampleValue, CSharpType type, bool includeCollectionInitialization = true)
-        {
-            return type.IsFrameworkType ?
-                writer.AppendFrameworkTypeValue(type, exampleValue, includeCollectionInitialization) :
-                writer.AppendTypeProviderValue(type, exampleValue);
-        }
-
         public static CodeWriter AppendInputExampleValue(this CodeWriter writer, InputExampleValue exampleValue, CSharpType type, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
         {
-            // TODO -- handle arrays and dictionaries
+            // handle list
+            if (TypeFactory.IsList(type))
+                return writer.AppendListValue(type.Arguments.Single(), exampleValue, serializationFormat, includeCollectionInitialization);
+            // handle dictionary
+            if (TypeFactory.IsDictionary(type))
+                return writer.AppendDictionaryValue(type, exampleValue, serializationFormat, includeCollectionInitialization: includeCollectionInitialization);
 
             Type? frameworkType = type.SerializeAs != null ? type.SerializeAs : type.IsFrameworkType ? type.FrameworkType : null;
             if (frameworkType != null)
@@ -53,7 +40,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             }
 
             // handle implementation
-            return writer.AppendRaw("null");
+            return writer.AppendTypeProviderValue(type, exampleValue);
         }
 
         private static CodeWriter AppendFrameworkTypeValue(this CodeWriter writer, InputExampleValue exampleValue, Type frameworkType, SerializationFormat serializationFormat)
@@ -211,29 +198,6 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                 return writer.Append(exampleParameterValue.Expression!);
         }
 
-        private static CodeWriter AppendFrameworkTypeValue(this CodeWriter writer, CSharpType type, InputExampleValue exampleValue, bool includeCollectionInitialization = true)
-        {
-            if (TypeFactory.IsList(type))
-                return writer.AppendListValue(type.Arguments.Single(), exampleValue, includeCollectionInitialization);
-
-            if (TypeFactory.IsDictionary(type))
-                return writer.AppendDictionaryValue(type, exampleValue, includeCollectionInitialization);
-
-            if (type.FrameworkType == typeof(BinaryData))
-                return writer.AppendBinaryData(exampleValue);
-
-            if (type.FrameworkType == typeof(RequestContent))
-                return writer.AppendRequestContent(exampleValue);
-
-            return exampleValue switch
-            {
-                InputExampleRawValue inputRawValue => writer.AppendRawValue(inputRawValue.RawValue, type.FrameworkType, exampleValue.Type),
-                InputExampleListValue inputListValue => writer.AppendListValue(typeof(object), inputListValue, includeCollectionInitialization),
-                InputExampleObjectValue inputObjectValue => writer.AppendDictionaryValue(new CSharpType(typeof(IDictionary<,>), typeof(string), typeof(object)), inputObjectValue, includeCollectionInitialization),
-                _ => throw new InvalidOperationException($"unhandled case {exampleValue}")
-            };
-        }
-
         private static CodeWriter AppendRequestContent(this CodeWriter writer, InputExampleValue value)
         {
             if (value is InputExampleRawValue rawValue && rawValue.RawValue == null)
@@ -248,19 +212,18 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             }
         }
 
-        private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType elementType, InputExampleValue exampleValue, bool includeInitialization = true)
+        private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType elementType, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
         {
-            if (exampleValue is not InputExampleListValue exampleListValue)
-                throw new InvalidOperationException($"expect the example value for an array is an InputExampleListValue, but got {exampleValue}");
+            var exampleListValue = exampleValue as InputExampleListValue;
             // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
-            var elements = exampleListValue.Values ?? Enumerable.Empty<InputExampleValue>();
-            var initialization = includeInitialization ? (FormattableString)$"new {elementType}[]" : (FormattableString)$"";
+            var elements = exampleListValue?.Values ?? Enumerable.Empty<InputExampleValue>();
+            var initialization = includeCollectionInitialization ? (FormattableString)$"new {elementType}[]" : $"";
             using (writer.Scope(initialization, newLine: false))
             {
                 foreach (var itemValue in elements)
                 {
                     // TODO -- bad formatting will happen in collection initializer because roslyn formatter ignores things in these places: https://github.com/dotnet/roslyn/issues/8269
-                    writer.AppendInputExampleValue(itemValue, elementType);
+                    writer.AppendInputExampleValue(itemValue, elementType, serializationFormat);
                     if (elementType.IsFrameworkType)
                         writer.AppendRaw(",");
                     else
@@ -272,27 +235,26 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             return writer;
         }
 
-        private static CodeWriter AppendDictionaryValue(this CodeWriter writer, CSharpType dictionaryType, InputExampleValue exampleValue, bool includeInitialization = true)
+        private static CodeWriter AppendDictionaryValue(this CodeWriter writer, CSharpType dictionaryType, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
         {
-            if (exampleValue is not InputExampleObjectValue exampleObjectType)
-                throw new InvalidOperationException($"expect the example value for an object or dictionary is an InputExampleObjectValue, but got {exampleValue}");
+            var exampleObjectValue = exampleValue as InputExampleObjectValue;
             // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
-            var keyValues = exampleObjectType.Values ?? new Dictionary<string, InputExampleValue>();
+            var keyValues = exampleObjectValue?.Values ?? new Dictionary<string, InputExampleValue>();
             // since this is a dictionary, we take the first generic argument as the key type
             // this is important because in our SDK, the key of a dictionary is not always a string. It could be a string-like type, for instance, a ResourceIdentifier
             var keyType = dictionaryType.Arguments[0];
             // the second as the value type
             var valueType = dictionaryType.Arguments[1];
-            var initialization = includeInitialization ? (FormattableString)$"new {TypeFactory.GetImplementationType(dictionaryType)}()" : (FormattableString)$"";
+            var initialization = includeCollectionInitialization ? (FormattableString)$"new {TypeFactory.GetImplementationType(dictionaryType)}()" : $"";
             using (writer.Scope(initialization, newLine: false))
             {
                 foreach ((var key, var value) in keyValues)
                 {
                     // write key
                     writer.AppendRaw("[");
-                    writer.AppendInputExampleValue(InputExampleValue.Value(InputPrimitiveType.String, key), keyType);
+                    writer.AppendInputExampleValue(InputExampleValue.Value(InputPrimitiveType.String, key), keyType, SerializationFormat.Default);
                     writer.AppendRaw("] = ");
-                    writer.AppendInputExampleValue(value, valueType);
+                    writer.AppendInputExampleValue(value, valueType, serializationFormat, includeCollectionInitialization);
                     writer.LineRaw(", ");
                 }
             }
@@ -319,10 +281,10 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                     }
                     else
                     {
-                        return writer.AppendRawValue(rawValue.RawValue, rawValue.RawValue.GetType(), exampleValue.Type);
+                        return writer.AppendFrameworkTypeValue(exampleValue, rawValue.RawValue.GetType(), SerializationFormat.Default);
                     }
                 case InputExampleListValue listValue:
-                    return writer.AppendListValue(typeof(object), listValue);
+                    return writer.AppendListValue(typeof(object), listValue, SerializationFormat.Default);
                 case InputExampleObjectValue objectValue:
                     if (objectValue.Values.Any())
                     {
@@ -346,61 +308,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             }
         }
 
-        private static CodeWriter AppendRawValue(this CodeWriter writer, object? rawValue, Type type, InputType? inputType = null)
-        {
-            // we should write things according to the actual type of the property or variable otherwise we may get compilation errors
-            if (rawValue == null)
-            {
-                return writer.AppendRaw("null");
-            }
-            else if (type == typeof(string))
-            {
-                return writer.Append($"{rawValue.ToString():L}");
-            }
-            else if (_primitiveTypes.Contains(type))
-            {
-                return writer.Append($"({type}){rawValue:L}");
-            }
-            else if (_newInstanceInitializedTypes.Contains(type))
-            {
-                return writer.Append($"new {type}({rawValue:L})");
-            }
-            else if (_parsableInitializedTypes.Contains(type))
-            {
-                return writer.Append($"{type}.Parse({rawValue:L})");
-            }
-            else if (type == typeof(byte[]))
-            {
-                return writer.Append($"{typeof(Convert)}.FromBase64String({rawValue:L})");
-            }
-            else if (type == typeof(JsonElement))
-            {
-                return writer.Append($"new {type}()");
-            }
-
-            return writer.Literal(rawValue); // fall back to default since we need to try our best not to generate compile errors.
-        }
-
-        private static CodeWriter AppendNumberValue(this CodeWriter writer, object value, InputType? inputType = null) => inputType switch
-        {
-            null => writer.Literal(value),
-            InputPrimitiveType { IsNumber: true } => writer.Literal(value),
-            InputPrimitiveType { Kind: InputTypeKind.DurationSeconds or InputTypeKind.DurationSecondsFloat } => writer.Append($"{typeof(TimeSpan)}.{nameof(TimeSpan.FromSeconds)}({value:L})"),
-            // TODO -- other types
-            _ => writer.Literal(value),
-        };
-
         private static bool IsStringLikeType(CSharpType type) => type.IsFrameworkType && (_newInstanceInitializedTypes.Contains(type.FrameworkType) || _parsableInitializedTypes.Contains(type.FrameworkType));
-
-        private static readonly HashSet<Type> _primitiveTypes = new()
-        {
-            typeof(bool), typeof(bool?),
-            typeof(int), typeof(int?),
-            typeof(long), typeof(long?),
-            typeof(float), typeof(float?),
-            typeof(double), typeof(double?),
-            typeof(decimal), typeof(decimal?)
-        };
 
         private static readonly HashSet<Type> _newInstanceInitializedTypes = new()
         {
@@ -492,7 +400,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                         throw new InvalidOperationException($"Example value for required property {property.InputModelProperty!.SerializedName} in class {objectType.Type.Name} is not found");
                 }
                 properties.Remove(property);
-                writer.AppendInputExampleValue(exampleValue, type: property.Declaration.Type).AppendRaw(",");
+                writer.AppendInputExampleValue(exampleValue, property.Declaration.Type, property.SerializationFormat, includeCollectionInitialization: true).AppendRaw(",");
             }
             writer.RemoveTrailingComma();
             writer.AppendRaw(")");
@@ -501,11 +409,11 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             {
                 using (writer.Scope($"", newLine: false))
                 {
-                    foreach ((var propertyName, (var propertyType, var exampleValue)) in propertiesToWrite)
+                    foreach (var (property, exampleValue) in propertiesToWrite)
                     {
-                        writer.Append($"{propertyName} = ");
+                        writer.Append($"{property.Declaration.Name} = ");
                         // we need to pass in the current type of this property to make sure its initialization is correct
-                        writer.AppendInputExampleValue(exampleValue, type: propertyType, includeCollectionInitialization: false);
+                        writer.AppendInputExampleValue(exampleValue, property.Declaration.Type, property.SerializationFormat, includeCollectionInitialization: false);
                         writer.LineRaw(",");
                     }
                 }
@@ -513,9 +421,9 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             return writer;
         }
 
-        private static Dictionary<string, (CSharpType PropertyType, InputExampleValue ExampleValue)> GetPropertiesToWrite(ObjectType objectType, IEnumerable<ObjectTypeProperty> properties, IReadOnlyDictionary<string, InputExampleValue> valueDict)
+        private static Dictionary<ObjectTypeProperty, InputExampleValue> GetPropertiesToWrite(ObjectType objectType, IEnumerable<ObjectTypeProperty> properties, IReadOnlyDictionary<string, InputExampleValue> valueDict)
         {
-            var propertiesToWrite = new Dictionary<string, (CSharpType PropertyType, InputExampleValue ExampleValue)>();
+            var propertiesToWrite = new Dictionary<ObjectTypeProperty, InputExampleValue>();
             foreach (var property in properties)
             {
                 var propertyToDeal = property;
@@ -540,7 +448,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                 if (!IsPropertyAssignable(propertyToDeal))
                     continue; // now we explicitly ignore all the AdditionalProperties
 
-                propertiesToWrite.Add(propertyToDeal.Declaration.Name, (propertyToDeal.Declaration.Type, exampleValue));
+                propertiesToWrite.Add(propertyToDeal, exampleValue);
             }
 
             return propertiesToWrite;
@@ -576,11 +484,9 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             // if we did not find a match, check if this is a SealedChoice, if so, we throw exceptions
             if (!enumType.IsExtensible)
                 throw new InvalidOperationException($"Enum value `{value}` in example does not find in type {enumType.Type.Name}");
-            var underlyingType = enumType.ValueType.FrameworkType; // the underlying type of an extensible enum should always be a primitive type which is a framework type
-            return writer.Append($"new {enumType.Type}(")
-                .AppendRawValue(value, underlyingType)
-                .AppendRaw(")");
+            return writer.Append($"new {enumType.Type}({value:L})");
         }
+
         public static void ConsoleWriteLine(this CodeWriter writer, FormattableString content)
         {
             writer.Line($"{typeof(Console)}.{nameof(Console.WriteLine)}({content});");

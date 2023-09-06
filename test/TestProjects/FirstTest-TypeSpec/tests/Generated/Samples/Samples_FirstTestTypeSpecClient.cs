@@ -565,7 +565,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend notFriend = null;
+            Friend notFriend = new Friend("<name>");
             Response<Friend> response = client.FriendlyModel(notFriend);
         }
 
@@ -576,7 +576,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend notFriend = null;
+            Friend notFriend = new Friend("<name>");
             Response<Friend> response = client.FriendlyModel(notFriend);
         }
 
@@ -621,7 +621,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend notFriend = null;
+            Friend notFriend = new Friend("<name>");
             Response<Friend> response = await client.FriendlyModelAsync(notFriend);
         }
 
@@ -632,7 +632,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend notFriend = null;
+            Friend notFriend = new Friend("<name>");
             Response<Friend> response = await client.FriendlyModelAsync(notFriend);
         }
 
@@ -719,7 +719,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ModelWithFormat body = null;
+            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
             Console.WriteLine(response.Status);
         }
@@ -731,7 +731,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ModelWithFormat body = null;
+            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
             Console.WriteLine(response.Status);
         }
@@ -775,7 +775,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ModelWithFormat body = null;
+            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
             Console.WriteLine(response.Status);
         }
@@ -787,7 +787,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ModelWithFormat body = null;
+            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
             Console.WriteLine(response.Status);
         }
@@ -833,7 +833,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ProjectedModel modelWithProjectedName = null;
+            ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
             Response<ProjectedModel> response = client.ProjectedNameModel(modelWithProjectedName);
         }
 
@@ -844,7 +844,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ProjectedModel modelWithProjectedName = null;
+            ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
             Response<ProjectedModel> response = client.ProjectedNameModel(modelWithProjectedName);
         }
 
@@ -889,7 +889,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ProjectedModel modelWithProjectedName = null;
+            ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
             Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
         }
 
@@ -900,7 +900,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ProjectedModel modelWithProjectedName = null;
+            ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
             Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
         }
 
