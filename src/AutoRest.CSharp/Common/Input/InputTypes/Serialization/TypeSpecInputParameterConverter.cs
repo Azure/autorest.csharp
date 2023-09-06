@@ -110,8 +110,7 @@ namespace AutoRest.CSharp.Common.Input
                 SkipUrlEncoding: skipUrlEncoding,
                 Explode: explode,
                 ArraySerializationDelimiter: arraySerializationDelimiter,
-                HeaderCollectionPrefix: headerCollectionPrefix,
-                SerializationFormat: GetSerializationFormat(parameterType, requestLocation));
+                HeaderCollectionPrefix: headerCollectionPrefix);
 
             if (id != null)
             {
@@ -119,30 +118,6 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             return parameter;
-        }
-
-        private static SerializationFormat GetSerializationFormat(InputType parameterType, RequestLocation requestLocation)
-        {
-            var affectType = parameterType switch
-            {
-                InputListType listType => listType.ElementType,
-                InputDictionaryType dictionaryType => dictionaryType.ValueType,
-                _ => parameterType
-            };
-            if (affectType is InputPrimitiveType { Kind: InputTypeKind.DateTime })
-            {
-                if (requestLocation == RequestLocation.Header)
-                {
-                    return SerializationFormat.DateTime_RFC7231;
-                }
-
-                if (requestLocation == RequestLocation.Body)
-                {
-                    return SerializationFormat.DateTime_RFC3339;
-                }
-            }
-
-            return SerializationBuilder.GetSerializationFormat(affectType);
         }
     }
 }

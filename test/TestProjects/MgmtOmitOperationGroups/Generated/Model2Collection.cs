@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -222,7 +223,7 @@ namespace MgmtOmitOperationGroups
         public virtual AsyncPageable<Model2Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _model2RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new Model2Resource(Client, Model2Data.DeserializeModel2Data(e)), _model2ClientDiagnostics, Pipeline, "Model2Collection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new Model2Resource(Client, Model2Data.DeserializeModel2Data(e)), _model2ClientDiagnostics, Pipeline, "Model2Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +243,7 @@ namespace MgmtOmitOperationGroups
         public virtual Pageable<Model2Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _model2RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new Model2Resource(Client, Model2Data.DeserializeModel2Data(e)), _model2ClientDiagnostics, Pipeline, "Model2Collection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new Model2Resource(Client, Model2Data.DeserializeModel2Data(e)), _model2ClientDiagnostics, Pipeline, "Model2Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

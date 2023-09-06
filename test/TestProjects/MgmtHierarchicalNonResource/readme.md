@@ -13,7 +13,7 @@ namespace: MgmtHierarchicalNonResource
 request-path-to-resource-data:
   /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}: SharedGallery
 
-rename-rules:
+acronym-mapping:
   VCPU: VCpu
   VCPUs: VCpus
 ```
