@@ -202,33 +202,20 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         private FormattableString CreateBinaryDataExtraDescription()
-        {
-            var type = Declaration.Type;
-            if (!type.IsFrameworkType)
+            => InputModelProperty?.Type switch
             {
-                return $"";
-            }
+                InputPrimitiveType primitiveType => ConstructBinaryDataDescription(primitiveType, "this property"),
+                InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } when !Configuration.Generation1ConvenienceClient => ConstructBinaryDataDescription(InputPrimitiveType.BinaryData, "this property"),
+                InputListType { ElementType: InputPrimitiveType elementType } => ConstructBinaryDataDescription(elementType, "the element of this property"),
+                InputDictionaryType { ValueType: InputPrimitiveType valueType } => ConstructBinaryDataDescription(valueType, "the value of this property"),
+                _ => $""
+            };
 
-            if (type.Equals(typeof(BinaryData)))
-            {
-                return ConstructBinaryDataDescription("this property");
-            }
-            if (TypeFactory.IsList(type) && type.Arguments[0].IsFrameworkType && type.Arguments[0].FrameworkType == typeof(BinaryData))
-            {
-                return ConstructBinaryDataDescription("the element of this property");
-            }
-            if (TypeFactory.IsDictionary(type) && type.Arguments[1].IsFrameworkType && type.Arguments[1].FrameworkType == typeof(BinaryData))
-            {
-                return ConstructBinaryDataDescription("the value of this property");
-            }
-            return $"";
-        }
-
-        private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc)
+        private FormattableString ConstructBinaryDataDescription(InputPrimitiveType type, string typeSpecificDesc)
         {
-            switch (InputModelProperty?.Type)
+            switch (type.Kind)
             {
-                case InputPrimitiveType { Kind: InputTypeKind.Bytes or InputTypeKind.BytesBase64Url }:
+                case InputTypeKind.Bytes or InputTypeKind.BytesBase64Url:
                     return $@"
 <para>
 To assign a byte[] to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromBytes(byte[])""/>.
@@ -244,7 +231,7 @@ Examples:
 </list>
 </para>";
 
-                default:
+                case InputTypeKind.BinaryData:
                     return $@"
 <para>
 To assign an object to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromObjectAsJson{{T}}(T, System.Text.Json.JsonSerializerOptions?)""/>.
@@ -273,6 +260,8 @@ Examples:
 </item>
 </list>
 </para>";
+                default:
+                    return $"";
             }
         }
 
