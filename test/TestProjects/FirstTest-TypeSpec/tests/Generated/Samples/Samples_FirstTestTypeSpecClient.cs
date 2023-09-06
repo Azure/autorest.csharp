@@ -565,7 +565,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend notFriend = new Friend("<name>");
+            Friend notFriend = null;
             Response<Friend> response = client.FriendlyModel(notFriend);
         }
 
@@ -576,7 +576,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend notFriend = new Friend("<name>");
+            Friend notFriend = null;
             Response<Friend> response = client.FriendlyModel(notFriend);
         }
 
@@ -621,7 +621,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend notFriend = new Friend("<name>");
+            Friend notFriend = null;
             Response<Friend> response = await client.FriendlyModelAsync(notFriend);
         }
 
@@ -632,7 +632,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Friend notFriend = new Friend("<name>");
+            Friend notFriend = null;
             Response<Friend> response = await client.FriendlyModelAsync(notFriend);
         }
 
@@ -719,7 +719,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            ModelWithFormat body = null;
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
             Console.WriteLine(response.Status);
         }
@@ -731,7 +731,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            ModelWithFormat body = null;
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
             Console.WriteLine(response.Status);
         }
@@ -775,7 +775,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            ModelWithFormat body = null;
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
             Console.WriteLine(response.Status);
         }
@@ -787,7 +787,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            ModelWithFormat body = null;
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
             Console.WriteLine(response.Status);
         }
@@ -796,15 +796,14 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ProjectedNameModel()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-            };
-
-            Response response = client.ProjectedNameModel(RequestContent.Create(data));
+                ["name"] = "<name>",
+            });
+            Response response = client.ProjectedNameModel(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -814,15 +813,14 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ProjectedNameModel_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-            };
-
-            Response response = client.ProjectedNameModel(RequestContent.Create(data));
+                ["name"] = "<name>",
+            });
+            Response response = client.ProjectedNameModel(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -830,17 +828,38 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_ProjectedNameModel_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ProjectedModel modelWithProjectedName = null;
+            Response<ProjectedModel> response = client.ProjectedNameModel(modelWithProjectedName);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ProjectedNameModel_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ProjectedModel modelWithProjectedName = null;
+            Response<ProjectedModel> response = client.ProjectedNameModel(modelWithProjectedName);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_ProjectedNameModel_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-            };
-
-            Response response = await client.ProjectedNameModelAsync(RequestContent.Create(data));
+                ["name"] = "<name>",
+            });
+            Response response = await client.ProjectedNameModelAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -850,15 +869,14 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ProjectedNameModel_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-            };
-
-            Response response = await client.ProjectedNameModelAsync(RequestContent.Create(data));
+                ["name"] = "<name>",
+            });
+            Response response = await client.ProjectedNameModelAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -868,21 +886,32 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ProjectedNameModel_Convenience_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            var modelWithProjectedName = new ProjectedModel("<name>");
-            var result = await client.ProjectedNameModelAsync(modelWithProjectedName);
+            ProjectedModel modelWithProjectedName = null;
+            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ProjectedNameModel_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ProjectedModel modelWithProjectedName = null;
+            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_ReturnsAnonymousModel()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.ReturnsAnonymousModel(new RequestContext());
+            Response response = client.ReturnsAnonymousModel(null);
 
             Console.WriteLine(response.ToString());
         }
@@ -891,10 +920,10 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ReturnsAnonymousModel_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.ReturnsAnonymousModel(new RequestContext());
+            Response response = client.ReturnsAnonymousModel(null);
 
             Console.WriteLine(response.ToString());
         }
@@ -903,10 +932,10 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ReturnsAnonymousModel_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.ReturnsAnonymousModelAsync(new RequestContext());
+            Response response = await client.ReturnsAnonymousModelAsync(null);
 
             Console.WriteLine(response.ToString());
         }
@@ -915,10 +944,10 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ReturnsAnonymousModel_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.ReturnsAnonymousModelAsync(new RequestContext());
+            Response response = await client.ReturnsAnonymousModelAsync(null);
 
             Console.WriteLine(response.ToString());
         }

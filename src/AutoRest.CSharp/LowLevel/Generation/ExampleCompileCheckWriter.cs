@@ -256,7 +256,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
                 {
                     var declaration = new CodeWriterDeclaration(parameter.Name);
                     _writer.Append($"{parameter.Type} {declaration:D} = ")
-                        .AppendInputExampleParameterValue(parameterValue).LineRaw(";");
+                        .AppendInputExampleParameterValue(parameterValue, parameter.SerializationFormat).LineRaw(";");
                     result.Add(parameter, declaration);
                 }
             }

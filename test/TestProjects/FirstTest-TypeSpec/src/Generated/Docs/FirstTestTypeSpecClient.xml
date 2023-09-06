@@ -424,7 +424,7 @@ This sample shows how to call FriendlyModelAsync with required parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Friend notFriend = new Friend("<name>");
+Friend notFriend = null;
 Response<Friend> response = await client.FriendlyModelAsync(notFriend);
 ]]></code></example>
     </member>
@@ -435,7 +435,7 @@ This sample shows how to call FriendlyModel with required parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Friend notFriend = new Friend("<name>");
+Friend notFriend = null;
 Response<Friend> response = client.FriendlyModel(notFriend);
 ]]></code></example>
     </member>
@@ -502,7 +502,7 @@ This sample shows how to call StringFormatAsync with required parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+ModelWithFormat body = null;
 Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -514,7 +514,7 @@ This sample shows how to call StringFormat with required parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+ModelWithFormat body = null;
 Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -552,90 +552,84 @@ Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ProjectedNameModelAsync(ProjectedModel,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call ProjectedNameModelAsync with required parameters.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var modelWithProjectedName = new ProjectedModel("<name>");
-var result = await client.ProjectedNameModelAsync(modelWithProjectedName);
-]]></code>
-</example>
+ProjectedModel modelWithProjectedName = null;
+Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
+]]></code></example>
     </member>
     <member name="ProjectedNameModel(ProjectedModel,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call ProjectedNameModel with required parameters.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var modelWithProjectedName = new ProjectedModel("<name>");
-var result = client.ProjectedNameModel(modelWithProjectedName);
-]]></code>
-</example>
+ProjectedModel modelWithProjectedName = null;
+Response<ProjectedModel> response = client.ProjectedNameModel(modelWithProjectedName);
+]]></code></example>
     </member>
     <member name="ProjectedNameModelAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call ProjectedNameModelAsync with required request content and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
-    name = "<name>",
-};
-
-Response response = await client.ProjectedNameModelAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["name"] = "<name>",
+});
+Response response = await client.ProjectedNameModelAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="ProjectedNameModel(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call ProjectedNameModel with required request content and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
-    name = "<name>",
-};
-
-Response response = client.ProjectedNameModel(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["name"] = "<name>",
+});
+Response response = client.ProjectedNameModel(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="ReturnsAnonymousModelAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call ReturnsAnonymousModelAsync with required parameters and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.ReturnsAnonymousModelAsync(new RequestContext());
+Response response = await client.ReturnsAnonymousModelAsync(null);
 
 Console.WriteLine(response.ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="ReturnsAnonymousModel(RequestContext)">
-<example>
+      <example>
 This sample shows how to call ReturnsAnonymousModel with required parameters and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = client.ReturnsAnonymousModel(new RequestContext());
+Response response = client.ReturnsAnonymousModel(null);
 
 Console.WriteLine(response.ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="HeadAsBooleanAsync(string,RequestContext)">
       <example>

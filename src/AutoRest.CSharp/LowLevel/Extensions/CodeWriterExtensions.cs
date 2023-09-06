@@ -5,12 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Text.Json;
 using System.Xml;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Output.Samples.Models;
@@ -39,19 +41,172 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                 writer.AppendTypeProviderValue(type, exampleValue);
         }
 
+        public static CodeWriter AppendInputExampleValue(this CodeWriter writer, InputExampleValue exampleValue, CSharpType type, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
+        {
+            // TODO -- handle arrays and dictionaries
+
+            Type? frameworkType = type.SerializeAs != null ? type.SerializeAs : type.IsFrameworkType ? type.FrameworkType : null;
+            if (frameworkType != null)
+            {
+                // handle framework type
+                return writer.AppendFrameworkTypeValue(exampleValue, frameworkType, serializationFormat);
+            }
+
+            // handle implementation
+            return writer.AppendRaw("null");
+        }
+
+        private static CodeWriter AppendFrameworkTypeValue(this CodeWriter writer, InputExampleValue exampleValue, Type frameworkType, SerializationFormat serializationFormat)
+        {
+            // handle objects - we usually do not generate object types, but for some rare cases (such as union type) we generate object.
+            if (frameworkType == typeof(object))
+            {
+                return writer.AppendAnonymousObject(exampleValue);
+            }
+
+            // handle RequestContent
+            if (frameworkType == typeof(RequestContent))
+            {
+                return writer.AppendRequestContent(exampleValue);
+            }
+
+            if (frameworkType == typeof(ETag) ||
+                frameworkType == typeof(Uri) ||
+                frameworkType == typeof(ResourceIdentifier) ||
+                frameworkType == typeof(ResourceType) ||
+                frameworkType == typeof(ContentType) ||
+                frameworkType == typeof(RequestMethod) ||
+                frameworkType == typeof(AzureLocation))
+            {
+                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue != null)
+                    return writer.Append($"new {frameworkType}({rawValue.RawValue.ToString():L})");
+                else
+                    return writer.AppendRaw("default");
+            }
+
+            if (frameworkType == typeof(IPAddress))
+            {
+                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue != null)
+                    return writer.Append($"{frameworkType}.Parse({rawValue.RawValue.ToString():L})");
+                else
+                    return writer.AppendRaw("default");
+            }
+
+            if (frameworkType == typeof(BinaryData))
+            {
+                return writer.AppendBinaryData(exampleValue);
+            }
+
+            if (frameworkType == typeof(TimeSpan))
+            {
+                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is not null)
+                {
+                    switch (serializationFormat)
+                    {
+                        case SerializationFormat.Duration_Seconds or SerializationFormat.Duration_Seconds_Float:
+                            if (rawValue.RawValue is int or float or double)
+                                return writer.Append($"{typeof(TimeSpan)}.FromSeconds({rawValue.RawValue:L})");
+                            break;
+                        case SerializationFormat.Duration_ISO8601:
+                            if (rawValue.RawValue is string s)
+                                return writer.Append($"{typeof(XmlConvert)}.ToTimeSpan({s:L})");
+                            break;
+                            //case SerializationFormat.Duration_Constant:
+                            // TODO - what does this look like?
+                    };
+                }
+
+                return writer.AppendRaw("default");
+            }
+
+            if (frameworkType == typeof(DateTimeOffset))
+            {
+                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is not null)
+                {
+                    switch (serializationFormat)
+                    {
+                        case SerializationFormat.DateTime_Unix:
+                            if (rawValue.RawValue is int or long)
+                                return writer.Append($"{typeof(DateTimeOffset)}.FromUnixTimeSeconds({rawValue.RawValue:L})");
+                            break;
+                        case SerializationFormat.DateTime_RFC1123 or SerializationFormat.DateTime_RFC3339 or SerializationFormat.DateTime_RFC7231 or SerializationFormat.DateTime_ISO8601:
+                            if (rawValue.RawValue is string s)
+                                return writer.Append($"{typeof(DateTimeOffset)}.Parse({s:L})");
+                            break;
+                    }
+                }
+
+                return writer.AppendRaw("default");
+            }
+
+            if (frameworkType == typeof(Guid))
+            {
+                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is string s)
+                {
+                    return writer.Append($"{typeof(Guid)}.Parse({s:L})");
+                }
+
+                return writer.AppendRaw("default");
+            }
+
+            if (frameworkType == typeof(char) ||
+                frameworkType == typeof(short) ||
+                frameworkType == typeof(int) ||
+                frameworkType == typeof(long) ||
+                frameworkType == typeof(float) ||
+                frameworkType == typeof(double) ||
+                frameworkType == typeof(decimal))
+            {
+                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is char or short or int or long or float or double or decimal)
+                {
+                    return writer.Append($"({frameworkType}){rawValue.RawValue:L}"); // roslyn will trim off the cast if it is unnecessary
+                }
+
+                return writer.AppendRaw("default");
+            }
+
+            if (frameworkType == typeof(string))
+            {
+                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is not null)
+                {
+                    return writer.Literal(rawValue.RawValue.ToString());
+                }
+
+                return writer.AppendRaw("default");
+            }
+
+            if (frameworkType == typeof(bool))
+            {
+                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is bool b)
+                    return writer.Literal(b);
+
+                return writer.AppendRaw("default");
+            }
+
+            if (frameworkType == typeof(byte[]))
+            {
+                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is not null)
+                    return writer.Append($"{typeof(Encoding)}.UTF8.GetBytes({rawValue.RawValue.ToString():L})");
+
+                return writer.AppendRaw("default");
+            }
+
+            return writer.AppendRaw("default");
+        }
+
         public static CodeWriter AppendInputExampleParameterValue(this CodeWriter writer, Parameter parameter, InputExampleParameterValue exampleParameterValue)
         {
             // for optional parameter, we write the parameter name here
             if (parameter.DefaultValue != null)
                 writer.Append($"{parameter.Name}: ");
 
-            return writer.AppendInputExampleParameterValue(exampleParameterValue);
+            return writer.AppendInputExampleParameterValue(exampleParameterValue, parameter.SerializationFormat);
         }
 
-        public static CodeWriter AppendInputExampleParameterValue(this CodeWriter writer, InputExampleParameterValue exampleParameterValue)
+        public static CodeWriter AppendInputExampleParameterValue(this CodeWriter writer, InputExampleParameterValue exampleParameterValue, SerializationFormat serializationFormat)
         {
             if (exampleParameterValue.Value != null)
-                return writer.AppendInputExampleValue(exampleParameterValue.Value, exampleParameterValue.Type);
+                return writer.AppendInputExampleValue(exampleParameterValue.Value, exampleParameterValue.Type, serializationFormat);
             else
                 return writer.Append(exampleParameterValue.Expression!);
         }
@@ -225,26 +380,6 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
 
             return writer.Literal(rawValue); // fall back to default since we need to try our best not to generate compile errors.
         }
-
-        //private static CodeWriter AppendRawValue(this CodeWriter writer, object? rawValue, Type type, InputType? inputType = null) => rawValue switch
-        //{
-        //    string str => writer.AppendStringValue(type, str, inputType),
-        //    int or float or double or decimal or bool => writer.AppendNumberValue(rawValue, inputType),
-        //    null => writer.AppendRaw("null"),
-        //    _ => writer.AppendRaw(rawValue.ToString()!)
-        //};
-
-        //private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value, InputType? inputType = null) => type switch
-        //{
-        //    _ when _primitiveTypes.Contains(type) => writer.AppendRaw(value),
-        //    _ when _newInstanceInitializedTypes.Contains(type) => writer.Append($"new {type}({value:L})"),
-        //    _ when _parsableInitializedTypes.Contains(type) => writer.Append($"{type}.Parse({value:L})"),
-        //    _ when type == typeof(byte[]) => writer.Append($"{typeof(Convert)}.FromBase64String({value:L})"),
-        //    _ when inputType is InputPrimitiveType { IsNumber: true } => writer.Literal(value),
-        //    _ when inputType is InputPrimitiveType { Kind: InputTypeKind.String } => writer.Literal(value),
-        //    _ when inputType is InputPrimitiveType { Kind: InputTypeKind.DurationISO8601 } => writer.Append($"{typeof(XmlConvert)}.ToTimeSpan({value:L})"),
-        //    _ => writer.Literal(value),
-        //};
 
         private static CodeWriter AppendNumberValue(this CodeWriter writer, object value, InputType? inputType = null) => inputType switch
         {
