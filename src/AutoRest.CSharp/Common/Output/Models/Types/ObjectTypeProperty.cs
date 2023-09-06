@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             null);
 
 
-        public ObjectTypeProperty(FieldDeclaration field, InputModelProperty inputModelProperty, ObjectType enclosingType, SerializationFormat serializationFormat)
+        public ObjectTypeProperty(FieldDeclaration field, InputModelProperty inputModelProperty, ObjectType enclosingType)
             : this(declaration: new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type),
                   parameterDescription: field.Description?.ToString() ?? string.Empty,
                   isReadOnly: field.Modifiers.HasFlag(FieldModifiers.ReadOnly),
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                   optionalViaNullability: field.OptionalViaNullability,
                   getterModifiers: field.GetterModifiers,
                   setterModifiers: field.SetterModifiers,
-                  serializationFormat: serializationFormat,
+                  serializationFormat: field.SerializationFormat,
                   serializationMapping: field.SerializationMapping)
         {
             InitializationValue = field.DefaultValue;
