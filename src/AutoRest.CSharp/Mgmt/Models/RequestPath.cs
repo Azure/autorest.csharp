@@ -229,27 +229,23 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
             // if we hit a {
             char c = candidateSpan[cIdx];
             char r = requestPathSpan[rIdx];
-            switch (c, r)
+
+            if (c != r)
+                return false;
+
+            if (c == '{')
             {
-                case ('{', '{'):
-                    // they both are {, skip everything until we have a }
-                    while (cIdx < candidateSpan.Length && candidateSpan[cIdx] != '}')
-                        cIdx++;
-                    while (rIdx < requestPathSpan.Length && requestPathSpan[rIdx] != '}')
-                        rIdx++;
-                    if (cIdx >= candidateSpan.Length || rIdx >= requestPathSpan.Length) // if we get out of range, we should return false because this request path might be incomplete
-                        return false;
-                    break;
-                case (not '{', not '{'):
-                    // they are not {, therefore we check if the char are the same
-                    if (c != r)
-                        return false;
+                // they both are {, skip everything until we have a } or we get to the last character of the string
+                while (cIdx < candidateSpan.Length - 1 && candidateSpan[cIdx] != '}')
                     cIdx++;
-                    rIdx++; // go to next char
-                    break;
-                default:
-                    // one of them is { and the other is not, we should return false
-                    return false;
+                while (rIdx < requestPathSpan.Length - 1 && requestPathSpan[rIdx] != '}')
+                    rIdx++;
+            }
+            else
+            {
+                // they are the same but not {
+                cIdx++;
+                rIdx++;
             }
         }
 
