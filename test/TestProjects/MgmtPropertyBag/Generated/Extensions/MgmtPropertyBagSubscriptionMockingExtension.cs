@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Threading;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -65,7 +66,7 @@ namespace MgmtPropertyBag.Mocking
         public virtual AsyncPageable<FooResource> GetFoosAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FooRestClient.CreateListWithSubscriptionRequest(Id.SubscriptionId, filter, top);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), FooClientDiagnostics, Pipeline, "MgmtPropertyBagSubscriptionMockingExtension.GetFoos", "", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), FooClientDiagnostics, Pipeline, "MgmtPropertyBagSubscriptionMockingExtension.GetFoos", "", null, cancellationToken);
         }
 
         /// <summary>
@@ -88,7 +89,7 @@ namespace MgmtPropertyBag.Mocking
         public virtual Pageable<FooResource> GetFoos(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FooRestClient.CreateListWithSubscriptionRequest(Id.SubscriptionId, filter, top);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), FooClientDiagnostics, Pipeline, "MgmtPropertyBagSubscriptionMockingExtension.GetFoos", "", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), FooClientDiagnostics, Pipeline, "MgmtPropertyBagSubscriptionMockingExtension.GetFoos", "", null, cancellationToken);
         }
 
         /// <summary>
@@ -112,7 +113,7 @@ namespace MgmtPropertyBag.Mocking
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => BarRestClient.CreateListWithSubscriptionRequest(Id.SubscriptionId, ifMatch, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => BarRestClient.CreateListWithSubscriptionNextPageRequest(nextLink, Id.SubscriptionId, ifMatch, top);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new BarResource(Client, BarData.DeserializeBarData(e)), BarClientDiagnostics, Pipeline, "MgmtPropertyBagSubscriptionMockingExtension.GetBars", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new BarResource(Client, BarData.DeserializeBarData(e)), BarClientDiagnostics, Pipeline, "MgmtPropertyBagSubscriptionMockingExtension.GetBars", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -136,7 +137,7 @@ namespace MgmtPropertyBag.Mocking
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => BarRestClient.CreateListWithSubscriptionRequest(Id.SubscriptionId, ifMatch, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => BarRestClient.CreateListWithSubscriptionNextPageRequest(nextLink, Id.SubscriptionId, ifMatch, top);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new BarResource(Client, BarData.DeserializeBarData(e)), BarClientDiagnostics, Pipeline, "MgmtPropertyBagSubscriptionMockingExtension.GetBars", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new BarResource(Client, BarData.DeserializeBarData(e)), BarClientDiagnostics, Pipeline, "MgmtPropertyBagSubscriptionMockingExtension.GetBars", "value", "nextLink", cancellationToken);
         }
     }
 }

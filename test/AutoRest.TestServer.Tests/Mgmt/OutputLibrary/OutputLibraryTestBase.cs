@@ -22,6 +22,7 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
+    [Parallelizable(ParallelScope.None)]
     internal abstract class OutputLibraryTestBase
     {
         private string _projectName;

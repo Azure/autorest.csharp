@@ -93,20 +93,57 @@ namespace AutoRest.CSharp.Output.Models
             var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => p != KnownParameters.RequestContentNullable && !shouldRequestContextOptional ? p.ToRequired() : p).ToArray();
             var protocolMethodModifiers = (Operation.GenerateProtocolMethod ? _restClientMethod.Accessibility : MethodSignatureModifiers.Internal) | Virtual;
             var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, protocolMethodModifiers, _returnType.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
-            var convenienceMethod = ShouldGenerateConvenienceMethod() ? BuildConvenienceMethod(shouldRequestContextOptional) : null;
+            var convenienceMethodInfo = ShouldGenerateConvenienceMethod();
+            var convenienceMethod = BuildConvenienceMethod(shouldRequestContextOptional, convenienceMethodInfo);
 
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
 
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
             var responseBodyType = Operation.Responses.FirstOrDefault()?.BodyType;
-            return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag);
+            return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag, convenienceMethodInfo.Message);
         }
 
-        private bool ShouldGenerateConvenienceMethod()
+        private ConvenienceMethodGenerationInfo ShouldGenerateConvenienceMethod()
         {
-            return Operation.GenerateConvenienceMethod
-                && (!Operation.GenerateProtocolMethod
-                || IsConvenienceMethodMeaningful());
+            // we do not generate convenience method if the emitter does not allow it.
+            if (!Operation.GenerateConvenienceMethod)
+                return new()
+                {
+                    IsConvenienceMethodGenerated = false
+                };
+
+            // if the protocol method is generated and the parameters are the same in protocol and convenience, we do not generate the convenience.
+            if (Operation.GenerateProtocolMethod && !IsConvenienceMethodMeaningful())
+            {
+                return new()
+                {
+                    Message = ConvenienceMethodOmittingMessage.NotMeaningful,
+                    IsConvenienceMethodGenerated = false
+                };
+            }
+
+            // check if there is anything not confident inside this operation
+            var confidentLevel = OperationConfidenceChecker.GetConfidenceLevel(Operation, _typeFactory);
+            return confidentLevel switch
+            {
+                ConvenienceMethodConfidenceLevel.Confident => new()
+                {
+                    IsConvenienceMethodGenerated = true,
+                    IsConvenienceMethodInternal = false
+                },
+                ConvenienceMethodConfidenceLevel.Internal => new()
+                {
+                    Message = ConvenienceMethodOmittingMessage.NotConfident,
+                    IsConvenienceMethodGenerated = true,
+                    IsConvenienceMethodInternal = true
+                },
+                ConvenienceMethodConfidenceLevel.Removal => new()
+                {
+                    Message = ConvenienceMethodOmittingMessage.AnonymousModel,
+                    IsConvenienceMethodGenerated = false
+                },
+                _ => throw new InvalidOperationException($"unhandled case {confidentLevel} for operation {Operation}")
+            };
         }
 
         // If all the corresponding parameters and return types of convenience method and protocol method have the same type, it does not make sense to generate the convenience method.
@@ -226,8 +263,11 @@ namespace AutoRest.CSharp.Output.Models
             return new ReturnTypeChain(typeof(Response), typeof(Response), null);
         }
 
-        private ConvenienceMethod BuildConvenienceMethod(bool shouldRequestContextOptional)
+        private ConvenienceMethod? BuildConvenienceMethod(bool shouldRequestContextOptional, ConvenienceMethodGenerationInfo generationInfo)
         {
+            if (!generationInfo.IsConvenienceMethodGenerated)
+                return null;
+
             bool needNameChange = shouldRequestContextOptional && HasAmbiguityBetweenProtocolAndConvenience();
             string name = _restClientMethod.Name;
             if (needNameChange)
@@ -268,7 +308,13 @@ namespace AutoRest.CSharp.Output.Models
                     }
                 }
             }
-            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, _returnType.Convenience, null, parameterList, attributes);
+            var accessibility = _restClientMethod.Accessibility | Virtual;
+            if (generationInfo.IsConvenienceMethodInternal)
+            {
+                accessibility &= ~Public; // removes public if any
+                accessibility |= Internal; // add internal
+            }
+            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, accessibility, _returnType.Convenience, null, parameterList, attributes);
             var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
             return new ConvenienceMethod(convenienceSignature, protocolToConvenience, _returnType.ConvenienceResponseType, diagnostic, _protocolMethodPaging is not null, Operation.LongRunning is not null, Operation.Deprecated);
         }
@@ -295,13 +341,6 @@ namespace AutoRest.CSharp.Output.Models
 
         private void BuildParameters()
         {
-            SerializationFormat GetSerializationFormat(InputParameter parameter)
-            {
-                return parameter.SerializationFormat == SerializationFormat.Default
-                        ? SerializationBuilder.GetSerializationFormat(parameter.Type)
-                        : parameter.SerializationFormat;
-            }
-
             var operationParameters = RestClientBuilder.FilterOperationAllParameters(Operation.Parameters);
 
             var requiredPathParameters = new Dictionary<string, InputParameter>();
@@ -334,7 +373,7 @@ namespace AutoRest.CSharp.Output.Models
                         requestConditionHeaders |= header;
                         requestConditionRequestParameter ??= operationParameter;
                         requestConditionSerializationFormat = requestConditionSerializationFormat == SerializationFormat.Default
-                            ? GetSerializationFormat(operationParameter)
+                            ? operationParameter.SerializationFormat
                             : requestConditionSerializationFormat;
 
                         break;
@@ -547,5 +586,14 @@ namespace AutoRest.CSharp.Output.Models
         private record ReturnTypeChain(CSharpType Convenience, CSharpType Protocol, CSharpType? ConvenienceResponseType);
 
         private record ParameterChain(Parameter? Convenience, Parameter? Protocol, Parameter? CreateMessage, bool IsSpreadParameter = false);
+
+        internal record ConvenienceMethodGenerationInfo()
+        {
+            public bool IsConvenienceMethodGenerated { get; init; } = false;
+
+            public bool IsConvenienceMethodInternal { get; init; } = false;
+
+            public ConvenienceMethodOmittingMessage? Message { get; init; }
+        }
     }
 }

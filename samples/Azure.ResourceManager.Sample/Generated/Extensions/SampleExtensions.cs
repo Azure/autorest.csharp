@@ -201,15 +201,15 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="VirtualMachineScaleSetVMResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="VirtualMachineScaleSetVMResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetVMResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetVmResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetVmResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetVmResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VirtualMachineScaleSetVMResource" /> object. </returns>
-        public static VirtualMachineScaleSetVMResource GetVirtualMachineScaleSetVMResource(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetVmResource" /> object. </returns>
+        public static VirtualMachineScaleSetVmResource GetVirtualMachineScaleSetVmResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetSampleArmClientMockingExtension(client).GetVirtualMachineScaleSetVMResource(id);
+            return GetSampleArmClientMockingExtension(client).GetVirtualMachineScaleSetVmResource(id);
         }
 
         /// <summary> Gets a collection of AvailabilitySetResources in the ResourceGroupResource. </summary>

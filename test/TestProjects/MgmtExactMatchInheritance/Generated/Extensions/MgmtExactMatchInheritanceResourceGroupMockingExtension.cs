@@ -8,6 +8,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -243,7 +244,7 @@ namespace MgmtExactMatchInheritance.Mocking
         public virtual AsyncPageable<ExactMatchModel3> GetExactMatchModel3sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ExactMatchModel3sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, ExactMatchModel3.DeserializeExactMatchModel3, ExactMatchModel3sClientDiagnostics, Pipeline, "MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel3s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, ExactMatchModel3.DeserializeExactMatchModel3, ExactMatchModel3sClientDiagnostics, Pipeline, "MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel3s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -263,7 +264,7 @@ namespace MgmtExactMatchInheritance.Mocking
         public virtual Pageable<ExactMatchModel3> GetExactMatchModel3s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ExactMatchModel3sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, ExactMatchModel3.DeserializeExactMatchModel3, ExactMatchModel3sClientDiagnostics, Pipeline, "MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel3s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, ExactMatchModel3.DeserializeExactMatchModel3, ExactMatchModel3sClientDiagnostics, Pipeline, "MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel3s", "value", null, cancellationToken);
         }
 
         /// <summary>

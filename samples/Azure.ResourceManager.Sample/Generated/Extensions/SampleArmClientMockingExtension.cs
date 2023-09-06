@@ -193,15 +193,15 @@ namespace Azure.ResourceManager.Sample.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="VirtualMachineScaleSetVMResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="VirtualMachineScaleSetVMResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetVMResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetVmResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetVmResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetVmResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VirtualMachineScaleSetVMResource" /> object. </returns>
-        public virtual VirtualMachineScaleSetVMResource GetVirtualMachineScaleSetVMResource(ResourceIdentifier id)
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetVmResource" /> object. </returns>
+        public virtual VirtualMachineScaleSetVmResource GetVirtualMachineScaleSetVmResource(ResourceIdentifier id)
         {
-            VirtualMachineScaleSetVMResource.ValidateResourceId(id);
-            return new VirtualMachineScaleSetVMResource(Client, id);
+            VirtualMachineScaleSetVmResource.ValidateResourceId(id);
+            return new VirtualMachineScaleSetVmResource(Client, id);
         }
     }
 }

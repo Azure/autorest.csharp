@@ -123,7 +123,7 @@ describe("Test getUsages", () => {
         const sdkContext = createSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
-        assert(usages.inputs.includes("TemplateModel"));
+        assert(usages.inputs.includes("TemplateModelFoo"));
         assert(usages.inputs.includes("Foo"));
     });
 
@@ -211,8 +211,7 @@ describe("Test getUsages", () => {
             }
       `,
             runner,
-            true,
-            true
+            { IsNamespaceNeeded: true, IsAzureCoreNeeded: true }
         );
         const context = createEmitterContext(program);
         const sdkContext = createSdkContext(context);
@@ -243,8 +242,7 @@ describe("Test getUsages", () => {
             }
       `,
             runner,
-            true,
-            true
+            { IsNamespaceNeeded: true, IsAzureCoreNeeded: true }
         );
 
         const context = createEmitterContext(program);
@@ -298,8 +296,7 @@ describe("Test getUsages", () => {
             }
       `,
             runner,
-            true,
-            true
+            { IsNamespaceNeeded: true, IsAzureCoreNeeded: true }
         );
 
         const context = createEmitterContext(program);
@@ -363,8 +360,7 @@ describe("Test getUsages", () => {
             }
       `,
             runner,
-            true,
-            true
+            { IsNamespaceNeeded: true, IsAzureCoreNeeded: true }
         );
 
         const context = createEmitterContext(program);

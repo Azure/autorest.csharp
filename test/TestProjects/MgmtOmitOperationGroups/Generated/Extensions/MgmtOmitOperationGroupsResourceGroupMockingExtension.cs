@@ -8,6 +8,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -112,7 +113,7 @@ namespace MgmtOmitOperationGroups.Mocking
         public virtual AsyncPageable<Model5> GetModel5sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => Model5sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, Model5.DeserializeModel5, Model5sClientDiagnostics, Pipeline, "MgmtOmitOperationGroupsResourceGroupMockingExtension.GetModel5s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, Model5.DeserializeModel5, Model5sClientDiagnostics, Pipeline, "MgmtOmitOperationGroupsResourceGroupMockingExtension.GetModel5s", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -132,7 +133,7 @@ namespace MgmtOmitOperationGroups.Mocking
         public virtual Pageable<Model5> GetModel5s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => Model5sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, Model5.DeserializeModel5, Model5sClientDiagnostics, Pipeline, "MgmtOmitOperationGroupsResourceGroupMockingExtension.GetModel5s", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, Model5.DeserializeModel5, Model5sClientDiagnostics, Pipeline, "MgmtOmitOperationGroupsResourceGroupMockingExtension.GetModel5s", "value", null, cancellationToken);
         }
 
         /// <summary>

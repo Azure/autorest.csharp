@@ -2,15 +2,14 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml;
+using _Type.Property.ValueTypes;
+using _Type.Property.ValueTypes.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using NUnit.Framework;
-using System.Collections.Generic;
-using _Type.Property.ValueTypes;
-using _Type.Property.ValueTypes.Models;
-using Newtonsoft.Json;
 
 namespace CadlRanchProjects.Tests
 {
@@ -263,7 +262,8 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_ValueTypes_UnknownDict_get() => Test(async (host) =>
         {
             var response = await new ValueTypesClient(host, null).GetUnknownDictClient().GetUnknownDictAsync();
-            var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(response.Value.Property.ToObjectFromJson()));
+            var result = response.Value.Property.ToObjectFromJson() as Dictionary<string, object>;
+            Assert.IsNotNull(result);
             Assert.AreEqual("hello", result["k1"]);
             Assert.AreEqual(42, result["k2"]);
         });
@@ -286,6 +286,7 @@ namespace CadlRanchProjects.Tests
         {
             var response = await new ValueTypesClient(host, null).GetUnknownArrayClient().GetUnknownArrayAsync();
             var result = response.Value.Property.ToObjectFromJson() as object[];
+            Assert.IsNotNull(result);
             Assert.AreEqual("hello", result[0]);
             Assert.AreEqual("world", result[1]);
         });

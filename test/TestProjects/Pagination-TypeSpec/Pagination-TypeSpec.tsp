@@ -212,6 +212,7 @@ model TextBlockItem {
   text: string;
 }
 
+@doc("The interval")
 enum Interval {
   @doc("5 seconds, available only if test run duration is less than 10 minutes")
   PT5S,

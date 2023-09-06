@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Threading;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -61,7 +62,7 @@ namespace MgmtCollectionParent.Mocking
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => OrderResourceRestClient.CreateListOrderAtSubscriptionLevelRequest(Id.SubscriptionId, skipToken);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => OrderResourceRestClient.CreateListOrderAtSubscriptionLevelNextPageRequest(nextLink, Id.SubscriptionId, skipToken);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OrderResource(Client, OrderResourceData.DeserializeOrderResourceData(e)), OrderResourceClientDiagnostics, Pipeline, "MgmtCollectionParentSubscriptionMockingExtension.GetOrderResources", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OrderResource(Client, OrderResourceData.DeserializeOrderResourceData(e)), OrderResourceClientDiagnostics, Pipeline, "MgmtCollectionParentSubscriptionMockingExtension.GetOrderResources", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -84,7 +85,7 @@ namespace MgmtCollectionParent.Mocking
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => OrderResourceRestClient.CreateListOrderAtSubscriptionLevelRequest(Id.SubscriptionId, skipToken);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => OrderResourceRestClient.CreateListOrderAtSubscriptionLevelNextPageRequest(nextLink, Id.SubscriptionId, skipToken);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OrderResource(Client, OrderResourceData.DeserializeOrderResourceData(e)), OrderResourceClientDiagnostics, Pipeline, "MgmtCollectionParentSubscriptionMockingExtension.GetOrderResources", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OrderResource(Client, OrderResourceData.DeserializeOrderResourceData(e)), OrderResourceClientDiagnostics, Pipeline, "MgmtCollectionParentSubscriptionMockingExtension.GetOrderResources", "value", "nextLink", cancellationToken);
         }
     }
 }

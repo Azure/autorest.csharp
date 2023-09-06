@@ -140,14 +140,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Put400Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Put400Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
             scope.Start();
             try
             {
-                return await RestClient.Put400Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Put400Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -157,14 +158,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Put400(CancellationToken cancellationToken = default)
+        public virtual Response Put400(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
             scope.Start();
             try
             {
-                return RestClient.Put400(cancellationToken);
+                return RestClient.Put400(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -174,14 +176,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Patch400Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Patch400Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
             scope.Start();
             try
             {
-                return await RestClient.Patch400Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Patch400Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -191,14 +194,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Patch400(CancellationToken cancellationToken = default)
+        public virtual Response Patch400(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
             scope.Start();
             try
             {
-                return RestClient.Patch400(cancellationToken);
+                return RestClient.Patch400(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -208,14 +212,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Post400Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Post400Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
             scope.Start();
             try
             {
-                return await RestClient.Post400Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Post400Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -225,14 +230,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Post400(CancellationToken cancellationToken = default)
+        public virtual Response Post400(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
             scope.Start();
             try
             {
-                return RestClient.Post400(cancellationToken);
+                return RestClient.Post400(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -242,14 +248,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Delete400Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Delete400Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
             scope.Start();
             try
             {
-                return await RestClient.Delete400Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Delete400Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -259,14 +266,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete400(CancellationToken cancellationToken = default)
+        public virtual Response Delete400(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
             scope.Start();
             try
             {
-                return RestClient.Delete400(cancellationToken);
+                return RestClient.Delete400(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -412,14 +420,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 404 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Put404Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Put404Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
             scope.Start();
             try
             {
-                return await RestClient.Put404Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Put404Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -429,14 +438,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 404 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Put404(CancellationToken cancellationToken = default)
+        public virtual Response Put404(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
             scope.Start();
             try
             {
-                return RestClient.Put404(cancellationToken);
+                return RestClient.Put404(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -446,14 +456,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 405 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Patch405Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Patch405Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
             scope.Start();
             try
             {
-                return await RestClient.Patch405Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Patch405Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -463,14 +474,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 405 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Patch405(CancellationToken cancellationToken = default)
+        public virtual Response Patch405(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
             scope.Start();
             try
             {
-                return RestClient.Patch405(cancellationToken);
+                return RestClient.Patch405(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -480,14 +492,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 406 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Post406Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Post406Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
             scope.Start();
             try
             {
-                return await RestClient.Post406Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Post406Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -497,14 +510,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 406 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Post406(CancellationToken cancellationToken = default)
+        public virtual Response Post406(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
             scope.Start();
             try
             {
-                return RestClient.Post406(cancellationToken);
+                return RestClient.Post406(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -514,14 +528,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 407 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Delete407Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Delete407Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
             scope.Start();
             try
             {
-                return await RestClient.Delete407Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Delete407Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -531,14 +546,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 407 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete407(CancellationToken cancellationToken = default)
+        public virtual Response Delete407(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
             scope.Start();
             try
             {
-                return RestClient.Delete407(cancellationToken);
+                return RestClient.Delete407(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -548,14 +564,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 409 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Put409Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Put409Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
             scope.Start();
             try
             {
-                return await RestClient.Put409Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Put409Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -565,14 +582,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 409 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Put409(CancellationToken cancellationToken = default)
+        public virtual Response Put409(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
             scope.Start();
             try
             {
-                return RestClient.Put409(cancellationToken);
+                return RestClient.Put409(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -718,14 +736,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 413 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Put413Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Put413Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
             scope.Start();
             try
             {
-                return await RestClient.Put413Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Put413Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -735,14 +754,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 413 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Put413(CancellationToken cancellationToken = default)
+        public virtual Response Put413(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
             scope.Start();
             try
             {
-                return RestClient.Put413(cancellationToken);
+                return RestClient.Put413(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -752,14 +772,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 414 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Patch414Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Patch414Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
             scope.Start();
             try
             {
-                return await RestClient.Patch414Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Patch414Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -769,14 +790,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 414 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Patch414(CancellationToken cancellationToken = default)
+        public virtual Response Patch414(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
             scope.Start();
             try
             {
-                return RestClient.Patch414(cancellationToken);
+                return RestClient.Patch414(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -786,14 +808,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 415 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Post415Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Post415Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
             scope.Start();
             try
             {
-                return await RestClient.Post415Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Post415Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -803,14 +826,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 415 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Post415(CancellationToken cancellationToken = default)
+        public virtual Response Post415(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
             scope.Start();
             try
             {
-                return RestClient.Post415(cancellationToken);
+                return RestClient.Post415(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -854,14 +878,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 417 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Delete417Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Delete417Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
             scope.Start();
             try
             {
-                return await RestClient.Delete417Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Delete417Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -871,14 +896,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 417 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete417(CancellationToken cancellationToken = default)
+        public virtual Response Delete417(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
             scope.Start();
             try
             {
-                return RestClient.Delete417(cancellationToken);
+                return RestClient.Delete417(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
