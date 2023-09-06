@@ -19,8 +19,8 @@ Write-Host "git sparse-checkout init"
 git sparse-checkout init
 Write-Host "git sparse-checkout set --no-cone $azCoreSharedPath $armCoreSharedPath"
 git sparse-checkout set --no-cone $azCoreSharedPath $armCoreSharedPath
-Write-Host "git checkout users/annelo/core-reshuffle-2"
-git checkout users/annelo/core-reshuffle-2
+Write-Host "git checkout users/annelo-msft/core-reshuffle-2"
+git checkout users/annelo-msft/core-reshuffle-2
 Pop-Location
 
 function CopyAll([string[]]$files, [string]$source, [string]$destination)
