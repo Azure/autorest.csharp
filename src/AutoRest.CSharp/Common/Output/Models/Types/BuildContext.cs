@@ -9,11 +9,15 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class BuildContext
     {
-        public BuildContext(CodeModel codeModel, SourceInputModel? sourceInputModel)
+        public BuildContext(CodeModel codeModel, SourceInputModel? sourceInputModel) : this(codeModel, sourceInputModel, Configuration.Namespace)
+        { }
+
+        public BuildContext(CodeModel codeModel, SourceInputModel? sourceInputModel, string defaultNamespace)
         {
             CodeModel = codeModel;
             SchemaUsageProvider = new SchemaUsageProvider(codeModel);
             SourceInputModel = sourceInputModel;
+            DefaultNamespace = defaultNamespace;
         }
 
         public OutputLibrary? BaseLibrary { get; protected set; }
@@ -21,7 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public CodeModel CodeModel { get; }
         public SchemaUsageProvider SchemaUsageProvider { get; }
         public string DefaultName => CodeModel.Language.Default.Name;
-        public string DefaultNamespace => Configuration.Namespace;
+        public string DefaultNamespace { get; }
         public SourceInputModel? SourceInputModel { get; }
         public virtual TypeFactory TypeFactory { get; } = null!;
     }

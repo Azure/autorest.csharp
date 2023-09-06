@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Resources;
@@ -226,7 +227,7 @@ namespace Azure.ResourceManager.Sample
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _sshPublicKeyRestClient.CreateListByResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sshPublicKeyRestClient.CreateListByResourceGroupNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new SshPublicKeyResource(Client, SshPublicKeyData.DeserializeSshPublicKeyData(e)), _sshPublicKeyClientDiagnostics, Pipeline, "SshPublicKeyCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new SshPublicKeyResource(Client, SshPublicKeyData.DeserializeSshPublicKeyData(e)), _sshPublicKeyClientDiagnostics, Pipeline, "SshPublicKeyCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -248,7 +249,7 @@ namespace Azure.ResourceManager.Sample
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _sshPublicKeyRestClient.CreateListByResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sshPublicKeyRestClient.CreateListByResourceGroupNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new SshPublicKeyResource(Client, SshPublicKeyData.DeserializeSshPublicKeyData(e)), _sshPublicKeyClientDiagnostics, Pipeline, "SshPublicKeyCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new SshPublicKeyResource(Client, SshPublicKeyData.DeserializeSshPublicKeyData(e)), _sshPublicKeyClientDiagnostics, Pipeline, "SshPublicKeyCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

@@ -28,7 +28,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                   optionalViaNullability: field.OptionalViaNullability,
                   getterModifiers: field.GetterModifiers,
                   setterModifiers: field.SetterModifiers,
-                  serializationFormat: inputModelProperty is not null ? SerializationBuilder.GetSerializationFormat(inputModelProperty.Type) : SerializationFormat.Default,
                   serializationMapping: field.SerializationMapping)
         {
             InitializationValue = Configuration.Generation1ConvenienceClient ? null : field.DefaultValue;
@@ -39,7 +38,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
-        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SerializationFormat serializationFormat = SerializationFormat.Default, SourcePropertySerializationMapping? serializationMapping = null)
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null, SourcePropertySerializationMapping? serializationMapping = null)
         {
             IsReadOnly = isReadOnly;
             SchemaProperty = schemaProperty;
@@ -53,11 +52,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsFlattenedProperty = isFlattenedProperty;
             GetterModifiers = getterModifiers;
             SetterModifiers = setterModifiers;
-            SerializationFormat = serializationFormat;
             SerializationMapping = serializationMapping;
         }
-
-        public SerializationFormat SerializationFormat { get; }
 
         public ObjectTypeProperty MarkFlatten()
         {
@@ -196,7 +192,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private FormattableString CreatePropertyDescription()
         {
             var propertyDescription = Description + BuilderHelpers.CreateDerivedTypesDescription(ValueType);
-            var binaryDataExtraDescription = CreateBinaryDataExtraDescription(Declaration.Type);
+            var binaryDataExtraDescription = CreateBinaryDataExtraDescription();
             if (!string.IsNullOrWhiteSpace(propertyDescription))
             {
                 return $"{propertyDescription}{binaryDataExtraDescription}";
@@ -205,8 +201,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             return $"{CreateDefaultPropertyDescription(Declaration.Name, IsReadOnly)}{binaryDataExtraDescription}";
         }
 
-        private FormattableString CreateBinaryDataExtraDescription(CSharpType type)
+        private FormattableString CreateBinaryDataExtraDescription()
         {
+            var type = Declaration.Type;
             if (!type.IsFrameworkType)
             {
                 return $"";
@@ -229,10 +226,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc)
         {
-            switch (SerializationFormat)
+            switch (InputModelProperty?.Type)
             {
-                case SerializationFormat.Bytes_Base64Url: //intentional fall through
-                case SerializationFormat.Bytes_Base64:
+                case InputPrimitiveType { Kind: InputTypeKind.Bytes or InputTypeKind.BytesBase64Url }:
                     return $@"
 <para>
 To assign a byte[] to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromBytes(byte[])""/>.

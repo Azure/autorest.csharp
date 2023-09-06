@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -222,7 +223,7 @@ namespace MgmtSupersetFlattenInheritance
         public virtual AsyncPageable<ResourceModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resourceModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ResourceModel1Resource(Client, ResourceModel1Data.DeserializeResourceModel1Data(e)), _resourceModel1ClientDiagnostics, Pipeline, "ResourceModel1Collection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ResourceModel1Resource(Client, ResourceModel1Data.DeserializeResourceModel1Data(e)), _resourceModel1ClientDiagnostics, Pipeline, "ResourceModel1Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +243,7 @@ namespace MgmtSupersetFlattenInheritance
         public virtual Pageable<ResourceModel1Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resourceModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ResourceModel1Resource(Client, ResourceModel1Data.DeserializeResourceModel1Data(e)), _resourceModel1ClientDiagnostics, Pipeline, "ResourceModel1Collection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new ResourceModel1Resource(Client, ResourceModel1Data.DeserializeResourceModel1Data(e)), _resourceModel1ClientDiagnostics, Pipeline, "ResourceModel1Collection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

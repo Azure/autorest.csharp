@@ -8,6 +8,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Network.Management.Interface.Models;
@@ -119,7 +120,7 @@ namespace Azure.Network.Management.Interface
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateListRequest(resourceGroupName, networkInterfaceName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateListNextPageRequest(nextLink, resourceGroupName, networkInterfaceName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration, _clientDiagnostics, _pipeline, "NetworkInterfaceTapConfigurationsClient.List", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration, _clientDiagnostics, _pipeline, "NetworkInterfaceTapConfigurationsClient.List", "value", "nextLink", cancellationToken);
         }
 
         /// <summary> Get all Tap configurations in a network interface. </summary>
@@ -134,7 +135,7 @@ namespace Azure.Network.Management.Interface
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateListRequest(resourceGroupName, networkInterfaceName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateListNextPageRequest(nextLink, resourceGroupName, networkInterfaceName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration, _clientDiagnostics, _pipeline, "NetworkInterfaceTapConfigurationsClient.List", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration, _clientDiagnostics, _pipeline, "NetworkInterfaceTapConfigurationsClient.List", "value", "nextLink", cancellationToken);
         }
 
         /// <summary> Deletes the specified tap configuration from the NetworkInterface. </summary>

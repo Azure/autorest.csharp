@@ -1,9 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Serialization;
-
 namespace AutoRest.CSharp.Common.Input;
 
 internal record InputParameter(

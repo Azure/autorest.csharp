@@ -27,8 +27,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// </param>
         public ImageOSDisk(OperatingSystemType osType, OperatingSystemStateType osState)
         {
-            OsType = osType;
-            OsState = osState;
+            OSType = osType;
+            OSState = osState;
         }
 
         /// <summary> Initializes a new instance of ImageOSDisk. </summary>
@@ -70,19 +70,19 @@ namespace Azure.ResourceManager.Sample.Models
         /// </param>
         internal ImageOSDisk(WritableSubResource snapshot, WritableSubResource managedDisk, Uri blobUri, CachingType? caching, int? diskSizeGB, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, OperatingSystemType osType, OperatingSystemStateType osState) : base(snapshot, managedDisk, blobUri, caching, diskSizeGB, storageAccountType, diskEncryptionSet)
         {
-            OsType = osType;
-            OsState = osState;
+            OSType = osType;
+            OSState = osState;
         }
 
         /// <summary>
         /// This property allows you to specify the type of the OS that is included in the disk if creating a VM from a custom image. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Windows** &lt;br&gt;&lt;br&gt; **Linux**
         /// Serialized Name: ImageOSDisk.osType
         /// </summary>
-        public OperatingSystemType OsType { get; set; }
+        public OperatingSystemType OSType { get; set; }
         /// <summary>
         /// The OS State.
         /// Serialized Name: ImageOSDisk.osState
         /// </summary>
-        public OperatingSystemStateType OsState { get; set; }
+        public OperatingSystemStateType OSState { get; set; }
     }
 }

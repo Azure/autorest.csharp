@@ -9,6 +9,7 @@ using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using Autorest.CSharp.Core;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
@@ -62,8 +63,8 @@ namespace AutoRest.CSharp.Common.Output.Models
                 arguments.Add(requestContextOrCancellationToken);
             }
 
-            var methodName = async ? nameof(PageableHelpers.CreateAsyncPageable) : nameof(PageableHelpers.CreatePageable);
-            return new InvokeStaticMethodExpression(typeof(PageableHelpers), methodName, arguments);
+            var methodName = async ? nameof(GeneratorPageableHelpers.CreateAsyncPageable) : nameof(GeneratorPageableHelpers.CreatePageable);
+            return new InvokeStaticMethodExpression(typeof(GeneratorPageableHelpers), methodName, arguments);
         }
 
         public static ValueExpression CreatePageable(
@@ -98,8 +99,8 @@ namespace AutoRest.CSharp.Common.Output.Models
                 arguments.Add(requestContext);
             }
 
-            var methodName = async ? nameof(PageableHelpers.CreateAsyncPageable) : nameof(PageableHelpers.CreatePageable);
-            return new InvokeStaticMethodExpression(typeof(PageableHelpers), methodName, arguments, null, false, async);
+            var methodName = async ? nameof(GeneratorPageableHelpers.CreateAsyncPageable) : nameof(GeneratorPageableHelpers.CreatePageable);
+            return new InvokeStaticMethodExpression(typeof(GeneratorPageableHelpers), methodName, arguments, null, false, async);
         }
 
         private static ValueExpression GetValueFactory(CSharpType? pageItemType)

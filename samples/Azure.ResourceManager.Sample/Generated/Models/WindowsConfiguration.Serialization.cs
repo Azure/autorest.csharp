@@ -16,10 +16,10 @@ namespace Azure.ResourceManager.Sample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ProvisionVMAgent))
+            if (Optional.IsDefined(ProvisionVmAgent))
             {
                 writer.WritePropertyName("provisionVMAgent"u8);
-                writer.WriteBooleanValue(ProvisionVMAgent.Value);
+                writer.WriteBooleanValue(ProvisionVmAgent.Value);
             }
             if (Optional.IsDefined(EnableAutomaticUpdates))
             {
@@ -60,7 +60,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 return null;
             }
-            Optional<bool> provisionVMAgent = default;
+            Optional<bool> provisionVmAgent = default;
             Optional<bool> enableAutomaticUpdates = default;
             Optional<string> timeZone = default;
             Optional<IList<AdditionalUnattendContent>> additionalUnattendContent = default;
@@ -74,7 +74,7 @@ namespace Azure.ResourceManager.Sample.Models
                     {
                         continue;
                     }
-                    provisionVMAgent = property.Value.GetBoolean();
+                    provisionVmAgent = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("enableAutomaticUpdates"u8))
@@ -124,7 +124,7 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new WindowsConfiguration(Optional.ToNullable(provisionVMAgent), Optional.ToNullable(enableAutomaticUpdates), timeZone.Value, Optional.ToList(additionalUnattendContent), patchSettings.Value, winRM.Value);
+            return new WindowsConfiguration(Optional.ToNullable(provisionVmAgent), Optional.ToNullable(enableAutomaticUpdates), timeZone.Value, Optional.ToList(additionalUnattendContent), patchSettings.Value, winRM.Value);
         }
     }
 }

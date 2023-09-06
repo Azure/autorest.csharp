@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -225,7 +226,7 @@ namespace MgmtSingletonResource
         public virtual AsyncPageable<ParentResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _parentResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ParentResource(Client, ParentResourceData.DeserializeParentResourceData(e)), _parentResourceClientDiagnostics, Pipeline, "ParentResourceCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ParentResource(Client, ParentResourceData.DeserializeParentResourceData(e)), _parentResourceClientDiagnostics, Pipeline, "ParentResourceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -246,7 +247,7 @@ namespace MgmtSingletonResource
         public virtual Pageable<ParentResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _parentResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ParentResource(Client, ParentResourceData.DeserializeParentResourceData(e)), _parentResourceClientDiagnostics, Pipeline, "ParentResourceCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new ParentResource(Client, ParentResourceData.DeserializeParentResourceData(e)), _parentResourceClientDiagnostics, Pipeline, "ParentResourceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

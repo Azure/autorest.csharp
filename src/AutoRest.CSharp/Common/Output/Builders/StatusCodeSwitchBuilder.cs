@@ -21,6 +21,7 @@ using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -74,10 +75,9 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            if (FindResourceDataType(operation, library) is {} resourceDataType && successInputResponses.Any())
+            if (FindResourceDataType(operation, library) is {} resourceDataType)
             {
-                var responseBodyTypeName = successInputResponses[0].Type?.Name;
-                if (responseBodyTypeName == resourceDataType.Name && operation.Responses.Any(r => r.BodyType is {} type && resourceDataType.EqualsIgnoreNullable(typeFactory.CreateType(type))))
+                if (successInputResponses.Select(r => r.Type).WhereNotNull().Any(type => resourceDataType.EqualsIgnoreNullable(typeFactory.CreateType(type))))
                 {
                     successInputResponses.Add((null, successInputResponses[0].BodyMediaType, new[]{404}));
                 }
