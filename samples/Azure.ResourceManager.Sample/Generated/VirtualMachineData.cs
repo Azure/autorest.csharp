@@ -140,7 +140,7 @@ namespace Azure.ResourceManager.Sample
             HardwareProfile = hardwareProfile;
             StorageProfile = storageProfile;
             AdditionalCapabilities = additionalCapabilities;
-            OsProfile = osProfile;
+            OSProfile = osProfile;
             NetworkProfile = networkProfile;
             SecurityProfile = securityProfile;
             DiagnosticsProfile = diagnosticsProfile;
@@ -228,7 +228,7 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned.
         /// Serialized Name: VirtualMachine.properties.osProfile
         /// </summary>
-        public OSProfile OsProfile { get; set; }
+        public OSProfile OSProfile { get; set; }
         /// <summary>
         /// Specifies the network interfaces of the virtual machine.
         /// Serialized Name: VirtualMachine.properties.networkProfile
