@@ -16,7 +16,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     /// Please note <see cref="Dinosaur"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="TRex"/>.
     /// </summary>
-    [AbstractTypeDeserializer(typeof(UnknownDinosaur))]
+    [DeserializationProxy(typeof(UnknownDinosaur))]
     public abstract partial class Dinosaur
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>

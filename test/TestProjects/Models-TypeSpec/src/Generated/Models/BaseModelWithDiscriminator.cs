@@ -16,7 +16,7 @@ namespace ModelsTypeSpec.Models
     /// Please note <see cref="BaseModelWithDiscriminator"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="DerivedModelWithDiscriminatorA"/> and <see cref="DerivedModelWithDiscriminatorB"/>.
     /// </summary>
-    [AbstractTypeDeserializer(typeof(UnknownBaseModelWithDiscriminator))]
+    [DeserializationProxy(typeof(UnknownBaseModelWithDiscriminator))]
     public abstract partial class BaseModelWithDiscriminator
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>

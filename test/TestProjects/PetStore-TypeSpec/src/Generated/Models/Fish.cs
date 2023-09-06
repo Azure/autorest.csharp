@@ -16,7 +16,7 @@ namespace PetStore.Models
     /// Please note <see cref="Fish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="Shark"/> and <see cref="Tuna"/>.
     /// </summary>
-    [AbstractTypeDeserializer(typeof(UnknownFish))]
+    [DeserializationProxy(typeof(UnknownFish))]
     public abstract partial class Fish
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>

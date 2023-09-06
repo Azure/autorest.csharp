@@ -12,7 +12,7 @@ using Azure.Core.Serialization;
 namespace ModelsTypeSpec.Models
 {
     /// <summary> Single base model without any child model. </summary>
-    [AbstractTypeDeserializer(typeof(UnknownSingleBase))]
+    [DeserializationProxy(typeof(UnknownSingleBase))]
     public abstract partial class SingleBase
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>

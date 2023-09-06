@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
     /// Please note <see cref="FirewallPolicyRuleCollection"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="FirewallPolicyFilterRuleCollection"/> and <see cref="FirewallPolicyNatRuleCollection"/>.
     /// </summary>
-    [AbstractTypeDeserializer(typeof(UnknownFirewallPolicyRuleCollection))]
+    [DeserializationProxy(typeof(UnknownFirewallPolicyRuleCollection))]
     public abstract partial class FirewallPolicyRuleCollection
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>

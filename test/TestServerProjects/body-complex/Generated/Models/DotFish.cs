@@ -16,7 +16,7 @@ namespace body_complex.Models
     /// Please note <see cref="DotFish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="DotSalmon"/>.
     /// </summary>
-    [AbstractTypeDeserializer(typeof(UnknownDotFish))]
+    [DeserializationProxy(typeof(UnknownDotFish))]
     public abstract partial class DotFish
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
