@@ -352,18 +352,18 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
-        public virtual async Task<NullableResponse<VirtualMachineScaleSetVMResource>> GetIfExistsAsync(string instanceId, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<NullableResponse<VirtualMachineScaleSetVmResource>> GetIfExistsAsync(string instanceId, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
 
-            using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetIfExists");
+            using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVmsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetVMRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineScaleSetVmVirtualMachineScaleSetVmsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return new NoValueResponse<VirtualMachineScaleSetVMResource>(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineScaleSetVMResource(Client, response.Value), response.GetRawResponse());
+                    return new NoValueResponse<VirtualMachineScaleSetVmResource>(response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSetVmResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -390,18 +390,18 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
-        public virtual NullableResponse<VirtualMachineScaleSetVMResource> GetIfExists(string instanceId, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
+        public virtual NullableResponse<VirtualMachineScaleSetVmResource> GetIfExists(string instanceId, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(instanceId, nameof(instanceId));
 
-            using var scope = _virtualMachineScaleSetVMClientDiagnostics.CreateScope("VirtualMachineScaleSetVMCollection.GetIfExists");
+            using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVmsClientDiagnostics.CreateScope("VirtualMachineScaleSetVmCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetVMRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, expand, cancellationToken: cancellationToken);
+                var response = _virtualMachineScaleSetVmVirtualMachineScaleSetVmsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, instanceId, expand, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return new NoValueResponse<VirtualMachineScaleSetVMResource>(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineScaleSetVMResource(Client, response.Value), response.GetRawResponse());
+                    return new NoValueResponse<VirtualMachineScaleSetVmResource>(response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineScaleSetVmResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -410,7 +410,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        IEnumerator<VirtualMachineScaleSetVMResource> IEnumerable<VirtualMachineScaleSetVMResource>.GetEnumerator()
+        IEnumerator<VirtualMachineScaleSetVmResource> IEnumerable<VirtualMachineScaleSetVmResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
