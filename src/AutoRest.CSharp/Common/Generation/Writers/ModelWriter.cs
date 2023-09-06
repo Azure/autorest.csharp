@@ -339,7 +339,7 @@ Examples:
             }
             if (schema.Declaration.IsAbstract && schema.Discriminator?.DefaultObjectType is not null)
             {
-                writer.Line($"[{typeof(AbstractTypeDeserializerAttribute)}(typeof({schema.Discriminator?.DefaultObjectType.Type}))]");
+                writer.Line($"[{typeof(DeserializationProxyAttribute)}(typeof({schema.Discriminator?.DefaultObjectType.Type}))]");
             }
         }
 
