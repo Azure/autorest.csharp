@@ -3,8 +3,14 @@
 
 namespace Authentication.OAuth2
 {
+    /// <summary>
+    /// OAuth2 client.
+    /// </summary>
     public partial class OAuth2Client
     {
+        /// <summary>
+        /// The authorization scopes.
+        /// </summary>
         public static string[] TokenScopes => AuthorizationScopes;
     }
 }

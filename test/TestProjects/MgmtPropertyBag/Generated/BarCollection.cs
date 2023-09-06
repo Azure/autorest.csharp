@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -235,7 +236,7 @@ namespace MgmtPropertyBag
             options ??= new BarCollectionGetAllOptions();
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => _barRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, options.IfMatch, options.Filter, options.Top, options.IfNoneMatch, options.Maxpagesize, options.Skip);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new BarResource(Client, BarData.DeserializeBarData(e)), _barClientDiagnostics, Pipeline, "BarCollection.GetAll", "", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new BarResource(Client, BarData.DeserializeBarData(e)), _barClientDiagnostics, Pipeline, "BarCollection.GetAll", "", null, cancellationToken);
         }
 
         /// <summary>
@@ -259,7 +260,7 @@ namespace MgmtPropertyBag
             options ??= new BarCollectionGetAllOptions();
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => _barRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, options.IfMatch, options.Filter, options.Top, options.IfNoneMatch, options.Maxpagesize, options.Skip);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new BarResource(Client, BarData.DeserializeBarData(e)), _barClientDiagnostics, Pipeline, "BarCollection.GetAll", "", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new BarResource(Client, BarData.DeserializeBarData(e)), _barClientDiagnostics, Pipeline, "BarCollection.GetAll", "", null, cancellationToken);
         }
 
         /// <summary>

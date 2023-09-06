@@ -56,9 +56,9 @@ namespace Azure.ResourceManager.Sample.Models
         /// The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host.
         /// Serialized Name: DedicatedHostAvailableCapacity.allocatableVMs
         /// </summary>
-        public IReadOnlyList<DedicatedHostAllocatableVM> AvailableCapacityAllocatableVMs
+        public IReadOnlyList<DedicatedHostAllocatableVm> AvailableCapacityAllocatableVms
         {
-            get => AvailableCapacity?.AllocatableVMs;
+            get => AvailableCapacity?.AllocatableVms;
         }
 
         /// <summary>

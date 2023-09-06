@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -230,7 +231,7 @@ namespace MgmtOperations
         public virtual AsyncPageable<UnpatchableResource> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _unpatchableResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new UnpatchableResource(Client, UnpatchableResourceData.DeserializeUnpatchableResourceData(e)), _unpatchableResourceClientDiagnostics, Pipeline, "UnpatchableResourceCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new UnpatchableResource(Client, UnpatchableResourceData.DeserializeUnpatchableResourceData(e)), _unpatchableResourceClientDiagnostics, Pipeline, "UnpatchableResourceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -252,7 +253,7 @@ namespace MgmtOperations
         public virtual Pageable<UnpatchableResource> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _unpatchableResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new UnpatchableResource(Client, UnpatchableResourceData.DeserializeUnpatchableResourceData(e)), _unpatchableResourceClientDiagnostics, Pipeline, "UnpatchableResourceCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new UnpatchableResource(Client, UnpatchableResourceData.DeserializeUnpatchableResourceData(e)), _unpatchableResourceClientDiagnostics, Pipeline, "UnpatchableResourceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

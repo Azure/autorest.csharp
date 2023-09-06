@@ -195,7 +195,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the unique id of the dedicated physical machine on which the dedicated host resides.
         /// Serialized Name: DedicatedHostInstanceView.assetId
         /// </param>
-        /// <param name="availableCapacityAllocatableVMs">
+        /// <param name="availableCapacityAllocatableVms">
         /// Unutilized capacity of the dedicated host.
         /// Serialized Name: DedicatedHostInstanceView.availableCapacity
         /// </param>
@@ -208,12 +208,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: DedicatedHostInstanceViewWithName.name
         /// </param>
         /// <returns> A new <see cref="Models.DedicatedHostInstanceViewWithName"/> instance for mocking. </returns>
-        public static DedicatedHostInstanceViewWithName DedicatedHostInstanceViewWithName(string assetId = null, IEnumerable<DedicatedHostAllocatableVM> availableCapacityAllocatableVMs = null, IEnumerable<InstanceViewStatus> statuses = null, string name = null)
+        public static DedicatedHostInstanceViewWithName DedicatedHostInstanceViewWithName(string assetId = null, IEnumerable<DedicatedHostAllocatableVm> availableCapacityAllocatableVms = null, IEnumerable<InstanceViewStatus> statuses = null, string name = null)
         {
-            availableCapacityAllocatableVMs ??= new List<DedicatedHostAllocatableVM>();
+            availableCapacityAllocatableVms ??= new List<DedicatedHostAllocatableVm>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new DedicatedHostInstanceViewWithName(assetId, availableCapacityAllocatableVMs != null ? new DedicatedHostAvailableCapacity(availableCapacityAllocatableVMs?.ToList()) : null, statuses?.ToList(), name);
+            return new DedicatedHostInstanceViewWithName(assetId, availableCapacityAllocatableVms != null ? new DedicatedHostAvailableCapacity(availableCapacityAllocatableVms?.ToList()) : null, statuses?.ToList(), name);
         }
 
         /// <summary> Initializes a new instance of DedicatedHostInstanceView. </summary>
@@ -221,7 +221,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the unique id of the dedicated physical machine on which the dedicated host resides.
         /// Serialized Name: DedicatedHostInstanceView.assetId
         /// </param>
-        /// <param name="availableCapacityAllocatableVMs">
+        /// <param name="availableCapacityAllocatableVms">
         /// Unutilized capacity of the dedicated host.
         /// Serialized Name: DedicatedHostInstanceView.availableCapacity
         /// </param>
@@ -230,15 +230,15 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: DedicatedHostInstanceView.statuses
         /// </param>
         /// <returns> A new <see cref="Models.DedicatedHostInstanceView"/> instance for mocking. </returns>
-        public static DedicatedHostInstanceView DedicatedHostInstanceView(string assetId = null, IEnumerable<DedicatedHostAllocatableVM> availableCapacityAllocatableVMs = null, IEnumerable<InstanceViewStatus> statuses = null)
+        public static DedicatedHostInstanceView DedicatedHostInstanceView(string assetId = null, IEnumerable<DedicatedHostAllocatableVm> availableCapacityAllocatableVms = null, IEnumerable<InstanceViewStatus> statuses = null)
         {
-            availableCapacityAllocatableVMs ??= new List<DedicatedHostAllocatableVM>();
+            availableCapacityAllocatableVms ??= new List<DedicatedHostAllocatableVm>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new DedicatedHostInstanceView(assetId, availableCapacityAllocatableVMs != null ? new DedicatedHostAvailableCapacity(availableCapacityAllocatableVMs?.ToList()) : null, statuses?.ToList());
+            return new DedicatedHostInstanceView(assetId, availableCapacityAllocatableVms != null ? new DedicatedHostAvailableCapacity(availableCapacityAllocatableVms?.ToList()) : null, statuses?.ToList());
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostAllocatableVM. </summary>
+        /// <summary> Initializes a new instance of DedicatedHostAllocatableVm. </summary>
         /// <param name="vmSize">
         /// VM size in terms of which the unutilized capacity is represented.
         /// Serialized Name: DedicatedHostAllocatableVM.vmSize
@@ -247,10 +247,10 @@ namespace Azure.ResourceManager.Sample.Models
         /// Maximum number of VMs of size vmSize that can fit in the dedicated host's remaining capacity.
         /// Serialized Name: DedicatedHostAllocatableVM.count
         /// </param>
-        /// <returns> A new <see cref="Models.DedicatedHostAllocatableVM"/> instance for mocking. </returns>
-        public static DedicatedHostAllocatableVM DedicatedHostAllocatableVM(string vmSize = null, double? count = null)
+        /// <returns> A new <see cref="Models.DedicatedHostAllocatableVm"/> instance for mocking. </returns>
+        public static DedicatedHostAllocatableVm DedicatedHostAllocatableVm(string vmSize = null, double? count = null)
         {
-            return new DedicatedHostAllocatableVM(vmSize, count);
+            return new DedicatedHostAllocatableVm(vmSize, count);
         }
 
         /// <summary> Initializes a new instance of DedicatedHostData. </summary>
@@ -461,19 +461,19 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of SampleUsage. </summary>
         /// <param name="unit">
         /// An enum describing the unit of usage measurement.
-        /// Serialized Name: SampleUsage.unit
+        /// Serialized Name: Usage.unit
         /// </param>
         /// <param name="currentValue">
         /// The current usage of the resource.
-        /// Serialized Name: SampleUsage.currentValue
+        /// Serialized Name: Usage.currentValue
         /// </param>
         /// <param name="limit">
         /// The maximum permitted usage of the resource.
-        /// Serialized Name: SampleUsage.limit
+        /// Serialized Name: Usage.limit
         /// </param>
         /// <param name="name">
         /// The name of the type of usage.
-        /// Serialized Name: SampleUsage.name
+        /// Serialized Name: Usage.name
         /// </param>
         /// <returns> A new <see cref="Models.SampleUsage"/> instance for mocking. </returns>
         public static SampleUsage SampleUsage(UsageUnit unit = default, int currentValue = default, long limit = default, SampleUsageName name = null)
@@ -484,11 +484,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of SampleUsageName. </summary>
         /// <param name="value">
         /// The name of the resource.
-        /// Serialized Name: SampleUsageName.value
+        /// Serialized Name: UsageName.value
         /// </param>
         /// <param name="localizedValue">
         /// The localized name of the resource.
-        /// Serialized Name: SampleUsageName.localizedValue
+        /// Serialized Name: UsageName.localizedValue
         /// </param>
         /// <returns> A new <see cref="Models.SampleUsageName"/> instance for mocking. </returns>
         public static SampleUsageName SampleUsageName(string value = null, string localizedValue = null)
@@ -1272,7 +1272,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies whether the Virtual Machine Scale Set should be overprovisioned.
         /// Serialized Name: VirtualMachineScaleSet.properties.overprovision
         /// </param>
-        /// <param name="doNotRunExtensionsOnOverprovisionedVMs">
+        /// <param name="doNotRunExtensionsOnOverprovisionedVms">
         /// When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.
         /// Serialized Name: VirtualMachineScaleSet.properties.doNotRunExtensionsOnOverprovisionedVMs
         /// </param>
@@ -1309,13 +1309,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: VirtualMachineScaleSet.properties.scaleInPolicy
         /// </param>
         /// <returns> A new <see cref="Sample.VirtualMachineScaleSetData"/> instance for mocking. </returns>
-        public static VirtualMachineScaleSetData VirtualMachineScaleSetData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, SampleSku sku = null, SamplePlan plan = null, ManagedServiceIdentity identity = null, IEnumerable<string> zones = null, UpgradePolicy upgradePolicy = null, AutomaticRepairsPolicy automaticRepairsPolicy = null, VirtualMachineScaleSetVMProfile virtualMachineProfile = null, string provisioningState = null, bool? overprovision = null, bool? doNotRunExtensionsOnOverprovisionedVMs = null, string uniqueId = null, bool? singlePlacementGroup = null, bool? zoneBalance = null, int? platformFaultDomainCount = null, ResourceIdentifier proximityPlacementGroupId = null, ResourceIdentifier hostGroupId = null, bool? ultraSSDEnabled = null, IEnumerable<VirtualMachineScaleSetScaleInRule> scaleInRules = null)
+        public static VirtualMachineScaleSetData VirtualMachineScaleSetData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, SampleSku sku = null, SamplePlan plan = null, ManagedServiceIdentity identity = null, IEnumerable<string> zones = null, UpgradePolicy upgradePolicy = null, AutomaticRepairsPolicy automaticRepairsPolicy = null, VirtualMachineScaleSetVmProfile virtualMachineProfile = null, string provisioningState = null, bool? overprovision = null, bool? doNotRunExtensionsOnOverprovisionedVms = null, string uniqueId = null, bool? singlePlacementGroup = null, bool? zoneBalance = null, int? platformFaultDomainCount = null, ResourceIdentifier proximityPlacementGroupId = null, ResourceIdentifier hostGroupId = null, bool? ultraSSDEnabled = null, IEnumerable<VirtualMachineScaleSetScaleInRule> scaleInRules = null)
         {
             tags ??= new Dictionary<string, string>();
             zones ??= new List<string>();
             scaleInRules ??= new List<VirtualMachineScaleSetScaleInRule>();
 
-            return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, sku, plan, identity, zones?.ToList(), upgradePolicy, automaticRepairsPolicy, virtualMachineProfile, provisioningState, overprovision, doNotRunExtensionsOnOverprovisionedVMs, uniqueId, singlePlacementGroup, zoneBalance, platformFaultDomainCount, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled) : null, scaleInRules != null ? new ScaleInPolicy(scaleInRules?.ToList()) : null);
+            return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, sku, plan, identity, zones?.ToList(), upgradePolicy, automaticRepairsPolicy, virtualMachineProfile, provisioningState, overprovision, doNotRunExtensionsOnOverprovisionedVms, uniqueId, singlePlacementGroup, zoneBalance, platformFaultDomainCount, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled) : null, scaleInRules != null ? new ScaleInPolicy(scaleInRules?.ToList()) : null);
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionData. </summary>
@@ -1397,10 +1397,10 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: VirtualMachineScaleSetInstanceView.orchestrationServices
         /// </param>
         /// <returns> A new <see cref="Models.VirtualMachineScaleSetInstanceView"/> instance for mocking. </returns>
-        public static VirtualMachineScaleSetInstanceView VirtualMachineScaleSetInstanceView(IEnumerable<VirtualMachineStatusCodeCount> virtualMachineStatusesSummary = null, IEnumerable<VirtualMachineScaleSetVMExtensionsSummary> extensions = null, IEnumerable<InstanceViewStatus> statuses = null, IEnumerable<OrchestrationServiceSummary> orchestrationServices = null)
+        public static VirtualMachineScaleSetInstanceView VirtualMachineScaleSetInstanceView(IEnumerable<VirtualMachineStatusCodeCount> virtualMachineStatusesSummary = null, IEnumerable<VirtualMachineScaleSetVmExtensionsSummary> extensions = null, IEnumerable<InstanceViewStatus> statuses = null, IEnumerable<OrchestrationServiceSummary> orchestrationServices = null)
         {
             virtualMachineStatusesSummary ??= new List<VirtualMachineStatusCodeCount>();
-            extensions ??= new List<VirtualMachineScaleSetVMExtensionsSummary>();
+            extensions ??= new List<VirtualMachineScaleSetVmExtensionsSummary>();
             statuses ??= new List<InstanceViewStatus>();
             orchestrationServices ??= new List<OrchestrationServiceSummary>();
 
@@ -1422,7 +1422,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineStatusCodeCount(code, count);
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMExtensionsSummary. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmExtensionsSummary. </summary>
         /// <param name="name">
         /// The extension name.
         /// Serialized Name: VirtualMachineScaleSetVMExtensionsSummary.name
@@ -1431,12 +1431,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The extensions information.
         /// Serialized Name: VirtualMachineScaleSetVMExtensionsSummary.statusesSummary
         /// </param>
-        /// <returns> A new <see cref="Models.VirtualMachineScaleSetVMExtensionsSummary"/> instance for mocking. </returns>
-        public static VirtualMachineScaleSetVMExtensionsSummary VirtualMachineScaleSetVMExtensionsSummary(string name = null, IEnumerable<VirtualMachineStatusCodeCount> statusesSummary = null)
+        /// <returns> A new <see cref="Models.VirtualMachineScaleSetVmExtensionsSummary"/> instance for mocking. </returns>
+        public static VirtualMachineScaleSetVmExtensionsSummary VirtualMachineScaleSetVmExtensionsSummary(string name = null, IEnumerable<VirtualMachineStatusCodeCount> statusesSummary = null)
         {
             statusesSummary ??= new List<VirtualMachineStatusCodeCount>();
 
-            return new VirtualMachineScaleSetVMExtensionsSummary(name, statusesSummary?.ToList());
+            return new VirtualMachineScaleSetVmExtensionsSummary(name, statusesSummary?.ToList());
         }
 
         /// <summary> Initializes a new instance of OrchestrationServiceSummary. </summary>
@@ -1729,7 +1729,7 @@ namespace Azure.ResourceManager.Sample.Models
             return new RecoveryWalkResponse(walkPerformed, nextPlatformUpdateDomain);
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMData. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -1820,8 +1820,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the protection policy of the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.protectionPolicy
         /// </param>
-        /// <returns> A new <see cref="Sample.VirtualMachineScaleSetVMData"/> instance for mocking. </returns>
-        public static VirtualMachineScaleSetVMData VirtualMachineScaleSetVMData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string instanceId = null, SampleSku sku = null, SamplePlan plan = null, IEnumerable<VirtualMachineExtensionData> resources = null, IEnumerable<string> zones = null, bool? latestModelApplied = null, string vmId = null, VirtualMachineScaleSetVMInstanceView instanceView = null, VirtualMachineSizeType? hardwareVmSize = null, StorageProfile storageProfile = null, bool? ultraSSDEnabled = null, OSProfile osProfile = null, bool? encryptionAtHost = null, IEnumerable<NetworkInterfaceReference> networkInterfaces = null, IEnumerable<VirtualMachineScaleSetNetworkConfiguration> networkInterfaceConfigurations = null, BootDiagnostics bootDiagnostics = null, ResourceIdentifier availabilitySetId = null, string provisioningState = null, string licenseType = null, string modelDefinitionApplied = null, VirtualMachineScaleSetVMProtectionPolicy protectionPolicy = null)
+        /// <returns> A new <see cref="Sample.VirtualMachineScaleSetVmData"/> instance for mocking. </returns>
+        public static VirtualMachineScaleSetVmData VirtualMachineScaleSetVmData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string instanceId = null, SampleSku sku = null, SamplePlan plan = null, IEnumerable<VirtualMachineExtensionData> resources = null, IEnumerable<string> zones = null, bool? latestModelApplied = null, string vmId = null, VirtualMachineScaleSetVmInstanceView instanceView = null, VirtualMachineSizeType? hardwareVmSize = null, StorageProfile storageProfile = null, bool? ultraSSDEnabled = null, OSProfile osProfile = null, bool? encryptionAtHost = null, IEnumerable<NetworkInterfaceReference> networkInterfaces = null, IEnumerable<VirtualMachineScaleSetNetworkConfiguration> networkInterfaceConfigurations = null, BootDiagnostics bootDiagnostics = null, ResourceIdentifier availabilitySetId = null, string provisioningState = null, string licenseType = null, string modelDefinitionApplied = null, VirtualMachineScaleSetVmProtectionPolicy protectionPolicy = null)
         {
             tags ??= new Dictionary<string, string>();
             resources ??= new List<VirtualMachineExtensionData>();
@@ -1829,10 +1829,10 @@ namespace Azure.ResourceManager.Sample.Models
             networkInterfaces ??= new List<NetworkInterfaceReference>();
             networkInterfaceConfigurations ??= new List<VirtualMachineScaleSetNetworkConfiguration>();
 
-            return new VirtualMachineScaleSetVMData(id, name, resourceType, systemData, tags, location, instanceId, sku, plan, resources?.ToList(), zones?.ToList(), latestModelApplied, vmId, instanceView, hardwareVmSize != null ? new HardwareProfile(hardwareVmSize) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled) : null, osProfile, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost) : null, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList()) : null, networkInterfaceConfigurations != null ? new VirtualMachineScaleSetVMNetworkProfileConfiguration(networkInterfaceConfigurations?.ToList()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, provisioningState, licenseType, modelDefinitionApplied, protectionPolicy);
+            return new VirtualMachineScaleSetVmData(id, name, resourceType, systemData, tags, location, instanceId, sku, plan, resources?.ToList(), zones?.ToList(), latestModelApplied, vmId, instanceView, hardwareVmSize != null ? new HardwareProfile(hardwareVmSize) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled) : null, osProfile, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost) : null, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList()) : null, networkInterfaceConfigurations != null ? new VirtualMachineScaleSetVmNetworkProfileConfiguration(networkInterfaceConfigurations?.ToList()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, provisioningState, licenseType, modelDefinitionApplied, protectionPolicy);
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMInstanceView. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmInstanceView. </summary>
         /// <param name="platformUpdateDomain">
         /// The Update Domain count.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceView.platformUpdateDomain
@@ -1881,14 +1881,14 @@ namespace Azure.ResourceManager.Sample.Models
         /// The placement group in which the VM is running. If the VM is deallocated it will not have a placementGroupId.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceView.placementGroupId
         /// </param>
-        /// <returns> A new <see cref="Models.VirtualMachineScaleSetVMInstanceView"/> instance for mocking. </returns>
-        public static VirtualMachineScaleSetVMInstanceView VirtualMachineScaleSetVMInstanceView(int? platformUpdateDomain = null, int? platformFaultDomain = null, string rdpThumbPrint = null, VirtualMachineAgentInstanceView vmAgent = null, MaintenanceRedeployStatus maintenanceRedeployStatus = null, IEnumerable<DiskInstanceView> disks = null, IEnumerable<VirtualMachineExtensionInstanceView> extensions = null, InstanceViewStatus vmHealthStatus = null, BootDiagnosticsInstanceView bootDiagnostics = null, IEnumerable<InstanceViewStatus> statuses = null, string assignedHost = null, string placementGroupId = null)
+        /// <returns> A new <see cref="Models.VirtualMachineScaleSetVmInstanceView"/> instance for mocking. </returns>
+        public static VirtualMachineScaleSetVmInstanceView VirtualMachineScaleSetVmInstanceView(int? platformUpdateDomain = null, int? platformFaultDomain = null, string rdpThumbPrint = null, VirtualMachineAgentInstanceView vmAgent = null, MaintenanceRedeployStatus maintenanceRedeployStatus = null, IEnumerable<DiskInstanceView> disks = null, IEnumerable<VirtualMachineExtensionInstanceView> extensions = null, InstanceViewStatus vmHealthStatus = null, BootDiagnosticsInstanceView bootDiagnostics = null, IEnumerable<InstanceViewStatus> statuses = null, string assignedHost = null, string placementGroupId = null)
         {
             disks ??= new List<DiskInstanceView>();
             extensions ??= new List<VirtualMachineExtensionInstanceView>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new VirtualMachineScaleSetVMInstanceView(platformUpdateDomain, platformFaultDomain, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), extensions?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus) : null, bootDiagnostics, statuses?.ToList(), assignedHost, placementGroupId);
+            return new VirtualMachineScaleSetVmInstanceView(platformUpdateDomain, platformFaultDomain, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), extensions?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus) : null, bootDiagnostics, statuses?.ToList(), assignedHost, placementGroupId);
         }
 
         /// <summary> Initializes a new instance of LogAnalytics. </summary>

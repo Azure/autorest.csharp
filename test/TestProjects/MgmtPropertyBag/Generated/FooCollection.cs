@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -235,7 +236,7 @@ namespace MgmtPropertyBag
             options ??= new FooCollectionGetAllOptions();
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fooRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, options.Filter, options.Top, options.Orderby, options.IfMatch, options.Maxpagesize, options.Skip);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), _fooClientDiagnostics, Pipeline, "FooCollection.GetAll", "", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), _fooClientDiagnostics, Pipeline, "FooCollection.GetAll", "", null, cancellationToken);
         }
 
         /// <summary>
@@ -259,7 +260,7 @@ namespace MgmtPropertyBag
             options ??= new FooCollectionGetAllOptions();
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fooRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, options.Filter, options.Top, options.Orderby, options.IfMatch, options.Maxpagesize, options.Skip);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), _fooClientDiagnostics, Pipeline, "FooCollection.GetAll", "", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), _fooClientDiagnostics, Pipeline, "FooCollection.GetAll", "", null, cancellationToken);
         }
 
         /// <summary>

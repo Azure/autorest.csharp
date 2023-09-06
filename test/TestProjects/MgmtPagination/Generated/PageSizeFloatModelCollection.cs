@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -224,7 +225,7 @@ namespace MgmtPagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeFloatModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeFloatModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeFloatModelResource(Client, PageSizeFloatModelData.DeserializePageSizeFloatModelData(e)), _pageSizeFloatModelClientDiagnostics, Pipeline, "PageSizeFloatModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeFloatModelResource(Client, PageSizeFloatModelData.DeserializePageSizeFloatModelData(e)), _pageSizeFloatModelClientDiagnostics, Pipeline, "PageSizeFloatModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -246,7 +247,7 @@ namespace MgmtPagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeFloatModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeFloatModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeFloatModelResource(Client, PageSizeFloatModelData.DeserializePageSizeFloatModelData(e)), _pageSizeFloatModelClientDiagnostics, Pipeline, "PageSizeFloatModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeFloatModelResource(Client, PageSizeFloatModelData.DeserializePageSizeFloatModelData(e)), _pageSizeFloatModelClientDiagnostics, Pipeline, "PageSizeFloatModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
