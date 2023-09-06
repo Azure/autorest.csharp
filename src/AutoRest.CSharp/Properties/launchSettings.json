@@ -332,6 +332,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MediaTypes-TypeSpec\\src\\Generated -n"
     },
+    "MgmtAcronymMapping": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtAcronymMapping\\Generated"
+    },
     "MgmtCollectionParent": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtCollectionParent\\Generated"
@@ -435,10 +439,6 @@
     "MgmtReferenceTypes": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtReferenceTypes\\Generated"
-    },
-    "MgmtRenameRules": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtRenameRules\\Generated"
     },
     "MgmtResourceName": {
       "commandName": "Project",

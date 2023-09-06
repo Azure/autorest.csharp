@@ -42,7 +42,7 @@
     }
    ],
    "Namespace": "Pagination",
-   "Description": "",
+   "Description": "The interval",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Input"

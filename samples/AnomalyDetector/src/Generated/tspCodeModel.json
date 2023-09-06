@@ -74,7 +74,7 @@
     }
    ],
    "Namespace": "AnomalyDetector.Univariate",
-   "Description": "",
+   "Description": "the time granularity of the data points.",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Input"
@@ -116,7 +116,7 @@
     }
    ],
    "Namespace": "AnomalyDetector.Univariate",
-   "Description": "",
+   "Description": "The impute mode.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Input"
@@ -148,7 +148,7 @@
     }
    ],
    "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "",
+   "Description": "The batch detection status.",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Output"
@@ -194,7 +194,7 @@
     }
    ],
    "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "",
+   "Description": "The alignment mode.",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -263,7 +263,7 @@
     }
    ],
    "Namespace": "AnomalyDetector.Multivariate",
-   "Description": "",
+   "Description": "the model status.",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
