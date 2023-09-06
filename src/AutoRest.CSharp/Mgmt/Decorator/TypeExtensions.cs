@@ -40,6 +40,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return true;
         }
 
+        public static bool EqualsBySystemType(this CSharpType? left, CSharpType? right)
+        {
+            if (ReferenceEquals(left, right))
+            {
+                return true;
+            }
+
+            if (left is null || right is null)
+            {
+                return false;
+            }
+            return left.GetType().Equals(right.GetType());
+        }
+
         public static CSharpType WrapPageable(this CSharpType type, bool isAsync)
         {
             return isAsync ? new CSharpType(typeof(AsyncPageable<>), type) : new CSharpType(typeof(Pageable<>), type);

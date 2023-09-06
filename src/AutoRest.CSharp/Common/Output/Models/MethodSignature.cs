@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using Microsoft.CodeAnalysis;
@@ -121,7 +122,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             var result = x.Name == x.Name
-                && CompareType(x.ReturnType, y.ReturnType)
+                && x.ReturnType.EqualsBySystemType(y.ReturnType)
                 && x.Parameters.SequenceEqual(y.Parameters, new ParameterComparer());
             return result;
         }
@@ -129,20 +130,6 @@ namespace AutoRest.CSharp.Output.Models
         public int GetHashCode([DisallowNull] MethodSignature obj)
         {
             return HashCode.Combine(obj.Name, obj.ReturnType);
-        }
-
-        private bool CompareType(CSharpType? x, CSharpType? y)
-        {
-            if (ReferenceEquals(x, y))
-            {
-                return true;
-            }
-
-            if (x is null || y is null)
-            {
-                return false;
-            }
-            return x.GetType().Equals(y.GetType());
         }
     }
 }
