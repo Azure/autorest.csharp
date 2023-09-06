@@ -522,7 +522,6 @@ export function getInputType(
         const name = getModelName(context, m);
         let model = models.get(name);
         if (!model) {
-            const baseModel = getInputModelBaseType(m.baseModel);
             const properties: InputModelProperty[] = [];
 
             const discriminator = getDiscriminator(program, m);
@@ -534,10 +533,9 @@ export function getInputType(
                 Description: getDoc(program, m),
                 IsNullable: false,
                 DiscriminatorPropertyName: discriminator?.propertyName,
-                DiscriminatorValue: getDiscriminatorValue(m, baseModel),
-                BaseModel: baseModel,
                 Usage: Usage.None,
-                Properties: properties // DerivedModels should be the last assigned to model, if no derived models, properties should be the last
+                DiscriminatorValue: undefined,
+                Properties: properties, // DerivedModels should be the last assigned to model, if no derived models, properties should be the last
             } as InputModelType;
 
             // Non-Finished model will not be generated.
@@ -545,6 +543,12 @@ export function getInputType(
                 models.set(name, model);
             }
 
+            /** navigate the base type later after the model is added to the map, so that when set the derived model of the base model, it will re-use the existing model in the map. 
+             * This is to resolve duplicate model issue in the emitted json.
+            **/
+            const baseModel = getInputModelBaseType(m.baseModel);
+            model.BaseModel = baseModel;
+            model.DiscriminatorValue = getDiscriminatorValue(m, baseModel);
             // Resolve properties after model is added to the map to resolve possible circular dependencies
             addModelProperties(model, m.properties, properties);
 
