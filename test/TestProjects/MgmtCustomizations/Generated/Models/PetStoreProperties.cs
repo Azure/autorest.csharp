@@ -13,6 +13,7 @@ namespace MgmtCustomizations.Models
     /// <summary> The properties. </summary>
     public partial class PetStoreProperties
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="PetStoreProperties"/>. </summary>

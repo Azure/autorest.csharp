@@ -13,6 +13,7 @@ namespace xms_error_responses.Models
     /// <summary> The BaseError. </summary>
     internal partial class BaseError
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="BaseError"/>. </summary>

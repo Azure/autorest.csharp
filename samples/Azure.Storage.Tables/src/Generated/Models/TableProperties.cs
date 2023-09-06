@@ -13,6 +13,7 @@ namespace Azure.Storage.Tables.Models
     /// <summary> The properties for creating a table. </summary>
     public partial class TableProperties
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="TableProperties"/>. </summary>

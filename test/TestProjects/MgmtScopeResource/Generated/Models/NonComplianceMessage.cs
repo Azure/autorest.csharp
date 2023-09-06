@@ -14,6 +14,7 @@ namespace MgmtScopeResource.Models
     /// <summary> A message that describes why a resource is non-compliant with the policy. This is shown in 'deny' error messages and on resource's non-compliant compliance results. </summary>
     public partial class NonComplianceMessage
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="NonComplianceMessage"/>. </summary>

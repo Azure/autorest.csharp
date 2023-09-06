@@ -13,6 +13,7 @@ namespace NameConflicts.Models
     /// <summary> The Class. </summary>
     public partial class Class
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="Class"/>. </summary>

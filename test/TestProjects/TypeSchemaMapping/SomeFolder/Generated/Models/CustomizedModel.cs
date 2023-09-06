@@ -14,6 +14,7 @@ namespace CustomNamespace
     /// <summary> The Model. </summary>
     internal partial class CustomizedModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="CustomizedModel"/>. </summary>

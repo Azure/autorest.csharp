@@ -15,6 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> Response schema. Contains list of blobs returned, and if paging is requested or required, a URL to next page of containers. </summary>
     internal partial class ListContainerItems
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ListContainerItems"/>. </summary>

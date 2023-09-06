@@ -14,27 +14,27 @@ using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample
 {
-    internal class VirtualMachineScaleSetVmOperationSource : IOperationSource<VirtualMachineScaleSetVmResource>
+    internal class VirtualMachineScaleSetVMOperationSource : IOperationSource<VirtualMachineScaleSetVMResource>
     {
         private readonly ArmClient _client;
 
-        internal VirtualMachineScaleSetVmOperationSource(ArmClient client)
+        internal VirtualMachineScaleSetVMOperationSource(ArmClient client)
         {
             _client = client;
         }
 
-        VirtualMachineScaleSetVmResource IOperationSource<VirtualMachineScaleSetVmResource>.CreateResult(Response response, CancellationToken cancellationToken)
+        VirtualMachineScaleSetVMResource IOperationSource<VirtualMachineScaleSetVMResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            var data = VirtualMachineScaleSetVmData.DeserializeVirtualMachineScaleSetVmData(document.RootElement);
-            return new VirtualMachineScaleSetVmResource(_client, data);
+            var data = VirtualMachineScaleSetVMData.DeserializeVirtualMachineScaleSetVMData(document.RootElement);
+            return new VirtualMachineScaleSetVMResource(_client, data);
         }
 
-        async ValueTask<VirtualMachineScaleSetVmResource> IOperationSource<VirtualMachineScaleSetVmResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<VirtualMachineScaleSetVMResource> IOperationSource<VirtualMachineScaleSetVMResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = VirtualMachineScaleSetVmData.DeserializeVirtualMachineScaleSetVmData(document.RootElement);
-            return new VirtualMachineScaleSetVmResource(_client, data);
+            var data = VirtualMachineScaleSetVMData.DeserializeVirtualMachineScaleSetVMData(document.RootElement);
+            return new VirtualMachineScaleSetVMResource(_client, data);
         }
     }
 }

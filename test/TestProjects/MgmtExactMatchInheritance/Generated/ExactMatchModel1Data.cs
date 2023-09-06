@@ -18,6 +18,7 @@ namespace MgmtExactMatchInheritance
     /// <summary> A class representing the ExactMatchModel1 data model. </summary>
     public partial class ExactMatchModel1Data : ResourceData
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ExactMatchModel1Data"/>. </summary>

@@ -14,6 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> Filters limit replication to a subset of blobs within the storage account. A logical OR is performed on values in the filter. If multiple filters are defined, a logical AND is performed on all filters. </summary>
     public partial class ObjectReplicationPolicyFilter
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ObjectReplicationPolicyFilter"/>. </summary>

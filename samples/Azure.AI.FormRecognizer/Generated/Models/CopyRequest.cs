@@ -14,6 +14,7 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Request parameter to copy an existing custom model from the source resource to a target resource referenced by the resource ID. </summary>
     public partial class CopyRequest
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="CopyRequest"/>. </summary>

@@ -14,6 +14,7 @@ namespace ModelWithConverterUsage.Models
     /// <summary> The ModelStruct. </summary>
     public readonly partial struct ModelStruct
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private readonly Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelStruct"/>. </summary>

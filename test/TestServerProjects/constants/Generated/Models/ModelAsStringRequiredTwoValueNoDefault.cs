@@ -13,6 +13,7 @@ namespace constants.Models
     /// <summary> The ModelAsStringRequiredTwoValueNoDefault. </summary>
     internal partial class ModelAsStringRequiredTwoValueNoDefault
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelAsStringRequiredTwoValueNoDefault"/>. </summary>

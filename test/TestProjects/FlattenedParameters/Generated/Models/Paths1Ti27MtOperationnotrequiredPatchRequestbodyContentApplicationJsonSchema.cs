@@ -13,6 +13,7 @@ namespace FlattenedParameters.Models
     /// <summary> The Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema. </summary>
     internal partial class Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema"/>. </summary>

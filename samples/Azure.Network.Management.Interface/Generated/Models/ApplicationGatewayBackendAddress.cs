@@ -13,6 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Backend address of an application gateway. </summary>
     public partial class ApplicationGatewayBackendAddress
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ApplicationGatewayBackendAddress"/>. </summary>

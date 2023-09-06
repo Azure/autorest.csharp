@@ -15,6 +15,7 @@ namespace MgmtPropertyChooser.Models
     /// <summary> Identity for the virtual machine. </summary>
     public partial class IdentityWithRenamedProperty
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="IdentityWithRenamedProperty"/>. </summary>

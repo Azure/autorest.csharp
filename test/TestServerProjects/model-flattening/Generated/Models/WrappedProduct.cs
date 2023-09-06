@@ -13,6 +13,7 @@ namespace model_flattening.Models
     /// <summary> The wrapped produc. </summary>
     public partial class WrappedProduct
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="WrappedProduct"/>. </summary>

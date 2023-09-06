@@ -14,6 +14,7 @@ namespace MgmtParamOrdering.Models
     /// <summary> Specifies a list of virtual machine instance IDs from the VM scale set. </summary>
     public partial class VirtualMachineScaleSetVMInstanceIDs
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMInstanceIDs"/>. </summary>

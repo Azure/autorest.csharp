@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> The key vault properties for the encryption scope. This is a required field if encryption scope 'source' attribute is set to 'Microsoft.KeyVault'. </summary>
     public partial class EncryptionScopeKeyVaultProperties
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="EncryptionScopeKeyVaultProperties"/>. </summary>

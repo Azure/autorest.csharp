@@ -13,6 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> SKU of a load balancer. </summary>
     public partial class LoadBalancerSku
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="LoadBalancerSku"/>. </summary>

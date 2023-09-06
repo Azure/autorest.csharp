@@ -16,6 +16,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineSize
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineSize"/>. </summary>
@@ -53,7 +54,7 @@ namespace Azure.ResourceManager.Sample.Models
         {
             Name = name;
             NumberOfCores = numberOfCores;
-            OSDiskSizeInMB = osDiskSizeInMB;
+            OsDiskSizeInMB = osDiskSizeInMB;
             ResourceDiskSizeInMB = resourceDiskSizeInMB;
             MemoryInMB = memoryInMB;
             MaxDataDiskCount = maxDataDiskCount;
@@ -74,7 +75,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The OS disk size, in MB, allowed by the virtual machine size.
         /// Serialized Name: VirtualMachineSize.osDiskSizeInMB
         /// </summary>
-        public int? OSDiskSizeInMB { get; }
+        public int? OsDiskSizeInMB { get; }
         /// <summary>
         /// The resource disk size, in MB, allowed by the virtual machine size.
         /// Serialized Name: VirtualMachineSize.resourceDiskSizeInMB

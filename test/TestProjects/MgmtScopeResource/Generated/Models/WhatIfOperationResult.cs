@@ -14,6 +14,7 @@ namespace MgmtScopeResource.Models
     /// <summary> Result of the What-If operation. Contains a list of predicted changes and a URL link to get to the next set of results. </summary>
     public partial class WhatIfOperationResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="WhatIfOperationResult"/>. </summary>

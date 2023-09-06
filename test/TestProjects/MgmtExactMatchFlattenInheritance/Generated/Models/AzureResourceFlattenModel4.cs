@@ -13,6 +13,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
     /// <summary> This model is x-ms-azure-resource, has flatten properties, and WITHOUT enough reference type properties. </summary>
     public partial class AzureResourceFlattenModel4
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel4"/>. </summary>

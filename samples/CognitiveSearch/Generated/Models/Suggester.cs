@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
     /// <summary> Defines how the Suggest API should apply to a group of fields in the index. </summary>
     public partial class Suggester
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="Suggester"/>. </summary>

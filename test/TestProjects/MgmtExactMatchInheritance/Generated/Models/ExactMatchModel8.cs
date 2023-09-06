@@ -14,6 +14,7 @@ namespace MgmtExactMatchInheritance.Models
     /// <summary> The ExactMatchModel8. </summary>
     public partial class ExactMatchModel8
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ExactMatchModel8"/>. </summary>

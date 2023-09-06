@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
     /// <summary> Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date. </summary>
     public partial class GetIndexStatisticsResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="GetIndexStatisticsResult"/>. </summary>

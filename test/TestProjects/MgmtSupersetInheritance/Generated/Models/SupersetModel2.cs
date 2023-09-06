@@ -13,6 +13,7 @@ namespace MgmtSupersetInheritance.Models
     /// <summary> This model does not have id property, it's Non-Resource. </summary>
     public partial class SupersetModel2
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="SupersetModel2"/>. </summary>

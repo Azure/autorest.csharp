@@ -15,6 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The LinkedEntity. </summary>
     public partial class LinkedEntity
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="LinkedEntity"/>. </summary>

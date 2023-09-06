@@ -14,6 +14,7 @@ namespace AnomalyDetector.Models
     /// <summary> Correlation changes among the anomalous variables. </summary>
     public partial class CorrelationChanges
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of CorrelationChanges. </summary>

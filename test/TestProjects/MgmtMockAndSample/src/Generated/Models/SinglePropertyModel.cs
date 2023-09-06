@@ -13,6 +13,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> This is a single property of string. </summary>
     internal partial class SinglePropertyModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="SinglePropertyModel"/>. </summary>

@@ -14,6 +14,7 @@ namespace AnomalyDetector.Models
     /// <summary> ErrorResponse contains code and message that shows the error information. </summary>
     public partial class ErrorResponse
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of ErrorResponse. </summary>

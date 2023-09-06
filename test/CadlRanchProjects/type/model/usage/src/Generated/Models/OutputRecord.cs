@@ -14,6 +14,7 @@ namespace _Type.Model.Usage.Models
     /// <summary> Record used in operation return type. </summary>
     public partial class OutputRecord
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of OutputRecord. </summary>

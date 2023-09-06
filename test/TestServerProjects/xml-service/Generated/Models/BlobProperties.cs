@@ -14,6 +14,7 @@ namespace xml_service.Models
     /// <summary> Properties of a blob. </summary>
     public partial class BlobProperties
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="BlobProperties"/>. </summary>

@@ -214,7 +214,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned.
         /// Serialized Name: VirtualMachineUpdate.properties.osProfile
         /// </summary>
-        public OSProfile OSProfile { get; set; }
+        public OSProfile OsProfile { get; set; }
         /// <summary>
         /// Specifies the network interfaces of the virtual machine.
         /// Serialized Name: VirtualMachineUpdate.properties.networkProfile

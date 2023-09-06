@@ -13,6 +13,7 @@ namespace MgmtPropertyBag.Models
     /// <summary> Foo instance details. </summary>
     public partial class FooPatch
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="FooPatch"/>. </summary>

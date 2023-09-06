@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object. </summary>
     public partial class Endpoints
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="Endpoints"/>. </summary>

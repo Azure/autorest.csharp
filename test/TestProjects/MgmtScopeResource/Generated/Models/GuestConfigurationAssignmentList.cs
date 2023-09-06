@@ -15,6 +15,7 @@ namespace MgmtScopeResource.Models
     /// <summary> The response of the list guest configuration assignment operation. </summary>
     internal partial class GuestConfigurationAssignmentList
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="GuestConfigurationAssignmentList"/>. </summary>

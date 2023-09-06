@@ -13,6 +13,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> the authorization used by the user who has performed the operation that led to this event. This captures the RBAC properties of the event. These usually include the 'action', 'role' and the 'scope'. </summary>
     public partial class SenderAuthorization
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="SenderAuthorization"/>. </summary>

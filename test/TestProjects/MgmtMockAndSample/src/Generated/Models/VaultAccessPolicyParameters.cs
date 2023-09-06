@@ -15,6 +15,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> Parameters for updating the access policy in a vault. </summary>
     public partial class VaultAccessPolicyParameters : ResourceData
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VaultAccessPolicyParameters"/>. </summary>

@@ -17,12 +17,13 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineScaleSetInstanceView
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetInstanceView"/>. </summary>
         internal VirtualMachineScaleSetInstanceView()
         {
-            Extensions = new ChangeTrackingList<VirtualMachineScaleSetVmExtensionsSummary>();
+            Extensions = new ChangeTrackingList<VirtualMachineScaleSetVMExtensionsSummary>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
             OrchestrationServices = new ChangeTrackingList<OrchestrationServiceSummary>();
         }
@@ -45,7 +46,7 @@ namespace MgmtAcronymMapping.Models
         /// Serialized Name: VirtualMachineScaleSetInstanceView.orchestrationServices
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetInstanceView(VirtualMachineScaleSetInstanceViewStatusesSummary virtualMachine, IReadOnlyList<VirtualMachineScaleSetVmExtensionsSummary> extensions, IReadOnlyList<InstanceViewStatus> statuses, IReadOnlyList<OrchestrationServiceSummary> orchestrationServices, Dictionary<string, BinaryData> rawData)
+        internal VirtualMachineScaleSetInstanceView(VirtualMachineScaleSetInstanceViewStatusesSummary virtualMachine, IReadOnlyList<VirtualMachineScaleSetVMExtensionsSummary> extensions, IReadOnlyList<InstanceViewStatus> statuses, IReadOnlyList<OrchestrationServiceSummary> orchestrationServices, Dictionary<string, BinaryData> rawData)
         {
             VirtualMachine = virtualMachine;
             Extensions = extensions;
@@ -72,7 +73,7 @@ namespace MgmtAcronymMapping.Models
         /// The extensions information.
         /// Serialized Name: VirtualMachineScaleSetInstanceView.extensions
         /// </summary>
-        public IReadOnlyList<VirtualMachineScaleSetVmExtensionsSummary> Extensions { get; }
+        public IReadOnlyList<VirtualMachineScaleSetVMExtensionsSummary> Extensions { get; }
         /// <summary>
         /// The resource status information.
         /// Serialized Name: VirtualMachineScaleSetInstanceView.statuses

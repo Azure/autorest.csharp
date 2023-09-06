@@ -14,6 +14,7 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Request parameter that contains authorization claims for copy operation. </summary>
     public partial class CopyAuthorizationResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="CopyAuthorizationResult"/>. </summary>

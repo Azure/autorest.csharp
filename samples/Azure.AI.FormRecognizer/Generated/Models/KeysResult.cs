@@ -14,6 +14,7 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Keys extracted by the custom model. </summary>
     public partial class KeysResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="KeysResult"/>. </summary>

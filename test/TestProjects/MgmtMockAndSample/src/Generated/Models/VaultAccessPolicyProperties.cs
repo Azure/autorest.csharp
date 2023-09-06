@@ -15,6 +15,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> Properties of the vault access policy. </summary>
     public partial class VaultAccessPolicyProperties
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VaultAccessPolicyProperties"/>. </summary>

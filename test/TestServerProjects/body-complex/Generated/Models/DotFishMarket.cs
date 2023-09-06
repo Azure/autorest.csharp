@@ -14,6 +14,7 @@ namespace body_complex.Models
     /// <summary> The DotFishMarket. </summary>
     public partial class DotFishMarket
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="DotFishMarket"/>. </summary>

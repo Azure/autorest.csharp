@@ -14,6 +14,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines how to identify a parameter for a specific purpose e.g. expires. </summary>
     public partial class UrlSigningParamIdentifier
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="UrlSigningParamIdentifier"/>. </summary>

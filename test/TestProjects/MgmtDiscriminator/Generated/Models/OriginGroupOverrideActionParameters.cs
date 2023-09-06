@@ -15,6 +15,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the parameters for the origin group override action. </summary>
     public partial class OriginGroupOverrideActionParameters
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="OriginGroupOverrideActionParameters"/>. </summary>

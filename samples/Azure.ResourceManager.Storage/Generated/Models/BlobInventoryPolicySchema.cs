@@ -15,6 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> The storage account blob inventory policy rules. </summary>
     public partial class BlobInventoryPolicySchema
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicySchema"/>. </summary>

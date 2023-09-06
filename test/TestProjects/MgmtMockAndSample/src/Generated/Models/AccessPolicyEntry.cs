@@ -14,6 +14,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> An identity that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID. </summary>
     public partial class AccessPolicyEntry
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="AccessPolicyEntry"/>. </summary>

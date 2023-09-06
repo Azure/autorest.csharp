@@ -13,6 +13,7 @@ namespace Projection.ProjectedName.Models
     /// <summary> The ClientProjectedNameModel. </summary>
     public partial class ClientProjectedNameModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of ClientProjectedNameModel. </summary>

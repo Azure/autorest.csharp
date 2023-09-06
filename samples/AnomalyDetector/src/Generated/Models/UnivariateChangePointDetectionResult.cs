@@ -14,6 +14,7 @@ namespace AnomalyDetector.Models
     /// <summary> The response of change point detection. </summary>
     public partial class UnivariateChangePointDetectionResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of UnivariateChangePointDetectionResult. </summary>

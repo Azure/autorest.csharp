@@ -108,10 +108,10 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("overprovision"u8);
                 writer.WriteBooleanValue(Overprovision.Value);
             }
-            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
+            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVMs))
             {
                 writer.WritePropertyName("doNotRunExtensionsOnOverprovisionedVMs"u8);
-                writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVms.Value);
+                writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVMs.Value);
             }
             if (Optional.IsDefined(SinglePlacementGroup))
             {

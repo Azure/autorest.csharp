@@ -35,7 +35,7 @@ namespace MgmtAcronymMapping
                 }
                 else
                 {
-                    ((IModelJsonSerializable<MgmtRenameRulesSku>)Sku).Serialize(writer, options);
+                    ((IModelJsonSerializable<MgmtAcronymMappingSku>)Sku).Serialize(writer, options);
                 }
             }
             if (Optional.IsDefined(Plan))
@@ -47,7 +47,7 @@ namespace MgmtAcronymMapping
                 }
                 else
                 {
-                    ((IModelJsonSerializable<MgmtRenameRulesPlan>)Plan).Serialize(writer, options);
+                    ((IModelJsonSerializable<MgmtAcronymMappingPlan>)Plan).Serialize(writer, options);
                 }
             }
             if (Optional.IsDefined(Identity))
@@ -80,15 +80,15 @@ namespace MgmtAcronymMapping
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (Optional.IsDefined(IPsecSomething))
+            if (Optional.IsDefined(IpsecSomething))
             {
                 writer.WritePropertyName("ipsecSomething"u8);
-                writer.WriteStringValue(IPsecSomething);
+                writer.WriteStringValue(IpsecSomething);
             }
-            if (Optional.IsDefined(TestIPsec))
+            if (Optional.IsDefined(TestIPSec))
             {
                 writer.WritePropertyName("testIPSec"u8);
-                writer.WriteStringValue(TestIPsec);
+                writer.WriteStringValue(TestIPSec);
             }
             if (Optional.IsDefined(P2SServer))
             {
@@ -128,7 +128,7 @@ namespace MgmtAcronymMapping
                 }
                 else
                 {
-                    ((IModelJsonSerializable<VirtualMachineScaleSetVmProfile>)VirtualMachineProfile).Serialize(writer, options);
+                    ((IModelJsonSerializable<VirtualMachineScaleSetVMProfile>)VirtualMachineProfile).Serialize(writer, options);
                 }
             }
             if (Optional.IsDefined(Overprovision))
@@ -136,10 +136,10 @@ namespace MgmtAcronymMapping
                 writer.WritePropertyName("overprovision"u8);
                 writer.WriteBooleanValue(Overprovision.Value);
             }
-            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
+            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVMs))
             {
                 writer.WritePropertyName("doNotRunExtensionsOnOverprovisionedVMs"u8);
-                writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVms.Value);
+                writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVMs.Value);
             }
             if (Optional.IsDefined(SinglePlacementGroup))
             {
@@ -225,14 +225,14 @@ namespace MgmtAcronymMapping
             ResourceType type = default;
             Optional<SystemData> systemData = default;
             Optional<string> ipsecSomething = default;
-            Optional<string> testIPsec = default;
+            Optional<string> testIPSec = default;
             Optional<string> p2sServer = default;
             Optional<UpgradePolicy> upgradePolicy = default;
             Optional<AutomaticRepairsPolicy> automaticRepairsPolicy = default;
-            Optional<VirtualMachineScaleSetVmProfile> virtualMachineProfile = default;
+            Optional<VirtualMachineScaleSetVMProfile> virtualMachineProfile = default;
             Optional<string> provisioningState = default;
             Optional<bool> overprovision = default;
-            Optional<bool> doNotRunExtensionsOnOverprovisionedVms = default;
+            Optional<bool> doNotRunExtensionsOnOverprovisionedVMs = default;
             Optional<string> uniqueId = default;
             Optional<bool> singlePlacementGroup = default;
             Optional<bool> zoneBalance = default;
@@ -344,7 +344,7 @@ namespace MgmtAcronymMapping
                         }
                         if (property0.NameEquals("testIPSec"u8))
                         {
-                            testIPsec = property0.Value.GetString();
+                            testIPSec = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("p2sServer"u8))
@@ -376,7 +376,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            virtualMachineProfile = VirtualMachineScaleSetVmProfile.DeserializeVirtualMachineScaleSetVmProfile(property0.Value);
+                            virtualMachineProfile = VirtualMachineScaleSetVMProfile.DeserializeVirtualMachineScaleSetVMProfile(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"u8))
@@ -399,7 +399,7 @@ namespace MgmtAcronymMapping
                             {
                                 continue;
                             }
-                            doNotRunExtensionsOnOverprovisionedVms = property0.Value.GetBoolean();
+                            doNotRunExtensionsOnOverprovisionedVMs = property0.Value.GetBoolean();
                             continue;
                         }
                         if (property0.NameEquals("uniqueId"u8))
@@ -479,7 +479,7 @@ namespace MgmtAcronymMapping
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value, plan.Value, identity, Optional.ToList(zones), ipsecSomething.Value, testIPsec.Value, p2sServer.Value, upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, provisioningState.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVms), uniqueId.Value, Optional.ToNullable(singlePlacementGroup), Optional.ToNullable(zoneBalance), Optional.ToNullable(platformFaultDomainCount), proximityPlacementGroup, hostGroup, additionalCapabilities.Value, scaleInPolicy.Value, rawData);
+            return new VirtualMachineScaleSetData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sku.Value, plan.Value, identity, Optional.ToList(zones), ipsecSomething.Value, testIPSec.Value, p2sServer.Value, upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, provisioningState.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVMs), uniqueId.Value, Optional.ToNullable(singlePlacementGroup), Optional.ToNullable(zoneBalance), Optional.ToNullable(platformFaultDomainCount), proximityPlacementGroup, hostGroup, additionalCapabilities.Value, scaleInPolicy.Value, rawData);
         }
 
         VirtualMachineScaleSetData IModelJsonSerializable<VirtualMachineScaleSetData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

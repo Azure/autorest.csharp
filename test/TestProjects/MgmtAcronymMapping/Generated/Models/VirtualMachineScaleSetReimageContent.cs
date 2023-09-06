@@ -15,7 +15,7 @@ namespace MgmtAcronymMapping.Models
     /// Describes a Virtual Machine Scale Set VM Reimage Parameters.
     /// Serialized Name: VirtualMachineScaleSetReimageParameters
     /// </summary>
-    public partial class VirtualMachineScaleSetReimageContent : VirtualMachineScaleSetVmReimageContent
+    public partial class VirtualMachineScaleSetReimageContent : VirtualMachineScaleSetVMReimageContent
     {
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetReimageContent"/>. </summary>
         public VirtualMachineScaleSetReimageContent()

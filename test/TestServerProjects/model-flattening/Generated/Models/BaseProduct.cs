@@ -14,6 +14,7 @@ namespace model_flattening.Models
     /// <summary> The product documentation. </summary>
     public partial class BaseProduct
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="BaseProduct"/>. </summary>

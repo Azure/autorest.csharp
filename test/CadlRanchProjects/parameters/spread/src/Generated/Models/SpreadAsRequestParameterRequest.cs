@@ -14,6 +14,7 @@ namespace Parameters.Spread.Models
     /// <summary> The SpreadAsRequestParameterRequest. </summary>
     internal partial class SpreadAsRequestParameterRequest
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of SpreadAsRequestParameterRequest. </summary>

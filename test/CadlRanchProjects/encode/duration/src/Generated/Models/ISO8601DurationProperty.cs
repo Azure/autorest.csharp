@@ -13,6 +13,7 @@ namespace Encode.Duration.Models
     /// <summary> The ISO8601DurationProperty. </summary>
     public partial class ISO8601DurationProperty
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of ISO8601DurationProperty. </summary>

@@ -13,6 +13,7 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Filter to apply to the documents in the source path for training. </summary>
     public partial class TrainSourceFilter
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="TrainSourceFilter"/>. </summary>

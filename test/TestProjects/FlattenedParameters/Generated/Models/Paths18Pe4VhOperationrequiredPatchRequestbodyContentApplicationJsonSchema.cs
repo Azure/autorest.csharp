@@ -14,6 +14,7 @@ namespace FlattenedParameters.Models
     /// <summary> The Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema. </summary>
     internal partial class Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema"/>. </summary>

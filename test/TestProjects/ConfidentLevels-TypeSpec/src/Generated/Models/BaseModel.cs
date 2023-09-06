@@ -14,6 +14,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> The base model. </summary>
     internal partial class BaseModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of BaseModel. </summary>

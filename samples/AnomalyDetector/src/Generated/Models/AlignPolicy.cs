@@ -13,6 +13,7 @@ namespace AnomalyDetector.Models
     /// <summary> An optional field, indicating the manner to align multiple variables. </summary>
     public partial class AlignPolicy
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of AlignPolicy. </summary>

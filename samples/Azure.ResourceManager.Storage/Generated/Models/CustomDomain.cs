@@ -14,6 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> The custom domain assigned to this storage account. This can be set via Update. </summary>
     public partial class CustomDomain
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="CustomDomain"/>. </summary>

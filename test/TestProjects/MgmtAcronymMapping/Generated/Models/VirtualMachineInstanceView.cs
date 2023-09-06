@@ -17,6 +17,7 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineInstanceView
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineInstanceView"/>. </summary>
@@ -93,8 +94,8 @@ namespace MgmtAcronymMapping.Models
             PlatformUpdateDomain = platformUpdateDomain;
             PlatformFaultDomain = platformFaultDomain;
             ComputerName = computerName;
-            OSName = osName;
-            OSVersion = osVersion;
+            OsName = osName;
+            OsVersion = osVersion;
             HyperVGeneration = hyperVGeneration;
             RdpThumbPrint = rdpThumbPrint;
             VmAgent = vmAgent;
@@ -127,12 +128,12 @@ namespace MgmtAcronymMapping.Models
         /// The Operating System running on the virtual machine.
         /// Serialized Name: VirtualMachineInstanceView.osName
         /// </summary>
-        public string OSName { get; }
+        public string OsName { get; }
         /// <summary>
         /// The version of Operating System running on the virtual machine.
         /// Serialized Name: VirtualMachineInstanceView.osVersion
         /// </summary>
-        public string OSVersion { get; }
+        public string OsVersion { get; }
         /// <summary>
         /// Specifies the HyperVGeneration Type associated with a resource
         /// Serialized Name: VirtualMachineInstanceView.hyperVGeneration

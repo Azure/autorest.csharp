@@ -14,6 +14,7 @@ namespace Encode.Bytes.Models
     /// <summary> The DefaultBytesProperty. </summary>
     public partial class DefaultBytesProperty
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of DefaultBytesProperty. </summary>

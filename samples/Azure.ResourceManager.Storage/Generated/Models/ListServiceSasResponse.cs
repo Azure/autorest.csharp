@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> The List service SAS credentials operation response. </summary>
     public partial class ListServiceSasResponse
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ListServiceSasResponse"/>. </summary>

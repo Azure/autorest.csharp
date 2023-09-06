@@ -14,6 +14,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> This is a model with a property of literal type of numbers. </summary>
     internal partial class ModelWithFloatLiteralTypeProperty
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of ModelWithFloatLiteralTypeProperty. </summary>

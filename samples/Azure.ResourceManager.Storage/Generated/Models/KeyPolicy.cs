@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> KeyPolicy assigned to the storage account. </summary>
     internal partial class KeyPolicy
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="KeyPolicy"/>. </summary>

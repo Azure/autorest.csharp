@@ -13,6 +13,7 @@ namespace AnomalyDetector.Models
     /// <summary> The definition of input timeseries points. </summary>
     public partial class TimeSeriesPoint
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of TimeSeriesPoint. </summary>

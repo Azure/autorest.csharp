@@ -15,6 +15,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
     /// <summary> This model is x-ms-azure-resource, but only extends a Resource type and inherits Resource properties from flatten source. </summary>
     public partial class AzureResourceFlattenModel5 : ResourceData
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel5"/>. </summary>

@@ -13,6 +13,7 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> An AAAA record. </summary>
     public partial class AaaaRecord
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="AaaaRecord"/>. </summary>

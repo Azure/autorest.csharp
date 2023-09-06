@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MgmtRenameRules.Models
+namespace MgmtAcronymMapping.Models
 {
     /// <summary>
     /// Describes an available virtual machine scale set sku.
@@ -16,6 +16,7 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineScaleSetSku
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetSku"/>. </summary>
@@ -37,7 +38,7 @@ namespace MgmtRenameRules.Models
         /// Serialized Name: VirtualMachineScaleSetSku.capacity
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetSku(string resourceType, MgmtRenameRulesSku sku, VirtualMachineScaleSetSkuCapacity capacity, Dictionary<string, BinaryData> rawData)
+        internal VirtualMachineScaleSetSku(string resourceType, MgmtAcronymMappingSku sku, VirtualMachineScaleSetSkuCapacity capacity, Dictionary<string, BinaryData> rawData)
         {
             ResourceType = resourceType;
             Sku = sku;
@@ -54,7 +55,7 @@ namespace MgmtRenameRules.Models
         /// The Sku.
         /// Serialized Name: VirtualMachineScaleSetSku.sku
         /// </summary>
-        public MgmtRenameRulesSku Sku { get; }
+        public MgmtAcronymMappingSku Sku { get; }
         /// <summary>
         /// Specifies the number of virtual machines in the scale set.
         /// Serialized Name: VirtualMachineScaleSetSku.capacity

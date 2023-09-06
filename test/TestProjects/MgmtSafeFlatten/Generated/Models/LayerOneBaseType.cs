@@ -19,6 +19,7 @@ namespace MgmtSafeFlatten.Models
     [AbstractTypeDeserializer(typeof(UnknownLayerOneBaseType))]
     public abstract partial class LayerOneBaseType
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="LayerOneBaseType"/>. </summary>

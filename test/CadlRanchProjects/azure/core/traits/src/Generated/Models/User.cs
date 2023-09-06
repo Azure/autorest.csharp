@@ -13,6 +13,7 @@ namespace _Specs_.Azure.Core.Traits.Models
     /// <summary> Sample Model. </summary>
     public partial class User
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of User. </summary>

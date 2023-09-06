@@ -14,6 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> Sets the CORS rules. You can include up to five CorsRule elements in the request. </summary>
     internal partial class CorsRules
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="CorsRules"/>. </summary>

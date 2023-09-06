@@ -14,6 +14,7 @@ namespace AuthoringTypeSpec.Models
     /// <summary> Represents a warning that was encountered while executing the request. </summary>
     public partial class JobWarning
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of JobWarning. </summary>

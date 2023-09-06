@@ -14,6 +14,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Models
     /// <summary> This is a model only used by internal operation. It should be generated but not exported. </summary>
     internal partial class InternalModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of InternalModel. </summary>

@@ -15,6 +15,7 @@ namespace MgmtCustomizations.Models
     /// <summary> The list result of the rules. </summary>
     internal partial class PetStoreListResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="PetStoreListResult"/>. </summary>

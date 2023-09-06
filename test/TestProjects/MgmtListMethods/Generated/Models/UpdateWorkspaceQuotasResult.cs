@@ -14,6 +14,7 @@ namespace MgmtListMethods.Models
     /// <summary> The result of update workspace quota. </summary>
     internal partial class UpdateWorkspaceQuotasResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="UpdateWorkspaceQuotasResult"/>. </summary>

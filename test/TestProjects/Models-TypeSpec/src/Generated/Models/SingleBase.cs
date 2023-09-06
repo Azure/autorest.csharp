@@ -15,6 +15,7 @@ namespace ModelsTypeSpec.Models
     [AbstractTypeDeserializer(typeof(UnknownSingleBase))]
     public abstract partial class SingleBase
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of SingleBase. </summary>

@@ -13,6 +13,7 @@ namespace CustomizationsInTsp.Models
     /// <summary> Model moved into custom namespace. </summary>
     public partial class ModelToChangeNamespace
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of ModelToChangeNamespace. </summary>

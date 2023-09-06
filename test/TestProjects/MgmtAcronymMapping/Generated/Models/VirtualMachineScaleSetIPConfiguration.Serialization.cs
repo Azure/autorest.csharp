@@ -56,11 +56,11 @@ namespace MgmtAcronymMapping.Models
                     ((IModelJsonSerializable<VirtualMachineScaleSetPublicIPAddressConfiguration>)PublicIPAddressConfiguration).Serialize(writer, options);
                 }
             }
-            if (Optional.IsCollectionDefined(IPAddresses))
+            if (Optional.IsCollectionDefined(IpAddresses))
             {
                 writer.WritePropertyName("ipAddresses"u8);
                 writer.WriteStartArray();
-                foreach (var item in IPAddresses)
+                foreach (var item in IpAddresses)
                 {
                     if (item == null)
                     {

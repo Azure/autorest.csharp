@@ -13,6 +13,7 @@ namespace MgmtSubscriptionNameParameter.Models
     /// <summary> Properties specific to client affine subscriptions. </summary>
     public partial class SBClientAffineProperties
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="SBClientAffineProperties"/>. </summary>

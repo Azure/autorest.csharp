@@ -14,6 +14,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> This is a model without union types. </summary>
     internal partial class UsualModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of UsualModel. </summary>

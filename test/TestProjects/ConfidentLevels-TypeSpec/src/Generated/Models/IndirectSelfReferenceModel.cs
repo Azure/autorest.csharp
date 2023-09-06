@@ -14,6 +14,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> Indirect self reference model. </summary>
     internal partial class IndirectSelfReferenceModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of IndirectSelfReferenceModel. </summary>

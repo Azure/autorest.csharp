@@ -15,6 +15,7 @@ namespace TypeSchemaMapping.Models
     /// <summary> The SecondModel. </summary>
     internal partial class SecondModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="SecondModel"/>. </summary>

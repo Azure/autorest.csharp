@@ -14,6 +14,7 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Information about the extracted key-value pair. </summary>
     public partial class KeyValuePair
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="KeyValuePair"/>. </summary>

@@ -17,6 +17,7 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class ImageStorageProfile
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ImageStorageProfile"/>. </summary>
@@ -41,7 +42,7 @@ namespace MgmtAcronymMapping.Models
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ImageStorageProfile(ImageOSDisk osDisk, IList<ImageDataDisk> dataDisks, bool? zoneResilient, Dictionary<string, BinaryData> rawData)
         {
-            OSDisk = osDisk;
+            OsDisk = osDisk;
             DataDisks = dataDisks;
             ZoneResilient = zoneResilient;
             _rawData = rawData;
@@ -51,7 +52,7 @@ namespace MgmtAcronymMapping.Models
         /// Specifies information about the operating system disk used by the virtual machine. &lt;br&gt;&lt;br&gt; For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
         /// Serialized Name: ImageStorageProfile.osDisk
         /// </summary>
-        public ImageOSDisk OSDisk { get; set; }
+        public ImageOSDisk OsDisk { get; set; }
         /// <summary>
         /// Specifies the parameters that are used to add a data disk to a virtual machine. &lt;br&gt;&lt;br&gt; For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
         /// Serialized Name: ImageStorageProfile.dataDisks

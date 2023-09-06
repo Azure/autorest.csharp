@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc. </summary>
     public partial class SKUCapability
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="SKUCapability"/>. </summary>

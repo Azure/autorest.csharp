@@ -18,6 +18,7 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     internal partial class VirtualMachineScaleSetListOSUpgradeHistory
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListOSUpgradeHistory"/>. </summary>

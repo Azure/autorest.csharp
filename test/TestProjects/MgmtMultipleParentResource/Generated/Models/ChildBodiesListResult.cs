@@ -16,6 +16,7 @@ namespace MgmtMultipleParentResource.Models
     /// <summary> The List run command operation response. </summary>
     internal partial class ChildBodiesListResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ChildBodiesListResult"/>. </summary>

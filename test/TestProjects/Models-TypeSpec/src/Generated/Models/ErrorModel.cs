@@ -13,6 +13,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Output model that has property of its own type. </summary>
     public partial class ErrorModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of ErrorModel. </summary>

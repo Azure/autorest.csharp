@@ -16,6 +16,7 @@ namespace MgmtConstants.Models
     /// <summary> The List Virtual Machine operation response. </summary>
     internal partial class OptionalMachineListResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="OptionalMachineListResult"/>. </summary>

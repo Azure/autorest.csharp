@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Defines a mapping between a field in a data source and a target field in an index. </summary>
     public partial class FieldMapping
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="FieldMapping"/>. </summary>

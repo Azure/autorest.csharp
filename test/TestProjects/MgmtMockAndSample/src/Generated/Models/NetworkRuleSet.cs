@@ -14,6 +14,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> A set of rules governing the network accessibility of a vault. </summary>
     public partial class NetworkRuleSet
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="NetworkRuleSet"/>. </summary>

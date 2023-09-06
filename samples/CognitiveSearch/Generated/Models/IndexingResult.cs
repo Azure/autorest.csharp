@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Status of an indexing operation for a single document. </summary>
     public partial class IndexingResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="IndexingResult"/>. </summary>

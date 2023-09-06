@@ -13,6 +13,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the parameters for the cache expiration action. </summary>
     public partial class CacheExpirationActionParameters
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="CacheExpirationActionParameters"/>. </summary>

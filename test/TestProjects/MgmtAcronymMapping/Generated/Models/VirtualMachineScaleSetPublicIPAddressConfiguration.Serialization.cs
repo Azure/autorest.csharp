@@ -45,11 +45,11 @@ namespace MgmtAcronymMapping.Models
                     ((IModelJsonSerializable<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings>)DnsSettings).Serialize(writer, options);
                 }
             }
-            if (Optional.IsCollectionDefined(IPTags))
+            if (Optional.IsCollectionDefined(IpTags))
             {
                 writer.WritePropertyName("ipTags"u8);
                 writer.WriteStartArray();
-                foreach (var item in IPTags)
+                foreach (var item in IpTags)
                 {
                     if (item is null)
                     {
@@ -57,7 +57,7 @@ namespace MgmtAcronymMapping.Models
                     }
                     else
                     {
-                        ((IModelJsonSerializable<VirtualMachineScaleSetIPTag>)item).Serialize(writer, options);
+                        ((IModelJsonSerializable<VirtualMachineScaleSetIpTag>)item).Serialize(writer, options);
                     }
                 }
                 writer.WriteEndArray();
@@ -99,7 +99,7 @@ namespace MgmtAcronymMapping.Models
             string name = default;
             Optional<int> idleTimeoutInMinutes = default;
             Optional<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings> dnsSettings = default;
-            Optional<IList<VirtualMachineScaleSetIPTag>> ipTags = default;
+            Optional<IList<VirtualMachineScaleSetIpTag>> ipTags = default;
             Optional<WritableSubResource> publicIPPrefix = default;
             Optional<IPVersion> publicIPAddressVersion = default;
             Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
@@ -143,10 +143,10 @@ namespace MgmtAcronymMapping.Models
                             {
                                 continue;
                             }
-                            List<VirtualMachineScaleSetIPTag> array = new List<VirtualMachineScaleSetIPTag>();
+                            List<VirtualMachineScaleSetIpTag> array = new List<VirtualMachineScaleSetIpTag>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(VirtualMachineScaleSetIPTag.DeserializeVirtualMachineScaleSetIPTag(item));
+                                array.Add(VirtualMachineScaleSetIpTag.DeserializeVirtualMachineScaleSetIpTag(item));
                             }
                             ipTags = array;
                             continue;

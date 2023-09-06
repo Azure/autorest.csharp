@@ -15,6 +15,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> Log Analytics Resources for Firewall Policy Insights. </summary>
     public partial class FirewallPolicyLogAnalyticsResources
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyLogAnalyticsResources"/>. </summary>

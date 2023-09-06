@@ -13,6 +13,7 @@ namespace model_flattening.Models
     /// <summary> The Generic URL. </summary>
     internal partial class GenericUrl
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="GenericUrl"/>. </summary>

@@ -14,6 +14,7 @@ namespace MgmtScopeResource.Models
     /// <summary> Result of listing marketplaces. It contains a list of available marketplaces in reverse chronological order by billing period. </summary>
     internal partial class MarketplacesListResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="MarketplacesListResult"/>. </summary>

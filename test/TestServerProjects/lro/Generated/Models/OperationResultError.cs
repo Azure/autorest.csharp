@@ -13,6 +13,7 @@ namespace lro.Models
     /// <summary> The OperationResultError. </summary>
     internal partial class OperationResultError
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="OperationResultError"/>. </summary>

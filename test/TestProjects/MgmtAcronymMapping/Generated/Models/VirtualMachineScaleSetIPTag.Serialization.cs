@@ -14,19 +14,19 @@ using Azure.Core.Serialization;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class VirtualMachineScaleSetIPTag : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetIPTag>
+    public partial class VirtualMachineScaleSetIpTag : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetIpTag>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetIPTag>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetIpTag>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VirtualMachineScaleSetIPTag>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<VirtualMachineScaleSetIpTag>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(IPTagType))
+            if (Optional.IsDefined(IpTagType))
             {
                 writer.WritePropertyName("ipTagType"u8);
-                writer.WriteStringValue(IPTagType);
+                writer.WriteStringValue(IpTagType);
             }
             if (Optional.IsDefined(Tag))
             {
@@ -48,7 +48,7 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineScaleSetIPTag DeserializeVirtualMachineScaleSetIPTag(JsonElement element, ModelSerializerOptions options = default)
+        internal static VirtualMachineScaleSetIpTag DeserializeVirtualMachineScaleSetIpTag(JsonElement element, ModelSerializerOptions options = default)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
 
@@ -77,35 +77,35 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetIPTag(ipTagType.Value, tag.Value, rawData);
+            return new VirtualMachineScaleSetIpTag(ipTagType.Value, tag.Value, rawData);
         }
 
-        VirtualMachineScaleSetIPTag IModelJsonSerializable<VirtualMachineScaleSetIPTag>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineScaleSetIpTag IModelJsonSerializable<VirtualMachineScaleSetIpTag>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVirtualMachineScaleSetIPTag(doc.RootElement, options);
+            return DeserializeVirtualMachineScaleSetIpTag(doc.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VirtualMachineScaleSetIPTag>.Serialize(ModelSerializerOptions options)
+        BinaryData IModelSerializable<VirtualMachineScaleSetIpTag>.Serialize(ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             return ModelSerializer.SerializeCore(this, options);
         }
 
-        VirtualMachineScaleSetIPTag IModelSerializable<VirtualMachineScaleSetIPTag>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        VirtualMachineScaleSetIpTag IModelSerializable<VirtualMachineScaleSetIpTag>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineScaleSetIPTag(doc.RootElement, options);
+            return DeserializeVirtualMachineScaleSetIpTag(doc.RootElement, options);
         }
 
-        /// <summary> Converts a <see cref="VirtualMachineScaleSetIPTag"/> into a <see cref="RequestContent"/>. </summary>
-        /// <param name="model"> The <see cref="VirtualMachineScaleSetIPTag"/> to convert. </param>
-        public static implicit operator RequestContent(VirtualMachineScaleSetIPTag model)
+        /// <summary> Converts a <see cref="VirtualMachineScaleSetIpTag"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VirtualMachineScaleSetIpTag"/> to convert. </param>
+        public static implicit operator RequestContent(VirtualMachineScaleSetIpTag model)
         {
             if (model is null)
             {
@@ -115,9 +115,9 @@ namespace MgmtAcronymMapping.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
-        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetIPTag"/>. </summary>
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VirtualMachineScaleSetIpTag"/>. </summary>
         /// <param name="response"> The <see cref="Response"/> to convert. </param>
-        public static explicit operator VirtualMachineScaleSetIPTag(Response response)
+        public static explicit operator VirtualMachineScaleSetIpTag(Response response)
         {
             if (response is null)
             {
@@ -125,7 +125,7 @@ namespace MgmtAcronymMapping.Models
             }
 
             using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
-            return DeserializeVirtualMachineScaleSetIPTag(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeVirtualMachineScaleSetIpTag(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

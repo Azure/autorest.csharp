@@ -17,6 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class DedicatedHostInstanceView
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="DedicatedHostInstanceView"/>. </summary>
@@ -61,9 +62,9 @@ namespace Azure.ResourceManager.Sample.Models
         /// The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host.
         /// Serialized Name: DedicatedHostAvailableCapacity.allocatableVMs
         /// </summary>
-        public IReadOnlyList<DedicatedHostAllocatableVm> AvailableCapacityAllocatableVms
+        public IReadOnlyList<DedicatedHostAllocatableVM> AvailableCapacityAllocatableVMs
         {
-            get => AvailableCapacity?.AllocatableVms;
+            get => AvailableCapacity?.AllocatableVMs;
         }
 
         /// <summary>

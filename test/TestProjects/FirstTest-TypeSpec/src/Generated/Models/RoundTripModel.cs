@@ -15,6 +15,7 @@ namespace FirstTestTypeSpec.Models
     /// <summary> this is a roundtrip model. </summary>
     internal partial class RoundTripModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of RoundTripModel. </summary>

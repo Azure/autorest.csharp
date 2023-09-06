@@ -13,6 +13,7 @@ namespace AnomalyDetector.Models
     /// <summary> Interpretation of the anomalous timestamp. </summary>
     public partial class AnomalyInterpretation
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of AnomalyInterpretation. </summary>

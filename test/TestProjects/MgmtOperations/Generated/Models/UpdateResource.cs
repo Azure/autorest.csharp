@@ -14,6 +14,7 @@ namespace MgmtOperations.Models
     /// <summary> The Update Resource model definition. </summary>
     public partial class UpdateResource
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="UpdateResource"/>. </summary>

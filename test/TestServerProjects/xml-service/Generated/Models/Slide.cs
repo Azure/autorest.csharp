@@ -14,6 +14,7 @@ namespace xml_service.Models
     /// <summary> A slide in a slideshow. </summary>
     public partial class Slide
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="Slide"/>. </summary>

@@ -13,6 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Contains the DDoS protection settings of the public IP. </summary>
     public partial class DdosSettings
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="DdosSettings"/>. </summary>

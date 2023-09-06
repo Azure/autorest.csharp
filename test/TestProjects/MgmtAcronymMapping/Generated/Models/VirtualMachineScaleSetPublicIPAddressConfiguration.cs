@@ -18,6 +18,7 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineScaleSetPublicIPAddressConfiguration
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPublicIPAddressConfiguration"/>. </summary>
@@ -31,7 +32,7 @@ namespace MgmtAcronymMapping.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
-            IPTags = new ChangeTrackingList<VirtualMachineScaleSetIPTag>();
+            IpTags = new ChangeTrackingList<VirtualMachineScaleSetIpTag>();
         }
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPublicIPAddressConfiguration"/>. </summary>
@@ -60,12 +61,12 @@ namespace MgmtAcronymMapping.Models
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.publicIPAddressVersion
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetPublicIPAddressConfiguration(string name, int? idleTimeoutInMinutes, VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetIPTag> ipTags, WritableSubResource publicIPPrefix, IPVersion? publicIPAddressVersion, Dictionary<string, BinaryData> rawData)
+        internal VirtualMachineScaleSetPublicIPAddressConfiguration(string name, int? idleTimeoutInMinutes, VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetIpTag> ipTags, WritableSubResource publicIPPrefix, IPVersion? publicIPAddressVersion, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             IdleTimeoutInMinutes = idleTimeoutInMinutes;
             DnsSettings = dnsSettings;
-            IPTags = ipTags;
+            IpTags = ipTags;
             PublicIPPrefix = publicIPPrefix;
             PublicIPAddressVersion = publicIPAddressVersion;
             _rawData = rawData;
@@ -105,7 +106,7 @@ namespace MgmtAcronymMapping.Models
         /// The list of IP tags associated with the public IP address.
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.ipTags
         /// </summary>
-        public IList<VirtualMachineScaleSetIPTag> IPTags { get; }
+        public IList<VirtualMachineScaleSetIpTag> IpTags { get; }
         /// <summary>
         /// The PublicIPPrefix from which to allocate publicIP addresses.
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.properties.publicIPPrefix

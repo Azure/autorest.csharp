@@ -15,6 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> Filters limit rule actions to a subset of blobs within the storage account. If multiple filters are defined, a logical AND is performed on all filters. </summary>
     public partial class ManagementPolicyFilter
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ManagementPolicyFilter"/>. </summary>

@@ -29,7 +29,7 @@ namespace MgmtAcronymMapping.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
-            IPConfigurations = new ChangeTrackingList<VirtualMachineScaleSetIPConfiguration>();
+            IpConfigurations = new ChangeTrackingList<VirtualMachineScaleSetIPConfiguration>();
         }
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetNetworkConfiguration"/>. </summary>
@@ -73,7 +73,7 @@ namespace MgmtAcronymMapping.Models
             EnableAcceleratedNetworking = enableAcceleratedNetworking;
             NetworkSecurityGroup = networkSecurityGroup;
             DnsSettings = dnsSettings;
-            IPConfigurations = ipConfigurations;
+            IpConfigurations = ipConfigurations;
             EnableIPForwarding = enableIPForwarding;
         }
 
@@ -137,7 +137,7 @@ namespace MgmtAcronymMapping.Models
         /// Specifies the IP configurations of the network interface.
         /// Serialized Name: VirtualMachineScaleSetNetworkConfiguration.properties.ipConfigurations
         /// </summary>
-        public IList<VirtualMachineScaleSetIPConfiguration> IPConfigurations { get; }
+        public IList<VirtualMachineScaleSetIPConfiguration> IpConfigurations { get; }
         /// <summary>
         /// Whether IP forwarding enabled on this NIC.
         /// Serialized Name: VirtualMachineScaleSetNetworkConfiguration.properties.enableIPForwarding

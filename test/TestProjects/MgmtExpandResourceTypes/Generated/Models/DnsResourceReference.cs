@@ -15,6 +15,7 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> Represents a single Azure resource and its referencing DNS records. </summary>
     public partial class DnsResourceReference
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="DnsResourceReference"/>. </summary>

@@ -13,6 +13,7 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Status and result of the queued analyze operation. </summary>
     public partial class AnalyzeOperationResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="AnalyzeOperationResult"/>. </summary>

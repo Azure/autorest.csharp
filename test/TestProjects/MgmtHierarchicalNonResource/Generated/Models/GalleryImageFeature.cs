@@ -13,6 +13,7 @@ namespace MgmtHierarchicalNonResource.Models
     /// <summary> A feature for gallery image. </summary>
     public partial class GalleryImageFeature
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="GalleryImageFeature"/>. </summary>

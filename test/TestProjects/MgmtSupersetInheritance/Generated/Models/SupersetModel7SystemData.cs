@@ -13,6 +13,7 @@ namespace MgmtSupersetInheritance.Models
     /// <summary> Metadata pertaining to creation and last modification of the resource. </summary>
     public partial class SupersetModel7SystemData
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="SupersetModel7SystemData"/>. </summary>

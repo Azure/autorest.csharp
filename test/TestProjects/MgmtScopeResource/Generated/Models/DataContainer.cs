@@ -14,6 +14,7 @@ namespace MgmtScopeResource.Models
     /// <summary> Information about a container with data for a given resource. </summary>
     public partial class DataContainer
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="DataContainer"/>. </summary>

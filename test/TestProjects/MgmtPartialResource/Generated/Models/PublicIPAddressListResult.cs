@@ -15,6 +15,7 @@ namespace MgmtPartialResource.Models
     /// <summary> Response for ListPublicIpAddresses API service call. </summary>
     internal partial class PublicIPAddressListResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="PublicIPAddressListResult"/>. </summary>

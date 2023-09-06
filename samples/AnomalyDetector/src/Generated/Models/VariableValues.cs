@@ -15,6 +15,7 @@ namespace AnomalyDetector.Models
     /// <summary> Variable values. </summary>
     public partial class VariableValues
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of VariableValues. </summary>

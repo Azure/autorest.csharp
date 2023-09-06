@@ -13,6 +13,7 @@ namespace CognitiveSearch.Models
     /// <summary> The IndexerLimits. </summary>
     public partial class IndexerLimits
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="IndexerLimits"/>. </summary>

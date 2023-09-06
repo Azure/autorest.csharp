@@ -13,6 +13,7 @@ namespace Azure.Storage.Tables.Models
     /// <summary> Stats for the storage service. </summary>
     public partial class StorageServiceStats
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="StorageServiceStats"/>. </summary>

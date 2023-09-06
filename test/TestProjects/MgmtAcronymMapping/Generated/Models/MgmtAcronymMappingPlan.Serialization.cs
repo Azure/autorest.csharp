@@ -12,13 +12,13 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
-namespace MgmtRenameRules.Models
+namespace MgmtAcronymMapping.Models
 {
-    public partial class MgmtRenameRulesPlan : IUtf8JsonSerializable, IModelJsonSerializable<MgmtRenameRulesPlan>
+    public partial class MgmtAcronymMappingPlan : IUtf8JsonSerializable, IModelJsonSerializable<MgmtAcronymMappingPlan>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MgmtRenameRulesPlan>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MgmtAcronymMappingPlan>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<MgmtRenameRulesPlan>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<MgmtAcronymMappingPlan>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -58,7 +58,7 @@ namespace MgmtRenameRules.Models
             writer.WriteEndObject();
         }
 
-        internal static MgmtRenameRulesPlan DeserializeMgmtRenameRulesPlan(JsonElement element, ModelSerializerOptions options = default)
+        internal static MgmtAcronymMappingPlan DeserializeMgmtAcronymMappingPlan(JsonElement element, ModelSerializerOptions options = default)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
 
@@ -99,35 +99,35 @@ namespace MgmtRenameRules.Models
                     continue;
                 }
             }
-            return new MgmtRenameRulesPlan(name.Value, publisher.Value, product.Value, promotionCode.Value, rawData);
+            return new MgmtAcronymMappingPlan(name.Value, publisher.Value, product.Value, promotionCode.Value, rawData);
         }
 
-        MgmtRenameRulesPlan IModelJsonSerializable<MgmtRenameRulesPlan>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        MgmtAcronymMappingPlan IModelJsonSerializable<MgmtAcronymMappingPlan>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeMgmtRenameRulesPlan(doc.RootElement, options);
+            return DeserializeMgmtAcronymMappingPlan(doc.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MgmtRenameRulesPlan>.Serialize(ModelSerializerOptions options)
+        BinaryData IModelSerializable<MgmtAcronymMappingPlan>.Serialize(ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             return ModelSerializer.SerializeCore(this, options);
         }
 
-        MgmtRenameRulesPlan IModelSerializable<MgmtRenameRulesPlan>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        MgmtAcronymMappingPlan IModelSerializable<MgmtAcronymMappingPlan>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.Parse(data);
-            return DeserializeMgmtRenameRulesPlan(doc.RootElement, options);
+            return DeserializeMgmtAcronymMappingPlan(doc.RootElement, options);
         }
 
-        /// <summary> Converts a <see cref="MgmtRenameRulesPlan"/> into a <see cref="RequestContent"/>. </summary>
-        /// <param name="model"> The <see cref="MgmtRenameRulesPlan"/> to convert. </param>
-        public static implicit operator RequestContent(MgmtRenameRulesPlan model)
+        /// <summary> Converts a <see cref="MgmtAcronymMappingPlan"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MgmtAcronymMappingPlan"/> to convert. </param>
+        public static implicit operator RequestContent(MgmtAcronymMappingPlan model)
         {
             if (model is null)
             {
@@ -137,9 +137,9 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
-        /// <summary> Converts a <see cref="Response"/> into a <see cref="MgmtRenameRulesPlan"/>. </summary>
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MgmtAcronymMappingPlan"/>. </summary>
         /// <param name="response"> The <see cref="Response"/> to convert. </param>
-        public static explicit operator MgmtRenameRulesPlan(Response response)
+        public static explicit operator MgmtAcronymMappingPlan(Response response)
         {
             if (response is null)
             {
@@ -147,7 +147,7 @@ namespace MgmtRenameRules.Models
             }
 
             using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
-            return DeserializeMgmtRenameRulesPlan(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeMgmtAcronymMappingPlan(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

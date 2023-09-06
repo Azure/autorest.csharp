@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Provides parameter values to a distance scoring function. </summary>
     public partial class DistanceScoringParameters
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="DistanceScoringParameters"/>. </summary>

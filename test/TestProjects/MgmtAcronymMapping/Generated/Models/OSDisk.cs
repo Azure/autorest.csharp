@@ -16,6 +16,7 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class OSDisk
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="OSDisk"/>. </summary>
@@ -76,7 +77,7 @@ namespace MgmtAcronymMapping.Models
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal OSDisk(OperatingSystemType? osType, DiskEncryptionSettings encryptionSettings, string name, VirtualHardDisk vhd, VirtualHardDisk image, CachingType? caching, bool? writeAcceleratorEnabled, DiffDiskSettings diffDiskSettings, DiskCreateOptionType createOption, int? diskSizeGB, ManagedDiskParameters managedDisk, Dictionary<string, BinaryData> rawData)
         {
-            OSType = osType;
+            OsType = osType;
             EncryptionSettings = encryptionSettings;
             Name = name;
             Vhd = vhd;
@@ -99,7 +100,7 @@ namespace MgmtAcronymMapping.Models
         /// This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Windows** &lt;br&gt;&lt;br&gt; **Linux**
         /// Serialized Name: OSDisk.osType
         /// </summary>
-        public OperatingSystemType? OSType { get; set; }
+        public OperatingSystemType? OsType { get; set; }
         /// <summary>
         /// Specifies the encryption settings for the OS Disk. &lt;br&gt;&lt;br&gt; Minimum api-version: 2015-06-15
         /// Serialized Name: OSDisk.encryptionSettings

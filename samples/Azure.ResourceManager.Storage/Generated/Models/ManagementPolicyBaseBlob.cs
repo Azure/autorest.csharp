@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> Management policy action for base blob. </summary>
     public partial class ManagementPolicyBaseBlob
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ManagementPolicyBaseBlob"/>. </summary>

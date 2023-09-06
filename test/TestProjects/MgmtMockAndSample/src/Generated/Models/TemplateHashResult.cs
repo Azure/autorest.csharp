@@ -13,6 +13,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> Result of the request to calculate template hash. It contains a string of minified template and its hash. </summary>
     public partial class TemplateHashResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="TemplateHashResult"/>. </summary>

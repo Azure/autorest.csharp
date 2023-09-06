@@ -14,6 +14,7 @@ namespace _Specs_.Azure.Core.Basic.Models
     /// <summary> UserOrder for testing list with expand. </summary>
     public partial class UserOrder
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of UserOrder. </summary>

@@ -16,6 +16,7 @@ namespace MgmtScopeResource.Models
     /// <summary> List of resource links. </summary>
     internal partial class ResourceLinkResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ResourceLinkResult"/>. </summary>

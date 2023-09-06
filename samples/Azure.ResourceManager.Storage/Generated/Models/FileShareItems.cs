@@ -15,6 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> Response schema. Contains list of shares returned, and if paging is requested or required, a URL to next page of shares. </summary>
     internal partial class FileShareItems
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="FileShareItems"/>. </summary>

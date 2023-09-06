@@ -14,6 +14,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> List of keys. </summary>
     public partial class VaultValidationResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VaultValidationResult"/>. </summary>

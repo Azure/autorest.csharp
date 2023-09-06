@@ -14,6 +14,10 @@ namespace dpg_customization_LowLevel.Models
 {
     public partial class Input : IUtf8JsonSerializable, IModelJsonSerializable<Input>
     {
+        /// <summary>
+        /// Converts a <see cref="Input"/> into a <see cref="RequestContent"/> using the default serialization options.
+        /// </summary>
+        /// <param name="input">The input to convert.</param>
         public static implicit operator RequestContent(Input input)
         {
             if (input == null)
@@ -24,6 +28,10 @@ namespace dpg_customization_LowLevel.Models
             return RequestContent.Create(input, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary>
+        /// Converts a <see cref="Response"/> to a <see cref="Input"/>.
+        /// </summary>
+        /// <param name="response">The response to convert.</param>
         public static explicit operator Input(Response response)
         {
             Argument.AssertNotNull(response, nameof(response));

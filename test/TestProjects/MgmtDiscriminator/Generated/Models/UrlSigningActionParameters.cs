@@ -14,6 +14,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the parameters for the Url Signing action. </summary>
     public partial class UrlSigningActionParameters
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="UrlSigningActionParameters"/>. </summary>

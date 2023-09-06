@@ -14,6 +14,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> Permissions the identity has for keys, secrets, certificates and storage. </summary>
     public partial class Permissions
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="Permissions"/>. </summary>

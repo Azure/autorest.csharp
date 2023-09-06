@@ -123,7 +123,7 @@ namespace MgmtAcronymMapping.Models
         /// Serialized Name: VirtualMachineUpdate.properties.extensionsTimeBudget
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachinePatch(IDictionary<string, string> tags, MgmtRenameRulesPlan plan, ManagedServiceIdentity identity, IList<string> zones, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, NetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, WritableSubResource virtualMachineScaleSet, WritableSubResource proximityPlacementGroup, VirtualMachinePriorityType? priority, VirtualMachineEvictionPolicyType? evictionPolicy, BillingProfile billingProfile, WritableSubResource host, WritableSubResource hostGroup, string provisioningState, VirtualMachineInstanceView instanceView, string licenseType, string vmId, string extensionsTimeBudget, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
+        internal VirtualMachinePatch(IDictionary<string, string> tags, MgmtAcronymMappingPlan plan, ManagedServiceIdentity identity, IList<string> zones, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, NetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, WritableSubResource virtualMachineScaleSet, WritableSubResource proximityPlacementGroup, VirtualMachinePriorityType? priority, VirtualMachineEvictionPolicyType? evictionPolicy, BillingProfile billingProfile, WritableSubResource host, WritableSubResource hostGroup, string provisioningState, VirtualMachineInstanceView instanceView, string licenseType, string vmId, string extensionsTimeBudget, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
         {
             Plan = plan;
             Identity = identity;
@@ -131,7 +131,7 @@ namespace MgmtAcronymMapping.Models
             HardwareProfile = hardwareProfile;
             StorageProfile = storageProfile;
             AdditionalCapabilities = additionalCapabilities;
-            OSProfile = osProfile;
+            OsProfile = osProfile;
             NetworkProfile = networkProfile;
             SecurityProfile = securityProfile;
             DiagnosticsProfile = diagnosticsProfile;
@@ -214,7 +214,7 @@ namespace MgmtAcronymMapping.Models
         /// Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned.
         /// Serialized Name: VirtualMachineUpdate.properties.osProfile
         /// </summary>
-        public OSProfile OSProfile { get; set; }
+        public OSProfile OsProfile { get; set; }
         /// <summary>
         /// Specifies the network interfaces of the virtual machine.
         /// Serialized Name: VirtualMachineUpdate.properties.networkProfile

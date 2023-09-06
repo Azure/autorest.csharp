@@ -13,6 +13,7 @@ namespace Very.Custom.Namespace.From.Swagger
     /// <summary> The ModelWithCustomNamespace. </summary>
     internal partial class ModelWithCustomNamespace
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelWithCustomNamespace"/>. </summary>

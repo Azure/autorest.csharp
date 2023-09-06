@@ -13,6 +13,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> The Azure event log entries are of type EventData. </summary>
     public partial class EventData
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="EventData"/>. </summary>

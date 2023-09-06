@@ -14,6 +14,7 @@ namespace additionalProperties.Models
     /// <summary> The PetAPInProperties. </summary>
     public partial class PetAPInProperties
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="PetAPInProperties"/>. </summary>

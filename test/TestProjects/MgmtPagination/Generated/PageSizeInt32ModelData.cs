@@ -13,6 +13,7 @@ namespace MgmtPagination
     /// <summary> A class representing the PageSizeInt32Model data model. </summary>
     public partial class PageSizeInt32ModelData
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="PageSizeInt32ModelData"/>. </summary>

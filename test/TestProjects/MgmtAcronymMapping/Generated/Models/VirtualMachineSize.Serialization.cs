@@ -33,10 +33,10 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("numberOfCores"u8);
                 writer.WriteNumberValue(NumberOfCores.Value);
             }
-            if (Optional.IsDefined(OSDiskSizeInMB))
+            if (Optional.IsDefined(OsDiskSizeInMB))
             {
                 writer.WritePropertyName("osDiskSizeInMB"u8);
-                writer.WriteNumberValue(OSDiskSizeInMB.Value);
+                writer.WriteNumberValue(OsDiskSizeInMB.Value);
             }
             if (Optional.IsDefined(ResourceDiskSizeInMB))
             {

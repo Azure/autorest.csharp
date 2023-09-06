@@ -14,6 +14,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with model properties. </summary>
     public partial class ModelProperty
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of ModelProperty. </summary>

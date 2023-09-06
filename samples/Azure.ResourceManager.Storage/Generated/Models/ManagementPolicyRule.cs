@@ -14,6 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> An object that wraps the Lifecycle rule. Each rule is uniquely defined by name. </summary>
     public partial class ManagementPolicyRule
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ManagementPolicyRule"/>. </summary>

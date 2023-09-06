@@ -19,6 +19,7 @@ namespace body_complex.Models
     [AbstractTypeDeserializer(typeof(UnknownDotFish))]
     public abstract partial class DotFish
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="DotFish"/>. </summary>

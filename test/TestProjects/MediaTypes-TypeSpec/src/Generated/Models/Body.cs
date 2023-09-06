@@ -14,6 +14,7 @@ namespace MultipleMediaTypes.Models
     /// <summary> The Body. </summary>
     public partial class Body
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of Body. </summary>

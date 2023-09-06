@@ -14,6 +14,7 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Response to the get custom model operation. </summary>
     public partial class Model
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="Model"/>. </summary>

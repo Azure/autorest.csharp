@@ -12,13 +12,13 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
-namespace MgmtRenameRules.Models
+namespace MgmtAcronymMapping.Models
 {
-    public partial class MgmtRenameRulesSku : IUtf8JsonSerializable, IModelJsonSerializable<MgmtRenameRulesSku>
+    public partial class MgmtAcronymMappingSku : IUtf8JsonSerializable, IModelJsonSerializable<MgmtAcronymMappingSku>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MgmtRenameRulesSku>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MgmtAcronymMappingSku>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<MgmtRenameRulesSku>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<MgmtAcronymMappingSku>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -53,7 +53,7 @@ namespace MgmtRenameRules.Models
             writer.WriteEndObject();
         }
 
-        internal static MgmtRenameRulesSku DeserializeMgmtRenameRulesSku(JsonElement element, ModelSerializerOptions options = default)
+        internal static MgmtAcronymMappingSku DeserializeMgmtAcronymMappingSku(JsonElement element, ModelSerializerOptions options = default)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
 
@@ -92,35 +92,35 @@ namespace MgmtRenameRules.Models
                     continue;
                 }
             }
-            return new MgmtRenameRulesSku(name.Value, tier.Value, Optional.ToNullable(capacity), rawData);
+            return new MgmtAcronymMappingSku(name.Value, tier.Value, Optional.ToNullable(capacity), rawData);
         }
 
-        MgmtRenameRulesSku IModelJsonSerializable<MgmtRenameRulesSku>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        MgmtAcronymMappingSku IModelJsonSerializable<MgmtAcronymMappingSku>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeMgmtRenameRulesSku(doc.RootElement, options);
+            return DeserializeMgmtAcronymMappingSku(doc.RootElement, options);
         }
 
-        BinaryData IModelSerializable<MgmtRenameRulesSku>.Serialize(ModelSerializerOptions options)
+        BinaryData IModelSerializable<MgmtAcronymMappingSku>.Serialize(ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             return ModelSerializer.SerializeCore(this, options);
         }
 
-        MgmtRenameRulesSku IModelSerializable<MgmtRenameRulesSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        MgmtAcronymMappingSku IModelSerializable<MgmtAcronymMappingSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.Parse(data);
-            return DeserializeMgmtRenameRulesSku(doc.RootElement, options);
+            return DeserializeMgmtAcronymMappingSku(doc.RootElement, options);
         }
 
-        /// <summary> Converts a <see cref="MgmtRenameRulesSku"/> into a <see cref="RequestContent"/>. </summary>
-        /// <param name="model"> The <see cref="MgmtRenameRulesSku"/> to convert. </param>
-        public static implicit operator RequestContent(MgmtRenameRulesSku model)
+        /// <summary> Converts a <see cref="MgmtAcronymMappingSku"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="MgmtAcronymMappingSku"/> to convert. </param>
+        public static implicit operator RequestContent(MgmtAcronymMappingSku model)
         {
             if (model is null)
             {
@@ -130,9 +130,9 @@ namespace MgmtRenameRules.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
-        /// <summary> Converts a <see cref="Response"/> into a <see cref="MgmtRenameRulesSku"/>. </summary>
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="MgmtAcronymMappingSku"/>. </summary>
         /// <param name="response"> The <see cref="Response"/> to convert. </param>
-        public static explicit operator MgmtRenameRulesSku(Response response)
+        public static explicit operator MgmtAcronymMappingSku(Response response)
         {
             if (response is null)
             {
@@ -140,7 +140,7 @@ namespace MgmtRenameRules.Models
             }
 
             using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
-            return DeserializeMgmtRenameRulesSku(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeMgmtAcronymMappingSku(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

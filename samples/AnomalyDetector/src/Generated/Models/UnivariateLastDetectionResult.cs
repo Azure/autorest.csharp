@@ -13,6 +13,7 @@ namespace AnomalyDetector.Models
     /// <summary> The response of last anomaly detection. </summary>
     public partial class UnivariateLastDetectionResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of UnivariateLastDetectionResult. </summary>

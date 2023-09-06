@@ -18,6 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class KeyVaultSecretReference
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="KeyVaultSecretReference"/>. </summary>

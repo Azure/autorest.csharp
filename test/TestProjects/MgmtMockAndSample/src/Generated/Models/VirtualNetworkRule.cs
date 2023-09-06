@@ -14,6 +14,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> A rule governing the accessibility of a vault from a specific virtual network. </summary>
     public partial class VirtualNetworkRule
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualNetworkRule"/>. </summary>

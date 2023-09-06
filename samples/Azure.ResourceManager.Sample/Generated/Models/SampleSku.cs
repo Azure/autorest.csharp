@@ -12,10 +12,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
     /// Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the hardware the scale set is currently on, you need to deallocate the VMs in the scale set before you modify the SKU name.
-    /// Serialized Name: Sku
+    /// Serialized Name: SampleSku
     /// </summary>
     public partial class SampleSku
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="SampleSku"/>. </summary>
@@ -26,15 +27,15 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of <see cref="SampleSku"/>. </summary>
         /// <param name="name">
         /// The sku name.
-        /// Serialized Name: Sku.name
+        /// Serialized Name: SampleSku.name
         /// </param>
         /// <param name="tier">
         /// Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**
-        /// Serialized Name: Sku.tier
+        /// Serialized Name: SampleSku.tier
         /// </param>
         /// <param name="capacity">
         /// Specifies the number of virtual machines in the scale set.
-        /// Serialized Name: Sku.capacity
+        /// Serialized Name: SampleSku.capacity
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal SampleSku(string name, string tier, long? capacity, Dictionary<string, BinaryData> rawData)
@@ -47,17 +48,17 @@ namespace Azure.ResourceManager.Sample.Models
 
         /// <summary>
         /// The sku name.
-        /// Serialized Name: Sku.name
+        /// Serialized Name: SampleSku.name
         /// </summary>
         public string Name { get; set; }
         /// <summary>
         /// Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**
-        /// Serialized Name: Sku.tier
+        /// Serialized Name: SampleSku.tier
         /// </summary>
         public string Tier { get; set; }
         /// <summary>
         /// Specifies the number of virtual machines in the scale set.
-        /// Serialized Name: Sku.capacity
+        /// Serialized Name: SampleSku.capacity
         /// </summary>
         public long? Capacity { get; set; }
     }

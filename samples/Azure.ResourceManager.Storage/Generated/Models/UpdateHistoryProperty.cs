@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> An update history of the ImmutabilityPolicy of a blob container. </summary>
     public partial class UpdateHistoryProperty
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="UpdateHistoryProperty"/>. </summary>

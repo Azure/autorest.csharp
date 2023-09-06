@@ -34,7 +34,7 @@ namespace MgmtAcronymMapping.Models
                 }
                 else
                 {
-                    ((IModelJsonSerializable<MgmtRenameRulesPlan>)Plan).Serialize(writer, options);
+                    ((IModelJsonSerializable<MgmtAcronymMappingPlan>)Plan).Serialize(writer, options);
                 }
             }
             if (Optional.IsDefined(Identity))
@@ -101,16 +101,16 @@ namespace MgmtAcronymMapping.Models
                     ((IModelJsonSerializable<AdditionalCapabilities>)AdditionalCapabilities).Serialize(writer, options);
                 }
             }
-            if (Optional.IsDefined(OSProfile))
+            if (Optional.IsDefined(OsProfile))
             {
                 writer.WritePropertyName("osProfile"u8);
-                if (OSProfile is null)
+                if (OsProfile is null)
                 {
                     writer.WriteNullValue();
                 }
                 else
                 {
-                    ((IModelJsonSerializable<OSProfile>)OSProfile).Serialize(writer, options);
+                    ((IModelJsonSerializable<OSProfile>)OsProfile).Serialize(writer, options);
                 }
             }
             if (Optional.IsDefined(NetworkProfile))
@@ -230,7 +230,7 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<MgmtRenameRulesPlan> plan = default;
+            Optional<MgmtAcronymMappingPlan> plan = default;
             Optional<ManagedServiceIdentity> identity = default;
             Optional<IList<string>> zones = default;
             Optional<IDictionary<string, string>> tags = default;
@@ -263,7 +263,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    plan = MgmtRenameRulesPlan.DeserializeMgmtRenameRulesPlan(property.Value);
+                    plan = MgmtAcronymMappingPlan.DeserializeMgmtAcronymMappingPlan(property.Value);
                     continue;
                 }
                 if (property.NameEquals("identity"u8))

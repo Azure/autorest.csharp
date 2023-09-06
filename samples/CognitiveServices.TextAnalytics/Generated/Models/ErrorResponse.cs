@@ -14,6 +14,7 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The ErrorResponse. </summary>
     internal partial class ErrorResponse
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ErrorResponse"/>. </summary>

@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
     /// <summary> Represents the current status and execution history of an indexer. </summary>
     public partial class IndexerExecutionInfo
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="IndexerExecutionInfo"/>. </summary>

@@ -15,6 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Report for a custom model training document. </summary>
     public partial class TrainingDocumentInfo
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="TrainingDocumentInfo"/>. </summary>

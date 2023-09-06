@@ -14,6 +14,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> The operation for configuring intrusion detection. </summary>
     public partial class FirewallPolicyIntrusionDetectionConfiguration
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyIntrusionDetectionConfiguration"/>. </summary>

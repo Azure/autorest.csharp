@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MgmtRenameRules.Models
+namespace MgmtAcronymMapping.Models
 {
     /// <summary>
     /// The SubResourceReadOnly.
@@ -16,6 +16,7 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class SubResourceReadOnly
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="SubResourceReadOnly"/>. </summary>

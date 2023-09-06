@@ -14,6 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> The blob service properties for Last access time based tracking policy. </summary>
     public partial class LastAccessTimeTrackingPolicy
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="LastAccessTimeTrackingPolicy"/>. </summary>

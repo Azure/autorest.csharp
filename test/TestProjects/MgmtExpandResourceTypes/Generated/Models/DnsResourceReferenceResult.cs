@@ -14,6 +14,7 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> Represents the properties of the Dns Resource Reference Result. </summary>
     public partial class DnsResourceReferenceResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="DnsResourceReferenceResult"/>. </summary>

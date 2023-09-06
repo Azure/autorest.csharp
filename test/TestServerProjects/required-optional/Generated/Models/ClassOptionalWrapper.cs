@@ -13,6 +13,7 @@ namespace required_optional.Models
     /// <summary> The ClassOptionalWrapper. </summary>
     public partial class ClassOptionalWrapper
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ClassOptionalWrapper"/>. </summary>

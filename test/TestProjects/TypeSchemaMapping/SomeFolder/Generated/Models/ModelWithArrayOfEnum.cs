@@ -14,6 +14,7 @@ namespace TypeSchemaMapping.Models
     /// <summary> The ModelWithArrayOfEnum. </summary>
     internal partial class ModelWithArrayOfEnum
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelWithArrayOfEnum"/>. </summary>

@@ -16,6 +16,7 @@ namespace MgmtHierarchicalNonResource.Models
     /// <summary> The List Shared Galleries operation response. </summary>
     internal partial class SharedGalleryList
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="SharedGalleryList"/>. </summary>

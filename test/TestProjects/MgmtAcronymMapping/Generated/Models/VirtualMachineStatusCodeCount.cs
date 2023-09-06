@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MgmtRenameRules.Models
+namespace MgmtAcronymMapping.Models
 {
     /// <summary>
     /// The status code and count of the virtual machine scale set instance view status summary.
@@ -16,6 +16,7 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineStatusCodeCount
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineStatusCodeCount"/>. </summary>

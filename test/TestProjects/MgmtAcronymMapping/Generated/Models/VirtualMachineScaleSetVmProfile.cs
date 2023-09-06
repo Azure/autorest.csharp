@@ -8,22 +8,23 @@
 using System;
 using System.Collections.Generic;
 
-namespace MgmtRenameRules.Models
+namespace MgmtAcronymMapping.Models
 {
     /// <summary>
     /// Describes a virtual machine scale set virtual machine profile.
     /// Serialized Name: VirtualMachineScaleSetVMProfile
     /// </summary>
-    public partial class VirtualMachineScaleSetVmProfile
+    public partial class VirtualMachineScaleSetVMProfile
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmProfile"/>. </summary>
-        public VirtualMachineScaleSetVmProfile()
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMProfile"/>. </summary>
+        public VirtualMachineScaleSetVMProfile()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmProfile"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMProfile"/>. </summary>
         /// <param name="osProfile">
         /// Specifies the operating system settings for the virtual machines in the scale set.
         /// Serialized Name: VirtualMachineScaleSetVMProfile.osProfile
@@ -69,9 +70,9 @@ namespace MgmtRenameRules.Models
         /// Serialized Name: VirtualMachineScaleSetVMProfile.scheduledEventsProfile
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetVmProfile(VirtualMachineScaleSetOSProfile osProfile, VirtualMachineScaleSetStorageProfile storageProfile, VirtualMachineScaleSetNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, VirtualMachinePriorityType? priority, VirtualMachineEvictionPolicyType? evictionPolicy, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile, Dictionary<string, BinaryData> rawData)
+        internal VirtualMachineScaleSetVMProfile(VirtualMachineScaleSetOSProfile osProfile, VirtualMachineScaleSetStorageProfile storageProfile, VirtualMachineScaleSetNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, VirtualMachinePriorityType? priority, VirtualMachineEvictionPolicyType? evictionPolicy, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile, Dictionary<string, BinaryData> rawData)
         {
-            OSProfile = osProfile;
+            OsProfile = osProfile;
             StorageProfile = storageProfile;
             NetworkProfile = networkProfile;
             SecurityProfile = securityProfile;
@@ -89,7 +90,7 @@ namespace MgmtRenameRules.Models
         /// Specifies the operating system settings for the virtual machines in the scale set.
         /// Serialized Name: VirtualMachineScaleSetVMProfile.osProfile
         /// </summary>
-        public VirtualMachineScaleSetOSProfile OSProfile { get; set; }
+        public VirtualMachineScaleSetOSProfile OsProfile { get; set; }
         /// <summary>
         /// Specifies the storage settings for the virtual machine disks.
         /// Serialized Name: VirtualMachineScaleSetVMProfile.storageProfile

@@ -17,6 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetOSDisk
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetOSDisk"/>. </summary>
@@ -80,7 +81,7 @@ namespace Azure.ResourceManager.Sample.Models
             CreateOption = createOption;
             DiffDiskSettings = diffDiskSettings;
             DiskSizeGB = diskSizeGB;
-            OSType = osType;
+            OsType = osType;
             Image = image;
             VhdContainers = vhdContainers;
             ManagedDisk = managedDisk;
@@ -126,7 +127,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Windows** &lt;br&gt;&lt;br&gt; **Linux**
         /// Serialized Name: VirtualMachineScaleSetOSDisk.osType
         /// </summary>
-        public OperatingSystemType? OSType { get; set; }
+        public OperatingSystemType? OsType { get; set; }
         /// <summary>
         /// Specifies information about the unmanaged user image to base the scale set on.
         /// Serialized Name: VirtualMachineScaleSetOSDisk.image

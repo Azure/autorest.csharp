@@ -10,9 +10,9 @@ using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
-using MgmtRenameRules.Models;
+using MgmtAcronymMapping.Models;
 
-namespace MgmtRenameRules
+namespace MgmtAcronymMapping
 {
     /// <summary>
     /// A class representing the VirtualMachineScaleSet data model.
@@ -21,6 +21,7 @@ namespace MgmtRenameRules
     /// </summary>
     public partial class VirtualMachineScaleSetData : TrackedResourceData
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetData"/>. </summary>
@@ -57,11 +58,11 @@ namespace MgmtRenameRules
         /// The IPsec
         /// Serialized Name: VirtualMachineScaleSet.properties.ipsecSomething
         /// </param>
-        /// <param name="testIPsec">
+        /// <param name="testIPSec">
         /// The IPsec
         /// Serialized Name: VirtualMachineScaleSet.properties.testIPSec
         /// </param>
-        /// <param name="p2sServer">
+        /// <param name="p2SServer">
         /// The P2S Server
         /// Serialized Name: VirtualMachineScaleSet.properties.p2sServer
         /// </param>
@@ -85,7 +86,7 @@ namespace MgmtRenameRules
         /// Specifies whether the Virtual Machine Scale Set should be overprovisioned.
         /// Serialized Name: VirtualMachineScaleSet.properties.overprovision
         /// </param>
-        /// <param name="doNotRunExtensionsOnOverprovisionedVms">
+        /// <param name="doNotRunExtensionsOnOverprovisionedVMs">
         /// When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.
         /// Serialized Name: VirtualMachineScaleSet.properties.doNotRunExtensionsOnOverprovisionedVMs
         /// </param>
@@ -122,21 +123,21 @@ namespace MgmtRenameRules
         /// Serialized Name: VirtualMachineScaleSet.properties.scaleInPolicy
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, MgmtRenameRulesSku sku, MgmtRenameRulesPlan plan, ManagedServiceIdentity identity, IList<string> zones, string ipsecSomething, string testIPsec, string p2sServer, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetVmProfile virtualMachineProfile, string provisioningState, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVms, string uniqueId, bool? singlePlacementGroup, bool? zoneBalance, int? platformFaultDomainCount, WritableSubResource proximityPlacementGroup, WritableSubResource hostGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
+        internal VirtualMachineScaleSetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, MgmtAcronymMappingSku sku, MgmtAcronymMappingPlan plan, ManagedServiceIdentity identity, IList<string> zones, string ipsecSomething, string testIPSec, string p2SServer, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetVMProfile virtualMachineProfile, string provisioningState, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVMs, string uniqueId, bool? singlePlacementGroup, bool? zoneBalance, int? platformFaultDomainCount, WritableSubResource proximityPlacementGroup, WritableSubResource hostGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Sku = sku;
             Plan = plan;
             Identity = identity;
             Zones = zones;
-            IPsecSomething = ipsecSomething;
-            TestIPsec = testIPsec;
-            P2SServer = p2sServer;
+            IpsecSomething = ipsecSomething;
+            TestIPSec = testIPSec;
+            P2SServer = p2SServer;
             UpgradePolicy = upgradePolicy;
             AutomaticRepairsPolicy = automaticRepairsPolicy;
             VirtualMachineProfile = virtualMachineProfile;
             ProvisioningState = provisioningState;
             Overprovision = overprovision;
-            DoNotRunExtensionsOnOverprovisionedVms = doNotRunExtensionsOnOverprovisionedVms;
+            DoNotRunExtensionsOnOverprovisionedVMs = doNotRunExtensionsOnOverprovisionedVMs;
             UniqueId = uniqueId;
             SinglePlacementGroup = singlePlacementGroup;
             ZoneBalance = zoneBalance;
@@ -157,12 +158,12 @@ namespace MgmtRenameRules
         /// The virtual machine scale set sku.
         /// Serialized Name: VirtualMachineScaleSet.sku
         /// </summary>
-        public MgmtRenameRulesSku Sku { get; set; }
+        public MgmtAcronymMappingSku Sku { get; set; }
         /// <summary>
         /// Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**.
         /// Serialized Name: VirtualMachineScaleSet.plan
         /// </summary>
-        public MgmtRenameRulesPlan Plan { get; set; }
+        public MgmtAcronymMappingPlan Plan { get; set; }
         /// <summary>
         /// The identity of the virtual machine scale set, if configured.
         /// Serialized Name: VirtualMachineScaleSet.identity
@@ -177,12 +178,12 @@ namespace MgmtRenameRules
         /// The IPsec
         /// Serialized Name: VirtualMachineScaleSet.properties.ipsecSomething
         /// </summary>
-        public string IPsecSomething { get; set; }
+        public string IpsecSomething { get; set; }
         /// <summary>
         /// The IPsec
         /// Serialized Name: VirtualMachineScaleSet.properties.testIPSec
         /// </summary>
-        public string TestIPsec { get; set; }
+        public string TestIPSec { get; set; }
         /// <summary>
         /// The P2S Server
         /// Serialized Name: VirtualMachineScaleSet.properties.p2sServer
@@ -202,7 +203,7 @@ namespace MgmtRenameRules
         /// The virtual machine profile.
         /// Serialized Name: VirtualMachineScaleSet.properties.virtualMachineProfile
         /// </summary>
-        public VirtualMachineScaleSetVmProfile VirtualMachineProfile { get; set; }
+        public VirtualMachineScaleSetVMProfile VirtualMachineProfile { get; set; }
         /// <summary>
         /// The provisioning state, which only appears in the response.
         /// Serialized Name: VirtualMachineScaleSet.properties.provisioningState
@@ -217,7 +218,7 @@ namespace MgmtRenameRules
         /// When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.
         /// Serialized Name: VirtualMachineScaleSet.properties.doNotRunExtensionsOnOverprovisionedVMs
         /// </summary>
-        public bool? DoNotRunExtensionsOnOverprovisionedVms { get; set; }
+        public bool? DoNotRunExtensionsOnOverprovisionedVMs { get; set; }
         /// <summary>
         /// Specifies the ID which uniquely identifies a Virtual Machine Scale Set.
         /// Serialized Name: VirtualMachineScaleSet.properties.uniqueId

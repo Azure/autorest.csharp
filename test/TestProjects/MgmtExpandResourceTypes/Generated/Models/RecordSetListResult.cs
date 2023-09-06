@@ -15,6 +15,7 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> The response to a record set List operation. </summary>
     internal partial class RecordSetListResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="RecordSetListResult"/>. </summary>

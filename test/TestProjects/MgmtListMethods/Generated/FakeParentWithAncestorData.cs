@@ -18,6 +18,7 @@ namespace MgmtListMethods
     /// </summary>
     public partial class FakeParentWithAncestorData : TrackedResourceData
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="FakeParentWithAncestorData"/>. </summary>

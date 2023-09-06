@@ -14,6 +14,7 @@ namespace AnomalyDetector.Models
     /// <summary> Diagnostics information to help inspect the states of model or variable. </summary>
     public partial class DiagnosticsInfo
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of DiagnosticsInfo. </summary>

@@ -14,6 +14,7 @@ namespace FirstTestTypeSpec.Models
     /// <summary> this is a model with a projected name. </summary>
     public partial class ProjectedModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of ProjectedModel. </summary>

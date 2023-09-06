@@ -19,6 +19,7 @@ namespace PetStore.Models
     [AbstractTypeDeserializer(typeof(UnknownFish))]
     public abstract partial class Fish
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of Fish. </summary>

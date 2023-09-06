@@ -766,7 +766,7 @@ namespace MgmtAcronymMapping.Models
         /// Serialized Name: VirtualMachineUpdate.properties.extensionsTimeBudget
         /// </param>
         /// <returns> A new <see cref="Models.VirtualMachinePatch"/> instance for mocking. </returns>
-        public static VirtualMachinePatch VirtualMachinePatch(IDictionary<string, string> tags = null, MgmtRenameRulesPlan plan = null, ManagedServiceIdentity identity = null, IEnumerable<string> zones = null, VirtualMachineSizeType? hardwareVmSize = null, StorageProfile storageProfile = null, bool? ultraSSDEnabled = null, OSProfile osProfile = null, IEnumerable<NetworkInterfaceReference> networkInterfaces = null, bool? encryptionAtHost = null, BootDiagnostics bootDiagnostics = null, ResourceIdentifier availabilitySetId = null, ResourceIdentifier virtualMachineScaleSetId = null, ResourceIdentifier proximityPlacementGroupId = null, VirtualMachinePriorityType? priority = null, VirtualMachineEvictionPolicyType? evictionPolicy = null, double? billingMaxPrice = null, ResourceIdentifier hostId = null, ResourceIdentifier hostGroupId = null, string provisioningState = null, VirtualMachineInstanceView instanceView = null, string licenseType = null, string vmId = null, string extensionsTimeBudget = null)
+        public static VirtualMachinePatch VirtualMachinePatch(IDictionary<string, string> tags = null, MgmtAcronymMappingPlan plan = null, ManagedServiceIdentity identity = null, IEnumerable<string> zones = null, VirtualMachineSizeType? hardwareVmSize = null, StorageProfile storageProfile = null, bool? ultraSSDEnabled = null, OSProfile osProfile = null, IEnumerable<NetworkInterfaceReference> networkInterfaces = null, bool? encryptionAtHost = null, BootDiagnostics bootDiagnostics = null, ResourceIdentifier availabilitySetId = null, ResourceIdentifier virtualMachineScaleSetId = null, ResourceIdentifier proximityPlacementGroupId = null, VirtualMachinePriorityType? priority = null, VirtualMachineEvictionPolicyType? evictionPolicy = null, double? billingMaxPrice = null, ResourceIdentifier hostId = null, ResourceIdentifier hostGroupId = null, string provisioningState = null, VirtualMachineInstanceView instanceView = null, string licenseType = null, string vmId = null, string extensionsTimeBudget = null)
         {
             tags ??= new Dictionary<string, string>();
             zones ??= new List<string>();
@@ -938,11 +938,11 @@ namespace MgmtAcronymMapping.Models
         /// The IPsec
         /// Serialized Name: VirtualMachineScaleSet.properties.ipsecSomething
         /// </param>
-        /// <param name="testIPsec">
+        /// <param name="testIPSec">
         /// The IPsec
         /// Serialized Name: VirtualMachineScaleSet.properties.testIPSec
         /// </param>
-        /// <param name="p2sServer">
+        /// <param name="p2SServer">
         /// The P2S Server
         /// Serialized Name: VirtualMachineScaleSet.properties.p2sServer
         /// </param>
@@ -966,7 +966,7 @@ namespace MgmtAcronymMapping.Models
         /// Specifies whether the Virtual Machine Scale Set should be overprovisioned.
         /// Serialized Name: VirtualMachineScaleSet.properties.overprovision
         /// </param>
-        /// <param name="doNotRunExtensionsOnOverprovisionedVms">
+        /// <param name="doNotRunExtensionsOnOverprovisionedVMs">
         /// When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.
         /// Serialized Name: VirtualMachineScaleSet.properties.doNotRunExtensionsOnOverprovisionedVMs
         /// </param>
@@ -1003,13 +1003,13 @@ namespace MgmtAcronymMapping.Models
         /// Serialized Name: VirtualMachineScaleSet.properties.scaleInPolicy
         /// </param>
         /// <returns> A new <see cref="MgmtAcronymMapping.VirtualMachineScaleSetData"/> instance for mocking. </returns>
-        public static VirtualMachineScaleSetData VirtualMachineScaleSetData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, MgmtAcronymMappingSku sku = null, MgmtAcronymMappingPlan plan = null, ManagedServiceIdentity identity = null, IEnumerable<string> zones = null, string ipsecSomething = null, string testIPsec = null, string p2sServer = null, UpgradePolicy upgradePolicy = null, AutomaticRepairsPolicy automaticRepairsPolicy = null, VirtualMachineScaleSetVmProfile virtualMachineProfile = null, string provisioningState = null, bool? overprovision = null, bool? doNotRunExtensionsOnOverprovisionedVms = null, string uniqueId = null, bool? singlePlacementGroup = null, bool? zoneBalance = null, int? platformFaultDomainCount = null, ResourceIdentifier proximityPlacementGroupId = null, ResourceIdentifier hostGroupId = null, bool? ultraSSDEnabled = null, IEnumerable<VirtualMachineScaleSetScaleInRule> scaleInRules = null)
+        public static VirtualMachineScaleSetData VirtualMachineScaleSetData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, MgmtAcronymMappingSku sku = null, MgmtAcronymMappingPlan plan = null, ManagedServiceIdentity identity = null, IEnumerable<string> zones = null, string ipsecSomething = null, string testIPSec = null, string p2SServer = null, UpgradePolicy upgradePolicy = null, AutomaticRepairsPolicy automaticRepairsPolicy = null, VirtualMachineScaleSetVMProfile virtualMachineProfile = null, string provisioningState = null, bool? overprovision = null, bool? doNotRunExtensionsOnOverprovisionedVMs = null, string uniqueId = null, bool? singlePlacementGroup = null, bool? zoneBalance = null, int? platformFaultDomainCount = null, ResourceIdentifier proximityPlacementGroupId = null, ResourceIdentifier hostGroupId = null, bool? ultraSSDEnabled = null, IEnumerable<VirtualMachineScaleSetScaleInRule> scaleInRules = null)
         {
             tags ??= new Dictionary<string, string>();
             zones ??= new List<string>();
             scaleInRules ??= new List<VirtualMachineScaleSetScaleInRule>();
 
-            return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, sku, plan, identity, zones?.ToList(), ipsecSomething, testIPsec, p2sServer, upgradePolicy, automaticRepairsPolicy, virtualMachineProfile, provisioningState, overprovision, doNotRunExtensionsOnOverprovisionedVms, uniqueId, singlePlacementGroup, zoneBalance, platformFaultDomainCount, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, scaleInRules != null ? new ScaleInPolicy(scaleInRules?.ToList(), new Dictionary<string, BinaryData>()) : null, default);
+            return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, sku, plan, identity, zones?.ToList(), ipsecSomething, testIPSec, p2SServer, upgradePolicy, automaticRepairsPolicy, virtualMachineProfile, provisioningState, overprovision, doNotRunExtensionsOnOverprovisionedVMs, uniqueId, singlePlacementGroup, zoneBalance, platformFaultDomainCount, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, scaleInRules != null ? new ScaleInPolicy(scaleInRules?.ToList(), new Dictionary<string, BinaryData>()) : null, default);
         }
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionData"/>. </summary>
@@ -1102,10 +1102,10 @@ namespace MgmtAcronymMapping.Models
         /// Serialized Name: VirtualMachineScaleSetInstanceView.orchestrationServices
         /// </param>
         /// <returns> A new <see cref="Models.VirtualMachineScaleSetInstanceView"/> instance for mocking. </returns>
-        public static VirtualMachineScaleSetInstanceView VirtualMachineScaleSetInstanceView(IEnumerable<VirtualMachineStatusCodeCount> virtualMachineStatusesSummary = null, IEnumerable<VirtualMachineScaleSetVmExtensionsSummary> extensions = null, IEnumerable<InstanceViewStatus> statuses = null, IEnumerable<OrchestrationServiceSummary> orchestrationServices = null)
+        public static VirtualMachineScaleSetInstanceView VirtualMachineScaleSetInstanceView(IEnumerable<VirtualMachineStatusCodeCount> virtualMachineStatusesSummary = null, IEnumerable<VirtualMachineScaleSetVMExtensionsSummary> extensions = null, IEnumerable<InstanceViewStatus> statuses = null, IEnumerable<OrchestrationServiceSummary> orchestrationServices = null)
         {
             virtualMachineStatusesSummary ??= new List<VirtualMachineStatusCodeCount>();
-            extensions ??= new List<VirtualMachineScaleSetVmExtensionsSummary>();
+            extensions ??= new List<VirtualMachineScaleSetVMExtensionsSummary>();
             statuses ??= new List<InstanceViewStatus>();
             orchestrationServices ??= new List<OrchestrationServiceSummary>();
 
@@ -1127,7 +1127,7 @@ namespace MgmtAcronymMapping.Models
             return new VirtualMachineStatusCodeCount(code, count, default);
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmExtensionsSummary"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMExtensionsSummary"/>. </summary>
         /// <param name="name">
         /// The extension name.
         /// Serialized Name: VirtualMachineScaleSetVMExtensionsSummary.name
@@ -1136,12 +1136,12 @@ namespace MgmtAcronymMapping.Models
         /// The extensions information.
         /// Serialized Name: VirtualMachineScaleSetVMExtensionsSummary.statusesSummary
         /// </param>
-        /// <returns> A new <see cref="Models.VirtualMachineScaleSetVmExtensionsSummary"/> instance for mocking. </returns>
-        public static VirtualMachineScaleSetVmExtensionsSummary VirtualMachineScaleSetVmExtensionsSummary(string name = null, IEnumerable<VirtualMachineStatusCodeCount> statusesSummary = null)
+        /// <returns> A new <see cref="Models.VirtualMachineScaleSetVMExtensionsSummary"/> instance for mocking. </returns>
+        public static VirtualMachineScaleSetVMExtensionsSummary VirtualMachineScaleSetVMExtensionsSummary(string name = null, IEnumerable<VirtualMachineStatusCodeCount> statusesSummary = null)
         {
             statusesSummary ??= new List<VirtualMachineStatusCodeCount>();
 
-            return new VirtualMachineScaleSetVmExtensionsSummary(name, statusesSummary?.ToList(), default);
+            return new VirtualMachineScaleSetVMExtensionsSummary(name, statusesSummary?.ToList(), default);
         }
 
         /// <summary> Initializes a new instance of <see cref="OrchestrationServiceSummary"/>. </summary>
@@ -1434,7 +1434,7 @@ namespace MgmtAcronymMapping.Models
             return new RecoveryWalkResponse(walkPerformed, nextPlatformUpdateDomain, default);
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmData"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -1521,18 +1521,18 @@ namespace MgmtAcronymMapping.Models
         /// Specifies the protection policy of the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.protectionPolicy
         /// </param>
-        /// <returns> A new <see cref="MgmtAcronymMapping.VirtualMachineScaleSetVmData"/> instance for mocking. </returns>
-        public static VirtualMachineScaleSetVmData VirtualMachineScaleSetVmData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string instanceId = null, MgmtAcronymMappingSku sku = null, MgmtAcronymMappingPlan plan = null, IEnumerable<string> zones = null, bool? latestModelApplied = null, string vmId = null, VirtualMachineScaleSetVmInstanceView instanceView = null, VirtualMachineSizeType? hardwareVmSize = null, StorageProfile storageProfile = null, bool? ultraSSDEnabled = null, OSProfile osProfile = null, bool? encryptionAtHost = null, IEnumerable<NetworkInterfaceReference> networkInterfaces = null, IEnumerable<VirtualMachineScaleSetNetworkConfiguration> networkInterfaceConfigurations = null, BootDiagnostics bootDiagnostics = null, ResourceIdentifier availabilitySetId = null, string provisioningState = null, string licenseType = null, string modelDefinitionApplied = null, VirtualMachineScaleSetVmProtectionPolicy protectionPolicy = null)
+        /// <returns> A new <see cref="MgmtAcronymMapping.VirtualMachineScaleSetVMData"/> instance for mocking. </returns>
+        public static VirtualMachineScaleSetVMData VirtualMachineScaleSetVMData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string instanceId = null, MgmtAcronymMappingSku sku = null, MgmtAcronymMappingPlan plan = null, IEnumerable<string> zones = null, bool? latestModelApplied = null, string vmId = null, VirtualMachineScaleSetVMInstanceView instanceView = null, VirtualMachineSizeType? hardwareVmSize = null, StorageProfile storageProfile = null, bool? ultraSSDEnabled = null, OSProfile osProfile = null, bool? encryptionAtHost = null, IEnumerable<NetworkInterfaceReference> networkInterfaces = null, IEnumerable<VirtualMachineScaleSetNetworkConfiguration> networkInterfaceConfigurations = null, BootDiagnostics bootDiagnostics = null, ResourceIdentifier availabilitySetId = null, string provisioningState = null, string licenseType = null, string modelDefinitionApplied = null, VirtualMachineScaleSetVMProtectionPolicy protectionPolicy = null)
         {
             tags ??= new Dictionary<string, string>();
             zones ??= new List<string>();
             networkInterfaces ??= new List<NetworkInterfaceReference>();
             networkInterfaceConfigurations ??= new List<VirtualMachineScaleSetNetworkConfiguration>();
 
-            return new VirtualMachineScaleSetVmData(id, name, resourceType, systemData, tags, location, instanceId, sku, plan, zones?.ToList(), latestModelApplied, vmId, instanceView, hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, networkInterfaceConfigurations != null ? new VirtualMachineScaleSetVmNetworkProfileConfiguration(networkInterfaceConfigurations?.ToList(), new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, provisioningState, licenseType, modelDefinitionApplied, protectionPolicy, default);
+            return new VirtualMachineScaleSetVMData(id, name, resourceType, systemData, tags, location, instanceId, sku, plan, zones?.ToList(), latestModelApplied, vmId, instanceView, hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, networkInterfaceConfigurations != null ? new VirtualMachineScaleSetVMNetworkProfileConfiguration(networkInterfaceConfigurations?.ToList(), new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, provisioningState, licenseType, modelDefinitionApplied, protectionPolicy, default);
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmInstanceView"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMInstanceView"/>. </summary>
         /// <param name="platformUpdateDomain">
         /// The Update Domain count.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceView.platformUpdateDomain
@@ -1577,13 +1577,13 @@ namespace MgmtAcronymMapping.Models
         /// The placement group in which the VM is running. If the VM is deallocated it will not have a placementGroupId.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceView.placementGroupId
         /// </param>
-        /// <returns> A new <see cref="Models.VirtualMachineScaleSetVmInstanceView"/> instance for mocking. </returns>
-        public static VirtualMachineScaleSetVmInstanceView VirtualMachineScaleSetVmInstanceView(int? platformUpdateDomain = null, int? platformFaultDomain = null, string rdpThumbPrint = null, VirtualMachineAgentInstanceView vmAgent = null, MaintenanceRedeployStatus maintenanceRedeployStatus = null, IEnumerable<DiskInstanceView> disks = null, InstanceViewStatus vmHealthStatus = null, BootDiagnosticsInstanceView bootDiagnostics = null, IEnumerable<InstanceViewStatus> statuses = null, string assignedHost = null, ResourceIdentifier placementGroupId = null)
+        /// <returns> A new <see cref="Models.VirtualMachineScaleSetVMInstanceView"/> instance for mocking. </returns>
+        public static VirtualMachineScaleSetVMInstanceView VirtualMachineScaleSetVMInstanceView(int? platformUpdateDomain = null, int? platformFaultDomain = null, string rdpThumbPrint = null, VirtualMachineAgentInstanceView vmAgent = null, MaintenanceRedeployStatus maintenanceRedeployStatus = null, IEnumerable<DiskInstanceView> disks = null, InstanceViewStatus vmHealthStatus = null, BootDiagnosticsInstanceView bootDiagnostics = null, IEnumerable<InstanceViewStatus> statuses = null, string assignedHost = null, ResourceIdentifier placementGroupId = null)
         {
             disks ??= new List<DiskInstanceView>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new VirtualMachineScaleSetVmInstanceView(platformUpdateDomain, platformFaultDomain, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus, new Dictionary<string, BinaryData>()) : null, bootDiagnostics, statuses?.ToList(), assignedHost, placementGroupId, default);
+            return new VirtualMachineScaleSetVMInstanceView(platformUpdateDomain, platformFaultDomain, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus, new Dictionary<string, BinaryData>()) : null, bootDiagnostics, statuses?.ToList(), assignedHost, placementGroupId, default);
         }
 
         /// <summary> Initializes a new instance of <see cref="RequestRateByIntervalContent"/>. </summary>

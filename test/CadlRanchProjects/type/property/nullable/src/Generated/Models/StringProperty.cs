@@ -14,6 +14,7 @@ namespace _Type.Property.Nullable.Models
     /// <summary> Template type for testing models with nullable property. Pass in the type of the property you are looking for. </summary>
     public partial class StringProperty
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of StringProperty. </summary>

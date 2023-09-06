@@ -40,10 +40,10 @@ namespace MgmtAcronymMapping.Models
                     ((IModelJsonSerializable<SshConfiguration>)Ssh).Serialize(writer, options);
                 }
             }
-            if (Optional.IsDefined(ProvisionVmAgent))
+            if (Optional.IsDefined(ProvisionVMAgent))
             {
                 writer.WritePropertyName("provisionVMAgent"u8);
-                writer.WriteBooleanValue(ProvisionVmAgent.Value);
+                writer.WriteBooleanValue(ProvisionVMAgent.Value);
             }
             if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
@@ -70,7 +70,7 @@ namespace MgmtAcronymMapping.Models
             }
             Optional<bool> disablePasswordAuthentication = default;
             Optional<SshConfiguration> ssh = default;
-            Optional<bool> provisionVmAgent = default;
+            Optional<bool> provisionVMAgent = default;
             Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
@@ -98,7 +98,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    provisionVmAgent = property.Value.GetBoolean();
+                    provisionVMAgent = property.Value.GetBoolean();
                     continue;
                 }
                 if (options.Format == ModelSerializerFormat.Json)
@@ -107,7 +107,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new LinuxConfiguration(Optional.ToNullable(disablePasswordAuthentication), ssh.Value, Optional.ToNullable(provisionVmAgent), rawData);
+            return new LinuxConfiguration(Optional.ToNullable(disablePasswordAuthentication), ssh.Value, Optional.ToNullable(provisionVMAgent), rawData);
         }
 
         LinuxConfiguration IModelJsonSerializable<LinuxConfiguration>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

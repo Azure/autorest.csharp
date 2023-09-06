@@ -26,7 +26,7 @@ namespace dpg_customization_LowLevel
             try
             {
                 RequestContext requestContext = new RequestContext { CancellationToken = cancellationToken };
-                Response response = await GetModelAsync(mode, requestContext);
+                Response response = await GetModelAsync(mode, requestContext).ConfigureAwait(false);
                 return Response.FromValue((Product)response, response);
             }
             catch (Exception e)
@@ -69,7 +69,7 @@ namespace dpg_customization_LowLevel
             RequestContext requestContext = new RequestContext();
             requestContext.CancellationToken = cancellationToken;
 
-            Response response = await PostModelAsync("model", input, requestContext);
+            Response response = await PostModelAsync("model", input, requestContext).ConfigureAwait(false);
             return Response.FromValue((Product)response, response);
         }
 

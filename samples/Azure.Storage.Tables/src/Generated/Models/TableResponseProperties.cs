@@ -13,6 +13,7 @@ namespace Azure.Storage.Tables.Models
     /// <summary> The properties for the table response. </summary>
     public partial class TableResponseProperties
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="TableResponseProperties"/>. </summary>

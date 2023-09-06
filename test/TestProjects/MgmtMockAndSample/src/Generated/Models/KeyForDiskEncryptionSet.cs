@@ -15,6 +15,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> Key Vault Key Url to be used for server side encryption of Managed Disks and Snapshots. </summary>
     public partial class KeyForDiskEncryptionSet
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="KeyForDiskEncryptionSet"/>. </summary>

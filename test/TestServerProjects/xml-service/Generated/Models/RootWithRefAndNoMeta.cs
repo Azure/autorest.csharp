@@ -13,6 +13,7 @@ namespace xml_service.Models
     /// <summary> I am root, and I ref a model with no meta. </summary>
     public partial class RootWithRefAndNoMeta
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="RootWithRefAndNoMeta"/>. </summary>

@@ -10,9 +10,9 @@ using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
-using MgmtRenameRules.Models;
+using MgmtAcronymMapping.Models;
 
-namespace MgmtRenameRules
+namespace MgmtAcronymMapping
 {
     /// <summary>
     /// A class representing the VirtualMachine data model.
@@ -21,6 +21,7 @@ namespace MgmtRenameRules
     /// </summary>
     public partial class VirtualMachineData : TrackedResourceData
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineData"/>. </summary>
@@ -130,7 +131,7 @@ namespace MgmtRenameRules
         /// Serialized Name: VirtualMachine.properties.extensionsTimeBudget
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, MgmtRenameRulesPlan plan, ManagedServiceIdentity identity, IList<string> zones, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, NetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, WritableSubResource virtualMachineScaleSet, WritableSubResource proximityPlacementGroup, VirtualMachinePriorityType? priority, VirtualMachineEvictionPolicyType? evictionPolicy, BillingProfile billingProfile, WritableSubResource host, WritableSubResource hostGroup, string provisioningState, VirtualMachineInstanceView instanceView, string licenseType, string vmId, string extensionsTimeBudget, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
+        internal VirtualMachineData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, MgmtAcronymMappingPlan plan, ManagedServiceIdentity identity, IList<string> zones, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, NetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, WritableSubResource virtualMachineScaleSet, WritableSubResource proximityPlacementGroup, VirtualMachinePriorityType? priority, VirtualMachineEvictionPolicyType? evictionPolicy, BillingProfile billingProfile, WritableSubResource host, WritableSubResource hostGroup, string provisioningState, VirtualMachineInstanceView instanceView, string licenseType, string vmId, string extensionsTimeBudget, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Plan = plan;
             Identity = identity;
@@ -138,7 +139,7 @@ namespace MgmtRenameRules
             HardwareProfile = hardwareProfile;
             StorageProfile = storageProfile;
             AdditionalCapabilities = additionalCapabilities;
-            OSProfile = osProfile;
+            OsProfile = osProfile;
             NetworkProfile = networkProfile;
             SecurityProfile = securityProfile;
             DiagnosticsProfile = diagnosticsProfile;
@@ -167,7 +168,7 @@ namespace MgmtRenameRules
         /// Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**.
         /// Serialized Name: VirtualMachine.plan
         /// </summary>
-        public MgmtRenameRulesPlan Plan { get; set; }
+        public MgmtAcronymMappingPlan Plan { get; set; }
         /// <summary>
         /// The identity of the virtual machine, if configured.
         /// Serialized Name: VirtualMachine.identity
@@ -227,7 +228,7 @@ namespace MgmtRenameRules
         /// Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned.
         /// Serialized Name: VirtualMachine.properties.osProfile
         /// </summary>
-        public OSProfile OSProfile { get; set; }
+        public OSProfile OsProfile { get; set; }
         /// <summary>
         /// Specifies the network interfaces of the virtual machine.
         /// Serialized Name: VirtualMachine.properties.networkProfile

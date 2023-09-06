@@ -13,6 +13,7 @@ namespace MgmtExtensionResource.Models
     /// <summary> Response for the CheckDnsNameAvailability API service call. </summary>
     public partial class DnsNameAvailabilityResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="DnsNameAvailabilityResult"/>. </summary>

@@ -15,6 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Analyze operation result. </summary>
     public partial class AnalyzeResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="AnalyzeResult"/>. </summary>

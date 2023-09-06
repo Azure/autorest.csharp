@@ -13,6 +13,7 @@ namespace MgmtSupersetFlattenInheritance.Models
     /// <summary> Normal custom object with flatten properties from CustomModel2. Also marked as azure resource, but it's not recognized either. </summary>
     public partial class NonResourceModel1
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="NonResourceModel1"/>. </summary>

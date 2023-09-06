@@ -19,6 +19,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
     [AbstractTypeDeserializer(typeof(UnknownDog))]
     public abstract partial class Dog
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of Dog. </summary>

@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> Object level immutability properties of the container. </summary>
     public partial class ImmutableStorageWithVersioning
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ImmutableStorageWithVersioning"/>. </summary>

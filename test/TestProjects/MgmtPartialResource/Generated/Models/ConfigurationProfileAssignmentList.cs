@@ -15,6 +15,7 @@ namespace MgmtPartialResource.Models
     /// <summary> The response of the list configuration profile assignment operation. </summary>
     internal partial class ConfigurationProfileAssignmentList
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ConfigurationProfileAssignmentList"/>. </summary>

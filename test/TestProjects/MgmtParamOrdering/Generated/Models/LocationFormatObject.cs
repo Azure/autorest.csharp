@@ -14,6 +14,7 @@ namespace MgmtParamOrdering.Models
     /// <summary> The LocationFormatObject. </summary>
     internal partial class LocationFormatObject
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="LocationFormatObject"/>. </summary>

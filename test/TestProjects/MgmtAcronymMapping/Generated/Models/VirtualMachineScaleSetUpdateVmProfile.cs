@@ -8,22 +8,23 @@
 using System;
 using System.Collections.Generic;
 
-namespace MgmtRenameRules.Models
+namespace MgmtAcronymMapping.Models
 {
     /// <summary>
     /// Describes a virtual machine scale set virtual machine profile.
     /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile
     /// </summary>
-    public partial class VirtualMachineScaleSetUpdateVmProfile
+    public partial class VirtualMachineScaleSetUpdateVMProfile
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateVmProfile"/>. </summary>
-        public VirtualMachineScaleSetUpdateVmProfile()
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateVMProfile"/>. </summary>
+        public VirtualMachineScaleSetUpdateVMProfile()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateVmProfile"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateVMProfile"/>. </summary>
         /// <param name="osProfile">
         /// The virtual machine scale set OS profile.
         /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.osProfile
@@ -61,9 +62,9 @@ namespace MgmtRenameRules.Models
         /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.scheduledEventsProfile
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetUpdateVmProfile(VirtualMachineScaleSetUpdateOSProfile osProfile, VirtualMachineScaleSetUpdateStorageProfile storageProfile, VirtualMachineScaleSetUpdateNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile, Dictionary<string, BinaryData> rawData)
+        internal VirtualMachineScaleSetUpdateVMProfile(VirtualMachineScaleSetUpdateOSProfile osProfile, VirtualMachineScaleSetUpdateStorageProfile storageProfile, VirtualMachineScaleSetUpdateNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile, Dictionary<string, BinaryData> rawData)
         {
-            OSProfile = osProfile;
+            OsProfile = osProfile;
             StorageProfile = storageProfile;
             NetworkProfile = networkProfile;
             SecurityProfile = securityProfile;
@@ -79,7 +80,7 @@ namespace MgmtRenameRules.Models
         /// The virtual machine scale set OS profile.
         /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.osProfile
         /// </summary>
-        public VirtualMachineScaleSetUpdateOSProfile OSProfile { get; set; }
+        public VirtualMachineScaleSetUpdateOSProfile OsProfile { get; set; }
         /// <summary>
         /// The virtual machine scale set storage profile.
         /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.storageProfile

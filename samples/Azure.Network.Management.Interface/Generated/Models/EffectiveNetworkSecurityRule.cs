@@ -14,6 +14,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Effective network security rules. </summary>
     public partial class EffectiveNetworkSecurityRule
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="EffectiveNetworkSecurityRule"/>. </summary>

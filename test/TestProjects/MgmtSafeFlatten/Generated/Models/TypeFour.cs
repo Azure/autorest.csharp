@@ -13,6 +13,7 @@ namespace MgmtSafeFlatten.Models
     /// <summary> The TypeFour. </summary>
     internal partial class TypeFour
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="TypeFour"/>. </summary>

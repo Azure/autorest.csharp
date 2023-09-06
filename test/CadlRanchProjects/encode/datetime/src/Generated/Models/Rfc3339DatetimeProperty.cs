@@ -13,6 +13,7 @@ namespace Encode.Datetime.Models
     /// <summary> The Rfc3339DatetimeProperty. </summary>
     public partial class Rfc3339DatetimeProperty
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of Rfc3339DatetimeProperty. </summary>

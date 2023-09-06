@@ -14,6 +14,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Response for list effective network security groups API service call. </summary>
     public partial class EffectiveNetworkSecurityGroupListResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="EffectiveNetworkSecurityGroupListResult"/>. </summary>

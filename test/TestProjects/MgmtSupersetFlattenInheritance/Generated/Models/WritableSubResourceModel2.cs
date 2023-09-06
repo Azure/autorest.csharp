@@ -13,6 +13,7 @@ namespace MgmtSupersetFlattenInheritance.Models
     /// <summary> WritableSubResource with flatten properties. </summary>
     public partial class WritableSubResourceModel2
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="WritableSubResourceModel2"/>. </summary>

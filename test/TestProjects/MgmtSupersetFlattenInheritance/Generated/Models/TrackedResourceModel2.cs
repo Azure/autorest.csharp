@@ -15,6 +15,7 @@ namespace MgmtSupersetFlattenInheritance.Models
     /// <summary> TrackedResource with flatten properties, but the id comes from flattened properties, therefore this should not be a resource. </summary>
     public partial class TrackedResourceModel2 : TrackedResourceData
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="TrackedResourceModel2"/>. </summary>

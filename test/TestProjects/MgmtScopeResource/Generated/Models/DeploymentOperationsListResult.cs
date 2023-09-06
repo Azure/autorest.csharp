@@ -14,6 +14,7 @@ namespace MgmtScopeResource.Models
     /// <summary> List of deployment operations. </summary>
     internal partial class DeploymentOperationsListResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="DeploymentOperationsListResult"/>. </summary>

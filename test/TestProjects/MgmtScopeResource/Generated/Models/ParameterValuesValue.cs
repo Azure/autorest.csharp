@@ -13,6 +13,7 @@ namespace MgmtScopeResource.Models
     /// <summary> The value of a parameter. </summary>
     public partial class ParameterValuesValue
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ParameterValuesValue"/>. </summary>

@@ -13,6 +13,7 @@ namespace MgmtPartialResource.Models
     /// <summary> Automanage configuration profile assignment properties. </summary>
     public partial class ConfigurationProfileAssignmentProperties
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ConfigurationProfileAssignmentProperties"/>. </summary>

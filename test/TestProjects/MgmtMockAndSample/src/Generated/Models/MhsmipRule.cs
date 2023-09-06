@@ -14,6 +14,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> A rule governing the accessibility of a managed hsm pool from a specific ip address or ip range. </summary>
     public partial class MhsmipRule
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="MhsmipRule"/>. </summary>

@@ -13,6 +13,7 @@ namespace MgmtOmitOperationGroups.Models
     /// <summary> The ModelZ. </summary>
     public partial class ModelZ
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelZ"/>. </summary>

@@ -13,6 +13,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
     /// <summary> This model is x-ms-azure-resource, and is exactly a WritableSubResource type. </summary>
     public partial class AzureResourceFlattenModel7
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel7"/>. </summary>

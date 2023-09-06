@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Represents a function that transforms a value from a data source before indexing. </summary>
     public partial class FieldMappingFunction
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="FieldMappingFunction"/>. </summary>

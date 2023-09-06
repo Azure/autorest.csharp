@@ -14,6 +14,10 @@ namespace dpg_customization_LowLevel.Models
 {
     public partial class Product : IUtf8JsonSerializable, IModelJsonSerializable<Product>
     {
+        /// <summary>
+        /// Converts a <see cref="Product"/> into a <see cref="RequestContent"/> using the default serialization options.
+        /// </summary>
+        /// <param name="product">The product to convert.</param>
         public static implicit operator RequestContent(Product product)
         {
             if (product == null)
@@ -24,6 +28,10 @@ namespace dpg_customization_LowLevel.Models
             return RequestContent.Create(product, ModelSerializerOptions.DefaultWireOptions);
         }
 
+        /// <summary>
+        /// Converts a <see cref="Response"/> to a <see cref="Product"/>.
+        /// </summary>
+        /// <param name="response">The response to convert.</param>
         public static explicit operator Product(Response response)
         {
             Argument.AssertNotNull(response, nameof(response));

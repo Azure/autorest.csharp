@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
     /// <summary> Response containing suggestion query results from an index. </summary>
     public partial class SuggestDocumentsResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="SuggestDocumentsResult"/>. </summary>

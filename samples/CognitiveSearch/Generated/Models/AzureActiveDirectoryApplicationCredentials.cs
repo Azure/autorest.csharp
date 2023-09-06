@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Credentials of a registered application created for your search service, used for authenticated access to the encryption keys stored in Azure Key Vault. </summary>
     public partial class AzureActiveDirectoryApplicationCredentials
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="AzureActiveDirectoryApplicationCredentials"/>. </summary>

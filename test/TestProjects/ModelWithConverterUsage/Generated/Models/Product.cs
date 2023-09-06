@@ -13,6 +13,7 @@ namespace ModelWithConverterUsage.Models
     /// <summary> The product documentation. </summary>
     public partial class Product
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>

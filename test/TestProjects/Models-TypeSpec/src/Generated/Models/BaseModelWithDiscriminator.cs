@@ -19,6 +19,7 @@ namespace ModelsTypeSpec.Models
     [AbstractTypeDeserializer(typeof(UnknownBaseModelWithDiscriminator))]
     public abstract partial class BaseModelWithDiscriminator
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of BaseModelWithDiscriminator. </summary>

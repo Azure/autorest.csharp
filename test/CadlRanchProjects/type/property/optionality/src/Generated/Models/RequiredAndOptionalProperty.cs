@@ -13,6 +13,7 @@ namespace _Type.Property.Optionality.Models
     /// <summary> Model with required and optional properties. </summary>
     public partial class RequiredAndOptionalProperty
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of RequiredAndOptionalProperty. </summary>

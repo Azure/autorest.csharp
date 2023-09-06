@@ -57,7 +57,7 @@ namespace MgmtAcronymMapping.Models
         /// Specifies whether the Virtual Machine Scale Set should be overprovisioned.
         /// Serialized Name: VirtualMachineScaleSetUpdate.properties.overprovision
         /// </param>
-        /// <param name="doNotRunExtensionsOnOverprovisionedVms">
+        /// <param name="doNotRunExtensionsOnOverprovisionedVMs">
         /// When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.
         /// Serialized Name: VirtualMachineScaleSetUpdate.properties.doNotRunExtensionsOnOverprovisionedVMs
         /// </param>
@@ -78,7 +78,7 @@ namespace MgmtAcronymMapping.Models
         /// Serialized Name: VirtualMachineScaleSetUpdate.properties.proximityPlacementGroup
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetPatch(IDictionary<string, string> tags, MgmtRenameRulesSku sku, MgmtRenameRulesPlan plan, ManagedServiceIdentity identity, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetUpdateVmProfile virtualMachineProfile, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVms, bool? singlePlacementGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy, WritableSubResource proximityPlacementGroup, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
+        internal VirtualMachineScaleSetPatch(IDictionary<string, string> tags, MgmtAcronymMappingSku sku, MgmtAcronymMappingPlan plan, ManagedServiceIdentity identity, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetUpdateVMProfile virtualMachineProfile, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVMs, bool? singlePlacementGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy, WritableSubResource proximityPlacementGroup, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
         {
             Sku = sku;
             Plan = plan;
@@ -87,7 +87,7 @@ namespace MgmtAcronymMapping.Models
             AutomaticRepairsPolicy = automaticRepairsPolicy;
             VirtualMachineProfile = virtualMachineProfile;
             Overprovision = overprovision;
-            DoNotRunExtensionsOnOverprovisionedVms = doNotRunExtensionsOnOverprovisionedVms;
+            DoNotRunExtensionsOnOverprovisionedVMs = doNotRunExtensionsOnOverprovisionedVMs;
             SinglePlacementGroup = singlePlacementGroup;
             AdditionalCapabilities = additionalCapabilities;
             ScaleInPolicy = scaleInPolicy;
@@ -123,7 +123,7 @@ namespace MgmtAcronymMapping.Models
         /// The virtual machine profile.
         /// Serialized Name: VirtualMachineScaleSetUpdate.properties.virtualMachineProfile
         /// </summary>
-        public VirtualMachineScaleSetUpdateVmProfile VirtualMachineProfile { get; set; }
+        public VirtualMachineScaleSetUpdateVMProfile VirtualMachineProfile { get; set; }
         /// <summary>
         /// Specifies whether the Virtual Machine Scale Set should be overprovisioned.
         /// Serialized Name: VirtualMachineScaleSetUpdate.properties.overprovision
@@ -133,7 +133,7 @@ namespace MgmtAcronymMapping.Models
         /// When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.
         /// Serialized Name: VirtualMachineScaleSetUpdate.properties.doNotRunExtensionsOnOverprovisionedVMs
         /// </summary>
-        public bool? DoNotRunExtensionsOnOverprovisionedVms { get; set; }
+        public bool? DoNotRunExtensionsOnOverprovisionedVMs { get; set; }
         /// <summary>
         /// When true this limits the scale set to a single placement group, of max size 100 virtual machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if singlePlacementGroup is false, it may not be modified to true.
         /// Serialized Name: VirtualMachineScaleSetUpdate.properties.singlePlacementGroup

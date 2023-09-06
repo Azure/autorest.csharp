@@ -15,6 +15,7 @@ namespace ModelShapes.Models
     /// <summary> The MixedModel. </summary>
     public partial class MixedModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="MixedModel"/>. </summary>

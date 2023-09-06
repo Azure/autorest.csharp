@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> Protected append writes history setting for the blob container with Legal holds. </summary>
     public partial class ProtectedAppendWritesHistory
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ProtectedAppendWritesHistory"/>. </summary>

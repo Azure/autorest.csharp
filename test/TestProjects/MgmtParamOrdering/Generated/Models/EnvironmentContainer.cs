@@ -14,6 +14,7 @@ namespace MgmtParamOrdering.Models
     /// <summary> Container for environment specification versions. </summary>
     public partial class EnvironmentContainer
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="EnvironmentContainer"/>. </summary>

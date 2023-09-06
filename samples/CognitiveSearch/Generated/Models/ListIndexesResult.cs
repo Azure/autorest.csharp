@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
     /// <summary> Response from a List Indexes request. If successful, it includes the full definitions of all indexes. </summary>
     public partial class ListIndexesResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ListIndexesResult"/>. </summary>

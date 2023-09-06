@@ -19,6 +19,7 @@ namespace MgmtScopeResource
     /// </summary>
     public partial class VMInsightsOnboardingStatusData : ResourceData
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VMInsightsOnboardingStatusData"/>. </summary>

@@ -13,6 +13,7 @@ namespace AnomalyDetector.Models
     /// <summary> Variable Status. </summary>
     public partial class VariableState
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of VariableState. </summary>

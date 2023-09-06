@@ -15,6 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> List of encryption scopes requested, and if paging is required, a URL to the next page of encryption scopes. </summary>
     internal partial class EncryptionScopeListResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="EncryptionScopeListResult"/>. </summary>

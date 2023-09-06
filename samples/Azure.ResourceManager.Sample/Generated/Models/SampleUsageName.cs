@@ -12,10 +12,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
     /// The Usage Names.
-    /// Serialized Name: UsageName
+    /// Serialized Name: SampleUsageName
     /// </summary>
     public partial class SampleUsageName
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="SampleUsageName"/>. </summary>
@@ -26,11 +27,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of <see cref="SampleUsageName"/>. </summary>
         /// <param name="value">
         /// The name of the resource.
-        /// Serialized Name: UsageName.value
+        /// Serialized Name: SampleUsageName.value
         /// </param>
         /// <param name="localizedValue">
         /// The localized name of the resource.
-        /// Serialized Name: UsageName.localizedValue
+        /// Serialized Name: SampleUsageName.localizedValue
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal SampleUsageName(string value, string localizedValue, Dictionary<string, BinaryData> rawData)
@@ -42,12 +43,12 @@ namespace Azure.ResourceManager.Sample.Models
 
         /// <summary>
         /// The name of the resource.
-        /// Serialized Name: UsageName.value
+        /// Serialized Name: SampleUsageName.value
         /// </summary>
         public string Value { get; }
         /// <summary>
         /// The localized name of the resource.
-        /// Serialized Name: UsageName.localizedValue
+        /// Serialized Name: SampleUsageName.localizedValue
         /// </summary>
         public string LocalizedValue { get; }
     }

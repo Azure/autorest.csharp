@@ -14,6 +14,7 @@ namespace MgmtListMethods.Models
     /// <summary> The List of Non Resource Child operation response. </summary>
     internal partial class NonResourceChildListResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="NonResourceChildListResult"/>. </summary>

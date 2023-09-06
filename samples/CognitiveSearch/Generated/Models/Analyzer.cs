@@ -18,6 +18,7 @@ namespace CognitiveSearch.Models
     /// </summary>
     public partial class Analyzer
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="Analyzer"/>. </summary>

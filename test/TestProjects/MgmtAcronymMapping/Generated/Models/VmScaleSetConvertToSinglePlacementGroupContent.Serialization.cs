@@ -14,11 +14,11 @@ using Azure.Core.Serialization;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class VmScaleSetConvertToSinglePlacementGroupContent : IUtf8JsonSerializable, IModelJsonSerializable<VmScaleSetConvertToSinglePlacementGroupContent>
+    public partial class VMScaleSetConvertToSinglePlacementGroupContent : IUtf8JsonSerializable, IModelJsonSerializable<VMScaleSetConvertToSinglePlacementGroupContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VmScaleSetConvertToSinglePlacementGroupContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VMScaleSetConvertToSinglePlacementGroupContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<VmScaleSetConvertToSinglePlacementGroupContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<VMScaleSetConvertToSinglePlacementGroupContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
@@ -43,7 +43,7 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        internal static VmScaleSetConvertToSinglePlacementGroupContent DeserializeVmScaleSetConvertToSinglePlacementGroupContent(JsonElement element, ModelSerializerOptions options = default)
+        internal static VMScaleSetConvertToSinglePlacementGroupContent DeserializeVMScaleSetConvertToSinglePlacementGroupContent(JsonElement element, ModelSerializerOptions options = default)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
 
@@ -66,35 +66,35 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VmScaleSetConvertToSinglePlacementGroupContent(activePlacementGroupId.Value, rawData);
+            return new VMScaleSetConvertToSinglePlacementGroupContent(activePlacementGroupId.Value, rawData);
         }
 
-        VmScaleSetConvertToSinglePlacementGroupContent IModelJsonSerializable<VmScaleSetConvertToSinglePlacementGroupContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VMScaleSetConvertToSinglePlacementGroupContent IModelJsonSerializable<VMScaleSetConvertToSinglePlacementGroupContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeVmScaleSetConvertToSinglePlacementGroupContent(doc.RootElement, options);
+            return DeserializeVMScaleSetConvertToSinglePlacementGroupContent(doc.RootElement, options);
         }
 
-        BinaryData IModelSerializable<VmScaleSetConvertToSinglePlacementGroupContent>.Serialize(ModelSerializerOptions options)
+        BinaryData IModelSerializable<VMScaleSetConvertToSinglePlacementGroupContent>.Serialize(ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             return ModelSerializer.SerializeCore(this, options);
         }
 
-        VmScaleSetConvertToSinglePlacementGroupContent IModelSerializable<VmScaleSetConvertToSinglePlacementGroupContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        VMScaleSetConvertToSinglePlacementGroupContent IModelSerializable<VMScaleSetConvertToSinglePlacementGroupContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.Parse(data);
-            return DeserializeVmScaleSetConvertToSinglePlacementGroupContent(doc.RootElement, options);
+            return DeserializeVMScaleSetConvertToSinglePlacementGroupContent(doc.RootElement, options);
         }
 
-        /// <summary> Converts a <see cref="VmScaleSetConvertToSinglePlacementGroupContent"/> into a <see cref="RequestContent"/>. </summary>
-        /// <param name="model"> The <see cref="VmScaleSetConvertToSinglePlacementGroupContent"/> to convert. </param>
-        public static implicit operator RequestContent(VmScaleSetConvertToSinglePlacementGroupContent model)
+        /// <summary> Converts a <see cref="VMScaleSetConvertToSinglePlacementGroupContent"/> into a <see cref="RequestContent"/>. </summary>
+        /// <param name="model"> The <see cref="VMScaleSetConvertToSinglePlacementGroupContent"/> to convert. </param>
+        public static implicit operator RequestContent(VMScaleSetConvertToSinglePlacementGroupContent model)
         {
             if (model is null)
             {
@@ -104,9 +104,9 @@ namespace MgmtAcronymMapping.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
-        /// <summary> Converts a <see cref="Response"/> into a <see cref="VmScaleSetConvertToSinglePlacementGroupContent"/>. </summary>
+        /// <summary> Converts a <see cref="Response"/> into a <see cref="VMScaleSetConvertToSinglePlacementGroupContent"/>. </summary>
         /// <param name="response"> The <see cref="Response"/> to convert. </param>
-        public static explicit operator VmScaleSetConvertToSinglePlacementGroupContent(Response response)
+        public static explicit operator VMScaleSetConvertToSinglePlacementGroupContent(Response response)
         {
             if (response is null)
             {
@@ -114,7 +114,7 @@ namespace MgmtAcronymMapping.Models
             }
 
             using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
-            return DeserializeVmScaleSetConvertToSinglePlacementGroupContent(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeVMScaleSetConvertToSinglePlacementGroupContent(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

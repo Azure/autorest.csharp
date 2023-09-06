@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Specifies some text and analysis components used to break that text into tokens. </summary>
     public partial class AnalyzeRequest
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="AnalyzeRequest"/>. </summary>

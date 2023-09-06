@@ -14,6 +14,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> The private IP addresses/IP ranges to which traffic will not be SNAT. </summary>
     internal partial class FirewallPolicySnat
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicySnat"/>. </summary>

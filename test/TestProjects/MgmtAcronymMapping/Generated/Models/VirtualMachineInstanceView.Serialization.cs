@@ -38,15 +38,15 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("computerName"u8);
                 writer.WriteStringValue(ComputerName);
             }
-            if (Optional.IsDefined(OSName))
+            if (Optional.IsDefined(OsName))
             {
                 writer.WritePropertyName("osName"u8);
-                writer.WriteStringValue(OSName);
+                writer.WriteStringValue(OsName);
             }
-            if (Optional.IsDefined(OSVersion))
+            if (Optional.IsDefined(OsVersion))
             {
                 writer.WritePropertyName("osVersion"u8);
-                writer.WriteStringValue(OSVersion);
+                writer.WriteStringValue(OsVersion);
             }
             if (Optional.IsDefined(HyperVGeneration))
             {

@@ -14,6 +14,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Response for list tap configurations API service call. </summary>
     internal partial class NetworkInterfaceTapConfigurationListResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="NetworkInterfaceTapConfigurationListResult"/>. </summary>

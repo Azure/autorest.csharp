@@ -10,27 +10,28 @@ using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
-using MgmtRenameRules.Models;
+using MgmtAcronymMapping.Models;
 
-namespace MgmtRenameRules
+namespace MgmtAcronymMapping
 {
     /// <summary>
-    /// A class representing the VirtualMachineScaleSetVm data model.
+    /// A class representing the VirtualMachineScaleSetVM data model.
     /// Describes a virtual machine scale set virtual machine.
     /// Serialized Name: VirtualMachineScaleSetVM
     /// </summary>
-    public partial class VirtualMachineScaleSetVmData : TrackedResourceData
+    public partial class VirtualMachineScaleSetVMData : TrackedResourceData
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmData"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMData"/>. </summary>
         /// <param name="location"> The location. </param>
-        public VirtualMachineScaleSetVmData(AzureLocation location) : base(location)
+        public VirtualMachineScaleSetVMData(AzureLocation location) : base(location)
         {
             Zones = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmData"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -118,7 +119,7 @@ namespace MgmtRenameRules
         /// Serialized Name: VirtualMachineScaleSetVM.properties.protectionPolicy
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetVmData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string instanceId, MgmtRenameRulesSku sku, MgmtRenameRulesPlan plan, IReadOnlyList<string> zones, bool? latestModelApplied, string vmId, VirtualMachineScaleSetVmInstanceView instanceView, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, SecurityProfile securityProfile, NetworkProfile networkProfile, VirtualMachineScaleSetVmNetworkProfileConfiguration networkProfileConfiguration, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, string provisioningState, string licenseType, string modelDefinitionApplied, VirtualMachineScaleSetVmProtectionPolicy protectionPolicy, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
+        internal VirtualMachineScaleSetVMData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string instanceId, MgmtAcronymMappingSku sku, MgmtAcronymMappingPlan plan, IReadOnlyList<string> zones, bool? latestModelApplied, string vmId, VirtualMachineScaleSetVMInstanceView instanceView, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, SecurityProfile securityProfile, NetworkProfile networkProfile, VirtualMachineScaleSetVMNetworkProfileConfiguration networkProfileConfiguration, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, string provisioningState, string licenseType, string modelDefinitionApplied, VirtualMachineScaleSetVMProtectionPolicy protectionPolicy, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             InstanceId = instanceId;
             Sku = sku;
@@ -130,7 +131,7 @@ namespace MgmtRenameRules
             HardwareProfile = hardwareProfile;
             StorageProfile = storageProfile;
             AdditionalCapabilities = additionalCapabilities;
-            OSProfile = osProfile;
+            OsProfile = osProfile;
             SecurityProfile = securityProfile;
             NetworkProfile = networkProfile;
             NetworkProfileConfiguration = networkProfileConfiguration;
@@ -143,8 +144,8 @@ namespace MgmtRenameRules
             _rawData = rawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmData"/> for deserialization. </summary>
-        internal VirtualMachineScaleSetVmData()
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMData"/> for deserialization. </summary>
+        internal VirtualMachineScaleSetVMData()
         {
         }
 
@@ -157,12 +158,12 @@ namespace MgmtRenameRules
         /// The virtual machine SKU.
         /// Serialized Name: VirtualMachineScaleSetVM.sku
         /// </summary>
-        public MgmtRenameRulesSku Sku { get; }
+        public MgmtAcronymMappingSku Sku { get; }
         /// <summary>
         /// Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**.
         /// Serialized Name: VirtualMachineScaleSetVM.plan
         /// </summary>
-        public MgmtRenameRulesPlan Plan { get; set; }
+        public MgmtAcronymMappingPlan Plan { get; set; }
         /// <summary>
         /// The virtual machine zones.
         /// Serialized Name: VirtualMachineScaleSetVM.zones
@@ -182,7 +183,7 @@ namespace MgmtRenameRules
         /// The virtual machine instance view.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.instanceView
         /// </summary>
-        public VirtualMachineScaleSetVmInstanceView InstanceView { get; }
+        public VirtualMachineScaleSetVMInstanceView InstanceView { get; }
         /// <summary>
         /// Specifies the hardware settings for the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.hardwareProfile
@@ -232,7 +233,7 @@ namespace MgmtRenameRules
         /// Specifies the operating system settings for the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.osProfile
         /// </summary>
-        public OSProfile OSProfile { get; set; }
+        public OSProfile OsProfile { get; set; }
         /// <summary>
         /// Specifies the Security related profile settings for the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.securityProfile
@@ -276,7 +277,7 @@ namespace MgmtRenameRules
         /// Specifies the network profile configuration of the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.networkProfileConfiguration
         /// </summary>
-        internal VirtualMachineScaleSetVmNetworkProfileConfiguration NetworkProfileConfiguration { get; set; }
+        internal VirtualMachineScaleSetVMNetworkProfileConfiguration NetworkProfileConfiguration { get; set; }
         /// <summary>
         /// The list of network configurations.
         /// Serialized Name: VirtualMachineScaleSetVMNetworkProfileConfiguration.networkInterfaceConfigurations
@@ -286,7 +287,7 @@ namespace MgmtRenameRules
             get
             {
                 if (NetworkProfileConfiguration is null)
-                    NetworkProfileConfiguration = new VirtualMachineScaleSetVmNetworkProfileConfiguration();
+                    NetworkProfileConfiguration = new VirtualMachineScaleSetVMNetworkProfileConfiguration();
                 return NetworkProfileConfiguration.NetworkInterfaceConfigurations;
             }
         }
@@ -347,6 +348,6 @@ namespace MgmtRenameRules
         /// Specifies the protection policy of the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.protectionPolicy
         /// </summary>
-        public VirtualMachineScaleSetVmProtectionPolicy ProtectionPolicy { get; set; }
+        public VirtualMachineScaleSetVMProtectionPolicy ProtectionPolicy { get; set; }
     }
 }

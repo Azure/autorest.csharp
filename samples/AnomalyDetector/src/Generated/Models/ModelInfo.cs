@@ -17,6 +17,7 @@ namespace AnomalyDetector.Models
     /// </summary>
     public partial class ModelInfo
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of ModelInfo. </summary>

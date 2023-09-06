@@ -17,6 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetUpdateStorageProfile
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateStorageProfile"/>. </summary>
@@ -56,7 +57,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The OS disk.
         /// Serialized Name: VirtualMachineScaleSetUpdateStorageProfile.osDisk
         /// </summary>
-        public VirtualMachineScaleSetUpdateOSDisk OSDisk { get; set; }
+        public VirtualMachineScaleSetUpdateOSDisk OsDisk { get; set; }
         /// <summary>
         /// The data disks.
         /// Serialized Name: VirtualMachineScaleSetUpdateStorageProfile.dataDisks

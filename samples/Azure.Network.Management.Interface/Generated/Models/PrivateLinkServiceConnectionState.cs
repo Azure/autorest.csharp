@@ -13,6 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> A collection of information about the state of the connection between service consumer and provider. </summary>
     public partial class PrivateLinkServiceConnectionState
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="PrivateLinkServiceConnectionState"/>. </summary>

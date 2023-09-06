@@ -13,6 +13,7 @@ namespace FirstTestTypeSpec.Models
     /// <summary> A model with a few required nullable properties. </summary>
     internal partial class ModelWithRequiredNullableProperties
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of ModelWithRequiredNullableProperties. </summary>

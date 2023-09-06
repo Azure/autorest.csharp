@@ -8,28 +8,29 @@
 using System;
 using System.Collections.Generic;
 
-namespace MgmtRenameRules.Models
+namespace MgmtAcronymMapping.Models
 {
     /// <summary>
-    /// The VmScaleSetConvertToSinglePlacementGroupInput.
+    /// The VMScaleSetConvertToSinglePlacementGroupInput.
     /// Serialized Name: VMScaleSetConvertToSinglePlacementGroupInput
     /// </summary>
-    public partial class VmScaleSetConvertToSinglePlacementGroupContent
+    public partial class VMScaleSetConvertToSinglePlacementGroupContent
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary> Initializes a new instance of <see cref="VmScaleSetConvertToSinglePlacementGroupContent"/>. </summary>
-        public VmScaleSetConvertToSinglePlacementGroupContent()
+        /// <summary> Initializes a new instance of <see cref="VMScaleSetConvertToSinglePlacementGroupContent"/>. </summary>
+        public VMScaleSetConvertToSinglePlacementGroupContent()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="VmScaleSetConvertToSinglePlacementGroupContent"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VMScaleSetConvertToSinglePlacementGroupContent"/>. </summary>
         /// <param name="activePlacementGroupId">
         /// Id of the placement group in which you want future virtual machine instances to be placed. To query placement group Id, please use Virtual Machine Scale Set VMs - Get API. If not provided, the platform will choose one with maximum number of virtual machine instances.
         /// Serialized Name: VMScaleSetConvertToSinglePlacementGroupInput.activePlacementGroupId
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VmScaleSetConvertToSinglePlacementGroupContent(string activePlacementGroupId, Dictionary<string, BinaryData> rawData)
+        internal VMScaleSetConvertToSinglePlacementGroupContent(string activePlacementGroupId, Dictionary<string, BinaryData> rawData)
         {
             ActivePlacementGroupId = activePlacementGroupId;
             _rawData = rawData;

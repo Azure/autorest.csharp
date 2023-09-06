@@ -25,9 +25,9 @@ namespace MgmtAcronymMapping.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("osType"u8);
-            writer.WriteStringValue(OSType.ToSerialString());
+            writer.WriteStringValue(OsType.ToSerialString());
             writer.WritePropertyName("osState"u8);
-            writer.WriteStringValue(OSState.ToSerialString());
+            writer.WriteStringValue(OsState.ToSerialString());
             if (Optional.IsDefined(Snapshot))
             {
                 writer.WritePropertyName("snapshot"u8);

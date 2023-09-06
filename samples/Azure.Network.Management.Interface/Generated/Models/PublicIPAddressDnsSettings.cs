@@ -13,6 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Contains FQDN of the DNS record associated with the public IP address. </summary>
     public partial class PublicIPAddressDnsSettings
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="PublicIPAddressDnsSettings"/>. </summary>

@@ -13,6 +13,7 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> An SOA record. </summary>
     public partial class SoaRecord
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="SoaRecord"/>. </summary>

@@ -19,6 +19,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     [AbstractTypeDeserializer(typeof(UnknownDinosaur))]
     public abstract partial class Dinosaur
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of Dinosaur. </summary>

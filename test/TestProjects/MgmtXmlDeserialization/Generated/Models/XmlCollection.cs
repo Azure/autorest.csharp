@@ -15,6 +15,7 @@ namespace MgmtXmlDeserialization.Models
     /// <summary> Paged Xml list representation. </summary>
     internal partial class XmlCollection
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="XmlCollection"/>. </summary>

@@ -13,6 +13,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> The VaultIssue. </summary>
     public partial class VaultIssue
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VaultIssue"/>. </summary>

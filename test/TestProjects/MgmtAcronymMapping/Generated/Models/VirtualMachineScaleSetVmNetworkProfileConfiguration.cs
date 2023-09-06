@@ -15,23 +15,24 @@ namespace MgmtAcronymMapping.Models
     /// Describes a virtual machine scale set VM network profile.
     /// Serialized Name: VirtualMachineScaleSetVMNetworkProfileConfiguration
     /// </summary>
-    internal partial class VirtualMachineScaleSetVmNetworkProfileConfiguration
+    internal partial class VirtualMachineScaleSetVMNetworkProfileConfiguration
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmNetworkProfileConfiguration"/>. </summary>
-        public VirtualMachineScaleSetVmNetworkProfileConfiguration()
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMNetworkProfileConfiguration"/>. </summary>
+        public VirtualMachineScaleSetVMNetworkProfileConfiguration()
         {
             NetworkInterfaceConfigurations = new ChangeTrackingList<VirtualMachineScaleSetNetworkConfiguration>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmNetworkProfileConfiguration"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMNetworkProfileConfiguration"/>. </summary>
         /// <param name="networkInterfaceConfigurations">
         /// The list of network configurations.
         /// Serialized Name: VirtualMachineScaleSetVMNetworkProfileConfiguration.networkInterfaceConfigurations
         /// </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetVmNetworkProfileConfiguration(IList<VirtualMachineScaleSetNetworkConfiguration> networkInterfaceConfigurations, Dictionary<string, BinaryData> rawData)
+        internal VirtualMachineScaleSetVMNetworkProfileConfiguration(IList<VirtualMachineScaleSetNetworkConfiguration> networkInterfaceConfigurations, Dictionary<string, BinaryData> rawData)
         {
             NetworkInterfaceConfigurations = networkInterfaceConfigurations;
             _rawData = rawData;

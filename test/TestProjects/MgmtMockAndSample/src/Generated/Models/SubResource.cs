@@ -13,6 +13,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> Reference to another subresource. </summary>
     public partial class SubResource
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="SubResource"/>. </summary>

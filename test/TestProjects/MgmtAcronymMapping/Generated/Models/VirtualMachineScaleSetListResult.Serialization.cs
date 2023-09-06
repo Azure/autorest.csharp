@@ -11,9 +11,9 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
-using MgmtRenameRules;
+using MgmtAcronymMapping;
 
-namespace MgmtRenameRules.Models
+namespace MgmtAcronymMapping.Models
 {
     internal partial class VirtualMachineScaleSetListResult : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetListResult>
     {

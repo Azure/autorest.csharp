@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Response from a get service statistics request. If successful, it includes service level counters and limits. </summary>
     public partial class ServiceStatistics
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ServiceStatistics"/>. </summary>

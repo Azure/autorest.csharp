@@ -14,6 +14,7 @@ namespace MgmtSupersetFlattenInheritance.Models
     /// <summary> The response from the List Storage Accounts operation. </summary>
     internal partial class TrackedResourceModel2ListResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="TrackedResourceModel2ListResult"/>. </summary>

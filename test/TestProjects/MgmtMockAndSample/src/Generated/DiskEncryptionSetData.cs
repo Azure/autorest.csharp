@@ -19,6 +19,7 @@ namespace MgmtMockAndSample
     /// </summary>
     public partial class DiskEncryptionSetData : ResourceData
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="DiskEncryptionSetData"/>. </summary>

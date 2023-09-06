@@ -15,6 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> Contains a set of input documents to be analyzed by the service. </summary>
     public partial class MultiLanguageBatchInput
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="MultiLanguageBatchInput"/>. </summary>

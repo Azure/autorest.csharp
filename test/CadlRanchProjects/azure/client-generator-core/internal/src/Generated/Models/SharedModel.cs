@@ -14,6 +14,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Models
     /// <summary> This is a model used by both public and internal operation. It should be generated and exported. </summary>
     public partial class SharedModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of SharedModel. </summary>

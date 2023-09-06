@@ -19,6 +19,7 @@ namespace body_complex.Models
     [AbstractTypeDeserializer(typeof(UnknownMyBaseType))]
     public abstract partial class MyBaseType
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="MyBaseType"/>. </summary>

@@ -14,6 +14,7 @@ namespace TypeSchemaMapping.Models
     /// <summary> The PublicModelWithInternalProperty. </summary>
     public partial class PublicModelWithInternalProperty
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="PublicModelWithInternalProperty"/>. </summary>

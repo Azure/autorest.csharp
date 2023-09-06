@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Input field mapping for a skill. </summary>
     public partial class InputFieldMappingEntry
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="InputFieldMappingEntry"/>. </summary>

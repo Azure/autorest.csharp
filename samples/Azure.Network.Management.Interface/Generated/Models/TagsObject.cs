@@ -14,6 +14,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Tags object for patch operations. </summary>
     public partial class TagsObject
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="TagsObject"/>. </summary>

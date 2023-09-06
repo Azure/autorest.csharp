@@ -21,6 +21,7 @@ namespace Azure.ResourceManager.Sample
     /// </summary>
     public partial class VirtualMachineData : TrackedResourceData
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineData"/>. </summary>
@@ -144,7 +145,7 @@ namespace Azure.ResourceManager.Sample
             HardwareProfile = hardwareProfile;
             StorageProfile = storageProfile;
             AdditionalCapabilities = additionalCapabilities;
-            OSProfile = osProfile;
+            OsProfile = osProfile;
             NetworkProfile = networkProfile;
             SecurityProfile = securityProfile;
             DiagnosticsProfile = diagnosticsProfile;
@@ -238,7 +239,7 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned.
         /// Serialized Name: VirtualMachine.properties.osProfile
         /// </summary>
-        public OSProfile OSProfile { get; set; }
+        public OSProfile OsProfile { get; set; }
         /// <summary>
         /// Specifies the network interfaces of the virtual machine.
         /// Serialized Name: VirtualMachine.properties.networkProfile

@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MgmtRenameRules.Models
+namespace MgmtAcronymMapping.Models
 {
     /// <summary>
     /// Enables or disables a capability on the virtual machine or virtual machine scale set.
@@ -16,6 +16,7 @@ namespace MgmtRenameRules.Models
     /// </summary>
     internal partial class AdditionalCapabilities
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="AdditionalCapabilities"/>. </summary>

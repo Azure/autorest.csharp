@@ -15,6 +15,7 @@ namespace MgmtSupersetFlattenInheritance.Models
     /// <summary> Resource with flatten properties (contains id). Since the id comes from flattened properties, this should not be counted as a resource. </summary>
     public partial class ResourceModel2 : ResourceData
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ResourceModel2"/>. </summary>

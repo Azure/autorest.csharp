@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Defines weights on index fields for which matches should boost scoring in search queries. </summary>
     public partial class TextWeights
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="TextWeights"/>. </summary>

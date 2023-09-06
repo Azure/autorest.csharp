@@ -14,6 +14,7 @@ namespace MgmtExtensionResource.Models
     /// <summary> The definition of a parameter that can be provided to the policy. </summary>
     public partial class ParameterDefinitionsValue
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ParameterDefinitionsValue"/>. </summary>

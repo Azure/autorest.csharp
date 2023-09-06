@@ -14,6 +14,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
     /// <summary> This is base model for not-discriminated normal multiple levels inheritance. </summary>
     public partial class Pet
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of Pet. </summary>

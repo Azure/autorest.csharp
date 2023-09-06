@@ -15,6 +15,7 @@ namespace MgmtPagination.Models
     /// <summary> The PageSizeNumericModelListResult. </summary>
     internal partial class PageSizeNumericModelListResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="PageSizeNumericModelListResult"/>. </summary>

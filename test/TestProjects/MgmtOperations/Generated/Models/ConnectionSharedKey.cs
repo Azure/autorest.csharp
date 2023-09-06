@@ -15,6 +15,7 @@ namespace MgmtOperations.Models
     /// <summary> Response for GetConnectionSharedKey API service call. </summary>
     public partial class ConnectionSharedKey : TrackedResourceData
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ConnectionSharedKey"/>. </summary>

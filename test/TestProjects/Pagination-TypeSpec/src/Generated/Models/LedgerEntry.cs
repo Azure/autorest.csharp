@@ -14,6 +14,7 @@ namespace Pagination.Models
     /// <summary> The LedgerEntry. </summary>
     public partial class LedgerEntry
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of LedgerEntry. </summary>

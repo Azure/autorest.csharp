@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> Actions are applied to the filtered blobs when the execution condition is met. </summary>
     public partial class ManagementPolicyAction
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ManagementPolicyAction"/>. </summary>

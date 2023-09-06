@@ -14,6 +14,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> PrivateLinkConnection properties for the network interface. </summary>
     public partial class NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties"/>. </summary>

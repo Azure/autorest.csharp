@@ -16,6 +16,7 @@ namespace CustomizationsInTsp.Models
     /// <summary> Model with customized properties. </summary>
     public partial class ModelWithCustomizedProperties
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of ModelWithCustomizedProperties. </summary>

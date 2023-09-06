@@ -13,6 +13,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> Probe describes a health check to be performed against an App Instance to determine whether it is alive or ready to receive traffic. </summary>
     public partial class Probe
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="Probe"/>. </summary>

@@ -63,11 +63,11 @@ namespace MgmtAcronymMapping.Models
                     ((IModelJsonSerializable<VirtualMachineScaleSetNetworkConfigurationDnsSettings>)DnsSettings).Serialize(writer, options);
                 }
             }
-            if (Optional.IsCollectionDefined(IPConfigurations))
+            if (Optional.IsCollectionDefined(IpConfigurations))
             {
                 writer.WritePropertyName("ipConfigurations"u8);
                 writer.WriteStartArray();
-                foreach (var item in IPConfigurations)
+                foreach (var item in IpConfigurations)
                 {
                     if (item is null)
                     {

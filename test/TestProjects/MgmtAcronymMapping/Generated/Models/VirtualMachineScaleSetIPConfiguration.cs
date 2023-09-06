@@ -30,7 +30,7 @@ namespace MgmtAcronymMapping.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
-            IPAddresses = new ChangeTrackingList<IPAddress>();
+            IpAddresses = new ChangeTrackingList<IPAddress>();
             ApplicationGatewayBackendAddressPools = new ChangeTrackingList<WritableSubResource>();
             ApplicationSecurityGroups = new ChangeTrackingList<WritableSubResource>();
             LoadBalancerBackendAddressPools = new ChangeTrackingList<WritableSubResource>();
@@ -89,7 +89,7 @@ namespace MgmtAcronymMapping.Models
             Subnet = subnet;
             Primary = primary;
             PublicIPAddressConfiguration = publicIPAddressConfiguration;
-            IPAddresses = ipAddresses;
+            IpAddresses = ipAddresses;
             PrivateIPAddressVersion = privateIPAddressVersion;
             ApplicationGatewayBackendAddressPools = applicationGatewayBackendAddressPools;
             ApplicationSecurityGroups = applicationSecurityGroups;
@@ -138,7 +138,7 @@ namespace MgmtAcronymMapping.Models
         /// IP Addresses
         /// Serialized Name: VirtualMachineScaleSetIPConfiguration.properties.ipAddresses
         /// </summary>
-        public IList<IPAddress> IPAddresses { get; }
+        public IList<IPAddress> IpAddresses { get; }
         /// <summary>
         /// Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
         /// Serialized Name: VirtualMachineScaleSetIPConfiguration.properties.privateIPAddressVersion

@@ -13,6 +13,7 @@ namespace subscriptionId_apiVersion.Models
     /// <summary> The SampleResourceGroup. </summary>
     public partial class SampleResourceGroup
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="SampleResourceGroup"/>. </summary>

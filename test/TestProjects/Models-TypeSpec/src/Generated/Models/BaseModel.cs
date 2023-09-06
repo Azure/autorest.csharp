@@ -13,6 +13,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Base model. </summary>
     public partial class BaseModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         protected internal Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of BaseModel. </summary>

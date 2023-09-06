@@ -15,6 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The SentimentResponse. </summary>
     public partial class SentimentResponse
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="SentimentResponse"/>. </summary>

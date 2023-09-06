@@ -15,6 +15,7 @@ namespace SpreadTypeSpec.Models
     /// <summary> The SpreadAliasWithOptionalPropsRequest. </summary>
     internal partial class SpreadAliasWithOptionalPropsRequest
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of SpreadAliasWithOptionalPropsRequest. </summary>

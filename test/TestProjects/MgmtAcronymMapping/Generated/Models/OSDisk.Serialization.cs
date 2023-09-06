@@ -23,10 +23,10 @@ namespace MgmtAcronymMapping.Models
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             writer.WriteStartObject();
-            if (Optional.IsDefined(OSType))
+            if (Optional.IsDefined(OsType))
             {
                 writer.WritePropertyName("osType"u8);
-                writer.WriteStringValue(OSType.Value.ToSerialString());
+                writer.WriteStringValue(OsType.Value.ToSerialString());
             }
             if (Optional.IsDefined(EncryptionSettings))
             {

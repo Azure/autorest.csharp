@@ -14,6 +14,7 @@ namespace MgmtScopeResource.Models
     /// <summary> Information about a Log Analytics Workspace. </summary>
     public partial class WorkspaceInfo
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="WorkspaceInfo"/>. </summary>

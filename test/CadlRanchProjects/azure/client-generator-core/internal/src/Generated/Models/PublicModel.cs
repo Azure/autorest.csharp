@@ -14,6 +14,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Models
     /// <summary> This is a model only used by public operation. It should be generated and exported. </summary>
     public partial class PublicModel
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of PublicModel. </summary>

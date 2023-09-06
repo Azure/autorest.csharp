@@ -13,6 +13,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with a boolean property. </summary>
     public partial class BooleanProperty
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of BooleanProperty. </summary>

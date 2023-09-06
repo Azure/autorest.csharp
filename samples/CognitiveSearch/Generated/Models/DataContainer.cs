@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Represents information about the entity (such as Azure SQL table or CosmosDB collection) that will be indexed. </summary>
     public partial class DataContainer
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="DataContainer"/>. </summary>

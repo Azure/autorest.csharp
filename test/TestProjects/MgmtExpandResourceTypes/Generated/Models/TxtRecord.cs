@@ -14,6 +14,7 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> A TXT record. </summary>
     public partial class TxtRecord
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="TxtRecord"/>. </summary>

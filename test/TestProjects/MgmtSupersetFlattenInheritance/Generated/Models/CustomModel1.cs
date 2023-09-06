@@ -13,6 +13,7 @@ namespace MgmtSupersetFlattenInheritance.Models
     /// <summary> Normal custom object, although marked as azure resource, but it's not recognized by autorest. </summary>
     public partial class CustomModel1
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="CustomModel1"/>. </summary>

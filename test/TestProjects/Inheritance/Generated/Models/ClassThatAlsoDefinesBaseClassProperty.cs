@@ -13,6 +13,7 @@ namespace Inheritance.Models
     /// <summary> The ClassThatAlsoDefinesBaseClassProperty. </summary>
     internal partial class ClassThatAlsoDefinesBaseClassProperty
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ClassThatAlsoDefinesBaseClassProperty"/>. </summary>

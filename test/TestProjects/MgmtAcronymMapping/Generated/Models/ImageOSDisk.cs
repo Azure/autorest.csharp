@@ -28,8 +28,8 @@ namespace MgmtAcronymMapping.Models
         /// </param>
         public ImageOSDisk(OperatingSystemType osType, OperatingSystemStateType osState)
         {
-            OSType = osType;
-            OSState = osState;
+            OsType = osType;
+            OsState = osState;
         }
 
         /// <summary> Initializes a new instance of <see cref="ImageOSDisk"/>. </summary>
@@ -72,8 +72,8 @@ namespace MgmtAcronymMapping.Models
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
         internal ImageOSDisk(WritableSubResource snapshot, WritableSubResource managedDisk, Uri blobUri, CachingType? caching, int? diskSizeGB, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, OperatingSystemType osType, OperatingSystemStateType osState, Dictionary<string, BinaryData> rawData) : base(snapshot, managedDisk, blobUri, caching, diskSizeGB, storageAccountType, diskEncryptionSet, rawData)
         {
-            OSType = osType;
-            OSState = osState;
+            OsType = osType;
+            OsState = osState;
         }
 
         /// <summary> Initializes a new instance of <see cref="ImageOSDisk"/> for deserialization. </summary>
@@ -85,11 +85,11 @@ namespace MgmtAcronymMapping.Models
         /// This property allows you to specify the type of the OS that is included in the disk if creating a VM from a custom image. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Windows** &lt;br&gt;&lt;br&gt; **Linux**
         /// Serialized Name: ImageOSDisk.osType
         /// </summary>
-        public OperatingSystemType OSType { get; set; }
+        public OperatingSystemType OsType { get; set; }
         /// <summary>
         /// The OS State.
         /// Serialized Name: ImageOSDisk.osState
         /// </summary>
-        public OperatingSystemStateType OSState { get; set; }
+        public OperatingSystemStateType OsState { get; set; }
     }
 }

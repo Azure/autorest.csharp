@@ -16,6 +16,7 @@ namespace MgmtListMethods.Models
     /// <summary> The List operation response. </summary>
     internal partial class SubParentWithNonResChWithLocListResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="SubParentWithNonResChWithLocListResult"/>. </summary>

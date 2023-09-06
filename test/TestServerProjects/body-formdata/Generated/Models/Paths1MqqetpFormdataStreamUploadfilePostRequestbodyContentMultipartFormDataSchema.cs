@@ -15,6 +15,7 @@ namespace body_formdata.Models
     /// <summary> The Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema. </summary>
     internal partial class Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema"/>. </summary>

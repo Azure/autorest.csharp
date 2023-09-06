@@ -15,6 +15,7 @@ namespace MgmtResourceName.Models
     /// <summary> Provider operations metadata list. </summary>
     internal partial class ProviderOperationsMetadataListResult
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ProviderOperationsMetadataListResult"/>. </summary>

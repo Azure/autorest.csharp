@@ -14,6 +14,7 @@ namespace Encode.Bytes.Models
     /// <summary> The Base64BytesProperty. </summary>
     public partial class Base64BytesProperty
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of Base64BytesProperty. </summary>

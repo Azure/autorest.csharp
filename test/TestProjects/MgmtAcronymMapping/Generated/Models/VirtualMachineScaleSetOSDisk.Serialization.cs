@@ -57,10 +57,10 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("diskSizeGB"u8);
                 writer.WriteNumberValue(DiskSizeGB.Value);
             }
-            if (Optional.IsDefined(OSType))
+            if (Optional.IsDefined(OsType))
             {
                 writer.WritePropertyName("osType"u8);
-                writer.WriteStringValue(OSType.Value.ToSerialString());
+                writer.WriteStringValue(OsType.Value.ToSerialString());
             }
             if (Optional.IsDefined(Image))
             {

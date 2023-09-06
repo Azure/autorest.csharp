@@ -34,7 +34,7 @@ namespace MgmtAcronymMapping.Models
                 }
                 else
                 {
-                    ((IModelJsonSerializable<MgmtRenameRulesSku>)Sku).Serialize(writer, options);
+                    ((IModelJsonSerializable<MgmtAcronymMappingSku>)Sku).Serialize(writer, options);
                 }
             }
             if (Optional.IsDefined(Plan))
@@ -46,7 +46,7 @@ namespace MgmtAcronymMapping.Models
                 }
                 else
                 {
-                    ((IModelJsonSerializable<MgmtRenameRulesPlan>)Plan).Serialize(writer, options);
+                    ((IModelJsonSerializable<MgmtAcronymMappingPlan>)Plan).Serialize(writer, options);
                 }
             }
             if (Optional.IsDefined(Identity))
@@ -100,7 +100,7 @@ namespace MgmtAcronymMapping.Models
                 }
                 else
                 {
-                    ((IModelJsonSerializable<VirtualMachineScaleSetUpdateVmProfile>)VirtualMachineProfile).Serialize(writer, options);
+                    ((IModelJsonSerializable<VirtualMachineScaleSetUpdateVMProfile>)VirtualMachineProfile).Serialize(writer, options);
                 }
             }
             if (Optional.IsDefined(Overprovision))
@@ -108,10 +108,10 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("overprovision"u8);
                 writer.WriteBooleanValue(Overprovision.Value);
             }
-            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
+            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVMs))
             {
                 writer.WritePropertyName("doNotRunExtensionsOnOverprovisionedVMs"u8);
-                writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVms.Value);
+                writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVMs.Value);
             }
             if (Optional.IsDefined(SinglePlacementGroup))
             {
@@ -171,15 +171,15 @@ namespace MgmtAcronymMapping.Models
             {
                 return null;
             }
-            Optional<MgmtRenameRulesSku> sku = default;
-            Optional<MgmtRenameRulesPlan> plan = default;
+            Optional<MgmtAcronymMappingSku> sku = default;
+            Optional<MgmtAcronymMappingPlan> plan = default;
             Optional<ManagedServiceIdentity> identity = default;
             Optional<IDictionary<string, string>> tags = default;
             Optional<UpgradePolicy> upgradePolicy = default;
             Optional<AutomaticRepairsPolicy> automaticRepairsPolicy = default;
-            Optional<VirtualMachineScaleSetUpdateVmProfile> virtualMachineProfile = default;
+            Optional<VirtualMachineScaleSetUpdateVMProfile> virtualMachineProfile = default;
             Optional<bool> overprovision = default;
-            Optional<bool> doNotRunExtensionsOnOverprovisionedVms = default;
+            Optional<bool> doNotRunExtensionsOnOverprovisionedVMs = default;
             Optional<bool> singlePlacementGroup = default;
             Optional<AdditionalCapabilities> additionalCapabilities = default;
             Optional<ScaleInPolicy> scaleInPolicy = default;
@@ -193,7 +193,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    sku = MgmtRenameRulesSku.DeserializeMgmtRenameRulesSku(property.Value);
+                    sku = MgmtAcronymMappingSku.DeserializeMgmtAcronymMappingSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("plan"u8))
@@ -202,7 +202,7 @@ namespace MgmtAcronymMapping.Models
                     {
                         continue;
                     }
-                    plan = MgmtRenameRulesPlan.DeserializeMgmtRenameRulesPlan(property.Value);
+                    plan = MgmtAcronymMappingPlan.DeserializeMgmtAcronymMappingPlan(property.Value);
                     continue;
                 }
                 if (property.NameEquals("identity"u8))
@@ -261,7 +261,7 @@ namespace MgmtAcronymMapping.Models
                             {
                                 continue;
                             }
-                            virtualMachineProfile = VirtualMachineScaleSetUpdateVmProfile.DeserializeVirtualMachineScaleSetUpdateVmProfile(property0.Value);
+                            virtualMachineProfile = VirtualMachineScaleSetUpdateVMProfile.DeserializeVirtualMachineScaleSetUpdateVMProfile(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("overprovision"u8))
@@ -279,7 +279,7 @@ namespace MgmtAcronymMapping.Models
                             {
                                 continue;
                             }
-                            doNotRunExtensionsOnOverprovisionedVms = property0.Value.GetBoolean();
+                            doNotRunExtensionsOnOverprovisionedVMs = property0.Value.GetBoolean();
                             continue;
                         }
                         if (property0.NameEquals("singlePlacementGroup"u8))
@@ -327,7 +327,7 @@ namespace MgmtAcronymMapping.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetPatch(Optional.ToDictionary(tags), sku.Value, plan.Value, identity, upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVms), Optional.ToNullable(singlePlacementGroup), additionalCapabilities.Value, scaleInPolicy.Value, proximityPlacementGroup, rawData);
+            return new VirtualMachineScaleSetPatch(Optional.ToDictionary(tags), sku.Value, plan.Value, identity, upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVMs), Optional.ToNullable(singlePlacementGroup), additionalCapabilities.Value, scaleInPolicy.Value, proximityPlacementGroup, rawData);
         }
 
         VirtualMachineScaleSetPatch IModelJsonSerializable<VirtualMachineScaleSetPatch>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

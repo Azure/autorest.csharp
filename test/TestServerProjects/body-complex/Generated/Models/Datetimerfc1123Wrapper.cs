@@ -13,6 +13,7 @@ namespace body_complex.Models
     /// <summary> The Datetimerfc1123Wrapper. </summary>
     public partial class Datetimerfc1123Wrapper
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="Datetimerfc1123Wrapper"/>. </summary>

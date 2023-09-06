@@ -14,6 +14,7 @@ namespace _Type.Property.Nullable.Models
     /// <summary> Model with a duration property. </summary>
     public partial class DurationProperty
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of DurationProperty. </summary>

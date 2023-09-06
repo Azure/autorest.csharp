@@ -14,6 +14,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> DNS settings of a network interface. </summary>
     public partial class NetworkInterfaceDnsSettings
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="NetworkInterfaceDnsSettings"/>. </summary>

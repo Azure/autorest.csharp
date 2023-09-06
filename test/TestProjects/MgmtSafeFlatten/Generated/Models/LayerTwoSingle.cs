@@ -13,6 +13,7 @@ namespace MgmtSafeFlatten.Models
     /// <summary> The LayerTwoSingle. </summary>
     internal partial class LayerTwoSingle
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="LayerTwoSingle"/>. </summary>

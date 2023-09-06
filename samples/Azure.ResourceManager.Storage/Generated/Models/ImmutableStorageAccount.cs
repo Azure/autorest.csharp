@@ -13,6 +13,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> This property enables and defines account-level immutability. Enabling the feature auto-enables Blob Versioning. </summary>
     public partial class ImmutableStorageAccount
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="ImmutableStorageAccount"/>. </summary>

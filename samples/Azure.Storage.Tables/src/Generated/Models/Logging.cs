@@ -14,6 +14,7 @@ namespace Azure.Storage.Tables.Models
     /// <summary> Azure Analytics Logging settings. </summary>
     public partial class Logging
     {
+        /// <summary> Keeps track of any properties unknown to the library. </summary>
         private Dictionary<string, BinaryData> _rawData;
 
         /// <summary> Initializes a new instance of <see cref="Logging"/>. </summary>
