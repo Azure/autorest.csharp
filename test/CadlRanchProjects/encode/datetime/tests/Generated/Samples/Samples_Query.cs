@@ -142,7 +142,7 @@ namespace Encode.Datetime.Samples
         {
             Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.UnixTimestamp(DateTimeOffset.Parse("1652209051"));
+            Response response = client.UnixTimestamp(DateTimeOffset.FromUnixTimeSeconds(1652209051));
             Console.WriteLine(response.Status);
         }
 
@@ -152,7 +152,7 @@ namespace Encode.Datetime.Samples
         {
             Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.UnixTimestamp(DateTimeOffset.Parse("1652209051"));
+            Response response = client.UnixTimestamp(DateTimeOffset.FromUnixTimeSeconds(1652209051));
             Console.WriteLine(response.Status);
         }
 
@@ -162,7 +162,7 @@ namespace Encode.Datetime.Samples
         {
             Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.UnixTimestampAsync(DateTimeOffset.Parse("1652209051"));
+            Response response = await client.UnixTimestampAsync(DateTimeOffset.FromUnixTimeSeconds(1652209051));
             Console.WriteLine(response.Status);
         }
 
@@ -172,7 +172,7 @@ namespace Encode.Datetime.Samples
         {
             Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.UnixTimestampAsync(DateTimeOffset.Parse("1652209051"));
+            Response response = await client.UnixTimestampAsync(DateTimeOffset.FromUnixTimeSeconds(1652209051));
             Console.WriteLine(response.Status);
         }
 
@@ -184,7 +184,7 @@ namespace Encode.Datetime.Samples
 
             Response response = client.UnixTimestampArray(new DateTimeOffset[]
             {
-DateTimeOffset.Parse("1652209051")
+DateTimeOffset.FromUnixTimeSeconds(1652209051)
             });
             Console.WriteLine(response.Status);
         }
@@ -197,7 +197,7 @@ DateTimeOffset.Parse("1652209051")
 
             Response response = client.UnixTimestampArray(new DateTimeOffset[]
             {
-DateTimeOffset.Parse("1652209051")
+DateTimeOffset.FromUnixTimeSeconds(1652209051)
             });
             Console.WriteLine(response.Status);
         }
@@ -210,7 +210,7 @@ DateTimeOffset.Parse("1652209051")
 
             Response response = await client.UnixTimestampArrayAsync(new DateTimeOffset[]
             {
-DateTimeOffset.Parse("1652209051")
+DateTimeOffset.FromUnixTimeSeconds(1652209051)
             });
             Console.WriteLine(response.Status);
         }
@@ -223,7 +223,7 @@ DateTimeOffset.Parse("1652209051")
 
             Response response = await client.UnixTimestampArrayAsync(new DateTimeOffset[]
             {
-DateTimeOffset.Parse("1652209051")
+DateTimeOffset.FromUnixTimeSeconds(1652209051)
             });
             Console.WriteLine(response.Status);
         }

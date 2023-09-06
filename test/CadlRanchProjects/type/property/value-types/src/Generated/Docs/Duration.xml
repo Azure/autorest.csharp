@@ -2,102 +2,96 @@
 <doc>
   <members>
     <member name="GetDurationAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetDurationAsync.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDurationClient("1.0.0");
+Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-var result = await client.GetDurationAsync();
-]]></code>
-</example>
+Response<DurationProperty> response = await client.GetDurationAsync();
+]]></code></example>
     </member>
     <member name="GetDuration(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetDuration.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDurationClient("1.0.0");
+Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-var result = client.GetDuration();
-]]></code>
-</example>
+Response<DurationProperty> response = client.GetDuration();
+]]></code></example>
     </member>
     <member name="GetDurationAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetDurationAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDurationClient("1.0.0");
+Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-Response response = await client.GetDurationAsync(new RequestContext());
+Response response = await client.GetDurationAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetDuration(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetDuration with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDurationClient("1.0.0");
+Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-Response response = client.GetDuration(new RequestContext());
+Response response = client.GetDuration(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAsync(DurationProperty,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDurationClient("1.0.0");
+Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-var body = new DurationProperty(new TimeSpan(1, 2, 3));
-var result = await client.PutAsync(body);
-]]></code>
-</example>
+DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
+Response response = await client.PutAsync(body);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Put(DurationProperty,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDurationClient("1.0.0");
+Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-var body = new DurationProperty(new TimeSpan(1, 2, 3));
-var result = client.Put(body);
-]]></code>
-</example>
+DurationProperty body = new DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
+Response response = client.Put(body);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDurationClient("1.0.0");
+Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-var data = new {
-    property = "PT1H23M45S",
-};
-
-Response response = await client.PutAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["property"] = "PT1H23M45S",
+});
+Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetDurationClient("1.0.0");
+Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-var data = new {
-    property = "PT1H23M45S",
-};
-
-Response response = client.Put(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["property"] = "PT1H23M45S",
+});
+Response response = client.Put(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

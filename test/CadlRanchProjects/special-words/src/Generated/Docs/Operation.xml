@@ -2,26 +2,24 @@
 <doc>
   <members>
     <member name="ForAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call ForAsync.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetOperationClient("1.0.0");
+Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
 
 Response response = await client.ForAsync();
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="For(RequestContext)">
-<example>
+      <example>
 This sample shows how to call For.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetOperationClient("1.0.0");
+Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
 
 Response response = client.For();
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

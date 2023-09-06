@@ -163,7 +163,7 @@ This sample shows how to call UnixTimestampAsync with required parameters.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-UnixTimestampDatetimeProperty body = new UnixTimestampDatetimeProperty(DateTimeOffset.Parse("1652209051"));
+UnixTimestampDatetimeProperty body = new UnixTimestampDatetimeProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051));
 Response<UnixTimestampDatetimeProperty> response = await client.UnixTimestampAsync(body);
 ]]></code></example>
     </member>
@@ -173,7 +173,7 @@ This sample shows how to call UnixTimestamp with required parameters.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-UnixTimestampDatetimeProperty body = new UnixTimestampDatetimeProperty(DateTimeOffset.Parse("1652209051"));
+UnixTimestampDatetimeProperty body = new UnixTimestampDatetimeProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051));
 Response<UnixTimestampDatetimeProperty> response = client.UnixTimestamp(body);
 ]]></code></example>
     </member>
@@ -185,7 +185,7 @@ Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["value"] = "1652209051",
+    ["value"] = 1652209051,
 });
 Response response = await client.UnixTimestampAsync(content);
 
@@ -201,7 +201,7 @@ Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["value"] = "1652209051",
+    ["value"] = 1652209051,
 });
 Response response = client.UnixTimestamp(content);
 
@@ -217,7 +217,7 @@ Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
 UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new DateTimeOffset[]
 {
-DateTimeOffset.Parse("1652209051")
+DateTimeOffset.FromUnixTimeSeconds(1652209051)
 });
 Response<UnixTimestampArrayDatetimeProperty> response = await client.UnixTimestampArrayAsync(body);
 ]]></code></example>
@@ -230,7 +230,7 @@ Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
 UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new DateTimeOffset[]
 {
-DateTimeOffset.Parse("1652209051")
+DateTimeOffset.FromUnixTimeSeconds(1652209051)
 });
 Response<UnixTimestampArrayDatetimeProperty> response = client.UnixTimestampArray(body);
 ]]></code></example>
@@ -245,7 +245,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["value"] = new object[]
 {
-"1652209051"
+1652209051
 },
 });
 Response response = await client.UnixTimestampArrayAsync(content);
@@ -264,7 +264,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["value"] = new object[]
 {
-"1652209051"
+1652209051
 },
 });
 Response response = client.UnixTimestampArray(content);

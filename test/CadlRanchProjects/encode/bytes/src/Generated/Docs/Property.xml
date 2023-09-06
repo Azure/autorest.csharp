@@ -194,8 +194,6 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["value"] = new object[]
 {
 new Dictionary<string, object>()
-{
-}
 },
 });
 Response response = await client.Base64urlArrayAsync(content);
@@ -215,8 +213,6 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["value"] = new object[]
 {
 new Dictionary<string, object>()
-{
-}
 },
 });
 Response response = client.Base64urlArray(content);

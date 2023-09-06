@@ -2956,10 +2956,10 @@ null
         [Ignore("Only validating compilation of examples")]
         public void Example_GetSingleBase()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            Response response = client.GetSingleBase(new RequestContext());
+            Response response = client.GetSingleBase(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -2970,10 +2970,10 @@ null
         [Ignore("Only validating compilation of examples")]
         public void Example_GetSingleBase_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            Response response = client.GetSingleBase(new RequestContext());
+            Response response = client.GetSingleBase(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -2982,12 +2982,32 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetSingleBase_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            Response<SingleBase> response = client.GetSingleBase();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetSingleBase_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            Response<SingleBase> response = client.GetSingleBase();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetSingleBase_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            Response response = await client.GetSingleBaseAsync(new RequestContext());
+            Response response = await client.GetSingleBaseAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -2998,10 +3018,10 @@ null
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetSingleBase_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            Response response = await client.GetSingleBaseAsync(new RequestContext());
+            Response response = await client.GetSingleBaseAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -3012,10 +3032,20 @@ null
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetSingleBase_Convenience_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ModelsTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            var result = await client.GetSingleBaseAsync();
+            Response<SingleBase> response = await client.GetSingleBaseAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetSingleBase_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            Response<SingleBase> response = await client.GetSingleBaseAsync();
         }
     }
 }

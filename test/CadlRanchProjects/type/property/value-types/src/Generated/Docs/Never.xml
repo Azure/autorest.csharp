@@ -2,96 +2,88 @@
 <doc>
   <members>
     <member name="GetNeverAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetNeverAsync.
 <code><![CDATA[
-var client = new ValueTypesClient().GetNeverClient("1.0.0");
+Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
-var result = await client.GetNeverAsync();
-]]></code>
-</example>
+Response<NeverProperty> response = await client.GetNeverAsync();
+]]></code></example>
     </member>
     <member name="GetNever(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetNever.
 <code><![CDATA[
-var client = new ValueTypesClient().GetNeverClient("1.0.0");
+Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
-var result = client.GetNever();
-]]></code>
-</example>
+Response<NeverProperty> response = client.GetNever();
+]]></code></example>
     </member>
     <member name="GetNeverAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetNeverAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetNeverClient("1.0.0");
+Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
-Response response = await client.GetNeverAsync(new RequestContext());
+Response response = await client.GetNeverAsync(null);
 
 Console.WriteLine(response.ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetNever(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetNever with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetNeverClient("1.0.0");
+Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
-Response response = client.GetNever(new RequestContext());
+Response response = client.GetNever(null);
 
 Console.WriteLine(response.ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAsync(NeverProperty,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
-var client = new ValueTypesClient().GetNeverClient("1.0.0");
+Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
-var body = new NeverProperty();
-var result = await client.PutAsync(body);
-]]></code>
-</example>
+NeverProperty body = new NeverProperty();
+Response response = await client.PutAsync(body);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Put(NeverProperty,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
-var client = new ValueTypesClient().GetNeverClient("1.0.0");
+Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
-var body = new NeverProperty();
-var result = client.Put(body);
-]]></code>
-</example>
+NeverProperty body = new NeverProperty();
+Response response = client.Put(body);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetNeverClient("1.0.0");
+Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
-var data = new {};
-
-Response response = await client.PutAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetNeverClient("1.0.0");
+Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
-var data = new {};
-
-Response response = client.Put(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+Response response = client.Put(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

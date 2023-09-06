@@ -2,102 +2,96 @@
 <doc>
   <members>
     <member name="GetEnumAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetEnumAsync.
 <code><![CDATA[
-var client = new ValueTypesClient().GetEnumClient("1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
 
-var result = await client.GetEnumAsync();
-]]></code>
-</example>
+Response<EnumProperty> response = await client.GetEnumAsync();
+]]></code></example>
     </member>
     <member name="GetEnum(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetEnum.
 <code><![CDATA[
-var client = new ValueTypesClient().GetEnumClient("1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
 
-var result = client.GetEnum();
-]]></code>
-</example>
+Response<EnumProperty> response = client.GetEnum();
+]]></code></example>
     </member>
     <member name="GetEnumAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetEnumAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetEnumClient("1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
 
-Response response = await client.GetEnumAsync(new RequestContext());
+Response response = await client.GetEnumAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetEnum(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetEnum with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetEnumClient("1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
 
-Response response = client.GetEnum(new RequestContext());
+Response response = client.GetEnum(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAsync(EnumProperty,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
-var client = new ValueTypesClient().GetEnumClient("1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
 
-var body = new EnumProperty(FixedInnerEnum.ValueOne);
-var result = await client.PutAsync(body);
-]]></code>
-</example>
+EnumProperty body = new EnumProperty(FixedInnerEnum.ValueOne);
+Response response = await client.PutAsync(body);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Put(EnumProperty,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
-var client = new ValueTypesClient().GetEnumClient("1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
 
-var body = new EnumProperty(FixedInnerEnum.ValueOne);
-var result = client.Put(body);
-]]></code>
-</example>
+EnumProperty body = new EnumProperty(FixedInnerEnum.ValueOne);
+Response response = client.Put(body);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetEnumClient("1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
 
-var data = new {
-    property = "ValueOne",
-};
-
-Response response = await client.PutAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["property"] = "ValueOne",
+});
+Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetEnumClient("1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
 
-var data = new {
-    property = "ValueOne",
-};
-
-Response response = client.Put(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["property"] = "ValueOne",
+});
+Response response = client.Put(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

@@ -1,141 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="SendIntAsync(ModelWithSimpleUnionProperty,CancellationToken)">
-    </member>
-    <member name="SendInt(ModelWithSimpleUnionProperty,CancellationToken)">
-    </member>
+    <member name="SendIntAsync(ModelWithSimpleUnionProperty,CancellationToken)"></member>
+    <member name="SendInt(ModelWithSimpleUnionProperty,CancellationToken)"></member>
     <member name="SendIntAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call SendIntAsync with required request content.
 <code><![CDATA[
-var client = new UnionClient();
+UnionClient client = new UnionClient();
 
-var data = new {
-    simpleUnion = new {},
-};
-
-Response response = await client.SendIntAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["simpleUnion"] = 1234,
+});
+Response response = await client.SendIntAsync(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="SendInt(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call SendInt with required request content.
 <code><![CDATA[
-var client = new UnionClient();
+UnionClient client = new UnionClient();
 
-var data = new {
-    simpleUnion = new {},
-};
-
-Response response = client.SendInt(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["simpleUnion"] = 1234,
+});
+Response response = client.SendInt(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
-    <member name="SendIntArrayAsync(ModelWithSimpleUnionProperty,CancellationToken)">
-    </member>
-    <member name="SendIntArray(ModelWithSimpleUnionProperty,CancellationToken)">
-    </member>
+    <member name="SendIntArrayAsync(ModelWithSimpleUnionProperty,CancellationToken)"></member>
+    <member name="SendIntArray(ModelWithSimpleUnionProperty,CancellationToken)"></member>
     <member name="SendIntArrayAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call SendIntArrayAsync with required request content.
 <code><![CDATA[
-var client = new UnionClient();
+UnionClient client = new UnionClient();
 
-var data = new {
-    simpleUnion = new {},
-};
-
-Response response = await client.SendIntArrayAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["simpleUnion"] = 1234,
+});
+Response response = await client.SendIntArrayAsync(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="SendIntArray(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call SendIntArray with required request content.
 <code><![CDATA[
-var client = new UnionClient();
+UnionClient client = new UnionClient();
 
-var data = new {
-    simpleUnion = new {},
-};
-
-Response response = client.SendIntArray(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["simpleUnion"] = 1234,
+});
+Response response = client.SendIntArray(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
-    <member name="SendFirstNamedUnionValueAsync(ModelWithNamedUnionProperty,CancellationToken)">
-    </member>
-    <member name="SendFirstNamedUnionValue(ModelWithNamedUnionProperty,CancellationToken)">
-    </member>
+    <member name="SendFirstNamedUnionValueAsync(ModelWithNamedUnionProperty,CancellationToken)"></member>
+    <member name="SendFirstNamedUnionValue(ModelWithNamedUnionProperty,CancellationToken)"></member>
     <member name="SendFirstNamedUnionValueAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call SendFirstNamedUnionValueAsync with required request content.
 <code><![CDATA[
-var client = new UnionClient();
+UnionClient client = new UnionClient();
 
-var data = new {
-    namedUnion = new {},
-};
-
-Response response = await client.SendFirstNamedUnionValueAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["namedUnion"] = new Dictionary<string, object>()
+    {
+        ["prop1"] = 1234,
+        ["name"] = "<name>",
+    },
+});
+Response response = await client.SendFirstNamedUnionValueAsync(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="SendFirstNamedUnionValue(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call SendFirstNamedUnionValue with required request content.
 <code><![CDATA[
-var client = new UnionClient();
+UnionClient client = new UnionClient();
 
-var data = new {
-    namedUnion = new {},
-};
-
-Response response = client.SendFirstNamedUnionValue(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["namedUnion"] = new Dictionary<string, object>()
+    {
+        ["prop1"] = 1234,
+        ["name"] = "<name>",
+    },
+});
+Response response = client.SendFirstNamedUnionValue(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
-    <member name="SendSecondNamedUnionValueAsync(ModelWithNamedUnionProperty,CancellationToken)">
-    </member>
-    <member name="SendSecondNamedUnionValue(ModelWithNamedUnionProperty,CancellationToken)">
-    </member>
+    <member name="SendSecondNamedUnionValueAsync(ModelWithNamedUnionProperty,CancellationToken)"></member>
+    <member name="SendSecondNamedUnionValue(ModelWithNamedUnionProperty,CancellationToken)"></member>
     <member name="SendSecondNamedUnionValueAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call SendSecondNamedUnionValueAsync with required request content.
 <code><![CDATA[
-var client = new UnionClient();
+UnionClient client = new UnionClient();
 
-var data = new {
-    namedUnion = new {},
-};
-
-Response response = await client.SendSecondNamedUnionValueAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["namedUnion"] = new Dictionary<string, object>()
+    {
+        ["prop1"] = 1234,
+        ["name"] = "<name>",
+    },
+});
+Response response = await client.SendSecondNamedUnionValueAsync(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="SendSecondNamedUnionValue(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call SendSecondNamedUnionValue with required request content.
 <code><![CDATA[
-var client = new UnionClient();
+UnionClient client = new UnionClient();
 
-var data = new {
-    namedUnion = new {},
-};
-
-Response response = client.SendSecondNamedUnionValue(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["namedUnion"] = new Dictionary<string, object>()
+    {
+        ["prop1"] = 1234,
+        ["name"] = "<name>",
+    },
+});
+Response response = client.SendSecondNamedUnionValue(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

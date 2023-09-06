@@ -7,6 +7,7 @@
 
 using System;
 using System.Threading.Tasks;
+using System.Xml;
 using Azure;
 using Azure.Identity;
 using Encode.Duration;
@@ -22,7 +23,7 @@ namespace Encode.Duration.Samples
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Default(TimeSpan.Parse("PT1H23M45S"));
+            Response response = client.Default(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Console.WriteLine(response.Status);
         }
 
@@ -32,7 +33,7 @@ namespace Encode.Duration.Samples
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Default(TimeSpan.Parse("PT1H23M45S"));
+            Response response = client.Default(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Console.WriteLine(response.Status);
         }
 
@@ -42,7 +43,7 @@ namespace Encode.Duration.Samples
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.DefaultAsync(TimeSpan.Parse("PT1H23M45S"));
+            Response response = await client.DefaultAsync(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Console.WriteLine(response.Status);
         }
 
@@ -52,7 +53,7 @@ namespace Encode.Duration.Samples
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.DefaultAsync(TimeSpan.Parse("PT1H23M45S"));
+            Response response = await client.DefaultAsync(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Console.WriteLine(response.Status);
         }
 
@@ -62,7 +63,7 @@ namespace Encode.Duration.Samples
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Iso8601(TimeSpan.Parse("PT1H23M45S"));
+            Response response = client.Iso8601(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Console.WriteLine(response.Status);
         }
 
@@ -72,7 +73,7 @@ namespace Encode.Duration.Samples
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Iso8601(TimeSpan.Parse("PT1H23M45S"));
+            Response response = client.Iso8601(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Console.WriteLine(response.Status);
         }
 
@@ -82,7 +83,7 @@ namespace Encode.Duration.Samples
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.Iso8601Async(TimeSpan.Parse("PT1H23M45S"));
+            Response response = await client.Iso8601Async(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Console.WriteLine(response.Status);
         }
 
@@ -92,7 +93,7 @@ namespace Encode.Duration.Samples
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.Iso8601Async(TimeSpan.Parse("PT1H23M45S"));
+            Response response = await client.Iso8601Async(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Console.WriteLine(response.Status);
         }
 
@@ -102,7 +103,7 @@ namespace Encode.Duration.Samples
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Int32Seconds(TimeSpan.Parse(10));
+            Response response = client.Int32Seconds(TimeSpan.FromSeconds(10));
             Console.WriteLine(response.Status);
         }
 
@@ -112,7 +113,7 @@ namespace Encode.Duration.Samples
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Int32Seconds(TimeSpan.Parse(10));
+            Response response = client.Int32Seconds(TimeSpan.FromSeconds(10));
             Console.WriteLine(response.Status);
         }
 
@@ -122,7 +123,7 @@ namespace Encode.Duration.Samples
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.Int32SecondsAsync(TimeSpan.Parse(10));
+            Response response = await client.Int32SecondsAsync(TimeSpan.FromSeconds(10));
             Console.WriteLine(response.Status);
         }
 
@@ -132,7 +133,7 @@ namespace Encode.Duration.Samples
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.Int32SecondsAsync(TimeSpan.Parse(10));
+            Response response = await client.Int32SecondsAsync(TimeSpan.FromSeconds(10));
             Console.WriteLine(response.Status);
         }
 
@@ -142,7 +143,7 @@ namespace Encode.Duration.Samples
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.FloatSeconds(TimeSpan.Parse(10F));
+            Response response = client.FloatSeconds(TimeSpan.FromSeconds(10F));
             Console.WriteLine(response.Status);
         }
 
@@ -152,7 +153,7 @@ namespace Encode.Duration.Samples
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.FloatSeconds(TimeSpan.Parse(10F));
+            Response response = client.FloatSeconds(TimeSpan.FromSeconds(10F));
             Console.WriteLine(response.Status);
         }
 
@@ -162,7 +163,7 @@ namespace Encode.Duration.Samples
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.FloatSecondsAsync(TimeSpan.Parse(10F));
+            Response response = await client.FloatSecondsAsync(TimeSpan.FromSeconds(10F));
             Console.WriteLine(response.Status);
         }
 
@@ -172,7 +173,7 @@ namespace Encode.Duration.Samples
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.FloatSecondsAsync(TimeSpan.Parse(10F));
+            Response response = await client.FloatSecondsAsync(TimeSpan.FromSeconds(10F));
             Console.WriteLine(response.Status);
         }
 
@@ -184,7 +185,7 @@ namespace Encode.Duration.Samples
 
             Response response = client.Int32SecondsArray(new TimeSpan[]
             {
-TimeSpan.Parse(10)
+TimeSpan.FromSeconds(10)
             });
             Console.WriteLine(response.Status);
         }
@@ -197,7 +198,7 @@ TimeSpan.Parse(10)
 
             Response response = client.Int32SecondsArray(new TimeSpan[]
             {
-TimeSpan.Parse(10)
+TimeSpan.FromSeconds(10)
             });
             Console.WriteLine(response.Status);
         }
@@ -210,7 +211,7 @@ TimeSpan.Parse(10)
 
             Response response = await client.Int32SecondsArrayAsync(new TimeSpan[]
             {
-TimeSpan.Parse(10)
+TimeSpan.FromSeconds(10)
             });
             Console.WriteLine(response.Status);
         }
@@ -223,7 +224,7 @@ TimeSpan.Parse(10)
 
             Response response = await client.Int32SecondsArrayAsync(new TimeSpan[]
             {
-TimeSpan.Parse(10)
+TimeSpan.FromSeconds(10)
             });
             Console.WriteLine(response.Status);
         }

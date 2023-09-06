@@ -67,7 +67,7 @@ This sample shows how to call UnixTimestampAsync with required parameters.
 <code><![CDATA[
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = await client.UnixTimestampAsync(DateTimeOffset.Parse("1652209051"));
+Response response = await client.UnixTimestampAsync(DateTimeOffset.FromUnixTimeSeconds(1652209051));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -77,7 +77,7 @@ This sample shows how to call UnixTimestamp with required parameters.
 <code><![CDATA[
 Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = client.UnixTimestamp(DateTimeOffset.Parse("1652209051"));
+Response response = client.UnixTimestamp(DateTimeOffset.FromUnixTimeSeconds(1652209051));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -89,7 +89,7 @@ Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
 Response response = await client.UnixTimestampArrayAsync(new DateTimeOffset[]
 {
-DateTimeOffset.Parse("1652209051")
+DateTimeOffset.FromUnixTimeSeconds(1652209051)
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -102,7 +102,7 @@ Header client = new DatetimeClient().GetHeaderClient(apiVersion: "1.0.0");
 
 Response response = client.UnixTimestampArray(new DateTimeOffset[]
 {
-DateTimeOffset.Parse("1652209051")
+DateTimeOffset.FromUnixTimeSeconds(1652209051)
 });
 Console.WriteLine(response.Status);
 ]]></code></example>

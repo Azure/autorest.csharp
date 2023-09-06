@@ -7,14 +7,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type._Array.Models;
+using _Type._Array;
 
 namespace _Type._Array.Samples
 {
@@ -24,9 +23,9 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetStringValue()
         {
-            var client = new ArrayClient().GetStringValueClient("1.0.0");
+            StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            Response response = client.GetStringValue(new RequestContext());
+            Response response = client.GetStringValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -36,9 +35,9 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetStringValue_AllParameters()
         {
-            var client = new ArrayClient().GetStringValueClient("1.0.0");
+            StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            Response response = client.GetStringValue(new RequestContext());
+            Response response = client.GetStringValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -46,11 +45,29 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetStringValue_Convenience()
+        {
+            StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyList<string>> response = client.GetStringValue();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetStringValue_AllParameters_Convenience()
+        {
+            StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyList<string>> response = client.GetStringValue();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetStringValue_Async()
         {
-            var client = new ArrayClient().GetStringValueClient("1.0.0");
+            StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetStringValueAsync(new RequestContext());
+            Response response = await client.GetStringValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -60,9 +77,9 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetStringValue_AllParameters_Async()
         {
-            var client = new ArrayClient().GetStringValueClient("1.0.0");
+            StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetStringValueAsync(new RequestContext());
+            Response response = await client.GetStringValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -72,22 +89,31 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetStringValue_Convenience_Async()
         {
-            var client = new ArrayClient().GetStringValueClient("1.0.0");
+            StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            var result = await client.GetStringValueAsync();
+            Response<IReadOnlyList<string>> response = await client.GetStringValueAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetStringValue_AllParameters_Convenience_Async()
+        {
+            StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyList<string>> response = await client.GetStringValueAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            var client = new ArrayClient().GetStringValueClient("1.0.0");
+            StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            var data = new[] {
-    "<String>"
-};
-
-            Response response = client.Put(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new object[]
+            {
+"<body>"
+            });
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -95,13 +121,39 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            var client = new ArrayClient().GetStringValueClient("1.0.0");
+            StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            var data = new[] {
-    "<String>"
-};
+            RequestContent content = RequestContent.Create(new object[]
+            {
+"<body>"
+            });
+            Response response = client.Put(content);
+            Console.WriteLine(response.Status);
+        }
 
-            Response response = client.Put(RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_Convenience()
+        {
+            StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
+
+            Response response = client.Put(new string[]
+            {
+"<body>"
+            });
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_AllParameters_Convenience()
+        {
+            StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
+
+            Response response = client.Put(new string[]
+            {
+"<body>"
+            });
             Console.WriteLine(response.Status);
         }
 
@@ -109,13 +161,13 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            var client = new ArrayClient().GetStringValueClient("1.0.0");
+            StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            var data = new[] {
-    "<String>"
-};
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new object[]
+            {
+"<body>"
+            });
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -123,13 +175,13 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            var client = new ArrayClient().GetStringValueClient("1.0.0");
+            StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            var data = new[] {
-    "<String>"
-};
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new object[]
+            {
+"<body>"
+            });
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -137,13 +189,26 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Convenience_Async()
         {
-            var client = new ArrayClient().GetStringValueClient("1.0.0");
+            StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
-            var body = new string[]
+            Response response = await client.PutAsync(new string[]
             {
-    "<null>"
-            };
-            var result = await client.PutAsync(body);
+"<body>"
+            });
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_AllParameters_Convenience_Async()
+        {
+            StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
+
+            Response response = await client.PutAsync(new string[]
+            {
+"<body>"
+            });
+            Console.WriteLine(response.Status);
         }
     }
 }

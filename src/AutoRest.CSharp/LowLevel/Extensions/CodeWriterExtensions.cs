@@ -95,8 +95,12 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                                 return writer.Append($"{typeof(TimeSpan)}.FromSeconds({rawValue.RawValue:L})");
                             break;
                         case SerializationFormat.Duration_ISO8601:
-                            if (rawValue.RawValue is string s)
-                                return writer.Append($"{typeof(XmlConvert)}.ToTimeSpan({s:L})");
+                            if (rawValue.RawValue is string duration)
+                                return writer.Append($"{typeof(XmlConvert)}.ToTimeSpan({duration:L})");
+                            break;
+                        case SerializationFormat.Time_ISO8601:
+                            if (rawValue.RawValue is string time)
+                                return writer.Append($"{typeof(TimeSpan)}.Parse({time:L})");
                             break;
                             //case SerializationFormat.Duration_Constant:
                             // TODO - what does this look like?
@@ -116,7 +120,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                             if (rawValue.RawValue is int or long)
                                 return writer.Append($"{typeof(DateTimeOffset)}.FromUnixTimeSeconds({rawValue.RawValue:L})");
                             break;
-                        case SerializationFormat.DateTime_RFC1123 or SerializationFormat.DateTime_RFC3339 or SerializationFormat.DateTime_RFC7231 or SerializationFormat.DateTime_ISO8601:
+                        case SerializationFormat.DateTime_RFC1123 or SerializationFormat.DateTime_RFC3339 or SerializationFormat.DateTime_RFC7231 or SerializationFormat.DateTime_ISO8601 or SerializationFormat.Date_ISO8601:
                             if (rawValue.RawValue is string s)
                                 return writer.Append($"{typeof(DateTimeOffset)}.Parse({s:L})");
                             break;

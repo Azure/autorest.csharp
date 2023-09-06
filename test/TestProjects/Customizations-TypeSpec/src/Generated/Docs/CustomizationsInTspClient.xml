@@ -14,7 +14,7 @@ RootModel input = new RootModel()
         OptionalInt = 1234,
     },
     PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, TimeSpan.Parse("<propertyToMakeDuration>"), "PT1H23M45S", new JsonElement(), "<propertyToField>", new string[]
+    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[]
 {
 "<badListName>"
 }, new Dictionary<string, string>()
@@ -55,7 +55,7 @@ RootModel input = new RootModel()
         OptionalInt = 1234,
     },
     PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, TimeSpan.Parse("<propertyToMakeDuration>"), "PT1H23M45S", new JsonElement(), "<propertyToField>", new string[]
+    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[]
 {
 "<badListName>"
 }, new Dictionary<string, string>()

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -58,7 +59,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            DefaultDurationProperty body = new DefaultDurationProperty(TimeSpan.Parse("PT1H23M45S"));
+            DefaultDurationProperty body = new DefaultDurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response<DefaultDurationProperty> response = client.Default(body);
         }
 
@@ -68,7 +69,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            DefaultDurationProperty body = new DefaultDurationProperty(TimeSpan.Parse("PT1H23M45S"));
+            DefaultDurationProperty body = new DefaultDurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response<DefaultDurationProperty> response = client.Default(body);
         }
 
@@ -110,7 +111,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            DefaultDurationProperty body = new DefaultDurationProperty(TimeSpan.Parse("PT1H23M45S"));
+            DefaultDurationProperty body = new DefaultDurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response<DefaultDurationProperty> response = await client.DefaultAsync(body);
         }
 
@@ -120,7 +121,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            DefaultDurationProperty body = new DefaultDurationProperty(TimeSpan.Parse("PT1H23M45S"));
+            DefaultDurationProperty body = new DefaultDurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response<DefaultDurationProperty> response = await client.DefaultAsync(body);
         }
 
@@ -162,7 +163,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            ISO8601DurationProperty body = new ISO8601DurationProperty(TimeSpan.Parse("PT1H23M45S"));
+            ISO8601DurationProperty body = new ISO8601DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response<ISO8601DurationProperty> response = client.Iso8601(body);
         }
 
@@ -172,7 +173,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            ISO8601DurationProperty body = new ISO8601DurationProperty(TimeSpan.Parse("PT1H23M45S"));
+            ISO8601DurationProperty body = new ISO8601DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response<ISO8601DurationProperty> response = client.Iso8601(body);
         }
 
@@ -214,7 +215,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            ISO8601DurationProperty body = new ISO8601DurationProperty(TimeSpan.Parse("PT1H23M45S"));
+            ISO8601DurationProperty body = new ISO8601DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response<ISO8601DurationProperty> response = await client.Iso8601Async(body);
         }
 
@@ -224,7 +225,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            ISO8601DurationProperty body = new ISO8601DurationProperty(TimeSpan.Parse("PT1H23M45S"));
+            ISO8601DurationProperty body = new ISO8601DurationProperty(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Response<ISO8601DurationProperty> response = await client.Iso8601Async(body);
         }
 
@@ -266,7 +267,6 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            //Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(TimeSpan.Parse(10));
             Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(TimeSpan.FromSeconds(10));
             Response<Int32SecondsDurationProperty> response = client.Int32Seconds(body);
         }
@@ -277,7 +277,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(TimeSpan.Parse(10));
+            Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(TimeSpan.FromSeconds(10));
             Response<Int32SecondsDurationProperty> response = client.Int32Seconds(body);
         }
 
@@ -319,7 +319,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(TimeSpan.Parse(10));
+            Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(TimeSpan.FromSeconds(10));
             Response<Int32SecondsDurationProperty> response = await client.Int32SecondsAsync(body);
         }
 
@@ -329,7 +329,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(TimeSpan.Parse(10));
+            Int32SecondsDurationProperty body = new Int32SecondsDurationProperty(TimeSpan.FromSeconds(10));
             Response<Int32SecondsDurationProperty> response = await client.Int32SecondsAsync(body);
         }
 
@@ -371,7 +371,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(TimeSpan.Parse(10F));
+            FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(TimeSpan.FromSeconds(10F));
             Response<FloatSecondsDurationProperty> response = client.FloatSeconds(body);
         }
 
@@ -381,7 +381,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(TimeSpan.Parse(10F));
+            FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(TimeSpan.FromSeconds(10F));
             Response<FloatSecondsDurationProperty> response = client.FloatSeconds(body);
         }
 
@@ -423,7 +423,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(TimeSpan.Parse(10F));
+            FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(TimeSpan.FromSeconds(10F));
             Response<FloatSecondsDurationProperty> response = await client.FloatSecondsAsync(body);
         }
 
@@ -433,7 +433,7 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(TimeSpan.Parse(10F));
+            FloatSecondsDurationProperty body = new FloatSecondsDurationProperty(TimeSpan.FromSeconds(10F));
             Response<FloatSecondsDurationProperty> response = await client.FloatSecondsAsync(body);
         }
 
@@ -483,7 +483,7 @@ namespace Encode.Duration.Samples
 
             FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[]
             {
-TimeSpan.Parse(10F)
+TimeSpan.FromSeconds(10F)
             });
             Response<FloatSecondsDurationArrayProperty> response = client.FloatSecondsArray(body);
         }
@@ -496,7 +496,7 @@ TimeSpan.Parse(10F)
 
             FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[]
             {
-TimeSpan.Parse(10F)
+TimeSpan.FromSeconds(10F)
             });
             Response<FloatSecondsDurationArrayProperty> response = client.FloatSecondsArray(body);
         }
@@ -547,7 +547,7 @@ TimeSpan.Parse(10F)
 
             FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[]
             {
-TimeSpan.Parse(10F)
+TimeSpan.FromSeconds(10F)
             });
             Response<FloatSecondsDurationArrayProperty> response = await client.FloatSecondsArrayAsync(body);
         }
@@ -560,7 +560,7 @@ TimeSpan.Parse(10F)
 
             FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new TimeSpan[]
             {
-TimeSpan.Parse(10F)
+TimeSpan.FromSeconds(10F)
             });
             Response<FloatSecondsDurationArrayProperty> response = await client.FloatSecondsArrayAsync(body);
         }

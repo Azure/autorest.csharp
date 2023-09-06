@@ -343,8 +343,6 @@ namespace Encode.Bytes.Samples
                 ["value"] = new object[]
             {
 new Dictionary<string, object>()
-{
-}
             },
             });
             Response response = client.Base64urlArray(content);
@@ -364,8 +362,6 @@ new Dictionary<string, object>()
                 ["value"] = new object[]
             {
 new Dictionary<string, object>()
-{
-}
             },
             });
             Response response = client.Base64urlArray(content);
@@ -411,8 +407,6 @@ BinaryData.FromObjectAsJson(new Dictionary<string, object>())
                 ["value"] = new object[]
             {
 new Dictionary<string, object>()
-{
-}
             },
             });
             Response response = await client.Base64urlArrayAsync(content);
@@ -432,8 +426,6 @@ new Dictionary<string, object>()
                 ["value"] = new object[]
             {
 new Dictionary<string, object>()
-{
-}
             },
             });
             Response response = await client.Base64urlArrayAsync(content);

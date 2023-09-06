@@ -2,108 +2,100 @@
 <doc>
   <members>
     <member name="GetFloat32ValueAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetFloat32ValueAsync.
 <code><![CDATA[
-var client = new DictionaryClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-var result = await client.GetFloat32ValueAsync();
-]]></code>
-</example>
+Response<IReadOnlyDictionary<string, float>> response = await client.GetFloat32ValueAsync();
+]]></code></example>
     </member>
     <member name="GetFloat32Value(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetFloat32Value.
 <code><![CDATA[
-var client = new DictionaryClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-var result = client.GetFloat32Value();
-]]></code>
-</example>
+Response<IReadOnlyDictionary<string, float>> response = client.GetFloat32Value();
+]]></code></example>
     </member>
     <member name="GetFloat32ValueAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetFloat32ValueAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new DictionaryClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-Response response = await client.GetFloat32ValueAsync(new RequestContext());
+Response response = await client.GetFloat32ValueAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<test>").ToString());
-]]></code>
-</example>
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code></example>
     </member>
     <member name="GetFloat32Value(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetFloat32Value with required parameters and parse the result.
 <code><![CDATA[
-var client = new DictionaryClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-Response response = client.GetFloat32Value(new RequestContext());
+Response response = client.GetFloat32Value(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<test>").ToString());
-]]></code>
-</example>
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code></example>
     </member>
     <member name="PutAsync(IDictionary{string,float},CancellationToken)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
-var client = new DictionaryClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-var body = new Dictionary<string, float>
+Response response = await client.PutAsync(new Dictionary<string, float>()
 {
-    ["key"] = 3.14f,
-};
-var result = await client.PutAsync(body);
-]]></code>
-</example>
+    ["key"] = (float)123.45F,
+});
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Put(IDictionary{string,float},CancellationToken)">
-<example>
+      <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
-var client = new DictionaryClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-var body = new Dictionary<string, float>
+Response response = client.Put(new Dictionary<string, float>()
 {
-    ["key"] = 3.14f,
-};
-var result = client.Put(body);
-]]></code>
-</example>
+    ["key"] = (float)123.45F,
+});
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new DictionaryClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-var data = new {
-    key = 123.45f,
-};
-
-Response response = await client.PutAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["key"] = 123.45F,
+});
+Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new DictionaryClient().GetFloat32ValueClient("1.0.0");
+Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-var data = new {
-    key = 123.45f,
-};
-
-Response response = client.Put(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["key"] = 123.45F,
+});
+Response response = client.Put(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

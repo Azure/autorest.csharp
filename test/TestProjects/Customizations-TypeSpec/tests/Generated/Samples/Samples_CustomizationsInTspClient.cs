@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -145,7 +146,7 @@ new Dictionary<string, object>()
                     OptionalInt = 1234,
                 },
                 PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, TimeSpan.Parse("<propertyToMakeDuration>"), "PT1H23M45S", new JsonElement(), "<propertyToField>", new string[]
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[]
             {
 "<badListName>"
             }, new Dictionary<string, string>()
@@ -298,7 +299,7 @@ new Dictionary<string, object>()
                     OptionalInt = 1234,
                 },
                 PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, TimeSpan.Parse("<propertyToMakeDuration>"), "PT1H23M45S", new JsonElement(), "<propertyToField>", new string[]
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[]
             {
 "<badListName>"
             }, new Dictionary<string, string>()

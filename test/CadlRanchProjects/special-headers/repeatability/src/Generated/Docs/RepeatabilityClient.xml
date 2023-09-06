@@ -2,26 +2,24 @@
 <doc>
   <members>
     <member name="ImmediateSuccessAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call ImmediateSuccessAsync.
 <code><![CDATA[
-var client = new RepeatabilityClient();
+RepeatabilityClient client = new RepeatabilityClient();
 
 Response response = await client.ImmediateSuccessAsync();
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="ImmediateSuccess(RequestContext)">
-<example>
+      <example>
 This sample shows how to call ImmediateSuccess.
 <code><![CDATA[
-var client = new RepeatabilityClient();
+RepeatabilityClient client = new RepeatabilityClient();
 
 Response response = client.ImmediateSuccess();
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

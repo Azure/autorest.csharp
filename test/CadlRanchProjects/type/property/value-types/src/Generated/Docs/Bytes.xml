@@ -2,102 +2,96 @@
 <doc>
   <members>
     <member name="GetByteAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetByteAsync.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
-var result = await client.GetByteAsync();
-]]></code>
-</example>
+Response<BytesProperty> response = await client.GetByteAsync();
+]]></code></example>
     </member>
     <member name="GetByte(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetByte.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
-var result = client.GetByte();
-]]></code>
-</example>
+Response<BytesProperty> response = client.GetByte();
+]]></code></example>
     </member>
     <member name="GetByteAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetByteAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
-Response response = await client.GetByteAsync(new RequestContext());
+Response response = await client.GetByteAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetByte(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetByte with required parameters and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
-Response response = client.GetByte(new RequestContext());
+Response response = client.GetByte(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAsync(BytesProperty,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
-var body = new BytesProperty(BinaryData.FromString("<your binary data content>"));
-var result = await client.PutAsync(body);
-]]></code>
-</example>
+BytesProperty body = new BytesProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = await client.PutAsync(body);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Put(BytesProperty,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
-var body = new BytesProperty(BinaryData.FromString("<your binary data content>"));
-var result = client.Put(body);
-]]></code>
-</example>
+BytesProperty body = new BytesProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = client.Put(body);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
-var data = new {
-    property = new {},
-};
-
-Response response = await client.PutAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["property"] = new Dictionary<string, object>(),
+});
+Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-var client = new ValueTypesClient().GetBytesClient("1.0.0");
+Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
 
-var data = new {
-    property = new {},
-};
-
-Response response = client.Put(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["property"] = new Dictionary<string, object>(),
+});
+Response response = client.Put(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

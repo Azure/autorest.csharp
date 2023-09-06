@@ -140,7 +140,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
             InputTypeKind.DateTimeRFC1123 => InputExampleValue.Value(primitiveType, "Tue, 10 May 2022 18:57:31 GMT"),
             InputTypeKind.DateTimeRFC3339 => InputExampleValue.Value(primitiveType, "2022-05-10T18:57:31.2311892Z"),
             InputTypeKind.DateTimeRFC7231 => InputExampleValue.Value(primitiveType, "Tue, 10 May 2022 18:57:31 GMT"),
-            InputTypeKind.DateTimeUnix => InputExampleValue.Value(primitiveType, "1652209051"),
+            InputTypeKind.DateTimeUnix => InputExampleValue.Value(primitiveType, 1652209051),
             InputTypeKind.Float32 => InputExampleValue.Value(primitiveType, 123.45f),
             InputTypeKind.Float64 => InputExampleValue.Value(primitiveType, 123.45d),
             InputTypeKind.Float128 => InputExampleValue.Value(primitiveType, 123.45m),
