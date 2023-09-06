@@ -13,6 +13,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Utilities;
@@ -297,7 +298,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 return false;
             }
 
-            var result = x.Type.Equals(y.Type) && x.Name == y.Name;
+            var result = x.Type.EqualsBySystemType(y.Type) && x.Name == y.Name;
             return result;
         }
 

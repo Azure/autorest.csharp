@@ -35,26 +35,29 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         // TODO: store the implementation of missing methods along with declaration
         public abstract IList<MethodSignature> Methods { get; }
 
+        private (IList<MethodSignature> Missing, IList<(List<MethodSignature> Current, MethodSignature Previous)> Updated)? _methodChangeset;
+        private (IList<MethodSignature> Missing, IList<(List<MethodSignature> Current, MethodSignature Previous)> Updated)? MethodChangeset
+            => _methodChangeset ??= CompareMethods(Methods.Union(Customization?.Methods ?? Array.Empty<MethodSignature>(), new MethodSignatureComparer()), PreviousContract?.Methods);
+
         public IList<(MethodSignature CurrentMethodToCall, MethodSignature PreviousMethodToAdd, IList<MethodParameter> MissingParameters)> MissingOverloadMethods
         {
             get
             {
-                if (Methods == null || PreviousContract?.Methods == null)
+                var overloadMethods = new List<(MethodSignature CurrentMethodToCall, MethodSignature PreviousMethodToAdd, IList<MethodParameter> MissingParameters)>();
+                var updated = MethodChangeset?.Updated;
+                if (updated is null)
                 {
-                    return Array.Empty<(MethodSignature, MethodSignature, IList<MethodParameter>)>();
+                    return Array.Empty<(MethodSignature CurrentMethodToCall, MethodSignature PreviousMethodToAdd, IList<MethodParameter> MissingParameters)>();
                 }
 
-                IList<MethodSignature> missing;
-                IList<(MethodSignature, MethodSignature, IList<MethodParameter>)> updated;
-                if (Customization?.Methods.Count > 0)
+                foreach (var (current, previous) in updated)
                 {
-                    (missing, updated) = CompareMethods(Methods.Union(Customization!.Methods), PreviousContract.Methods);
+                    if (TryGetPreviousMethodWithLessOptionalParameters(current, previous, out var currentMethodToCall, out var missingParameters))
+                    {
+                        overloadMethods.Add((currentMethodToCall, previous, missingParameters));
+                    }
                 }
-                else
-                {
-                    (missing, updated) = CompareMethods(Methods, PreviousContract!.Methods);
-                }
-                return updated;
+                return overloadMethods;
             }
         }
 
@@ -147,11 +150,14 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             return modifiers;
         }
 
-        private (IList<MethodSignature> MissingMethods, IList<(MethodSignature CurrentMethodToCall, MethodSignature PreviousMethodToAdd, IList<MethodParameter> MissingParameters)> UpdatedMethods)
-            CompareMethods(IEnumerable<MethodSignature> currentMethods, IEnumerable<MethodSignature> previousMethods)
+        private static (IList<MethodSignature> Missing, IList<(List<MethodSignature> Current, MethodSignature Previous)> Updated)? CompareMethods(IEnumerable<MethodSignature> currentMethods, IEnumerable<MethodSignature>? previousMethods)
         {
+            if (previousMethods is null)
+            {
+                return null;
+            }
             var missing = new List<MethodSignature>();
-            var updated = new List<(MethodSignature, MethodSignature, IList<MethodParameter>)>();
+            var updated = new List<(List<MethodSignature> Current, MethodSignature Previous)>();
             var set = currentMethods.ToHashSet(new MethodSignatureComparer());
             var dict = new Dictionary<string, List<MethodSignature>>();
             foreach (var item in currentMethods)
@@ -169,12 +175,9 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             {
                 if (!set.Contains(item))
                 {
-                    if (dict.TryGetValue(item.Name, out var current))
+                    if (dict.TryGetValue(item.Name, out var currentOverloadMethods))
                     {
-                        if (TryGetPreviousMethodWithLessOptionalParameters(current, item, out var currentMethodToCall, out var missingParameters))
-                        {
-                            updated.Add((currentMethodToCall, item, missingParameters));
-                        }
+                        updated.Add((currentOverloadMethods, item));
                     }
                     else
                     {
