@@ -52,7 +52,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The virtual machine profile.
         /// Serialized Name: VirtualMachineScaleSetUpdate.properties.virtualMachineProfile
         /// </summary>
-        public VirtualMachineScaleSetUpdateVMProfile VirtualMachineProfile { get; set; }
+        public VirtualMachineScaleSetUpdateVmProfile VirtualMachineProfile { get; set; }
         /// <summary>
         /// Specifies whether the Virtual Machine Scale Set should be overprovisioned.
         /// Serialized Name: VirtualMachineScaleSetUpdate.properties.overprovision
@@ -62,7 +62,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.
         /// Serialized Name: VirtualMachineScaleSetUpdate.properties.doNotRunExtensionsOnOverprovisionedVMs
         /// </summary>
-        public bool? DoNotRunExtensionsOnOverprovisionedVMs { get; set; }
+        public bool? DoNotRunExtensionsOnOverprovisionedVms { get; set; }
         /// <summary>
         /// When true this limits the scale set to a single placement group, of max size 100 virtual machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if singlePlacementGroup is false, it may not be modified to true.
         /// Serialized Name: VirtualMachineScaleSetUpdate.properties.singlePlacementGroup

@@ -111,7 +111,7 @@ namespace dpg_update1_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
         public virtual async Task<Response> PutRequiredOptionalAsync(string requiredParam, string optionalParam, RequestContext context)
         {
-            var result = await PutRequiredOptionalAsync(requiredParam, optionalParam, null, context);
+            var result = await PutRequiredOptionalAsync(requiredParam, optionalParam, null, context).ConfigureAwait(false);
             return result;
         }
 

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -149,7 +150,7 @@ namespace MgmtResourceName
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _providerOperationRestClient.CreateListRequest(expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _providerOperationRestClient.CreateListNextPageRequest(nextLink, expand);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ProviderOperationResource(Client, ProviderOperationData.DeserializeProviderOperationData(e)), _providerOperationClientDiagnostics, Pipeline, "ProviderOperationCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ProviderOperationResource(Client, ProviderOperationData.DeserializeProviderOperationData(e)), _providerOperationClientDiagnostics, Pipeline, "ProviderOperationCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -172,7 +173,7 @@ namespace MgmtResourceName
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _providerOperationRestClient.CreateListRequest(expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _providerOperationRestClient.CreateListNextPageRequest(nextLink, expand);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new ProviderOperationResource(Client, ProviderOperationData.DeserializeProviderOperationData(e)), _providerOperationClientDiagnostics, Pipeline, "ProviderOperationCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new ProviderOperationResource(Client, ProviderOperationData.DeserializeProviderOperationData(e)), _providerOperationClientDiagnostics, Pipeline, "ProviderOperationCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
