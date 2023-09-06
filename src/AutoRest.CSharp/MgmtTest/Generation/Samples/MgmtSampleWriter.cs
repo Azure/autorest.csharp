@@ -385,7 +385,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             if (returnType.IsGenericType)
             {
                 // if the type is NullableResponse, there is no implicit convert, so have to explicitly unwrap it
-                if (returnType.Name == nameof(NullableResponse<string>))
+                if (returnType.IsFrameworkType && returnType.FrameworkType == typeof(NullableResponse<>))
                 {
                     var unwrappedReturnType = returnType.Arguments.First().WithNullable(true);
                     var valueResponse = new CodeWriterVariableDeclaration("response", returnType);

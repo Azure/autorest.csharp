@@ -32,6 +32,8 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal record MgmtRestOperation
     {
+        private static readonly string[] NULLABLE_RESPONSE_METHOD_NAMES = { "GetIfExists" };
+
         private bool? _isLongRunning;
 
         /// <summary>
@@ -550,8 +552,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (InterimOperation is not null)
                 return InterimOperation.InterimType;
 
-            string[] nullableResponseMethodNames = { "GetIfExists" };
-            return IsLongRunningOperation ? originalType.WrapOperation(false) : originalType.WrapResponse(isAsync: false, isNullable: nullableResponseMethodNames.Contains(this.Name));
+            return IsLongRunningOperation ? originalType.WrapOperation(false) : originalType.WrapResponse(isAsync: false, isNullable: NULLABLE_RESPONSE_METHOD_NAMES.Contains(this.Name));
         }
 
         private CSharpType? GetMgmtReturnType(CSharpType? originalType)
