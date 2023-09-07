@@ -28,6 +28,9 @@ namespace AutoRest.CSharp.Output.Models
                     ? MakeSync()
                     : this;
 
+        public MethodSignature DisableOptionalParameters()
+            => this with { Parameters = Parameters.Select(p => p.ToRequired()).ToList() };
+
         private MethodSignature MakeAsync()
         {
             if (Modifiers.HasFlag(Async) || ReturnType != null && TypeFactory.IsAsyncPageable(ReturnType))

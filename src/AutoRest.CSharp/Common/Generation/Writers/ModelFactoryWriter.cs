@@ -44,9 +44,9 @@ namespace AutoRest.CSharp.Generation.Writers
                         _writer.Line();
                     }
 
-                    foreach ((MethodSignature currentMethodToCall, MethodSignature previousMethodToAdd, IList<Parameter> missingParameters) in This.MissingOverloadMethods)
+                    foreach (OverloadMethodSignature overloadMethod in This.MissingOverloadMethods)
                     {
-                        _writer.WriteMissingOverloadMethod(currentMethodToCall, previousMethodToAdd, missingParameters);
+                        _writer.WriteMissingOverloadMethod(overloadMethod);
                         _writer.Line();
                     }
                 }

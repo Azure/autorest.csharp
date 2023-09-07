@@ -15,15 +15,16 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class BreakingChangeWriter
     {
-        public static void WriteMissingOverloadMethod(this CodeWriter writer, MethodSignature currentMethodToCall, MethodSignature previousMethodToAdd, IList<MethodParameter> missingParameters)
+        public static void WriteMissingOverloadMethod(this CodeWriter writer, OverloadMethodSignature overloadMethod)
         {
             writer.Line($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]");
-            using (writer.WriteMethodDeclaration(previousMethodToAdd, ignoreOptional: true))
+            using (writer.WriteMethodDeclaration(overloadMethod.PreviousMethodSignature))
             {
                 writer.Line();
-                writer.Append($"return {currentMethodToCall.Name}(");
-                var set = missingParameters.ToHashSet(new ParameterComparer());
-                foreach (var parameter in currentMethodToCall.Parameters)
+                var awaitOperation = overloadMethod.PreviousMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Async) ? "await " : "";
+                writer.Append($"return {awaitOperation}{overloadMethod.MethodSignature.Name}(");
+                var set = overloadMethod.MissingParameters.ToHashSet(new ParameterComparer());
+                foreach (var parameter in overloadMethod.MethodSignature.Parameters)
                 {
                     if (set.Contains(parameter))
                     {
