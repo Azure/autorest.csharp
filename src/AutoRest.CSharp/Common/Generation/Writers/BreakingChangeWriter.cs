@@ -17,6 +17,7 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         public static void WriteMissingOverloadMethod(this CodeWriter writer, OverloadMethodSignature overloadMethod)
         {
+            writer.WriteXmlDocumentationSummary(overloadMethod.Description);
             writer.Line($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]");
             using (writer.WriteMethodDeclaration(overloadMethod.PreviousMethodSignature))
             {

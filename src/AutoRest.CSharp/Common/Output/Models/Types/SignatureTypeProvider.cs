@@ -3,22 +3,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using Humanizer;
 using Microsoft.CodeAnalysis;
-using MethodParameter = AutoRest.CSharp.Output.Models.Shared.Parameter;
 
 namespace AutoRest.CSharp.Common.Output.Models.Types
 {
@@ -54,7 +46,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                 {
                     if (TryGetPreviousMethodWithLessOptionalParameters(current, previous, out var currentMethodToCall, out var missingParameters))
                     {
-                        overloadMethods.Add(new OverloadMethodSignature(currentMethodToCall, previous.DisableOptionalParameters(), missingParameters));
+                        overloadMethods.Add(new OverloadMethodSignature(currentMethodToCall, previous.DisableOptionalParameters(), missingParameters, previous.FormattableDescription));
                     }
                 }
                 return overloadMethods;
@@ -86,20 +78,21 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             var methods = typeSymbol!.GetMembers().OfType<IMethodSymbol>();
             foreach (var method in methods)
             {
-                ;
-                if (MgmtContext.TypeFactory.TryCreateType(method.ReturnType, out var returnType))
+                var description = method.GetDocumentationCommentXml();
+                var returnType = MgmtContext.TypeFactory.GetCsharpType(method.ReturnType);
+                if (returnType is null)
                 {
                     // TODO: handle missing parameter type from MgmtOutputLibrary
-                    var parameters = new List<MethodParameter>();
+                    var parameters = new List<Parameter>();
                     foreach (var parameter in method.Parameters)
                     {
-                        var methodParameter = MethodParameter.FromParameterSymbol(parameter);
+                        var methodParameter = Parameter.FromParameterSymbol(parameter);
                         if (methodParameter is not null)
                         {
                             parameters.Add(methodParameter);
                         }
                     }
-                    result.Add(new MethodSignature(method.Name, null, null, MapModifiers(method), returnType, null, parameters));
+                    result.Add(new MethodSignature(method.Name, null, description, MapModifiers(method), returnType, null, parameters));
                 }
                 else
                 {
@@ -188,7 +181,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             return (missing, updated);
         }
 
-        private bool TryGetPreviousMethodWithLessOptionalParameters(IList<MethodSignature> currentMethods, MethodSignature previousMethod, [NotNullWhen(true)] out MethodSignature? currentMethodToCall, [NotNullWhen(true)] out IReadOnlyList<MethodParameter>? missingParameters)
+        private bool TryGetPreviousMethodWithLessOptionalParameters(IList<MethodSignature> currentMethods, MethodSignature previousMethod, [NotNullWhen(true)] out MethodSignature? currentMethodToCall, [NotNullWhen(true)] out IReadOnlyList<Parameter>? missingParameters)
         {
             foreach (var item in currentMethods)
             {

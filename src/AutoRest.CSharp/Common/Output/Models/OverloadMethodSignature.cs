@@ -15,12 +15,14 @@ namespace AutoRest.CSharp.Output.Models
         public MethodSignature MethodSignature { get; }
         public MethodSignature PreviousMethodSignature { get; }
         public IReadOnlyList<Parameter> MissingParameters { get; }
+        public FormattableString? Description { get; }
 
-        public OverloadMethodSignature(MethodSignature methodSignature, MethodSignature previousMethodSignature, IReadOnlyList<Parameter> missingParameters)
+        public OverloadMethodSignature(MethodSignature methodSignature, MethodSignature previousMethodSignature, IReadOnlyList<Parameter> missingParameters, FormattableString? description)
         {
             MethodSignature = methodSignature;
             PreviousMethodSignature = previousMethodSignature;
             MissingParameters = missingParameters;
+            Description = description;
         }
     }
 }
