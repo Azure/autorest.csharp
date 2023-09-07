@@ -39,7 +39,6 @@ $files = @('AsyncLockWithValue.cs', 'ClientDiagnostics.cs', 'DiagnosticScope.cs'
     'ForwardsClientCallsAttribute.cs', 'AsyncLockWithValue.cs', 'VoidValue.cs', 'AzureResourceProviderNamespaceAttribute.cs',
     'ChangeTrackingDictionary.cs',
     'ChangeTrackingList.cs',
-    'ErrorResponse.cs',
     'FormUrlEncodedContent.cs',
     'HttpPipelineExtensions.cs',
     'IOperationSource.cs',
