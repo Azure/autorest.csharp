@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -79,7 +80,7 @@ namespace custom_baseUrl_paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesPartialUrlRequest(accountName, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrl", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrl", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -104,7 +105,7 @@ namespace custom_baseUrl_paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesPartialUrlRequest(accountName, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesPartialUrlNextPageRequest(nextLink, accountName, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrl", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrl", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -129,7 +130,7 @@ namespace custom_baseUrl_paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesPartialUrlOperationRequest(accountName, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperation", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperation", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -154,7 +155,7 @@ namespace custom_baseUrl_paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesPartialUrlOperationRequest(accountName, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperation", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperation", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -181,7 +182,7 @@ namespace custom_baseUrl_paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperationNext", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperationNext", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -208,7 +209,7 @@ namespace custom_baseUrl_paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesPartialUrlOperationNextRequest(accountName, nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperationNext", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagesPartialUrlOperationNext", "values", "nextLink", context);
         }
 
         internal HttpMessage CreateGetPagesPartialUrlRequest(string accountName, RequestContext context)
