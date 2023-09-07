@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -33,14 +33,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             else if (Configuration.AzureArm)
             {
-                if (Configuration.MgmtTestConfiguration is not null)
+                if (Configuration.MgmtConfiguration.MgmtDebug.SkipCodeGen)
                 {
-                    // we currently do not need this sourceInputModel when generating the test code because it only has information about the "non-generated" test code.
-                    await MgmtTestTarget.ExecuteAsync(project, codeModel);
+                    await AutoRestLogger.Warning("skip generating sdk code because 'mgmt-debug.skip-codegen' is true.");
+                    if (Configuration.MgmtTestConfiguration is not null)
+                        await MgmtTestTarget.ExecuteAsync(project, codeModel, null);
                 }
                 else
                 {
                     await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel);
+                    if (Configuration.MgmtTestConfiguration is not null)
+                        await MgmtTestTarget.ExecuteAsync (project, codeModel, sourceInputModel);
                 }
             }
             else
@@ -62,7 +65,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return project;
         }
 
-        private static void ValidateConfiguration ()
+        private static void ValidateConfiguration()
         {
             if (Configuration.Generation1ConvenienceClient && Configuration.AzureArm)
             {
@@ -84,7 +87,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (!Path.IsPathRooted(Configuration.OutputFolder))
             {
-                await autoRest.Warning("output-folder path should be an absolute path");
+                await AutoRestLogger.Warning("output-folder path should be an absolute path");
             }
             if (Configuration.SaveInputs)
             {
@@ -97,12 +100,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var project = await ExecuteAsync(codeModel);
                 await foreach (var file in project.GetGeneratedFilesAsync())
                 {
-                    await autoRest.WriteFile(file.Name, file.Text, "source-file-csharp");
+                    // format all \ to / in filename, otherwise they will be treated as escape char when sending to autorest service
+                    var filename = file.Name.Replace('\\', '/');
+                    await autoRest.WriteFile(filename, file.Text, "source-file-csharp");
                 }
             }
             catch (ErrorHelpers.ErrorException e)
             {
-                await autoRest.Fatal(e.ErrorText);
+                await AutoRestLogger.Fatal(e.ErrorText);
                 return false;
             }
             catch (Exception e)
@@ -120,7 +125,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     // Ignore any errors while trying to output crash information
                 }
-                await autoRest.Fatal($"Internal error in AutoRest.CSharp{ErrorHelpers.FileIssueText}\nException: {e.Message}\n{e.StackTrace}");
+                await AutoRestLogger.Fatal($"Internal error in AutoRest.CSharp{ErrorHelpers.FileIssueText}\nException: {e.Message}\n{e.StackTrace}");
                 return false;
             }
 
