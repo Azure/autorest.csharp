@@ -540,7 +540,8 @@ export function getInputType(
                 Properties: properties // DerivedModels should be the last assigned to model, if no derived models, properties should be the last
             } as InputModelType;
 
-            // Non-Finished model will not be generated.
+            // open generic type model which has un-instanced template parameter will not be generated. e.g.
+            // model GenericModel<T> { value: T }
             if (m.isFinished) {
                 models.set(name, model);
             }
@@ -552,6 +553,8 @@ export function getInputType(
             if (m.derivedModels !== undefined && m.derivedModels.length > 0) {
                 model.DerivedModels = [];
                 for (const dm of m.derivedModels) {
+                    // skip open generic type model which has un-instanced template parameter. e.g.
+                    // model GenericModel<T> { value: T }
                     if (dm.isFinished) {
                         const derivedModel = getInputType(
                             context,
