@@ -46,7 +46,7 @@ This sample shows how to call CollapsePutAsync with required parameters and requ
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MatchConditionCollapseClient client = new MatchConditionCollapseClient(credential);
 
-RequestContent content = RequestContent.Create("<body>");
+RequestContent content = null;
 Response response = await client.CollapsePutAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -67,7 +67,7 @@ This sample shows how to call CollapsePut with required parameters and request c
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 MatchConditionCollapseClient client = new MatchConditionCollapseClient(credential);
 
-RequestContent content = RequestContent.Create("<body>");
+RequestContent content = null;
 Response response = client.CollapsePut(content);
 Console.WriteLine(response.Status);
 ]]></code>

@@ -2,200 +2,190 @@
 <doc>
   <members>
     <member name="GetValidAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetValidAsync with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new ArrayClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+ArrayClient client = new ArrayClient(credential);
 
-Response response = await client.GetValidAsync(new RequestContext());
+Response response = await client.GetValidAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("array")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetValid(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetValid with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new ArrayClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+ArrayClient client = new ArrayClient(credential);
 
-Response response = client.GetValid(new RequestContext());
+Response response = client.GetValid(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("array")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutValidAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutValidAsync.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new ArrayClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+ArrayClient client = new ArrayClient(credential);
 
-var data = new {};
-
-Response response = await client.PutValidAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+Response response = await client.PutValidAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new ArrayClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+ArrayClient client = new ArrayClient(credential);
 
-var data = new {
-    array = new[] {
-        "<String>"
-    },
-};
-
-Response response = await client.PutValidAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["array"] = new object[]
+{
+"<array>"
+},
+});
+Response response = await client.PutValidAsync(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutValid(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutValid.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new ArrayClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+ArrayClient client = new ArrayClient(credential);
 
-var data = new {};
-
-Response response = client.PutValid(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+Response response = client.PutValid(content);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValid with all request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new ArrayClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+ArrayClient client = new ArrayClient(credential);
 
-var data = new {
-    array = new[] {
-        "<String>"
-    },
-};
-
-Response response = client.PutValid(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["array"] = new object[]
+{
+"<array>"
+},
+});
+Response response = client.PutValid(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetEmptyAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetEmptyAsync with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new ArrayClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+ArrayClient client = new ArrayClient(credential);
 
-Response response = await client.GetEmptyAsync(new RequestContext());
+Response response = await client.GetEmptyAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("array")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetEmpty(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetEmpty with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new ArrayClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+ArrayClient client = new ArrayClient(credential);
 
-Response response = client.GetEmpty(new RequestContext());
+Response response = client.GetEmpty(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("array")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutEmptyAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutEmptyAsync.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new ArrayClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+ArrayClient client = new ArrayClient(credential);
 
-var data = new {};
-
-Response response = await client.PutEmptyAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+Response response = await client.PutEmptyAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutEmptyAsync with all request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new ArrayClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+ArrayClient client = new ArrayClient(credential);
 
-var data = new {
-    array = new[] {
-        "<String>"
-    },
-};
-
-Response response = await client.PutEmptyAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["array"] = new object[]
+{
+"<array>"
+},
+});
+Response response = await client.PutEmptyAsync(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutEmpty(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutEmpty.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new ArrayClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+ArrayClient client = new ArrayClient(credential);
 
-var data = new {};
-
-Response response = client.PutEmpty(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+Response response = client.PutEmpty(content);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutEmpty with all request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new ArrayClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+ArrayClient client = new ArrayClient(credential);
 
-var data = new {
-    array = new[] {
-        "<String>"
-    },
-};
-
-Response response = client.PutEmpty(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["array"] = new object[]
+{
+"<array>"
+},
+});
+Response response = client.PutEmpty(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetNotProvidedAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetNotProvidedAsync with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new ArrayClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+ArrayClient client = new ArrayClient(credential);
 
-Response response = await client.GetNotProvidedAsync(new RequestContext());
+Response response = await client.GetNotProvidedAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("array")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetNotProvided(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetNotProvided with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new ArrayClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+ArrayClient client = new ArrayClient(credential);
 
-Response response = client.GetNotProvided(new RequestContext());
+Response response = client.GetNotProvided(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("array")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

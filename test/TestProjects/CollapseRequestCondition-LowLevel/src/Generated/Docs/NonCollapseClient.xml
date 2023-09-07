@@ -8,7 +8,7 @@ This sample shows how to call IfMatchPutAsync with required parameters and reque
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NonCollapseClient client = new NonCollapseClient(credential);
 
-RequestContent content = RequestContent.Create("<body>");
+RequestContent content = null;
 Response response = await client.IfMatchPutAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -29,7 +29,7 @@ This sample shows how to call IfMatchPut with required parameters and request co
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NonCollapseClient client = new NonCollapseClient(credential);
 
-RequestContent content = RequestContent.Create("<body>");
+RequestContent content = null;
 Response response = client.IfMatchPut(content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -50,7 +50,7 @@ This sample shows how to call IfNoneMatchPutAsync with required parameters and r
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NonCollapseClient client = new NonCollapseClient(credential);
 
-RequestContent content = RequestContent.Create("<body>");
+RequestContent content = null;
 Response response = await client.IfNoneMatchPutAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -71,7 +71,7 @@ This sample shows how to call IfNoneMatchPut with required parameters and reques
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NonCollapseClient client = new NonCollapseClient(credential);
 
-RequestContent content = RequestContent.Create("<body>");
+RequestContent content = null;
 Response response = client.IfNoneMatchPut(content);
 Console.WriteLine(response.Status);
 ]]></code>

@@ -2,34 +2,28 @@
 <doc>
   <members>
     <member name="OperationAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call OperationAsync with required request content.
 <code><![CDATA[
-var client = new AccessibilityClient();
+AccessibilityClient client = new AccessibilityClient();
 
-var data = "<String>";
-
-Response response = await client.OperationAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create("<body>");
+Response response = await client.OperationAsync(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Operation(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call Operation with required request content.
 <code><![CDATA[
-var client = new AccessibilityClient();
+AccessibilityClient client = new AccessibilityClient();
 
-var data = "<String>";
-
-Response response = client.Operation(RequestContent.Create(data));
+RequestContent content = RequestContent.Create("<body>");
+Response response = client.Operation(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
-    <member name="OperationInternalAsync(RequestContent,RequestContext)">
-    </member>
-    <member name="OperationInternal(RequestContent,RequestContext)">
-    </member>
+    <member name="OperationInternalAsync(RequestContent,RequestContext)"></member>
+    <member name="OperationInternal(RequestContent,RequestContext)"></member>
   </members>
 </doc>

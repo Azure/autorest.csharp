@@ -2,76 +2,70 @@
 <doc>
   <members>
     <member name="Head200Async(RequestContext)">
-<example>
+      <example>
 This sample shows how to call Head200Async.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new HttpSuccessClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = await client.Head200Async();
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Head200(RequestContext)">
-<example>
+      <example>
 This sample shows how to call Head200.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new HttpSuccessClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = client.Head200();
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Head204Async(RequestContext)">
-<example>
+      <example>
 This sample shows how to call Head204Async.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new HttpSuccessClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = await client.Head204Async();
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Head204(RequestContext)">
-<example>
+      <example>
 This sample shows how to call Head204.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new HttpSuccessClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = client.Head204();
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Head404Async(RequestContext)">
-<example>
+      <example>
 This sample shows how to call Head404Async.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new HttpSuccessClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = await client.Head404Async();
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Head404(RequestContext)">
-<example>
+      <example>
 This sample shows how to call Head404.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new HttpSuccessClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+HttpSuccessClient client = new HttpSuccessClient(credential);
 
 Response response = client.Head404();
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

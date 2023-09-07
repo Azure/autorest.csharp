@@ -24,7 +24,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NonCollapseClient client = new NonCollapseClient(credential);
 
-            RequestContent content = RequestContent.Create("<body>");
+            RequestContent content = null;
             Response response = client.IfMatchPut(content);
             Console.WriteLine(response.Status);
         }
@@ -48,7 +48,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NonCollapseClient client = new NonCollapseClient(credential);
 
-            RequestContent content = RequestContent.Create("<body>");
+            RequestContent content = null;
             Response response = await client.IfMatchPutAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -72,7 +72,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NonCollapseClient client = new NonCollapseClient(credential);
 
-            RequestContent content = RequestContent.Create("<body>");
+            RequestContent content = null;
             Response response = client.IfNoneMatchPut(content);
             Console.WriteLine(response.Status);
         }
@@ -96,7 +96,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NonCollapseClient client = new NonCollapseClient(credential);
 
-            RequestContent content = RequestContent.Create("<body>");
+            RequestContent content = null;
             Response response = await client.IfNoneMatchPutAsync(content);
             Console.WriteLine(response.Status);
         }

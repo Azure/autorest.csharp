@@ -7,13 +7,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using lro_LowLevel;
 
 namespace lro_LowLevel.Samples
 {
@@ -23,14 +23,13 @@ namespace lro_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAsyncRetrySucceeded()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new LROsCustomHeaderClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
-            var data = new { };
-
-            var operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
-
+            RequestContent content = null;
+            Operation<BinaryData> operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.ToString());
         }
@@ -39,31 +38,30 @@ namespace lro_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAsyncRetrySucceeded_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new LROsCustomHeaderClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                properties = new
+                ["properties"] = new Dictionary<string, object>()
                 {
-                    provisioningState = "<provisioningState>",
+                    ["provisioningState"] = "<provisioningState>",
                 },
-                tags = new
+                ["tags"] = new Dictionary<string, object>()
                 {
-                    key = "<String>",
+                    ["key"] = "<tags>",
                 },
-                location = "<location>",
-            };
-
-            var operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
-
+                ["location"] = "<location>",
+            });
+            Operation<BinaryData> operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("type").ToString());
-            Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -72,14 +70,13 @@ namespace lro_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAsyncRetrySucceeded_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new LROsCustomHeaderClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
-            var data = new { };
-
-            var operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
-
+            RequestContent content = null;
+            Operation<BinaryData> operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.ToString());
         }
@@ -88,31 +85,30 @@ namespace lro_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAsyncRetrySucceeded_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new LROsCustomHeaderClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                properties = new
+                ["properties"] = new Dictionary<string, object>()
                 {
-                    provisioningState = "<provisioningState>",
+                    ["provisioningState"] = "<provisioningState>",
                 },
-                tags = new
+                ["tags"] = new Dictionary<string, object>()
                 {
-                    key = "<String>",
+                    ["key"] = "<tags>",
                 },
-                location = "<location>",
-            };
-
-            var operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
-
+                ["location"] = "<location>",
+            });
+            Operation<BinaryData> operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("type").ToString());
-            Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -121,14 +117,13 @@ namespace lro_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put201CreatingSucceeded200()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new LROsCustomHeaderClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
-            var data = new { };
-
-            var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
-
+            RequestContent content = null;
+            Operation<BinaryData> operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.ToString());
         }
@@ -137,31 +132,30 @@ namespace lro_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put201CreatingSucceeded200_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new LROsCustomHeaderClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                properties = new
+                ["properties"] = new Dictionary<string, object>()
                 {
-                    provisioningState = "<provisioningState>",
+                    ["provisioningState"] = "<provisioningState>",
                 },
-                tags = new
+                ["tags"] = new Dictionary<string, object>()
                 {
-                    key = "<String>",
+                    ["key"] = "<tags>",
                 },
-                location = "<location>",
-            };
-
-            var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
-
+                ["location"] = "<location>",
+            });
+            Operation<BinaryData> operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("type").ToString());
-            Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -170,14 +164,13 @@ namespace lro_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put201CreatingSucceeded200_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new LROsCustomHeaderClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
-            var data = new { };
-
-            var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
-
+            RequestContent content = null;
+            Operation<BinaryData> operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.ToString());
         }
@@ -186,31 +179,30 @@ namespace lro_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put201CreatingSucceeded200_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new LROsCustomHeaderClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                properties = new
+                ["properties"] = new Dictionary<string, object>()
                 {
-                    provisioningState = "<provisioningState>",
+                    ["provisioningState"] = "<provisioningState>",
                 },
-                tags = new
+                ["tags"] = new Dictionary<string, object>()
                 {
-                    key = "<String>",
+                    ["key"] = "<tags>",
                 },
-                location = "<location>",
-            };
-
-            var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
-
+                ["location"] = "<location>",
+            });
+            Operation<BinaryData> operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
             Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("type").ToString());
-            Console.WriteLine(result.GetProperty("tags").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -219,156 +211,132 @@ namespace lro_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Post202Retry200()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new LROsCustomHeaderClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
-            var data = new { };
-
-            var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
-
-            Console.WriteLine(operation.GetRawResponse().Status);
+            RequestContent content = null;
+            Operation operation = client.Post202Retry200(WaitUntil.Completed, content);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Post202Retry200_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new LROsCustomHeaderClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                properties = new
+                ["properties"] = new Dictionary<string, object>()
                 {
-                    provisioningState = "<provisioningState>",
+                    ["provisioningState"] = "<provisioningState>",
                 },
-                tags = new
+                ["tags"] = new Dictionary<string, object>()
                 {
-                    key = "<String>",
+                    ["key"] = "<tags>",
                 },
-                location = "<location>",
-            };
-
-            var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
-
-            Console.WriteLine(operation.GetRawResponse().Status);
+                ["location"] = "<location>",
+            });
+            Operation operation = client.Post202Retry200(WaitUntil.Completed, content);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Post202Retry200_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new LROsCustomHeaderClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
-            var data = new { };
-
-            var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
-
-            Console.WriteLine(operation.GetRawResponse().Status);
+            RequestContent content = null;
+            Operation operation = await client.Post202Retry200Async(WaitUntil.Completed, content);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Post202Retry200_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new LROsCustomHeaderClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                properties = new
+                ["properties"] = new Dictionary<string, object>()
                 {
-                    provisioningState = "<provisioningState>",
+                    ["provisioningState"] = "<provisioningState>",
                 },
-                tags = new
+                ["tags"] = new Dictionary<string, object>()
                 {
-                    key = "<String>",
+                    ["key"] = "<tags>",
                 },
-                location = "<location>",
-            };
-
-            var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
-
-            Console.WriteLine(operation.GetRawResponse().Status);
+                ["location"] = "<location>",
+            });
+            Operation operation = await client.Post202Retry200Async(WaitUntil.Completed, content);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_PostAsyncRetrySucceeded()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new LROsCustomHeaderClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
-            var data = new { };
-
-            var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
-
-            Console.WriteLine(operation.GetRawResponse().Status);
+            RequestContent content = null;
+            Operation operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, content);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_PostAsyncRetrySucceeded_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new LROsCustomHeaderClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                properties = new
+                ["properties"] = new Dictionary<string, object>()
                 {
-                    provisioningState = "<provisioningState>",
+                    ["provisioningState"] = "<provisioningState>",
                 },
-                tags = new
+                ["tags"] = new Dictionary<string, object>()
                 {
-                    key = "<String>",
+                    ["key"] = "<tags>",
                 },
-                location = "<location>",
-            };
-
-            var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
-
-            Console.WriteLine(operation.GetRawResponse().Status);
+                ["location"] = "<location>",
+            });
+            Operation operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, content);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PostAsyncRetrySucceeded_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new LROsCustomHeaderClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
-            var data = new { };
-
-            var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
-
-            Console.WriteLine(operation.GetRawResponse().Status);
+            RequestContent content = null;
+            Operation operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, content);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PostAsyncRetrySucceeded_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new LROsCustomHeaderClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                properties = new
+                ["properties"] = new Dictionary<string, object>()
                 {
-                    provisioningState = "<provisioningState>",
+                    ["provisioningState"] = "<provisioningState>",
                 },
-                tags = new
+                ["tags"] = new Dictionary<string, object>()
                 {
-                    key = "<String>",
+                    ["key"] = "<tags>",
                 },
-                location = "<location>",
-            };
-
-            var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
-
-            Console.WriteLine(operation.GetRawResponse().Status);
+                ["location"] = "<location>",
+            });
+            Operation operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, content);
         }
     }
 }

@@ -32,36 +32,34 @@ foreach (BinaryData item in client.GetNoItemNamePages(null))
 ]]></code></example>
     </member>
     <member name="GetEmptyNextLinkNamePagesAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetEmptyNextLinkNamePagesAsync with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PagingClient client = new PagingClient(credential);
 
-await foreach (var item in client.GetEmptyNextLinkNamePagesAsync(new RequestContext()))
+await foreach (BinaryData item in client.GetEmptyNextLinkNamePagesAsync(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetEmptyNextLinkNamePages(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetEmptyNextLinkNamePages with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PagingClient client = new PagingClient(credential);
 
-foreach (var item in client.GetEmptyNextLinkNamePages(new RequestContext()))
+foreach (BinaryData item in client.GetEmptyNextLinkNamePages(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetNullNextLinkNamePagesAsync(RequestContext)">
       <example>
@@ -124,70 +122,66 @@ foreach (BinaryData item in client.GetSinglePages(null))
 ]]></code></example>
     </member>
     <member name="GetSinglePagesWithBodyParamsAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetSinglePagesWithBodyParamsAsync and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PagingClient client = new PagingClient(credential);
 
-var data = new {};
-
-await foreach (var item in client.GetSinglePagesWithBodyParamsAsync(RequestContent.Create(data)))
+RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+await foreach (BinaryData item in client.GetSinglePagesWithBodyParamsAsync(content))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetSinglePagesWithBodyParamsAsync with all request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PagingClient client = new PagingClient(credential);
 
-var data = new {
-    name = "<name>",
-};
-
-await foreach (var item in client.GetSinglePagesWithBodyParamsAsync(RequestContent.Create(data)))
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["name"] = "<name>",
+});
+await foreach (BinaryData item in client.GetSinglePagesWithBodyParamsAsync(content))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetSinglePagesWithBodyParams(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetSinglePagesWithBodyParams and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PagingClient client = new PagingClient(credential);
 
-var data = new {};
-
-foreach (var item in client.GetSinglePagesWithBodyParams(RequestContent.Create(data)))
+RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+foreach (BinaryData item in client.GetSinglePagesWithBodyParams(content))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
+    Console.WriteLine(result[0].ToString());
 }
 ]]></code>
 This sample shows how to call GetSinglePagesWithBodyParams with all request content, and how to parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PagingClient client = new PagingClient(credential);
 
-var data = new {
-    name = "<name>",
-};
-
-foreach (var item in client.GetSinglePagesWithBodyParams(RequestContent.Create(data)))
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["name"] = "<name>",
+});
+foreach (BinaryData item in client.GetSinglePagesWithBodyParams(content))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="FirstResponseEmptyAsync(RequestContext)">
       <example>
@@ -310,36 +304,34 @@ foreach (BinaryData item in client.DuplicateParams("<filter>", null))
 ]]></code></example>
     </member>
     <member name="PageWithMaxPageSizeAsync(string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PageWithMaxPageSizeAsync with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PagingClient client = new PagingClient(credential);
 
-await foreach (var item in client.PageWithMaxPageSizeAsync("<maxpagesize>", new RequestContext()))
+await foreach (BinaryData item in client.PageWithMaxPageSizeAsync("5", null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PageWithMaxPageSize(string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PageWithMaxPageSize with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PagingClient client = new PagingClient(credential);
 
-foreach (var item in client.PageWithMaxPageSize("<maxpagesize>", new RequestContext()))
+foreach (BinaryData item in client.PageWithMaxPageSize("5", null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="NextOperationWithQueryParamsAsync(RequestContext)">
       <example>
@@ -642,68 +634,64 @@ foreach (BinaryData item in client.GetMultiplePagesFragmentWithGroupingNextLink(
 ]]></code></example>
     </member>
     <member name="AppendApiVersionAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call AppendApiVersionAsync with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PagingClient client = new PagingClient(credential);
 
-await foreach (var item in client.AppendApiVersionAsync(new RequestContext()))
+await foreach (BinaryData item in client.AppendApiVersionAsync(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="AppendApiVersion(RequestContext)">
-<example>
+      <example>
 This sample shows how to call AppendApiVersion with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PagingClient client = new PagingClient(credential);
 
-foreach (var item in client.AppendApiVersion(new RequestContext()))
+foreach (BinaryData item in client.AppendApiVersion(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="ReplaceApiVersionAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call ReplaceApiVersionAsync with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PagingClient client = new PagingClient(credential);
 
-await foreach (var item in client.ReplaceApiVersionAsync(new RequestContext()))
+await foreach (BinaryData item in client.ReplaceApiVersionAsync(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="ReplaceApiVersion(RequestContext)">
-<example>
+      <example>
 This sample shows how to call ReplaceApiVersion with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PagingClient client = new PagingClient(credential);
 
-foreach (var item in client.ReplaceApiVersion(new RequestContext()))
+foreach (BinaryData item in client.ReplaceApiVersion(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
 }
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="NextFragmentAsync(string,string,string,RequestContext)">
       <example>

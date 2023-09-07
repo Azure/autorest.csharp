@@ -2,13 +2,13 @@
 <doc>
   <members>
     <member name="GetValidAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetValidAsync with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new InheritanceClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+InheritanceClient client = new InheritanceClient(credential);
 
-Response response = await client.GetValidAsync(new RequestContext());
+Response response = await client.GetValidAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("breed").ToString());
@@ -18,17 +18,16 @@ Console.WriteLine(result.GetProperty("hates")[0].GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("hates")[0].GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetValid(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetValid with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new InheritanceClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+InheritanceClient client = new InheritanceClient(credential);
 
-Response response = client.GetValid(new RequestContext());
+Response response = client.GetValid(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("breed").ToString());
@@ -38,80 +37,79 @@ Console.WriteLine(result.GetProperty("hates")[0].GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("hates")[0].GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutValidAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutValidAsync.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new InheritanceClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+InheritanceClient client = new InheritanceClient(credential);
 
-var data = new {};
-
-Response response = await client.PutValidAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+Response response = await client.PutValidAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new InheritanceClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+InheritanceClient client = new InheritanceClient(credential);
 
-var data = new {
-    breed = "<breed>",
-    color = "<color>",
-    hates = new[] {
-        new {
-            food = "<food>",
-            id = 1234,
-            name = "<name>",
-        }
-    },
-    id = 1234,
-    name = "<name>",
-};
-
-Response response = await client.PutValidAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["breed"] = "<breed>",
+    ["color"] = "<color>",
+    ["hates"] = new object[]
+{
+new Dictionary<string, object>()
+{
+["food"] = "<food>",
+["id"] = 1234,
+["name"] = "<name>",
+}
+},
+    ["id"] = 1234,
+    ["name"] = "<name>",
+});
+Response response = await client.PutValidAsync(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutValid(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutValid.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new InheritanceClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+InheritanceClient client = new InheritanceClient(credential);
 
-var data = new {};
-
-Response response = client.PutValid(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+Response response = client.PutValid(content);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValid with all request content.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new InheritanceClient(credential);
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+InheritanceClient client = new InheritanceClient(credential);
 
-var data = new {
-    breed = "<breed>",
-    color = "<color>",
-    hates = new[] {
-        new {
-            food = "<food>",
-            id = 1234,
-            name = "<name>",
-        }
-    },
-    id = 1234,
-    name = "<name>",
-};
-
-Response response = client.PutValid(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["breed"] = "<breed>",
+    ["color"] = "<color>",
+    ["hates"] = new object[]
+{
+new Dictionary<string, object>()
+{
+["food"] = "<food>",
+["id"] = 1234,
+["name"] = "<name>",
+}
+},
+    ["id"] = 1234,
+    ["name"] = "<name>",
+});
+Response response = client.PutValid(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

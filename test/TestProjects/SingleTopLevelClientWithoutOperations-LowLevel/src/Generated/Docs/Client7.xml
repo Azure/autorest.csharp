@@ -2,32 +2,30 @@
 <doc>
   <members>
     <member name="OperationAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call OperationAsync with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new TopLevelClientWithoutOperationClient(credential).GetClient7Client();
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+Client7 client = new TopLevelClientWithoutOperationClient(credential).GetClient7Client();
 
-Response response = await client.OperationAsync(new RequestContext());
+Response response = await client.OperationAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Operation(RequestContext)">
-<example>
+      <example>
 This sample shows how to call Operation with required parameters and parse the result.
 <code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var client = new TopLevelClientWithoutOperationClient(credential).GetClient7Client();
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+Client7 client = new TopLevelClientWithoutOperationClient(credential).GetClient7Client();
 
-Response response = client.Operation(new RequestContext());
+Response response = client.Operation(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

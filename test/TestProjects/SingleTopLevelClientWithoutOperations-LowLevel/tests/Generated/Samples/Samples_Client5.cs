@@ -6,14 +6,12 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using SingleTopLevelClientWithoutOperations_LowLevel;
 
 namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
 {
@@ -23,10 +21,10 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Operation()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new TopLevelClientWithoutOperationClient(credential).GetClient5Client();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Client5 client = new TopLevelClientWithoutOperationClient(credential).GetClient5Client();
 
-            Response response = client.Operation(new RequestContext());
+            Response response = client.Operation(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -36,10 +34,10 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Operation_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new TopLevelClientWithoutOperationClient(credential).GetClient5Client();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Client5 client = new TopLevelClientWithoutOperationClient(credential).GetClient5Client();
 
-            Response response = client.Operation(new RequestContext());
+            Response response = client.Operation(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -49,10 +47,10 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new TopLevelClientWithoutOperationClient(credential).GetClient5Client();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Client5 client = new TopLevelClientWithoutOperationClient(credential).GetClient5Client();
 
-            Response response = await client.OperationAsync(new RequestContext());
+            Response response = await client.OperationAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -62,10 +60,10 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new TopLevelClientWithoutOperationClient(credential).GetClient5Client();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Client5 client = new TopLevelClientWithoutOperationClient(credential).GetClient5Client();
 
-            Response response = await client.OperationAsync(new RequestContext());
+            Response response = await client.OperationAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

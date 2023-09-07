@@ -6,14 +6,11 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using custom_baseUrl_LowLevel;
 
 namespace custom_baseUrl_LowLevel.Samples
 {
@@ -23,8 +20,8 @@ namespace custom_baseUrl_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetEmpty()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PathsClient("<host>", credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PathsClient client = new PathsClient("host", credential);
 
             Response response = client.GetEmpty("<accountName>");
             Console.WriteLine(response.Status);
@@ -34,8 +31,8 @@ namespace custom_baseUrl_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetEmpty_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PathsClient("<host>", credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PathsClient client = new PathsClient("host", credential);
 
             Response response = client.GetEmpty("<accountName>");
             Console.WriteLine(response.Status);
@@ -45,8 +42,8 @@ namespace custom_baseUrl_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetEmpty_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PathsClient("<host>", credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PathsClient client = new PathsClient("host", credential);
 
             Response response = await client.GetEmptyAsync("<accountName>");
             Console.WriteLine(response.Status);
@@ -56,8 +53,8 @@ namespace custom_baseUrl_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetEmpty_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PathsClient("<host>", credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PathsClient client = new PathsClient("host", credential);
 
             Response response = await client.GetEmptyAsync("<accountName>");
             Console.WriteLine(response.Status);
