@@ -15,7 +15,7 @@ namespace Parameters.Spread.Models
     internal partial class SpreadWithMultipleParametersRequest
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of SpreadWithMultipleParametersRequest. </summary>
         /// <param name="prop1"></param>
@@ -49,8 +49,8 @@ namespace Parameters.Spread.Models
         /// <param name="prop4"></param>
         /// <param name="prop5"></param>
         /// <param name="prop6"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SpreadWithMultipleParametersRequest(string prop1, string prop2, string prop3, string prop4, string prop5, string prop6, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SpreadWithMultipleParametersRequest(string prop1, string prop2, string prop3, string prop4, string prop5, string prop6, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Prop1 = prop1;
             Prop2 = prop2;
@@ -58,7 +58,7 @@ namespace Parameters.Spread.Models
             Prop4 = prop4;
             Prop5 = prop5;
             Prop6 = prop6;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="SpreadWithMultipleParametersRequest"/> for deserialization. </summary>

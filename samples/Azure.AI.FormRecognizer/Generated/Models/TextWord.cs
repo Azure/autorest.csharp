@@ -16,7 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class TextWord
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TextWord"/>. </summary>
         /// <param name="text"> The text content of the word. </param>
@@ -35,13 +35,13 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="text"> The text content of the word. </param>
         /// <param name="boundingBox"> Bounding box of an extracted word. </param>
         /// <param name="confidence"> Confidence value. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TextWord(string text, IReadOnlyList<float> boundingBox, float? confidence, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TextWord(string text, IReadOnlyList<float> boundingBox, float? confidence, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Text = text;
             BoundingBox = boundingBox;
             Confidence = confidence;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="TextWord"/> for deserialization. </summary>

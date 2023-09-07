@@ -14,7 +14,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class EffectiveNetworkSecurityGroupAssociation
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="EffectiveNetworkSecurityGroupAssociation"/>. </summary>
         internal EffectiveNetworkSecurityGroupAssociation()
@@ -24,12 +24,12 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Initializes a new instance of <see cref="EffectiveNetworkSecurityGroupAssociation"/>. </summary>
         /// <param name="subnet"> The ID of the subnet if assigned. </param>
         /// <param name="networkInterface"> The ID of the network interface if assigned. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal EffectiveNetworkSecurityGroupAssociation(SubResource subnet, SubResource networkInterface, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal EffectiveNetworkSecurityGroupAssociation(SubResource subnet, SubResource networkInterface, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Subnet = subnet;
             NetworkInterface = networkInterface;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The ID of the subnet if assigned. </summary>

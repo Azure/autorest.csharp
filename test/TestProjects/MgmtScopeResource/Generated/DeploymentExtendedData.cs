@@ -20,7 +20,7 @@ namespace MgmtScopeResource
     public partial class DeploymentExtendedData : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DeploymentExtendedData"/>. </summary>
         internal DeploymentExtendedData()
@@ -36,13 +36,13 @@ namespace MgmtScopeResource
         /// <param name="location"> the location of the deployment. </param>
         /// <param name="properties"> Deployment properties. </param>
         /// <param name="tags"> Deployment tags. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeploymentExtendedData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, DeploymentPropertiesExtended properties, IReadOnlyDictionary<string, string> tags, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentExtendedData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, DeploymentPropertiesExtended properties, IReadOnlyDictionary<string, string> tags, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Properties = properties;
             Tags = tags;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> the location of the deployment. </summary>

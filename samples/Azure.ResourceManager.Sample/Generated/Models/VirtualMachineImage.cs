@@ -72,8 +72,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies disallowed configuration for the VirtualMachine created from the image
         /// Serialized Name: VirtualMachineImage.properties.disallowed
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineImage(string id, string name, AzureLocation location, IDictionary<string, string> tags, PurchasePlan plan, OSDiskImage osDiskImage, IList<DataDiskImage> dataDiskImages, AutomaticOSUpgradeProperties automaticOSUpgradeProperties, HyperVGeneration? hyperVGeneration, DisallowedConfiguration disallowed, Dictionary<string, BinaryData> rawData) : base(id, name, location, tags, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineImage(string id, string name, AzureLocation location, IDictionary<string, string> tags, PurchasePlan plan, OSDiskImage osDiskImage, IList<DataDiskImage> dataDiskImages, AutomaticOSUpgradeProperties automaticOSUpgradeProperties, HyperVGeneration? hyperVGeneration, DisallowedConfiguration disallowed, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, location, tags, serializedAdditionalRawData)
         {
             Plan = plan;
             OSDiskImage = osDiskImage;

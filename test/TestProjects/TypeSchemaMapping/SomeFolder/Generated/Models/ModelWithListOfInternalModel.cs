@@ -15,7 +15,7 @@ namespace TypeSchemaMapping.Models
     public partial class ModelWithListOfInternalModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelWithListOfInternalModel"/>. </summary>
         internal ModelWithListOfInternalModel()
@@ -26,12 +26,12 @@ namespace TypeSchemaMapping.Models
         /// <summary> Initializes a new instance of <see cref="ModelWithListOfInternalModel"/>. </summary>
         /// <param name="stringProperty"></param>
         /// <param name="internalListProperty"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithListOfInternalModel(string stringProperty, IReadOnlyList<InternalModel> internalListProperty, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithListOfInternalModel(string stringProperty, IReadOnlyList<InternalModel> internalListProperty, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             StringProperty = stringProperty;
             InternalListProperty = internalListProperty;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the string property. </summary>

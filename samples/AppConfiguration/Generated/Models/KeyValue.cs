@@ -15,7 +15,7 @@ namespace AppConfiguration.Models
     public partial class KeyValue
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="KeyValue"/>. </summary>
         public KeyValue()
@@ -32,8 +32,8 @@ namespace AppConfiguration.Models
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
         /// <param name="locked"></param>
         /// <param name="etag"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal KeyValue(string key, string label, string contentType, string value, DateTimeOffset? lastModified, IDictionary<string, string> tags, bool? locked, string etag, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeyValue(string key, string label, string contentType, string value, DateTimeOffset? lastModified, IDictionary<string, string> tags, bool? locked, string etag, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Key = key;
             Label = label;
@@ -43,7 +43,7 @@ namespace AppConfiguration.Models
             Tags = tags;
             Locked = locked;
             Etag = etag;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the key. </summary>

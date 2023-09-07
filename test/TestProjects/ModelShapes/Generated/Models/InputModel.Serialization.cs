@@ -175,9 +175,9 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableIntList");
                 }
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -214,7 +214,7 @@ namespace ModelShapes.Models
             Optional<int?> nonRequiredNullableInt = default;
             Optional<IList<string>> nonRequiredNullableStringList = default;
             Optional<IList<int>> nonRequiredNullableIntList = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("RequiredString"u8))
@@ -389,11 +389,11 @@ namespace ModelShapes.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new InputModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList), rawData);
+            return new InputModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList), serializedAdditionalRawData);
         }
 
         InputModel IModelJsonSerializable<InputModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

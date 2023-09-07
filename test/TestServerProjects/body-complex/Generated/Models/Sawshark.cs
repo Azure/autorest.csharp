@@ -32,8 +32,8 @@ namespace body_complex.Models
         /// <param name="age"></param>
         /// <param name="birthday"></param>
         /// <param name="picture"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Sawshark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday, byte[] picture, Dictionary<string, BinaryData> rawData) : base(fishtype, species, length, siblings, age, birthday, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Sawshark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday, byte[] picture, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(fishtype, species, length, siblings, age, birthday, serializedAdditionalRawData)
         {
             Picture = picture;
             Fishtype = fishtype ?? "sawshark";

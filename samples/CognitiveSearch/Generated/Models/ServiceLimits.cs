@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     public partial class ServiceLimits
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ServiceLimits"/>. </summary>
         internal ServiceLimits()
@@ -26,14 +26,14 @@ namespace CognitiveSearch.Models
         /// <param name="maxFieldNestingDepthPerIndex"> The maximum depth which you can nest sub-fields in an index, including the top-level complex field. For example, a/b/c has a nesting depth of 3. </param>
         /// <param name="maxComplexCollectionFieldsPerIndex"> The maximum number of fields of type Collection(Edm.ComplexType) allowed in an index. </param>
         /// <param name="maxComplexObjectsInCollectionsPerDocument"> The maximum number of objects in complex collections allowed per document. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ServiceLimits(int? maxFieldsPerIndex, int? maxFieldNestingDepthPerIndex, int? maxComplexCollectionFieldsPerIndex, int? maxComplexObjectsInCollectionsPerDocument, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ServiceLimits(int? maxFieldsPerIndex, int? maxFieldNestingDepthPerIndex, int? maxComplexCollectionFieldsPerIndex, int? maxComplexObjectsInCollectionsPerDocument, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             MaxFieldsPerIndex = maxFieldsPerIndex;
             MaxFieldNestingDepthPerIndex = maxFieldNestingDepthPerIndex;
             MaxComplexCollectionFieldsPerIndex = maxComplexCollectionFieldsPerIndex;
             MaxComplexObjectsInCollectionsPerDocument = maxComplexObjectsInCollectionsPerDocument;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The maximum allowed fields per index. </summary>

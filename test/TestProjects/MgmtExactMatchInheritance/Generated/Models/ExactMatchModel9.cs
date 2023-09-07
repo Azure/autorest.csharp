@@ -14,7 +14,7 @@ namespace MgmtExactMatchInheritance.Models
     public partial class ExactMatchModel9
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ExactMatchModel9"/>. </summary>
         public ExactMatchModel9()
@@ -25,13 +25,13 @@ namespace MgmtExactMatchInheritance.Models
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="exactMatchModel9Type"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ExactMatchModel9(int? id, string name, string exactMatchModel9Type, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ExactMatchModel9(int? id, string name, string exactMatchModel9Type, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
             ExactMatchModel9Type = exactMatchModel9Type;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

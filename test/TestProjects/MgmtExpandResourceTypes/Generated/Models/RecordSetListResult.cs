@@ -16,7 +16,7 @@ namespace MgmtExpandResourceTypes.Models
     internal partial class RecordSetListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RecordSetListResult"/>. </summary>
         internal RecordSetListResult()
@@ -27,12 +27,12 @@ namespace MgmtExpandResourceTypes.Models
         /// <summary> Initializes a new instance of <see cref="RecordSetListResult"/>. </summary>
         /// <param name="value"> Information about the record sets in the response. </param>
         /// <param name="nextLink"> The continuation token for the next page of results. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RecordSetListResult(IReadOnlyList<RecordSetData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RecordSetListResult(IReadOnlyList<RecordSetData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Information about the record sets in the response. </summary>

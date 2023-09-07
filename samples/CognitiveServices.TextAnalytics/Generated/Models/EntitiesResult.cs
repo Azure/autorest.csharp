@@ -16,7 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class EntitiesResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="EntitiesResult"/>. </summary>
         /// <param name="documents"> Response by document. </param>
@@ -39,14 +39,14 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the request payload. </param>
         /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal EntitiesResult(IReadOnlyList<DocumentEntities> documents, IReadOnlyList<DocumentError> errors, RequestStatistics statistics, string modelVersion, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal EntitiesResult(IReadOnlyList<DocumentEntities> documents, IReadOnlyList<DocumentError> errors, RequestStatistics statistics, string modelVersion, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Documents = documents;
             Errors = errors;
             Statistics = statistics;
             ModelVersion = modelVersion;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="EntitiesResult"/> for deserialization. </summary>

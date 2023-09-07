@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
     public partial class OrchestrationServiceStateContent
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="OrchestrationServiceStateContent"/>. </summary>
         /// <param name="serviceName">
@@ -43,12 +43,12 @@ namespace MgmtAcronymMapping.Models
         /// The action to be performed.
         /// Serialized Name: OrchestrationServiceStateInput.action
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal OrchestrationServiceStateContent(OrchestrationServiceName serviceName, OrchestrationServiceStateAction action, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OrchestrationServiceStateContent(OrchestrationServiceName serviceName, OrchestrationServiceStateAction action, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ServiceName = serviceName;
             Action = action;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="OrchestrationServiceStateContent"/> for deserialization. </summary>

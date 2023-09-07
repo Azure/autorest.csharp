@@ -20,7 +20,7 @@ namespace MgmtMockAndSample.Models
     public abstract partial class FirewallPolicyRuleCollection
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyRuleCollection"/>. </summary>
         protected FirewallPolicyRuleCollection()
@@ -31,13 +31,13 @@ namespace MgmtMockAndSample.Models
         /// <param name="ruleCollectionType"> The type of the rule collection. </param>
         /// <param name="name"> The name of the rule collection. </param>
         /// <param name="priority"> Priority of the Firewall Policy Rule Collection resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirewallPolicyRuleCollection(FirewallPolicyRuleCollectionType ruleCollectionType, string name, int? priority, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyRuleCollection(FirewallPolicyRuleCollectionType ruleCollectionType, string name, int? priority, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RuleCollectionType = ruleCollectionType;
             Name = name;
             Priority = priority;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The type of the rule collection. </summary>

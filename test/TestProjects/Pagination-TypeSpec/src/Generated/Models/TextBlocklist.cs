@@ -15,7 +15,7 @@ namespace Pagination.Models
     public partial class TextBlocklist
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of TextBlocklist. </summary>
         /// <param name="blocklistName"> Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~. </param>
@@ -30,12 +30,12 @@ namespace Pagination.Models
         /// <summary> Initializes a new instance of TextBlocklist. </summary>
         /// <param name="blocklistName"> Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~. </param>
         /// <param name="description"> Text blocklist description. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TextBlocklist(string blocklistName, string description, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TextBlocklist(string blocklistName, string description, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             BlocklistName = blocklistName;
             Description = description;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="TextBlocklist"/> for deserialization. </summary>

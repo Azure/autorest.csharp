@@ -14,7 +14,7 @@ namespace model_flattening.Models
     public partial class ProductWrapper
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ProductWrapper"/>. </summary>
         internal ProductWrapper()
@@ -23,11 +23,11 @@ namespace model_flattening.Models
 
         /// <summary> Initializes a new instance of <see cref="ProductWrapper"/>. </summary>
         /// <param name="value"> the product value. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ProductWrapper(string value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProductWrapper(string value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> the product value. </summary>

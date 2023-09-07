@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class TokenInfo
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TokenInfo"/>. </summary>
         /// <param name="token"> The token returned by the analyzer. </param>
@@ -38,14 +38,14 @@ namespace CognitiveSearch.Models
         /// <param name="startOffset"> The index of the first character of the token in the input text. </param>
         /// <param name="endOffset"> The index of the last character of the token in the input text. </param>
         /// <param name="position"> The position of the token in the input text relative to other tokens. The first token in the input text has position 0, the next has position 1, and so on. Depending on the analyzer used, some tokens might have the same position, for example if they are synonyms of each other. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TokenInfo(string token, int startOffset, int endOffset, int position, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TokenInfo(string token, int startOffset, int endOffset, int position, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Token = token;
             StartOffset = startOffset;
             EndOffset = endOffset;
             Position = position;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="TokenInfo"/> for deserialization. </summary>

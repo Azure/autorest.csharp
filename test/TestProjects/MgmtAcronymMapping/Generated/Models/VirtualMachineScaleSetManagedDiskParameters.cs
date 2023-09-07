@@ -19,7 +19,7 @@ namespace MgmtAcronymMapping.Models
     public partial class VirtualMachineScaleSetManagedDiskParameters
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetManagedDiskParameters"/>. </summary>
         public VirtualMachineScaleSetManagedDiskParameters()
@@ -35,12 +35,12 @@ namespace MgmtAcronymMapping.Models
         /// Specifies the customer managed disk encryption set resource id for the managed disk.
         /// Serialized Name: VirtualMachineScaleSetManagedDiskParameters.diskEncryptionSet
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetManagedDiskParameters(StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetManagedDiskParameters(StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             StorageAccountType = storageAccountType;
             DiskEncryptionSet = diskEncryptionSet;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

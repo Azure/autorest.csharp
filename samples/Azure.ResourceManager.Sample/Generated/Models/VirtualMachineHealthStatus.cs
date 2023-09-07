@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     internal partial class VirtualMachineHealthStatus
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineHealthStatus"/>. </summary>
         internal VirtualMachineHealthStatus()
@@ -29,11 +29,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// The health status information for the VM.
         /// Serialized Name: VirtualMachineHealthStatus.status
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineHealthStatus(InstanceViewStatus status, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineHealthStatus(InstanceViewStatus status, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

@@ -21,7 +21,7 @@ namespace Azure.ResourceManager.Storage
     public partial class BlobContainerData : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BlobContainerData"/>. </summary>
         public BlobContainerData()
@@ -54,8 +54,8 @@ namespace Azure.ResourceManager.Storage
         /// <param name="enableNfsV3RootSquash"> Enable NFSv3 root squash on blob container. </param>
         /// <param name="enableNfsV3AllSquash"> Enable NFSv3 all squash on blob container. </param>
         /// <param name="etag"> Resource Etag. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BlobContainerData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string version, bool? deleted, DateTimeOffset? deletedOn, int? remainingRetentionDays, string defaultEncryptionScope, bool? denyEncryptionScopeOverride, PublicAccess? publicAccess, DateTimeOffset? lastModifiedOn, LeaseStatus? leaseStatus, LeaseState? leaseState, LeaseDuration? leaseDuration, IDictionary<string, string> metadata, ImmutabilityPolicyProperties immutabilityPolicy, LegalHoldProperties legalHold, bool? hasLegalHold, bool? hasImmutabilityPolicy, ImmutableStorageWithVersioning immutableStorageWithVersioning, bool? enableNfsV3RootSquash, bool? enableNfsV3AllSquash, ETag? etag, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BlobContainerData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string version, bool? deleted, DateTimeOffset? deletedOn, int? remainingRetentionDays, string defaultEncryptionScope, bool? denyEncryptionScopeOverride, PublicAccess? publicAccess, DateTimeOffset? lastModifiedOn, LeaseStatus? leaseStatus, LeaseState? leaseState, LeaseDuration? leaseDuration, IDictionary<string, string> metadata, ImmutabilityPolicyProperties immutabilityPolicy, LegalHoldProperties legalHold, bool? hasLegalHold, bool? hasImmutabilityPolicy, ImmutableStorageWithVersioning immutableStorageWithVersioning, bool? enableNfsV3RootSquash, bool? enableNfsV3AllSquash, ETag? etag, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Version = version;
             Deleted = deleted;
@@ -77,7 +77,7 @@ namespace Azure.ResourceManager.Storage
             EnableNfsV3RootSquash = enableNfsV3RootSquash;
             EnableNfsV3AllSquash = enableNfsV3AllSquash;
             Etag = etag;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The version of the deleted blob container. </summary>

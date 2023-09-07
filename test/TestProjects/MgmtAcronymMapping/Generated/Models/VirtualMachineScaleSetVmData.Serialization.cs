@@ -172,9 +172,9 @@ namespace MgmtAcronymMapping
                 }
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -221,7 +221,7 @@ namespace MgmtAcronymMapping
             Optional<string> licenseType = default;
             Optional<string> modelDefinitionApplied = default;
             Optional<VirtualMachineScaleSetVmProtectionPolicy> protectionPolicy = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("instanceId"u8))
@@ -446,11 +446,11 @@ namespace MgmtAcronymMapping
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVmData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, instanceId.Value, sku.Value, plan.Value, Optional.ToList(zones), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value, rawData);
+            return new VirtualMachineScaleSetVmData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, instanceId.Value, sku.Value, plan.Value, Optional.ToList(zones), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value, serializedAdditionalRawData);
         }
 
         VirtualMachineScaleSetVmData IModelJsonSerializable<VirtualMachineScaleSetVmData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

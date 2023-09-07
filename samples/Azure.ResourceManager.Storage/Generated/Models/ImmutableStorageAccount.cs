@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class ImmutableStorageAccount
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ImmutableStorageAccount"/>. </summary>
         public ImmutableStorageAccount()
@@ -24,12 +24,12 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of <see cref="ImmutableStorageAccount"/>. </summary>
         /// <param name="enabled"> A boolean flag which enables account-level immutability. All the containers under such an account have object-level immutability enabled by default. </param>
         /// <param name="immutabilityPolicy"> Specifies the default account-level immutability policy which is inherited and applied to objects that do not possess an explicit immutability policy at the object level. The object-level immutability policy has higher precedence than the container-level immutability policy, which has a higher precedence than the account-level immutability policy. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ImmutableStorageAccount(bool? enabled, AccountImmutabilityPolicyProperties immutabilityPolicy, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImmutableStorageAccount(bool? enabled, AccountImmutabilityPolicyProperties immutabilityPolicy, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Enabled = enabled;
             ImmutabilityPolicy = immutabilityPolicy;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A boolean flag which enables account-level immutability. All the containers under such an account have object-level immutability enabled by default. </summary>

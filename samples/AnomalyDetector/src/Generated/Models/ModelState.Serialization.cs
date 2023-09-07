@@ -63,9 +63,9 @@ namespace AnomalyDetector.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -90,7 +90,7 @@ namespace AnomalyDetector.Models
             Optional<IList<float>> trainLosses = default;
             Optional<IList<float>> validationLosses = default;
             Optional<IList<float>> latenciesInSeconds = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("epochIds"u8))
@@ -151,11 +151,11 @@ namespace AnomalyDetector.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new ModelState(Optional.ToList(epochIds), Optional.ToList(trainLosses), Optional.ToList(validationLosses), Optional.ToList(latenciesInSeconds), rawData);
+            return new ModelState(Optional.ToList(epochIds), Optional.ToList(trainLosses), Optional.ToList(validationLosses), Optional.ToList(latenciesInSeconds), serializedAdditionalRawData);
         }
 
         ModelState IModelJsonSerializable<ModelState>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

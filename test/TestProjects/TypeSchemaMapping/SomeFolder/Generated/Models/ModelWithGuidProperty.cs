@@ -14,7 +14,7 @@ namespace TypeSchemaMapping.Models
     public partial class ModelWithGuidProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelWithGuidProperty"/>. </summary>
         public ModelWithGuidProperty()
@@ -23,11 +23,11 @@ namespace TypeSchemaMapping.Models
 
         /// <summary> Initializes a new instance of <see cref="ModelWithGuidProperty"/>. </summary>
         /// <param name="modelProperty"> . </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithGuidProperty(Guid? modelProperty, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithGuidProperty(Guid? modelProperty, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ModelProperty = modelProperty;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> . </summary>

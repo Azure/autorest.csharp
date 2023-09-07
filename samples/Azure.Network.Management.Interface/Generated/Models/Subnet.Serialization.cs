@@ -148,9 +148,9 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStringValue(PrivateLinkServiceNetworkPolicies);
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -191,7 +191,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<ProvisioningState> provisioningState = default;
             Optional<string> privateEndpointNetworkPolicies = default;
             Optional<string> privateLinkServiceNetworkPolicies = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -405,11 +405,11 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new Subnet(id.Value, name.Value, etag.Value, addressPrefix.Value, Optional.ToList(addressPrefixes), networkSecurityGroup.Value, routeTable.Value, natGateway.Value, Optional.ToList(serviceEndpoints), Optional.ToList(serviceEndpointPolicies), Optional.ToList(privateEndpoints), Optional.ToList(ipConfigurations), Optional.ToList(ipConfigurationProfiles), Optional.ToList(resourceNavigationLinks), Optional.ToList(serviceAssociationLinks), Optional.ToList(delegations), purpose.Value, Optional.ToNullable(provisioningState), privateEndpointNetworkPolicies.Value, privateLinkServiceNetworkPolicies.Value, rawData);
+            return new Subnet(id.Value, name.Value, etag.Value, addressPrefix.Value, Optional.ToList(addressPrefixes), networkSecurityGroup.Value, routeTable.Value, natGateway.Value, Optional.ToList(serviceEndpoints), Optional.ToList(serviceEndpointPolicies), Optional.ToList(privateEndpoints), Optional.ToList(ipConfigurations), Optional.ToList(ipConfigurationProfiles), Optional.ToList(resourceNavigationLinks), Optional.ToList(serviceAssociationLinks), Optional.ToList(delegations), purpose.Value, Optional.ToNullable(provisioningState), privateEndpointNetworkPolicies.Value, privateLinkServiceNetworkPolicies.Value, serializedAdditionalRawData);
         }
 
         Subnet IModelJsonSerializable<Subnet>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

@@ -16,7 +16,7 @@ namespace Azure.NewProject.TypeSpec.Models
     internal partial class RoundTripModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
@@ -73,8 +73,8 @@ namespace Azure.NewProject.TypeSpec.Models
         /// <param name="optionalRecordUnknown"> optional record of unknown. </param>
         /// <param name="readOnlyRequiredRecordUnknown"> required readonly record of unknown. </param>
         /// <param name="readOnlyOptionalRecordUnknown"> optional readonly record of unknown. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RoundTripModel(string requiredString, int requiredInt, IList<StringFixedEnum> requiredCollection, IDictionary<string, StringExtensibleEnum> requiredDictionary, Thing requiredModel, IntExtensibleEnum? intExtensibleEnum, IList<IntExtensibleEnum> intExtensibleEnumCollection, FloatExtensibleEnum? floatExtensibleEnum, IList<FloatExtensibleEnum> floatExtensibleEnumCollection, FloatFixedEnum? floatFixedEnum, IList<FloatFixedEnum> floatFixedEnumCollection, IntFixedEnum? intFixedEnum, IList<IntFixedEnum> intFixedEnumCollection, StringFixedEnum? stringFixedEnum, BinaryData requiredUnknown, BinaryData optionalUnknown, IDictionary<string, BinaryData> requiredRecordUnknown, IDictionary<string, BinaryData> optionalRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RoundTripModel(string requiredString, int requiredInt, IList<StringFixedEnum> requiredCollection, IDictionary<string, StringExtensibleEnum> requiredDictionary, Thing requiredModel, IntExtensibleEnum? intExtensibleEnum, IList<IntExtensibleEnum> intExtensibleEnumCollection, FloatExtensibleEnum? floatExtensibleEnum, IList<FloatExtensibleEnum> floatExtensibleEnumCollection, FloatFixedEnum? floatFixedEnum, IList<FloatFixedEnum> floatFixedEnumCollection, IntFixedEnum? intFixedEnum, IList<IntFixedEnum> intFixedEnumCollection, StringFixedEnum? stringFixedEnum, BinaryData requiredUnknown, BinaryData optionalUnknown, IDictionary<string, BinaryData> requiredRecordUnknown, IDictionary<string, BinaryData> optionalRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -96,7 +96,7 @@ namespace Azure.NewProject.TypeSpec.Models
             OptionalRecordUnknown = optionalRecordUnknown;
             ReadOnlyRequiredRecordUnknown = readOnlyRequiredRecordUnknown;
             ReadOnlyOptionalRecordUnknown = readOnlyOptionalRecordUnknown;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="RoundTripModel"/> for deserialization. </summary>

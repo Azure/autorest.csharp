@@ -14,7 +14,7 @@ namespace _Type.Property.Optionality.Models
     public partial class RequiredAndOptionalProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of RequiredAndOptionalProperty. </summary>
         /// <param name="requiredProperty"> required int property. </param>
@@ -26,12 +26,12 @@ namespace _Type.Property.Optionality.Models
         /// <summary> Initializes a new instance of RequiredAndOptionalProperty. </summary>
         /// <param name="optionalProperty"> optional string property. </param>
         /// <param name="requiredProperty"> required int property. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RequiredAndOptionalProperty(string optionalProperty, int requiredProperty, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RequiredAndOptionalProperty(string optionalProperty, int requiredProperty, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OptionalProperty = optionalProperty;
             RequiredProperty = requiredProperty;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="RequiredAndOptionalProperty"/> for deserialization. </summary>

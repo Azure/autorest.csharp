@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
     public partial class PrivateEndpointConnectionItem
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="PrivateEndpointConnectionItem"/>. </summary>
         internal PrivateEndpointConnectionItem()
@@ -29,15 +29,15 @@ namespace MgmtMockAndSample.Models
         /// <param name="privateEndpoint"> Properties of the private endpoint object. </param>
         /// <param name="connectionState"> Approval state of the private link connection. </param>
         /// <param name="provisioningState"> Provisioning state of the private endpoint connection. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PrivateEndpointConnectionItem(string id, string etag, Azure.ResourceManager.Resources.Models.SubResource privateEndpoint, MgmtMockAndSamplePrivateLinkServiceConnectionState connectionState, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PrivateEndpointConnectionItem(string id, string etag, Azure.ResourceManager.Resources.Models.SubResource privateEndpoint, MgmtMockAndSamplePrivateLinkServiceConnectionState connectionState, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Etag = etag;
             PrivateEndpoint = privateEndpoint;
             ConnectionState = connectionState;
             ProvisioningState = provisioningState;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Id of private endpoint connection. </summary>

@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class BlobRestoreContent
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BlobRestoreContent"/>. </summary>
         /// <param name="timeToRestore"> Restore blob to the specified time. </param>
@@ -33,12 +33,12 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of <see cref="BlobRestoreContent"/>. </summary>
         /// <param name="timeToRestore"> Restore blob to the specified time. </param>
         /// <param name="blobRanges"> Blob ranges to restore. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BlobRestoreContent(DateTimeOffset timeToRestore, IList<BlobRestoreRange> blobRanges, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BlobRestoreContent(DateTimeOffset timeToRestore, IList<BlobRestoreRange> blobRanges, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TimeToRestore = timeToRestore;
             BlobRanges = blobRanges;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="BlobRestoreContent"/> for deserialization. </summary>

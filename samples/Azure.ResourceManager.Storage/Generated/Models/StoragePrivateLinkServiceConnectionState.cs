@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class StoragePrivateLinkServiceConnectionState
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StoragePrivateLinkServiceConnectionState"/>. </summary>
         public StoragePrivateLinkServiceConnectionState()
@@ -25,13 +25,13 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="status"> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </param>
         /// <param name="description"> The reason for approval/rejection of the connection. </param>
         /// <param name="actionRequired"> A message indicating if changes on the service provider require any updates on the consumer. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StoragePrivateLinkServiceConnectionState(StoragePrivateEndpointServiceConnectionStatus? status, string description, string actionRequired, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StoragePrivateLinkServiceConnectionState(StoragePrivateEndpointServiceConnectionStatus? status, string description, string actionRequired, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             Description = description;
             ActionRequired = actionRequired;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </summary>

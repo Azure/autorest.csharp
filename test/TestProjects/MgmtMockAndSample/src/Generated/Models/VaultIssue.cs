@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     public partial class VaultIssue
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VaultIssue"/>. </summary>
         internal VaultIssue()
@@ -25,13 +25,13 @@ namespace MgmtMockAndSample.Models
         /// <param name="vaultIssueType"> The type of the issue. </param>
         /// <param name="description"> The description of the issue. </param>
         /// <param name="sev"> The severity of the issue. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VaultIssue(string vaultIssueType, string description, int? sev, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultIssue(string vaultIssueType, string description, int? sev, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             VaultIssueType = vaultIssueType;
             Description = description;
             Sev = sev;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The type of the issue. </summary>

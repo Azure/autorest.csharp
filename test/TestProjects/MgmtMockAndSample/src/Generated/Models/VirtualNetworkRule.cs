@@ -15,7 +15,7 @@ namespace MgmtMockAndSample.Models
     public partial class VirtualNetworkRule
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualNetworkRule"/>. </summary>
         /// <param name="id"> Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'. </param>
@@ -30,12 +30,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="VirtualNetworkRule"/>. </summary>
         /// <param name="id"> Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'. </param>
         /// <param name="ignoreMissingVnetServiceEndpoint"> Property to specify whether NRP will ignore the check if parent subnet has serviceEndpoints configured. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualNetworkRule(string id, bool? ignoreMissingVnetServiceEndpoint, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualNetworkRule(string id, bool? ignoreMissingVnetServiceEndpoint, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             IgnoreMissingVnetServiceEndpoint = ignoreMissingVnetServiceEndpoint;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="VirtualNetworkRule"/> for deserialization. </summary>

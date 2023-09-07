@@ -14,7 +14,7 @@ namespace MgmtCollectionParent.Models
     public partial class StageDetails
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StageDetails"/>. </summary>
         internal StageDetails()
@@ -26,14 +26,14 @@ namespace MgmtCollectionParent.Models
         /// <param name="stageName"> Stage name. </param>
         /// <param name="displayName"> Display name of the resource stage. </param>
         /// <param name="startOn"> Stage start time. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StageDetails(StageStatus? stageStatus, StageName? stageName, string displayName, DateTimeOffset? startOn, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StageDetails(StageStatus? stageStatus, StageName? stageName, string displayName, DateTimeOffset? startOn, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             StageStatus = stageStatus;
             StageName = stageName;
             DisplayName = displayName;
             StartOn = startOn;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Stage status. </summary>

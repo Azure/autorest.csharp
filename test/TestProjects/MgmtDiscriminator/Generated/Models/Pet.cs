@@ -20,7 +20,7 @@ namespace MgmtDiscriminator.Models
     public abstract partial class Pet
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         protected Pet()
@@ -30,12 +30,12 @@ namespace MgmtDiscriminator.Models
         /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="kind"> The kind of the pet. </param>
         /// <param name="id"> The Id of the pet. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Pet(PetKind kind, string id, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Pet(PetKind kind, string id, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Kind = kind;
             Id = id;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The kind of the pet. </summary>

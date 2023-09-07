@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
     public partial class SearchDocumentsResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SearchDocumentsResult"/>. </summary>
         /// <param name="results"> The sequence of results returned by the query. </param>
@@ -36,8 +36,8 @@ namespace CognitiveSearch.Models
         /// <param name="nextPageParameters"> Continuation JSON payload returned when Azure Cognitive Search can't return all the requested results in a single Search response. You can use this JSON along with @odata.nextLink to formulate another POST Search request to get the next part of the search response. </param>
         /// <param name="results"> The sequence of results returned by the query. </param>
         /// <param name="nextLink"> Continuation URL returned when Azure Cognitive Search can't return all the requested results in a single Search response. You can use this URL to formulate another GET or POST Search request to get the next part of the search response. Make sure to use the same verb (GET or POST) as the request that produced this response. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SearchDocumentsResult(long? count, double? coverage, IReadOnlyDictionary<string, IList<FacetResult>> facets, SearchRequest nextPageParameters, IReadOnlyList<SearchResult> results, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SearchDocumentsResult(long? count, double? coverage, IReadOnlyDictionary<string, IList<FacetResult>> facets, SearchRequest nextPageParameters, IReadOnlyList<SearchResult> results, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Count = count;
             Coverage = coverage;
@@ -45,7 +45,7 @@ namespace CognitiveSearch.Models
             NextPageParameters = nextPageParameters;
             Results = results;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="SearchDocumentsResult"/> for deserialization. </summary>

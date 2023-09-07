@@ -20,7 +20,7 @@ namespace Azure.ResourceManager.Storage
     public partial class EncryptionScopeData : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="EncryptionScopeData"/>. </summary>
         public EncryptionScopeData()
@@ -38,8 +38,8 @@ namespace Azure.ResourceManager.Storage
         /// <param name="lastModifiedOn"> Gets the last modification date and time of the encryption scope in UTC. </param>
         /// <param name="keyVaultProperties"> The key vault properties for the encryption scope. This is a required field if encryption scope 'source' attribute is set to 'Microsoft.KeyVault'. </param>
         /// <param name="requireInfrastructureEncryption"> A boolean indicating whether or not the service applies a secondary layer of encryption with platform managed keys for data at rest. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal EncryptionScopeData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, EncryptionScopeSource? source, EncryptionScopeState? state, DateTimeOffset? createdOn, DateTimeOffset? lastModifiedOn, EncryptionScopeKeyVaultProperties keyVaultProperties, bool? requireInfrastructureEncryption, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal EncryptionScopeData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, EncryptionScopeSource? source, EncryptionScopeState? state, DateTimeOffset? createdOn, DateTimeOffset? lastModifiedOn, EncryptionScopeKeyVaultProperties keyVaultProperties, bool? requireInfrastructureEncryption, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Source = source;
             State = state;
@@ -47,7 +47,7 @@ namespace Azure.ResourceManager.Storage
             LastModifiedOn = lastModifiedOn;
             KeyVaultProperties = keyVaultProperties;
             RequireInfrastructureEncryption = requireInfrastructureEncryption;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The provider for the encryption scope. Possible values (case-insensitive):  Microsoft.Storage, Microsoft.KeyVault. </summary>

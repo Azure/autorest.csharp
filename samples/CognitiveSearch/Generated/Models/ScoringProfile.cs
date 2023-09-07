@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class ScoringProfile
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ScoringProfile"/>. </summary>
         /// <param name="name"> The name of the scoring profile. </param>
@@ -37,14 +37,14 @@ namespace CognitiveSearch.Models
         /// The available derived classes include <see cref="DistanceScoringFunction"/>, <see cref="FreshnessScoringFunction"/>, <see cref="MagnitudeScoringFunction"/> and <see cref="TagScoringFunction"/>.
         /// </param>
         /// <param name="functionAggregation"> A value indicating how the results of individual scoring functions should be combined. Defaults to "Sum". Ignored if there are no scoring functions. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ScoringProfile(string name, TextWeights textWeights, IList<ScoringFunction> functions, ScoringFunctionAggregation? functionAggregation, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ScoringProfile(string name, TextWeights textWeights, IList<ScoringFunction> functions, ScoringFunctionAggregation? functionAggregation, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             TextWeights = textWeights;
             Functions = functions;
             FunctionAggregation = functionAggregation;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ScoringProfile"/> for deserialization. </summary>

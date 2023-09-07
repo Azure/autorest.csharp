@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
     public partial class MaintenanceRedeployStatus
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MaintenanceRedeployStatus"/>. </summary>
         internal MaintenanceRedeployStatus()
@@ -53,8 +53,8 @@ namespace MgmtAcronymMapping.Models
         /// Message returned for the last Maintenance Operation.
         /// Serialized Name: MaintenanceRedeployStatus.lastOperationMessage
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MaintenanceRedeployStatus(bool? isCustomerInitiatedMaintenanceAllowed, DateTimeOffset? preMaintenanceWindowStartOn, DateTimeOffset? preMaintenanceWindowEndOn, DateTimeOffset? maintenanceWindowStartOn, DateTimeOffset? maintenanceWindowEndOn, MaintenanceOperationResultCodeType? lastOperationResultCode, string lastOperationMessage, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MaintenanceRedeployStatus(bool? isCustomerInitiatedMaintenanceAllowed, DateTimeOffset? preMaintenanceWindowStartOn, DateTimeOffset? preMaintenanceWindowEndOn, DateTimeOffset? maintenanceWindowStartOn, DateTimeOffset? maintenanceWindowEndOn, MaintenanceOperationResultCodeType? lastOperationResultCode, string lastOperationMessage, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             IsCustomerInitiatedMaintenanceAllowed = isCustomerInitiatedMaintenanceAllowed;
             PreMaintenanceWindowStartOn = preMaintenanceWindowStartOn;
@@ -63,7 +63,7 @@ namespace MgmtAcronymMapping.Models
             MaintenanceWindowEndOn = maintenanceWindowEndOn;
             LastOperationResultCode = lastOperationResultCode;
             LastOperationMessage = lastOperationMessage;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

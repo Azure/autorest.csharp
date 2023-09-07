@@ -14,7 +14,7 @@ namespace ModelShapes.Models
     public partial class ReadonlyModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ReadonlyModel"/>. </summary>
         internal ReadonlyModel()
@@ -23,11 +23,11 @@ namespace ModelShapes.Models
 
         /// <summary> Initializes a new instance of <see cref="ReadonlyModel"/>. </summary>
         /// <param name="name"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ReadonlyModel(string name, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ReadonlyModel(string name, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the name. </summary>

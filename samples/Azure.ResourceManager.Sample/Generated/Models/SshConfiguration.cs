@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     internal partial class SshConfiguration
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SshConfiguration"/>. </summary>
         public SshConfiguration()
@@ -31,11 +31,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// The list of SSH public keys used to authenticate with linux based VMs.
         /// Serialized Name: SshConfiguration.publicKeys
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SshConfiguration(IList<SshPublicKeyInfo> publicKeys, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SshConfiguration(IList<SshPublicKeyInfo> publicKeys, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PublicKeys = publicKeys;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

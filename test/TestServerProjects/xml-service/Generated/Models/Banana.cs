@@ -14,7 +14,7 @@ namespace xml_service.Models
     public partial class Banana
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Banana"/>. </summary>
         public Banana()
@@ -25,13 +25,13 @@ namespace xml_service.Models
         /// <param name="name"></param>
         /// <param name="flavor"></param>
         /// <param name="expiration"> The time at which you should reconsider eating this banana. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Banana(string name, string flavor, DateTimeOffset? expiration, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Banana(string name, string flavor, DateTimeOffset? expiration, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Flavor = flavor;
             Expiration = expiration;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the name. </summary>

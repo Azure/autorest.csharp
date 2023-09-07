@@ -27,9 +27,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WritePropertyName("secretUrl"u8);
             writer.WriteStringValue(SecretUri.AbsoluteUri);
             writer.WritePropertyName("sourceVault"u8);
-            JsonSerializer.Serialize(writer, SourceVault); if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            JsonSerializer.Serialize(writer, SourceVault); if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -52,7 +52,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
             Uri secretUrl = default;
             WritableSubResource sourceVault = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("secretUrl"u8))
@@ -67,11 +67,11 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new KeyVaultSecretReference(secretUrl, sourceVault, rawData);
+            return new KeyVaultSecretReference(secretUrl, sourceVault, serializedAdditionalRawData);
         }
 
         KeyVaultSecretReference IModelJsonSerializable<KeyVaultSecretReference>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

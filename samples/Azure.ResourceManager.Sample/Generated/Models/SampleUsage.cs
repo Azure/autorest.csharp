@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class SampleUsage
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SampleUsage"/>. </summary>
         /// <param name="currentValue">
@@ -61,14 +61,14 @@ namespace Azure.ResourceManager.Sample.Models
         /// The name of the type of usage.
         /// Serialized Name: Usage.name
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SampleUsage(UsageUnit unit, int currentValue, long limit, SampleUsageName name, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SampleUsage(UsageUnit unit, int currentValue, long limit, SampleUsageName name, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Unit = unit;
             CurrentValue = currentValue;
             Limit = limit;
             Name = name;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="SampleUsage"/> for deserialization. </summary>

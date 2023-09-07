@@ -15,7 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class KeyValuePair
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="KeyValuePair"/>. </summary>
         /// <param name="key"> Information about the extracted key in a key-value pair. </param>
@@ -37,14 +37,14 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="key"> Information about the extracted key in a key-value pair. </param>
         /// <param name="value"> Information about the extracted value in a key-value pair. </param>
         /// <param name="confidence"> Confidence value. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal KeyValuePair(string label, KeyValueElement key, KeyValueElement value, float confidence, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeyValuePair(string label, KeyValueElement key, KeyValueElement value, float confidence, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Label = label;
             Key = key;
             Value = value;
             Confidence = confidence;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="KeyValuePair"/> for deserialization. </summary>

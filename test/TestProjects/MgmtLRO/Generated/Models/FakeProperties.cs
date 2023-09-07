@@ -14,7 +14,7 @@ namespace MgmtLRO.Models
     public partial class FakeProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FakeProperties"/>. </summary>
         public FakeProperties()
@@ -24,12 +24,12 @@ namespace MgmtLRO.Models
         /// <summary> Initializes a new instance of <see cref="FakeProperties"/>. </summary>
         /// <param name="platformUpdateDomainCount"> Update Domain count. </param>
         /// <param name="platformFaultDomainCount"> Fault Domain count. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FakeProperties(int? platformUpdateDomainCount, int? platformFaultDomainCount, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FakeProperties(int? platformUpdateDomainCount, int? platformFaultDomainCount, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PlatformUpdateDomainCount = platformUpdateDomainCount;
             PlatformFaultDomainCount = platformFaultDomainCount;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Update Domain count. </summary>

@@ -43,9 +43,9 @@ namespace MgmtExpandResourceTypes.Models
                 writer.WritePropertyName("target"u8);
                 writer.WriteStringValue(Target);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -70,7 +70,7 @@ namespace MgmtExpandResourceTypes.Models
             Optional<int> weight = default;
             Optional<int> port = default;
             Optional<string> target = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("priority"u8))
@@ -107,11 +107,11 @@ namespace MgmtExpandResourceTypes.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new SrvRecord(Optional.ToNullable(priority), Optional.ToNullable(weight), Optional.ToNullable(port), target.Value, rawData);
+            return new SrvRecord(Optional.ToNullable(priority), Optional.ToNullable(weight), Optional.ToNullable(port), target.Value, serializedAdditionalRawData);
         }
 
         SrvRecord IModelJsonSerializable<SrvRecord>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

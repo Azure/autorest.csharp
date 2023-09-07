@@ -41,8 +41,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="idleTimeoutInMinutes"> The idle timeout of the public IP address. </param>
         /// <param name="resourceGuid"> The resource GUID property of the public IP address resource. </param>
         /// <param name="provisioningState"> The provisioning state of the public IP address resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PublicIPAddress(string id, string name, string type, string location, IDictionary<string, string> tags, PublicIPAddressSku sku, string etag, IList<string> zones, IPAllocationMethod? publicIPAllocationMethod, IPVersion? publicIPAddressVersion, IPConfiguration ipConfiguration, PublicIPAddressDnsSettings dnsSettings, DdosSettings ddosSettings, IList<IpTag> ipTags, string ipAddress, SubResource publicIPPrefix, int? idleTimeoutInMinutes, string resourceGuid, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, name, type, location, tags, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PublicIPAddress(string id, string name, string type, string location, IDictionary<string, string> tags, PublicIPAddressSku sku, string etag, IList<string> zones, IPAllocationMethod? publicIPAllocationMethod, IPVersion? publicIPAddressVersion, IPConfiguration ipConfiguration, PublicIPAddressDnsSettings dnsSettings, DdosSettings ddosSettings, IList<IpTag> ipTags, string ipAddress, SubResource publicIPPrefix, int? idleTimeoutInMinutes, string resourceGuid, ProvisioningState? provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, type, location, tags, serializedAdditionalRawData)
         {
             Sku = sku;
             Etag = etag;

@@ -66,9 +66,9 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -113,7 +113,7 @@ namespace ModelsTypeSpec.Models
             Optional<IReadOnlyDictionary<string, RecordItem>> optionalModelRecord = default;
             IReadOnlyList<int?> requiredCollectionWithNullableIntElement = default;
             Optional<IReadOnlyList<bool?>> optionalCollectionWithNullableBooleanElement = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredReadonlyString"u8))
@@ -350,11 +350,11 @@ namespace ModelsTypeSpec.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString.Value, Optional.ToNullable(optionalReadonlyInt), requiredReadonlyModel, optionalReadonlyModel.Value, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList, requiredReadonlyIntList, requiredReadOnlyModelList, requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, Optional.ToList(optionalReadonlyStringList), Optional.ToList(optionalReadonlyIntList), Optional.ToList(optionalReadOnlyModelList), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, Optional.ToDictionary(optionalModelRecord), requiredCollectionWithNullableIntElement, Optional.ToList(optionalCollectionWithNullableBooleanElement), rawData);
+            return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString.Value, Optional.ToNullable(optionalReadonlyInt), requiredReadonlyModel, optionalReadonlyModel.Value, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList, requiredReadonlyIntList, requiredReadOnlyModelList, requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, Optional.ToList(optionalReadonlyStringList), Optional.ToList(optionalReadonlyIntList), Optional.ToList(optionalReadOnlyModelList), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, Optional.ToDictionary(optionalModelRecord), requiredCollectionWithNullableIntElement, Optional.ToList(optionalCollectionWithNullableBooleanElement), serializedAdditionalRawData);
         }
 
         RoundTripReadOnlyModel IModelJsonSerializable<RoundTripReadOnlyModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

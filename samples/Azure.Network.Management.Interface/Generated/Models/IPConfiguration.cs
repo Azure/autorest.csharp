@@ -27,8 +27,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="subnet"> The reference to the subnet resource. </param>
         /// <param name="publicIPAddress"> The reference to the public IP resource. </param>
         /// <param name="provisioningState"> The provisioning state of the IP configuration resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal IPConfiguration(string id, string name, string etag, string privateIPAddress, IPAllocationMethod? privateIPAllocationMethod, Subnet subnet, PublicIPAddress publicIPAddress, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IPConfiguration(string id, string name, string etag, string privateIPAddress, IPAllocationMethod? privateIPAllocationMethod, Subnet subnet, PublicIPAddress publicIPAddress, ProvisioningState? provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

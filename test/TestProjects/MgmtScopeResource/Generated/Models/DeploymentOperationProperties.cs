@@ -14,7 +14,7 @@ namespace MgmtScopeResource.Models
     public partial class DeploymentOperationProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DeploymentOperationProperties"/>. </summary>
         internal DeploymentOperationProperties()
@@ -32,8 +32,8 @@ namespace MgmtScopeResource.Models
         /// <param name="statusMessage"> Operation status message from the resource provider. This property is optional.  It will only be provided if an error was received from the resource provider. </param>
         /// <param name="request"> The HTTP request message. </param>
         /// <param name="response"> The HTTP response message. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeploymentOperationProperties(ProvisioningOperation? provisioningOperation, string provisioningState, DateTimeOffset? timestamp, TimeSpan? duration, TimeSpan? anotherDuration, string serviceRequestId, string statusCode, StatusMessage statusMessage, HttpMessage request, HttpMessage response, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentOperationProperties(ProvisioningOperation? provisioningOperation, string provisioningState, DateTimeOffset? timestamp, TimeSpan? duration, TimeSpan? anotherDuration, string serviceRequestId, string statusCode, StatusMessage statusMessage, HttpMessage request, HttpMessage response, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ProvisioningOperation = provisioningOperation;
             ProvisioningState = provisioningState;
@@ -45,7 +45,7 @@ namespace MgmtScopeResource.Models
             StatusMessage = statusMessage;
             Request = request;
             Response = response;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The name of the current provisioning operation. </summary>

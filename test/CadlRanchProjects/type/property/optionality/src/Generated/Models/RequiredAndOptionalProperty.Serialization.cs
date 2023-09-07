@@ -30,9 +30,9 @@ namespace _Type.Property.Optionality.Models
             }
             writer.WritePropertyName("requiredProperty"u8);
             writer.WriteNumberValue(RequiredProperty);
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -55,7 +55,7 @@ namespace _Type.Property.Optionality.Models
             }
             Optional<string> optionalProperty = default;
             int requiredProperty = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("optionalProperty"u8))
@@ -70,11 +70,11 @@ namespace _Type.Property.Optionality.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new RequiredAndOptionalProperty(optionalProperty.Value, requiredProperty, rawData);
+            return new RequiredAndOptionalProperty(optionalProperty.Value, requiredProperty, serializedAdditionalRawData);
         }
 
         RequiredAndOptionalProperty IModelJsonSerializable<RequiredAndOptionalProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

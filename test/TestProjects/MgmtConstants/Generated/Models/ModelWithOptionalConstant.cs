@@ -14,7 +14,7 @@ namespace MgmtConstants.Models
     public partial class ModelWithOptionalConstant
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelWithOptionalConstant"/>. </summary>
         public ModelWithOptionalConstant()
@@ -26,14 +26,14 @@ namespace MgmtConstants.Models
         /// <param name="optionalIntConstant"> A constant based on integer. </param>
         /// <param name="optionalBooleanConstant"> A constant based on boolean. </param>
         /// <param name="optionalFloatConstant"> A constant based on float. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithOptionalConstant(StringConstant? optionalStringConstant, IntConstant? optionalIntConstant, bool? optionalBooleanConstant, FloatConstant? optionalFloatConstant, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithOptionalConstant(StringConstant? optionalStringConstant, IntConstant? optionalIntConstant, bool? optionalBooleanConstant, FloatConstant? optionalFloatConstant, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OptionalStringConstant = optionalStringConstant;
             OptionalIntConstant = optionalIntConstant;
             OptionalBooleanConstant = optionalBooleanConstant;
             OptionalFloatConstant = optionalFloatConstant;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A constant based on string, the only allowable value is default. </summary>

@@ -54,8 +54,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The resource status information.
         /// Serialized Name: AvailabilitySetUpdate.properties.statuses
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AvailabilitySetPatch(IDictionary<string, string> tags, SampleSku sku, int? platformUpdateDomainCount, int? platformFaultDomainCount, IList<WritableSubResource> virtualMachines, WritableSubResource proximityPlacementGroup, IReadOnlyList<InstanceViewStatus> statuses, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AvailabilitySetPatch(IDictionary<string, string> tags, SampleSku sku, int? platformUpdateDomainCount, int? platformFaultDomainCount, IList<WritableSubResource> virtualMachines, WritableSubResource proximityPlacementGroup, IReadOnlyList<InstanceViewStatus> statuses, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(tags, serializedAdditionalRawData)
         {
             Sku = sku;
             PlatformUpdateDomainCount = platformUpdateDomainCount;

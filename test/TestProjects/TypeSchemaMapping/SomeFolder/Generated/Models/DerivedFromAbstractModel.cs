@@ -21,8 +21,8 @@ namespace TypeSchemaMapping.Models
 
         /// <summary> Initializes a new instance of <see cref="DerivedFromAbstractModel"/>. </summary>
         /// <param name="discriminatorProperty"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DerivedFromAbstractModel(string discriminatorProperty, Dictionary<string, BinaryData> rawData) : base(discriminatorProperty, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DerivedFromAbstractModel(string discriminatorProperty, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(discriminatorProperty, serializedAdditionalRawData)
         {
             DiscriminatorProperty = discriminatorProperty ?? "DerivedFromAbstractModel";
         }

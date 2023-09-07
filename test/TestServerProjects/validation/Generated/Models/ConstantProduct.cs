@@ -14,7 +14,7 @@ namespace validation.Models
     public partial class ConstantProduct
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ConstantProduct"/>. </summary>
         public ConstantProduct()
@@ -26,12 +26,12 @@ namespace validation.Models
         /// <summary> Initializes a new instance of <see cref="ConstantProduct"/>. </summary>
         /// <param name="constProperty"> Constant string. </param>
         /// <param name="constProperty2"> Constant string2. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ConstantProduct(ConstantProductConstProperty constProperty, ConstantProductConstProperty2 constProperty2, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ConstantProduct(ConstantProductConstProperty constProperty, ConstantProductConstProperty2 constProperty2, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ConstProperty = constProperty;
             ConstProperty2 = constProperty2;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Constant string. </summary>

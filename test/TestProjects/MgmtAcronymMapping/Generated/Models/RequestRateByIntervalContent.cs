@@ -71,8 +71,8 @@ namespace MgmtAcronymMapping.Models
         /// Interval value in minutes used to create LogAnalytics call rate logs.
         /// Serialized Name: RequestRateByIntervalInput.intervalLength
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RequestRateByIntervalContent(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime, bool? groupByThrottlePolicy, bool? groupByOperationName, bool? groupByResourceName, IntervalInMin intervalLength, Dictionary<string, BinaryData> rawData) : base(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RequestRateByIntervalContent(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime, bool? groupByThrottlePolicy, bool? groupByOperationName, bool? groupByResourceName, IntervalInMin intervalLength, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, serializedAdditionalRawData)
         {
             IntervalLength = intervalLength;
         }

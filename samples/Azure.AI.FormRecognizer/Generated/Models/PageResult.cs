@@ -15,7 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class PageResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="PageResult"/>. </summary>
         /// <param name="page"> Page number. </param>
@@ -31,14 +31,14 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="clusterId"> Cluster identifier. </param>
         /// <param name="keyValuePairs"> List of key-value pairs extracted from the page. </param>
         /// <param name="tables"> List of data tables extracted from the page. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PageResult(int page, int? clusterId, IReadOnlyList<KeyValuePair> keyValuePairs, IReadOnlyList<DataTable> tables, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PageResult(int page, int? clusterId, IReadOnlyList<KeyValuePair> keyValuePairs, IReadOnlyList<DataTable> tables, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Page = page;
             ClusterId = clusterId;
             KeyValuePairs = keyValuePairs;
             Tables = tables;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="PageResult"/> for deserialization. </summary>

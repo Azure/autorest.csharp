@@ -31,8 +31,8 @@ namespace CognitiveSearch.Models
         /// <param name="minGram"> The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram. </param>
         /// <param name="maxGram"> The maximum n-gram length. Default is 2. Maximum is 300. </param>
         /// <param name="tokenChars"> Character classes to keep in the tokens. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NGramTokenizer(string odataType, string name, int? minGram, int? maxGram, IList<TokenCharacterKind> tokenChars, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NGramTokenizer(string odataType, string name, int? minGram, int? maxGram, IList<TokenCharacterKind> tokenChars, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             MinGram = minGram;
             MaxGram = maxGram;

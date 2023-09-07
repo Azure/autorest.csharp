@@ -18,7 +18,7 @@ namespace MgmtSupersetInheritance
     public partial class SupersetModel7Data
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SupersetModel7Data"/>. </summary>
         public SupersetModel7Data()
@@ -31,15 +31,15 @@ namespace MgmtSupersetInheritance
         /// <param name="resourceType"></param>
         /// <param name="new"></param>
         /// <param name="systemData"> Metadata pertaining to creation and last modification of the resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SupersetModel7Data(string id, string name, string resourceType, string @new, SupersetModel7SystemData systemData, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SupersetModel7Data(string id, string name, string resourceType, string @new, SupersetModel7SystemData systemData, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
             ResourceType = resourceType;
             New = @new;
             SystemData = systemData;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the id. </summary>

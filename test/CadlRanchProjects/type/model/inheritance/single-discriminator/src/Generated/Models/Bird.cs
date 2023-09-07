@@ -20,7 +20,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     public abstract partial class Bird
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of Bird. </summary>
         /// <param name="wingspan"></param>
@@ -32,12 +32,12 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         /// <summary> Initializes a new instance of Bird. </summary>
         /// <param name="kind"></param>
         /// <param name="wingspan"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Bird(string kind, int wingspan, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Bird(string kind, int wingspan, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Kind = kind;
             Wingspan = wingspan;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Bird"/> for deserialization. </summary>

@@ -16,7 +16,7 @@ namespace MgmtOmitOperationGroups.Models
     public partial class ModelQ : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelQ"/>. </summary>
         public ModelQ()
@@ -29,11 +29,11 @@ namespace MgmtOmitOperationGroups.Models
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="m"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelQ(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string m, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelQ(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string m, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             M = m;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the m. </summary>

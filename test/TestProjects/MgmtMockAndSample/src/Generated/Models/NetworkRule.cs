@@ -38,8 +38,8 @@ namespace MgmtMockAndSample.Models
         /// <param name="sourceIpGroups"> List of source IpGroups for this rule. </param>
         /// <param name="destinationIpGroups"> List of destination IpGroups for this rule. </param>
         /// <param name="destinationFqdns"> List of destination FQDNs. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NetworkRule(string name, string description, FirewallPolicyRuleType ruleType, IList<FirewallPolicyRuleNetworkProtocol> ipProtocols, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<string> destinationPorts, IList<string> sourceIpGroups, IList<string> destinationIpGroups, IList<string> destinationFqdns, Dictionary<string, BinaryData> rawData) : base(name, description, ruleType, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NetworkRule(string name, string description, FirewallPolicyRuleType ruleType, IList<FirewallPolicyRuleNetworkProtocol> ipProtocols, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<string> destinationPorts, IList<string> sourceIpGroups, IList<string> destinationIpGroups, IList<string> destinationFqdns, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(name, description, ruleType, serializedAdditionalRawData)
         {
             IpProtocols = ipProtocols;
             SourceAddresses = sourceAddresses;

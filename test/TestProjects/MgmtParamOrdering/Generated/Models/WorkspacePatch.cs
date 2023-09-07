@@ -15,7 +15,7 @@ namespace MgmtParamOrdering.Models
     public partial class WorkspacePatch
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="WorkspacePatch"/>. </summary>
         public WorkspacePatch()
@@ -25,11 +25,11 @@ namespace MgmtParamOrdering.Models
 
         /// <summary> Initializes a new instance of <see cref="WorkspacePatch"/>. </summary>
         /// <param name="tags"> The resource tags for the machine learning workspace. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal WorkspacePatch(IDictionary<string, string> tags, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal WorkspacePatch(IDictionary<string, string> tags, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Tags = tags;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The resource tags for the machine learning workspace. </summary>

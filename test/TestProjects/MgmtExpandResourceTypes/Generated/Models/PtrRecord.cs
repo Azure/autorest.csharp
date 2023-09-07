@@ -14,7 +14,7 @@ namespace MgmtExpandResourceTypes.Models
     public partial class PtrRecord
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="PtrRecord"/>. </summary>
         public PtrRecord()
@@ -23,11 +23,11 @@ namespace MgmtExpandResourceTypes.Models
 
         /// <summary> Initializes a new instance of <see cref="PtrRecord"/>. </summary>
         /// <param name="ptrdname"> The PTR target domain name for this PTR record. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PtrRecord(string ptrdname, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PtrRecord(string ptrdname, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Ptrdname = ptrdname;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The PTR target domain name for this PTR record. </summary>

@@ -14,7 +14,7 @@ namespace MgmtExpandResourceTypes.Models
     public partial class NsRecord
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="NsRecord"/>. </summary>
         public NsRecord()
@@ -23,11 +23,11 @@ namespace MgmtExpandResourceTypes.Models
 
         /// <summary> Initializes a new instance of <see cref="NsRecord"/>. </summary>
         /// <param name="nsdname"> The name server name for this NS record. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NsRecord(string nsdname, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NsRecord(string nsdname, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Nsdname = nsdname;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The name server name for this NS record. </summary>

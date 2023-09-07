@@ -35,8 +35,8 @@ namespace CognitiveSearch.Models
         /// <param name="outputs"> The output of a skill is either a field in a search index, or a value that can be consumed as an input by another skill. </param>
         /// <param name="insertPreTag"> The tag indicates the start of the merged text. By default, the tag is an empty space. </param>
         /// <param name="insertPostTag"> The tag indicates the end of the merged text. By default, the tag is an empty space. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MergeSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, string insertPreTag, string insertPostTag, Dictionary<string, BinaryData> rawData) : base(odataType, name, description, context, inputs, outputs, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MergeSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, string insertPreTag, string insertPostTag, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, description, context, inputs, outputs, serializedAdditionalRawData)
         {
             InsertPreTag = insertPreTag;
             InsertPostTag = insertPostTag;

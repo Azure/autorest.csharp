@@ -57,8 +57,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Whether IP forwarding enabled on this NIC.
         /// Serialized Name: VirtualMachineScaleSetUpdateNetworkConfiguration.properties.enableIPForwarding
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetUpdateNetworkConfiguration(string id, string name, bool? primary, bool? enableAcceleratedNetworking, WritableSubResource networkSecurityGroup, VirtualMachineScaleSetNetworkConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetUpdateIPConfiguration> ipConfigurations, bool? enableIPForwarding, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetUpdateNetworkConfiguration(string id, string name, bool? primary, bool? enableAcceleratedNetworking, WritableSubResource networkSecurityGroup, VirtualMachineScaleSetNetworkConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetUpdateIPConfiguration> ipConfigurations, bool? enableIPForwarding, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Primary = primary;

@@ -17,7 +17,7 @@ namespace MgmtNoTypeReplacement
     public partial class NoTypeReplacementModel1Data : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="NoTypeReplacementModel1Data"/>. </summary>
         public NoTypeReplacementModel1Data()
@@ -30,11 +30,11 @@ namespace MgmtNoTypeReplacement
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="foo"> Gets or sets the foo. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NoTypeReplacementModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, SubResource foo, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NoTypeReplacementModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, SubResource foo, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Foo = foo;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the foo. </summary>

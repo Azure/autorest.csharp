@@ -62,9 +62,9 @@ namespace MgmtMockAndSample.Models
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -95,7 +95,7 @@ namespace MgmtMockAndSample.Models
             Optional<string> groupId = default;
             Optional<IReadOnlyList<string>> requiredMembers = default;
             Optional<IList<string>> requiredZoneNames = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -197,11 +197,11 @@ namespace MgmtMockAndSample.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new MhsmPrivateLinkResource(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames), sku.Value, rawData);
+            return new MhsmPrivateLinkResource(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames), sku.Value, serializedAdditionalRawData);
         }
 
         MhsmPrivateLinkResource IModelJsonSerializable<MhsmPrivateLinkResource>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

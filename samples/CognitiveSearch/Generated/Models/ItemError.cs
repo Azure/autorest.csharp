@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class ItemError
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ItemError"/>. </summary>
         /// <param name="errorMessage"> The message describing the error that occurred while processing the item. </param>
@@ -36,8 +36,8 @@ namespace CognitiveSearch.Models
         /// <param name="name"> The name of the source at which the error originated. For example, this could refer to a particular skill in the attached skillset. This may not be always available. </param>
         /// <param name="details"> Additional, verbose details about the error to assist in debugging the indexer. This may not be always available. </param>
         /// <param name="documentationLink"> A link to a troubleshooting guide for these classes of errors. This may not be always available. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ItemError(string key, string errorMessage, int statusCode, string name, string details, string documentationLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ItemError(string key, string errorMessage, int statusCode, string name, string details, string documentationLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Key = key;
             ErrorMessage = errorMessage;
@@ -45,7 +45,7 @@ namespace CognitiveSearch.Models
             Name = name;
             Details = details;
             DocumentationLink = documentationLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ItemError"/> for deserialization. </summary>

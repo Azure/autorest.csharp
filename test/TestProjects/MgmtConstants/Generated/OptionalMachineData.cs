@@ -20,7 +20,7 @@ namespace MgmtConstants
     public partial class OptionalMachineData : TrackedResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="OptionalMachineData"/>. </summary>
         /// <param name="location"> The location. </param>
@@ -37,12 +37,12 @@ namespace MgmtConstants
         /// <param name="location"> The location. </param>
         /// <param name="listener"> Describes Protocol and thumbprint of Windows Remote Management listener. </param>
         /// <param name="content"> Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal OptionalMachineData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ModelWithRequiredConstant listener, ModelWithOptionalConstant content, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OptionalMachineData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ModelWithRequiredConstant listener, ModelWithOptionalConstant content, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Listener = listener;
             Content = content;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="OptionalMachineData"/> for deserialization. </summary>

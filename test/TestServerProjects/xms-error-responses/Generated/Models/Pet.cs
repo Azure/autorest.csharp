@@ -21,8 +21,8 @@ namespace xms_error_responses.Models
         /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="aniType"></param>
         /// <param name="name"> Gets the Pet by id. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Pet(string aniType, string name, Dictionary<string, BinaryData> rawData) : base(aniType, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Pet(string aniType, string name, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(aniType, serializedAdditionalRawData)
         {
             Name = name;
         }

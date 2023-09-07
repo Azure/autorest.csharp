@@ -14,7 +14,7 @@ namespace ModelShapes.Models
     internal partial class UnusedModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UnusedModel"/>. </summary>
         internal UnusedModel()
@@ -23,11 +23,11 @@ namespace ModelShapes.Models
 
         /// <summary> Initializes a new instance of <see cref="UnusedModel"/>. </summary>
         /// <param name="unusedString"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnusedModel(string unusedString, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnusedModel(string unusedString, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             UnusedString = unusedString;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the unused string. </summary>

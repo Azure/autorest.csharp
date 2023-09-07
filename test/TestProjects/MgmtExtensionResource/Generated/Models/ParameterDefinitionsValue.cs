@@ -15,7 +15,7 @@ namespace MgmtExtensionResource.Models
     public partial class ParameterDefinitionsValue
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ParameterDefinitionsValue"/>. </summary>
         public ParameterDefinitionsValue()
@@ -28,14 +28,14 @@ namespace MgmtExtensionResource.Models
         /// <param name="allowedValues"> The allowed values for the parameter. </param>
         /// <param name="defaultValue"> The default value for the parameter if no value is provided. </param>
         /// <param name="metadata"> General metadata for the parameter. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ParameterDefinitionsValue(ParameterType? parameterType, IList<BinaryData> allowedValues, BinaryData defaultValue, ParameterDefinitionsValueMetadata metadata, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ParameterDefinitionsValue(ParameterType? parameterType, IList<BinaryData> allowedValues, BinaryData defaultValue, ParameterDefinitionsValueMetadata metadata, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ParameterType = parameterType;
             AllowedValues = allowedValues;
             DefaultValue = defaultValue;
             Metadata = metadata;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The data type of the parameter. </summary>

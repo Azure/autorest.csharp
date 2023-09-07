@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
     public partial class OSDisk
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="OSDisk"/>. </summary>
         /// <param name="createOption">
@@ -74,8 +74,8 @@ namespace MgmtAcronymMapping.Models
         /// The managed disk parameters.
         /// Serialized Name: OSDisk.managedDisk
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal OSDisk(OperatingSystemType? osType, DiskEncryptionSettings encryptionSettings, string name, VirtualHardDisk vhd, VirtualHardDisk image, CachingType? caching, bool? writeAcceleratorEnabled, DiffDiskSettings diffDiskSettings, DiskCreateOptionType createOption, int? diskSizeGB, ManagedDiskParameters managedDisk, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OSDisk(OperatingSystemType? osType, DiskEncryptionSettings encryptionSettings, string name, VirtualHardDisk vhd, VirtualHardDisk image, CachingType? caching, bool? writeAcceleratorEnabled, DiffDiskSettings diffDiskSettings, DiskCreateOptionType createOption, int? diskSizeGB, ManagedDiskParameters managedDisk, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OSType = osType;
             EncryptionSettings = encryptionSettings;
@@ -88,7 +88,7 @@ namespace MgmtAcronymMapping.Models
             CreateOption = createOption;
             DiskSizeGB = diskSizeGB;
             ManagedDisk = managedDisk;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="OSDisk"/> for deserialization. </summary>

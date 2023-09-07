@@ -45,9 +45,9 @@ namespace MgmtAcronymMapping.Models
                     ((IModelJsonSerializable<InstanceViewStatus>)Status).Serialize(writer, options);
                 }
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -71,7 +71,7 @@ namespace MgmtAcronymMapping.Models
             Optional<string> type = default;
             Optional<string> typeHandlerVersion = default;
             Optional<InstanceViewStatus> status = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))
@@ -95,11 +95,11 @@ namespace MgmtAcronymMapping.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new VirtualMachineExtensionHandlerInstanceView(type.Value, typeHandlerVersion.Value, status.Value, rawData);
+            return new VirtualMachineExtensionHandlerInstanceView(type.Value, typeHandlerVersion.Value, status.Value, serializedAdditionalRawData);
         }
 
         VirtualMachineExtensionHandlerInstanceView IModelJsonSerializable<VirtualMachineExtensionHandlerInstanceView>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

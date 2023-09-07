@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     internal partial class NetworkProfile
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="NetworkProfile"/>. </summary>
         public NetworkProfile()
@@ -31,11 +31,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the list of resource Ids for the network interfaces associated with the virtual machine.
         /// Serialized Name: NetworkProfile.networkInterfaces
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NetworkProfile(IList<NetworkInterfaceReference> networkInterfaces, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NetworkProfile(IList<NetworkInterfaceReference> networkInterfaces, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             NetworkInterfaces = networkInterfaces;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

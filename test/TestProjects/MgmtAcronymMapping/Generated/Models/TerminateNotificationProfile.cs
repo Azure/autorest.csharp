@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
     public partial class TerminateNotificationProfile
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TerminateNotificationProfile"/>. </summary>
         public TerminateNotificationProfile()
@@ -33,12 +33,12 @@ namespace MgmtAcronymMapping.Models
         /// Specifies whether the Terminate Scheduled event is enabled or disabled.
         /// Serialized Name: TerminateNotificationProfile.enable
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TerminateNotificationProfile(string notBeforeTimeout, bool? enable, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TerminateNotificationProfile(string notBeforeTimeout, bool? enable, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             NotBeforeTimeout = notBeforeTimeout;
             Enable = enable;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class SshPublicKeyInfo
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SshPublicKeyInfo"/>. </summary>
         public SshPublicKeyInfo()
@@ -33,12 +33,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. &lt;br&gt;&lt;br&gt; For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
         /// Serialized Name: SshPublicKey.keyData
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SshPublicKeyInfo(string path, string keyData, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SshPublicKeyInfo(string path, string keyData, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Path = path;
             KeyData = keyData;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

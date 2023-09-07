@@ -34,8 +34,8 @@ namespace body_complex.Models
         /// </param>
         /// <param name="location"></param>
         /// <param name="iswild"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Salmon(string fishtype, string species, float length, IList<Fish> siblings, string location, bool? iswild, Dictionary<string, BinaryData> rawData) : base(fishtype, species, length, siblings, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Salmon(string fishtype, string species, float length, IList<Fish> siblings, string location, bool? iswild, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(fishtype, species, length, siblings, serializedAdditionalRawData)
         {
             Location = location;
             Iswild = iswild;

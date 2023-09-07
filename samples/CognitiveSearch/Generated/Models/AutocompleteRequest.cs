@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class AutocompleteRequest
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AutocompleteRequest"/>. </summary>
         /// <param name="searchText"> The search text on which to base autocomplete results. </param>
@@ -41,8 +41,8 @@ namespace CognitiveSearch.Models
         /// <param name="searchFields"> The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
         /// <param name="top"> The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AutocompleteRequest(string searchText, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, string searchFields, string suggesterName, int? top, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AutocompleteRequest(string searchText, AutocompleteMode? autocompleteMode, string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, string searchFields, string suggesterName, int? top, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SearchText = searchText;
             AutocompleteMode = autocompleteMode;
@@ -54,7 +54,7 @@ namespace CognitiveSearch.Models
             SearchFields = searchFields;
             SuggesterName = suggesterName;
             Top = top;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="AutocompleteRequest"/> for deserialization. </summary>

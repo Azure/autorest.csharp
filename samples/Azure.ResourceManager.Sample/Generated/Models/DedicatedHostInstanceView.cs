@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class DedicatedHostInstanceView
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DedicatedHostInstanceView"/>. </summary>
         internal DedicatedHostInstanceView()
@@ -39,13 +39,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// The resource status information.
         /// Serialized Name: DedicatedHostInstanceView.statuses
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DedicatedHostInstanceView(string assetId, DedicatedHostAvailableCapacity availableCapacity, IReadOnlyList<InstanceViewStatus> statuses, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DedicatedHostInstanceView(string assetId, DedicatedHostAvailableCapacity availableCapacity, IReadOnlyList<InstanceViewStatus> statuses, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             AssetId = assetId;
             AvailableCapacity = availableCapacity;
             Statuses = statuses;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

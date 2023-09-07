@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     public partial class IndexingSchedule
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="IndexingSchedule"/>. </summary>
         /// <param name="interval"> The interval of time between indexer executions. </param>
@@ -26,12 +26,12 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="IndexingSchedule"/>. </summary>
         /// <param name="interval"> The interval of time between indexer executions. </param>
         /// <param name="startTime"> The time when an indexer should start running. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal IndexingSchedule(TimeSpan interval, DateTimeOffset? startTime, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IndexingSchedule(TimeSpan interval, DateTimeOffset? startTime, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Interval = interval;
             StartTime = startTime;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="IndexingSchedule"/> for deserialization. </summary>

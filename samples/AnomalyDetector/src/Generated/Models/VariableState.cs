@@ -14,7 +14,7 @@ namespace AnomalyDetector.Models
     public partial class VariableState
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of VariableState. </summary>
         public VariableState()
@@ -27,15 +27,15 @@ namespace AnomalyDetector.Models
         /// <param name="effectiveCount"> Number of effective data points before applying fillNAMethod. </param>
         /// <param name="firstTimestamp"> First valid timestamp with value of input data. </param>
         /// <param name="lastTimestamp"> Last valid timestamp with value of input data. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VariableState(string variable, float? filledNARatio, int? effectiveCount, DateTimeOffset? firstTimestamp, DateTimeOffset? lastTimestamp, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VariableState(string variable, float? filledNARatio, int? effectiveCount, DateTimeOffset? firstTimestamp, DateTimeOffset? lastTimestamp, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Variable = variable;
             FilledNARatio = filledNARatio;
             EffectiveCount = effectiveCount;
             FirstTimestamp = firstTimestamp;
             LastTimestamp = lastTimestamp;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Variable name in variable states. </summary>

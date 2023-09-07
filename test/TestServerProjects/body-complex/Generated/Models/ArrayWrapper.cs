@@ -15,7 +15,7 @@ namespace body_complex.Models
     public partial class ArrayWrapper
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ArrayWrapper"/>. </summary>
         public ArrayWrapper()
@@ -25,11 +25,11 @@ namespace body_complex.Models
 
         /// <summary> Initializes a new instance of <see cref="ArrayWrapper"/>. </summary>
         /// <param name="array"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ArrayWrapper(IList<string> array, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ArrayWrapper(IList<string> array, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Array = array;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the array. </summary>

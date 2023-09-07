@@ -15,7 +15,7 @@ namespace AnomalyDetector.Models
     public partial class AnomalyState
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of AnomalyState. </summary>
         /// <param name="timestamp"> The timestamp for this anomaly. </param>
@@ -29,13 +29,13 @@ namespace AnomalyDetector.Models
         /// <param name="timestamp"> The timestamp for this anomaly. </param>
         /// <param name="value"> The detailed value of this anomalous timestamp. </param>
         /// <param name="errors"> Error message for the current timestamp. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AnomalyState(DateTimeOffset timestamp, AnomalyValue value, IReadOnlyList<ErrorResponse> errors, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AnomalyState(DateTimeOffset timestamp, AnomalyValue value, IReadOnlyList<ErrorResponse> errors, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Timestamp = timestamp;
             Value = value;
             Errors = errors;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="AnomalyState"/> for deserialization. </summary>

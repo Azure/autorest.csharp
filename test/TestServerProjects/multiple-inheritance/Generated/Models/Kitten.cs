@@ -28,8 +28,8 @@ namespace multiple_inheritance.Models
         /// <param name="meows"></param>
         /// <param name="hisses"></param>
         /// <param name="eatsMiceYet"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Kitten(string name, bool? likesMilk, bool? meows, bool? hisses, bool? eatsMiceYet, Dictionary<string, BinaryData> rawData) : base(name, likesMilk, meows, hisses, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Kitten(string name, bool? likesMilk, bool? meows, bool? hisses, bool? eatsMiceYet, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(name, likesMilk, meows, hisses, serializedAdditionalRawData)
         {
             EatsMiceYet = eatsMiceYet;
         }

@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class RollingUpgradePolicy
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RollingUpgradePolicy"/>. </summary>
         public RollingUpgradePolicy()
@@ -41,14 +41,14 @@ namespace Azure.ResourceManager.Sample.Models
         /// The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 format. The default value is 0 seconds (PT0S).
         /// Serialized Name: RollingUpgradePolicy.pauseTimeBetweenBatches
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RollingUpgradePolicy(int? maxBatchInstancePercent, int? maxUnhealthyInstancePercent, int? maxUnhealthyUpgradedInstancePercent, string pauseTimeBetweenBatches, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RollingUpgradePolicy(int? maxBatchInstancePercent, int? maxUnhealthyInstancePercent, int? maxUnhealthyUpgradedInstancePercent, string pauseTimeBetweenBatches, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             MaxBatchInstancePercent = maxBatchInstancePercent;
             MaxUnhealthyInstancePercent = maxUnhealthyInstancePercent;
             MaxUnhealthyUpgradedInstancePercent = maxUnhealthyUpgradedInstancePercent;
             PauseTimeBetweenBatches = pauseTimeBetweenBatches;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

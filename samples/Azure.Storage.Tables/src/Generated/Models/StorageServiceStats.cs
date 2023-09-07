@@ -14,7 +14,7 @@ namespace Azure.Storage.Tables.Models
     public partial class StorageServiceStats
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StorageServiceStats"/>. </summary>
         internal StorageServiceStats()
@@ -23,11 +23,11 @@ namespace Azure.Storage.Tables.Models
 
         /// <summary> Initializes a new instance of <see cref="StorageServiceStats"/>. </summary>
         /// <param name="geoReplication"> Geo-Replication information for the Secondary Storage Service. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StorageServiceStats(GeoReplication geoReplication, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageServiceStats(GeoReplication geoReplication, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             GeoReplication = geoReplication;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Geo-Replication information for the Secondary Storage Service. </summary>

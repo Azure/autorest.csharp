@@ -15,7 +15,7 @@ namespace Pagination.Models
     public partial class LedgerEntry
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of LedgerEntry. </summary>
         /// <param name="contents"> Contents of the ledger entry. </param>
@@ -31,13 +31,13 @@ namespace Pagination.Models
         /// <param name="contents"> Contents of the ledger entry. </param>
         /// <param name="collectionId"></param>
         /// <param name="transactionId"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LedgerEntry(string contents, string collectionId, string transactionId, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LedgerEntry(string contents, string collectionId, string transactionId, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Contents = contents;
             CollectionId = collectionId;
             TransactionId = transactionId;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="LedgerEntry"/> for deserialization. </summary>

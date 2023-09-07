@@ -14,7 +14,7 @@ namespace MgmtScopeResource.Models
     public partial class GuestConfigurationAssignmentProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="GuestConfigurationAssignmentProperties"/>. </summary>
         public GuestConfigurationAssignmentProperties()
@@ -31,8 +31,8 @@ namespace MgmtScopeResource.Models
         /// <param name="assignmentHash"> Combined hash of the configuration package and parameters. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
         /// <param name="resourceType"> Type of the resource - VMSS / VM. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal GuestConfigurationAssignmentProperties(string targetResourceId, ComplianceStatus? complianceStatus, DateTimeOffset? lastComplianceStatusChecked, string latestReportId, string parameterHash, string context, string assignmentHash, ProvisioningState? provisioningState, string resourceType, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal GuestConfigurationAssignmentProperties(string targetResourceId, ComplianceStatus? complianceStatus, DateTimeOffset? lastComplianceStatusChecked, string latestReportId, string parameterHash, string context, string assignmentHash, ProvisioningState? provisioningState, string resourceType, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TargetResourceId = targetResourceId;
             ComplianceStatus = complianceStatus;
@@ -43,7 +43,7 @@ namespace MgmtScopeResource.Models
             AssignmentHash = assignmentHash;
             ProvisioningState = provisioningState;
             ResourceType = resourceType;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> VM resource Id. </summary>

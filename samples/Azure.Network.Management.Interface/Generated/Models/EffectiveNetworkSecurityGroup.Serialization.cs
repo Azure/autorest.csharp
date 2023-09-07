@@ -69,9 +69,9 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("tagMap"u8);
                 writer.WriteStringValue(TagMap);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -96,7 +96,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<EffectiveNetworkSecurityGroupAssociation> association = default;
             Optional<IReadOnlyList<EffectiveNetworkSecurityRule>> effectiveSecurityRules = default;
             Optional<string> tagMap = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("networkSecurityGroup"u8))
@@ -138,11 +138,11 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new EffectiveNetworkSecurityGroup(networkSecurityGroup.Value, association.Value, Optional.ToList(effectiveSecurityRules), tagMap.Value, rawData);
+            return new EffectiveNetworkSecurityGroup(networkSecurityGroup.Value, association.Value, Optional.ToList(effectiveSecurityRules), tagMap.Value, serializedAdditionalRawData);
         }
 
         EffectiveNetworkSecurityGroup IModelJsonSerializable<EffectiveNetworkSecurityGroup>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

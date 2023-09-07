@@ -35,9 +35,9 @@ namespace ConfidentLevelsInTsp.Models
                 writer.WritePropertyName("size"u8);
                 writer.WriteNumberValue(Size.Value);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -61,7 +61,7 @@ namespace ConfidentLevelsInTsp.Models
             Optional<int> age = default;
             string name = default;
             Optional<double> size = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("age"u8))
@@ -89,11 +89,11 @@ namespace ConfidentLevelsInTsp.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new DerivedModel(name, Optional.ToNullable(size), Optional.ToNullable(age), rawData);
+            return new DerivedModel(name, Optional.ToNullable(size), Optional.ToNullable(age), serializedAdditionalRawData);
         }
 
         DerivedModel IModelJsonSerializable<DerivedModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

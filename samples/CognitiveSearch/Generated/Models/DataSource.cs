@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class DataSource
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DataSource"/>. </summary>
         /// <param name="name"> The name of the datasource. </param>
@@ -52,8 +52,8 @@ namespace CognitiveSearch.Models
         /// The available derived classes include <see cref="SoftDeleteColumnDeletionDetectionPolicy"/>.
         /// </param>
         /// <param name="eTag"> The ETag of the DataSource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DataSource(string name, string description, DataSourceType type, DataSourceCredentials credentials, DataContainer container, DataChangeDetectionPolicy dataChangeDetectionPolicy, DataDeletionDetectionPolicy dataDeletionDetectionPolicy, string eTag, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DataSource(string name, string description, DataSourceType type, DataSourceCredentials credentials, DataContainer container, DataChangeDetectionPolicy dataChangeDetectionPolicy, DataDeletionDetectionPolicy dataDeletionDetectionPolicy, string eTag, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Description = description;
@@ -63,7 +63,7 @@ namespace CognitiveSearch.Models
             DataChangeDetectionPolicy = dataChangeDetectionPolicy;
             DataDeletionDetectionPolicy = dataDeletionDetectionPolicy;
             ETag = eTag;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DataSource"/> for deserialization. </summary>

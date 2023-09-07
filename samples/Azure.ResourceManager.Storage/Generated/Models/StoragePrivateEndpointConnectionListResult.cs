@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     internal partial class StoragePrivateEndpointConnectionListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StoragePrivateEndpointConnectionListResult"/>. </summary>
         internal StoragePrivateEndpointConnectionListResult()
@@ -26,11 +26,11 @@ namespace Azure.ResourceManager.Storage.Models
 
         /// <summary> Initializes a new instance of <see cref="StoragePrivateEndpointConnectionListResult"/>. </summary>
         /// <param name="value"> Array of private endpoint connections. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StoragePrivateEndpointConnectionListResult(IReadOnlyList<StoragePrivateEndpointConnectionData> value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StoragePrivateEndpointConnectionListResult(IReadOnlyList<StoragePrivateEndpointConnectionData> value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Array of private endpoint connections. </summary>

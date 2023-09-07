@@ -21,7 +21,7 @@ namespace Azure.ResourceManager.Sample
     public partial class VirtualMachineExtensionData : TrackedResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionData"/>. </summary>
         /// <param name="location"> The location. </param>
@@ -76,8 +76,8 @@ namespace Azure.ResourceManager.Sample
         /// The virtual machine extension instance view.
         /// Serialized Name: VirtualMachineExtension.properties.instanceView
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineExtensionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string forceUpdateTag, string publisher, string extensionType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, string provisioningState, VirtualMachineExtensionInstanceView instanceView, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineExtensionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string forceUpdateTag, string publisher, string extensionType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, string provisioningState, VirtualMachineExtensionInstanceView instanceView, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             ForceUpdateTag = forceUpdateTag;
             Publisher = publisher;
@@ -89,7 +89,7 @@ namespace Azure.ResourceManager.Sample
             ProtectedSettings = protectedSettings;
             ProvisioningState = provisioningState;
             InstanceView = instanceView;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionData"/> for deserialization. </summary>

@@ -15,7 +15,7 @@ namespace ConfidentLevelsInTsp.Models
     internal partial class UsualModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of UsualModel. </summary>
         /// <param name="name"> The name. </param>
@@ -33,13 +33,13 @@ namespace ConfidentLevelsInTsp.Models
         /// <param name="name"> The name. </param>
         /// <param name="age"> The age. </param>
         /// <param name="size"> The size. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UsualModel(string name, int age, double? size, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UsualModel(string name, int age, double? size, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Age = age;
             Size = size;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="UsualModel"/> for deserialization. </summary>

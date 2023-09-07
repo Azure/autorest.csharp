@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     internal partial class UsageListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UsageListResult"/>. </summary>
         internal UsageListResult()
@@ -25,11 +25,11 @@ namespace Azure.ResourceManager.Storage.Models
 
         /// <summary> Initializes a new instance of <see cref="UsageListResult"/>. </summary>
         /// <param name="value"> Gets or sets the list of Storage Resource Usages. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UsageListResult(IReadOnlyList<StorageUsage> value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UsageListResult(IReadOnlyList<StorageUsage> value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the list of Storage Resource Usages. </summary>

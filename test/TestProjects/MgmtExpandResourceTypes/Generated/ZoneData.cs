@@ -21,7 +21,7 @@ namespace MgmtExpandResourceTypes
     public partial class ZoneData : TrackedResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ZoneData"/>. </summary>
         /// <param name="location"> The location. </param>
@@ -50,8 +50,8 @@ namespace MgmtExpandResourceTypes
         /// <param name="memoryType"></param>
         /// <param name="registrationVirtualNetworks"> A list of references to virtual networks that register hostnames in this DNS zone. This is a only when ZoneType is Private. </param>
         /// <param name="resolutionVirtualNetworks"> A list of references to virtual networks that resolve records in this DNS zone. This is a only when ZoneType is Private. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ZoneData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string etag, long? maxNumberOfRecordSets, long? maxNumberOfRecordsPerRecordSet, long? numberOfRecordSets, IReadOnlyList<string> nameServers, ZoneType? zoneType, MachineType? machineType, StorageType? storageType, MemoryType? memoryType, IList<WritableSubResource> registrationVirtualNetworks, IList<WritableSubResource> resolutionVirtualNetworks, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ZoneData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string etag, long? maxNumberOfRecordSets, long? maxNumberOfRecordsPerRecordSet, long? numberOfRecordSets, IReadOnlyList<string> nameServers, ZoneType? zoneType, MachineType? machineType, StorageType? storageType, MemoryType? memoryType, IList<WritableSubResource> registrationVirtualNetworks, IList<WritableSubResource> resolutionVirtualNetworks, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Etag = etag;
             MaxNumberOfRecordSets = maxNumberOfRecordSets;
@@ -64,7 +64,7 @@ namespace MgmtExpandResourceTypes
             MemoryType = memoryType;
             RegistrationVirtualNetworks = registrationVirtualNetworks;
             ResolutionVirtualNetworks = resolutionVirtualNetworks;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ZoneData"/> for deserialization. </summary>

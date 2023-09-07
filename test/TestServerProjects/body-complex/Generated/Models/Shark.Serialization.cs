@@ -56,9 +56,9 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -96,7 +96,7 @@ namespace body_complex.Models
             Optional<string> species = default;
             float length = default;
             Optional<IList<Fish>> siblings = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("age"u8))
@@ -144,11 +144,11 @@ namespace body_complex.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new Shark(fishtype, species.Value, length, Optional.ToList(siblings), Optional.ToNullable(age), birthday, rawData);
+            return new Shark(fishtype, species.Value, length, Optional.ToList(siblings), Optional.ToNullable(age), birthday, serializedAdditionalRawData);
         }
 
         Shark IModelJsonSerializable<Shark>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

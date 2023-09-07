@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     internal partial class CloudErrorBody
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CloudErrorBody"/>. </summary>
         internal CloudErrorBody()
@@ -28,14 +28,14 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="message"> A message describing the error, intended to be suitable for display in a user interface. </param>
         /// <param name="target"> The target of the particular error. For example, the name of the property in error. </param>
         /// <param name="details"> A list of additional details about the error. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CloudErrorBody(string code, string message, string target, IReadOnlyList<CloudErrorBody> details, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CloudErrorBody(string code, string message, string target, IReadOnlyList<CloudErrorBody> details, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Code = code;
             Message = message;
             Target = target;
             Details = details;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> An identifier for the error. Codes are invariant and are intended to be consumed programmatically. </summary>

@@ -23,8 +23,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         /// <summary> Initializes a new instance of Sparrow. </summary>
         /// <param name="kind"></param>
         /// <param name="wingspan"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Sparrow(string kind, int wingspan, Dictionary<string, BinaryData> rawData) : base(kind, wingspan, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Sparrow(string kind, int wingspan, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, wingspan, serializedAdditionalRawData)
         {
         }
 

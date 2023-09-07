@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class StorageAccountCreateOrUpdateContent
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StorageAccountCreateOrUpdateContent"/>. </summary>
         /// <param name="sku"> Required. Gets or sets the SKU name. </param>
@@ -60,8 +60,8 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="allowCrossTenantReplication"> Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property. </param>
         /// <param name="defaultToOAuthAuthentication"> A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property. </param>
         /// <param name="immutableStorageWithVersioning"> The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the new containers in the account by default. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StorageAccountCreateOrUpdateContent(StorageSku sku, StorageKind kind, AzureLocation location, ExtendedLocation extendedLocation, IDictionary<string, string> tags, ManagedServiceIdentity identity, PublicNetworkAccess? publicNetworkAccess, SasPolicy sasPolicy, KeyPolicy keyPolicy, CustomDomain customDomain, Encryption encryption, NetworkRuleSet networkRuleSet, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, bool? isHnsEnabled, LargeFileSharesState? largeFileSharesState, RoutingPreference routingPreference, bool? allowBlobPublicAccess, MinimumTlsVersion? minimumTlsVersion, bool? allowSharedKeyAccess, bool? enableNfsV3, bool? allowCrossTenantReplication, bool? defaultToOAuthAuthentication, ImmutableStorageAccount immutableStorageWithVersioning, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageAccountCreateOrUpdateContent(StorageSku sku, StorageKind kind, AzureLocation location, ExtendedLocation extendedLocation, IDictionary<string, string> tags, ManagedServiceIdentity identity, PublicNetworkAccess? publicNetworkAccess, SasPolicy sasPolicy, KeyPolicy keyPolicy, CustomDomain customDomain, Encryption encryption, NetworkRuleSet networkRuleSet, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, bool? isHnsEnabled, LargeFileSharesState? largeFileSharesState, RoutingPreference routingPreference, bool? allowBlobPublicAccess, MinimumTlsVersion? minimumTlsVersion, bool? allowSharedKeyAccess, bool? enableNfsV3, bool? allowCrossTenantReplication, bool? defaultToOAuthAuthentication, ImmutableStorageAccount immutableStorageWithVersioning, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Sku = sku;
             Kind = kind;
@@ -88,7 +88,7 @@ namespace Azure.ResourceManager.Storage.Models
             AllowCrossTenantReplication = allowCrossTenantReplication;
             DefaultToOAuthAuthentication = defaultToOAuthAuthentication;
             ImmutableStorageWithVersioning = immutableStorageWithVersioning;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="StorageAccountCreateOrUpdateContent"/> for deserialization. </summary>

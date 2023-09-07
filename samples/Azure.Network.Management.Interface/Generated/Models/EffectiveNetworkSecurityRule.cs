@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class EffectiveNetworkSecurityRule
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="EffectiveNetworkSecurityRule"/>. </summary>
         internal EffectiveNetworkSecurityRule()
@@ -44,8 +44,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="access"> Whether network traffic is allowed or denied. </param>
         /// <param name="priority"> The priority of the rule. </param>
         /// <param name="direction"> The direction of the rule. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal EffectiveNetworkSecurityRule(string name, EffectiveSecurityRuleProtocol? protocol, string sourcePortRange, string destinationPortRange, IReadOnlyList<string> sourcePortRanges, IReadOnlyList<string> destinationPortRanges, string sourceAddressPrefix, string destinationAddressPrefix, IReadOnlyList<string> sourceAddressPrefixes, IReadOnlyList<string> destinationAddressPrefixes, IReadOnlyList<string> expandedSourceAddressPrefix, IReadOnlyList<string> expandedDestinationAddressPrefix, SecurityRuleAccess? access, int? priority, SecurityRuleDirection? direction, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal EffectiveNetworkSecurityRule(string name, EffectiveSecurityRuleProtocol? protocol, string sourcePortRange, string destinationPortRange, IReadOnlyList<string> sourcePortRanges, IReadOnlyList<string> destinationPortRanges, string sourceAddressPrefix, string destinationAddressPrefix, IReadOnlyList<string> sourceAddressPrefixes, IReadOnlyList<string> destinationAddressPrefixes, IReadOnlyList<string> expandedSourceAddressPrefix, IReadOnlyList<string> expandedDestinationAddressPrefix, SecurityRuleAccess? access, int? priority, SecurityRuleDirection? direction, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Protocol = protocol;
@@ -62,7 +62,7 @@ namespace Azure.Network.Management.Interface.Models
             Access = access;
             Priority = priority;
             Direction = direction;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The name of the security rule specified by the user (if created by the user). </summary>

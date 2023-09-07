@@ -29,8 +29,8 @@ namespace MgmtMockAndSample
         /// <param name="location"> Region where the VM is located. </param>
         /// <param name="resourceType"> The type of the resource. </param>
         /// <param name="properties"> Properties of the Guest configuration assignment. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal GuestConfigurationAssignmentData(string id, string name, AzureLocation? location, ResourceType? resourceType, GuestConfigurationAssignmentProperties properties, Dictionary<string, BinaryData> rawData) : base(id, name, location, resourceType, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal GuestConfigurationAssignmentData(string id, string name, AzureLocation? location, ResourceType? resourceType, GuestConfigurationAssignmentProperties properties, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, location, resourceType, serializedAdditionalRawData)
         {
             Properties = properties;
         }

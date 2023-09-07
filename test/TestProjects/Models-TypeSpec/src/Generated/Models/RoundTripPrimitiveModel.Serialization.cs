@@ -53,9 +53,9 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(item.Value);
             }
             writer.WriteEndArray();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -86,7 +86,7 @@ namespace ModelsTypeSpec.Models
             DateTimeOffset requiredDateTimeOffset = default;
             TimeSpan requiredTimeSpan = default;
             IList<float?> requiredCollectionWithNullableFloatElement = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"u8))
@@ -153,11 +153,11 @@ namespace ModelsTypeSpec.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new RoundTripPrimitiveModel(requiredString, requiredInt, requiredInt64, requiredSafeInt, requiredFloat, requiredDouble, requiredBoolean, requiredDateTimeOffset, requiredTimeSpan, requiredCollectionWithNullableFloatElement, rawData);
+            return new RoundTripPrimitiveModel(requiredString, requiredInt, requiredInt64, requiredSafeInt, requiredFloat, requiredDouble, requiredBoolean, requiredDateTimeOffset, requiredTimeSpan, requiredCollectionWithNullableFloatElement, serializedAdditionalRawData);
         }
 
         RoundTripPrimitiveModel IModelJsonSerializable<RoundTripPrimitiveModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

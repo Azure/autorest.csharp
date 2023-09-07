@@ -14,7 +14,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class PublicIPAddressSku
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="PublicIPAddressSku"/>. </summary>
         public PublicIPAddressSku()
@@ -23,11 +23,11 @@ namespace Azure.Network.Management.Interface.Models
 
         /// <summary> Initializes a new instance of <see cref="PublicIPAddressSku"/>. </summary>
         /// <param name="name"> Name of a public IP address SKU. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PublicIPAddressSku(PublicIPAddressSkuName? name, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PublicIPAddressSku(PublicIPAddressSkuName? name, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Name of a public IP address SKU. </summary>

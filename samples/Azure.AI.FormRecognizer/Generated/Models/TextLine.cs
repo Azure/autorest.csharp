@@ -16,7 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class TextLine
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TextLine"/>. </summary>
         /// <param name="text"> The text content of the line. </param>
@@ -39,14 +39,14 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="boundingBox"> Bounding box of an extracted line. </param>
         /// <param name="language"> The detected language of this line, if different from the overall page language. </param>
         /// <param name="words"> List of words in the text line. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TextLine(string text, IReadOnlyList<float> boundingBox, Language? language, IReadOnlyList<TextWord> words, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TextLine(string text, IReadOnlyList<float> boundingBox, Language? language, IReadOnlyList<TextWord> words, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Text = text;
             BoundingBox = boundingBox;
             Language = language;
             Words = words;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="TextLine"/> for deserialization. </summary>

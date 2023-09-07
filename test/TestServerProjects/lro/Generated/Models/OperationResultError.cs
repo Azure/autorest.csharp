@@ -14,7 +14,7 @@ namespace lro.Models
     internal partial class OperationResultError
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="OperationResultError"/>. </summary>
         internal OperationResultError()
@@ -24,12 +24,12 @@ namespace lro.Models
         /// <summary> Initializes a new instance of <see cref="OperationResultError"/>. </summary>
         /// <param name="code"> The error code for an operation failure. </param>
         /// <param name="message"> The detailed arror message. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal OperationResultError(int? code, string message, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OperationResultError(int? code, string message, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Code = code;
             Message = message;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The error code for an operation failure. </summary>

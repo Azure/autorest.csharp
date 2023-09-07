@@ -17,7 +17,7 @@ namespace MgmtListMethods.Models
     internal partial class FakeParentListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FakeParentListResult"/>. </summary>
         /// <param name="value"> List. </param>
@@ -32,12 +32,12 @@ namespace MgmtListMethods.Models
         /// <summary> Initializes a new instance of <see cref="FakeParentListResult"/>. </summary>
         /// <param name="value"> List. </param>
         /// <param name="nextLink"> The URI to fetch the next page. Call ListNext() with this URI to fetch the next page. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FakeParentListResult(IReadOnlyList<FakeParentData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FakeParentListResult(IReadOnlyList<FakeParentData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="FakeParentListResult"/> for deserialization. </summary>

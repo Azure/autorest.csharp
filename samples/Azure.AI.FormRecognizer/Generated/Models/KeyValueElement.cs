@@ -15,7 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class KeyValueElement
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="KeyValueElement"/>. </summary>
         /// <param name="text"> The text content of the key or value. </param>
@@ -33,13 +33,13 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="text"> The text content of the key or value. </param>
         /// <param name="boundingBox"> Bounding box of the key or value. </param>
         /// <param name="elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this key or value. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal KeyValueElement(string text, IReadOnlyList<float> boundingBox, IReadOnlyList<string> elements, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeyValueElement(string text, IReadOnlyList<float> boundingBox, IReadOnlyList<string> elements, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Text = text;
             BoundingBox = boundingBox;
             Elements = elements;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="KeyValueElement"/> for deserialization. </summary>

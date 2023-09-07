@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties"/>. </summary>
         internal NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties()
@@ -27,13 +27,13 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="groupId"> The group ID for current private link connection. </param>
         /// <param name="requiredMemberName"> The required member name for current private link connection. </param>
         /// <param name="fqdns"> List of FQDNs for current private link connection. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(string groupId, string requiredMemberName, IReadOnlyList<string> fqdns, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(string groupId, string requiredMemberName, IReadOnlyList<string> fqdns, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             GroupId = groupId;
             RequiredMemberName = requiredMemberName;
             Fqdns = fqdns;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The group ID for current private link connection. </summary>

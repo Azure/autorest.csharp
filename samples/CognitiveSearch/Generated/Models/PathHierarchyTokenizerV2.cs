@@ -32,8 +32,8 @@ namespace CognitiveSearch.Models
         /// <param name="maxTokenLength"> The maximum token length. Default and maximum is 300. </param>
         /// <param name="reverseTokenOrder"> A value indicating whether to generate tokens in reverse order. Default is false. </param>
         /// <param name="numberOfTokensToSkip"> The number of initial tokens to skip. Default is 0. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PathHierarchyTokenizerV2(string odataType, string name, char? delimiter, char? replacement, int? maxTokenLength, bool? reverseTokenOrder, int? numberOfTokensToSkip, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PathHierarchyTokenizerV2(string odataType, string name, char? delimiter, char? replacement, int? maxTokenLength, bool? reverseTokenOrder, int? numberOfTokensToSkip, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             Delimiter = delimiter;
             Replacement = replacement;

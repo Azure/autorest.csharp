@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class CustomDomain
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CustomDomain"/>. </summary>
         /// <param name="name"> Gets or sets the custom domain name assigned to the storage account. Name is the CNAME source. </param>
@@ -30,12 +30,12 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of <see cref="CustomDomain"/>. </summary>
         /// <param name="name"> Gets or sets the custom domain name assigned to the storage account. Name is the CNAME source. </param>
         /// <param name="useSubDomainName"> Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CustomDomain(string name, bool? useSubDomainName, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CustomDomain(string name, bool? useSubDomainName, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             UseSubDomainName = useSubDomainName;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CustomDomain"/> for deserialization. </summary>

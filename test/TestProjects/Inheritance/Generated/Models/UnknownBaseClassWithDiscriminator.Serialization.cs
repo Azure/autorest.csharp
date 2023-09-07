@@ -83,9 +83,9 @@ namespace Inheritance.Models
                 writer.WritePropertyName("DfeUri"u8);
                 JsonSerializer.Serialize(writer, DfeUri);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER

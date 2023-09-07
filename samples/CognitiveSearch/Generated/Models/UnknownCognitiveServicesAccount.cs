@@ -16,8 +16,8 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="UnknownCognitiveServicesAccount"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the cognitive service resource attached to a skillset. </param>
         /// <param name="description"> Description of the cognitive service resource attached to a skillset. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownCognitiveServicesAccount(string odataType, string description, Dictionary<string, BinaryData> rawData) : base(odataType, description, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownCognitiveServicesAccount(string odataType, string description, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, description, serializedAdditionalRawData)
         {
             OdataType = odataType ?? "Unknown";
         }

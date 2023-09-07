@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Fake.Models
     public partial class CheckNameAvailabilityRequest
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CheckNameAvailabilityRequest"/>. </summary>
         [InitializationConstructor]
@@ -27,12 +27,12 @@ namespace Azure.ResourceManager.Fake.Models
         /// <summary> Initializes a new instance of <see cref="CheckNameAvailabilityRequest"/>. </summary>
         /// <param name="name"> The name of the resource for which availability needs to be checked. </param>
         /// <param name="resourceType"> The resource type. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CheckNameAvailabilityRequest(string name, ResourceType resourceType, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CheckNameAvailabilityRequest(string name, ResourceType resourceType, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             ResourceType = resourceType;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The name of the resource for which availability needs to be checked. </summary>

@@ -55,9 +55,9 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("channelEncryption"u8);
                 writer.WriteStringValue(ChannelEncryption);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -83,7 +83,7 @@ namespace Azure.ResourceManager.Storage.Models
             Optional<string> authenticationMethods = default;
             Optional<string> kerberosTicketEncryption = default;
             Optional<string> channelEncryption = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("multichannel"u8))
@@ -117,11 +117,11 @@ namespace Azure.ResourceManager.Storage.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new SmbSetting(multichannel.Value, versions.Value, authenticationMethods.Value, kerberosTicketEncryption.Value, channelEncryption.Value, rawData);
+            return new SmbSetting(multichannel.Value, versions.Value, authenticationMethods.Value, kerberosTicketEncryption.Value, channelEncryption.Value, serializedAdditionalRawData);
         }
 
         SmbSetting IModelJsonSerializable<SmbSetting>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

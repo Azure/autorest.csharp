@@ -14,7 +14,7 @@ namespace subscriptionId_apiVersion.Models
     public partial class SampleResourceGroup
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SampleResourceGroup"/>. </summary>
         internal SampleResourceGroup()
@@ -24,12 +24,12 @@ namespace subscriptionId_apiVersion.Models
         /// <summary> Initializes a new instance of <see cref="SampleResourceGroup"/>. </summary>
         /// <param name="name"> resource group name 'testgroup101'. </param>
         /// <param name="location"> resource group location 'West US'. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SampleResourceGroup(string name, string location, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SampleResourceGroup(string name, string location, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Location = location;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> resource group name 'testgroup101'. </summary>

@@ -19,7 +19,7 @@ namespace MgmtAcronymMapping.Models
     public partial class KeyVaultKeyReference
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="KeyVaultKeyReference"/>. </summary>
         /// <param name="keyUri">
@@ -49,12 +49,12 @@ namespace MgmtAcronymMapping.Models
         /// The relative URL of the Key Vault containing the key.
         /// Serialized Name: KeyVaultKeyReference.sourceVault
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal KeyVaultKeyReference(Uri keyUri, WritableSubResource sourceVault, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeyVaultKeyReference(Uri keyUri, WritableSubResource sourceVault, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             KeyUri = keyUri;
             SourceVault = sourceVault;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="KeyVaultKeyReference"/> for deserialization. </summary>

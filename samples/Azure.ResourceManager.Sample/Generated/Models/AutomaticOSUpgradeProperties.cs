@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     internal partial class AutomaticOSUpgradeProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AutomaticOSUpgradeProperties"/>. </summary>
         /// <param name="automaticOSUpgradeSupported">
@@ -34,11 +34,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies whether automatic OS upgrade is supported on the image.
         /// Serialized Name: AutomaticOSUpgradeProperties.automaticOSUpgradeSupported
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AutomaticOSUpgradeProperties(bool automaticOSUpgradeSupported, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AutomaticOSUpgradeProperties(bool automaticOSUpgradeSupported, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             AutomaticOSUpgradeSupported = automaticOSUpgradeSupported;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="AutomaticOSUpgradeProperties"/> for deserialization. </summary>

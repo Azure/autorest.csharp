@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     public partial class TemplateHashResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TemplateHashResult"/>. </summary>
         internal TemplateHashResult()
@@ -24,12 +24,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="TemplateHashResult"/>. </summary>
         /// <param name="minifiedTemplate"> The minified template string. </param>
         /// <param name="templateHash"> The template hash. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TemplateHashResult(string minifiedTemplate, string templateHash, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TemplateHashResult(string minifiedTemplate, string templateHash, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             MinifiedTemplate = minifiedTemplate;
             TemplateHash = templateHash;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The minified template string. </summary>

@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
     public partial class SuggestDocumentsResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SuggestDocumentsResult"/>. </summary>
         /// <param name="results"> The sequence of results returned by the query. </param>
@@ -31,12 +31,12 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="SuggestDocumentsResult"/>. </summary>
         /// <param name="results"> The sequence of results returned by the query. </param>
         /// <param name="coverage"> A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not set in the request. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SuggestDocumentsResult(IReadOnlyList<SuggestResult> results, double? coverage, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SuggestDocumentsResult(IReadOnlyList<SuggestResult> results, double? coverage, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Results = results;
             Coverage = coverage;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="SuggestDocumentsResult"/> for deserialization. </summary>

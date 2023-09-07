@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     internal partial class DateAfterCreation
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DateAfterCreation"/>. </summary>
         /// <param name="daysAfterCreationGreaterThan"> Value indicating the age in days after creation. </param>
@@ -25,11 +25,11 @@ namespace Azure.ResourceManager.Storage.Models
 
         /// <summary> Initializes a new instance of <see cref="DateAfterCreation"/>. </summary>
         /// <param name="daysAfterCreationGreaterThan"> Value indicating the age in days after creation. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DateAfterCreation(float daysAfterCreationGreaterThan, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DateAfterCreation(float daysAfterCreationGreaterThan, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DaysAfterCreationGreaterThan = daysAfterCreationGreaterThan;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DateAfterCreation"/> for deserialization. </summary>

@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     public partial class EventData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="EventData"/>. </summary>
         internal EventData()
@@ -24,12 +24,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="EventData"/>. </summary>
         /// <param name="authorization"> The sender authorization information. </param>
         /// <param name="tenantId"> the Azure tenant Id. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal EventData(SenderAuthorization authorization, Guid? tenantId, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal EventData(SenderAuthorization authorization, Guid? tenantId, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Authorization = authorization;
             TenantId = tenantId;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The sender authorization information. </summary>

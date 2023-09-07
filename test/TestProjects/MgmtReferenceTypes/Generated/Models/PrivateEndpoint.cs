@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Fake.Models
     public partial class PrivateEndpoint
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="PrivateEndpoint"/>. </summary>
         [InitializationConstructor]
@@ -26,11 +26,11 @@ namespace Azure.ResourceManager.Fake.Models
 
         /// <summary> Initializes a new instance of <see cref="PrivateEndpoint"/>. </summary>
         /// <param name="id"> The ARM identifier for Private Endpoint. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        protected PrivateEndpoint(ResourceIdentifier id, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        protected PrivateEndpoint(ResourceIdentifier id, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The ARM identifier for Private Endpoint. </summary>

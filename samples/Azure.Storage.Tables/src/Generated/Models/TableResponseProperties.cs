@@ -14,7 +14,7 @@ namespace Azure.Storage.Tables.Models
     public partial class TableResponseProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TableResponseProperties"/>. </summary>
         internal TableResponseProperties()
@@ -26,14 +26,14 @@ namespace Azure.Storage.Tables.Models
         /// <param name="odataType"> The odata type of the table. </param>
         /// <param name="odataId"> The id of the table. </param>
         /// <param name="odataEditLink"> The edit link of the table. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TableResponseProperties(string tableName, string odataType, string odataId, string odataEditLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TableResponseProperties(string tableName, string odataType, string odataId, string odataEditLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TableName = tableName;
             OdataType = odataType;
             OdataId = odataId;
             OdataEditLink = odataEditLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The name of the table. </summary>

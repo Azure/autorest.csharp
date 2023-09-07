@@ -15,7 +15,7 @@ namespace Azure.Storage.Tables.Models
     public partial class AccessPolicy
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AccessPolicy"/>. </summary>
         /// <param name="start"> the date-time the policy is active. </param>
@@ -35,13 +35,13 @@ namespace Azure.Storage.Tables.Models
         /// <param name="start"> the date-time the policy is active. </param>
         /// <param name="expiry"> the date-time the policy expires. </param>
         /// <param name="permission"> the permissions for the acl policy. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AccessPolicy(DateTimeOffset start, DateTimeOffset expiry, string permission, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AccessPolicy(DateTimeOffset start, DateTimeOffset expiry, string permission, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Start = start;
             Expiry = expiry;
             Permission = permission;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="AccessPolicy"/> for deserialization. </summary>

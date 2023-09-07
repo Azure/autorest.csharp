@@ -25,9 +25,9 @@ namespace Projection.ProjectedName.Models
             writer.WriteStartObject();
             writer.WritePropertyName("defaultName"u8);
             writer.WriteBooleanValue(ClientName);
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -49,7 +49,7 @@ namespace Projection.ProjectedName.Models
                 return null;
             }
             bool defaultName = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("defaultName"u8))
@@ -59,11 +59,11 @@ namespace Projection.ProjectedName.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new ClientProjectedNameModel(defaultName, rawData);
+            return new ClientProjectedNameModel(defaultName, serializedAdditionalRawData);
         }
 
         ClientProjectedNameModel IModelJsonSerializable<ClientProjectedNameModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

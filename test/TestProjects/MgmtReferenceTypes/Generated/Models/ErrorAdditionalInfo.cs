@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Fake.Models
     public partial class ErrorAdditionalInfo
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ErrorAdditionalInfo"/>. </summary>
         [InitializationConstructor]
@@ -27,12 +27,12 @@ namespace Azure.ResourceManager.Fake.Models
         /// <summary> Initializes a new instance of <see cref="ErrorAdditionalInfo"/>. </summary>
         /// <param name="errorAdditionalInfoType"> The additional info type. </param>
         /// <param name="info"> The additional info. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ErrorAdditionalInfo(string errorAdditionalInfoType, BinaryData info, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ErrorAdditionalInfo(string errorAdditionalInfoType, BinaryData info, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ErrorAdditionalInfoType = errorAdditionalInfoType;
             Info = info;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The additional info type. </summary>

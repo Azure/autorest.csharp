@@ -52,9 +52,9 @@ namespace MgmtDiscriminator.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -80,7 +80,7 @@ namespace MgmtDiscriminator.Models
             Optional<bool> negateCondition = default;
             Optional<IList<Transform>> transforms = default;
             Optional<IList<RequestMethodMatchConditionParametersMatchValuesItem>> matchValues = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("typeName"u8))
@@ -132,11 +132,11 @@ namespace MgmtDiscriminator.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new RequestMethodMatchConditionParameters(typeName, @operator, Optional.ToNullable(negateCondition), Optional.ToList(transforms), Optional.ToList(matchValues), rawData);
+            return new RequestMethodMatchConditionParameters(typeName, @operator, Optional.ToNullable(negateCondition), Optional.ToList(transforms), Optional.ToList(matchValues), serializedAdditionalRawData);
         }
 
         RequestMethodMatchConditionParameters IModelJsonSerializable<RequestMethodMatchConditionParameters>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

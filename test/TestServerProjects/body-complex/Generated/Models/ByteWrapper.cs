@@ -14,7 +14,7 @@ namespace body_complex.Models
     public partial class ByteWrapper
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ByteWrapper"/>. </summary>
         public ByteWrapper()
@@ -23,11 +23,11 @@ namespace body_complex.Models
 
         /// <summary> Initializes a new instance of <see cref="ByteWrapper"/>. </summary>
         /// <param name="field"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ByteWrapper(byte[] field, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ByteWrapper(byte[] field, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Field = field;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the field. </summary>

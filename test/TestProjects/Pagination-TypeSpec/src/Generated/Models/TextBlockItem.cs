@@ -15,7 +15,7 @@ namespace Pagination.Models
     public partial class TextBlockItem
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of TextBlockItem. </summary>
         /// <param name="blockItemId"> Block Item Id. It will be uuid. </param>
@@ -34,13 +34,13 @@ namespace Pagination.Models
         /// <param name="blockItemId"> Block Item Id. It will be uuid. </param>
         /// <param name="description"> Block item description. </param>
         /// <param name="text"> Block item content. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TextBlockItem(string blockItemId, string description, string text, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TextBlockItem(string blockItemId, string description, string text, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             BlockItemId = blockItemId;
             Description = description;
             Text = text;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="TextBlockItem"/> for deserialization. </summary>

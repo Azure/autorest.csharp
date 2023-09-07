@@ -22,8 +22,8 @@ namespace body_complex.Models
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="food"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Dog(int? id, string name, string food, Dictionary<string, BinaryData> rawData) : base(id, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Dog(int? id, string name, string food, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, serializedAdditionalRawData)
         {
             Food = food;
         }

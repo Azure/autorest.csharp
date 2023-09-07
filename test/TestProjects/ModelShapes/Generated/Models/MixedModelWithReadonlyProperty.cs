@@ -15,7 +15,7 @@ namespace ModelShapes.Models
     public partial class MixedModelWithReadonlyProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MixedModelWithReadonlyProperty"/>. </summary>
         public MixedModelWithReadonlyProperty()
@@ -26,12 +26,12 @@ namespace ModelShapes.Models
         /// <summary> Initializes a new instance of <see cref="MixedModelWithReadonlyProperty"/>. </summary>
         /// <param name="readonlyProperty"></param>
         /// <param name="readonlyListProperty"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MixedModelWithReadonlyProperty(ReadonlyModel readonlyProperty, IReadOnlyList<ReadonlyModel> readonlyListProperty, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MixedModelWithReadonlyProperty(ReadonlyModel readonlyProperty, IReadOnlyList<ReadonlyModel> readonlyListProperty, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ReadonlyProperty = readonlyProperty;
             ReadonlyListProperty = readonlyListProperty;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the readonly property. </summary>

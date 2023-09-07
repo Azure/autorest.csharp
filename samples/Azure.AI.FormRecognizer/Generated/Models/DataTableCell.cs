@@ -16,7 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class DataTableCell
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DataTableCell"/>. </summary>
         /// <param name="rowIndex"> Row index of the cell. </param>
@@ -49,8 +49,8 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this table cell. </param>
         /// <param name="isHeader"> Is the current cell a header cell?. </param>
         /// <param name="isFooter"> Is the current cell a footer cell?. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DataTableCell(int rowIndex, int columnIndex, int? rowSpan, int? columnSpan, string text, IReadOnlyList<float> boundingBox, float confidence, IReadOnlyList<string> elements, bool? isHeader, bool? isFooter, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DataTableCell(int rowIndex, int columnIndex, int? rowSpan, int? columnSpan, string text, IReadOnlyList<float> boundingBox, float confidence, IReadOnlyList<string> elements, bool? isHeader, bool? isFooter, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RowIndex = rowIndex;
             ColumnIndex = columnIndex;
@@ -62,7 +62,7 @@ namespace Azure.AI.FormRecognizer.Models
             Elements = elements;
             IsHeader = isHeader;
             IsFooter = isFooter;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DataTableCell"/> for deserialization. </summary>

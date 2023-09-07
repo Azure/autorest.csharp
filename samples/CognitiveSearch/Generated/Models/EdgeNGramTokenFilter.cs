@@ -30,8 +30,8 @@ namespace CognitiveSearch.Models
         /// <param name="minGram"> The minimum n-gram length. Default is 1. Must be less than the value of maxGram. </param>
         /// <param name="maxGram"> The maximum n-gram length. Default is 2. </param>
         /// <param name="side"> Specifies which side of the input the n-gram should be generated from. Default is "front". </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal EdgeNGramTokenFilter(string odataType, string name, int? minGram, int? maxGram, EdgeNGramTokenFilterSide? side, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal EdgeNGramTokenFilter(string odataType, string name, int? minGram, int? maxGram, EdgeNGramTokenFilterSide? side, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             MinGram = minGram;
             MaxGram = maxGram;

@@ -21,7 +21,7 @@ namespace MgmtExpandResourceTypes
     public partial class RecordSetData : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RecordSetData"/>. </summary>
         public RecordSetData()
@@ -58,8 +58,8 @@ namespace MgmtExpandResourceTypes
         /// <param name="cnameRecord"> The CNAME record in the  record set. </param>
         /// <param name="soaRecord"> The SOA record in the record set. </param>
         /// <param name="caaRecords"> The list of CAA records in the record set. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RecordSetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string etag, IDictionary<string, string> metadata, long? ttl, string fqdn, string provisioningState, WritableSubResource targetResource, IList<ARecord> aRecords, IList<AaaaRecord> aaaaRecords, IList<MxRecord> mxRecords, IList<NsRecord> nsRecords, IList<PtrRecord> ptrRecords, IList<SrvRecord> srvRecords, IList<TxtRecord> txtRecords, CnameRecord cnameRecord, SoaRecord soaRecord, IList<CaaRecord> caaRecords, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RecordSetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string etag, IDictionary<string, string> metadata, long? ttl, string fqdn, string provisioningState, WritableSubResource targetResource, IList<ARecord> aRecords, IList<AaaaRecord> aaaaRecords, IList<MxRecord> mxRecords, IList<NsRecord> nsRecords, IList<PtrRecord> ptrRecords, IList<SrvRecord> srvRecords, IList<TxtRecord> txtRecords, CnameRecord cnameRecord, SoaRecord soaRecord, IList<CaaRecord> caaRecords, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Etag = etag;
             Metadata = metadata;
@@ -77,7 +77,7 @@ namespace MgmtExpandResourceTypes
             CnameRecord = cnameRecord;
             SoaRecord = soaRecord;
             CaaRecords = caaRecords;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The etag of the record set. </summary>

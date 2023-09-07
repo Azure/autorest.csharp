@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
     public partial class LinuxConfiguration
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="LinuxConfiguration"/>. </summary>
         public LinuxConfiguration()
@@ -37,13 +37,13 @@ namespace MgmtAcronymMapping.Models
         /// Indicates whether virtual machine agent should be provisioned on the virtual machine. &lt;br&gt;&lt;br&gt; When this property is not specified in the request body, default behavior is to set it to true.  This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.
         /// Serialized Name: LinuxConfiguration.provisionVMAgent
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LinuxConfiguration(bool? disablePasswordAuthentication, SshConfiguration ssh, bool? provisionVmAgent, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LinuxConfiguration(bool? disablePasswordAuthentication, SshConfiguration ssh, bool? provisionVmAgent, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DisablePasswordAuthentication = disablePasswordAuthentication;
             Ssh = ssh;
             ProvisionVmAgent = provisionVmAgent;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class Indexer
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Indexer"/>. </summary>
         /// <param name="name"> The name of the indexer. </param>
@@ -47,8 +47,8 @@ namespace CognitiveSearch.Models
         /// <param name="outputFieldMappings"> Output field mappings are applied after enrichment and immediately before indexing. </param>
         /// <param name="isDisabled"> A value indicating whether the indexer is disabled. Default is false. </param>
         /// <param name="eTag"> The ETag of the Indexer. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Indexer(string name, string description, string dataSourceName, string skillsetName, string targetIndexName, IndexingSchedule schedule, IndexingParameters parameters, IList<FieldMapping> fieldMappings, IList<FieldMapping> outputFieldMappings, bool? isDisabled, string eTag, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Indexer(string name, string description, string dataSourceName, string skillsetName, string targetIndexName, IndexingSchedule schedule, IndexingParameters parameters, IList<FieldMapping> fieldMappings, IList<FieldMapping> outputFieldMappings, bool? isDisabled, string eTag, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Description = description;
@@ -61,7 +61,7 @@ namespace CognitiveSearch.Models
             OutputFieldMappings = outputFieldMappings;
             IsDisabled = isDisabled;
             ETag = eTag;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Indexer"/> for deserialization. </summary>

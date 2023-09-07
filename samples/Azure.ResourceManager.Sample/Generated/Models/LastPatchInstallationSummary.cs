@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class LastPatchInstallationSummary
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="LastPatchInstallationSummary"/>. </summary>
         internal LastPatchInstallationSummary()
@@ -77,8 +77,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The errors that were encountered during execution of the operation. The details array contains the list of them.
         /// Serialized Name: LastPatchInstallationSummary.error
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LastPatchInstallationSummary(PatchOperationStatus? status, string installationActivityId, bool? maintenanceWindowExceeded, RebootStatus? rebootStatus, int? notSelectedPatchCount, int? excludedPatchCount, int? pendingPatchCount, int? installedPatchCount, int? failedPatchCount, DateTimeOffset? startOn, DateTimeOffset? lastModifiedOn, string startedBy, ApiError error, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LastPatchInstallationSummary(PatchOperationStatus? status, string installationActivityId, bool? maintenanceWindowExceeded, RebootStatus? rebootStatus, int? notSelectedPatchCount, int? excludedPatchCount, int? pendingPatchCount, int? installedPatchCount, int? failedPatchCount, DateTimeOffset? startOn, DateTimeOffset? lastModifiedOn, string startedBy, ApiError error, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             InstallationActivityId = installationActivityId;
@@ -93,7 +93,7 @@ namespace Azure.ResourceManager.Sample.Models
             LastModifiedOn = lastModifiedOn;
             StartedBy = startedBy;
             Error = error;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

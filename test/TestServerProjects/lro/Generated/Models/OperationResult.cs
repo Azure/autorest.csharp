@@ -14,7 +14,7 @@ namespace lro.Models
     internal partial class OperationResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="OperationResult"/>. </summary>
         internal OperationResult()
@@ -24,12 +24,12 @@ namespace lro.Models
         /// <summary> Initializes a new instance of <see cref="OperationResult"/>. </summary>
         /// <param name="status"> The status of the request. </param>
         /// <param name="error"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal OperationResult(OperationResultStatus? status, OperationResultError error, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OperationResult(OperationResultStatus? status, OperationResultError error, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             Error = error;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The status of the request. </summary>

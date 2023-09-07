@@ -68,9 +68,9 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WritePropertyName("isFooter"u8);
                 writer.WriteBooleanValue(IsFooter.Value);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -101,7 +101,7 @@ namespace Azure.AI.FormRecognizer.Models
             Optional<IReadOnlyList<string>> elements = default;
             Optional<bool> isHeader = default;
             Optional<bool> isFooter = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("rowIndex"u8))
@@ -186,11 +186,11 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new DataTableCell(rowIndex, columnIndex, Optional.ToNullable(rowSpan), Optional.ToNullable(columnSpan), text, boundingBox, confidence, Optional.ToList(elements), Optional.ToNullable(isHeader), Optional.ToNullable(isFooter), rawData);
+            return new DataTableCell(rowIndex, columnIndex, Optional.ToNullable(rowSpan), Optional.ToNullable(columnSpan), text, boundingBox, confidence, Optional.ToList(elements), Optional.ToNullable(isHeader), Optional.ToNullable(isFooter), serializedAdditionalRawData);
         }
 
         DataTableCell IModelJsonSerializable<DataTableCell>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

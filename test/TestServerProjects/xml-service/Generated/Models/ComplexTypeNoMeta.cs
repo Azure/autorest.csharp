@@ -14,7 +14,7 @@ namespace xml_service.Models
     public partial class ComplexTypeNoMeta
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ComplexTypeNoMeta"/>. </summary>
         public ComplexTypeNoMeta()
@@ -23,11 +23,11 @@ namespace xml_service.Models
 
         /// <summary> Initializes a new instance of <see cref="ComplexTypeNoMeta"/>. </summary>
         /// <param name="id"> The id of the res. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ComplexTypeNoMeta(string id, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ComplexTypeNoMeta(string id, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ID = id;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The id of the res. </summary>

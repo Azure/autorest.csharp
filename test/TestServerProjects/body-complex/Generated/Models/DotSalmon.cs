@@ -24,8 +24,8 @@ namespace body_complex.Models
         /// <param name="species"></param>
         /// <param name="location"></param>
         /// <param name="iswild"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DotSalmon(string fishType, string species, string location, bool? iswild, Dictionary<string, BinaryData> rawData) : base(fishType, species, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DotSalmon(string fishType, string species, string location, bool? iswild, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(fishType, species, serializedAdditionalRawData)
         {
             Location = location;
             Iswild = iswild;

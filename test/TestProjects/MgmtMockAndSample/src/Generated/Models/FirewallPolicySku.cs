@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     internal partial class FirewallPolicySku
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicySku"/>. </summary>
         public FirewallPolicySku()
@@ -23,11 +23,11 @@ namespace MgmtMockAndSample.Models
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicySku"/>. </summary>
         /// <param name="tier"> Tier of Firewall Policy. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirewallPolicySku(FirewallPolicySkuTier? tier, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicySku(FirewallPolicySkuTier? tier, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Tier = tier;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Tier of Firewall Policy. </summary>

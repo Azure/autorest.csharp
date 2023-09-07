@@ -15,7 +15,7 @@ namespace MgmtDiscriminator.Models
     public partial class RemoteAddressMatchConditionParameters
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RemoteAddressMatchConditionParameters"/>. </summary>
         /// <param name="typeName"></param>
@@ -34,15 +34,15 @@ namespace MgmtDiscriminator.Models
         /// <param name="negateCondition"> Describes if this is negate condition or not. </param>
         /// <param name="matchValues"> Match values to match against. The operator will apply to each value in here with OR semantics. If any of them match the variable with the given operator this match condition is considered a match. </param>
         /// <param name="transforms"> List of transforms. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RemoteAddressMatchConditionParameters(RemoteAddressMatchConditionParametersTypeName typeName, RemoteAddressOperator @operator, bool? negateCondition, IList<string> matchValues, IList<Transform> transforms, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RemoteAddressMatchConditionParameters(RemoteAddressMatchConditionParametersTypeName typeName, RemoteAddressOperator @operator, bool? negateCondition, IList<string> matchValues, IList<Transform> transforms, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TypeName = typeName;
             Operator = @operator;
             NegateCondition = negateCondition;
             MatchValues = matchValues;
             Transforms = transforms;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="RemoteAddressMatchConditionParameters"/> for deserialization. </summary>

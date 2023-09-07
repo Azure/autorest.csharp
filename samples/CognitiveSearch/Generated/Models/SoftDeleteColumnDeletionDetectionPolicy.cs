@@ -23,8 +23,8 @@ namespace CognitiveSearch.Models
         /// <param name="odataType"> Identifies the concrete type of the data deletion detection policy. </param>
         /// <param name="softDeleteColumnName"> The name of the column to use for soft-deletion detection. </param>
         /// <param name="softDeleteMarkerValue"> The marker value that identifies an item as deleted. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SoftDeleteColumnDeletionDetectionPolicy(string odataType, string softDeleteColumnName, string softDeleteMarkerValue, Dictionary<string, BinaryData> rawData) : base(odataType, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SoftDeleteColumnDeletionDetectionPolicy(string odataType, string softDeleteColumnName, string softDeleteMarkerValue, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, serializedAdditionalRawData)
         {
             SoftDeleteColumnName = softDeleteColumnName;
             SoftDeleteMarkerValue = softDeleteMarkerValue;

@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class ManagementPolicyDefinition
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ManagementPolicyDefinition"/>. </summary>
         /// <param name="actions"> An object that defines the action set. </param>
@@ -30,12 +30,12 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of <see cref="ManagementPolicyDefinition"/>. </summary>
         /// <param name="actions"> An object that defines the action set. </param>
         /// <param name="filters"> An object that defines the filter set. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ManagementPolicyDefinition(ManagementPolicyAction actions, ManagementPolicyFilter filters, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ManagementPolicyDefinition(ManagementPolicyAction actions, ManagementPolicyFilter filters, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Actions = actions;
             Filters = filters;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ManagementPolicyDefinition"/> for deserialization. </summary>

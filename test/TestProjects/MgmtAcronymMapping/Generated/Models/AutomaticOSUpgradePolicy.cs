@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
     public partial class AutomaticOSUpgradePolicy
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AutomaticOSUpgradePolicy"/>. </summary>
         public AutomaticOSUpgradePolicy()
@@ -33,12 +33,12 @@ namespace MgmtAcronymMapping.Models
         /// Whether OS image rollback feature should be disabled. Default value is false.
         /// Serialized Name: AutomaticOSUpgradePolicy.disableAutomaticRollback
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AutomaticOSUpgradePolicy(bool? enableAutomaticOSUpgrade, bool? disableAutomaticRollback, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AutomaticOSUpgradePolicy(bool? enableAutomaticOSUpgrade, bool? disableAutomaticRollback, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             EnableAutomaticOSUpgrade = enableAutomaticOSUpgrade;
             DisableAutomaticRollback = disableAutomaticRollback;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

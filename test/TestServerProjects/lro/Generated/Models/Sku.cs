@@ -14,7 +14,7 @@ namespace lro.Models
     public partial class Sku
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Sku"/>. </summary>
         public Sku()
@@ -24,12 +24,12 @@ namespace lro.Models
         /// <summary> Initializes a new instance of <see cref="Sku"/>. </summary>
         /// <param name="name"></param>
         /// <param name="id"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Sku(string name, string id, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Sku(string name, string id, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Id = id;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the name. </summary>

@@ -33,9 +33,9 @@ namespace subscriptionId_apiVersion.Models
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -58,7 +58,7 @@ namespace subscriptionId_apiVersion.Models
             }
             Optional<string> name = default;
             Optional<string> location = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -73,11 +73,11 @@ namespace subscriptionId_apiVersion.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new SampleResourceGroup(name.Value, location.Value, rawData);
+            return new SampleResourceGroup(name.Value, location.Value, serializedAdditionalRawData);
         }
 
         SampleResourceGroup IModelJsonSerializable<SampleResourceGroup>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

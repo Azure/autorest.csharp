@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class NetworkInterfaceDnsSettings
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="NetworkInterfaceDnsSettings"/>. </summary>
         public NetworkInterfaceDnsSettings()
@@ -30,15 +30,15 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="internalDnsNameLabel"> Relative DNS name for this NIC used for internal communications between VMs in the same virtual network. </param>
         /// <param name="internalFqdn"> Fully qualified DNS name supporting internal communications between VMs in the same virtual network. </param>
         /// <param name="internalDomainNameSuffix"> Even if internalDnsNameLabel is not specified, a DNS entry is created for the primary NIC of the VM. This DNS name can be constructed by concatenating the VM name with the value of internalDomainNameSuffix. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NetworkInterfaceDnsSettings(IList<string> dnsServers, IReadOnlyList<string> appliedDnsServers, string internalDnsNameLabel, string internalFqdn, string internalDomainNameSuffix, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NetworkInterfaceDnsSettings(IList<string> dnsServers, IReadOnlyList<string> appliedDnsServers, string internalDnsNameLabel, string internalFqdn, string internalDomainNameSuffix, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DnsServers = dnsServers;
             AppliedDnsServers = appliedDnsServers;
             InternalDnsNameLabel = internalDnsNameLabel;
             InternalFqdn = internalFqdn;
             InternalDomainNameSuffix = internalDomainNameSuffix;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> List of DNS servers IP addresses. Use 'AzureProvidedDNS' to switch to azure provided DNS resolution. 'AzureProvidedDNS' value cannot be combined with other IPs, it must be the only value in dnsServers collection. </summary>

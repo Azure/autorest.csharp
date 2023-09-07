@@ -15,7 +15,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Models
     public partial class SharedModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of SharedModel. </summary>
         /// <param name="name"></param>
@@ -29,11 +29,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Models
 
         /// <summary> Initializes a new instance of SharedModel. </summary>
         /// <param name="name"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SharedModel(string name, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SharedModel(string name, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="SharedModel"/> for deserialization. </summary>

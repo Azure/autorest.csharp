@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     public partial class RoleAssignmentCreateOrUpdateContent
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RoleAssignmentCreateOrUpdateContent"/>. </summary>
         public RoleAssignmentCreateOrUpdateContent()
@@ -25,13 +25,13 @@ namespace MgmtMockAndSample.Models
         /// <param name="roleDefinitionId"> The role definition ID used in the role assignment. </param>
         /// <param name="principalId"> The principal ID assigned to the role. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group. </param>
         /// <param name="canDelegate"> The delegation flag used for creating a role assignment. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RoleAssignmentCreateOrUpdateContent(string roleDefinitionId, string principalId, bool? canDelegate, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RoleAssignmentCreateOrUpdateContent(string roleDefinitionId, string principalId, bool? canDelegate, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RoleDefinitionId = roleDefinitionId;
             PrincipalId = principalId;
             CanDelegate = canDelegate;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The role definition ID used in the role assignment. </summary>

@@ -15,7 +15,7 @@ namespace _Specs_.Azure.Core.Traits.Models
     public partial class UserActionResponse
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of UserActionResponse. </summary>
         /// <param name="userActionResult"> User action result. </param>
@@ -29,11 +29,11 @@ namespace _Specs_.Azure.Core.Traits.Models
 
         /// <summary> Initializes a new instance of UserActionResponse. </summary>
         /// <param name="userActionResult"> User action result. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UserActionResponse(string userActionResult, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UserActionResponse(string userActionResult, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             UserActionResult = userActionResult;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="UserActionResponse"/> for deserialization. </summary>

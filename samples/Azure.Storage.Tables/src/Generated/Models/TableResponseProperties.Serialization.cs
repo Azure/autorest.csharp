@@ -43,9 +43,9 @@ namespace Azure.Storage.Tables.Models
                 writer.WritePropertyName("odata.editLink"u8);
                 writer.WriteStringValue(OdataEditLink);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -70,7 +70,7 @@ namespace Azure.Storage.Tables.Models
             Optional<string> odataType = default;
             Optional<string> odataId = default;
             Optional<string> odataEditLink = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("TableName"u8))
@@ -95,11 +95,11 @@ namespace Azure.Storage.Tables.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new TableResponseProperties(tableName.Value, odataType.Value, odataId.Value, odataEditLink.Value, rawData);
+            return new TableResponseProperties(tableName.Value, odataType.Value, odataId.Value, odataEditLink.Value, serializedAdditionalRawData);
         }
 
         TableResponseProperties IModelJsonSerializable<TableResponseProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

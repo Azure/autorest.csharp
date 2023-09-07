@@ -17,7 +17,7 @@ namespace CustomizationsInTsp.Models
     public partial class ModelWithCustomizedProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of ModelWithCustomizedProperties. </summary>
         /// <param name="propertyToMakeInternal"> Public property made internal. </param>
@@ -69,8 +69,8 @@ namespace CustomizationsInTsp.Models
         /// <param name="goodDictionaryName"> Property renamed that is dictionary. </param>
         /// <param name="goodListOfListName"> Property renamed that is listoflist. </param>
         /// <param name="goodListOfDictionaryName"> Property renamed that is listofdictionary. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithCustomizedProperties(int propertyToMakeInternal, int renamedProperty, float propertyToMakeFloat, int propertyToMakeInt, TimeSpan propertyToMakeDuration, string propertyToMakeString, JsonElement propertyToMakeJsonElement, string propertyToField, IList<string> goodListName, IDictionary<string, string> goodDictionaryName, IList<IList<string>> goodListOfListName, IList<IDictionary<string, string>> goodListOfDictionaryName, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithCustomizedProperties(int propertyToMakeInternal, int renamedProperty, float propertyToMakeFloat, int propertyToMakeInt, TimeSpan propertyToMakeDuration, string propertyToMakeString, JsonElement propertyToMakeJsonElement, string propertyToField, IList<string> goodListName, IDictionary<string, string> goodDictionaryName, IList<IList<string>> goodListOfListName, IList<IDictionary<string, string>> goodListOfDictionaryName, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PropertyToMakeInternal = propertyToMakeInternal;
             RenamedProperty = renamedProperty;
@@ -84,7 +84,7 @@ namespace CustomizationsInTsp.Models
             GoodDictionaryName = goodDictionaryName;
             GoodListOfListName = goodListOfListName;
             GoodListOfDictionaryName = goodListOfDictionaryName;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelWithCustomizedProperties"/> for deserialization. </summary>

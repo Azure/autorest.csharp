@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class SasPolicy
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SasPolicy"/>. </summary>
         /// <param name="sasExpirationPeriod"> The SAS expiration period, DD.HH:MM:SS. </param>
@@ -32,12 +32,12 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of <see cref="SasPolicy"/>. </summary>
         /// <param name="sasExpirationPeriod"> The SAS expiration period, DD.HH:MM:SS. </param>
         /// <param name="expirationAction"> The SAS expiration action. Can only be Log. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SasPolicy(string sasExpirationPeriod, ExpirationAction expirationAction, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SasPolicy(string sasExpirationPeriod, ExpirationAction expirationAction, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SasExpirationPeriod = sasExpirationPeriod;
             ExpirationAction = expirationAction;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="SasPolicy"/> for deserialization. </summary>

@@ -15,7 +15,7 @@ namespace MgmtMockAndSample.Models
     public partial class DeletedVaultProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DeletedVaultProperties"/>. </summary>
         internal DeletedVaultProperties()
@@ -30,8 +30,8 @@ namespace MgmtMockAndSample.Models
         /// <param name="scheduledPurgeOn"> The scheduled purged date. </param>
         /// <param name="tags"> Tags of the original vault. </param>
         /// <param name="purgeProtectionEnabled"> Purge protection status of the original vault. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeletedVaultProperties(string vaultId, AzureLocation? location, DateTimeOffset? deletedOn, DateTimeOffset? scheduledPurgeOn, IReadOnlyDictionary<string, string> tags, bool? purgeProtectionEnabled, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeletedVaultProperties(string vaultId, AzureLocation? location, DateTimeOffset? deletedOn, DateTimeOffset? scheduledPurgeOn, IReadOnlyDictionary<string, string> tags, bool? purgeProtectionEnabled, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             VaultId = vaultId;
             Location = location;
@@ -39,7 +39,7 @@ namespace MgmtMockAndSample.Models
             ScheduledPurgeOn = scheduledPurgeOn;
             Tags = tags;
             PurgeProtectionEnabled = purgeProtectionEnabled;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The resource id of the original vault. </summary>

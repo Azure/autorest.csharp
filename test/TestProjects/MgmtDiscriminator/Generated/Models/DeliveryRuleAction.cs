@@ -18,7 +18,7 @@ namespace MgmtDiscriminator.Models
     public partial class DeliveryRuleAction
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DeliveryRuleAction"/>. </summary>
         public DeliveryRuleAction()
@@ -28,12 +28,12 @@ namespace MgmtDiscriminator.Models
         /// <summary> Initializes a new instance of <see cref="DeliveryRuleAction"/>. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeliveryRuleAction(DeliveryRuleActionType name, string foo, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeliveryRuleAction(DeliveryRuleActionType name, string foo, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Foo = foo;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The name of the action for the delivery rule. </summary>

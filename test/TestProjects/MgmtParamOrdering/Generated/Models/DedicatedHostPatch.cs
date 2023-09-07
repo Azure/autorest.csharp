@@ -25,8 +25,8 @@ namespace MgmtParamOrdering.Models
         /// <param name="hostId"> A unique id generated and assigned to the dedicated host by the platform. &lt;br&gt;&lt;br&gt; Does not change throughout the lifetime of the host. </param>
         /// <param name="provisioningOn"> The date when the host was first provisioned. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DedicatedHostPatch(IDictionary<string, string> tags, int? platformFaultDomain, bool? autoReplaceOnFailure, string hostId, DateTimeOffset? provisioningOn, string provisioningState, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DedicatedHostPatch(IDictionary<string, string> tags, int? platformFaultDomain, bool? autoReplaceOnFailure, string hostId, DateTimeOffset? provisioningOn, string provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(tags, serializedAdditionalRawData)
         {
             PlatformFaultDomain = platformFaultDomain;
             AutoReplaceOnFailure = autoReplaceOnFailure;

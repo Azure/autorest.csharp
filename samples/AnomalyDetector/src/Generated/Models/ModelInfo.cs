@@ -18,7 +18,7 @@ namespace AnomalyDetector.Models
     public partial class ModelInfo
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of ModelInfo. </summary>
         /// <param name="dataSource">
@@ -75,8 +75,8 @@ namespace AnomalyDetector.Models
         /// <param name="status"> Model status. One of CREATED, RUNNING, READY, and FAILED. </param>
         /// <param name="errors"> Error messages when failed to create a model. </param>
         /// <param name="diagnosticsInfo"> Diagnostics information to help inspect the states of model or variable. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelInfo(string dataSource, DataSchema? dataSchema, DateTimeOffset startTime, DateTimeOffset endTime, string displayName, int? slidingWindow, AlignPolicy alignPolicy, ModelStatus? status, IReadOnlyList<ErrorResponse> errors, DiagnosticsInfo diagnosticsInfo, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelInfo(string dataSource, DataSchema? dataSchema, DateTimeOffset startTime, DateTimeOffset endTime, string displayName, int? slidingWindow, AlignPolicy alignPolicy, ModelStatus? status, IReadOnlyList<ErrorResponse> errors, DiagnosticsInfo diagnosticsInfo, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DataSource = dataSource;
             DataSchema = dataSchema;
@@ -88,7 +88,7 @@ namespace AnomalyDetector.Models
             Status = status;
             Errors = errors;
             DiagnosticsInfo = diagnosticsInfo;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelInfo"/> for deserialization. </summary>

@@ -16,7 +16,7 @@ namespace MgmtSingletonResource
     public partial class BrakeData : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BrakeData"/>. </summary>
         internal BrakeData()
@@ -29,11 +29,11 @@ namespace MgmtSingletonResource
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="hitBrake"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BrakeData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, bool? hitBrake, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BrakeData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, bool? hitBrake, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             HitBrake = hitBrake;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the hit brake. </summary>

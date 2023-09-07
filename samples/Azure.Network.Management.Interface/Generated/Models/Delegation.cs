@@ -27,8 +27,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="serviceName"> The name of the service to whom the subnet should be delegated (e.g. Microsoft.Sql/servers). </param>
         /// <param name="actions"> The actions permitted to the service upon delegation. </param>
         /// <param name="provisioningState"> The provisioning state of the service delegation resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Delegation(string id, string name, string etag, string serviceName, IReadOnlyList<string> actions, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Delegation(string id, string name, string etag, string serviceName, IReadOnlyList<string> actions, ProvisioningState? provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

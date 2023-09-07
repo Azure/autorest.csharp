@@ -15,7 +15,7 @@ namespace Azure.Storage.Tables.Models
     public partial class TableQueryResponse
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TableQueryResponse"/>. </summary>
         internal TableQueryResponse()
@@ -26,12 +26,12 @@ namespace Azure.Storage.Tables.Models
         /// <summary> Initializes a new instance of <see cref="TableQueryResponse"/>. </summary>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
         /// <param name="value"> List of tables. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TableQueryResponse(string odataMetadata, IReadOnlyList<TableResponseProperties> value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TableQueryResponse(string odataMetadata, IReadOnlyList<TableResponseProperties> value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OdataMetadata = odataMetadata;
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The metadata response of the table. </summary>

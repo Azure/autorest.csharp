@@ -15,7 +15,7 @@ namespace _Type.Union.Models
     internal partial class ModelWithSimpleUnionProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of ModelWithSimpleUnionProperty. </summary>
         /// <param name="simpleUnion"></param>
@@ -29,11 +29,11 @@ namespace _Type.Union.Models
 
         /// <summary> Initializes a new instance of ModelWithSimpleUnionProperty. </summary>
         /// <param name="simpleUnion"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithSimpleUnionProperty(object simpleUnion, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithSimpleUnionProperty(object simpleUnion, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SimpleUnion = simpleUnion;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelWithSimpleUnionProperty"/> for deserialization. </summary>

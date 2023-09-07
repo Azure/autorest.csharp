@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     internal partial class Multichannel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Multichannel"/>. </summary>
         public Multichannel()
@@ -23,11 +23,11 @@ namespace Azure.ResourceManager.Storage.Models
 
         /// <summary> Initializes a new instance of <see cref="Multichannel"/>. </summary>
         /// <param name="enabled"> Indicates whether multichannel is enabled. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Multichannel(bool? enabled, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Multichannel(bool? enabled, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Enabled = enabled;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Indicates whether multichannel is enabled. </summary>

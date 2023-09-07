@@ -14,7 +14,7 @@ namespace MgmtSupersetFlattenInheritance.Models
     public partial class CustomModel2
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CustomModel2"/>. </summary>
         public CustomModel2()
@@ -26,14 +26,14 @@ namespace MgmtSupersetFlattenInheritance.Models
         /// <param name="bar"></param>
         /// <param name="idPropertiesId"></param>
         /// <param name="foo"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CustomModel2(string id, string bar, string idPropertiesId, string foo, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CustomModel2(string id, string bar, string idPropertiesId, string foo, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Bar = bar;
             IdPropertiesId = idPropertiesId;
             Foo = foo;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

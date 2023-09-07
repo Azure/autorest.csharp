@@ -15,7 +15,7 @@ namespace MgmtPropertyChooser.Models
     public partial class UpdateResource
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UpdateResource"/>. </summary>
         public UpdateResource()
@@ -25,11 +25,11 @@ namespace MgmtPropertyChooser.Models
 
         /// <summary> Initializes a new instance of <see cref="UpdateResource"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UpdateResource(IDictionary<string, string> tags, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UpdateResource(IDictionary<string, string> tags, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Tags = tags;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Resource tags. </summary>

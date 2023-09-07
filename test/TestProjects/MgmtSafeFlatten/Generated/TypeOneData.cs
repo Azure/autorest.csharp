@@ -21,7 +21,7 @@ namespace MgmtSafeFlatten
     public partial class TypeOneData : TrackedResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TypeOneData"/>. </summary>
         /// <param name="location"> The location. </param>
@@ -44,14 +44,14 @@ namespace MgmtSafeFlatten
         /// The available derived classes include <see cref="LayerOneBarType"/> and <see cref="LayerOneFooType"/>.
         /// </param>
         /// <param name="layerOneConflict"> The single value prop with conflict. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TypeOneData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string myType, LayerOneSingle layerOne, LayerOneBaseType layerOneType, WritableSubResource layerOneConflict, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TypeOneData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string myType, LayerOneSingle layerOne, LayerOneBaseType layerOneType, WritableSubResource layerOneConflict, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             MyType = myType;
             LayerOne = layerOne;
             LayerOneType = layerOneType;
             LayerOneConflict = layerOneConflict;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="TypeOneData"/> for deserialization. </summary>

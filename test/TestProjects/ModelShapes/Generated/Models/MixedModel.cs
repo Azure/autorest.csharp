@@ -16,7 +16,7 @@ namespace ModelShapes.Models
     public partial class MixedModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MixedModel"/>. </summary>
         /// <param name="requiredString"></param>
@@ -69,8 +69,8 @@ namespace ModelShapes.Models
         /// <param name="nonRequiredNullableIntList"></param>
         /// <param name="requiredReadonlyInt"></param>
         /// <param name="nonRequiredReadonlyInt"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MixedModel(string requiredString, int requiredInt, IList<string> requiredStringList, IList<int> requiredIntList, string nonRequiredString, int? nonRequiredInt, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, string requiredNullableString, int? requiredNullableInt, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, string nonRequiredNullableString, int? nonRequiredNullableInt, IList<string> nonRequiredNullableStringList, IList<int> nonRequiredNullableIntList, int requiredReadonlyInt, int? nonRequiredReadonlyInt, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MixedModel(string requiredString, int requiredInt, IList<string> requiredStringList, IList<int> requiredIntList, string nonRequiredString, int? nonRequiredInt, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, string requiredNullableString, int? requiredNullableInt, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, string nonRequiredNullableString, int? nonRequiredNullableInt, IList<string> nonRequiredNullableStringList, IList<int> nonRequiredNullableIntList, int requiredReadonlyInt, int? nonRequiredReadonlyInt, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -90,7 +90,7 @@ namespace ModelShapes.Models
             NonRequiredNullableIntList = nonRequiredNullableIntList;
             RequiredReadonlyInt = requiredReadonlyInt;
             NonRequiredReadonlyInt = nonRequiredReadonlyInt;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="MixedModel"/> for deserialization. </summary>

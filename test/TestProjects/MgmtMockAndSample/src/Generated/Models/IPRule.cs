@@ -15,7 +15,7 @@ namespace MgmtMockAndSample.Models
     public partial class IPRule
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="IPRule"/>. </summary>
         /// <param name="value"> An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78). </param>
@@ -29,11 +29,11 @@ namespace MgmtMockAndSample.Models
 
         /// <summary> Initializes a new instance of <see cref="IPRule"/>. </summary>
         /// <param name="value"> An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78). </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal IPRule(string value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IPRule(string value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="IPRule"/> for deserialization. </summary>

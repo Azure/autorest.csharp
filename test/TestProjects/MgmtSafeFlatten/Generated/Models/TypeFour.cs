@@ -14,7 +14,7 @@ namespace MgmtSafeFlatten.Models
     internal partial class TypeFour
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TypeFour"/>. </summary>
         internal TypeFour()
@@ -24,12 +24,12 @@ namespace MgmtSafeFlatten.Models
         /// <summary> Initializes a new instance of <see cref="TypeFour"/>. </summary>
         /// <param name="myType"> The details of the type. </param>
         /// <param name="properties"> The single value prop. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TypeFour(string myType, LayerOneProperties properties, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TypeFour(string myType, LayerOneProperties properties, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             MyType = myType;
             Properties = properties;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The details of the type. </summary>

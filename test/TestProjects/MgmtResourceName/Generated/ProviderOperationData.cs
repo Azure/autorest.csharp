@@ -20,7 +20,7 @@ namespace MgmtResourceName
     public partial class ProviderOperationData : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ProviderOperationData"/>. </summary>
         internal ProviderOperationData()
@@ -37,13 +37,13 @@ namespace MgmtResourceName
         /// <param name="displayName"> The provider display name. </param>
         /// <param name="resourceTypes"> The provider resource types. </param>
         /// <param name="operations"> The provider operations. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ProviderOperationData(ResourceIdentifier id, string name, Azure.Core.ResourceType resourceType, SystemData systemData, string displayName, IReadOnlyList<Models.ResourceType> resourceTypes, IReadOnlyList<ResourceOperation> operations, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProviderOperationData(ResourceIdentifier id, string name, Azure.Core.ResourceType resourceType, SystemData systemData, string displayName, IReadOnlyList<Models.ResourceType> resourceTypes, IReadOnlyList<ResourceOperation> operations, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             DisplayName = displayName;
             ResourceTypes = resourceTypes;
             Operations = operations;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The provider display name. </summary>

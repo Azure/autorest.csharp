@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
     public partial class VirtualMachineSize
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineSize"/>. </summary>
         internal VirtualMachineSize()
@@ -49,8 +49,8 @@ namespace MgmtAcronymMapping.Models
         /// The maximum number of data disks that can be attached to the virtual machine size.
         /// Serialized Name: VirtualMachineSize.maxDataDiskCount
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineSize(string name, int? numberOfCores, int? osDiskSizeInMB, int? resourceDiskSizeInMB, int? memoryInMB, int? maxDataDiskCount, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineSize(string name, int? numberOfCores, int? osDiskSizeInMB, int? resourceDiskSizeInMB, int? memoryInMB, int? maxDataDiskCount, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             NumberOfCores = numberOfCores;
@@ -58,7 +58,7 @@ namespace MgmtAcronymMapping.Models
             ResourceDiskSizeInMB = resourceDiskSizeInMB;
             MemoryInMB = memoryInMB;
             MaxDataDiskCount = maxDataDiskCount;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

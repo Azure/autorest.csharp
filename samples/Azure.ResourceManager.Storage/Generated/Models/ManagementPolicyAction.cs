@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class ManagementPolicyAction
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ManagementPolicyAction"/>. </summary>
         public ManagementPolicyAction()
@@ -25,13 +25,13 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="baseBlob"> The management policy action for base blob. </param>
         /// <param name="snapshot"> The management policy action for snapshot. </param>
         /// <param name="version"> The management policy action for version. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ManagementPolicyAction(ManagementPolicyBaseBlob baseBlob, ManagementPolicySnapShot snapshot, ManagementPolicyVersion version, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ManagementPolicyAction(ManagementPolicyBaseBlob baseBlob, ManagementPolicySnapShot snapshot, ManagementPolicyVersion version, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             BaseBlob = baseBlob;
             Snapshot = snapshot;
             Version = version;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The management policy action for base blob. </summary>

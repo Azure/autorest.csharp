@@ -16,7 +16,7 @@ namespace AnomalyDetector.Models
     public partial class VariableValues
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of VariableValues. </summary>
         /// <param name="variable"> Variable name of last detection request. </param>
@@ -38,13 +38,13 @@ namespace AnomalyDetector.Models
         /// <param name="variable"> Variable name of last detection request. </param>
         /// <param name="timestamps"> Timestamps of last detection request. </param>
         /// <param name="values"> Values of variables. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VariableValues(string variable, IList<string> timestamps, IList<float> values, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VariableValues(string variable, IList<string> timestamps, IList<float> values, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Variable = variable;
             Timestamps = timestamps;
             Values = values;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="VariableValues"/> for deserialization. </summary>

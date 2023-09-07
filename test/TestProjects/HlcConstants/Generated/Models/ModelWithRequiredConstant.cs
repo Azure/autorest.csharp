@@ -14,7 +14,7 @@ namespace HlcConstants.Models
     public partial class ModelWithRequiredConstant
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelWithRequiredConstant"/>. </summary>
         public ModelWithRequiredConstant()
@@ -30,14 +30,14 @@ namespace HlcConstants.Models
         /// <param name="requiredIntConstant"> A constant based on integer. </param>
         /// <param name="requiredBooleanConstant"> A constant based on boolean. </param>
         /// <param name="requiredFloatConstant"> A constant based on float. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithRequiredConstant(StringConstant requiredStringConstant, IntConstant requiredIntConstant, bool requiredBooleanConstant, FloatConstant requiredFloatConstant, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithRequiredConstant(StringConstant requiredStringConstant, IntConstant requiredIntConstant, bool requiredBooleanConstant, FloatConstant requiredFloatConstant, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredStringConstant = requiredStringConstant;
             RequiredIntConstant = requiredIntConstant;
             RequiredBooleanConstant = requiredBooleanConstant;
             RequiredFloatConstant = requiredFloatConstant;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A constant based on string, the only allowable value is default. </summary>

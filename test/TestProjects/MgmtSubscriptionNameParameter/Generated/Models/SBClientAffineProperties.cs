@@ -14,7 +14,7 @@ namespace MgmtSubscriptionNameParameter.Models
     public partial class SBClientAffineProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SBClientAffineProperties"/>. </summary>
         public SBClientAffineProperties()
@@ -25,13 +25,13 @@ namespace MgmtSubscriptionNameParameter.Models
         /// <param name="clientId"> Indicates the Client ID of the application that created the client-affine subscription. </param>
         /// <param name="isDurable"> For client-affine subscriptions, this value indicates whether the subscription is durable or not. </param>
         /// <param name="isShared"> For client-affine subscriptions, this value indicates whether the subscription is shared or not. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SBClientAffineProperties(string clientId, bool? isDurable, bool? isShared, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SBClientAffineProperties(string clientId, bool? isDurable, bool? isShared, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ClientId = clientId;
             IsDurable = isDurable;
             IsShared = isShared;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Indicates the Client ID of the application that created the client-affine subscription. </summary>

@@ -28,9 +28,9 @@ namespace MgmtScopeResource.Models
                 writer.WritePropertyName("context"u8);
                 writer.WriteStringValue(Context);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -60,7 +60,7 @@ namespace MgmtScopeResource.Models
             Optional<string> assignmentHash = default;
             Optional<ProvisioningState?> provisioningState = default;
             Optional<string> resourceType = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("targetResourceId"u8))
@@ -149,11 +149,11 @@ namespace MgmtScopeResource.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new GuestConfigurationAssignmentProperties(targetResourceId.Value, Optional.ToNullable(complianceStatus), Optional.ToNullable(lastComplianceStatusChecked), latestReportId.Value, parameterHash.Value, context.Value, assignmentHash.Value, Optional.ToNullable(provisioningState), resourceType.Value, rawData);
+            return new GuestConfigurationAssignmentProperties(targetResourceId.Value, Optional.ToNullable(complianceStatus), Optional.ToNullable(lastComplianceStatusChecked), latestReportId.Value, parameterHash.Value, context.Value, assignmentHash.Value, Optional.ToNullable(provisioningState), resourceType.Value, serializedAdditionalRawData);
         }
 
         GuestConfigurationAssignmentProperties IModelJsonSerializable<GuestConfigurationAssignmentProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

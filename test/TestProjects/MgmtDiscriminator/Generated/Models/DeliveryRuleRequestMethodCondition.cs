@@ -29,8 +29,8 @@ namespace MgmtDiscriminator.Models
         /// <param name="name"> The name of the condition for the delivery rule. </param>
         /// <param name="foo"> For test. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeliveryRuleRequestMethodCondition(MatchVariable name, string foo, RequestMethodMatchConditionParameters parameters, Dictionary<string, BinaryData> rawData) : base(name, foo, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeliveryRuleRequestMethodCondition(MatchVariable name, string foo, RequestMethodMatchConditionParameters parameters, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(name, foo, serializedAdditionalRawData)
         {
             Parameters = parameters;
             Name = name;

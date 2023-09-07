@@ -22,8 +22,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         /// <summary> Initializes a new instance of UnknownDinosaur. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownDinosaur(string kind, int size, Dictionary<string, BinaryData> rawData) : base(kind, size, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownDinosaur(string kind, int size, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, size, serializedAdditionalRawData)
         {
         }
 

@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class SignedIdentifier
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SignedIdentifier"/>. </summary>
         public SignedIdentifier()
@@ -24,12 +24,12 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of <see cref="SignedIdentifier"/>. </summary>
         /// <param name="id"> An unique identifier of the stored access policy. </param>
         /// <param name="accessPolicy"> Access policy. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SignedIdentifier(string id, AccessPolicy accessPolicy, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SignedIdentifier(string id, AccessPolicy accessPolicy, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             AccessPolicy = accessPolicy;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> An unique identifier of the stored access policy. </summary>

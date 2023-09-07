@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class VirtualMachineScaleSetVmInstanceView
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmInstanceView"/>. </summary>
         internal VirtualMachineScaleSetVmInstanceView()
@@ -77,8 +77,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The placement group in which the VM is running. If the VM is deallocated it will not have a placementGroupId.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceView.placementGroupId
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetVmInstanceView(int? platformUpdateDomain, int? platformFaultDomain, string rdpThumbPrint, VirtualMachineAgentInstanceView vmAgent, MaintenanceRedeployStatus maintenanceRedeployStatus, IReadOnlyList<DiskInstanceView> disks, IReadOnlyList<VirtualMachineExtensionInstanceView> extensions, VirtualMachineHealthStatus vmHealth, BootDiagnosticsInstanceView bootDiagnostics, IReadOnlyList<InstanceViewStatus> statuses, string assignedHost, string placementGroupId, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetVmInstanceView(int? platformUpdateDomain, int? platformFaultDomain, string rdpThumbPrint, VirtualMachineAgentInstanceView vmAgent, MaintenanceRedeployStatus maintenanceRedeployStatus, IReadOnlyList<DiskInstanceView> disks, IReadOnlyList<VirtualMachineExtensionInstanceView> extensions, VirtualMachineHealthStatus vmHealth, BootDiagnosticsInstanceView bootDiagnostics, IReadOnlyList<InstanceViewStatus> statuses, string assignedHost, string placementGroupId, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PlatformUpdateDomain = platformUpdateDomain;
             PlatformFaultDomain = platformFaultDomain;
@@ -92,7 +92,7 @@ namespace Azure.ResourceManager.Sample.Models
             Statuses = statuses;
             AssignedHost = assignedHost;
             PlacementGroupId = placementGroupId;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

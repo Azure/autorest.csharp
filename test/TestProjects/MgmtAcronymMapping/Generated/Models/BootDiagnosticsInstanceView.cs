@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
     public partial class BootDiagnosticsInstanceView
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BootDiagnosticsInstanceView"/>. </summary>
         internal BootDiagnosticsInstanceView()
@@ -37,13 +37,13 @@ namespace MgmtAcronymMapping.Models
         /// The boot diagnostics status information for the VM. &lt;br&gt;&lt;br&gt; NOTE: It will be set only if there are errors encountered in enabling boot diagnostics.
         /// Serialized Name: BootDiagnosticsInstanceView.status
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BootDiagnosticsInstanceView(Uri consoleScreenshotBlobUri, Uri serialConsoleLogBlobUri, InstanceViewStatus status, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BootDiagnosticsInstanceView(Uri consoleScreenshotBlobUri, Uri serialConsoleLogBlobUri, InstanceViewStatus status, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ConsoleScreenshotBlobUri = consoleScreenshotBlobUri;
             SerialConsoleLogBlobUri = serialConsoleLogBlobUri;
             Status = status;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

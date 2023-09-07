@@ -15,7 +15,7 @@ namespace xml_service.Models
     public partial class StorageServiceProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StorageServiceProperties"/>. </summary>
         public StorageServiceProperties()
@@ -30,8 +30,8 @@ namespace xml_service.Models
         /// <param name="cors"> The set of CORS rules. </param>
         /// <param name="defaultServiceVersion"> The default version to use for requests to the Blob service if an incoming request's version is not specified. Possible values include version 2008-10-27 and all more recent versions. </param>
         /// <param name="deleteRetentionPolicy"> The Delete Retention Policy for the service. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StorageServiceProperties(Logging logging, Metrics hourMetrics, Metrics minuteMetrics, IList<CorsRule> cors, string defaultServiceVersion, RetentionPolicy deleteRetentionPolicy, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageServiceProperties(Logging logging, Metrics hourMetrics, Metrics minuteMetrics, IList<CorsRule> cors, string defaultServiceVersion, RetentionPolicy deleteRetentionPolicy, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Logging = logging;
             HourMetrics = hourMetrics;
@@ -39,7 +39,7 @@ namespace xml_service.Models
             Cors = cors;
             DefaultServiceVersion = defaultServiceVersion;
             DeleteRetentionPolicy = deleteRetentionPolicy;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Azure Analytics Logging settings. </summary>

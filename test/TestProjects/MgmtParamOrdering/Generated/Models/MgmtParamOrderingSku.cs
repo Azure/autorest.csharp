@@ -14,7 +14,7 @@ namespace MgmtParamOrdering.Models
     public partial class MgmtParamOrderingSku
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MgmtParamOrderingSku"/>. </summary>
         public MgmtParamOrderingSku()
@@ -25,13 +25,13 @@ namespace MgmtParamOrdering.Models
         /// <param name="name"> The sku name. </param>
         /// <param name="tier"> Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**. </param>
         /// <param name="capacity"> Specifies the number of virtual machines in the scale set. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MgmtParamOrderingSku(string name, string tier, long? capacity, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MgmtParamOrderingSku(string name, string tier, long? capacity, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Tier = tier;
             Capacity = capacity;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The sku name. </summary>

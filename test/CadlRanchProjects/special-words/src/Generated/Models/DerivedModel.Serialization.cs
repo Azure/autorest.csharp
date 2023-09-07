@@ -29,9 +29,9 @@ namespace SpecialWords.Models
             writer.WriteStringValue(For);
             writer.WritePropertyName("model.kind"u8);
             writer.WriteStringValue(ModelKind);
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -55,7 +55,7 @@ namespace SpecialWords.Models
             string derivedName = default;
             string @for = default;
             string modelKind = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("derived.name"u8))
@@ -75,11 +75,11 @@ namespace SpecialWords.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new DerivedModel(modelKind, derivedName, @for, rawData);
+            return new DerivedModel(modelKind, derivedName, @for, serializedAdditionalRawData);
         }
 
         DerivedModel IModelJsonSerializable<DerivedModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

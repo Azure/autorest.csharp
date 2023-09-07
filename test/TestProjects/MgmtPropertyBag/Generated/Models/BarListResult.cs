@@ -17,7 +17,7 @@ namespace MgmtPropertyBag.Models
     internal partial class BarListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BarListResult"/>. </summary>
         /// <param name="value"> The list of bar. </param>
@@ -32,12 +32,12 @@ namespace MgmtPropertyBag.Models
         /// <summary> Initializes a new instance of <see cref="BarListResult"/>. </summary>
         /// <param name="value"> The list of bar. </param>
         /// <param name="nextLink"> The uri to fetch the next page of bar. Call ListNext() with this to fetch the next page. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BarListResult(IReadOnlyList<BarData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BarListResult(IReadOnlyList<BarData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="BarListResult"/> for deserialization. </summary>

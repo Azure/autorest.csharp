@@ -23,8 +23,8 @@ namespace CognitiveSearch.Models
         /// <param name="odataType"></param>
         /// <param name="k1"> This property controls the scaling function between the term frequency of each matching terms and the final relevance score of a document-query pair. By default, a value of 1.2 is used. A value of 0.0 means the score does not scale with an increase in term frequency. </param>
         /// <param name="b"> This property controls how the length of a document affects the relevance score. By default, a value of 0.75 is used. A value of 0.0 means no length normalization is applied, while a value of 1.0 means the score is fully normalized by the length of the document. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BM25Similarity(string odataType, double? k1, double? b, Dictionary<string, BinaryData> rawData) : base(odataType, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BM25Similarity(string odataType, double? k1, double? b, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, serializedAdditionalRawData)
         {
             K1 = k1;
             B = b;

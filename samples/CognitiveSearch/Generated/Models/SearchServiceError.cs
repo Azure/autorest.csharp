@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     internal partial class SearchServiceError
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SearchServiceError"/>. </summary>
         /// <param name="message"> A human-readable representation of the error. </param>
@@ -32,13 +32,13 @@ namespace CognitiveSearch.Models
         /// <param name="code"> One of a server-defined set of error codes. </param>
         /// <param name="message"> A human-readable representation of the error. </param>
         /// <param name="details"> An array of details about specific errors that led to this reported error. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SearchServiceError(string code, string message, IReadOnlyList<SearchServiceError> details, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SearchServiceError(string code, string message, IReadOnlyList<SearchServiceError> details, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Code = code;
             Message = message;
             Details = details;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="SearchServiceError"/> for deserialization. </summary>

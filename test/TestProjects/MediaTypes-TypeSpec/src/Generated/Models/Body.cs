@@ -15,7 +15,7 @@ namespace MultipleMediaTypes.Models
     public partial class Body
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of Body. </summary>
         /// <param name="id"></param>
@@ -29,11 +29,11 @@ namespace MultipleMediaTypes.Models
 
         /// <summary> Initializes a new instance of Body. </summary>
         /// <param name="id"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Body(string id, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Body(string id, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Body"/> for deserialization. </summary>

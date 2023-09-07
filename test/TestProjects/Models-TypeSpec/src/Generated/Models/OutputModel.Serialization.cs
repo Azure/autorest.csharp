@@ -149,9 +149,9 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("optionalNullableRecord");
                 }
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -181,7 +181,7 @@ namespace ModelsTypeSpec.Models
             Optional<IReadOnlyList<CollectionItem>> optionalNullableList = default;
             Optional<IReadOnlyDictionary<string, RecordItem>> optionalRecord = default;
             Optional<IReadOnlyDictionary<string, RecordItem>> optionalNullableRecord = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"u8))
@@ -277,11 +277,11 @@ namespace ModelsTypeSpec.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new OutputModel(requiredString, requiredInt, requiredModel, requiredList, requiredModelRecord, Optional.ToList(optionalList), Optional.ToList(optionalNullableList), Optional.ToDictionary(optionalRecord), Optional.ToDictionary(optionalNullableRecord), rawData);
+            return new OutputModel(requiredString, requiredInt, requiredModel, requiredList, requiredModelRecord, Optional.ToList(optionalList), Optional.ToList(optionalNullableList), Optional.ToDictionary(optionalRecord), Optional.ToDictionary(optionalNullableRecord), serializedAdditionalRawData);
         }
 
         OutputModel IModelJsonSerializable<OutputModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

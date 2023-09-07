@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     internal partial class OSDiskImage
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="OSDiskImage"/>. </summary>
         /// <param name="operatingSystem">
@@ -34,11 +34,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// The operating system of the osDiskImage.
         /// Serialized Name: OSDiskImage.operatingSystem
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal OSDiskImage(OperatingSystemType operatingSystem, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OSDiskImage(OperatingSystemType operatingSystem, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OperatingSystem = operatingSystem;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="OSDiskImage"/> for deserialization. </summary>

@@ -15,7 +15,7 @@ namespace MgmtScopeResource.Models
     public partial class ResourceLinkProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ResourceLinkProperties"/>. </summary>
         /// <param name="targetId"> The fully qualified ID of the target resource in the link. </param>
@@ -31,13 +31,13 @@ namespace MgmtScopeResource.Models
         /// <param name="sourceId"> The fully qualified ID of the source resource in the link. </param>
         /// <param name="targetId"> The fully qualified ID of the target resource in the link. </param>
         /// <param name="notes"> Notes about the resource link. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ResourceLinkProperties(string sourceId, string targetId, string notes, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceLinkProperties(string sourceId, string targetId, string notes, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SourceId = sourceId;
             TargetId = targetId;
             Notes = notes;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ResourceLinkProperties"/> for deserialization. </summary>

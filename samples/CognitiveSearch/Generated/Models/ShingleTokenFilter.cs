@@ -33,8 +33,8 @@ namespace CognitiveSearch.Models
         /// <param name="outputUnigramsIfNoShingles"> A value indicating whether to output unigrams for those times when no shingles are available. This property takes precedence when outputUnigrams is set to false. Default is false. </param>
         /// <param name="tokenSeparator"> The string to use when joining adjacent tokens to form a shingle. Default is a single space (" "). </param>
         /// <param name="filterToken"> The string to insert for each position at which there is no token. Default is an underscore ("_"). </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ShingleTokenFilter(string odataType, string name, int? maxShingleSize, int? minShingleSize, bool? outputUnigrams, bool? outputUnigramsIfNoShingles, string tokenSeparator, string filterToken, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ShingleTokenFilter(string odataType, string name, int? maxShingleSize, int? minShingleSize, bool? outputUnigrams, bool? outputUnigramsIfNoShingles, string tokenSeparator, string filterToken, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             MaxShingleSize = maxShingleSize;
             MinShingleSize = minShingleSize;

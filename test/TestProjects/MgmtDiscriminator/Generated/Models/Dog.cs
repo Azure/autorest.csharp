@@ -23,8 +23,8 @@ namespace MgmtDiscriminator.Models
         /// <param name="kind"> The kind of the pet. </param>
         /// <param name="id"> The Id of the pet. </param>
         /// <param name="bark"> A dog can bark. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Dog(PetKind kind, string id, string bark, Dictionary<string, BinaryData> rawData) : base(kind, id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Dog(PetKind kind, string id, string bark, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, id, serializedAdditionalRawData)
         {
             Bark = bark;
             Kind = kind;

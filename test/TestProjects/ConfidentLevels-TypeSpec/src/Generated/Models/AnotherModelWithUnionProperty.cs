@@ -15,7 +15,7 @@ namespace ConfidentLevelsInTsp.Models
     internal partial class AnotherModelWithUnionProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of AnotherModelWithUnionProperty. </summary>
         /// <param name="unionProperty"> This is a union property. </param>
@@ -29,11 +29,11 @@ namespace ConfidentLevelsInTsp.Models
 
         /// <summary> Initializes a new instance of AnotherModelWithUnionProperty. </summary>
         /// <param name="unionProperty"> This is a union property. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AnotherModelWithUnionProperty(object unionProperty, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AnotherModelWithUnionProperty(object unionProperty, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             UnionProperty = unionProperty;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="AnotherModelWithUnionProperty"/> for deserialization. </summary>

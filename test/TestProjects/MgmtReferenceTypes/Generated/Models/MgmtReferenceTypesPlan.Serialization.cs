@@ -41,9 +41,9 @@ namespace Azure.ResourceManager.Fake.Models
                 writer.WritePropertyName("version"u8);
                 writer.WriteStringValue(Version);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -69,7 +69,7 @@ namespace Azure.ResourceManager.Fake.Models
             string product = default;
             Optional<string> promotionCode = default;
             Optional<string> version = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -99,11 +99,11 @@ namespace Azure.ResourceManager.Fake.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new MgmtReferenceTypesPlan(name, publisher, product, promotionCode.Value, version.Value, rawData);
+            return new MgmtReferenceTypesPlan(name, publisher, product, promotionCode.Value, version.Value, serializedAdditionalRawData);
         }
 
         MgmtReferenceTypesPlan IModelJsonSerializable<MgmtReferenceTypesPlan>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
     public partial class ListSynonymMapsResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ListSynonymMapsResult"/>. </summary>
         /// <param name="synonymMaps"> The synonym maps in the Search service. </param>
@@ -30,11 +30,11 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of <see cref="ListSynonymMapsResult"/>. </summary>
         /// <param name="synonymMaps"> The synonym maps in the Search service. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ListSynonymMapsResult(IReadOnlyList<SynonymMap> synonymMaps, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListSynonymMapsResult(IReadOnlyList<SynonymMap> synonymMaps, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SynonymMaps = synonymMaps;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ListSynonymMapsResult"/> for deserialization. </summary>

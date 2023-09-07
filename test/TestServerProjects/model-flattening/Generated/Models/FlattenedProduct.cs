@@ -28,8 +28,8 @@ namespace model_flattening.Models
         /// <param name="typePropertiesType"></param>
         /// <param name="provisioningStateValues"></param>
         /// <param name="provisioningState"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FlattenedProduct(string id, string type, IDictionary<string, string> tags, string location, string name, string pName, string typePropertiesType, FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues, string provisioningState, Dictionary<string, BinaryData> rawData) : base(id, type, tags, location, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FlattenedProduct(string id, string type, IDictionary<string, string> tags, string location, string name, string pName, string typePropertiesType, FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues, string provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, type, tags, location, name, serializedAdditionalRawData)
         {
             PName = pName;
             TypePropertiesType = typePropertiesType;

@@ -47,9 +47,9 @@ namespace MgmtParamOrdering.Models
                 writer.WriteBooleanValue(AutoReplaceOnFailure.Value);
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -76,7 +76,7 @@ namespace MgmtParamOrdering.Models
             Optional<string> hostId = default;
             Optional<DateTimeOffset> provisioningTime = default;
             Optional<string> provisioningState = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"u8))
@@ -144,11 +144,11 @@ namespace MgmtParamOrdering.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new DedicatedHostPatch(Optional.ToDictionary(tags), Optional.ToNullable(platformFaultDomain), Optional.ToNullable(autoReplaceOnFailure), hostId.Value, Optional.ToNullable(provisioningTime), provisioningState.Value, rawData);
+            return new DedicatedHostPatch(Optional.ToDictionary(tags), Optional.ToNullable(platformFaultDomain), Optional.ToNullable(autoReplaceOnFailure), hostId.Value, Optional.ToNullable(provisioningTime), provisioningState.Value, serializedAdditionalRawData);
         }
 
         DedicatedHostPatch IModelJsonSerializable<DedicatedHostPatch>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

@@ -14,7 +14,7 @@ namespace AnomalyDetector.Models
     public partial class AlignPolicy
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of AlignPolicy. </summary>
         public AlignPolicy()
@@ -31,13 +31,13 @@ namespace AnomalyDetector.Models
         /// Previous, Subsequent, Linear, Zero, Fixed.
         /// </param>
         /// <param name="paddingValue"> An optional field. Required when fillNAMethod is Fixed. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AlignPolicy(AlignMode? alignMode, FillNAMethod? fillNAMethod, float? paddingValue, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AlignPolicy(AlignMode? alignMode, FillNAMethod? fillNAMethod, float? paddingValue, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             AlignMode = alignMode;
             FillNAMethod = fillNAMethod;
             PaddingValue = paddingValue;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

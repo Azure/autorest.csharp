@@ -16,7 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class DocumentLinkedEntities
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DocumentLinkedEntities"/>. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
@@ -39,14 +39,14 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="entities"> Recognized well-known entities in the document. </param>
         /// <param name="warnings"> Warnings encountered while processing document. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the document payload. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DocumentLinkedEntities(string id, IReadOnlyList<LinkedEntity> entities, IReadOnlyList<TextAnalyticsWarning> warnings, DocumentStatistics statistics, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DocumentLinkedEntities(string id, IReadOnlyList<LinkedEntity> entities, IReadOnlyList<TextAnalyticsWarning> warnings, DocumentStatistics statistics, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Entities = entities;
             Warnings = warnings;
             Statistics = statistics;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DocumentLinkedEntities"/> for deserialization. </summary>

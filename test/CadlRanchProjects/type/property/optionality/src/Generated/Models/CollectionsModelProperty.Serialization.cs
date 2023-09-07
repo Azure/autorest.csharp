@@ -40,9 +40,9 @@ namespace _Type.Property.Optionality.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -64,7 +64,7 @@ namespace _Type.Property.Optionality.Models
                 return null;
             }
             Optional<IList<StringProperty>> property = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
             {
                 if (property0.NameEquals("property"u8))
@@ -83,11 +83,11 @@ namespace _Type.Property.Optionality.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
                     continue;
                 }
             }
-            return new CollectionsModelProperty(Optional.ToList(property), rawData);
+            return new CollectionsModelProperty(Optional.ToList(property), serializedAdditionalRawData);
         }
 
         CollectionsModelProperty IModelJsonSerializable<CollectionsModelProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

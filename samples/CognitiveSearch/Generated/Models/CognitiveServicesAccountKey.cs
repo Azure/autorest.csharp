@@ -29,8 +29,8 @@ namespace CognitiveSearch.Models
         /// <param name="odataType"> Identifies the concrete type of the cognitive service resource attached to a skillset. </param>
         /// <param name="description"> Description of the cognitive service resource attached to a skillset. </param>
         /// <param name="key"> The key used to provision the cognitive service resource attached to a skillset. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CognitiveServicesAccountKey(string odataType, string description, string key, Dictionary<string, BinaryData> rawData) : base(odataType, description, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CognitiveServicesAccountKey(string odataType, string description, string key, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, description, serializedAdditionalRawData)
         {
             Key = key;
             OdataType = odataType ?? "#Microsoft.Azure.Search.CognitiveServicesByKey";

@@ -15,7 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class Model
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Model"/>. </summary>
         /// <param name="modelInfo"> Basic custom model information. </param>
@@ -31,13 +31,13 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="modelInfo"> Basic custom model information. </param>
         /// <param name="keys"> Keys extracted by the custom model. </param>
         /// <param name="trainResult"> Custom model training result. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Model(ModelInfo modelInfo, KeysResult keys, TrainResult trainResult, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Model(ModelInfo modelInfo, KeysResult keys, TrainResult trainResult, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ModelInfo = modelInfo;
             Keys = keys;
             TrainResult = trainResult;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Model"/> for deserialization. </summary>

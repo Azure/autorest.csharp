@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
     public partial class ListDataSourcesResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ListDataSourcesResult"/>. </summary>
         /// <param name="dataSources"> The datasources in the Search service. </param>
@@ -30,11 +30,11 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of <see cref="ListDataSourcesResult"/>. </summary>
         /// <param name="dataSources"> The datasources in the Search service. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ListDataSourcesResult(IReadOnlyList<DataSource> dataSources, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListDataSourcesResult(IReadOnlyList<DataSource> dataSources, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DataSources = dataSources;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ListDataSourcesResult"/> for deserialization. </summary>

@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class StorageAccountKey
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StorageAccountKey"/>. </summary>
         internal StorageAccountKey()
@@ -26,14 +26,14 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="value"> Base 64-encoded value of the key. </param>
         /// <param name="permissions"> Permissions for the key -- read-only or full permissions. </param>
         /// <param name="createdOn"> Creation time of the key, in round trip date format. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StorageAccountKey(string keyName, string value, KeyPermission? permissions, DateTimeOffset? createdOn, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageAccountKey(string keyName, string value, KeyPermission? permissions, DateTimeOffset? createdOn, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             KeyName = keyName;
             Value = value;
             Permissions = permissions;
             CreatedOn = createdOn;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Name of the key. </summary>

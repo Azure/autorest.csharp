@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     internal partial class StoragePrivateLinkResourceListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StoragePrivateLinkResourceListResult"/>. </summary>
         internal StoragePrivateLinkResourceListResult()
@@ -25,11 +25,11 @@ namespace Azure.ResourceManager.Storage.Models
 
         /// <summary> Initializes a new instance of <see cref="StoragePrivateLinkResourceListResult"/>. </summary>
         /// <param name="value"> Array of private link resources. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StoragePrivateLinkResourceListResult(IReadOnlyList<StoragePrivateLinkResource> value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StoragePrivateLinkResourceListResult(IReadOnlyList<StoragePrivateLinkResource> value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Array of private link resources. </summary>

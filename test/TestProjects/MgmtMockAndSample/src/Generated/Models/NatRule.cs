@@ -37,8 +37,8 @@ namespace MgmtMockAndSample.Models
         /// <param name="translatedPort"> The translated port for this NAT rule. </param>
         /// <param name="sourceIpGroups"> List of source IpGroups for this rule. </param>
         /// <param name="translatedFqdn"> The translated FQDN for this NAT rule. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NatRule(string name, string description, FirewallPolicyRuleType ruleType, IList<FirewallPolicyRuleNetworkProtocol> ipProtocols, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<string> destinationPorts, string translatedAddress, string translatedPort, IList<string> sourceIpGroups, string translatedFqdn, Dictionary<string, BinaryData> rawData) : base(name, description, ruleType, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NatRule(string name, string description, FirewallPolicyRuleType ruleType, IList<FirewallPolicyRuleNetworkProtocol> ipProtocols, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<string> destinationPorts, string translatedAddress, string translatedPort, IList<string> sourceIpGroups, string translatedFqdn, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(name, description, ruleType, serializedAdditionalRawData)
         {
             IpProtocols = ipProtocols;
             SourceAddresses = sourceAddresses;

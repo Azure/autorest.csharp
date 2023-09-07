@@ -26,8 +26,8 @@ namespace PetStore.Models
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"> The size of the fish. </param>
         /// <param name="fat"> The amount of fat of the tuna. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Tuna(string kind, int size, int fat, Dictionary<string, BinaryData> rawData) : base(kind, size, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Tuna(string kind, int size, int fat, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, size, serializedAdditionalRawData)
         {
             Fat = fat;
         }

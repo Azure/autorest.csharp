@@ -32,8 +32,8 @@ namespace CognitiveSearch.Models
         /// <param name="pattern"> A regular expression pattern to match token separators. Default is an expression that matches one or more whitespace characters. </param>
         /// <param name="flags"> Regular expression flags. </param>
         /// <param name="stopwords"> A list of stopwords. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PatternAnalyzer(string odataType, string name, bool? lowerCaseTerms, string pattern, RegexFlags? flags, IList<string> stopwords, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PatternAnalyzer(string odataType, string name, bool? lowerCaseTerms, string pattern, RegexFlags? flags, IList<string> stopwords, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             LowerCaseTerms = lowerCaseTerms;
             Pattern = pattern;

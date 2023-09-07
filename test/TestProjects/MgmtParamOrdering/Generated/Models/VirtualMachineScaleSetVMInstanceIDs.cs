@@ -15,7 +15,7 @@ namespace MgmtParamOrdering.Models
     public partial class VirtualMachineScaleSetVMInstanceIDs
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMInstanceIDs"/>. </summary>
         public VirtualMachineScaleSetVMInstanceIDs()
@@ -25,11 +25,11 @@ namespace MgmtParamOrdering.Models
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMInstanceIDs"/>. </summary>
         /// <param name="instanceIds"> The virtual machine scale set instance ids. Omitting the virtual machine scale set instance ids will result in the operation being performed on all virtual machines in the virtual machine scale set. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetVMInstanceIDs(IList<string> instanceIds, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetVMInstanceIDs(IList<string> instanceIds, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             InstanceIds = instanceIds;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The virtual machine scale set instance ids. Omitting the virtual machine scale set instance ids will result in the operation being performed on all virtual machines in the virtual machine scale set. </summary>

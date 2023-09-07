@@ -28,8 +28,8 @@ namespace CognitiveSearch.Models
         /// <param name="odataType"> Identifies the concrete type of the tokenizer. </param>
         /// <param name="name"> The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="bufferSize"> The read buffer size in bytes. Default is 256. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal KeywordTokenizer(string odataType, string name, int? bufferSize, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeywordTokenizer(string odataType, string name, int? bufferSize, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             BufferSize = bufferSize;
             OdataType = odataType ?? "#Microsoft.Azure.Search.KeywordTokenizer";

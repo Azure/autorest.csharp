@@ -14,7 +14,7 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class DocumentStatistics
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DocumentStatistics"/>. </summary>
         /// <param name="charactersCount"> Number of text elements recognized in the document. </param>
@@ -28,12 +28,12 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Initializes a new instance of <see cref="DocumentStatistics"/>. </summary>
         /// <param name="charactersCount"> Number of text elements recognized in the document. </param>
         /// <param name="transactionsCount"> Number of transactions for the document. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DocumentStatistics(int charactersCount, int transactionsCount, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DocumentStatistics(int charactersCount, int transactionsCount, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             CharactersCount = charactersCount;
             TransactionsCount = transactionsCount;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DocumentStatistics"/> for deserialization. </summary>

@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     internal partial class CorsRules
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CorsRules"/>. </summary>
         public CorsRules()
@@ -25,11 +25,11 @@ namespace Azure.ResourceManager.Storage.Models
 
         /// <summary> Initializes a new instance of <see cref="CorsRules"/>. </summary>
         /// <param name="corsRulesValue"> The List of CORS rules. You can include up to five CorsRule elements in the request. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CorsRules(IList<CorsRule> corsRulesValue, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CorsRules(IList<CorsRule> corsRulesValue, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             CorsRulesValue = corsRulesValue;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The List of CORS rules. You can include up to five CorsRule elements in the request. </summary>

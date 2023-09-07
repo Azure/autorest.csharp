@@ -71,9 +71,9 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStringValue(FederatedClientId);
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -100,7 +100,7 @@ namespace MgmtMockAndSample.Models
             Optional<KeyForDiskEncryptionSet> activeKey = default;
             Optional<bool> rotationToLatestKeyVersionEnabled = default;
             Optional<string> federatedClientId = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"u8))
@@ -173,11 +173,11 @@ namespace MgmtMockAndSample.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new DiskEncryptionSetPatch(Optional.ToDictionary(tags), identity, Optional.ToNullable(encryptionType), activeKey.Value, Optional.ToNullable(rotationToLatestKeyVersionEnabled), federatedClientId.Value, rawData);
+            return new DiskEncryptionSetPatch(Optional.ToDictionary(tags), identity, Optional.ToNullable(encryptionType), activeKey.Value, Optional.ToNullable(rotationToLatestKeyVersionEnabled), federatedClientId.Value, serializedAdditionalRawData);
         }
 
         DiskEncryptionSetPatch IModelJsonSerializable<DiskEncryptionSetPatch>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

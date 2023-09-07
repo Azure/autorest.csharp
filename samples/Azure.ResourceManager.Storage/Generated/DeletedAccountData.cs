@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Storage
     public partial class DeletedAccountData : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DeletedAccountData"/>. </summary>
         public DeletedAccountData()
@@ -36,15 +36,15 @@ namespace Azure.ResourceManager.Storage
         /// <param name="restoreReference"> Can be used to attempt recovering this deleted account via PutStorageAccount API. </param>
         /// <param name="creationTime"> Creation time of the deleted account. </param>
         /// <param name="deletionTime"> Deletion time of the deleted account. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeletedAccountData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string storageAccountResourceId, AzureLocation? location, string restoreReference, string creationTime, string deletionTime, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeletedAccountData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string storageAccountResourceId, AzureLocation? location, string restoreReference, string creationTime, string deletionTime, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             StorageAccountResourceId = storageAccountResourceId;
             Location = location;
             RestoreReference = restoreReference;
             CreationTime = creationTime;
             DeletionTime = deletionTime;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Full resource id of the original storage account. </summary>

@@ -46,9 +46,9 @@ namespace MgmtSupersetFlattenInheritance.Models
                 writer.WriteStringValue(Foo);
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -73,7 +73,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             Optional<string> bar = default;
             Optional<string> id0 = default;
             Optional<string> foo = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -110,11 +110,11 @@ namespace MgmtSupersetFlattenInheritance.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new CustomModel2(id.Value, bar.Value, id0.Value, foo.Value, rawData);
+            return new CustomModel2(id.Value, bar.Value, id0.Value, foo.Value, serializedAdditionalRawData);
         }
 
         CustomModel2 IModelJsonSerializable<CustomModel2>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

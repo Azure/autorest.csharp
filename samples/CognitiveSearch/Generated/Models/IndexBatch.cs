@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
     public partial class IndexBatch
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="IndexBatch"/>. </summary>
         /// <param name="actions"> The actions in the batch. </param>
@@ -30,11 +30,11 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of <see cref="IndexBatch"/>. </summary>
         /// <param name="actions"> The actions in the batch. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal IndexBatch(IList<IndexAction> actions, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IndexBatch(IList<IndexAction> actions, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Actions = actions;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="IndexBatch"/> for deserialization. </summary>

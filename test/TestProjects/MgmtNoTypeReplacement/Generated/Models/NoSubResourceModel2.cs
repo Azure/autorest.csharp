@@ -14,7 +14,7 @@ namespace MgmtNoTypeReplacement.Models
     internal partial class NoSubResourceModel2
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="NoSubResourceModel2"/>. </summary>
         public NoSubResourceModel2()
@@ -23,11 +23,11 @@ namespace MgmtNoTypeReplacement.Models
 
         /// <summary> Initializes a new instance of <see cref="NoSubResourceModel2"/>. </summary>
         /// <param name="id"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NoSubResourceModel2(string id, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NoSubResourceModel2(string id, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the id. </summary>

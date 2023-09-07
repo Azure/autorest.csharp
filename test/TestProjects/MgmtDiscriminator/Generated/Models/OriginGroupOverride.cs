@@ -16,7 +16,7 @@ namespace MgmtDiscriminator.Models
     public partial class OriginGroupOverride
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="OriginGroupOverride"/>. </summary>
         public OriginGroupOverride()
@@ -26,12 +26,12 @@ namespace MgmtDiscriminator.Models
         /// <summary> Initializes a new instance of <see cref="OriginGroupOverride"/>. </summary>
         /// <param name="originGroup"> defines the OriginGroup that would override the DefaultOriginGroup on route. </param>
         /// <param name="forwardingProtocol"> Protocol this rule will use when forwarding traffic to backends. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal OriginGroupOverride(WritableSubResource originGroup, ForwardingProtocol? forwardingProtocol, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OriginGroupOverride(WritableSubResource originGroup, ForwardingProtocol? forwardingProtocol, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OriginGroup = originGroup;
             ForwardingProtocol = forwardingProtocol;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> defines the OriginGroup that would override the DefaultOriginGroup on route. </summary>

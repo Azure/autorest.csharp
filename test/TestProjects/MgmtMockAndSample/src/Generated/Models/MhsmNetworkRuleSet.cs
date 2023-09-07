@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
     public partial class MhsmNetworkRuleSet
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MhsmNetworkRuleSet"/>. </summary>
         public MhsmNetworkRuleSet()
@@ -30,14 +30,14 @@ namespace MgmtMockAndSample.Models
         /// <param name="defaultAction"> The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated. </param>
         /// <param name="ipRules"> The list of IP address rules. </param>
         /// <param name="virtualNetworkRules"> The list of virtual network rules. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MhsmNetworkRuleSet(NetworkRuleBypassOption? bypass, NetworkRuleAction? defaultAction, IList<MhsmipRule> ipRules, IList<WritableSubResource> virtualNetworkRules, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MhsmNetworkRuleSet(NetworkRuleBypassOption? bypass, NetworkRuleAction? defaultAction, IList<MhsmipRule> ipRules, IList<WritableSubResource> virtualNetworkRules, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Bypass = bypass;
             DefaultAction = defaultAction;
             IpRules = ipRules;
             VirtualNetworkRules = virtualNetworkRules;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'. </summary>

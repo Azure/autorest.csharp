@@ -25,8 +25,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="subnet"> The reference to the subnet resource to create a container network interface ip configuration. </param>
         /// <param name="provisioningState"> The provisioning state of the IP configuration profile resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal IPConfigurationProfile(string id, string name, string type, string etag, Subnet subnet, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IPConfigurationProfile(string id, string name, string type, string etag, Subnet subnet, ProvisioningState? provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Type = type;

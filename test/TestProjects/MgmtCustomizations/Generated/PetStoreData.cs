@@ -20,7 +20,7 @@ namespace MgmtCustomizations
     public partial class PetStoreData : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="PetStoreData"/>. </summary>
         public PetStoreData()
@@ -33,11 +33,11 @@ namespace MgmtCustomizations
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="properties"> The properties. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PetStoreData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, PetStoreProperties properties, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PetStoreData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, PetStoreProperties properties, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Properties = properties;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The properties. </summary>

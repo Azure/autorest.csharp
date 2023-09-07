@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class TagScoringParameters
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TagScoringParameters"/>. </summary>
         /// <param name="tagsParameter"> The name of the parameter passed in search queries to specify the list of tags to compare against the target field. </param>
@@ -29,11 +29,11 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of <see cref="TagScoringParameters"/>. </summary>
         /// <param name="tagsParameter"> The name of the parameter passed in search queries to specify the list of tags to compare against the target field. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TagScoringParameters(string tagsParameter, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TagScoringParameters(string tagsParameter, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TagsParameter = tagsParameter;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="TagScoringParameters"/> for deserialization. </summary>

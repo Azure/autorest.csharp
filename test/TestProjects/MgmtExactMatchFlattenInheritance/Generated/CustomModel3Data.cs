@@ -27,8 +27,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <param name="name"></param>
         /// <param name="resourceType"></param>
         /// <param name="foo"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CustomModel3Data(string id, string name, string resourceType, string foo, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CustomModel3Data(string id, string name, string resourceType, string foo, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, serializedAdditionalRawData)
         {
             Foo = foo;
         }

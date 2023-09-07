@@ -15,7 +15,7 @@ namespace MgmtMockAndSample.Models
     public partial class Permissions
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Permissions"/>. </summary>
         public Permissions()
@@ -31,14 +31,14 @@ namespace MgmtMockAndSample.Models
         /// <param name="secrets"> Permissions to secrets. </param>
         /// <param name="certificates"> Permissions to certificates. </param>
         /// <param name="storage"> Permissions to storage accounts. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Permissions(IList<KeyPermission> keys, IList<SecretPermission> secrets, IList<CertificatePermission> certificates, IList<StoragePermission> storage, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Permissions(IList<KeyPermission> keys, IList<SecretPermission> secrets, IList<CertificatePermission> certificates, IList<StoragePermission> storage, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Keys = keys;
             Secrets = secrets;
             Certificates = certificates;
             Storage = storage;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Permissions to keys. </summary>

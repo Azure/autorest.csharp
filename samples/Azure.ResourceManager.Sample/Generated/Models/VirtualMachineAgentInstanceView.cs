@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class VirtualMachineAgentInstanceView
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineAgentInstanceView"/>. </summary>
         internal VirtualMachineAgentInstanceView()
@@ -40,13 +40,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// The resource status information.
         /// Serialized Name: VirtualMachineAgentInstanceView.statuses
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineAgentInstanceView(string vmAgentVersion, IReadOnlyList<VirtualMachineExtensionHandlerInstanceView> extensionHandlers, IReadOnlyList<InstanceViewStatus> statuses, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineAgentInstanceView(string vmAgentVersion, IReadOnlyList<VirtualMachineExtensionHandlerInstanceView> extensionHandlers, IReadOnlyList<InstanceViewStatus> statuses, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             VmAgentVersion = vmAgentVersion;
             ExtensionHandlers = extensionHandlers;
             Statuses = statuses;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

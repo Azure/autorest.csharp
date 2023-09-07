@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Fake.Models
     public partial class PrivateEndpointConnectionList
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="PrivateEndpointConnectionList"/>. </summary>
         [InitializationConstructor]
@@ -27,11 +27,11 @@ namespace Azure.ResourceManager.Fake.Models
 
         /// <summary> Initializes a new instance of <see cref="PrivateEndpointConnectionList"/>. </summary>
         /// <param name="value"> Array of private endpoint connections. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        protected PrivateEndpointConnectionList(IReadOnlyList<PrivateEndpointConnectionData> value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        protected PrivateEndpointConnectionList(IReadOnlyList<PrivateEndpointConnectionData> value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Array of private endpoint connections. </summary>

@@ -68,9 +68,9 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -100,7 +100,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<IList<string>> groupIds = default;
             Optional<string> requestMessage = default;
             Optional<PrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -179,11 +179,11 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new PrivateLinkServiceConnection(id.Value, name.Value, type.Value, etag.Value, Optional.ToNullable(provisioningState), privateLinkServiceId.Value, Optional.ToList(groupIds), requestMessage.Value, privateLinkServiceConnectionState.Value, rawData);
+            return new PrivateLinkServiceConnection(id.Value, name.Value, type.Value, etag.Value, Optional.ToNullable(provisioningState), privateLinkServiceId.Value, Optional.ToList(groupIds), requestMessage.Value, privateLinkServiceConnectionState.Value, serializedAdditionalRawData);
         }
 
         PrivateLinkServiceConnection IModelJsonSerializable<PrivateLinkServiceConnection>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

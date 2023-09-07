@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class Endpoints
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Endpoints"/>. </summary>
         internal Endpoints()
@@ -30,8 +30,8 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="dfs"> Gets the dfs endpoint. </param>
         /// <param name="microsoftEndpoints"> Gets the microsoft routing storage endpoints. </param>
         /// <param name="internetEndpoints"> Gets the internet routing storage endpoints. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Endpoints(string blob, string queue, string table, string file, string web, string dfs, StorageAccountMicrosoftEndpoints microsoftEndpoints, StorageAccountInternetEndpoints internetEndpoints, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Endpoints(string blob, string queue, string table, string file, string web, string dfs, StorageAccountMicrosoftEndpoints microsoftEndpoints, StorageAccountInternetEndpoints internetEndpoints, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Blob = blob;
             Queue = queue;
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Storage.Models
             Dfs = dfs;
             MicrosoftEndpoints = microsoftEndpoints;
             InternetEndpoints = internetEndpoints;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the blob endpoint. </summary>

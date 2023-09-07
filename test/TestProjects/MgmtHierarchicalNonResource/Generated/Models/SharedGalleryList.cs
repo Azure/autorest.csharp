@@ -17,7 +17,7 @@ namespace MgmtHierarchicalNonResource.Models
     internal partial class SharedGalleryList
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SharedGalleryList"/>. </summary>
         /// <param name="value"> A list of shared galleries. </param>
@@ -32,12 +32,12 @@ namespace MgmtHierarchicalNonResource.Models
         /// <summary> Initializes a new instance of <see cref="SharedGalleryList"/>. </summary>
         /// <param name="value"> A list of shared galleries. </param>
         /// <param name="nextLink"> The uri to fetch the next page of shared galleries. Call ListNext() with this to fetch the next page of shared galleries. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SharedGalleryList(IReadOnlyList<SharedGalleryData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SharedGalleryList(IReadOnlyList<SharedGalleryData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="SharedGalleryList"/> for deserialization. </summary>

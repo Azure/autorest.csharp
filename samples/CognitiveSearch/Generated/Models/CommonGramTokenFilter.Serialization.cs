@@ -44,9 +44,9 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -72,7 +72,7 @@ namespace CognitiveSearch.Models
             Optional<bool> queryMode = default;
             string odataType = default;
             string name = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("commonWords"u8))
@@ -115,11 +115,11 @@ namespace CognitiveSearch.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new CommonGramTokenFilter(odataType, name, commonWords, Optional.ToNullable(ignoreCase), Optional.ToNullable(queryMode), rawData);
+            return new CommonGramTokenFilter(odataType, name, commonWords, Optional.ToNullable(ignoreCase), Optional.ToNullable(queryMode), serializedAdditionalRawData);
         }
 
         CommonGramTokenFilter IModelJsonSerializable<CommonGramTokenFilter>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

@@ -15,7 +15,7 @@ namespace MgmtScopeResource.Models
     public partial class WhatIfChange
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="WhatIfChange"/>. </summary>
         /// <param name="resourceId"> Resource ID. </param>
@@ -35,15 +35,15 @@ namespace MgmtScopeResource.Models
         /// <param name="unsupportedReason"> The explanation about why the resource is unsupported by What-If. </param>
         /// <param name="before"> The snapshot of the resource before the deployment is executed. </param>
         /// <param name="after"> The predicted snapshot of the resource after the deployment is executed. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal WhatIfChange(string resourceId, ChangeType changeType, string unsupportedReason, BinaryData before, BinaryData after, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal WhatIfChange(string resourceId, ChangeType changeType, string unsupportedReason, BinaryData before, BinaryData after, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ResourceId = resourceId;
             ChangeType = changeType;
             UnsupportedReason = unsupportedReason;
             Before = before;
             After = after;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="WhatIfChange"/> for deserialization. </summary>

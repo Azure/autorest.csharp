@@ -14,7 +14,7 @@ namespace MgmtScopeResource.Models
     public partial class DeploymentValidateResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DeploymentValidateResult"/>. </summary>
         internal DeploymentValidateResult()
@@ -24,12 +24,12 @@ namespace MgmtScopeResource.Models
         /// <summary> Initializes a new instance of <see cref="DeploymentValidateResult"/>. </summary>
         /// <param name="errorResponse"> The deployment validation error. </param>
         /// <param name="properties"> The template deployment properties. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeploymentValidateResult(ErrorResponse errorResponse, DeploymentPropertiesExtended properties, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentValidateResult(ErrorResponse errorResponse, DeploymentPropertiesExtended properties, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ErrorResponse = errorResponse;
             Properties = properties;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The deployment validation error. </summary>

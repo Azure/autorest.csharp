@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     public partial class IndexerLimits
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="IndexerLimits"/>. </summary>
         internal IndexerLimits()
@@ -25,13 +25,13 @@ namespace CognitiveSearch.Models
         /// <param name="maxRunTime"> The maximum duration that the indexer is permitted to run for one execution. </param>
         /// <param name="maxDocumentExtractionSize"> The maximum size of a document, in bytes, which will be considered valid for indexing. </param>
         /// <param name="maxDocumentContentCharactersToExtract"> The maximum number of characters that will be extracted from a document picked up for indexing. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal IndexerLimits(TimeSpan? maxRunTime, long? maxDocumentExtractionSize, long? maxDocumentContentCharactersToExtract, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IndexerLimits(TimeSpan? maxRunTime, long? maxDocumentExtractionSize, long? maxDocumentContentCharactersToExtract, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             MaxRunTime = maxRunTime;
             MaxDocumentExtractionSize = maxDocumentExtractionSize;
             MaxDocumentContentCharactersToExtract = maxDocumentContentCharactersToExtract;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The maximum duration that the indexer is permitted to run for one execution. </summary>

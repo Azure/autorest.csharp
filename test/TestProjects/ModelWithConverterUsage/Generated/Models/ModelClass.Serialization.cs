@@ -44,9 +44,9 @@ namespace ModelWithConverterUsage.Models
                     ((IModelJsonSerializable<Product>)ObjProperty).Serialize(writer, options);
                 }
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -70,7 +70,7 @@ namespace ModelWithConverterUsage.Models
             Optional<string> stringProperty = default;
             EnumProperty enumProperty = default;
             Optional<Product> objProperty = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("String_Property"u8))
@@ -94,11 +94,11 @@ namespace ModelWithConverterUsage.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new ModelClass(stringProperty.Value, enumProperty, objProperty.Value, rawData);
+            return new ModelClass(stringProperty.Value, enumProperty, objProperty.Value, serializedAdditionalRawData);
         }
 
         ModelClass IModelJsonSerializable<ModelClass>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

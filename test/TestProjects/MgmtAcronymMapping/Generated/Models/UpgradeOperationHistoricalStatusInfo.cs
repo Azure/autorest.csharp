@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping.Models
     public partial class UpgradeOperationHistoricalStatusInfo
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UpgradeOperationHistoricalStatusInfo"/>. </summary>
         internal UpgradeOperationHistoricalStatusInfo()
@@ -38,13 +38,13 @@ namespace MgmtAcronymMapping.Models
         /// Resource location
         /// Serialized Name: UpgradeOperationHistoricalStatusInfo.location
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UpgradeOperationHistoricalStatusInfo(UpgradeOperationHistoricalStatusInfoProperties properties, ResourceType? upgradeOperationHistoricalStatusInfoType, AzureLocation? location, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UpgradeOperationHistoricalStatusInfo(UpgradeOperationHistoricalStatusInfoProperties properties, ResourceType? upgradeOperationHistoricalStatusInfoType, AzureLocation? location, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Properties = properties;
             UpgradeOperationHistoricalStatusInfoType = upgradeOperationHistoricalStatusInfoType;
             Location = location;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

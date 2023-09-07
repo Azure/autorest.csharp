@@ -14,7 +14,7 @@ namespace body_complex.Models
     public partial class Basic
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Basic"/>. </summary>
         public Basic()
@@ -25,13 +25,13 @@ namespace body_complex.Models
         /// <param name="id"> Basic Id. </param>
         /// <param name="name"> Name property with a very long description that does not fit on a single line and a line break. </param>
         /// <param name="color"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Basic(int? id, string name, CMYKColors? color, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Basic(int? id, string name, CMYKColors? color, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
             Color = color;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Basic Id. </summary>

@@ -15,7 +15,7 @@ namespace MgmtScopeResource.Models
     public partial class WorkspaceInfo
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="WorkspaceInfo"/>. </summary>
         /// <param name="id"> Azure Resource Manager identifier of the Log Analytics Workspace. </param>
@@ -37,13 +37,13 @@ namespace MgmtScopeResource.Models
         /// <param name="id"> Azure Resource Manager identifier of the Log Analytics Workspace. </param>
         /// <param name="location"> Location of the Log Analytics workspace. </param>
         /// <param name="customerId"> Log Analytics workspace identifier. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal WorkspaceInfo(string id, string location, string customerId, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal WorkspaceInfo(string id, string location, string customerId, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Location = location;
             CustomerId = customerId;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="WorkspaceInfo"/> for deserialization. </summary>

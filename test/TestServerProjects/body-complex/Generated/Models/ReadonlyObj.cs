@@ -14,7 +14,7 @@ namespace body_complex.Models
     public partial class ReadonlyObj
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ReadonlyObj"/>. </summary>
         public ReadonlyObj()
@@ -24,12 +24,12 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of <see cref="ReadonlyObj"/>. </summary>
         /// <param name="id"></param>
         /// <param name="size"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ReadonlyObj(string id, int? size, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ReadonlyObj(string id, int? size, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Size = size;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the id. </summary>

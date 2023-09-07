@@ -16,7 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class DocumentResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DocumentResult"/>. </summary>
         /// <param name="docType"> Document type. </param>
@@ -38,13 +38,13 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="docType"> Document type. </param>
         /// <param name="pageRange"> First and last page number where the document is found. </param>
         /// <param name="fields"> Dictionary of named field values. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DocumentResult(string docType, IReadOnlyList<int> pageRange, IReadOnlyDictionary<string, FieldValue> fields, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DocumentResult(string docType, IReadOnlyList<int> pageRange, IReadOnlyDictionary<string, FieldValue> fields, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DocType = docType;
             PageRange = pageRange;
             Fields = fields;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DocumentResult"/> for deserialization. </summary>

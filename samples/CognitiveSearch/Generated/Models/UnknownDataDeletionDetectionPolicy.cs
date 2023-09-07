@@ -15,8 +15,8 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of <see cref="UnknownDataDeletionDetectionPolicy"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the data deletion detection policy. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownDataDeletionDetectionPolicy(string odataType, Dictionary<string, BinaryData> rawData) : base(odataType, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownDataDeletionDetectionPolicy(string odataType, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, serializedAdditionalRawData)
         {
             OdataType = odataType ?? "Unknown";
         }

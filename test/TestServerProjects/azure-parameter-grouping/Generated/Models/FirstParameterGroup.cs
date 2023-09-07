@@ -14,7 +14,7 @@ namespace azure_parameter_grouping.Models
     public partial class FirstParameterGroup
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FirstParameterGroup"/>. </summary>
         public FirstParameterGroup()
@@ -24,12 +24,12 @@ namespace azure_parameter_grouping.Models
         /// <summary> Initializes a new instance of <see cref="FirstParameterGroup"/>. </summary>
         /// <param name="headerOne"></param>
         /// <param name="queryOne"> Query parameter with default. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirstParameterGroup(string headerOne, int? queryOne, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirstParameterGroup(string headerOne, int? queryOne, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             HeaderOne = headerOne;
             QueryOne = queryOne;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the header one. </summary>

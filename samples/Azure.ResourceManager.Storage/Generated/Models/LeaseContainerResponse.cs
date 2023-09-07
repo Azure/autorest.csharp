@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class LeaseContainerResponse
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="LeaseContainerResponse"/>. </summary>
         internal LeaseContainerResponse()
@@ -24,12 +24,12 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of <see cref="LeaseContainerResponse"/>. </summary>
         /// <param name="leaseId"> Returned unique lease ID that must be included with any request to delete the container, or to renew, change, or release the lease. </param>
         /// <param name="leaseTimeSeconds"> Approximate time remaining in the lease period, in seconds. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LeaseContainerResponse(string leaseId, string leaseTimeSeconds, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LeaseContainerResponse(string leaseId, string leaseTimeSeconds, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             LeaseId = leaseId;
             LeaseTimeSeconds = leaseTimeSeconds;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Returned unique lease ID that must be included with any request to delete the container, or to renew, change, or release the lease. </summary>

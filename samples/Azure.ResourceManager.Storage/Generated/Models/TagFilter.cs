@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class TagFilter
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TagFilter"/>. </summary>
         /// <param name="name"> This is the filter tag name, it can have 1 - 128 characters. </param>
@@ -37,13 +37,13 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="name"> This is the filter tag name, it can have 1 - 128 characters. </param>
         /// <param name="op"> This is the comparison operator which is used for object comparison and filtering. Only == (equality operator) is currently supported. </param>
         /// <param name="value"> This is the filter tag value field used for tag based filtering, it can have 0 - 256 characters. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TagFilter(string name, string op, string value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TagFilter(string name, string op, string value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Op = op;
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="TagFilter"/> for deserialization. </summary>

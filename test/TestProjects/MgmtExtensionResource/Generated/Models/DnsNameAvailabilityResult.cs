@@ -14,7 +14,7 @@ namespace MgmtExtensionResource.Models
     public partial class DnsNameAvailabilityResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DnsNameAvailabilityResult"/>. </summary>
         internal DnsNameAvailabilityResult()
@@ -23,11 +23,11 @@ namespace MgmtExtensionResource.Models
 
         /// <summary> Initializes a new instance of <see cref="DnsNameAvailabilityResult"/>. </summary>
         /// <param name="available"> Domain availability (True/False). </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DnsNameAvailabilityResult(bool? available, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DnsNameAvailabilityResult(bool? available, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Available = available;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Domain availability (True/False). </summary>

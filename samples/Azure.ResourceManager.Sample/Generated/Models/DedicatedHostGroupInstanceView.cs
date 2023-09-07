@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     internal partial class DedicatedHostGroupInstanceView
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupInstanceView"/>. </summary>
         internal DedicatedHostGroupInstanceView()
@@ -31,11 +31,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// List of instance view of the dedicated hosts under the dedicated host group.
         /// Serialized Name: DedicatedHostGroupInstanceView.hosts
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DedicatedHostGroupInstanceView(IReadOnlyList<DedicatedHostInstanceViewWithName> hosts, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DedicatedHostGroupInstanceView(IReadOnlyList<DedicatedHostInstanceViewWithName> hosts, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Hosts = hosts;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

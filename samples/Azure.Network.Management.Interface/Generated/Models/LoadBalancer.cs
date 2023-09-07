@@ -43,8 +43,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="outboundRules"> The outbound rules. </param>
         /// <param name="resourceGuid"> The resource GUID property of the load balancer resource. </param>
         /// <param name="provisioningState"> The provisioning state of the load balancer resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LoadBalancer(string id, string name, string type, string location, IDictionary<string, string> tags, LoadBalancerSku sku, string etag, IList<FrontendIPConfiguration> frontendIPConfigurations, IList<BackendAddressPool> backendAddressPools, IList<LoadBalancingRule> loadBalancingRules, IList<Probe> probes, IList<InboundNatRule> inboundNatRules, IList<InboundNatPool> inboundNatPools, IList<OutboundRule> outboundRules, string resourceGuid, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, name, type, location, tags, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LoadBalancer(string id, string name, string type, string location, IDictionary<string, string> tags, LoadBalancerSku sku, string etag, IList<FrontendIPConfiguration> frontendIPConfigurations, IList<BackendAddressPool> backendAddressPools, IList<LoadBalancingRule> loadBalancingRules, IList<Probe> probes, IList<InboundNatRule> inboundNatRules, IList<InboundNatPool> inboundNatPools, IList<OutboundRule> outboundRules, string resourceGuid, ProvisioningState? provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, type, location, tags, serializedAdditionalRawData)
         {
             Sku = sku;
             Etag = etag;

@@ -15,7 +15,7 @@ namespace _Type.Property.Optionality.Models
     public partial class CollectionsModelProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of CollectionsModelProperty. </summary>
         public CollectionsModelProperty()
@@ -25,11 +25,11 @@ namespace _Type.Property.Optionality.Models
 
         /// <summary> Initializes a new instance of CollectionsModelProperty. </summary>
         /// <param name="property"> Property. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CollectionsModelProperty(IList<StringProperty> property, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CollectionsModelProperty(IList<StringProperty> property, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Property = property;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Property. </summary>

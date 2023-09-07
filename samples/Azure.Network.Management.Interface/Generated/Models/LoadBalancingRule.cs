@@ -35,8 +35,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="enableTcpReset"> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </param>
         /// <param name="disableOutboundSnat"> Configures SNAT for the VMs in the backend pool to use the publicIP address specified in the frontend of the load balancing rule. </param>
         /// <param name="provisioningState"> The provisioning state of the load balancing rule resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LoadBalancingRule(string id, string name, string etag, string type, SubResource frontendIPConfiguration, SubResource backendAddressPool, SubResource probe, TransportProtocol? protocol, LoadDistribution? loadDistribution, int? frontendPort, int? backendPort, int? idleTimeoutInMinutes, bool? enableFloatingIP, bool? enableTcpReset, bool? disableOutboundSnat, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LoadBalancingRule(string id, string name, string etag, string type, SubResource frontendIPConfiguration, SubResource backendAddressPool, SubResource probe, TransportProtocol? protocol, LoadDistribution? loadDistribution, int? frontendPort, int? backendPort, int? idleTimeoutInMinutes, bool? enableFloatingIP, bool? enableTcpReset, bool? disableOutboundSnat, ProvisioningState? provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

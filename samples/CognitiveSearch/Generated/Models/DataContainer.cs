@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class DataContainer
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DataContainer"/>. </summary>
         /// <param name="name"> The name of the table or view (for Azure SQL data source) or collection (for CosmosDB data source) that will be indexed. </param>
@@ -30,12 +30,12 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="DataContainer"/>. </summary>
         /// <param name="name"> The name of the table or view (for Azure SQL data source) or collection (for CosmosDB data source) that will be indexed. </param>
         /// <param name="query"> A query that is applied to this data container. The syntax and meaning of this parameter is datasource-specific. Not supported by Azure SQL datasources. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DataContainer(string name, string query, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DataContainer(string name, string query, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Query = query;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DataContainer"/> for deserialization. </summary>

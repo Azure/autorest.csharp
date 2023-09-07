@@ -33,8 +33,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="destinationNetworkInterfaceIPConfiguration"> The reference to the private IP Address of the collector nic that will receive the tap. </param>
         /// <param name="destinationLoadBalancerFrontEndIPConfiguration"> The reference to the private IP address on the internal Load Balancer that will receive the tap. </param>
         /// <param name="destinationPort"> The VXLAN destination port that will receive the tapped traffic. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualNetworkTap(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, IReadOnlyList<NetworkInterfaceTapConfiguration> networkInterfaceTapConfigurations, string resourceGuid, ProvisioningState? provisioningState, NetworkInterfaceIPConfiguration destinationNetworkInterfaceIPConfiguration, FrontendIPConfiguration destinationLoadBalancerFrontEndIPConfiguration, int? destinationPort, Dictionary<string, BinaryData> rawData) : base(id, name, type, location, tags, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualNetworkTap(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, IReadOnlyList<NetworkInterfaceTapConfiguration> networkInterfaceTapConfigurations, string resourceGuid, ProvisioningState? provisioningState, NetworkInterfaceIPConfiguration destinationNetworkInterfaceIPConfiguration, FrontendIPConfiguration destinationLoadBalancerFrontEndIPConfiguration, int? destinationPort, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, type, location, tags, serializedAdditionalRawData)
         {
             Etag = etag;
             NetworkInterfaceTapConfigurations = networkInterfaceTapConfigurations;

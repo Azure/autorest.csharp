@@ -16,7 +16,7 @@ namespace AnomalyDetector.Models
     public partial class MultivariateDetectionResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of MultivariateDetectionResult. </summary>
         /// <param name="summary"> Multivariate anomaly detection status. </param>
@@ -35,13 +35,13 @@ namespace AnomalyDetector.Models
         /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
         /// <param name="summary"> Multivariate anomaly detection status. </param>
         /// <param name="results"> Detection result for each timestamp. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MultivariateDetectionResult(Guid resultId, MultivariateBatchDetectionResultSummary summary, IReadOnlyList<AnomalyState> results, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MultivariateDetectionResult(Guid resultId, MultivariateBatchDetectionResultSummary summary, IReadOnlyList<AnomalyState> results, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ResultId = resultId;
             Summary = summary;
             Results = results;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="MultivariateDetectionResult"/> for deserialization. </summary>

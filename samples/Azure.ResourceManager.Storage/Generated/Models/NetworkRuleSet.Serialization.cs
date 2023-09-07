@@ -81,9 +81,9 @@ namespace Azure.ResourceManager.Storage.Models
             }
             writer.WritePropertyName("defaultAction"u8);
             writer.WriteStringValue(DefaultAction.ToSerialString());
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Storage.Models
             Optional<IList<VirtualNetworkRule>> virtualNetworkRules = default;
             Optional<IList<IPRule>> ipRules = default;
             DefaultAction defaultAction = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("bypass"u8))
@@ -170,11 +170,11 @@ namespace Azure.ResourceManager.Storage.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new NetworkRuleSet(Optional.ToNullable(bypass), Optional.ToList(resourceAccessRules), Optional.ToList(virtualNetworkRules), Optional.ToList(ipRules), defaultAction, rawData);
+            return new NetworkRuleSet(Optional.ToNullable(bypass), Optional.ToList(resourceAccessRules), Optional.ToList(virtualNetworkRules), Optional.ToList(ipRules), defaultAction, serializedAdditionalRawData);
         }
 
         NetworkRuleSet IModelJsonSerializable<NetworkRuleSet>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

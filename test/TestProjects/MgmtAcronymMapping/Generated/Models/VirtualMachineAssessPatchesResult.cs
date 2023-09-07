@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping.Models
     public partial class VirtualMachineAssessPatchesResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineAssessPatchesResult"/>. </summary>
         internal VirtualMachineAssessPatchesResult()
@@ -59,8 +59,8 @@ namespace MgmtAcronymMapping.Models
         /// The errors that were encountered during execution of the operation. The details array contains the list of them.
         /// Serialized Name: VirtualMachineAssessPatchesResult.error
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineAssessPatchesResult(PatchOperationStatus? status, string assessmentActivityId, bool? rebootPending, int? criticalAndSecurityPatchCount, int? otherPatchCount, DateTimeOffset? startOn, IReadOnlyList<VirtualMachineSoftwarePatchProperties> patches, ApiError error, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineAssessPatchesResult(PatchOperationStatus? status, string assessmentActivityId, bool? rebootPending, int? criticalAndSecurityPatchCount, int? otherPatchCount, DateTimeOffset? startOn, IReadOnlyList<VirtualMachineSoftwarePatchProperties> patches, ApiError error, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             AssessmentActivityId = assessmentActivityId;
@@ -70,7 +70,7 @@ namespace MgmtAcronymMapping.Models
             StartOn = startOn;
             Patches = patches;
             Error = error;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

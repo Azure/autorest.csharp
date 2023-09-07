@@ -26,8 +26,8 @@ namespace lro.Models
         /// <param name="name"> Resource Name. </param>
         /// <param name="provisioningState"></param>
         /// <param name="provisioningStateValues"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Product(string id, string type, IDictionary<string, string> tags, string location, string name, string provisioningState, ProductPropertiesProvisioningStateValues? provisioningStateValues, Dictionary<string, BinaryData> rawData) : base(id, type, tags, location, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Product(string id, string type, IDictionary<string, string> tags, string location, string name, string provisioningState, ProductPropertiesProvisioningStateValues? provisioningStateValues, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, type, tags, location, name, serializedAdditionalRawData)
         {
             ProvisioningState = provisioningState;
             ProvisioningStateValues = provisioningStateValues;

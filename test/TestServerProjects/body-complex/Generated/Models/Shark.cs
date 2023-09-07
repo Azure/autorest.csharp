@@ -36,8 +36,8 @@ namespace body_complex.Models
         /// </param>
         /// <param name="age"></param>
         /// <param name="birthday"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Shark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday, Dictionary<string, BinaryData> rawData) : base(fishtype, species, length, siblings, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Shark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(fishtype, species, length, siblings, serializedAdditionalRawData)
         {
             Age = age;
             Birthday = birthday;

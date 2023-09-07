@@ -14,7 +14,7 @@ namespace MgmtScopeResource.Models
     public partial class DeploymentExportResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DeploymentExportResult"/>. </summary>
         internal DeploymentExportResult()
@@ -23,11 +23,11 @@ namespace MgmtScopeResource.Models
 
         /// <summary> Initializes a new instance of <see cref="DeploymentExportResult"/>. </summary>
         /// <param name="template"> The template content. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeploymentExportResult(BinaryData template, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentExportResult(BinaryData template, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Template = template;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace _Specs_.Azure.Core.Basic.Models
     public partial class UserOrder
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of UserOrder. </summary>
         /// <param name="userId"> The user's id. </param>
@@ -33,13 +33,13 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// <param name="id"> The user's id. </param>
         /// <param name="userId"> The user's id. </param>
         /// <param name="detail"> The user's order detail. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UserOrder(int id, int userId, string detail, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UserOrder(int id, int userId, string detail, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             UserId = userId;
             Detail = detail;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="UserOrder"/> for deserialization. </summary>

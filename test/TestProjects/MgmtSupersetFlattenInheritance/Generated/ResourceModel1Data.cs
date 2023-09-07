@@ -19,7 +19,7 @@ namespace MgmtSupersetFlattenInheritance
     public partial class ResourceModel1Data : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ResourceModel1Data"/>. </summary>
         public ResourceModel1Data()
@@ -32,11 +32,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="foo"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ResourceModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string foo, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string foo, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Foo = foo;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the foo. </summary>

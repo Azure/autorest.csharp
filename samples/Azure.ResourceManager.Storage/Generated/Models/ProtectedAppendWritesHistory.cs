@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class ProtectedAppendWritesHistory
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ProtectedAppendWritesHistory"/>. </summary>
         internal ProtectedAppendWritesHistory()
@@ -24,12 +24,12 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of <see cref="ProtectedAppendWritesHistory"/>. </summary>
         /// <param name="allowProtectedAppendWritesAll"> When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining legal hold protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. </param>
         /// <param name="timestamp"> Returns the date and time the tag was added. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ProtectedAppendWritesHistory(bool? allowProtectedAppendWritesAll, DateTimeOffset? timestamp, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProtectedAppendWritesHistory(bool? allowProtectedAppendWritesAll, DateTimeOffset? timestamp, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             AllowProtectedAppendWritesAll = allowProtectedAppendWritesAll;
             Timestamp = timestamp;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining legal hold protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. </summary>

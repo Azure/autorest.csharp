@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     internal partial class FirewallPolicyFilterRuleCollectionAction
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyFilterRuleCollectionAction"/>. </summary>
         public FirewallPolicyFilterRuleCollectionAction()
@@ -23,11 +23,11 @@ namespace MgmtMockAndSample.Models
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyFilterRuleCollectionAction"/>. </summary>
         /// <param name="actionType"> The type of action. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirewallPolicyFilterRuleCollectionAction(FirewallPolicyFilterRuleCollectionActionType? actionType, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyFilterRuleCollectionAction(FirewallPolicyFilterRuleCollectionActionType? actionType, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ActionType = actionType;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The type of action. </summary>

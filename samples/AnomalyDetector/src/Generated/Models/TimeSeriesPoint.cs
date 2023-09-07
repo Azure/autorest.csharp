@@ -14,7 +14,7 @@ namespace AnomalyDetector.Models
     public partial class TimeSeriesPoint
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of TimeSeriesPoint. </summary>
         /// <param name="value"> The measurement of that point, should be float. </param>
@@ -26,12 +26,12 @@ namespace AnomalyDetector.Models
         /// <summary> Initializes a new instance of TimeSeriesPoint. </summary>
         /// <param name="timestamp"> Optional argument, timestamp of a data point (ISO8601 format). </param>
         /// <param name="value"> The measurement of that point, should be float. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TimeSeriesPoint(DateTimeOffset? timestamp, float value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TimeSeriesPoint(DateTimeOffset? timestamp, float value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Timestamp = timestamp;
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="TimeSeriesPoint"/> for deserialization. </summary>

@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
     internal partial class EventDataCollection
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="EventDataCollection"/>. </summary>
         /// <param name="value"> this list that includes the Azure audit logs. </param>
@@ -31,12 +31,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="EventDataCollection"/>. </summary>
         /// <param name="value"> this list that includes the Azure audit logs. </param>
         /// <param name="nextLink"> Provides the link to retrieve the next set of events. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal EventDataCollection(IReadOnlyList<EventData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal EventDataCollection(IReadOnlyList<EventData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="EventDataCollection"/> for deserialization. </summary>

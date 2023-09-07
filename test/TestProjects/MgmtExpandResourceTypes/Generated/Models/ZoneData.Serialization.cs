@@ -87,9 +87,9 @@ namespace MgmtExpandResourceTypes
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -127,7 +127,7 @@ namespace MgmtExpandResourceTypes
             Optional<MemoryType> memoryType = default;
             Optional<IList<WritableSubResource>> registrationVirtualNetworks = default;
             Optional<IList<WritableSubResource>> resolutionVirtualNetworks = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -297,11 +297,11 @@ namespace MgmtExpandResourceTypes
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new ZoneData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, Optional.ToNullable(maxNumberOfRecordSets), Optional.ToNullable(maxNumberOfRecordsPerRecordSet), Optional.ToNullable(numberOfRecordSets), Optional.ToList(nameServers), Optional.ToNullable(zoneType), Optional.ToNullable(machineType), Optional.ToNullable(storageType), Optional.ToNullable(memoryType), Optional.ToList(registrationVirtualNetworks), Optional.ToList(resolutionVirtualNetworks), rawData);
+            return new ZoneData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, Optional.ToNullable(maxNumberOfRecordSets), Optional.ToNullable(maxNumberOfRecordsPerRecordSet), Optional.ToNullable(numberOfRecordSets), Optional.ToList(nameServers), Optional.ToNullable(zoneType), Optional.ToNullable(machineType), Optional.ToNullable(storageType), Optional.ToNullable(memoryType), Optional.ToList(registrationVirtualNetworks), Optional.ToList(resolutionVirtualNetworks), serializedAdditionalRawData);
         }
 
         ZoneData IModelJsonSerializable<ZoneData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

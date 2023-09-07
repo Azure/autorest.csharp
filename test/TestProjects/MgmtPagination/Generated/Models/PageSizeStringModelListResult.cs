@@ -16,7 +16,7 @@ namespace MgmtPagination.Models
     internal partial class PageSizeStringModelListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="PageSizeStringModelListResult"/>. </summary>
         internal PageSizeStringModelListResult()
@@ -27,12 +27,12 @@ namespace MgmtPagination.Models
         /// <summary> Initializes a new instance of <see cref="PageSizeStringModelListResult"/>. </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PageSizeStringModelListResult(IReadOnlyList<PageSizeStringModelData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PageSizeStringModelListResult(IReadOnlyList<PageSizeStringModelData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the value. </summary>

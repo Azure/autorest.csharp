@@ -15,7 +15,7 @@ namespace _Type.Model.Usage.Models
     public partial class InputOutputRecord
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of InputOutputRecord. </summary>
         /// <param name="requiredProp"></param>
@@ -29,11 +29,11 @@ namespace _Type.Model.Usage.Models
 
         /// <summary> Initializes a new instance of InputOutputRecord. </summary>
         /// <param name="requiredProp"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal InputOutputRecord(string requiredProp, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal InputOutputRecord(string requiredProp, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredProp = requiredProp;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="InputOutputRecord"/> for deserialization. </summary>

@@ -16,7 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class TrainingDocumentInfo
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TrainingDocumentInfo"/>. </summary>
         /// <param name="documentName"> Training document name. </param>
@@ -40,14 +40,14 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="pages"> Total number of pages trained. </param>
         /// <param name="errors"> List of errors. </param>
         /// <param name="status"> Status of the training operation. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TrainingDocumentInfo(string documentName, int pages, IReadOnlyList<ErrorInformation> errors, TrainStatus status, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TrainingDocumentInfo(string documentName, int pages, IReadOnlyList<ErrorInformation> errors, TrainStatus status, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DocumentName = documentName;
             Pages = pages;
             Errors = errors;
             Status = status;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="TrainingDocumentInfo"/> for deserialization. </summary>

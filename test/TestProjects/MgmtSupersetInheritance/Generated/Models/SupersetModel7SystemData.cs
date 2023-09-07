@@ -14,7 +14,7 @@ namespace MgmtSupersetInheritance.Models
     public partial class SupersetModel7SystemData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SupersetModel7SystemData"/>. </summary>
         internal SupersetModel7SystemData()
@@ -25,13 +25,13 @@ namespace MgmtSupersetInheritance.Models
         /// <param name="createdBy"> The identity that created the resource. </param>
         /// <param name="createdOn"> The timestamp of resource creation (UTC). </param>
         /// <param name="lastModifiedBy"> The identity that last modified the resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SupersetModel7SystemData(string createdBy, DateTimeOffset? createdOn, string lastModifiedBy, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SupersetModel7SystemData(string createdBy, DateTimeOffset? createdOn, string lastModifiedBy, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             CreatedBy = createdBy;
             CreatedOn = createdOn;
             LastModifiedBy = lastModifiedBy;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The identity that created the resource. </summary>

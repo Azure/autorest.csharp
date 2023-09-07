@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class InputFieldMappingEntry
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="InputFieldMappingEntry"/>. </summary>
         /// <param name="name"> The name of the input. </param>
@@ -33,14 +33,14 @@ namespace CognitiveSearch.Models
         /// <param name="source"> The source of the input. </param>
         /// <param name="sourceContext"> The source context used for selecting recursive inputs. </param>
         /// <param name="inputs"> The recursive inputs used when creating a complex type. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal InputFieldMappingEntry(string name, string source, string sourceContext, IList<InputFieldMappingEntry> inputs, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal InputFieldMappingEntry(string name, string source, string sourceContext, IList<InputFieldMappingEntry> inputs, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Source = source;
             SourceContext = sourceContext;
             Inputs = inputs;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="InputFieldMappingEntry"/> for deserialization. </summary>

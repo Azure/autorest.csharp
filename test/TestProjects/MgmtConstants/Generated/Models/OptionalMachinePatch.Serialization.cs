@@ -61,9 +61,9 @@ namespace MgmtConstants.Models
                 }
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -87,7 +87,7 @@ namespace MgmtConstants.Models
             Optional<IDictionary<string, string>> tags = default;
             Optional<ModelWithRequiredConstant> listener = default;
             Optional<ModelWithOptionalConstant> content = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"u8))
@@ -136,11 +136,11 @@ namespace MgmtConstants.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new OptionalMachinePatch(Optional.ToDictionary(tags), listener.Value, content.Value, rawData);
+            return new OptionalMachinePatch(Optional.ToDictionary(tags), listener.Value, content.Value, serializedAdditionalRawData);
         }
 
         OptionalMachinePatch IModelJsonSerializable<OptionalMachinePatch>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

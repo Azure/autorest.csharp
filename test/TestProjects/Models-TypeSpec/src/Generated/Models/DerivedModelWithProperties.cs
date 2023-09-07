@@ -28,8 +28,8 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of DerivedModelWithProperties. </summary>
         /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
         /// <param name="requiredList"> Required collection. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DerivedModelWithProperties(string optionalPropertyOnBase, IList<CollectionItem> requiredList, Dictionary<string, BinaryData> rawData) : base(optionalPropertyOnBase, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DerivedModelWithProperties(string optionalPropertyOnBase, IList<CollectionItem> requiredList, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(optionalPropertyOnBase, serializedAdditionalRawData)
         {
             RequiredList = requiredList;
         }

@@ -15,7 +15,7 @@ namespace AppConfiguration.Models
     internal partial class KeyValueListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="KeyValueListResult"/>. </summary>
         internal KeyValueListResult()
@@ -26,12 +26,12 @@ namespace AppConfiguration.Models
         /// <summary> Initializes a new instance of <see cref="KeyValueListResult"/>. </summary>
         /// <param name="items"> The collection value. </param>
         /// <param name="nextLink"> The URI that can be used to request the next set of paged results. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal KeyValueListResult(IReadOnlyList<KeyValue> items, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeyValueListResult(IReadOnlyList<KeyValue> items, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Items = items;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The collection value. </summary>

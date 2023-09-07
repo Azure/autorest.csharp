@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class VirtualMachineScaleSetUpdateNetworkProfile
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateNetworkProfile"/>. </summary>
         public VirtualMachineScaleSetUpdateNetworkProfile()
@@ -36,12 +36,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The list of network configurations.
         /// Serialized Name: VirtualMachineScaleSetUpdateNetworkProfile.networkInterfaceConfigurations
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetUpdateNetworkProfile(WritableSubResource healthProbe, IList<VirtualMachineScaleSetUpdateNetworkConfiguration> networkInterfaceConfigurations, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetUpdateNetworkProfile(WritableSubResource healthProbe, IList<VirtualMachineScaleSetUpdateNetworkConfiguration> networkInterfaceConfigurations, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             HealthProbe = healthProbe;
             NetworkInterfaceConfigurations = networkInterfaceConfigurations;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

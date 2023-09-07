@@ -20,7 +20,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     public abstract partial class Dinosaur
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of Dinosaur. </summary>
         /// <param name="size"></param>
@@ -32,12 +32,12 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         /// <summary> Initializes a new instance of Dinosaur. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Dinosaur(string kind, int size, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Dinosaur(string kind, int size, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Kind = kind;
             Size = size;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Dinosaur"/> for deserialization. </summary>

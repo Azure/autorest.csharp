@@ -15,7 +15,7 @@ namespace MgmtMockAndSample.Models
     public partial class DeletedManagedHsmProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DeletedManagedHsmProperties"/>. </summary>
         internal DeletedManagedHsmProperties()
@@ -30,8 +30,8 @@ namespace MgmtMockAndSample.Models
         /// <param name="scheduledPurgeOn"> The scheduled purged date. </param>
         /// <param name="purgeProtectionEnabled"> Purge protection status of the original managed HSM. </param>
         /// <param name="tags"> Tags of the original managed HSM. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeletedManagedHsmProperties(string mhsmId, AzureLocation? location, DateTimeOffset? deletedOn, DateTimeOffset? scheduledPurgeOn, bool? purgeProtectionEnabled, IReadOnlyDictionary<string, string> tags, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeletedManagedHsmProperties(string mhsmId, AzureLocation? location, DateTimeOffset? deletedOn, DateTimeOffset? scheduledPurgeOn, bool? purgeProtectionEnabled, IReadOnlyDictionary<string, string> tags, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             MhsmId = mhsmId;
             Location = location;
@@ -39,7 +39,7 @@ namespace MgmtMockAndSample.Models
             ScheduledPurgeOn = scheduledPurgeOn;
             PurgeProtectionEnabled = purgeProtectionEnabled;
             Tags = tags;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The resource id of the original managed HSM. </summary>

@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class Restriction
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Restriction"/>. </summary>
         internal Restriction()
@@ -27,13 +27,13 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="restrictionType"> The type of restrictions. As of now only possible value for this is location. </param>
         /// <param name="values"> The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted. </param>
         /// <param name="reasonCode"> The reason for the restriction. As of now this can be "QuotaId" or "NotAvailableForSubscription". Quota Id is set when the SKU has requiredQuotas parameter as the subscription does not belong to that quota. The "NotAvailableForSubscription" is related to capacity at DC. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Restriction(string restrictionType, IReadOnlyList<string> values, ReasonCode? reasonCode, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Restriction(string restrictionType, IReadOnlyList<string> values, ReasonCode? reasonCode, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RestrictionType = restrictionType;
             Values = values;
             ReasonCode = reasonCode;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The type of restrictions. As of now only possible value for this is location. </summary>

@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     internal partial class DiagnosticsProfile
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DiagnosticsProfile"/>. </summary>
         public DiagnosticsProfile()
@@ -29,11 +29,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. &lt;br&gt;&lt;br&gt; You can easily view the output of your console log. &lt;br&gt;&lt;br&gt; Azure also enables you to see a screenshot of the VM from the hypervisor.
         /// Serialized Name: DiagnosticsProfile.bootDiagnostics
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DiagnosticsProfile(BootDiagnostics bootDiagnostics, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DiagnosticsProfile(BootDiagnostics bootDiagnostics, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             BootDiagnostics = bootDiagnostics;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

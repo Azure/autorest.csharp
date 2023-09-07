@@ -15,7 +15,7 @@ namespace ConfidentLevelsInTsp.Models
     internal partial class NonConfidentModelWithIndirectSelfReference
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of NonConfidentModelWithIndirectSelfReference. </summary>
         /// <param name="name"> The name. </param>
@@ -31,12 +31,12 @@ namespace ConfidentLevelsInTsp.Models
         /// <summary> Initializes a new instance of NonConfidentModelWithIndirectSelfReference. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="reference"> The self reference. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NonConfidentModelWithIndirectSelfReference(string name, IList<IndirectSelfReferenceModel> reference, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NonConfidentModelWithIndirectSelfReference(string name, IList<IndirectSelfReferenceModel> reference, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Reference = reference;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="NonConfidentModelWithIndirectSelfReference"/> for deserialization. </summary>

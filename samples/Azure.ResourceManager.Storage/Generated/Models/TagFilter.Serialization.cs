@@ -29,9 +29,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStringValue(Op);
             writer.WritePropertyName("value"u8);
             writer.WriteStringValue(Value);
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -55,7 +55,7 @@ namespace Azure.ResourceManager.Storage.Models
             string name = default;
             string op = default;
             string value = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -75,11 +75,11 @@ namespace Azure.ResourceManager.Storage.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new TagFilter(name, op, value, rawData);
+            return new TagFilter(name, op, value, serializedAdditionalRawData);
         }
 
         TagFilter IModelJsonSerializable<TagFilter>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

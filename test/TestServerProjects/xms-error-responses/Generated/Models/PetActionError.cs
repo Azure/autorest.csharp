@@ -26,8 +26,8 @@ namespace xms_error_responses.Models
         /// <param name="actionResponse"> action feedback. </param>
         /// <param name="errorType"></param>
         /// <param name="errorMessage"> the error message. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PetActionError(string actionResponse, string errorType, string errorMessage, Dictionary<string, BinaryData> rawData) : base(actionResponse, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PetActionError(string actionResponse, string errorType, string errorMessage, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(actionResponse, serializedAdditionalRawData)
         {
             ErrorType = errorType;
             ErrorMessage = errorMessage;

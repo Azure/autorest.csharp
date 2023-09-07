@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
     public partial class IndexerExecutionResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="IndexerExecutionResult"/>. </summary>
         /// <param name="status"> The outcome of this indexer execution. </param>
@@ -48,8 +48,8 @@ namespace CognitiveSearch.Models
         /// <param name="failedItemCount"> The number of items that failed to be indexed during this indexer execution. </param>
         /// <param name="initialTrackingState"> Change tracking state with which an indexer execution started. </param>
         /// <param name="finalTrackingState"> Change tracking state with which an indexer execution finished. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal IndexerExecutionResult(IndexerExecutionStatus status, string errorMessage, DateTimeOffset? startTime, DateTimeOffset? endTime, IReadOnlyList<ItemError> errors, IReadOnlyList<ItemWarning> warnings, int itemCount, int failedItemCount, string initialTrackingState, string finalTrackingState, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IndexerExecutionResult(IndexerExecutionStatus status, string errorMessage, DateTimeOffset? startTime, DateTimeOffset? endTime, IReadOnlyList<ItemError> errors, IReadOnlyList<ItemWarning> warnings, int itemCount, int failedItemCount, string initialTrackingState, string finalTrackingState, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             ErrorMessage = errorMessage;
@@ -61,7 +61,7 @@ namespace CognitiveSearch.Models
             FailedItemCount = failedItemCount;
             InitialTrackingState = initialTrackingState;
             FinalTrackingState = finalTrackingState;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="IndexerExecutionResult"/> for deserialization. </summary>

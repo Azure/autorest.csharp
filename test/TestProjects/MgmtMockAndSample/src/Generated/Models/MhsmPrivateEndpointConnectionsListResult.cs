@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
     internal partial class MhsmPrivateEndpointConnectionsListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MhsmPrivateEndpointConnectionsListResult"/>. </summary>
         internal MhsmPrivateEndpointConnectionsListResult()
@@ -27,12 +27,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="MhsmPrivateEndpointConnectionsListResult"/>. </summary>
         /// <param name="value"> The private endpoint connection associated with a managed HSM Pools. </param>
         /// <param name="nextLink"> The URL to get the next set of managed HSM Pools. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MhsmPrivateEndpointConnectionsListResult(IReadOnlyList<MhsmPrivateEndpointConnectionData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MhsmPrivateEndpointConnectionsListResult(IReadOnlyList<MhsmPrivateEndpointConnectionData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The private endpoint connection associated with a managed HSM Pools. </summary>

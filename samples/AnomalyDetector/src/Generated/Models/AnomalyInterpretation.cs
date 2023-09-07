@@ -14,7 +14,7 @@ namespace AnomalyDetector.Models
     public partial class AnomalyInterpretation
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of AnomalyInterpretation. </summary>
         internal AnomalyInterpretation()
@@ -28,13 +28,13 @@ namespace AnomalyDetector.Models
         /// number between 0 and 1.
         /// </param>
         /// <param name="correlationChanges"> Correlation changes among the anomalous variables. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AnomalyInterpretation(string variable, float? contributionScore, CorrelationChanges correlationChanges, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AnomalyInterpretation(string variable, float? contributionScore, CorrelationChanges correlationChanges, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Variable = variable;
             ContributionScore = contributionScore;
             CorrelationChanges = correlationChanges;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Variable. </summary>

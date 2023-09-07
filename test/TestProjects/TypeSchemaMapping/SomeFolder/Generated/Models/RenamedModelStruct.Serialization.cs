@@ -47,9 +47,9 @@ namespace CustomNamespace
                 writer.WriteStringValue(DaysOfWeek.Value.ToString());
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -90,9 +90,9 @@ namespace CustomNamespace
                 writer.WriteStringValue(DaysOfWeek.Value.ToString());
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -113,7 +113,7 @@ namespace CustomNamespace
             Optional<string> propertyToField = default;
             Optional<CustomFruitEnum> fruit = default;
             Optional<CustomDaysOfWeek> daysOfWeek = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ModelProperty"u8))
@@ -158,11 +158,11 @@ namespace CustomNamespace
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new RenamedModelStruct(modelProperty.Value, propertyToField.Value, Optional.ToNullable(fruit), Optional.ToNullable(daysOfWeek), rawData);
+            return new RenamedModelStruct(modelProperty.Value, propertyToField.Value, Optional.ToNullable(fruit), Optional.ToNullable(daysOfWeek), serializedAdditionalRawData);
         }
 
         RenamedModelStruct IModelJsonSerializable<RenamedModelStruct>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

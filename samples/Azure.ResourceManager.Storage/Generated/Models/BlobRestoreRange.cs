@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class BlobRestoreRange
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BlobRestoreRange"/>. </summary>
         /// <param name="startRange"> Blob start range. This is inclusive. Empty means account start. </param>
@@ -33,12 +33,12 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of <see cref="BlobRestoreRange"/>. </summary>
         /// <param name="startRange"> Blob start range. This is inclusive. Empty means account start. </param>
         /// <param name="endRange"> Blob end range. This is exclusive. Empty means account end. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BlobRestoreRange(string startRange, string endRange, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BlobRestoreRange(string startRange, string endRange, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             StartRange = startRange;
             EndRange = endRange;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="BlobRestoreRange"/> for deserialization. </summary>

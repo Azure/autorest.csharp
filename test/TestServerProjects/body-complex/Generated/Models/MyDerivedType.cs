@@ -24,8 +24,8 @@ namespace body_complex.Models
         /// <param name="propB1"></param>
         /// <param name="propBH1"></param>
         /// <param name="propD1"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MyDerivedType(MyKind kind, string propB1, string propBH1, string propD1, Dictionary<string, BinaryData> rawData) : base(kind, propB1, propBH1, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MyDerivedType(MyKind kind, string propB1, string propBH1, string propD1, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, propB1, propBH1, serializedAdditionalRawData)
         {
             PropD1 = propD1;
             Kind = kind;

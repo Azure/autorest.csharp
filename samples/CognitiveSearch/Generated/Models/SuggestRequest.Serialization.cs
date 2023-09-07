@@ -72,9 +72,9 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("top"u8);
                 writer.WriteNumberValue(Top.Value);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -106,7 +106,7 @@ namespace CognitiveSearch.Models
             Optional<string> select = default;
             string suggesterName = default;
             Optional<int> top = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("filter"u8))
@@ -178,11 +178,11 @@ namespace CognitiveSearch.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new SuggestRequest(filter.Value, Optional.ToNullable(fuzzy), highlightPostTag.Value, highlightPreTag.Value, Optional.ToNullable(minimumCoverage), orderby.Value, search, searchFields.Value, select.Value, suggesterName, Optional.ToNullable(top), rawData);
+            return new SuggestRequest(filter.Value, Optional.ToNullable(fuzzy), highlightPostTag.Value, highlightPreTag.Value, Optional.ToNullable(minimumCoverage), orderby.Value, search, searchFields.Value, select.Value, suggesterName, Optional.ToNullable(top), serializedAdditionalRawData);
         }
 
         SuggestRequest IModelJsonSerializable<SuggestRequest>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

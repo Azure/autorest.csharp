@@ -16,7 +16,7 @@ namespace MgmtScopeResource.Models
     public partial class Marketplace : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Marketplace"/>. </summary>
         internal Marketplace()
@@ -57,8 +57,8 @@ namespace MgmtScopeResource.Models
         /// <param name="isRecurringCharge"> Flag indicating whether this is a recurring charge or not. </param>
         /// <param name="etag"> The etag for the resource. </param>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Marketplace(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string billingPeriodId, DateTimeOffset? usageStart, DateTimeOffset? usageEnd, decimal? resourceRate, string offerName, string resourceGroup, string additionalInfo, string orderNumber, string instanceName, string instanceId, string currency, decimal? consumedQuantity, string unitOfMeasure, decimal? pretaxCost, bool? isEstimated, Guid? meterId, Guid? subscriptionGuid, string subscriptionName, string accountName, string departmentName, string consumedService, string costCenter, string additionalProperties, string publisherName, string planName, bool? isRecurringCharge, string etag, IReadOnlyDictionary<string, string> tags, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Marketplace(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string billingPeriodId, DateTimeOffset? usageStart, DateTimeOffset? usageEnd, decimal? resourceRate, string offerName, string resourceGroup, string additionalInfo, string orderNumber, string instanceName, string instanceId, string currency, decimal? consumedQuantity, string unitOfMeasure, decimal? pretaxCost, bool? isEstimated, Guid? meterId, Guid? subscriptionGuid, string subscriptionName, string accountName, string departmentName, string consumedService, string costCenter, string additionalProperties, string publisherName, string planName, bool? isRecurringCharge, string etag, IReadOnlyDictionary<string, string> tags, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             BillingPeriodId = billingPeriodId;
             UsageStart = usageStart;
@@ -88,7 +88,7 @@ namespace MgmtScopeResource.Models
             IsRecurringCharge = isRecurringCharge;
             Etag = etag;
             Tags = tags;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The id of the billing period resource that the usage belongs to. </summary>

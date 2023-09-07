@@ -15,7 +15,7 @@ namespace custom_baseUrl_paging.Models
     internal partial class ProductResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ProductResult"/>. </summary>
         internal ProductResult()
@@ -26,12 +26,12 @@ namespace custom_baseUrl_paging.Models
         /// <summary> Initializes a new instance of <see cref="ProductResult"/>. </summary>
         /// <param name="values"></param>
         /// <param name="nextLink"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ProductResult(IReadOnlyList<Product> values, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProductResult(IReadOnlyList<Product> values, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Values = values;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the values. </summary>

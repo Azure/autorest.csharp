@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping.Models
     public partial class OSProfile
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="OSProfile"/>. </summary>
         public OSProfile()
@@ -63,8 +63,8 @@ namespace MgmtAcronymMapping.Models
         /// Specifies whether the guest provision signal is required to infer provision success of the virtual machine.  **Note: This property is for private testing only, and all customers must not set the property to false.**
         /// Serialized Name: OSProfile.requireGuestProvisionSignal
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal OSProfile(string computerName, string adminUsername, string adminPassword, string customData, WindowsConfiguration windowsConfiguration, LinuxConfiguration linuxConfiguration, IList<VaultSecretGroup> secrets, bool? allowExtensionOperations, bool? requireGuestProvisionSignal, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OSProfile(string computerName, string adminUsername, string adminPassword, string customData, WindowsConfiguration windowsConfiguration, LinuxConfiguration linuxConfiguration, IList<VaultSecretGroup> secrets, bool? allowExtensionOperations, bool? requireGuestProvisionSignal, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ComputerName = computerName;
             AdminUsername = adminUsername;
@@ -75,7 +75,7 @@ namespace MgmtAcronymMapping.Models
             Secrets = secrets;
             AllowExtensionOperations = allowExtensionOperations;
             RequireGuestProvisionSignal = requireGuestProvisionSignal;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

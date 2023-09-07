@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
     public partial class IndexDocumentsResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="IndexDocumentsResult"/>. </summary>
         /// <param name="results"> The list of status information for each document in the indexing request. </param>
@@ -30,11 +30,11 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of <see cref="IndexDocumentsResult"/>. </summary>
         /// <param name="results"> The list of status information for each document in the indexing request. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal IndexDocumentsResult(IReadOnlyList<IndexingResult> results, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IndexDocumentsResult(IReadOnlyList<IndexingResult> results, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Results = results;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="IndexDocumentsResult"/> for deserialization. </summary>

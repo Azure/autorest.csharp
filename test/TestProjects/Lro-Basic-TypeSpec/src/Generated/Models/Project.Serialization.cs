@@ -33,9 +33,9 @@ namespace LroBasicTypeSpec.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -59,7 +59,7 @@ namespace LroBasicTypeSpec.Models
             string id = default;
             Optional<string> description = default;
             Optional<string> name = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -79,11 +79,11 @@ namespace LroBasicTypeSpec.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new Project(id, description.Value, name.Value, rawData);
+            return new Project(id, description.Value, name.Value, serializedAdditionalRawData);
         }
 
         Project IModelJsonSerializable<Project>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

@@ -15,8 +15,8 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of <see cref="UnknownSimilarity"/>. </summary>
         /// <param name="odataType"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownSimilarity(string odataType, Dictionary<string, BinaryData> rawData) : base(odataType, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownSimilarity(string odataType, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, serializedAdditionalRawData)
         {
             OdataType = odataType ?? "Unknown";
         }

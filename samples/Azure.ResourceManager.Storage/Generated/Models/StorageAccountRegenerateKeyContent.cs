@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class StorageAccountRegenerateKeyContent
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StorageAccountRegenerateKeyContent"/>. </summary>
         /// <param name="keyName"> The name of storage keys that want to be regenerated, possible values are key1, key2, kerb1, kerb2. </param>
@@ -29,11 +29,11 @@ namespace Azure.ResourceManager.Storage.Models
 
         /// <summary> Initializes a new instance of <see cref="StorageAccountRegenerateKeyContent"/>. </summary>
         /// <param name="keyName"> The name of storage keys that want to be regenerated, possible values are key1, key2, kerb1, kerb2. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StorageAccountRegenerateKeyContent(string keyName, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageAccountRegenerateKeyContent(string keyName, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             KeyName = keyName;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="StorageAccountRegenerateKeyContent"/> for deserialization. </summary>

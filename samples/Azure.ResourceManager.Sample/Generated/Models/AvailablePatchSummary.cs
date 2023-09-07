@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class AvailablePatchSummary
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AvailablePatchSummary"/>. </summary>
         internal AvailablePatchSummary()
@@ -57,8 +57,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The errors that were encountered during execution of the operation. The details array contains the list of them.
         /// Serialized Name: AvailablePatchSummary.error
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AvailablePatchSummary(PatchOperationStatus? status, string assessmentActivityId, bool? rebootPending, int? criticalAndSecurityPatchCount, int? otherPatchCount, DateTimeOffset? startOn, DateTimeOffset? lastModifiedOn, ApiError error, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AvailablePatchSummary(PatchOperationStatus? status, string assessmentActivityId, bool? rebootPending, int? criticalAndSecurityPatchCount, int? otherPatchCount, DateTimeOffset? startOn, DateTimeOffset? lastModifiedOn, ApiError error, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             AssessmentActivityId = assessmentActivityId;
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Sample.Models
             StartOn = startOn;
             LastModifiedOn = lastModifiedOn;
             Error = error;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

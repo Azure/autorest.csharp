@@ -20,7 +20,7 @@ namespace Azure.ResourceManager.Storage
     public partial class ObjectReplicationPolicyData : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ObjectReplicationPolicyData"/>. </summary>
         public ObjectReplicationPolicyData()
@@ -38,15 +38,15 @@ namespace Azure.ResourceManager.Storage
         /// <param name="sourceAccount"> Required. Source account name. It should be full resource id if allowCrossTenantReplication set to false. </param>
         /// <param name="destinationAccount"> Required. Destination account name. It should be full resource id if allowCrossTenantReplication set to false. </param>
         /// <param name="rules"> The storage account object replication rules. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ObjectReplicationPolicyData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string policyId, DateTimeOffset? enabledOn, string sourceAccount, string destinationAccount, IList<ObjectReplicationPolicyRule> rules, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ObjectReplicationPolicyData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string policyId, DateTimeOffset? enabledOn, string sourceAccount, string destinationAccount, IList<ObjectReplicationPolicyRule> rules, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             PolicyId = policyId;
             EnabledOn = enabledOn;
             SourceAccount = sourceAccount;
             DestinationAccount = destinationAccount;
             Rules = rules;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A unique id for object replication policy. </summary>

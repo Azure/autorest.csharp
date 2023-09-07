@@ -15,7 +15,7 @@ namespace MgmtResourceName.Models
     public partial class ResourceType
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ResourceType"/>. </summary>
         internal ResourceType()
@@ -27,13 +27,13 @@ namespace MgmtResourceName.Models
         /// <param name="name"> The resource type name. </param>
         /// <param name="displayName"> The resource type display name. </param>
         /// <param name="operations"> The resource type operations. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ResourceType(string name, string displayName, IReadOnlyList<ResourceOperation> operations, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceType(string name, string displayName, IReadOnlyList<ResourceOperation> operations, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             DisplayName = displayName;
             Operations = operations;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The resource type name. </summary>

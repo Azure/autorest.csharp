@@ -58,8 +58,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
         /// Serialized Name: VirtualMachineExtensionUpdate.properties.protectedSettings
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineExtensionUpdate(IDictionary<string, string> tags, string forceUpdateTag, string publisher, string extensionType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineExtensionUpdate(IDictionary<string, string> tags, string forceUpdateTag, string publisher, string extensionType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(tags, serializedAdditionalRawData)
         {
             ForceUpdateTag = forceUpdateTag;
             Publisher = publisher;

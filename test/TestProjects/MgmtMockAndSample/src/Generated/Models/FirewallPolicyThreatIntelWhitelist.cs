@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
     public partial class FirewallPolicyThreatIntelWhitelist
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyThreatIntelWhitelist"/>. </summary>
         public FirewallPolicyThreatIntelWhitelist()
@@ -28,12 +28,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyThreatIntelWhitelist"/>. </summary>
         /// <param name="ipAddresses"> List of IP addresses for the ThreatIntel Whitelist. </param>
         /// <param name="fqdns"> List of FQDNs for the ThreatIntel Whitelist. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirewallPolicyThreatIntelWhitelist(IList<IPAddress> ipAddresses, IList<string> fqdns, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyThreatIntelWhitelist(IList<IPAddress> ipAddresses, IList<string> fqdns, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             IpAddresses = ipAddresses;
             Fqdns = fqdns;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> List of IP addresses for the ThreatIntel Whitelist. </summary>

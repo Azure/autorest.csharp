@@ -27,8 +27,8 @@ namespace MgmtMultipleParentResource.Models
         /// <param name="outputBlobUri"> Specifies the Azure storage blob where script output stream will be uploaded. </param>
         /// <param name="errorBlobUri"> Specifies the Azure storage blob where script error stream will be uploaded. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SubParentPatch(IDictionary<string, string> tags, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, Uri outputBlobUri, Uri errorBlobUri, string provisioningState, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SubParentPatch(IDictionary<string, string> tags, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, Uri outputBlobUri, Uri errorBlobUri, string provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(tags, serializedAdditionalRawData)
         {
             AsyncExecution = asyncExecution;
             RunAsUser = runAsUser;

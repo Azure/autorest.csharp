@@ -14,7 +14,7 @@ namespace MgmtHierarchicalNonResource.Models
     public partial class ImagePurchasePlan
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ImagePurchasePlan"/>. </summary>
         internal ImagePurchasePlan()
@@ -25,13 +25,13 @@ namespace MgmtHierarchicalNonResource.Models
         /// <param name="name"> The plan ID. </param>
         /// <param name="publisher"> The publisher ID. </param>
         /// <param name="product"> The product ID. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ImagePurchasePlan(string name, string publisher, string product, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImagePurchasePlan(string name, string publisher, string product, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Publisher = publisher;
             Product = product;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The plan ID. </summary>

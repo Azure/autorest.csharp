@@ -52,9 +52,9 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("customFragment"u8);
                 writer.WriteStringValue(CustomFragment);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -82,7 +82,7 @@ namespace MgmtDiscriminator.Models
             Optional<string> customHostname = default;
             Optional<string> customQueryString = default;
             Optional<string> customFragment = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("typeName"u8))
@@ -126,11 +126,11 @@ namespace MgmtDiscriminator.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new UrlRedirectActionParameters(typeName, redirectType, Optional.ToNullable(destinationProtocol), customPath.Value, customHostname.Value, customQueryString.Value, customFragment.Value, rawData);
+            return new UrlRedirectActionParameters(typeName, redirectType, Optional.ToNullable(destinationProtocol), customPath.Value, customHostname.Value, customQueryString.Value, customFragment.Value, serializedAdditionalRawData);
         }
 
         UrlRedirectActionParameters IModelJsonSerializable<UrlRedirectActionParameters>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

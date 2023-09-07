@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
     public partial class Suggester
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Suggester"/>. </summary>
         /// <param name="name"> The name of the suggester. </param>
@@ -37,13 +37,13 @@ namespace CognitiveSearch.Models
         /// <param name="name"> The name of the suggester. </param>
         /// <param name="searchMode"> A value indicating the capabilities of the suggester. </param>
         /// <param name="sourceFields"> The list of field names to which the suggester applies. Each field must be searchable. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Suggester(string name, SearchMode searchMode, IList<string> sourceFields, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Suggester(string name, SearchMode searchMode, IList<string> sourceFields, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             SearchMode = searchMode;
             SourceFields = sourceFields;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Suggester"/> for deserialization. </summary>

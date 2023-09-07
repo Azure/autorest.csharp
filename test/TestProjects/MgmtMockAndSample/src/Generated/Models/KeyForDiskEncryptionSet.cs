@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
     public partial class KeyForDiskEncryptionSet
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="KeyForDiskEncryptionSet"/>. </summary>
         /// <param name="keyUri"> Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value. </param>
@@ -31,12 +31,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="KeyForDiskEncryptionSet"/>. </summary>
         /// <param name="sourceVault"> Resource id of the KeyVault containing the key or secret. This property is optional and cannot be used if the KeyVault subscription is not the same as the Disk Encryption Set subscription. </param>
         /// <param name="keyUri"> Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal KeyForDiskEncryptionSet(WritableSubResource sourceVault, Uri keyUri, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeyForDiskEncryptionSet(WritableSubResource sourceVault, Uri keyUri, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SourceVault = sourceVault;
             KeyUri = keyUri;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="KeyForDiskEncryptionSet"/> for deserialization. </summary>

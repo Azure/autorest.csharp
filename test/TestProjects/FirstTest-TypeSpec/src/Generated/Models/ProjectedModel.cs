@@ -15,7 +15,7 @@ namespace FirstTestTypeSpec.Models
     public partial class ProjectedModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of ProjectedModel. </summary>
         /// <param name="name"> name of the ModelWithProjectedName. </param>
@@ -29,11 +29,11 @@ namespace FirstTestTypeSpec.Models
 
         /// <summary> Initializes a new instance of ProjectedModel. </summary>
         /// <param name="name"> name of the ModelWithProjectedName. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ProjectedModel(string name, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProjectedModel(string name, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ProjectedModel"/> for deserialization. </summary>

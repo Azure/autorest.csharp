@@ -32,8 +32,8 @@ namespace CognitiveSearch.Models
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="rules"> A list of stemming rules in the following format: "word =&gt; stem", for example: "ran =&gt; run". </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StemmerOverrideTokenFilter(string odataType, string name, IList<string> rules, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StemmerOverrideTokenFilter(string odataType, string name, IList<string> rules, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             Rules = rules;
             OdataType = odataType ?? "#Microsoft.Azure.Search.StemmerOverrideTokenFilter";

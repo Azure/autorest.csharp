@@ -15,7 +15,7 @@ namespace ExtensionClientName.Models
     public partial class RenamedSchema
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RenamedSchema"/>. </summary>
         public RenamedSchema()
@@ -26,12 +26,12 @@ namespace ExtensionClientName.Models
         /// <summary> Initializes a new instance of <see cref="RenamedSchema"/>. </summary>
         /// <param name="renamedProperty"> A description about the set of tags. </param>
         /// <param name="renamedPropertyString"> A description about the set of tags. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RenamedSchema(IDictionary<string, string> renamedProperty, string renamedPropertyString, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RenamedSchema(IDictionary<string, string> renamedProperty, string renamedPropertyString, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RenamedProperty = renamedProperty;
             RenamedPropertyString = renamedPropertyString;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A description about the set of tags. </summary>

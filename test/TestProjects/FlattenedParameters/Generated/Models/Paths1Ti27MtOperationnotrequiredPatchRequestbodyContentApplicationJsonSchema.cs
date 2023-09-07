@@ -14,7 +14,7 @@ namespace FlattenedParameters.Models
     internal partial class Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         public Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema()
@@ -24,12 +24,12 @@ namespace FlattenedParameters.Models
         /// <summary> Initializes a new instance of <see cref="Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         /// <param name="required"></param>
         /// <param name="nonRequired"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(string required, string nonRequired, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(string required, string nonRequired, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Required = required;
             NonRequired = nonRequired;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the required. </summary>

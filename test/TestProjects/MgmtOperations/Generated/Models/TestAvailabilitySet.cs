@@ -14,7 +14,7 @@ namespace MgmtOperations.Models
     public partial class TestAvailabilitySet
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TestAvailabilitySet"/>. </summary>
         internal TestAvailabilitySet()
@@ -23,11 +23,11 @@ namespace MgmtOperations.Models
 
         /// <summary> Initializes a new instance of <see cref="TestAvailabilitySet"/>. </summary>
         /// <param name="bar"> specifies the bar. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TestAvailabilitySet(string bar, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TestAvailabilitySet(string bar, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Bar = bar;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> specifies the bar. </summary>

@@ -15,7 +15,7 @@ namespace additionalProperties.Models
     public partial class PetAPInProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="PetAPInProperties"/>. </summary>
         /// <param name="id"></param>
@@ -30,14 +30,14 @@ namespace additionalProperties.Models
         /// <param name="name"></param>
         /// <param name="status"></param>
         /// <param name="additionalProperties"> Dictionary of &lt;number&gt;. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PetAPInProperties(int id, string name, bool? status, IDictionary<string, float> additionalProperties, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PetAPInProperties(int id, string name, bool? status, IDictionary<string, float> additionalProperties, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
             Status = status;
             AdditionalProperties = additionalProperties;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="PetAPInProperties"/> for deserialization. </summary>

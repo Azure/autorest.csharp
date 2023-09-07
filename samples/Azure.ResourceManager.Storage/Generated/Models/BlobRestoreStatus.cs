@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class BlobRestoreStatus
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BlobRestoreStatus"/>. </summary>
         internal BlobRestoreStatus()
@@ -26,14 +26,14 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="failureReason"> Failure reason when blob restore is failed. </param>
         /// <param name="restoreId"> Id for tracking blob restore request. </param>
         /// <param name="parameters"> Blob restore request parameters. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BlobRestoreStatus(BlobRestoreProgressStatus? status, string failureReason, string restoreId, BlobRestoreContent parameters, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BlobRestoreStatus(BlobRestoreProgressStatus? status, string failureReason, string restoreId, BlobRestoreContent parameters, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             FailureReason = failureReason;
             RestoreId = restoreId;
             Parameters = parameters;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The status of blob restore progress. Possible values are: - InProgress: Indicates that blob restore is ongoing. - Complete: Indicates that blob restore has been completed successfully. - Failed: Indicates that blob restore is failed. </summary>

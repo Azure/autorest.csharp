@@ -19,7 +19,7 @@ namespace MgmtAcronymMapping.Models
     public partial class VirtualMachineScaleSetNetworkProfile
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetNetworkProfile"/>. </summary>
         public VirtualMachineScaleSetNetworkProfile()
@@ -36,12 +36,12 @@ namespace MgmtAcronymMapping.Models
         /// The list of network configurations.
         /// Serialized Name: VirtualMachineScaleSetNetworkProfile.networkInterfaceConfigurations
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetNetworkProfile(WritableSubResource healthProbe, IList<VirtualMachineScaleSetNetworkConfiguration> networkInterfaceConfigurations, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetNetworkProfile(WritableSubResource healthProbe, IList<VirtualMachineScaleSetNetworkConfiguration> networkInterfaceConfigurations, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             HealthProbe = healthProbe;
             NetworkInterfaceConfigurations = networkInterfaceConfigurations;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

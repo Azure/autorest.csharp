@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class OrchestrationServiceSummary
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="OrchestrationServiceSummary"/>. </summary>
         internal OrchestrationServiceSummary()
@@ -33,12 +33,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The current state of the service.
         /// Serialized Name: OrchestrationServiceSummary.serviceState
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal OrchestrationServiceSummary(OrchestrationServiceName? serviceName, OrchestrationServiceState? serviceState, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OrchestrationServiceSummary(OrchestrationServiceName? serviceName, OrchestrationServiceState? serviceState, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ServiceName = serviceName;
             ServiceState = serviceState;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

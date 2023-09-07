@@ -16,7 +16,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
     internal partial class CustomModel3ListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CustomModel3ListResult"/>. </summary>
         internal CustomModel3ListResult()
@@ -27,12 +27,12 @@ namespace MgmtExactMatchFlattenInheritance.Models
         /// <summary> Initializes a new instance of <see cref="CustomModel3ListResult"/>. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CustomModel3ListResult(IReadOnlyList<CustomModel3Data> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CustomModel3ListResult(IReadOnlyList<CustomModel3Data> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the list of storage accounts and their properties. </summary>

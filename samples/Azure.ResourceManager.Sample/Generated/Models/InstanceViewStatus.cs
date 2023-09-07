@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class InstanceViewStatus
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="InstanceViewStatus"/>. </summary>
         public InstanceViewStatus()
@@ -45,15 +45,15 @@ namespace Azure.ResourceManager.Sample.Models
         /// The time of the status.
         /// Serialized Name: InstanceViewStatus.time
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal InstanceViewStatus(string code, StatusLevelType? level, string displayStatus, string message, DateTimeOffset? time, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal InstanceViewStatus(string code, StatusLevelType? level, string displayStatus, string message, DateTimeOffset? time, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Code = code;
             Level = level;
             DisplayStatus = displayStatus;
             Message = message;
             Time = time;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

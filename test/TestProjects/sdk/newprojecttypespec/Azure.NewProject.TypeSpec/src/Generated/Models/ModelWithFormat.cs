@@ -15,7 +15,7 @@ namespace Azure.NewProject.TypeSpec.Models
     public partial class ModelWithFormat
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of ModelWithFormat. </summary>
         /// <param name="sourceUrl"> url format. </param>
@@ -32,12 +32,12 @@ namespace Azure.NewProject.TypeSpec.Models
         /// <summary> Initializes a new instance of ModelWithFormat. </summary>
         /// <param name="sourceUrl"> url format. </param>
         /// <param name="guid"> uuid format. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithFormat(Uri sourceUrl, Guid guid, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithFormat(Uri sourceUrl, Guid guid, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SourceUrl = sourceUrl;
             Guid = guid;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelWithFormat"/> for deserialization. </summary>

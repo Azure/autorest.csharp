@@ -14,7 +14,7 @@ namespace CustomizationsInTsp.Models
     public partial class ModelToAddAdditionalSerializableProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of ModelToAddAdditionalSerializableProperty. </summary>
         /// <param name="requiredInt"> Required int. </param>
@@ -27,13 +27,13 @@ namespace CustomizationsInTsp.Models
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="additionalSerializableProperty"> to be removed by post process. </param>
         /// <param name="additionalNullableSerializableProperty"> to be removed by post process. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelToAddAdditionalSerializableProperty(int requiredInt, int additionalSerializableProperty, int? additionalNullableSerializableProperty, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelToAddAdditionalSerializableProperty(int requiredInt, int additionalSerializableProperty, int? additionalNullableSerializableProperty, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredInt = requiredInt;
             AdditionalSerializableProperty = additionalSerializableProperty;
             AdditionalNullableSerializableProperty = additionalNullableSerializableProperty;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelToAddAdditionalSerializableProperty"/> for deserialization. </summary>

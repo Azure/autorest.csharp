@@ -14,7 +14,7 @@ namespace MgmtOmitOperationGroups.Models
     public partial class ModelY
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelY"/>. </summary>
         public ModelY()
@@ -23,11 +23,11 @@ namespace MgmtOmitOperationGroups.Models
 
         /// <summary> Initializes a new instance of <see cref="ModelY"/>. </summary>
         /// <param name="e"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelY(string e, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelY(string e, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             E = e;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the e. </summary>

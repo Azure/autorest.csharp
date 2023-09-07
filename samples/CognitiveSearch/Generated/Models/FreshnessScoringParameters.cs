@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     public partial class FreshnessScoringParameters
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FreshnessScoringParameters"/>. </summary>
         /// <param name="boostingDuration"> The expiration period after which boosting will stop for a particular document. </param>
@@ -25,11 +25,11 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of <see cref="FreshnessScoringParameters"/>. </summary>
         /// <param name="boostingDuration"> The expiration period after which boosting will stop for a particular document. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FreshnessScoringParameters(TimeSpan boostingDuration, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FreshnessScoringParameters(TimeSpan boostingDuration, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             BoostingDuration = boostingDuration;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="FreshnessScoringParameters"/> for deserialization. </summary>

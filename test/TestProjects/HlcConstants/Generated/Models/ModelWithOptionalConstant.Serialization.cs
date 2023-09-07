@@ -43,9 +43,9 @@ namespace HlcConstants.Models
                 writer.WritePropertyName("optionalFloatConstant"u8);
                 writer.WriteNumberValue(OptionalFloatConstant.Value.ToSerialSingle());
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -70,7 +70,7 @@ namespace HlcConstants.Models
             Optional<IntConstant> optionalIntConstant = default;
             Optional<bool> optionalBooleanConstant = default;
             Optional<FloatConstant> optionalFloatConstant = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("optionalStringConstant"u8))
@@ -111,11 +111,11 @@ namespace HlcConstants.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new ModelWithOptionalConstant(Optional.ToNullable(optionalStringConstant), Optional.ToNullable(optionalIntConstant), Optional.ToNullable(optionalBooleanConstant), Optional.ToNullable(optionalFloatConstant), rawData);
+            return new ModelWithOptionalConstant(Optional.ToNullable(optionalStringConstant), Optional.ToNullable(optionalIntConstant), Optional.ToNullable(optionalBooleanConstant), Optional.ToNullable(optionalFloatConstant), serializedAdditionalRawData);
         }
 
         ModelWithOptionalConstant IModelJsonSerializable<ModelWithOptionalConstant>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

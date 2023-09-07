@@ -15,7 +15,7 @@ namespace _Specs_.Azure.Core.Basic.Models
     public partial class User
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of User. </summary>
         /// <param name="name"> The user's name. </param>
@@ -33,14 +33,14 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// <param name="name"> The user's name. </param>
         /// <param name="orders"> The user's order list. </param>
         /// <param name="etag"> The entity tag for this resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal User(int id, string name, IList<UserOrder> orders, string etag, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal User(int id, string name, IList<UserOrder> orders, string etag, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
             Orders = orders;
             Etag = etag;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="User"/> for deserialization. </summary>

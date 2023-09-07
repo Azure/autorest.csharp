@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class VirtualMachineScaleSetIPTag
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetIPTag"/>. </summary>
         public VirtualMachineScaleSetIPTag()
@@ -33,12 +33,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// IP tag associated with the public IP. Example: SQL, Storage etc.
         /// Serialized Name: VirtualMachineScaleSetIpTag.tag
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetIPTag(string ipTagType, string tag, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetIPTag(string ipTagType, string tag, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             IPTagType = ipTagType;
             Tag = tag;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

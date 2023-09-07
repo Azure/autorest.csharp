@@ -30,8 +30,8 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of RoundTripOnNoUse. </summary>
         /// <param name="baseModelProp"> base model property. </param>
         /// <param name="requiredList"> Required collection. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RoundTripOnNoUse(string baseModelProp, IList<CollectionItem> requiredList, Dictionary<string, BinaryData> rawData) : base(baseModelProp, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RoundTripOnNoUse(string baseModelProp, IList<CollectionItem> requiredList, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(baseModelProp, serializedAdditionalRawData)
         {
             RequiredList = requiredList;
         }

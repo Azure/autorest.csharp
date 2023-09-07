@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class LegalHoldProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="LegalHoldProperties"/>. </summary>
         internal LegalHoldProperties()
@@ -27,13 +27,13 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="hasLegalHold"> The hasLegalHold public property is set to true by SRP if there are at least one existing tag. The hasLegalHold public property is set to false by SRP if all existing legal hold tags are cleared out. There can be a maximum of 1000 blob containers with hasLegalHold=true for a given account. </param>
         /// <param name="tags"> The list of LegalHold tags of a blob container. </param>
         /// <param name="protectedAppendWritesHistory"> Protected append blob writes history. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LegalHoldProperties(bool? hasLegalHold, IReadOnlyList<TagProperty> tags, ProtectedAppendWritesHistory protectedAppendWritesHistory, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LegalHoldProperties(bool? hasLegalHold, IReadOnlyList<TagProperty> tags, ProtectedAppendWritesHistory protectedAppendWritesHistory, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             HasLegalHold = hasLegalHold;
             Tags = tags;
             ProtectedAppendWritesHistory = protectedAppendWritesHistory;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The hasLegalHold public property is set to true by SRP if there are at least one existing tag. The hasLegalHold public property is set to false by SRP if all existing legal hold tags are cleared out. There can be a maximum of 1000 blob containers with hasLegalHold=true for a given account. </summary>

@@ -37,9 +37,9 @@ namespace MgmtScopeResource.Models
             {
                 ((IModelJsonSerializable<DeploymentWhatIfProperties>)Properties).Serialize(writer, options);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -62,7 +62,7 @@ namespace MgmtScopeResource.Models
             }
             Optional<string> location = default;
             DeploymentWhatIfProperties properties = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"u8))
@@ -77,11 +77,11 @@ namespace MgmtScopeResource.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new DeploymentWhatIf(location.Value, properties, rawData);
+            return new DeploymentWhatIf(location.Value, properties, serializedAdditionalRawData);
         }
 
         DeploymentWhatIf IModelJsonSerializable<DeploymentWhatIf>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

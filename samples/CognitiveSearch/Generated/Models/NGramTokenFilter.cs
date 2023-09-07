@@ -29,8 +29,8 @@ namespace CognitiveSearch.Models
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="minGram"> The minimum n-gram length. Default is 1. Must be less than the value of maxGram. </param>
         /// <param name="maxGram"> The maximum n-gram length. Default is 2. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NGramTokenFilter(string odataType, string name, int? minGram, int? maxGram, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NGramTokenFilter(string odataType, string name, int? minGram, int? maxGram, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             MinGram = minGram;
             MaxGram = maxGram;

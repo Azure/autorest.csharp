@@ -25,9 +25,9 @@ namespace _Specs_.Azure.Core.Traits.Models
             writer.WriteStartObject();
             writer.WritePropertyName("userActionValue"u8);
             writer.WriteStringValue(UserActionValue);
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -49,7 +49,7 @@ namespace _Specs_.Azure.Core.Traits.Models
                 return null;
             }
             string userActionValue = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("userActionValue"u8))
@@ -59,11 +59,11 @@ namespace _Specs_.Azure.Core.Traits.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new UserActionParam(userActionValue, rawData);
+            return new UserActionParam(userActionValue, serializedAdditionalRawData);
         }
 
         UserActionParam IModelJsonSerializable<UserActionParam>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

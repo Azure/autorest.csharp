@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
     internal partial class FirewallPolicyRuleCollectionGroupListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyRuleCollectionGroupListResult"/>. </summary>
         internal FirewallPolicyRuleCollectionGroupListResult()
@@ -27,12 +27,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyRuleCollectionGroupListResult"/>. </summary>
         /// <param name="value"> List of FirewallPolicyRuleCollectionGroups in a FirewallPolicy. </param>
         /// <param name="nextLink"> URL to get the next set of results. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirewallPolicyRuleCollectionGroupListResult(IReadOnlyList<FirewallPolicyRuleCollectionGroupData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyRuleCollectionGroupListResult(IReadOnlyList<FirewallPolicyRuleCollectionGroupData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> List of FirewallPolicyRuleCollectionGroups in a FirewallPolicy. </summary>

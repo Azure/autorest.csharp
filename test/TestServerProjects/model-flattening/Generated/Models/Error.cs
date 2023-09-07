@@ -14,7 +14,7 @@ namespace model_flattening.Models
     internal partial class Error
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Error"/>. </summary>
         internal Error()
@@ -25,13 +25,13 @@ namespace model_flattening.Models
         /// <param name="status"></param>
         /// <param name="message"></param>
         /// <param name="parentError"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Error(int? status, string message, Error parentError, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Error(int? status, string message, Error parentError, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             Message = message;
             ParentError = parentError;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the status. </summary>

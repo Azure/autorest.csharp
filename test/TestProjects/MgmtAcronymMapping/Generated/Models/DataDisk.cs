@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
     public partial class DataDisk
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DataDisk"/>. </summary>
         /// <param name="lun">
@@ -83,8 +83,8 @@ namespace MgmtAcronymMapping.Models
         /// Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.
         /// Serialized Name: DataDisk.diskMBpsReadWrite
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DataDisk(int lun, string name, VirtualHardDisk vhd, VirtualHardDisk image, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, int? diskSizeGB, ManagedDiskParameters managedDisk, bool? toBeDetached, long? diskIopsReadWrite, long? diskMBpsReadWrite, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DataDisk(int lun, string name, VirtualHardDisk vhd, VirtualHardDisk image, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, int? diskSizeGB, ManagedDiskParameters managedDisk, bool? toBeDetached, long? diskIopsReadWrite, long? diskMBpsReadWrite, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Lun = lun;
             Name = name;
@@ -98,7 +98,7 @@ namespace MgmtAcronymMapping.Models
             ToBeDetached = toBeDetached;
             DiskIopsReadWrite = diskIopsReadWrite;
             DiskMBpsReadWrite = diskMBpsReadWrite;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DataDisk"/> for deserialization. </summary>

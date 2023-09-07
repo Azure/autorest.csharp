@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class VirtualMachineScaleSetExtensionProfile
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionProfile"/>. </summary>
         public VirtualMachineScaleSetExtensionProfile()
@@ -36,12 +36,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). &lt;br&gt;&lt;br&gt; Minimum api-version: 2020-06-01
         /// Serialized Name: VirtualMachineScaleSetExtensionProfile.extensionsTimeBudget
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetExtensionProfile(IList<VirtualMachineScaleSetExtensionData> extensions, string extensionsTimeBudget, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetExtensionProfile(IList<VirtualMachineScaleSetExtensionData> extensions, string extensionsTimeBudget, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Extensions = extensions;
             ExtensionsTimeBudget = extensionsTimeBudget;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

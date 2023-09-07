@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class AdditionalUnattendContent
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AdditionalUnattendContent"/>. </summary>
         public AdditionalUnattendContent()
@@ -41,14 +41,14 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component. The XML must be less than 4KB and must include the root element for the setting or feature that is being inserted.
         /// Serialized Name: AdditionalUnattendContent.content
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AdditionalUnattendContent(PassName? passName, ComponentName? componentName, SettingName? settingName, string content, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AdditionalUnattendContent(PassName? passName, ComponentName? componentName, SettingName? settingName, string content, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PassName = passName;
             ComponentName = componentName;
             SettingName = settingName;
             Content = content;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

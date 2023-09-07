@@ -30,8 +30,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="provisioningState"> The provisioning state of the service association link resource. </param>
         /// <param name="allowDelete"> If true, the resource can be deleted. </param>
         /// <param name="locations"> A list of locations. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ServiceAssociationLink(string id, string name, string etag, string type, string linkedResourceType, string link, ProvisioningState? provisioningState, bool? allowDelete, IList<string> locations, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ServiceAssociationLink(string id, string name, string etag, string type, string linkedResourceType, string link, ProvisioningState? provisioningState, bool? allowDelete, IList<string> locations, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

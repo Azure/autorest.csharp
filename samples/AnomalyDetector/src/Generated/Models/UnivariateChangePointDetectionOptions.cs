@@ -16,7 +16,7 @@ namespace AnomalyDetector.Models
     public partial class UnivariateChangePointDetectionOptions
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of UnivariateChangePointDetectionOptions. </summary>
         /// <param name="series">
@@ -63,8 +63,8 @@ namespace AnomalyDetector.Models
         /// value is, the larger the trend error will be which means less change point will
         /// be accepted.
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnivariateChangePointDetectionOptions(IList<TimeSeriesPoint> series, TimeGranularity granularity, int? customInterval, int? period, int? stableTrendWindow, float? threshold, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnivariateChangePointDetectionOptions(IList<TimeSeriesPoint> series, TimeGranularity granularity, int? customInterval, int? period, int? stableTrendWindow, float? threshold, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Series = series;
             Granularity = granularity;
@@ -72,7 +72,7 @@ namespace AnomalyDetector.Models
             Period = period;
             StableTrendWindow = stableTrendWindow;
             Threshold = threshold;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="UnivariateChangePointDetectionOptions"/> for deserialization. </summary>

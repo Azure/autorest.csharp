@@ -14,7 +14,7 @@ namespace body_complex.Models
     public partial class Pet
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         public Pet()
@@ -24,12 +24,12 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Pet(int? id, string name, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Pet(int? id, string name, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

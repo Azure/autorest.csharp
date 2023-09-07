@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class ListServiceSasResponse
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ListServiceSasResponse"/>. </summary>
         internal ListServiceSasResponse()
@@ -23,11 +23,11 @@ namespace Azure.ResourceManager.Storage.Models
 
         /// <summary> Initializes a new instance of <see cref="ListServiceSasResponse"/>. </summary>
         /// <param name="serviceSasToken"> List service SAS credentials of specific resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ListServiceSasResponse(string serviceSasToken, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListServiceSasResponse(string serviceSasToken, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ServiceSasToken = serviceSasToken;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> List service SAS credentials of specific resource. </summary>

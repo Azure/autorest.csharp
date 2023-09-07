@@ -16,7 +16,7 @@ namespace ConfidentLevelsInTsp.Models
     internal partial class NonConfidentModelWithSelfReference
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of NonConfidentModelWithSelfReference. </summary>
         /// <param name="name"> The name. </param>
@@ -38,13 +38,13 @@ namespace ConfidentLevelsInTsp.Models
         /// <param name="name"> The name. </param>
         /// <param name="selfReference"> The self reference. </param>
         /// <param name="unionProperty"> The non-confident part. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NonConfidentModelWithSelfReference(string name, IList<NonConfidentModelWithSelfReference> selfReference, object unionProperty, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NonConfidentModelWithSelfReference(string name, IList<NonConfidentModelWithSelfReference> selfReference, object unionProperty, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             SelfReference = selfReference;
             UnionProperty = unionProperty;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="NonConfidentModelWithSelfReference"/> for deserialization. </summary>

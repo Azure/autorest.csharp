@@ -14,7 +14,7 @@ namespace MgmtResourceName.Models
     public partial class ResourceOperation
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ResourceOperation"/>. </summary>
         internal ResourceOperation()
@@ -27,15 +27,15 @@ namespace MgmtResourceName.Models
         /// <param name="description"> The operation description. </param>
         /// <param name="origin"> The operation origin. </param>
         /// <param name="properties"> The operation properties. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ResourceOperation(string name, string displayName, string description, string origin, BinaryData properties, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceOperation(string name, string displayName, string description, string origin, BinaryData properties, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             DisplayName = displayName;
             Description = description;
             Origin = origin;
             Properties = properties;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The operation name. </summary>

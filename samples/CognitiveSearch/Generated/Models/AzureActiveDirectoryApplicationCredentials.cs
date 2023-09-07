@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class AzureActiveDirectoryApplicationCredentials
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AzureActiveDirectoryApplicationCredentials"/>. </summary>
         /// <param name="applicationId"> An AAD Application ID that was granted the required access permissions to the Azure Key Vault that is to be used when encrypting your data at rest. The Application ID should not be confused with the Object ID for your AAD Application. </param>
@@ -30,12 +30,12 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="AzureActiveDirectoryApplicationCredentials"/>. </summary>
         /// <param name="applicationId"> An AAD Application ID that was granted the required access permissions to the Azure Key Vault that is to be used when encrypting your data at rest. The Application ID should not be confused with the Object ID for your AAD Application. </param>
         /// <param name="applicationSecret"> The authentication key of the specified AAD application. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AzureActiveDirectoryApplicationCredentials(string applicationId, string applicationSecret, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AzureActiveDirectoryApplicationCredentials(string applicationId, string applicationSecret, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ApplicationId = applicationId;
             ApplicationSecret = applicationSecret;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="AzureActiveDirectoryApplicationCredentials"/> for deserialization. </summary>

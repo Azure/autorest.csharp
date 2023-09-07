@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
     public partial class VaultAccessPolicyParameters : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VaultAccessPolicyParameters"/>. </summary>
         /// <param name="properties"> Properties of the access policy. </param>
@@ -35,12 +35,12 @@ namespace MgmtMockAndSample.Models
         /// <param name="systemData"> The systemData. </param>
         /// <param name="location"> The resource type of the access policy. </param>
         /// <param name="properties"> Properties of the access policy. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VaultAccessPolicyParameters(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, AzureLocation? location, VaultAccessPolicyProperties properties, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultAccessPolicyParameters(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, AzureLocation? location, VaultAccessPolicyProperties properties, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Properties = properties;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="VaultAccessPolicyParameters"/> for deserialization. </summary>

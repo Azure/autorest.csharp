@@ -28,9 +28,9 @@ namespace _Type.Property.Optionality.Models
                 writer.WritePropertyName("property"u8);
                 writer.WriteStringValue(Property.Value, "P");
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -52,7 +52,7 @@ namespace _Type.Property.Optionality.Models
                 return null;
             }
             Optional<TimeSpan> property = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
             {
                 if (property0.NameEquals("property"u8))
@@ -66,11 +66,11 @@ namespace _Type.Property.Optionality.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
                     continue;
                 }
             }
-            return new DurationProperty(Optional.ToNullable(property), rawData);
+            return new DurationProperty(Optional.ToNullable(property), serializedAdditionalRawData);
         }
 
         DurationProperty IModelJsonSerializable<DurationProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

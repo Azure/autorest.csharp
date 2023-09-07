@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class DeletedShare
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DeletedShare"/>. </summary>
         /// <param name="deletedShareName"> Required. Identify the name of the deleted share that will be restored. </param>
@@ -33,12 +33,12 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of <see cref="DeletedShare"/>. </summary>
         /// <param name="deletedShareName"> Required. Identify the name of the deleted share that will be restored. </param>
         /// <param name="deletedShareVersion"> Required. Identify the version of the deleted share that will be restored. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeletedShare(string deletedShareName, string deletedShareVersion, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeletedShare(string deletedShareName, string deletedShareVersion, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DeletedShareName = deletedShareName;
             DeletedShareVersion = deletedShareVersion;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DeletedShare"/> for deserialization. </summary>

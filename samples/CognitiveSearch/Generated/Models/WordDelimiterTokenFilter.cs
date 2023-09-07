@@ -38,8 +38,8 @@ namespace CognitiveSearch.Models
         /// <param name="splitOnNumerics"> A value indicating whether to split on numbers. For example, if this is set to true, "Azure1Search" becomes "Azure" "1" "Search". Default is true. </param>
         /// <param name="stemEnglishPossessive"> A value indicating whether to remove trailing "'s" for each subword. Default is true. </param>
         /// <param name="protectedWords"> A list of tokens to protect from being delimited. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal WordDelimiterTokenFilter(string odataType, string name, bool? generateWordParts, bool? generateNumberParts, bool? catenateWords, bool? catenateNumbers, bool? catenateAll, bool? splitOnCaseChange, bool? preserveOriginal, bool? splitOnNumerics, bool? stemEnglishPossessive, IList<string> protectedWords, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal WordDelimiterTokenFilter(string odataType, string name, bool? generateWordParts, bool? generateNumberParts, bool? catenateWords, bool? catenateNumbers, bool? catenateAll, bool? splitOnCaseChange, bool? preserveOriginal, bool? splitOnNumerics, bool? stemEnglishPossessive, IList<string> protectedWords, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             GenerateWordParts = generateWordParts;
             GenerateNumberParts = generateNumberParts;

@@ -15,7 +15,7 @@ namespace PetStore.Models
     public partial class Pet
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of Pet. </summary>
         /// <param name="name"></param>
@@ -33,13 +33,13 @@ namespace PetStore.Models
         /// <param name="name"></param>
         /// <param name="tag"></param>
         /// <param name="age"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Pet(string name, string tag, int age, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Pet(string name, string tag, int age, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Tag = tag;
             Age = age;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Pet"/> for deserialization. </summary>

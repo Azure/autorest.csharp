@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
     internal partial class ListUsagesResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ListUsagesResult"/>. </summary>
         /// <param name="value">
@@ -43,12 +43,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information.
         /// Serialized Name: ListUsagesResult.nextLink
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ListUsagesResult(IReadOnlyList<SampleUsage> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListUsagesResult(IReadOnlyList<SampleUsage> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ListUsagesResult"/> for deserialization. </summary>

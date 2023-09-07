@@ -20,8 +20,8 @@ namespace ModelsTypeSpec.Models
 
         /// <summary> Initializes a new instance of UnknownOutputBaseModelWithDiscriminator. </summary>
         /// <param name="kind"> Discriminator. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownOutputBaseModelWithDiscriminator(string kind, Dictionary<string, BinaryData> rawData) : base(kind, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownOutputBaseModelWithDiscriminator(string kind, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, serializedAdditionalRawData)
         {
         }
     }

@@ -15,7 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class TextAnalyticsWarning
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TextAnalyticsWarning"/>. </summary>
         /// <param name="code"> Error code. </param>
@@ -33,13 +33,13 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Warning message. </param>
         /// <param name="targetRef"> A JSON pointer reference indicating the target object. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TextAnalyticsWarning(WarningCodeValue code, string message, string targetRef, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TextAnalyticsWarning(WarningCodeValue code, string message, string targetRef, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Code = code;
             Message = message;
             TargetRef = targetRef;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="TextAnalyticsWarning"/> for deserialization. </summary>

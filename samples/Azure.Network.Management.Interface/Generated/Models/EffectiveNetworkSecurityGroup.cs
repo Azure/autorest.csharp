@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class EffectiveNetworkSecurityGroup
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="EffectiveNetworkSecurityGroup"/>. </summary>
         internal EffectiveNetworkSecurityGroup()
@@ -28,14 +28,14 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="association"> Associated resources. </param>
         /// <param name="effectiveSecurityRules"> A collection of effective security rules. </param>
         /// <param name="tagMap"> Mapping of tags to list of IP Addresses included within the tag. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal EffectiveNetworkSecurityGroup(SubResource networkSecurityGroup, EffectiveNetworkSecurityGroupAssociation association, IReadOnlyList<EffectiveNetworkSecurityRule> effectiveSecurityRules, string tagMap, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal EffectiveNetworkSecurityGroup(SubResource networkSecurityGroup, EffectiveNetworkSecurityGroupAssociation association, IReadOnlyList<EffectiveNetworkSecurityRule> effectiveSecurityRules, string tagMap, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             NetworkSecurityGroup = networkSecurityGroup;
             Association = association;
             EffectiveSecurityRules = effectiveSecurityRules;
             TagMap = tagMap;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The ID of network security group that is applied. </summary>

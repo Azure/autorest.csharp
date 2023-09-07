@@ -42,8 +42,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="hostedWorkloads"> A list of references to linked BareMetal resources. </param>
         /// <param name="resourceGuid"> The resource GUID property of the network interface resource. </param>
         /// <param name="provisioningState"> The provisioning state of the network interface resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NetworkInterface(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, SubResource virtualMachine, NetworkSecurityGroup networkSecurityGroup, PrivateEndpoint privateEndpoint, IList<NetworkInterfaceIPConfiguration> ipConfigurations, IReadOnlyList<NetworkInterfaceTapConfiguration> tapConfigurations, NetworkInterfaceDnsSettings dnsSettings, string macAddress, bool? primary, bool? enableAcceleratedNetworking, bool? enableIPForwarding, IReadOnlyList<string> hostedWorkloads, string resourceGuid, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, name, type, location, tags, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NetworkInterface(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, SubResource virtualMachine, NetworkSecurityGroup networkSecurityGroup, PrivateEndpoint privateEndpoint, IList<NetworkInterfaceIPConfiguration> ipConfigurations, IReadOnlyList<NetworkInterfaceTapConfiguration> tapConfigurations, NetworkInterfaceDnsSettings dnsSettings, string macAddress, bool? primary, bool? enableAcceleratedNetworking, bool? enableIPForwarding, IReadOnlyList<string> hostedWorkloads, string resourceGuid, ProvisioningState? provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, type, location, tags, serializedAdditionalRawData)
         {
             Etag = etag;
             VirtualMachine = virtualMachine;

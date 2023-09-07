@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class LogAnalyticsInputBase
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="LogAnalyticsInputBase"/>. </summary>
         /// <param name="blobContainerSasUri">
@@ -68,8 +68,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Group query result by Resource Name.
         /// Serialized Name: LogAnalyticsInputBase.groupByResourceName
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LogAnalyticsInputBase(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime, bool? groupByThrottlePolicy, bool? groupByOperationName, bool? groupByResourceName, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LogAnalyticsInputBase(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime, bool? groupByThrottlePolicy, bool? groupByOperationName, bool? groupByResourceName, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             BlobContainerSasUri = blobContainerSasUri;
             FromTime = fromTime;
@@ -77,7 +77,7 @@ namespace Azure.ResourceManager.Sample.Models
             GroupByThrottlePolicy = groupByThrottlePolicy;
             GroupByOperationName = groupByOperationName;
             GroupByResourceName = groupByResourceName;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="LogAnalyticsInputBase"/> for deserialization. </summary>

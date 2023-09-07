@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class OutputFieldMappingEntry
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="OutputFieldMappingEntry"/>. </summary>
         /// <param name="name"> The name of the output defined by the skill. </param>
@@ -30,12 +30,12 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="OutputFieldMappingEntry"/>. </summary>
         /// <param name="name"> The name of the output defined by the skill. </param>
         /// <param name="targetName"> The target name of the output. It is optional and default to name. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal OutputFieldMappingEntry(string name, string targetName, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OutputFieldMappingEntry(string name, string targetName, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             TargetName = targetName;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="OutputFieldMappingEntry"/> for deserialization. </summary>

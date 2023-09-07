@@ -32,9 +32,9 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("constantBoostBeyondRange"u8);
                 writer.WriteBooleanValue(ShouldBoostBeyondRangeByConstant.Value);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -58,7 +58,7 @@ namespace CognitiveSearch.Models
             double boostingRangeStart = default;
             double boostingRangeEnd = default;
             Optional<bool> constantBoostBeyondRange = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("boostingRangeStart"u8))
@@ -82,11 +82,11 @@ namespace CognitiveSearch.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new MagnitudeScoringParameters(boostingRangeStart, boostingRangeEnd, Optional.ToNullable(constantBoostBeyondRange), rawData);
+            return new MagnitudeScoringParameters(boostingRangeStart, boostingRangeEnd, Optional.ToNullable(constantBoostBeyondRange), serializedAdditionalRawData);
         }
 
         MagnitudeScoringParameters IModelJsonSerializable<MagnitudeScoringParameters>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

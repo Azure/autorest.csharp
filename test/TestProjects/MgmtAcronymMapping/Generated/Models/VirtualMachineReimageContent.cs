@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
     public partial class VirtualMachineReimageContent
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineReimageContent"/>. </summary>
         public VirtualMachineReimageContent()
@@ -29,11 +29,11 @@ namespace MgmtAcronymMapping.Models
         /// Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk.
         /// Serialized Name: VirtualMachineReimageParameters.tempDisk
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineReimageContent(bool? tempDisk, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineReimageContent(bool? tempDisk, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TempDisk = tempDisk;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

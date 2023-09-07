@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     internal partial class SinglePropertyModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SinglePropertyModel"/>. </summary>
         public SinglePropertyModel()
@@ -23,11 +23,11 @@ namespace MgmtMockAndSample.Models
 
         /// <summary> Initializes a new instance of <see cref="SinglePropertyModel"/>. </summary>
         /// <param name="something"> This is a string property. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SinglePropertyModel(string something, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SinglePropertyModel(string something, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Something = something;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> This is a string property. </summary>

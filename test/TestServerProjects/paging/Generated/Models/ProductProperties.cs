@@ -14,7 +14,7 @@ namespace paging.Models
     public partial class ProductProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ProductProperties"/>. </summary>
         internal ProductProperties()
@@ -24,12 +24,12 @@ namespace paging.Models
         /// <summary> Initializes a new instance of <see cref="ProductProperties"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ProductProperties(int? id, string name, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProductProperties(int? id, string name, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the id. </summary>

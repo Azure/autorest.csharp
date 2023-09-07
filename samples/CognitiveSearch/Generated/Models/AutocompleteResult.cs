@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
     public partial class AutocompleteResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AutocompleteResult"/>. </summary>
         /// <param name="results"> The list of returned Autocompleted items. </param>
@@ -31,12 +31,12 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="AutocompleteResult"/>. </summary>
         /// <param name="coverage"> A value indicating the percentage of the index that was considered by the autocomplete request, or null if minimumCoverage was not specified in the request. </param>
         /// <param name="results"> The list of returned Autocompleted items. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AutocompleteResult(double? coverage, IReadOnlyList<AutocompleteItem> results, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AutocompleteResult(double? coverage, IReadOnlyList<AutocompleteItem> results, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Coverage = coverage;
             Results = results;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="AutocompleteResult"/> for deserialization. </summary>

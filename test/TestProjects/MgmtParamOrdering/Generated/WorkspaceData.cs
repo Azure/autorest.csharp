@@ -20,7 +20,7 @@ namespace MgmtParamOrdering
     public partial class WorkspaceData : TrackedResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="WorkspaceData"/>. </summary>
         /// <param name="location"> The location. </param>
@@ -51,8 +51,8 @@ namespace MgmtParamOrdering
         /// <param name="allowPublicAccessWhenBehindVnet"> The flag to indicate whether to allow public access when behind VNet. </param>
         /// <param name="primaryUserAssignedIdentity"> The user assigned identity resource id that represents the workspace identity. </param>
         /// <param name="tenantId"> The tenant id associated with this workspace. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal WorkspaceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string workspaceId, string description, string friendlyName, string keyVault, string applicationInsights, string containerRegistry, string storageAccount, Uri discoveryUri, ProvisioningState? provisioningState, bool? hbiWorkspace, string serviceProvisionedResourceGroup, int? privateLinkCount, string imageBuildCompute, bool? allowPublicAccessWhenBehindVnet, string primaryUserAssignedIdentity, Guid? tenantId, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal WorkspaceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string workspaceId, string description, string friendlyName, string keyVault, string applicationInsights, string containerRegistry, string storageAccount, Uri discoveryUri, ProvisioningState? provisioningState, bool? hbiWorkspace, string serviceProvisionedResourceGroup, int? privateLinkCount, string imageBuildCompute, bool? allowPublicAccessWhenBehindVnet, string primaryUserAssignedIdentity, Guid? tenantId, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             WorkspaceId = workspaceId;
             Description = description;
@@ -70,7 +70,7 @@ namespace MgmtParamOrdering
             AllowPublicAccessWhenBehindVnet = allowPublicAccessWhenBehindVnet;
             PrimaryUserAssignedIdentity = primaryUserAssignedIdentity;
             TenantId = tenantId;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="WorkspaceData"/> for deserialization. </summary>

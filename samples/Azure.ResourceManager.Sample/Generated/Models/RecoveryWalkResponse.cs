@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class RecoveryWalkResponse
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RecoveryWalkResponse"/>. </summary>
         internal RecoveryWalkResponse()
@@ -33,12 +33,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The next update domain that needs to be walked. Null means walk spanning all update domains has been completed
         /// Serialized Name: RecoveryWalkResponse.nextPlatformUpdateDomain
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RecoveryWalkResponse(bool? walkPerformed, int? nextPlatformUpdateDomain, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RecoveryWalkResponse(bool? walkPerformed, int? nextPlatformUpdateDomain, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             WalkPerformed = walkPerformed;
             NextPlatformUpdateDomain = nextPlatformUpdateDomain;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

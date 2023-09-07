@@ -96,9 +96,9 @@ namespace Inheritance.Models
                 writer.WritePropertyName("DfeUri"u8);
                 JsonSerializer.Serialize(writer, DfeUri);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -134,7 +134,7 @@ namespace Inheritance.Models
             Optional<DataFactoryElement<DateTimeOffset>> dfeDateTime = default;
             Optional<DataFactoryElement<TimeSpan>> dfeDuration = default;
             Optional<DataFactoryElement<Uri>> dfeUri = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("SomeProperty"u8))
@@ -258,11 +258,11 @@ namespace Inheritance.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties(baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value, discriminatorProperty, someProperty.Value, someOtherProperty.Value, rawData);
+            return new ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties(baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value, discriminatorProperty, someProperty.Value, someOtherProperty.Value, serializedAdditionalRawData);
         }
 
         ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties IModelJsonSerializable<ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

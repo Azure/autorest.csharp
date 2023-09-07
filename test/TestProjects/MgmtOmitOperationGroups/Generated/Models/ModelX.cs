@@ -22,8 +22,8 @@ namespace MgmtOmitOperationGroups.Models
         /// <param name="e"></param>
         /// <param name="c"></param>
         /// <param name="d"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelX(string e, string c, string d, Dictionary<string, BinaryData> rawData) : base(e, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelX(string e, string c, string d, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(e, serializedAdditionalRawData)
         {
             C = c;
             D = d;

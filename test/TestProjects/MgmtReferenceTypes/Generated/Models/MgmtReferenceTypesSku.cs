@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Fake.Models
     public partial class MgmtReferenceTypesSku
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MgmtReferenceTypesSku"/>. </summary>
         /// <param name="name"> The name of the SKU. Ex - P3. It is typically a letter+number code. </param>
@@ -35,15 +35,15 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="size"> The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. </param>
         /// <param name="family"> If the service has different generations of hardware, for the same SKU, then that can be captured here. </param>
         /// <param name="capacity"> If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MgmtReferenceTypesSku(string name, MgmtReferenceTypesSkuTier? tier, string size, string family, int? capacity, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MgmtReferenceTypesSku(string name, MgmtReferenceTypesSkuTier? tier, string size, string family, int? capacity, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Tier = tier;
             Size = size;
             Family = family;
             Capacity = capacity;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtReferenceTypesSku"/> for deserialization. </summary>

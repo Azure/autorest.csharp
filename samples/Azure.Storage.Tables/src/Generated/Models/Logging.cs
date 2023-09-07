@@ -15,7 +15,7 @@ namespace Azure.Storage.Tables.Models
     public partial class Logging
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Logging"/>. </summary>
         /// <param name="version"> The version of Storage Analytics to configure. </param>
@@ -42,15 +42,15 @@ namespace Azure.Storage.Tables.Models
         /// <param name="read"> Indicates whether all read requests should be logged. </param>
         /// <param name="write"> Indicates whether all write requests should be logged. </param>
         /// <param name="retentionPolicy"> the retention policy. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Logging(string version, bool delete, bool read, bool write, RetentionPolicy retentionPolicy, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Logging(string version, bool delete, bool read, bool write, RetentionPolicy retentionPolicy, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Version = version;
             Delete = delete;
             Read = read;
             Write = write;
             RetentionPolicy = retentionPolicy;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Logging"/> for deserialization. </summary>

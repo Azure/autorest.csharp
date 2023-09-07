@@ -15,7 +15,7 @@ namespace model_flattening.Models
     public partial class ResourceCollection
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ResourceCollection"/>. </summary>
         public ResourceCollection()
@@ -28,13 +28,13 @@ namespace model_flattening.Models
         /// <param name="productresource"> Flattened product. </param>
         /// <param name="arrayofresources"></param>
         /// <param name="dictionaryofresources"> Dictionary of &lt;FlattenedProduct&gt;. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ResourceCollection(FlattenedProduct productresource, IList<FlattenedProduct> arrayofresources, IDictionary<string, FlattenedProduct> dictionaryofresources, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceCollection(FlattenedProduct productresource, IList<FlattenedProduct> arrayofresources, IDictionary<string, FlattenedProduct> dictionaryofresources, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Productresource = productresource;
             Arrayofresources = arrayofresources;
             Dictionaryofresources = dictionaryofresources;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Flattened product. </summary>

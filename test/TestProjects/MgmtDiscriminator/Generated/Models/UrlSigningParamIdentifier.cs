@@ -15,7 +15,7 @@ namespace MgmtDiscriminator.Models
     public partial class UrlSigningParamIdentifier
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UrlSigningParamIdentifier"/>. </summary>
         /// <param name="paramIndicator"> Indicates the purpose of the parameter. </param>
@@ -32,12 +32,12 @@ namespace MgmtDiscriminator.Models
         /// <summary> Initializes a new instance of <see cref="UrlSigningParamIdentifier"/>. </summary>
         /// <param name="paramIndicator"> Indicates the purpose of the parameter. </param>
         /// <param name="paramName"> Parameter name. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UrlSigningParamIdentifier(ParamIndicator paramIndicator, string paramName, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UrlSigningParamIdentifier(ParamIndicator paramIndicator, string paramName, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ParamIndicator = paramIndicator;
             ParamName = paramName;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="UrlSigningParamIdentifier"/> for deserialization. </summary>

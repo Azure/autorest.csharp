@@ -15,7 +15,7 @@ namespace Azure.Storage.Tables.Models
     public partial class CorsRule
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CorsRule"/>. </summary>
         /// <param name="allowedOrigins"> The origin domains that are permitted to make a request against the storage service via CORS. The origin domain is the domain from which the request originates. Note that the origin must be an exact case-sensitive match with the origin that the user age sends to the service. You can also use the wildcard character '*' to allow all origin domains to make requests via CORS. </param>
@@ -44,15 +44,15 @@ namespace Azure.Storage.Tables.Models
         /// <param name="allowedHeaders"> the request headers that the origin domain may specify on the CORS request. </param>
         /// <param name="exposedHeaders"> The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer. </param>
         /// <param name="maxAgeInSeconds"> The maximum amount time that a browser should cache the preflight OPTIONS request. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CorsRule(string allowedOrigins, string allowedMethods, string allowedHeaders, string exposedHeaders, int maxAgeInSeconds, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CorsRule(string allowedOrigins, string allowedMethods, string allowedHeaders, string exposedHeaders, int maxAgeInSeconds, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             AllowedOrigins = allowedOrigins;
             AllowedMethods = allowedMethods;
             AllowedHeaders = allowedHeaders;
             ExposedHeaders = exposedHeaders;
             MaxAgeInSeconds = maxAgeInSeconds;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CorsRule"/> for deserialization. </summary>

@@ -14,7 +14,7 @@ namespace NameConflicts.Models
     public partial class Request
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Request"/>. </summary>
         public Request()
@@ -23,11 +23,11 @@ namespace NameConflicts.Models
 
         /// <summary> Initializes a new instance of <see cref="Request"/>. </summary>
         /// <param name="property"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Request(string property, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Request(string property, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Property = property;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the property. </summary>

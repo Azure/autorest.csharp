@@ -20,7 +20,7 @@ namespace MgmtScopeResource
     public partial class VMInsightsOnboardingStatusData : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VMInsightsOnboardingStatusData"/>. </summary>
         internal VMInsightsOnboardingStatusData()
@@ -37,14 +37,14 @@ namespace MgmtScopeResource
         /// <param name="onboardingStatus"> The onboarding status for the resource. Note that, a higher level scope, e.g., resource group or subscription, is considered onboarded if at least one resource under it is onboarded. </param>
         /// <param name="dataStatus"> The status of VM Insights data from the resource. When reported as `present` the data array will contain information about the data containers to which data for the specified resource is being routed. </param>
         /// <param name="data"> Containers that currently store VM Insights data for the specified resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VMInsightsOnboardingStatusData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string resourceId, OnboardingStatus? onboardingStatus, DataStatus? dataStatus, IReadOnlyList<DataContainer> data, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VMInsightsOnboardingStatusData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string resourceId, OnboardingStatus? onboardingStatus, DataStatus? dataStatus, IReadOnlyList<DataContainer> data, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             ResourceId = resourceId;
             OnboardingStatus = onboardingStatus;
             DataStatus = dataStatus;
             Data = data;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Azure Resource Manager identifier of the resource whose onboarding status is being represented. </summary>

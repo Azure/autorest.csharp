@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping.Models
     public partial class VirtualMachineSoftwarePatchProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineSoftwarePatchProperties"/>. </summary>
         internal VirtualMachineSoftwarePatchProperties()
@@ -67,8 +67,8 @@ namespace MgmtAcronymMapping.Models
         /// Describes the outcome of an install operation for a given patch.
         /// Serialized Name: VirtualMachineSoftwarePatchProperties.assessmentState
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineSoftwarePatchProperties(string patchId, string name, string version, string kbid, IReadOnlyList<string> classifications, SoftwareUpdateRebootBehavior? rebootBehavior, string activityId, DateTimeOffset? publishedOn, DateTimeOffset? lastModifiedOn, PatchAssessmentState? assessmentState, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineSoftwarePatchProperties(string patchId, string name, string version, string kbid, IReadOnlyList<string> classifications, SoftwareUpdateRebootBehavior? rebootBehavior, string activityId, DateTimeOffset? publishedOn, DateTimeOffset? lastModifiedOn, PatchAssessmentState? assessmentState, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PatchId = patchId;
             Name = name;
@@ -80,7 +80,7 @@ namespace MgmtAcronymMapping.Models
             PublishedOn = publishedOn;
             LastModifiedOn = lastModifiedOn;
             AssessmentState = assessmentState;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

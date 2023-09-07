@@ -15,7 +15,7 @@ namespace _Type.Property.Nullable.Models
     public partial class DurationProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of DurationProperty. </summary>
         /// <param name="requiredProperty"> Required property. </param>
@@ -32,12 +32,12 @@ namespace _Type.Property.Nullable.Models
         /// <summary> Initializes a new instance of DurationProperty. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DurationProperty(string requiredProperty, TimeSpan? nullableProperty, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DurationProperty(string requiredProperty, TimeSpan? nullableProperty, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredProperty = requiredProperty;
             NullableProperty = nullableProperty;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DurationProperty"/> for deserialization. </summary>

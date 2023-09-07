@@ -32,8 +32,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="subnets"> A collection of references to subnets. </param>
         /// <param name="resourceGuid"> The resource GUID property of the service endpoint policy resource. </param>
         /// <param name="provisioningState"> The provisioning state of the service endpoint policy resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ServiceEndpointPolicy(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, IList<ServiceEndpointPolicyDefinition> serviceEndpointPolicyDefinitions, IReadOnlyList<Subnet> subnets, string resourceGuid, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, name, type, location, tags, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ServiceEndpointPolicy(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, IList<ServiceEndpointPolicyDefinition> serviceEndpointPolicyDefinitions, IReadOnlyList<Subnet> subnets, string resourceGuid, ProvisioningState? provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, type, location, tags, serializedAdditionalRawData)
         {
             Etag = etag;
             ServiceEndpointPolicyDefinitions = serviceEndpointPolicyDefinitions;

@@ -17,7 +17,7 @@ namespace MgmtScopeResource.Models
     internal partial class ResourceLinkResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ResourceLinkResult"/>. </summary>
         /// <param name="value"> An array of resource links. </param>
@@ -32,12 +32,12 @@ namespace MgmtScopeResource.Models
         /// <summary> Initializes a new instance of <see cref="ResourceLinkResult"/>. </summary>
         /// <param name="value"> An array of resource links. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ResourceLinkResult(IReadOnlyList<ResourceLinkData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceLinkResult(IReadOnlyList<ResourceLinkData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ResourceLinkResult"/> for deserialization. </summary>

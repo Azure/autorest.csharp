@@ -21,8 +21,8 @@ namespace body_complex.Models
         /// Please note <see cref="Fish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="Cookiecuttershark"/>, <see cref="Goblinshark"/>, <see cref="Salmon"/>, <see cref="Sawshark"/>, <see cref="Shark"/> and <see cref="SmartSalmon"/>.
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownFish(string fishtype, string species, float length, IList<Fish> siblings, Dictionary<string, BinaryData> rawData) : base(fishtype, species, length, siblings, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownFish(string fishtype, string species, float length, IList<Fish> siblings, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(fishtype, species, length, siblings, serializedAdditionalRawData)
         {
             Fishtype = fishtype ?? "Unknown";
         }

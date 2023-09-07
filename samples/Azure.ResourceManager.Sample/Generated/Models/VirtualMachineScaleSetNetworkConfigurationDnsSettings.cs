@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     internal partial class VirtualMachineScaleSetNetworkConfigurationDnsSettings
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetNetworkConfigurationDnsSettings"/>. </summary>
         public VirtualMachineScaleSetNetworkConfigurationDnsSettings()
@@ -31,11 +31,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// List of DNS servers IP addresses
         /// Serialized Name: VirtualMachineScaleSetNetworkConfigurationDnsSettings.dnsServers
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetNetworkConfigurationDnsSettings(IList<string> dnsServers, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetNetworkConfigurationDnsSettings(IList<string> dnsServers, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DnsServers = dnsServers;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

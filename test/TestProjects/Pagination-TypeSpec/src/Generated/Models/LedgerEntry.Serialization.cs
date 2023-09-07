@@ -25,9 +25,9 @@ namespace Pagination.Models
             writer.WriteStartObject();
             writer.WritePropertyName("contents"u8);
             writer.WriteStringValue(Contents);
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -51,7 +51,7 @@ namespace Pagination.Models
             string contents = default;
             string collectionId = default;
             string transactionId = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("contents"u8))
@@ -71,11 +71,11 @@ namespace Pagination.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new LedgerEntry(contents, collectionId, transactionId, rawData);
+            return new LedgerEntry(contents, collectionId, transactionId, serializedAdditionalRawData);
         }
 
         LedgerEntry IModelJsonSerializable<LedgerEntry>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

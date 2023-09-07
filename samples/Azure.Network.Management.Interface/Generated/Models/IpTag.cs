@@ -14,7 +14,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class IpTag
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="IpTag"/>. </summary>
         public IpTag()
@@ -24,12 +24,12 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Initializes a new instance of <see cref="IpTag"/>. </summary>
         /// <param name="ipTagType"> The IP tag type. Example: FirstPartyUsage. </param>
         /// <param name="tag"> The value of the IP tag associated with the public IP. Example: SQL. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal IpTag(string ipTagType, string tag, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IpTag(string ipTagType, string tag, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             IpTagType = ipTagType;
             Tag = tag;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The IP tag type. Example: FirstPartyUsage. </summary>

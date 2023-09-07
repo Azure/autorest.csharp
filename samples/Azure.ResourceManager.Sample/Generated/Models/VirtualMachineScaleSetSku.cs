@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class VirtualMachineScaleSetSku
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetSku"/>. </summary>
         internal VirtualMachineScaleSetSku()
@@ -38,13 +38,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the number of virtual machines in the scale set.
         /// Serialized Name: VirtualMachineScaleSetSku.capacity
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetSku(ResourceType? resourceType, SampleSku sku, VirtualMachineScaleSetSkuCapacity capacity, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetSku(ResourceType? resourceType, SampleSku sku, VirtualMachineScaleSetSkuCapacity capacity, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ResourceType = resourceType;
             Sku = sku;
             Capacity = capacity;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

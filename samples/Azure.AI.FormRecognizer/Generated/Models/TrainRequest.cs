@@ -15,7 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class TrainRequest
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TrainRequest"/>. </summary>
         /// <param name="source"> Source path containing the training documents. </param>
@@ -31,13 +31,13 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="source"> Source path containing the training documents. </param>
         /// <param name="sourceFilter"> Filter to apply to the documents in the source path for training. </param>
         /// <param name="useLabelFile"> Use label file for training a model. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TrainRequest(string source, TrainSourceFilter sourceFilter, bool? useLabelFile, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TrainRequest(string source, TrainSourceFilter sourceFilter, bool? useLabelFile, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Source = source;
             SourceFilter = sourceFilter;
             UseLabelFile = useLabelFile;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="TrainRequest"/> for deserialization. </summary>

@@ -25,8 +25,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="type"> Sub Resource type. </param>
         /// <param name="virtualNetworkTap"> The reference to the Virtual Network Tap resource. </param>
         /// <param name="provisioningState"> The provisioning state of the network interface tap configuration resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NetworkInterfaceTapConfiguration(string id, string name, string etag, string type, VirtualNetworkTap virtualNetworkTap, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NetworkInterfaceTapConfiguration(string id, string name, string etag, string type, VirtualNetworkTap virtualNetworkTap, ProvisioningState? provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class ServiceStatistics
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ServiceStatistics"/>. </summary>
         /// <param name="counters"> Service level resource counters. </param>
@@ -33,12 +33,12 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="ServiceStatistics"/>. </summary>
         /// <param name="counters"> Service level resource counters. </param>
         /// <param name="limits"> Service level general limits. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ServiceStatistics(ServiceCounters counters, ServiceLimits limits, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ServiceStatistics(ServiceCounters counters, ServiceLimits limits, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Counters = counters;
             Limits = limits;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ServiceStatistics"/> for deserialization. </summary>

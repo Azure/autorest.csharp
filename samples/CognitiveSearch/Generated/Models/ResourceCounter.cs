@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     public partial class ResourceCounter
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ResourceCounter"/>. </summary>
         /// <param name="usage"> The resource usage amount. </param>
@@ -26,12 +26,12 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="ResourceCounter"/>. </summary>
         /// <param name="usage"> The resource usage amount. </param>
         /// <param name="quota"> The resource amount quota. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ResourceCounter(long usage, long? quota, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceCounter(long usage, long? quota, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Usage = usage;
             Quota = quota;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ResourceCounter"/> for deserialization. </summary>

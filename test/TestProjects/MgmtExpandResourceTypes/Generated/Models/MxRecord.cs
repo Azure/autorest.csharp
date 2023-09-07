@@ -14,7 +14,7 @@ namespace MgmtExpandResourceTypes.Models
     public partial class MxRecord
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MxRecord"/>. </summary>
         public MxRecord()
@@ -24,12 +24,12 @@ namespace MgmtExpandResourceTypes.Models
         /// <summary> Initializes a new instance of <see cref="MxRecord"/>. </summary>
         /// <param name="preference"> The preference value for this MX record. </param>
         /// <param name="exchange"> The domain name of the mail host for this MX record. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MxRecord(int? preference, string exchange, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MxRecord(int? preference, string exchange, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Preference = preference;
             Exchange = exchange;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The preference value for this MX record. </summary>

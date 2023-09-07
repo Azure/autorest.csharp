@@ -28,8 +28,8 @@ namespace xms_error_responses.Models
         /// <param name="errorType"></param>
         /// <param name="errorMessage"> the error message. </param>
         /// <param name="reason"> why is the pet sad. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PetSadError(string actionResponse, string errorType, string errorMessage, string reason, Dictionary<string, BinaryData> rawData) : base(actionResponse, errorType, errorMessage, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PetSadError(string actionResponse, string errorType, string errorMessage, string reason, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(actionResponse, errorType, errorMessage, serializedAdditionalRawData)
         {
             Reason = reason;
             ErrorType = errorType ?? "PetSadError";

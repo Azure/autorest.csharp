@@ -15,7 +15,7 @@ namespace MgmtScopeResource.Models
     public partial class DeploymentWhatIf
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DeploymentWhatIf"/>. </summary>
         /// <param name="properties"> The deployment properties. </param>
@@ -30,12 +30,12 @@ namespace MgmtScopeResource.Models
         /// <summary> Initializes a new instance of <see cref="DeploymentWhatIf"/>. </summary>
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="properties"> The deployment properties. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeploymentWhatIf(string location, DeploymentWhatIfProperties properties, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentWhatIf(string location, DeploymentWhatIfProperties properties, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Location = location;
             Properties = properties;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DeploymentWhatIf"/> for deserialization. </summary>

@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
     public partial class UpgradeOperationHistoricalStatusInfoProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UpgradeOperationHistoricalStatusInfoProperties"/>. </summary>
         internal UpgradeOperationHistoricalStatusInfoProperties()
@@ -49,8 +49,8 @@ namespace MgmtAcronymMapping.Models
         /// Information about OS rollback if performed
         /// Serialized Name: UpgradeOperationHistoricalStatusInfoProperties.rollbackInfo
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UpgradeOperationHistoricalStatusInfoProperties(UpgradeOperationHistoryStatus runningStatus, RollingUpgradeProgressInfo progress, ApiError error, UpgradeOperationInvoker? startedBy, ImageReference targetImageReference, RollbackStatusInfo rollbackInfo, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UpgradeOperationHistoricalStatusInfoProperties(UpgradeOperationHistoryStatus runningStatus, RollingUpgradeProgressInfo progress, ApiError error, UpgradeOperationInvoker? startedBy, ImageReference targetImageReference, RollbackStatusInfo rollbackInfo, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RunningStatus = runningStatus;
             Progress = progress;
@@ -58,7 +58,7 @@ namespace MgmtAcronymMapping.Models
             StartedBy = startedBy;
             TargetImageReference = targetImageReference;
             RollbackInfo = rollbackInfo;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

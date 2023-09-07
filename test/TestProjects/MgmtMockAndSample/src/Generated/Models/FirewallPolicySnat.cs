@@ -15,7 +15,7 @@ namespace MgmtMockAndSample.Models
     internal partial class FirewallPolicySnat
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicySnat"/>. </summary>
         public FirewallPolicySnat()
@@ -25,11 +25,11 @@ namespace MgmtMockAndSample.Models
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicySnat"/>. </summary>
         /// <param name="privateRanges"> List of private IP addresses/IP address ranges to not be SNAT. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirewallPolicySnat(IList<string> privateRanges, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicySnat(IList<string> privateRanges, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PrivateRanges = privateRanges;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> List of private IP addresses/IP address ranges to not be SNAT. </summary>

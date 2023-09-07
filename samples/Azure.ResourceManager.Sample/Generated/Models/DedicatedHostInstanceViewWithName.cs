@@ -38,8 +38,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The name of the dedicated host.
         /// Serialized Name: DedicatedHostInstanceViewWithName.name
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DedicatedHostInstanceViewWithName(string assetId, DedicatedHostAvailableCapacity availableCapacity, IReadOnlyList<InstanceViewStatus> statuses, string name, Dictionary<string, BinaryData> rawData) : base(assetId, availableCapacity, statuses, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DedicatedHostInstanceViewWithName(string assetId, DedicatedHostAvailableCapacity availableCapacity, IReadOnlyList<InstanceViewStatus> statuses, string name, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(assetId, availableCapacity, statuses, serializedAdditionalRawData)
         {
             Name = name;
         }

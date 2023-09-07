@@ -29,9 +29,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStringValue(DestinationContainerName);
             writer.WritePropertyName("overwriteVhds"u8);
             writer.WriteBooleanValue(OverwriteVhds);
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -55,7 +55,7 @@ namespace Azure.ResourceManager.Sample.Models
             string vhdPrefix = default;
             string destinationContainerName = default;
             bool overwriteVhds = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("vhdPrefix"u8))
@@ -75,11 +75,11 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new VirtualMachineCaptureContent(vhdPrefix, destinationContainerName, overwriteVhds, rawData);
+            return new VirtualMachineCaptureContent(vhdPrefix, destinationContainerName, overwriteVhds, serializedAdditionalRawData);
         }
 
         VirtualMachineCaptureContent IModelJsonSerializable<VirtualMachineCaptureContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

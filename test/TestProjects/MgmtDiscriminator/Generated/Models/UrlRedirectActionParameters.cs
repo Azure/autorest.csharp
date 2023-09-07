@@ -14,7 +14,7 @@ namespace MgmtDiscriminator.Models
     public partial class UrlRedirectActionParameters
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UrlRedirectActionParameters"/>. </summary>
         /// <param name="typeName"></param>
@@ -33,8 +33,8 @@ namespace MgmtDiscriminator.Models
         /// <param name="customHostname"> Host to redirect. Leave empty to use the incoming host as the destination host. </param>
         /// <param name="customQueryString"> The set of query strings to be placed in the redirect URL. Setting this value would replace any existing query string; leave empty to preserve the incoming query string. Query string must be in &lt;key&gt;=&lt;value&gt; format. ? and &amp; will be added automatically so do not include them. </param>
         /// <param name="customFragment"> Fragment to add to the redirect URL. Fragment is the part of the URL that comes after #. Do not include the #. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UrlRedirectActionParameters(UrlRedirectActionParametersTypeName typeName, RedirectType redirectType, DestinationProtocol? destinationProtocol, string customPath, string customHostname, string customQueryString, string customFragment, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UrlRedirectActionParameters(UrlRedirectActionParametersTypeName typeName, RedirectType redirectType, DestinationProtocol? destinationProtocol, string customPath, string customHostname, string customQueryString, string customFragment, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TypeName = typeName;
             RedirectType = redirectType;
@@ -43,7 +43,7 @@ namespace MgmtDiscriminator.Models
             CustomHostname = customHostname;
             CustomQueryString = customQueryString;
             CustomFragment = customFragment;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="UrlRedirectActionParameters"/> for deserialization. </summary>

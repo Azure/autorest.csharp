@@ -27,8 +27,8 @@ namespace multiple_inheritance.Models
         /// <param name="likesMilk"></param>
         /// <param name="meows"></param>
         /// <param name="hisses"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Cat(string name, bool? likesMilk, bool? meows, bool? hisses, Dictionary<string, BinaryData> rawData) : base(name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Cat(string name, bool? likesMilk, bool? meows, bool? hisses, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(name, serializedAdditionalRawData)
         {
             LikesMilk = likesMilk;
             Meows = meows;

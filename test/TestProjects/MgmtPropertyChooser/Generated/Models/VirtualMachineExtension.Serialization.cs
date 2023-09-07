@@ -88,9 +88,9 @@ namespace MgmtPropertyChooser.Models
 #endif
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -126,7 +126,7 @@ namespace MgmtPropertyChooser.Models
             Optional<BinaryData> settings = default;
             Optional<BinaryData> protectedSettings = default;
             Optional<string> provisioningState = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"u8))
@@ -247,11 +247,11 @@ namespace MgmtPropertyChooser.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new VirtualMachineExtension(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, forceUpdateTag.Value, publisher.Value, type0.Value, typeHandlerVersion.Value, Optional.ToNullable(autoUpgradeMinorVersion), Optional.ToNullable(enableAutomaticUpgrade), settings.Value, protectedSettings.Value, provisioningState.Value, rawData);
+            return new VirtualMachineExtension(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, forceUpdateTag.Value, publisher.Value, type0.Value, typeHandlerVersion.Value, Optional.ToNullable(autoUpgradeMinorVersion), Optional.ToNullable(enableAutomaticUpgrade), settings.Value, protectedSettings.Value, provisioningState.Value, serializedAdditionalRawData);
         }
 
         VirtualMachineExtension IModelJsonSerializable<VirtualMachineExtension>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

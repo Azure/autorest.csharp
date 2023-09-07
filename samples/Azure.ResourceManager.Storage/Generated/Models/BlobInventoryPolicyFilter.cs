@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class BlobInventoryPolicyFilter
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicyFilter"/>. </summary>
         public BlobInventoryPolicyFilter()
@@ -29,14 +29,14 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="blobTypes"> An array of predefined enum values. Valid values include blockBlob, appendBlob, pageBlob. Hns accounts does not support pageBlobs. This field is required when definition.objectType property is set to 'Blob'. </param>
         /// <param name="includeBlobVersions"> Includes blob versions in blob inventory when value is set to true. The definition.schemaFields values 'VersionId and IsCurrentVersion' are required if this property is set to true, else they must be excluded. </param>
         /// <param name="includeSnapshots"> Includes blob snapshots in blob inventory when value is set to true. The definition.schemaFields value 'Snapshot' is required if this property is set to true, else it must be excluded. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BlobInventoryPolicyFilter(IList<string> prefixMatch, IList<string> blobTypes, bool? includeBlobVersions, bool? includeSnapshots, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BlobInventoryPolicyFilter(IList<string> prefixMatch, IList<string> blobTypes, bool? includeBlobVersions, bool? includeSnapshots, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PrefixMatch = prefixMatch;
             BlobTypes = blobTypes;
             IncludeBlobVersions = includeBlobVersions;
             IncludeSnapshots = includeSnapshots;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> An array of strings for blob prefixes to be matched. </summary>

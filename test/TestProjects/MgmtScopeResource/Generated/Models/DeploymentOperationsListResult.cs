@@ -15,7 +15,7 @@ namespace MgmtScopeResource.Models
     internal partial class DeploymentOperationsListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DeploymentOperationsListResult"/>. </summary>
         internal DeploymentOperationsListResult()
@@ -26,12 +26,12 @@ namespace MgmtScopeResource.Models
         /// <summary> Initializes a new instance of <see cref="DeploymentOperationsListResult"/>. </summary>
         /// <param name="value"> An array of deployment operations. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeploymentOperationsListResult(IReadOnlyList<DeploymentOperation> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentOperationsListResult(IReadOnlyList<DeploymentOperation> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> An array of deployment operations. </summary>

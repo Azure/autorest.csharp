@@ -14,7 +14,7 @@ namespace AnomalyDetector.Models
     public partial class AnomalyDetectionModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of AnomalyDetectionModel. </summary>
         /// <param name="createdTime"> Date and time (UTC) when the model was created. </param>
@@ -33,14 +33,14 @@ namespace AnomalyDetector.Models
         /// Training result of a model including its status, errors and diagnostics
         /// information.
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AnomalyDetectionModel(Guid modelId, DateTimeOffset createdTime, DateTimeOffset lastUpdatedTime, ModelInfo modelInfo, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AnomalyDetectionModel(Guid modelId, DateTimeOffset createdTime, DateTimeOffset lastUpdatedTime, ModelInfo modelInfo, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ModelId = modelId;
             CreatedTime = createdTime;
             LastUpdatedTime = lastUpdatedTime;
             ModelInfo = modelInfo;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="AnomalyDetectionModel"/> for deserialization. </summary>

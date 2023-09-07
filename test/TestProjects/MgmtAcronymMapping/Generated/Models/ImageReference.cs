@@ -46,8 +46,8 @@ namespace MgmtAcronymMapping.Models
         /// Specifies in decimal numbers, the version of platform image or marketplace image used to create the virtual machine. This readonly field differs from 'version', only if the value specified in 'version' field is 'latest'.
         /// Serialized Name: ImageReference.exactVersion
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ImageReference(string id, string publisher, string offer, string sku, string version, string exactVersion, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImageReference(string id, string publisher, string offer, string sku, string version, string exactVersion, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             Publisher = publisher;
             Offer = offer;

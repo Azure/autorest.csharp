@@ -38,9 +38,9 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 ((IModelJsonSerializable<SampleUsageName>)Name).Serialize(writer, options);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Sample.Models
             int currentValue = default;
             long limit = default;
             SampleUsageName name = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("unit"u8))
@@ -90,11 +90,11 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new SampleUsage(unit, currentValue, limit, name, rawData);
+            return new SampleUsage(unit, currentValue, limit, name, serializedAdditionalRawData);
         }
 
         SampleUsage IModelJsonSerializable<SampleUsage>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

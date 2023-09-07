@@ -14,7 +14,7 @@ namespace MgmtExtensionCommonRestOperation.Models
     internal partial class CloudError
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CloudError"/>. </summary>
         internal CloudError()
@@ -23,11 +23,11 @@ namespace MgmtExtensionCommonRestOperation.Models
 
         /// <summary> Initializes a new instance of <see cref="CloudError"/>. </summary>
         /// <param name="errorResponse"> Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CloudError(ErrorResponse errorResponse, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CloudError(ErrorResponse errorResponse, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ErrorResponse = errorResponse;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
         /// <summary> The details of the error. </summary>
         public string Error

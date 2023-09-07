@@ -30,8 +30,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the primary network interface in case the virtual machine has more than 1 network interface.
         /// Serialized Name: NetworkInterfaceReference.properties.primary
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NetworkInterfaceReference(string id, bool? primary, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NetworkInterfaceReference(string id, bool? primary, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             Primary = primary;
         }

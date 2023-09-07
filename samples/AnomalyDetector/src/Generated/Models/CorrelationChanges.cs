@@ -15,7 +15,7 @@ namespace AnomalyDetector.Models
     public partial class CorrelationChanges
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of CorrelationChanges. </summary>
         internal CorrelationChanges()
@@ -25,11 +25,11 @@ namespace AnomalyDetector.Models
 
         /// <summary> Initializes a new instance of CorrelationChanges. </summary>
         /// <param name="changedVariables"> The correlated variables that have correlation changes under an anomaly. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CorrelationChanges(IReadOnlyList<string> changedVariables, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CorrelationChanges(IReadOnlyList<string> changedVariables, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ChangedVariables = changedVariables;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The correlated variables that have correlation changes under an anomaly. </summary>

@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     public partial class FirewallPolicyCertificateAuthority
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyCertificateAuthority"/>. </summary>
         public FirewallPolicyCertificateAuthority()
@@ -24,12 +24,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyCertificateAuthority"/>. </summary>
         /// <param name="keyVaultSecretId"> Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault. </param>
         /// <param name="name"> Name of the CA certificate. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirewallPolicyCertificateAuthority(string keyVaultSecretId, string name, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyCertificateAuthority(string keyVaultSecretId, string name, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             KeyVaultSecretId = keyVaultSecretId;
             Name = name;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault. </summary>

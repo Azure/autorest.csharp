@@ -14,7 +14,7 @@ namespace MgmtLRO.Models
     internal partial class FakePostResultProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FakePostResultProperties"/>. </summary>
         internal FakePostResultProperties()
@@ -23,11 +23,11 @@ namespace MgmtLRO.Models
 
         /// <summary> Initializes a new instance of <see cref="FakePostResultProperties"/>. </summary>
         /// <param name="bar"> Bar property. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FakePostResultProperties(string bar, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FakePostResultProperties(string bar, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Bar = bar;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Bar property. </summary>

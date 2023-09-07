@@ -26,8 +26,8 @@ namespace ConfidentLevelsInTsp.Models
         /// <param name="name"> The name. </param>
         /// <param name="size"> The size. </param>
         /// <param name="age"> The age. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DerivedModel(string name, double? size, int? age, Dictionary<string, BinaryData> rawData) : base(name, size, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DerivedModel(string name, double? size, int? age, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(name, size, serializedAdditionalRawData)
         {
             Age = age;
         }

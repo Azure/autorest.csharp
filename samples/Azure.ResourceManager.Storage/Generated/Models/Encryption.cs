@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class Encryption
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Encryption"/>. </summary>
         /// <param name="keySource"> The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage, Microsoft.Keyvault. </param>
@@ -29,15 +29,15 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="requireInfrastructureEncryption"> A boolean indicating whether or not the service applies a secondary layer of encryption with platform managed keys for data at rest. </param>
         /// <param name="keyVaultProperties"> Properties provided by key vault. </param>
         /// <param name="encryptionIdentity"> The identity to be used with service-side encryption at rest. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Encryption(EncryptionServices services, KeySource keySource, bool? requireInfrastructureEncryption, KeyVaultProperties keyVaultProperties, EncryptionIdentity encryptionIdentity, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Encryption(EncryptionServices services, KeySource keySource, bool? requireInfrastructureEncryption, KeyVaultProperties keyVaultProperties, EncryptionIdentity encryptionIdentity, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Services = services;
             KeySource = keySource;
             RequireInfrastructureEncryption = requireInfrastructureEncryption;
             KeyVaultProperties = keyVaultProperties;
             EncryptionIdentity = encryptionIdentity;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Encryption"/> for deserialization. </summary>

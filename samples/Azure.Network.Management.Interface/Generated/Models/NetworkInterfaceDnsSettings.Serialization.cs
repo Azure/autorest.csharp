@@ -38,9 +38,9 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("internalDnsNameLabel"u8);
                 writer.WriteStringValue(InternalDnsNameLabel);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -66,7 +66,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> internalDnsNameLabel = default;
             Optional<string> internalFqdn = default;
             Optional<string> internalDomainNameSuffix = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("dnsServers"u8))
@@ -114,11 +114,11 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new NetworkInterfaceDnsSettings(Optional.ToList(dnsServers), Optional.ToList(appliedDnsServers), internalDnsNameLabel.Value, internalFqdn.Value, internalDomainNameSuffix.Value, rawData);
+            return new NetworkInterfaceDnsSettings(Optional.ToList(dnsServers), Optional.ToList(appliedDnsServers), internalDnsNameLabel.Value, internalFqdn.Value, internalDomainNameSuffix.Value, serializedAdditionalRawData);
         }
 
         NetworkInterfaceDnsSettings IModelJsonSerializable<NetworkInterfaceDnsSettings>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

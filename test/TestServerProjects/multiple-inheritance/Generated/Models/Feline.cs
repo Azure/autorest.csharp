@@ -14,7 +14,7 @@ namespace multiple_inheritance.Models
     public partial class Feline
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Feline"/>. </summary>
         public Feline()
@@ -24,12 +24,12 @@ namespace multiple_inheritance.Models
         /// <summary> Initializes a new instance of <see cref="Feline"/>. </summary>
         /// <param name="meows"></param>
         /// <param name="hisses"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Feline(bool? meows, bool? hisses, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Feline(bool? meows, bool? hisses, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Meows = meows;
             Hisses = hisses;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the meows. </summary>

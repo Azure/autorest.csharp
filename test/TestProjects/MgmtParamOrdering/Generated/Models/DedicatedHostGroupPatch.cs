@@ -25,8 +25,8 @@ namespace MgmtParamOrdering.Models
         /// <param name="zones"> Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone. </param>
         /// <param name="platformFaultDomainCount"> Number of fault domains that the host group can span. </param>
         /// <param name="supportAutomaticPlacement"> Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'true' when not provided. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DedicatedHostGroupPatch(IDictionary<string, string> tags, IList<string> zones, int? platformFaultDomainCount, bool? supportAutomaticPlacement, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DedicatedHostGroupPatch(IDictionary<string, string> tags, IList<string> zones, int? platformFaultDomainCount, bool? supportAutomaticPlacement, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(tags, serializedAdditionalRawData)
         {
             Zones = zones;
             PlatformFaultDomainCount = platformFaultDomainCount;

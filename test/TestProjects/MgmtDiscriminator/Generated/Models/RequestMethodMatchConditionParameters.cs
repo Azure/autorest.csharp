@@ -15,7 +15,7 @@ namespace MgmtDiscriminator.Models
     public partial class RequestMethodMatchConditionParameters
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RequestMethodMatchConditionParameters"/>. </summary>
         /// <param name="typeName"></param>
@@ -34,15 +34,15 @@ namespace MgmtDiscriminator.Models
         /// <param name="negateCondition"> Describes if this is negate condition or not. </param>
         /// <param name="transforms"> List of transforms. </param>
         /// <param name="matchValues"> The match value for the condition of the delivery rule. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RequestMethodMatchConditionParameters(RequestMethodMatchConditionParametersTypeName typeName, RequestMethodOperator @operator, bool? negateCondition, IList<Transform> transforms, IList<RequestMethodMatchConditionParametersMatchValuesItem> matchValues, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RequestMethodMatchConditionParameters(RequestMethodMatchConditionParametersTypeName typeName, RequestMethodOperator @operator, bool? negateCondition, IList<Transform> transforms, IList<RequestMethodMatchConditionParametersMatchValuesItem> matchValues, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TypeName = typeName;
             Operator = @operator;
             NegateCondition = negateCondition;
             Transforms = transforms;
             MatchValues = matchValues;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="RequestMethodMatchConditionParameters"/> for deserialization. </summary>

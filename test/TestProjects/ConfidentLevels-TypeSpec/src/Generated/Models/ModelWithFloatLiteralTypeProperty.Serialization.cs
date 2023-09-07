@@ -27,9 +27,9 @@ namespace ConfidentLevelsInTsp.Models
             writer.WriteStringValue(Name);
             writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id.ToSerialSingle());
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -52,7 +52,7 @@ namespace ConfidentLevelsInTsp.Models
             }
             string name = default;
             ModelWithFloatLiteralTypePropertyId id = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -67,11 +67,11 @@ namespace ConfidentLevelsInTsp.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new ModelWithFloatLiteralTypeProperty(name, id, rawData);
+            return new ModelWithFloatLiteralTypeProperty(name, id, serializedAdditionalRawData);
         }
 
         ModelWithFloatLiteralTypeProperty IModelJsonSerializable<ModelWithFloatLiteralTypeProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

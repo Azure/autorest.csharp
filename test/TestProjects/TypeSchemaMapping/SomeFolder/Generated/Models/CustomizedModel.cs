@@ -15,21 +15,21 @@ namespace CustomNamespace
     internal partial class CustomizedModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CustomizedModel"/>. </summary>
         /// <param name="propertyRenamedAndTypeChanged"> . </param>
         /// <param name="field"> . </param>
         /// <param name="customizedFancyField"> Fruit. </param>
         /// <param name="daysOfWeek"> Day of week. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CustomizedModel(int? propertyRenamedAndTypeChanged, string field, CustomFruitEnum customizedFancyField, CustomDaysOfWeek daysOfWeek, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CustomizedModel(int? propertyRenamedAndTypeChanged, string field, CustomFruitEnum customizedFancyField, CustomDaysOfWeek daysOfWeek, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PropertyRenamedAndTypeChanged = propertyRenamedAndTypeChanged;
             _field = field;
             CustomizedFancyField = customizedFancyField;
             DaysOfWeek = daysOfWeek;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CustomizedModel"/> for deserialization. </summary>

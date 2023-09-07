@@ -14,7 +14,7 @@ namespace xml_service.Models
     public partial class RootWithRefAndNoMeta
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RootWithRefAndNoMeta"/>. </summary>
         public RootWithRefAndNoMeta()
@@ -24,12 +24,12 @@ namespace xml_service.Models
         /// <summary> Initializes a new instance of <see cref="RootWithRefAndNoMeta"/>. </summary>
         /// <param name="refToModel"> XML will use RefToModel. </param>
         /// <param name="something"> Something else (just to avoid flattening). </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RootWithRefAndNoMeta(ComplexTypeNoMeta refToModel, string something, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RootWithRefAndNoMeta(ComplexTypeNoMeta refToModel, string something, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RefToModel = refToModel;
             Something = something;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> XML will use RefToModel. </summary>

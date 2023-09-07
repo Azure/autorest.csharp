@@ -32,8 +32,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="numberOfProbes"> The number of probes where if no response, will result in stopping further traffic from being delivered to the endpoint. This values allows endpoints to be taken out of rotation faster or slower than the typical times used in Azure. </param>
         /// <param name="requestPath"> The URI used for requesting health status from the VM. Path is required if a protocol is set to http. Otherwise, it is not allowed. There is no default value. </param>
         /// <param name="provisioningState"> The provisioning state of the probe resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Probe(string id, string name, string etag, string type, IReadOnlyList<SubResource> loadBalancingRules, ProbeProtocol? protocol, int? port, int? intervalInSeconds, int? numberOfProbes, string requestPath, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Probe(string id, string name, string etag, string type, IReadOnlyList<SubResource> loadBalancingRules, ProbeProtocol? protocol, int? port, int? intervalInSeconds, int? numberOfProbes, string requestPath, ProvisioningState? provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

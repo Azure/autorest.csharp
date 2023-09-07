@@ -15,7 +15,7 @@ namespace MgmtListMethods.Models
     public partial class QuotaUpdateContent
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="QuotaUpdateContent"/>. </summary>
         public QuotaUpdateContent()
@@ -26,12 +26,12 @@ namespace MgmtListMethods.Models
         /// <summary> Initializes a new instance of <see cref="QuotaUpdateContent"/>. </summary>
         /// <param name="value"> The list for update quota. </param>
         /// <param name="location"> Region of workspace quota to be updated. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal QuotaUpdateContent(IList<QuotaBaseProperties> value, string location, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal QuotaUpdateContent(IList<QuotaBaseProperties> value, string location, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             Location = location;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The list for update quota. </summary>

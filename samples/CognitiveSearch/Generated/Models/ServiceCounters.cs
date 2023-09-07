@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class ServiceCounters
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ServiceCounters"/>. </summary>
         /// <param name="documentCounter"> Total number of documents across all indexes in the service. </param>
@@ -53,8 +53,8 @@ namespace CognitiveSearch.Models
         /// <param name="storageSizeCounter"> Total size of used storage in bytes. </param>
         /// <param name="synonymMapCounter"> Total number of synonym maps. </param>
         /// <param name="skillsetCounter"> Total number of skillsets. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ServiceCounters(ResourceCounter documentCounter, ResourceCounter indexCounter, ResourceCounter indexerCounter, ResourceCounter dataSourceCounter, ResourceCounter storageSizeCounter, ResourceCounter synonymMapCounter, ResourceCounter skillsetCounter, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ServiceCounters(ResourceCounter documentCounter, ResourceCounter indexCounter, ResourceCounter indexerCounter, ResourceCounter dataSourceCounter, ResourceCounter storageSizeCounter, ResourceCounter synonymMapCounter, ResourceCounter skillsetCounter, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DocumentCounter = documentCounter;
             IndexCounter = indexCounter;
@@ -63,7 +63,7 @@ namespace CognitiveSearch.Models
             StorageSizeCounter = storageSizeCounter;
             SynonymMapCounter = synonymMapCounter;
             SkillsetCounter = skillsetCounter;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ServiceCounters"/> for deserialization. </summary>

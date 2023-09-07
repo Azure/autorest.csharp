@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
     internal partial class AdditionalCapabilities
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AdditionalCapabilities"/>. </summary>
         public AdditionalCapabilities()
@@ -29,11 +29,11 @@ namespace MgmtAcronymMapping.Models
         /// The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled.
         /// Serialized Name: AdditionalCapabilities.ultraSSDEnabled
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AdditionalCapabilities(bool? ultraSSDEnabled, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AdditionalCapabilities(bool? ultraSSDEnabled, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             UltraSSDEnabled = ultraSSDEnabled;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

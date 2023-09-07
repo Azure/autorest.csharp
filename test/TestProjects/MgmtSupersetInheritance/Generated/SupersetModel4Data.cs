@@ -19,7 +19,7 @@ namespace MgmtSupersetInheritance
     public partial class SupersetModel4Data : TrackedResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SupersetModel4Data"/>. </summary>
         /// <param name="location"> The location. </param>
@@ -35,11 +35,11 @@ namespace MgmtSupersetInheritance
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="new"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SupersetModel4Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string @new, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SupersetModel4Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string @new, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             New = @new;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="SupersetModel4Data"/> for deserialization. </summary>

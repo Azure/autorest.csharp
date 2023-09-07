@@ -23,9 +23,9 @@ namespace Azure.ResourceManager.Storage.Models
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             writer.WriteStartObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -51,7 +51,7 @@ namespace Azure.ResourceManager.Storage.Models
             Optional<string> objectIdentifier = default;
             Optional<Guid> tenantId = default;
             Optional<string> upn = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tag"u8))
@@ -89,11 +89,11 @@ namespace Azure.ResourceManager.Storage.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new TagProperty(tag.Value, Optional.ToNullable(timestamp), objectIdentifier.Value, Optional.ToNullable(tenantId), upn.Value, rawData);
+            return new TagProperty(tag.Value, Optional.ToNullable(timestamp), objectIdentifier.Value, Optional.ToNullable(tenantId), upn.Value, serializedAdditionalRawData);
         }
 
         TagProperty IModelJsonSerializable<TagProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

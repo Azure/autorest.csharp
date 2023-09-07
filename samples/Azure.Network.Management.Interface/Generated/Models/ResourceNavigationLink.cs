@@ -26,8 +26,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="linkedResourceType"> Resource type of the linked resource. </param>
         /// <param name="link"> Link to the external resource. </param>
         /// <param name="provisioningState"> The provisioning state of the resource navigation link resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ResourceNavigationLink(string id, string name, string etag, string type, string linkedResourceType, string link, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceNavigationLink(string id, string name, string etag, string type, string linkedResourceType, string link, ProvisioningState? provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

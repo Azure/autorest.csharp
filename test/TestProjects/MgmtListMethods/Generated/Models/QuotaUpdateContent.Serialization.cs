@@ -45,9 +45,9 @@ namespace MgmtListMethods.Models
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -70,7 +70,7 @@ namespace MgmtListMethods.Models
             }
             Optional<IList<QuotaBaseProperties>> value = default;
             Optional<string> location = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -94,11 +94,11 @@ namespace MgmtListMethods.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new QuotaUpdateContent(Optional.ToList(value), location.Value, rawData);
+            return new QuotaUpdateContent(Optional.ToList(value), location.Value, serializedAdditionalRawData);
         }
 
         QuotaUpdateContent IModelJsonSerializable<QuotaUpdateContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

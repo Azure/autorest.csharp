@@ -70,9 +70,9 @@ namespace model_flattening.Models
                 }
                 writer.WriteEndObject();
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -96,7 +96,7 @@ namespace model_flattening.Models
             Optional<FlattenedProduct> productresource = default;
             Optional<IList<FlattenedProduct>> arrayofresources = default;
             Optional<IDictionary<string, FlattenedProduct>> dictionaryofresources = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("productresource"u8))
@@ -138,11 +138,11 @@ namespace model_flattening.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new ResourceCollection(productresource.Value, Optional.ToList(arrayofresources), Optional.ToDictionary(dictionaryofresources), rawData);
+            return new ResourceCollection(productresource.Value, Optional.ToList(arrayofresources), Optional.ToDictionary(dictionaryofresources), serializedAdditionalRawData);
         }
 
         ResourceCollection IModelJsonSerializable<ResourceCollection>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

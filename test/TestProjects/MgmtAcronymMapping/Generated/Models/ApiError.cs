@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping.Models
     public partial class ApiError
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ApiError"/>. </summary>
         internal ApiError()
@@ -47,15 +47,15 @@ namespace MgmtAcronymMapping.Models
         /// The error message.
         /// Serialized Name: ApiError.message
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ApiError(IReadOnlyList<ApiErrorBase> details, InnerError innererror, string code, string target, string message, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ApiError(IReadOnlyList<ApiErrorBase> details, InnerError innererror, string code, string target, string message, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Details = details;
             Innererror = innererror;
             Code = code;
             Target = target;
             Message = message;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace AnomalyDetector.Models
     public partial class DiagnosticsInfo
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of DiagnosticsInfo. </summary>
         public DiagnosticsInfo()
@@ -26,12 +26,12 @@ namespace AnomalyDetector.Models
         /// <summary> Initializes a new instance of DiagnosticsInfo. </summary>
         /// <param name="modelState"> Model status. </param>
         /// <param name="variableStates"> Variable Status. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DiagnosticsInfo(ModelState modelState, IList<VariableState> variableStates, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DiagnosticsInfo(ModelState modelState, IList<VariableState> variableStates, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ModelState = modelState;
             VariableStates = variableStates;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Model status. </summary>

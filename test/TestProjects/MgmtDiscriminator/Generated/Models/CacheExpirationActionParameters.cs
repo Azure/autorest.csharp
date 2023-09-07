@@ -14,7 +14,7 @@ namespace MgmtDiscriminator.Models
     public partial class CacheExpirationActionParameters
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CacheExpirationActionParameters"/>. </summary>
         /// <param name="typeName"></param>
@@ -32,14 +32,14 @@ namespace MgmtDiscriminator.Models
         /// <param name="cacheBehavior"> Caching behavior for the requests. </param>
         /// <param name="cacheType"> The level at which the content needs to be cached. </param>
         /// <param name="cacheDuration"> The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CacheExpirationActionParameters(CacheExpirationActionParametersTypeName typeName, CacheBehavior cacheBehavior, CacheType cacheType, TimeSpan? cacheDuration, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CacheExpirationActionParameters(CacheExpirationActionParametersTypeName typeName, CacheBehavior cacheBehavior, CacheType cacheType, TimeSpan? cacheDuration, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TypeName = typeName;
             CacheBehavior = cacheBehavior;
             CacheType = cacheType;
             CacheDuration = cacheDuration;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CacheExpirationActionParameters"/> for deserialization. </summary>

@@ -16,7 +16,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
     public partial class AzureResourceFlattenModel3 : TrackedResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel3"/>. </summary>
         /// <param name="location"> The location. </param>
@@ -32,11 +32,11 @@ namespace MgmtExactMatchFlattenInheritance.Models
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="foo"> New property. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AzureResourceFlattenModel3(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, int? foo, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AzureResourceFlattenModel3(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, int? foo, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Foo = foo;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel3"/> for deserialization. </summary>

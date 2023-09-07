@@ -94,9 +94,9 @@ namespace Inheritance.Models
                 writer.WritePropertyName("SomeOtherProperty"u8);
                 writer.WriteStringValue(SomeOtherProperty);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -131,7 +131,7 @@ namespace Inheritance.Models
             Optional<DataFactoryElement<Uri>> dfeUri = default;
             Optional<string> someProperty = default;
             Optional<string> someOtherProperty = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("BaseClassProperty"u8))
@@ -250,11 +250,11 @@ namespace Inheritance.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride(someProperty.Value, someOtherProperty.Value, baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value, rawData);
+            return new ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride(someProperty.Value, someOtherProperty.Value, baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value, serializedAdditionalRawData);
         }
 
         ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride IModelJsonSerializable<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

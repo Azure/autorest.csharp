@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     internal partial class ListContainerItems
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ListContainerItems"/>. </summary>
         internal ListContainerItems()
@@ -27,12 +27,12 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of <see cref="ListContainerItems"/>. </summary>
         /// <param name="value"> List of blobs containers returned. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of containers. Returned when total number of requested containers exceed maximum page size. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ListContainerItems(IReadOnlyList<BlobContainerData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListContainerItems(IReadOnlyList<BlobContainerData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> List of blobs containers returned. </summary>

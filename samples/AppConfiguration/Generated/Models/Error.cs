@@ -14,7 +14,7 @@ namespace AppConfiguration.Models
     internal partial class Error
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Error"/>. </summary>
         internal Error()
@@ -27,15 +27,15 @@ namespace AppConfiguration.Models
         /// <param name="name"> The name of the parameter that resulted in the error. </param>
         /// <param name="detail"> A detailed description of the error. </param>
         /// <param name="status"> The HTTP status code that the error maps to. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Error(string type, string title, string name, string detail, int? status, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Error(string type, string title, string name, string detail, int? status, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Type = type;
             Title = title;
             Name = name;
             Detail = detail;
             Status = status;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The type of the error. </summary>

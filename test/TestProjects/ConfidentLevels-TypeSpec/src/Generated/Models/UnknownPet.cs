@@ -25,8 +25,8 @@ namespace ConfidentLevelsInTsp.Models
         /// <summary> Initializes a new instance of UnknownPet. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"> The name of the pet. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownPet(string kind, string name, Dictionary<string, BinaryData> rawData) : base(kind, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownPet(string kind, string name, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, name, serializedAdditionalRawData)
         {
         }
 

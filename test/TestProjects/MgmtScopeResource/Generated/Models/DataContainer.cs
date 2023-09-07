@@ -15,7 +15,7 @@ namespace MgmtScopeResource.Models
     public partial class DataContainer
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DataContainer"/>. </summary>
         /// <param name="workspace"> Log Analytics workspace information. </param>
@@ -29,11 +29,11 @@ namespace MgmtScopeResource.Models
 
         /// <summary> Initializes a new instance of <see cref="DataContainer"/>. </summary>
         /// <param name="workspace"> Log Analytics workspace information. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DataContainer(WorkspaceInfo workspace, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DataContainer(WorkspaceInfo workspace, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Workspace = workspace;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DataContainer"/> for deserialization. </summary>

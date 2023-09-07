@@ -142,9 +142,9 @@ namespace MgmtExactMatchInheritance
                 writer.WritePropertyName("type19"u8);
                 JsonSerializer.Serialize(writer, Type19);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -190,7 +190,7 @@ namespace MgmtExactMatchInheritance
             string name = default;
             ResourceType type = default;
             Optional<SystemData> systemData = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"u8))
@@ -416,11 +416,11 @@ namespace MgmtExactMatchInheritance
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), Optional.ToNullable(type2), type3.Value, type4.Value, type5.Value, type6.Value, type7.Value, type8.Value, type9.Value, type10.Value, type11.Value, type12.Value, type13.Value, type14.Value, type15.Value, type16.Value, type17, type18, type19, rawData);
+            return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), Optional.ToNullable(type2), type3.Value, type4.Value, type5.Value, type6.Value, type7.Value, type8.Value, type9.Value, type10.Value, type11.Value, type12.Value, type13.Value, type14.Value, type15.Value, type16.Value, type17, type18, type19, serializedAdditionalRawData);
         }
 
         ExactMatchModel1Data IModelJsonSerializable<ExactMatchModel1Data>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

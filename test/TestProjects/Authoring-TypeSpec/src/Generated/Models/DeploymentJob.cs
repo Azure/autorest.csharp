@@ -17,7 +17,7 @@ namespace AuthoringTypeSpec.Models
     public partial class DeploymentJob
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of DeploymentJob. </summary>
         /// <param name="jobId"> The job ID. </param>
@@ -46,8 +46,8 @@ namespace AuthoringTypeSpec.Models
         /// <param name="warnings"> The warnings that were encountered while executing the job. </param>
         /// <param name="errors"> The errors encountered while executing the job. </param>
         /// <param name="id"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeploymentJob(string jobId, DateTimeOffset createdDateTime, DateTimeOffset lastUpdatedDateTime, DateTimeOffset expirationDateTime, JobStatus status, IReadOnlyList<JobWarning> warnings, ResponseError errors, string id, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentJob(string jobId, DateTimeOffset createdDateTime, DateTimeOffset lastUpdatedDateTime, DateTimeOffset expirationDateTime, JobStatus status, IReadOnlyList<JobWarning> warnings, ResponseError errors, string id, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             JobId = jobId;
             CreatedDateTime = createdDateTime;
@@ -57,7 +57,7 @@ namespace AuthoringTypeSpec.Models
             Warnings = warnings;
             Errors = errors;
             Id = id;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DeploymentJob"/> for deserialization. </summary>

@@ -23,9 +23,9 @@ namespace Azure.ResourceManager.Sample.Models
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             writer.WriteStartObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -52,7 +52,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<UpgradeOperationInvoker> startedBy = default;
             Optional<ImageReference> targetImageReference = default;
             Optional<RollbackStatusInfo> rollbackInfo = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("runningStatus"u8))
@@ -111,11 +111,11 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new UpgradeOperationHistoricalStatusInfoProperties(runningStatus.Value, progress.Value, error.Value, Optional.ToNullable(startedBy), targetImageReference.Value, rollbackInfo.Value, rawData);
+            return new UpgradeOperationHistoricalStatusInfoProperties(runningStatus.Value, progress.Value, error.Value, Optional.ToNullable(startedBy), targetImageReference.Value, rollbackInfo.Value, serializedAdditionalRawData);
         }
 
         UpgradeOperationHistoricalStatusInfoProperties IModelJsonSerializable<UpgradeOperationHistoricalStatusInfoProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

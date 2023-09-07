@@ -21,7 +21,7 @@ namespace body_complex.Models
     public abstract partial class Fish
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Fish"/>. </summary>
         /// <param name="length"></param>
@@ -39,14 +39,14 @@ namespace body_complex.Models
         /// Please note <see cref="Fish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="Cookiecuttershark"/>, <see cref="Goblinshark"/>, <see cref="Salmon"/>, <see cref="Sawshark"/>, <see cref="Shark"/> and <see cref="SmartSalmon"/>.
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Fish(string fishtype, string species, float length, IList<Fish> siblings, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Fish(string fishtype, string species, float length, IList<Fish> siblings, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Fishtype = fishtype;
             Species = species;
             Length = length;
             Siblings = siblings;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Fish"/> for deserialization. </summary>

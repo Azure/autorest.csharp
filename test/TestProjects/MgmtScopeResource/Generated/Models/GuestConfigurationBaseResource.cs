@@ -14,7 +14,7 @@ namespace MgmtScopeResource.Models
     public partial class GuestConfigurationBaseResource
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="GuestConfigurationBaseResource"/>. </summary>
         public GuestConfigurationBaseResource()
@@ -26,14 +26,14 @@ namespace MgmtScopeResource.Models
         /// <param name="name"> Name of the guest configuration assignment. </param>
         /// <param name="location"> Region where the VM is located. </param>
         /// <param name="resourceType"> The type of the resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal GuestConfigurationBaseResource(string id, string name, string location, string resourceType, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal GuestConfigurationBaseResource(string id, string name, string location, string resourceType, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
             Location = location;
             ResourceType = resourceType;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> ARM resource id of the guest configuration assignment. </summary>

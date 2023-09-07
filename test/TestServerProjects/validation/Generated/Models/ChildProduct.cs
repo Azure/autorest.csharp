@@ -14,7 +14,7 @@ namespace validation.Models
     public partial class ChildProduct
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ChildProduct"/>. </summary>
         public ChildProduct()
@@ -25,12 +25,12 @@ namespace validation.Models
         /// <summary> Initializes a new instance of <see cref="ChildProduct"/>. </summary>
         /// <param name="constProperty"> Constant string. </param>
         /// <param name="count"> Count. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ChildProduct(ChildProductConstProperty constProperty, int? count, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ChildProduct(ChildProductConstProperty constProperty, int? count, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ConstProperty = constProperty;
             Count = count;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Constant string. </summary>

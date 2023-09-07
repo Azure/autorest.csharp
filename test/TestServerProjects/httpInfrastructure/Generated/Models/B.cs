@@ -21,8 +21,8 @@ namespace httpInfrastructure.Models
         /// <summary> Initializes a new instance of <see cref="B"/>. </summary>
         /// <param name="statusCode"></param>
         /// <param name="textStatusCode"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal B(string statusCode, string textStatusCode, Dictionary<string, BinaryData> rawData) : base(statusCode, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal B(string statusCode, string textStatusCode, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(statusCode, serializedAdditionalRawData)
         {
             TextStatusCode = textStatusCode;
         }

@@ -14,7 +14,7 @@ namespace extensible_enums_swagger.Models
     public partial class Pet
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="intEnum"></param>
@@ -27,13 +27,13 @@ namespace extensible_enums_swagger.Models
         /// <param name="name"> name. </param>
         /// <param name="daysOfWeek"> Type of Pet. </param>
         /// <param name="intEnum"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Pet(string name, DaysOfWeekExtensibleEnum? daysOfWeek, IntEnum intEnum, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Pet(string name, DaysOfWeekExtensibleEnum? daysOfWeek, IntEnum intEnum, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             DaysOfWeek = daysOfWeek;
             IntEnum = intEnum;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Pet"/> for deserialization. </summary>

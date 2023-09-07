@@ -16,7 +16,7 @@ namespace MgmtScopeResource.Models
     internal partial class GuestConfigurationAssignmentList
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="GuestConfigurationAssignmentList"/>. </summary>
         internal GuestConfigurationAssignmentList()
@@ -26,11 +26,11 @@ namespace MgmtScopeResource.Models
 
         /// <summary> Initializes a new instance of <see cref="GuestConfigurationAssignmentList"/>. </summary>
         /// <param name="value"> Result of the list guest configuration assignment operation. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal GuestConfigurationAssignmentList(IReadOnlyList<GuestConfigurationAssignmentData> value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal GuestConfigurationAssignmentList(IReadOnlyList<GuestConfigurationAssignmentData> value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Result of the list guest configuration assignment operation. </summary>

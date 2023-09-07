@@ -15,7 +15,7 @@ namespace xml_service.Models
     public partial class Slide
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Slide"/>. </summary>
         public Slide()
@@ -27,13 +27,13 @@ namespace xml_service.Models
         /// <param name="type"></param>
         /// <param name="title"></param>
         /// <param name="items"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Slide(string type, string title, IList<string> items, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Slide(string type, string title, IList<string> items, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Type = type;
             Title = title;
             Items = items;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the type. </summary>

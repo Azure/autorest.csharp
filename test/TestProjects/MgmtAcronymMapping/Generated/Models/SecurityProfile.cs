@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
     internal partial class SecurityProfile
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SecurityProfile"/>. </summary>
         public SecurityProfile()
@@ -29,11 +29,11 @@ namespace MgmtAcronymMapping.Models
         /// This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. &lt;br&gt;&lt;br&gt; Default: The Encryption at host will be disabled unless this property is set to true for the resource.
         /// Serialized Name: SecurityProfile.encryptionAtHost
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SecurityProfile(bool? encryptionAtHost, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SecurityProfile(bool? encryptionAtHost, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             EncryptionAtHost = encryptionAtHost;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

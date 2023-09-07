@@ -31,8 +31,8 @@ namespace MgmtMockAndSample.Models
         /// Please note <see cref="FirewallPolicyRule"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="ApplicationRule"/>, <see cref="NatRule"/> and <see cref="NetworkRule"/>.
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirewallPolicyNatRuleCollection(FirewallPolicyRuleCollectionType ruleCollectionType, string name, int? priority, FirewallPolicyNatRuleCollectionAction action, IList<FirewallPolicyRule> rules, Dictionary<string, BinaryData> rawData) : base(ruleCollectionType, name, priority, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyNatRuleCollection(FirewallPolicyRuleCollectionType ruleCollectionType, string name, int? priority, FirewallPolicyNatRuleCollectionAction action, IList<FirewallPolicyRule> rules, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(ruleCollectionType, name, priority, serializedAdditionalRawData)
         {
             Action = action;
             Rules = rules;

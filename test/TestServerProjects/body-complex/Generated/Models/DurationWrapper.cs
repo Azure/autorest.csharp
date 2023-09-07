@@ -14,7 +14,7 @@ namespace body_complex.Models
     public partial class DurationWrapper
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DurationWrapper"/>. </summary>
         public DurationWrapper()
@@ -23,11 +23,11 @@ namespace body_complex.Models
 
         /// <summary> Initializes a new instance of <see cref="DurationWrapper"/>. </summary>
         /// <param name="field"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DurationWrapper(TimeSpan? field, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DurationWrapper(TimeSpan? field, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Field = field;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the field. </summary>

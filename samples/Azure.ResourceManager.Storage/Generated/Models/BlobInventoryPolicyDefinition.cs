@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class BlobInventoryPolicyDefinition
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicyDefinition"/>. </summary>
         /// <param name="format"> This is a required field, it specifies the format for the inventory files. </param>
@@ -40,15 +40,15 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="schedule"> This is a required field. This field is used to schedule an inventory formation. </param>
         /// <param name="objectType"> This is a required field. This field specifies the scope of the inventory created either at the blob or container level. </param>
         /// <param name="schemaFields"> This is a required field. This field specifies the fields and properties of the object to be included in the inventory. The Schema field value 'Name' is always required. The valid values for this field for the 'Blob' definition.objectType include 'Name, Creation-Time, Last-Modified, Content-Length, Content-MD5, BlobType, AccessTier, AccessTierChangeTime, AccessTierInferred, Tags, Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl, Snapshot, VersionId, IsCurrentVersion, Metadata, LastAccessTime'. The valid values for 'Container' definition.objectType include 'Name, Last-Modified, Metadata, LeaseStatus, LeaseState, LeaseDuration, PublicAccess, HasImmutabilityPolicy, HasLegalHold'. Schema field values 'Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl' are valid only for Hns enabled accounts.'Tags' field is only valid for non Hns accounts. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BlobInventoryPolicyDefinition(BlobInventoryPolicyFilter filters, Format format, Schedule schedule, ObjectType objectType, IList<string> schemaFields, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BlobInventoryPolicyDefinition(BlobInventoryPolicyFilter filters, Format format, Schedule schedule, ObjectType objectType, IList<string> schemaFields, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Filters = filters;
             Format = format;
             Schedule = schedule;
             ObjectType = objectType;
             SchemaFields = schemaFields;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicyDefinition"/> for deserialization. </summary>

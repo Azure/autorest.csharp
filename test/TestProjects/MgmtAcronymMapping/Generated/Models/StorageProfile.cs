@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping.Models
     public partial class StorageProfile
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StorageProfile"/>. </summary>
         public StorageProfile()
@@ -39,13 +39,13 @@ namespace MgmtAcronymMapping.Models
         /// Specifies the parameters that are used to add a data disk to a virtual machine. &lt;br&gt;&lt;br&gt; For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
         /// Serialized Name: StorageProfile.dataDisks
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StorageProfile(ImageReference imageReference, OSDisk osDisk, IList<DataDisk> dataDisks, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageProfile(ImageReference imageReference, OSDisk osDisk, IList<DataDisk> dataDisks, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ImageReference = imageReference;
             OSDisk = osDisk;
             DataDisks = dataDisks;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

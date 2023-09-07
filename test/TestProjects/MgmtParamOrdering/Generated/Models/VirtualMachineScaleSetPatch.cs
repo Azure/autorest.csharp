@@ -21,8 +21,8 @@ namespace MgmtParamOrdering.Models
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPatch"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="sku"> The virtual machine scale set sku. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetPatch(IDictionary<string, string> tags, MgmtParamOrderingSku sku, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetPatch(IDictionary<string, string> tags, MgmtParamOrderingSku sku, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(tags, serializedAdditionalRawData)
         {
             Sku = sku;
         }

@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class VirtualMachinePatchStatus
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachinePatchStatus"/>. </summary>
         internal VirtualMachinePatchStatus()
@@ -33,12 +33,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The installation summary of the latest installation operation for the virtual machine.
         /// Serialized Name: VirtualMachinePatchStatus.lastPatchInstallationSummary
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachinePatchStatus(AvailablePatchSummary availablePatchSummary, LastPatchInstallationSummary lastPatchInstallationSummary, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachinePatchStatus(AvailablePatchSummary availablePatchSummary, LastPatchInstallationSummary lastPatchInstallationSummary, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             AvailablePatchSummary = availablePatchSummary;
             LastPatchInstallationSummary = lastPatchInstallationSummary;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class ObjectReplicationPolicyRule
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ObjectReplicationPolicyRule"/>. </summary>
         /// <param name="sourceContainer"> Required. Source container name. </param>
@@ -35,14 +35,14 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="sourceContainer"> Required. Source container name. </param>
         /// <param name="destinationContainer"> Required. Destination container name. </param>
         /// <param name="filters"> Optional. An object that defines the filter set. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ObjectReplicationPolicyRule(string ruleId, string sourceContainer, string destinationContainer, ObjectReplicationPolicyFilter filters, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ObjectReplicationPolicyRule(string ruleId, string sourceContainer, string destinationContainer, ObjectReplicationPolicyFilter filters, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RuleId = ruleId;
             SourceContainer = sourceContainer;
             DestinationContainer = destinationContainer;
             Filters = filters;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ObjectReplicationPolicyRule"/> for deserialization. </summary>

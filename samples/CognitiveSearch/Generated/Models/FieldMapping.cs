@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class FieldMapping
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FieldMapping"/>. </summary>
         /// <param name="sourceFieldName"> The name of the field in the data source. </param>
@@ -31,13 +31,13 @@ namespace CognitiveSearch.Models
         /// <param name="sourceFieldName"> The name of the field in the data source. </param>
         /// <param name="targetFieldName"> The name of the target field in the index. Same as the source field name by default. </param>
         /// <param name="mappingFunction"> A function to apply to each source field value before indexing. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FieldMapping(string sourceFieldName, string targetFieldName, FieldMappingFunction mappingFunction, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FieldMapping(string sourceFieldName, string targetFieldName, FieldMappingFunction mappingFunction, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SourceFieldName = sourceFieldName;
             TargetFieldName = targetFieldName;
             MappingFunction = mappingFunction;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="FieldMapping"/> for deserialization. </summary>

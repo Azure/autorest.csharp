@@ -25,9 +25,9 @@ namespace _Type.Model.Usage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("requiredProp"u8);
             writer.WriteStringValue(RequiredProp);
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -49,7 +49,7 @@ namespace _Type.Model.Usage.Models
                 return null;
             }
             string requiredProp = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredProp"u8))
@@ -59,11 +59,11 @@ namespace _Type.Model.Usage.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new OutputRecord(requiredProp, rawData);
+            return new OutputRecord(requiredProp, serializedAdditionalRawData);
         }
 
         OutputRecord IModelJsonSerializable<OutputRecord>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

@@ -29,8 +29,8 @@ namespace MgmtDiscriminator.Models
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeliveryRuleCacheKeyQueryStringAction(DeliveryRuleActionType name, string foo, CacheKeyQueryStringActionParameters parameters, Dictionary<string, BinaryData> rawData) : base(name, foo, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeliveryRuleCacheKeyQueryStringAction(DeliveryRuleActionType name, string foo, CacheKeyQueryStringActionParameters parameters, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(name, foo, serializedAdditionalRawData)
         {
             Parameters = parameters;
             Name = name;

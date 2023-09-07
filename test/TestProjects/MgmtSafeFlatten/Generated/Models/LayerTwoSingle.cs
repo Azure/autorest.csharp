@@ -14,7 +14,7 @@ namespace MgmtSafeFlatten.Models
     internal partial class LayerTwoSingle
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="LayerTwoSingle"/>. </summary>
         public LayerTwoSingle()
@@ -23,11 +23,11 @@ namespace MgmtSafeFlatten.Models
 
         /// <summary> Initializes a new instance of <see cref="LayerTwoSingle"/>. </summary>
         /// <param name="myProp"> MyProp description. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LayerTwoSingle(string myProp, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LayerTwoSingle(string myProp, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             MyProp = myProp;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> MyProp description. </summary>

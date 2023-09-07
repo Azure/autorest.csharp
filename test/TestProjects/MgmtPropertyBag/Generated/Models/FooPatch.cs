@@ -14,7 +14,7 @@ namespace MgmtPropertyBag.Models
     public partial class FooPatch
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FooPatch"/>. </summary>
         public FooPatch()
@@ -23,11 +23,11 @@ namespace MgmtPropertyBag.Models
 
         /// <summary> Initializes a new instance of <see cref="FooPatch"/>. </summary>
         /// <param name="details"> The details of the resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FooPatch(string details, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FooPatch(string details, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Details = details;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The details of the resource. </summary>

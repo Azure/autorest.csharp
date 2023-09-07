@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class EffectiveRoute
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="EffectiveRoute"/>. </summary>
         internal EffectiveRoute()
@@ -32,8 +32,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="addressPrefix"> The address prefixes of the effective routes in CIDR notation. </param>
         /// <param name="nextHopIpAddress"> The IP address of the next hop of the effective route. </param>
         /// <param name="nextHopType"> The type of Azure hop the packet should be sent to. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal EffectiveRoute(string name, bool? disableBgpRoutePropagation, EffectiveRouteSource? source, EffectiveRouteState? state, IReadOnlyList<string> addressPrefix, IReadOnlyList<string> nextHopIpAddress, RouteNextHopType? nextHopType, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal EffectiveRoute(string name, bool? disableBgpRoutePropagation, EffectiveRouteSource? source, EffectiveRouteState? state, IReadOnlyList<string> addressPrefix, IReadOnlyList<string> nextHopIpAddress, RouteNextHopType? nextHopType, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             DisableBgpRoutePropagation = disableBgpRoutePropagation;
@@ -42,7 +42,7 @@ namespace Azure.Network.Management.Interface.Models
             AddressPrefix = addressPrefix;
             NextHopIpAddress = nextHopIpAddress;
             NextHopType = nextHopType;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The name of the user defined route. This is optional. </summary>

@@ -14,7 +14,7 @@ namespace ProtocolMethodsInRestClient.Models
     public partial class Grouped
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Grouped"/>. </summary>
         /// <param name="second"> Second in group. </param>
@@ -26,12 +26,12 @@ namespace ProtocolMethodsInRestClient.Models
         /// <summary> Initializes a new instance of <see cref="Grouped"/>. </summary>
         /// <param name="first"> First in group. </param>
         /// <param name="second"> Second in group. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Grouped(string first, int second, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Grouped(string first, int second, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             First = first;
             Second = second;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Grouped"/> for deserialization. </summary>

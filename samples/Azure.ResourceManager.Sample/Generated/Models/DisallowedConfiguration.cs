@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     internal partial class DisallowedConfiguration
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DisallowedConfiguration"/>. </summary>
         public DisallowedConfiguration()
@@ -29,11 +29,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// VM disk types which are disallowed.
         /// Serialized Name: DisallowedConfiguration.vmDiskType
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DisallowedConfiguration(VmDiskType? vmDiskType, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DisallowedConfiguration(VmDiskType? vmDiskType, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             VmDiskType = vmDiskType;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

@@ -25,8 +25,8 @@ namespace body_complex.Models
         /// <param name="name"></param>
         /// <param name="color"></param>
         /// <param name="hates"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Cat(int? id, string name, string color, IList<Dog> hates, Dictionary<string, BinaryData> rawData) : base(id, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Cat(int? id, string name, string color, IList<Dog> hates, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, serializedAdditionalRawData)
         {
             Color = color;
             Hates = hates;

@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     internal partial class EncryptionScopeListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="EncryptionScopeListResult"/>. </summary>
         internal EncryptionScopeListResult()
@@ -27,12 +27,12 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of <see cref="EncryptionScopeListResult"/>. </summary>
         /// <param name="value"> List of encryption scopes requested. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of encryption scopes. Returned when total number of requested encryption scopes exceeds the maximum page size. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal EncryptionScopeListResult(IReadOnlyList<EncryptionScopeData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal EncryptionScopeListResult(IReadOnlyList<EncryptionScopeData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> List of encryption scopes requested. </summary>

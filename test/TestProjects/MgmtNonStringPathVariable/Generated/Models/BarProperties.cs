@@ -14,7 +14,7 @@ namespace MgmtNonStringPathVariable.Models
     internal partial class BarProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BarProperties"/>. </summary>
         public BarProperties()
@@ -23,11 +23,11 @@ namespace MgmtNonStringPathVariable.Models
 
         /// <summary> Initializes a new instance of <see cref="BarProperties"/>. </summary>
         /// <param name="buzz"> Update Domain count. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BarProperties(Guid? buzz, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BarProperties(Guid? buzz, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Buzz = buzz;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Update Domain count. </summary>

@@ -14,7 +14,7 @@ namespace MgmtExtensionResource.Models
     public partial class ValidateSomethingContent
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ValidateSomethingContent"/>. </summary>
         public ValidateSomethingContent()
@@ -23,11 +23,11 @@ namespace MgmtExtensionResource.Models
 
         /// <summary> Initializes a new instance of <see cref="ValidateSomethingContent"/>. </summary>
         /// <param name="something"> The something to validate. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ValidateSomethingContent(string something, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ValidateSomethingContent(string something, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Something = something;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The something to validate. </summary>

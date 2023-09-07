@@ -15,7 +15,7 @@ namespace AnomalyDetector.Models
     public partial class ErrorResponse
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of ErrorResponse. </summary>
         /// <param name="code"> The error code. </param>
@@ -33,12 +33,12 @@ namespace AnomalyDetector.Models
         /// <summary> Initializes a new instance of ErrorResponse. </summary>
         /// <param name="code"> The error code. </param>
         /// <param name="message"> The message explaining the error reported by the service. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ErrorResponse(string code, string message, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ErrorResponse(string code, string message, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Code = code;
             Message = message;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ErrorResponse"/> for deserialization. </summary>

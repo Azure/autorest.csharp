@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class LegalHold
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="LegalHold"/>. </summary>
         /// <param name="tags"> Each tag should be 3 to 23 alphanumeric characters and is normalized to lower case at SRP. </param>
@@ -32,13 +32,13 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="hasLegalHold"> The hasLegalHold public property is set to true by SRP if there are at least one existing tag. The hasLegalHold public property is set to false by SRP if all existing legal hold tags are cleared out. There can be a maximum of 1000 blob containers with hasLegalHold=true for a given account. </param>
         /// <param name="tags"> Each tag should be 3 to 23 alphanumeric characters and is normalized to lower case at SRP. </param>
         /// <param name="allowProtectedAppendWritesAll"> When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining legal hold protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LegalHold(bool? hasLegalHold, IList<string> tags, bool? allowProtectedAppendWritesAll, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LegalHold(bool? hasLegalHold, IList<string> tags, bool? allowProtectedAppendWritesAll, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             HasLegalHold = hasLegalHold;
             Tags = tags;
             AllowProtectedAppendWritesAll = allowProtectedAppendWritesAll;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="LegalHold"/> for deserialization. </summary>

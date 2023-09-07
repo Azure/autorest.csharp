@@ -33,9 +33,9 @@ namespace TypeSchemaMapping.Models
                 writer.WritePropertyName("PublicProperty"u8);
                 writer.WriteStringValue(PublicProperty);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -58,7 +58,7 @@ namespace TypeSchemaMapping.Models
             }
             Optional<JsonElement> internalProperty = default;
             Optional<string> publicProperty = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("InternalProperty"u8))
@@ -73,11 +73,11 @@ namespace TypeSchemaMapping.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new PublicModelWithInternalProperty(internalProperty, publicProperty.Value, rawData);
+            return new PublicModelWithInternalProperty(internalProperty, publicProperty.Value, serializedAdditionalRawData);
         }
 
         PublicModelWithInternalProperty IModelJsonSerializable<PublicModelWithInternalProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

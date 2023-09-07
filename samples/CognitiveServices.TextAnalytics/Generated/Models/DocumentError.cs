@@ -15,7 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class DocumentError
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DocumentError"/>. </summary>
         /// <param name="id"> Document Id. </param>
@@ -33,12 +33,12 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Initializes a new instance of <see cref="DocumentError"/>. </summary>
         /// <param name="id"> Document Id. </param>
         /// <param name="error"> Document Error. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DocumentError(string id, TextAnalyticsError error, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DocumentError(string id, TextAnalyticsError error, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Error = error;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DocumentError"/> for deserialization. </summary>

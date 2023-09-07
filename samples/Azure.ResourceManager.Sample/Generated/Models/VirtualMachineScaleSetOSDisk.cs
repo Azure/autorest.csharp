@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class VirtualMachineScaleSetOSDisk
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetOSDisk"/>. </summary>
         /// <param name="createOption">
@@ -72,8 +72,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The managed disk parameters.
         /// Serialized Name: VirtualMachineScaleSetOSDisk.managedDisk
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetOSDisk(string name, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, DiffDiskSettings diffDiskSettings, int? diskSizeGB, OperatingSystemType? osType, VirtualHardDisk image, IList<string> vhdContainers, VirtualMachineScaleSetManagedDiskParameters managedDisk, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetOSDisk(string name, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, DiffDiskSettings diffDiskSettings, int? diskSizeGB, OperatingSystemType? osType, VirtualHardDisk image, IList<string> vhdContainers, VirtualMachineScaleSetManagedDiskParameters managedDisk, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Caching = caching;
@@ -85,7 +85,7 @@ namespace Azure.ResourceManager.Sample.Models
             Image = image;
             VhdContainers = vhdContainers;
             ManagedDisk = managedDisk;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetOSDisk"/> for deserialization. </summary>

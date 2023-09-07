@@ -21,8 +21,8 @@ namespace model_flattening.Models
         /// <summary> Initializes a new instance of <see cref="ProductUrl"/>. </summary>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ProductUrl(string genericValue, string odataValue, Dictionary<string, BinaryData> rawData) : base(genericValue, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProductUrl(string genericValue, string odataValue, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(genericValue, serializedAdditionalRawData)
         {
             OdataValue = odataValue;
         }

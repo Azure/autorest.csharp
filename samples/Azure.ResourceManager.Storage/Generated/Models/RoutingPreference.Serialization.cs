@@ -38,9 +38,9 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("publishInternetEndpoints"u8);
                 writer.WriteBooleanValue(PublishInternetEndpoints.Value);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -64,7 +64,7 @@ namespace Azure.ResourceManager.Storage.Models
             Optional<RoutingChoice> routingChoice = default;
             Optional<bool> publishMicrosoftEndpoints = default;
             Optional<bool> publishInternetEndpoints = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("routingChoice"u8))
@@ -96,11 +96,11 @@ namespace Azure.ResourceManager.Storage.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new RoutingPreference(Optional.ToNullable(routingChoice), Optional.ToNullable(publishMicrosoftEndpoints), Optional.ToNullable(publishInternetEndpoints), rawData);
+            return new RoutingPreference(Optional.ToNullable(routingChoice), Optional.ToNullable(publishMicrosoftEndpoints), Optional.ToNullable(publishInternetEndpoints), serializedAdditionalRawData);
         }
 
         RoutingPreference IModelJsonSerializable<RoutingPreference>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

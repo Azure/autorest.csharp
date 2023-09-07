@@ -32,8 +32,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The virtual machine scale set instance ids. Omitting the virtual machine scale set instance ids will result in the operation being performed on all virtual machines in the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetReimageParameters.instanceIds
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetReimageContent(bool? tempDisk, IList<string> instanceIds, Dictionary<string, BinaryData> rawData) : base(tempDisk, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetReimageContent(bool? tempDisk, IList<string> instanceIds, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(tempDisk, serializedAdditionalRawData)
         {
             InstanceIds = instanceIds;
         }

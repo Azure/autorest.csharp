@@ -15,7 +15,7 @@ namespace AuthoringTypeSpec.Models
     public partial class JobWarning
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of JobWarning. </summary>
         /// <param name="code"> The warning code. </param>
@@ -33,12 +33,12 @@ namespace AuthoringTypeSpec.Models
         /// <summary> Initializes a new instance of JobWarning. </summary>
         /// <param name="code"> The warning code. </param>
         /// <param name="message"> The warning message. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal JobWarning(string code, string message, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal JobWarning(string code, string message, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Code = code;
             Message = message;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="JobWarning"/> for deserialization. </summary>

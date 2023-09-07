@@ -16,7 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class AnalyzeResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AnalyzeResult"/>. </summary>
         /// <param name="version"> Version of schema used for this result. </param>
@@ -40,15 +40,15 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="pageResults"> Page-level information extracted from the input. </param>
         /// <param name="documentResults"> Document-level information extracted from the input. </param>
         /// <param name="errors"> List of errors reported during the analyze operation. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AnalyzeResult(string version, IReadOnlyList<ReadResult> readResults, IReadOnlyList<PageResult> pageResults, IReadOnlyList<DocumentResult> documentResults, IReadOnlyList<ErrorInformation> errors, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AnalyzeResult(string version, IReadOnlyList<ReadResult> readResults, IReadOnlyList<PageResult> pageResults, IReadOnlyList<DocumentResult> documentResults, IReadOnlyList<ErrorInformation> errors, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Version = version;
             ReadResults = readResults;
             PageResults = pageResults;
             DocumentResults = documentResults;
             Errors = errors;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="AnalyzeResult"/> for deserialization. </summary>

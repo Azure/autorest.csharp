@@ -14,7 +14,7 @@ namespace MgmtScopeResource.Models
     public partial class StatusMessage
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StatusMessage"/>. </summary>
         internal StatusMessage()
@@ -24,12 +24,12 @@ namespace MgmtScopeResource.Models
         /// <summary> Initializes a new instance of <see cref="StatusMessage"/>. </summary>
         /// <param name="status"> Status of the deployment operation. </param>
         /// <param name="errorResponse"> The error reported by the operation. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StatusMessage(string status, ErrorResponse errorResponse, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StatusMessage(string status, ErrorResponse errorResponse, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             ErrorResponse = errorResponse;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Status of the deployment operation. </summary>

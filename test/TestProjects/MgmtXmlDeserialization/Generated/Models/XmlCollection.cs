@@ -16,7 +16,7 @@ namespace MgmtXmlDeserialization.Models
     internal partial class XmlCollection
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="XmlCollection"/>. </summary>
         internal XmlCollection()
@@ -28,13 +28,13 @@ namespace MgmtXmlDeserialization.Models
         /// <param name="value"> Page values. </param>
         /// <param name="count"> Total record count number across all pages. </param>
         /// <param name="nextLink"> Next page link if any. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal XmlCollection(IReadOnlyList<XmlInstanceData> value, long? count, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal XmlCollection(IReadOnlyList<XmlInstanceData> value, long? count, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             Count = count;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Page values. </summary>

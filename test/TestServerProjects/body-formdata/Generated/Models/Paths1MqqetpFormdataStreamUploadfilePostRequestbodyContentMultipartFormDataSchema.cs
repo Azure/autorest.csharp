@@ -16,7 +16,7 @@ namespace body_formdata.Models
     internal partial class Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema"/>. </summary>
         /// <param name="fileContent"> File to upload. </param>
@@ -34,12 +34,12 @@ namespace body_formdata.Models
         /// <summary> Initializes a new instance of <see cref="Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema"/>. </summary>
         /// <param name="fileContent"> File to upload. </param>
         /// <param name="fileName"> File name to upload. Name has to be spelled exactly as written here. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema(Stream fileContent, string fileName, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema(Stream fileContent, string fileName, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             FileContent = fileContent;
             FileName = fileName;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema"/> for deserialization. </summary>

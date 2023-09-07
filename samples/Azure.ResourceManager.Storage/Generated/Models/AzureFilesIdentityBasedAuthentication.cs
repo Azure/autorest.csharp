@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class AzureFilesIdentityBasedAuthentication
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AzureFilesIdentityBasedAuthentication"/>. </summary>
         /// <param name="directoryServiceOptions"> Indicates the directory service used. </param>
@@ -27,13 +27,13 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="directoryServiceOptions"> Indicates the directory service used. </param>
         /// <param name="activeDirectoryProperties"> Required if choose AD. </param>
         /// <param name="defaultSharePermission"> Default share permission for users using Kerberos authentication if RBAC role is not assigned. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AzureFilesIdentityBasedAuthentication(DirectoryServiceOption directoryServiceOptions, ActiveDirectoryProperties activeDirectoryProperties, DefaultSharePermission? defaultSharePermission, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AzureFilesIdentityBasedAuthentication(DirectoryServiceOption directoryServiceOptions, ActiveDirectoryProperties activeDirectoryProperties, DefaultSharePermission? defaultSharePermission, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DirectoryServiceOptions = directoryServiceOptions;
             ActiveDirectoryProperties = activeDirectoryProperties;
             DefaultSharePermission = defaultSharePermission;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="AzureFilesIdentityBasedAuthentication"/> for deserialization. </summary>

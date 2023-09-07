@@ -14,7 +14,7 @@ namespace azure_parameter_grouping.Models
     public partial class Grouper
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Grouper"/>. </summary>
         public Grouper()
@@ -24,12 +24,12 @@ namespace azure_parameter_grouping.Models
         /// <summary> Initializes a new instance of <see cref="Grouper"/>. </summary>
         /// <param name="groupedConstant"> A grouped parameter that is a constant. </param>
         /// <param name="groupedParameter"> Optional parameter part of a parameter grouping. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Grouper(EncryptionAlgorithmType? groupedConstant, string groupedParameter, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Grouper(EncryptionAlgorithmType? groupedConstant, string groupedParameter, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             GroupedConstant = groupedConstant;
             GroupedParameter = groupedParameter;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A grouped parameter that is a constant. </summary>

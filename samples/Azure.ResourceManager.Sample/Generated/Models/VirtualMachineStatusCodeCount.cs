@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class VirtualMachineStatusCodeCount
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineStatusCodeCount"/>. </summary>
         internal VirtualMachineStatusCodeCount()
@@ -33,12 +33,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The number of instances having a particular status code.
         /// Serialized Name: VirtualMachineStatusCodeCount.count
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineStatusCodeCount(string code, int? count, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineStatusCodeCount(string code, int? count, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Code = code;
             Count = count;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

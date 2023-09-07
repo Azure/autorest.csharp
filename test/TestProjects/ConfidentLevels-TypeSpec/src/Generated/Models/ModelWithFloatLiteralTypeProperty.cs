@@ -15,7 +15,7 @@ namespace ConfidentLevelsInTsp.Models
     internal partial class ModelWithFloatLiteralTypeProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of ModelWithFloatLiteralTypeProperty. </summary>
         /// <param name="name"> The name. </param>
@@ -30,12 +30,12 @@ namespace ConfidentLevelsInTsp.Models
         /// <summary> Initializes a new instance of ModelWithFloatLiteralTypeProperty. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="id"> The id. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithFloatLiteralTypeProperty(string name, ModelWithFloatLiteralTypePropertyId id, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithFloatLiteralTypeProperty(string name, ModelWithFloatLiteralTypePropertyId id, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Id = id;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelWithFloatLiteralTypeProperty"/> for deserialization. </summary>

@@ -20,8 +20,8 @@ namespace SpecialWords.Models
 
         /// <summary> Initializes a new instance of UnknownBaseModel. </summary>
         /// <param name="modelKind"> Discriminator. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownBaseModel(string modelKind, Dictionary<string, BinaryData> rawData) : base(modelKind, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownBaseModel(string modelKind, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(modelKind, serializedAdditionalRawData)
         {
         }
     }

@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping.Models
     internal partial class VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings"/>. </summary>
         /// <param name="domainNameLabel">
@@ -38,11 +38,11 @@ namespace MgmtAcronymMapping.Models
         /// The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings.domainNameLabel
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(string domainNameLabel, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(string domainNameLabel, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DomainNameLabel = domainNameLabel;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings"/> for deserialization. </summary>

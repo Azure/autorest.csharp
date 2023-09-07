@@ -14,7 +14,7 @@ namespace constants.Models
     internal partial class NoModelAsStringRequiredOneValueNoDefault
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="NoModelAsStringRequiredOneValueNoDefault"/>. </summary>
         internal NoModelAsStringRequiredOneValueNoDefault()
@@ -24,11 +24,11 @@ namespace constants.Models
 
         /// <summary> Initializes a new instance of <see cref="NoModelAsStringRequiredOneValueNoDefault"/>. </summary>
         /// <param name="parameter"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NoModelAsStringRequiredOneValueNoDefault(NoModelAsStringRequiredOneValueNoDefaultEnum parameter, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NoModelAsStringRequiredOneValueNoDefault(NoModelAsStringRequiredOneValueNoDefaultEnum parameter, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Parameter = parameter;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the parameter. </summary>

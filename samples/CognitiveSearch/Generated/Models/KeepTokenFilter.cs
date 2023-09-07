@@ -33,8 +33,8 @@ namespace CognitiveSearch.Models
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="keepWords"> The list of words to keep. </param>
         /// <param name="lowerCaseKeepWords"> A value indicating whether to lower case all words first. Default is false. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal KeepTokenFilter(string odataType, string name, IList<string> keepWords, bool? lowerCaseKeepWords, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeepTokenFilter(string odataType, string name, IList<string> keepWords, bool? lowerCaseKeepWords, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             KeepWords = keepWords;
             LowerCaseKeepWords = lowerCaseKeepWords;

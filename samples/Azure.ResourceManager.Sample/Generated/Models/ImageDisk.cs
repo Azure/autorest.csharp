@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class ImageDisk
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ImageDisk"/>. </summary>
         public ImageDisk()
@@ -55,8 +55,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the customer managed disk encryption set resource id for the managed image disk.
         /// Serialized Name: ImageDisk.diskEncryptionSet
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ImageDisk(WritableSubResource snapshot, WritableSubResource managedDisk, Uri blobUri, CachingType? caching, int? diskSizeGB, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImageDisk(WritableSubResource snapshot, WritableSubResource managedDisk, Uri blobUri, CachingType? caching, int? diskSizeGB, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Snapshot = snapshot;
             ManagedDisk = managedDisk;
@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Sample.Models
             DiskSizeGB = diskSizeGB;
             StorageAccountType = storageAccountType;
             DiskEncryptionSet = diskEncryptionSet;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

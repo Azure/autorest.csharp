@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class KeyVaultProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="KeyVaultProperties"/>. </summary>
         public KeyVaultProperties()
@@ -27,15 +27,15 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="keyVaultUri"> The Uri of KeyVault. </param>
         /// <param name="currentVersionedKeyIdentifier"> The object identifier of the current versioned Key Vault Key in use. </param>
         /// <param name="lastKeyRotationTimestamp"> Timestamp of last rotation of the Key Vault Key. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal KeyVaultProperties(string keyName, string keyVersion, Uri keyVaultUri, string currentVersionedKeyIdentifier, DateTimeOffset? lastKeyRotationTimestamp, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeyVaultProperties(string keyName, string keyVersion, Uri keyVaultUri, string currentVersionedKeyIdentifier, DateTimeOffset? lastKeyRotationTimestamp, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             KeyName = keyName;
             KeyVersion = keyVersion;
             KeyVaultUri = keyVaultUri;
             CurrentVersionedKeyIdentifier = currentVersionedKeyIdentifier;
             LastKeyRotationTimestamp = lastKeyRotationTimestamp;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The name of KeyVault key. </summary>

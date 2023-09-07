@@ -46,9 +46,9 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("defaultWorkspaceId"u8);
                 JsonSerializer.Serialize(writer, DefaultWorkspaceId);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -71,7 +71,7 @@ namespace MgmtMockAndSample.Models
             }
             Optional<IList<FirewallPolicyLogAnalyticsWorkspace>> workspaces = default;
             Optional<WritableSubResource> defaultWorkspaceId = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("workspaces"u8))
@@ -99,11 +99,11 @@ namespace MgmtMockAndSample.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new FirewallPolicyLogAnalyticsResources(Optional.ToList(workspaces), defaultWorkspaceId, rawData);
+            return new FirewallPolicyLogAnalyticsResources(Optional.ToList(workspaces), defaultWorkspaceId, serializedAdditionalRawData);
         }
 
         FirewallPolicyLogAnalyticsResources IModelJsonSerializable<FirewallPolicyLogAnalyticsResources>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

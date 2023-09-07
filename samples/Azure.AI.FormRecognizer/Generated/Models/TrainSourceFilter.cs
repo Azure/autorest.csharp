@@ -14,7 +14,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class TrainSourceFilter
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TrainSourceFilter"/>. </summary>
         public TrainSourceFilter()
@@ -24,12 +24,12 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Initializes a new instance of <see cref="TrainSourceFilter"/>. </summary>
         /// <param name="prefix"> A case-sensitive prefix string to filter documents in the source path for training. For example, when using a Azure storage blob Uri, use the prefix to restrict sub folders for training. </param>
         /// <param name="includeSubFolders"> A flag to indicate if sub folders within the set of prefix folders will also need to be included when searching for content to be preprocessed. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TrainSourceFilter(string prefix, bool? includeSubFolders, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TrainSourceFilter(string prefix, bool? includeSubFolders, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Prefix = prefix;
             IncludeSubFolders = includeSubFolders;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A case-sensitive prefix string to filter documents in the source path for training. For example, when using a Azure storage blob Uri, use the prefix to restrict sub folders for training. </summary>

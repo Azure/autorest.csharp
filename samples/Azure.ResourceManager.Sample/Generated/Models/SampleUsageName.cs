@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class SampleUsageName
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SampleUsageName"/>. </summary>
         internal SampleUsageName()
@@ -33,12 +33,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The localized name of the resource.
         /// Serialized Name: UsageName.localizedValue
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SampleUsageName(string value, string localizedValue, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SampleUsageName(string value, string localizedValue, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             LocalizedValue = localizedValue;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

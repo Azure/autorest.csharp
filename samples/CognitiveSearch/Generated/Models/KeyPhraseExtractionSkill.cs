@@ -35,8 +35,8 @@ namespace CognitiveSearch.Models
         /// <param name="outputs"> The output of a skill is either a field in a search index, or a value that can be consumed as an input by another skill. </param>
         /// <param name="defaultLanguageCode"> A value indicating which language code to use. Default is en. </param>
         /// <param name="maxKeyPhraseCount"> A number indicating how many key phrases to return. If absent, all identified key phrases will be returned. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal KeyPhraseExtractionSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, KeyPhraseExtractionSkillLanguage? defaultLanguageCode, int? maxKeyPhraseCount, Dictionary<string, BinaryData> rawData) : base(odataType, name, description, context, inputs, outputs, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeyPhraseExtractionSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, KeyPhraseExtractionSkillLanguage? defaultLanguageCode, int? maxKeyPhraseCount, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, description, context, inputs, outputs, serializedAdditionalRawData)
         {
             DefaultLanguageCode = defaultLanguageCode;
             MaxKeyPhraseCount = maxKeyPhraseCount;

@@ -14,7 +14,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class ModelsSummary
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelsSummary"/>. </summary>
         /// <param name="count"> Current count of trained custom models. </param>
@@ -31,13 +31,13 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="count"> Current count of trained custom models. </param>
         /// <param name="limit"> Max number of models that can be trained for this account. </param>
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the summary was last updated. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelsSummary(int count, int limit, DateTimeOffset lastUpdatedDateTime, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelsSummary(int count, int limit, DateTimeOffset lastUpdatedDateTime, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Count = count;
             Limit = limit;
             LastUpdatedDateTime = lastUpdatedDateTime;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelsSummary"/> for deserialization. </summary>

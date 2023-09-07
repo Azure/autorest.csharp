@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class RestorePolicyProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RestorePolicyProperties"/>. </summary>
         /// <param name="enabled"> Blob restore is enabled if set to true. </param>
@@ -28,14 +28,14 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="days"> how long this blob can be restored. It should be great than zero and less than DeleteRetentionPolicy.days. </param>
         /// <param name="lastEnabledOn"> Deprecated in favor of minRestoreTime property. </param>
         /// <param name="minRestoreOn"> Returns the minimum date and time that the restore can be started. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RestorePolicyProperties(bool enabled, int? days, DateTimeOffset? lastEnabledOn, DateTimeOffset? minRestoreOn, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RestorePolicyProperties(bool enabled, int? days, DateTimeOffset? lastEnabledOn, DateTimeOffset? minRestoreOn, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Enabled = enabled;
             Days = days;
             LastEnabledOn = lastEnabledOn;
             MinRestoreOn = minRestoreOn;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="RestorePolicyProperties"/> for deserialization. </summary>

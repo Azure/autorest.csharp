@@ -14,7 +14,7 @@ namespace ModelWithConverterUsage.Models
     public partial class OutputModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="OutputModel"/>. </summary>
         internal OutputModel()
@@ -23,11 +23,11 @@ namespace ModelWithConverterUsage.Models
 
         /// <summary> Initializes a new instance of <see cref="OutputModel"/>. </summary>
         /// <param name="outputModelProperty"> Constant string. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal OutputModel(string outputModelProperty, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OutputModel(string outputModelProperty, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OutputModelProperty = outputModelProperty;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Constant string. </summary>

@@ -47,9 +47,9 @@ namespace HlcConstants.Models
                     ((IModelJsonSerializable<ModelWithOptionalConstant>)OptionalConstantModel).Serialize(writer, options);
                 }
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -72,7 +72,7 @@ namespace HlcConstants.Models
             }
             Optional<ModelWithRequiredConstant> requiredConstantModel = default;
             Optional<ModelWithOptionalConstant> optionalConstantModel = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredConstantModel"u8))
@@ -95,11 +95,11 @@ namespace HlcConstants.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new RoundTripModel(requiredConstantModel.Value, optionalConstantModel.Value, rawData);
+            return new RoundTripModel(requiredConstantModel.Value, optionalConstantModel.Value, serializedAdditionalRawData);
         }
 
         RoundTripModel IModelJsonSerializable<RoundTripModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

@@ -50,9 +50,9 @@ namespace MgmtMockAndSample.Models
                     writer.WriteNull("requireProxyForNetworkRules");
                 }
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -76,7 +76,7 @@ namespace MgmtMockAndSample.Models
             Optional<IList<string>> servers = default;
             Optional<bool> enableProxy = default;
             Optional<bool?> requireProxyForNetworkRules = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("servers"u8))
@@ -114,11 +114,11 @@ namespace MgmtMockAndSample.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new DnsSettings(Optional.ToList(servers), Optional.ToNullable(enableProxy), Optional.ToNullable(requireProxyForNetworkRules), rawData);
+            return new DnsSettings(Optional.ToList(servers), Optional.ToNullable(enableProxy), Optional.ToNullable(requireProxyForNetworkRules), serializedAdditionalRawData);
         }
 
         DnsSettings IModelJsonSerializable<DnsSettings>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

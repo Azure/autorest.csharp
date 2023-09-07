@@ -14,7 +14,7 @@ namespace CustomizationsInTsp.Models
     public partial class ModelToChangeNamespace
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of ModelToChangeNamespace. </summary>
         /// <param name="requiredInt"> Required int. </param>
@@ -25,11 +25,11 @@ namespace CustomizationsInTsp.Models
 
         /// <summary> Initializes a new instance of ModelToChangeNamespace. </summary>
         /// <param name="requiredInt"> Required int. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelToChangeNamespace(int requiredInt, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelToChangeNamespace(int requiredInt, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredInt = requiredInt;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelToChangeNamespace"/> for deserialization. </summary>

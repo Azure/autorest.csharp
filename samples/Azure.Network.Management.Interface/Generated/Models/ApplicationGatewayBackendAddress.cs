@@ -14,7 +14,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class ApplicationGatewayBackendAddress
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ApplicationGatewayBackendAddress"/>. </summary>
         public ApplicationGatewayBackendAddress()
@@ -24,12 +24,12 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Initializes a new instance of <see cref="ApplicationGatewayBackendAddress"/>. </summary>
         /// <param name="fqdn"> Fully qualified domain name (FQDN). </param>
         /// <param name="ipAddress"> IP address. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ApplicationGatewayBackendAddress(string fqdn, string ipAddress, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ApplicationGatewayBackendAddress(string fqdn, string ipAddress, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Fqdn = fqdn;
             IpAddress = ipAddress;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Fully qualified domain name (FQDN). </summary>

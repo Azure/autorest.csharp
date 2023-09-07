@@ -27,8 +27,8 @@ namespace ModelsTypeSpec.Models
         /// <param name="optionalPropertyOnBase"> Optional property on base. </param>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
         /// <param name="requiredInt"> Required int. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DerivedModelWithDiscriminatorB(string discriminatorProperty, string optionalPropertyOnBase, int requiredPropertyOnBase, int requiredInt, Dictionary<string, BinaryData> rawData) : base(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DerivedModelWithDiscriminatorB(string discriminatorProperty, string optionalPropertyOnBase, int requiredPropertyOnBase, int requiredInt, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase, serializedAdditionalRawData)
         {
             RequiredInt = requiredInt;
         }

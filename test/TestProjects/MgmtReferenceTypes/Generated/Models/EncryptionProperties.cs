@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Fake.Models
     public partial class EncryptionProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="EncryptionProperties"/>. </summary>
         [InitializationConstructor]
@@ -27,12 +27,12 @@ namespace Azure.ResourceManager.Fake.Models
         /// <summary> Initializes a new instance of <see cref="EncryptionProperties"/>. </summary>
         /// <param name="status"> Indicates whether or not the encryption is enabled for container registry. </param>
         /// <param name="keyVaultProperties"> Key vault properties. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal EncryptionProperties(EncryptionStatus? status, KeyVaultProperties keyVaultProperties, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal EncryptionProperties(EncryptionStatus? status, KeyVaultProperties keyVaultProperties, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             KeyVaultProperties = keyVaultProperties;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Indicates whether or not the encryption is enabled for container registry. </summary>

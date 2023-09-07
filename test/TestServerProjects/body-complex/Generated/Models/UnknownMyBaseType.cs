@@ -17,8 +17,8 @@ namespace body_complex.Models
         /// <param name="kind"></param>
         /// <param name="propB1"></param>
         /// <param name="propBH1"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownMyBaseType(MyKind kind, string propB1, string propBH1, Dictionary<string, BinaryData> rawData) : base(kind, propB1, propBH1, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownMyBaseType(MyKind kind, string propB1, string propBH1, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, propB1, propBH1, serializedAdditionalRawData)
         {
             Kind = kind;
         }

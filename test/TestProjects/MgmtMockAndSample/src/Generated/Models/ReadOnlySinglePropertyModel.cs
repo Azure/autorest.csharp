@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     internal partial class ReadOnlySinglePropertyModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ReadOnlySinglePropertyModel"/>. </summary>
         public ReadOnlySinglePropertyModel()
@@ -23,11 +23,11 @@ namespace MgmtMockAndSample.Models
 
         /// <summary> Initializes a new instance of <see cref="ReadOnlySinglePropertyModel"/>. </summary>
         /// <param name="readOnlySomething"> This is a read only string property. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ReadOnlySinglePropertyModel(string readOnlySomething, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ReadOnlySinglePropertyModel(string readOnlySomething, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ReadOnlySomething = readOnlySomething;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> This is a read only string property. </summary>

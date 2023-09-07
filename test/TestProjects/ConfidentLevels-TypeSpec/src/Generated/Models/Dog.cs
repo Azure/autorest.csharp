@@ -31,8 +31,8 @@ namespace ConfidentLevelsInTsp.Models
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="woof"> Woof. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Dog(string kind, string name, string woof, Dictionary<string, BinaryData> rawData) : base(kind, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Dog(string kind, string name, string woof, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, name, serializedAdditionalRawData)
         {
             Woof = woof;
         }

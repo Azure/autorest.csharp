@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class GeoReplicationStats
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="GeoReplicationStats"/>. </summary>
         internal GeoReplicationStats()
@@ -25,13 +25,13 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="status"> The status of the secondary location. Possible values are: - Live: Indicates that the secondary location is active and operational. - Bootstrap: Indicates initial synchronization from the primary location to the secondary location is in progress.This typically occurs when replication is first enabled. - Unavailable: Indicates that the secondary location is temporarily unavailable. </param>
         /// <param name="lastSyncOn"> All primary writes preceding this UTC date/time value are guaranteed to be available for read operations. Primary writes following this point in time may or may not be available for reads. Element may be default value if value of LastSyncTime is not available, this can happen if secondary is offline or we are in bootstrap. </param>
         /// <param name="canFailover"> A boolean flag which indicates whether or not account failover is supported for the account. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal GeoReplicationStats(GeoReplicationStatus? status, DateTimeOffset? lastSyncOn, bool? canFailover, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal GeoReplicationStats(GeoReplicationStatus? status, DateTimeOffset? lastSyncOn, bool? canFailover, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             LastSyncOn = lastSyncOn;
             CanFailover = canFailover;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The status of the secondary location. Possible values are: - Live: Indicates that the secondary location is active and operational. - Bootstrap: Indicates initial synchronization from the primary location to the secondary location is in progress.This typically occurs when replication is first enabled. - Unavailable: Indicates that the secondary location is temporarily unavailable. </summary>

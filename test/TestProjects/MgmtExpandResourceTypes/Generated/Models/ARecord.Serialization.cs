@@ -28,9 +28,9 @@ namespace MgmtExpandResourceTypes.Models
                 writer.WritePropertyName("ipv4Address"u8);
                 writer.WriteStringValue(Ipv4Address);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -52,7 +52,7 @@ namespace MgmtExpandResourceTypes.Models
                 return null;
             }
             Optional<string> ipv4Address = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ipv4Address"u8))
@@ -62,11 +62,11 @@ namespace MgmtExpandResourceTypes.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new ARecord(ipv4Address.Value, rawData);
+            return new ARecord(ipv4Address.Value, serializedAdditionalRawData);
         }
 
         ARecord IModelJsonSerializable<ARecord>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

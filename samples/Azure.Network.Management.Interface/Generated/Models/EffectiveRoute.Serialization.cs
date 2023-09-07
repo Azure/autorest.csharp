@@ -68,9 +68,9 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("nextHopType"u8);
                 writer.WriteStringValue(NextHopType.Value.ToString());
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -98,7 +98,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<IReadOnlyList<string>> addressPrefix = default;
             Optional<IReadOnlyList<string>> nextHopIpAddress = default;
             Optional<RouteNextHopType> nextHopType = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -172,11 +172,11 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new EffectiveRoute(name.Value, Optional.ToNullable(disableBgpRoutePropagation), Optional.ToNullable(source), Optional.ToNullable(state), Optional.ToList(addressPrefix), Optional.ToList(nextHopIpAddress), Optional.ToNullable(nextHopType), rawData);
+            return new EffectiveRoute(name.Value, Optional.ToNullable(disableBgpRoutePropagation), Optional.ToNullable(source), Optional.ToNullable(state), Optional.ToList(addressPrefix), Optional.ToList(nextHopIpAddress), Optional.ToNullable(nextHopType), serializedAdditionalRawData);
         }
 
         EffectiveRoute IModelJsonSerializable<EffectiveRoute>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

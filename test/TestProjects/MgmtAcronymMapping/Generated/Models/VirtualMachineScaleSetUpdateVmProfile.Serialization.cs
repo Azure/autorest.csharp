@@ -124,9 +124,9 @@ namespace MgmtAcronymMapping.Models
                     ((IModelJsonSerializable<ScheduledEventsProfile>)ScheduledEventsProfile).Serialize(writer, options);
                 }
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -156,7 +156,7 @@ namespace MgmtAcronymMapping.Models
             Optional<string> licenseType = default;
             Optional<BillingProfile> billingProfile = default;
             Optional<ScheduledEventsProfile> scheduledEventsProfile = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("osProfile"u8))
@@ -238,11 +238,11 @@ namespace MgmtAcronymMapping.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetUpdateVmProfile(osProfile.Value, storageProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, extensionProfile.Value, licenseType.Value, billingProfile.Value, scheduledEventsProfile.Value, rawData);
+            return new VirtualMachineScaleSetUpdateVmProfile(osProfile.Value, storageProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, extensionProfile.Value, licenseType.Value, billingProfile.Value, scheduledEventsProfile.Value, serializedAdditionalRawData);
         }
 
         VirtualMachineScaleSetUpdateVmProfile IModelJsonSerializable<VirtualMachineScaleSetUpdateVmProfile>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

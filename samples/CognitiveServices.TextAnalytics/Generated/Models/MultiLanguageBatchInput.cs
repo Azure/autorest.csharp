@@ -16,7 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class MultiLanguageBatchInput
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MultiLanguageBatchInput"/>. </summary>
         /// <param name="documents"> The set of documents to process as part of this batch. </param>
@@ -30,11 +30,11 @@ namespace CognitiveServices.TextAnalytics.Models
 
         /// <summary> Initializes a new instance of <see cref="MultiLanguageBatchInput"/>. </summary>
         /// <param name="documents"> The set of documents to process as part of this batch. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MultiLanguageBatchInput(IList<MultiLanguageInput> documents, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MultiLanguageBatchInput(IList<MultiLanguageInput> documents, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Documents = documents;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="MultiLanguageBatchInput"/> for deserialization. </summary>

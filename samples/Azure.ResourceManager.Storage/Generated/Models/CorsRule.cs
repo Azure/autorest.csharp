@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class CorsRule
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CorsRule"/>. </summary>
         /// <param name="allowedOrigins"> Required if CorsRule element is present. A list of origin domains that will be allowed via CORS, or "*" to allow all domains. </param>
@@ -45,15 +45,15 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="maxAgeInSeconds"> Required if CorsRule element is present. The number of seconds that the client/browser should cache a preflight response. </param>
         /// <param name="exposedHeaders"> Required if CorsRule element is present. A list of response headers to expose to CORS clients. </param>
         /// <param name="allowedHeaders"> Required if CorsRule element is present. A list of headers allowed to be part of the cross-origin request. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CorsRule(IList<string> allowedOrigins, IList<CorsRuleAllowedMethodsItem> allowedMethods, int maxAgeInSeconds, IList<string> exposedHeaders, IList<string> allowedHeaders, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CorsRule(IList<string> allowedOrigins, IList<CorsRuleAllowedMethodsItem> allowedMethods, int maxAgeInSeconds, IList<string> exposedHeaders, IList<string> allowedHeaders, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             AllowedOrigins = allowedOrigins;
             AllowedMethods = allowedMethods;
             MaxAgeInSeconds = maxAgeInSeconds;
             ExposedHeaders = exposedHeaders;
             AllowedHeaders = allowedHeaders;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CorsRule"/> for deserialization. </summary>

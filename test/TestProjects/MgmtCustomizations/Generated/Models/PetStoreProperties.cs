@@ -14,7 +14,7 @@ namespace MgmtCustomizations.Models
     public partial class PetStoreProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="PetStoreProperties"/>. </summary>
         public PetStoreProperties()
@@ -28,12 +28,12 @@ namespace MgmtCustomizations.Models
         /// Please note <see cref="Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="Cat"/> and <see cref="Dog"/>.
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PetStoreProperties(int? order, Pet pet, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PetStoreProperties(int? order, Pet pet, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Order = order;
             Pet = pet;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
         /// <summary>
         /// A pet

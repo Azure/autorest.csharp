@@ -15,7 +15,7 @@ namespace AnomalyDetector.Models
     public partial class MultivariateLastDetectionResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of MultivariateLastDetectionResult. </summary>
         internal MultivariateLastDetectionResult()
@@ -27,12 +27,12 @@ namespace AnomalyDetector.Models
         /// <summary> Initializes a new instance of MultivariateLastDetectionResult. </summary>
         /// <param name="variableStates"> Variable Status. </param>
         /// <param name="results"> Anomaly status and information. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MultivariateLastDetectionResult(IReadOnlyList<VariableState> variableStates, IReadOnlyList<AnomalyState> results, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MultivariateLastDetectionResult(IReadOnlyList<VariableState> variableStates, IReadOnlyList<AnomalyState> results, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             VariableStates = variableStates;
             Results = results;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Variable Status. </summary>

@@ -14,7 +14,7 @@ namespace MgmtSupersetInheritance.Models
     public partial class SupersetModel2
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SupersetModel2"/>. </summary>
         public SupersetModel2()
@@ -26,14 +26,14 @@ namespace MgmtSupersetInheritance.Models
         /// <param name="name"></param>
         /// <param name="supersetModel2Type"></param>
         /// <param name="new"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SupersetModel2(string id, string name, string supersetModel2Type, string @new, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SupersetModel2(string id, string name, string supersetModel2Type, string @new, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ID = id;
             Name = name;
             SupersetModel2Type = supersetModel2Type;
             New = @new;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

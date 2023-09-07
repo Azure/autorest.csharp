@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     internal partial class NetworkInterfaceLoadBalancerListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="NetworkInterfaceLoadBalancerListResult"/>. </summary>
         internal NetworkInterfaceLoadBalancerListResult()
@@ -26,12 +26,12 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Initializes a new instance of <see cref="NetworkInterfaceLoadBalancerListResult"/>. </summary>
         /// <param name="value"> A list of load balancers. </param>
         /// <param name="nextLink"> The URL to get the next set of results. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NetworkInterfaceLoadBalancerListResult(IReadOnlyList<LoadBalancer> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NetworkInterfaceLoadBalancerListResult(IReadOnlyList<LoadBalancer> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A list of load balancers. </summary>

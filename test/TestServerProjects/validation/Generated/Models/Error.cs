@@ -14,7 +14,7 @@ namespace validation.Models
     internal partial class Error
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Error"/>. </summary>
         internal Error()
@@ -25,13 +25,13 @@ namespace validation.Models
         /// <param name="code"></param>
         /// <param name="message"></param>
         /// <param name="fields"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Error(int? code, string message, string fields, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Error(int? code, string message, string fields, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Code = code;
             Message = message;
             Fields = fields;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the code. </summary>

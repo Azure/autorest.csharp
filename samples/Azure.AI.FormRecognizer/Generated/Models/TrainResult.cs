@@ -16,7 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class TrainResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TrainResult"/>. </summary>
         /// <param name="trainingDocuments"> List of the documents used to train the model and any errors reported in each document. </param>
@@ -35,14 +35,14 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="fields"> List of fields used to train the model and the train operation error reported by each. </param>
         /// <param name="averageModelAccuracy"> Average accuracy. </param>
         /// <param name="errors"> Errors returned during the training operation. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TrainResult(IReadOnlyList<TrainingDocumentInfo> trainingDocuments, IReadOnlyList<FormFieldsReport> fields, float? averageModelAccuracy, IReadOnlyList<ErrorInformation> errors, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TrainResult(IReadOnlyList<TrainingDocumentInfo> trainingDocuments, IReadOnlyList<FormFieldsReport> fields, float? averageModelAccuracy, IReadOnlyList<ErrorInformation> errors, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TrainingDocuments = trainingDocuments;
             Fields = fields;
             AverageModelAccuracy = averageModelAccuracy;
             Errors = errors;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="TrainResult"/> for deserialization. </summary>

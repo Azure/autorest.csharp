@@ -15,7 +15,7 @@ namespace ModelsTypeSpec.Models
     public partial class NoUseBase
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of NoUseBase. </summary>
         /// <param name="baseModelProp"> base model property. </param>
@@ -29,11 +29,11 @@ namespace ModelsTypeSpec.Models
 
         /// <summary> Initializes a new instance of NoUseBase. </summary>
         /// <param name="baseModelProp"> base model property. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NoUseBase(string baseModelProp, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NoUseBase(string baseModelProp, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             BaseModelProp = baseModelProp;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="NoUseBase"/> for deserialization. </summary>

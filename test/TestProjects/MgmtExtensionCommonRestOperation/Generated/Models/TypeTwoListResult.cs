@@ -17,7 +17,7 @@ namespace MgmtExtensionCommonRestOperation.Models
     internal partial class TypeTwoListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TypeTwoListResult"/>. </summary>
         /// <param name="value"> The list of of type twos. </param>
@@ -32,12 +32,12 @@ namespace MgmtExtensionCommonRestOperation.Models
         /// <summary> Initializes a new instance of <see cref="TypeTwoListResult"/>. </summary>
         /// <param name="value"> The list of of type twos. </param>
         /// <param name="nextLink"> The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TypeTwoListResult(IReadOnlyList<TypeTwoData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TypeTwoListResult(IReadOnlyList<TypeTwoData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="TypeTwoListResult"/> for deserialization. </summary>

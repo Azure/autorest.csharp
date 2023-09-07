@@ -19,7 +19,7 @@ namespace MgmtMultipleParentResource
     public partial class ChildBodyData : TrackedResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ChildBodyData"/>. </summary>
         /// <param name="location"> The location. </param>
@@ -41,8 +41,8 @@ namespace MgmtMultipleParentResource
         /// <param name="outputBlobUri"> Specifies the Azure storage blob where script output stream will be uploaded. </param>
         /// <param name="errorBlobUri"> Specifies the Azure storage blob where script error stream will be uploaded. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ChildBodyData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, Uri outputBlobUri, Uri errorBlobUri, string provisioningState, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ChildBodyData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, Uri outputBlobUri, Uri errorBlobUri, string provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             AsyncExecution = asyncExecution;
             RunAsUser = runAsUser;
@@ -51,7 +51,7 @@ namespace MgmtMultipleParentResource
             OutputBlobUri = outputBlobUri;
             ErrorBlobUri = errorBlobUri;
             ProvisioningState = provisioningState;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ChildBodyData"/> for deserialization. </summary>

@@ -19,7 +19,7 @@ namespace MgmtExtensionResource
     public partial class SubSingletonData : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SubSingletonData"/>. </summary>
         internal SubSingletonData()
@@ -32,11 +32,11 @@ namespace MgmtExtensionResource
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="something"> The something. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SubSingletonData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string something, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SubSingletonData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string something, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Something = something;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The something. </summary>

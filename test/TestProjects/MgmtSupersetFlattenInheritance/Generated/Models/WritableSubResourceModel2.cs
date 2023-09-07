@@ -14,7 +14,7 @@ namespace MgmtSupersetFlattenInheritance.Models
     public partial class WritableSubResourceModel2
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="WritableSubResourceModel2"/>. </summary>
         public WritableSubResourceModel2()
@@ -25,13 +25,13 @@ namespace MgmtSupersetFlattenInheritance.Models
         /// <param name="id"></param>
         /// <param name="idPropertiesId"></param>
         /// <param name="foo"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal WritableSubResourceModel2(string id, string idPropertiesId, string foo, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal WritableSubResourceModel2(string id, string idPropertiesId, string foo, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             IdPropertiesId = idPropertiesId;
             Foo = foo;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

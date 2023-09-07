@@ -33,9 +33,9 @@ namespace body_complex.Models
                 writer.WritePropertyName("leap"u8);
                 writer.WriteStringValue(Leap.Value, "D");
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -58,7 +58,7 @@ namespace body_complex.Models
             }
             Optional<DateTimeOffset> field = default;
             Optional<DateTimeOffset> leap = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field"u8))
@@ -81,11 +81,11 @@ namespace body_complex.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new DateWrapper(Optional.ToNullable(field), Optional.ToNullable(leap), rawData);
+            return new DateWrapper(Optional.ToNullable(field), Optional.ToNullable(leap), serializedAdditionalRawData);
         }
 
         DateWrapper IModelJsonSerializable<DateWrapper>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

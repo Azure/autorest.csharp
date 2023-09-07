@@ -14,7 +14,7 @@ namespace MgmtExpandResourceTypes.Models
     public partial class CaaRecord
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CaaRecord"/>. </summary>
         public CaaRecord()
@@ -25,13 +25,13 @@ namespace MgmtExpandResourceTypes.Models
         /// <param name="flags"> The flags for this CAA record as an integer between 0 and 255. </param>
         /// <param name="tag"> The tag for this CAA record. </param>
         /// <param name="value"> The value for this CAA record. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CaaRecord(int? flags, string tag, string value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CaaRecord(int? flags, string tag, string value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Flags = flags;
             Tag = tag;
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The flags for this CAA record as an integer between 0 and 255. </summary>

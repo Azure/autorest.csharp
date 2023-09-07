@@ -43,9 +43,9 @@ namespace AnomalyDetector.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -69,7 +69,7 @@ namespace AnomalyDetector.Models
             Optional<int> period = default;
             Optional<IReadOnlyList<bool>> isChangePoint = default;
             Optional<IReadOnlyList<float>> confidenceScores = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("period"u8))
@@ -111,11 +111,11 @@ namespace AnomalyDetector.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new UnivariateChangePointDetectionResult(Optional.ToNullable(period), Optional.ToList(isChangePoint), Optional.ToList(confidenceScores), rawData);
+            return new UnivariateChangePointDetectionResult(Optional.ToNullable(period), Optional.ToList(isChangePoint), Optional.ToList(confidenceScores), serializedAdditionalRawData);
         }
 
         UnivariateChangePointDetectionResult IModelJsonSerializable<UnivariateChangePointDetectionResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

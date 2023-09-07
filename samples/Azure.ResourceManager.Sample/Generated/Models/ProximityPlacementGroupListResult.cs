@@ -20,7 +20,7 @@ namespace Azure.ResourceManager.Sample.Models
     internal partial class ProximityPlacementGroupListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupListResult"/>. </summary>
         /// <param name="value">
@@ -44,12 +44,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The URI to fetch the next page of proximity placement groups.
         /// Serialized Name: ProximityPlacementGroupListResult.nextLink
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ProximityPlacementGroupListResult(IReadOnlyList<ProximityPlacementGroupData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProximityPlacementGroupListResult(IReadOnlyList<ProximityPlacementGroupData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupListResult"/> for deserialization. </summary>

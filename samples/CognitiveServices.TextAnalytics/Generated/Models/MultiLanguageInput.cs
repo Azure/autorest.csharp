@@ -15,7 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class MultiLanguageInput
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MultiLanguageInput"/>. </summary>
         /// <param name="id"> A unique, non-empty document identifier. </param>
@@ -34,13 +34,13 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="id"> A unique, non-empty document identifier. </param>
         /// <param name="text"> The input text to process. </param>
         /// <param name="language"> (Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use "en" for English; "es" for Spanish etc. If not set, use "en" for English as default. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MultiLanguageInput(string id, string text, string language, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MultiLanguageInput(string id, string text, string language, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Text = text;
             Language = language;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="MultiLanguageInput"/> for deserialization. </summary>

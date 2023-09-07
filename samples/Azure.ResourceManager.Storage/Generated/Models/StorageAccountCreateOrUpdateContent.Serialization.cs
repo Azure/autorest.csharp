@@ -214,9 +214,9 @@ namespace Azure.ResourceManager.Storage.Models
                 }
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -262,7 +262,7 @@ namespace Azure.ResourceManager.Storage.Models
             Optional<bool> allowCrossTenantReplication = default;
             Optional<bool> defaultToOAuthAuthentication = default;
             Optional<ImmutableStorageAccount> immutableStorageWithVersioning = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -498,11 +498,11 @@ namespace Azure.ResourceManager.Storage.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new StorageAccountCreateOrUpdateContent(sku, kind, location, extendedLocation, Optional.ToDictionary(tags), identity, Optional.ToNullable(publicNetworkAccess), sasPolicy.Value, keyPolicy.Value, customDomain.Value, encryption.Value, networkAcls.Value, Optional.ToNullable(accessTier), azureFilesIdentityBasedAuthentication.Value, Optional.ToNullable(supportsHttpsTrafficOnly), Optional.ToNullable(isHnsEnabled), Optional.ToNullable(largeFileSharesState), routingPreference.Value, Optional.ToNullable(allowBlobPublicAccess), Optional.ToNullable(minimumTlsVersion), Optional.ToNullable(allowSharedKeyAccess), Optional.ToNullable(isNfsV3Enabled), Optional.ToNullable(allowCrossTenantReplication), Optional.ToNullable(defaultToOAuthAuthentication), immutableStorageWithVersioning.Value, rawData);
+            return new StorageAccountCreateOrUpdateContent(sku, kind, location, extendedLocation, Optional.ToDictionary(tags), identity, Optional.ToNullable(publicNetworkAccess), sasPolicy.Value, keyPolicy.Value, customDomain.Value, encryption.Value, networkAcls.Value, Optional.ToNullable(accessTier), azureFilesIdentityBasedAuthentication.Value, Optional.ToNullable(supportsHttpsTrafficOnly), Optional.ToNullable(isHnsEnabled), Optional.ToNullable(largeFileSharesState), routingPreference.Value, Optional.ToNullable(allowBlobPublicAccess), Optional.ToNullable(minimumTlsVersion), Optional.ToNullable(allowSharedKeyAccess), Optional.ToNullable(isNfsV3Enabled), Optional.ToNullable(allowCrossTenantReplication), Optional.ToNullable(defaultToOAuthAuthentication), immutableStorageWithVersioning.Value, serializedAdditionalRawData);
         }
 
         StorageAccountCreateOrUpdateContent IModelJsonSerializable<StorageAccountCreateOrUpdateContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

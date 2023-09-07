@@ -14,7 +14,7 @@ namespace body_dictionary.Models
     public partial class Widget
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Widget"/>. </summary>
         public Widget()
@@ -24,12 +24,12 @@ namespace body_dictionary.Models
         /// <summary> Initializes a new instance of <see cref="Widget"/>. </summary>
         /// <param name="integer"></param>
         /// <param name="string"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Widget(int? integer, string @string, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Widget(int? integer, string @string, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Integer = integer;
             String = @string;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the integer. </summary>

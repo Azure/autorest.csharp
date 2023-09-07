@@ -23,9 +23,9 @@ namespace MgmtCollectionParent.Models
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             writer.WriteStartObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -50,7 +50,7 @@ namespace MgmtCollectionParent.Models
             Optional<StageName> stageName = default;
             Optional<string> displayName = default;
             Optional<DateTimeOffset> startTime = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("stageStatus"u8))
@@ -87,11 +87,11 @@ namespace MgmtCollectionParent.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new StageDetails(Optional.ToNullable(stageStatus), Optional.ToNullable(stageName), displayName.Value, Optional.ToNullable(startTime), rawData);
+            return new StageDetails(Optional.ToNullable(stageStatus), Optional.ToNullable(stageName), displayName.Value, Optional.ToNullable(startTime), serializedAdditionalRawData);
         }
 
         StageDetails IModelJsonSerializable<StageDetails>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

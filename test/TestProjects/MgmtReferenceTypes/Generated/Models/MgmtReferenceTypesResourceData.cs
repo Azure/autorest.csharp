@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Fake.Models
     public abstract partial class MgmtReferenceTypesResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MgmtReferenceTypesResourceData"/>. </summary>
         [InitializationConstructor]
@@ -28,13 +28,13 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="id"> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
         /// <param name="name"> The name of the resource. </param>
         /// <param name="resourceType"> The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts". </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        protected MgmtReferenceTypesResourceData(ResourceIdentifier id, string name, ResourceType resourceType, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        protected MgmtReferenceTypesResourceData(ResourceIdentifier id, string name, ResourceType resourceType, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
             ResourceType = resourceType;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </summary>

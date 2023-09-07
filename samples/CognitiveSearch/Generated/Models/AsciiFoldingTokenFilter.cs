@@ -28,8 +28,8 @@ namespace CognitiveSearch.Models
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="preserveOriginal"> A value indicating whether the original token will be kept. Default is false. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AsciiFoldingTokenFilter(string odataType, string name, bool? preserveOriginal, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AsciiFoldingTokenFilter(string odataType, string name, bool? preserveOriginal, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             PreserveOriginal = preserveOriginal;
             OdataType = odataType ?? "#Microsoft.Azure.Search.AsciiFoldingTokenFilter";

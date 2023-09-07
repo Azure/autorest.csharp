@@ -32,9 +32,9 @@ namespace Pagination.Models
             }
             writer.WritePropertyName("text"u8);
             writer.WriteStringValue(Text);
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -58,7 +58,7 @@ namespace Pagination.Models
             string blockItemId = default;
             Optional<string> description = default;
             string text = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("blockItemId"u8))
@@ -78,11 +78,11 @@ namespace Pagination.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new TextBlockItem(blockItemId, description.Value, text, rawData);
+            return new TextBlockItem(blockItemId, description.Value, text, serializedAdditionalRawData);
         }
 
         TextBlockItem IModelJsonSerializable<TextBlockItem>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

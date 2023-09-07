@@ -34,8 +34,8 @@ namespace CognitiveSearch.Models
         /// <param name="commonWords"> The set of common words. </param>
         /// <param name="ignoreCase"> A value indicating whether common words matching will be case insensitive. Default is false. </param>
         /// <param name="useQueryMode"> A value that indicates whether the token filter is in query mode. When in query mode, the token filter generates bigrams and then removes common words and single terms followed by a common word. Default is false. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CommonGramTokenFilter(string odataType, string name, IList<string> commonWords, bool? ignoreCase, bool? useQueryMode, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CommonGramTokenFilter(string odataType, string name, IList<string> commonWords, bool? ignoreCase, bool? useQueryMode, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             CommonWords = commonWords;
             IgnoreCase = ignoreCase;

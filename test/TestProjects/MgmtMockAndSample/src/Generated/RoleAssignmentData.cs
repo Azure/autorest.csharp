@@ -19,7 +19,7 @@ namespace MgmtMockAndSample
     public partial class RoleAssignmentData : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RoleAssignmentData"/>. </summary>
         internal RoleAssignmentData()
@@ -35,14 +35,14 @@ namespace MgmtMockAndSample
         /// <param name="roleDefinitionId"> The role definition ID. </param>
         /// <param name="principalId"> The principal ID. </param>
         /// <param name="canDelegate"> The Delegation flag for the role assignment. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RoleAssignmentData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string scope, string roleDefinitionId, string principalId, bool? canDelegate, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RoleAssignmentData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string scope, string roleDefinitionId, string principalId, bool? canDelegate, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Scope = scope;
             RoleDefinitionId = roleDefinitionId;
             PrincipalId = principalId;
             CanDelegate = canDelegate;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The role assignment scope. </summary>

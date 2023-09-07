@@ -14,7 +14,7 @@ namespace azure_parameter_grouping.Models
     public partial class ParameterGroupingPostReservedWordsParameters
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostReservedWordsParameters"/>. </summary>
         public ParameterGroupingPostReservedWordsParameters()
@@ -24,12 +24,12 @@ namespace azure_parameter_grouping.Models
         /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostReservedWordsParameters"/>. </summary>
         /// <param name="from"> 'from' is a reserved word. Pass in 'bob' to pass. </param>
         /// <param name="accept"> 'accept' is a reserved word. Pass in 'yes' to pass. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ParameterGroupingPostReservedWordsParameters(string @from, string accept, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ParameterGroupingPostReservedWordsParameters(string @from, string accept, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             From = @from;
             Accept = accept;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> 'from' is a reserved word. Pass in 'bob' to pass. </summary>

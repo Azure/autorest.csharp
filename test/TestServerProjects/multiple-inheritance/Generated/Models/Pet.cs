@@ -15,7 +15,7 @@ namespace multiple_inheritance.Models
     public partial class Pet
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="name"></param>
@@ -29,11 +29,11 @@ namespace multiple_inheritance.Models
 
         /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="name"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Pet(string name, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Pet(string name, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Pet"/> for deserialization. </summary>

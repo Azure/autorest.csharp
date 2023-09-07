@@ -257,9 +257,9 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableStringList");
                 }
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -310,7 +310,7 @@ namespace ModelsTypeSpec.Models
             IList<string> requiredNullableStringList = default;
             Optional<IList<int>> nonRequiredNullableIntList = default;
             Optional<IList<string>> nonRequiredNullableStringList = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"u8))
@@ -587,11 +587,11 @@ namespace ModelsTypeSpec.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new RoundTripModel(requiredString, requiredInt, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), requiredNullableInt, requiredNullableString, Optional.ToNullable(nonRequiredNullableInt), nonRequiredNullableString.Value, requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList, requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes.Value, requiredUint8Array, Optional.ToList(optionalUint8Array), requiredUnknown, optionalUnknown.Value, requiredInt8Array, Optional.ToList(optionalInt8Array), requiredNullableIntList, requiredNullableStringList, Optional.ToList(nonRequiredNullableIntList), Optional.ToList(nonRequiredNullableStringList), rawData);
+            return new RoundTripModel(requiredString, requiredInt, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), requiredNullableInt, requiredNullableString, Optional.ToNullable(nonRequiredNullableInt), nonRequiredNullableString.Value, requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList, requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes.Value, requiredUint8Array, Optional.ToList(optionalUint8Array), requiredUnknown, optionalUnknown.Value, requiredInt8Array, Optional.ToList(optionalInt8Array), requiredNullableIntList, requiredNullableStringList, Optional.ToList(nonRequiredNullableIntList), Optional.ToList(nonRequiredNullableStringList), serializedAdditionalRawData);
         }
 
         RoundTripModel IModelJsonSerializable<RoundTripModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

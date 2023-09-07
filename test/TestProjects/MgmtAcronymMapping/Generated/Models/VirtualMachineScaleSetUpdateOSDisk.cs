@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping.Models
     public partial class VirtualMachineScaleSetUpdateOSDisk
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateOSDisk"/>. </summary>
         public VirtualMachineScaleSetUpdateOSDisk()
@@ -51,8 +51,8 @@ namespace MgmtAcronymMapping.Models
         /// The managed disk parameters.
         /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.managedDisk
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetUpdateOSDisk(CachingType? caching, bool? writeAcceleratorEnabled, int? diskSizeGB, VirtualHardDisk image, IList<string> vhdContainers, VirtualMachineScaleSetManagedDiskParameters managedDisk, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetUpdateOSDisk(CachingType? caching, bool? writeAcceleratorEnabled, int? diskSizeGB, VirtualHardDisk image, IList<string> vhdContainers, VirtualMachineScaleSetManagedDiskParameters managedDisk, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Caching = caching;
             WriteAcceleratorEnabled = writeAcceleratorEnabled;
@@ -60,7 +60,7 @@ namespace MgmtAcronymMapping.Models
             Image = image;
             VhdContainers = vhdContainers;
             ManagedDisk = managedDisk;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

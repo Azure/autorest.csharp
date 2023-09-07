@@ -15,7 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class DetectedLanguage
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DetectedLanguage"/>. </summary>
         /// <param name="name"> Long name of a detected language (e.g. English, French). </param>
@@ -36,13 +36,13 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="name"> Long name of a detected language (e.g. English, French). </param>
         /// <param name="iso6391Name"> A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr). </param>
         /// <param name="confidenceScore"> A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DetectedLanguage(string name, string iso6391Name, double confidenceScore, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DetectedLanguage(string name, string iso6391Name, double confidenceScore, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Iso6391Name = iso6391Name;
             ConfidenceScore = confidenceScore;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DetectedLanguage"/> for deserialization. </summary>

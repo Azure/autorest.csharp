@@ -14,7 +14,7 @@ namespace _Type.Property.ValueTypes.Models
     public partial class FloatProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of FloatProperty. </summary>
         /// <param name="property"> Property. </param>
@@ -25,11 +25,11 @@ namespace _Type.Property.ValueTypes.Models
 
         /// <summary> Initializes a new instance of FloatProperty. </summary>
         /// <param name="property"> Property. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FloatProperty(float property, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FloatProperty(float property, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Property = property;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="FloatProperty"/> for deserialization. </summary>

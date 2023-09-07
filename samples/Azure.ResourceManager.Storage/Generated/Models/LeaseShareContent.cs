@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class LeaseShareContent
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="LeaseShareContent"/>. </summary>
         /// <param name="action"> Specifies the lease action. Can be one of the available actions. </param>
@@ -29,15 +29,15 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="breakPeriod"> Optional. For a break action, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. </param>
         /// <param name="leaseDuration"> Required for acquire. Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. </param>
         /// <param name="proposedLeaseId"> Optional for acquire, required for change. Proposed lease ID, in a GUID string format. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LeaseShareContent(LeaseShareAction action, string leaseId, int? breakPeriod, int? leaseDuration, string proposedLeaseId, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LeaseShareContent(LeaseShareAction action, string leaseId, int? breakPeriod, int? leaseDuration, string proposedLeaseId, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Action = action;
             LeaseId = leaseId;
             BreakPeriod = breakPeriod;
             LeaseDuration = leaseDuration;
             ProposedLeaseId = proposedLeaseId;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="LeaseShareContent"/> for deserialization. </summary>

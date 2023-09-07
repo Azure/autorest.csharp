@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
     public partial class IndexerExecutionInfo
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="IndexerExecutionInfo"/>. </summary>
         /// <param name="status"> Overall indexer status. </param>
@@ -38,14 +38,14 @@ namespace CognitiveSearch.Models
         /// <param name="lastResult"> The result of the most recent or an in-progress indexer execution. </param>
         /// <param name="executionHistory"> History of the recent indexer executions, sorted in reverse chronological order. </param>
         /// <param name="limits"> The execution limits for the indexer. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal IndexerExecutionInfo(IndexerStatus status, IndexerExecutionResult lastResult, IReadOnlyList<IndexerExecutionResult> executionHistory, IndexerLimits limits, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IndexerExecutionInfo(IndexerStatus status, IndexerExecutionResult lastResult, IReadOnlyList<IndexerExecutionResult> executionHistory, IndexerLimits limits, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             LastResult = lastResult;
             ExecutionHistory = executionHistory;
             Limits = limits;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="IndexerExecutionInfo"/> for deserialization. </summary>

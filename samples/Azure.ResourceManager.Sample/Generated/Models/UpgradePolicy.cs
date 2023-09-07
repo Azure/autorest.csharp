@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class UpgradePolicy
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UpgradePolicy"/>. </summary>
         public UpgradePolicy()
@@ -37,13 +37,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// Configuration parameters used for performing automatic OS Upgrade.
         /// Serialized Name: UpgradePolicy.automaticOSUpgradePolicy
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UpgradePolicy(UpgradeMode? mode, RollingUpgradePolicy rollingUpgradePolicy, AutomaticOSUpgradePolicy automaticOSUpgradePolicy, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UpgradePolicy(UpgradeMode? mode, RollingUpgradePolicy rollingUpgradePolicy, AutomaticOSUpgradePolicy automaticOSUpgradePolicy, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Mode = mode;
             RollingUpgradePolicy = rollingUpgradePolicy;
             AutomaticOSUpgradePolicy = automaticOSUpgradePolicy;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

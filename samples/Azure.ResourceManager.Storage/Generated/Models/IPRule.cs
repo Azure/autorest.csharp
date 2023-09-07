@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class IPRule
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="IPRule"/>. </summary>
         /// <param name="ipAddressOrRange"> Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed. </param>
@@ -30,12 +30,12 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of <see cref="IPRule"/>. </summary>
         /// <param name="ipAddressOrRange"> Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed. </param>
         /// <param name="action"> The action of IP ACL rule. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal IPRule(string ipAddressOrRange, Action? action, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IPRule(string ipAddressOrRange, Action? action, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             IPAddressOrRange = ipAddressOrRange;
             Action = action;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="IPRule"/> for deserialization. </summary>

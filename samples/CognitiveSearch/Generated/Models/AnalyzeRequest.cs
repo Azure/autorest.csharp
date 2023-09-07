@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class AnalyzeRequest
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AnalyzeRequest"/>. </summary>
         /// <param name="text"> The text to break into tokens. </param>
@@ -35,15 +35,15 @@ namespace CognitiveSearch.Models
         /// <param name="tokenizer"> The name of the tokenizer to use to break the given text. If this parameter is not specified, you must specify an analyzer instead. The tokenizer and analyzer parameters are mutually exclusive. </param>
         /// <param name="tokenFilters"> An optional list of token filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter. </param>
         /// <param name="charFilters"> An optional list of character filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AnalyzeRequest(string text, AnalyzerName? analyzer, TokenizerName? tokenizer, IList<TokenFilterName> tokenFilters, IList<CharFilterName> charFilters, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AnalyzeRequest(string text, AnalyzerName? analyzer, TokenizerName? tokenizer, IList<TokenFilterName> tokenFilters, IList<CharFilterName> charFilters, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Text = text;
             Analyzer = analyzer;
             Tokenizer = tokenizer;
             TokenFilters = tokenFilters;
             CharFilters = charFilters;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="AnalyzeRequest"/> for deserialization. </summary>

@@ -25,9 +25,9 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("baseModelProp"u8);
             writer.WriteStringValue(BaseModelProp);
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -49,7 +49,7 @@ namespace ModelsTypeSpec.Models
                 return null;
             }
             string baseModelProp = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("baseModelProp"u8))
@@ -59,11 +59,11 @@ namespace ModelsTypeSpec.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new NoUseBase(baseModelProp, rawData);
+            return new NoUseBase(baseModelProp, serializedAdditionalRawData);
         }
 
         NoUseBase IModelJsonSerializable<NoUseBase>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

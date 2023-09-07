@@ -15,7 +15,7 @@ namespace Inheritance.Models
     public partial class BaseClass
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BaseClass"/>. </summary>
         public BaseClass()
@@ -35,8 +35,8 @@ namespace Inheritance.Models
         /// <param name="dfeDateTime"> Any object. </param>
         /// <param name="dfeDuration"> Any object. </param>
         /// <param name="dfeUri"> Any object. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BaseClass(string baseClassProperty, DataFactoryElement<string> dfeString, DataFactoryElement<double> dfeDouble, DataFactoryElement<bool> dfeBool, DataFactoryElement<int> dfeInt, DataFactoryElement<BinaryData> dfeObject, DataFactoryElement<IList<SeparateClass>> dfeListOfT, DataFactoryElement<IList<string>> dfeListOfString, DataFactoryElement<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryElement<DateTimeOffset> dfeDateTime, DataFactoryElement<TimeSpan> dfeDuration, DataFactoryElement<Uri> dfeUri, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BaseClass(string baseClassProperty, DataFactoryElement<string> dfeString, DataFactoryElement<double> dfeDouble, DataFactoryElement<bool> dfeBool, DataFactoryElement<int> dfeInt, DataFactoryElement<BinaryData> dfeObject, DataFactoryElement<IList<SeparateClass>> dfeListOfT, DataFactoryElement<IList<string>> dfeListOfString, DataFactoryElement<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryElement<DateTimeOffset> dfeDateTime, DataFactoryElement<TimeSpan> dfeDuration, DataFactoryElement<Uri> dfeUri, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             BaseClassProperty = baseClassProperty;
             DfeString = dfeString;
@@ -50,7 +50,7 @@ namespace Inheritance.Models
             DfeDateTime = dfeDateTime;
             DfeDuration = dfeDuration;
             DfeUri = dfeUri;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the base class property. </summary>

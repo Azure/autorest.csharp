@@ -34,8 +34,8 @@ namespace CognitiveSearch.Models
         /// <param name="synonyms"> A list of synonyms in following one of two formats: 1. incredible, unbelievable, fabulous =&gt; amazing - all terms on the left side of =&gt; symbol will be replaced with all terms on its right side; 2. incredible, unbelievable, fabulous, amazing - comma separated list of equivalent words. Set the expand option to change how this list is interpreted. </param>
         /// <param name="ignoreCase"> A value indicating whether to case-fold input for matching. Default is false. </param>
         /// <param name="expand"> A value indicating whether all words in the list of synonyms (if =&gt; notation is not used) will map to one another. If true, all words in the list of synonyms (if =&gt; notation is not used) will map to one another. The following list: incredible, unbelievable, fabulous, amazing is equivalent to: incredible, unbelievable, fabulous, amazing =&gt; incredible, unbelievable, fabulous, amazing. If false, the following list: incredible, unbelievable, fabulous, amazing will be equivalent to: incredible, unbelievable, fabulous, amazing =&gt; incredible. Default is true. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SynonymTokenFilter(string odataType, string name, IList<string> synonyms, bool? ignoreCase, bool? expand, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SynonymTokenFilter(string odataType, string name, IList<string> synonyms, bool? ignoreCase, bool? expand, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             Synonyms = synonyms;
             IgnoreCase = ignoreCase;

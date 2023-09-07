@@ -28,8 +28,8 @@ namespace MgmtSafeFlatten.Models
         /// <summary> Initializes a new instance of <see cref="LayerOneFooType"/>. </summary>
         /// <param name="name"></param>
         /// <param name="parameters"> Defines the parameters for the type. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LayerOneFooType(LayerOneTypeName name, string parameters, Dictionary<string, BinaryData> rawData) : base(name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LayerOneFooType(LayerOneTypeName name, string parameters, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(name, serializedAdditionalRawData)
         {
             Parameters = parameters;
             Name = name;

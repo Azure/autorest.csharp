@@ -14,7 +14,7 @@ namespace xml_service.Models
     public partial class ObjectWithXMsTextProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ObjectWithXMsTextProperty"/>. </summary>
         internal ObjectWithXMsTextProperty()
@@ -24,12 +24,12 @@ namespace xml_service.Models
         /// <summary> Initializes a new instance of <see cref="ObjectWithXMsTextProperty"/>. </summary>
         /// <param name="language"> Returned value should be 'english'. </param>
         /// <param name="content"> Returned value should be 'I am text'. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ObjectWithXMsTextProperty(string language, string content, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ObjectWithXMsTextProperty(string language, string content, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Language = language;
             Content = content;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Returned value should be 'english'. </summary>

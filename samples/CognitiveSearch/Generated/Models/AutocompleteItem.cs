@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class AutocompleteItem
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AutocompleteItem"/>. </summary>
         /// <param name="text"> The completed term. </param>
@@ -33,12 +33,12 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="AutocompleteItem"/>. </summary>
         /// <param name="text"> The completed term. </param>
         /// <param name="queryPlusText"> The query along with the completed term. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AutocompleteItem(string text, string queryPlusText, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AutocompleteItem(string text, string queryPlusText, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Text = text;
             QueryPlusText = queryPlusText;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="AutocompleteItem"/> for deserialization. </summary>

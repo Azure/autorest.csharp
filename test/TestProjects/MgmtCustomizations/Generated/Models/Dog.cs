@@ -27,8 +27,8 @@ namespace MgmtCustomizations.Models
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
         /// <param name="bark"> A dog can bark. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Dog(PetKind kind, string name, int size, string bark, Dictionary<string, BinaryData> rawData) : base(kind, name, size, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Dog(PetKind kind, string name, int size, string bark, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, name, size, serializedAdditionalRawData)
         {
             Bark = bark;
             Kind = kind;

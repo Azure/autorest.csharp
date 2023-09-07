@@ -14,7 +14,7 @@ namespace xms_error_responses.Models
     public partial class Animal
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Animal"/>. </summary>
         internal Animal()
@@ -23,11 +23,11 @@ namespace xms_error_responses.Models
 
         /// <summary> Initializes a new instance of <see cref="Animal"/>. </summary>
         /// <param name="aniType"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Animal(string aniType, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Animal(string aniType, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             AniType = aniType;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the ani type. </summary>

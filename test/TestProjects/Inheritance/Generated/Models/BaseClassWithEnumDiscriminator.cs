@@ -18,7 +18,7 @@ namespace Inheritance.Models
     internal abstract partial class BaseClassWithEnumDiscriminator
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BaseClassWithEnumDiscriminator"/>. </summary>
         protected BaseClassWithEnumDiscriminator()
@@ -27,11 +27,11 @@ namespace Inheritance.Models
 
         /// <summary> Initializes a new instance of <see cref="BaseClassWithEnumDiscriminator"/>. </summary>
         /// <param name="discriminatorProperty"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BaseClassWithEnumDiscriminator(BaseClassWithEnumDiscriminatorEnum discriminatorProperty, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BaseClassWithEnumDiscriminator(BaseClassWithEnumDiscriminatorEnum discriminatorProperty, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DiscriminatorProperty = discriminatorProperty;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the discriminator property. </summary>

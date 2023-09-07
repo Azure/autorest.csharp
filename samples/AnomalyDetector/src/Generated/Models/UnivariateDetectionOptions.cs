@@ -16,7 +16,7 @@ namespace AnomalyDetector.Models
     public partial class UnivariateDetectionOptions
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of UnivariateDetectionOptions. </summary>
         /// <param name="series">
@@ -69,8 +69,8 @@ namespace AnomalyDetector.Models
         /// Used to specify the value to fill, it's used when granularity is not "none"
         /// and imputeMode is "fixed".
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnivariateDetectionOptions(IList<TimeSeriesPoint> series, TimeGranularity? granularity, int? customInterval, int? period, float? maxAnomalyRatio, int? sensitivity, ImputeMode? imputeMode, float? imputeFixedValue, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnivariateDetectionOptions(IList<TimeSeriesPoint> series, TimeGranularity? granularity, int? customInterval, int? period, float? maxAnomalyRatio, int? sensitivity, ImputeMode? imputeMode, float? imputeFixedValue, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Series = series;
             Granularity = granularity;
@@ -80,7 +80,7 @@ namespace AnomalyDetector.Models
             Sensitivity = sensitivity;
             ImputeMode = imputeMode;
             ImputeFixedValue = imputeFixedValue;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="UnivariateDetectionOptions"/> for deserialization. </summary>

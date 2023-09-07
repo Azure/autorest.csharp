@@ -16,8 +16,8 @@ namespace MgmtDiscriminator.Models
         /// <summary> Initializes a new instance of <see cref="UnknownDeliveryRuleAction"/>. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownDeliveryRuleAction(DeliveryRuleActionType name, string foo, Dictionary<string, BinaryData> rawData) : base(name, foo, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownDeliveryRuleAction(DeliveryRuleActionType name, string foo, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(name, foo, serializedAdditionalRawData)
         {
             Name = name;
         }

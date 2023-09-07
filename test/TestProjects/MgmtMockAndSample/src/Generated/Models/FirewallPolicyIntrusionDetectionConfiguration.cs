@@ -15,7 +15,7 @@ namespace MgmtMockAndSample.Models
     public partial class FirewallPolicyIntrusionDetectionConfiguration
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyIntrusionDetectionConfiguration"/>. </summary>
         public FirewallPolicyIntrusionDetectionConfiguration()
@@ -27,12 +27,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyIntrusionDetectionConfiguration"/>. </summary>
         /// <param name="signatureOverrides"> List of specific signatures states. </param>
         /// <param name="bypassTrafficSettings"> List of rules for traffic to bypass. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirewallPolicyIntrusionDetectionConfiguration(IList<FirewallPolicyIntrusionDetectionSignatureSpecification> signatureOverrides, IList<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications> bypassTrafficSettings, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyIntrusionDetectionConfiguration(IList<FirewallPolicyIntrusionDetectionSignatureSpecification> signatureOverrides, IList<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications> bypassTrafficSettings, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SignatureOverrides = signatureOverrides;
             BypassTrafficSettings = bypassTrafficSettings;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> List of specific signatures states. </summary>

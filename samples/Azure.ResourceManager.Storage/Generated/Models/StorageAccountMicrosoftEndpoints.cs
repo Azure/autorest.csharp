@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class StorageAccountMicrosoftEndpoints
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StorageAccountMicrosoftEndpoints"/>. </summary>
         internal StorageAccountMicrosoftEndpoints()
@@ -28,8 +28,8 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="file"> Gets the file endpoint. </param>
         /// <param name="web"> Gets the web endpoint. </param>
         /// <param name="dfs"> Gets the dfs endpoint. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StorageAccountMicrosoftEndpoints(string blob, string queue, string table, string file, string web, string dfs, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageAccountMicrosoftEndpoints(string blob, string queue, string table, string file, string web, string dfs, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Blob = blob;
             Queue = queue;
@@ -37,7 +37,7 @@ namespace Azure.ResourceManager.Storage.Models
             File = file;
             Web = web;
             Dfs = dfs;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the blob endpoint. </summary>

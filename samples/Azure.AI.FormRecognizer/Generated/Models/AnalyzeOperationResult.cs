@@ -14,7 +14,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class AnalyzeOperationResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AnalyzeOperationResult"/>. </summary>
         /// <param name="status"> Operation status. </param>
@@ -32,14 +32,14 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="createdDateTime"> Date and time (UTC) when the analyze operation was submitted. </param>
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
         /// <param name="analyzeResult"> Results of the analyze operation. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AnalyzeOperationResult(OperationStatus status, DateTimeOffset createdDateTime, DateTimeOffset lastUpdatedDateTime, AnalyzeResult analyzeResult, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AnalyzeOperationResult(OperationStatus status, DateTimeOffset createdDateTime, DateTimeOffset lastUpdatedDateTime, AnalyzeResult analyzeResult, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             CreatedDateTime = createdDateTime;
             LastUpdatedDateTime = lastUpdatedDateTime;
             AnalyzeResult = analyzeResult;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="AnalyzeOperationResult"/> for deserialization. </summary>

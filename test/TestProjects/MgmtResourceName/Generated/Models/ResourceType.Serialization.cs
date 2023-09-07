@@ -50,9 +50,9 @@ namespace MgmtResourceName.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -76,7 +76,7 @@ namespace MgmtResourceName.Models
             Optional<string> name = default;
             Optional<string> displayName = default;
             Optional<IReadOnlyList<ResourceOperation>> operations = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -105,11 +105,11 @@ namespace MgmtResourceName.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new ResourceType(name.Value, displayName.Value, Optional.ToList(operations), rawData);
+            return new ResourceType(name.Value, displayName.Value, Optional.ToList(operations), serializedAdditionalRawData);
         }
 
         ResourceType IModelJsonSerializable<ResourceType>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

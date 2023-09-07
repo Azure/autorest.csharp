@@ -16,7 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class LinkedEntity
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="LinkedEntity"/>. </summary>
         /// <param name="name"> Entity Linking formal name. </param>
@@ -47,8 +47,8 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="id"> Unique identifier of the recognized entity from the data source. </param>
         /// <param name="url"> URL for the entity's page from the data source. </param>
         /// <param name="dataSource"> Data source used to extract entity linking, such as Wiki/Bing etc. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LinkedEntity(string name, IReadOnlyList<Match> matches, string language, string id, string url, string dataSource, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LinkedEntity(string name, IReadOnlyList<Match> matches, string language, string id, string url, string dataSource, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Matches = matches;
@@ -56,7 +56,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Id = id;
             Url = url;
             DataSource = dataSource;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="LinkedEntity"/> for deserialization. </summary>

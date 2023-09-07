@@ -38,8 +38,8 @@ namespace CognitiveSearch.Models
         /// <param name="defaultToLanguageCode"> The language code to translate documents into for documents that don't specify the to language explicitly. </param>
         /// <param name="defaultFromLanguageCode"> The language code to translate documents from for documents that don't specify the from language explicitly. </param>
         /// <param name="suggestedFrom"> The language code to translate documents from when neither the fromLanguageCode input nor the defaultFromLanguageCode parameter are provided, and the automatic language detection is unsuccessful. Default is en. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TextTranslationSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, TextTranslationSkillLanguage defaultToLanguageCode, TextTranslationSkillLanguage? defaultFromLanguageCode, TextTranslationSkillLanguage? suggestedFrom, Dictionary<string, BinaryData> rawData) : base(odataType, name, description, context, inputs, outputs, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TextTranslationSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, TextTranslationSkillLanguage defaultToLanguageCode, TextTranslationSkillLanguage? defaultFromLanguageCode, TextTranslationSkillLanguage? suggestedFrom, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, description, context, inputs, outputs, serializedAdditionalRawData)
         {
             DefaultToLanguageCode = defaultToLanguageCode;
             DefaultFromLanguageCode = defaultFromLanguageCode;

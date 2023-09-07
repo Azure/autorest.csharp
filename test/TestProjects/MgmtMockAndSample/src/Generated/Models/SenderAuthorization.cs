@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     public partial class SenderAuthorization
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SenderAuthorization"/>. </summary>
         internal SenderAuthorization()
@@ -25,13 +25,13 @@ namespace MgmtMockAndSample.Models
         /// <param name="action"> the permissible actions. For instance: microsoft.support/supporttickets/write. </param>
         /// <param name="role"> the role of the user. For instance: Subscription Admin. </param>
         /// <param name="scope"> the scope. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SenderAuthorization(string action, string role, string scope, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SenderAuthorization(string action, string role, string scope, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Action = action;
             Role = role;
             Scope = scope;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> the permissible actions. For instance: microsoft.support/supporttickets/write. </summary>

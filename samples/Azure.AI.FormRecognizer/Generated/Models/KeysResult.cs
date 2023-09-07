@@ -15,7 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class KeysResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="KeysResult"/>. </summary>
         /// <param name="clusters"> Object mapping clusterIds to a list of keys. </param>
@@ -29,11 +29,11 @@ namespace Azure.AI.FormRecognizer.Models
 
         /// <summary> Initializes a new instance of <see cref="KeysResult"/>. </summary>
         /// <param name="clusters"> Object mapping clusterIds to a list of keys. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal KeysResult(IReadOnlyDictionary<string, IList<string>> clusters, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeysResult(IReadOnlyDictionary<string, IList<string>> clusters, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Clusters = clusters;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="KeysResult"/> for deserialization. </summary>

@@ -15,7 +15,7 @@ namespace FlattenedParameters.Models
     internal partial class Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         /// <param name="required"></param>
@@ -30,12 +30,12 @@ namespace FlattenedParameters.Models
         /// <summary> Initializes a new instance of <see cref="Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         /// <param name="required"></param>
         /// <param name="nonRequired"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(string required, string nonRequired, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(string required, string nonRequired, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Required = required;
             NonRequired = nonRequired;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema"/> for deserialization. </summary>

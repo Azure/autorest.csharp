@@ -18,7 +18,7 @@ namespace CognitiveSearch.Models
     public partial class DataDeletionDetectionPolicy
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DataDeletionDetectionPolicy"/>. </summary>
         public DataDeletionDetectionPolicy()
@@ -27,11 +27,11 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of <see cref="DataDeletionDetectionPolicy"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the data deletion detection policy. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DataDeletionDetectionPolicy(string odataType, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DataDeletionDetectionPolicy(string odataType, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OdataType = odataType;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Identifies the concrete type of the data deletion detection policy. </summary>

@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class ServiceEndpointPropertiesFormat
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ServiceEndpointPropertiesFormat"/>. </summary>
         public ServiceEndpointPropertiesFormat()
@@ -27,13 +27,13 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="service"> The type of the endpoint service. </param>
         /// <param name="locations"> A list of locations. </param>
         /// <param name="provisioningState"> The provisioning state of the service endpoint resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ServiceEndpointPropertiesFormat(string service, IList<string> locations, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ServiceEndpointPropertiesFormat(string service, IList<string> locations, ProvisioningState? provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Service = service;
             Locations = locations;
             ProvisioningState = provisioningState;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The type of the endpoint service. </summary>

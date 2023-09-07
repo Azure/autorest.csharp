@@ -16,7 +16,7 @@ namespace _Type.Property.Nullable.Models
     public partial class CollectionsByteProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of CollectionsByteProperty. </summary>
         /// <param name="requiredProperty"> Required property. </param>
@@ -33,12 +33,12 @@ namespace _Type.Property.Nullable.Models
         /// <summary> Initializes a new instance of CollectionsByteProperty. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CollectionsByteProperty(string requiredProperty, IReadOnlyList<BinaryData> nullableProperty, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CollectionsByteProperty(string requiredProperty, IReadOnlyList<BinaryData> nullableProperty, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredProperty = requiredProperty;
             NullableProperty = nullableProperty;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CollectionsByteProperty"/> for deserialization. </summary>

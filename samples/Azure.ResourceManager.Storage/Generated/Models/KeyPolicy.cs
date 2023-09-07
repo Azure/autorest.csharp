@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     internal partial class KeyPolicy
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="KeyPolicy"/>. </summary>
         /// <param name="keyExpirationPeriodInDays"> The key expiration period in days. </param>
@@ -25,11 +25,11 @@ namespace Azure.ResourceManager.Storage.Models
 
         /// <summary> Initializes a new instance of <see cref="KeyPolicy"/>. </summary>
         /// <param name="keyExpirationPeriodInDays"> The key expiration period in days. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal KeyPolicy(int keyExpirationPeriodInDays, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeyPolicy(int keyExpirationPeriodInDays, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             KeyExpirationPeriodInDays = keyExpirationPeriodInDays;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="KeyPolicy"/> for deserialization. </summary>

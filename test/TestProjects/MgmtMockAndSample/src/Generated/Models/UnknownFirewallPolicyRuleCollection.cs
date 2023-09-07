@@ -17,8 +17,8 @@ namespace MgmtMockAndSample.Models
         /// <param name="ruleCollectionType"> The type of the rule collection. </param>
         /// <param name="name"> The name of the rule collection. </param>
         /// <param name="priority"> Priority of the Firewall Policy Rule Collection resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownFirewallPolicyRuleCollection(FirewallPolicyRuleCollectionType ruleCollectionType, string name, int? priority, Dictionary<string, BinaryData> rawData) : base(ruleCollectionType, name, priority, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownFirewallPolicyRuleCollection(FirewallPolicyRuleCollectionType ruleCollectionType, string name, int? priority, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(ruleCollectionType, name, priority, serializedAdditionalRawData)
         {
             RuleCollectionType = ruleCollectionType;
         }

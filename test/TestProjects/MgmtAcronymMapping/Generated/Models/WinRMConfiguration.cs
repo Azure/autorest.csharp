@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping.Models
     internal partial class WinRMConfiguration
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="WinRMConfiguration"/>. </summary>
         public WinRMConfiguration()
@@ -31,11 +31,11 @@ namespace MgmtAcronymMapping.Models
         /// The list of Windows Remote Management listeners
         /// Serialized Name: WinRMConfiguration.listeners
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal WinRMConfiguration(IList<WinRMListener> listeners, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal WinRMConfiguration(IList<WinRMListener> listeners, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Listeners = listeners;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace MgmtSupersetFlattenInheritance.Models
     public partial class SubResourceModel1
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SubResourceModel1"/>. </summary>
         public SubResourceModel1()
@@ -24,12 +24,12 @@ namespace MgmtSupersetFlattenInheritance.Models
         /// <summary> Initializes a new instance of <see cref="SubResourceModel1"/>. </summary>
         /// <param name="id"></param>
         /// <param name="foo"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SubResourceModel1(string id, string foo, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SubResourceModel1(string id, string foo, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Foo = foo;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the id. </summary>

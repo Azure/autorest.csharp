@@ -15,7 +15,7 @@ namespace xml_service.Models
     public partial class ListBlobsResponse
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ListBlobsResponse"/>. </summary>
         /// <param name="containerName"></param>
@@ -53,8 +53,8 @@ namespace xml_service.Models
         /// <param name="delimiter"></param>
         /// <param name="blobs"></param>
         /// <param name="nextMarker"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ListBlobsResponse(string serviceEndpoint, string containerName, string prefix, string marker, int maxResults, string delimiter, Blobs blobs, string nextMarker, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListBlobsResponse(string serviceEndpoint, string containerName, string prefix, string marker, int maxResults, string delimiter, Blobs blobs, string nextMarker, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ServiceEndpoint = serviceEndpoint;
             ContainerName = containerName;
@@ -64,7 +64,7 @@ namespace xml_service.Models
             Delimiter = delimiter;
             Blobs = blobs;
             NextMarker = nextMarker;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ListBlobsResponse"/> for deserialization. </summary>

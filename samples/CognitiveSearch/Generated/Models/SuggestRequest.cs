@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class SuggestRequest
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SuggestRequest"/>. </summary>
         /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
@@ -42,8 +42,8 @@ namespace CognitiveSearch.Models
         /// <param name="select"> The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
         /// <param name="top"> The number of suggestions to retrieve. This must be a value between 1 and 100. The default is 5. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SuggestRequest(string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, string orderBy, string searchText, string searchFields, string select, string suggesterName, int? top, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SuggestRequest(string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, string orderBy, string searchText, string searchFields, string select, string suggesterName, int? top, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Filter = filter;
             UseFuzzyMatching = useFuzzyMatching;
@@ -56,7 +56,7 @@ namespace CognitiveSearch.Models
             Select = select;
             SuggesterName = suggesterName;
             Top = top;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="SuggestRequest"/> for deserialization. </summary>

@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     public partial class MgmtMockAndSampleSku
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSampleSku"/>. </summary>
         /// <param name="family"> SKU family name. </param>
@@ -28,12 +28,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSampleSku"/>. </summary>
         /// <param name="family"> SKU family name. </param>
         /// <param name="name"> SKU name to specify whether the key vault is a standard vault or a premium vault. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily family, MgmtMockAndSampleSkuName name, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily family, MgmtMockAndSampleSkuName name, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Family = family;
             Name = name;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSampleSku"/> for deserialization. </summary>

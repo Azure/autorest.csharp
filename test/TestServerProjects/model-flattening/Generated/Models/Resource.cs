@@ -15,7 +15,7 @@ namespace model_flattening.Models
     public partial class Resource
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Resource"/>. </summary>
         public Resource()
@@ -29,15 +29,15 @@ namespace model_flattening.Models
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
         /// <param name="location"> Resource Location. </param>
         /// <param name="name"> Resource Name. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Resource(string id, string type, IDictionary<string, string> tags, string location, string name, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Resource(string id, string type, IDictionary<string, string> tags, string location, string name, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Type = type;
             Tags = tags;
             Location = location;
             Name = name;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Resource Id. </summary>

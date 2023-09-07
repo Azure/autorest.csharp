@@ -14,7 +14,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
     public partial class AzureResourceFlattenModel4
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel4"/>. </summary>
         public AzureResourceFlattenModel4()
@@ -26,14 +26,14 @@ namespace MgmtExactMatchFlattenInheritance.Models
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="resourceType"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AzureResourceFlattenModel4(int? foo, string id, string name, string resourceType, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AzureResourceFlattenModel4(int? foo, string id, string name, string resourceType, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Foo = foo;
             Id = id;
             Name = name;
             ResourceType = resourceType;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> New property. </summary>

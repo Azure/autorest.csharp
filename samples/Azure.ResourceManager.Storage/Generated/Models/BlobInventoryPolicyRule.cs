@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class BlobInventoryPolicyRule
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicyRule"/>. </summary>
         /// <param name="enabled"> Rule is enabled when set to true. </param>
@@ -40,14 +40,14 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="name"> A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy. </param>
         /// <param name="destination"> Container name where blob inventory files are stored. Must be pre-created. </param>
         /// <param name="definition"> An object that defines the blob inventory policy rule. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BlobInventoryPolicyRule(bool enabled, string name, string destination, BlobInventoryPolicyDefinition definition, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BlobInventoryPolicyRule(bool enabled, string name, string destination, BlobInventoryPolicyDefinition definition, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Enabled = enabled;
             Name = name;
             Destination = destination;
             Definition = definition;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicyRule"/> for deserialization. </summary>

@@ -15,7 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class CopyAuthorizationResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CopyAuthorizationResult"/>. </summary>
         /// <param name="modelId"> Model identifier. </param>
@@ -36,13 +36,13 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="accessToken"> Token claim used to authorize the request. </param>
         /// <param name="expirationDateTimeTicks"> The time when the access token expires. The date is represented as the number of seconds from 1970-01-01T0:0:0Z UTC until the expiration time. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CopyAuthorizationResult(string modelId, string accessToken, long expirationDateTimeTicks, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CopyAuthorizationResult(string modelId, string accessToken, long expirationDateTimeTicks, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ModelId = modelId;
             AccessToken = accessToken;
             ExpirationDateTimeTicks = expirationDateTimeTicks;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CopyAuthorizationResult"/> for deserialization. </summary>

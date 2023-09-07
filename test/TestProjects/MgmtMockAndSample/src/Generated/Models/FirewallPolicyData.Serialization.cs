@@ -166,9 +166,9 @@ namespace MgmtMockAndSample
                 }
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -212,7 +212,7 @@ namespace MgmtMockAndSample
             Optional<FirewallPolicyIntrusionDetection> intrusionDetection = default;
             Optional<FirewallPolicyTransportSecurity> transportSecurity = default;
             Optional<FirewallPolicySku> sku = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -437,11 +437,11 @@ namespace MgmtMockAndSample
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new FirewallPolicyData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, identity, startupProbe.Value, readinessProbe.Value, Optional.ToNullable(desiredStatusCode), Optional.ToList(ruleCollectionGroups), Optional.ToNullable(provisioningState), basePolicy, Optional.ToList(firewalls), Optional.ToList(childPolicies), threatIntelWhitelist.Value, insights.Value, snat.Value, dnsSettings.Value, intrusionDetection.Value, transportSecurity.Value, sku.Value, rawData);
+            return new FirewallPolicyData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, identity, startupProbe.Value, readinessProbe.Value, Optional.ToNullable(desiredStatusCode), Optional.ToList(ruleCollectionGroups), Optional.ToNullable(provisioningState), basePolicy, Optional.ToList(firewalls), Optional.ToList(childPolicies), threatIntelWhitelist.Value, insights.Value, snat.Value, dnsSettings.Value, intrusionDetection.Value, transportSecurity.Value, sku.Value, serializedAdditionalRawData);
         }
 
         FirewallPolicyData IModelJsonSerializable<FirewallPolicyData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

@@ -15,7 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class FormFieldsReport
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FormFieldsReport"/>. </summary>
         /// <param name="fieldName"> Training field name. </param>
@@ -32,12 +32,12 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Initializes a new instance of <see cref="FormFieldsReport"/>. </summary>
         /// <param name="fieldName"> Training field name. </param>
         /// <param name="accuracy"> Estimated extraction accuracy for this field. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FormFieldsReport(string fieldName, float accuracy, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FormFieldsReport(string fieldName, float accuracy, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             FieldName = fieldName;
             Accuracy = accuracy;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="FormFieldsReport"/> for deserialization. </summary>

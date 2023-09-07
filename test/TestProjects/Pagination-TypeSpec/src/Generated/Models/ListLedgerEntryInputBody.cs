@@ -15,7 +15,7 @@ namespace Pagination.Models
     public partial class ListLedgerEntryInputBody
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of ListLedgerEntryInputBody. </summary>
         /// <param name="requiredString"> Required string. </param>
@@ -32,12 +32,12 @@ namespace Pagination.Models
         /// <summary> Initializes a new instance of ListLedgerEntryInputBody. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ListLedgerEntryInputBody(string requiredString, int requiredInt, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListLedgerEntryInputBody(string requiredString, int requiredInt, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ListLedgerEntryInputBody"/> for deserialization. </summary>

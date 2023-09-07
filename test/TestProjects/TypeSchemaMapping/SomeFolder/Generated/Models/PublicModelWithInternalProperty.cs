@@ -15,7 +15,7 @@ namespace TypeSchemaMapping.Models
     public partial class PublicModelWithInternalProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="PublicModelWithInternalProperty"/>. </summary>
         internal PublicModelWithInternalProperty()
@@ -25,12 +25,12 @@ namespace TypeSchemaMapping.Models
         /// <summary> Initializes a new instance of <see cref="PublicModelWithInternalProperty"/>. </summary>
         /// <param name="stringPropertyJson"></param>
         /// <param name="publicProperty"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PublicModelWithInternalProperty(JsonElement stringPropertyJson, string publicProperty, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PublicModelWithInternalProperty(JsonElement stringPropertyJson, string publicProperty, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             StringPropertyJson = stringPropertyJson;
             PublicProperty = publicProperty;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
         /// <summary> Gets the public property. </summary>
         public string PublicProperty { get; }

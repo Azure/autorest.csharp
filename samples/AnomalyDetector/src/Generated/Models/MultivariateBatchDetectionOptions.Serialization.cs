@@ -31,9 +31,9 @@ namespace AnomalyDetector.Models
             writer.WriteStringValue(StartTime, "O");
             writer.WritePropertyName("endTime"u8);
             writer.WriteStringValue(EndTime, "O");
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -58,7 +58,7 @@ namespace AnomalyDetector.Models
             int topContributorCount = default;
             DateTimeOffset startTime = default;
             DateTimeOffset endTime = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("dataSource"u8))
@@ -83,11 +83,11 @@ namespace AnomalyDetector.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new MultivariateBatchDetectionOptions(dataSource, topContributorCount, startTime, endTime, rawData);
+            return new MultivariateBatchDetectionOptions(dataSource, topContributorCount, startTime, endTime, serializedAdditionalRawData);
         }
 
         MultivariateBatchDetectionOptions IModelJsonSerializable<MultivariateBatchDetectionOptions>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

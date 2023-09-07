@@ -27,8 +27,8 @@ namespace MgmtHierarchicalNonResource
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SharedGalleryData(string name, string location, string uniqueId, Dictionary<string, BinaryData> rawData) : base(name, location, uniqueId, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SharedGalleryData(string name, string location, string uniqueId, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(name, location, uniqueId, serializedAdditionalRawData)
         {
         }
 

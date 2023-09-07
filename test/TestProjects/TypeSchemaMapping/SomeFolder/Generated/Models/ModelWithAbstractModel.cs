@@ -14,7 +14,7 @@ namespace TypeSchemaMapping.Models
     public partial class ModelWithAbstractModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelWithAbstractModel"/>. </summary>
         internal ModelWithAbstractModel()
@@ -26,11 +26,11 @@ namespace TypeSchemaMapping.Models
         /// Please note <see cref="AbstractModel"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="DerivedFromAbstractModel"/>.
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithAbstractModel(AbstractModel abstractModelProperty, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithAbstractModel(AbstractModel abstractModelProperty, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             AbstractModelProperty = abstractModelProperty;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

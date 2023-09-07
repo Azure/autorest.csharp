@@ -36,8 +36,8 @@ namespace MgmtMockAndSample
         /// The available derived classes include <see cref="FirewallPolicyFilterRuleCollection"/> and <see cref="FirewallPolicyNatRuleCollection"/>.
         /// </param>
         /// <param name="provisioningState"> The provisioning state of the firewall policy rule collection group resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirewallPolicyRuleCollectionGroupData(string id, string name, string etag, ResourceType? resourceType, int? priority, IList<FirewallPolicyRuleCollection> ruleCollections, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyRuleCollectionGroupData(string id, string name, string etag, ResourceType? resourceType, int? priority, IList<FirewallPolicyRuleCollection> ruleCollections, ProvisioningState? provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

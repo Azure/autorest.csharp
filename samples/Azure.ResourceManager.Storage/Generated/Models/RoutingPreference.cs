@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class RoutingPreference
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RoutingPreference"/>. </summary>
         public RoutingPreference()
@@ -25,13 +25,13 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="routingChoice"> Routing Choice defines the kind of network routing opted by the user. </param>
         /// <param name="publishMicrosoftEndpoints"> A boolean flag which indicates whether microsoft routing storage endpoints are to be published. </param>
         /// <param name="publishInternetEndpoints"> A boolean flag which indicates whether internet routing storage endpoints are to be published. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RoutingPreference(RoutingChoice? routingChoice, bool? publishMicrosoftEndpoints, bool? publishInternetEndpoints, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RoutingPreference(RoutingChoice? routingChoice, bool? publishMicrosoftEndpoints, bool? publishInternetEndpoints, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RoutingChoice = routingChoice;
             PublishMicrosoftEndpoints = publishMicrosoftEndpoints;
             PublishInternetEndpoints = publishInternetEndpoints;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Routing Choice defines the kind of network routing opted by the user. </summary>

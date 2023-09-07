@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     public partial class MhsmPrivateLinkServiceConnectionState
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MhsmPrivateLinkServiceConnectionState"/>. </summary>
         public MhsmPrivateLinkServiceConnectionState()
@@ -25,13 +25,13 @@ namespace MgmtMockAndSample.Models
         /// <param name="status"> Indicates whether the connection has been approved, rejected or removed by the key vault owner. </param>
         /// <param name="description"> The reason for approval or rejection. </param>
         /// <param name="actionsRequired"> A message indicating if changes on the service provider require any updates on the consumer. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MhsmPrivateLinkServiceConnectionState(MgmtMockAndSamplePrivateEndpointServiceConnectionStatus? status, string description, ActionsRequired? actionsRequired, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MhsmPrivateLinkServiceConnectionState(MgmtMockAndSamplePrivateEndpointServiceConnectionStatus? status, string description, ActionsRequired? actionsRequired, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             Description = description;
             ActionsRequired = actionsRequired;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Indicates whether the connection has been approved, rejected or removed by the key vault owner. </summary>

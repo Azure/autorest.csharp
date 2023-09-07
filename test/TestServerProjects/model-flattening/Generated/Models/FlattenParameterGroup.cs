@@ -15,7 +15,7 @@ namespace model_flattening.Models
     public partial class FlattenParameterGroup
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FlattenParameterGroup"/>. </summary>
         /// <param name="name"> Product name with value 'groupproduct'. </param>
@@ -39,8 +39,8 @@ namespace model_flattening.Models
         /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FlattenParameterGroup(string name, SimpleProduct simpleBodyProduct, string productId, string description, string maxProductDisplayName, SimpleProductPropertiesMaxProductCapacity? capacity, string genericValue, string odataValue, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FlattenParameterGroup(string name, SimpleProduct simpleBodyProduct, string productId, string description, string maxProductDisplayName, SimpleProductPropertiesMaxProductCapacity? capacity, string genericValue, string odataValue, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             SimpleBodyProduct = simpleBodyProduct;
@@ -50,7 +50,7 @@ namespace model_flattening.Models
             Capacity = capacity;
             GenericValue = genericValue;
             OdataValue = odataValue;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="FlattenParameterGroup"/> for deserialization. </summary>

@@ -30,8 +30,8 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="resourceType"> The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts". </param>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="location"> The geo-location where the resource lives. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        protected TrackedResource(ResourceIdentifier id, string name, ResourceType resourceType, IDictionary<string, string> tags, AzureLocation location, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        protected TrackedResource(ResourceIdentifier id, string name, ResourceType resourceType, IDictionary<string, string> tags, AzureLocation location, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, serializedAdditionalRawData)
         {
             Tags = tags;
             Location = location;

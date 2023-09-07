@@ -15,7 +15,7 @@ namespace Azure.Storage.Tables.Models
     public partial class QueryOptions
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="QueryOptions"/>. </summary>
         public QueryOptions()
@@ -27,14 +27,14 @@ namespace Azure.Storage.Tables.Models
         /// <param name="top"> Maximum number of records to return. </param>
         /// <param name="select"> Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId". </param>
         /// <param name="filter"> OData filter expression. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal QueryOptions(ResponseFormat? format, int? top, string select, string filter, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal QueryOptions(ResponseFormat? format, int? top, string select, string filter, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Format = format;
             Top = top;
             Select = select;
             Filter = filter;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Specifies the media type for the response. </summary>

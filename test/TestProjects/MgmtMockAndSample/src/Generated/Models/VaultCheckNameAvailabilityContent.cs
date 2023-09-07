@@ -15,7 +15,7 @@ namespace MgmtMockAndSample.Models
     public partial class VaultCheckNameAvailabilityContent
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VaultCheckNameAvailabilityContent"/>. </summary>
         /// <param name="name"> The vault name. </param>
@@ -31,12 +31,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="VaultCheckNameAvailabilityContent"/>. </summary>
         /// <param name="name"> The vault name. </param>
         /// <param name="resourceType"> The type of resource, Microsoft.KeyVault/vaults. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VaultCheckNameAvailabilityContent(string name, EncryptionType resourceType, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultCheckNameAvailabilityContent(string name, EncryptionType resourceType, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             ResourceType = resourceType;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="VaultCheckNameAvailabilityContent"/> for deserialization. </summary>

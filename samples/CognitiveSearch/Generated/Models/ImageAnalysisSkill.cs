@@ -38,8 +38,8 @@ namespace CognitiveSearch.Models
         /// <param name="defaultLanguageCode"> A value indicating which language code to use. Default is en. </param>
         /// <param name="visualFeatures"> A list of visual features. </param>
         /// <param name="details"> A string indicating which domain-specific details to return. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ImageAnalysisSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, ImageAnalysisSkillLanguage? defaultLanguageCode, IList<VisualFeature> visualFeatures, IList<ImageDetail> details, Dictionary<string, BinaryData> rawData) : base(odataType, name, description, context, inputs, outputs, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImageAnalysisSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, ImageAnalysisSkillLanguage? defaultLanguageCode, IList<VisualFeature> visualFeatures, IList<ImageDetail> details, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, description, context, inputs, outputs, serializedAdditionalRawData)
         {
             DefaultLanguageCode = defaultLanguageCode;
             VisualFeatures = visualFeatures;

@@ -14,7 +14,7 @@ namespace MgmtHierarchicalNonResource.Models
     public partial class ResourceRange
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ResourceRange"/>. </summary>
         internal ResourceRange()
@@ -24,12 +24,12 @@ namespace MgmtHierarchicalNonResource.Models
         /// <summary> Initializes a new instance of <see cref="ResourceRange"/>. </summary>
         /// <param name="min"> The minimum number of the resource. </param>
         /// <param name="max"> The maximum number of the resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ResourceRange(int? min, int? max, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceRange(int? min, int? max, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Min = min;
             Max = max;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The minimum number of the resource. </summary>

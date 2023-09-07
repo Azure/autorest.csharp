@@ -14,7 +14,7 @@ namespace MgmtExpandResourceTypes.Models
     public partial class SrvRecord
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SrvRecord"/>. </summary>
         public SrvRecord()
@@ -26,14 +26,14 @@ namespace MgmtExpandResourceTypes.Models
         /// <param name="weight"> The weight value for this SRV record. </param>
         /// <param name="port"> The port value for this SRV record. </param>
         /// <param name="target"> The target domain name for this SRV record. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SrvRecord(int? priority, int? weight, int? port, string target, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SrvRecord(int? priority, int? weight, int? port, string target, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Priority = priority;
             Weight = weight;
             Port = port;
             Target = target;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The priority value for this SRV record. </summary>

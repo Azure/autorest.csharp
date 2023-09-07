@@ -44,8 +44,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// a list of resource items of the captured virtual machine
         /// Serialized Name: VirtualMachineCaptureResult.resources
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineCaptureResult(string id, string schema, string contentVersion, BinaryData parameters, IReadOnlyList<BinaryData> resources, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineCaptureResult(string id, string schema, string contentVersion, BinaryData parameters, IReadOnlyList<BinaryData> resources, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             Schema = schema;
             ContentVersion = contentVersion;

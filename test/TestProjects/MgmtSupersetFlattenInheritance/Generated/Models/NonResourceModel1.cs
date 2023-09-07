@@ -14,7 +14,7 @@ namespace MgmtSupersetFlattenInheritance.Models
     public partial class NonResourceModel1
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="NonResourceModel1"/>. </summary>
         public NonResourceModel1()
@@ -25,13 +25,13 @@ namespace MgmtSupersetFlattenInheritance.Models
         /// <param name="bar"></param>
         /// <param name="id"></param>
         /// <param name="foo"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NonResourceModel1(string bar, string id, string foo, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NonResourceModel1(string bar, string id, string foo, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Bar = bar;
             Id = id;
             Foo = foo;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the bar. </summary>

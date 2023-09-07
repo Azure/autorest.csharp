@@ -43,9 +43,9 @@ namespace MgmtSupersetInheritance.Models
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -70,7 +70,7 @@ namespace MgmtSupersetInheritance.Models
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> @new = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -99,11 +99,11 @@ namespace MgmtSupersetInheritance.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new SupersetModel3(Optional.ToNullable(id), name.Value, type.Value, @new.Value, rawData);
+            return new SupersetModel3(Optional.ToNullable(id), name.Value, type.Value, @new.Value, serializedAdditionalRawData);
         }
 
         SupersetModel3 IModelJsonSerializable<SupersetModel3>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

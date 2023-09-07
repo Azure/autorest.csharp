@@ -20,7 +20,7 @@ namespace Azure.ResourceManager.Storage
     public partial class BlobInventoryPolicyData : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicyData"/>. </summary>
         public BlobInventoryPolicyData()
@@ -34,12 +34,12 @@ namespace Azure.ResourceManager.Storage
         /// <param name="systemData"> The systemData. </param>
         /// <param name="lastModifiedOn"> Returns the last modified date and time of the blob inventory policy. </param>
         /// <param name="policy"> The storage account blob inventory policy object. It is composed of policy rules. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BlobInventoryPolicyData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DateTimeOffset? lastModifiedOn, BlobInventoryPolicySchema policy, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BlobInventoryPolicyData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DateTimeOffset? lastModifiedOn, BlobInventoryPolicySchema policy, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             LastModifiedOn = lastModifiedOn;
             Policy = policy;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Returns the last modified date and time of the blob inventory policy. </summary>

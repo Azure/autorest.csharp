@@ -19,7 +19,7 @@ namespace MgmtXmlDeserialization
     public partial class XmlInstanceData : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="XmlInstanceData"/>. </summary>
         public XmlInstanceData()
@@ -31,10 +31,10 @@ namespace MgmtXmlDeserialization
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal XmlInstanceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal XmlInstanceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
     }
 }

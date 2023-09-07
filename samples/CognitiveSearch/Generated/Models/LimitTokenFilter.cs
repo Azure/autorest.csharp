@@ -29,8 +29,8 @@ namespace CognitiveSearch.Models
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="maxTokenCount"> The maximum number of tokens to produce. Default is 1. </param>
         /// <param name="consumeAllTokens"> A value indicating whether all tokens from the input must be consumed even if maxTokenCount is reached. Default is false. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LimitTokenFilter(string odataType, string name, int? maxTokenCount, bool? consumeAllTokens, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LimitTokenFilter(string odataType, string name, int? maxTokenCount, bool? consumeAllTokens, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             MaxTokenCount = maxTokenCount;
             ConsumeAllTokens = consumeAllTokens;

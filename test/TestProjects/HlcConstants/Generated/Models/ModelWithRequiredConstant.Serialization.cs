@@ -31,9 +31,9 @@ namespace HlcConstants.Models
             writer.WriteBooleanValue(RequiredBooleanConstant);
             writer.WritePropertyName("requiredFloatConstant"u8);
             writer.WriteNumberValue(RequiredFloatConstant.ToSerialSingle());
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -58,7 +58,7 @@ namespace HlcConstants.Models
             IntConstant requiredIntConstant = default;
             bool requiredBooleanConstant = default;
             FloatConstant requiredFloatConstant = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredStringConstant"u8))
@@ -83,11 +83,11 @@ namespace HlcConstants.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant, requiredFloatConstant, rawData);
+            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant, requiredFloatConstant, serializedAdditionalRawData);
         }
 
         ModelWithRequiredConstant IModelJsonSerializable<ModelWithRequiredConstant>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

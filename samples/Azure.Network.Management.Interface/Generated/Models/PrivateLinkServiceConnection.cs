@@ -30,8 +30,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="groupIds"> The ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to. </param>
         /// <param name="requestMessage"> A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars. </param>
         /// <param name="privateLinkServiceConnectionState"> A collection of read-only information about the state of the connection to the remote resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PrivateLinkServiceConnection(string id, string name, string type, string etag, ProvisioningState? provisioningState, string privateLinkServiceId, IList<string> groupIds, string requestMessage, PrivateLinkServiceConnectionState privateLinkServiceConnectionState, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PrivateLinkServiceConnection(string id, string name, string type, string etag, ProvisioningState? provisioningState, string privateLinkServiceId, IList<string> groupIds, string requestMessage, PrivateLinkServiceConnectionState privateLinkServiceConnectionState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Type = type;

@@ -41,8 +41,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="publicIPAddress"> The reference to the Public IP resource. </param>
         /// <param name="publicIPPrefix"> The reference to the Public IP Prefix resource. </param>
         /// <param name="provisioningState"> The provisioning state of the frontend IP configuration resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FrontendIPConfiguration(string id, string name, string etag, string type, IList<string> zones, IReadOnlyList<SubResource> inboundNatRules, IReadOnlyList<SubResource> inboundNatPools, IReadOnlyList<SubResource> outboundRules, IReadOnlyList<SubResource> loadBalancingRules, string privateIPAddress, IPAllocationMethod? privateIPAllocationMethod, IPVersion? privateIPAddressVersion, Subnet subnet, PublicIPAddress publicIPAddress, SubResource publicIPPrefix, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FrontendIPConfiguration(string id, string name, string etag, string type, IList<string> zones, IReadOnlyList<SubResource> inboundNatRules, IReadOnlyList<SubResource> inboundNatPools, IReadOnlyList<SubResource> outboundRules, IReadOnlyList<SubResource> loadBalancingRules, string privateIPAddress, IPAllocationMethod? privateIPAllocationMethod, IPVersion? privateIPAddressVersion, Subnet subnet, PublicIPAddress publicIPAddress, SubResource publicIPPrefix, ProvisioningState? provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

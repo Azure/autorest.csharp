@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class NetworkRuleSet
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="NetworkRuleSet"/>. </summary>
         /// <param name="defaultAction"> Specifies the default action of allow or deny when no other rules match. </param>
@@ -33,15 +33,15 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="virtualNetworkRules"> Sets the virtual network rules. </param>
         /// <param name="ipRules"> Sets the IP ACL rules. </param>
         /// <param name="defaultAction"> Specifies the default action of allow or deny when no other rules match. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NetworkRuleSet(Bypass? bypass, IList<ResourceAccessRule> resourceAccessRules, IList<VirtualNetworkRule> virtualNetworkRules, IList<IPRule> ipRules, DefaultAction defaultAction, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NetworkRuleSet(Bypass? bypass, IList<ResourceAccessRule> resourceAccessRules, IList<VirtualNetworkRule> virtualNetworkRules, IList<IPRule> ipRules, DefaultAction defaultAction, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Bypass = bypass;
             ResourceAccessRules = resourceAccessRules;
             VirtualNetworkRules = virtualNetworkRules;
             IpRules = ipRules;
             DefaultAction = defaultAction;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="NetworkRuleSet"/> for deserialization. </summary>

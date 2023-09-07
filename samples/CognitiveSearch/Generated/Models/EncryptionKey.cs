@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class EncryptionKey
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="EncryptionKey"/>. </summary>
         /// <param name="keyVaultKeyName"> The name of your Azure Key Vault key to be used to encrypt your data at rest. </param>
@@ -38,14 +38,14 @@ namespace CognitiveSearch.Models
         /// <param name="keyVaultKeyVersion"> The version of your Azure Key Vault key to be used to encrypt your data at rest. </param>
         /// <param name="keyVaultUri"> The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be https://my-keyvault-name.vault.azure.net. </param>
         /// <param name="accessCredentials"> Optional Azure Active Directory credentials used for accessing your Azure Key Vault. Not required if using managed identity instead. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal EncryptionKey(string keyVaultKeyName, string keyVaultKeyVersion, string keyVaultUri, AzureActiveDirectoryApplicationCredentials accessCredentials, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal EncryptionKey(string keyVaultKeyName, string keyVaultKeyVersion, string keyVaultUri, AzureActiveDirectoryApplicationCredentials accessCredentials, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             KeyVaultKeyName = keyVaultKeyName;
             KeyVaultKeyVersion = keyVaultKeyVersion;
             KeyVaultUri = keyVaultUri;
             AccessCredentials = accessCredentials;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="EncryptionKey"/> for deserialization. </summary>

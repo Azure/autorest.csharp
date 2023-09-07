@@ -41,9 +41,9 @@ namespace MgmtMockAndSample.Models
             {
                 ((IModelJsonSerializable<Permissions>)Permissions).Serialize(writer, options);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -68,7 +68,7 @@ namespace MgmtMockAndSample.Models
             string objectId = default;
             Optional<Guid> applicationId = default;
             Permissions permissions = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tenantId"u8))
@@ -97,11 +97,11 @@ namespace MgmtMockAndSample.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new AccessPolicyEntry(tenantId, objectId, Optional.ToNullable(applicationId), permissions, rawData);
+            return new AccessPolicyEntry(tenantId, objectId, Optional.ToNullable(applicationId), permissions, serializedAdditionalRawData);
         }
 
         AccessPolicyEntry IModelJsonSerializable<AccessPolicyEntry>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

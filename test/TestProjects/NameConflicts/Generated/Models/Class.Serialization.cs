@@ -563,9 +563,9 @@ namespace NameConflicts.Models
                 writer.WritePropertyName("GetHashCode"u8);
                 writer.WriteStringValue(GetHashCodeValue);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -694,7 +694,7 @@ namespace NameConflicts.Models
             Optional<string> toString = default;
             Optional<string> @equals = default;
             Optional<string> getHashCode = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("abstract"u8))
@@ -1243,11 +1243,11 @@ namespace NameConflicts.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new Class(@abstract.Value, @add.Value, @alias.Value, @as.Value, @ascending.Value, @async.Value, @await.Value, @base.Value, @bool.Value, @break.Value, @by.Value, @byte.Value, @catch.Value, @char.Value, @checked.Value, @const.Value, @continue.Value, @class.Value, @decimal.Value, @default.Value, @delegate.Value, @descending.Value, @do.Value, @double.Value, @dynamic.Value, @else.Value, @enum.Value, @event.Value, @explicit.Value, @extern.Value, @false.Value, @finally.Value, @fixed.Value, @float.Value, @for.Value, @foreach.Value, @from.Value, @get.Value, @global.Value, @goto.Value, group.Value, @if.Value, @implicit.Value, @in.Value, @int.Value, @interface.Value, @internal.Value, @into.Value, @is.Value, @join.Value, @let.Value, @lock.Value, @long.Value, @nameof.Value, @namespace.Value, @new.Value, @null.Value, @object.Value, @on.Value, @operator.Value, orderby.Value, @out.Value, @override.Value, @params.Value, @partial.Value, @private.Value, @protected.Value, @public.Value, @readonly.Value, @ref.Value, @remove.Value, @return.Value, @sbyte.Value, @sealed.Value, select.Value, @set.Value, @short.Value, @sizeof.Value, @stackalloc.Value, @static.Value, @string.Value, @struct.Value, @switch.Value, @this.Value, @throw.Value, @true.Value, @try.Value, @typeof.Value, @uint.Value, @ulong.Value, @unchecked.Value, @unmanaged.Value, @unsafe.Value, @ushort.Value, @using.Value, value.Value, @var.Value, @virtual.Value, @void.Value, @volatile.Value, @when.Value, @where.Value, @while.Value, @yield.Value, Optional.ToNullable(system), toString.Value, @equals.Value, getHashCode.Value, rawData);
+            return new Class(@abstract.Value, @add.Value, @alias.Value, @as.Value, @ascending.Value, @async.Value, @await.Value, @base.Value, @bool.Value, @break.Value, @by.Value, @byte.Value, @catch.Value, @char.Value, @checked.Value, @const.Value, @continue.Value, @class.Value, @decimal.Value, @default.Value, @delegate.Value, @descending.Value, @do.Value, @double.Value, @dynamic.Value, @else.Value, @enum.Value, @event.Value, @explicit.Value, @extern.Value, @false.Value, @finally.Value, @fixed.Value, @float.Value, @for.Value, @foreach.Value, @from.Value, @get.Value, @global.Value, @goto.Value, group.Value, @if.Value, @implicit.Value, @in.Value, @int.Value, @interface.Value, @internal.Value, @into.Value, @is.Value, @join.Value, @let.Value, @lock.Value, @long.Value, @nameof.Value, @namespace.Value, @new.Value, @null.Value, @object.Value, @on.Value, @operator.Value, orderby.Value, @out.Value, @override.Value, @params.Value, @partial.Value, @private.Value, @protected.Value, @public.Value, @readonly.Value, @ref.Value, @remove.Value, @return.Value, @sbyte.Value, @sealed.Value, select.Value, @set.Value, @short.Value, @sizeof.Value, @stackalloc.Value, @static.Value, @string.Value, @struct.Value, @switch.Value, @this.Value, @throw.Value, @true.Value, @try.Value, @typeof.Value, @uint.Value, @ulong.Value, @unchecked.Value, @unmanaged.Value, @unsafe.Value, @ushort.Value, @using.Value, value.Value, @var.Value, @virtual.Value, @void.Value, @volatile.Value, @when.Value, @where.Value, @while.Value, @yield.Value, Optional.ToNullable(system), toString.Value, @equals.Value, getHashCode.Value, serializedAdditionalRawData);
         }
 
         Class IModelJsonSerializable<Class>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

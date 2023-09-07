@@ -43,9 +43,9 @@ namespace body_complex.Models
                 writer.WriteStringValue(PropBH1);
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -70,7 +70,7 @@ namespace body_complex.Models
             MyKind kind = default;
             Optional<string> propB1 = default;
             Optional<string> propBH1 = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("propD1"u8))
@@ -107,11 +107,11 @@ namespace body_complex.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new MyDerivedType(kind, propB1.Value, propBH1.Value, propD1.Value, rawData);
+            return new MyDerivedType(kind, propB1.Value, propBH1.Value, propD1.Value, serializedAdditionalRawData);
         }
 
         MyDerivedType IModelJsonSerializable<MyDerivedType>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

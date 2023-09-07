@@ -32,8 +32,8 @@ namespace SpecialWords.Models
         /// <param name="modelKind"> Discriminator. </param>
         /// <param name="derivedName"></param>
         /// <param name="for"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DerivedModel(string modelKind, string derivedName, string @for, Dictionary<string, BinaryData> rawData) : base(modelKind, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DerivedModel(string modelKind, string derivedName, string @for, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(modelKind, serializedAdditionalRawData)
         {
             DerivedName = derivedName;
             For = @for;

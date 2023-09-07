@@ -15,7 +15,7 @@ namespace paging.Models
     internal partial class ProductResultValueWithXMSClientName
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ProductResultValueWithXMSClientName"/>. </summary>
         internal ProductResultValueWithXMSClientName()
@@ -26,12 +26,12 @@ namespace paging.Models
         /// <summary> Initializes a new instance of <see cref="ProductResultValueWithXMSClientName"/>. </summary>
         /// <param name="indexes"></param>
         /// <param name="nextLink"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ProductResultValueWithXMSClientName(IReadOnlyList<Product> indexes, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProductResultValueWithXMSClientName(IReadOnlyList<Product> indexes, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Indexes = indexes;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the indexes. </summary>

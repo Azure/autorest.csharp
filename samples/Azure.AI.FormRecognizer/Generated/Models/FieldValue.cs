@@ -15,7 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class FieldValue
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FieldValue"/>. </summary>
         /// <param name="type"> Type of field value. </param>
@@ -43,8 +43,8 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="confidence"> Confidence score. </param>
         /// <param name="elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this field. </param>
         /// <param name="page"> The 1-based page number in the input document. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FieldValue(FieldValueType type, string valueString, DateTimeOffset? valueDate, TimeSpan? valueTime, string valuePhoneNumber, float? valueNumber, int? valueInteger, IReadOnlyList<FieldValue> valueArray, IReadOnlyDictionary<string, FieldValue> valueObject, string text, IReadOnlyList<float> boundingBox, float? confidence, IReadOnlyList<string> elements, int? page, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FieldValue(FieldValueType type, string valueString, DateTimeOffset? valueDate, TimeSpan? valueTime, string valuePhoneNumber, float? valueNumber, int? valueInteger, IReadOnlyList<FieldValue> valueArray, IReadOnlyDictionary<string, FieldValue> valueObject, string text, IReadOnlyList<float> boundingBox, float? confidence, IReadOnlyList<string> elements, int? page, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Type = type;
             ValueString = valueString;
@@ -60,7 +60,7 @@ namespace Azure.AI.FormRecognizer.Models
             Confidence = confidence;
             Elements = elements;
             Page = page;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="FieldValue"/> for deserialization. </summary>

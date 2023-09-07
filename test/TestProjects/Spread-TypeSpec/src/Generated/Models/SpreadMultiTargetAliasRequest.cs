@@ -15,7 +15,7 @@ namespace SpreadTypeSpec.Models
     internal partial class SpreadMultiTargetAliasRequest
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of SpreadMultiTargetAliasRequest. </summary>
         /// <param name="name"> name of the Thing. </param>
@@ -32,12 +32,12 @@ namespace SpreadTypeSpec.Models
         /// <summary> Initializes a new instance of SpreadMultiTargetAliasRequest. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SpreadMultiTargetAliasRequest(string name, int age, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SpreadMultiTargetAliasRequest(string name, int age, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Age = age;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="SpreadMultiTargetAliasRequest"/> for deserialization. </summary>

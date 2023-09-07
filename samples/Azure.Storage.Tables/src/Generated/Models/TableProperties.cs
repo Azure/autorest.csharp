@@ -14,7 +14,7 @@ namespace Azure.Storage.Tables.Models
     public partial class TableProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TableProperties"/>. </summary>
         public TableProperties()
@@ -23,11 +23,11 @@ namespace Azure.Storage.Tables.Models
 
         /// <summary> Initializes a new instance of <see cref="TableProperties"/>. </summary>
         /// <param name="tableName"> The name of the table to create. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TableProperties(string tableName, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TableProperties(string tableName, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TableName = tableName;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The name of the table to create. </summary>

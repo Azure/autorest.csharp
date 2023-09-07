@@ -41,8 +41,8 @@ namespace MgmtMockAndSample.Models
         /// <param name="sourceIpGroups"> List of source IpGroups for this rule. </param>
         /// <param name="terminateTLS"> Terminate TLS connections for this rule. </param>
         /// <param name="webCategories"> List of destination azure web categories. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ApplicationRule(string name, string description, FirewallPolicyRuleType ruleType, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<FirewallPolicyRuleApplicationProtocol> protocols, IList<string> targetFqdns, IList<string> targetUrls, IList<string> fqdnTags, IList<string> sourceIpGroups, bool? terminateTLS, IList<string> webCategories, Dictionary<string, BinaryData> rawData) : base(name, description, ruleType, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ApplicationRule(string name, string description, FirewallPolicyRuleType ruleType, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<FirewallPolicyRuleApplicationProtocol> protocols, IList<string> targetFqdns, IList<string> targetUrls, IList<string> fqdnTags, IList<string> sourceIpGroups, bool? terminateTLS, IList<string> webCategories, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(name, description, ruleType, serializedAdditionalRawData)
         {
             SourceAddresses = sourceAddresses;
             DestinationAddresses = destinationAddresses;

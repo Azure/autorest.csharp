@@ -55,9 +55,9 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -83,7 +83,7 @@ namespace CognitiveSearch.Models
             Optional<TokenizerName> tokenizer = default;
             Optional<IList<TokenFilterName>> tokenFilters = default;
             Optional<IList<CharFilterName>> charFilters = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("text"u8))
@@ -139,11 +139,11 @@ namespace CognitiveSearch.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new AnalyzeRequest(text, Optional.ToNullable(analyzer), Optional.ToNullable(tokenizer), Optional.ToList(tokenFilters), Optional.ToList(charFilters), rawData);
+            return new AnalyzeRequest(text, Optional.ToNullable(analyzer), Optional.ToNullable(tokenizer), Optional.ToList(tokenFilters), Optional.ToList(charFilters), serializedAdditionalRawData);
         }
 
         AnalyzeRequest IModelJsonSerializable<AnalyzeRequest>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

@@ -16,7 +16,7 @@ namespace MgmtExtensionResource.Models
     internal partial class PolicyDefinitionListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="PolicyDefinitionListResult"/>. </summary>
         internal PolicyDefinitionListResult()
@@ -27,12 +27,12 @@ namespace MgmtExtensionResource.Models
         /// <summary> Initializes a new instance of <see cref="PolicyDefinitionListResult"/>. </summary>
         /// <param name="value"> An array of policy definitions. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PolicyDefinitionListResult(IReadOnlyList<PolicyDefinitionData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PolicyDefinitionListResult(IReadOnlyList<PolicyDefinitionData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> An array of policy definitions. </summary>

@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     public partial class RequestOptions
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RequestOptions"/>. </summary>
         public RequestOptions()
@@ -23,11 +23,11 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of <see cref="RequestOptions"/>. </summary>
         /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RequestOptions(Guid? xMsClientRequestId, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RequestOptions(Guid? xMsClientRequestId, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             XMsClientRequestId = xMsClientRequestId;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The tracking ID sent with the request to help with debugging. </summary>

@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Fake.Models
     public partial class MgmtReferenceTypesPrivateLinkServiceConnectionState
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MgmtReferenceTypesPrivateLinkServiceConnectionState"/>. </summary>
         [InitializationConstructor]
@@ -28,13 +28,13 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="status"> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </param>
         /// <param name="description"> The reason for approval/rejection of the connection. </param>
         /// <param name="actionsRequired"> A message indicating if changes on the service provider require any updates on the consumer. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        protected MgmtReferenceTypesPrivateLinkServiceConnectionState(MgmtReferenceTypesPrivateEndpointServiceConnectionStatus? status, string description, string actionsRequired, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        protected MgmtReferenceTypesPrivateLinkServiceConnectionState(MgmtReferenceTypesPrivateEndpointServiceConnectionStatus? status, string description, string actionsRequired, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             Description = description;
             ActionsRequired = actionsRequired;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </summary>

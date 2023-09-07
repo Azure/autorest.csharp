@@ -14,7 +14,7 @@ namespace Azure.Storage.Tables.Models
     public partial class RetentionPolicy
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RetentionPolicy"/>. </summary>
         /// <param name="enabled"> Indicates whether a retention policy is enabled for the storage service. </param>
@@ -26,12 +26,12 @@ namespace Azure.Storage.Tables.Models
         /// <summary> Initializes a new instance of <see cref="RetentionPolicy"/>. </summary>
         /// <param name="enabled"> Indicates whether a retention policy is enabled for the storage service. </param>
         /// <param name="days"> Indicates the number of days that metrics or logging or soft-deleted data should be retained. All data older than this value will be deleted. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RetentionPolicy(bool enabled, int? days, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RetentionPolicy(bool enabled, int? days, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Enabled = enabled;
             Days = days;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="RetentionPolicy"/> for deserialization. </summary>

@@ -44,8 +44,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Gets the HyperVGenerationType of the VirtualMachine created from the image
         /// Serialized Name: ImageUpdate.properties.hyperVGeneration
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ImagePatch(IDictionary<string, string> tags, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGeneration? hyperVGeneration, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImagePatch(IDictionary<string, string> tags, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGeneration? hyperVGeneration, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(tags, serializedAdditionalRawData)
         {
             SourceVirtualMachine = sourceVirtualMachine;
             StorageProfile = storageProfile;

@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class StorageSkuInformation
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StorageSkuInformation"/>. </summary>
         /// <param name="name"> The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType. </param>
@@ -35,8 +35,8 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="locations"> The set of locations that the SKU is available. This will be supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). </param>
         /// <param name="capabilities"> The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc. </param>
         /// <param name="restrictions"> The restrictions because of which SKU cannot be used. This is empty if there are no restrictions. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StorageSkuInformation(StorageSkuName name, StorageSkuTier? tier, ResourceType? resourceType, StorageKind? kind, IReadOnlyList<string> locations, IReadOnlyList<SKUCapability> capabilities, IReadOnlyList<Restriction> restrictions, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageSkuInformation(StorageSkuName name, StorageSkuTier? tier, ResourceType? resourceType, StorageKind? kind, IReadOnlyList<string> locations, IReadOnlyList<SKUCapability> capabilities, IReadOnlyList<Restriction> restrictions, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Tier = tier;
@@ -45,7 +45,7 @@ namespace Azure.ResourceManager.Storage.Models
             Locations = locations;
             Capabilities = capabilities;
             Restrictions = restrictions;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="StorageSkuInformation"/> for deserialization. </summary>

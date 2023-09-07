@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class RetrieveBootDiagnosticsDataResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RetrieveBootDiagnosticsDataResult"/>. </summary>
         internal RetrieveBootDiagnosticsDataResult()
@@ -33,12 +33,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The serial console log blob URI.
         /// Serialized Name: RetrieveBootDiagnosticsDataResult.serialConsoleLogBlobUri
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RetrieveBootDiagnosticsDataResult(Uri consoleScreenshotBlobUri, Uri serialConsoleLogBlobUri, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RetrieveBootDiagnosticsDataResult(Uri consoleScreenshotBlobUri, Uri serialConsoleLogBlobUri, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ConsoleScreenshotBlobUri = consoleScreenshotBlobUri;
             SerialConsoleLogBlobUri = serialConsoleLogBlobUri;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

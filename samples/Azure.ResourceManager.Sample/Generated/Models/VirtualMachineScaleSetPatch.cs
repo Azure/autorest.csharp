@@ -77,8 +77,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. &lt;br&gt;&lt;br&gt;Minimum api-version: 2018-04-01.
         /// Serialized Name: VirtualMachineScaleSetUpdate.properties.proximityPlacementGroup
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetPatch(IDictionary<string, string> tags, SampleSku sku, SamplePlan plan, ManagedServiceIdentity identity, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetUpdateVmProfile virtualMachineProfile, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVms, bool? singlePlacementGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy, WritableSubResource proximityPlacementGroup, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetPatch(IDictionary<string, string> tags, SampleSku sku, SamplePlan plan, ManagedServiceIdentity identity, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetUpdateVmProfile virtualMachineProfile, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVms, bool? singlePlacementGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy, WritableSubResource proximityPlacementGroup, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(tags, serializedAdditionalRawData)
         {
             Sku = sku;
             Plan = plan;

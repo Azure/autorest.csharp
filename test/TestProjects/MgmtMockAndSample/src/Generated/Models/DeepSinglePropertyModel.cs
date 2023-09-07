@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     internal partial class DeepSinglePropertyModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DeepSinglePropertyModel"/>. </summary>
         public DeepSinglePropertyModel()
@@ -23,11 +23,11 @@ namespace MgmtMockAndSample.Models
 
         /// <summary> Initializes a new instance of <see cref="DeepSinglePropertyModel"/>. </summary>
         /// <param name="deep"> This is a single property of string. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeepSinglePropertyModel(SinglePropertyModel deep, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeepSinglePropertyModel(SinglePropertyModel deep, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Deep = deep;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> This is a single property of string. </summary>

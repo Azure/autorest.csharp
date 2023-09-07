@@ -17,8 +17,8 @@ namespace MgmtMockAndSample.Models
         /// <param name="name"> Name of the rule. </param>
         /// <param name="description"> Description of the rule. </param>
         /// <param name="ruleType"> Rule Type. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownFirewallPolicyRule(string name, string description, FirewallPolicyRuleType ruleType, Dictionary<string, BinaryData> rawData) : base(name, description, ruleType, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownFirewallPolicyRule(string name, string description, FirewallPolicyRuleType ruleType, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(name, description, ruleType, serializedAdditionalRawData)
         {
             RuleType = ruleType;
         }

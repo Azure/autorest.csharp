@@ -17,7 +17,7 @@ namespace MgmtMockAndSample.Models
     internal partial class DiskEncryptionSetList
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DiskEncryptionSetList"/>. </summary>
         /// <param name="value"> A list of disk encryption sets. </param>
@@ -32,12 +32,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="DiskEncryptionSetList"/>. </summary>
         /// <param name="value"> A list of disk encryption sets. </param>
         /// <param name="nextLink"> The uri to fetch the next page of disk encryption sets. Call ListNext() with this to fetch the next page of disk encryption sets. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DiskEncryptionSetList(IReadOnlyList<DiskEncryptionSetData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DiskEncryptionSetList(IReadOnlyList<DiskEncryptionSetData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DiskEncryptionSetList"/> for deserialization. </summary>

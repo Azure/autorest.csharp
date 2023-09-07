@@ -17,7 +17,7 @@ namespace MgmtOperations.Models
     internal partial class AvailabilitySetListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AvailabilitySetListResult"/>. </summary>
         /// <param name="value"> The list of availability sets. </param>
@@ -32,12 +32,12 @@ namespace MgmtOperations.Models
         /// <summary> Initializes a new instance of <see cref="AvailabilitySetListResult"/>. </summary>
         /// <param name="value"> The list of availability sets. </param>
         /// <param name="nextLink"> The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AvailabilitySetListResult(IReadOnlyList<AvailabilitySetData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AvailabilitySetListResult(IReadOnlyList<AvailabilitySetData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="AvailabilitySetListResult"/> for deserialization. </summary>

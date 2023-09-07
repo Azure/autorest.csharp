@@ -15,7 +15,7 @@ namespace AnomalyDetector.Models
     public partial class AnomalyValue
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of AnomalyValue. </summary>
         /// <param name="isAnomaly"> True if an anomaly is detected at the current timestamp. </param>
@@ -46,14 +46,14 @@ namespace AnomalyDetector.Models
         /// well.
         /// </param>
         /// <param name="interpretation"> Interpretation of this anomalous timestamp. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AnomalyValue(bool isAnomaly, float severity, float score, IReadOnlyList<AnomalyInterpretation> interpretation, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AnomalyValue(bool isAnomaly, float severity, float score, IReadOnlyList<AnomalyInterpretation> interpretation, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             IsAnomaly = isAnomaly;
             Severity = severity;
             Score = score;
             Interpretation = interpretation;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="AnomalyValue"/> for deserialization. </summary>

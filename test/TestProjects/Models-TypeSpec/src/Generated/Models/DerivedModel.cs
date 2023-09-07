@@ -27,8 +27,8 @@ namespace ModelsTypeSpec.Models
 
         /// <summary> Initializes a new instance of DerivedModel. </summary>
         /// <param name="requiredList"> Required collection. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DerivedModel(IList<CollectionItem> requiredList, Dictionary<string, BinaryData> rawData) : base(rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DerivedModel(IList<CollectionItem> requiredList, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(serializedAdditionalRawData)
         {
             RequiredList = requiredList;
         }

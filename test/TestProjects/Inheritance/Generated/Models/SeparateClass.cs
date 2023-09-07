@@ -14,7 +14,7 @@ namespace Inheritance.Models
     public partial class SeparateClass
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SeparateClass"/>. </summary>
         public SeparateClass()
@@ -27,12 +27,12 @@ namespace Inheritance.Models
         /// Please note <see cref="BaseClassWithExtensibleEnumDiscriminator"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="DerivedClassWithExtensibleEnumDiscriminator"/> and <see cref="AnotherDerivedClassWithExtensibleEnumDiscriminator"/>.
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SeparateClass(string stringProperty, BaseClassWithExtensibleEnumDiscriminator modelProperty, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SeparateClass(string stringProperty, BaseClassWithExtensibleEnumDiscriminator modelProperty, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             StringProperty = stringProperty;
             ModelProperty = modelProperty;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the string property. </summary>

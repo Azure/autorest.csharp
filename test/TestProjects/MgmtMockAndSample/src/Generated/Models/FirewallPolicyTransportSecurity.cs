@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     internal partial class FirewallPolicyTransportSecurity
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyTransportSecurity"/>. </summary>
         public FirewallPolicyTransportSecurity()
@@ -23,11 +23,11 @@ namespace MgmtMockAndSample.Models
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyTransportSecurity"/>. </summary>
         /// <param name="certificateAuthority"> The CA used for intermediate CA generation. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirewallPolicyTransportSecurity(FirewallPolicyCertificateAuthority certificateAuthority, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyTransportSecurity(FirewallPolicyCertificateAuthority certificateAuthority, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             CertificateAuthority = certificateAuthority;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The CA used for intermediate CA generation. </summary>

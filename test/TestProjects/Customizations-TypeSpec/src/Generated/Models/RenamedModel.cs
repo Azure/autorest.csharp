@@ -14,7 +14,7 @@ namespace CustomizationsInTsp.Models
     public partial class RenamedModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of RenamedModel. </summary>
         /// <param name="requiredInt"> Required int. </param>
@@ -26,12 +26,12 @@ namespace CustomizationsInTsp.Models
         /// <summary> Initializes a new instance of RenamedModel. </summary>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="optionalInt"> Optional int. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RenamedModel(int requiredInt, int? optionalInt, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RenamedModel(int requiredInt, int? optionalInt, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredInt = requiredInt;
             OptionalInt = optionalInt;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="RenamedModel"/> for deserialization. </summary>

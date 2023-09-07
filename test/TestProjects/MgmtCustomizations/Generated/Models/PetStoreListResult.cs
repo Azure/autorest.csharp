@@ -16,7 +16,7 @@ namespace MgmtCustomizations.Models
     internal partial class PetStoreListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="PetStoreListResult"/>. </summary>
         internal PetStoreListResult()
@@ -26,11 +26,11 @@ namespace MgmtCustomizations.Models
 
         /// <summary> Initializes a new instance of <see cref="PetStoreListResult"/>. </summary>
         /// <param name="value"> The values. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PetStoreListResult(IReadOnlyList<PetStoreData> value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PetStoreListResult(IReadOnlyList<PetStoreData> value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The values. </summary>

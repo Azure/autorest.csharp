@@ -14,7 +14,7 @@ namespace ModelWithConverterUsage.Models
     public partial class InputModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
         public InputModel()
@@ -23,11 +23,11 @@ namespace ModelWithConverterUsage.Models
 
         /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
         /// <param name="inputModelProperty"> Constant string. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal InputModel(string inputModelProperty, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal InputModel(string inputModelProperty, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             InputModelProperty = inputModelProperty;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Constant string. </summary>

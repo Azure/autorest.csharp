@@ -29,8 +29,8 @@ namespace model_flattening.Models
         /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SimpleProduct(string productId, string description, string maxProductDisplayName, SimpleProductPropertiesMaxProductCapacity? capacity, string genericValue, string odataValue, Dictionary<string, BinaryData> rawData) : base(productId, description, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SimpleProduct(string productId, string description, string maxProductDisplayName, SimpleProductPropertiesMaxProductCapacity? capacity, string genericValue, string odataValue, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(productId, description, serializedAdditionalRawData)
         {
             MaxProductDisplayName = maxProductDisplayName;
             Capacity = capacity;

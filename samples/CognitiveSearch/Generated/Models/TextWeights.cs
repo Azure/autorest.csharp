@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class TextWeights
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TextWeights"/>. </summary>
         /// <param name="weights"> The dictionary of per-field weights to boost document scoring. The keys are field names and the values are the weights for each field. </param>
@@ -29,11 +29,11 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of <see cref="TextWeights"/>. </summary>
         /// <param name="weights"> The dictionary of per-field weights to boost document scoring. The keys are field names and the values are the weights for each field. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TextWeights(IDictionary<string, double> weights, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TextWeights(IDictionary<string, double> weights, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Weights = weights;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="TextWeights"/> for deserialization. </summary>

@@ -47,9 +47,9 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("basePath"u8);
                 writer.WriteStringValue(BasePathUri.AbsoluteUri);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -75,7 +75,7 @@ namespace MgmtAcronymMapping.Models
             Optional<BinaryData> content = default;
             Optional<RequestMethod> method = default;
             Optional<Uri> basePath = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -125,11 +125,11 @@ namespace MgmtAcronymMapping.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new LogAnalytics(properties.Value, Optional.ToNullable(contentType), content.Value, Optional.ToNullable(method), basePath.Value, rawData);
+            return new LogAnalytics(properties.Value, Optional.ToNullable(contentType), content.Value, Optional.ToNullable(method), basePath.Value, serializedAdditionalRawData);
         }
 
         LogAnalytics IModelJsonSerializable<LogAnalytics>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

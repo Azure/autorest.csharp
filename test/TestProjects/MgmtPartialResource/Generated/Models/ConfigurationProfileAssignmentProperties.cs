@@ -14,7 +14,7 @@ namespace MgmtPartialResource.Models
     public partial class ConfigurationProfileAssignmentProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ConfigurationProfileAssignmentProperties"/>. </summary>
         public ConfigurationProfileAssignmentProperties()
@@ -25,13 +25,13 @@ namespace MgmtPartialResource.Models
         /// <param name="configurationProfile"> The Automanage configurationProfile ARM Resource URI. </param>
         /// <param name="targetId"> The target VM resource URI. </param>
         /// <param name="status"> The status of onboarding, which only appears in the response. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ConfigurationProfileAssignmentProperties(string configurationProfile, string targetId, string status, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ConfigurationProfileAssignmentProperties(string configurationProfile, string targetId, string status, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ConfigurationProfile = configurationProfile;
             TargetId = targetId;
             Status = status;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The Automanage configurationProfile ARM Resource URI. </summary>

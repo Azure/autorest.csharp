@@ -16,7 +16,7 @@ namespace MgmtDiscriminator.Models
     internal partial class DeliveryRuleListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DeliveryRuleListResult"/>. </summary>
         internal DeliveryRuleListResult()
@@ -26,11 +26,11 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> Initializes a new instance of <see cref="DeliveryRuleListResult"/>. </summary>
         /// <param name="value"> The values. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeliveryRuleListResult(IReadOnlyList<DeliveryRuleData> value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeliveryRuleListResult(IReadOnlyList<DeliveryRuleData> value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The values. </summary>

@@ -14,7 +14,7 @@ namespace _Type.Property.ValueTypes.Models
     public partial class NeverProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of NeverProperty. </summary>
         public NeverProperty()
@@ -22,10 +22,10 @@ namespace _Type.Property.ValueTypes.Models
         }
 
         /// <summary> Initializes a new instance of NeverProperty. </summary>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NeverProperty(Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NeverProperty(Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
     }
 }

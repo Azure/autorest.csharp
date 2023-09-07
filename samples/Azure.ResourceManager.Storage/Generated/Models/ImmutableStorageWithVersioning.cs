@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class ImmutableStorageWithVersioning
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ImmutableStorageWithVersioning"/>. </summary>
         public ImmutableStorageWithVersioning()
@@ -25,13 +25,13 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="enabled"> This is an immutable property, when set to true it enables object level immutability at the container level. </param>
         /// <param name="timeStamp"> Returns the date and time the object level immutability was enabled. </param>
         /// <param name="migrationState"> This property denotes the container level immutability to object level immutability migration state. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ImmutableStorageWithVersioning(bool? enabled, DateTimeOffset? timeStamp, MigrationState? migrationState, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImmutableStorageWithVersioning(bool? enabled, DateTimeOffset? timeStamp, MigrationState? migrationState, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Enabled = enabled;
             TimeStamp = timeStamp;
             MigrationState = migrationState;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> This is an immutable property, when set to true it enables object level immutability at the container level. </summary>

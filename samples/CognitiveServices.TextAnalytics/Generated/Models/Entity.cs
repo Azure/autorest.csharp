@@ -15,7 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class Entity
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Entity"/>. </summary>
         /// <param name="text"> Entity text as appears in the request. </param>
@@ -43,8 +43,8 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="offset"> Start position (in Unicode characters) for the entity text. </param>
         /// <param name="length"> Length (in Unicode characters) for the entity text. </param>
         /// <param name="confidenceScore"> Confidence score between 0 and 1 of the extracted entity. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Entity(string text, string category, string subcategory, int offset, int length, double confidenceScore, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Entity(string text, string category, string subcategory, int offset, int length, double confidenceScore, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Text = text;
             Category = category;
@@ -52,7 +52,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Offset = offset;
             Length = length;
             ConfidenceScore = confidenceScore;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Entity"/> for deserialization. </summary>

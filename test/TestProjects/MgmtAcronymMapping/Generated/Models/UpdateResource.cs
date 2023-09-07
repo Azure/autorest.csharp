@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping.Models
     public partial class UpdateResource
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UpdateResource"/>. </summary>
         public UpdateResource()
@@ -31,11 +31,11 @@ namespace MgmtAcronymMapping.Models
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UpdateResource(IDictionary<string, string> tags, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UpdateResource(IDictionary<string, string> tags, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Tags = tags;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

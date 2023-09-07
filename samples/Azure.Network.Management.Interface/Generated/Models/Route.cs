@@ -26,8 +26,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="nextHopType"> The type of Azure hop the packet should be sent to. </param>
         /// <param name="nextHopIpAddress"> The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance. </param>
         /// <param name="provisioningState"> The provisioning state of the route resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Route(string id, string name, string etag, string addressPrefix, RouteNextHopType? nextHopType, string nextHopIpAddress, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Route(string id, string name, string etag, string addressPrefix, RouteNextHopType? nextHopType, string nextHopIpAddress, ProvisioningState? provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

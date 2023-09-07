@@ -15,7 +15,7 @@ namespace AnomalyDetector.Models
     public partial class ModelState
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of ModelState. </summary>
         public ModelState()
@@ -40,14 +40,14 @@ namespace AnomalyDetector.Models
         /// epoch.
         /// </param>
         /// <param name="latenciesInSeconds"> Latency for each epoch. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelState(IList<int> epochIds, IList<float> trainLosses, IList<float> validationLosses, IList<float> latenciesInSeconds, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelState(IList<int> epochIds, IList<float> trainLosses, IList<float> validationLosses, IList<float> latenciesInSeconds, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             EpochIds = epochIds;
             TrainLosses = trainLosses;
             ValidationLosses = validationLosses;
             LatenciesInSeconds = latenciesInSeconds;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

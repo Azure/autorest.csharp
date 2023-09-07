@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     public partial class GetIndexStatisticsResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="GetIndexStatisticsResult"/>. </summary>
         /// <param name="documentCount"> The number of documents in the index. </param>
@@ -28,12 +28,12 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="GetIndexStatisticsResult"/>. </summary>
         /// <param name="documentCount"> The number of documents in the index. </param>
         /// <param name="storageSize"> The amount of storage in bytes consumed by the index. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal GetIndexStatisticsResult(long documentCount, long storageSize, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal GetIndexStatisticsResult(long documentCount, long storageSize, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DocumentCount = documentCount;
             StorageSize = storageSize;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="GetIndexStatisticsResult"/> for deserialization. </summary>

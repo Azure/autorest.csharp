@@ -14,7 +14,7 @@ namespace MgmtScopeResource.Models
     public partial class DeploymentOperation
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DeploymentOperation"/>. </summary>
         internal DeploymentOperation()
@@ -25,13 +25,13 @@ namespace MgmtScopeResource.Models
         /// <param name="id"> Full deployment operation ID. </param>
         /// <param name="operationId"> Deployment operation ID. </param>
         /// <param name="properties"> Deployment properties. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeploymentOperation(string id, string operationId, DeploymentOperationProperties properties, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentOperation(string id, string operationId, DeploymentOperationProperties properties, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             OperationId = operationId;
             Properties = properties;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Full deployment operation ID. </summary>

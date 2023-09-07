@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class AccountSasContent
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AccountSasContent"/>. </summary>
         /// <param name="services"> The signed services accessible with the account SAS. Possible values include: Blob (b), Queue (q), Table (t), File (f). </param>
@@ -38,8 +38,8 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="sharedAccessStartOn"> The time at which the SAS becomes valid. </param>
         /// <param name="sharedAccessExpiryOn"> The time at which the shared access signature becomes invalid. </param>
         /// <param name="keyToSign"> The key to sign the account SAS token with. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AccountSasContent(Service services, SignedResourceType resourceTypes, Permission permissions, string ipAddressOrRange, HttpProtocol? protocols, DateTimeOffset? sharedAccessStartOn, DateTimeOffset sharedAccessExpiryOn, string keyToSign, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AccountSasContent(Service services, SignedResourceType resourceTypes, Permission permissions, string ipAddressOrRange, HttpProtocol? protocols, DateTimeOffset? sharedAccessStartOn, DateTimeOffset sharedAccessExpiryOn, string keyToSign, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Services = services;
             ResourceTypes = resourceTypes;
@@ -49,7 +49,7 @@ namespace Azure.ResourceManager.Storage.Models
             SharedAccessStartOn = sharedAccessStartOn;
             SharedAccessExpiryOn = sharedAccessExpiryOn;
             KeyToSign = keyToSign;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="AccountSasContent"/> for deserialization. </summary>

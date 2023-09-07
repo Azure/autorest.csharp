@@ -16,7 +16,7 @@ namespace MgmtExpandResourceTypes.Models
     public partial class DnsResourceReference
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DnsResourceReference"/>. </summary>
         internal DnsResourceReference()
@@ -27,12 +27,12 @@ namespace MgmtExpandResourceTypes.Models
         /// <summary> Initializes a new instance of <see cref="DnsResourceReference"/>. </summary>
         /// <param name="dnsResources"> A list of dns Records. </param>
         /// <param name="targetResource"> A reference to an azure resource from where the dns resource value is taken. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DnsResourceReference(IReadOnlyList<WritableSubResource> dnsResources, WritableSubResource targetResource, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DnsResourceReference(IReadOnlyList<WritableSubResource> dnsResources, WritableSubResource targetResource, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DnsResources = dnsResources;
             TargetResource = targetResource;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A list of dns Records. </summary>

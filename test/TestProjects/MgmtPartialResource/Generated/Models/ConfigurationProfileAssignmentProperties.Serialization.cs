@@ -33,9 +33,9 @@ namespace MgmtPartialResource.Models
                 writer.WritePropertyName("targetId"u8);
                 writer.WriteStringValue(TargetId);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -59,7 +59,7 @@ namespace MgmtPartialResource.Models
             Optional<string> configurationProfile = default;
             Optional<string> targetId = default;
             Optional<string> status = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("configurationProfile"u8))
@@ -79,11 +79,11 @@ namespace MgmtPartialResource.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new ConfigurationProfileAssignmentProperties(configurationProfile.Value, targetId.Value, status.Value, rawData);
+            return new ConfigurationProfileAssignmentProperties(configurationProfile.Value, targetId.Value, status.Value, serializedAdditionalRawData);
         }
 
         ConfigurationProfileAssignmentProperties IModelJsonSerializable<ConfigurationProfileAssignmentProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

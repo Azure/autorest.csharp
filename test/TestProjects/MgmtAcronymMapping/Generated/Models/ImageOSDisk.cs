@@ -69,8 +69,8 @@ namespace MgmtAcronymMapping.Models
         /// The OS State.
         /// Serialized Name: ImageOSDisk.osState
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ImageOSDisk(WritableSubResource snapshot, WritableSubResource managedDisk, Uri blobUri, CachingType? caching, int? diskSizeGB, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, OperatingSystemType osType, OperatingSystemStateType osState, Dictionary<string, BinaryData> rawData) : base(snapshot, managedDisk, blobUri, caching, diskSizeGB, storageAccountType, diskEncryptionSet, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImageOSDisk(WritableSubResource snapshot, WritableSubResource managedDisk, Uri blobUri, CachingType? caching, int? diskSizeGB, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, OperatingSystemType osType, OperatingSystemStateType osState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(snapshot, managedDisk, blobUri, caching, diskSizeGB, storageAccountType, diskEncryptionSet, serializedAdditionalRawData)
         {
             OSType = osType;
             OSState = osState;

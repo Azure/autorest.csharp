@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
     public partial class CorsOptions
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CorsOptions"/>. </summary>
         /// <param name="allowedOrigins"> The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended). </param>
@@ -31,12 +31,12 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="CorsOptions"/>. </summary>
         /// <param name="allowedOrigins"> The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended). </param>
         /// <param name="maxAgeInSeconds"> The duration for which browsers should cache CORS preflight responses. Defaults to 5 minutes. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CorsOptions(IList<string> allowedOrigins, long? maxAgeInSeconds, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CorsOptions(IList<string> allowedOrigins, long? maxAgeInSeconds, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             AllowedOrigins = allowedOrigins;
             MaxAgeInSeconds = maxAgeInSeconds;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CorsOptions"/> for deserialization. </summary>

@@ -15,7 +15,7 @@ namespace xml_service.Models
     public partial class ListContainersResponse
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ListContainersResponse"/>. </summary>
         /// <param name="serviceEndpoint"></param>
@@ -43,8 +43,8 @@ namespace xml_service.Models
         /// <param name="maxResults"></param>
         /// <param name="containers"></param>
         /// <param name="nextMarker"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ListContainersResponse(string serviceEndpoint, string prefix, string marker, int maxResults, IReadOnlyList<Container> containers, string nextMarker, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListContainersResponse(string serviceEndpoint, string prefix, string marker, int maxResults, IReadOnlyList<Container> containers, string nextMarker, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ServiceEndpoint = serviceEndpoint;
             Prefix = prefix;
@@ -52,7 +52,7 @@ namespace xml_service.Models
             MaxResults = maxResults;
             Containers = containers;
             NextMarker = nextMarker;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ListContainersResponse"/> for deserialization. </summary>

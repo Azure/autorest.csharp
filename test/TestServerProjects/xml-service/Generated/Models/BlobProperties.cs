@@ -15,7 +15,7 @@ namespace xml_service.Models
     public partial class BlobProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BlobProperties"/>. </summary>
         /// <param name="lastModified"></param>
@@ -58,8 +58,8 @@ namespace xml_service.Models
         /// <param name="accessTier"></param>
         /// <param name="accessTierInferred"></param>
         /// <param name="archiveStatus"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BlobProperties(DateTimeOffset lastModified, string etag, long? contentLength, string contentType, string contentEncoding, string contentLanguage, string contentMD5, string contentDisposition, string cacheControl, int? blobSequenceNumber, BlobType? blobType, LeaseStatusType? leaseStatus, LeaseStateType? leaseState, LeaseDurationType? leaseDuration, string copyId, CopyStatusType? copyStatus, string copySource, string copyProgress, DateTimeOffset? copyCompletionTime, string copyStatusDescription, bool? serverEncrypted, bool? incrementalCopy, string destinationSnapshot, DateTimeOffset? deletedTime, int? remainingRetentionDays, AccessTier? accessTier, bool? accessTierInferred, ArchiveStatus? archiveStatus, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BlobProperties(DateTimeOffset lastModified, string etag, long? contentLength, string contentType, string contentEncoding, string contentLanguage, string contentMD5, string contentDisposition, string cacheControl, int? blobSequenceNumber, BlobType? blobType, LeaseStatusType? leaseStatus, LeaseStateType? leaseState, LeaseDurationType? leaseDuration, string copyId, CopyStatusType? copyStatus, string copySource, string copyProgress, DateTimeOffset? copyCompletionTime, string copyStatusDescription, bool? serverEncrypted, bool? incrementalCopy, string destinationSnapshot, DateTimeOffset? deletedTime, int? remainingRetentionDays, AccessTier? accessTier, bool? accessTierInferred, ArchiveStatus? archiveStatus, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             LastModified = lastModified;
             Etag = etag;
@@ -89,7 +89,7 @@ namespace xml_service.Models
             AccessTier = accessTier;
             AccessTierInferred = accessTierInferred;
             ArchiveStatus = archiveStatus;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="BlobProperties"/> for deserialization. </summary>

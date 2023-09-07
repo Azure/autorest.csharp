@@ -30,8 +30,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Describes colocation status of a resource in the Proximity Placement Group.
         /// Serialized Name: SubResourceWithColocationStatus.colocationStatus
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SubResourceWithColocationStatus(string id, InstanceViewStatus colocationStatus, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SubResourceWithColocationStatus(string id, InstanceViewStatus colocationStatus, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             ColocationStatus = colocationStatus;
         }

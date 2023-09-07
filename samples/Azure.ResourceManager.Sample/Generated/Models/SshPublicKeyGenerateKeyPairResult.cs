@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class SshPublicKeyGenerateKeyPairResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SshPublicKeyGenerateKeyPairResult"/>. </summary>
         /// <param name="privateKey">
@@ -58,13 +58,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{SshPublicKeyName}
         /// Serialized Name: SshPublicKeyGenerateKeyPairResult.id
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SshPublicKeyGenerateKeyPairResult(string privateKey, string publicKey, string id, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SshPublicKeyGenerateKeyPairResult(string privateKey, string publicKey, string id, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PrivateKey = privateKey;
             PublicKey = publicKey;
             Id = id;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="SshPublicKeyGenerateKeyPairResult"/> for deserialization. </summary>

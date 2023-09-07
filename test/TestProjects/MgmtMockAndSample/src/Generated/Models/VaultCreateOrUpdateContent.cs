@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
     public partial class VaultCreateOrUpdateContent
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VaultCreateOrUpdateContent"/>. </summary>
         /// <param name="location"> The supported Azure location where the key vault should be created. </param>
@@ -36,14 +36,14 @@ namespace MgmtMockAndSample.Models
         /// <param name="tags"> The tags that will be assigned to the key vault. </param>
         /// <param name="properties"> Properties of the vault. </param>
         /// <param name="identity"> Identity for the virtual machine. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VaultCreateOrUpdateContent(AzureLocation location, IDictionary<string, string> tags, VaultProperties properties, ManagedServiceIdentity identity, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultCreateOrUpdateContent(AzureLocation location, IDictionary<string, string> tags, VaultProperties properties, ManagedServiceIdentity identity, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Location = location;
             Tags = tags;
             Properties = properties;
             Identity = identity;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="VaultCreateOrUpdateContent"/> for deserialization. </summary>

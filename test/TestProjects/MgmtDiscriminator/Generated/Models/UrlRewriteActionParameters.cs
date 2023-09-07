@@ -15,7 +15,7 @@ namespace MgmtDiscriminator.Models
     public partial class UrlRewriteActionParameters
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UrlRewriteActionParameters"/>. </summary>
         /// <param name="typeName"></param>
@@ -37,14 +37,14 @@ namespace MgmtDiscriminator.Models
         /// <param name="sourcePattern"> define a request URI pattern that identifies the type of requests that may be rewritten. If value is blank, all strings are matched. </param>
         /// <param name="destination"> Define the relative URL to which the above requests will be rewritten by. </param>
         /// <param name="preserveUnmatchedPath"> Whether to preserve unmatched path. Default value is true. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UrlRewriteActionParameters(UrlRewriteActionParametersTypeName typeName, string sourcePattern, string destination, bool? preserveUnmatchedPath, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UrlRewriteActionParameters(UrlRewriteActionParametersTypeName typeName, string sourcePattern, string destination, bool? preserveUnmatchedPath, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TypeName = typeName;
             SourcePattern = sourcePattern;
             Destination = destination;
             PreserveUnmatchedPath = preserveUnmatchedPath;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="UrlRewriteActionParameters"/> for deserialization. </summary>

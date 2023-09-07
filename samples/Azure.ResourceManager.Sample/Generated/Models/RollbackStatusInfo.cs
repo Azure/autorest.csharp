@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class RollbackStatusInfo
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RollbackStatusInfo"/>. </summary>
         internal RollbackStatusInfo()
@@ -37,13 +37,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// Error details if OS rollback failed.
         /// Serialized Name: RollbackStatusInfo.rollbackError
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RollbackStatusInfo(int? successfullyRolledbackInstanceCount, int? failedRolledbackInstanceCount, ApiError rollbackError, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RollbackStatusInfo(int? successfullyRolledbackInstanceCount, int? failedRolledbackInstanceCount, ApiError rollbackError, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SuccessfullyRolledbackInstanceCount = successfullyRolledbackInstanceCount;
             FailedRolledbackInstanceCount = failedRolledbackInstanceCount;
             RollbackError = rollbackError;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace lro.Models
     public partial class SubResource
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SubResource"/>. </summary>
         public SubResource()
@@ -23,11 +23,11 @@ namespace lro.Models
 
         /// <summary> Initializes a new instance of <see cref="SubResource"/>. </summary>
         /// <param name="id"> Sub Resource Id. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SubResource(string id, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SubResource(string id, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Sub Resource Id. </summary>

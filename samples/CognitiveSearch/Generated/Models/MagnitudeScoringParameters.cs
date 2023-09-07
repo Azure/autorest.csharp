@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     public partial class MagnitudeScoringParameters
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MagnitudeScoringParameters"/>. </summary>
         /// <param name="boostingRangeStart"> The field value at which boosting starts. </param>
@@ -29,13 +29,13 @@ namespace CognitiveSearch.Models
         /// <param name="boostingRangeStart"> The field value at which boosting starts. </param>
         /// <param name="boostingRangeEnd"> The field value at which boosting ends. </param>
         /// <param name="shouldBoostBeyondRangeByConstant"> A value indicating whether to apply a constant boost for field values beyond the range end value; default is false. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MagnitudeScoringParameters(double boostingRangeStart, double boostingRangeEnd, bool? shouldBoostBeyondRangeByConstant, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MagnitudeScoringParameters(double boostingRangeStart, double boostingRangeEnd, bool? shouldBoostBeyondRangeByConstant, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             BoostingRangeStart = boostingRangeStart;
             BoostingRangeEnd = boostingRangeEnd;
             ShouldBoostBeyondRangeByConstant = shouldBoostBeyondRangeByConstant;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="MagnitudeScoringParameters"/> for deserialization. </summary>

@@ -20,7 +20,7 @@ namespace Azure.ResourceManager.Sample.Models
     internal partial class VirtualMachineListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineListResult"/>. </summary>
         /// <param name="value">
@@ -44,12 +44,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines.
         /// Serialized Name: VirtualMachineListResult.nextLink
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineListResult(IReadOnlyList<VirtualMachineData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineListResult(IReadOnlyList<VirtualMachineData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineListResult"/> for deserialization. </summary>

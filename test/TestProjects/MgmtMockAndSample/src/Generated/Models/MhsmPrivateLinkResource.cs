@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
     public partial class MhsmPrivateLinkResource : TrackedResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MhsmPrivateLinkResource"/>. </summary>
         /// <param name="location"> The location. </param>
@@ -37,14 +37,14 @@ namespace MgmtMockAndSample.Models
         /// <param name="requiredMembers"> Required member names of private link resource. </param>
         /// <param name="requiredZoneNames"> Required DNS zone names of the the private link resource. </param>
         /// <param name="sku"> SKU details. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MhsmPrivateLinkResource(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string groupId, IReadOnlyList<string> requiredMembers, IList<string> requiredZoneNames, ManagedHsmSku sku, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MhsmPrivateLinkResource(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string groupId, IReadOnlyList<string> requiredMembers, IList<string> requiredZoneNames, ManagedHsmSku sku, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             GroupId = groupId;
             RequiredMembers = requiredMembers;
             RequiredZoneNames = requiredZoneNames;
             Sku = sku;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="MhsmPrivateLinkResource"/> for deserialization. </summary>

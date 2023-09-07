@@ -55,9 +55,9 @@ namespace MgmtSupersetFlattenInheritance.Models
                 writer.WriteStringValue(FooPropertiesFoo);
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -87,7 +87,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             ResourceType type = default;
             Optional<SystemData> systemData = default;
             Optional<string> foo0 = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"u8))
@@ -162,11 +162,11 @@ namespace MgmtSupersetFlattenInheritance.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new TrackedResourceModel2(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, foo.Value, bar.Value, foo0.Value, rawData);
+            return new TrackedResourceModel2(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, foo.Value, bar.Value, foo0.Value, serializedAdditionalRawData);
         }
 
         TrackedResourceModel2 IModelJsonSerializable<TrackedResourceModel2>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

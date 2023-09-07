@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     public partial class FirewallPolicyInsights
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyInsights"/>. </summary>
         public FirewallPolicyInsights()
@@ -25,13 +25,13 @@ namespace MgmtMockAndSample.Models
         /// <param name="isEnabled"> A flag to indicate if the insights are enabled on the policy. </param>
         /// <param name="retentionDays"> Number of days the insights should be enabled on the policy. </param>
         /// <param name="logAnalyticsResources"> Workspaces needed to configure the Firewall Policy Insights. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirewallPolicyInsights(bool? isEnabled, int? retentionDays, FirewallPolicyLogAnalyticsResources logAnalyticsResources, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyInsights(bool? isEnabled, int? retentionDays, FirewallPolicyLogAnalyticsResources logAnalyticsResources, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             IsEnabled = isEnabled;
             RetentionDays = retentionDays;
             LogAnalyticsResources = logAnalyticsResources;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A flag to indicate if the insights are enabled on the policy. </summary>

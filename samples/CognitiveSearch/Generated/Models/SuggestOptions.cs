@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class SuggestOptions
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SuggestOptions"/>. </summary>
         public SuggestOptions()
@@ -35,8 +35,8 @@ namespace CognitiveSearch.Models
         /// <param name="searchFields"> The list of field names to search for the specified search text. Target fields must be included in the specified suggester. </param>
         /// <param name="select"> The list of fields to retrieve. If unspecified, only the key field will be included in the results. </param>
         /// <param name="top"> The number of suggestions to retrieve. The value must be a number between 1 and 100. The default is 5. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SuggestOptions(string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IList<string> orderBy, IList<string> searchFields, IList<string> select, int? top, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SuggestOptions(string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IList<string> orderBy, IList<string> searchFields, IList<string> select, int? top, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Filter = filter;
             UseFuzzyMatching = useFuzzyMatching;
@@ -47,7 +47,7 @@ namespace CognitiveSearch.Models
             SearchFields = searchFields;
             Select = select;
             Top = top;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> An OData expression that filters the documents considered for suggestions. </summary>

@@ -30,8 +30,8 @@ namespace PetStore.Models
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"> The size of the fish. </param>
         /// <param name="bite"> The bite of the shark. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Shark(string kind, int size, string bite, Dictionary<string, BinaryData> rawData) : base(kind, size, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Shark(string kind, int size, string bite, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, size, serializedAdditionalRawData)
         {
             Bite = bite;
         }

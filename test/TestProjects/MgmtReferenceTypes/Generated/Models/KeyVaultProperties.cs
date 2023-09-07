@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Fake.Models
     public partial class KeyVaultProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="KeyVaultProperties"/>. </summary>
         [InitializationConstructor]
@@ -27,12 +27,12 @@ namespace Azure.ResourceManager.Fake.Models
         /// <summary> Initializes a new instance of <see cref="KeyVaultProperties"/>. </summary>
         /// <param name="keyIdentifier"> Key vault uri to access the encryption key. </param>
         /// <param name="identity"> The client ID of the identity which will be used to access key vault. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal KeyVaultProperties(string keyIdentifier, string identity, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeyVaultProperties(string keyIdentifier, string identity, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             KeyIdentifier = keyIdentifier;
             Identity = identity;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Key vault uri to access the encryption key. </summary>

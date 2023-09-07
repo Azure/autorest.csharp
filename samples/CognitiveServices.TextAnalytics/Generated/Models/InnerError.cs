@@ -15,7 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class InnerError
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="InnerError"/>. </summary>
         /// <param name="code"> Error code. </param>
@@ -36,15 +36,15 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="details"> Error details. </param>
         /// <param name="target"> Error target. </param>
         /// <param name="innererror"> Inner error contains more specific information. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal InnerError(InnerErrorCodeValue code, string message, IReadOnlyDictionary<string, string> details, string target, InnerError innererror, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal InnerError(InnerErrorCodeValue code, string message, IReadOnlyDictionary<string, string> details, string target, InnerError innererror, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Code = code;
             Message = message;
             Details = details;
             Target = target;
             Innererror = innererror;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="InnerError"/> for deserialization. </summary>

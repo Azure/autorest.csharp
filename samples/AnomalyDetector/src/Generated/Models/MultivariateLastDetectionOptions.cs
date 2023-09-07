@@ -16,7 +16,7 @@ namespace AnomalyDetector.Models
     public partial class MultivariateLastDetectionOptions
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of MultivariateLastDetectionOptions. </summary>
         /// <param name="variables">
@@ -47,12 +47,12 @@ namespace AnomalyDetector.Models
         /// variables for one anomalous timestamp in the response. The default number is
         /// 10.
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MultivariateLastDetectionOptions(IList<VariableValues> variables, int topContributorCount, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MultivariateLastDetectionOptions(IList<VariableValues> variables, int topContributorCount, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Variables = variables;
             TopContributorCount = topContributorCount;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="MultivariateLastDetectionOptions"/> for deserialization. </summary>

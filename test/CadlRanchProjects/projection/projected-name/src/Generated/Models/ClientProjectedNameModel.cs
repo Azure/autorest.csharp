@@ -14,7 +14,7 @@ namespace Projection.ProjectedName.Models
     public partial class ClientProjectedNameModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of ClientProjectedNameModel. </summary>
         /// <param name="clientName"> Pass in true. </param>
@@ -25,11 +25,11 @@ namespace Projection.ProjectedName.Models
 
         /// <summary> Initializes a new instance of ClientProjectedNameModel. </summary>
         /// <param name="clientName"> Pass in true. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ClientProjectedNameModel(bool clientName, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ClientProjectedNameModel(bool clientName, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ClientName = clientName;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ClientProjectedNameModel"/> for deserialization. </summary>

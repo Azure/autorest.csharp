@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
     public partial class Skillset
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Skillset"/>. </summary>
         /// <param name="name"> The name of the skillset. </param>
@@ -52,15 +52,15 @@ namespace CognitiveSearch.Models
         /// The available derived classes include <see cref="CognitiveServicesAccountKey"/> and <see cref="DefaultCognitiveServicesAccount"/>.
         /// </param>
         /// <param name="eTag"> The ETag of the skillset. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Skillset(string name, string description, IList<Skill> skills, CognitiveServicesAccount cognitiveServicesAccount, string eTag, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Skillset(string name, string description, IList<Skill> skills, CognitiveServicesAccount cognitiveServicesAccount, string eTag, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Description = description;
             Skills = skills;
             CognitiveServicesAccount = cognitiveServicesAccount;
             ETag = eTag;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Skillset"/> for deserialization. </summary>

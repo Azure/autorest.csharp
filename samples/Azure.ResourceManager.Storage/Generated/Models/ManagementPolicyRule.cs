@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class ManagementPolicyRule
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ManagementPolicyRule"/>. </summary>
         /// <param name="name"> A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy. </param>
@@ -37,14 +37,14 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="name"> A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy. </param>
         /// <param name="ruleType"> The valid value is Lifecycle. </param>
         /// <param name="definition"> An object that defines the Lifecycle rule. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ManagementPolicyRule(bool? enabled, string name, RuleType ruleType, ManagementPolicyDefinition definition, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ManagementPolicyRule(bool? enabled, string name, RuleType ruleType, ManagementPolicyDefinition definition, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Enabled = enabled;
             Name = name;
             RuleType = ruleType;
             Definition = definition;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ManagementPolicyRule"/> for deserialization. </summary>

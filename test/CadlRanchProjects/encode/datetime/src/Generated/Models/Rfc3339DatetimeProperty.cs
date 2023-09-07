@@ -14,7 +14,7 @@ namespace Encode.Datetime.Models
     public partial class Rfc3339DatetimeProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of Rfc3339DatetimeProperty. </summary>
         /// <param name="value"></param>
@@ -25,11 +25,11 @@ namespace Encode.Datetime.Models
 
         /// <summary> Initializes a new instance of Rfc3339DatetimeProperty. </summary>
         /// <param name="value"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Rfc3339DatetimeProperty(DateTimeOffset value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Rfc3339DatetimeProperty(DateTimeOffset value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Rfc3339DatetimeProperty"/> for deserialization. </summary>

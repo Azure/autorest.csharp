@@ -15,7 +15,7 @@ namespace MgmtMockAndSample.Models
     public partial class FirewallPolicyIntrusionDetectionBypassTrafficSpecifications
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyIntrusionDetectionBypassTrafficSpecifications"/>. </summary>
         public FirewallPolicyIntrusionDetectionBypassTrafficSpecifications()
@@ -36,8 +36,8 @@ namespace MgmtMockAndSample.Models
         /// <param name="destinationPorts"> List of destination ports or ranges. </param>
         /// <param name="sourceIpGroups"> List of source IpGroups for this rule. </param>
         /// <param name="destinationIpGroups"> List of destination IpGroups for this rule. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirewallPolicyIntrusionDetectionBypassTrafficSpecifications(string name, string description, FirewallPolicyIntrusionDetectionProtocol? protocol, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<string> destinationPorts, IList<string> sourceIpGroups, IList<string> destinationIpGroups, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyIntrusionDetectionBypassTrafficSpecifications(string name, string description, FirewallPolicyIntrusionDetectionProtocol? protocol, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<string> destinationPorts, IList<string> sourceIpGroups, IList<string> destinationIpGroups, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Description = description;
@@ -47,7 +47,7 @@ namespace MgmtMockAndSample.Models
             DestinationPorts = destinationPorts;
             SourceIpGroups = sourceIpGroups;
             DestinationIpGroups = destinationIpGroups;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Name of the bypass traffic rule. </summary>

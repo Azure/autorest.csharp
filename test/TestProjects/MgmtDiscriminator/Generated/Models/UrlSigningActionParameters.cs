@@ -15,7 +15,7 @@ namespace MgmtDiscriminator.Models
     public partial class UrlSigningActionParameters
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UrlSigningActionParameters"/>. </summary>
         /// <param name="typeName"></param>
@@ -29,13 +29,13 @@ namespace MgmtDiscriminator.Models
         /// <param name="typeName"></param>
         /// <param name="algorithm"> Algorithm to use for URL signing. </param>
         /// <param name="parameterNameOverride"> Defines which query string parameters in the url to be considered for expires, key id etc. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UrlSigningActionParameters(UrlSigningActionParametersTypeName typeName, Algorithm? algorithm, IList<UrlSigningParamIdentifier> parameterNameOverride, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UrlSigningActionParameters(UrlSigningActionParametersTypeName typeName, Algorithm? algorithm, IList<UrlSigningParamIdentifier> parameterNameOverride, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TypeName = typeName;
             Algorithm = algorithm;
             ParameterNameOverride = parameterNameOverride;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="UrlSigningActionParameters"/> for deserialization. </summary>

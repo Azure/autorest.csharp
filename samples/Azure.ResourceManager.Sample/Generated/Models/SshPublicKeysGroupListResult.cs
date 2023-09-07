@@ -20,7 +20,7 @@ namespace Azure.ResourceManager.Sample.Models
     internal partial class SshPublicKeysGroupListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SshPublicKeysGroupListResult"/>. </summary>
         /// <param name="value">
@@ -44,12 +44,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the next page of SSH public keys.
         /// Serialized Name: SshPublicKeysGroupListResult.nextLink
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SshPublicKeysGroupListResult(IReadOnlyList<SshPublicKeyData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SshPublicKeysGroupListResult(IReadOnlyList<SshPublicKeyData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="SshPublicKeysGroupListResult"/> for deserialization. </summary>

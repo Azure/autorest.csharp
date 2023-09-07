@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class UpgradeOperationHistoryStatus
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UpgradeOperationHistoryStatus"/>. </summary>
         internal UpgradeOperationHistoryStatus()
@@ -37,13 +37,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// End time of the upgrade.
         /// Serialized Name: UpgradeOperationHistoryStatus.endTime
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UpgradeOperationHistoryStatus(UpgradeState? code, DateTimeOffset? startOn, DateTimeOffset? endOn, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UpgradeOperationHistoryStatus(UpgradeState? code, DateTimeOffset? startOn, DateTimeOffset? endOn, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Code = code;
             StartOn = startOn;
             EndOn = endOn;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

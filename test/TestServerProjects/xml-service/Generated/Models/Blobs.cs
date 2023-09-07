@@ -15,7 +15,7 @@ namespace xml_service.Models
     public partial class Blobs
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Blobs"/>. </summary>
         internal Blobs()
@@ -27,12 +27,12 @@ namespace xml_service.Models
         /// <summary> Initializes a new instance of <see cref="Blobs"/>. </summary>
         /// <param name="blobPrefix"></param>
         /// <param name="blob"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Blobs(IReadOnlyList<BlobPrefix> blobPrefix, IReadOnlyList<Blob> blob, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Blobs(IReadOnlyList<BlobPrefix> blobPrefix, IReadOnlyList<Blob> blob, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             BlobPrefix = blobPrefix;
             Blob = blob;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the blob prefix. </summary>

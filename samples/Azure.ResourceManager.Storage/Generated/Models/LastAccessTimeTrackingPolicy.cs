@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class LastAccessTimeTrackingPolicy
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="LastAccessTimeTrackingPolicy"/>. </summary>
         /// <param name="enable"> When set to true last access time based tracking is enabled. </param>
@@ -30,14 +30,14 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="name"> Name of the policy. The valid value is AccessTimeTracking. This field is currently read only. </param>
         /// <param name="trackingGranularityInDays"> The field specifies blob object tracking granularity in days, typically how often the blob object should be tracked.This field is currently read only with value as 1. </param>
         /// <param name="blobType"> An array of predefined supported blob types. Only blockBlob is the supported value. This field is currently read only. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LastAccessTimeTrackingPolicy(bool enable, Name? name, int? trackingGranularityInDays, IList<string> blobType, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LastAccessTimeTrackingPolicy(bool enable, Name? name, int? trackingGranularityInDays, IList<string> blobType, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Enable = enable;
             Name = name;
             TrackingGranularityInDays = trackingGranularityInDays;
             BlobType = blobType;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="LastAccessTimeTrackingPolicy"/> for deserialization. </summary>

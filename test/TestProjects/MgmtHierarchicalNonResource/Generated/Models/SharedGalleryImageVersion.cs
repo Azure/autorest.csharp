@@ -24,8 +24,8 @@ namespace MgmtHierarchicalNonResource.Models
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>
         /// <param name="publishedOn"> The published date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable. </param>
         /// <param name="endOfLifeOn"> The end of life date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SharedGalleryImageVersion(string name, string location, string uniqueId, DateTimeOffset? publishedOn, DateTimeOffset? endOfLifeOn, Dictionary<string, BinaryData> rawData) : base(name, location, uniqueId, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SharedGalleryImageVersion(string name, string location, string uniqueId, DateTimeOffset? publishedOn, DateTimeOffset? endOfLifeOn, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(name, location, uniqueId, serializedAdditionalRawData)
         {
             PublishedOn = publishedOn;
             EndOfLifeOn = endOfLifeOn;

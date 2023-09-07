@@ -33,9 +33,9 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("keyData"u8);
                 writer.WriteStringValue(KeyData);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -58,7 +58,7 @@ namespace MgmtAcronymMapping.Models
             }
             Optional<string> path = default;
             Optional<string> keyData = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("path"u8))
@@ -73,11 +73,11 @@ namespace MgmtAcronymMapping.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new SshPublicKeyInfo(path.Value, keyData.Value, rawData);
+            return new SshPublicKeyInfo(path.Value, keyData.Value, serializedAdditionalRawData);
         }
 
         SshPublicKeyInfo IModelJsonSerializable<SshPublicKeyInfo>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

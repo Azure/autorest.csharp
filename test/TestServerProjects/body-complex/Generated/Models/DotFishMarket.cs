@@ -15,7 +15,7 @@ namespace body_complex.Models
     public partial class DotFishMarket
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DotFishMarket"/>. </summary>
         internal DotFishMarket()
@@ -35,14 +35,14 @@ namespace body_complex.Models
         /// Please note <see cref="DotFish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="DotSalmon"/>.
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DotFishMarket(DotSalmon sampleSalmon, IReadOnlyList<DotSalmon> salmons, DotFish sampleFish, IReadOnlyList<DotFish> fishes, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DotFishMarket(DotSalmon sampleSalmon, IReadOnlyList<DotSalmon> salmons, DotFish sampleFish, IReadOnlyList<DotFish> fishes, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             SampleSalmon = sampleSalmon;
             Salmons = salmons;
             SampleFish = sampleFish;
             Fishes = fishes;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the sample salmon. </summary>

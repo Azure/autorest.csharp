@@ -43,9 +43,9 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("interpolation"u8);
                 writer.WriteStringValue(Interpolation.Value.ToSerialString());
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -71,7 +71,7 @@ namespace CognitiveSearch.Models
             string fieldName = default;
             double boost = default;
             Optional<ScoringFunctionInterpolation> interpolation = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("freshness"u8))
@@ -105,11 +105,11 @@ namespace CognitiveSearch.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new FreshnessScoringFunction(type, fieldName, boost, Optional.ToNullable(interpolation), freshness, rawData);
+            return new FreshnessScoringFunction(type, fieldName, boost, Optional.ToNullable(interpolation), freshness, serializedAdditionalRawData);
         }
 
         FreshnessScoringFunction IModelJsonSerializable<FreshnessScoringFunction>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

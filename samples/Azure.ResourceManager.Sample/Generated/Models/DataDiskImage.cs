@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class DataDiskImage
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DataDiskImage"/>. </summary>
         public DataDiskImage()
@@ -29,11 +29,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: DataDiskImage.lun
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DataDiskImage(int? lun, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DataDiskImage(int? lun, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Lun = lun;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class StorageAccountCheckNameAvailabilityContent
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StorageAccountCheckNameAvailabilityContent"/>. </summary>
         /// <param name="name"> The storage account name. </param>
@@ -31,12 +31,12 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of <see cref="StorageAccountCheckNameAvailabilityContent"/>. </summary>
         /// <param name="name"> The storage account name. </param>
         /// <param name="resourceType"> The type of resource, Microsoft.Storage/storageAccounts. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StorageAccountCheckNameAvailabilityContent(string name, Type resourceType, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageAccountCheckNameAvailabilityContent(string name, Type resourceType, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             ResourceType = resourceType;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="StorageAccountCheckNameAvailabilityContent"/> for deserialization. </summary>

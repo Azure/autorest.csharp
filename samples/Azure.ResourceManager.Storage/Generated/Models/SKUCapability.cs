@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class SKUCapability
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SKUCapability"/>. </summary>
         internal SKUCapability()
@@ -24,12 +24,12 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of <see cref="SKUCapability"/>. </summary>
         /// <param name="name"> The name of capability, The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc. </param>
         /// <param name="value"> A string value to indicate states of given capability. Possibly 'true' or 'false'. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SKUCapability(string name, string value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SKUCapability(string name, string value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The name of capability, The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc. </summary>

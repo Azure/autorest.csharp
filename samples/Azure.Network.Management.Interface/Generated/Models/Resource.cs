@@ -15,7 +15,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class Resource
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Resource"/>. </summary>
         public Resource()
@@ -29,15 +29,15 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="type"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Resource(string id, string name, string type, string location, IDictionary<string, string> tags, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Resource(string id, string name, string type, string location, IDictionary<string, string> tags, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
             Type = type;
             Location = location;
             Tags = tags;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Resource ID. </summary>

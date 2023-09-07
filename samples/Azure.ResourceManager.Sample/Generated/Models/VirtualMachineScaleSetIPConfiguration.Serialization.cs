@@ -101,9 +101,9 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -134,7 +134,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<IList<WritableSubResource>> applicationSecurityGroups = default;
             Optional<IList<WritableSubResource>> loadBalancerBackendAddressPools = default;
             Optional<IList<WritableSubResource>> loadBalancerInboundNatPools = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -253,11 +253,11 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetIPConfiguration(id.Value, name, subnet, Optional.ToNullable(primary), publicIPAddressConfiguration.Value, Optional.ToNullable(privateIPAddressVersion), Optional.ToList(applicationGatewayBackendAddressPools), Optional.ToList(applicationSecurityGroups), Optional.ToList(loadBalancerBackendAddressPools), Optional.ToList(loadBalancerInboundNatPools), rawData);
+            return new VirtualMachineScaleSetIPConfiguration(id.Value, name, subnet, Optional.ToNullable(primary), publicIPAddressConfiguration.Value, Optional.ToNullable(privateIPAddressVersion), Optional.ToList(applicationGatewayBackendAddressPools), Optional.ToList(applicationSecurityGroups), Optional.ToList(loadBalancerBackendAddressPools), Optional.ToList(loadBalancerInboundNatPools), serializedAdditionalRawData);
         }
 
         VirtualMachineScaleSetIPConfiguration IModelJsonSerializable<VirtualMachineScaleSetIPConfiguration>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

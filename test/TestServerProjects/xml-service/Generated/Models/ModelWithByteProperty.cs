@@ -14,7 +14,7 @@ namespace xml_service.Models
     public partial class ModelWithByteProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelWithByteProperty"/>. </summary>
         public ModelWithByteProperty()
@@ -23,11 +23,11 @@ namespace xml_service.Models
 
         /// <summary> Initializes a new instance of <see cref="ModelWithByteProperty"/>. </summary>
         /// <param name="bytes"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithByteProperty(byte[] bytes, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithByteProperty(byte[] bytes, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Bytes = bytes;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the bytes. </summary>

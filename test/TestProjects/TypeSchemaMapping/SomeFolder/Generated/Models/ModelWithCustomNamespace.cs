@@ -14,7 +14,7 @@ namespace Very.Custom.Namespace.From.Swagger
     internal partial class ModelWithCustomNamespace
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelWithCustomNamespace"/>. </summary>
         internal ModelWithCustomNamespace()
@@ -23,11 +23,11 @@ namespace Very.Custom.Namespace.From.Swagger
 
         /// <summary> Initializes a new instance of <see cref="ModelWithCustomNamespace"/>. </summary>
         /// <param name="modelProperty"> . </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithCustomNamespace(string modelProperty, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithCustomNamespace(string modelProperty, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ModelProperty = modelProperty;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> . </summary>

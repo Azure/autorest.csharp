@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
     public partial class DiskEncryptionSettings
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DiskEncryptionSettings"/>. </summary>
         public DiskEncryptionSettings()
@@ -37,13 +37,13 @@ namespace MgmtAcronymMapping.Models
         /// Specifies whether disk encryption should be enabled on the virtual machine.
         /// Serialized Name: DiskEncryptionSettings.enabled
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DiskEncryptionSettings(KeyVaultSecretReference diskEncryptionKey, KeyVaultKeyReference keyEncryptionKey, bool? enabled, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DiskEncryptionSettings(KeyVaultSecretReference diskEncryptionKey, KeyVaultKeyReference keyEncryptionKey, bool? enabled, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DiskEncryptionKey = diskEncryptionKey;
             KeyEncryptionKey = keyEncryptionKey;
             Enabled = enabled;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

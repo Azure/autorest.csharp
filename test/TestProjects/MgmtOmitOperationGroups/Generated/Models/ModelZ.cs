@@ -14,7 +14,7 @@ namespace MgmtOmitOperationGroups.Models
     public partial class ModelZ
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelZ"/>. </summary>
         public ModelZ()
@@ -24,12 +24,12 @@ namespace MgmtOmitOperationGroups.Models
         /// <summary> Initializes a new instance of <see cref="ModelZ"/>. </summary>
         /// <param name="h"></param>
         /// <param name="i"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelZ(string h, string i, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelZ(string h, string i, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             H = h;
             I = i;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the h. </summary>

@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     public partial class FirewallPolicyRuleApplicationProtocol
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyRuleApplicationProtocol"/>. </summary>
         public FirewallPolicyRuleApplicationProtocol()
@@ -24,12 +24,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyRuleApplicationProtocol"/>. </summary>
         /// <param name="protocolType"> Protocol type. </param>
         /// <param name="port"> Port number for the protocol, cannot be greater than 64000. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirewallPolicyRuleApplicationProtocol(FirewallPolicyRuleApplicationProtocolType? protocolType, int? port, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyRuleApplicationProtocol(FirewallPolicyRuleApplicationProtocolType? protocolType, int? port, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ProtocolType = protocolType;
             Port = port;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Protocol type. </summary>

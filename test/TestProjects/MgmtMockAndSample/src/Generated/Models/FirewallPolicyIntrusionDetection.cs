@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     public partial class FirewallPolicyIntrusionDetection
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyIntrusionDetection"/>. </summary>
         public FirewallPolicyIntrusionDetection()
@@ -24,12 +24,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyIntrusionDetection"/>. </summary>
         /// <param name="mode"> Intrusion detection general state. </param>
         /// <param name="configuration"> Intrusion detection configuration properties. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirewallPolicyIntrusionDetection(FirewallPolicyIntrusionDetectionStateType? mode, FirewallPolicyIntrusionDetectionConfiguration configuration, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyIntrusionDetection(FirewallPolicyIntrusionDetectionStateType? mode, FirewallPolicyIntrusionDetectionConfiguration configuration, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Mode = mode;
             Configuration = configuration;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Intrusion detection general state. </summary>

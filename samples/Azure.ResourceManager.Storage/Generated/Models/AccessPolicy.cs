@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class AccessPolicy
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AccessPolicy"/>. </summary>
         public AccessPolicy()
@@ -25,13 +25,13 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="startOn"> Start time of the access policy. </param>
         /// <param name="expiryOn"> Expiry time of the access policy. </param>
         /// <param name="permission"> List of abbreviated permissions. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AccessPolicy(DateTimeOffset? startOn, DateTimeOffset? expiryOn, string permission, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AccessPolicy(DateTimeOffset? startOn, DateTimeOffset? expiryOn, string permission, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             StartOn = startOn;
             ExpiryOn = expiryOn;
             Permission = permission;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Start time of the access policy. </summary>

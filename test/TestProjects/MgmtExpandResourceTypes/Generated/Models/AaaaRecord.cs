@@ -14,7 +14,7 @@ namespace MgmtExpandResourceTypes.Models
     public partial class AaaaRecord
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AaaaRecord"/>. </summary>
         public AaaaRecord()
@@ -23,11 +23,11 @@ namespace MgmtExpandResourceTypes.Models
 
         /// <summary> Initializes a new instance of <see cref="AaaaRecord"/>. </summary>
         /// <param name="ipv6Address"> The IPv6 address of this AAAA record. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AaaaRecord(string ipv6Address, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AaaaRecord(string ipv6Address, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Ipv6Address = ipv6Address;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The IPv6 address of this AAAA record. </summary>

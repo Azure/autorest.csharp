@@ -28,8 +28,8 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
         /// <summary> Initializes a new instance of Cat. </summary>
         /// <param name="name"></param>
         /// <param name="age"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Cat(string name, int age, Dictionary<string, BinaryData> rawData) : base(name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Cat(string name, int age, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(name, serializedAdditionalRawData)
         {
             Age = age;
         }

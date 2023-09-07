@@ -20,7 +20,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
     public abstract partial class Snake
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of Snake. </summary>
         /// <param name="length"> Length of the snake. </param>
@@ -32,12 +32,12 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         /// <summary> Initializes a new instance of Snake. </summary>
         /// <param name="kind"> discriminator property. </param>
         /// <param name="length"> Length of the snake. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Snake(SnakeKind kind, int length, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Snake(SnakeKind kind, int length, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Kind = kind;
             Length = length;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Snake"/> for deserialization. </summary>

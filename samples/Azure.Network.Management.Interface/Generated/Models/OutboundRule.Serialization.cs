@@ -85,9 +85,9 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -119,7 +119,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<LoadBalancerOutboundRuleProtocol> protocol = default;
             Optional<bool> enableTcpReset = default;
             Optional<int> idleTimeoutInMinutes = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -224,11 +224,11 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new OutboundRule(id.Value, name.Value, etag.Value, type.Value, Optional.ToNullable(allocatedOutboundPorts), Optional.ToList(frontendIPConfigurations), backendAddressPool.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(protocol), Optional.ToNullable(enableTcpReset), Optional.ToNullable(idleTimeoutInMinutes), rawData);
+            return new OutboundRule(id.Value, name.Value, etag.Value, type.Value, Optional.ToNullable(allocatedOutboundPorts), Optional.ToList(frontendIPConfigurations), backendAddressPool.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(protocol), Optional.ToNullable(enableTcpReset), Optional.ToNullable(idleTimeoutInMinutes), serializedAdditionalRawData);
         }
 
         OutboundRule IModelJsonSerializable<OutboundRule>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

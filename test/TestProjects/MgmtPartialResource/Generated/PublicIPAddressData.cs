@@ -20,7 +20,7 @@ namespace MgmtPartialResource
     public partial class PublicIPAddressData : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="PublicIPAddressData"/>. </summary>
         public PublicIPAddressData()
@@ -45,8 +45,8 @@ namespace MgmtPartialResource
         /// <param name="migrationPhase"> Migration phase of Public IP Address. </param>
         /// <param name="linkedPublicIPAddress"> The linked public IP address of the public IP address resource. </param>
         /// <param name="deleteOption"> Specify what happens to the public IP address when the VM using it is deleted. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PublicIPAddressData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, PublicIPAddressSku sku, string etag, IList<string> zones, IPAllocationMethod? publicIPAllocationMethod, IPVersion? publicIPAddressVersion, string ipAddress, int? idleTimeoutInMinutes, string resourceGuid, PublicIPAddressData servicePublicIPAddress, PublicIPAddressMigrationPhase? migrationPhase, PublicIPAddressData linkedPublicIPAddress, DeleteOption? deleteOption, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PublicIPAddressData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, PublicIPAddressSku sku, string etag, IList<string> zones, IPAllocationMethod? publicIPAllocationMethod, IPVersion? publicIPAddressVersion, string ipAddress, int? idleTimeoutInMinutes, string resourceGuid, PublicIPAddressData servicePublicIPAddress, PublicIPAddressMigrationPhase? migrationPhase, PublicIPAddressData linkedPublicIPAddress, DeleteOption? deleteOption, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Sku = sku;
             Etag = etag;
@@ -60,7 +60,7 @@ namespace MgmtPartialResource
             MigrationPhase = migrationPhase;
             LinkedPublicIPAddress = linkedPublicIPAddress;
             DeleteOption = deleteOption;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The public IP address SKU. </summary>

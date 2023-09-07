@@ -73,9 +73,9 @@ namespace AnomalyDetector.Models
                     ((IModelJsonSerializable<DiagnosticsInfo>)DiagnosticsInfo).Serialize(writer, options);
                 }
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -106,7 +106,7 @@ namespace AnomalyDetector.Models
             Optional<ModelStatus> status = default;
             Optional<IReadOnlyList<ErrorResponse>> errors = default;
             Optional<DiagnosticsInfo> diagnosticsInfo = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("dataSource"u8))
@@ -190,11 +190,11 @@ namespace AnomalyDetector.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new ModelInfo(dataSource, Optional.ToNullable(dataSchema), startTime, endTime, displayName.Value, Optional.ToNullable(slidingWindow), alignPolicy.Value, Optional.ToNullable(status), Optional.ToList(errors), diagnosticsInfo.Value, rawData);
+            return new ModelInfo(dataSource, Optional.ToNullable(dataSchema), startTime, endTime, displayName.Value, Optional.ToNullable(slidingWindow), alignPolicy.Value, Optional.ToNullable(status), Optional.ToList(errors), diagnosticsInfo.Value, serializedAdditionalRawData);
         }
 
         ModelInfo IModelJsonSerializable<ModelInfo>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
     internal partial class DeletedVaultListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DeletedVaultListResult"/>. </summary>
         internal DeletedVaultListResult()
@@ -27,12 +27,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="DeletedVaultListResult"/>. </summary>
         /// <param name="value"> The list of deleted vaults. </param>
         /// <param name="nextLink"> The URL to get the next set of deleted vaults. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeletedVaultListResult(IReadOnlyList<DeletedVaultData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeletedVaultListResult(IReadOnlyList<DeletedVaultData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The list of deleted vaults. </summary>

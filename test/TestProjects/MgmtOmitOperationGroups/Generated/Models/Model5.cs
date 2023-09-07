@@ -15,7 +15,7 @@ namespace MgmtOmitOperationGroups.Models
     public partial class Model5
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Model5"/>. </summary>
         public Model5()
@@ -27,13 +27,13 @@ namespace MgmtOmitOperationGroups.Models
         /// <param name="id"></param>
         /// <param name="k"></param>
         /// <param name="modelqs"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Model5(string id, string k, IList<ModelQ> modelqs, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Model5(string id, string k, IList<ModelQ> modelqs, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             K = k;
             Modelqs = modelqs;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

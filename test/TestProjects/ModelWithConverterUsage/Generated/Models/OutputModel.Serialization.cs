@@ -30,9 +30,9 @@ namespace ModelWithConverterUsage.Models
                 writer.WritePropertyName("Output_Model_Property"u8);
                 writer.WriteStringValue(OutputModelProperty);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -54,7 +54,7 @@ namespace ModelWithConverterUsage.Models
                 return null;
             }
             Optional<string> outputModelProperty = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("Output_Model_Property"u8))
@@ -64,11 +64,11 @@ namespace ModelWithConverterUsage.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new OutputModel(outputModelProperty.Value, rawData);
+            return new OutputModel(outputModelProperty.Value, serializedAdditionalRawData);
         }
 
         OutputModel IModelJsonSerializable<OutputModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

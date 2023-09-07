@@ -23,8 +23,8 @@ namespace MgmtExactMatchInheritance.Models
         /// <param name="name"></param>
         /// <param name="exactMatchModel9Type"></param>
         /// <param name="new"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ExactMatchModel4(int? id, string name, string exactMatchModel9Type, string @new, Dictionary<string, BinaryData> rawData) : base(id, name, exactMatchModel9Type, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ExactMatchModel4(int? id, string name, string exactMatchModel9Type, string @new, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, exactMatchModel9Type, serializedAdditionalRawData)
         {
             New = @new;
         }

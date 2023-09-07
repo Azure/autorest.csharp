@@ -26,8 +26,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ProximityPlacementGroupPatch(IDictionary<string, string> tags, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProximityPlacementGroupPatch(IDictionary<string, string> tags, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(tags, serializedAdditionalRawData)
         {
         }
     }

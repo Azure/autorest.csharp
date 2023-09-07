@@ -22,8 +22,8 @@ namespace MgmtOperations.Models
         /// <param name="tags"> Resource tags. </param>
         /// <param name="platformUpdateDomainCount"> Update Domain count. </param>
         /// <param name="platformFaultDomainCount"> Fault Domain count. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AvailabilitySetUpdate(IDictionary<string, string> tags, int? platformUpdateDomainCount, int? platformFaultDomainCount, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AvailabilitySetUpdate(IDictionary<string, string> tags, int? platformUpdateDomainCount, int? platformFaultDomainCount, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(tags, serializedAdditionalRawData)
         {
             PlatformUpdateDomainCount = platformUpdateDomainCount;
             PlatformFaultDomainCount = platformFaultDomainCount;

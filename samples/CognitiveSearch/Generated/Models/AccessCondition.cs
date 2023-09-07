@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     public partial class AccessCondition
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AccessCondition"/>. </summary>
         public AccessCondition()
@@ -24,12 +24,12 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="AccessCondition"/>. </summary>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AccessCondition(string ifMatch, string ifNoneMatch, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AccessCondition(string ifMatch, string ifNoneMatch, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             IfMatch = ifMatch;
             IfNoneMatch = ifNoneMatch;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </summary>

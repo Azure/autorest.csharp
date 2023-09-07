@@ -17,7 +17,7 @@ namespace MgmtSafeFlatten.Models
     internal partial class TypeOneListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TypeOneListResult"/>. </summary>
         /// <param name="value"> The list of of typeones. </param>
@@ -32,12 +32,12 @@ namespace MgmtSafeFlatten.Models
         /// <summary> Initializes a new instance of <see cref="TypeOneListResult"/>. </summary>
         /// <param name="value"> The list of of typeones. </param>
         /// <param name="nextLink"> The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TypeOneListResult(IReadOnlyList<TypeOneData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TypeOneListResult(IReadOnlyList<TypeOneData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="TypeOneListResult"/> for deserialization. </summary>

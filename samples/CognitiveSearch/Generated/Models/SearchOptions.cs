@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class SearchOptions
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SearchOptions"/>. </summary>
         public SearchOptions()
@@ -45,8 +45,8 @@ namespace CognitiveSearch.Models
         /// <param name="select"> The list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included. </param>
         /// <param name="skip"> The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use $skip due to this limitation, consider using $orderby on a totally-ordered key and $filter with a range query instead. </param>
         /// <param name="top"> The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SearchOptions(bool? includeTotalResultCount, IList<string> facets, string filter, IList<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IList<string> orderBy, QueryType? queryType, IList<string> scoringParameters, string scoringProfile, IList<string> searchFields, SearchMode? searchMode, IList<string> select, int? skip, int? top, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SearchOptions(bool? includeTotalResultCount, IList<string> facets, string filter, IList<string> highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IList<string> orderBy, QueryType? queryType, IList<string> scoringParameters, string scoringProfile, IList<string> searchFields, SearchMode? searchMode, IList<string> select, int? skip, int? top, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             IncludeTotalResultCount = includeTotalResultCount;
             Facets = facets;
@@ -64,7 +64,7 @@ namespace CognitiveSearch.Models
             Select = select;
             Skip = skip;
             Top = top;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. </summary>

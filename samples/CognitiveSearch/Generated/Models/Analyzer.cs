@@ -19,7 +19,7 @@ namespace CognitiveSearch.Models
     public partial class Analyzer
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Analyzer"/>. </summary>
         /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
@@ -34,12 +34,12 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="Analyzer"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the analyzer. </param>
         /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Analyzer(string odataType, string name, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Analyzer(string odataType, string name, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OdataType = odataType;
             Name = name;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Analyzer"/> for deserialization. </summary>

@@ -21,7 +21,7 @@ namespace MgmtMockAndSample
     public partial class MgmtMockAndSamplePrivateEndpointConnectionData : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSamplePrivateEndpointConnectionData"/>. </summary>
         public MgmtMockAndSamplePrivateEndpointConnectionData()
@@ -40,8 +40,8 @@ namespace MgmtMockAndSample
         /// <param name="provisioningState"> Provisioning state of the private endpoint connection. </param>
         /// <param name="location"> Azure location of the key vault resource. </param>
         /// <param name="tags"> Tags assigned to the key vault resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MgmtMockAndSamplePrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string etag, Azure.ResourceManager.Resources.Models.SubResource privateEndpoint, MgmtMockAndSamplePrivateLinkServiceConnectionState connectionState, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState, AzureLocation? location, IReadOnlyDictionary<string, string> tags, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MgmtMockAndSamplePrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string etag, Azure.ResourceManager.Resources.Models.SubResource privateEndpoint, MgmtMockAndSamplePrivateLinkServiceConnectionState connectionState, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState, AzureLocation? location, IReadOnlyDictionary<string, string> tags, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Etag = etag;
             PrivateEndpoint = privateEndpoint;
@@ -49,7 +49,7 @@ namespace MgmtMockAndSample
             ProvisioningState = provisioningState;
             Location = location;
             Tags = tags;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Modified whenever there is a change in the state of private endpoint connection. </summary>

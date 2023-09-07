@@ -14,7 +14,7 @@ namespace MgmtListMethods.Models
     public partial class NonResourceChild
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="NonResourceChild"/>. </summary>
         internal NonResourceChild()
@@ -24,12 +24,12 @@ namespace MgmtListMethods.Models
         /// <summary> Initializes a new instance of <see cref="NonResourceChild"/>. </summary>
         /// <param name="name"> Name. </param>
         /// <param name="numberOfCores"> Test Desc. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal NonResourceChild(string name, int? numberOfCores, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal NonResourceChild(string name, int? numberOfCores, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             NumberOfCores = numberOfCores;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Name. </summary>

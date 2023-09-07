@@ -18,7 +18,7 @@ namespace AnomalyDetector.Models
     public partial class MultivariateBatchDetectionOptions
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of MultivariateBatchDetectionOptions. </summary>
         /// <param name="dataSource">
@@ -71,14 +71,14 @@ namespace AnomalyDetector.Models
         /// A required field, indicating the end time of data for detection, which should
         /// be date-time of ISO 8601 format.
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MultivariateBatchDetectionOptions(Uri dataSource, int topContributorCount, DateTimeOffset startTime, DateTimeOffset endTime, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MultivariateBatchDetectionOptions(Uri dataSource, int topContributorCount, DateTimeOffset startTime, DateTimeOffset endTime, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DataSource = dataSource;
             TopContributorCount = topContributorCount;
             StartTime = startTime;
             EndTime = endTime;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="MultivariateBatchDetectionOptions"/> for deserialization. </summary>

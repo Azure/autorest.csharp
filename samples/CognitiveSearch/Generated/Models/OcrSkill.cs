@@ -36,8 +36,8 @@ namespace CognitiveSearch.Models
         /// <param name="textExtractionAlgorithm"> A value indicating which algorithm to use for extracting text. Default is printed. </param>
         /// <param name="defaultLanguageCode"> A value indicating which language code to use. Default is en. </param>
         /// <param name="shouldDetectOrientation"> A value indicating to turn orientation detection on or not. Default is false. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal OcrSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, TextExtractionAlgorithm? textExtractionAlgorithm, OcrSkillLanguage? defaultLanguageCode, bool? shouldDetectOrientation, Dictionary<string, BinaryData> rawData) : base(odataType, name, description, context, inputs, outputs, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OcrSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, TextExtractionAlgorithm? textExtractionAlgorithm, OcrSkillLanguage? defaultLanguageCode, bool? shouldDetectOrientation, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, description, context, inputs, outputs, serializedAdditionalRawData)
         {
             TextExtractionAlgorithm = textExtractionAlgorithm;
             DefaultLanguageCode = defaultLanguageCode;

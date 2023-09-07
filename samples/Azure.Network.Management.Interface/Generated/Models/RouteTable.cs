@@ -32,8 +32,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="subnets"> A collection of references to subnets. </param>
         /// <param name="disableBgpRoutePropagation"> Whether to disable the routes learned by BGP on that route table. True means disable. </param>
         /// <param name="provisioningState"> The provisioning state of the route table resource. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RouteTable(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, IList<Route> routes, IReadOnlyList<Subnet> subnets, bool? disableBgpRoutePropagation, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, name, type, location, tags, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RouteTable(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, IList<Route> routes, IReadOnlyList<Subnet> subnets, bool? disableBgpRoutePropagation, ProvisioningState? provisioningState, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, type, location, tags, serializedAdditionalRawData)
         {
             Etag = etag;
             Routes = routes;

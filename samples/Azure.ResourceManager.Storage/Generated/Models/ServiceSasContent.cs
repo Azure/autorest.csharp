@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class ServiceSasContent
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ServiceSasContent"/>. </summary>
         /// <param name="canonicalizedResource"> The canonical path to the signed resource. </param>
@@ -46,8 +46,8 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="contentEncoding"> The response header override for content encoding. </param>
         /// <param name="contentLanguage"> The response header override for content language. </param>
         /// <param name="contentType"> The response header override for content type. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ServiceSasContent(string canonicalizedResource, SignedResource? resource, Permission? permissions, string ipAddressOrRange, HttpProtocol? protocols, DateTimeOffset? sharedAccessStartOn, DateTimeOffset? sharedAccessExpiryOn, string identifier, string partitionKeyStart, string partitionKeyEnd, string rowKeyStart, string rowKeyEnd, string keyToSign, string cacheControl, string contentDisposition, string contentEncoding, string contentLanguage, string contentType, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ServiceSasContent(string canonicalizedResource, SignedResource? resource, Permission? permissions, string ipAddressOrRange, HttpProtocol? protocols, DateTimeOffset? sharedAccessStartOn, DateTimeOffset? sharedAccessExpiryOn, string identifier, string partitionKeyStart, string partitionKeyEnd, string rowKeyStart, string rowKeyEnd, string keyToSign, string cacheControl, string contentDisposition, string contentEncoding, string contentLanguage, string contentType, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             CanonicalizedResource = canonicalizedResource;
             Resource = resource;
@@ -67,7 +67,7 @@ namespace Azure.ResourceManager.Storage.Models
             ContentEncoding = contentEncoding;
             ContentLanguage = contentLanguage;
             ContentType = contentType;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ServiceSasContent"/> for deserialization. </summary>

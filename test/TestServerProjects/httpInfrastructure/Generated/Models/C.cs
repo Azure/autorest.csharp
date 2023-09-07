@@ -14,7 +14,7 @@ namespace httpInfrastructure.Models
     public partial class C
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="C"/>. </summary>
         internal C()
@@ -23,11 +23,11 @@ namespace httpInfrastructure.Models
 
         /// <summary> Initializes a new instance of <see cref="C"/>. </summary>
         /// <param name="httpCode"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal C(string httpCode, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal C(string httpCode, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             HttpCode = httpCode;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the http code. </summary>

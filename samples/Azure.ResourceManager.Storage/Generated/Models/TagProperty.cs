@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class TagProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TagProperty"/>. </summary>
         internal TagProperty()
@@ -27,15 +27,15 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="objectIdentifier"> Returns the Object ID of the user who added the tag. </param>
         /// <param name="tenantId"> Returns the Tenant ID that issued the token for the user who added the tag. </param>
         /// <param name="upn"> Returns the User Principal Name of the user who added the tag. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TagProperty(string tag, DateTimeOffset? timestamp, string objectIdentifier, Guid? tenantId, string upn, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TagProperty(string tag, DateTimeOffset? timestamp, string objectIdentifier, Guid? tenantId, string upn, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Tag = tag;
             Timestamp = timestamp;
             ObjectIdentifier = objectIdentifier;
             TenantId = tenantId;
             Upn = upn;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The tag value. </summary>

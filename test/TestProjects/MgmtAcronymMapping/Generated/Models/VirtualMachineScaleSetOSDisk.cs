@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping.Models
     public partial class VirtualMachineScaleSetOSDisk
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetOSDisk"/>. </summary>
         /// <param name="createOption">
@@ -76,8 +76,8 @@ namespace MgmtAcronymMapping.Models
         /// Specifies the SecurityType of the VM. Applicable for OS disks only.
         /// Serialized Name: VirtualMachineScaleSetOSDisk.securityType
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetOSDisk(string name, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, DiffDiskSettings diffDiskSettings, int? diskSizeGB, OperatingSystemType? osType, VirtualHardDisk image, IList<string> vhdContainers, VirtualMachineScaleSetManagedDiskParameters managedDisk, DiskSecurityType? securityType, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetOSDisk(string name, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, DiffDiskSettings diffDiskSettings, int? diskSizeGB, OperatingSystemType? osType, VirtualHardDisk image, IList<string> vhdContainers, VirtualMachineScaleSetManagedDiskParameters managedDisk, DiskSecurityType? securityType, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Caching = caching;
@@ -90,7 +90,7 @@ namespace MgmtAcronymMapping.Models
             VhdContainers = vhdContainers;
             ManagedDisk = managedDisk;
             SecurityType = securityType;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetOSDisk"/> for deserialization. </summary>

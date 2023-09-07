@@ -16,8 +16,8 @@ namespace MgmtDiscriminator.Models
         /// <summary> Initializes a new instance of <see cref="UnknownPet"/>. </summary>
         /// <param name="kind"> The kind of the pet. </param>
         /// <param name="id"> The Id of the pet. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownPet(PetKind kind, string id, Dictionary<string, BinaryData> rawData) : base(kind, id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownPet(PetKind kind, string id, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, id, serializedAdditionalRawData)
         {
             Kind = kind;
         }

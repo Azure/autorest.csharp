@@ -29,8 +29,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         /// <param name="friends"></param>
         /// <param name="hate"></param>
         /// <param name="partner"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Eagle(string kind, int wingspan, IList<Bird> friends, IDictionary<string, Bird> hate, Bird partner, Dictionary<string, BinaryData> rawData) : base(kind, wingspan, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Eagle(string kind, int wingspan, IList<Bird> friends, IDictionary<string, Bird> hate, Bird partner, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, wingspan, serializedAdditionalRawData)
         {
             Friends = friends;
             Hate = hate;

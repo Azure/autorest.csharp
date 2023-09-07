@@ -14,7 +14,7 @@ namespace body_complex.Models
     public partial class FloatWrapper
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FloatWrapper"/>. </summary>
         public FloatWrapper()
@@ -24,12 +24,12 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of <see cref="FloatWrapper"/>. </summary>
         /// <param name="field1"></param>
         /// <param name="field2"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FloatWrapper(float? field1, float? field2, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FloatWrapper(float? field1, float? field2, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Field1 = field1;
             Field2 = field2;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the field 1. </summary>

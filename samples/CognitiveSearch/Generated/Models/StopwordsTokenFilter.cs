@@ -32,8 +32,8 @@ namespace CognitiveSearch.Models
         /// <param name="stopwordsList"> A predefined list of stopwords to use. This property and the stopwords property cannot both be set. Default is English. </param>
         /// <param name="ignoreCase"> A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false. </param>
         /// <param name="removeTrailingStopWords"> A value indicating whether to ignore the last search term if it's a stop word. Default is true. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StopwordsTokenFilter(string odataType, string name, IList<string> stopwords, StopwordsList? stopwordsList, bool? ignoreCase, bool? removeTrailingStopWords, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StopwordsTokenFilter(string odataType, string name, IList<string> stopwords, StopwordsList? stopwordsList, bool? ignoreCase, bool? removeTrailingStopWords, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             Stopwords = stopwords;
             StopwordsList = stopwordsList;

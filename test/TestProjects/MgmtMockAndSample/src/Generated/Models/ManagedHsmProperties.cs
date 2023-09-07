@@ -15,7 +15,7 @@ namespace MgmtMockAndSample.Models
     public partial class ManagedHsmProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ManagedHsmProperties"/>. </summary>
         public ManagedHsmProperties()
@@ -41,8 +41,8 @@ namespace MgmtMockAndSample.Models
         /// <param name="privateEndpointConnections"> List of private endpoint connections associated with the managed hsm pool. </param>
         /// <param name="publicNetworkAccess"> Control permission for data plane traffic coming from public networks while private endpoint is enabled. </param>
         /// <param name="scheduledPurgeOn"> The scheduled purge date in UTC. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ManagedHsmProperties(BinaryData settings, BinaryData protectedSettings, byte[] rawMessage, Guid? tenantId, IList<string> initialAdminObjectIds, Uri hsmUri, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enablePurgeProtection, CreateMode? createMode, string statusMessage, ProvisioningState? provisioningState, MhsmNetworkRuleSet networkAcls, IReadOnlyList<MhsmPrivateEndpointConnectionItem> privateEndpointConnections, PublicNetworkAccess? publicNetworkAccess, DateTimeOffset? scheduledPurgeOn, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ManagedHsmProperties(BinaryData settings, BinaryData protectedSettings, byte[] rawMessage, Guid? tenantId, IList<string> initialAdminObjectIds, Uri hsmUri, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enablePurgeProtection, CreateMode? createMode, string statusMessage, ProvisioningState? provisioningState, MhsmNetworkRuleSet networkAcls, IReadOnlyList<MhsmPrivateEndpointConnectionItem> privateEndpointConnections, PublicNetworkAccess? publicNetworkAccess, DateTimeOffset? scheduledPurgeOn, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Settings = settings;
             ProtectedSettings = protectedSettings;
@@ -60,7 +60,7 @@ namespace MgmtMockAndSample.Models
             PrivateEndpointConnections = privateEndpointConnections;
             PublicNetworkAccess = publicNetworkAccess;
             ScheduledPurgeOn = scheduledPurgeOn;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

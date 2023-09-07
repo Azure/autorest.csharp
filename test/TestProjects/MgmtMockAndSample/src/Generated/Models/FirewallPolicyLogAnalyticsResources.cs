@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
     public partial class FirewallPolicyLogAnalyticsResources
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyLogAnalyticsResources"/>. </summary>
         public FirewallPolicyLogAnalyticsResources()
@@ -27,12 +27,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="FirewallPolicyLogAnalyticsResources"/>. </summary>
         /// <param name="workspaces"> List of workspaces for Firewall Policy Insights. </param>
         /// <param name="defaultWorkspaceId"> The default workspace Id for Firewall Policy Insights. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirewallPolicyLogAnalyticsResources(IList<FirewallPolicyLogAnalyticsWorkspace> workspaces, WritableSubResource defaultWorkspaceId, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyLogAnalyticsResources(IList<FirewallPolicyLogAnalyticsWorkspace> workspaces, WritableSubResource defaultWorkspaceId, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Workspaces = workspaces;
             DefaultWorkspaceId = defaultWorkspaceId;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> List of workspaces for Firewall Policy Insights. </summary>

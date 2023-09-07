@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
     public partial class MgmtAcronymMappingPlan
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MgmtAcronymMappingPlan"/>. </summary>
         public MgmtAcronymMappingPlan()
@@ -41,14 +41,14 @@ namespace MgmtAcronymMapping.Models
         /// The promotion code.
         /// Serialized Name: Plan.promotionCode
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MgmtAcronymMappingPlan(string name, string publisher, string product, string promotionCode, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MgmtAcronymMappingPlan(string name, string publisher, string product, string promotionCode, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Publisher = publisher;
             Product = product;
             PromotionCode = promotionCode;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

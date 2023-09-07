@@ -15,7 +15,7 @@ namespace MgmtHierarchicalNonResource.Models
     public partial class GalleryImageIdentifier
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="GalleryImageIdentifier"/>. </summary>
         /// <param name="publisher"> The name of the gallery image definition publisher. </param>
@@ -37,13 +37,13 @@ namespace MgmtHierarchicalNonResource.Models
         /// <param name="publisher"> The name of the gallery image definition publisher. </param>
         /// <param name="offer"> The name of the gallery image definition offer. </param>
         /// <param name="sku"> The name of the gallery image definition SKU. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal GalleryImageIdentifier(string publisher, string offer, string sku, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal GalleryImageIdentifier(string publisher, string offer, string sku, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Publisher = publisher;
             Offer = offer;
             Sku = sku;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="GalleryImageIdentifier"/> for deserialization. </summary>

@@ -42,9 +42,9 @@ namespace _Type._Array.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -67,7 +67,7 @@ namespace _Type._Array.Models
             }
             string property = default;
             Optional<IList<InnerModel>> children = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
             {
                 if (property0.NameEquals("property"u8))
@@ -91,11 +91,11 @@ namespace _Type._Array.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
                     continue;
                 }
             }
-            return new InnerModel(property, Optional.ToList(children), rawData);
+            return new InnerModel(property, Optional.ToList(children), serializedAdditionalRawData);
         }
 
         InnerModel IModelJsonSerializable<InnerModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

@@ -16,7 +16,7 @@ namespace MgmtPropertyChooser.Models
     public partial class IdentityWithNoSystemIdentity
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="IdentityWithNoSystemIdentity"/>. </summary>
         public IdentityWithNoSystemIdentity()
@@ -27,12 +27,12 @@ namespace MgmtPropertyChooser.Models
         /// <summary> Initializes a new instance of <see cref="IdentityWithNoSystemIdentity"/>. </summary>
         /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </param>
         /// <param name="userAssignedIdentities"> The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal IdentityWithNoSystemIdentity(ResourceIdentityType? resourceIdentityType, IDictionary<string, UserAssignedIdentity> userAssignedIdentities, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IdentityWithNoSystemIdentity(ResourceIdentityType? resourceIdentityType, IDictionary<string, UserAssignedIdentity> userAssignedIdentities, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ResourceIdentityType = resourceIdentityType;
             UserAssignedIdentities = userAssignedIdentities;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </summary>

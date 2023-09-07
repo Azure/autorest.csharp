@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class ManagementPolicyFilter
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ManagementPolicyFilter"/>. </summary>
         /// <param name="blobTypes"> An array of predefined enum values. Currently blockBlob supports all tiering and delete actions. Only delete actions are supported for appendBlob. </param>
@@ -34,13 +34,13 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="prefixMatch"> An array of strings for prefixes to be match. </param>
         /// <param name="blobTypes"> An array of predefined enum values. Currently blockBlob supports all tiering and delete actions. Only delete actions are supported for appendBlob. </param>
         /// <param name="blobIndexMatch"> An array of blob index tag based filters, there can be at most 10 tag filters. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ManagementPolicyFilter(IList<string> prefixMatch, IList<string> blobTypes, IList<TagFilter> blobIndexMatch, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ManagementPolicyFilter(IList<string> prefixMatch, IList<string> blobTypes, IList<TagFilter> blobIndexMatch, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             PrefixMatch = prefixMatch;
             BlobTypes = blobTypes;
             BlobIndexMatch = blobIndexMatch;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ManagementPolicyFilter"/> for deserialization. </summary>

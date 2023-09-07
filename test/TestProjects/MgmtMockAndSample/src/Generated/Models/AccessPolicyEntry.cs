@@ -15,7 +15,7 @@ namespace MgmtMockAndSample.Models
     public partial class AccessPolicyEntry
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AccessPolicyEntry"/>. </summary>
         /// <param name="tenantId"> The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. </param>
@@ -37,14 +37,14 @@ namespace MgmtMockAndSample.Models
         /// <param name="objectId"> The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies. </param>
         /// <param name="applicationId"> Application ID of the client making request on behalf of a principal. </param>
         /// <param name="permissions"> Permissions the identity has for keys, secrets and certificates. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AccessPolicyEntry(Guid tenantId, string objectId, Guid? applicationId, Permissions permissions, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AccessPolicyEntry(Guid tenantId, string objectId, Guid? applicationId, Permissions permissions, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TenantId = tenantId;
             ObjectId = objectId;
             ApplicationId = applicationId;
             Permissions = permissions;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="AccessPolicyEntry"/> for deserialization. </summary>

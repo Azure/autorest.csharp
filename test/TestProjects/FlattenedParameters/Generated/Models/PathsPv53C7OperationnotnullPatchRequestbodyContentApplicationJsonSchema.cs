@@ -15,7 +15,7 @@ namespace FlattenedParameters.Models
     internal partial class PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         public PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema()
@@ -25,11 +25,11 @@ namespace FlattenedParameters.Models
 
         /// <summary> Initializes a new instance of <see cref="PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         /// <param name="items"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(IList<string> items, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(IList<string> items, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Items = items;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the items. </summary>

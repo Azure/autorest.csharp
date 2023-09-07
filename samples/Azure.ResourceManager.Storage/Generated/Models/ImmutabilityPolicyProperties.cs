@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class ImmutabilityPolicyProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ImmutabilityPolicyProperties"/>. </summary>
         internal ImmutabilityPolicyProperties()
@@ -31,8 +31,8 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="state"> The ImmutabilityPolicy state of a blob container, possible values include: Locked and Unlocked. </param>
         /// <param name="allowProtectedAppendWrites"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. </param>
         /// <param name="allowProtectedAppendWritesAll"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. The 'allowProtectedAppendWrites' and 'allowProtectedAppendWritesAll' properties are mutually exclusive. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ImmutabilityPolicyProperties(ETag? etag, IReadOnlyList<UpdateHistoryProperty> updateHistory, int? immutabilityPeriodSinceCreationInDays, ImmutabilityPolicyState? state, bool? allowProtectedAppendWrites, bool? allowProtectedAppendWritesAll, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImmutabilityPolicyProperties(ETag? etag, IReadOnlyList<UpdateHistoryProperty> updateHistory, int? immutabilityPeriodSinceCreationInDays, ImmutabilityPolicyState? state, bool? allowProtectedAppendWrites, bool? allowProtectedAppendWritesAll, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Etag = etag;
             UpdateHistory = updateHistory;
@@ -40,7 +40,7 @@ namespace Azure.ResourceManager.Storage.Models
             State = state;
             AllowProtectedAppendWrites = allowProtectedAppendWrites;
             AllowProtectedAppendWritesAll = allowProtectedAppendWritesAll;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> ImmutabilityPolicy Etag. </summary>

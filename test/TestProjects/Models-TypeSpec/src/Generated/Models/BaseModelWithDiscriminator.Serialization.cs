@@ -32,9 +32,9 @@ namespace ModelsTypeSpec.Models
             }
             writer.WritePropertyName("requiredPropertyOnBase"u8);
             writer.WriteNumberValue(RequiredPropertyOnBase);
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -68,7 +68,7 @@ namespace ModelsTypeSpec.Models
             string discriminatorProperty = default;
             Optional<string> optionalPropertyOnBase = default;
             int requiredPropertyOnBase = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("discriminatorProperty"u8))
@@ -88,11 +88,11 @@ namespace ModelsTypeSpec.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new UnknownBaseModelWithDiscriminator(discriminatorProperty, optionalPropertyOnBase.Value, requiredPropertyOnBase, rawData);
+            return new UnknownBaseModelWithDiscriminator(discriminatorProperty, optionalPropertyOnBase.Value, requiredPropertyOnBase, serializedAdditionalRawData);
         }
 
         BaseModelWithDiscriminator IModelJsonSerializable<BaseModelWithDiscriminator>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

@@ -17,8 +17,8 @@ namespace xms_error_responses.Models
         /// <param name="someBaseProp"></param>
         /// <param name="reason"></param>
         /// <param name="whatNotFound"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownNotFoundErrorBase(string someBaseProp, string reason, string whatNotFound, Dictionary<string, BinaryData> rawData) : base(someBaseProp, reason, whatNotFound, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownNotFoundErrorBase(string someBaseProp, string reason, string whatNotFound, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(someBaseProp, reason, whatNotFound, serializedAdditionalRawData)
         {
             WhatNotFound = whatNotFound ?? "Unknown";
         }

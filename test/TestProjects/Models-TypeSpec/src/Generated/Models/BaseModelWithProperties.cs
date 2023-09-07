@@ -14,7 +14,7 @@ namespace ModelsTypeSpec.Models
     public partial class BaseModelWithProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of BaseModelWithProperties. </summary>
         internal BaseModelWithProperties()
@@ -23,11 +23,11 @@ namespace ModelsTypeSpec.Models
 
         /// <summary> Initializes a new instance of BaseModelWithProperties. </summary>
         /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BaseModelWithProperties(string optionalPropertyOnBase, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BaseModelWithProperties(string optionalPropertyOnBase, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OptionalPropertyOnBase = optionalPropertyOnBase;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Optional properties on base. </summary>

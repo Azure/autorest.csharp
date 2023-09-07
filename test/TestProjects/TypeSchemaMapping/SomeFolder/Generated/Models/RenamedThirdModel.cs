@@ -15,7 +15,7 @@ namespace CustomNamespace
     internal partial class RenamedThirdModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RenamedThirdModel"/>. </summary>
         public RenamedThirdModel()
@@ -25,12 +25,12 @@ namespace CustomNamespace
         /// <summary> Initializes a new instance of <see cref="RenamedThirdModel"/>. </summary>
         /// <param name="customizedETagProperty"> ETag property. </param>
         /// <param name="customizedCreatedAtProperty"> Creation date. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RenamedThirdModel(ETag customizedETagProperty, DateTime customizedCreatedAtProperty, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RenamedThirdModel(ETag customizedETagProperty, DateTime customizedCreatedAtProperty, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             CustomizedETagProperty = customizedETagProperty;
             CustomizedCreatedAtProperty = customizedCreatedAtProperty;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
     }
 }

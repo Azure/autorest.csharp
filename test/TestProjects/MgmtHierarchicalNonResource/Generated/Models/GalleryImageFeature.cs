@@ -14,7 +14,7 @@ namespace MgmtHierarchicalNonResource.Models
     public partial class GalleryImageFeature
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="GalleryImageFeature"/>. </summary>
         internal GalleryImageFeature()
@@ -24,12 +24,12 @@ namespace MgmtHierarchicalNonResource.Models
         /// <summary> Initializes a new instance of <see cref="GalleryImageFeature"/>. </summary>
         /// <param name="name"> The name of the gallery image feature. </param>
         /// <param name="value"> The value of the gallery image feature. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal GalleryImageFeature(string name, string value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal GalleryImageFeature(string name, string value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The name of the gallery image feature. </summary>

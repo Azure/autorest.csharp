@@ -41,9 +41,9 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStringValue(ServiceName);
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -70,7 +70,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> serviceName = default;
             Optional<IReadOnlyList<string>> actions = default;
             Optional<ProvisioningState> provisioningState = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -130,11 +130,11 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new Delegation(id.Value, name.Value, etag.Value, serviceName.Value, Optional.ToList(actions), Optional.ToNullable(provisioningState), rawData);
+            return new Delegation(id.Value, name.Value, etag.Value, serviceName.Value, Optional.ToList(actions), Optional.ToNullable(provisioningState), serializedAdditionalRawData);
         }
 
         Delegation IModelJsonSerializable<Delegation>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

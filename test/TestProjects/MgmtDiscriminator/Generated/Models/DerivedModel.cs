@@ -28,8 +28,8 @@ namespace MgmtDiscriminator.Models
         /// <summary> Initializes a new instance of <see cref="DerivedModel"/>. </summary>
         /// <param name="optionalString"></param>
         /// <param name="requiredCollection"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DerivedModel(string optionalString, IList<string> requiredCollection, Dictionary<string, BinaryData> rawData) : base(optionalString, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DerivedModel(string optionalString, IList<string> requiredCollection, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(optionalString, serializedAdditionalRawData)
         {
             RequiredCollection = requiredCollection;
         }

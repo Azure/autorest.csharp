@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class ManagementPolicyBaseBlob
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ManagementPolicyBaseBlob"/>. </summary>
         public ManagementPolicyBaseBlob()
@@ -26,14 +26,14 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="tierToArchive"> The function to tier blobs to archive storage. Support blobs currently at Hot or Cool tier. </param>
         /// <param name="delete"> The function to delete the blob. </param>
         /// <param name="enableAutoTierToHotFromCool"> This property enables auto tiering of a blob from cool to hot on a blob access. This property requires tierToCool.daysAfterLastAccessTimeGreaterThan. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ManagementPolicyBaseBlob(DateAfterModification tierToCool, DateAfterModification tierToArchive, DateAfterModification delete, bool? enableAutoTierToHotFromCool, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ManagementPolicyBaseBlob(DateAfterModification tierToCool, DateAfterModification tierToArchive, DateAfterModification delete, bool? enableAutoTierToHotFromCool, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TierToCool = tierToCool;
             TierToArchive = tierToArchive;
             Delete = delete;
             EnableAutoTierToHotFromCool = enableAutoTierToHotFromCool;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The function to tier blobs to cool storage. Support blobs currently at Hot tier. </summary>

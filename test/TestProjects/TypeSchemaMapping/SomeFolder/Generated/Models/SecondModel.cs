@@ -16,7 +16,7 @@ namespace TypeSchemaMapping.Models
     internal partial class SecondModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SecondModel"/>. </summary>
         public SecondModel()
@@ -28,13 +28,13 @@ namespace TypeSchemaMapping.Models
         /// <param name="intProperty"> . </param>
         /// <param name="dictionaryProperty"> . </param>
         /// <param name="daysOfWeek"> Day of week. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SecondModel(int intProperty, IReadOnlyDictionary<string, string> dictionaryProperty, CustomDaysOfWeek? daysOfWeek, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SecondModel(int intProperty, IReadOnlyDictionary<string, string> dictionaryProperty, CustomDaysOfWeek? daysOfWeek, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             IntProperty = intProperty;
             DictionaryProperty = dictionaryProperty;
             DaysOfWeek = daysOfWeek;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
     }
 }

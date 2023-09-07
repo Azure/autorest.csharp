@@ -24,8 +24,8 @@ namespace MgmtExactMatchInheritance.Models
         /// <param name="name"></param>
         /// <param name="bar"></param>
         /// <param name="new"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ExactMatchModel3(ResourceIdentifier id, string name, string bar, string @new, Dictionary<string, BinaryData> rawData) : base(id, name, bar, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ExactMatchModel3(ResourceIdentifier id, string name, string bar, string @new, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, bar, serializedAdditionalRawData)
         {
             New = @new;
         }

@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     internal partial class ScheduledEventsProfile
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ScheduledEventsProfile"/>. </summary>
         public ScheduledEventsProfile()
@@ -29,11 +29,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies Terminate Scheduled Event related configurations.
         /// Serialized Name: ScheduledEventsProfile.terminateNotificationProfile
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ScheduledEventsProfile(TerminateNotificationProfile terminateNotificationProfile, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ScheduledEventsProfile(TerminateNotificationProfile terminateNotificationProfile, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TerminateNotificationProfile = terminateNotificationProfile;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

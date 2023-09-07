@@ -15,7 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class SentenceSentiment
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SentenceSentiment"/>. </summary>
         /// <param name="text"> The sentence text. </param>
@@ -42,15 +42,15 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="confidenceScores"> The sentiment confidence score between 0 and 1 for the sentence for all classes. </param>
         /// <param name="offset"> The sentence offset from the start of the document. </param>
         /// <param name="length"> The length of the sentence by Unicode standard. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SentenceSentiment(string text, SentenceSentimentValue sentiment, SentimentConfidenceScorePerLabel confidenceScores, int offset, int length, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SentenceSentiment(string text, SentenceSentimentValue sentiment, SentimentConfidenceScorePerLabel confidenceScores, int offset, int length, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Text = text;
             Sentiment = sentiment;
             ConfidenceScores = confidenceScores;
             Offset = offset;
             Length = length;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="SentenceSentiment"/> for deserialization. </summary>

@@ -15,7 +15,7 @@ namespace model_flattening.Models
     public partial class BaseProduct
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BaseProduct"/>. </summary>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
@@ -30,12 +30,12 @@ namespace model_flattening.Models
         /// <summary> Initializes a new instance of <see cref="BaseProduct"/>. </summary>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <param name="description"> Description of product. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BaseProduct(string productId, string description, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BaseProduct(string productId, string description, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ProductId = productId;
             Description = description;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="BaseProduct"/> for deserialization. </summary>

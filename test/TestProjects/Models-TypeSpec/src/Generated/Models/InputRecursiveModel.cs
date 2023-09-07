@@ -15,7 +15,7 @@ namespace ModelsTypeSpec.Models
     public partial class InputRecursiveModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of InputRecursiveModel. </summary>
         /// <param name="message"> Message. </param>
@@ -30,12 +30,12 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of InputRecursiveModel. </summary>
         /// <param name="message"> Message. </param>
         /// <param name="inner"> Required Record. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal InputRecursiveModel(string message, InputRecursiveModel inner, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal InputRecursiveModel(string message, InputRecursiveModel inner, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Message = message;
             Inner = inner;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="InputRecursiveModel"/> for deserialization. </summary>

@@ -15,7 +15,7 @@ namespace MgmtDiscriminator.Models
     public partial class HeaderActionParameters
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="HeaderActionParameters"/>. </summary>
         /// <param name="typeName"></param>
@@ -36,14 +36,14 @@ namespace MgmtDiscriminator.Models
         /// <param name="headerAction"> Action to perform. </param>
         /// <param name="headerName"> Name of the header to modify. </param>
         /// <param name="value"> Value for the specified action. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal HeaderActionParameters(HeaderActionParametersTypeName typeName, HeaderAction headerAction, string headerName, string value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal HeaderActionParameters(HeaderActionParametersTypeName typeName, HeaderAction headerAction, string headerName, string value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TypeName = typeName;
             HeaderAction = headerAction;
             HeaderName = headerName;
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="HeaderActionParameters"/> for deserialization. </summary>

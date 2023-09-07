@@ -15,7 +15,7 @@ namespace MgmtParamOrdering.Models
     internal partial class LocationFormatObject
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="LocationFormatObject"/>. </summary>
         internal LocationFormatObject()
@@ -25,12 +25,12 @@ namespace MgmtParamOrdering.Models
         /// <summary> Initializes a new instance of <see cref="LocationFormatObject"/>. </summary>
         /// <param name="stringLocation"> This location should be a string. </param>
         /// <param name="objectLocation"> This location should be an AzureLocation. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LocationFormatObject(string stringLocation, AzureLocation? objectLocation, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LocationFormatObject(string stringLocation, AzureLocation? objectLocation, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             StringLocation = stringLocation;
             ObjectLocation = objectLocation;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> This location should be a string. </summary>

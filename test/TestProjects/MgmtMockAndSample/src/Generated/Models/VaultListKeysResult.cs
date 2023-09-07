@@ -15,7 +15,7 @@ namespace MgmtMockAndSample.Models
     internal partial class VaultListKeysResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VaultListKeysResult"/>. </summary>
         internal VaultListKeysResult()
@@ -26,12 +26,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="VaultListKeysResult"/>. </summary>
         /// <param name="value"> The list of vaults. </param>
         /// <param name="nextLink"> The URL to get the next set of vaults. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VaultListKeysResult(IReadOnlyList<VaultKey> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultListKeysResult(IReadOnlyList<VaultKey> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The list of vaults. </summary>

@@ -14,7 +14,7 @@ namespace MgmtDiscriminator.Models
     public partial class RouteConfigurationOverrideActionParameters
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RouteConfigurationOverrideActionParameters"/>. </summary>
         /// <param name="typeName"></param>
@@ -26,12 +26,12 @@ namespace MgmtDiscriminator.Models
         /// <summary> Initializes a new instance of <see cref="RouteConfigurationOverrideActionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="originGroupOverride"> A reference to the origin group override configuration. Leave empty to use the default origin group on route. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RouteConfigurationOverrideActionParameters(RouteConfigurationOverrideActionParametersTypeName typeName, OriginGroupOverride originGroupOverride, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RouteConfigurationOverrideActionParameters(RouteConfigurationOverrideActionParametersTypeName typeName, OriginGroupOverride originGroupOverride, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TypeName = typeName;
             OriginGroupOverride = originGroupOverride;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="RouteConfigurationOverrideActionParameters"/> for deserialization. </summary>

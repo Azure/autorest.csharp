@@ -15,7 +15,7 @@ namespace azure_parameter_grouping.Models
     public partial class ParameterGroupingPostRequiredParameters
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostRequiredParameters"/>. </summary>
         /// <param name="path"> Path parameter. </param>
@@ -34,14 +34,14 @@ namespace azure_parameter_grouping.Models
         /// <param name="query"> Query parameter with default. </param>
         /// <param name="path"> Path parameter. </param>
         /// <param name="body"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ParameterGroupingPostRequiredParameters(string customHeader, int? query, string path, int body, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ParameterGroupingPostRequiredParameters(string customHeader, int? query, string path, int body, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             CustomHeader = customHeader;
             Query = query;
             Path = path;
             Body = body;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostRequiredParameters"/> for deserialization. </summary>

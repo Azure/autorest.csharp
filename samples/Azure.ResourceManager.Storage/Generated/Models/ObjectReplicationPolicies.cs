@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     internal partial class ObjectReplicationPolicies
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ObjectReplicationPolicies"/>. </summary>
         internal ObjectReplicationPolicies()
@@ -26,11 +26,11 @@ namespace Azure.ResourceManager.Storage.Models
 
         /// <summary> Initializes a new instance of <see cref="ObjectReplicationPolicies"/>. </summary>
         /// <param name="value"> The replication policy between two storage accounts. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ObjectReplicationPolicies(IReadOnlyList<ObjectReplicationPolicyData> value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ObjectReplicationPolicies(IReadOnlyList<ObjectReplicationPolicyData> value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The replication policy between two storage accounts. </summary>

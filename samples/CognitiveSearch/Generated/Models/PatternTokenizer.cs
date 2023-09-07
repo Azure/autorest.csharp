@@ -30,8 +30,8 @@ namespace CognitiveSearch.Models
         /// <param name="pattern"> A regular expression pattern to match token separators. Default is an expression that matches one or more whitespace characters. </param>
         /// <param name="flags"> Regular expression flags. </param>
         /// <param name="group"> The zero-based ordinal of the matching group in the regular expression pattern to extract into tokens. Use -1 if you want to use the entire pattern to split the input into tokens, irrespective of matching groups. Default is -1. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PatternTokenizer(string odataType, string name, string pattern, RegexFlags? flags, int? group, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PatternTokenizer(string odataType, string name, string pattern, RegexFlags? flags, int? group, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             Pattern = pattern;
             Flags = flags;

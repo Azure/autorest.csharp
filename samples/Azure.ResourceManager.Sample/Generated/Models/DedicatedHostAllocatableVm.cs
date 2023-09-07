@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class DedicatedHostAllocatableVm
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DedicatedHostAllocatableVm"/>. </summary>
         internal DedicatedHostAllocatableVm()
@@ -33,12 +33,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// Maximum number of VMs of size vmSize that can fit in the dedicated host's remaining capacity.
         /// Serialized Name: DedicatedHostAllocatableVM.count
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DedicatedHostAllocatableVm(string vmSize, double? count, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DedicatedHostAllocatableVm(string vmSize, double? count, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             VmSize = vmSize;
             Count = count;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

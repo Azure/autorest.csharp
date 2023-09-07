@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class IndexingResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="IndexingResult"/>. </summary>
         /// <param name="key"> The key of a document that was in the indexing request. </param>
@@ -36,14 +36,14 @@ namespace CognitiveSearch.Models
         /// <param name="errorMessage"> The error message explaining why the indexing operation failed for the document identified by the key; null if indexing succeeded. </param>
         /// <param name="succeeded"> A value indicating whether the indexing operation succeeded for the document identified by the key. </param>
         /// <param name="statusCode"> The status code of the indexing operation. Possible values include: 200 for a successful update or delete, 201 for successful document creation, 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal IndexingResult(string key, string errorMessage, bool succeeded, int statusCode, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IndexingResult(string key, string errorMessage, bool succeeded, int statusCode, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Key = key;
             ErrorMessage = errorMessage;
             Succeeded = succeeded;
             StatusCode = statusCode;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="IndexingResult"/> for deserialization. </summary>

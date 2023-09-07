@@ -15,7 +15,7 @@ namespace _Type.Model.Usage.Models
     public partial class OutputRecord
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of OutputRecord. </summary>
         /// <param name="requiredProp"></param>
@@ -29,11 +29,11 @@ namespace _Type.Model.Usage.Models
 
         /// <summary> Initializes a new instance of OutputRecord. </summary>
         /// <param name="requiredProp"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal OutputRecord(string requiredProp, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OutputRecord(string requiredProp, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredProp = requiredProp;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="OutputRecord"/> for deserialization. </summary>

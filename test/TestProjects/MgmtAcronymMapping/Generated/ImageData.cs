@@ -22,7 +22,7 @@ namespace MgmtAcronymMapping
     public partial class ImageData : TrackedResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ImageData"/>. </summary>
         /// <param name="location"> The location. </param>
@@ -53,14 +53,14 @@ namespace MgmtAcronymMapping
         /// Gets the HyperVGenerationType of the VirtualMachine created from the image
         /// Serialized Name: Image.properties.hyperVGeneration
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ImageData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGenerationType? hyperVGeneration, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImageData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGenerationType? hyperVGeneration, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
             SourceVirtualMachine = sourceVirtualMachine;
             StorageProfile = storageProfile;
             ProvisioningState = provisioningState;
             HyperVGeneration = hyperVGeneration;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ImageData"/> for deserialization. </summary>

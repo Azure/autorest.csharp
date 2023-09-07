@@ -14,7 +14,7 @@ namespace ApiVersionInTsp.Models
     public partial class DetectionResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of DetectionResult. </summary>
         /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
@@ -25,11 +25,11 @@ namespace ApiVersionInTsp.Models
 
         /// <summary> Initializes a new instance of DetectionResult. </summary>
         /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DetectionResult(Guid resultId, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DetectionResult(Guid resultId, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ResultId = resultId;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DetectionResult"/> for deserialization. </summary>

@@ -46,9 +46,9 @@ namespace MgmtExactMatchFlattenInheritance.Models
                 writer.WriteStringValue(ResourceType);
             }
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -73,7 +73,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
             Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"u8))
@@ -114,11 +114,11 @@ namespace MgmtExactMatchFlattenInheritance.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel4(Optional.ToNullable(foo), id.Value, name.Value, type.Value, rawData);
+            return new AzureResourceFlattenModel4(Optional.ToNullable(foo), id.Value, name.Value, type.Value, serializedAdditionalRawData);
         }
 
         AzureResourceFlattenModel4 IModelJsonSerializable<AzureResourceFlattenModel4>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

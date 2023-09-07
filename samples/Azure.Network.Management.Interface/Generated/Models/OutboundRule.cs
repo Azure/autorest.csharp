@@ -32,8 +32,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="protocol"> The protocol for the outbound rule in load balancer. </param>
         /// <param name="enableTcpReset"> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </param>
         /// <param name="idleTimeoutInMinutes"> The timeout for the TCP idle connection. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal OutboundRule(string id, string name, string etag, string type, int? allocatedOutboundPorts, IList<SubResource> frontendIPConfigurations, SubResource backendAddressPool, ProvisioningState? provisioningState, LoadBalancerOutboundRuleProtocol? protocol, bool? enableTcpReset, int? idleTimeoutInMinutes, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OutboundRule(string id, string name, string etag, string type, int? allocatedOutboundPorts, IList<SubResource> frontendIPConfigurations, SubResource backendAddressPool, ProvisioningState? provisioningState, LoadBalancerOutboundRuleProtocol? protocol, bool? enableTcpReset, int? idleTimeoutInMinutes, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             Name = name;
             Etag = etag;

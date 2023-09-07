@@ -15,7 +15,7 @@ namespace xml_service.Models
     public partial class Blob
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Blob"/>. </summary>
         /// <param name="name"></param>
@@ -42,15 +42,15 @@ namespace xml_service.Models
         /// <param name="snapshot"></param>
         /// <param name="properties"> Properties of a blob. </param>
         /// <param name="metadata"> Dictionary of &lt;string&gt;. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Blob(string name, bool deleted, string snapshot, BlobProperties properties, IReadOnlyDictionary<string, string> metadata, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Blob(string name, bool deleted, string snapshot, BlobProperties properties, IReadOnlyDictionary<string, string> metadata, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Deleted = deleted;
             Snapshot = snapshot;
             Properties = properties;
             Metadata = metadata;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Blob"/> for deserialization. </summary>

@@ -14,7 +14,7 @@ namespace MgmtExpandResourceTypes.Models
     public partial class SoaRecord
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SoaRecord"/>. </summary>
         public SoaRecord()
@@ -29,8 +29,8 @@ namespace MgmtExpandResourceTypes.Models
         /// <param name="retryTime"> The retry time for this SOA record. </param>
         /// <param name="expireTime"> The expire time for this SOA record. </param>
         /// <param name="minimumTtl"> The minimum value for this SOA record. By convention this is used to determine the negative caching duration. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SoaRecord(string host, string email, long? serialNumber, long? refreshTime, long? retryTime, long? expireTime, long? minimumTtl, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SoaRecord(string host, string email, long? serialNumber, long? refreshTime, long? retryTime, long? expireTime, long? minimumTtl, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Host = host;
             Email = email;
@@ -39,7 +39,7 @@ namespace MgmtExpandResourceTypes.Models
             RetryTime = retryTime;
             ExpireTime = expireTime;
             MinimumTtl = minimumTtl;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The domain name of the authoritative name server for this SOA record. </summary>

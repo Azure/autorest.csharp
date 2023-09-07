@@ -15,7 +15,7 @@ namespace xml_service.Models
     public partial class ContainerProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ContainerProperties"/>. </summary>
         /// <param name="lastModified"></param>
@@ -36,8 +36,8 @@ namespace xml_service.Models
         /// <param name="leaseState"></param>
         /// <param name="leaseDuration"></param>
         /// <param name="publicAccess"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ContainerProperties(DateTimeOffset lastModified, string etag, LeaseStatusType? leaseStatus, LeaseStateType? leaseState, LeaseDurationType? leaseDuration, PublicAccessType? publicAccess, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ContainerProperties(DateTimeOffset lastModified, string etag, LeaseStatusType? leaseStatus, LeaseStateType? leaseState, LeaseDurationType? leaseDuration, PublicAccessType? publicAccess, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             LastModified = lastModified;
             Etag = etag;
@@ -45,7 +45,7 @@ namespace xml_service.Models
             LeaseState = leaseState;
             LeaseDuration = leaseDuration;
             PublicAccess = publicAccess;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ContainerProperties"/> for deserialization. </summary>

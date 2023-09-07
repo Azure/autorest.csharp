@@ -30,9 +30,9 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("query"u8);
                 writer.WriteStringValue(Query);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -55,7 +55,7 @@ namespace CognitiveSearch.Models
             }
             string name = default;
             Optional<string> query = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -70,11 +70,11 @@ namespace CognitiveSearch.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new DataContainer(name, query.Value, rawData);
+            return new DataContainer(name, query.Value, serializedAdditionalRawData);
         }
 
         DataContainer IModelJsonSerializable<DataContainer>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

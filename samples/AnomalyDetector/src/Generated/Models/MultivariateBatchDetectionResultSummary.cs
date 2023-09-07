@@ -15,7 +15,7 @@ namespace AnomalyDetector.Models
     public partial class MultivariateBatchDetectionResultSummary
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of MultivariateBatchDetectionResultSummary. </summary>
         /// <param name="status"> Status of detection results. One of CREATED, RUNNING, READY, and FAILED. </param>
@@ -42,14 +42,14 @@ namespace AnomalyDetector.Models
         /// Detection request for batch inference. This is an asynchronous inference which
         /// will need another API to get detection results.
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MultivariateBatchDetectionResultSummary(MultivariateBatchDetectionStatus status, IReadOnlyList<ErrorResponse> errors, IReadOnlyList<VariableState> variableStates, MultivariateBatchDetectionOptions setupInfo, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MultivariateBatchDetectionResultSummary(MultivariateBatchDetectionStatus status, IReadOnlyList<ErrorResponse> errors, IReadOnlyList<VariableState> variableStates, MultivariateBatchDetectionOptions setupInfo, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Status = status;
             Errors = errors;
             VariableStates = variableStates;
             SetupInfo = setupInfo;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="MultivariateBatchDetectionResultSummary"/> for deserialization. </summary>

@@ -42,9 +42,9 @@ namespace Azure.ResourceManager.Storage.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -72,7 +72,7 @@ namespace Azure.ResourceManager.Storage.Models
             Optional<IReadOnlyList<string>> locations = default;
             Optional<IReadOnlyList<SKUCapability>> capabilities = default;
             Optional<IReadOnlyList<Restriction>> restrictions = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -151,11 +151,11 @@ namespace Azure.ResourceManager.Storage.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new StorageSkuInformation(name, Optional.ToNullable(tier), Optional.ToNullable(resourceType), Optional.ToNullable(kind), Optional.ToList(locations), Optional.ToList(capabilities), Optional.ToList(restrictions), rawData);
+            return new StorageSkuInformation(name, Optional.ToNullable(tier), Optional.ToNullable(resourceType), Optional.ToNullable(kind), Optional.ToList(locations), Optional.ToList(capabilities), Optional.ToList(restrictions), serializedAdditionalRawData);
         }
 
         StorageSkuInformation IModelJsonSerializable<StorageSkuInformation>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

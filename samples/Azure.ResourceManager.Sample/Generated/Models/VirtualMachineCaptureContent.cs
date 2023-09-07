@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class VirtualMachineCaptureContent
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineCaptureContent"/>. </summary>
         /// <param name="vhdPrefix">
@@ -57,13 +57,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies whether to overwrite the destination virtual hard disk, in case of conflict.
         /// Serialized Name: VirtualMachineCaptureParameters.overwriteVhds
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineCaptureContent(string vhdPrefix, string destinationContainerName, bool overwriteVhds, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineCaptureContent(string vhdPrefix, string destinationContainerName, bool overwriteVhds, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             VhdPrefix = vhdPrefix;
             DestinationContainerName = destinationContainerName;
             OverwriteVhds = overwriteVhds;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineCaptureContent"/> for deserialization. </summary>

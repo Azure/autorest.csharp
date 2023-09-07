@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class ManagementPolicyVersion
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ManagementPolicyVersion"/>. </summary>
         public ManagementPolicyVersion()
@@ -25,13 +25,13 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="tierToCool"> The function to tier blob version to cool storage. Support blob version currently at Hot tier. </param>
         /// <param name="tierToArchive"> The function to tier blob version to archive storage. Support blob version currently at Hot or Cool tier. </param>
         /// <param name="delete"> The function to delete the blob version. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ManagementPolicyVersion(DateAfterCreation tierToCool, DateAfterCreation tierToArchive, DateAfterCreation delete, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ManagementPolicyVersion(DateAfterCreation tierToCool, DateAfterCreation tierToArchive, DateAfterCreation delete, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TierToCool = tierToCool;
             TierToArchive = tierToArchive;
             Delete = delete;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The function to tier blob version to cool storage. Support blob version currently at Hot tier. </summary>

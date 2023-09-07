@@ -15,7 +15,7 @@ namespace ModelWithConverterUsage.Models
     public readonly partial struct ModelStruct
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private readonly Dictionary<string, BinaryData> _rawData;
+        private readonly Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelStruct"/>. </summary>
         /// <param name="modelProperty"> . </param>
@@ -29,11 +29,11 @@ namespace ModelWithConverterUsage.Models
 
         /// <summary> Initializes a new instance of <see cref="ModelStruct"/>. </summary>
         /// <param name="modelProperty"> . </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelStruct(string modelProperty, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelStruct(string modelProperty, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ModelProperty = modelProperty;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> . </summary>

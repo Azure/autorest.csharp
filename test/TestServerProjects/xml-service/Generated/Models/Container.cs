@@ -15,7 +15,7 @@ namespace xml_service.Models
     public partial class Container
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Container"/>. </summary>
         /// <param name="name"></param>
@@ -35,13 +35,13 @@ namespace xml_service.Models
         /// <param name="name"></param>
         /// <param name="properties"> Properties of a container. </param>
         /// <param name="metadata"> Dictionary of &lt;string&gt;. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Container(string name, ContainerProperties properties, IReadOnlyDictionary<string, string> metadata, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Container(string name, ContainerProperties properties, IReadOnlyDictionary<string, string> metadata, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Properties = properties;
             Metadata = metadata;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Container"/> for deserialization. </summary>

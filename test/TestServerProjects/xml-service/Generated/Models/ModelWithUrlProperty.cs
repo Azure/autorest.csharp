@@ -14,7 +14,7 @@ namespace xml_service.Models
     public partial class ModelWithUrlProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelWithUrlProperty"/>. </summary>
         public ModelWithUrlProperty()
@@ -23,11 +23,11 @@ namespace xml_service.Models
 
         /// <summary> Initializes a new instance of <see cref="ModelWithUrlProperty"/>. </summary>
         /// <param name="url"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelWithUrlProperty(Uri url, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithUrlProperty(Uri url, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Url = url;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the url. </summary>

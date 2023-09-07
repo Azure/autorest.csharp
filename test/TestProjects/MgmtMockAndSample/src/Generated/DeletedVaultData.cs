@@ -20,7 +20,7 @@ namespace MgmtMockAndSample
     public partial class DeletedVaultData : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DeletedVaultData"/>. </summary>
         internal DeletedVaultData()
@@ -33,11 +33,11 @@ namespace MgmtMockAndSample
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="properties"> Properties of the vault. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeletedVaultData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DeletedVaultProperties properties, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeletedVaultData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DeletedVaultProperties properties, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Properties = properties;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Properties of the vault. </summary>

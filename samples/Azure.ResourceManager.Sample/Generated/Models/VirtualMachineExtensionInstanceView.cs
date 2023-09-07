@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class VirtualMachineExtensionInstanceView
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionInstanceView"/>. </summary>
         public VirtualMachineExtensionInstanceView()
@@ -48,15 +48,15 @@ namespace Azure.ResourceManager.Sample.Models
         /// The resource status information.
         /// Serialized Name: VirtualMachineExtensionInstanceView.statuses
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineExtensionInstanceView(string name, string virtualMachineExtensionInstanceViewType, string typeHandlerVersion, IList<InstanceViewStatus> substatuses, IList<InstanceViewStatus> statuses, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineExtensionInstanceView(string name, string virtualMachineExtensionInstanceViewType, string typeHandlerVersion, IList<InstanceViewStatus> substatuses, IList<InstanceViewStatus> statuses, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             VirtualMachineExtensionInstanceViewType = virtualMachineExtensionInstanceViewType;
             TypeHandlerVersion = typeHandlerVersion;
             Substatuses = substatuses;
             Statuses = statuses;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

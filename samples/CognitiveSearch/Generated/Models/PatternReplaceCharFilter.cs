@@ -35,8 +35,8 @@ namespace CognitiveSearch.Models
         /// <param name="name"> The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="pattern"> A regular expression pattern. </param>
         /// <param name="replacement"> The replacement text. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PatternReplaceCharFilter(string odataType, string name, string pattern, string replacement, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PatternReplaceCharFilter(string odataType, string name, string pattern, string replacement, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             Pattern = pattern;
             Replacement = replacement;

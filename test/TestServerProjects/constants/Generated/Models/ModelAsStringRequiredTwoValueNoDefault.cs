@@ -14,7 +14,7 @@ namespace constants.Models
     internal partial class ModelAsStringRequiredTwoValueNoDefault
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelAsStringRequiredTwoValueNoDefault"/>. </summary>
         /// <param name="parameter"></param>
@@ -25,11 +25,11 @@ namespace constants.Models
 
         /// <summary> Initializes a new instance of <see cref="ModelAsStringRequiredTwoValueNoDefault"/>. </summary>
         /// <param name="parameter"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelAsStringRequiredTwoValueNoDefault(ModelAsStringRequiredTwoValueNoDefaultEnum parameter, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelAsStringRequiredTwoValueNoDefault(ModelAsStringRequiredTwoValueNoDefaultEnum parameter, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Parameter = parameter;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelAsStringRequiredTwoValueNoDefault"/> for deserialization. </summary>

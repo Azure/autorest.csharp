@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class StorageAccountListKeysResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StorageAccountListKeysResult"/>. </summary>
         internal StorageAccountListKeysResult()
@@ -25,11 +25,11 @@ namespace Azure.ResourceManager.Storage.Models
 
         /// <summary> Initializes a new instance of <see cref="StorageAccountListKeysResult"/>. </summary>
         /// <param name="keys"> Gets the list of storage account keys and their properties for the specified storage account. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StorageAccountListKeysResult(IReadOnlyList<StorageAccountKey> keys, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageAccountListKeysResult(IReadOnlyList<StorageAccountKey> keys, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Keys = keys;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the list of storage account keys and their properties for the specified storage account. </summary>

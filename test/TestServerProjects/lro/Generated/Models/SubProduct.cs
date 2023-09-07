@@ -22,8 +22,8 @@ namespace lro.Models
         /// <param name="id"> Sub Resource Id. </param>
         /// <param name="provisioningState"></param>
         /// <param name="provisioningStateValues"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SubProduct(string id, string provisioningState, SubProductPropertiesProvisioningStateValues? provisioningStateValues, Dictionary<string, BinaryData> rawData) : base(id, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SubProduct(string id, string provisioningState, SubProductPropertiesProvisioningStateValues? provisioningStateValues, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, serializedAdditionalRawData)
         {
             ProvisioningState = provisioningState;
             ProvisioningStateValues = provisioningStateValues;

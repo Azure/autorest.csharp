@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class WindowsConfiguration
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="WindowsConfiguration"/>. </summary>
         public WindowsConfiguration()
@@ -51,8 +51,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the Windows Remote Management listeners. This enables remote Windows PowerShell.
         /// Serialized Name: WindowsConfiguration.winRM
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal WindowsConfiguration(bool? provisionVmAgent, bool? enableAutomaticUpdates, string timeZone, IList<AdditionalUnattendContent> additionalUnattendContent, PatchSettings patchSettings, WinRMConfiguration winRM, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal WindowsConfiguration(bool? provisionVmAgent, bool? enableAutomaticUpdates, string timeZone, IList<AdditionalUnattendContent> additionalUnattendContent, PatchSettings patchSettings, WinRMConfiguration winRM, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ProvisionVmAgent = provisionVmAgent;
             EnableAutomaticUpdates = enableAutomaticUpdates;
@@ -60,7 +60,7 @@ namespace Azure.ResourceManager.Sample.Models
             AdditionalUnattendContent = additionalUnattendContent;
             PatchSettings = patchSettings;
             WinRM = winRM;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

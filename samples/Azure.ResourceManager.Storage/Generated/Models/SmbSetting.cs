@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class SmbSetting
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SmbSetting"/>. </summary>
         public SmbSetting()
@@ -27,15 +27,15 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="authenticationMethods"> SMB authentication methods supported by server. Valid values are NTLMv2, Kerberos. Should be passed as a string with delimiter ';'. </param>
         /// <param name="kerberosTicketEncryption"> Kerberos ticket encryption supported by server. Valid values are RC4-HMAC, AES-256. Should be passed as a string with delimiter ';'. </param>
         /// <param name="channelEncryption"> SMB channel encryption supported by server. Valid values are AES-128-CCM, AES-128-GCM, AES-256-GCM. Should be passed as a string with delimiter ';'. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SmbSetting(Multichannel multichannel, string versions, string authenticationMethods, string kerberosTicketEncryption, string channelEncryption, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SmbSetting(Multichannel multichannel, string versions, string authenticationMethods, string kerberosTicketEncryption, string channelEncryption, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Multichannel = multichannel;
             Versions = versions;
             AuthenticationMethods = authenticationMethods;
             KerberosTicketEncryption = kerberosTicketEncryption;
             ChannelEncryption = channelEncryption;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Multichannel setting. Applies to Premium FileStorage only. </summary>

@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     public partial class VirtualMachineScaleSetOSProfile
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetOSProfile"/>. </summary>
         public VirtualMachineScaleSetOSProfile()
@@ -55,8 +55,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies set of certificates that should be installed onto the virtual machines in the scale set.
         /// Serialized Name: VirtualMachineScaleSetOSProfile.secrets
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal VirtualMachineScaleSetOSProfile(string computerNamePrefix, string adminUsername, string adminPassword, string customData, WindowsConfiguration windowsConfiguration, LinuxConfiguration linuxConfiguration, IList<VaultSecretGroup> secrets, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetOSProfile(string computerNamePrefix, string adminUsername, string adminPassword, string customData, WindowsConfiguration windowsConfiguration, LinuxConfiguration linuxConfiguration, IList<VaultSecretGroup> secrets, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ComputerNamePrefix = computerNamePrefix;
             AdminUsername = adminUsername;
@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Sample.Models
             WindowsConfiguration = windowsConfiguration;
             LinuxConfiguration = linuxConfiguration;
             Secrets = secrets;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

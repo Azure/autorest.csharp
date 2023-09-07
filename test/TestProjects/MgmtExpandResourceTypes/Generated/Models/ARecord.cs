@@ -14,7 +14,7 @@ namespace MgmtExpandResourceTypes.Models
     public partial class ARecord
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ARecord"/>. </summary>
         public ARecord()
@@ -23,11 +23,11 @@ namespace MgmtExpandResourceTypes.Models
 
         /// <summary> Initializes a new instance of <see cref="ARecord"/>. </summary>
         /// <param name="ipv4Address"> The IPv4 address of this A record. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ARecord(string ipv4Address, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ARecord(string ipv4Address, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Ipv4Address = ipv4Address;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The IPv4 address of this A record. </summary>

@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     public partial class Field
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Field"/>. </summary>
         /// <param name="name"> The name of the field, which must be unique within the fields collection of the index or parent field. </param>
@@ -45,8 +45,8 @@ namespace CognitiveSearch.Models
         /// <param name="indexAnalyzer"> The name of the analyzer used at indexing time for the field. This option can be used only with searchable fields. It must be set together with searchAnalyzer and it cannot be set together with the analyzer option.  This property cannot be set to the name of a language analyzer; use the analyzer property instead if you need a language analyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields. </param>
         /// <param name="synonymMaps"> A list of the names of synonym maps to associate with this field. This option can be used only with searchable fields. Currently only one synonym map per field is supported. Assigning a synonym map to a field ensures that query terms targeting that field are expanded at query-time using the rules in the synonym map. This attribute can be changed on existing fields. Must be null or an empty collection for complex fields. </param>
         /// <param name="fields"> A list of sub-fields if this is a field of type Edm.ComplexType or Collection(Edm.ComplexType). Must be null or empty for simple fields. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Field(string name, DataType type, bool? key, bool? retrievable, bool? searchable, bool? filterable, bool? sortable, bool? facetable, AnalyzerName? analyzer, AnalyzerName? searchAnalyzer, AnalyzerName? indexAnalyzer, IList<string> synonymMaps, IList<Field> fields, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Field(string name, DataType type, bool? key, bool? retrievable, bool? searchable, bool? filterable, bool? sortable, bool? facetable, AnalyzerName? analyzer, AnalyzerName? searchAnalyzer, AnalyzerName? indexAnalyzer, IList<string> synonymMaps, IList<Field> fields, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Type = type;
@@ -61,7 +61,7 @@ namespace CognitiveSearch.Models
             IndexAnalyzer = indexAnalyzer;
             SynonymMaps = synonymMaps;
             Fields = fields;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Field"/> for deserialization. </summary>

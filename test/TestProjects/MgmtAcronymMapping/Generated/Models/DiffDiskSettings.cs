@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
     public partial class DiffDiskSettings
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DiffDiskSettings"/>. </summary>
         public DiffDiskSettings()
@@ -33,12 +33,12 @@ namespace MgmtAcronymMapping.Models
         /// Specifies the ephemeral disk placement for operating system disk.&lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **CacheDisk** &lt;br&gt;&lt;br&gt; **ResourceDisk** &lt;br&gt;&lt;br&gt; Default: **CacheDisk** if one is configured for the VM size otherwise **ResourceDisk** is used.&lt;br&gt;&lt;br&gt; Refer to VM size documentation for Windows VM at https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk.
         /// Serialized Name: DiffDiskSettings.placement
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DiffDiskSettings(DiffDiskOption? option, DiffDiskPlacement? placement, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DiffDiskSettings(DiffDiskOption? option, DiffDiskPlacement? placement, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Option = option;
             Placement = placement;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

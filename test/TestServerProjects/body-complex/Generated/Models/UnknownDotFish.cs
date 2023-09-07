@@ -16,8 +16,8 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of <see cref="UnknownDotFish"/>. </summary>
         /// <param name="fishType"></param>
         /// <param name="species"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownDotFish(string fishType, string species, Dictionary<string, BinaryData> rawData) : base(fishType, species, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownDotFish(string fishType, string species, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(fishType, species, serializedAdditionalRawData)
         {
             FishType = fishType ?? "Unknown";
         }

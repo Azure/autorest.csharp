@@ -16,7 +16,7 @@ namespace ModelsTypeSpec.Models
     public abstract partial class SingleBase
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of SingleBase. </summary>
         /// <param name="size"></param>
@@ -28,12 +28,12 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of SingleBase. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SingleBase(string kind, int size, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SingleBase(string kind, int size, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Kind = kind;
             Size = size;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="SingleBase"/> for deserialization. </summary>

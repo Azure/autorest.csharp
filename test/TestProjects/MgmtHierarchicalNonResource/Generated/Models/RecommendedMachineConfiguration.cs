@@ -14,7 +14,7 @@ namespace MgmtHierarchicalNonResource.Models
     public partial class RecommendedMachineConfiguration
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RecommendedMachineConfiguration"/>. </summary>
         internal RecommendedMachineConfiguration()
@@ -24,12 +24,12 @@ namespace MgmtHierarchicalNonResource.Models
         /// <summary> Initializes a new instance of <see cref="RecommendedMachineConfiguration"/>. </summary>
         /// <param name="vCpus"> Describes the resource range. </param>
         /// <param name="memory"> Describes the resource range. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal RecommendedMachineConfiguration(ResourceRange vCpus, ResourceRange memory, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal RecommendedMachineConfiguration(ResourceRange vCpus, ResourceRange memory, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             VCpus = vCpus;
             Memory = memory;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Describes the resource range. </summary>

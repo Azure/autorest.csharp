@@ -14,7 +14,7 @@ namespace httpInfrastructure.Models
     public partial class D
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="D"/>. </summary>
         internal D()
@@ -23,11 +23,11 @@ namespace httpInfrastructure.Models
 
         /// <summary> Initializes a new instance of <see cref="D"/>. </summary>
         /// <param name="httpStatusCode"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal D(string httpStatusCode, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal D(string httpStatusCode, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             HttpStatusCode = httpStatusCode;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the http status code. </summary>

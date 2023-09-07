@@ -20,7 +20,7 @@ namespace MgmtCustomizations.Models
     public abstract partial class Pet
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         protected Pet()
@@ -34,13 +34,13 @@ namespace MgmtCustomizations.Models
         /// The size of the pet. This property here is mocking the following scenario:
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Pet(PetKind kind, string name, int size, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Pet(PetKind kind, string name, int size, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Kind = kind;
             Name = name;
             Size = size;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The kind of the pet. </summary>

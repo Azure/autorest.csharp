@@ -15,7 +15,7 @@ namespace MgmtDiscriminator.Models
     public partial class DeliveryRuleProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DeliveryRuleProperties"/>. </summary>
         public DeliveryRuleProperties()
@@ -46,15 +46,15 @@ namespace MgmtDiscriminator.Models
         /// Please note <see cref="Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="Cat"/> and <see cref="Dog"/>.
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DeliveryRuleProperties(int? order, DeliveryRuleCondition conditions, IList<DeliveryRuleAction> actions, IDictionary<string, DeliveryRuleAction> extraMappingInfo, Pet pet, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeliveryRuleProperties(int? order, DeliveryRuleCondition conditions, IList<DeliveryRuleAction> actions, IDictionary<string, DeliveryRuleAction> extraMappingInfo, Pet pet, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Order = order;
             Conditions = conditions;
             Actions = actions;
             ExtraMappingInfo = extraMappingInfo;
             Pet = pet;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied. </summary>

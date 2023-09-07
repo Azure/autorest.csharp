@@ -14,7 +14,7 @@ namespace MgmtListMethods.Models
     public partial class UpdateWorkspaceQuotas
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UpdateWorkspaceQuotas"/>. </summary>
         internal UpdateWorkspaceQuotas()
@@ -27,15 +27,15 @@ namespace MgmtListMethods.Models
         /// <param name="limit"> The maximum permitted quota of the resource. </param>
         /// <param name="unit"> An enum describing the unit of quota measurement. </param>
         /// <param name="status"> Status of update workspace quota. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UpdateWorkspaceQuotas(string id, string updateWorkspaceQuotasType, long? limit, QuotaUnit? unit, Status? status, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UpdateWorkspaceQuotas(string id, string updateWorkspaceQuotasType, long? limit, QuotaUnit? unit, Status? status, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             UpdateWorkspaceQuotasType = updateWorkspaceQuotasType;
             Limit = limit;
             Unit = unit;
             Status = status;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Specifies the resource ID. </summary>

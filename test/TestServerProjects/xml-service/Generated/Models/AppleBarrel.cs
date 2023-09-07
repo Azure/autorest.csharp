@@ -15,7 +15,7 @@ namespace xml_service.Models
     public partial class AppleBarrel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AppleBarrel"/>. </summary>
         public AppleBarrel()
@@ -27,12 +27,12 @@ namespace xml_service.Models
         /// <summary> Initializes a new instance of <see cref="AppleBarrel"/>. </summary>
         /// <param name="goodApples"></param>
         /// <param name="badApples"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal AppleBarrel(IList<string> goodApples, IList<string> badApples, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal AppleBarrel(IList<string> goodApples, IList<string> badApples, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             GoodApples = goodApples;
             BadApples = badApples;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the good apples. </summary>

@@ -29,8 +29,8 @@ namespace CognitiveSearch.Models
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="encoder"> The phonetic encoder to use. Default is "metaphone". </param>
         /// <param name="replaceOriginalTokens"> A value indicating whether encoded tokens should replace original tokens. If false, encoded tokens are added as synonyms. Default is true. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal PhoneticTokenFilter(string odataType, string name, PhoneticEncoder? encoder, bool? replaceOriginalTokens, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal PhoneticTokenFilter(string odataType, string name, PhoneticEncoder? encoder, bool? replaceOriginalTokens, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             Encoder = encoder;
             ReplaceOriginalTokens = replaceOriginalTokens;

@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class ChangeFeed
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ChangeFeed"/>. </summary>
         public ChangeFeed()
@@ -24,12 +24,12 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of <see cref="ChangeFeed"/>. </summary>
         /// <param name="enabled"> Indicates whether change feed event logging is enabled for the Blob service. </param>
         /// <param name="retentionInDays"> Indicates the duration of changeFeed retention in days. Minimum value is 1 day and maximum value is 146000 days (400 years). A null value indicates an infinite retention of the change feed. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ChangeFeed(bool? enabled, int? retentionInDays, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ChangeFeed(bool? enabled, int? retentionInDays, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Enabled = enabled;
             RetentionInDays = retentionInDays;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Indicates whether change feed event logging is enabled for the Blob service. </summary>

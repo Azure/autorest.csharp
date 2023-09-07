@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class EncryptionService
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="EncryptionService"/>. </summary>
         public EncryptionService()
@@ -25,13 +25,13 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="enabled"> A boolean indicating whether or not the service encrypts the data as it is stored. </param>
         /// <param name="lastEnabledOn"> Gets a rough estimate of the date/time when the encryption was last enabled by the user. Only returned when encryption is enabled. There might be some unencrypted blobs which were written after this time, as it is just a rough estimate. </param>
         /// <param name="keyType"> Encryption key type to be used for the encryption service. 'Account' key type implies that an account-scoped encryption key will be used. 'Service' key type implies that a default service key is used. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal EncryptionService(bool? enabled, DateTimeOffset? lastEnabledOn, KeyType? keyType, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal EncryptionService(bool? enabled, DateTimeOffset? lastEnabledOn, KeyType? keyType, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Enabled = enabled;
             LastEnabledOn = lastEnabledOn;
             KeyType = keyType;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A boolean indicating whether or not the service encrypts the data as it is stored. </summary>

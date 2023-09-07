@@ -87,9 +87,9 @@ namespace MgmtDiscriminator.Models
                     ((IModelJsonSerializable<Pet>)Pet).Serialize(writer, options);
                 }
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -115,7 +115,7 @@ namespace MgmtDiscriminator.Models
             Optional<IList<DeliveryRuleAction>> actions = default;
             Optional<IDictionary<string, DeliveryRuleAction>> extraMappingInfo = default;
             Optional<Pet> pet = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("order"u8))
@@ -175,11 +175,11 @@ namespace MgmtDiscriminator.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new DeliveryRuleProperties(Optional.ToNullable(order), conditions.Value, Optional.ToList(actions), Optional.ToDictionary(extraMappingInfo), pet.Value, rawData);
+            return new DeliveryRuleProperties(Optional.ToNullable(order), conditions.Value, Optional.ToList(actions), Optional.ToDictionary(extraMappingInfo), pet.Value, serializedAdditionalRawData);
         }
 
         DeliveryRuleProperties IModelJsonSerializable<DeliveryRuleProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

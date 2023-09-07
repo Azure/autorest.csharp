@@ -20,7 +20,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
     public abstract partial class Dog
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of Dog. </summary>
         /// <param name="weight"> Weight of the dog. </param>
@@ -32,12 +32,12 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         /// <summary> Initializes a new instance of Dog. </summary>
         /// <param name="kind"> discriminator property. </param>
         /// <param name="weight"> Weight of the dog. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Dog(DogKind kind, int weight, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Dog(DogKind kind, int weight, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Kind = kind;
             Weight = weight;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Dog"/> for deserialization. </summary>

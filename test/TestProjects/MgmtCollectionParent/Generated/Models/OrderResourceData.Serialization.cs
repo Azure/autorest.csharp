@@ -28,9 +28,9 @@ namespace MgmtCollectionParent
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             writer.WriteEndObject();
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -58,7 +58,7 @@ namespace MgmtCollectionParent
             Optional<IReadOnlyList<string>> orderItemIds = default;
             Optional<StageDetails> currentStage = default;
             Optional<IReadOnlyList<StageDetails>> orderStageHistory = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -136,11 +136,11 @@ namespace MgmtCollectionParent
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new OrderResourceData(id, name, type, systemData.Value, Optional.ToList(orderItemIds), currentStage.Value, Optional.ToList(orderStageHistory), rawData);
+            return new OrderResourceData(id, name, type, systemData.Value, Optional.ToList(orderItemIds), currentStage.Value, Optional.ToList(orderStageHistory), serializedAdditionalRawData);
         }
 
         OrderResourceData IModelJsonSerializable<OrderResourceData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

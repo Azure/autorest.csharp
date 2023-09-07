@@ -16,7 +16,7 @@ namespace MgmtSubscriptionNameParameter.Models
     internal partial class SBSubscriptionListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SBSubscriptionListResult"/>. </summary>
         internal SBSubscriptionListResult()
@@ -27,12 +27,12 @@ namespace MgmtSubscriptionNameParameter.Models
         /// <summary> Initializes a new instance of <see cref="SBSubscriptionListResult"/>. </summary>
         /// <param name="value"> Result of the List Subscriptions operation. </param>
         /// <param name="nextLink"> Link to the next set of results. Not empty if Value contains incomplete list of subscriptions. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SBSubscriptionListResult(IReadOnlyList<SBSubscriptionData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SBSubscriptionListResult(IReadOnlyList<SBSubscriptionData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Result of the List Subscriptions operation. </summary>

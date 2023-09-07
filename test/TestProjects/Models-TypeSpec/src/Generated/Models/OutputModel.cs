@@ -16,7 +16,7 @@ namespace ModelsTypeSpec.Models
     public partial class OutputModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of OutputModel. </summary>
         /// <param name="requiredString"> Required string. </param>
@@ -53,8 +53,8 @@ namespace ModelsTypeSpec.Models
         /// <param name="optionalNullableList"> Optional model nullable collection. </param>
         /// <param name="optionalRecord"> Optional model record. </param>
         /// <param name="optionalNullableRecord"> Optional model nullable record. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal OutputModel(string requiredString, int requiredInt, DerivedModel requiredModel, IReadOnlyList<CollectionItem> requiredList, IReadOnlyDictionary<string, RecordItem> requiredModelRecord, IReadOnlyList<CollectionItem> optionalList, IReadOnlyList<CollectionItem> optionalNullableList, IReadOnlyDictionary<string, RecordItem> optionalRecord, IReadOnlyDictionary<string, RecordItem> optionalNullableRecord, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal OutputModel(string requiredString, int requiredInt, DerivedModel requiredModel, IReadOnlyList<CollectionItem> requiredList, IReadOnlyDictionary<string, RecordItem> requiredModelRecord, IReadOnlyList<CollectionItem> optionalList, IReadOnlyList<CollectionItem> optionalNullableList, IReadOnlyDictionary<string, RecordItem> optionalRecord, IReadOnlyDictionary<string, RecordItem> optionalNullableRecord, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -65,7 +65,7 @@ namespace ModelsTypeSpec.Models
             OptionalNullableList = optionalNullableList;
             OptionalRecord = optionalRecord;
             OptionalNullableRecord = optionalNullableRecord;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="OutputModel"/> for deserialization. </summary>

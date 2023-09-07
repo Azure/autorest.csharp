@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
     public partial class Index
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Index"/>. </summary>
         /// <param name="name"> The name of the index. </param>
@@ -71,8 +71,8 @@ namespace CognitiveSearch.Models
         /// The available derived classes include <see cref="BM25Similarity"/> and <see cref="ClassicSimilarity"/>.
         /// </param>
         /// <param name="eTag"> The ETag of the index. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Index(string name, IList<Field> fields, IList<ScoringProfile> scoringProfiles, string defaultScoringProfile, CorsOptions corsOptions, IList<Suggester> suggesters, IList<Analyzer> analyzers, IList<Tokenizer> tokenizers, IList<TokenFilter> tokenFilters, IList<CharFilter> charFilters, EncryptionKey encryptionKey, Similarity similarity, string eTag, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Index(string name, IList<Field> fields, IList<ScoringProfile> scoringProfiles, string defaultScoringProfile, CorsOptions corsOptions, IList<Suggester> suggesters, IList<Analyzer> analyzers, IList<Tokenizer> tokenizers, IList<TokenFilter> tokenFilters, IList<CharFilter> charFilters, EncryptionKey encryptionKey, Similarity similarity, string eTag, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             Fields = fields;
@@ -87,7 +87,7 @@ namespace CognitiveSearch.Models
             EncryptionKey = encryptionKey;
             Similarity = similarity;
             ETag = eTag;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Index"/> for deserialization. </summary>

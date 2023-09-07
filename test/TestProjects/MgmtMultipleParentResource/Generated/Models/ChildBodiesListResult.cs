@@ -17,7 +17,7 @@ namespace MgmtMultipleParentResource.Models
     internal partial class ChildBodiesListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ChildBodiesListResult"/>. </summary>
         /// <param name="value"> The list of run commands. </param>
@@ -32,12 +32,12 @@ namespace MgmtMultipleParentResource.Models
         /// <summary> Initializes a new instance of <see cref="ChildBodiesListResult"/>. </summary>
         /// <param name="value"> The list of run commands. </param>
         /// <param name="nextLink"> The uri to fetch the next page of run commands. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ChildBodiesListResult(IReadOnlyList<ChildBodyData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ChildBodiesListResult(IReadOnlyList<ChildBodyData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ChildBodiesListResult"/> for deserialization. </summary>

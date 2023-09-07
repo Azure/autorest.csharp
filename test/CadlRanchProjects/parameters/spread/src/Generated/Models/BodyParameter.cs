@@ -15,7 +15,7 @@ namespace Parameters.Spread.Models
     public partial class BodyParameter
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of BodyParameter. </summary>
         /// <param name="name"></param>
@@ -29,11 +29,11 @@ namespace Parameters.Spread.Models
 
         /// <summary> Initializes a new instance of BodyParameter. </summary>
         /// <param name="name"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BodyParameter(string name, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BodyParameter(string name, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="BodyParameter"/> for deserialization. </summary>

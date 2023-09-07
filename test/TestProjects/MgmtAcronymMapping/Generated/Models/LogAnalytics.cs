@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping.Models
     public partial class LogAnalytics
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="LogAnalytics"/>. </summary>
         internal LogAnalytics()
@@ -46,15 +46,15 @@ namespace MgmtAcronymMapping.Models
         /// Gets the workflow trigger callback URL base path.
         /// Serialized Name: LogAnalyticsOperationResult.basePath
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LogAnalytics(LogAnalyticsOutput properties, ContentType? contentType, BinaryData content, RequestMethod? requestMethod, Uri basePathUri, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LogAnalytics(LogAnalyticsOutput properties, ContentType? contentType, BinaryData content, RequestMethod? requestMethod, Uri basePathUri, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Properties = properties;
             ContentType = contentType;
             Content = content;
             RequestMethod = requestMethod;
             BasePathUri = basePathUri;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

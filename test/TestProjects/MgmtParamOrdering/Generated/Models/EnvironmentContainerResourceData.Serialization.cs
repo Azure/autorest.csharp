@@ -47,9 +47,9 @@ namespace MgmtParamOrdering
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -77,7 +77,7 @@ namespace MgmtParamOrdering
             string name = default;
             ResourceType type = default;
             Optional<SystemData> systemData = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"u8))
@@ -130,11 +130,11 @@ namespace MgmtParamOrdering
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new EnvironmentContainerResourceData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, properties, rawData);
+            return new EnvironmentContainerResourceData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, properties, serializedAdditionalRawData);
         }
 
         EnvironmentContainerResourceData IModelJsonSerializable<EnvironmentContainerResourceData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class StorageAccountPatch
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StorageAccountPatch"/>. </summary>
         public StorageAccountPatch()
@@ -46,8 +46,8 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="defaultToOAuthAuthentication"> A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property. </param>
         /// <param name="publicNetworkAccess"> Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'. </param>
         /// <param name="immutableStorageWithVersioning"> The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the containers in the account by default. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StorageAccountPatch(StorageSku sku, IDictionary<string, string> tags, ManagedServiceIdentity identity, StorageKind? kind, CustomDomain customDomain, Encryption encryption, SasPolicy sasPolicy, KeyPolicy keyPolicy, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, LargeFileSharesState? largeFileSharesState, RoutingPreference routingPreference, bool? allowBlobPublicAccess, MinimumTlsVersion? minimumTlsVersion, bool? allowSharedKeyAccess, bool? allowCrossTenantReplication, bool? defaultToOAuthAuthentication, PublicNetworkAccess? publicNetworkAccess, ImmutableStorageAccount immutableStorageWithVersioning, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageAccountPatch(StorageSku sku, IDictionary<string, string> tags, ManagedServiceIdentity identity, StorageKind? kind, CustomDomain customDomain, Encryption encryption, SasPolicy sasPolicy, KeyPolicy keyPolicy, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, LargeFileSharesState? largeFileSharesState, RoutingPreference routingPreference, bool? allowBlobPublicAccess, MinimumTlsVersion? minimumTlsVersion, bool? allowSharedKeyAccess, bool? allowCrossTenantReplication, bool? defaultToOAuthAuthentication, PublicNetworkAccess? publicNetworkAccess, ImmutableStorageAccount immutableStorageWithVersioning, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Sku = sku;
             Tags = tags;
@@ -70,7 +70,7 @@ namespace Azure.ResourceManager.Storage.Models
             DefaultToOAuthAuthentication = defaultToOAuthAuthentication;
             PublicNetworkAccess = publicNetworkAccess;
             ImmutableStorageWithVersioning = immutableStorageWithVersioning;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the SKU name. Note that the SKU name cannot be updated to Standard_ZRS, Premium_LRS or Premium_ZRS, nor can accounts of those SKU names be updated to any other value. </summary>

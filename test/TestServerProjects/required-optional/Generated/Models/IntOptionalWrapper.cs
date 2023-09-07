@@ -14,7 +14,7 @@ namespace required_optional.Models
     public partial class IntOptionalWrapper
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="IntOptionalWrapper"/>. </summary>
         public IntOptionalWrapper()
@@ -23,11 +23,11 @@ namespace required_optional.Models
 
         /// <summary> Initializes a new instance of <see cref="IntOptionalWrapper"/>. </summary>
         /// <param name="value"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal IntOptionalWrapper(int? value, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal IntOptionalWrapper(int? value, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the value. </summary>

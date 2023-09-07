@@ -14,7 +14,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class DdosSettings
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DdosSettings"/>. </summary>
         public DdosSettings()
@@ -25,13 +25,13 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="ddosCustomPolicy"> The DDoS custom policy associated with the public IP. </param>
         /// <param name="protectionCoverage"> The DDoS protection policy customizability of the public IP. Only standard coverage will have the ability to be customized. </param>
         /// <param name="protectedIP"> Enables DDoS protection on the public IP. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DdosSettings(SubResource ddosCustomPolicy, DdosSettingsProtectionCoverage? protectionCoverage, bool? protectedIP, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DdosSettings(SubResource ddosCustomPolicy, DdosSettingsProtectionCoverage? protectionCoverage, bool? protectedIP, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DdosCustomPolicy = ddosCustomPolicy;
             ProtectionCoverage = protectionCoverage;
             ProtectedIP = protectedIP;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The DDoS custom policy associated with the public IP. </summary>

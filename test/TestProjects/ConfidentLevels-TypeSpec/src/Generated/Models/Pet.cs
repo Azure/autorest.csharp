@@ -21,7 +21,7 @@ namespace ConfidentLevelsInTsp.Models
     public abstract partial class Pet
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        protected internal Dictionary<string, BinaryData> _rawData;
+        protected internal Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of Pet. </summary>
         /// <param name="name"> The name of the pet. </param>
@@ -36,12 +36,12 @@ namespace ConfidentLevelsInTsp.Models
         /// <summary> Initializes a new instance of Pet. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"> The name of the pet. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Pet(string kind, string name, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Pet(string kind, string name, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Kind = kind;
             Name = name;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="Pet"/> for deserialization. </summary>

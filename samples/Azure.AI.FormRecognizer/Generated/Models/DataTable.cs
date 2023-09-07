@@ -16,7 +16,7 @@ namespace Azure.AI.FormRecognizer.Models
     public partial class DataTable
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DataTable"/>. </summary>
         /// <param name="rows"> Number of rows. </param>
@@ -36,13 +36,13 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="rows"> Number of rows. </param>
         /// <param name="columns"> Number of columns. </param>
         /// <param name="cells"> List of cells contained in the table. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal DataTable(int rows, int columns, IReadOnlyList<DataTableCell> cells, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal DataTable(int rows, int columns, IReadOnlyList<DataTableCell> cells, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Rows = rows;
             Columns = columns;
             Cells = cells;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="DataTable"/> for deserialization. </summary>

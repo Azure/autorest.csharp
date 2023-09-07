@@ -16,7 +16,7 @@ namespace MgmtScopeResource.Models
     internal partial class FakePolicyAssignmentListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="FakePolicyAssignmentListResult"/>. </summary>
         internal FakePolicyAssignmentListResult()
@@ -27,12 +27,12 @@ namespace MgmtScopeResource.Models
         /// <summary> Initializes a new instance of <see cref="FakePolicyAssignmentListResult"/>. </summary>
         /// <param name="value"> An array of policy assignments. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal FakePolicyAssignmentListResult(IReadOnlyList<FakePolicyAssignmentData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal FakePolicyAssignmentListResult(IReadOnlyList<FakePolicyAssignmentData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> An array of policy assignments. </summary>

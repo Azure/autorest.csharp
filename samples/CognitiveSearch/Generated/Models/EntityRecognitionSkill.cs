@@ -38,8 +38,8 @@ namespace CognitiveSearch.Models
         /// <param name="defaultLanguageCode"> A value indicating which language code to use. Default is en. </param>
         /// <param name="includeTypelessEntities"> Determines whether or not to include entities which are well known but don't conform to a pre-defined type. If this configuration is not set (default), set to null or set to false, entities which don't conform to one of the pre-defined types will not be surfaced. </param>
         /// <param name="minimumPrecision"> A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal EntityRecognitionSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, IList<EntityCategory> categories, EntityRecognitionSkillLanguage? defaultLanguageCode, bool? includeTypelessEntities, double? minimumPrecision, Dictionary<string, BinaryData> rawData) : base(odataType, name, description, context, inputs, outputs, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal EntityRecognitionSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, IList<EntityCategory> categories, EntityRecognitionSkillLanguage? defaultLanguageCode, bool? includeTypelessEntities, double? minimumPrecision, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, description, context, inputs, outputs, serializedAdditionalRawData)
         {
             Categories = categories;
             DefaultLanguageCode = defaultLanguageCode;

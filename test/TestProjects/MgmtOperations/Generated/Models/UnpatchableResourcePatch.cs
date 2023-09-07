@@ -15,7 +15,7 @@ namespace MgmtOperations.Models
     public partial class UnpatchableResourcePatch
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UnpatchableResourcePatch"/>. </summary>
         public UnpatchableResourcePatch()
@@ -25,11 +25,11 @@ namespace MgmtOperations.Models
 
         /// <summary> Initializes a new instance of <see cref="UnpatchableResourcePatch"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnpatchableResourcePatch(IDictionary<string, string> tags, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnpatchableResourcePatch(IDictionary<string, string> tags, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Tags = tags;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Resource tags. </summary>

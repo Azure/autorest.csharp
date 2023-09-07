@@ -43,8 +43,8 @@ namespace CognitiveSearch.Models
         /// <param name="timeout"> The desired timeout for the request. Default is 30 seconds. </param>
         /// <param name="batchSize"> The desired batch size which indicates number of documents. </param>
         /// <param name="degreeOfParallelism"> If set, the number of parallel calls that can be made to the Web API. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal WebApiSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, string uri, IDictionary<string, string> httpHeaders, string httpMethod, TimeSpan? timeout, int? batchSize, int? degreeOfParallelism, Dictionary<string, BinaryData> rawData) : base(odataType, name, description, context, inputs, outputs, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal WebApiSkill(string odataType, string name, string description, string context, IList<InputFieldMappingEntry> inputs, IList<OutputFieldMappingEntry> outputs, string uri, IDictionary<string, string> httpHeaders, string httpMethod, TimeSpan? timeout, int? batchSize, int? degreeOfParallelism, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, description, context, inputs, outputs, serializedAdditionalRawData)
         {
             Uri = uri;
             HttpHeaders = httpHeaders;

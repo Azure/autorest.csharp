@@ -18,7 +18,7 @@ namespace MgmtAcronymMapping.Models
     public partial class ImageStorageProfile
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ImageStorageProfile"/>. </summary>
         public ImageStorageProfile()
@@ -39,13 +39,13 @@ namespace MgmtAcronymMapping.Models
         /// Specifies whether an image is zone resilient or not. Default is false. Zone resilient images can be created only in regions that provide Zone Redundant Storage (ZRS).
         /// Serialized Name: ImageStorageProfile.zoneResilient
         /// </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ImageStorageProfile(ImageOSDisk osDisk, IList<ImageDataDisk> dataDisks, bool? zoneResilient, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImageStorageProfile(ImageOSDisk osDisk, IList<ImageDataDisk> dataDisks, bool? zoneResilient, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OSDisk = osDisk;
             DataDisks = dataDisks;
             ZoneResilient = zoneResilient;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

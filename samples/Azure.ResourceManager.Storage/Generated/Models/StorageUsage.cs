@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class StorageUsage
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StorageUsage"/>. </summary>
         internal StorageUsage()
@@ -26,14 +26,14 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="currentValue"> Gets the current count of the allocated resources in the subscription. </param>
         /// <param name="limit"> Gets the maximum count of the resources that can be allocated in the subscription. </param>
         /// <param name="name"> Gets the name of the type of usage. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StorageUsage(UsageUnit? unit, int? currentValue, int? limit, UsageName name, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageUsage(UsageUnit? unit, int? currentValue, int? limit, UsageName name, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Unit = unit;
             CurrentValue = currentValue;
             Limit = limit;
             Name = name;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets the unit of measurement. </summary>

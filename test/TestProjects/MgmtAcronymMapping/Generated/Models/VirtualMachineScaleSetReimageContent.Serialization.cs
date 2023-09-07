@@ -38,9 +38,9 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("tempDisk"u8);
                 writer.WriteBooleanValue(TempDisk.Value);
             }
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -63,7 +63,7 @@ namespace MgmtAcronymMapping.Models
             }
             Optional<IList<string>> instanceIds = default;
             Optional<bool> tempDisk = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("instanceIds"u8))
@@ -91,11 +91,11 @@ namespace MgmtAcronymMapping.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetReimageContent(Optional.ToNullable(tempDisk), Optional.ToList(instanceIds), rawData);
+            return new VirtualMachineScaleSetReimageContent(Optional.ToNullable(tempDisk), Optional.ToList(instanceIds), serializedAdditionalRawData);
         }
 
         VirtualMachineScaleSetReimageContent IModelJsonSerializable<VirtualMachineScaleSetReimageContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

@@ -30,8 +30,8 @@ namespace CognitiveSearch.Models
         /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="maxTokenLength"> The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters. </param>
         /// <param name="stopwords"> A list of stopwords. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal StandardAnalyzer(string odataType, string name, int? maxTokenLength, IList<string> stopwords, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal StandardAnalyzer(string odataType, string name, int? maxTokenLength, IList<string> stopwords, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, name, serializedAdditionalRawData)
         {
             MaxTokenLength = maxTokenLength;
             Stopwords = stopwords;

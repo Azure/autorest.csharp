@@ -30,8 +30,8 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
         /// <param name="name"></param>
         /// <param name="age"></param>
         /// <param name="smart"></param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Siamese(string name, int age, bool smart, Dictionary<string, BinaryData> rawData) : base(name, age, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal Siamese(string name, int age, bool smart, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(name, age, serializedAdditionalRawData)
         {
             Smart = smart;
         }

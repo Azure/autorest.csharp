@@ -14,7 +14,7 @@ namespace azure_parameter_grouping.Models
     public partial class ParameterGroupingPostMultiParamGroupsSecondParamGroup
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostMultiParamGroupsSecondParamGroup"/>. </summary>
         public ParameterGroupingPostMultiParamGroupsSecondParamGroup()
@@ -24,12 +24,12 @@ namespace azure_parameter_grouping.Models
         /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostMultiParamGroupsSecondParamGroup"/>. </summary>
         /// <param name="headerTwo"></param>
         /// <param name="queryTwo"> Query parameter with default. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ParameterGroupingPostMultiParamGroupsSecondParamGroup(string headerTwo, int? queryTwo, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ParameterGroupingPostMultiParamGroupsSecondParamGroup(string headerTwo, int? queryTwo, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             HeaderTwo = headerTwo;
             QueryTwo = queryTwo;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the header two. </summary>

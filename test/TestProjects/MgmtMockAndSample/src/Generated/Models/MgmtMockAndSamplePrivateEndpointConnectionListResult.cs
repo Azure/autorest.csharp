@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
     internal partial class MgmtMockAndSamplePrivateEndpointConnectionListResult
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSamplePrivateEndpointConnectionListResult"/>. </summary>
         internal MgmtMockAndSamplePrivateEndpointConnectionListResult()
@@ -27,12 +27,12 @@ namespace MgmtMockAndSample.Models
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSamplePrivateEndpointConnectionListResult"/>. </summary>
         /// <param name="value"> The list of private endpoint connections. </param>
         /// <param name="nextLink"> The URL to get the next set of private endpoint connections. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal MgmtMockAndSamplePrivateEndpointConnectionListResult(IReadOnlyList<MgmtMockAndSamplePrivateEndpointConnectionData> value, string nextLink, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal MgmtMockAndSamplePrivateEndpointConnectionListResult(IReadOnlyList<MgmtMockAndSamplePrivateEndpointConnectionData> value, string nextLink, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Value = value;
             NextLink = nextLink;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The list of private endpoint connections. </summary>

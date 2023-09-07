@@ -14,7 +14,7 @@ namespace _Type.Property.Optionality.Models
     public partial class BytesProperty
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of BytesProperty. </summary>
         public BytesProperty()
@@ -23,11 +23,11 @@ namespace _Type.Property.Optionality.Models
 
         /// <summary> Initializes a new instance of BytesProperty. </summary>
         /// <param name="property"> Property. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal BytesProperty(BinaryData property, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal BytesProperty(BinaryData property, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Property = property;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary>

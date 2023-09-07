@@ -20,7 +20,7 @@ namespace MgmtSubscriptionNameParameter
     public partial class SBSubscriptionData : ResourceData
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SBSubscriptionData"/>. </summary>
         public SBSubscriptionData()
@@ -49,8 +49,8 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="forwardDeadLetteredMessagesTo"> Queue/Topic name to forward the Dead Letter message. </param>
         /// <param name="isClientAffine"> Value that indicates whether the subscription has an affinity to the client id. </param>
         /// <param name="clientAffineProperties"> Properties specific to client affine subscriptions. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal SBSubscriptionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, long? messageCount, DateTimeOffset? createdOn, DateTimeOffset? accessedOn, DateTimeOffset? updatedOn, TimeSpan? lockDuration, bool? requiresSession, TimeSpan? defaultMessageTimeToLive, bool? deadLetteringOnFilterEvaluationExceptions, bool? deadLetteringOnMessageExpiration, TimeSpan? duplicateDetectionHistoryTimeWindow, int? maxDeliveryCount, bool? enableBatchedOperations, TimeSpan? autoDeleteOnIdle, string forwardTo, string forwardDeadLetteredMessagesTo, bool? isClientAffine, SBClientAffineProperties clientAffineProperties, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal SBSubscriptionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, long? messageCount, DateTimeOffset? createdOn, DateTimeOffset? accessedOn, DateTimeOffset? updatedOn, TimeSpan? lockDuration, bool? requiresSession, TimeSpan? defaultMessageTimeToLive, bool? deadLetteringOnFilterEvaluationExceptions, bool? deadLetteringOnMessageExpiration, TimeSpan? duplicateDetectionHistoryTimeWindow, int? maxDeliveryCount, bool? enableBatchedOperations, TimeSpan? autoDeleteOnIdle, string forwardTo, string forwardDeadLetteredMessagesTo, bool? isClientAffine, SBClientAffineProperties clientAffineProperties, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             MessageCount = messageCount;
             CreatedOn = createdOn;
@@ -69,7 +69,7 @@ namespace MgmtSubscriptionNameParameter
             ForwardDeadLetteredMessagesTo = forwardDeadLetteredMessagesTo;
             IsClientAffine = isClientAffine;
             ClientAffineProperties = clientAffineProperties;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Number of messages. </summary>

@@ -65,9 +65,9 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             writer.WritePropertyName("modelVersion"u8);
             writer.WriteStringValue(ModelVersion);
-            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -92,7 +92,7 @@ namespace CognitiveServices.TextAnalytics.Models
             IReadOnlyList<DocumentError> errors = default;
             Optional<RequestStatistics> statistics = default;
             string modelVersion = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("documents"u8))
@@ -131,11 +131,11 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new SentimentResponse(documents, errors, statistics.Value, modelVersion, rawData);
+            return new SentimentResponse(documents, errors, statistics.Value, modelVersion, serializedAdditionalRawData);
         }
 
         SentimentResponse IModelJsonSerializable<SentimentResponse>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

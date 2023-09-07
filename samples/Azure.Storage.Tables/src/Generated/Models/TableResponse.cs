@@ -24,8 +24,8 @@ namespace Azure.Storage.Tables.Models
         /// <param name="odataId"> The id of the table. </param>
         /// <param name="odataEditLink"> The edit link of the table. </param>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal TableResponse(string tableName, string odataType, string odataId, string odataEditLink, string odataMetadata, Dictionary<string, BinaryData> rawData) : base(tableName, odataType, odataId, odataEditLink, rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal TableResponse(string tableName, string odataType, string odataId, string odataEditLink, string odataMetadata, Dictionary<string, BinaryData> serializedAdditionalRawData) : base(tableName, odataType, odataId, odataEditLink, serializedAdditionalRawData)
         {
             OdataMetadata = odataMetadata;
         }

@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Storage.Models
     public partial class ActiveDirectoryProperties
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ActiveDirectoryProperties"/>. </summary>
         /// <param name="domainName"> Specifies the primary domain that the AD DNS server is authoritative for. </param>
@@ -49,8 +49,8 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="domainGuid"> Specifies the domain GUID. </param>
         /// <param name="domainSid"> Specifies the security identifier (SID). </param>
         /// <param name="azureStorageSid"> Specifies the security identifier (SID) for Azure Storage. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal ActiveDirectoryProperties(string domainName, string netBiosDomainName, string forestName, string domainGuid, string domainSid, string azureStorageSid, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal ActiveDirectoryProperties(string domainName, string netBiosDomainName, string forestName, string domainGuid, string domainSid, string azureStorageSid, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             DomainName = domainName;
             NetBiosDomainName = netBiosDomainName;
@@ -58,7 +58,7 @@ namespace Azure.ResourceManager.Storage.Models
             DomainGuid = domainGuid;
             DomainSid = domainSid;
             AzureStorageSid = azureStorageSid;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ActiveDirectoryProperties"/> for deserialization. </summary>

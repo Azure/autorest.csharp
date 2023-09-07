@@ -14,7 +14,7 @@ namespace Azure.Network.Management.Interface.Models
     public partial class LoadBalancerSku
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="LoadBalancerSku"/>. </summary>
         public LoadBalancerSku()
@@ -23,11 +23,11 @@ namespace Azure.Network.Management.Interface.Models
 
         /// <summary> Initializes a new instance of <see cref="LoadBalancerSku"/>. </summary>
         /// <param name="name"> Name of a load balancer SKU. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal LoadBalancerSku(LoadBalancerSkuName? name, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal LoadBalancerSku(LoadBalancerSkuName? name, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Name of a load balancer SKU. </summary>

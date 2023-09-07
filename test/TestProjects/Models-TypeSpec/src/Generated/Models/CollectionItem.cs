@@ -15,7 +15,7 @@ namespace ModelsTypeSpec.Models
     public partial class CollectionItem
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private Dictionary<string, BinaryData> _rawData;
+        private Dictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of CollectionItem. </summary>
         /// <param name="requiredModelRecord"> Required model record. </param>
@@ -29,11 +29,11 @@ namespace ModelsTypeSpec.Models
 
         /// <summary> Initializes a new instance of CollectionItem. </summary>
         /// <param name="requiredModelRecord"> Required model record. </param>
-        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal CollectionItem(IDictionary<string, RecordItem> requiredModelRecord, Dictionary<string, BinaryData> rawData)
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        internal CollectionItem(IDictionary<string, RecordItem> requiredModelRecord, Dictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredModelRecord = requiredModelRecord;
-            _rawData = rawData;
+            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="CollectionItem"/> for deserialization. </summary>

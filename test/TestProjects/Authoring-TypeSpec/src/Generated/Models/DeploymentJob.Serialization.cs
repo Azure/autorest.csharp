@@ -42,9 +42,9 @@ namespace AuthoringTypeSpec.Models
             }
             writer.WriteEndArray();
             writer.WritePropertyName("errors"u8);
-            JsonSerializer.Serialize(writer, Errors); if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            JsonSerializer.Serialize(writer, Errors); if (_serializedAdditionalRawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                foreach (var property in _rawData)
+                foreach (var property in _serializedAdditionalRawData)
                 {
                     writer.WritePropertyName(property.Key);
 #if NET6_0_OR_GREATER
@@ -73,7 +73,7 @@ namespace AuthoringTypeSpec.Models
             IReadOnlyList<JobWarning> warnings = default;
             ResponseError errors = default;
             string id = default;
-            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            Dictionary<string, BinaryData> serializedAdditionalRawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("jobId"u8))
@@ -123,11 +123,11 @@ namespace AuthoringTypeSpec.Models
                 }
                 if (options.Format == ModelSerializerFormat.Json)
                 {
-                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    serializedAdditionalRawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new DeploymentJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings, errors, id, rawData);
+            return new DeploymentJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings, errors, id, serializedAdditionalRawData);
         }
 
         DeploymentJob IModelJsonSerializable<DeploymentJob>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
