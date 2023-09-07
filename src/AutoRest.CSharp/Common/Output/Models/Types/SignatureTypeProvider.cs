@@ -82,6 +82,11 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                 var returnType = MgmtContext.TypeFactory.GetCsharpType(method.ReturnType);
                 if (returnType is null)
                 {
+                    // TODO: handle missing method return type from MgmtOutputLibrary
+                    continue;
+                }
+                else
+                {
                     // TODO: handle missing parameter type from MgmtOutputLibrary
                     var parameters = new List<Parameter>();
                     foreach (var parameter in method.Parameters)
@@ -93,10 +98,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                         }
                     }
                     result.Add(new MethodSignature(method.Name, null, description, MapModifiers(method), returnType, null, parameters));
-                }
-                else
-                {
-                    // TODO: handle missing method return type from MgmtOutputLibrary
                 }
             }
             return result;
