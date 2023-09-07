@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -288,6 +289,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                             writer.AppendFrameworkTypeValue(exampleValue, rawValue.RawValue.GetType(), SerializationFormat.Default, includeCollectionInitialization),
             InputExampleListValue listValue => writer.AppendListValue(typeof(IList<object>), listValue, SerializationFormat.Default),
             InputExampleObjectValue objectValue => writer.AppendDictionaryValue(typeof(Dictionary<string, object>), objectValue, SerializationFormat.Default, includeCollectionInitialization),
+            InputExampleStreamValue streamValue => writer.Append($"{typeof(File)}.OpenRead({streamValue.Filename:L})"),
             _ => throw new InvalidOperationException($"unhandled case {exampleValue}")
         };
 

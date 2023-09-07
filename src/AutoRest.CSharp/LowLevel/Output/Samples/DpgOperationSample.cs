@@ -306,7 +306,23 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         private InputExampleValue GetBodyParameterValue()
         {
-            var bodyParameterExample = _inputOperationExample.Parameters.SingleOrDefault(e => e.Parameter is { Location: RequestLocation.Body });
+            // we have a request body type
+            if (Method.RequestBodyType == null)
+                return InputExampleValue.Null(InputPrimitiveType.Object);
+
+            //if (Method.RequestBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
+            //    return InputExampleValue.Stream(Method.RequestBodyType, "<filePath>");
+
+            // find the example value for this type
+            // if there is only one parameter is body parameter, we return it.
+            var bodyParameters = _inputOperationExample.Parameters.Where(e => e.Parameter is { Location: RequestLocation.Body }).ToArray();
+            if (bodyParameters.Length == 1)
+            {
+                return bodyParameters.Single().ExampleValue;
+            }
+            // there could be multiple body parameters especially when we have a multiform content type operation
+            // if we have more than one body parameters which should happen very rarely, we just search the type in all parameters we have and get the first one that matches.
+            var bodyParameterExample = _inputOperationExample.Parameters.FirstOrDefault(e => e.Parameter.Type == Method.RequestBodyType);
             if (bodyParameterExample != null)
             {
                 return bodyParameterExample.ExampleValue;

@@ -11,6 +11,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
         public static InputExampleValue Value(InputType type, object? rawValue) => new InputExampleRawValue(type, rawValue);
         public static InputExampleValue List(InputType type, IReadOnlyList<InputExampleValue> values) => new InputExampleListValue(type, values);
         public static InputExampleValue Object(InputType type, IReadOnlyDictionary<string, InputExampleValue> properties) => new InputExampleObjectValue(type, properties);
+        public static InputExampleValue Stream(InputType type, string filename) => new InputExampleStreamValue(type, filename);
     }
 
     internal record InputExampleRawValue(InputType Type, object? RawValue) : InputExampleValue(Type);
@@ -18,4 +19,6 @@ namespace AutoRest.CSharp.Common.Input.Examples
     internal record InputExampleListValue(InputType Type, IReadOnlyList<InputExampleValue> Values) : InputExampleValue(Type);
 
     internal record InputExampleObjectValue(InputType Type, IReadOnlyDictionary<string, InputExampleValue> Values): InputExampleValue(Type);
+
+    internal record InputExampleStreamValue(InputType Type, string Filename): InputExampleValue(Type);
 }

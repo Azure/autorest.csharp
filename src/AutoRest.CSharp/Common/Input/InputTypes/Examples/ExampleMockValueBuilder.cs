@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
 
         private static InputExampleValue BuildPrimitiveExampleValue(InputPrimitiveType primitiveType, string? hint) => primitiveType.Kind switch
         {
-            InputTypeKind.Stream => InputExampleValue.Value(primitiveType, "<filePath>"),
+            InputTypeKind.Stream => InputExampleValue.Stream(primitiveType, "<filePath>"),
             InputTypeKind.Boolean => InputExampleValue.Value(primitiveType, true),
             InputTypeKind.Date => InputExampleValue.Value(primitiveType, "2022-05-10"),
             InputTypeKind.DateTime => InputExampleValue.Value(primitiveType, "2022-05-10T14:57:31.2311892-04:00"),
