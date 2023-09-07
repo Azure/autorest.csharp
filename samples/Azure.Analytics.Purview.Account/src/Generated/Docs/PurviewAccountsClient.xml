@@ -3,7 +3,18 @@
   <members>
     <member name="GetAccountPropertiesAsync(RequestContext)">
       <example>
-This sample shows how to call GetAccountPropertiesAsync with required parameters and parse the result.
+This sample shows how to call GetAccountPropertiesAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+
+Response response = await client.GetAccountPropertiesAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetAccountPropertiesAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -54,7 +65,18 @@ Console.WriteLine(result.GetProperty("type").ToString());
     </member>
     <member name="GetAccountProperties(RequestContext)">
       <example>
-This sample shows how to call GetAccountProperties with required parameters and parse the result.
+This sample shows how to call GetAccountProperties and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+
+Response response = client.GetAccountProperties(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetAccountProperties with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -117,7 +139,7 @@ Response response = await client.UpdateAccountPropertiesAsync(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call UpdateAccountPropertiesAsync with all request content, and how to parse the result.
+This sample shows how to call UpdateAccountPropertiesAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -184,7 +206,7 @@ Response response = client.UpdateAccountProperties(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call UpdateAccountProperties with all request content, and how to parse the result.
+This sample shows how to call UpdateAccountProperties with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -239,7 +261,18 @@ Console.WriteLine(result.GetProperty("type").ToString());
     </member>
     <member name="GetAccessKeysAsync(RequestContext)">
       <example>
-This sample shows how to call GetAccessKeysAsync with required parameters and parse the result.
+This sample shows how to call GetAccessKeysAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+
+Response response = await client.GetAccessKeysAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetAccessKeysAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -254,7 +287,18 @@ Console.WriteLine(result.GetProperty("atlasKafkaSecondaryEndpoint").ToString());
     </member>
     <member name="GetAccessKeys(RequestContext)">
       <example>
-This sample shows how to call GetAccessKeys with required parameters and parse the result.
+This sample shows how to call GetAccessKeys and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+
+Response response = client.GetAccessKeys(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetAccessKeys with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -281,7 +325,7 @@ Response response = await client.RegenerateAccessKeyAsync(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call RegenerateAccessKeyAsync with all request content, and how to parse the result.
+This sample shows how to call RegenerateAccessKeyAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -312,7 +356,7 @@ Response response = client.RegenerateAccessKey(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call RegenerateAccessKey with all request content, and how to parse the result.
+This sample shows how to call RegenerateAccessKey with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -331,7 +375,19 @@ Console.WriteLine(result.GetProperty("atlasKafkaSecondaryEndpoint").ToString());
     </member>
     <member name="GetResourceSetRulesAsync(string,RequestContext)">
       <example>
-This sample shows how to call GetResourceSetRulesAsync with required parameters and parse the result.
+This sample shows how to call GetResourceSetRulesAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+
+await foreach (BinaryData item in client.GetResourceSetRulesAsync(null, null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
+}
+]]></code>
+This sample shows how to call GetResourceSetRulesAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -430,7 +486,19 @@ await foreach (BinaryData item in client.GetResourceSetRulesAsync("<skipToken>",
     </member>
     <member name="GetResourceSetRules(string,RequestContext)">
       <example>
-This sample shows how to call GetResourceSetRules with required parameters and parse the result.
+This sample shows how to call GetResourceSetRules and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
+
+foreach (BinaryData item in client.GetResourceSetRules(null, null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
+}
+]]></code>
+This sample shows how to call GetResourceSetRules with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();

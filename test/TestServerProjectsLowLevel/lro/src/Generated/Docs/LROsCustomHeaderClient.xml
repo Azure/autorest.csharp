@@ -3,7 +3,7 @@
   <members>
     <member name="PutAsyncRetrySucceededAsync(WaitUntil,RequestContent,RequestContext)">
       <example>
-This sample shows how to call PutAsyncRetrySucceededAsync with required parameters and parse the result.
+This sample shows how to call PutAsyncRetrySucceededAsync and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
@@ -15,7 +15,7 @@ BinaryData responseData = operation.Value;
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call PutAsyncRetrySucceededAsync with all parameters and request content, and how to parse the result.
+This sample shows how to call PutAsyncRetrySucceededAsync with all parameters and request content and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
@@ -47,7 +47,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
     </member>
     <member name="PutAsyncRetrySucceeded(WaitUntil,RequestContent,RequestContext)">
       <example>
-This sample shows how to call PutAsyncRetrySucceeded with required parameters and parse the result.
+This sample shows how to call PutAsyncRetrySucceeded and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
@@ -59,7 +59,7 @@ BinaryData responseData = operation.Value;
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call PutAsyncRetrySucceeded with all parameters and request content, and how to parse the result.
+This sample shows how to call PutAsyncRetrySucceeded with all parameters and request content and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
@@ -91,7 +91,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
     </member>
     <member name="Put201CreatingSucceeded200Async(WaitUntil,RequestContent,RequestContext)">
       <example>
-This sample shows how to call Put201CreatingSucceeded200Async with required parameters and parse the result.
+This sample shows how to call Put201CreatingSucceeded200Async and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
@@ -103,7 +103,7 @@ BinaryData responseData = operation.Value;
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call Put201CreatingSucceeded200Async with all parameters and request content, and how to parse the result.
+This sample shows how to call Put201CreatingSucceeded200Async with all parameters and request content and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
@@ -135,7 +135,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
     </member>
     <member name="Put201CreatingSucceeded200(WaitUntil,RequestContent,RequestContext)">
       <example>
-This sample shows how to call Put201CreatingSucceeded200 with required parameters and parse the result.
+This sample shows how to call Put201CreatingSucceeded200 and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
@@ -147,7 +147,7 @@ BinaryData responseData = operation.Value;
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call Put201CreatingSucceeded200 with all parameters and request content, and how to parse the result.
+This sample shows how to call Put201CreatingSucceeded200 with all parameters and request content and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
@@ -179,7 +179,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
     </member>
     <member name="Post202Retry200Async(WaitUntil,RequestContent,RequestContext)">
       <example>
-This sample shows how to call Post202Retry200Async with required parameters.
+This sample shows how to call Post202Retry200Async.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
@@ -209,7 +209,7 @@ Operation operation = await client.Post202Retry200Async(WaitUntil.Completed, con
     </member>
     <member name="Post202Retry200(WaitUntil,RequestContent,RequestContext)">
       <example>
-This sample shows how to call Post202Retry200 with required parameters.
+This sample shows how to call Post202Retry200.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
@@ -239,7 +239,7 @@ Operation operation = client.Post202Retry200(WaitUntil.Completed, content);
     </member>
     <member name="PostAsyncRetrySucceededAsync(WaitUntil,RequestContent,RequestContext)">
       <example>
-This sample shows how to call PostAsyncRetrySucceededAsync with required parameters.
+This sample shows how to call PostAsyncRetrySucceededAsync.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
@@ -269,7 +269,7 @@ Operation operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Comple
     </member>
     <member name="PostAsyncRetrySucceeded(WaitUntil,RequestContent,RequestContext)">
       <example>
-This sample shows how to call PostAsyncRetrySucceeded with required parameters.
+This sample shows how to call PostAsyncRetrySucceeded.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);

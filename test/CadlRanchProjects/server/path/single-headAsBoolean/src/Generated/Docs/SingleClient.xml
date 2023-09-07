@@ -10,11 +10,27 @@ SingleClient client = new SingleClient(endpoint);
 
 Response<bool> response = await client.MyOpAsync();
 Console.WriteLine(response.GetRawResponse().Status);
+]]></code>
+This sample shows how to call MyOpAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SingleClient client = new SingleClient(endpoint);
+
+Response<bool> response = await client.MyOpAsync();
+Console.WriteLine(response.GetRawResponse().Status);
 ]]></code></example>
     </member>
     <member name="MyOp(RequestContext)">
       <example>
 This sample shows how to call MyOp.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+SingleClient client = new SingleClient(endpoint);
+
+Response<bool> response = client.MyOp();
+Console.WriteLine(response.GetRawResponse().Status);
+]]></code>
+This sample shows how to call MyOp with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SingleClient client = new SingleClient(endpoint);

@@ -3,7 +3,18 @@
   <members>
     <member name="GetResourceSetRuleAsync(RequestContext)">
       <example>
-This sample shows how to call GetResourceSetRuleAsync with required parameters and parse the result.
+This sample shows how to call GetResourceSetRuleAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+
+Response response = await client.GetResourceSetRuleAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetResourceSetRuleAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -101,7 +112,18 @@ Console.WriteLine(result.GetProperty("pathPatternConfig").GetProperty("version")
     </member>
     <member name="GetResourceSetRule(RequestContext)">
       <example>
-This sample shows how to call GetResourceSetRule with required parameters and parse the result.
+This sample shows how to call GetResourceSetRule and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+
+Response response = client.GetResourceSetRule(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetResourceSetRule with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -211,7 +233,7 @@ Response response = await client.CreateOrUpdateResourceSetRuleAsync(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call CreateOrUpdateResourceSetRuleAsync with all request content, and how to parse the result.
+This sample shows how to call CreateOrUpdateResourceSetRuleAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -436,7 +458,7 @@ Response response = client.CreateOrUpdateResourceSetRule(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call CreateOrUpdateResourceSetRule with all request content, and how to parse the result.
+This sample shows how to call CreateOrUpdateResourceSetRule with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -657,11 +679,29 @@ PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, cred
 
 Response response = await client.DeleteResourceSetRuleAsync();
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call DeleteResourceSetRuleAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+
+Response response = await client.DeleteResourceSetRuleAsync();
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="DeleteResourceSetRule(RequestContext)">
       <example>
 This sample shows how to call DeleteResourceSetRule.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+
+Response response = client.DeleteResourceSetRule();
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call DeleteResourceSetRule with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();

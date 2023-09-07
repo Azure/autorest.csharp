@@ -3,7 +3,13 @@
   <members>
     <member name="PublicAsync(string,CancellationToken)">
       <example>
-This sample shows how to call PublicAsync with required parameters.
+This sample shows how to call PublicAsync.
+<code><![CDATA[
+Shared client = new InternalClient().GetSharedClient();
+
+Response<SharedModel> response = await client.PublicAsync("<name>");
+]]></code>
+This sample shows how to call PublicAsync with all parameters.
 <code><![CDATA[
 Shared client = new InternalClient().GetSharedClient();
 
@@ -12,7 +18,13 @@ Response<SharedModel> response = await client.PublicAsync("<name>");
     </member>
     <member name="Public(string,CancellationToken)">
       <example>
-This sample shows how to call Public with required parameters.
+This sample shows how to call Public.
+<code><![CDATA[
+Shared client = new InternalClient().GetSharedClient();
+
+Response<SharedModel> response = client.Public("<name>");
+]]></code>
+This sample shows how to call Public with all parameters.
 <code><![CDATA[
 Shared client = new InternalClient().GetSharedClient();
 
@@ -21,7 +33,16 @@ Response<SharedModel> response = client.Public("<name>");
     </member>
     <member name="PublicAsync(string,RequestContext)">
       <example>
-This sample shows how to call PublicAsync with required parameters and parse the result.
+This sample shows how to call PublicAsync and parse the result.
+<code><![CDATA[
+Shared client = new InternalClient().GetSharedClient();
+
+Response response = await client.PublicAsync("<name>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call PublicAsync with all parameters and parse the result.
 <code><![CDATA[
 Shared client = new InternalClient().GetSharedClient();
 
@@ -33,7 +54,16 @@ Console.WriteLine(result.GetProperty("name").ToString());
     </member>
     <member name="Public(string,RequestContext)">
       <example>
-This sample shows how to call Public with required parameters and parse the result.
+This sample shows how to call Public and parse the result.
+<code><![CDATA[
+Shared client = new InternalClient().GetSharedClient();
+
+Response response = client.Public("<name>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call Public with all parameters and parse the result.
 <code><![CDATA[
 Shared client = new InternalClient().GetSharedClient();
 
@@ -43,9 +73,9 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
-    <member name="InternalAsync(string,CancellationToken)"></member>
-    <member name="Internal(string,CancellationToken)"></member>
-    <member name="InternalAsync(string,RequestContext)"></member>
-    <member name="Internal(string,RequestContext)"></member>
+    <member name="InternalAsync(string,CancellationToken)" />
+    <member name="Internal(string,CancellationToken)" />
+    <member name="InternalAsync(string,RequestContext)" />
+    <member name="Internal(string,RequestContext)" />
   </members>
 </doc>

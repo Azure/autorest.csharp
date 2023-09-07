@@ -8,6 +8,12 @@ This sample shows how to call GetNeverAsync.
 Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
 Response<NeverProperty> response = await client.GetNeverAsync();
+]]></code>
+This sample shows how to call GetNeverAsync with all parameters.
+<code><![CDATA[
+Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
+
+Response<NeverProperty> response = await client.GetNeverAsync();
 ]]></code></example>
     </member>
     <member name="GetNever(CancellationToken)">
@@ -17,11 +23,25 @@ This sample shows how to call GetNever.
 Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
 Response<NeverProperty> response = client.GetNever();
+]]></code>
+This sample shows how to call GetNever with all parameters.
+<code><![CDATA[
+Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
+
+Response<NeverProperty> response = client.GetNever();
 ]]></code></example>
     </member>
     <member name="GetNeverAsync(RequestContext)">
       <example>
-This sample shows how to call GetNeverAsync with required parameters and parse the result.
+This sample shows how to call GetNeverAsync and parse the result.
+<code><![CDATA[
+Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
+
+Response response = await client.GetNeverAsync(null);
+
+Console.WriteLine(response.ToString());
+]]></code>
+This sample shows how to call GetNeverAsync with all parameters and parse the result.
 <code><![CDATA[
 Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -32,7 +52,15 @@ Console.WriteLine(response.ToString());
     </member>
     <member name="GetNever(RequestContext)">
       <example>
-This sample shows how to call GetNever with required parameters and parse the result.
+This sample shows how to call GetNever and parse the result.
+<code><![CDATA[
+Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
+
+Response response = client.GetNever(null);
+
+Console.WriteLine(response.ToString());
+]]></code>
+This sample shows how to call GetNever with all parameters and parse the result.
 <code><![CDATA[
 Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -43,7 +71,15 @@ Console.WriteLine(response.ToString());
     </member>
     <member name="PutAsync(NeverProperty,CancellationToken)">
       <example>
-This sample shows how to call PutAsync with required parameters.
+This sample shows how to call PutAsync.
+<code><![CDATA[
+Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
+
+NeverProperty body = new NeverProperty();
+Response response = await client.PutAsync(body);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -54,7 +90,15 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put(NeverProperty,CancellationToken)">
       <example>
-This sample shows how to call Put with required parameters.
+This sample shows how to call Put.
+<code><![CDATA[
+Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
+
+NeverProperty body = new NeverProperty();
+Response response = client.Put(body);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all parameters.
 <code><![CDATA[
 Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -65,7 +109,15 @@ Console.WriteLine(response.Status);
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
       <example>
-This sample shows how to call PutAsync with required request content.
+This sample shows how to call PutAsync.
+<code><![CDATA[
+Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+Response response = await client.PutAsync(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 
@@ -76,7 +128,15 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put(RequestContent,RequestContext)">
       <example>
-This sample shows how to call Put with required request content.
+This sample shows how to call Put.
+<code><![CDATA[
+Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+Response response = client.Put(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all request content.
 <code><![CDATA[
 Never client = new ValueTypesClient().GetNeverClient(apiVersion: "1.0.0");
 

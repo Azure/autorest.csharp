@@ -3,7 +3,14 @@
   <members>
     <member name="OperationAsync(string,RequestContext)">
       <example>
-This sample shows how to call OperationAsync with required parameters.
+This sample shows how to call OperationAsync.
+<code><![CDATA[
+ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
+
+Response response = await client.OperationAsync("2.0");
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call OperationAsync with all parameters.
 <code><![CDATA[
 ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
 
@@ -13,7 +20,14 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Operation(string,RequestContext)">
       <example>
-This sample shows how to call Operation with required parameters.
+This sample shows how to call Operation.
+<code><![CDATA[
+ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
+
+Response response = client.Operation("2.0");
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Operation with all parameters.
 <code><![CDATA[
 ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
 

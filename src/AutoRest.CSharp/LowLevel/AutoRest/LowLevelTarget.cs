@@ -47,9 +47,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var exampleFileCheckFilename = $"../../tests/Generated/Samples/Samples_{client.Type.Name}.cs";
                 project.AddGeneratedFile(exampleFileCheckFilename, exampleCompileCheckWriter.ToString());
 
-                // TODO -- temporary
-                var xmlDocument = XDocument.Parse(xmlDocWriter.ToString());
-                project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", new XmlDocument(exampleFileCheckFilename, xmlDocument));
+                project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", new XmlDocumentFile(exampleFileCheckFilename, xmlDocWriter));
             }
 
             var optionsWriter = new CodeWriter();

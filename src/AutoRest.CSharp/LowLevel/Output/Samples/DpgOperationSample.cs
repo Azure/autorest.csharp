@@ -12,10 +12,7 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -459,6 +456,52 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 !protocolMethodSignature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))) &&
                 !client.IsMethodSuppressed(protocolMethodSignature) &&
                 (client.IsSubClient ? true : client.GetEffectiveCtor() is not null);
+        }
+
+        public string GetSampleInformation(bool isAsync) => IsConvenienceSample
+                ? GetSampleInformationForConvenience(Method.ConvenienceMethod!.Signature.WithAsync(isAsync))
+                : GetSampleInformationForProtocol(Method.ProtocolMethodSignature.WithAsync(isAsync));
+
+        private string GetSampleInformationForConvenience(MethodSignature methodSignature)
+        {
+            var methodName = methodSignature.Name;
+            if (_useAllParameters)
+            {
+                return $"This sample shows how to call {methodName} with all parameters.";
+            }
+
+            return $"This sample shows how to call {methodName}.";
+        }
+
+        private string GetSampleInformationForProtocol(MethodSignature methodSignature)
+        {
+            var methodName = methodSignature.Name;
+            if (_useAllParameters)
+            {
+                return $"This sample shows how to call {methodName} with all {GenerateParameterAndRequestContentDescription(methodSignature.Parameters)}{(HasResponseBody ? " and parse the result" : "")}.";
+            }
+
+            return $"This sample shows how to call {methodName}{(HasResponseBody ? " and parse the result" : string.Empty)}.";
+        }
+
+        // RequestContext is excluded
+        private static bool HasNonBodyCustomParameter(IReadOnlyList<Parameter> parameters)
+            => parameters.Any(p => p.RequestLocation != RequestLocation.Body && !p.Equals(KnownParameters.RequestContext));
+
+        private string GenerateParameterAndRequestContentDescription(IReadOnlyList<Parameter> parameters)
+        {
+            var hasNonBodyParameter = HasNonBodyCustomParameter(parameters);
+            var hasBodyParameter = parameters.Any(p => p.RequestLocation == RequestLocation.Body);
+
+            if (hasNonBodyParameter)
+            {
+                if (hasBodyParameter)
+                {
+                    return "parameters and request content";
+                }
+                return "parameters";
+            }
+            return "request content";
         }
     }
 }

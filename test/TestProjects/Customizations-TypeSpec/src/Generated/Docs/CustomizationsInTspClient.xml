@@ -3,7 +3,14 @@
   <members>
     <member name="RoundTripAsync(RootModel,CancellationToken)">
       <example>
-This sample shows how to call RoundTripAsync with required parameters.
+This sample shows how to call RoundTripAsync.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+RootModel input = new RootModel();
+Response<RootModel> response = await client.RoundTripAsync(input);
+]]></code>
+This sample shows how to call RoundTripAsync with all parameters.
 <code><![CDATA[
 CustomizationsInTspClient client = new CustomizationsInTspClient();
 
@@ -44,7 +51,14 @@ Response<RootModel> response = await client.RoundTripAsync(input);
     </member>
     <member name="RoundTrip(RootModel,CancellationToken)">
       <example>
-This sample shows how to call RoundTrip with required parameters.
+This sample shows how to call RoundTrip.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+RootModel input = new RootModel();
+Response<RootModel> response = client.RoundTrip(input);
+]]></code>
+This sample shows how to call RoundTrip with all parameters.
 <code><![CDATA[
 CustomizationsInTspClient client = new CustomizationsInTspClient();
 
@@ -95,7 +109,7 @@ Response response = await client.RoundTripAsync(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call RoundTripAsync with all request content, and how to parse the result.
+This sample shows how to call RoundTripAsync with all request content and parse the result.
 <code><![CDATA[
 CustomizationsInTspClient client = new CustomizationsInTspClient();
 
@@ -194,7 +208,7 @@ Response response = client.RoundTrip(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call RoundTrip with all request content, and how to parse the result.
+This sample shows how to call RoundTrip with all request content and parse the result.
 <code><![CDATA[
 CustomizationsInTspClient client = new CustomizationsInTspClient();
 

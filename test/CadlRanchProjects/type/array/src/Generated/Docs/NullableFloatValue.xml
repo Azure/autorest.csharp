@@ -8,6 +8,12 @@ This sample shows how to call GetNullableFloatValueAsync.
 NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyList<float?>> response = await client.GetNullableFloatValueAsync();
+]]></code>
+This sample shows how to call GetNullableFloatValueAsync with all parameters.
+<code><![CDATA[
+NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyList<float?>> response = await client.GetNullableFloatValueAsync();
 ]]></code></example>
     </member>
     <member name="GetNullableFloatValue(CancellationToken)">
@@ -17,11 +23,26 @@ This sample shows how to call GetNullableFloatValue.
 NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
 Response<IReadOnlyList<float?>> response = client.GetNullableFloatValue();
+]]></code>
+This sample shows how to call GetNullableFloatValue with all parameters.
+<code><![CDATA[
+NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyList<float?>> response = client.GetNullableFloatValue();
 ]]></code></example>
     </member>
     <member name="GetNullableFloatValueAsync(RequestContext)">
       <example>
-This sample shows how to call GetNullableFloatValueAsync with required parameters and parse the result.
+This sample shows how to call GetNullableFloatValueAsync and parse the result.
+<code><![CDATA[
+NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+Response response = await client.GetNullableFloatValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
+]]></code>
+This sample shows how to call GetNullableFloatValueAsync with all parameters and parse the result.
 <code><![CDATA[
 NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
@@ -33,7 +54,16 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetNullableFloatValue(RequestContext)">
       <example>
-This sample shows how to call GetNullableFloatValue with required parameters and parse the result.
+This sample shows how to call GetNullableFloatValue and parse the result.
+<code><![CDATA[
+NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+Response response = client.GetNullableFloatValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
+]]></code>
+This sample shows how to call GetNullableFloatValue with all parameters and parse the result.
 <code><![CDATA[
 NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
@@ -45,7 +75,17 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="PutAsync(IEnumerable{float?},CancellationToken)">
       <example>
-This sample shows how to call PutAsync with required parameters.
+This sample shows how to call PutAsync.
+<code><![CDATA[
+NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new List<float?>()
+{
+(float)123.45F
+});
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
@@ -58,7 +98,17 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put(IEnumerable{float?},CancellationToken)">
       <example>
-This sample shows how to call Put with required parameters.
+This sample shows how to call Put.
+<code><![CDATA[
+NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new List<float?>()
+{
+(float)123.45F
+});
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all parameters.
 <code><![CDATA[
 NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
@@ -71,7 +121,18 @@ Console.WriteLine(response.Status);
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
       <example>
-This sample shows how to call PutAsync with required request content.
+This sample shows how to call PutAsync.
+<code><![CDATA[
+NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new List<object>()
+{
+123.45F
+});
+Response response = await client.PutAsync(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
@@ -85,7 +146,18 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Put(RequestContent,RequestContext)">
       <example>
-This sample shows how to call Put with required request content.
+This sample shows how to call Put.
+<code><![CDATA[
+NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new List<object>()
+{
+123.45F
+});
+Response response = client.Put(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all request content.
 <code><![CDATA[
 NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 

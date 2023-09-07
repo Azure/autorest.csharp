@@ -3,7 +3,7 @@
   <members>
     <member name="CollapsePutAsync(RequestContent,RequestConditions,RequestContext)">
       <example>
-This sample shows how to call CollapsePutAsync with required parameters and request content.
+This sample shows how to call CollapsePutAsync.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);
@@ -24,7 +24,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="CollapsePut(RequestContent,RequestConditions,RequestContext)">
       <example>
-This sample shows how to call CollapsePut with required parameters and request content.
+This sample shows how to call CollapsePut.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 RequestConditionCollapseClient client = new RequestConditionCollapseClient(credential);

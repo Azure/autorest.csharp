@@ -3,7 +3,7 @@
   <members>
     <member name="GetEmptyAsync(string,string,string,string,RequestContext)">
       <example>
-This sample shows how to call GetEmptyAsync with required parameters.
+This sample shows how to call GetEmptyAsync.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);
@@ -22,7 +22,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetEmpty(string,string,string,string,RequestContext)">
       <example>
-This sample shows how to call GetEmpty with required parameters.
+This sample shows how to call GetEmpty.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient("host", "<SubscriptionId>", credential);

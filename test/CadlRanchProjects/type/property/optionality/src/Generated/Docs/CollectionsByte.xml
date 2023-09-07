@@ -8,6 +8,12 @@ This sample shows how to call GetAllAsync.
 CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
 Response<CollectionsByteProperty> response = await client.GetAllAsync();
+]]></code>
+This sample shows how to call GetAllAsync with all parameters.
+<code><![CDATA[
+CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+
+Response<CollectionsByteProperty> response = await client.GetAllAsync();
 ]]></code></example>
     </member>
     <member name="GetAll(CancellationToken)">
@@ -17,11 +23,26 @@ This sample shows how to call GetAll.
 CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
 Response<CollectionsByteProperty> response = client.GetAll();
+]]></code>
+This sample shows how to call GetAll with all parameters.
+<code><![CDATA[
+CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+
+Response<CollectionsByteProperty> response = client.GetAll();
 ]]></code></example>
     </member>
     <member name="GetAllAsync(RequestContext)">
       <example>
-This sample shows how to call GetAllAsync with required parameters and parse the result.
+This sample shows how to call GetAllAsync and parse the result.
+<code><![CDATA[
+CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+
+Response response = await client.GetAllAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetAllAsync with all parameters and parse the result.
 <code><![CDATA[
 CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
@@ -33,7 +54,16 @@ Console.WriteLine(result.GetProperty("property")[0].ToString());
     </member>
     <member name="GetAll(RequestContext)">
       <example>
-This sample shows how to call GetAll with required parameters and parse the result.
+This sample shows how to call GetAll and parse the result.
+<code><![CDATA[
+CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+
+Response response = client.GetAll(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetAll with all parameters and parse the result.
 <code><![CDATA[
 CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
@@ -50,6 +80,12 @@ This sample shows how to call GetDefaultAsync.
 CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
 Response<CollectionsByteProperty> response = await client.GetDefaultAsync();
+]]></code>
+This sample shows how to call GetDefaultAsync with all parameters.
+<code><![CDATA[
+CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+
+Response<CollectionsByteProperty> response = await client.GetDefaultAsync();
 ]]></code></example>
     </member>
     <member name="GetDefault(CancellationToken)">
@@ -59,11 +95,26 @@ This sample shows how to call GetDefault.
 CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
 Response<CollectionsByteProperty> response = client.GetDefault();
+]]></code>
+This sample shows how to call GetDefault with all parameters.
+<code><![CDATA[
+CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+
+Response<CollectionsByteProperty> response = client.GetDefault();
 ]]></code></example>
     </member>
     <member name="GetDefaultAsync(RequestContext)">
       <example>
-This sample shows how to call GetDefaultAsync with required parameters and parse the result.
+This sample shows how to call GetDefaultAsync and parse the result.
+<code><![CDATA[
+CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+
+Response response = await client.GetDefaultAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetDefaultAsync with all parameters and parse the result.
 <code><![CDATA[
 CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
@@ -75,7 +126,16 @@ Console.WriteLine(result.GetProperty("property")[0].ToString());
     </member>
     <member name="GetDefault(RequestContext)">
       <example>
-This sample shows how to call GetDefault with required parameters and parse the result.
+This sample shows how to call GetDefault and parse the result.
+<code><![CDATA[
+CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+
+Response response = client.GetDefault(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetDefault with all parameters and parse the result.
 <code><![CDATA[
 CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
@@ -87,7 +147,15 @@ Console.WriteLine(result.GetProperty("property")[0].ToString());
     </member>
     <member name="PutAllAsync(CollectionsByteProperty,CancellationToken)">
       <example>
-This sample shows how to call PutAllAsync with required parameters.
+This sample shows how to call PutAllAsync.
+<code><![CDATA[
+CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+
+CollectionsByteProperty body = new CollectionsByteProperty();
+Response response = await client.PutAllAsync(body);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAllAsync with all parameters.
 <code><![CDATA[
 CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
@@ -104,7 +172,15 @@ Console.WriteLine(response.Status);
     </member>
     <member name="PutAll(CollectionsByteProperty,CancellationToken)">
       <example>
-This sample shows how to call PutAll with required parameters.
+This sample shows how to call PutAll.
+<code><![CDATA[
+CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+
+CollectionsByteProperty body = new CollectionsByteProperty();
+Response response = client.PutAll(body);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAll with all parameters.
 <code><![CDATA[
 CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
@@ -171,7 +247,15 @@ Console.WriteLine(response.Status);
     </member>
     <member name="PutDefaultAsync(CollectionsByteProperty,CancellationToken)">
       <example>
-This sample shows how to call PutDefaultAsync with required parameters.
+This sample shows how to call PutDefaultAsync.
+<code><![CDATA[
+CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+
+CollectionsByteProperty body = new CollectionsByteProperty();
+Response response = await client.PutDefaultAsync(body);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutDefaultAsync with all parameters.
 <code><![CDATA[
 CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
@@ -188,7 +272,15 @@ Console.WriteLine(response.Status);
     </member>
     <member name="PutDefault(CollectionsByteProperty,CancellationToken)">
       <example>
-This sample shows how to call PutDefault with required parameters.
+This sample shows how to call PutDefault.
+<code><![CDATA[
+CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+
+CollectionsByteProperty body = new CollectionsByteProperty();
+Response response = client.PutDefault(body);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutDefault with all parameters.
 <code><![CDATA[
 CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 

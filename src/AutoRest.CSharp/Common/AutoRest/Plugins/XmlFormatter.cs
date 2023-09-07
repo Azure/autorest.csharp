@@ -5,12 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
-using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Generation.Writers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -18,10 +17,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class XmlFormatter
     {
-        internal static async Task<string> FormatAsync(XDocument document, SyntaxTree syntaxTree)
+        internal static async Task<string> FormatAsync(XmlDocWriter writer, SyntaxTree syntaxTree)
         {
+            var document = writer.Document;
             var methods = await GetMethods(syntaxTree);
             // first we need to get the members
+            // TODO -- we should have a reference to the members we have in the writer and directly go to them
             var members = document.Element("doc")!
                 .Element("members")!
                 .Elements("member")!;
@@ -50,14 +51,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
             }
 
-            var writer = new XmlStringWriter();
+            var swriter = new XmlStringWriter();
             XmlWriterSettings settings = new XmlWriterSettings { OmitXmlDeclaration = false, Indent = true };
-            using (XmlWriter xw = XmlWriter.Create(writer, settings))
+            using (XmlWriter xw = XmlWriter.Create(swriter, settings))
             {
                 document.Save(xw);
             }
 
-            return writer.ToString();
+            return swriter.ToString();
         }
 
         private static string[] GetLines(BlockSyntax methodBlock)

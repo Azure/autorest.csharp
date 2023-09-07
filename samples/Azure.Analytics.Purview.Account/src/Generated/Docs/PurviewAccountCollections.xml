@@ -3,7 +3,18 @@
   <members>
     <member name="GetCollectionAsync(RequestContext)">
       <example>
-This sample shows how to call GetCollectionAsync with required parameters and parse the result.
+This sample shows how to call GetCollectionAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
+
+Response response = await client.GetCollectionAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetCollectionAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -28,7 +39,18 @@ Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByTy
     </member>
     <member name="GetCollection(RequestContext)">
       <example>
-This sample shows how to call GetCollection with required parameters and parse the result.
+This sample shows how to call GetCollection and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
+
+Response response = client.GetCollection(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetCollection with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -65,7 +87,7 @@ Response response = await client.CreateOrUpdateCollectionAsync(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call CreateOrUpdateCollectionAsync with all request content, and how to parse the result.
+This sample shows how to call CreateOrUpdateCollectionAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -111,7 +133,7 @@ Response response = client.CreateOrUpdateCollection(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-This sample shows how to call CreateOrUpdateCollection with all request content, and how to parse the result.
+This sample shows how to call CreateOrUpdateCollection with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -153,6 +175,15 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 Response response = await client.DeleteCollectionAsync();
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call DeleteCollectionAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
+
+Response response = await client.DeleteCollectionAsync();
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="DeleteCollection(RequestContext)">
@@ -165,11 +196,31 @@ PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credentia
 
 Response response = client.DeleteCollection();
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call DeleteCollection with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
+
+Response response = client.DeleteCollection();
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="GetCollectionPathAsync(RequestContext)">
       <example>
-This sample shows how to call GetCollectionPathAsync with required parameters and parse the result.
+This sample shows how to call GetCollectionPathAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
+
+Response response = await client.GetCollectionPathAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetCollectionPathAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -184,7 +235,18 @@ Console.WriteLine(result.GetProperty("parentNameChain")[0].ToString());
     </member>
     <member name="GetCollectionPath(RequestContext)">
       <example>
-This sample shows how to call GetCollectionPath with required parameters and parse the result.
+This sample shows how to call GetCollectionPath and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
+
+Response response = client.GetCollectionPath(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetCollectionPath with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -199,7 +261,19 @@ Console.WriteLine(result.GetProperty("parentNameChain")[0].ToString());
     </member>
     <member name="GetCollectionsAsync(string,RequestContext)">
       <example>
-This sample shows how to call GetCollectionsAsync with required parameters and parse the result.
+This sample shows how to call GetCollectionsAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient(null);
+
+await foreach (BinaryData item in client.GetCollectionsAsync(null, null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
+}
+]]></code>
+This sample shows how to call GetCollectionsAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -225,7 +299,19 @@ await foreach (BinaryData item in client.GetCollectionsAsync("<skipToken>", null
     </member>
     <member name="GetCollections(string,RequestContext)">
       <example>
-This sample shows how to call GetCollections with required parameters and parse the result.
+This sample shows how to call GetCollections and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient(null);
+
+foreach (BinaryData item in client.GetCollections(null, null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
+}
+]]></code>
+This sample shows how to call GetCollections with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -251,7 +337,19 @@ foreach (BinaryData item in client.GetCollections("<skipToken>", null))
     </member>
     <member name="GetChildCollectionNamesAsync(string,RequestContext)">
       <example>
-This sample shows how to call GetChildCollectionNamesAsync with required parameters and parse the result.
+This sample shows how to call GetChildCollectionNamesAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
+
+await foreach (BinaryData item in client.GetChildCollectionNamesAsync(null, null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
+}
+]]></code>
+This sample shows how to call GetChildCollectionNamesAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
@@ -267,7 +365,19 @@ await foreach (BinaryData item in client.GetChildCollectionNamesAsync("<skipToke
     </member>
     <member name="GetChildCollectionNames(string,RequestContext)">
       <example>
-This sample shows how to call GetChildCollectionNames with required parameters and parse the result.
+This sample shows how to call GetChildCollectionNames and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
+
+foreach (BinaryData item in client.GetChildCollectionNames(null, null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
+}
+]]></code>
+This sample shows how to call GetChildCollectionNames with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();

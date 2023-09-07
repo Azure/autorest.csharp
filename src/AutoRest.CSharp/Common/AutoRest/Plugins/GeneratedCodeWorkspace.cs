@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static Task<Project>? _cachedProject;
 
         private Project _project;
-        private Dictionary<string, XmlDocument> _xmlDocFiles { get; }
+        private Dictionary<string, XmlDocumentFile> _xmlDocFiles { get; }
 
         private GeneratedCodeWorkspace(Project generatedCodeProject)
         {
@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         /// </summary>
         /// <param name="name">Name of the doc file, including the relative path to the "Generated" folder.</param>
         /// <param name="xmlDocument">Content of the doc file.</param>
-        public void AddGeneratedDocFile(string name, XmlDocument xmlDocument)
+        public void AddGeneratedDocFile(string name, XmlDocumentFile xmlDocument)
         {
             _xmlDocFiles.Add(name, xmlDocument);
         }
@@ -127,9 +127,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var (docName, doc) in _xmlDocFiles)
             {
-                var xmlDocument = doc.XmlDocDocument;
+                var xmlWriter = doc.XmlDocWriter;
                 var testDocument = generatedDocs[doc.TestFileName];
-                var content = await XmlFormatter.FormatAsync(xmlDocument, testDocument);
+                var content = await XmlFormatter.FormatAsync(xmlWriter, testDocument);
                 yield return (docName, content);
             }
         }

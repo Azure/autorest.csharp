@@ -21,13 +21,11 @@ namespace AutoRest.CSharp.LowLevel.Generation
     {
         private LowLevelClient _client;
         private CodeWriter _writer;
-        private LowLevelExampleComposer _exampleComposer; // TODO -- to be removed
 
         public ExampleCompileCheckWriter(LowLevelClient client)
         {
             _client = client;
             _writer = new CodeWriter();
-            _exampleComposer = new LowLevelExampleComposer(_client);
         }
 
         public void Write()

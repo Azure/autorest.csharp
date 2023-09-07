@@ -3,7 +3,17 @@
   <members>
     <member name="MultiAsync(IEnumerable{string},RequestContext)">
       <example>
-This sample shows how to call MultiAsync with required parameters.
+This sample shows how to call MultiAsync.
+<code><![CDATA[
+Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
+
+Response response = await client.MultiAsync(new List<string>()
+{
+"<colors>"
+});
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call MultiAsync with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -16,7 +26,17 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Multi(IEnumerable{string},RequestContext)">
       <example>
-This sample shows how to call Multi with required parameters.
+This sample shows how to call Multi.
+<code><![CDATA[
+Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
+
+Response response = client.Multi(new List<string>()
+{
+"<colors>"
+});
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Multi with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -29,7 +49,17 @@ Console.WriteLine(response.Status);
     </member>
     <member name="SsvAsync(IEnumerable{string},RequestContext)">
       <example>
-This sample shows how to call SsvAsync with required parameters.
+This sample shows how to call SsvAsync.
+<code><![CDATA[
+Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
+
+Response response = await client.SsvAsync(new List<string>()
+{
+"<colors>"
+});
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call SsvAsync with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -42,7 +72,17 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Ssv(IEnumerable{string},RequestContext)">
       <example>
-This sample shows how to call Ssv with required parameters.
+This sample shows how to call Ssv.
+<code><![CDATA[
+Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
+
+Response response = client.Ssv(new List<string>()
+{
+"<colors>"
+});
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Ssv with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -55,7 +95,17 @@ Console.WriteLine(response.Status);
     </member>
     <member name="TsvAsync(IEnumerable{string},RequestContext)">
       <example>
-This sample shows how to call TsvAsync with required parameters.
+This sample shows how to call TsvAsync.
+<code><![CDATA[
+Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
+
+Response response = await client.TsvAsync(new List<string>()
+{
+"<colors>"
+});
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call TsvAsync with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -68,7 +118,17 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Tsv(IEnumerable{string},RequestContext)">
       <example>
-This sample shows how to call Tsv with required parameters.
+This sample shows how to call Tsv.
+<code><![CDATA[
+Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
+
+Response response = client.Tsv(new List<string>()
+{
+"<colors>"
+});
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Tsv with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -81,7 +141,17 @@ Console.WriteLine(response.Status);
     </member>
     <member name="PipesAsync(IEnumerable{string},RequestContext)">
       <example>
-This sample shows how to call PipesAsync with required parameters.
+This sample shows how to call PipesAsync.
+<code><![CDATA[
+Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
+
+Response response = await client.PipesAsync(new List<string>()
+{
+"<colors>"
+});
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PipesAsync with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -94,7 +164,17 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Pipes(IEnumerable{string},RequestContext)">
       <example>
-This sample shows how to call Pipes with required parameters.
+This sample shows how to call Pipes.
+<code><![CDATA[
+Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
+
+Response response = client.Pipes(new List<string>()
+{
+"<colors>"
+});
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Pipes with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -107,7 +187,17 @@ Console.WriteLine(response.Status);
     </member>
     <member name="CsvAsync(IEnumerable{string},RequestContext)">
       <example>
-This sample shows how to call CsvAsync with required parameters.
+This sample shows how to call CsvAsync.
+<code><![CDATA[
+Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
+
+Response response = await client.CsvAsync(new List<string>()
+{
+"<colors>"
+});
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call CsvAsync with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
@@ -120,7 +210,17 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Csv(IEnumerable{string},RequestContext)">
       <example>
-This sample shows how to call Csv with required parameters.
+This sample shows how to call Csv.
+<code><![CDATA[
+Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
+
+Response response = client.Csv(new List<string>()
+{
+"<colors>"
+});
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Csv with all parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 

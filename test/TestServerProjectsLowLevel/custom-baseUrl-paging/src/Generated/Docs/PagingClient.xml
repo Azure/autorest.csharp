@@ -3,7 +3,18 @@
   <members>
     <member name="GetPagesPartialUrlAsync(string,RequestContext)">
       <example>
-This sample shows how to call GetPagesPartialUrlAsync with required parameters and parse the result.
+This sample shows how to call GetPagesPartialUrlAsync and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PagingClient client = new PagingClient("host", credential);
+
+await foreach (BinaryData item in client.GetPagesPartialUrlAsync("<accountName>", null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
+}
+]]></code>
+This sample shows how to call GetPagesPartialUrlAsync with all parameters and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PagingClient client = new PagingClient("host", credential);
@@ -18,7 +29,18 @@ await foreach (BinaryData item in client.GetPagesPartialUrlAsync("<accountName>"
     </member>
     <member name="GetPagesPartialUrl(string,RequestContext)">
       <example>
-This sample shows how to call GetPagesPartialUrl with required parameters and parse the result.
+This sample shows how to call GetPagesPartialUrl and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PagingClient client = new PagingClient("host", credential);
+
+foreach (BinaryData item in client.GetPagesPartialUrl("<accountName>", null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
+}
+]]></code>
+This sample shows how to call GetPagesPartialUrl with all parameters and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PagingClient client = new PagingClient("host", credential);
@@ -33,7 +55,18 @@ foreach (BinaryData item in client.GetPagesPartialUrl("<accountName>", null))
     </member>
     <member name="GetPagesPartialUrlOperationAsync(string,RequestContext)">
       <example>
-This sample shows how to call GetPagesPartialUrlOperationAsync with required parameters and parse the result.
+This sample shows how to call GetPagesPartialUrlOperationAsync and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PagingClient client = new PagingClient("host", credential);
+
+await foreach (BinaryData item in client.GetPagesPartialUrlOperationAsync("<accountName>", null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
+}
+]]></code>
+This sample shows how to call GetPagesPartialUrlOperationAsync with all parameters and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PagingClient client = new PagingClient("host", credential);
@@ -48,7 +81,18 @@ await foreach (BinaryData item in client.GetPagesPartialUrlOperationAsync("<acco
     </member>
     <member name="GetPagesPartialUrlOperation(string,RequestContext)">
       <example>
-This sample shows how to call GetPagesPartialUrlOperation with required parameters and parse the result.
+This sample shows how to call GetPagesPartialUrlOperation and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PagingClient client = new PagingClient("host", credential);
+
+foreach (BinaryData item in client.GetPagesPartialUrlOperation("<accountName>", null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
+}
+]]></code>
+This sample shows how to call GetPagesPartialUrlOperation with all parameters and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PagingClient client = new PagingClient("host", credential);
@@ -63,7 +107,18 @@ foreach (BinaryData item in client.GetPagesPartialUrlOperation("<accountName>", 
     </member>
     <member name="GetPagesPartialUrlOperationNextAsync(string,string,RequestContext)">
       <example>
-This sample shows how to call GetPagesPartialUrlOperationNextAsync with required parameters and parse the result.
+This sample shows how to call GetPagesPartialUrlOperationNextAsync and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PagingClient client = new PagingClient("host", credential);
+
+await foreach (BinaryData item in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>", null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
+}
+]]></code>
+This sample shows how to call GetPagesPartialUrlOperationNextAsync with all parameters and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PagingClient client = new PagingClient("host", credential);
@@ -78,7 +133,18 @@ await foreach (BinaryData item in client.GetPagesPartialUrlOperationNextAsync("<
     </member>
     <member name="GetPagesPartialUrlOperationNext(string,string,RequestContext)">
       <example>
-This sample shows how to call GetPagesPartialUrlOperationNext with required parameters and parse the result.
+This sample shows how to call GetPagesPartialUrlOperationNext and parse the result.
+<code><![CDATA[
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+PagingClient client = new PagingClient("host", credential);
+
+foreach (BinaryData item in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>", null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].ToString());
+}
+]]></code>
+This sample shows how to call GetPagesPartialUrlOperationNext with all parameters and parse the result.
 <code><![CDATA[
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PagingClient client = new PagingClient("host", credential);

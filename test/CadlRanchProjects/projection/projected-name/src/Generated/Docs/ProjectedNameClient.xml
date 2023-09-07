@@ -9,6 +9,13 @@ ProjectedNameClient client = new ProjectedNameClient();
 
 Response response = await client.OperationAsync();
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call OperationAsync with all request content.
+<code><![CDATA[
+ProjectedNameClient client = new ProjectedNameClient();
+
+Response response = await client.OperationAsync();
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Operation(RequestContext)">
@@ -19,11 +26,25 @@ ProjectedNameClient client = new ProjectedNameClient();
 
 Response response = client.Operation();
 Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Operation with all request content.
+<code><![CDATA[
+ProjectedNameClient client = new ProjectedNameClient();
+
+Response response = client.Operation();
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="ParameterAsync(string,RequestContext)">
       <example>
-This sample shows how to call ParameterAsync with required parameters.
+This sample shows how to call ParameterAsync.
+<code><![CDATA[
+ProjectedNameClient client = new ProjectedNameClient();
+
+Response response = await client.ParameterAsync("<default-name>");
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call ParameterAsync with all parameters.
 <code><![CDATA[
 ProjectedNameClient client = new ProjectedNameClient();
 
@@ -33,7 +54,14 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Parameter(string,RequestContext)">
       <example>
-This sample shows how to call Parameter with required parameters.
+This sample shows how to call Parameter.
+<code><![CDATA[
+ProjectedNameClient client = new ProjectedNameClient();
+
+Response response = client.Parameter("<default-name>");
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Parameter with all parameters.
 <code><![CDATA[
 ProjectedNameClient client = new ProjectedNameClient();
 

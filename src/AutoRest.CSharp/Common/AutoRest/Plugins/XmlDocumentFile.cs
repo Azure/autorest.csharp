@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Xml.Linq;
+using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
-    public record XmlDocument(string TestFileName, XDocument XmlDocDocument);
+    internal record XmlDocumentFile(string TestFileName, XmlDocWriter XmlDocWriter);
 }
