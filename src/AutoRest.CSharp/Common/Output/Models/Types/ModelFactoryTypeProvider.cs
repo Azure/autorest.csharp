@@ -30,8 +30,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
-        private IList<MethodSignature>? _methods;
-        public override IList<MethodSignature> Methods => _methods ??= Models!.Select(CreateMethod).ToList();
+        private IReadOnlyList<MethodSignature>? _methods;
+        public override IReadOnlyList<MethodSignature> Methods => _methods ??= Models!.Select(CreateMethod).ToList();
 
         public IEnumerable<SerializableObjectType>? Models { get; }
 
@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             ExistingModelFactoryMethods.UnionWith(typeof(DataFactoryModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet());
         }
 
-        private ModelFactoryTypeProvider(IList<MethodSignature> methods)
+        private ModelFactoryTypeProvider(IReadOnlyList<MethodSignature> methods)
             : base(string.Empty, null)
         {
             _methods = methods;

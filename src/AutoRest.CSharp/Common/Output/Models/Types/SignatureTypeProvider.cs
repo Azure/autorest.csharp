@@ -33,35 +33,35 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         protected abstract SignatureTypeProvider? PreviousContract { get; }
 
         // TODO: store the implementation of missing methods along with declaration
-        public abstract IList<MethodSignature> Methods { get; }
+        public abstract IReadOnlyList<MethodSignature> Methods { get; }
 
         private (IList<MethodSignature> Missing, IList<(List<MethodSignature> Current, MethodSignature Previous)> Updated)? _methodChangeset;
         private (IList<MethodSignature> Missing, IList<(List<MethodSignature> Current, MethodSignature Previous)> Updated)? MethodChangeset
             => _methodChangeset ??= CompareMethods(Methods.Union(Customization?.Methods ?? Array.Empty<MethodSignature>(), new MethodSignatureComparer()), PreviousContract?.Methods);
 
-        public IList<(MethodSignature CurrentMethodToCall, MethodSignature PreviousMethodToAdd, IList<MethodParameter> MissingParameters)> MissingOverloadMethods
+        public IList<OverloadMethodSignature> MissingOverloadMethods
         {
             get
             {
-                var overloadMethods = new List<(MethodSignature CurrentMethodToCall, MethodSignature PreviousMethodToAdd, IList<MethodParameter> MissingParameters)>();
+                var overloadMethods = new List<OverloadMethodSignature>();
                 var updated = MethodChangeset?.Updated;
                 if (updated is null)
                 {
-                    return Array.Empty<(MethodSignature CurrentMethodToCall, MethodSignature PreviousMethodToAdd, IList<MethodParameter> MissingParameters)>();
+                    return Array.Empty<OverloadMethodSignature>();
                 }
 
                 foreach (var (current, previous) in updated)
                 {
                     if (TryGetPreviousMethodWithLessOptionalParameters(current, previous, out var currentMethodToCall, out var missingParameters))
                     {
-                        overloadMethods.Add((currentMethodToCall, previous, missingParameters));
+                        overloadMethods.Add(new OverloadMethodSignature(currentMethodToCall, previous.DisableOptionalParameters(), missingParameters));
                     }
                 }
                 return overloadMethods;
             }
         }
 
-        protected IList<MethodSignature> PopulateMethodsFromCompilation(Compilation? compilation)
+        protected IReadOnlyList<MethodSignature> PopulateMethodsFromCompilation(Compilation? compilation)
         {
             if (compilation is null)
             {
@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             return PopulateMethods(type);
         }
 
-        private IList<MethodSignature> PopulateMethods(INamedTypeSymbol? typeSymbol)
+        private IReadOnlyList<MethodSignature> PopulateMethods(INamedTypeSymbol? typeSymbol)
         {
             var result = new List<MethodSignature>();
             if (typeSymbol is null)
@@ -188,7 +188,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             return (missing, updated);
         }
 
-        private bool TryGetPreviousMethodWithLessOptionalParameters(IList<MethodSignature> currentMethods, MethodSignature previousMethod, [NotNullWhen(true)] out MethodSignature? currentMethodToCall, [NotNullWhen(true)] out IList<MethodParameter>? missingParameters)
+        private bool TryGetPreviousMethodWithLessOptionalParameters(IList<MethodSignature> currentMethods, MethodSignature previousMethod, [NotNullWhen(true)] out MethodSignature? currentMethodToCall, [NotNullWhen(true)] out IReadOnlyList<MethodParameter>? missingParameters)
         {
             foreach (var item in currentMethods)
             {
