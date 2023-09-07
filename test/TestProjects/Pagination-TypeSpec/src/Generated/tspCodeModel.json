@@ -9,7 +9,7 @@
    "$id": "2",
    "Name": "Interval",
    "Namespace": "Pagination",
-   "Description": "",
+   "Description": "The interval",
    "EnumValueType": "String",
    "AllowedValues": [
     {

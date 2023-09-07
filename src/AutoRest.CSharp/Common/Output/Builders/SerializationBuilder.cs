@@ -44,6 +44,8 @@ namespace AutoRest.CSharp.Output.Builders
         public static SerializationFormat GetSerializationFormat(InputType type) => type switch
         {
             InputLiteralType literalType => GetSerializationFormat(literalType.LiteralValueType),
+            InputListType listType => GetSerializationFormat(listType.ElementType),
+            InputDictionaryType dictionaryType => GetSerializationFormat(dictionaryType.ValueType),
             InputPrimitiveType primitiveType => primitiveType.Kind switch
             {
                 InputTypeKind.BytesBase64Url => SerializationFormat.Bytes_Base64Url,
@@ -65,7 +67,7 @@ namespace AutoRest.CSharp.Output.Builders
             _ => SerializationFormat.Default
         };
 
-        private static SerializationFormat GetSerializationFormat(InputType inputType, CSharpType valueType)
+        internal static SerializationFormat GetSerializationFormat(InputType inputType, CSharpType valueType)
         {
             var serializationFormat = GetSerializationFormat(inputType);
             return serializationFormat != SerializationFormat.Default ? serializationFormat : GetDefaultSerializationFormat(valueType);
@@ -74,7 +76,7 @@ namespace AutoRest.CSharp.Output.Builders
         public static ObjectSerialization Build(BodyMediaType bodyMediaType, InputType inputType, CSharpType type, SerializationFormat? serializationFormat) => bodyMediaType switch
         {
             BodyMediaType.Xml => BuildXmlElementSerialization(inputType, type, null, true),
-            BodyMediaType.Json => BuildJsonSerialization(inputType, type, false, serializationFormat),
+            BodyMediaType.Json => BuildJsonSerialization(inputType, type, false, serializationFormat ?? GetSerializationFormat(inputType, type)),
             _ => throw new NotImplementedException(bodyMediaType.ToString())
         };
 
@@ -147,11 +149,11 @@ namespace AutoRest.CSharp.Output.Builders
             return false;
         }
 
-        public static JsonSerialization BuildJsonSerialization(InputType inputType, CSharpType valueType, bool isCollectionElement, SerializationFormat? serializationFormat)
+        public static JsonSerialization BuildJsonSerialization(InputType inputType, CSharpType valueType, bool isCollectionElement, SerializationFormat serializationFormat)
         {
             if (valueType.IsFrameworkType && valueType.FrameworkType == typeof(JsonElement))
             {
-                return new JsonValueSerialization(valueType, serializationFormat ?? GetSerializationFormat(inputType, valueType), valueType.IsNullable || isCollectionElement);
+                return new JsonValueSerialization(valueType, serializationFormat, valueType.IsNullable || isCollectionElement);
             }
 
             return inputType switch
@@ -159,7 +161,7 @@ namespace AutoRest.CSharp.Output.Builders
                 CodeModelType codeModelType => BuildSerialization(codeModelType.Schema, valueType, isCollectionElement),
                 InputListType listType => new JsonArraySerialization(TypeFactory.GetImplementationType(valueType), BuildJsonSerialization(listType.ElementType, TypeFactory.GetElementType(valueType), true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
                 InputDictionaryType dictionaryType => new JsonDictionarySerialization(TypeFactory.GetImplementationType(valueType), BuildJsonSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(valueType), true, serializationFormat), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)),
-                _ => new JsonValueSerialization(valueType, GetSerializationFormat(inputType, valueType), valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)) // nullable CSharp type like int?, Etag?, and reference type in collection
+                _ => new JsonValueSerialization(valueType, serializationFormat, valueType.IsNullable || (isCollectionElement && !valueType.IsValueType)) // nullable CSharp type like int?, Etag?, and reference type in collection
             };
         }
 

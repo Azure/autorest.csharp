@@ -198,7 +198,7 @@ internal static class SchemaNameAndFormatUpdater
 
     public static void UpdateAcronyms()
     {
-        if (Configuration.MgmtConfiguration.RenameRules.Count == 0)
+        if (Configuration.MgmtConfiguration.AcronymMapping.Count == 0)
             return;
         // first transform all the name of schemas, properties
         UpdateAcronyms(MgmtContext.CodeModel.AllSchemas);
@@ -285,7 +285,7 @@ internal static class SchemaNameAndFormatUpdater
 
     public static void UpdateAcronym(Schema schema)
     {
-        if (Configuration.MgmtConfiguration.RenameRules.Count == 0)
+        if (Configuration.MgmtConfiguration.AcronymMapping.Count == 0)
             return;
         TransformSchema(schema);
     }
