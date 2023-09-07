@@ -351,7 +351,7 @@ export function getInputType(
             }
             extensibleEnum = {
                 Name: m.name,
-                EnumValueType: innerEnum.EnumValueType,
+                EnumValueType: innerEnum.EnumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
                 AllowedValues: innerEnum.AllowedValues,
                 Namespace: getFullNamespaceString(e.namespace),
                 Accessibility: undefined, //TODO: need to add accessibility
@@ -415,7 +415,7 @@ export function getInputType(
             ];
             const enumType = {
                 Name: enumName,
-                EnumValueType: enumValueType,
+                EnumValueType: enumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
                 AllowedValues: allowValues,
                 Namespace: literalContext.Namespace,
                 Accessibility: undefined,
@@ -464,7 +464,7 @@ export function getInputType(
 
             enumType = {
                 Name: e.name,
-                EnumValueType: enumValueType,
+                EnumValueType: enumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
                 AllowedValues: allowValues,
                 Namespace: getFullNamespaceString(e.namespace),
                 Accessibility: undefined, //TODO: need to add accessibility
