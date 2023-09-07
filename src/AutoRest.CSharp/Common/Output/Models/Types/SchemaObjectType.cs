@@ -101,10 +101,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // We use a $ prefix here as AdditionalProperties comes from a swagger concept
                 // and not a swagger model/operation name to disambiguate from a possible property with
                 // the same name.
-                SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember("$AdditionalProperties");
+                var existingMember = _sourceTypeMapping?.GetMemberByOriginalName("$AdditionalProperties");
 
                 _additionalPropertiesProperty = new ObjectTypeProperty(
-                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "public", memberMapping?.ExistingMember, _typeFactory),
+                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "public", existingMember, _typeFactory),
                     "Additional Properties",
                     true,
                     null
@@ -446,9 +446,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected ObjectTypeProperty CreateProperty(Property property)
         {
             var name = BuilderHelpers.DisambiguateName(Type.Name, property.CSharpName());
-            SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
+            var existingMember = _sourceTypeMapping?.GetMemberByOriginalName(name);
 
-            var serializationMapping = _sourceTypeMapping?.GetForMemberSerialization(memberMapping?.ExistingMember);
+            var serializationMapping = _sourceTypeMapping?.GetForMemberSerialization(existingMember);
 
             var accessibility = property.IsDiscriminator == true ? "internal" : "public";
 
@@ -469,7 +469,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 name,
                 propertyType,
                 accessibility,
-                memberMapping?.ExistingMember,
+                existingMember,
                 _typeFactory);
 
             var type = memberDeclaration.Type;

@@ -73,19 +73,9 @@ namespace AutoRest.CSharp.Input.Source
             }
         }
 
-        public SourceMemberMapping? GetForMember(string name)
+        public ISymbol? GetMemberByOriginalName(string name)
         {
-            if (!_propertyMappings.TryGetValue(name, out var memberSymbol))
-            {
-                memberSymbol = _existingType?.GetMembers(name).FirstOrDefault();
-            }
-
-            if (memberSymbol != null)
-            {
-                return new SourceMemberMapping(name, memberSymbol);
-            }
-
-            return null;
+            return !_propertyMappings.TryGetValue(name, out var memberSymbol) ? _existingType?.GetMembers(name).FirstOrDefault() : memberSymbol;
         }
 
         public SourcePropertySerializationMapping? GetForMemberSerialization(ISymbol? symbol)

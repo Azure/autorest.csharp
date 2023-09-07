@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public int Count => _fields.Count;
         public FieldDeclaration? AdditionalProperties { get; }
 
-        public ModelTypeProviderFields(IReadOnlyList<InputModelProperty> properties, string inputModelName, InputModelTypeUsage inputModelUsage, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping, InputDictionaryType? additionalPropertiesType, bool isStruct, bool isPropertyBag)
+        public ModelTypeProviderFields(IReadOnlyList<InputModelProperty> properties, string modelName, InputModelTypeUsage inputModelUsage, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping, InputDictionaryType? additionalPropertiesType, bool isStruct, bool isPropertyBag)
         {
             var fields = new List<FieldDeclaration>();
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
@@ -45,18 +45,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                     ? inputModelProperty.Name == "null" ? "NullProperty" : inputModelProperty.Name.ToCleanName()
                     : inputModelProperty.Name.ToCleanName();
 
-                originalFieldName = BuilderHelpers.DisambiguateName(inputModelName, originalFieldName);
-                var existingMember = sourceTypeMapping?.GetForMember(originalFieldName)?.ExistingMember;
-
-                if (existingMember is not null)
-                {
-                    visitedMembers.Add(existingMember);
-                    if (existingMember.ContainingType.Name != inputModelName)
-                    {
-                        // Member defined in a base type, don't generate it in current type
-                        continue;
-                    }
-                }
+                originalFieldName = BuilderHelpers.DisambiguateName(modelName, originalFieldName);
+                var existingMember = sourceTypeMapping?.GetMemberByOriginalName(originalFieldName);
 
                 var propertyType = GetPropertyDefaultType(inputModelUsage, inputModelProperty, typeFactory);
 
@@ -72,6 +62,16 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 fields.Add(field);
                 fieldsToInputs[field] = inputModelProperty;
+
+                if (existingMember is not null)
+                {
+                    visitedMembers.Add(existingMember);
+                    if (existingMember.ContainingType.Name != modelName && existingMember.Name == originalFieldName)
+                    {
+                        // Member defined in a base type, don't generate parameters for it
+                        continue;
+                    }
+                }
 
                 var parameterName = field.Name.ToVariableName();
                 // we do not validate a parameter when it is a value type (struct or int, etc), or it is optional, or it it nullable, or it is readonly in DPG (in Legacy Data Plane readonly property require validation)
@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // We use a $ prefix here as AdditionalProperties comes from a swagger concept
                 // and not a swagger model/operation name to disambiguate from a possible property with
                 // the same name.
-                var existingMember = sourceTypeMapping?.GetForMember("$AdditionalProperties")?.ExistingMember;
+                var existingMember = sourceTypeMapping?.GetMemberByOriginalName("$AdditionalProperties");
 
                 var type = typeFactory.CreateType(additionalPropertiesType);
                 if (!inputModelUsage.HasFlag(InputModelTypeUsage.Input))

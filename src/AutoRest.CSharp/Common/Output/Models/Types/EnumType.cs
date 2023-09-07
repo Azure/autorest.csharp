@@ -102,9 +102,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var value in _allowedValues)
             {
                 var name = BuilderHelpers.DisambiguateName(Type.Name, value.Name.ToCleanName());
-                var memberMapping = _typeMapping?.GetForMember(name);
+                var existingMember = _typeMapping?.GetMemberByOriginalName(name);
                 values.Add(new EnumTypeValue(
-                    BuilderHelpers.CreateMemberDeclaration(name, Type, "public", memberMapping?.ExistingMember, _typeFactory),
+                    BuilderHelpers.CreateMemberDeclaration(name, Type, "public", existingMember, _typeFactory),
                     CreateDescription(value),
                     BuilderHelpers.ParseConstant(value.Value, ValueType)));
             }
