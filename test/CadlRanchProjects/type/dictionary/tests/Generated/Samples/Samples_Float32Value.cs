@@ -139,7 +139,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = client.Put(new Dictionary<string, float>()
             {
-                ["key"] = (float)123.45F,
+                ["key"] = 123.45F,
             });
             Console.WriteLine(response.Status);
         }
@@ -152,7 +152,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = client.Put(new Dictionary<string, float>()
             {
-                ["key"] = (float)123.45F,
+                ["key"] = 123.45F,
             });
             Console.WriteLine(response.Status);
         }
@@ -193,7 +193,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = await client.PutAsync(new Dictionary<string, float>()
             {
-                ["key"] = (float)123.45F,
+                ["key"] = 123.45F,
             });
             Console.WriteLine(response.Status);
         }
@@ -206,7 +206,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = await client.PutAsync(new Dictionary<string, float>()
             {
-                ["key"] = (float)123.45F,
+                ["key"] = 123.45F,
             });
             Console.WriteLine(response.Status);
         }

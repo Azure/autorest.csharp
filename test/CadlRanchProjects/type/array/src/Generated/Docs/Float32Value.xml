@@ -81,7 +81,7 @@ Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0
 
 Response response = await client.PutAsync(new List<float>()
 {
-(float)123.45F
+123.45F
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -91,7 +91,7 @@ Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0
 
 Response response = await client.PutAsync(new List<float>()
 {
-(float)123.45F
+123.45F
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -104,7 +104,7 @@ Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0
 
 Response response = client.Put(new List<float>()
 {
-(float)123.45F
+123.45F
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -114,7 +114,7 @@ Float32Value client = new ArrayClient().GetFloat32ValueClient(apiVersion: "1.0.0
 
 Response response = client.Put(new List<float>()
 {
-(float)123.45F
+123.45F
 });
 Console.WriteLine(response.Status);
 ]]></code></example>

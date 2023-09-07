@@ -519,7 +519,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = client.FloatNull(floatQuery: (float)123.45F);
+            Response response = client.FloatNull(floatQuery: 123.45F);
             Console.WriteLine(response.Status);
         }
 
@@ -541,7 +541,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = await client.FloatNullAsync(floatQuery: (float)123.45F);
+            Response response = await client.FloatNullAsync(floatQuery: 123.45F);
             Console.WriteLine(response.Status);
         }
 
@@ -651,7 +651,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = client.DoubleNull(doubleQuery: (double)123.45);
+            Response response = client.DoubleNull(doubleQuery: 123.45);
             Console.WriteLine(response.Status);
         }
 
@@ -673,7 +673,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = await client.DoubleNullAsync(doubleQuery: (double)123.45);
+            Response response = await client.DoubleNullAsync(doubleQuery: 123.45);
             Console.WriteLine(response.Status);
         }
 

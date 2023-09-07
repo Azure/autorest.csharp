@@ -355,7 +355,7 @@ null
     ["key"] = null,
 }, new List<float?>()
 {
-(float)123.45F
+123.45F
 }, new List<bool?>()
 {
 true
@@ -399,7 +399,7 @@ null
     ["key"] = null,
 }, new List<float?>()
 {
-(float)123.45F
+123.45F
 }, new List<bool?>()
 {
 true
@@ -687,7 +687,7 @@ null
     ["key"] = null,
 }, new List<float?>()
 {
-(float)123.45F
+123.45F
 }, new List<bool?>()
 {
 true
@@ -731,7 +731,7 @@ null
     ["key"] = null,
 }, new List<float?>()
 {
-(float)123.45F
+123.45F
 }, new List<bool?>()
 {
 true
@@ -991,7 +991,7 @@ null
     ["key"] = null,
 }, new List<float?>()
 {
-(float)123.45F
+123.45F
 }, new List<bool?>()
 {
 true
@@ -1035,7 +1035,7 @@ null
     ["key"] = null,
 }, new List<float?>()
 {
-(float)123.45F
+123.45F
 }, new List<bool?>()
 {
 true
@@ -1295,7 +1295,7 @@ null
     ["key"] = null,
 }, new List<float?>()
 {
-(float)123.45F
+123.45F
 }, new List<bool?>()
 {
 true
@@ -1339,7 +1339,7 @@ null
     ["key"] = null,
 }, new List<float?>()
 {
-(float)123.45F
+123.45F
 }, new List<bool?>()
 {
 true

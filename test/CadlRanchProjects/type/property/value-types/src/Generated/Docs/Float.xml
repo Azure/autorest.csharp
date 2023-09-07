@@ -79,7 +79,7 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-FloatProperty body = new FloatProperty((float)123.45F);
+FloatProperty body = new FloatProperty(123.45F);
 Response response = await client.PutAsync(body);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -87,7 +87,7 @@ This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-FloatProperty body = new FloatProperty((float)123.45F);
+FloatProperty body = new FloatProperty(123.45F);
 Response response = await client.PutAsync(body);
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -98,7 +98,7 @@ This sample shows how to call Put.
 <code><![CDATA[
 Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-FloatProperty body = new FloatProperty((float)123.45F);
+FloatProperty body = new FloatProperty(123.45F);
 Response response = client.Put(body);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -106,7 +106,7 @@ This sample shows how to call Put with all parameters.
 <code><![CDATA[
 Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-FloatProperty body = new FloatProperty((float)123.45F);
+FloatProperty body = new FloatProperty(123.45F);
 Response response = client.Put(body);
 Console.WriteLine(response.Status);
 ]]></code></example>

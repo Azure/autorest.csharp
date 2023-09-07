@@ -138,7 +138,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-            FloatProperty body = new FloatProperty((float)123.45F);
+            FloatProperty body = new FloatProperty(123.45F);
             Response response = client.Put(body);
             Console.WriteLine(response.Status);
         }
@@ -149,7 +149,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-            FloatProperty body = new FloatProperty((float)123.45F);
+            FloatProperty body = new FloatProperty(123.45F);
             Response response = client.Put(body);
             Console.WriteLine(response.Status);
         }
@@ -188,7 +188,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-            FloatProperty body = new FloatProperty((float)123.45F);
+            FloatProperty body = new FloatProperty(123.45F);
             Response response = await client.PutAsync(body);
             Console.WriteLine(response.Status);
         }
@@ -199,7 +199,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-            FloatProperty body = new FloatProperty((float)123.45F);
+            FloatProperty body = new FloatProperty(123.45F);
             Response response = await client.PutAsync(body);
             Console.WriteLine(response.Status);
         }

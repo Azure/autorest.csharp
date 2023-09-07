@@ -99,7 +99,7 @@ new Dictionary<string, object>()
 
             UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint((float)123.45F)
+new TimeSeriesPoint(123.45F)
 });
             Response<UnivariateEntireDetectionResult> response = client.DetectUnivariateEntireSeries(options);
         }
@@ -114,7 +114,7 @@ new TimeSeriesPoint((float)123.45F)
 
             UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint((float)123.45F)
+new TimeSeriesPoint(123.45F)
 {
 Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }
@@ -123,10 +123,10 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 Granularity = TimeGranularity.Yearly,
                 CustomInterval = 1234,
                 Period = 1234,
-                MaxAnomalyRatio = (float)123.45F,
+                MaxAnomalyRatio = 123.45F,
                 Sensitivity = 1234,
                 ImputeMode = ImputeMode.Auto,
-                ImputeFixedValue = (float)123.45F,
+                ImputeFixedValue = 123.45F,
             };
             Response<UnivariateEntireDetectionResult> response = client.DetectUnivariateEntireSeries(options);
         }
@@ -210,7 +210,7 @@ new Dictionary<string, object>()
 
             UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint((float)123.45F)
+new TimeSeriesPoint(123.45F)
 });
             Response<UnivariateEntireDetectionResult> response = await client.DetectUnivariateEntireSeriesAsync(options);
         }
@@ -225,7 +225,7 @@ new TimeSeriesPoint((float)123.45F)
 
             UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint((float)123.45F)
+new TimeSeriesPoint(123.45F)
 {
 Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }
@@ -234,10 +234,10 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 Granularity = TimeGranularity.Yearly,
                 CustomInterval = 1234,
                 Period = 1234,
-                MaxAnomalyRatio = (float)123.45F,
+                MaxAnomalyRatio = 123.45F,
                 Sensitivity = 1234,
                 ImputeMode = ImputeMode.Auto,
-                ImputeFixedValue = (float)123.45F,
+                ImputeFixedValue = 123.45F,
             };
             Response<UnivariateEntireDetectionResult> response = await client.DetectUnivariateEntireSeriesAsync(options);
         }
@@ -323,7 +323,7 @@ new Dictionary<string, object>()
 
             UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint((float)123.45F)
+new TimeSeriesPoint(123.45F)
 });
             Response<UnivariateLastDetectionResult> response = client.DetectUnivariateLastPoint(options);
         }
@@ -338,7 +338,7 @@ new TimeSeriesPoint((float)123.45F)
 
             UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint((float)123.45F)
+new TimeSeriesPoint(123.45F)
 {
 Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }
@@ -347,10 +347,10 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 Granularity = TimeGranularity.Yearly,
                 CustomInterval = 1234,
                 Period = 1234,
-                MaxAnomalyRatio = (float)123.45F,
+                MaxAnomalyRatio = 123.45F,
                 Sensitivity = 1234,
                 ImputeMode = ImputeMode.Auto,
-                ImputeFixedValue = (float)123.45F,
+                ImputeFixedValue = 123.45F,
             };
             Response<UnivariateLastDetectionResult> response = client.DetectUnivariateLastPoint(options);
         }
@@ -436,7 +436,7 @@ new Dictionary<string, object>()
 
             UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint((float)123.45F)
+new TimeSeriesPoint(123.45F)
 });
             Response<UnivariateLastDetectionResult> response = await client.DetectUnivariateLastPointAsync(options);
         }
@@ -451,7 +451,7 @@ new TimeSeriesPoint((float)123.45F)
 
             UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint((float)123.45F)
+new TimeSeriesPoint(123.45F)
 {
 Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }
@@ -460,10 +460,10 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 Granularity = TimeGranularity.Yearly,
                 CustomInterval = 1234,
                 Period = 1234,
-                MaxAnomalyRatio = (float)123.45F,
+                MaxAnomalyRatio = 123.45F,
                 Sensitivity = 1234,
                 ImputeMode = ImputeMode.Auto,
-                ImputeFixedValue = (float)123.45F,
+                ImputeFixedValue = 123.45F,
             };
             Response<UnivariateLastDetectionResult> response = await client.DetectUnivariateLastPointAsync(options);
         }
@@ -535,7 +535,7 @@ new Dictionary<string, object>()
 
             UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint((float)123.45F)
+new TimeSeriesPoint(123.45F)
 }, TimeGranularity.Yearly);
             Response<UnivariateChangePointDetectionResult> response = client.DetectUnivariateChangePoint(options);
         }
@@ -550,7 +550,7 @@ new TimeSeriesPoint((float)123.45F)
 
             UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint((float)123.45F)
+new TimeSeriesPoint(123.45F)
 {
 Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }
@@ -559,7 +559,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 CustomInterval = 1234,
                 Period = 1234,
                 StableTrendWindow = 1234,
-                Threshold = (float)123.45F,
+                Threshold = 123.45F,
             };
             Response<UnivariateChangePointDetectionResult> response = client.DetectUnivariateChangePoint(options);
         }
@@ -631,7 +631,7 @@ new Dictionary<string, object>()
 
             UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint((float)123.45F)
+new TimeSeriesPoint(123.45F)
 }, TimeGranularity.Yearly);
             Response<UnivariateChangePointDetectionResult> response = await client.DetectUnivariateChangePointAsync(options);
         }
@@ -646,7 +646,7 @@ new TimeSeriesPoint((float)123.45F)
 
             UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint((float)123.45F)
+new TimeSeriesPoint(123.45F)
 {
 Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }
@@ -655,7 +655,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 CustomInterval = 1234,
                 Period = 1234,
                 StableTrendWindow = 1234,
-                Threshold = (float)123.45F,
+                Threshold = 123.45F,
             };
             Response<UnivariateChangePointDetectionResult> response = await client.DetectUnivariateChangePointAsync(options);
         }
@@ -951,7 +951,7 @@ new Dictionary<string, object>()
                 {
                     AlignMode = AlignMode.Inner,
                     FillNAMethod = FillNAMethod.Previous,
-                    PaddingValue = (float)123.45F,
+                    PaddingValue = 123.45F,
                 },
                 Status = ModelStatus.Created,
                 DiagnosticsInfo = new DiagnosticsInfo()
@@ -964,15 +964,15 @@ new Dictionary<string, object>()
 },
                         TrainLosses =
 {
-(float)123.45F
+123.45F
 },
                         ValidationLosses =
 {
-(float)123.45F
+123.45F
 },
                         LatenciesInSeconds =
 {
-(float)123.45F
+123.45F
 },
                     },
                     VariableStates =
@@ -980,7 +980,7 @@ new Dictionary<string, object>()
 new VariableState()
 {
 Variable = "<variable>",
-FilledNARatio = (float)123.45F,
+FilledNARatio = 123.45F,
 EffectiveCount = 1234,
 FirstTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
@@ -1128,7 +1128,7 @@ new Dictionary<string, object>()
                 {
                     AlignMode = AlignMode.Inner,
                     FillNAMethod = FillNAMethod.Previous,
-                    PaddingValue = (float)123.45F,
+                    PaddingValue = 123.45F,
                 },
                 Status = ModelStatus.Created,
                 DiagnosticsInfo = new DiagnosticsInfo()
@@ -1141,15 +1141,15 @@ new Dictionary<string, object>()
 },
                         TrainLosses =
 {
-(float)123.45F
+123.45F
 },
                         ValidationLosses =
 {
-(float)123.45F
+123.45F
 },
                         LatenciesInSeconds =
 {
-(float)123.45F
+123.45F
 },
                     },
                     VariableStates =
@@ -1157,7 +1157,7 @@ new Dictionary<string, object>()
 new VariableState()
 {
 Variable = "<variable>",
-FilledNARatio = (float)123.45F,
+FilledNARatio = 123.45F,
 EffectiveCount = 1234,
 FirstTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
@@ -1646,7 +1646,7 @@ new VariableValues("<variable>",new List<string>()
 "<timestamps>"
 },new List<float>()
 {
-(float)123.45F
+123.45F
 })
 }, 1234);
             Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("<modelId>", options);
@@ -1667,7 +1667,7 @@ new VariableValues("<variable>",new List<string>()
 "<timestamps>"
 },new List<float>()
 {
-(float)123.45F
+123.45F
 })
 }, 1234);
             Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("<modelId>", options);
@@ -1767,7 +1767,7 @@ new VariableValues("<variable>",new List<string>()
 "<timestamps>"
 },new List<float>()
 {
-(float)123.45F
+123.45F
 })
 }, 1234);
             Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
@@ -1788,7 +1788,7 @@ new VariableValues("<variable>",new List<string>()
 "<timestamps>"
 },new List<float>()
 {
-(float)123.45F
+123.45F
 })
 }, 1234);
             Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
