@@ -540,11 +540,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private IEnumerable<ObjectTypeDiscriminatorImplementation> GetDerivedTypes(IReadOnlyList<InputModelType> derivedInputTypes)
         {
-            if (derivedInputTypes == null)
-            {
-                yield break;
-            }
-
             foreach (var derivedInputType in derivedInputTypes)
             {
                 var derivedType = (ModelTypeProvider)_typeFactory.CreateType(derivedInputType).Implementation;

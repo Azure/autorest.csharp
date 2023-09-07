@@ -46,6 +46,17 @@ namespace AutoRest.CSharp.Output.Models.Types
                     : inputModelProperty.Name.ToCleanName();
 
                 originalFieldName = BuilderHelpers.DisambiguateName(inputModelName, originalFieldName);
+                var existingMember = sourceTypeMapping?.GetForMember(originalFieldName)?.ExistingMember;
+
+                if (existingMember is not null)
+                {
+                    visitedMembers.Add(existingMember);
+                    if (existingMember.ContainingType.Name != inputModelName)
+                    {
+                        // Member defined in a base type, don't generate it in current type
+                        continue;
+                    }
+                }
 
                 var propertyType = GetPropertyDefaultType(inputModelUsage, inputModelProperty, typeFactory);
 
@@ -54,16 +65,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var optionalViaNullability = inputModelProperty is { IsRequired: false, Type.IsNullable: false } &&
                                              !TypeFactory.IsCollectionType(propertyType);
 
-                var existingMember = sourceTypeMapping?.GetForMember(originalFieldName)?.ExistingMember;
                 var serialization = sourceTypeMapping?.GetForMemberSerialization(existingMember);
                 var field = existingMember is not null
                     ? CreateFieldFromExisting(existingMember, serialization, propertyType, inputModelProperty, typeFactory, optionalViaNullability)
                     : CreateField(originalFieldName, propertyType, inputModelUsage, inputModelProperty, isStruct, isPropertyBag, optionalViaNullability);
-
-                if (existingMember is not null)
-                {
-                    visitedMembers.Add(existingMember);
-                }
 
                 fields.Add(field);
                 fieldsToInputs[field] = inputModelProperty;
@@ -255,6 +260,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var fieldType = BuilderHelpers.GetTypeFromExisting(existingMember, originalType, typeFactory);
             var fieldModifiers = GetAccessModifiers(existingMember);
+            if (existingMember is IFieldSymbol { IsReadOnly: true } or IPropertySymbol { IsReadOnly: true })
+            {
+                fieldModifiers |= ReadOnly;
+            }
 
             var writeAsProperty = existingMember is IPropertySymbol;
             var declaration = new CodeWriterDeclaration(existingMember.Name);

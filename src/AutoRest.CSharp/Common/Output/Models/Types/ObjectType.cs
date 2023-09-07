@@ -55,21 +55,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             while (type != null)
             {
                 yield return type;
-
-                if (type.Inherits?.IsFrameworkType == false && type.Inherits.Implementation is ObjectType o)
-                {
-                    type = o;
-                }
-                else
-                {
-                    type = null;
-                }
+                type = type.GetBaseObjectType();
             }
         }
 
         protected abstract IEnumerable<ObjectTypeConstructor> BuildConstructors();
 
-        protected ObjectType? GetBaseObjectType()
+        public ObjectType? GetBaseObjectType()
             => Inherits is { IsFrameworkType: false, Implementation: ObjectType objectType } ? objectType : null;
 
         protected virtual ObjectTypeDiscriminator? BuildDiscriminator()

@@ -252,7 +252,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false;
             }
 
-            if (!properties.Any(p => p.IsReadOnly && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType)))
+            var readOnlyProperties = properties
+                .Where(p => p.IsReadOnly && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType))
+                .ToArray();
+
+            if (!readOnlyProperties.Any())
             {
                 return false;
             }
@@ -264,7 +268,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return model.Constructors
                 .Where(c => c.Signature.Modifiers.HasFlag(Public))
-                .All(c => properties.Any(property => c.FindParameterByInitializedProperty(property) == default));
+                .All(c => readOnlyProperties.Any(property => c.FindParameterByInitializedProperty(property) == default));
         }
     }
 }

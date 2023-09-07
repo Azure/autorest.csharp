@@ -28,6 +28,7 @@ namespace AutoRest.CSharp.Input.Source
 
             foreach (ISymbol member in GetMembers(existingType))
             {
+                bool hasCodeGenMemberAttribute = false;
                 string[]? serializationPath = null;
                 string? serializationHook = null;
                 string? deserializationHook = null;
@@ -37,8 +38,10 @@ namespace AutoRest.CSharp.Input.Source
                     // handle CodeGenMember attribute
                     if (codeGenAttributes.TryGetCodeGenMemberAttributeValue(attributeData, out var schemaMemberName))
                     {
+                        hasCodeGenMemberAttribute = true;
                         _propertyMappings.Add(schemaMemberName, member);
                     }
+
                     // handle CodeGenMemberSerialization attribute
                     if (codeGenAttributes.TryGetCodeGenMemberSerializationAttributeValue(attributeData, out var pathResult))
                     {
@@ -51,6 +54,11 @@ namespace AutoRest.CSharp.Input.Source
                 if (serializationPath != null || serializationHook != null || deserializationHook != null)
                 {
                     _serializationMappings.Add(member, new SourcePropertySerializationMapping(member, serializationPath, serializationHook, deserializationHook));
+                }
+
+                if (member.Kind is SymbolKind.Property or SymbolKind.Field && !hasCodeGenMemberAttribute)
+                {
+                    _propertyMappings.Add(member.Name, member);
                 }
             }
 
