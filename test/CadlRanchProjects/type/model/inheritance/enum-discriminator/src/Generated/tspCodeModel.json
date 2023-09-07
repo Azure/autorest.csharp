@@ -9,8 +9,6 @@
   {
    "$id": "2",
    "Name": "DogKind",
-   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
-   "Description": "extensible enum type for discriminator",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -20,6 +18,8 @@
      "Description": "Species golden"
     }
    ],
+   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
+   "Description": "extensible enum type for discriminator",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -27,8 +27,6 @@
   {
    "$id": "4",
    "Name": "SnakeKind",
-   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
-   "Description": "fixed enum type for discriminator",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -38,6 +36,8 @@
      "Description": "Species cobra"
     }
    ],
+   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
+   "Description": "fixed enum type for discriminator",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
