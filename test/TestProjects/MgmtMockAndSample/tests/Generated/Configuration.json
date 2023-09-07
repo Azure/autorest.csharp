@@ -42,7 +42,7 @@
     "Type": "EncryptionType",
     "FirewallPolicyThreatIntelWhitelist.ipAddresses": "-|ip-address"
   },
-  "testgen": {
+  "sample-gen": {
     "SkippedOperations": [
       "Vaults_GetDeleted",
       "Vaults_Update"
