@@ -9,8 +9,6 @@
   {
    "$id": "2",
    "Name": "PetKind",
-   "Namespace": "PetStore",
-   "Description": "Extensible enum Values for pet kind",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -24,6 +22,8 @@
      "Value": "cat"
     }
    ],
+   "Namespace": "PetStore",
+   "Description": "Extensible enum Values for pet kind",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Input"
