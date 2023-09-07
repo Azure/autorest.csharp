@@ -85,20 +85,18 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                     // TODO: handle missing method return type from MgmtOutputLibrary
                     continue;
                 }
-                else
+
+                // TODO: handle missing parameter type from MgmtOutputLibrary
+                var parameters = new List<Parameter>();
+                foreach (var parameter in method.Parameters)
                 {
-                    // TODO: handle missing parameter type from MgmtOutputLibrary
-                    var parameters = new List<Parameter>();
-                    foreach (var parameter in method.Parameters)
+                    var methodParameter = Parameter.FromParameterSymbol(parameter);
+                    if (methodParameter is not null)
                     {
-                        var methodParameter = Parameter.FromParameterSymbol(parameter);
-                        if (methodParameter is not null)
-                        {
-                            parameters.Add(methodParameter);
-                        }
+                        parameters.Add(methodParameter);
                     }
-                    result.Add(new MethodSignature(method.Name, null, description, MapModifiers(method), returnType, null, parameters));
                 }
+                result.Add(new MethodSignature(method.Name, null, description, MapModifiers(method), returnType, null, parameters));
             }
             return result;
         }
