@@ -149,7 +149,10 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             {
                 if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is char or short or int or long or float or double or decimal)
                 {
-                    return writer.Append($"({frameworkType}){rawValue.RawValue:L}"); // roslyn will trim off the cast if it is unnecessary
+                    if (frameworkType == rawValue.RawValue.GetType())
+                        return writer.Append($"{rawValue.RawValue:L}");
+                    else
+                        return writer.Append($"({frameworkType}){rawValue.RawValue:L}");
                 }
 
                 return writer.AppendRaw("default");

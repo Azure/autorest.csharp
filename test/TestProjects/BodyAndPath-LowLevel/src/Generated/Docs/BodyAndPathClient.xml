@@ -50,7 +50,7 @@ This sample shows how to call CreateStreamAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
-RequestContent content = RequestContent.Create("<filePath>");
+RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"));
 Console.WriteLine(response.Status);
 ]]></code>
@@ -59,7 +59,7 @@ This sample shows how to call CreateStreamAsync with all parameters and request 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
-RequestContent content = RequestContent.Create("<filePath>");
+RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"), excluded: new List<string>()
 {
 "<excluded>"
@@ -74,7 +74,7 @@ This sample shows how to call CreateStream.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
-RequestContent content = RequestContent.Create("<filePath>");
+RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.CreateStream("<itemNameStream>", content, new ContentType("application/json"));
 Console.WriteLine(response.Status);
 ]]></code>
@@ -83,7 +83,7 @@ This sample shows how to call CreateStream with all parameters and request conte
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
-RequestContent content = RequestContent.Create("<filePath>");
+RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.CreateStream("<itemNameStream>", content, new ContentType("application/json"), excluded: new List<string>()
 {
 "<excluded>"

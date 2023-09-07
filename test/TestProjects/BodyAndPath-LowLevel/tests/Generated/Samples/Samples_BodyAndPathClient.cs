@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -74,7 +75,7 @@ namespace BodyAndPath_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
-            RequestContent content = RequestContent.Create("<filePath>");
+            RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = client.CreateStream("<itemNameStream>", content, new ContentType("application/json"));
             Console.WriteLine(response.Status);
         }
@@ -86,7 +87,7 @@ namespace BodyAndPath_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
-            RequestContent content = RequestContent.Create("<filePath>");
+            RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = client.CreateStream("<itemNameStream>", content, new ContentType("application/json"), excluded: new List<string>()
 {
 "<excluded>"
@@ -101,7 +102,7 @@ namespace BodyAndPath_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
-            RequestContent content = RequestContent.Create("<filePath>");
+            RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"));
             Console.WriteLine(response.Status);
         }
@@ -113,7 +114,7 @@ namespace BodyAndPath_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
-            RequestContent content = RequestContent.Create("<filePath>");
+            RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"), excluded: new List<string>()
 {
 "<excluded>"
