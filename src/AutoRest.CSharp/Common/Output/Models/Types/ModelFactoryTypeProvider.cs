@@ -23,7 +23,7 @@ using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal sealed class ModelFactoryTypeProvider : SignatureTypeProvider
+    internal sealed class ModelFactoryTypeProvider : TypeProvider
     {
         private SourceInputModel? _sourceInputModel;
 
@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultAccessibility { get; }
 
         private IReadOnlyList<MethodSignature>? _methods;
-        public override IReadOnlyList<MethodSignature> Methods => _methods ??= Models!.Select(CreateMethod).ToList();
+        public IReadOnlyList<MethodSignature> Methods => _methods ??= Models!.Select(CreateMethod).ToList();
 
         public IEnumerable<SerializableObjectType>? Models { get; }
 
@@ -99,9 +99,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
 
-        protected override SignatureTypeProvider? Customization => new ModelFactoryTypeProvider(PopulateMethodsFromCompilation(_sourceInputModel?.Customization));
+        protected override TypeProvider? Customization => new ModelFactoryTypeProvider(PopulateMethodsFromCompilation(_sourceInputModel?.Customization));
 
-        protected override SignatureTypeProvider? PreviousContract => new ModelFactoryTypeProvider(PopulateMethodsFromCompilation(_sourceInputModel?.PreviousContract));
+        protected override TypeProvider? PreviousContract => new ModelFactoryTypeProvider(PopulateMethodsFromCompilation(_sourceInputModel?.PreviousContract));
+
+        protected override IReadOnlyList<MethodSignature> MethodSignatures => Methods;
 
         private (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignmentForSimpleProperty(CodeWriter writer, SerializableObjectType model, Parameter parameter, ObjectTypeProperty property)
         {
