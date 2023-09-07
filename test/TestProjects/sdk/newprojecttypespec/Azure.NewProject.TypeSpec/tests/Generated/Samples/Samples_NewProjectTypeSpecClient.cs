@@ -856,10 +856,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 ["requiredString"] = "<requiredString>",
                 ["requiredInt"] = 1234,
-                ["requiredCollection"] = new object[]
-            {
+                ["requiredCollection"] = new List<object>()
+{
 "1"
-            },
+},
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
                     ["key"] = "1",
@@ -911,10 +911,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 ["requiredString"] = "<requiredString>",
                 ["requiredInt"] = 1234,
-                ["requiredCollection"] = new object[]
-            {
+                ["requiredCollection"] = new List<object>()
+{
 "1"
-            },
+},
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
                     ["key"] = "1",
@@ -934,25 +934,25 @@ namespace Azure.NewProject.TypeSpec.Samples
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                 },
                 ["intExtensibleEnum"] = 1,
-                ["intExtensibleEnumCollection"] = new object[]
-            {
+                ["intExtensibleEnumCollection"] = new List<object>()
+{
 1
-            },
+},
                 ["floatExtensibleEnum"] = 1,
-                ["floatExtensibleEnumCollection"] = new object[]
-            {
+                ["floatExtensibleEnumCollection"] = new List<object>()
+{
 1
-            },
+},
                 ["floatFixedEnum"] = 1.1F,
-                ["floatFixedEnumCollection"] = new object[]
-            {
+                ["floatFixedEnumCollection"] = new List<object>()
+{
 1.1F
-            },
+},
                 ["intFixedEnum"] = 1,
-                ["intFixedEnumCollection"] = new object[]
-            {
+                ["intFixedEnumCollection"] = new List<object>()
+{
 1
-            },
+},
                 ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
                 ["optionalUnknown"] = new Dictionary<string, object>(),
@@ -1012,10 +1012,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 ["requiredString"] = "<requiredString>",
                 ["requiredInt"] = 1234,
-                ["requiredCollection"] = new object[]
-            {
+                ["requiredCollection"] = new List<object>()
+{
 "1"
-            },
+},
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
                     ["key"] = "1",
@@ -1067,10 +1067,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 ["requiredString"] = "<requiredString>",
                 ["requiredInt"] = 1234,
-                ["requiredCollection"] = new object[]
-            {
+                ["requiredCollection"] = new List<object>()
+{
 "1"
-            },
+},
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
                     ["key"] = "1",
@@ -1090,25 +1090,25 @@ namespace Azure.NewProject.TypeSpec.Samples
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                 },
                 ["intExtensibleEnum"] = 1,
-                ["intExtensibleEnumCollection"] = new object[]
-            {
+                ["intExtensibleEnumCollection"] = new List<object>()
+{
 1
-            },
+},
                 ["floatExtensibleEnum"] = 1,
-                ["floatExtensibleEnumCollection"] = new object[]
-            {
+                ["floatExtensibleEnumCollection"] = new List<object>()
+{
 1
-            },
+},
                 ["floatFixedEnum"] = 1.1F,
-                ["floatFixedEnumCollection"] = new object[]
-            {
+                ["floatFixedEnumCollection"] = new List<object>()
+{
 1.1F
-            },
+},
                 ["intFixedEnum"] = 1,
-                ["intFixedEnumCollection"] = new object[]
-            {
+                ["intFixedEnumCollection"] = new List<object>()
+{
 1
-            },
+},
                 ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
                 ["optionalUnknown"] = new Dictionary<string, object>(),
@@ -1168,10 +1168,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 ["requiredString"] = "<requiredString>",
                 ["requiredInt"] = 1234,
-                ["requiredCollection"] = new object[]
-            {
+                ["requiredCollection"] = new List<object>()
+{
 "1"
-            },
+},
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
                     ["key"] = "1",
@@ -1223,10 +1223,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 ["requiredString"] = "<requiredString>",
                 ["requiredInt"] = 1234,
-                ["requiredCollection"] = new object[]
-            {
+                ["requiredCollection"] = new List<object>()
+{
 "1"
-            },
+},
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
                     ["key"] = "1",
@@ -1246,25 +1246,25 @@ namespace Azure.NewProject.TypeSpec.Samples
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                 },
                 ["intExtensibleEnum"] = 1,
-                ["intExtensibleEnumCollection"] = new object[]
-            {
+                ["intExtensibleEnumCollection"] = new List<object>()
+{
 1
-            },
+},
                 ["floatExtensibleEnum"] = 1,
-                ["floatExtensibleEnumCollection"] = new object[]
-            {
+                ["floatExtensibleEnumCollection"] = new List<object>()
+{
 1
-            },
+},
                 ["floatFixedEnum"] = 1.1F,
-                ["floatFixedEnumCollection"] = new object[]
-            {
+                ["floatFixedEnumCollection"] = new List<object>()
+{
 1.1F
-            },
+},
                 ["intFixedEnum"] = 1,
-                ["intFixedEnumCollection"] = new object[]
-            {
+                ["intFixedEnumCollection"] = new List<object>()
+{
 1
-            },
+},
                 ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
                 ["optionalUnknown"] = new Dictionary<string, object>(),
@@ -1324,10 +1324,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 ["requiredString"] = "<requiredString>",
                 ["requiredInt"] = 1234,
-                ["requiredCollection"] = new object[]
-            {
+                ["requiredCollection"] = new List<object>()
+{
 "1"
-            },
+},
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
                     ["key"] = "1",
@@ -1379,10 +1379,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 ["requiredString"] = "<requiredString>",
                 ["requiredInt"] = 1234,
-                ["requiredCollection"] = new object[]
-            {
+                ["requiredCollection"] = new List<object>()
+{
 "1"
-            },
+},
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
                     ["key"] = "1",
@@ -1402,25 +1402,25 @@ namespace Azure.NewProject.TypeSpec.Samples
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                 },
                 ["intExtensibleEnum"] = 1,
-                ["intExtensibleEnumCollection"] = new object[]
-            {
+                ["intExtensibleEnumCollection"] = new List<object>()
+{
 1
-            },
+},
                 ["floatExtensibleEnum"] = 1,
-                ["floatExtensibleEnumCollection"] = new object[]
-            {
+                ["floatExtensibleEnumCollection"] = new List<object>()
+{
 1
-            },
+},
                 ["floatFixedEnum"] = 1.1F,
-                ["floatFixedEnumCollection"] = new object[]
-            {
+                ["floatFixedEnumCollection"] = new List<object>()
+{
 1.1F
-            },
+},
                 ["intFixedEnum"] = 1,
-                ["intFixedEnumCollection"] = new object[]
-            {
+                ["intFixedEnumCollection"] = new List<object>()
+{
 1
-            },
+},
                 ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
                 ["optionalUnknown"] = new Dictionary<string, object>(),

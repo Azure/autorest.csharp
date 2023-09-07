@@ -215,7 +215,7 @@ This sample shows how to call UnixTimestampArrayAsync with required parameters.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new DateTimeOffset[]
+UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new List<DateTimeOffset>()
 {
 DateTimeOffset.FromUnixTimeSeconds(1652209051)
 });
@@ -228,7 +228,7 @@ This sample shows how to call UnixTimestampArray with required parameters.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new DateTimeOffset[]
+UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new List<DateTimeOffset>()
 {
 DateTimeOffset.FromUnixTimeSeconds(1652209051)
 });
@@ -243,7 +243,7 @@ Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["value"] = new object[]
+    ["value"] = new List<object>()
 {
 1652209051
 },
@@ -262,7 +262,7 @@ Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["value"] = new object[]
+    ["value"] = new List<object>()
 {
 1652209051
 },

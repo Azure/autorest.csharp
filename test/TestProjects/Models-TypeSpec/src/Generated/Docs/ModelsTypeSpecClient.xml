@@ -54,37 +54,37 @@ This sample shows how to call InputToRoundTripAsync with required parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), null, new int[]
+InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), null, new List<int>()
 {
 1234
-}, new string[]
+}, new List<string>()
 {
 "<requiredStringList>"
-}, new CollectionItem[]
+}, new List<CollectionItem>()
 {
 new CollectionItem(new Dictionary<string, RecordItem>()
 {
-["key"] = new RecordItem(new CollectionItem[]
+["key"] = new RecordItem(new List<CollectionItem>()
 {
 null
 }),
 })
 }, new Dictionary<string, RecordItem>()
 {
-    ["key"] = null,
-}, new float?[]
+["key"] = null,
+}, new List<float?>()
 {
-123.45F
-}, new bool?[]
+(float)123.45F
+}, new List<bool?>()
 {
 true
-}, new CollectionItem[]
+}, new List<CollectionItem>()
 {
 null
-}, new string[]
+}, new List<string>()
 {
 "<requiredNullableStringList>"
-}, new int[]
+}, new List<int>()
 {
 1234
 })
@@ -126,37 +126,37 @@ This sample shows how to call InputToRoundTrip with required parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), null, new int[]
+InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), null, new List<int>()
 {
 1234
-}, new string[]
+}, new List<string>()
 {
 "<requiredStringList>"
-}, new CollectionItem[]
+}, new List<CollectionItem>()
 {
 new CollectionItem(new Dictionary<string, RecordItem>()
 {
-["key"] = new RecordItem(new CollectionItem[]
+["key"] = new RecordItem(new List<CollectionItem>()
 {
 null
 }),
 })
 }, new Dictionary<string, RecordItem>()
 {
-    ["key"] = null,
-}, new float?[]
+["key"] = null,
+}, new List<float?>()
 {
-123.45F
-}, new bool?[]
+(float)123.45F
+}, new List<bool?>()
 {
 true
-}, new CollectionItem[]
+}, new List<CollectionItem>()
 {
 null
-}, new string[]
+}, new List<string>()
 {
 "<requiredNullableStringList>"
-}, new int[]
+}, new List<int>()
 {
 1234
 })
@@ -207,15 +207,15 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredModel"] = new Dictionary<string, object>(),
     ["requiredModel2"] = null
 ,
-    ["requiredIntList"] = new object[]
+    ["requiredIntList"] = new List<object>()
 {
 1234
 },
-    ["requiredStringList"] = new object[]
+    ["requiredStringList"] = new List<object>()
 {
 "<requiredStringList>"
 },
-    ["requiredModelList"] = new object[]
+    ["requiredModelList"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -223,7 +223,7 @@ new Dictionary<string, object>()
 {
 ["key"] = new Dictionary<string, object>()
 {
-["requiredList"] = new object[]
+["requiredList"] = new List<object>()
 {
 null
 },
@@ -236,23 +236,23 @@ null
         ["key"] = null
 ,
     },
-    ["requiredCollectionWithNullableFloatElement"] = new object[]
+    ["requiredCollectionWithNullableFloatElement"] = new List<object>()
 {
 123.45F
 },
-    ["requiredCollectionWithNullableBooleanElement"] = new object[]
+    ["requiredCollectionWithNullableBooleanElement"] = new List<object>()
 {
 true
 },
-    ["requiredNullableModelList"] = new object[]
+    ["requiredNullableModelList"] = new List<object>()
 {
 null
 },
-    ["requiredNullableStringList"] = new object[]
+    ["requiredNullableStringList"] = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-    ["requiredNullableIntList"] = new object[]
+    ["requiredNullableIntList"] = new List<object>()
 {
 1234
 },
@@ -295,15 +295,15 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredModel"] = new Dictionary<string, object>(),
     ["requiredModel2"] = null
 ,
-    ["requiredIntList"] = new object[]
+    ["requiredIntList"] = new List<object>()
 {
 1234
 },
-    ["requiredStringList"] = new object[]
+    ["requiredStringList"] = new List<object>()
 {
 "<requiredStringList>"
 },
-    ["requiredModelList"] = new object[]
+    ["requiredModelList"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -311,7 +311,7 @@ new Dictionary<string, object>()
 {
 ["key"] = new Dictionary<string, object>()
 {
-["requiredList"] = new object[]
+["requiredList"] = new List<object>()
 {
 null
 },
@@ -324,47 +324,47 @@ null
         ["key"] = null
 ,
     },
-    ["requiredCollectionWithNullableFloatElement"] = new object[]
+    ["requiredCollectionWithNullableFloatElement"] = new List<object>()
 {
 123.45F
 },
-    ["requiredCollectionWithNullableBooleanElement"] = new object[]
+    ["requiredCollectionWithNullableBooleanElement"] = new List<object>()
 {
 true
 },
-    ["requiredNullableModelList"] = new object[]
+    ["requiredNullableModelList"] = new List<object>()
 {
 null
 },
-    ["requiredNullableStringList"] = new object[]
+    ["requiredNullableStringList"] = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-    ["requiredNullableIntList"] = new object[]
+    ["requiredNullableIntList"] = new List<object>()
 {
 1234
 },
-    ["nonRequiredModelList"] = new object[]
+    ["nonRequiredModelList"] = new List<object>()
 {
 null
 },
-    ["nonRequiredStringList"] = new object[]
+    ["nonRequiredStringList"] = new List<object>()
 {
 "<nonRequiredStringList>"
 },
-    ["nonRequiredIntList"] = new object[]
+    ["nonRequiredIntList"] = new List<object>()
 {
 1234
 },
-    ["nonRequiredNullableModelList"] = new object[]
+    ["nonRequiredNullableModelList"] = new List<object>()
 {
 null
 },
-    ["nonRequiredNullableStringList"] = new object[]
+    ["nonRequiredNullableStringList"] = new List<object>()
 {
 "<nonRequiredNullableStringList>"
 },
-    ["nonRequiredNullableIntList"] = new object[]
+    ["nonRequiredNullableIntList"] = new List<object>()
 {
 1234
 },
@@ -420,15 +420,15 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredModel"] = new Dictionary<string, object>(),
     ["requiredModel2"] = null
 ,
-    ["requiredIntList"] = new object[]
+    ["requiredIntList"] = new List<object>()
 {
 1234
 },
-    ["requiredStringList"] = new object[]
+    ["requiredStringList"] = new List<object>()
 {
 "<requiredStringList>"
 },
-    ["requiredModelList"] = new object[]
+    ["requiredModelList"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -436,7 +436,7 @@ new Dictionary<string, object>()
 {
 ["key"] = new Dictionary<string, object>()
 {
-["requiredList"] = new object[]
+["requiredList"] = new List<object>()
 {
 null
 },
@@ -449,23 +449,23 @@ null
         ["key"] = null
 ,
     },
-    ["requiredCollectionWithNullableFloatElement"] = new object[]
+    ["requiredCollectionWithNullableFloatElement"] = new List<object>()
 {
 123.45F
 },
-    ["requiredCollectionWithNullableBooleanElement"] = new object[]
+    ["requiredCollectionWithNullableBooleanElement"] = new List<object>()
 {
 true
 },
-    ["requiredNullableModelList"] = new object[]
+    ["requiredNullableModelList"] = new List<object>()
 {
 null
 },
-    ["requiredNullableStringList"] = new object[]
+    ["requiredNullableStringList"] = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-    ["requiredNullableIntList"] = new object[]
+    ["requiredNullableIntList"] = new List<object>()
 {
 1234
 },
@@ -508,15 +508,15 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredModel"] = new Dictionary<string, object>(),
     ["requiredModel2"] = null
 ,
-    ["requiredIntList"] = new object[]
+    ["requiredIntList"] = new List<object>()
 {
 1234
 },
-    ["requiredStringList"] = new object[]
+    ["requiredStringList"] = new List<object>()
 {
 "<requiredStringList>"
 },
-    ["requiredModelList"] = new object[]
+    ["requiredModelList"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -524,7 +524,7 @@ new Dictionary<string, object>()
 {
 ["key"] = new Dictionary<string, object>()
 {
-["requiredList"] = new object[]
+["requiredList"] = new List<object>()
 {
 null
 },
@@ -537,47 +537,47 @@ null
         ["key"] = null
 ,
     },
-    ["requiredCollectionWithNullableFloatElement"] = new object[]
+    ["requiredCollectionWithNullableFloatElement"] = new List<object>()
 {
 123.45F
 },
-    ["requiredCollectionWithNullableBooleanElement"] = new object[]
+    ["requiredCollectionWithNullableBooleanElement"] = new List<object>()
 {
 true
 },
-    ["requiredNullableModelList"] = new object[]
+    ["requiredNullableModelList"] = new List<object>()
 {
 null
 },
-    ["requiredNullableStringList"] = new object[]
+    ["requiredNullableStringList"] = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-    ["requiredNullableIntList"] = new object[]
+    ["requiredNullableIntList"] = new List<object>()
 {
 1234
 },
-    ["nonRequiredModelList"] = new object[]
+    ["nonRequiredModelList"] = new List<object>()
 {
 null
 },
-    ["nonRequiredStringList"] = new object[]
+    ["nonRequiredStringList"] = new List<object>()
 {
 "<nonRequiredStringList>"
 },
-    ["nonRequiredIntList"] = new object[]
+    ["nonRequiredIntList"] = new List<object>()
 {
 1234
 },
-    ["nonRequiredNullableModelList"] = new object[]
+    ["nonRequiredNullableModelList"] = new List<object>()
 {
 null
 },
-    ["nonRequiredNullableStringList"] = new object[]
+    ["nonRequiredNullableStringList"] = new List<object>()
 {
 "<nonRequiredNullableStringList>"
 },
-    ["nonRequiredNullableIntList"] = new object[]
+    ["nonRequiredNullableIntList"] = new List<object>()
 {
 1234
 },
@@ -624,37 +624,37 @@ This sample shows how to call InputToRoundTripPrimitiveAsync with required param
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), null, new int[]
+InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), null, new List<int>()
 {
 1234
-}, new string[]
+}, new List<string>()
 {
 "<requiredStringList>"
-}, new CollectionItem[]
+}, new List<CollectionItem>()
 {
 new CollectionItem(new Dictionary<string, RecordItem>()
 {
-["key"] = new RecordItem(new CollectionItem[]
+["key"] = new RecordItem(new List<CollectionItem>()
 {
 null
 }),
 })
 }, new Dictionary<string, RecordItem>()
 {
-    ["key"] = null,
-}, new float?[]
+["key"] = null,
+}, new List<float?>()
 {
-123.45F
-}, new bool?[]
+(float)123.45F
+}, new List<bool?>()
 {
 true
-}, new CollectionItem[]
+}, new List<CollectionItem>()
 {
 null
-}, new string[]
+}, new List<string>()
 {
 "<requiredNullableStringList>"
-}, new int[]
+}, new List<int>()
 {
 1234
 })
@@ -696,37 +696,37 @@ This sample shows how to call InputToRoundTripPrimitive with required parameters
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), null, new int[]
+InputModel input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), null, new List<int>()
 {
 1234
-}, new string[]
+}, new List<string>()
 {
 "<requiredStringList>"
-}, new CollectionItem[]
+}, new List<CollectionItem>()
 {
 new CollectionItem(new Dictionary<string, RecordItem>()
 {
-["key"] = new RecordItem(new CollectionItem[]
+["key"] = new RecordItem(new List<CollectionItem>()
 {
 null
 }),
 })
 }, new Dictionary<string, RecordItem>()
 {
-    ["key"] = null,
-}, new float?[]
+["key"] = null,
+}, new List<float?>()
 {
-123.45F
-}, new bool?[]
+(float)123.45F
+}, new List<bool?>()
 {
 true
-}, new CollectionItem[]
+}, new List<CollectionItem>()
 {
 null
-}, new string[]
+}, new List<string>()
 {
 "<requiredNullableStringList>"
-}, new int[]
+}, new List<int>()
 {
 1234
 })
@@ -777,15 +777,15 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredModel"] = new Dictionary<string, object>(),
     ["requiredModel2"] = null
 ,
-    ["requiredIntList"] = new object[]
+    ["requiredIntList"] = new List<object>()
 {
 1234
 },
-    ["requiredStringList"] = new object[]
+    ["requiredStringList"] = new List<object>()
 {
 "<requiredStringList>"
 },
-    ["requiredModelList"] = new object[]
+    ["requiredModelList"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -793,7 +793,7 @@ new Dictionary<string, object>()
 {
 ["key"] = new Dictionary<string, object>()
 {
-["requiredList"] = new object[]
+["requiredList"] = new List<object>()
 {
 null
 },
@@ -806,23 +806,23 @@ null
         ["key"] = null
 ,
     },
-    ["requiredCollectionWithNullableFloatElement"] = new object[]
+    ["requiredCollectionWithNullableFloatElement"] = new List<object>()
 {
 123.45F
 },
-    ["requiredCollectionWithNullableBooleanElement"] = new object[]
+    ["requiredCollectionWithNullableBooleanElement"] = new List<object>()
 {
 true
 },
-    ["requiredNullableModelList"] = new object[]
+    ["requiredNullableModelList"] = new List<object>()
 {
 null
 },
-    ["requiredNullableStringList"] = new object[]
+    ["requiredNullableStringList"] = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-    ["requiredNullableIntList"] = new object[]
+    ["requiredNullableIntList"] = new List<object>()
 {
 1234
 },
@@ -857,15 +857,15 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredModel"] = new Dictionary<string, object>(),
     ["requiredModel2"] = null
 ,
-    ["requiredIntList"] = new object[]
+    ["requiredIntList"] = new List<object>()
 {
 1234
 },
-    ["requiredStringList"] = new object[]
+    ["requiredStringList"] = new List<object>()
 {
 "<requiredStringList>"
 },
-    ["requiredModelList"] = new object[]
+    ["requiredModelList"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -873,7 +873,7 @@ new Dictionary<string, object>()
 {
 ["key"] = new Dictionary<string, object>()
 {
-["requiredList"] = new object[]
+["requiredList"] = new List<object>()
 {
 null
 },
@@ -886,47 +886,47 @@ null
         ["key"] = null
 ,
     },
-    ["requiredCollectionWithNullableFloatElement"] = new object[]
+    ["requiredCollectionWithNullableFloatElement"] = new List<object>()
 {
 123.45F
 },
-    ["requiredCollectionWithNullableBooleanElement"] = new object[]
+    ["requiredCollectionWithNullableBooleanElement"] = new List<object>()
 {
 true
 },
-    ["requiredNullableModelList"] = new object[]
+    ["requiredNullableModelList"] = new List<object>()
 {
 null
 },
-    ["requiredNullableStringList"] = new object[]
+    ["requiredNullableStringList"] = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-    ["requiredNullableIntList"] = new object[]
+    ["requiredNullableIntList"] = new List<object>()
 {
 1234
 },
-    ["nonRequiredModelList"] = new object[]
+    ["nonRequiredModelList"] = new List<object>()
 {
 null
 },
-    ["nonRequiredStringList"] = new object[]
+    ["nonRequiredStringList"] = new List<object>()
 {
 "<nonRequiredStringList>"
 },
-    ["nonRequiredIntList"] = new object[]
+    ["nonRequiredIntList"] = new List<object>()
 {
 1234
 },
-    ["nonRequiredNullableModelList"] = new object[]
+    ["nonRequiredNullableModelList"] = new List<object>()
 {
 null
 },
-    ["nonRequiredNullableStringList"] = new object[]
+    ["nonRequiredNullableStringList"] = new List<object>()
 {
 "<nonRequiredNullableStringList>"
 },
-    ["nonRequiredNullableIntList"] = new object[]
+    ["nonRequiredNullableIntList"] = new List<object>()
 {
 1234
 },
@@ -962,15 +962,15 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredModel"] = new Dictionary<string, object>(),
     ["requiredModel2"] = null
 ,
-    ["requiredIntList"] = new object[]
+    ["requiredIntList"] = new List<object>()
 {
 1234
 },
-    ["requiredStringList"] = new object[]
+    ["requiredStringList"] = new List<object>()
 {
 "<requiredStringList>"
 },
-    ["requiredModelList"] = new object[]
+    ["requiredModelList"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -978,7 +978,7 @@ new Dictionary<string, object>()
 {
 ["key"] = new Dictionary<string, object>()
 {
-["requiredList"] = new object[]
+["requiredList"] = new List<object>()
 {
 null
 },
@@ -991,23 +991,23 @@ null
         ["key"] = null
 ,
     },
-    ["requiredCollectionWithNullableFloatElement"] = new object[]
+    ["requiredCollectionWithNullableFloatElement"] = new List<object>()
 {
 123.45F
 },
-    ["requiredCollectionWithNullableBooleanElement"] = new object[]
+    ["requiredCollectionWithNullableBooleanElement"] = new List<object>()
 {
 true
 },
-    ["requiredNullableModelList"] = new object[]
+    ["requiredNullableModelList"] = new List<object>()
 {
 null
 },
-    ["requiredNullableStringList"] = new object[]
+    ["requiredNullableStringList"] = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-    ["requiredNullableIntList"] = new object[]
+    ["requiredNullableIntList"] = new List<object>()
 {
 1234
 },
@@ -1042,15 +1042,15 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredModel"] = new Dictionary<string, object>(),
     ["requiredModel2"] = null
 ,
-    ["requiredIntList"] = new object[]
+    ["requiredIntList"] = new List<object>()
 {
 1234
 },
-    ["requiredStringList"] = new object[]
+    ["requiredStringList"] = new List<object>()
 {
 "<requiredStringList>"
 },
-    ["requiredModelList"] = new object[]
+    ["requiredModelList"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -1058,7 +1058,7 @@ new Dictionary<string, object>()
 {
 ["key"] = new Dictionary<string, object>()
 {
-["requiredList"] = new object[]
+["requiredList"] = new List<object>()
 {
 null
 },
@@ -1071,47 +1071,47 @@ null
         ["key"] = null
 ,
     },
-    ["requiredCollectionWithNullableFloatElement"] = new object[]
+    ["requiredCollectionWithNullableFloatElement"] = new List<object>()
 {
 123.45F
 },
-    ["requiredCollectionWithNullableBooleanElement"] = new object[]
+    ["requiredCollectionWithNullableBooleanElement"] = new List<object>()
 {
 true
 },
-    ["requiredNullableModelList"] = new object[]
+    ["requiredNullableModelList"] = new List<object>()
 {
 null
 },
-    ["requiredNullableStringList"] = new object[]
+    ["requiredNullableStringList"] = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-    ["requiredNullableIntList"] = new object[]
+    ["requiredNullableIntList"] = new List<object>()
 {
 1234
 },
-    ["nonRequiredModelList"] = new object[]
+    ["nonRequiredModelList"] = new List<object>()
 {
 null
 },
-    ["nonRequiredStringList"] = new object[]
+    ["nonRequiredStringList"] = new List<object>()
 {
 "<nonRequiredStringList>"
 },
-    ["nonRequiredIntList"] = new object[]
+    ["nonRequiredIntList"] = new List<object>()
 {
 1234
 },
-    ["nonRequiredNullableModelList"] = new object[]
+    ["nonRequiredNullableModelList"] = new List<object>()
 {
 null
 },
-    ["nonRequiredNullableStringList"] = new object[]
+    ["nonRequiredNullableStringList"] = new List<object>()
 {
 "<nonRequiredNullableStringList>"
 },
-    ["nonRequiredNullableIntList"] = new object[]
+    ["nonRequiredNullableIntList"] = new List<object>()
 {
 1234
 },
@@ -1155,15 +1155,15 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["optionalString"] = "<optionalString>",
     ["optionalInt"] = 1234,
-    ["optionalStringList"] = new object[]
+    ["optionalStringList"] = new List<object>()
 {
 "<optionalStringList>"
 },
-    ["optionalIntList"] = new object[]
+    ["optionalIntList"] = new List<object>()
 {
 1234
 },
-    ["optionalModelList"] = new object[]
+    ["optionalModelList"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -1171,7 +1171,7 @@ new Dictionary<string, object>()
 {
 ["key"] = new Dictionary<string, object>()
 {
-["requiredList"] = new object[]
+["requiredList"] = new List<object>()
 {
 null
 },
@@ -1181,14 +1181,14 @@ null
 },
     ["optionalModel"] = new Dictionary<string, object>()
     {
-        ["requiredList"] = new object[]
+        ["requiredList"] = new List<object>()
 {
 null
 },
     },
     ["optionalModelWithPropertiesOnBase"] = new Dictionary<string, object>()
     {
-        ["requiredList"] = new object[]
+        ["requiredList"] = new List<object>()
 {
 null
 },
@@ -1211,7 +1211,7 @@ null
     },
     ["optionalPlainDate"] = "2022-05-10",
     ["optionalPlainTime"] = "01:23:45",
-    ["optionalCollectionWithNullableIntElement"] = new object[]
+    ["optionalCollectionWithNullableIntElement"] = new List<object>()
 {
 1234
 },
@@ -1255,15 +1255,15 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["optionalString"] = "<optionalString>",
     ["optionalInt"] = 1234,
-    ["optionalStringList"] = new object[]
+    ["optionalStringList"] = new List<object>()
 {
 "<optionalStringList>"
 },
-    ["optionalIntList"] = new object[]
+    ["optionalIntList"] = new List<object>()
 {
 1234
 },
-    ["optionalModelList"] = new object[]
+    ["optionalModelList"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -1271,7 +1271,7 @@ new Dictionary<string, object>()
 {
 ["key"] = new Dictionary<string, object>()
 {
-["requiredList"] = new object[]
+["requiredList"] = new List<object>()
 {
 null
 },
@@ -1281,14 +1281,14 @@ null
 },
     ["optionalModel"] = new Dictionary<string, object>()
     {
-        ["requiredList"] = new object[]
+        ["requiredList"] = new List<object>()
 {
 null
 },
     },
     ["optionalModelWithPropertiesOnBase"] = new Dictionary<string, object>()
     {
-        ["requiredList"] = new object[]
+        ["requiredList"] = new List<object>()
 {
 null
 },
@@ -1311,7 +1311,7 @@ null
     },
     ["optionalPlainDate"] = "2022-05-10",
     ["optionalPlainTime"] = "01:23:45",
-    ["optionalCollectionWithNullableIntElement"] = new object[]
+    ["optionalCollectionWithNullableIntElement"] = new List<object>()
 {
 1234
 },
@@ -1361,7 +1361,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredFixedStringEnum"] = "1",
     ["requiredFixedIntEnum"] = 1,
     ["requiredExtensibleEnum"] = "1",
-    ["requiredList"] = new object[]
+    ["requiredList"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -1369,7 +1369,7 @@ new Dictionary<string, object>()
 {
 ["key"] = new Dictionary<string, object>()
 {
-["requiredList"] = new object[]
+["requiredList"] = new List<object>()
 {
 null
 },
@@ -1391,20 +1391,20 @@ null
 ,
     },
     ["requiredBytes"] = new Dictionary<string, object>(),
-    ["requiredUint8Array"] = new object[]
+    ["requiredUint8Array"] = new List<object>()
 {
 1234
 },
     ["requiredUnknown"] = new Dictionary<string, object>(),
-    ["requiredInt8Array"] = new object[]
+    ["requiredInt8Array"] = new List<object>()
 {
 1234
 },
-    ["requiredNullableIntList"] = new object[]
+    ["requiredNullableIntList"] = new List<object>()
 {
 1234
 },
-    ["requiredNullableStringList"] = new object[]
+    ["requiredNullableStringList"] = new List<object>()
 {
 "<requiredNullableStringList>"
 },
@@ -1440,7 +1440,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredFixedStringEnum"] = "1",
     ["requiredFixedIntEnum"] = 1,
     ["requiredExtensibleEnum"] = "1",
-    ["requiredList"] = new object[]
+    ["requiredList"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -1448,7 +1448,7 @@ new Dictionary<string, object>()
 {
 ["key"] = new Dictionary<string, object>()
 {
-["requiredList"] = new object[]
+["requiredList"] = new List<object>()
 {
 null
 },
@@ -1471,37 +1471,37 @@ null
     },
     ["requiredBytes"] = new Dictionary<string, object>(),
     ["optionalBytes"] = new Dictionary<string, object>(),
-    ["requiredUint8Array"] = new object[]
+    ["requiredUint8Array"] = new List<object>()
 {
 1234
 },
-    ["optionalUint8Array"] = new object[]
+    ["optionalUint8Array"] = new List<object>()
 {
 1234
 },
     ["requiredUnknown"] = new Dictionary<string, object>(),
     ["optionalUnknown"] = new Dictionary<string, object>(),
-    ["requiredInt8Array"] = new object[]
+    ["requiredInt8Array"] = new List<object>()
 {
 1234
 },
-    ["optionalInt8Array"] = new object[]
+    ["optionalInt8Array"] = new List<object>()
 {
 1234
 },
-    ["requiredNullableIntList"] = new object[]
+    ["requiredNullableIntList"] = new List<object>()
 {
 1234
 },
-    ["requiredNullableStringList"] = new object[]
+    ["requiredNullableStringList"] = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-    ["nonRequiredNullableIntList"] = new object[]
+    ["nonRequiredNullableIntList"] = new List<object>()
 {
 1234
 },
-    ["nonRequiredNullableStringList"] = new object[]
+    ["nonRequiredNullableStringList"] = new List<object>()
 {
 "<nonRequiredNullableStringList>"
 },
@@ -1535,7 +1535,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredFixedStringEnum"] = "1",
     ["requiredFixedIntEnum"] = 1,
     ["requiredExtensibleEnum"] = "1",
-    ["requiredList"] = new object[]
+    ["requiredList"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -1543,7 +1543,7 @@ new Dictionary<string, object>()
 {
 ["key"] = new Dictionary<string, object>()
 {
-["requiredList"] = new object[]
+["requiredList"] = new List<object>()
 {
 null
 },
@@ -1565,20 +1565,20 @@ null
 ,
     },
     ["requiredBytes"] = new Dictionary<string, object>(),
-    ["requiredUint8Array"] = new object[]
+    ["requiredUint8Array"] = new List<object>()
 {
 1234
 },
     ["requiredUnknown"] = new Dictionary<string, object>(),
-    ["requiredInt8Array"] = new object[]
+    ["requiredInt8Array"] = new List<object>()
 {
 1234
 },
-    ["requiredNullableIntList"] = new object[]
+    ["requiredNullableIntList"] = new List<object>()
 {
 1234
 },
-    ["requiredNullableStringList"] = new object[]
+    ["requiredNullableStringList"] = new List<object>()
 {
 "<requiredNullableStringList>"
 },
@@ -1614,7 +1614,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredFixedStringEnum"] = "1",
     ["requiredFixedIntEnum"] = 1,
     ["requiredExtensibleEnum"] = "1",
-    ["requiredList"] = new object[]
+    ["requiredList"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -1622,7 +1622,7 @@ new Dictionary<string, object>()
 {
 ["key"] = new Dictionary<string, object>()
 {
-["requiredList"] = new object[]
+["requiredList"] = new List<object>()
 {
 null
 },
@@ -1645,37 +1645,37 @@ null
     },
     ["requiredBytes"] = new Dictionary<string, object>(),
     ["optionalBytes"] = new Dictionary<string, object>(),
-    ["requiredUint8Array"] = new object[]
+    ["requiredUint8Array"] = new List<object>()
 {
 1234
 },
-    ["optionalUint8Array"] = new object[]
+    ["optionalUint8Array"] = new List<object>()
 {
 1234
 },
     ["requiredUnknown"] = new Dictionary<string, object>(),
     ["optionalUnknown"] = new Dictionary<string, object>(),
-    ["requiredInt8Array"] = new object[]
+    ["requiredInt8Array"] = new List<object>()
 {
 1234
 },
-    ["optionalInt8Array"] = new object[]
+    ["optionalInt8Array"] = new List<object>()
 {
 1234
 },
-    ["requiredNullableIntList"] = new object[]
+    ["requiredNullableIntList"] = new List<object>()
 {
 1234
 },
-    ["requiredNullableStringList"] = new object[]
+    ["requiredNullableStringList"] = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-    ["nonRequiredNullableIntList"] = new object[]
+    ["nonRequiredNullableIntList"] = new List<object>()
 {
 1234
 },
-    ["nonRequiredNullableStringList"] = new object[]
+    ["nonRequiredNullableStringList"] = new List<object>()
 {
 "<nonRequiredNullableStringList>"
 },
@@ -1926,11 +1926,11 @@ This sample shows how to call RoundTripToOutputWithNoUseBaseAsync with required 
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RoundTripOnNoUse input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[]
+RoundTripOnNoUse input = new RoundTripOnNoUse("<baseModelProp>", new List<CollectionItem>()
 {
 new CollectionItem(new Dictionary<string, RecordItem>()
 {
-["key"] = new RecordItem(new CollectionItem[]
+["key"] = new RecordItem(new List<CollectionItem>()
 {
 null
 }),
@@ -1946,11 +1946,11 @@ This sample shows how to call RoundTripToOutputWithNoUseBase with required param
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-RoundTripOnNoUse input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[]
+RoundTripOnNoUse input = new RoundTripOnNoUse("<baseModelProp>", new List<CollectionItem>()
 {
 new CollectionItem(new Dictionary<string, RecordItem>()
 {
-["key"] = new RecordItem(new CollectionItem[]
+["key"] = new RecordItem(new List<CollectionItem>()
 {
 null
 }),
@@ -1968,7 +1968,7 @@ ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["requiredList"] = new object[]
+    ["requiredList"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -1976,7 +1976,7 @@ new Dictionary<string, object>()
 {
 ["key"] = new Dictionary<string, object>()
 {
-["requiredList"] = new object[]
+["requiredList"] = new List<object>()
 {
 null
 },
@@ -2001,7 +2001,7 @@ ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["requiredList"] = new object[]
+    ["requiredList"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -2009,7 +2009,7 @@ new Dictionary<string, object>()
 {
 ["key"] = new Dictionary<string, object>()
 {
-["requiredList"] = new object[]
+["requiredList"] = new List<object>()
 {
 null
 },

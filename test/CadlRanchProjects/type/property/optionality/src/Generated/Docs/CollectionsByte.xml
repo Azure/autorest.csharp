@@ -135,7 +135,7 @@ CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersio
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["property"] = new object[]
+    ["property"] = new List<object>()
 {
 new Dictionary<string, object>()
 },
@@ -160,7 +160,7 @@ CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersio
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["property"] = new object[]
+    ["property"] = new List<object>()
 {
 new Dictionary<string, object>()
 },
@@ -219,7 +219,7 @@ CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersio
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["property"] = new object[]
+    ["property"] = new List<object>()
 {
 new Dictionary<string, object>()
 },
@@ -244,7 +244,7 @@ CollectionsByte client = new OptionalClient().GetCollectionsByteClient(apiVersio
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["property"] = new object[]
+    ["property"] = new List<object>()
 {
 new Dictionary<string, object>()
 },

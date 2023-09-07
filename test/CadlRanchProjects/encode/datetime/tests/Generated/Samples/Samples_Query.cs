@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -182,10 +183,10 @@ namespace Encode.Datetime.Samples
         {
             Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.UnixTimestampArray(new DateTimeOffset[]
-            {
+            Response response = client.UnixTimestampArray(new List<DateTimeOffset>()
+{
 DateTimeOffset.FromUnixTimeSeconds(1652209051)
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -195,10 +196,10 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
         {
             Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.UnixTimestampArray(new DateTimeOffset[]
-            {
+            Response response = client.UnixTimestampArray(new List<DateTimeOffset>()
+{
 DateTimeOffset.FromUnixTimeSeconds(1652209051)
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -208,10 +209,10 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
         {
             Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.UnixTimestampArrayAsync(new DateTimeOffset[]
-            {
+            Response response = await client.UnixTimestampArrayAsync(new List<DateTimeOffset>()
+{
 DateTimeOffset.FromUnixTimeSeconds(1652209051)
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -221,10 +222,10 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
         {
             Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.UnixTimestampArrayAsync(new DateTimeOffset[]
-            {
+            Response response = await client.UnixTimestampArrayAsync(new List<DateTimeOffset>()
+{
 DateTimeOffset.FromUnixTimeSeconds(1652209051)
-            });
+});
             Console.WriteLine(response.Status);
         }
     }

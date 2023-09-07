@@ -7,7 +7,7 @@ This sample shows how to call CsvAsync with required parameters.
 <code><![CDATA[
 Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = await client.CsvAsync(new string[]
+Response response = await client.CsvAsync(new List<string>()
 {
 "<colors>"
 });
@@ -20,7 +20,7 @@ This sample shows how to call Csv with required parameters.
 <code><![CDATA[
 Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = client.Csv(new string[]
+Response response = client.Csv(new List<string>()
 {
 "<colors>"
 });

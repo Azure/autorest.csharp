@@ -49,7 +49,7 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new DateTimeOffset[]
+Response response = await client.PutAsync(new List<DateTimeOffset>()
 {
 DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
 });
@@ -62,7 +62,7 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new DateTimeOffset[]
+Response response = client.Put(new List<DateTimeOffset>()
 {
 DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
 });
@@ -75,7 +75,7 @@ This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
 DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+RequestContent content = RequestContent.Create(new List<object>()
 {
 "2022-05-10T14:57:31.2311892-04:00"
 });
@@ -89,7 +89,7 @@ This sample shows how to call Put with required request content.
 <code><![CDATA[
 DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+RequestContent content = RequestContent.Create(new List<object>()
 {
 "2022-05-10T14:57:31.2311892-04:00"
 });

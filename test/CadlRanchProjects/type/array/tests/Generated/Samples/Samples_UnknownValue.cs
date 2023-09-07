@@ -109,10 +109,10 @@ namespace _Type._Array.Samples
         {
             UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
-            });
+});
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
@@ -123,10 +123,10 @@ new Dictionary<string, object>()
         {
             UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
-            });
+});
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
@@ -137,10 +137,10 @@ new Dictionary<string, object>()
         {
             UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new BinaryData[]
-            {
+            Response response = client.Put(new List<BinaryData>()
+{
 BinaryData.FromObjectAsJson(new Dictionary<string, object>())
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -150,10 +150,10 @@ BinaryData.FromObjectAsJson(new Dictionary<string, object>())
         {
             UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new BinaryData[]
-            {
+            Response response = client.Put(new List<BinaryData>()
+{
 BinaryData.FromObjectAsJson(new Dictionary<string, object>())
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -163,10 +163,10 @@ BinaryData.FromObjectAsJson(new Dictionary<string, object>())
         {
             UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
-            });
+});
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -177,10 +177,10 @@ new Dictionary<string, object>()
         {
             UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
-            });
+});
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -191,10 +191,10 @@ new Dictionary<string, object>()
         {
             UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new BinaryData[]
-            {
+            Response response = await client.PutAsync(new List<BinaryData>()
+{
 BinaryData.FromObjectAsJson(new Dictionary<string, object>())
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -204,10 +204,10 @@ BinaryData.FromObjectAsJson(new Dictionary<string, object>())
         {
             UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new BinaryData[]
-            {
+            Response response = await client.PutAsync(new List<BinaryData>()
+{
 BinaryData.FromObjectAsJson(new Dictionary<string, object>())
-            });
+});
             Console.WriteLine(response.Status);
         }
     }

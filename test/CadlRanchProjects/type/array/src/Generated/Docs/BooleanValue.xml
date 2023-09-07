@@ -49,7 +49,7 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new bool[]
+Response response = await client.PutAsync(new List<bool>()
 {
 true
 });
@@ -62,7 +62,7 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new bool[]
+Response response = client.Put(new List<bool>()
 {
 true
 });
@@ -75,7 +75,7 @@ This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
 BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+RequestContent content = RequestContent.Create(new List<object>()
 {
 true
 });
@@ -89,7 +89,7 @@ This sample shows how to call Put with required request content.
 <code><![CDATA[
 BooleanValue client = new ArrayClient().GetBooleanValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+RequestContent content = RequestContent.Create(new List<object>()
 {
 true
 });

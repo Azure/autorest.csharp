@@ -49,7 +49,7 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new int[]
+Response response = await client.PutAsync(new List<int>()
 {
 1234
 });
@@ -62,7 +62,7 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new int[]
+Response response = client.Put(new List<int>()
 {
 1234
 });
@@ -75,7 +75,7 @@ This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
 Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+RequestContent content = RequestContent.Create(new List<object>()
 {
 1234
 });
@@ -89,7 +89,7 @@ This sample shows how to call Put with required request content.
 <code><![CDATA[
 Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+RequestContent content = RequestContent.Create(new List<object>()
 {
 1234
 });

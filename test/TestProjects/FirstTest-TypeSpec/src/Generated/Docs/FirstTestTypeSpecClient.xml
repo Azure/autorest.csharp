@@ -119,7 +119,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredLiteralFloat"] = 1.23F,
     ["requiredLiteralBool"] = false,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["requiredNullableList"] = new object[]
+    ["requiredNullableList"] = new List<object>()
 {
 1234
 },
@@ -154,11 +154,11 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["optionalLiteralFloat"] = 4.56F,
     ["optionalLiteralBool"] = true,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["optionalNullableList"] = new object[]
+    ["optionalNullableList"] = new List<object>()
 {
 1234
 },
-    ["requiredNullableList"] = new object[]
+    ["requiredNullableList"] = new List<object>()
 {
 1234
 },
@@ -197,7 +197,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredLiteralFloat"] = 1.23F,
     ["requiredLiteralBool"] = false,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["requiredNullableList"] = new object[]
+    ["requiredNullableList"] = new List<object>()
 {
 1234
 },
@@ -232,11 +232,11 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["optionalLiteralFloat"] = 4.56F,
     ["optionalLiteralBool"] = true,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["optionalNullableList"] = new object[]
+    ["optionalNullableList"] = new List<object>()
 {
 1234
 },
-    ["requiredNullableList"] = new object[]
+    ["requiredNullableList"] = new List<object>()
 {
 1234
 },
@@ -277,7 +277,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredLiteralFloat"] = 1.23F,
     ["requiredLiteralBool"] = false,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["requiredNullableList"] = new object[]
+    ["requiredNullableList"] = new List<object>()
 {
 1234
 },
@@ -312,11 +312,11 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["optionalLiteralFloat"] = 4.56F,
     ["optionalLiteralBool"] = true,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["optionalNullableList"] = new object[]
+    ["optionalNullableList"] = new List<object>()
 {
 1234
 },
-    ["requiredNullableList"] = new object[]
+    ["requiredNullableList"] = new List<object>()
 {
 1234
 },
@@ -355,7 +355,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredLiteralFloat"] = 1.23F,
     ["requiredLiteralBool"] = false,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["requiredNullableList"] = new object[]
+    ["requiredNullableList"] = new List<object>()
 {
 1234
 },
@@ -390,11 +390,11 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["optionalLiteralFloat"] = 4.56F,
     ["optionalLiteralBool"] = true,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["optionalNullableList"] = new object[]
+    ["optionalNullableList"] = new List<object>()
 {
 1234
 },
-    ["requiredNullableList"] = new object[]
+    ["requiredNullableList"] = new List<object>()
 {
 1234
 },
@@ -716,7 +716,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["requiredString"] = "<requiredString>",
     ["requiredInt"] = 1234,
-    ["requiredCollection"] = new object[]
+    ["requiredCollection"] = new List<object>()
 {
 "1"
 },
@@ -733,7 +733,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredLiteralFloat"] = 1.23F,
         ["requiredLiteralBool"] = false,
         ["requiredBadDescription"] = "<requiredBadDescription>",
-        ["requiredNullableList"] = new object[]
+        ["requiredNullableList"] = new List<object>()
 {
 1234
 },
@@ -781,7 +781,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["requiredString"] = "<requiredString>",
     ["requiredInt"] = 1234,
-    ["requiredCollection"] = new object[]
+    ["requiredCollection"] = new List<object>()
 {
 "1"
 },
@@ -802,32 +802,32 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["optionalLiteralFloat"] = 4.56F,
         ["optionalLiteralBool"] = true,
         ["requiredBadDescription"] = "<requiredBadDescription>",
-        ["optionalNullableList"] = new object[]
+        ["optionalNullableList"] = new List<object>()
 {
 1234
 },
-        ["requiredNullableList"] = new object[]
+        ["requiredNullableList"] = new List<object>()
 {
 1234
 },
     },
     ["intExtensibleEnum"] = 1,
-    ["intExtensibleEnumCollection"] = new object[]
+    ["intExtensibleEnumCollection"] = new List<object>()
 {
 1
 },
     ["floatExtensibleEnum"] = 1,
-    ["floatExtensibleEnumCollection"] = new object[]
+    ["floatExtensibleEnumCollection"] = new List<object>()
 {
 1
 },
     ["floatFixedEnum"] = 1.1F,
-    ["floatFixedEnumCollection"] = new object[]
+    ["floatFixedEnumCollection"] = new List<object>()
 {
 1.1F
 },
     ["intFixedEnum"] = 1,
-    ["intFixedEnumCollection"] = new object[]
+    ["intFixedEnumCollection"] = new List<object>()
 {
 1
 },
@@ -900,7 +900,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["requiredString"] = "<requiredString>",
     ["requiredInt"] = 1234,
-    ["requiredCollection"] = new object[]
+    ["requiredCollection"] = new List<object>()
 {
 "1"
 },
@@ -917,7 +917,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredLiteralFloat"] = 1.23F,
         ["requiredLiteralBool"] = false,
         ["requiredBadDescription"] = "<requiredBadDescription>",
-        ["requiredNullableList"] = new object[]
+        ["requiredNullableList"] = new List<object>()
 {
 1234
 },
@@ -965,7 +965,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["requiredString"] = "<requiredString>",
     ["requiredInt"] = 1234,
-    ["requiredCollection"] = new object[]
+    ["requiredCollection"] = new List<object>()
 {
 "1"
 },
@@ -986,32 +986,32 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["optionalLiteralFloat"] = 4.56F,
         ["optionalLiteralBool"] = true,
         ["requiredBadDescription"] = "<requiredBadDescription>",
-        ["optionalNullableList"] = new object[]
+        ["optionalNullableList"] = new List<object>()
 {
 1234
 },
-        ["requiredNullableList"] = new object[]
+        ["requiredNullableList"] = new List<object>()
 {
 1234
 },
     },
     ["intExtensibleEnum"] = 1,
-    ["intExtensibleEnumCollection"] = new object[]
+    ["intExtensibleEnumCollection"] = new List<object>()
 {
 1
 },
     ["floatExtensibleEnum"] = 1,
-    ["floatExtensibleEnumCollection"] = new object[]
+    ["floatExtensibleEnumCollection"] = new List<object>()
 {
 1
 },
     ["floatFixedEnum"] = 1.1F,
-    ["floatFixedEnumCollection"] = new object[]
+    ["floatFixedEnumCollection"] = new List<object>()
 {
 1.1F
 },
     ["intFixedEnum"] = 1,
-    ["intFixedEnumCollection"] = new object[]
+    ["intFixedEnumCollection"] = new List<object>()
 {
 1
 },
@@ -1084,7 +1084,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["requiredString"] = "<requiredString>",
     ["requiredInt"] = 1234,
-    ["requiredCollection"] = new object[]
+    ["requiredCollection"] = new List<object>()
 {
 "1"
 },
@@ -1101,7 +1101,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredLiteralFloat"] = 1.23F,
         ["requiredLiteralBool"] = false,
         ["requiredBadDescription"] = "<requiredBadDescription>",
-        ["requiredNullableList"] = new object[]
+        ["requiredNullableList"] = new List<object>()
 {
 1234
 },
@@ -1149,7 +1149,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["requiredString"] = "<requiredString>",
     ["requiredInt"] = 1234,
-    ["requiredCollection"] = new object[]
+    ["requiredCollection"] = new List<object>()
 {
 "1"
 },
@@ -1170,32 +1170,32 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["optionalLiteralFloat"] = 4.56F,
         ["optionalLiteralBool"] = true,
         ["requiredBadDescription"] = "<requiredBadDescription>",
-        ["optionalNullableList"] = new object[]
+        ["optionalNullableList"] = new List<object>()
 {
 1234
 },
-        ["requiredNullableList"] = new object[]
+        ["requiredNullableList"] = new List<object>()
 {
 1234
 },
     },
     ["intExtensibleEnum"] = 1,
-    ["intExtensibleEnumCollection"] = new object[]
+    ["intExtensibleEnumCollection"] = new List<object>()
 {
 1
 },
     ["floatExtensibleEnum"] = 1,
-    ["floatExtensibleEnumCollection"] = new object[]
+    ["floatExtensibleEnumCollection"] = new List<object>()
 {
 1
 },
     ["floatFixedEnum"] = 1.1F,
-    ["floatFixedEnumCollection"] = new object[]
+    ["floatFixedEnumCollection"] = new List<object>()
 {
 1.1F
 },
     ["intFixedEnum"] = 1,
-    ["intFixedEnumCollection"] = new object[]
+    ["intFixedEnumCollection"] = new List<object>()
 {
 1
 },
@@ -1268,7 +1268,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["requiredString"] = "<requiredString>",
     ["requiredInt"] = 1234,
-    ["requiredCollection"] = new object[]
+    ["requiredCollection"] = new List<object>()
 {
 "1"
 },
@@ -1285,7 +1285,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredLiteralFloat"] = 1.23F,
         ["requiredLiteralBool"] = false,
         ["requiredBadDescription"] = "<requiredBadDescription>",
-        ["requiredNullableList"] = new object[]
+        ["requiredNullableList"] = new List<object>()
 {
 1234
 },
@@ -1333,7 +1333,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["requiredString"] = "<requiredString>",
     ["requiredInt"] = 1234,
-    ["requiredCollection"] = new object[]
+    ["requiredCollection"] = new List<object>()
 {
 "1"
 },
@@ -1354,32 +1354,32 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["optionalLiteralFloat"] = 4.56F,
         ["optionalLiteralBool"] = true,
         ["requiredBadDescription"] = "<requiredBadDescription>",
-        ["optionalNullableList"] = new object[]
+        ["optionalNullableList"] = new List<object>()
 {
 1234
 },
-        ["requiredNullableList"] = new object[]
+        ["requiredNullableList"] = new List<object>()
 {
 1234
 },
     },
     ["intExtensibleEnum"] = 1,
-    ["intExtensibleEnumCollection"] = new object[]
+    ["intExtensibleEnumCollection"] = new List<object>()
 {
 1
 },
     ["floatExtensibleEnum"] = 1,
-    ["floatExtensibleEnumCollection"] = new object[]
+    ["floatExtensibleEnumCollection"] = new List<object>()
 {
 1
 },
     ["floatFixedEnum"] = 1.1F,
-    ["floatFixedEnumCollection"] = new object[]
+    ["floatFixedEnumCollection"] = new List<object>()
 {
 1.1F
 },
     ["intFixedEnum"] = 1,
-    ["intFixedEnumCollection"] = new object[]
+    ["intFixedEnumCollection"] = new List<object>()
 {
 1
 },
@@ -1511,7 +1511,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredLiteralFloat"] = 1.23F,
     ["requiredLiteralBool"] = false,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["requiredNullableList"] = new object[]
+    ["requiredNullableList"] = new List<object>()
 {
 1234
 },
@@ -1546,11 +1546,11 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["optionalLiteralFloat"] = 4.56F,
     ["optionalLiteralBool"] = true,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["optionalNullableList"] = new object[]
+    ["optionalNullableList"] = new List<object>()
 {
 1234
 },
-    ["requiredNullableList"] = new object[]
+    ["requiredNullableList"] = new List<object>()
 {
 1234
 },
@@ -1589,7 +1589,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredLiteralFloat"] = 1.23F,
     ["requiredLiteralBool"] = false,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["requiredNullableList"] = new object[]
+    ["requiredNullableList"] = new List<object>()
 {
 1234
 },
@@ -1624,11 +1624,11 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["optionalLiteralFloat"] = 4.56F,
     ["optionalLiteralBool"] = true,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["optionalNullableList"] = new object[]
+    ["optionalNullableList"] = new List<object>()
 {
 1234
 },
-    ["requiredNullableList"] = new object[]
+    ["requiredNullableList"] = new List<object>()
 {
 1234
 },

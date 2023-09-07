@@ -340,10 +340,10 @@ namespace Encode.Bytes.Samples
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["value"] = new object[]
-            {
+                ["value"] = new List<object>()
+{
 new Dictionary<string, object>()
-            },
+},
             });
             Response response = client.Base64urlArray(content);
 
@@ -359,10 +359,10 @@ new Dictionary<string, object>()
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["value"] = new object[]
-            {
+                ["value"] = new List<object>()
+{
 new Dictionary<string, object>()
-            },
+},
             });
             Response response = client.Base64urlArray(content);
 
@@ -376,10 +376,10 @@ new Dictionary<string, object>()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new BinaryData[]
-            {
+            Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
+{
 BinaryData.FromObjectAsJson(new Dictionary<string, object>())
-            });
+});
             Response<Base64urlArrayBytesProperty> response = client.Base64urlArray(body);
         }
 
@@ -389,10 +389,10 @@ BinaryData.FromObjectAsJson(new Dictionary<string, object>())
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new BinaryData[]
-            {
+            Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
+{
 BinaryData.FromObjectAsJson(new Dictionary<string, object>())
-            });
+});
             Response<Base64urlArrayBytesProperty> response = client.Base64urlArray(body);
         }
 
@@ -404,10 +404,10 @@ BinaryData.FromObjectAsJson(new Dictionary<string, object>())
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["value"] = new object[]
-            {
+                ["value"] = new List<object>()
+{
 new Dictionary<string, object>()
-            },
+},
             });
             Response response = await client.Base64urlArrayAsync(content);
 
@@ -423,10 +423,10 @@ new Dictionary<string, object>()
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["value"] = new object[]
-            {
+                ["value"] = new List<object>()
+{
 new Dictionary<string, object>()
-            },
+},
             });
             Response response = await client.Base64urlArrayAsync(content);
 
@@ -440,10 +440,10 @@ new Dictionary<string, object>()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new BinaryData[]
-            {
+            Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
+{
 BinaryData.FromObjectAsJson(new Dictionary<string, object>())
-            });
+});
             Response<Base64urlArrayBytesProperty> response = await client.Base64urlArrayAsync(body);
         }
 
@@ -453,10 +453,10 @@ BinaryData.FromObjectAsJson(new Dictionary<string, object>())
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new BinaryData[]
-            {
+            Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
+{
 BinaryData.FromObjectAsJson(new Dictionary<string, object>())
-            });
+});
             Response<Base64urlArrayBytesProperty> response = await client.Base64urlArrayAsync(body);
         }
     }

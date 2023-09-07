@@ -25,7 +25,7 @@ BasicClient client = new BasicClient();
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["name"] = "<name>",
-    ["orders"] = new object[]
+    ["orders"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -69,7 +69,7 @@ BasicClient client = new BasicClient();
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["name"] = "<name>",
-    ["orders"] = new object[]
+    ["orders"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -145,7 +145,7 @@ BasicClient client = new BasicClient();
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["name"] = "<name>",
-    ["orders"] = new object[]
+    ["orders"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -189,7 +189,7 @@ BasicClient client = new BasicClient();
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["name"] = "<name>",
-    ["orders"] = new object[]
+    ["orders"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -339,13 +339,13 @@ This sample shows how to call GetUsersAsync with required parameters.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-await foreach (User item in client.GetUsersAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new string[]
+await foreach (User item in client.GetUsersAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new List<string>()
 {
 "<orderby>"
-}, filter: "<filter>", select: new string[]
+}, filter: "<filter>", select: new List<string>()
 {
 "<select>"
-}, expand: new string[]
+}, expand: new List<string>()
 {
 "<expand>"
 }))
@@ -359,13 +359,13 @@ This sample shows how to call GetUsers with required parameters.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-foreach (User item in client.GetUsers(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new string[]
+foreach (User item in client.GetUsers(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new List<string>()
 {
 "<orderby>"
-}, filter: "<filter>", select: new string[]
+}, filter: "<filter>", select: new List<string>()
 {
 "<select>"
-}, expand: new string[]
+}, expand: new List<string>()
 {
 "<expand>"
 }))
@@ -379,13 +379,13 @@ This sample shows how to call GetUsersAsync with required parameters and parse t
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-await foreach (BinaryData item in client.GetUsersAsync(1234, 1234, 1234, new string[]
+await foreach (BinaryData item in client.GetUsersAsync(1234, 1234, 1234, new List<string>()
 {
 "<orderby>"
-}, "<filter>", new string[]
+}, "<filter>", new List<string>()
 {
 "<select>"
-}, new string[]
+}, new List<string>()
 {
 "<expand>"
 }, null))
@@ -406,13 +406,13 @@ This sample shows how to call GetUsers with required parameters and parse the re
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-foreach (BinaryData item in client.GetUsers(1234, 1234, 1234, new string[]
+foreach (BinaryData item in client.GetUsers(1234, 1234, 1234, new List<string>()
 {
 "<orderby>"
-}, "<filter>", new string[]
+}, "<filter>", new List<string>()
 {
 "<select>"
-}, new string[]
+}, new List<string>()
 {
 "<expand>"
 }, null))

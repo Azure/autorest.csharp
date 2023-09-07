@@ -112,13 +112,13 @@ namespace _Type.Property.ValueTypes.Samples
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["property"] = new object[]
-            {
+                ["property"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
 }
-            },
+},
             });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -132,13 +132,13 @@ new Dictionary<string, object>()
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["property"] = new object[]
-            {
+                ["property"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
 }
-            },
+},
             });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -150,10 +150,10 @@ new Dictionary<string, object>()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            CollectionsModelProperty body = new CollectionsModelProperty(new InnerModel[]
-            {
+            CollectionsModelProperty body = new CollectionsModelProperty(new List<InnerModel>()
+{
 new InnerModel("<property>")
-            });
+});
             Response response = client.Put(body);
             Console.WriteLine(response.Status);
         }
@@ -164,10 +164,10 @@ new InnerModel("<property>")
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            CollectionsModelProperty body = new CollectionsModelProperty(new InnerModel[]
-            {
+            CollectionsModelProperty body = new CollectionsModelProperty(new List<InnerModel>()
+{
 new InnerModel("<property>")
-            });
+});
             Response response = client.Put(body);
             Console.WriteLine(response.Status);
         }
@@ -180,13 +180,13 @@ new InnerModel("<property>")
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["property"] = new object[]
-            {
+                ["property"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
 }
-            },
+},
             });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
@@ -200,13 +200,13 @@ new Dictionary<string, object>()
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["property"] = new object[]
-            {
+                ["property"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
 }
-            },
+},
             });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
@@ -218,10 +218,10 @@ new Dictionary<string, object>()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            CollectionsModelProperty body = new CollectionsModelProperty(new InnerModel[]
-            {
+            CollectionsModelProperty body = new CollectionsModelProperty(new List<InnerModel>()
+{
 new InnerModel("<property>")
-            });
+});
             Response response = await client.PutAsync(body);
             Console.WriteLine(response.Status);
         }
@@ -232,10 +232,10 @@ new InnerModel("<property>")
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            CollectionsModelProperty body = new CollectionsModelProperty(new InnerModel[]
-            {
+            CollectionsModelProperty body = new CollectionsModelProperty(new List<InnerModel>()
+{
 new InnerModel("<property>")
-            });
+});
             Response response = await client.PutAsync(body);
             Console.WriteLine(response.Status);
         }

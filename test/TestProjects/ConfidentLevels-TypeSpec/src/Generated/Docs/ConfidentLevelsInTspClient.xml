@@ -115,7 +115,7 @@ ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["name"] = "<name>",
-    ["selfReference"] = new object[]
+    ["selfReference"] = new List<object>()
 {
 null
 },
@@ -135,7 +135,7 @@ ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["name"] = "<name>",
-    ["selfReference"] = new object[]
+    ["selfReference"] = new List<object>()
 {
 null
 },
@@ -169,7 +169,7 @@ ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["name"] = "<name>",
-    ["reference"] = new object[]
+    ["reference"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -177,7 +177,7 @@ new Dictionary<string, object>()
 ["reference"] = new Dictionary<string, object>()
 {
 ["name"] = "<name>",
-["selfReference"] = new object[]
+["selfReference"] = new List<object>()
 {
 null
 },
@@ -213,7 +213,7 @@ ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["name"] = "<name>",
-    ["reference"] = new object[]
+    ["reference"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -221,7 +221,7 @@ new Dictionary<string, object>()
 ["reference"] = new Dictionary<string, object>()
 {
 ["name"] = "<name>",
-["selfReference"] = new object[]
+["selfReference"] = new List<object>()
 {
 null
 },

@@ -16,7 +16,7 @@ This sample shows how to call ArrayStringMultiNullAsync with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
-Response response = await client.ArrayStringMultiNullAsync(arrayQuery: new string[]
+Response response = await client.ArrayStringMultiNullAsync(arrayQuery: new List<string>()
 {
 "<arrayQuery>"
 });
@@ -38,7 +38,7 @@ This sample shows how to call ArrayStringMultiNull with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
-Response response = client.ArrayStringMultiNull(arrayQuery: new string[]
+Response response = client.ArrayStringMultiNull(arrayQuery: new List<string>()
 {
 "<arrayQuery>"
 });
@@ -60,7 +60,7 @@ This sample shows how to call ArrayStringMultiEmptyAsync with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
-Response response = await client.ArrayStringMultiEmptyAsync(arrayQuery: new string[]
+Response response = await client.ArrayStringMultiEmptyAsync(arrayQuery: new List<string>()
 {
 "<arrayQuery>"
 });
@@ -82,7 +82,7 @@ This sample shows how to call ArrayStringMultiEmpty with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
-Response response = client.ArrayStringMultiEmpty(arrayQuery: new string[]
+Response response = client.ArrayStringMultiEmpty(arrayQuery: new List<string>()
 {
 "<arrayQuery>"
 });
@@ -104,7 +104,7 @@ This sample shows how to call ArrayStringMultiValidAsync with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
-Response response = await client.ArrayStringMultiValidAsync(arrayQuery: new string[]
+Response response = await client.ArrayStringMultiValidAsync(arrayQuery: new List<string>()
 {
 "<arrayQuery>"
 });
@@ -126,7 +126,7 @@ This sample shows how to call ArrayStringMultiValid with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
-Response response = client.ArrayStringMultiValid(arrayQuery: new string[]
+Response response = client.ArrayStringMultiValid(arrayQuery: new List<string>()
 {
 "<arrayQuery>"
 });

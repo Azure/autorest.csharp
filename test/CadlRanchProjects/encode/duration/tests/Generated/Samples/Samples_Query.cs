@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml;
 using Azure;
@@ -183,10 +184,10 @@ namespace Encode.Duration.Samples
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Int32SecondsArray(new TimeSpan[]
-            {
+            Response response = client.Int32SecondsArray(new List<TimeSpan>()
+{
 TimeSpan.FromSeconds(10)
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -196,10 +197,10 @@ TimeSpan.FromSeconds(10)
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Int32SecondsArray(new TimeSpan[]
-            {
+            Response response = client.Int32SecondsArray(new List<TimeSpan>()
+{
 TimeSpan.FromSeconds(10)
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -209,10 +210,10 @@ TimeSpan.FromSeconds(10)
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.Int32SecondsArrayAsync(new TimeSpan[]
-            {
+            Response response = await client.Int32SecondsArrayAsync(new List<TimeSpan>()
+{
 TimeSpan.FromSeconds(10)
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -222,10 +223,10 @@ TimeSpan.FromSeconds(10)
         {
             Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.Int32SecondsArrayAsync(new TimeSpan[]
-            {
+            Response response = await client.Int32SecondsArrayAsync(new List<TimeSpan>()
+{
 TimeSpan.FromSeconds(10)
-            });
+});
             Console.WriteLine(response.Status);
         }
     }

@@ -65,28 +65,28 @@ namespace CustomizationsInTsp.Samples
                     ["propertyToMakeString"] = "PT1H23M45S",
                     ["propertyToMakeJsonElement"] = "<propertyToMakeJsonElement>",
                     ["propertyToField"] = "<propertyToField>",
-                    ["badListName"] = new object[]
-            {
+                    ["badListName"] = new List<object>()
+{
 "<badListName>"
-            },
+},
                     ["badDictionaryName"] = new Dictionary<string, object>()
                     {
                         ["key"] = "<badDictionaryName>",
                     },
-                    ["badListOfListName"] = new object[]
-            {
-new object[]
+                    ["badListOfListName"] = new List<object>()
+{
+new List<object>()
 {
 "<badListOfListName>"
 }
-            },
-                    ["badListOfDictionaryName"] = new object[]
-            {
+},
+                    ["badListOfDictionaryName"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["key"] = "<badListOfDictionaryName>",
 }
-            },
+},
                 },
                 ["propertyEnumToRename"] = "1",
                 ["propertyEnumWithValueToRename"] = "1",
@@ -146,25 +146,25 @@ new Dictionary<string, object>()
                     OptionalInt = 1234,
                 },
                 PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[]
-            {
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new List<string>()
+{
 "<badListName>"
-            }, new Dictionary<string, string>()
-            {
-                ["key"] = "<badDictionaryName>",
-            }, new IList<string>[]
-            {
-new string[]
+}, new Dictionary<string, string>()
+{
+    ["key"] = "<badDictionaryName>",
+}, new List<IList<string>>()
+{
+new List<string>()
 {
 "<badListOfListName>"
 }
-            }, new IDictionary<string, string>[]
-            {
+}, new List<IDictionary<string, string>>()
+{
 new Dictionary<string, string>()
 {
 ["key"] = "<badListOfDictionaryName>",
 }
-            }),
+}),
                 PropertyEnumToRename = RenamedEnum.One,
                 PropertyEnumWithValueToRename = EnumWithValueToRename.One,
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
@@ -218,28 +218,28 @@ new Dictionary<string, string>()
                     ["propertyToMakeString"] = "PT1H23M45S",
                     ["propertyToMakeJsonElement"] = "<propertyToMakeJsonElement>",
                     ["propertyToField"] = "<propertyToField>",
-                    ["badListName"] = new object[]
-            {
+                    ["badListName"] = new List<object>()
+{
 "<badListName>"
-            },
+},
                     ["badDictionaryName"] = new Dictionary<string, object>()
                     {
                         ["key"] = "<badDictionaryName>",
                     },
-                    ["badListOfListName"] = new object[]
-            {
-new object[]
+                    ["badListOfListName"] = new List<object>()
+{
+new List<object>()
 {
 "<badListOfListName>"
 }
-            },
-                    ["badListOfDictionaryName"] = new object[]
-            {
+},
+                    ["badListOfDictionaryName"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["key"] = "<badListOfDictionaryName>",
 }
-            },
+},
                 },
                 ["propertyEnumToRename"] = "1",
                 ["propertyEnumWithValueToRename"] = "1",
@@ -299,25 +299,25 @@ new Dictionary<string, object>()
                     OptionalInt = 1234,
                 },
                 PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[]
-            {
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new List<string>()
+{
 "<badListName>"
-            }, new Dictionary<string, string>()
-            {
-                ["key"] = "<badDictionaryName>",
-            }, new IList<string>[]
-            {
-new string[]
+}, new Dictionary<string, string>()
+{
+    ["key"] = "<badDictionaryName>",
+}, new List<IList<string>>()
+{
+new List<string>()
 {
 "<badListOfListName>"
 }
-            }, new IDictionary<string, string>[]
-            {
+}, new List<IDictionary<string, string>>()
+{
 new Dictionary<string, string>()
 {
 ["key"] = "<badListOfDictionaryName>",
 }
-            }),
+}),
                 PropertyEnumToRename = RenamedEnum.One,
                 PropertyEnumWithValueToRename = EnumWithValueToRename.One,
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,

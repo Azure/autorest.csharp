@@ -182,10 +182,10 @@ namespace body_array_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "<arrayBody>"
-            });
+});
             Response response = client.PutEmpty(content);
             Console.WriteLine(response.Status);
         }
@@ -197,10 +197,10 @@ namespace body_array_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "<arrayBody>"
-            });
+});
             Response response = client.PutEmpty(content);
             Console.WriteLine(response.Status);
         }
@@ -212,10 +212,10 @@ namespace body_array_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "<arrayBody>"
-            });
+});
             Response response = await client.PutEmptyAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -227,10 +227,10 @@ namespace body_array_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "<arrayBody>"
-            });
+});
             Response response = await client.PutEmptyAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -294,10 +294,10 @@ namespace body_array_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 true
-            });
+});
             Response response = client.PutBooleanTfft(content);
             Console.WriteLine(response.Status);
         }
@@ -309,10 +309,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 true
-            });
+});
             Response response = client.PutBooleanTfft(content);
             Console.WriteLine(response.Status);
         }
@@ -324,10 +324,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 true
-            });
+});
             Response response = await client.PutBooleanTfftAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -339,10 +339,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 true
-            });
+});
             Response response = await client.PutBooleanTfftAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -510,10 +510,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 1234
-            });
+});
             Response response = client.PutIntegerValid(content);
             Console.WriteLine(response.Status);
         }
@@ -525,10 +525,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 1234
-            });
+});
             Response response = client.PutIntegerValid(content);
             Console.WriteLine(response.Status);
         }
@@ -540,10 +540,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 1234
-            });
+});
             Response response = await client.PutIntegerValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -555,10 +555,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 1234
-            });
+});
             Response response = await client.PutIntegerValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -726,10 +726,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 1234L
-            });
+});
             Response response = client.PutLongValid(content);
             Console.WriteLine(response.Status);
         }
@@ -741,10 +741,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 1234L
-            });
+});
             Response response = client.PutLongValid(content);
             Console.WriteLine(response.Status);
         }
@@ -756,10 +756,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 1234L
-            });
+});
             Response response = await client.PutLongValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -771,10 +771,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 1234L
-            });
+});
             Response response = await client.PutLongValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -942,10 +942,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 123.45F
-            });
+});
             Response response = client.PutFloatValid(content);
             Console.WriteLine(response.Status);
         }
@@ -957,10 +957,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 123.45F
-            });
+});
             Response response = client.PutFloatValid(content);
             Console.WriteLine(response.Status);
         }
@@ -972,10 +972,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 123.45F
-            });
+});
             Response response = await client.PutFloatValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -987,10 +987,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 123.45F
-            });
+});
             Response response = await client.PutFloatValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -1158,10 +1158,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 123.45
-            });
+});
             Response response = client.PutDoubleValid(content);
             Console.WriteLine(response.Status);
         }
@@ -1173,10 +1173,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 123.45
-            });
+});
             Response response = client.PutDoubleValid(content);
             Console.WriteLine(response.Status);
         }
@@ -1188,10 +1188,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 123.45
-            });
+});
             Response response = await client.PutDoubleValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -1203,10 +1203,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 123.45
-            });
+});
             Response response = await client.PutDoubleValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -1374,10 +1374,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "<arrayBody>"
-            });
+});
             Response response = client.PutStringValid(content);
             Console.WriteLine(response.Status);
         }
@@ -1389,10 +1389,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "<arrayBody>"
-            });
+});
             Response response = client.PutStringValid(content);
             Console.WriteLine(response.Status);
         }
@@ -1404,10 +1404,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "<arrayBody>"
-            });
+});
             Response response = await client.PutStringValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -1419,10 +1419,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "<arrayBody>"
-            });
+});
             Response response = await client.PutStringValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -1486,10 +1486,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "foo1"
-            });
+});
             Response response = client.PutEnumValid(content);
             Console.WriteLine(response.Status);
         }
@@ -1501,10 +1501,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "foo1"
-            });
+});
             Response response = client.PutEnumValid(content);
             Console.WriteLine(response.Status);
         }
@@ -1516,10 +1516,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "foo1"
-            });
+});
             Response response = await client.PutEnumValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -1531,10 +1531,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "foo1"
-            });
+});
             Response response = await client.PutEnumValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -1598,10 +1598,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "foo1"
-            });
+});
             Response response = client.PutStringEnumValid(content);
             Console.WriteLine(response.Status);
         }
@@ -1613,10 +1613,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "foo1"
-            });
+});
             Response response = client.PutStringEnumValid(content);
             Console.WriteLine(response.Status);
         }
@@ -1628,10 +1628,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "foo1"
-            });
+});
             Response response = await client.PutStringEnumValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -1643,10 +1643,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "foo1"
-            });
+});
             Response response = await client.PutStringEnumValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -1814,10 +1814,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
-            });
+});
             Response response = client.PutUuidValid(content);
             Console.WriteLine(response.Status);
         }
@@ -1829,10 +1829,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
-            });
+});
             Response response = client.PutUuidValid(content);
             Console.WriteLine(response.Status);
         }
@@ -1844,10 +1844,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
-            });
+});
             Response response = await client.PutUuidValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -1859,10 +1859,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
-            });
+});
             Response response = await client.PutUuidValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -1978,10 +1978,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "2022-05-10"
-            });
+});
             Response response = client.PutDateValid(content);
             Console.WriteLine(response.Status);
         }
@@ -1993,10 +1993,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "2022-05-10"
-            });
+});
             Response response = client.PutDateValid(content);
             Console.WriteLine(response.Status);
         }
@@ -2008,10 +2008,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "2022-05-10"
-            });
+});
             Response response = await client.PutDateValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -2023,10 +2023,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "2022-05-10"
-            });
+});
             Response response = await client.PutDateValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -2194,10 +2194,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "2022-05-10T18:57:31.2311892Z"
-            });
+});
             Response response = client.PutDateTimeValid(content);
             Console.WriteLine(response.Status);
         }
@@ -2209,10 +2209,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "2022-05-10T18:57:31.2311892Z"
-            });
+});
             Response response = client.PutDateTimeValid(content);
             Console.WriteLine(response.Status);
         }
@@ -2224,10 +2224,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "2022-05-10T18:57:31.2311892Z"
-            });
+});
             Response response = await client.PutDateTimeValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -2239,10 +2239,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "2022-05-10T18:57:31.2311892Z"
-            });
+});
             Response response = await client.PutDateTimeValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -2410,10 +2410,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "Tue, 10 May 2022 18:57:31 GMT"
-            });
+});
             Response response = client.PutDateTimeRfc1123Valid(content);
             Console.WriteLine(response.Status);
         }
@@ -2425,10 +2425,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "Tue, 10 May 2022 18:57:31 GMT"
-            });
+});
             Response response = client.PutDateTimeRfc1123Valid(content);
             Console.WriteLine(response.Status);
         }
@@ -2440,10 +2440,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "Tue, 10 May 2022 18:57:31 GMT"
-            });
+});
             Response response = await client.PutDateTimeRfc1123ValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -2455,10 +2455,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "Tue, 10 May 2022 18:57:31 GMT"
-            });
+});
             Response response = await client.PutDateTimeRfc1123ValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -2522,10 +2522,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "PT1H23M45S"
-            });
+});
             Response response = client.PutDurationValid(content);
             Console.WriteLine(response.Status);
         }
@@ -2537,10 +2537,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "PT1H23M45S"
-            });
+});
             Response response = client.PutDurationValid(content);
             Console.WriteLine(response.Status);
         }
@@ -2552,10 +2552,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "PT1H23M45S"
-            });
+});
             Response response = await client.PutDurationValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -2567,10 +2567,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "PT1H23M45S"
-            });
+});
             Response response = await client.PutDurationValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -2634,10 +2634,10 @@ true
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
-            });
+});
             Response response = client.PutByteValid(content);
             Console.WriteLine(response.Status);
         }
@@ -2649,10 +2649,10 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
-            });
+});
             Response response = client.PutByteValid(content);
             Console.WriteLine(response.Status);
         }
@@ -2664,10 +2664,10 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
-            });
+});
             Response response = await client.PutByteValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -2679,10 +2679,10 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
-            });
+});
             Response response = await client.PutByteValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -3068,10 +3068,10 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
-            });
+});
             Response response = client.PutComplexValid(content);
             Console.WriteLine(response.Status);
         }
@@ -3083,14 +3083,14 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["integer"] = 1234,
 ["string"] = "<string>",
 }
-            });
+});
             Response response = client.PutComplexValid(content);
             Console.WriteLine(response.Status);
         }
@@ -3102,10 +3102,10 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
-            });
+});
             Response response = await client.PutComplexValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -3117,14 +3117,14 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["integer"] = 1234,
 ["string"] = "<string>",
 }
-            });
+});
             Response response = await client.PutComplexValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -3396,13 +3396,13 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
-new object[]
+            RequestContent content = RequestContent.Create(new List<object>()
+{
+new List<object>()
 {
 "<arrayBody>"
 }
-            });
+});
             Response response = client.PutArrayValid(content);
             Console.WriteLine(response.Status);
         }
@@ -3414,13 +3414,13 @@ new object[]
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
-new object[]
+            RequestContent content = RequestContent.Create(new List<object>()
+{
+new List<object>()
 {
 "<arrayBody>"
 }
-            });
+});
             Response response = client.PutArrayValid(content);
             Console.WriteLine(response.Status);
         }
@@ -3432,13 +3432,13 @@ new object[]
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
-new object[]
+            RequestContent content = RequestContent.Create(new List<object>()
+{
+new List<object>()
 {
 "<arrayBody>"
 }
-            });
+});
             Response response = await client.PutArrayValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -3450,13 +3450,13 @@ new object[]
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
-new object[]
+            RequestContent content = RequestContent.Create(new List<object>()
+{
+new List<object>()
 {
 "<arrayBody>"
 }
-            });
+});
             Response response = await client.PutArrayValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -3728,13 +3728,13 @@ new object[]
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["key"] = "<arrayBody>",
 }
-            });
+});
             Response response = client.PutDictionaryValid(content);
             Console.WriteLine(response.Status);
         }
@@ -3746,13 +3746,13 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["key"] = "<arrayBody>",
 }
-            });
+});
             Response response = client.PutDictionaryValid(content);
             Console.WriteLine(response.Status);
         }
@@ -3764,13 +3764,13 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["key"] = "<arrayBody>",
 }
-            });
+});
             Response response = await client.PutDictionaryValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -3782,13 +3782,13 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ArrayClient client = new ArrayClient(credential);
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["key"] = "<arrayBody>",
 }
-            });
+});
             Response response = await client.PutDictionaryValidAsync(content);
             Console.WriteLine(response.Status);
         }

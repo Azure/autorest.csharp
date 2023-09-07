@@ -1267,10 +1267,10 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = client.ArrayStringCsvValid(arrayQuery: new string[]
-            {
+            Response response = client.ArrayStringCsvValid(arrayQuery: new List<string>()
+{
 "<arrayQuery>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -1292,10 +1292,10 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringCsvValidAsync(arrayQuery: new string[]
-            {
+            Response response = await client.ArrayStringCsvValidAsync(arrayQuery: new List<string>()
+{
 "<arrayQuery>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -1317,10 +1317,10 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = client.ArrayStringCsvNull(arrayQuery: new string[]
-            {
+            Response response = client.ArrayStringCsvNull(arrayQuery: new List<string>()
+{
 "<arrayQuery>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -1342,10 +1342,10 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringCsvNullAsync(arrayQuery: new string[]
-            {
+            Response response = await client.ArrayStringCsvNullAsync(arrayQuery: new List<string>()
+{
 "<arrayQuery>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -1367,10 +1367,10 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = client.ArrayStringCsvEmpty(arrayQuery: new string[]
-            {
+            Response response = client.ArrayStringCsvEmpty(arrayQuery: new List<string>()
+{
 "<arrayQuery>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -1392,10 +1392,10 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringCsvEmptyAsync(arrayQuery: new string[]
-            {
+            Response response = await client.ArrayStringCsvEmptyAsync(arrayQuery: new List<string>()
+{
 "<arrayQuery>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -1417,10 +1417,10 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = client.ArrayStringNoCollectionFormatEmpty(arrayQuery: new string[]
-            {
+            Response response = client.ArrayStringNoCollectionFormatEmpty(arrayQuery: new List<string>()
+{
 "<arrayQuery>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -1442,10 +1442,10 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringNoCollectionFormatEmptyAsync(arrayQuery: new string[]
-            {
+            Response response = await client.ArrayStringNoCollectionFormatEmptyAsync(arrayQuery: new List<string>()
+{
 "<arrayQuery>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -1467,10 +1467,10 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = client.ArrayStringSsvValid(arrayQuery: new string[]
-            {
+            Response response = client.ArrayStringSsvValid(arrayQuery: new List<string>()
+{
 "<arrayQuery>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -1492,10 +1492,10 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringSsvValidAsync(arrayQuery: new string[]
-            {
+            Response response = await client.ArrayStringSsvValidAsync(arrayQuery: new List<string>()
+{
 "<arrayQuery>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -1517,10 +1517,10 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = client.ArrayStringTsvValid(arrayQuery: new string[]
-            {
+            Response response = client.ArrayStringTsvValid(arrayQuery: new List<string>()
+{
 "<arrayQuery>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -1542,10 +1542,10 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringTsvValidAsync(arrayQuery: new string[]
-            {
+            Response response = await client.ArrayStringTsvValidAsync(arrayQuery: new List<string>()
+{
 "<arrayQuery>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -1567,10 +1567,10 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = client.ArrayStringPipesValid(arrayQuery: new string[]
-            {
+            Response response = client.ArrayStringPipesValid(arrayQuery: new List<string>()
+{
 "<arrayQuery>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -1592,10 +1592,10 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringPipesValidAsync(arrayQuery: new string[]
-            {
+            Response response = await client.ArrayStringPipesValidAsync(arrayQuery: new List<string>()
+{
 "<arrayQuery>"
-            });
+});
             Console.WriteLine(response.Status);
         }
     }

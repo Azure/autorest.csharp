@@ -21,13 +21,13 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.LowLevel.Generation.Extensions
 {
-    internal static class CodeWriterExtensions
+    internal static class CodeWriterExampleExtensions
     {
         public static CodeWriter AppendInputExampleValue(this CodeWriter writer, InputExampleValue exampleValue, CSharpType type, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
         {
             // handle list
             if (TypeFactory.IsList(type))
-                return writer.AppendListValue(type.Arguments.Single(), exampleValue, serializationFormat, includeCollectionInitialization);
+                return writer.AppendListValue(type, exampleValue, serializationFormat, includeCollectionInitialization);
             // handle dictionary
             if (TypeFactory.IsDictionary(type))
                 return writer.AppendDictionaryValue(type, exampleValue, serializationFormat, includeCollectionInitialization: includeCollectionInitialization);
@@ -102,8 +102,6 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                             if (rawValue.RawValue is string time)
                                 return writer.Append($"{typeof(TimeSpan)}.Parse({time:L})");
                             break;
-                            //case SerializationFormat.Duration_Constant:
-                            // TODO - what does this look like?
                     };
                 }
 
@@ -216,25 +214,30 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             }
         }
 
-        private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType elementType, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
+        private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType listType, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
         {
             var exampleListValue = exampleValue as InputExampleListValue;
             // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
             var elements = exampleListValue?.Values ?? Enumerable.Empty<InputExampleValue>();
-            var initialization = includeCollectionInitialization ? (FormattableString)$"new {elementType}[]" : $"";
-            using (writer.Scope(initialization, newLine: false))
+            var elementType = listType.Arguments.Single();
+            var initialization = includeCollectionInitialization ? (FormattableString)$"new {TypeFactory.GetImplementationType(listType)}()" : $"";
+            writer.Append(initialization);
+            if (elements.Any())
             {
-                foreach (var itemValue in elements)
+                using (writer.Scope($"", newLine: false))
                 {
-                    // TODO -- bad formatting will happen in collection initializer because roslyn formatter ignores things in these places: https://github.com/dotnet/roslyn/issues/8269
-                    writer.AppendInputExampleValue(itemValue, elementType, serializationFormat);
-                    if (elementType.IsFrameworkType)
-                        writer.AppendRaw(",");
-                    else
-                        writer.LineRaw(",");
+                    foreach (var itemValue in elements)
+                    {
+                        // TODO -- bad formatting will happen in collection initializer because roslyn formatter ignores things in these places: https://github.com/dotnet/roslyn/issues/8269
+                        writer.AppendInputExampleValue(itemValue, elementType, serializationFormat);
+                        if (elementType.IsFrameworkType)
+                            writer.AppendRaw(",");
+                        else
+                            writer.LineRaw(",");
+                    }
+                    writer.RemoveTrailingComma();
+                    writer.Line();
                 }
-                writer.RemoveTrailingComma();
-                writer.Line();
             }
             return writer;
         }
@@ -283,7 +286,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             InputExampleRawValue rawValue => rawValue.RawValue == null ?
                             writer.LineRaw("null") :
                             writer.AppendFrameworkTypeValue(exampleValue, rawValue.RawValue.GetType(), SerializationFormat.Default, includeCollectionInitialization),
-            InputExampleListValue listValue => writer.AppendListValue(typeof(object), listValue, SerializationFormat.Default),
+            InputExampleListValue listValue => writer.AppendListValue(typeof(IList<object>), listValue, SerializationFormat.Default),
             InputExampleObjectValue objectValue => writer.AppendDictionaryValue(typeof(Dictionary<string, object>), objectValue, SerializationFormat.Default, includeCollectionInitialization),
             _ => throw new InvalidOperationException($"unhandled case {exampleValue}")
         };

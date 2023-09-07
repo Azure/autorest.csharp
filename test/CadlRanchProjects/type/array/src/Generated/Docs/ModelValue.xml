@@ -51,7 +51,7 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new InnerModel[]
+Response response = await client.PutAsync(new List<InnerModel>()
 {
 new InnerModel("<property>")
 {
@@ -70,7 +70,7 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new InnerModel[]
+Response response = client.Put(new List<InnerModel>()
 {
 new InnerModel("<property>")
 {
@@ -89,12 +89,12 @@ This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
 ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+RequestContent content = RequestContent.Create(new List<object>()
 {
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
-["children"] = new object[]
+["children"] = new List<object>()
 {
 null
 },
@@ -110,12 +110,12 @@ This sample shows how to call Put with required request content.
 <code><![CDATA[
 ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+RequestContent content = RequestContent.Create(new List<object>()
 {
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
-["children"] = new object[]
+["children"] = new List<object>()
 {
 null
 },

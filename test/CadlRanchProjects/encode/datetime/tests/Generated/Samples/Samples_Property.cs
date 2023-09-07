@@ -444,10 +444,10 @@ namespace Encode.Datetime.Samples
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["value"] = new object[]
-            {
+                ["value"] = new List<object>()
+{
 1652209051
-            },
+},
             });
             Response response = client.UnixTimestampArray(content);
 
@@ -463,10 +463,10 @@ namespace Encode.Datetime.Samples
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["value"] = new object[]
-            {
+                ["value"] = new List<object>()
+{
 1652209051
-            },
+},
             });
             Response response = client.UnixTimestampArray(content);
 
@@ -480,10 +480,10 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new DateTimeOffset[]
-            {
+            UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new List<DateTimeOffset>()
+{
 DateTimeOffset.FromUnixTimeSeconds(1652209051)
-            });
+});
             Response<UnixTimestampArrayDatetimeProperty> response = client.UnixTimestampArray(body);
         }
 
@@ -493,10 +493,10 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new DateTimeOffset[]
-            {
+            UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new List<DateTimeOffset>()
+{
 DateTimeOffset.FromUnixTimeSeconds(1652209051)
-            });
+});
             Response<UnixTimestampArrayDatetimeProperty> response = client.UnixTimestampArray(body);
         }
 
@@ -508,10 +508,10 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["value"] = new object[]
-            {
+                ["value"] = new List<object>()
+{
 1652209051
-            },
+},
             });
             Response response = await client.UnixTimestampArrayAsync(content);
 
@@ -527,10 +527,10 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["value"] = new object[]
-            {
+                ["value"] = new List<object>()
+{
 1652209051
-            },
+},
             });
             Response response = await client.UnixTimestampArrayAsync(content);
 
@@ -544,10 +544,10 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new DateTimeOffset[]
-            {
+            UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new List<DateTimeOffset>()
+{
 DateTimeOffset.FromUnixTimeSeconds(1652209051)
-            });
+});
             Response<UnixTimestampArrayDatetimeProperty> response = await client.UnixTimestampArrayAsync(body);
         }
 
@@ -557,10 +557,10 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new DateTimeOffset[]
-            {
+            UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new List<DateTimeOffset>()
+{
 DateTimeOffset.FromUnixTimeSeconds(1652209051)
-            });
+});
             Response<UnixTimestampArrayDatetimeProperty> response = await client.UnixTimestampArrayAsync(body);
         }
     }

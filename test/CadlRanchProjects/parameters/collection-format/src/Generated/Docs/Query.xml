@@ -7,7 +7,7 @@ This sample shows how to call MultiAsync with required parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.MultiAsync(new string[]
+Response response = await client.MultiAsync(new List<string>()
 {
 "<colors>"
 });
@@ -20,7 +20,7 @@ This sample shows how to call Multi with required parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Multi(new string[]
+Response response = client.Multi(new List<string>()
 {
 "<colors>"
 });
@@ -33,7 +33,7 @@ This sample shows how to call SsvAsync with required parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.SsvAsync(new string[]
+Response response = await client.SsvAsync(new List<string>()
 {
 "<colors>"
 });
@@ -46,7 +46,7 @@ This sample shows how to call Ssv with required parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Ssv(new string[]
+Response response = client.Ssv(new List<string>()
 {
 "<colors>"
 });
@@ -59,7 +59,7 @@ This sample shows how to call TsvAsync with required parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.TsvAsync(new string[]
+Response response = await client.TsvAsync(new List<string>()
 {
 "<colors>"
 });
@@ -72,7 +72,7 @@ This sample shows how to call Tsv with required parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Tsv(new string[]
+Response response = client.Tsv(new List<string>()
 {
 "<colors>"
 });
@@ -85,7 +85,7 @@ This sample shows how to call PipesAsync with required parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.PipesAsync(new string[]
+Response response = await client.PipesAsync(new List<string>()
 {
 "<colors>"
 });
@@ -98,7 +98,7 @@ This sample shows how to call Pipes with required parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Pipes(new string[]
+Response response = client.Pipes(new List<string>()
 {
 "<colors>"
 });
@@ -111,7 +111,7 @@ This sample shows how to call CsvAsync with required parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.CsvAsync(new string[]
+Response response = await client.CsvAsync(new List<string>()
 {
 "<colors>"
 });
@@ -124,7 +124,7 @@ This sample shows how to call Csv with required parameters.
 <code><![CDATA[
 Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Csv(new string[]
+Response response = client.Csv(new List<string>()
 {
 "<colors>"
 });

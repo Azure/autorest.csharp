@@ -1124,10 +1124,10 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = client.ArrayCsvInPath(new string[]
-            {
+            Response response = client.ArrayCsvInPath(new List<string>()
+{
 "<arrayPath>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -1138,10 +1138,10 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = client.ArrayCsvInPath(new string[]
-            {
+            Response response = client.ArrayCsvInPath(new List<string>()
+{
 "<arrayPath>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -1152,10 +1152,10 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = await client.ArrayCsvInPathAsync(new string[]
-            {
+            Response response = await client.ArrayCsvInPathAsync(new List<string>()
+{
 "<arrayPath>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -1166,10 +1166,10 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = await client.ArrayCsvInPathAsync(new string[]
-            {
+            Response response = await client.ArrayCsvInPathAsync(new List<string>()
+{
 "<arrayPath>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 

@@ -112,10 +112,10 @@ namespace _Type.Property.ValueTypes.Samples
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["property"] = new object[]
-            {
+                ["property"] = new List<object>()
+{
 "<property>"
-            },
+},
             });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -129,10 +129,10 @@ namespace _Type.Property.ValueTypes.Samples
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["property"] = new object[]
-            {
+                ["property"] = new List<object>()
+{
 "<property>"
-            },
+},
             });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -144,10 +144,10 @@ namespace _Type.Property.ValueTypes.Samples
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
-            CollectionsStringProperty body = new CollectionsStringProperty(new string[]
-            {
+            CollectionsStringProperty body = new CollectionsStringProperty(new List<string>()
+{
 "<property>"
-            });
+});
             Response response = client.Put(body);
             Console.WriteLine(response.Status);
         }
@@ -158,10 +158,10 @@ namespace _Type.Property.ValueTypes.Samples
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
-            CollectionsStringProperty body = new CollectionsStringProperty(new string[]
-            {
+            CollectionsStringProperty body = new CollectionsStringProperty(new List<string>()
+{
 "<property>"
-            });
+});
             Response response = client.Put(body);
             Console.WriteLine(response.Status);
         }
@@ -174,10 +174,10 @@ namespace _Type.Property.ValueTypes.Samples
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["property"] = new object[]
-            {
+                ["property"] = new List<object>()
+{
 "<property>"
-            },
+},
             });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
@@ -191,10 +191,10 @@ namespace _Type.Property.ValueTypes.Samples
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["property"] = new object[]
-            {
+                ["property"] = new List<object>()
+{
 "<property>"
-            },
+},
             });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
@@ -206,10 +206,10 @@ namespace _Type.Property.ValueTypes.Samples
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
-            CollectionsStringProperty body = new CollectionsStringProperty(new string[]
-            {
+            CollectionsStringProperty body = new CollectionsStringProperty(new List<string>()
+{
 "<property>"
-            });
+});
             Response response = await client.PutAsync(body);
             Console.WriteLine(response.Status);
         }
@@ -220,10 +220,10 @@ namespace _Type.Property.ValueTypes.Samples
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
-            CollectionsStringProperty body = new CollectionsStringProperty(new string[]
-            {
+            CollectionsStringProperty body = new CollectionsStringProperty(new List<string>()
+{
 "<property>"
-            });
+});
             Response response = await client.PutAsync(body);
             Console.WriteLine(response.Status);
         }

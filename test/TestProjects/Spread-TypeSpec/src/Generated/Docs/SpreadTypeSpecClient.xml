@@ -282,10 +282,10 @@ This sample shows how to call SpreadAliasWithOptionalPropsAsync with required pa
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new int[]
+Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new List<int>()
 {
 1234
-}, color: "<color>", age: 1234, elements: new string[]
+}, color: "<color>", age: 1234, elements: new List<string>()
 {
 "<elements>"
 });
@@ -299,10 +299,10 @@ This sample shows how to call SpreadAliasWithOptionalProps with required paramet
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new int[]
+Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new List<int>()
 {
 1234
-}, color: "<color>", age: 1234, elements: new string[]
+}, color: "<color>", age: 1234, elements: new List<string>()
 {
 "<elements>"
 });
@@ -319,7 +319,7 @@ SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["name"] = "<name>",
-    ["items"] = new object[]
+    ["items"] = new List<object>()
 {
 1234
 },
@@ -337,11 +337,11 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["name"] = "<name>",
     ["color"] = "<color>",
     ["age"] = 1234,
-    ["items"] = new object[]
+    ["items"] = new List<object>()
 {
 1234
 },
-    ["elements"] = new object[]
+    ["elements"] = new List<object>()
 {
 "<elements>"
 },
@@ -360,7 +360,7 @@ SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["name"] = "<name>",
-    ["items"] = new object[]
+    ["items"] = new List<object>()
 {
 1234
 },
@@ -378,11 +378,11 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["name"] = "<name>",
     ["color"] = "<color>",
     ["age"] = 1234,
-    ["items"] = new object[]
+    ["items"] = new List<object>()
 {
 1234
 },
-    ["elements"] = new object[]
+    ["elements"] = new List<object>()
 {
 "<elements>"
 },
@@ -398,10 +398,10 @@ This sample shows how to call SpreadAliasWithCollectionsAsync with required para
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Response response = await client.SpreadAliasWithCollectionsAsync(new string[]
+Response response = await client.SpreadAliasWithCollectionsAsync(new List<string>()
 {
 "<requiredStringList>"
-}, optionalStringList: new string[]
+}, optionalStringList: new List<string>()
 {
 "<optionalStringList>"
 });
@@ -415,10 +415,10 @@ This sample shows how to call SpreadAliasWithCollections with required parameter
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
-Response response = client.SpreadAliasWithCollections(new string[]
+Response response = client.SpreadAliasWithCollections(new List<string>()
 {
 "<requiredStringList>"
-}, optionalStringList: new string[]
+}, optionalStringList: new List<string>()
 {
 "<optionalStringList>"
 });
@@ -434,7 +434,7 @@ SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["requiredStringList"] = new object[]
+    ["requiredStringList"] = new List<object>()
 {
 "<requiredStringList>"
 },
@@ -449,11 +449,11 @@ SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["requiredStringList"] = new object[]
+    ["requiredStringList"] = new List<object>()
 {
 "<requiredStringList>"
 },
-    ["optionalStringList"] = new object[]
+    ["optionalStringList"] = new List<object>()
 {
 "<optionalStringList>"
 },
@@ -471,7 +471,7 @@ SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["requiredStringList"] = new object[]
+    ["requiredStringList"] = new List<object>()
 {
 "<requiredStringList>"
 },
@@ -486,11 +486,11 @@ SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["requiredStringList"] = new object[]
+    ["requiredStringList"] = new List<object>()
 {
 "<requiredStringList>"
 },
-    ["optionalStringList"] = new object[]
+    ["optionalStringList"] = new List<object>()
 {
 "<optionalStringList>"
 },

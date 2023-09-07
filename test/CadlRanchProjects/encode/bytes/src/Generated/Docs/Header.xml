@@ -67,7 +67,7 @@ This sample shows how to call Base64urlArrayAsync with required parameters.
 <code><![CDATA[
 Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = await client.Base64urlArrayAsync(new BinaryData[]
+Response response = await client.Base64urlArrayAsync(new List<BinaryData>()
 {
 BinaryData.FromObjectAsJson(new Dictionary<string, object>())
 });
@@ -80,7 +80,7 @@ This sample shows how to call Base64urlArray with required parameters.
 <code><![CDATA[
 Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = client.Base64urlArray(new BinaryData[]
+Response response = client.Base64urlArray(new List<BinaryData>()
 {
 BinaryData.FromObjectAsJson(new Dictionary<string, object>())
 });

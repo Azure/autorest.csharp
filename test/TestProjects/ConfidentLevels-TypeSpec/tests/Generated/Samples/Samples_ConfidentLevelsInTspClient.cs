@@ -164,10 +164,10 @@ namespace ConfidentLevelsInTsp.Samples
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
                 ["name"] = "<name>",
-                ["selfReference"] = new object[]
-            {
+                ["selfReference"] = new List<object>()
+{
 null
-            },
+},
                 ["unionProperty"] = "<unionProperty>",
             });
             Response response = client.UnionWithSelfReference(content);
@@ -184,10 +184,10 @@ null
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
                 ["name"] = "<name>",
-                ["selfReference"] = new object[]
-            {
+                ["selfReference"] = new List<object>()
+{
 null
-            },
+},
                 ["unionProperty"] = "<unionProperty>",
             });
             Response response = client.UnionWithSelfReference(content);
@@ -204,10 +204,10 @@ null
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
                 ["name"] = "<name>",
-                ["selfReference"] = new object[]
-            {
+                ["selfReference"] = new List<object>()
+{
 null
-            },
+},
                 ["unionProperty"] = "<unionProperty>",
             });
             Response response = await client.UnionWithSelfReferenceAsync(content);
@@ -224,10 +224,10 @@ null
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
                 ["name"] = "<name>",
-                ["selfReference"] = new object[]
-            {
+                ["selfReference"] = new List<object>()
+{
 null
-            },
+},
                 ["unionProperty"] = "<unionProperty>",
             });
             Response response = await client.UnionWithSelfReferenceAsync(content);
@@ -259,15 +259,15 @@ null
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
                 ["name"] = "<name>",
-                ["reference"] = new object[]
-            {
+                ["reference"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["something"] = "<something>",
 ["reference"] = new Dictionary<string, object>()
 {
 ["name"] = "<name>",
-["selfReference"] = new object[]
+["selfReference"] = new List<object>()
 {
 null
 },
@@ -275,7 +275,7 @@ null
 },
 ["unionProperty"] = "<unionProperty>",
 }
-            },
+},
             });
             Response response = client.UnionWithInderict(content);
             Console.WriteLine(response.Status);
@@ -306,15 +306,15 @@ null
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
                 ["name"] = "<name>",
-                ["reference"] = new object[]
-            {
+                ["reference"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["something"] = "<something>",
 ["reference"] = new Dictionary<string, object>()
 {
 ["name"] = "<name>",
-["selfReference"] = new object[]
+["selfReference"] = new List<object>()
 {
 null
 },
@@ -322,7 +322,7 @@ null
 },
 ["unionProperty"] = "<unionProperty>",
 }
-            },
+},
             });
             Response response = await client.UnionWithInderictAsync(content);
             Console.WriteLine(response.Status);

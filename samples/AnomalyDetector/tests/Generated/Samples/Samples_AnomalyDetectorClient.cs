@@ -30,13 +30,13 @@ namespace AnomalyDetector.Samples
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["series"] = new object[]
-            {
+                ["series"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["value"] = 123.45F,
 }
-            },
+},
             });
             Response response = client.DetectUnivariateEntireSeries(content);
 
@@ -60,14 +60,14 @@ new Dictionary<string, object>()
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["series"] = new object[]
-            {
+                ["series"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["timestamp"] = "2022-05-10T14:57:31.2311892-04:00",
 ["value"] = 123.45F,
 }
-            },
+},
                 ["granularity"] = "yearly",
                 ["customInterval"] = 1234,
                 ["period"] = 1234,
@@ -97,10 +97,10 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
-            {
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
+{
 new TimeSeriesPoint((float)123.45F)
-            });
+});
             Response<UnivariateEntireDetectionResult> response = client.DetectUnivariateEntireSeries(options);
         }
 
@@ -112,13 +112,13 @@ new TimeSeriesPoint((float)123.45F)
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
-            {
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
+{
 new TimeSeriesPoint((float)123.45F)
 {
 Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }
-            })
+})
             {
                 Granularity = TimeGranularity.Yearly,
                 CustomInterval = 1234,
@@ -141,13 +141,13 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["series"] = new object[]
-            {
+                ["series"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["value"] = 123.45F,
 }
-            },
+},
             });
             Response response = await client.DetectUnivariateEntireSeriesAsync(content);
 
@@ -171,14 +171,14 @@ new Dictionary<string, object>()
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["series"] = new object[]
-            {
+                ["series"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["timestamp"] = "2022-05-10T14:57:31.2311892-04:00",
 ["value"] = 123.45F,
 }
-            },
+},
                 ["granularity"] = "yearly",
                 ["customInterval"] = 1234,
                 ["period"] = 1234,
@@ -208,10 +208,10 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
-            {
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
+{
 new TimeSeriesPoint((float)123.45F)
-            });
+});
             Response<UnivariateEntireDetectionResult> response = await client.DetectUnivariateEntireSeriesAsync(options);
         }
 
@@ -223,13 +223,13 @@ new TimeSeriesPoint((float)123.45F)
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
-            {
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
+{
 new TimeSeriesPoint((float)123.45F)
 {
 Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }
-            })
+})
             {
                 Granularity = TimeGranularity.Yearly,
                 CustomInterval = 1234,
@@ -252,13 +252,13 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["series"] = new object[]
-            {
+                ["series"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["value"] = 123.45F,
 }
-            },
+},
             });
             Response response = client.DetectUnivariateLastPoint(content);
 
@@ -283,14 +283,14 @@ new Dictionary<string, object>()
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["series"] = new object[]
-            {
+                ["series"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["timestamp"] = "2022-05-10T14:57:31.2311892-04:00",
 ["value"] = 123.45F,
 }
-            },
+},
                 ["granularity"] = "yearly",
                 ["customInterval"] = 1234,
                 ["period"] = 1234,
@@ -321,10 +321,10 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
-            {
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
+{
 new TimeSeriesPoint((float)123.45F)
-            });
+});
             Response<UnivariateLastDetectionResult> response = client.DetectUnivariateLastPoint(options);
         }
 
@@ -336,13 +336,13 @@ new TimeSeriesPoint((float)123.45F)
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
-            {
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
+{
 new TimeSeriesPoint((float)123.45F)
 {
 Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }
-            })
+})
             {
                 Granularity = TimeGranularity.Yearly,
                 CustomInterval = 1234,
@@ -365,13 +365,13 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["series"] = new object[]
-            {
+                ["series"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["value"] = 123.45F,
 }
-            },
+},
             });
             Response response = await client.DetectUnivariateLastPointAsync(content);
 
@@ -396,14 +396,14 @@ new Dictionary<string, object>()
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["series"] = new object[]
-            {
+                ["series"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["timestamp"] = "2022-05-10T14:57:31.2311892-04:00",
 ["value"] = 123.45F,
 }
-            },
+},
                 ["granularity"] = "yearly",
                 ["customInterval"] = 1234,
                 ["period"] = 1234,
@@ -434,10 +434,10 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
-            {
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
+{
 new TimeSeriesPoint((float)123.45F)
-            });
+});
             Response<UnivariateLastDetectionResult> response = await client.DetectUnivariateLastPointAsync(options);
         }
 
@@ -449,13 +449,13 @@ new TimeSeriesPoint((float)123.45F)
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
-            {
+            UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
+{
 new TimeSeriesPoint((float)123.45F)
 {
 Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }
-            })
+})
             {
                 Granularity = TimeGranularity.Yearly,
                 CustomInterval = 1234,
@@ -478,13 +478,13 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["series"] = new object[]
-            {
+                ["series"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["value"] = 123.45F,
 }
-            },
+},
                 ["granularity"] = "yearly",
             });
             Response response = client.DetectUnivariateChangePoint(content);
@@ -503,14 +503,14 @@ new Dictionary<string, object>()
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["series"] = new object[]
-            {
+                ["series"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["timestamp"] = "2022-05-10T14:57:31.2311892-04:00",
 ["value"] = 123.45F,
 }
-            },
+},
                 ["granularity"] = "yearly",
                 ["customInterval"] = 1234,
                 ["period"] = 1234,
@@ -533,10 +533,10 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
-            {
+            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new List<TimeSeriesPoint>()
+{
 new TimeSeriesPoint((float)123.45F)
-            }, TimeGranularity.Yearly);
+}, TimeGranularity.Yearly);
             Response<UnivariateChangePointDetectionResult> response = client.DetectUnivariateChangePoint(options);
         }
 
@@ -548,13 +548,13 @@ new TimeSeriesPoint((float)123.45F)
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
-            {
+            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new List<TimeSeriesPoint>()
+{
 new TimeSeriesPoint((float)123.45F)
 {
 Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }
-            }, TimeGranularity.Yearly)
+}, TimeGranularity.Yearly)
             {
                 CustomInterval = 1234,
                 Period = 1234,
@@ -574,13 +574,13 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["series"] = new object[]
-            {
+                ["series"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["value"] = 123.45F,
 }
-            },
+},
                 ["granularity"] = "yearly",
             });
             Response response = await client.DetectUnivariateChangePointAsync(content);
@@ -599,14 +599,14 @@ new Dictionary<string, object>()
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["series"] = new object[]
-            {
+                ["series"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["timestamp"] = "2022-05-10T14:57:31.2311892-04:00",
 ["value"] = 123.45F,
 }
-            },
+},
                 ["granularity"] = "yearly",
                 ["customInterval"] = 1234,
                 ["period"] = 1234,
@@ -629,10 +629,10 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
-            {
+            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new List<TimeSeriesPoint>()
+{
 new TimeSeriesPoint((float)123.45F)
-            }, TimeGranularity.Yearly);
+}, TimeGranularity.Yearly);
             Response<UnivariateChangePointDetectionResult> response = await client.DetectUnivariateChangePointAsync(options);
         }
 
@@ -644,13 +644,13 @@ new TimeSeriesPoint((float)123.45F)
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
-            {
+            UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new List<TimeSeriesPoint>()
+{
 new TimeSeriesPoint((float)123.45F)
 {
 Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 }
-            }, TimeGranularity.Yearly)
+}, TimeGranularity.Yearly)
             {
                 CustomInterval = 1234,
                 Period = 1234,
@@ -863,25 +863,25 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 {
                     ["modelState"] = new Dictionary<string, object>()
                     {
-                        ["epochIds"] = new object[]
-            {
+                        ["epochIds"] = new List<object>()
+{
 1234
-            },
-                        ["trainLosses"] = new object[]
-            {
+},
+                        ["trainLosses"] = new List<object>()
+{
 123.45F
-            },
-                        ["validationLosses"] = new object[]
-            {
+},
+                        ["validationLosses"] = new List<object>()
+{
 123.45F
-            },
-                        ["latenciesInSeconds"] = new object[]
-            {
+},
+                        ["latenciesInSeconds"] = new List<object>()
+{
 123.45F
-            },
+},
                     },
-                    ["variableStates"] = new object[]
-            {
+                    ["variableStates"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["variable"] = "<variable>",
@@ -890,7 +890,7 @@ new Dictionary<string, object>()
 ["firstTimestamp"] = "2022-05-10T14:57:31.2311892-04:00",
 ["lastTimestamp"] = "2022-05-10T14:57:31.2311892-04:00",
 }
-            },
+},
                 },
             });
             Response response = client.TrainMultivariateModel(content);
@@ -1040,25 +1040,25 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
                 {
                     ["modelState"] = new Dictionary<string, object>()
                     {
-                        ["epochIds"] = new object[]
-            {
+                        ["epochIds"] = new List<object>()
+{
 1234
-            },
-                        ["trainLosses"] = new object[]
-            {
+},
+                        ["trainLosses"] = new List<object>()
+{
 123.45F
-            },
-                        ["validationLosses"] = new object[]
-            {
+},
+                        ["validationLosses"] = new List<object>()
+{
 123.45F
-            },
-                        ["latenciesInSeconds"] = new object[]
-            {
+},
+                        ["latenciesInSeconds"] = new List<object>()
+{
 123.45F
-            },
+},
                     },
-                    ["variableStates"] = new object[]
-            {
+                    ["variableStates"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["variable"] = "<variable>",
@@ -1067,7 +1067,7 @@ new Dictionary<string, object>()
 ["firstTimestamp"] = "2022-05-10T14:57:31.2311892-04:00",
 ["lastTimestamp"] = "2022-05-10T14:57:31.2311892-04:00",
 }
-            },
+},
                 },
             });
             Response response = await client.TrainMultivariateModelAsync(content);
@@ -1562,21 +1562,21 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["variables"] = new object[]
-            {
+                ["variables"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["variable"] = "<variable>",
-["timestamps"] = new object[]
+["timestamps"] = new List<object>()
 {
 "<timestamps>"
 },
-["values"] = new object[]
+["values"] = new List<object>()
 {
 123.45F
 },
 }
-            },
+},
                 ["topContributorCount"] = 1234,
             });
             Response response = client.DetectMultivariateLastAnomaly("<modelId>", content);
@@ -1595,21 +1595,21 @@ new Dictionary<string, object>()
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["variables"] = new object[]
-            {
+                ["variables"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["variable"] = "<variable>",
-["timestamps"] = new object[]
+["timestamps"] = new List<object>()
 {
 "<timestamps>"
 },
-["values"] = new object[]
+["values"] = new List<object>()
 {
 123.45F
 },
 }
-            },
+},
                 ["topContributorCount"] = 1234,
             });
             Response response = client.DetectMultivariateLastAnomaly("<modelId>", content);
@@ -1639,16 +1639,16 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
-            {
-new VariableValues("<variable>",new string[]
+            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new List<VariableValues>()
+{
+new VariableValues("<variable>",new List<string>()
 {
 "<timestamps>"
-},new float[]
+},new List<float>()
 {
-123.45F
+(float)123.45F
 })
-            }, 1234);
+}, 1234);
             Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("<modelId>", options);
         }
 
@@ -1660,16 +1660,16 @@ new VariableValues("<variable>",new string[]
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
-            {
-new VariableValues("<variable>",new string[]
+            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new List<VariableValues>()
+{
+new VariableValues("<variable>",new List<string>()
 {
 "<timestamps>"
-},new float[]
+},new List<float>()
 {
-123.45F
+(float)123.45F
 })
-            }, 1234);
+}, 1234);
             Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("<modelId>", options);
         }
 
@@ -1683,21 +1683,21 @@ new VariableValues("<variable>",new string[]
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["variables"] = new object[]
-            {
+                ["variables"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["variable"] = "<variable>",
-["timestamps"] = new object[]
+["timestamps"] = new List<object>()
 {
 "<timestamps>"
 },
-["values"] = new object[]
+["values"] = new List<object>()
 {
 123.45F
 },
 }
-            },
+},
                 ["topContributorCount"] = 1234,
             });
             Response response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", content);
@@ -1716,21 +1716,21 @@ new Dictionary<string, object>()
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["variables"] = new object[]
-            {
+                ["variables"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["variable"] = "<variable>",
-["timestamps"] = new object[]
+["timestamps"] = new List<object>()
 {
 "<timestamps>"
 },
-["values"] = new object[]
+["values"] = new List<object>()
 {
 123.45F
 },
 }
-            },
+},
                 ["topContributorCount"] = 1234,
             });
             Response response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", content);
@@ -1760,16 +1760,16 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
-            {
-new VariableValues("<variable>",new string[]
+            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new List<VariableValues>()
+{
+new VariableValues("<variable>",new List<string>()
 {
 "<timestamps>"
-},new float[]
+},new List<float>()
 {
-123.45F
+(float)123.45F
 })
-            }, 1234);
+}, 1234);
             Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
         }
 
@@ -1781,16 +1781,16 @@ new VariableValues("<variable>",new string[]
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
-            {
-new VariableValues("<variable>",new string[]
+            MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new List<VariableValues>()
+{
+new VariableValues("<variable>",new List<string>()
 {
 "<timestamps>"
-},new float[]
+},new List<float>()
 {
-123.45F
+(float)123.45F
 })
-            }, 1234);
+}, 1234);
             Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
         }
 

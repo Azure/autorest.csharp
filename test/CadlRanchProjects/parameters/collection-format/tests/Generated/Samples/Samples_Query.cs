@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -22,10 +23,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Multi(new string[]
-            {
+            Response response = client.Multi(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -35,10 +36,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Multi(new string[]
-            {
+            Response response = client.Multi(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -48,10 +49,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.MultiAsync(new string[]
-            {
+            Response response = await client.MultiAsync(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -61,10 +62,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.MultiAsync(new string[]
-            {
+            Response response = await client.MultiAsync(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -74,10 +75,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Ssv(new string[]
-            {
+            Response response = client.Ssv(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -87,10 +88,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Ssv(new string[]
-            {
+            Response response = client.Ssv(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -100,10 +101,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.SsvAsync(new string[]
-            {
+            Response response = await client.SsvAsync(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -113,10 +114,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.SsvAsync(new string[]
-            {
+            Response response = await client.SsvAsync(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -126,10 +127,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Tsv(new string[]
-            {
+            Response response = client.Tsv(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -139,10 +140,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Tsv(new string[]
-            {
+            Response response = client.Tsv(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -152,10 +153,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.TsvAsync(new string[]
-            {
+            Response response = await client.TsvAsync(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -165,10 +166,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.TsvAsync(new string[]
-            {
+            Response response = await client.TsvAsync(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -178,10 +179,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Pipes(new string[]
-            {
+            Response response = client.Pipes(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -191,10 +192,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Pipes(new string[]
-            {
+            Response response = client.Pipes(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -204,10 +205,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.PipesAsync(new string[]
-            {
+            Response response = await client.PipesAsync(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -217,10 +218,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.PipesAsync(new string[]
-            {
+            Response response = await client.PipesAsync(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -230,10 +231,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Csv(new string[]
-            {
+            Response response = client.Csv(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -243,10 +244,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Csv(new string[]
-            {
+            Response response = client.Csv(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -256,10 +257,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.CsvAsync(new string[]
-            {
+            Response response = await client.CsvAsync(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -269,10 +270,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.CsvAsync(new string[]
-            {
+            Response response = await client.CsvAsync(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
     }

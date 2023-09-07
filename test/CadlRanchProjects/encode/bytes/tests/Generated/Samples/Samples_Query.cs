@@ -143,10 +143,10 @@ namespace Encode.Bytes.Samples
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Base64urlArray(new BinaryData[]
-            {
+            Response response = client.Base64urlArray(new List<BinaryData>()
+{
 BinaryData.FromObjectAsJson(new Dictionary<string, object>())
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -156,10 +156,10 @@ BinaryData.FromObjectAsJson(new Dictionary<string, object>())
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Base64urlArray(new BinaryData[]
-            {
+            Response response = client.Base64urlArray(new List<BinaryData>()
+{
 BinaryData.FromObjectAsJson(new Dictionary<string, object>())
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -169,10 +169,10 @@ BinaryData.FromObjectAsJson(new Dictionary<string, object>())
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.Base64urlArrayAsync(new BinaryData[]
-            {
+            Response response = await client.Base64urlArrayAsync(new List<BinaryData>()
+{
 BinaryData.FromObjectAsJson(new Dictionary<string, object>())
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -182,10 +182,10 @@ BinaryData.FromObjectAsJson(new Dictionary<string, object>())
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.Base64urlArrayAsync(new BinaryData[]
-            {
+            Response response = await client.Base64urlArrayAsync(new List<BinaryData>()
+{
 BinaryData.FromObjectAsJson(new Dictionary<string, object>())
-            });
+});
             Console.WriteLine(response.Status);
         }
     }

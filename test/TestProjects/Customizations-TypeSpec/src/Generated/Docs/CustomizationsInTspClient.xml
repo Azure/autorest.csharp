@@ -14,19 +14,19 @@ RootModel input = new RootModel()
         OptionalInt = 1234,
     },
     PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[]
+    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new List<string>()
 {
 "<badListName>"
 }, new Dictionary<string, string>()
 {
-    ["key"] = "<badDictionaryName>",
-}, new IList<string>[]
+["key"] = "<badDictionaryName>",
+}, new List<IList<string>>()
 {
-new string[]
+new List<string>()
 {
 "<badListOfListName>"
 }
-}, new IDictionary<string, string>[]
+}, new List<IDictionary<string, string>>()
 {
 new Dictionary<string, string>()
 {
@@ -55,19 +55,19 @@ RootModel input = new RootModel()
         OptionalInt = 1234,
     },
     PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[]
+    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new List<string>()
 {
 "<badListName>"
 }, new Dictionary<string, string>()
 {
-    ["key"] = "<badDictionaryName>",
-}, new IList<string>[]
+["key"] = "<badDictionaryName>",
+}, new List<IList<string>>()
 {
-new string[]
+new List<string>()
 {
 "<badListOfListName>"
 }
-}, new IDictionary<string, string>[]
+}, new List<IDictionary<string, string>>()
 {
 new Dictionary<string, string>()
 {
@@ -124,7 +124,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["propertyToMakeString"] = "PT1H23M45S",
         ["propertyToMakeJsonElement"] = "<propertyToMakeJsonElement>",
         ["propertyToField"] = "<propertyToField>",
-        ["badListName"] = new object[]
+        ["badListName"] = new List<object>()
 {
 "<badListName>"
 },
@@ -132,14 +132,14 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         {
             ["key"] = "<badDictionaryName>",
         },
-        ["badListOfListName"] = new object[]
+        ["badListOfListName"] = new List<object>()
 {
-new object[]
+new List<object>()
 {
 "<badListOfListName>"
 }
 },
-        ["badListOfDictionaryName"] = new object[]
+        ["badListOfDictionaryName"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -223,7 +223,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["propertyToMakeString"] = "PT1H23M45S",
         ["propertyToMakeJsonElement"] = "<propertyToMakeJsonElement>",
         ["propertyToField"] = "<propertyToField>",
-        ["badListName"] = new object[]
+        ["badListName"] = new List<object>()
 {
 "<badListName>"
 },
@@ -231,14 +231,14 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         {
             ["key"] = "<badDictionaryName>",
         },
-        ["badListOfListName"] = new object[]
+        ["badListOfListName"] = new List<object>()
 {
-new object[]
+new List<object>()
 {
 "<badListOfListName>"
 }
 },
-        ["badListOfDictionaryName"] = new object[]
+        ["badListOfDictionaryName"] = new List<object>()
 {
 new Dictionary<string, object>()
 {

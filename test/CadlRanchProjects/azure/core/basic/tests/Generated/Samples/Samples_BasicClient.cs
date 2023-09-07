@@ -47,14 +47,14 @@ namespace _Specs_.Azure.Core.Basic.Samples
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
                 ["name"] = "<name>",
-                ["orders"] = new object[]
-            {
+                ["orders"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["userId"] = 1234,
 ["detail"] = "<detail>",
 }
-            },
+},
             });
             Response response = client.CreateOrUpdate(1234, content);
 
@@ -94,14 +94,14 @@ new Dictionary<string, object>()
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
                 ["name"] = "<name>",
-                ["orders"] = new object[]
-            {
+                ["orders"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["userId"] = 1234,
 ["detail"] = "<detail>",
 }
-            },
+},
             });
             Response response = await client.CreateOrUpdateAsync(1234, content);
 
@@ -141,14 +141,14 @@ new Dictionary<string, object>()
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
                 ["name"] = "<name>",
-                ["orders"] = new object[]
-            {
+                ["orders"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["userId"] = 1234,
 ["detail"] = "<detail>",
 }
-            },
+},
             });
             Response response = client.CreateOrReplace(1234, content);
 
@@ -214,14 +214,14 @@ new UserOrder(1234,"<detail>")
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
                 ["name"] = "<name>",
-                ["orders"] = new object[]
-            {
+                ["orders"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["userId"] = 1234,
 ["detail"] = "<detail>",
 }
-            },
+},
             });
             Response response = await client.CreateOrReplaceAsync(1234, content);
 
@@ -517,16 +517,16 @@ new UserOrder(1234,"<detail>")
         {
             BasicClient client = new BasicClient();
 
-            foreach (BinaryData item in client.GetUsers(1234, 1234, 1234, new string[]
-            {
+            foreach (BinaryData item in client.GetUsers(1234, 1234, 1234, new List<string>()
+{
 "<orderby>"
-            }, "<filter>", new string[]
-            {
+}, "<filter>", new List<string>()
+{
 "<select>"
-            }, new string[]
-            {
+}, new List<string>()
+{
 "<expand>"
-            }, null))
+}, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("id").ToString());
@@ -555,16 +555,16 @@ new UserOrder(1234,"<detail>")
         {
             BasicClient client = new BasicClient();
 
-            foreach (User item in client.GetUsers(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new string[]
-            {
+            foreach (User item in client.GetUsers(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new List<string>()
+{
 "<orderby>"
-            }, filter: "<filter>", select: new string[]
-            {
+}, filter: "<filter>", select: new List<string>()
+{
 "<select>"
-            }, expand: new string[]
-            {
+}, expand: new List<string>()
+{
 "<expand>"
-            }))
+}))
             {
             }
         }
@@ -590,16 +590,16 @@ new UserOrder(1234,"<detail>")
         {
             BasicClient client = new BasicClient();
 
-            await foreach (BinaryData item in client.GetUsersAsync(1234, 1234, 1234, new string[]
-            {
+            await foreach (BinaryData item in client.GetUsersAsync(1234, 1234, 1234, new List<string>()
+{
 "<orderby>"
-            }, "<filter>", new string[]
-            {
+}, "<filter>", new List<string>()
+{
 "<select>"
-            }, new string[]
-            {
+}, new List<string>()
+{
 "<expand>"
-            }, null))
+}, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("id").ToString());
@@ -628,16 +628,16 @@ new UserOrder(1234,"<detail>")
         {
             BasicClient client = new BasicClient();
 
-            await foreach (User item in client.GetUsersAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new string[]
-            {
+            await foreach (User item in client.GetUsersAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new List<string>()
+{
 "<orderby>"
-            }, filter: "<filter>", select: new string[]
-            {
+}, filter: "<filter>", select: new List<string>()
+{
 "<select>"
-            }, expand: new string[]
-            {
+}, expand: new List<string>()
+{
 "<expand>"
-            }))
+}))
             {
             }
         }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -22,10 +23,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = client.Csv(new string[]
-            {
+            Response response = client.Csv(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -35,10 +36,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = client.Csv(new string[]
-            {
+            Response response = client.Csv(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -48,10 +49,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = await client.CsvAsync(new string[]
-            {
+            Response response = await client.CsvAsync(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -61,10 +62,10 @@ namespace Parameters.CollectionFormat.Samples
         {
             Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = await client.CsvAsync(new string[]
-            {
+            Response response = await client.CsvAsync(new List<string>()
+{
 "<colors>"
-            });
+});
             Console.WriteLine(response.Status);
         }
     }

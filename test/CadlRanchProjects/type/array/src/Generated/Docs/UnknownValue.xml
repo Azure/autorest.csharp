@@ -49,7 +49,7 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new BinaryData[]
+Response response = await client.PutAsync(new List<BinaryData>()
 {
 BinaryData.FromObjectAsJson(new Dictionary<string, object>())
 });
@@ -62,7 +62,7 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new BinaryData[]
+Response response = client.Put(new List<BinaryData>()
 {
 BinaryData.FromObjectAsJson(new Dictionary<string, object>())
 });
@@ -75,7 +75,7 @@ This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
 UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+RequestContent content = RequestContent.Create(new List<object>()
 {
 new Dictionary<string, object>()
 });
@@ -89,7 +89,7 @@ This sample shows how to call Put with required request content.
 <code><![CDATA[
 UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+RequestContent content = RequestContent.Create(new List<object>()
 {
 new Dictionary<string, object>()
 });

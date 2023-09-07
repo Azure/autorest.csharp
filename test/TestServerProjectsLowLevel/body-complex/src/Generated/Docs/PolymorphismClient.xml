@@ -64,7 +64,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["fishtype"] = "salmon",
     ["species"] = "<species>",
     ["length"] = 123.45F,
-    ["siblings"] = new object[]
+    ["siblings"] = new List<object>()
 {
 null
 },
@@ -100,7 +100,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["fishtype"] = "salmon",
     ["species"] = "<species>",
     ["length"] = 123.45F,
-    ["siblings"] = new object[]
+    ["siblings"] = new List<object>()
 {
 null
 },
@@ -301,7 +301,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["fishtype"] = "smart_salmon",
     ["species"] = "<species>",
     ["length"] = 123.45F,
-    ["siblings"] = new object[]
+    ["siblings"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -310,7 +310,7 @@ new Dictionary<string, object>()
 ["fishtype"] = "salmon",
 ["species"] = "<species>",
 ["length"] = 123.45F,
-["siblings"] = new object[]
+["siblings"] = new List<object>()
 {
 null
 },
@@ -349,7 +349,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["fishtype"] = "smart_salmon",
     ["species"] = "<species>",
     ["length"] = 123.45F,
-    ["siblings"] = new object[]
+    ["siblings"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -358,7 +358,7 @@ new Dictionary<string, object>()
 ["fishtype"] = "salmon",
 ["species"] = "<species>",
 ["length"] = 123.45F,
-["siblings"] = new object[]
+["siblings"] = new List<object>()
 {
 null
 },
@@ -399,7 +399,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["fishtype"] = "smart_salmon",
     ["species"] = "<species>",
     ["length"] = 123.45F,
-    ["siblings"] = new object[]
+    ["siblings"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -408,7 +408,7 @@ new Dictionary<string, object>()
 ["fishtype"] = "salmon",
 ["species"] = "<species>",
 ["length"] = 123.45F,
-["siblings"] = new object[]
+["siblings"] = new List<object>()
 {
 null
 },
@@ -458,7 +458,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["fishtype"] = "smart_salmon",
     ["species"] = "<species>",
     ["length"] = 123.45F,
-    ["siblings"] = new object[]
+    ["siblings"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -467,7 +467,7 @@ new Dictionary<string, object>()
 ["fishtype"] = "salmon",
 ["species"] = "<species>",
 ["length"] = 123.45F,
-["siblings"] = new object[]
+["siblings"] = new List<object>()
 {
 null
 },
@@ -514,7 +514,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["fishtype"] = "salmon",
     ["species"] = "<species>",
     ["length"] = 123.45F,
-    ["siblings"] = new object[]
+    ["siblings"] = new List<object>()
 {
 null
 },
@@ -550,7 +550,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["fishtype"] = "salmon",
     ["species"] = "<species>",
     ["length"] = 123.45F,
-    ["siblings"] = new object[]
+    ["siblings"] = new List<object>()
 {
 null
 },

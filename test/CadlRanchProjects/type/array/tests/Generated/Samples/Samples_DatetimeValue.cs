@@ -109,10 +109,10 @@ namespace _Type._Array.Samples
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "2022-05-10T14:57:31.2311892-04:00"
-            });
+});
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
@@ -123,10 +123,10 @@ namespace _Type._Array.Samples
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "2022-05-10T14:57:31.2311892-04:00"
-            });
+});
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
@@ -137,10 +137,10 @@ namespace _Type._Array.Samples
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new DateTimeOffset[]
-            {
+            Response response = client.Put(new List<DateTimeOffset>()
+{
 DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -150,10 +150,10 @@ DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new DateTimeOffset[]
-            {
+            Response response = client.Put(new List<DateTimeOffset>()
+{
 DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -163,10 +163,10 @@ DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "2022-05-10T14:57:31.2311892-04:00"
-            });
+});
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -177,10 +177,10 @@ DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "2022-05-10T14:57:31.2311892-04:00"
-            });
+});
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -191,10 +191,10 @@ DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new DateTimeOffset[]
-            {
+            Response response = await client.PutAsync(new List<DateTimeOffset>()
+{
 DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -204,10 +204,10 @@ DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new DateTimeOffset[]
-            {
+            Response response = await client.PutAsync(new List<DateTimeOffset>()
+{
 DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
-            });
+});
             Console.WriteLine(response.Status);
         }
     }

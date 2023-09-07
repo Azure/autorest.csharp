@@ -9,7 +9,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
+UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
 new TimeSeriesPoint((float)123.45F)
 {
@@ -36,7 +36,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
+UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
 new TimeSeriesPoint((float)123.45F)
 {
@@ -65,7 +65,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["series"] = new object[]
+    ["series"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -92,7 +92,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["series"] = new object[]
+    ["series"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -131,7 +131,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["series"] = new object[]
+    ["series"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -158,7 +158,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["series"] = new object[]
+    ["series"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -195,7 +195,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
+UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
 new TimeSeriesPoint((float)123.45F)
 {
@@ -222,7 +222,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-UnivariateDetectionOptions options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
+UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
 new TimeSeriesPoint((float)123.45F)
 {
@@ -251,7 +251,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["series"] = new object[]
+    ["series"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -279,7 +279,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["series"] = new object[]
+    ["series"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -319,7 +319,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["series"] = new object[]
+    ["series"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -347,7 +347,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["series"] = new object[]
+    ["series"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -385,7 +385,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
+UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new List<TimeSeriesPoint>()
 {
 new TimeSeriesPoint((float)123.45F)
 {
@@ -409,7 +409,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
+UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new List<TimeSeriesPoint>()
 {
 new TimeSeriesPoint((float)123.45F)
 {
@@ -435,7 +435,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["series"] = new object[]
+    ["series"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -457,7 +457,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["series"] = new object[]
+    ["series"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -489,7 +489,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["series"] = new object[]
+    ["series"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -511,7 +511,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["series"] = new object[]
+    ["series"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -785,24 +785,24 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     {
         ["modelState"] = new Dictionary<string, object>()
         {
-            ["epochIds"] = new object[]
+            ["epochIds"] = new List<object>()
 {
 1234
 },
-            ["trainLosses"] = new object[]
+            ["trainLosses"] = new List<object>()
 {
 123.45F
 },
-            ["validationLosses"] = new object[]
+            ["validationLosses"] = new List<object>()
 {
 123.45F
 },
-            ["latenciesInSeconds"] = new object[]
+            ["latenciesInSeconds"] = new List<object>()
 {
 123.45F
 },
         },
-        ["variableStates"] = new object[]
+        ["variableStates"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -890,24 +890,24 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     {
         ["modelState"] = new Dictionary<string, object>()
         {
-            ["epochIds"] = new object[]
+            ["epochIds"] = new List<object>()
 {
 1234
 },
-            ["trainLosses"] = new object[]
+            ["trainLosses"] = new List<object>()
 {
 123.45F
 },
-            ["validationLosses"] = new object[]
+            ["validationLosses"] = new List<object>()
 {
 123.45F
 },
-            ["latenciesInSeconds"] = new object[]
+            ["latenciesInSeconds"] = new List<object>()
 {
 123.45F
 },
         },
-        ["variableStates"] = new object[]
+        ["variableStates"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -1185,14 +1185,14 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
+MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new List<VariableValues>()
 {
-new VariableValues("<variable>",new string[]
+new VariableValues("<variable>",new List<string>()
 {
 "<timestamps>"
-},new float[]
+},new List<float>()
 {
-123.45F
+(float)123.45F
 })
 }, 1234);
 Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
@@ -1206,14 +1206,14 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
-MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new VariableValues[]
+MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new List<VariableValues>()
 {
-new VariableValues("<variable>",new string[]
+new VariableValues("<variable>",new List<string>()
 {
 "<timestamps>"
-},new float[]
+},new List<float>()
 {
-123.45F
+(float)123.45F
 })
 }, 1234);
 Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("<modelId>", options);
@@ -1229,16 +1229,16 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["variables"] = new object[]
+    ["variables"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
 ["variable"] = "<variable>",
-["timestamps"] = new object[]
+["timestamps"] = new List<object>()
 {
 "<timestamps>"
 },
-["values"] = new object[]
+["values"] = new List<object>()
 {
 123.45F
 },
@@ -1275,16 +1275,16 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["variables"] = new object[]
+    ["variables"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
 ["variable"] = "<variable>",
-["timestamps"] = new object[]
+["timestamps"] = new List<object>()
 {
 "<timestamps>"
 },
-["values"] = new object[]
+["values"] = new List<object>()
 {
 123.45F
 },

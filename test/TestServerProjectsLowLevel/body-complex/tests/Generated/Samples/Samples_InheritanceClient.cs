@@ -106,15 +106,15 @@ namespace body_complex_LowLevel.Samples
             {
                 ["breed"] = "<breed>",
                 ["color"] = "<color>",
-                ["hates"] = new object[]
-            {
+                ["hates"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["food"] = "<food>",
 ["id"] = 1234,
 ["name"] = "<name>",
 }
-            },
+},
                 ["id"] = 1234,
                 ["name"] = "<name>",
             });
@@ -145,15 +145,15 @@ new Dictionary<string, object>()
             {
                 ["breed"] = "<breed>",
                 ["color"] = "<color>",
-                ["hates"] = new object[]
-            {
+                ["hates"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["food"] = "<food>",
 ["id"] = 1234,
 ["name"] = "<name>",
 }
-            },
+},
                 ["id"] = 1234,
                 ["name"] = "<name>",
             });

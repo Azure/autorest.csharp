@@ -205,13 +205,13 @@ namespace _Type.Property.Nullable.Samples
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
                 ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new object[]
-            {
+                ["nullableProperty"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
 }
-            },
+},
             });
             Response response = client.PatchNonNull(content);
             Console.WriteLine(response.Status);
@@ -226,13 +226,13 @@ new Dictionary<string, object>()
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
                 ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new object[]
-            {
+                ["nullableProperty"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
 }
-            },
+},
             });
             Response response = client.PatchNonNull(content);
             Console.WriteLine(response.Status);
@@ -247,13 +247,13 @@ new Dictionary<string, object>()
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
                 ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new object[]
-            {
+                ["nullableProperty"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
 }
-            },
+},
             });
             Response response = await client.PatchNonNullAsync(content);
             Console.WriteLine(response.Status);
@@ -268,13 +268,13 @@ new Dictionary<string, object>()
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
                 ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new object[]
-            {
+                ["nullableProperty"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
 }
-            },
+},
             });
             Response response = await client.PatchNonNullAsync(content);
             Console.WriteLine(response.Status);
@@ -289,13 +289,13 @@ new Dictionary<string, object>()
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
                 ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new object[]
-            {
+                ["nullableProperty"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
 }
-            },
+},
             });
             Response response = client.PatchNull(content);
             Console.WriteLine(response.Status);
@@ -310,13 +310,13 @@ new Dictionary<string, object>()
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
                 ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new object[]
-            {
+                ["nullableProperty"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
 }
-            },
+},
             });
             Response response = client.PatchNull(content);
             Console.WriteLine(response.Status);
@@ -331,13 +331,13 @@ new Dictionary<string, object>()
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
                 ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new object[]
-            {
+                ["nullableProperty"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
 }
-            },
+},
             });
             Response response = await client.PatchNullAsync(content);
             Console.WriteLine(response.Status);
@@ -352,13 +352,13 @@ new Dictionary<string, object>()
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
                 ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new object[]
-            {
+                ["nullableProperty"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
 }
-            },
+},
             });
             Response response = await client.PatchNullAsync(content);
             Console.WriteLine(response.Status);

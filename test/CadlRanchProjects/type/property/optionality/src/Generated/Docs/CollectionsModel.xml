@@ -141,7 +141,7 @@ CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVers
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["property"] = new object[]
+    ["property"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -169,7 +169,7 @@ CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVers
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["property"] = new object[]
+    ["property"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -237,7 +237,7 @@ CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVers
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["property"] = new object[]
+    ["property"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -265,7 +265,7 @@ CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVers
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["property"] = new object[]
+    ["property"] = new List<object>()
 {
 new Dictionary<string, object>()
 {

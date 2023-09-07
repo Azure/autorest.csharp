@@ -207,13 +207,13 @@ namespace _Type.Property.Optionality.Samples
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["property"] = new object[]
-            {
+                ["property"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
 }
-            },
+},
             });
             Response response = client.PutAll(content);
             Console.WriteLine(response.Status);
@@ -269,13 +269,13 @@ Property = "<property>",
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["property"] = new object[]
-            {
+                ["property"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
 }
-            },
+},
             });
             Response response = await client.PutAllAsync(content);
             Console.WriteLine(response.Status);
@@ -331,13 +331,13 @@ Property = "<property>",
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["property"] = new object[]
-            {
+                ["property"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
 }
-            },
+},
             });
             Response response = client.PutDefault(content);
             Console.WriteLine(response.Status);
@@ -393,13 +393,13 @@ Property = "<property>",
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["property"] = new object[]
-            {
+                ["property"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
 }
-            },
+},
             });
             Response response = await client.PutDefaultAsync(content);
             Console.WriteLine(response.Status);

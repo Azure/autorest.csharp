@@ -113,10 +113,10 @@ namespace body_complex_LowLevel.Samples
                 ["fishtype"] = "salmon",
                 ["species"] = "<species>",
                 ["length"] = 123.45F,
-                ["siblings"] = new object[]
-            {
+                ["siblings"] = new List<object>()
+{
 null
-            },
+},
             });
             Response response = client.PutValid(content);
             Console.WriteLine(response.Status);
@@ -152,10 +152,10 @@ null
                 ["fishtype"] = "salmon",
                 ["species"] = "<species>",
                 ["length"] = 123.45F,
-                ["siblings"] = new object[]
-            {
+                ["siblings"] = new List<object>()
+{
 null
-            },
+},
             });
             Response response = await client.PutValidAsync(content);
             Console.WriteLine(response.Status);

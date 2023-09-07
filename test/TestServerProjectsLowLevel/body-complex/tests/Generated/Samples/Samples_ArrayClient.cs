@@ -92,10 +92,10 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["array"] = new object[]
-            {
+                ["array"] = new List<object>()
+{
 "<array>"
-            },
+},
             });
             Response response = client.PutValid(content);
             Console.WriteLine(response.Status);
@@ -122,10 +122,10 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["array"] = new object[]
-            {
+                ["array"] = new List<object>()
+{
 "<array>"
-            },
+},
             });
             Response response = await client.PutValidAsync(content);
             Console.WriteLine(response.Status);
@@ -204,10 +204,10 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["array"] = new object[]
-            {
+                ["array"] = new List<object>()
+{
 "<array>"
-            },
+},
             });
             Response response = client.PutEmpty(content);
             Console.WriteLine(response.Status);
@@ -234,10 +234,10 @@ namespace body_complex_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                ["array"] = new object[]
-            {
+                ["array"] = new List<object>()
+{
 "<array>"
-            },
+},
             });
             Response response = await client.PutEmptyAsync(content);
             Console.WriteLine(response.Status);

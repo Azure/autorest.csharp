@@ -112,13 +112,13 @@ namespace _Type._Array.Samples
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
 }
-            });
+});
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
@@ -129,17 +129,17 @@ new Dictionary<string, object>()
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
-["children"] = new object[]
+["children"] = new List<object>()
 {
 null
 },
 }
-            });
+});
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
@@ -150,10 +150,10 @@ null
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new InnerModel[]
-            {
+            Response response = client.Put(new List<InnerModel>()
+{
 new InnerModel("<property>")
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -163,8 +163,8 @@ new InnerModel("<property>")
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new InnerModel[]
-            {
+            Response response = client.Put(new List<InnerModel>()
+{
 new InnerModel("<property>")
 {
 Children =
@@ -172,7 +172,7 @@ Children =
 null
 },
 }
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -182,13 +182,13 @@ null
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
 }
-            });
+});
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -199,17 +199,17 @@ new Dictionary<string, object>()
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["property"] = "<property>",
-["children"] = new object[]
+["children"] = new List<object>()
 {
 null
 },
 }
-            });
+});
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -220,10 +220,10 @@ null
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new InnerModel[]
-            {
+            Response response = await client.PutAsync(new List<InnerModel>()
+{
 new InnerModel("<property>")
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -233,8 +233,8 @@ new InnerModel("<property>")
         {
             ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new InnerModel[]
-            {
+            Response response = await client.PutAsync(new List<InnerModel>()
+{
 new InnerModel("<property>")
 {
 Children =
@@ -242,7 +242,7 @@ Children =
 null
 },
 }
-            });
+});
             Console.WriteLine(response.Status);
         }
     }

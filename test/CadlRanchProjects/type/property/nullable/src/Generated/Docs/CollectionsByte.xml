@@ -98,7 +98,7 @@ CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersio
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["requiredProperty"] = "<requiredProperty>",
-    ["nullableProperty"] = new object[]
+    ["nullableProperty"] = new List<object>()
 {
 new Dictionary<string, object>()
 },
@@ -116,7 +116,7 @@ CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersio
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["requiredProperty"] = "<requiredProperty>",
-    ["nullableProperty"] = new object[]
+    ["nullableProperty"] = new List<object>()
 {
 new Dictionary<string, object>()
 },
@@ -134,7 +134,7 @@ CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersio
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["requiredProperty"] = "<requiredProperty>",
-    ["nullableProperty"] = new object[]
+    ["nullableProperty"] = new List<object>()
 {
 new Dictionary<string, object>()
 },
@@ -152,7 +152,7 @@ CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersio
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["requiredProperty"] = "<requiredProperty>",
-    ["nullableProperty"] = new object[]
+    ["nullableProperty"] = new List<object>()
 {
 new Dictionary<string, object>()
 },

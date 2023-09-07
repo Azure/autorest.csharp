@@ -163,7 +163,7 @@ This sample shows how to call Base64urlArrayAsync with required parameters.
 <code><![CDATA[
 Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new BinaryData[]
+Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
 {
 BinaryData.FromObjectAsJson(new Dictionary<string, object>())
 });
@@ -176,7 +176,7 @@ This sample shows how to call Base64urlArray with required parameters.
 <code><![CDATA[
 Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new BinaryData[]
+Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
 {
 BinaryData.FromObjectAsJson(new Dictionary<string, object>())
 });
@@ -191,7 +191,7 @@ Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["value"] = new object[]
+    ["value"] = new List<object>()
 {
 new Dictionary<string, object>()
 },
@@ -210,7 +210,7 @@ Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["value"] = new object[]
+    ["value"] = new List<object>()
 {
 new Dictionary<string, object>()
 },

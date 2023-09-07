@@ -109,10 +109,10 @@ namespace _Type._Array.Samples
         {
             Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 1234L
-            });
+});
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
@@ -123,10 +123,10 @@ namespace _Type._Array.Samples
         {
             Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 1234L
-            });
+});
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
@@ -137,10 +137,10 @@ namespace _Type._Array.Samples
         {
             Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new long[]
-            {
+            Response response = client.Put(new List<long>()
+{
 1234L
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -150,10 +150,10 @@ namespace _Type._Array.Samples
         {
             Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new long[]
-            {
+            Response response = client.Put(new List<long>()
+{
 1234L
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -163,10 +163,10 @@ namespace _Type._Array.Samples
         {
             Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 1234L
-            });
+});
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -177,10 +177,10 @@ namespace _Type._Array.Samples
         {
             Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 1234L
-            });
+});
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -191,10 +191,10 @@ namespace _Type._Array.Samples
         {
             Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new long[]
-            {
+            Response response = await client.PutAsync(new List<long>()
+{
 1234L
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -204,10 +204,10 @@ namespace _Type._Array.Samples
         {
             Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new long[]
-            {
+            Response response = await client.PutAsync(new List<long>()
+{
 1234L
-            });
+});
             Console.WriteLine(response.Status);
         }
     }

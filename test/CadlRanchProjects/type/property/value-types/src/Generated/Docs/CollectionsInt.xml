@@ -49,7 +49,7 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
 
-CollectionsIntProperty body = new CollectionsIntProperty(new int[]
+CollectionsIntProperty body = new CollectionsIntProperty(new List<int>()
 {
 1234
 });
@@ -63,7 +63,7 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
 
-CollectionsIntProperty body = new CollectionsIntProperty(new int[]
+CollectionsIntProperty body = new CollectionsIntProperty(new List<int>()
 {
 1234
 });
@@ -79,7 +79,7 @@ CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersio
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["property"] = new object[]
+    ["property"] = new List<object>()
 {
 1234
 },
@@ -96,7 +96,7 @@ CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersio
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["property"] = new object[]
+    ["property"] = new List<object>()
 {
 1234
 },

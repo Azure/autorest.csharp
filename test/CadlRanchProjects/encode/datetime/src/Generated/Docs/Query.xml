@@ -87,7 +87,7 @@ This sample shows how to call UnixTimestampArrayAsync with required parameters.
 <code><![CDATA[
 Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.UnixTimestampArrayAsync(new DateTimeOffset[]
+Response response = await client.UnixTimestampArrayAsync(new List<DateTimeOffset>()
 {
 DateTimeOffset.FromUnixTimeSeconds(1652209051)
 });
@@ -100,7 +100,7 @@ This sample shows how to call UnixTimestampArray with required parameters.
 <code><![CDATA[
 Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.UnixTimestampArray(new DateTimeOffset[]
+Response response = client.UnixTimestampArray(new List<DateTimeOffset>()
 {
 DateTimeOffset.FromUnixTimeSeconds(1652209051)
 });

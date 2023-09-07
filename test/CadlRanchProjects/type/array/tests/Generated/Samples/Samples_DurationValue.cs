@@ -110,10 +110,10 @@ namespace _Type._Array.Samples
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "PT1H23M45S"
-            });
+});
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
@@ -124,10 +124,10 @@ namespace _Type._Array.Samples
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "PT1H23M45S"
-            });
+});
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
@@ -138,10 +138,10 @@ namespace _Type._Array.Samples
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new TimeSpan[]
-            {
+            Response response = client.Put(new List<TimeSpan>()
+{
 XmlConvert.ToTimeSpan("PT1H23M45S")
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -151,10 +151,10 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new TimeSpan[]
-            {
+            Response response = client.Put(new List<TimeSpan>()
+{
 XmlConvert.ToTimeSpan("PT1H23M45S")
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -164,10 +164,10 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "PT1H23M45S"
-            });
+});
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -178,10 +178,10 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new object[]
-            {
+            RequestContent content = RequestContent.Create(new List<object>()
+{
 "PT1H23M45S"
-            });
+});
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -192,10 +192,10 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new TimeSpan[]
-            {
+            Response response = await client.PutAsync(new List<TimeSpan>()
+{
 XmlConvert.ToTimeSpan("PT1H23M45S")
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -205,10 +205,10 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new TimeSpan[]
-            {
+            Response response = await client.PutAsync(new List<TimeSpan>()
+{
 XmlConvert.ToTimeSpan("PT1H23M45S")
-            });
+});
             Console.WriteLine(response.Status);
         }
     }

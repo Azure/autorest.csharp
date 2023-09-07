@@ -59,7 +59,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["breed"] = "<breed>",
     ["color"] = "<color>",
-    ["hates"] = new object[]
+    ["hates"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -95,7 +95,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
     ["breed"] = "<breed>",
     ["color"] = "<color>",
-    ["hates"] = new object[]
+    ["hates"] = new List<object>()
 {
 new Dictionary<string, object>()
 {

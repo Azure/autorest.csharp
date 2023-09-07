@@ -47,7 +47,7 @@ This sample shows how to call Iso8601ArrayAsync with required parameters.
 <code><![CDATA[
 Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = await client.Iso8601ArrayAsync(new TimeSpan[]
+Response response = await client.Iso8601ArrayAsync(new List<TimeSpan>()
 {
 XmlConvert.ToTimeSpan("PT1H23M45S")
 });
@@ -60,7 +60,7 @@ This sample shows how to call Iso8601Array with required parameters.
 <code><![CDATA[
 Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = client.Iso8601Array(new TimeSpan[]
+Response response = client.Iso8601Array(new List<TimeSpan>()
 {
 XmlConvert.ToTimeSpan("PT1H23M45S")
 });

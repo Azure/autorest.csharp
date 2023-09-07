@@ -45,7 +45,7 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["array"] = new object[]
+    ["array"] = new List<object>()
 {
 "<array>"
 },
@@ -72,7 +72,7 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["array"] = new object[]
+    ["array"] = new List<object>()
 {
 "<array>"
 },
@@ -125,7 +125,7 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["array"] = new object[]
+    ["array"] = new List<object>()
 {
 "<array>"
 },
@@ -152,7 +152,7 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["array"] = new object[]
+    ["array"] = new List<object>()
 {
 "<array>"
 },

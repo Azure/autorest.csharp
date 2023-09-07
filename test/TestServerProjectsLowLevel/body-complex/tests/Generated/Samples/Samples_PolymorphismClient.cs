@@ -113,10 +113,10 @@ namespace body_complex_LowLevel.Samples
                 ["fishtype"] = "salmon",
                 ["species"] = "<species>",
                 ["length"] = 123.45F,
-                ["siblings"] = new object[]
-            {
+                ["siblings"] = new List<object>()
+{
 null
-            },
+},
             });
             Response response = client.PutValid(content);
             Console.WriteLine(response.Status);
@@ -152,10 +152,10 @@ null
                 ["fishtype"] = "salmon",
                 ["species"] = "<species>",
                 ["length"] = 123.45F,
-                ["siblings"] = new object[]
-            {
+                ["siblings"] = new List<object>()
+{
 null
-            },
+},
             });
             Response response = await client.PutValidAsync(content);
             Console.WriteLine(response.Status);
@@ -460,8 +460,8 @@ null
                 ["fishtype"] = "smart_salmon",
                 ["species"] = "<species>",
                 ["length"] = 123.45F,
-                ["siblings"] = new object[]
-            {
+                ["siblings"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["location"] = "<location>",
@@ -469,12 +469,12 @@ new Dictionary<string, object>()
 ["fishtype"] = "salmon",
 ["species"] = "<species>",
 ["length"] = 123.45F,
-["siblings"] = new object[]
+["siblings"] = new List<object>()
 {
 null
 },
 }
-            },
+},
             });
             Response response = client.PutComplicated(content);
             Console.WriteLine(response.Status);
@@ -511,8 +511,8 @@ null
                 ["fishtype"] = "smart_salmon",
                 ["species"] = "<species>",
                 ["length"] = 123.45F,
-                ["siblings"] = new object[]
-            {
+                ["siblings"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["location"] = "<location>",
@@ -520,12 +520,12 @@ new Dictionary<string, object>()
 ["fishtype"] = "salmon",
 ["species"] = "<species>",
 ["length"] = 123.45F,
-["siblings"] = new object[]
+["siblings"] = new List<object>()
 {
 null
 },
 }
-            },
+},
             });
             Response response = await client.PutComplicatedAsync(content);
             Console.WriteLine(response.Status);
@@ -564,8 +564,8 @@ null
                 ["fishtype"] = "smart_salmon",
                 ["species"] = "<species>",
                 ["length"] = 123.45F,
-                ["siblings"] = new object[]
-            {
+                ["siblings"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["location"] = "<location>",
@@ -573,12 +573,12 @@ new Dictionary<string, object>()
 ["fishtype"] = "salmon",
 ["species"] = "<species>",
 ["length"] = 123.45F,
-["siblings"] = new object[]
+["siblings"] = new List<object>()
 {
 null
 },
 }
-            },
+},
             });
             Response response = client.PutMissingDiscriminator(content);
 
@@ -626,8 +626,8 @@ null
                 ["fishtype"] = "smart_salmon",
                 ["species"] = "<species>",
                 ["length"] = 123.45F,
-                ["siblings"] = new object[]
-            {
+                ["siblings"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["location"] = "<location>",
@@ -635,12 +635,12 @@ new Dictionary<string, object>()
 ["fishtype"] = "salmon",
 ["species"] = "<species>",
 ["length"] = 123.45F,
-["siblings"] = new object[]
+["siblings"] = new List<object>()
 {
 null
 },
 }
-            },
+},
             });
             Response response = await client.PutMissingDiscriminatorAsync(content);
 
@@ -685,10 +685,10 @@ null
                 ["fishtype"] = "salmon",
                 ["species"] = "<species>",
                 ["length"] = 123.45F,
-                ["siblings"] = new object[]
-            {
+                ["siblings"] = new List<object>()
+{
 null
-            },
+},
             });
             Response response = client.PutValidMissingRequired(content);
             Console.WriteLine(response.Status);
@@ -724,10 +724,10 @@ null
                 ["fishtype"] = "salmon",
                 ["species"] = "<species>",
                 ["length"] = 123.45F,
-                ["siblings"] = new object[]
-            {
+                ["siblings"] = new List<object>()
+{
 null
-            },
+},
             });
             Response response = await client.PutValidMissingRequiredAsync(content);
             Console.WriteLine(response.Status);

@@ -49,7 +49,7 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-CollectionsModelProperty body = new CollectionsModelProperty(new InnerModel[]
+CollectionsModelProperty body = new CollectionsModelProperty(new List<InnerModel>()
 {
 new InnerModel("<property>")
 });
@@ -63,7 +63,7 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-CollectionsModelProperty body = new CollectionsModelProperty(new InnerModel[]
+CollectionsModelProperty body = new CollectionsModelProperty(new List<InnerModel>()
 {
 new InnerModel("<property>")
 });
@@ -79,7 +79,7 @@ CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVe
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["property"] = new object[]
+    ["property"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -99,7 +99,7 @@ CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVe
 
 RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    ["property"] = new object[]
+    ["property"] = new List<object>()
 {
 new Dictionary<string, object>()
 {

@@ -275,8 +275,8 @@ namespace Azure.Analytics.Purview.Account.Samples
                 },
                 ["pathPatternConfig"] = new Dictionary<string, object>()
                 {
-                    ["acceptedPatterns"] = new object[]
-            {
+                    ["acceptedPatterns"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["createdBy"] = "<createdBy>",
@@ -286,9 +286,9 @@ new Dictionary<string, object>()
 ["name"] = "<name>",
 ["path"] = "<path>",
 }
-            },
-                    ["complexReplacers"] = new object[]
-            {
+},
+                    ["complexReplacers"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["createdBy"] = "<createdBy>",
@@ -300,19 +300,19 @@ new Dictionary<string, object>()
 ["name"] = "<name>",
 ["typeName"] = "<typeName>",
 }
-            },
+},
                     ["createdBy"] = "<createdBy>",
                     ["enableDefaultPatterns"] = true,
                     ["lastUpdatedTimestamp"] = 1234L,
                     ["modifiedBy"] = "<modifiedBy>",
-                    ["normalizationRules"] = new object[]
-            {
+                    ["normalizationRules"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["description"] = "<description>",
 ["disabled"] = true,
 ["dynamicReplacement"] = true,
-["entityTypes"] = new object[]
+["entityTypes"] = new List<object>()
 {
 "<entityTypes>"
 },
@@ -335,9 +335,9 @@ new Dictionary<string, object>()
 ["replaceWith"] = "<replaceWith>",
 ["version"] = 123.45,
 }
-            },
-                    ["regexReplacers"] = new object[]
-            {
+},
+                    ["regexReplacers"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["condition"] = "<condition>",
@@ -345,24 +345,26 @@ new Dictionary<string, object>()
 ["description"] = "<description>",
 ["disabled"] = true,
 ["disableRecursiveReplacerApplication"] = true,
-["doNotReplaceRegex"] = null,
+["doNotReplaceRegex"] = null
+,
 ["lastUpdatedTimestamp"] = 1234L,
 ["modifiedBy"] = "<modifiedBy>",
 ["name"] = "<name>",
-["regex"] = null,
+["regex"] = null
+,
 ["replaceWith"] = "<replaceWith>",
 }
-            },
-                    ["rejectedPatterns"] = new object[]
-            {
+},
+                    ["rejectedPatterns"] = new List<object>()
+{
 null
-            },
-                    ["scopedRules"] = new object[]
-            {
+},
+                    ["scopedRules"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["bindingUrl"] = "<bindingUrl>",
-["rules"] = new object[]
+["rules"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -375,7 +377,7 @@ new Dictionary<string, object>()
 },
 ["storeType"] = "<storeType>",
 }
-            },
+},
                     ["version"] = 1234,
                 },
             });
@@ -501,8 +503,8 @@ new Dictionary<string, object>()
                 },
                 ["pathPatternConfig"] = new Dictionary<string, object>()
                 {
-                    ["acceptedPatterns"] = new object[]
-            {
+                    ["acceptedPatterns"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["createdBy"] = "<createdBy>",
@@ -512,9 +514,9 @@ new Dictionary<string, object>()
 ["name"] = "<name>",
 ["path"] = "<path>",
 }
-            },
-                    ["complexReplacers"] = new object[]
-            {
+},
+                    ["complexReplacers"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["createdBy"] = "<createdBy>",
@@ -526,19 +528,19 @@ new Dictionary<string, object>()
 ["name"] = "<name>",
 ["typeName"] = "<typeName>",
 }
-            },
+},
                     ["createdBy"] = "<createdBy>",
                     ["enableDefaultPatterns"] = true,
                     ["lastUpdatedTimestamp"] = 1234L,
                     ["modifiedBy"] = "<modifiedBy>",
-                    ["normalizationRules"] = new object[]
-            {
+                    ["normalizationRules"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["description"] = "<description>",
 ["disabled"] = true,
 ["dynamicReplacement"] = true,
-["entityTypes"] = new object[]
+["entityTypes"] = new List<object>()
 {
 "<entityTypes>"
 },
@@ -561,9 +563,9 @@ new Dictionary<string, object>()
 ["replaceWith"] = "<replaceWith>",
 ["version"] = 123.45,
 }
-            },
-                    ["regexReplacers"] = new object[]
-            {
+},
+                    ["regexReplacers"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["condition"] = "<condition>",
@@ -571,24 +573,26 @@ new Dictionary<string, object>()
 ["description"] = "<description>",
 ["disabled"] = true,
 ["disableRecursiveReplacerApplication"] = true,
-["doNotReplaceRegex"] = null,
+["doNotReplaceRegex"] = null
+,
 ["lastUpdatedTimestamp"] = 1234L,
 ["modifiedBy"] = "<modifiedBy>",
 ["name"] = "<name>",
-["regex"] = null,
+["regex"] = null
+,
 ["replaceWith"] = "<replaceWith>",
 }
-            },
-                    ["rejectedPatterns"] = new object[]
-            {
+},
+                    ["rejectedPatterns"] = new List<object>()
+{
 null
-            },
-                    ["scopedRules"] = new object[]
-            {
+},
+                    ["scopedRules"] = new List<object>()
+{
 new Dictionary<string, object>()
 {
 ["bindingUrl"] = "<bindingUrl>",
-["rules"] = new object[]
+["rules"] = new List<object>()
 {
 new Dictionary<string, object>()
 {
@@ -601,7 +605,7 @@ new Dictionary<string, object>()
 },
 ["storeType"] = "<storeType>",
 }
-            },
+},
                     ["version"] = 1234,
                 },
             });

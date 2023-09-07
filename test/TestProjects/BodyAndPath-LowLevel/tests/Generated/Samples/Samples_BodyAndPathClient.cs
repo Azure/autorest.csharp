@@ -87,10 +87,10 @@ namespace BodyAndPath_LowLevel.Samples
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
             RequestContent content = RequestContent.Create("<filePath>");
-            Response response = client.CreateStream("<itemNameStream>", content, new ContentType("application/json"), excluded: new string[]
-            {
+            Response response = client.CreateStream("<itemNameStream>", content, new ContentType("application/json"), excluded: new List<string>()
+{
 "<excluded>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -114,10 +114,10 @@ namespace BodyAndPath_LowLevel.Samples
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
             RequestContent content = RequestContent.Create("<filePath>");
-            Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"), excluded: new string[]
-            {
+            Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"), excluded: new List<string>()
+{
 "<excluded>"
-            });
+});
             Console.WriteLine(response.Status);
         }
 

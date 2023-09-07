@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml;
 using Azure;
@@ -103,10 +104,10 @@ namespace Encode.Duration.Samples
         {
             Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = client.Iso8601Array(new TimeSpan[]
-            {
+            Response response = client.Iso8601Array(new List<TimeSpan>()
+{
 XmlConvert.ToTimeSpan("PT1H23M45S")
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -116,10 +117,10 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
         {
             Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = client.Iso8601Array(new TimeSpan[]
-            {
+            Response response = client.Iso8601Array(new List<TimeSpan>()
+{
 XmlConvert.ToTimeSpan("PT1H23M45S")
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -129,10 +130,10 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
         {
             Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = await client.Iso8601ArrayAsync(new TimeSpan[]
-            {
+            Response response = await client.Iso8601ArrayAsync(new List<TimeSpan>()
+{
 XmlConvert.ToTimeSpan("PT1H23M45S")
-            });
+});
             Console.WriteLine(response.Status);
         }
 
@@ -142,10 +143,10 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
         {
             Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = await client.Iso8601ArrayAsync(new TimeSpan[]
-            {
+            Response response = await client.Iso8601ArrayAsync(new List<TimeSpan>()
+{
 XmlConvert.ToTimeSpan("PT1H23M45S")
-            });
+});
             Console.WriteLine(response.Status);
         }
 

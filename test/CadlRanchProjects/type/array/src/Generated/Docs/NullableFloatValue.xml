@@ -49,9 +49,9 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAsync(new float?[]
+Response response = await client.PutAsync(new List<float?>()
 {
-123.45F
+(float)123.45F
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -62,9 +62,9 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-Response response = client.Put(new float?[]
+Response response = client.Put(new List<float?>()
 {
-123.45F
+(float)123.45F
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -75,7 +75,7 @@ This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
 NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+RequestContent content = RequestContent.Create(new List<object>()
 {
 123.45F
 });
@@ -89,7 +89,7 @@ This sample shows how to call Put with required request content.
 <code><![CDATA[
 NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new object[]
+RequestContent content = RequestContent.Create(new List<object>()
 {
 123.45F
 });
