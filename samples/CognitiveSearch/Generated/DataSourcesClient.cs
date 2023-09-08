@@ -46,6 +46,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="dataSourceName"/> or <paramref name="dataSource"/> is null. </exception>
         public virtual async Task<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, Enum0 prefer, DataSource dataSource, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.CreateOrUpdate");
@@ -68,6 +69,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="dataSourceName"/> or <paramref name="dataSource"/> is null. </exception>
         public virtual Response<DataSource> CreateOrUpdate(string dataSourceName, Enum0 prefer, DataSource dataSource, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.CreateOrUpdate");
@@ -88,6 +90,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="dataSourceName"/> is null. </exception>
         public virtual async Task<Response> DeleteAsync(string dataSourceName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Delete");
@@ -108,6 +111,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="dataSourceName"/> is null. </exception>
         public virtual Response Delete(string dataSourceName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Delete");
@@ -127,6 +131,7 @@ namespace CognitiveSearch
         /// <param name="dataSourceName"> The name of the datasource to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="dataSourceName"/> is null. </exception>
         public virtual async Task<Response<DataSource>> GetAsync(string dataSourceName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Get");
@@ -146,6 +151,7 @@ namespace CognitiveSearch
         /// <param name="dataSourceName"> The name of the datasource to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="dataSourceName"/> is null. </exception>
         public virtual Response<DataSource> Get(string dataSourceName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Get");
@@ -203,6 +209,7 @@ namespace CognitiveSearch
         /// <param name="dataSource"> The definition of the datasource to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="dataSource"/> is null. </exception>
         public virtual async Task<Response<DataSource>> CreateAsync(DataSource dataSource, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Create");
@@ -222,6 +229,7 @@ namespace CognitiveSearch
         /// <param name="dataSource"> The definition of the datasource to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="dataSource"/> is null. </exception>
         public virtual Response<DataSource> Create(DataSource dataSource, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Create");

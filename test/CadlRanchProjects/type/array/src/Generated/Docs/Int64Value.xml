@@ -53,9 +53,9 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ArrayClient().GetInt64ValueClient("1.0.0");
 
-var body = new long[] 
+var body = new long[]
 {
-    1234
+    1234L
 };
 var result = await client.PutAsync(body);
 ]]></code>
@@ -67,9 +67,9 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ArrayClient().GetInt64ValueClient("1.0.0");
 
-var body = new long[] 
+var body = new long[]
 {
-    1234
+    1234L
 };
 var result = client.Put(body);
 ]]></code>

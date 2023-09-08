@@ -73,8 +73,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             operationSetOfResource = null;
             // first we need to ensure this operation at least returns a collection of something
-            var restClientMethod = MgmtContext.Library.GetRestClientMethod(operation);
-            if (!restClientMethod.IsListMethod(out var valueType))
+            if (!operation.IsListMethod(out var valueType))
                 return false;
 
             // then check if its path is a prefix of which resource's operationSet
@@ -185,19 +184,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static ServiceResponse? GetServiceResponse(this Operation operation, StatusCodes code = StatusCodes._200)
         {
             return operation.Responses.FirstOrDefault(r => r.HttpResponse.StatusCodes.Contains(code));
-        }
-
-        public static bool IsGetResourceOperation(this Input.Operation operation, string? responseBodyType, ResourceData resourceData)
-        {
-            // first we need to be a GET operation
-            var request = operation.GetHttpRequest();
-            if (request == null || request.Method != HttpMethod.Get)
-                return false;
-            // then we get the corresponding OperationSet and see if this OperationSet corresponds to a resource
-            var operationSet = MgmtContext.Library.GetOperationSet(operation.GetHttpPath());
-            if (!operationSet.IsResource())
-                return false;
-            return responseBodyType == resourceData.Type.Name;
         }
 
         internal static IEnumerable<Resource> GetResourceFromResourceType(this Operation operation)

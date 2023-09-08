@@ -30,7 +30,7 @@ This sample shows how to call DefaultAsync with required request content and par
 var client = new DatetimeClient().GetPropertyClient("1.0.0");
 
 var data = new {
-    value = "2022-05-10T14:57:31.2311892-04:00",
+    value = "2022-05-10T14:14:57.0310000Z",
 };
 
 Response response = await client.DefaultAsync(RequestContent.Create(data));
@@ -47,7 +47,7 @@ This sample shows how to call Default with required request content and parse th
 var client = new DatetimeClient().GetPropertyClient("1.0.0");
 
 var data = new {
-    value = "2022-05-10T14:57:31.2311892-04:00",
+    value = "2022-05-10T14:14:57.0310000Z",
 };
 
 Response response = client.Default(RequestContent.Create(data));
@@ -86,7 +86,7 @@ This sample shows how to call Rfc3339Async with required request content and par
 var client = new DatetimeClient().GetPropertyClient("1.0.0");
 
 var data = new {
-    value = "2022-05-10T18:57:31.2311892Z",
+    value = "2022-05-10T14:14:57.0310000Z",
 };
 
 Response response = await client.Rfc3339Async(RequestContent.Create(data));
@@ -103,7 +103,7 @@ This sample shows how to call Rfc3339 with required request content and parse th
 var client = new DatetimeClient().GetPropertyClient("1.0.0");
 
 var data = new {
-    value = "2022-05-10T18:57:31.2311892Z",
+    value = "2022-05-10T14:14:57.0310000Z",
 };
 
 Response response = client.Rfc3339(RequestContent.Create(data));
@@ -142,7 +142,7 @@ This sample shows how to call Rfc7231Async with required request content and par
 var client = new DatetimeClient().GetPropertyClient("1.0.0");
 
 var data = new {
-    value = "Tue, 10 May 2022 18:57:31 GMT",
+    value = "Tue, 10 May 2022 14:14:57 GMT",
 };
 
 Response response = await client.Rfc7231Async(RequestContent.Create(data));
@@ -159,7 +159,7 @@ This sample shows how to call Rfc7231 with required request content and parse th
 var client = new DatetimeClient().GetPropertyClient("1.0.0");
 
 var data = new {
-    value = "Tue, 10 May 2022 18:57:31 GMT",
+    value = "Tue, 10 May 2022 14:14:57 GMT",
 };
 
 Response response = client.Rfc7231(RequestContent.Create(data));
@@ -198,7 +198,7 @@ This sample shows how to call UnixTimestampAsync with required request content a
 var client = new DatetimeClient().GetPropertyClient("1.0.0");
 
 var data = new {
-    value = "1652209051",
+    value = "1652192097",
 };
 
 Response response = await client.UnixTimestampAsync(RequestContent.Create(data));
@@ -215,7 +215,7 @@ This sample shows how to call UnixTimestamp with required request content and pa
 var client = new DatetimeClient().GetPropertyClient("1.0.0");
 
 var data = new {
-    value = "1652209051",
+    value = "1652192097",
 };
 
 Response response = client.UnixTimestamp(RequestContent.Create(data));
@@ -231,7 +231,7 @@ This sample shows how to call UnixTimestampArrayAsync with required parameters.
 <code><![CDATA[
 var client = new DatetimeClient().GetPropertyClient("1.0.0");
 
-var body = new UnixTimestampArrayDatetimeProperty(new DateTimeOffset[] 
+var body = new UnixTimestampArrayDatetimeProperty(new DateTimeOffset[]
 {
     DateTimeOffset.UtcNow
 });
@@ -245,7 +245,7 @@ This sample shows how to call UnixTimestampArray with required parameters.
 <code><![CDATA[
 var client = new DatetimeClient().GetPropertyClient("1.0.0");
 
-var body = new UnixTimestampArrayDatetimeProperty(new DateTimeOffset[] 
+var body = new UnixTimestampArrayDatetimeProperty(new DateTimeOffset[]
 {
     DateTimeOffset.UtcNow
 });
@@ -261,7 +261,7 @@ var client = new DatetimeClient().GetPropertyClient("1.0.0");
 
 var data = new {
     value = new[] {
-        "1652209051"
+        "1652192097"
     },
 };
 
@@ -280,7 +280,7 @@ var client = new DatetimeClient().GetPropertyClient("1.0.0");
 
 var data = new {
     value = new[] {
-        "1652209051"
+        "1652192097"
     },
 };
 

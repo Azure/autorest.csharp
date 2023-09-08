@@ -316,7 +316,7 @@ This sample shows how to call PutBase64UrlEncodedAsync with required request con
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-var data = new {};
+var data = BinaryData.FromString("<your binary data content>");
 
 Response response = await client.PutBase64UrlEncodedAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
@@ -330,7 +330,7 @@ This sample shows how to call PutBase64UrlEncoded with required request content.
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-var data = new {};
+var data = BinaryData.FromString("<your binary data content>");
 
 Response response = client.PutBase64UrlEncoded(RequestContent.Create(data));
 Console.WriteLine(response.Status);

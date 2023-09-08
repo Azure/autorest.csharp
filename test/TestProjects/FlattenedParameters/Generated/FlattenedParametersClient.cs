@@ -38,7 +38,7 @@ namespace FlattenedParameters
             _pipeline = pipeline;
         }
 
-        /// <param name="items"> The PatchContentSchemaItems to use. </param>
+        /// <param name="items"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> OperationAsync(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -55,7 +55,7 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="items"> The PatchContentSchemaItems to use. </param>
+        /// <param name="items"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Operation(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -72,7 +72,7 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="items"> The ArrayOfString to use. </param>
+        /// <param name="items"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> OperationNotNullAsync(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -89,7 +89,7 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="items"> The ArrayOfString to use. </param>
+        /// <param name="items"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response OperationNotNull(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -145,6 +145,7 @@ namespace FlattenedParameters
         /// <param name="required"> The String to use. </param>
         /// <param name="nonRequired"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
         public virtual async Task<Response> OperationRequiredAsync(string required, string nonRequired = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FlattenedParametersClient.OperationRequired");
@@ -163,6 +164,7 @@ namespace FlattenedParameters
         /// <param name="required"> The String to use. </param>
         /// <param name="nonRequired"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
         public virtual Response OperationRequired(string required, string nonRequired = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FlattenedParametersClient.OperationRequired");

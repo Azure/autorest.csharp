@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
@@ -323,8 +324,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field1 = 123.45f,
-                field2 = 123.45f,
+                field1 = 3.14f,
+                field2 = 3.14f,
             };
 
             Response response = client.PutFloat(RequestContent.Create(data));
@@ -353,8 +354,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field1 = 123.45f,
-                field2 = 123.45f,
+                field1 = 3.14f,
+                field2 = 3.14f,
             };
 
             Response response = await client.PutFloatAsync(RequestContent.Create(data));
@@ -437,8 +438,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field1 = 123.45d,
-                field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 123.45d,
+                field1 = 3.14d,
+                field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 3.14d,
             };
 
             Response response = client.PutDouble(RequestContent.Create(data));
@@ -467,8 +468,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field1 = 123.45d,
-                field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 123.45d,
+                field1 = 3.14d,
+                field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 3.14d,
             };
 
             Response response = await client.PutDoubleAsync(RequestContent.Create(data));
@@ -665,11 +666,11 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            var data = new
+            var data = new Dictionary<string, object>
             {
-                field = "<field>",
-                empty = "<empty>",
-                @null = "<null>",
+                ["field"] = "<field>",
+                ["empty"] = "<empty>",
+                ["null"] = "<null>"
             };
 
             Response response = client.PutString(RequestContent.Create(data));
@@ -696,11 +697,11 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            var data = new
+            var data = new Dictionary<string, object>
             {
-                field = "<field>",
-                empty = "<empty>",
-                @null = "<null>",
+                ["field"] = "<field>",
+                ["empty"] = "<empty>",
+                ["null"] = "<null>"
             };
 
             Response response = await client.PutStringAsync(RequestContent.Create(data));
@@ -897,8 +898,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = "2022-05-10T18:57:31.2311892Z",
-                now = "2022-05-10T18:57:31.2311892Z",
+                field = "2022-05-10T14:14:57.0310000Z",
+                now = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.PutDateTime(RequestContent.Create(data));
@@ -927,8 +928,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = "2022-05-10T18:57:31.2311892Z",
-                now = "2022-05-10T18:57:31.2311892Z",
+                field = "2022-05-10T14:14:57.0310000Z",
+                now = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = await client.PutDateTimeAsync(RequestContent.Create(data));
@@ -1011,8 +1012,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = "Tue, 10 May 2022 18:57:31 GMT",
-                now = "Tue, 10 May 2022 18:57:31 GMT",
+                field = "Tue, 10 May 2022 14:14:57 GMT",
+                now = "Tue, 10 May 2022 14:14:57 GMT",
             };
 
             Response response = client.PutDateTimeRfc1123(RequestContent.Create(data));
@@ -1041,8 +1042,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = "Tue, 10 May 2022 18:57:31 GMT",
-                now = "Tue, 10 May 2022 18:57:31 GMT",
+                field = "Tue, 10 May 2022 14:14:57 GMT",
+                now = "Tue, 10 May 2022 14:14:57 GMT",
             };
 
             Response response = await client.PutDateTimeRfc1123Async(RequestContent.Create(data));
@@ -1233,7 +1234,7 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = new { },
+                field = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.PutByte(RequestContent.Create(data));
@@ -1262,7 +1263,7 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = new { },
+                field = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = await client.PutByteAsync(RequestContent.Create(data));

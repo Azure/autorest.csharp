@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using httpInfrastructure_LowLevel;
 
 namespace httpInfrastructure_LowLevel.Samples
 {
@@ -302,7 +303,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = client.Get200Model201ModelDefaultError200Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -328,7 +329,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = await client.Get200Model201ModelDefaultError200ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -354,7 +355,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = client.Get200Model201ModelDefaultError201Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -380,7 +381,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = await client.Get200Model201ModelDefaultError201ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -406,7 +407,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = client.Get200Model201ModelDefaultError400Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -432,7 +433,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = await client.Get200Model201ModelDefaultError400ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -458,7 +459,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError200Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -484,7 +485,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -510,7 +511,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError201Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -536,7 +537,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -562,7 +563,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError404Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -588,7 +589,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -614,7 +615,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = client.Get200ModelA201ModelC404ModelDDefaultError400Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -640,7 +641,7 @@ namespace httpInfrastructure_LowLevel.Samples
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
+            Console.WriteLine(result.ToString());
         }
 
         [Test]

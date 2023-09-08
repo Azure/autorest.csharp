@@ -27,7 +27,6 @@ namespace AutoRest.CSharp.Common.Input
         public static InputConstant CreateInputConstant(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null;
-            Object? value = null;
             InputType? type = null;
 
             reader.TryReadReferenceId(ref isFirstProperty, ref id);
@@ -35,11 +34,17 @@ namespace AutoRest.CSharp.Common.Input
             {
                 throw new JsonException("Must provide type ahead of value.");
             }
-            value = ReadConstantValue(ref reader, nameof(InputConstant.Value), options, type);
+
+            var value = ReadConstantValue(ref reader, nameof(InputConstant.Value), options, type);
 
             type = type ?? throw new JsonException("InputConstant must have type");
 
             value = value ?? throw new JsonException("InputConstant must have value");
+
+            if (type is InputLiteralType literalType)
+            {
+                type = literalType.LiteralValueType;
+            }
 
             var constant = new InputConstant(value, type);
             if (id != null)
@@ -66,7 +71,7 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             reader.Read();
-            Object? value = null;
+            object? value;
             switch (type) {
                 case InputPrimitiveType primitype:
                     switch (primitype.Kind)

@@ -2,21 +2,18 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -64,9 +61,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var response = new CodeWriterDeclaration("response");
                 _writer
                     .Append($"var {response:D} = {GetAwait(async)} ")
-                    .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
-                WriteArguments(_writer, clientOperation.ParameterMappings.Values.First());
-                _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+                    .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
+                WriteArguments(_writer, clientOperation.ParameterMappings.Values.First().SkipLast(1));
+                _writer.Line($", cancellationToken: cancellationToken){GetConfigureAwait(async)};");
                 _writer.Line($"return Response.FromValue(response.Value != null, response.GetRawResponse());");
             }
         }
@@ -95,16 +92,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var response = new CodeWriterDeclaration("response");
             writer
                 .Append($"var {response:D} = {GetAwait(async)} ")
-                .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
-            WriteArguments(writer, parameterMappings);
-            writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+                .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
+            WriteArguments(writer, parameterMappings.SkipLast(1));
+            writer.Line($", cancellationToken: cancellationToken){GetConfigureAwait(async)};");
+
+            var armResource = new ArmResourceExpression(new MemberExpression(response, nameof(Response<object>.Value)));
 
             writer.Line($"if ({response}.Value == null)");
             writer.Line($"return {typeof(Response)}.FromValue<{operation.MgmtReturnType}>(null, {response}.GetRawResponse());");
 
             if (This.Resource.ResourceData.ShouldSetResourceIdentifier)
             {
-                writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(This.Resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
+                writer.WriteMethodBodyStatement(Assign(armResource.Id, InvokeCreateResourceIdentifier(This.Resource, operation.RequestPath, parameterMappings, armResource)));
             }
 
             writer.Line($"return {typeof(Response)}.FromValue(new {operation.MgmtReturnType}({ArmClientReference}, {response}.Value), {response}.GetRawResponse());");

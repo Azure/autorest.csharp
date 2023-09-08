@@ -3,14 +3,11 @@
 
 using System;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using NUnit.Framework;
@@ -27,22 +24,22 @@ namespace AutoRest.CSharp.LowLevel.Generation
             isAsync ? typeof(Task) : (CSharpType?)null,
             null,
             Array.Empty<Parameter>(),
-            Attributes: new CSharpAttribute[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Only validating compilation of examples") });
+            Attributes: new CSharpAttribute[] { new(typeof(TestAttribute)), new(typeof(IgnoreAttribute), "Only validating compilation of examples") });
 
-        private LowLevelClient _client;
-        private CodeWriter _writer;
-        private LowLevelExampleComposer _exampleComposer;
+        private readonly LowLevelClient _client;
+        private readonly CodeWriter _writer;
+        private readonly LowLevelExampleComposer _exampleComposer;
 
-        public ExampleCompileCheckWriter(LowLevelClient client)
+        public ExampleCompileCheckWriter(LowLevelClient client, LowLevelExampleComposer exampleComposer)
         {
             _client = client;
             _writer = new CodeWriter();
-            _exampleComposer = new LowLevelExampleComposer(_client);
+            _exampleComposer = exampleComposer;
         }
 
         public void Write()
         {
-            //TODO: Once the code snippet composer uses CodeWriter these won't be needed
+            // [TODO] These UseNamespace calls are needed to reduce the change footprint. Can be removed during cleanup phase
             _writer.UseNamespace("Azure");
             _writer.UseNamespace("Azure.Core");
             _writer.UseNamespace("Azure.Identity");
@@ -50,50 +47,56 @@ namespace AutoRest.CSharp.LowLevel.Generation
             _writer.UseNamespace("System.Collections.Generic");
             _writer.UseNamespace("System.IO");
             _writer.UseNamespace("System.Text.Json");
-            if (Configuration.ModelNamespace && _client.HasConvenienceMethods)
-                _writer.UseNamespace($"{_client.Declaration.Namespace}.Models");
 
             using (_writer.Namespace($"{_client.Declaration.Namespace}.Samples"))
             {
                 using (_writer.Scope($"public class Samples_{_client.Declaration.Name}"))
                 {
-                    foreach (var method in _client.ClientMethods)
+                    foreach (var method in _client.OperationMethods.OrderBy(o => o.Order))
                     {
                         //TODO: we should make this more obvious to determine if something is convenience only
-                        if (method.ProtocolMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
-                            !method.ProtocolMethodSignature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))) &&
-                            !_client.IsMethodSuppressed(method.ProtocolMethodSignature) &&
-                            (_client.IsSubClient ? true : _client.GetEffectiveCtor() is not null))
+                        if (method.Protocol is {} protocol)
                         {
-                            bool writeShortVersion = ShouldGenerateShortVersion(method);
+                            var signature = (MethodSignature)protocol.Signature;
 
-                            if (writeShortVersion)
-                                WriteTestCompilation(method, false, false);
-                            WriteTestCompilation(method, false, true);
+                            if (signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
+                                !signature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))) &&
+                                (_client.IsSubClient || _client.GetEffectiveCtor() is not null) &&
+                                !_client.IsMethodSuppressed(signature))
+                            {
 
-                            if (writeShortVersion)
-                                WriteTestCompilation(method, true, false);
-                            WriteTestCompilation(method, true, true);
+                                if (ShouldGenerateShortVersion(method))
+                                {
+                                    WriteProtocolTestCompilation(method, signature.WithAsync(false), false, false);
+                                }
+                                WriteProtocolTestCompilation(method, signature.WithAsync(false), false, true);
 
+                                if (ShouldGenerateShortVersion(method))
+                                {
+                                    WriteProtocolTestCompilation(method, signature.WithAsync(true), true, false);
+                                }
+                                WriteProtocolTestCompilation(method, signature.WithAsync(true), true, true);
+                            }
                         }
 
-                        if (method.ConvenienceMethod is not null &&
-                            !method.ConvenienceMethod.IsDeprecatedForExamples() &&
-                            method.ConvenienceMethod.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
-                            (_client.IsSubClient ? true : _client.GetEffectiveCtor() is not null) &&
-                            !_client.IsMethodSuppressed(method.ConvenienceMethod.Signature))
-                            WriteConvenienceTestCompilation(method.ConvenienceMethod, method.ConvenienceMethod.Signature.Name, true, false);
+                        if (method.ConvenienceAsync is {} convenience)
+                        {
+                            if (convenience.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
+                                (_client.IsSubClient || _client.GetEffectiveCtor() is not null) &&
+                                !_client.IsMethodSuppressed(convenience.Signature))
+                            {
+                                WriteConvenienceTestCompilation((MethodSignature)convenience.Signature, true, false);
+                            }
+                        }
                     }
                 }
             }
         }
 
-        private void WriteConvenienceTestCompilation(ConvenienceMethod method, string methodName, bool isAsync, bool useAllParameters)
+        private void WriteConvenienceTestCompilation(MethodSignature signature, bool isAsync, bool useAllParameters)
         {
-            StringBuilder builder = new StringBuilder();
-            var asyncKeyword = isAsync ? "Async" : "";
-            _exampleComposer.ComposeConvenienceMethodExample(method, isAsync, false, $"{methodName}{asyncKeyword}", builder);
-            var testMethodName = methodName;
+            var methodBody = _exampleComposer.ComposeConvenienceMethodExample(signature, isAsync);
+            var testMethodName = signature.WithAsync(false).Name;
             if (useAllParameters)
             {
                 testMethodName += "_AllParameters";
@@ -105,49 +108,44 @@ namespace AutoRest.CSharp.LowLevel.Generation
             }
             using (_writer.WriteMethodDeclaration(ExampleMethodSignature(testMethodName, isAsync)))
             {
-                _writer.AppendRaw(builder.ToString());
+                _writer.WriteMethodBodyStatement(methodBody);
             }
             _writer.Line();
 
         }
 
-        private bool ShouldGenerateShortVersion(LowLevelClientMethod method)
+        private static bool ShouldGenerateShortVersion(RestClientOperationMethods method)
         {
-            if (method.ConvenienceMethod is not null)
+            if (method is not { Convenience: { } convenience, Protocol: { } protocol })
             {
-                if (method.ConvenienceMethod.Signature.Parameters.Count == method.ProtocolMethodSignature.Parameters.Count - 1 &&
-                    !method.ConvenienceMethod.Signature.Parameters.Last().Type.Equals(typeof(CancellationToken)))
+                return true;
+            }
+
+            if (convenience.Signature.Parameters.Count == protocol.Signature.Parameters.Count - 1 &&
+                !convenience.Signature.Parameters.Last().Type.Equals(typeof(CancellationToken)))
+            {
+                bool allEqual = true;
+                for (int i = 0; i < method.Convenience.Signature.Parameters.Count; i++)
                 {
-                    bool allEqual = true;
-                    for (int i = 0; i < method.ConvenienceMethod.Signature.Parameters.Count; i++)
+                    if (!method.Convenience.Signature.Parameters[i].Type.Equals(protocol.Signature.Parameters[i].Type))
                     {
-                        if (!method.ConvenienceMethod.Signature.Parameters[i].Type.Equals(method.ProtocolMethodSignature.Parameters[i].Type))
-                        {
-                            allEqual = false;
-                            break;
-                        }
-                    }
-                    if (allEqual)
-                    {
-                        return false;
+                        allEqual = false;
+                        break;
                     }
                 }
-            }
-            else
-            {
-                if (_client.HasMatchingCustomMethod(method))
+                if (allEqual)
+                {
                     return false;
+                }
             }
 
             return true;
         }
 
-        private void WriteTestCompilation(LowLevelClientMethod method, bool isAsync, bool useAllParameters)
+        private void WriteProtocolTestCompilation(RestClientOperationMethods method, MethodSignature signature, bool isAsync, bool useAllParameters)
         {
-            StringBuilder builder = new StringBuilder();
-            var asyncKeyword = isAsync ? "Async" : "";
-            _exampleComposer.ComposeCodeSnippet(method, $"{method.RequestMethod.Name}{asyncKeyword}", isAsync, useAllParameters, builder);
-            var methodName = method.RequestMethod.Name;
+            var methodBody =_exampleComposer.ComposeProtocolCodeSnippet(method, signature, useAllParameters, isAsync).AsStatement();
+            var methodName = signature.WithAsync(false).Name;
             if (useAllParameters)
             {
                 methodName += "_AllParameters";
@@ -158,14 +156,14 @@ namespace AutoRest.CSharp.LowLevel.Generation
             }
             using (_writer.WriteMethodDeclaration(ExampleMethodSignature(methodName, isAsync)))
             {
-                _writer.AppendRaw(builder.ToString());
+                _writer.WriteMethodBodyStatement(methodBody);
             }
             _writer.Line();
         }
 
         public override string ToString()
         {
-            return _writer.ToString();
+            return SamplesFormattingSyntaxRewriter.FormatFile(_writer.ToString());
         }
     }
 }

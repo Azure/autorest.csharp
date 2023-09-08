@@ -14,7 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Property.Nullable.Models;
+using _Type.Property.Nullable;
 
 namespace _Type.Property.Nullable.Samples
 {
@@ -151,7 +151,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new { },
+                nullableProperty = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.PatchNonNull(RequestContent.Create(data));
@@ -167,7 +167,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new { },
+                nullableProperty = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.PatchNonNull(RequestContent.Create(data));
@@ -183,7 +183,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new { },
+                nullableProperty = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = await client.PatchNonNullAsync(RequestContent.Create(data));
@@ -199,7 +199,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new { },
+                nullableProperty = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = await client.PatchNonNullAsync(RequestContent.Create(data));
@@ -215,7 +215,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new { },
+                nullableProperty = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.PatchNull(RequestContent.Create(data));
@@ -231,7 +231,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new { },
+                nullableProperty = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.PatchNull(RequestContent.Create(data));
@@ -247,7 +247,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new { },
+                nullableProperty = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = await client.PatchNullAsync(RequestContent.Create(data));
@@ -263,7 +263,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new { },
+                nullableProperty = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = await client.PatchNullAsync(RequestContent.Create(data));

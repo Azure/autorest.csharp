@@ -53,7 +53,7 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
 
-var body = new CollectionsModelProperty(new InnerModel[] 
+var body = new CollectionsModelProperty(new InnerModel[]
 {
     new InnerModel("<property>")
 });
@@ -67,7 +67,7 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
 
-var body = new CollectionsModelProperty(new InnerModel[] 
+var body = new CollectionsModelProperty(new InnerModel[]
 {
     new InnerModel("<property>")
 });

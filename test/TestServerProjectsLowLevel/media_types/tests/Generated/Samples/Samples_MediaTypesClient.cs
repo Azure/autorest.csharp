@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using media_types_LowLevel;
 
 namespace media_types_LowLevel.Samples
 {

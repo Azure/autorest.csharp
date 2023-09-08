@@ -11,12 +11,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
     internal partial class UnknownDog : Dog
     {
         /// <summary> Initializes a new instance of UnknownDog. </summary>
-        /// <param name="weight"> Weight of the dog. </param>
-        internal UnknownDog(int weight) : base(weight)
-        {
-        }
-
-        /// <summary> Initializes a new instance of UnknownDog. </summary>
         /// <param name="kind"> discriminator property. </param>
         /// <param name="weight"> Weight of the dog. </param>
         internal UnknownDog(DogKind kind, int weight) : base(kind, weight)

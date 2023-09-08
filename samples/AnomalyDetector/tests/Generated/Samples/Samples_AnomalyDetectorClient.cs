@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using AnomalyDetector;
 using AnomalyDetector.Models;
 using Azure;
 using Azure.Core;
@@ -32,7 +33,7 @@ namespace AnomalyDetector.Samples
             {
                 series = new[] {
         new {
-            value = 123.45f,
+            value = 3.14f,
         }
     },
             };
@@ -61,17 +62,17 @@ namespace AnomalyDetector.Samples
             {
                 series = new[] {
         new {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
-            value = 123.45f,
+            timestamp = "2022-05-10T14:14:57.0310000Z",
+            value = 3.14f,
         }
     },
                 granularity = "yearly",
                 customInterval = 1234,
                 period = 1234,
-                maxAnomalyRatio = 123.45f,
+                maxAnomalyRatio = 3.14f,
                 sensitivity = 1234,
                 imputeMode = "auto",
-                imputeFixedValue = 123.45f,
+                imputeFixedValue = 3.14f,
             };
 
             Response response = client.DetectUnivariateEntireSeries(RequestContent.Create(data));
@@ -99,7 +100,7 @@ namespace AnomalyDetector.Samples
             {
                 series = new[] {
         new {
-            value = 123.45f,
+            value = 3.14f,
         }
     },
             };
@@ -128,17 +129,17 @@ namespace AnomalyDetector.Samples
             {
                 series = new[] {
         new {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
-            value = 123.45f,
+            timestamp = "2022-05-10T14:14:57.0310000Z",
+            value = 3.14f,
         }
     },
                 granularity = "yearly",
                 customInterval = 1234,
                 period = 1234,
-                maxAnomalyRatio = 123.45f,
+                maxAnomalyRatio = 3.14f,
                 sensitivity = 1234,
                 imputeMode = "auto",
-                imputeFixedValue = 123.45f,
+                imputeFixedValue = 3.14f,
             };
 
             Response response = await client.DetectUnivariateEntireSeriesAsync(RequestContent.Create(data));
@@ -165,7 +166,7 @@ namespace AnomalyDetector.Samples
             var options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
             {
     new TimeSeriesPoint(3.14f)
-{
+    {
         Timestamp = DateTimeOffset.UtcNow,
     }
             })
@@ -193,7 +194,7 @@ namespace AnomalyDetector.Samples
             {
                 series = new[] {
         new {
-            value = 123.45f,
+            value = 3.14f,
         }
     },
             };
@@ -223,17 +224,17 @@ namespace AnomalyDetector.Samples
             {
                 series = new[] {
         new {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
-            value = 123.45f,
+            timestamp = "2022-05-10T14:14:57.0310000Z",
+            value = 3.14f,
         }
     },
                 granularity = "yearly",
                 customInterval = 1234,
                 period = 1234,
-                maxAnomalyRatio = 123.45f,
+                maxAnomalyRatio = 3.14f,
                 sensitivity = 1234,
                 imputeMode = "auto",
-                imputeFixedValue = 123.45f,
+                imputeFixedValue = 3.14f,
             };
 
             Response response = client.DetectUnivariateLastPoint(RequestContent.Create(data));
@@ -262,7 +263,7 @@ namespace AnomalyDetector.Samples
             {
                 series = new[] {
         new {
-            value = 123.45f,
+            value = 3.14f,
         }
     },
             };
@@ -292,17 +293,17 @@ namespace AnomalyDetector.Samples
             {
                 series = new[] {
         new {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
-            value = 123.45f,
+            timestamp = "2022-05-10T14:14:57.0310000Z",
+            value = 3.14f,
         }
     },
                 granularity = "yearly",
                 customInterval = 1234,
                 period = 1234,
-                maxAnomalyRatio = 123.45f,
+                maxAnomalyRatio = 3.14f,
                 sensitivity = 1234,
                 imputeMode = "auto",
-                imputeFixedValue = 123.45f,
+                imputeFixedValue = 3.14f,
             };
 
             Response response = await client.DetectUnivariateLastPointAsync(RequestContent.Create(data));
@@ -330,7 +331,7 @@ namespace AnomalyDetector.Samples
             var options = new UnivariateDetectionOptions(new TimeSeriesPoint[]
             {
     new TimeSeriesPoint(3.14f)
-{
+    {
         Timestamp = DateTimeOffset.UtcNow,
     }
             })
@@ -358,7 +359,7 @@ namespace AnomalyDetector.Samples
             {
                 series = new[] {
         new {
-            value = 123.45f,
+            value = 3.14f,
         }
     },
                 granularity = "yearly",
@@ -382,15 +383,15 @@ namespace AnomalyDetector.Samples
             {
                 series = new[] {
         new {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
-            value = 123.45f,
+            timestamp = "2022-05-10T14:14:57.0310000Z",
+            value = 3.14f,
         }
     },
                 granularity = "yearly",
                 customInterval = 1234,
                 period = 1234,
                 stableTrendWindow = 1234,
-                threshold = 123.45f,
+                threshold = 3.14f,
             };
 
             Response response = client.DetectUnivariateChangePoint(RequestContent.Create(data));
@@ -413,7 +414,7 @@ namespace AnomalyDetector.Samples
             {
                 series = new[] {
         new {
-            value = 123.45f,
+            value = 3.14f,
         }
     },
                 granularity = "yearly",
@@ -437,15 +438,15 @@ namespace AnomalyDetector.Samples
             {
                 series = new[] {
         new {
-            timestamp = "2022-05-10T14:57:31.2311892-04:00",
-            value = 123.45f,
+            timestamp = "2022-05-10T14:14:57.0310000Z",
+            value = 3.14f,
         }
     },
                 granularity = "yearly",
                 customInterval = 1234,
                 period = 1234,
                 stableTrendWindow = 1234,
-                threshold = 123.45f,
+                threshold = 3.14f,
             };
 
             Response response = await client.DetectUnivariateChangePointAsync(RequestContent.Create(data));
@@ -467,7 +468,7 @@ namespace AnomalyDetector.Samples
             var options = new UnivariateChangePointDetectionOptions(new TimeSeriesPoint[]
             {
     new TimeSeriesPoint(3.14f)
-{
+    {
         Timestamp = DateTimeOffset.UtcNow,
     }
             }, TimeGranularity.Yearly)
@@ -612,8 +613,8 @@ namespace AnomalyDetector.Samples
             var data = new
             {
                 dataSource = "<dataSource>",
-                startTime = "2022-05-10T14:57:31.2311892-04:00",
-                endTime = "2022-05-10T14:57:31.2311892-04:00",
+                startTime = "2022-05-10T14:14:57.0310000Z",
+                endTime = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.TrainMultivariateModel(RequestContent.Create(data));
@@ -636,15 +637,15 @@ namespace AnomalyDetector.Samples
             {
                 dataSource = "<dataSource>",
                 dataSchema = "OneTable",
-                startTime = "2022-05-10T14:57:31.2311892-04:00",
-                endTime = "2022-05-10T14:57:31.2311892-04:00",
+                startTime = "2022-05-10T14:14:57.0310000Z",
+                endTime = "2022-05-10T14:14:57.0310000Z",
                 displayName = "<displayName>",
                 slidingWindow = 1234,
                 alignPolicy = new
                 {
                     alignMode = "Inner",
                     fillNAMethod = "Previous",
-                    paddingValue = 123.45f,
+                    paddingValue = 3.14f,
                 },
                 status = "CREATED",
                 diagnosticsInfo = new
@@ -655,22 +656,22 @@ namespace AnomalyDetector.Samples
                 1234
             },
                         trainLosses = new[] {
-                123.45f
+                3.14f
             },
                         validationLosses = new[] {
-                123.45f
+                3.14f
             },
                         latenciesInSeconds = new[] {
-                123.45f
+                3.14f
             },
                     },
                     variableStates = new[] {
             new {
                 variable = "<variable>",
-                filledNARatio = 123.45f,
+                filledNARatio = 3.14f,
                 effectiveCount = 1234,
-                firstTimestamp = "2022-05-10T14:57:31.2311892-04:00",
-                lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
+                firstTimestamp = "2022-05-10T14:14:57.0310000Z",
+                lastTimestamp = "2022-05-10T14:14:57.0310000Z",
             }
         },
                 },
@@ -716,8 +717,8 @@ namespace AnomalyDetector.Samples
             var data = new
             {
                 dataSource = "<dataSource>",
-                startTime = "2022-05-10T14:57:31.2311892-04:00",
-                endTime = "2022-05-10T14:57:31.2311892-04:00",
+                startTime = "2022-05-10T14:14:57.0310000Z",
+                endTime = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = await client.TrainMultivariateModelAsync(RequestContent.Create(data));
@@ -740,15 +741,15 @@ namespace AnomalyDetector.Samples
             {
                 dataSource = "<dataSource>",
                 dataSchema = "OneTable",
-                startTime = "2022-05-10T14:57:31.2311892-04:00",
-                endTime = "2022-05-10T14:57:31.2311892-04:00",
+                startTime = "2022-05-10T14:14:57.0310000Z",
+                endTime = "2022-05-10T14:14:57.0310000Z",
                 displayName = "<displayName>",
                 slidingWindow = 1234,
                 alignPolicy = new
                 {
                     alignMode = "Inner",
                     fillNAMethod = "Previous",
-                    paddingValue = 123.45f,
+                    paddingValue = 3.14f,
                 },
                 status = "CREATED",
                 diagnosticsInfo = new
@@ -759,22 +760,22 @@ namespace AnomalyDetector.Samples
                 1234
             },
                         trainLosses = new[] {
-                123.45f
+                3.14f
             },
                         validationLosses = new[] {
-                123.45f
+                3.14f
             },
                         latenciesInSeconds = new[] {
-                123.45f
+                3.14f
             },
                     },
                     variableStates = new[] {
             new {
                 variable = "<variable>",
-                filledNARatio = 123.45f,
+                filledNARatio = 3.14f,
                 effectiveCount = 1234,
-                firstTimestamp = "2022-05-10T14:57:31.2311892-04:00",
-                lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
+                firstTimestamp = "2022-05-10T14:14:57.0310000Z",
+                lastTimestamp = "2022-05-10T14:14:57.0310000Z",
             }
         },
                 },
@@ -822,38 +823,38 @@ namespace AnomalyDetector.Samples
                 DataSchema = DataSchema.OneTable,
                 DisplayName = "<DisplayName>",
                 SlidingWindow = 1234,
-                AlignPolicy = new AlignPolicy()
+                AlignPolicy = new AlignPolicy
                 {
                     AlignMode = AlignMode.Inner,
                     FillNAMethod = FillNAMethod.Previous,
                     PaddingValue = 3.14f,
                 },
                 Status = ModelStatus.Created,
-                DiagnosticsInfo = new DiagnosticsInfo()
+                DiagnosticsInfo = new DiagnosticsInfo
                 {
-                    ModelState = new ModelState()
+                    ModelState = new ModelState
                     {
                         EpochIds =
-{
+            {
                 1234
             },
                         TrainLosses =
-{
+            {
                 3.14f
             },
                         ValidationLosses =
-{
+            {
                 3.14f
             },
                         LatenciesInSeconds =
-{
+            {
                 3.14f
             },
                     },
                     VariableStates =
-{
-            new VariableState()
-{
+        {
+            new VariableState
+            {
                 Variable = "<Variable>",
                 FilledNARatio = 3.14f,
                 EffectiveCount = 1234,
@@ -1043,8 +1044,8 @@ namespace AnomalyDetector.Samples
             {
                 dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
-                startTime = "2022-05-10T14:57:31.2311892-04:00",
-                endTime = "2022-05-10T14:57:31.2311892-04:00",
+                startTime = "2022-05-10T14:14:57.0310000Z",
+                endTime = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.DetectMultivariateBatchAnomaly("<modelId>", RequestContent.Create(data));
@@ -1071,8 +1072,8 @@ namespace AnomalyDetector.Samples
             {
                 dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
-                startTime = "2022-05-10T14:57:31.2311892-04:00",
-                endTime = "2022-05-10T14:57:31.2311892-04:00",
+                startTime = "2022-05-10T14:14:57.0310000Z",
+                endTime = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.DetectMultivariateBatchAnomaly("<modelId>", RequestContent.Create(data));
@@ -1114,8 +1115,8 @@ namespace AnomalyDetector.Samples
             {
                 dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
-                startTime = "2022-05-10T14:57:31.2311892-04:00",
-                endTime = "2022-05-10T14:57:31.2311892-04:00",
+                startTime = "2022-05-10T14:14:57.0310000Z",
+                endTime = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", RequestContent.Create(data));
@@ -1142,8 +1143,8 @@ namespace AnomalyDetector.Samples
             {
                 dataSource = "http://localhost:3000",
                 topContributorCount = 1234,
-                startTime = "2022-05-10T14:57:31.2311892-04:00",
-                endTime = "2022-05-10T14:57:31.2311892-04:00",
+                startTime = "2022-05-10T14:14:57.0310000Z",
+                endTime = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = await client.DetectMultivariateBatchAnomalyAsync("<modelId>", RequestContent.Create(data));
@@ -1202,7 +1203,7 @@ namespace AnomalyDetector.Samples
                 "<String>"
             },
             values = new[] {
-                123.45f
+                3.14f
             },
         }
     },
@@ -1232,7 +1233,7 @@ namespace AnomalyDetector.Samples
                 "<String>"
             },
             values = new[] {
-                123.45f
+                3.14f
             },
         }
     },
@@ -1275,7 +1276,7 @@ namespace AnomalyDetector.Samples
                 "<String>"
             },
             values = new[] {
-                123.45f
+                3.14f
             },
         }
     },
@@ -1305,7 +1306,7 @@ namespace AnomalyDetector.Samples
                 "<String>"
             },
             values = new[] {
-                123.45f
+                3.14f
             },
         }
     },
@@ -1342,10 +1343,10 @@ namespace AnomalyDetector.Samples
             var options = new MultivariateLastDetectionOptions(new VariableValues[]
             {
     new VariableValues("<variable>", new string[]
-{
-        "<null>"
+    {
+        "<String>"
     }, new float[]
-{
+    {
         3.14f
     })
             }, 1234);

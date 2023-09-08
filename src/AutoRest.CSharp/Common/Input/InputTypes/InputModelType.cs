@@ -1,11 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, bool IsNullable)
+    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, InputDictionaryType? InheritedDictionaryType, bool IsNullable)
         : InputType(Name, IsNullable)
     {
         /// <summary>
@@ -19,20 +20,12 @@ namespace AutoRest.CSharp.Common.Input
 
         public bool IsAnonymousModel { get; init; } = false;
 
+        /// <summary>
+        /// Types provided as immediate parents in spec that aren't base model
+        /// </summary>
+        public IReadOnlyList<InputModelType> CompositionModels { get; init; } = Array.Empty<InputModelType>();
+
         public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
-
-        public IEnumerable<InputModelType> GetAllBaseModels() => EnumerateBase(BaseModel);
-
-        public IReadOnlyList<InputModelType> GetAllDerivedModels()
-        {
-            var list = new List<InputModelType>(DerivedModels);
-            for (var i = 0; i < list.Count; i++)
-            {
-                list.AddRange(list[i].DerivedModels);
-            }
-
-            return list;
-        }
 
         private static IEnumerable<InputModelType> EnumerateBase(InputModelType? model)
         {

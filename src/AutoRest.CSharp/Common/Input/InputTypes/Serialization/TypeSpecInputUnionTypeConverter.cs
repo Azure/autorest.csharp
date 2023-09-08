@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            name = name ?? throw new JsonException($"{nameof(InputLiteralType)} must have a name.");
+            name = name ?? throw new JsonException($"{nameof(InputUnionType)} must have a name.");
             if (unionItemTypes == null || unionItemTypes.Count == 0)
             {
                 throw new JsonException("Union must have a least one union type");

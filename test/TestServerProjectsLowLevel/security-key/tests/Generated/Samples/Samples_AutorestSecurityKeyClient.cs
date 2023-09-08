@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using security_key_LowLevel;
 
 namespace security_key_LowLevel.Samples
 {

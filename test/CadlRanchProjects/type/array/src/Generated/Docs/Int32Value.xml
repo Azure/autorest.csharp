@@ -53,7 +53,7 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ArrayClient().GetInt32ValueClient("1.0.0");
 
-var body = new int[] 
+var body = new int[]
 {
     1234
 };
@@ -67,7 +67,7 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ArrayClient().GetInt32ValueClient("1.0.0");
 
-var body = new int[] 
+var body = new int[]
 {
     1234
 };

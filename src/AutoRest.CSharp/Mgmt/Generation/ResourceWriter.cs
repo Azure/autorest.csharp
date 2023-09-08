@@ -4,9 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -15,6 +16,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using Resource = AutoRest.CSharp.Mgmt.Output.Resource;
 
@@ -282,19 +284,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteTaggableCommonMethodBranch(MgmtRestOperation getOperation, IEnumerable<ParameterMapping> parameterMappings, bool isAsync)
+        private void WriteTaggableCommonMethodBranch(MgmtRestOperation getOperation, IReadOnlyList<ParameterMapping> parameterMappings, bool isAsync)
         {
             var originalResponse = new CodeWriterDeclaration("originalResponse");
             _writer
                 .Append($"var {originalResponse:D} = {GetAwait(isAsync)} ")
-                .Append($"{GetRestClientName(getOperation)}.{CreateMethodName(getOperation.Method.Name, isAsync)}(");
+                .Append($"{GetRestClientName(getOperation)}.{CreateMethodName(getOperation.MethodName, isAsync)}(");
 
             WriteArguments(_writer, parameterMappings, true);
-            _writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
+            _writer.Line($"){GetConfigureAwait(isAsync)};");
 
+            var armResource = new ArmResourceExpression(new MemberExpression(originalResponse, nameof(Response<object>.Value)));
             if (This.ResourceData.ShouldSetResourceIdentifier)
             {
-                _writer.Line($"{originalResponse}.Value.Id = {CreateResourceIdentifierExpression(This, getOperation.RequestPath, parameterMappings, $"{originalResponse}.Value")};");
+                _writer.WriteMethodBodyStatement(Assign(armResource.Id, InvokeCreateResourceIdentifier(This, getOperation.RequestPath, parameterMappings, armResource)));
             }
 
             var valueConverter = getOperation.GetValueConverter($"{ArmClientReference}", $"{originalResponse}.Value", getOperation.MgmtReturnType);

@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Output.Models
                 InputModelType modelType => WalkModelType(modelType, typeFactory, visitedModels),
                 InputListType listType => WalkListType(listType, typeFactory, visitedModels),
                 InputDictionaryType dictType => WalkDictionaryType(dictType, typeFactory, visitedModels),
-                InputLiteralType literalType => WalkLiteralType(literalType, typeFactory),
+                InputEnumType enumType => WalkEnumType(enumType, typeFactory),
                 InputUnionType unionType => WalkUnionType(unionType),
                 _ => ConvenienceMethodConfidenceLevel.Confident
             };
@@ -161,12 +161,8 @@ namespace AutoRest.CSharp.Output.Models
             return confidenceLevel;
         }
 
-        private static ConvenienceMethodConfidenceLevel WalkLiteralType(InputLiteralType literalType, TypeFactory typeFactory)
+        private static ConvenienceMethodConfidenceLevel WalkEnumType(InputEnumType inputEnumType, TypeFactory typeFactory)
         {
-            // a literal type is not confident, when we wrap it wiht a number-valued enum without proper names for its enum value items
-            if (literalType.LiteralValueType is not InputEnumType inputEnumType)
-                return ConvenienceMethodConfidenceLevel.Confident;
-
             var isConfident = true;
             var csharpType = typeFactory.CreateType(inputEnumType);
             var serializedValueDict = inputEnumType.AllowedValues.ToDictionary(v => v.Value.ToString()!, v => v);

@@ -3,9 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
@@ -20,7 +18,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeConstructor? _serializationConstructor;
         private ObjectTypeConstructor? _initializationConstructor;
         private string? _description;
-        private IEnumerable<ModelMethodDefinition>? _methods;
         private ObjectTypeDiscriminator? _discriminator;
 
         protected ObjectType(BuildContext context)
@@ -39,7 +36,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
         public ObjectTypeConstructor SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
-        public IEnumerable<ModelMethodDefinition> Methods => _methods ??= BuildMethods();
         public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
         public ObjectTypeConstructor InitializationConstructor => _initializationConstructor ??= BuildInitializationConstructor();
@@ -53,32 +49,19 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected abstract string CreateDescription();
         public abstract bool IncludeConverter { get; }
 
-        protected virtual IEnumerable<ModelMethodDefinition> BuildMethods()
-        {
-            return Array.Empty<ModelMethodDefinition>();
-        }
-
         public IEnumerable<ObjectType> EnumerateHierarchy()
         {
             ObjectType? type = this;
             while (type != null)
             {
                 yield return type;
-
-                if (type.Inherits?.IsFrameworkType == false && type.Inherits.Implementation is ObjectType o)
-                {
-                    type = o;
-                }
-                else
-                {
-                    type = null;
-                }
+                type = type.GetBaseObjectType();
             }
         }
 
         protected abstract IEnumerable<ObjectTypeConstructor> BuildConstructors();
 
-        protected ObjectType? GetBaseObjectType()
+        public ObjectType? GetBaseObjectType()
             => Inherits is { IsFrameworkType: false, Implementation: ObjectType objectType } ? objectType : null;
 
         protected virtual ObjectTypeDiscriminator? BuildDiscriminator()
@@ -90,7 +73,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             " is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.",
             "The available derived classes include " };
 
-        public virtual string CreateExtraDescriptionWithDiscriminator()
+        public string CreateExtraDescriptionWithDiscriminator()
         {
             if (Discriminator?.HasDescendants == true)
             {
@@ -99,6 +82,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     childrenList.Add($"<see cref=\"{implementation.Type.Implementation.Type.Name}\"/>");
                 }
+
                 return $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[0]}<see cref=\"{Type.Name}\"/>{DiscriminatorDescFixedPart[1]}" +
                     $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[2]}{FormattableStringHelpers.Join(childrenList, ", ", " and ")}.";
             }

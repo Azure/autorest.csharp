@@ -11,10 +11,8 @@ var client = new FilesClient(credential);
 Response response = await client.GetFileAsync(new RequestContext());
 if (response.ContentStream != null)
 {
-    using(Stream outFileStream = File.OpenWrite("<filePath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
+    using Stream outFileStream = File.OpenWrite("<filePath>");
+    response.ContentStream.CopyTo(outFileStream);
 }
 ]]></code>
 </example>
@@ -29,10 +27,8 @@ var client = new FilesClient(credential);
 Response response = client.GetFile(new RequestContext());
 if (response.ContentStream != null)
 {
-    using(Stream outFileStream = File.OpenWrite("<filePath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
+    using Stream outFileStream = File.OpenWrite("<filePath>");
+    response.ContentStream.CopyTo(outFileStream);
 }
 ]]></code>
 </example>
@@ -47,10 +43,8 @@ var client = new FilesClient(credential);
 Response response = await client.GetFileLargeAsync(new RequestContext());
 if (response.ContentStream != null)
 {
-    using(Stream outFileStream = File.OpenWrite("<filePath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
+    using Stream outFileStream = File.OpenWrite("<filePath>");
+    response.ContentStream.CopyTo(outFileStream);
 }
 ]]></code>
 </example>
@@ -65,10 +59,8 @@ var client = new FilesClient(credential);
 Response response = client.GetFileLarge(new RequestContext());
 if (response.ContentStream != null)
 {
-    using(Stream outFileStream = File.OpenWrite("<filePath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
+    using Stream outFileStream = File.OpenWrite("<filePath>");
+    response.ContentStream.CopyTo(outFileStream);
 }
 ]]></code>
 </example>
@@ -83,10 +75,8 @@ var client = new FilesClient(credential);
 Response response = await client.GetEmptyFileAsync(new RequestContext());
 if (response.ContentStream != null)
 {
-    using(Stream outFileStream = File.OpenWrite("<filePath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
+    using Stream outFileStream = File.OpenWrite("<filePath>");
+    response.ContentStream.CopyTo(outFileStream);
 }
 ]]></code>
 </example>
@@ -101,10 +91,8 @@ var client = new FilesClient(credential);
 Response response = client.GetEmptyFile(new RequestContext());
 if (response.ContentStream != null)
 {
-    using(Stream outFileStream = File.OpenWrite("<filePath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
+    using Stream outFileStream = File.OpenWrite("<filePath>");
+    response.ContentStream.CopyTo(outFileStream);
 }
 ]]></code>
 </example>

@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using Projection.ProjectedName;
 using Projection.ProjectedName.Models;
 
 namespace Projection.ProjectedName.Samples

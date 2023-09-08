@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Model.Inheritance.NotDiscriminated;
 using _Type.Model.Inheritance.NotDiscriminated.Models;
 
 namespace _Type.Model.Inheritance.NotDiscriminated.Samples

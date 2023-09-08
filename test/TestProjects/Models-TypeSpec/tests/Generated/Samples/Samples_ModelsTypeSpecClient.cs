@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using ModelsTypeSpec;
 using ModelsTypeSpec.Models;
 using NUnit.Framework;
 
@@ -95,26 +96,8 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredNullableInt = 1234,
                 requiredNullableString = "<requiredNullableString>",
-                requiredModel = new
-                {
-                    requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-                },
-                requiredModel2 = new
-                {
-                    requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-                },
+                requiredModel = new { },
+                requiredModel2 = new { },
                 requiredIntList = new[] {
         1234
     },
@@ -138,7 +121,7 @@ namespace ModelsTypeSpec.Samples
                     },
                 },
                 requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
+        3.14f
     },
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
@@ -196,26 +179,8 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableString = "<requiredNullableString>",
                 nonRequiredNullableInt = 1234,
                 nonRequiredNullableString = "<nonRequiredNullableString>",
-                requiredModel = new
-                {
-                    requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-                },
-                requiredModel2 = new
-                {
-                    requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-                },
+                requiredModel = new { },
+                requiredModel2 = new { },
                 requiredIntList = new[] {
         1234
     },
@@ -239,7 +204,7 @@ namespace ModelsTypeSpec.Samples
                     },
                 },
                 requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
+        3.14f
     },
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
@@ -333,26 +298,8 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredNullableInt = 1234,
                 requiredNullableString = "<requiredNullableString>",
-                requiredModel = new
-                {
-                    requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-                },
-                requiredModel2 = new
-                {
-                    requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-                },
+                requiredModel = new { },
+                requiredModel2 = new { },
                 requiredIntList = new[] {
         1234
     },
@@ -376,7 +323,7 @@ namespace ModelsTypeSpec.Samples
                     },
                 },
                 requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
+        3.14f
     },
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
@@ -434,26 +381,8 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableString = "<requiredNullableString>",
                 nonRequiredNullableInt = 1234,
                 nonRequiredNullableString = "<nonRequiredNullableString>",
-                requiredModel = new
-                {
-                    requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-                },
-                requiredModel2 = new
-                {
-                    requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-                },
+                requiredModel = new { },
+                requiredModel2 = new { },
                 requiredIntList = new[] {
         1234
     },
@@ -477,7 +406,7 @@ namespace ModelsTypeSpec.Samples
                     },
                 },
                 requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
+        3.14f
     },
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
@@ -570,19 +499,19 @@ namespace ModelsTypeSpec.Samples
     1234
             }, new string[]
             {
-    "<null>"
+    "<String>"
             }, new CollectionItem[]
             {
     new CollectionItem(new Dictionary<string, RecordItem>
-{
-        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+    {
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>())
     })
             }, new Dictionary<string, RecordItem>
             {
                 ["key"] = new RecordItem(new CollectionItem[]
-            {
+                {
         new CollectionItem(new Dictionary<string, RecordItem>())
-                }),
+                })
             }, new float?[]
             {
     3.14f
@@ -592,12 +521,12 @@ namespace ModelsTypeSpec.Samples
             }, new CollectionItem[]
             {
     new CollectionItem(new Dictionary<string, RecordItem>
-{
-        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+    {
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>())
     })
             }, new string[]
             {
-    "<null>"
+    "<String>"
             }, new int[]
             {
     1234
@@ -606,33 +535,33 @@ namespace ModelsTypeSpec.Samples
                 NonRequiredNullableInt = 1234,
                 NonRequiredNullableString = "<NonRequiredNullableString>",
                 NonRequiredModelList =
-{
+    {
         new CollectionItem(new Dictionary<string, RecordItem>
-{
-            ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+        {
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>())
         })
     },
                 NonRequiredStringList =
-{
-        "<null>"
+    {
+        "<String>"
     },
                 NonRequiredIntList =
-{
+    {
         1234
     },
                 NonRequiredNullableModelList =
-{
+    {
         new CollectionItem(new Dictionary<string, RecordItem>
-{
-            ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+        {
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>())
         })
     },
                 NonRequiredNullableStringList =
-{
-        "<null>"
+    {
+        "<String>"
     },
                 NonRequiredNullableIntList =
-{
+    {
         1234
     },
             };
@@ -652,26 +581,8 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredNullableInt = 1234,
                 requiredNullableString = "<requiredNullableString>",
-                requiredModel = new
-                {
-                    requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-                },
-                requiredModel2 = new
-                {
-                    requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-                },
+                requiredModel = new { },
+                requiredModel2 = new { },
                 requiredIntList = new[] {
         1234
     },
@@ -695,7 +606,7 @@ namespace ModelsTypeSpec.Samples
                     },
                 },
                 requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
+        3.14f
     },
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
@@ -745,26 +656,8 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableString = "<requiredNullableString>",
                 nonRequiredNullableInt = 1234,
                 nonRequiredNullableString = "<nonRequiredNullableString>",
-                requiredModel = new
-                {
-                    requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-                },
-                requiredModel2 = new
-                {
-                    requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-                },
+                requiredModel = new { },
+                requiredModel2 = new { },
                 requiredIntList = new[] {
         1234
     },
@@ -788,7 +681,7 @@ namespace ModelsTypeSpec.Samples
                     },
                 },
                 requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
+        3.14f
     },
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
@@ -862,26 +755,8 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredNullableInt = 1234,
                 requiredNullableString = "<requiredNullableString>",
-                requiredModel = new
-                {
-                    requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-                },
-                requiredModel2 = new
-                {
-                    requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-                },
+                requiredModel = new { },
+                requiredModel2 = new { },
                 requiredIntList = new[] {
         1234
     },
@@ -905,7 +780,7 @@ namespace ModelsTypeSpec.Samples
                     },
                 },
                 requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
+        3.14f
     },
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
@@ -955,26 +830,8 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableString = "<requiredNullableString>",
                 nonRequiredNullableInt = 1234,
                 nonRequiredNullableString = "<nonRequiredNullableString>",
-                requiredModel = new
-                {
-                    requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-                },
-                requiredModel2 = new
-                {
-                    requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-                },
+                requiredModel = new { },
+                requiredModel2 = new { },
                 requiredIntList = new[] {
         1234
     },
@@ -998,7 +855,7 @@ namespace ModelsTypeSpec.Samples
                     },
                 },
                 requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
+        3.14f
     },
                 requiredCollectionWithNullableBooleanElement = new[] {
         true
@@ -1071,19 +928,19 @@ namespace ModelsTypeSpec.Samples
     1234
             }, new string[]
             {
-    "<null>"
+    "<String>"
             }, new CollectionItem[]
             {
     new CollectionItem(new Dictionary<string, RecordItem>
-{
-        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+    {
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>())
     })
             }, new Dictionary<string, RecordItem>
             {
                 ["key"] = new RecordItem(new CollectionItem[]
-            {
+                {
         new CollectionItem(new Dictionary<string, RecordItem>())
-                }),
+                })
             }, new float?[]
             {
     3.14f
@@ -1093,12 +950,12 @@ namespace ModelsTypeSpec.Samples
             }, new CollectionItem[]
             {
     new CollectionItem(new Dictionary<string, RecordItem>
-{
-        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+    {
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>())
     })
             }, new string[]
             {
-    "<null>"
+    "<String>"
             }, new int[]
             {
     1234
@@ -1107,33 +964,33 @@ namespace ModelsTypeSpec.Samples
                 NonRequiredNullableInt = 1234,
                 NonRequiredNullableString = "<NonRequiredNullableString>",
                 NonRequiredModelList =
-{
+    {
         new CollectionItem(new Dictionary<string, RecordItem>
-{
-            ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+        {
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>())
         })
     },
                 NonRequiredStringList =
-{
-        "<null>"
+    {
+        "<String>"
     },
                 NonRequiredIntList =
-{
+    {
         1234
     },
                 NonRequiredNullableModelList =
-{
+    {
         new CollectionItem(new Dictionary<string, RecordItem>
-{
-            ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+        {
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>())
         })
     },
                 NonRequiredNullableStringList =
-{
-        "<null>"
+    {
+        "<String>"
     },
                 NonRequiredNullableIntList =
-{
+    {
         1234
     },
             };
@@ -1348,6 +1205,151 @@ namespace ModelsTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_InputToRoundTripOptional_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            var input = new RoundTripOptionalModel
+            {
+                OptionalString = "<OptionalString>",
+                OptionalInt = 1234,
+                OptionalStringList =
+    {
+        "<String>"
+    },
+                OptionalIntList =
+    {
+        1234
+    },
+                OptionalModelList =
+    {
+        new CollectionItem(new Dictionary<string, RecordItem>
+        {
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>())
+        })
+    },
+                OptionalModel = new DerivedModel(new CollectionItem[]
+                {
+        new CollectionItem(new Dictionary<string, RecordItem>
+        {
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>())
+        })
+                }),
+                OptionalModelWithPropertiesOnBase = new DerivedModelWithProperties(new CollectionItem[]
+                {
+        new CollectionItem(new Dictionary<string, RecordItem>
+        {
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>())
+        })
+                }),
+                OptionalFixedStringEnum = FixedStringEnum.One,
+                OptionalExtensibleEnum = ExtensibleEnum.One,
+                OptionalIntRecord =     {
+        ["key"] = 1234
+    },
+                OptionalStringRecord =     {
+        ["key"] = "<String>"
+    },
+                OptionalModelRecord =     {
+        ["key"] = new RecordItem(new CollectionItem[]
+        {
+            new CollectionItem(new Dictionary<string, RecordItem>())
+        })
+    },
+                OptionalPlainDate = DateTimeOffset.UtcNow,
+                OptionalPlainTime = new TimeSpan(1, 23, 45),
+                OptionalCollectionWithNullableIntElement =
+    {
+        1234
+    },
+            };
+            var result = await client.InputToRoundTripOptionalAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_InputToRoundTripReadOnly_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), new BaseModel(), new int[]
+            {
+    1234
+            }, new string[]
+            {
+    "<String>"
+            }, new CollectionItem[]
+            {
+    new CollectionItem(new Dictionary<string, RecordItem>
+    {
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>())
+    })
+            }, new Dictionary<string, RecordItem>
+            {
+                ["key"] = new RecordItem(new CollectionItem[]
+                {
+        new CollectionItem(new Dictionary<string, RecordItem>())
+                })
+            }, new float?[]
+            {
+    3.14f
+            }, new bool?[]
+            {
+    true
+            }, new CollectionItem[]
+            {
+    new CollectionItem(new Dictionary<string, RecordItem>
+    {
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>())
+    })
+            }, new string[]
+            {
+    "<String>"
+            }, new int[]
+            {
+    1234
+            })
+            {
+                NonRequiredNullableInt = 1234,
+                NonRequiredNullableString = "<NonRequiredNullableString>",
+                NonRequiredModelList =
+    {
+        new CollectionItem(new Dictionary<string, RecordItem>
+        {
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>())
+        })
+    },
+                NonRequiredStringList =
+    {
+        "<String>"
+    },
+                NonRequiredIntList =
+    {
+        1234
+    },
+                NonRequiredNullableModelList =
+    {
+        new CollectionItem(new Dictionary<string, RecordItem>
+        {
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>())
+        })
+    },
+                NonRequiredNullableStringList =
+    {
+        "<String>"
+    },
+                NonRequiredNullableIntList =
+    {
+        1234
+    },
+            };
+            var result = await client.InputToRoundTripReadOnlyAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_RoundTripToOutput()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1366,7 +1368,7 @@ namespace ModelsTypeSpec.Samples
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
-                requiredFixedIntEnum = "1",
+                requiredFixedIntEnum = 1,
                 requiredExtensibleEnum = "1",
                 requiredList = new[] {
         new {
@@ -1392,11 +1394,11 @@ namespace ModelsTypeSpec.Samples
             },
                     },
                 },
-                requiredBytes = new { },
+                requiredBytes = BinaryData.FromString("<your binary data content>"),
                 requiredUint8Array = new[] {
         1234
     },
-                requiredUnknown = new { },
+                requiredUnknown = BinaryData.FromString("<your binary data content>"),
                 requiredInt8Array = new[] {
         1234
     },
@@ -1440,7 +1442,7 @@ namespace ModelsTypeSpec.Samples
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
-                requiredFixedIntEnum = "1",
+                requiredFixedIntEnum = 1,
                 requiredExtensibleEnum = "1",
                 requiredList = new[] {
         new {
@@ -1466,16 +1468,16 @@ namespace ModelsTypeSpec.Samples
             },
                     },
                 },
-                requiredBytes = new { },
-                optionalBytes = new { },
+                requiredBytes = BinaryData.FromString("<your binary data content>"),
+                optionalBytes = BinaryData.FromString("<your binary data content>"),
                 requiredUint8Array = new[] {
         1234
     },
                 optionalUint8Array = new[] {
         1234
     },
-                requiredUnknown = new { },
-                optionalUnknown = new { },
+                requiredUnknown = BinaryData.FromString("<your binary data content>"),
+                optionalUnknown = BinaryData.FromString("<your binary data content>"),
                 requiredInt8Array = new[] {
         1234
     },
@@ -1523,7 +1525,7 @@ namespace ModelsTypeSpec.Samples
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
-                requiredFixedIntEnum = "1",
+                requiredFixedIntEnum = 1,
                 requiredExtensibleEnum = "1",
                 requiredList = new[] {
         new {
@@ -1549,11 +1551,11 @@ namespace ModelsTypeSpec.Samples
             },
                     },
                 },
-                requiredBytes = new { },
+                requiredBytes = BinaryData.FromString("<your binary data content>"),
                 requiredUint8Array = new[] {
         1234
     },
-                requiredUnknown = new { },
+                requiredUnknown = BinaryData.FromString("<your binary data content>"),
                 requiredInt8Array = new[] {
         1234
     },
@@ -1597,7 +1599,7 @@ namespace ModelsTypeSpec.Samples
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
-                requiredFixedIntEnum = "1",
+                requiredFixedIntEnum = 1,
                 requiredExtensibleEnum = "1",
                 requiredList = new[] {
         new {
@@ -1623,16 +1625,16 @@ namespace ModelsTypeSpec.Samples
             },
                     },
                 },
-                requiredBytes = new { },
-                optionalBytes = new { },
+                requiredBytes = BinaryData.FromString("<your binary data content>"),
+                optionalBytes = BinaryData.FromString("<your binary data content>"),
                 requiredUint8Array = new[] {
         1234
     },
                 optionalUint8Array = new[] {
         1234
     },
-                requiredUnknown = new { },
-                optionalUnknown = new { },
+                requiredUnknown = BinaryData.FromString("<your binary data content>"),
+                optionalUnknown = BinaryData.FromString("<your binary data content>"),
                 requiredInt8Array = new[] {
         1234
     },
@@ -1658,6 +1660,74 @@ namespace ModelsTypeSpec.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_RoundTripToOutput_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            var input = new RoundTripModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new DerivedModelWithDiscriminatorA(1234, "<requiredString>")
+            {
+                OptionalPropertyOnBase = "<OptionalPropertyOnBase>",
+            }, FixedStringEnum.One, FixedIntEnum.One, ExtensibleEnum.One, new CollectionItem[]
+            {
+    new CollectionItem(new Dictionary<string, RecordItem>
+    {
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>())
+    })
+            }, new Dictionary<string, int>
+            {
+                ["key"] = 1234
+            }, new Dictionary<string, string>
+            {
+                ["key"] = "<String>"
+            }, new Dictionary<string, RecordItem>
+            {
+                ["key"] = new RecordItem(new CollectionItem[]
+                {
+        new CollectionItem(new Dictionary<string, RecordItem>())
+                })
+            }, BinaryData.FromString("<your binary data content>"), new int[]
+            {
+    1234
+            }, BinaryData.FromString("<your binary data content>"), new int[]
+            {
+    1234
+            }, new int[]
+            {
+    1234
+            }, new string[]
+            {
+    "<String>"
+            })
+            {
+                NonRequiredString = "<NonRequiredString>",
+                NonRequiredInt = 1234,
+                NonRequiredNullableInt = 1234,
+                NonRequiredNullableString = "<NonRequiredNullableString>",
+                OptionalBytes = BinaryData.FromString("<your binary data content>"),
+                OptionalUint8Array =
+    {
+        1234
+    },
+                OptionalUnknown = BinaryData.FromString("<your binary data content>"),
+                OptionalInt8Array =
+    {
+        1234
+    },
+                NonRequiredNullableIntList =
+    {
+        1234
+    },
+                NonRequiredNullableStringList =
+    {
+        "<String>"
+    },
+            };
+            var result = await client.RoundTripToOutputAsync(input);
         }
 
         [Test]
@@ -1994,8 +2064,8 @@ namespace ModelsTypeSpec.Samples
             var input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[]
             {
     new CollectionItem(new Dictionary<string, RecordItem>
-{
-        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+    {
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>())
     })
             });
             var result = await client.RoundTripToOutputWithNoUseBaseAsync(input);

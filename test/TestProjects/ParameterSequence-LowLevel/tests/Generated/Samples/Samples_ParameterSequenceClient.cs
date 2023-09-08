@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using ParameterSequence_LowLevel;
 
 namespace ParameterSequence_LowLevel.Samples
 {

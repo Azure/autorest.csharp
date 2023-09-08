@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.Optionality;
 using _Type.Property.Optionality.Models;
 
 namespace _Type.Property.Optionality.Samples
@@ -155,7 +156,7 @@ namespace _Type.Property.Optionality.Samples
             var data = new
             {
                 property = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 
@@ -184,7 +185,7 @@ namespace _Type.Property.Optionality.Samples
             var data = new
             {
                 property = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 
@@ -198,10 +199,10 @@ namespace _Type.Property.Optionality.Samples
         {
             var client = new OptionalClient().GetCollectionsByteClient("1.0.0");
 
-            var body = new CollectionsByteProperty()
+            var body = new CollectionsByteProperty
             {
                 Property =
-{
+    {
         BinaryData.FromString("<your binary data content>")
     },
             };
@@ -229,7 +230,7 @@ namespace _Type.Property.Optionality.Samples
             var data = new
             {
                 property = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 
@@ -258,7 +259,7 @@ namespace _Type.Property.Optionality.Samples
             var data = new
             {
                 property = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 
@@ -272,10 +273,10 @@ namespace _Type.Property.Optionality.Samples
         {
             var client = new OptionalClient().GetCollectionsByteClient("1.0.0");
 
-            var body = new CollectionsByteProperty()
+            var body = new CollectionsByteProperty
             {
                 Property =
-{
+    {
         BinaryData.FromString("<your binary data content>")
     },
             };

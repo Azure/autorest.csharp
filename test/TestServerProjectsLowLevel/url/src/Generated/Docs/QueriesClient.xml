@@ -240,7 +240,7 @@ This sample shows how to call GetLongNullAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = await client.GetLongNullAsync(1234);
+Response response = await client.GetLongNullAsync(1234L);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -260,7 +260,7 @@ This sample shows how to call GetLongNull with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = client.GetLongNull(1234);
+Response response = client.GetLongNull(1234L);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -416,7 +416,7 @@ This sample shows how to call DoubleNullAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = await client.DoubleNullAsync(3.14);
+Response response = await client.DoubleNullAsync(3.14d);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -436,7 +436,7 @@ This sample shows how to call DoubleNull with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = client.DoubleNull(3.14);
+Response response = client.DoubleNull(3.14d);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -880,7 +880,7 @@ This sample shows how to call ArrayStringCsvValidAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = await client.ArrayStringCsvValidAsync(new String[]{"<arrayQuery>"});
+Response response = await client.ArrayStringCsvValidAsync(new string[]{"<arrayQuery>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -900,7 +900,7 @@ This sample shows how to call ArrayStringCsvValid with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = client.ArrayStringCsvValid(new String[]{"<arrayQuery>"});
+Response response = client.ArrayStringCsvValid(new string[]{"<arrayQuery>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -920,7 +920,7 @@ This sample shows how to call ArrayStringCsvNullAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = await client.ArrayStringCsvNullAsync(new String[]{"<arrayQuery>"});
+Response response = await client.ArrayStringCsvNullAsync(new string[]{"<arrayQuery>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -940,7 +940,7 @@ This sample shows how to call ArrayStringCsvNull with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = client.ArrayStringCsvNull(new String[]{"<arrayQuery>"});
+Response response = client.ArrayStringCsvNull(new string[]{"<arrayQuery>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -960,7 +960,7 @@ This sample shows how to call ArrayStringCsvEmptyAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = await client.ArrayStringCsvEmptyAsync(new String[]{"<arrayQuery>"});
+Response response = await client.ArrayStringCsvEmptyAsync(new string[]{"<arrayQuery>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -980,7 +980,7 @@ This sample shows how to call ArrayStringCsvEmpty with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = client.ArrayStringCsvEmpty(new String[]{"<arrayQuery>"});
+Response response = client.ArrayStringCsvEmpty(new string[]{"<arrayQuery>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1000,7 +1000,7 @@ This sample shows how to call ArrayStringNoCollectionFormatEmptyAsync with all p
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = await client.ArrayStringNoCollectionFormatEmptyAsync(new String[]{"<arrayQuery>"});
+Response response = await client.ArrayStringNoCollectionFormatEmptyAsync(new string[]{"<arrayQuery>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1020,7 +1020,7 @@ This sample shows how to call ArrayStringNoCollectionFormatEmpty with all parame
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = client.ArrayStringNoCollectionFormatEmpty(new String[]{"<arrayQuery>"});
+Response response = client.ArrayStringNoCollectionFormatEmpty(new string[]{"<arrayQuery>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1040,7 +1040,7 @@ This sample shows how to call ArrayStringSsvValidAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = await client.ArrayStringSsvValidAsync(new String[]{"<arrayQuery>"});
+Response response = await client.ArrayStringSsvValidAsync(new string[]{"<arrayQuery>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1060,7 +1060,7 @@ This sample shows how to call ArrayStringSsvValid with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = client.ArrayStringSsvValid(new String[]{"<arrayQuery>"});
+Response response = client.ArrayStringSsvValid(new string[]{"<arrayQuery>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1080,7 +1080,7 @@ This sample shows how to call ArrayStringTsvValidAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = await client.ArrayStringTsvValidAsync(new String[]{"<arrayQuery>"});
+Response response = await client.ArrayStringTsvValidAsync(new string[]{"<arrayQuery>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1100,7 +1100,7 @@ This sample shows how to call ArrayStringTsvValid with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = client.ArrayStringTsvValid(new String[]{"<arrayQuery>"});
+Response response = client.ArrayStringTsvValid(new string[]{"<arrayQuery>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1120,7 +1120,7 @@ This sample shows how to call ArrayStringPipesValidAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = await client.ArrayStringPipesValidAsync(new String[]{"<arrayQuery>"});
+Response response = await client.ArrayStringPipesValidAsync(new string[]{"<arrayQuery>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1140,7 +1140,7 @@ This sample shows how to call ArrayStringPipesValid with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = client.ArrayStringPipesValid(new String[]{"<arrayQuery>"});
+Response response = client.ArrayStringPipesValid(new string[]{"<arrayQuery>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

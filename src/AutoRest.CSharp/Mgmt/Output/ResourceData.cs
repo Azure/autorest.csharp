@@ -12,13 +12,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ResourceData : MgmtObjectType
     {
-        public ResourceData(ObjectSchema schema)
-            : this(schema, default, default)
-        {
-        }
-
-        public ResourceData(ObjectSchema schema, string? name = default, string? nameSpace = default)
-            : base(schema, name, nameSpace)
+        public ResourceData(ObjectSchema schema, TypeFactory typeFactory, string? name = default, string? nameSpace = default)
+            : base(schema, typeFactory, name, nameSpace)
         {
             _clientPrefix = schema.Name;
         }
@@ -53,7 +48,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var baseTypes = EnumerateHierarchy().TakeLast(2).ToArray();
             var baseType = baseTypes.Length == 1 || baseTypes[1].Declaration.Name == "Object" ? baseTypes[0] : baseTypes[1];
-            var idProperty = baseType.Properties.Where(p => p.Declaration.Name == "Id").FirstOrDefault();
+            var idProperty = baseType.Properties.FirstOrDefault(p => p.Declaration.Name == "Id");
             return idProperty?.Declaration.Type;
         }
 
@@ -61,7 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var baseTypes = EnumerateHierarchy().TakeLast(2).ToArray();
             var baseType = baseTypes.Length == 1 || baseTypes[1].Declaration.Name == "Object" ? baseTypes[0] : baseTypes[1];
-            var nameProperty = baseType.Properties.Where(p => p.Declaration.Name == "Name").FirstOrDefault();
+            var nameProperty = baseType.Properties.FirstOrDefault(p => p.Declaration.Name == "Name");
             return nameProperty?.Declaration.Type;
         }
 

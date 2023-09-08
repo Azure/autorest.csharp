@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using MixApiVersion;
 using NUnit.Framework;
 
 namespace MixApiVersion.Samples

@@ -14,7 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type._Dictionary.Models;
+using _Type._Dictionary;
 
 namespace _Type._Dictionary.Samples
 {
@@ -145,7 +145,7 @@ namespace _Type._Dictionary.Samples
 
             var body = new Dictionary<string, TimeSpan>
             {
-                ["key"] = new TimeSpan(1, 2, 3),
+                ["key"] = new TimeSpan(1, 23, 45)
             };
             var result = await client.PutAsync(body);
         }

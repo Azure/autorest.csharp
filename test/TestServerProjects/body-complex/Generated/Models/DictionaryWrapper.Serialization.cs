@@ -50,6 +50,7 @@ namespace body_complex.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        defaultProgram = new ChangeTrackingDictionary<string, string>();
                         continue;
                     }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();

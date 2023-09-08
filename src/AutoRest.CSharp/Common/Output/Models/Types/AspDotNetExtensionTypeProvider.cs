@@ -24,13 +24,11 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         internal string FullName => $"{Type.Namespace}.{Type.Name}";
 
-        private IReadOnlyList<LowLevelClient> _clients;
+        private readonly IReadOnlyList<LowLevelClient> _clients;
 
         public AspDotNetExtensionTypeProvider(IReadOnlyList<LowLevelClient> clients, string clientNamespace, SourceInputModel? sourceInputModel) : base(AspDotNetExtensionNamespace, sourceInputModel)
         {
             DefaultName = $"{ClientBuilder.GetRPName(clientNamespace)}ClientBuilderExtensions".ToCleanName();
-            //TODO: very bad design that this list is empty when we leave the constructor and is filled in at some point in the future.
-            //creates lots of opportunity run into issues with iterators
             _clients = clients;
         }
 
@@ -144,7 +142,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             "The builder to register with.",
             TBuilderType,
             null,
-            ValidationType.None,
+            Validation.None,
             null);
 
         private Parameter? _configurationParameter;
@@ -153,7 +151,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             "The configuration values.",
             TConfigurationType,
             null,
-            ValidationType.None,
+            Validation.None,
             null);
 
         private static CSharpType? _builderType;
@@ -163,7 +161,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private static CSharpType TBuilderType => _builderType ??= typeof(Template<>).GetGenericArguments()[0];
         private static CSharpType TConfigurationType => _configurationType ??= typeof(IAzureClientFactoryBuilderWithConfiguration<>).GetGenericArguments()[0];
 
-        // this is a private type that provides the open generic type argument "TBuilder" for us to use in the geenrated code
+        // this is a private type that provides the open generic type argument "TBuilder" for us to use in the generated code
         private class Template<TBuilder> { }
     }
 }

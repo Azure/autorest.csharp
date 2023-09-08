@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using CustomizationsInTsp;
 using CustomizationsInTsp.Models;
 using NUnit.Framework;
 
@@ -59,11 +60,11 @@ namespace CustomizationsInTsp.Samples
                 {
                     propertyToMakeInternal = 1234,
                     propertyToRename = 1234,
-                    propertyToMakeFloat = 1234,
-                    propertyToMakeInt = 123.45f,
-                    propertyToMakeDuration = "<propertyToMakeDuration>",
-                    propertyToMakeString = "PT1H23M45S",
-                    propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
+                    propertyToMakeFloat = 3.14f,
+                    propertyToMakeInt = 1234,
+                    propertyToMakeDuration = "PT1H23M45S",
+                    propertyToMakeString = "<propertyToMakeString>",
+                    propertyToMakeJsonElement = "{}",
                     propertyToField = "<propertyToField>",
                     badListName = new[] {
             "<String>"
@@ -89,6 +90,8 @@ namespace CustomizationsInTsp.Samples
                 propertyModelToAddAdditionalSerializableProperty = new
                 {
                     requiredInt = 1234,
+                    additionalSerializableProperty = 1234,
+                    additionalNullableSerializableProperty = 1234,
                 },
                 propertyToMoveToCustomization = "a",
             };
@@ -116,6 +119,8 @@ namespace CustomizationsInTsp.Samples
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("additionalSerializableProperty").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("additionalNullableSerializableProperty").ToString());
             Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
         }
 
@@ -158,11 +163,11 @@ namespace CustomizationsInTsp.Samples
                 {
                     propertyToMakeInternal = 1234,
                     propertyToRename = 1234,
-                    propertyToMakeFloat = 1234,
-                    propertyToMakeInt = 123.45f,
-                    propertyToMakeDuration = "<propertyToMakeDuration>",
-                    propertyToMakeString = "PT1H23M45S",
-                    propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
+                    propertyToMakeFloat = 3.14f,
+                    propertyToMakeInt = 1234,
+                    propertyToMakeDuration = "PT1H23M45S",
+                    propertyToMakeString = "<propertyToMakeString>",
+                    propertyToMakeJsonElement = "{}",
                     propertyToField = "<propertyToField>",
                     badListName = new[] {
             "<String>"
@@ -188,6 +193,8 @@ namespace CustomizationsInTsp.Samples
                 propertyModelToAddAdditionalSerializableProperty = new
                 {
                     requiredInt = 1234,
+                    additionalSerializableProperty = 1234,
+                    additionalNullableSerializableProperty = 1234,
                 },
                 propertyToMoveToCustomization = "a",
             };
@@ -215,6 +222,8 @@ namespace CustomizationsInTsp.Samples
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("additionalSerializableProperty").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("additionalNullableSerializableProperty").ToString());
             Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
         }
 
@@ -224,30 +233,30 @@ namespace CustomizationsInTsp.Samples
         {
             var client = new CustomizationsInTspClient();
 
-            var input = new RootModel()
+            var input = new RootModel
             {
                 PropertyModelToRename = new RenamedModel(1234)
                 {
                     OptionalInt = 1234,
                 },
                 PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 3.14f, 1234, new TimeSpan(1, 2, 3), "<propertyToMakeString>", new JsonElement(), "<propertyToField>", new string[]
-            {
-        "<null>"
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 3.14f, 1234, new TimeSpan(1, 23, 45), "<propertyToMakeString>", default, "<propertyToField>", new string[]
+                {
+        "<String>"
                 }, new Dictionary<string, string>
                 {
-                    ["key"] = "<null>",
+                    ["key"] = "<String>"
                 }, new IList<string>[]
-            {
+                {
         new string[]
-{
-            "<null>"
+        {
+            "<String>"
         }
                 }, new IDictionary<string, string>[]
-            {
+                {
         new Dictionary<string, string>
-{
-            ["key"] = "<null>",
+        {
+            ["key"] = "<String>"
         }
                 }),
                 PropertyEnumToRename = RenamedEnum.One,

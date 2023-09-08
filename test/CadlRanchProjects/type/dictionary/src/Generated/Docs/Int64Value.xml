@@ -55,7 +55,7 @@ var client = new DictionaryClient().GetInt64ValueClient("1.0.0");
 
 var body = new Dictionary<string, long>
 {
-    ["key"] = 1234,
+    ["key"] = 1234L
 };
 var result = await client.PutAsync(body);
 ]]></code>
@@ -69,7 +69,7 @@ var client = new DictionaryClient().GetInt64ValueClient("1.0.0");
 
 var body = new Dictionary<string, long>
 {
-    ["key"] = 1234,
+    ["key"] = 1234L
 };
 var result = client.Put(body);
 ]]></code>

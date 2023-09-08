@@ -120,7 +120,7 @@ namespace SpecialHeaders.ClientRequestId
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("client-request-id", request.ClientRequestId);
             return message;
         }
 

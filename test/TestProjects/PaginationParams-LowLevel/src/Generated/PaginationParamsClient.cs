@@ -259,6 +259,7 @@ namespace PaginationParams_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/authoring/analyze-text/projects", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (maxCount != null)
             {
                 uri.AppendQuery("top", maxCount.Value, true);
@@ -271,7 +272,6 @@ namespace PaginationParams_LowLevel
             {
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -285,6 +285,7 @@ namespace PaginationParams_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/authoring/analyze-language/projects", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (limit != null)
             {
                 uri.AppendQuery("limit", limit.Value, true);
@@ -297,7 +298,6 @@ namespace PaginationParams_LowLevel
             {
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -311,6 +311,7 @@ namespace PaginationParams_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/authoring/analyze-lyrics/projects", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (maxCount != null)
             {
                 uri.AppendQuery("Top", maxCount.Value, true);
@@ -323,7 +324,6 @@ namespace PaginationParams_LowLevel
             {
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -337,6 +337,7 @@ namespace PaginationParams_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/authoring/analyze-song/projects", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (top != null)
             {
                 uri.AppendQuery("top", top.Value, true);
@@ -349,7 +350,6 @@ namespace PaginationParams_LowLevel
             {
                 uri.AppendQuery("maxcount", maxcount.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

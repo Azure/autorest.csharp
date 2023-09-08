@@ -169,7 +169,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (RequiredNullableIntList != null && Optional.IsCollectionDefined(RequiredNullableIntList))
+            if (RequiredNullableIntList != null)
             {
                 writer.WritePropertyName("requiredNullableIntList"u8);
                 writer.WriteStartArray();
@@ -183,7 +183,7 @@ namespace ModelsTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableIntList");
             }
-            if (RequiredNullableStringList != null && Optional.IsCollectionDefined(RequiredNullableStringList))
+            if (RequiredNullableStringList != null)
             {
                 writer.WritePropertyName("requiredNullableStringList"u8);
                 writer.WriteStartArray();
@@ -520,6 +520,7 @@ namespace ModelsTypeSpec.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        nonRequiredNullableIntList = new ChangeTrackingList<int>();
                         continue;
                     }
                     List<int> array = new List<int>();
@@ -534,6 +535,7 @@ namespace ModelsTypeSpec.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        nonRequiredNullableStringList = new ChangeTrackingList<string>();
                         continue;
                     }
                     List<string> array = new List<string>();

@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.Optionality;
 using _Type.Property.Optionality.Models;
 
 namespace _Type.Property.Optionality.Samples
@@ -202,12 +203,12 @@ namespace _Type.Property.Optionality.Samples
         {
             var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
-            var body = new CollectionsModelProperty()
+            var body = new CollectionsModelProperty
             {
                 Property =
-{
-        new StringProperty()
-{
+    {
+        new StringProperty
+        {
             Property = "<Property>",
         }
     },
@@ -283,12 +284,12 @@ namespace _Type.Property.Optionality.Samples
         {
             var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
-            var body = new CollectionsModelProperty()
+            var body = new CollectionsModelProperty
             {
                 Property =
-{
-        new StringProperty()
-{
+    {
+        new StringProperty
+        {
             Property = "<Property>",
         }
     },

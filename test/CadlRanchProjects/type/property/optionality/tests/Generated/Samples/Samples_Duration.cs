@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.Optionality;
 using _Type.Property.Optionality.Models;
 
 namespace _Type.Property.Optionality.Samples
@@ -194,9 +195,9 @@ namespace _Type.Property.Optionality.Samples
         {
             var client = new OptionalClient().GetDurationClient("1.0.0");
 
-            var body = new DurationProperty()
+            var body = new DurationProperty
             {
-                Property = new TimeSpan(1, 2, 3),
+                Property = new TimeSpan(1, 23, 45),
             };
             var result = await client.PutAllAsync(body);
         }
@@ -261,9 +262,9 @@ namespace _Type.Property.Optionality.Samples
         {
             var client = new OptionalClient().GetDurationClient("1.0.0");
 
-            var body = new DurationProperty()
+            var body = new DurationProperty
             {
-                Property = new TimeSpan(1, 2, 3),
+                Property = new TimeSpan(1, 23, 45),
             };
             var result = await client.PutDefaultAsync(body);
         }

@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+
 namespace AutoRest.CSharp.Common.Input;
 
 internal record InputPrimitiveType(InputTypeKind Kind, bool IsNullable) : InputType(Kind.ToString(), IsNullable)
@@ -17,6 +19,8 @@ internal record InputPrimitiveType(InputTypeKind Kind, bool IsNullable) : InputT
     public static InputPrimitiveType DateTime { get; } = new(InputTypeKind.DateTime);
     public static InputPrimitiveType DateTimeISO8601 { get; } = new(InputTypeKind.DateTimeISO8601);
     public static InputPrimitiveType DateTimeRFC1123 { get; } = new(InputTypeKind.DateTimeRFC1123);
+    public static InputPrimitiveType DateTimeRFC3339 { get; } = new(InputTypeKind.DateTimeRFC3339);
+    public static InputPrimitiveType DateTimeRFC7231 { get; } = new(InputTypeKind.DateTimeRFC7231);
     public static InputPrimitiveType DateTimeUnix { get; } = new(InputTypeKind.DateTimeUnix);
     public static InputPrimitiveType DurationISO8601 { get; } = new(InputTypeKind.DurationISO8601);
     public static InputPrimitiveType DurationConstant { get; } = new(InputTypeKind.DurationConstant);
@@ -39,3 +43,5 @@ internal record InputPrimitiveType(InputTypeKind Kind, bool IsNullable) : InputT
 
     public bool IsNumber => Kind is InputTypeKind.Int32 or InputTypeKind.Int64 or InputTypeKind.Float32 or InputTypeKind.Float64 or InputTypeKind.Float128;
 }
+
+internal record InputSystemType(Type Type, InputType ElementType, bool IsNullable) : InputType(Type.Name, IsNullable);

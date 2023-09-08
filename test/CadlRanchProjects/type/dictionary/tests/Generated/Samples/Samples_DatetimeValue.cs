@@ -14,7 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type._Dictionary.Models;
+using _Type._Dictionary;
 
 namespace _Type._Dictionary.Samples
 {
@@ -85,7 +85,7 @@ namespace _Type._Dictionary.Samples
 
             var data = new
             {
-                key = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -100,7 +100,7 @@ namespace _Type._Dictionary.Samples
 
             var data = new
             {
-                key = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -115,7 +115,7 @@ namespace _Type._Dictionary.Samples
 
             var data = new
             {
-                key = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
@@ -130,7 +130,7 @@ namespace _Type._Dictionary.Samples
 
             var data = new
             {
-                key = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
@@ -145,7 +145,7 @@ namespace _Type._Dictionary.Samples
 
             var body = new Dictionary<string, DateTimeOffset>
             {
-                ["key"] = DateTimeOffset.UtcNow,
+                ["key"] = DateTimeOffset.UtcNow
             };
             var result = await client.PutAsync(body);
         }

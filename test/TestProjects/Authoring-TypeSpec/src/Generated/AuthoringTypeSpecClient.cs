@@ -1185,9 +1185,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The Int32 to use. </param>
-        /// <param name="skip"> The Int32 to use. </param>
-        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="maxCount"> The int? to use. </param>
+        /// <param name="skip"> The int? to use. </param>
+        /// <param name="maxpagesize"> The int? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -1209,9 +1209,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The Int32 to use. </param>
-        /// <param name="skip"> The Int32 to use. </param>
-        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="maxCount"> The int? to use. </param>
+        /// <param name="skip"> The int? to use. </param>
+        /// <param name="maxpagesize"> The int? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -1233,9 +1233,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The Int32 to use. </param>
-        /// <param name="skip"> The Int32 to use. </param>
-        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="maxCount"> The int? to use. </param>
+        /// <param name="skip"> The int? to use. </param>
+        /// <param name="maxpagesize"> The int? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -1257,9 +1257,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The Int32 to use. </param>
-        /// <param name="skip"> The Int32 to use. </param>
-        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="maxCount"> The int? to use. </param>
+        /// <param name="skip"> The int? to use. </param>
+        /// <param name="maxpagesize"> The int? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -1347,8 +1347,8 @@ namespace AuthoringTypeSpec
             uri.AppendPath("/authoring/analyze-text/projects/", false);
             uri.AppendPath(projectName, true);
             uri.AppendPath(":export", false);
-            uri.AppendQuery("projectFileVersion", projectFileVersion, true);
             uri.AppendQuery("api-version", _apiVersion, true);
+            uri.AppendQuery("projectFileVersion", projectFileVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1531,6 +1531,7 @@ namespace AuthoringTypeSpec
             uri.Reset(_endpoint);
             uri.AppendRaw("/language", false);
             uri.AppendPath("/authoring/analyze-text/projects/global/languages", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (maxCount != null)
             {
                 uri.AppendQuery("top", maxCount.Value, true);
@@ -1543,7 +1544,6 @@ namespace AuthoringTypeSpec
             {
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1558,6 +1558,7 @@ namespace AuthoringTypeSpec
             uri.Reset(_endpoint);
             uri.AppendRaw("/language", false);
             uri.AppendPath("/authoring/analyze-text/projects/global/training-config-versions", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (maxCount != null)
             {
                 uri.AppendQuery("top", maxCount.Value, true);
@@ -1570,7 +1571,6 @@ namespace AuthoringTypeSpec
             {
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

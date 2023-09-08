@@ -28,29 +28,38 @@ namespace AutoRest.CSharp.Input.Source
 
             foreach (ISymbol member in GetMembers(existingType))
             {
+                bool hasCodeGenMemberAttribute = false;
                 string[]? serializationPath = null;
-                (string? SerializationValueHook, string? DeserializationValueHook)? serializationHooks = null;
+                string? serializationHook = null;
+                string? deserializationHook = null;
+
                 foreach (var attributeData in member.GetAttributes())
                 {
                     // handle CodeGenMember attribute
                     if (codeGenAttributes.TryGetCodeGenMemberAttributeValue(attributeData, out var schemaMemberName))
                     {
+                        hasCodeGenMemberAttribute = true;
                         _propertyMappings.Add(schemaMemberName, member);
                     }
+
                     // handle CodeGenMemberSerialization attribute
                     if (codeGenAttributes.TryGetCodeGenMemberSerializationAttributeValue(attributeData, out var pathResult))
                     {
                         serializationPath = pathResult;
                     }
                     // handle CodeGenMemberSerializationHooks attribute
-                    if (codeGenAttributes.TryGetCodeGenMemberSerializationHooksAttributeValue(attributeData, out var hooks))
-                    {
-                        serializationHooks = hooks;
-                    }
+                    codeGenAttributes.TryGetCodeGenMemberSerializationHooksAttributeValue(attributeData, out serializationHook, out deserializationHook);
                 }
-                if (serializationPath != null || serializationHooks != null)
+
+                if (serializationPath != null || serializationHook != null || deserializationHook != null)
                 {
-                    _serializationMappings.Add(member, new SourcePropertySerializationMapping(member, serializationPath, serializationHooks?.SerializationValueHook, serializationHooks?.DeserializationValueHook));
+                    _serializationMappings.Add(member, new SourcePropertySerializationMapping(member, serializationPath, serializationHook, deserializationHook));
+                }
+
+                // If member is defined in both base and derived class, use derived one
+                if (member.Kind is SymbolKind.Property or SymbolKind.Field && !hasCodeGenMemberAttribute && !_propertyMappings.ContainsKey(member.Name))
+                {
+                    _propertyMappings.Add(member.Name, member);
                 }
             }
 
@@ -65,19 +74,9 @@ namespace AutoRest.CSharp.Input.Source
             }
         }
 
-        public SourceMemberMapping? GetForMember(string name)
+        public ISymbol? GetMemberByOriginalName(string name)
         {
-            if (!_propertyMappings.TryGetValue(name, out var memberSymbol))
-            {
-                memberSymbol = _existingType?.GetMembers(name).FirstOrDefault();
-            }
-
-            if (memberSymbol != null)
-            {
-                return new SourceMemberMapping(name, memberSymbol);
-            }
-
-            return null;
+            return !_propertyMappings.TryGetValue(name, out var memberSymbol) ? _existingType?.GetMembers(name).FirstOrDefault() : memberSymbol;
         }
 
         public SourcePropertySerializationMapping? GetForMemberSerialization(ISymbol? symbol)

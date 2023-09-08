@@ -95,8 +95,8 @@ var client = new BasicClient();
 
 var resource = new User("<name>")
 {
-    Orders = 
-{
+    Orders =
+    {
         new UserOrder(1234, "<detail>")
     },
 };
@@ -112,8 +112,8 @@ var client = new BasicClient();
 
 var resource = new User("<name>")
 {
-    Orders = 
-{
+    Orders =
+    {
         new UserOrder(1234, "<detail>")
     },
 };
@@ -347,7 +347,7 @@ This sample shows how to call GetUsersAsync with required parameters.
 <code><![CDATA[
 var client = new BasicClient();
 
-await foreach (var item in client.GetUsersAsync(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"}))
+await foreach (var item in client.GetUsersAsync(1234, 1234, 1234, new string[]{"<orderby>"}, "<filter>", new string[]{"<select>"}, new string[]{"<expand>"}))
 {
 }
 ]]></code>
@@ -359,7 +359,7 @@ This sample shows how to call GetUsers with required parameters.
 <code><![CDATA[
 var client = new BasicClient();
 
-foreach (var item in client.GetUsers(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"}))
+foreach (var item in client.GetUsers(1234, 1234, 1234, new string[]{"<orderby>"}, "<filter>", new string[]{"<select>"}, new string[]{"<expand>"}))
 {
 }
 ]]></code>
@@ -371,7 +371,7 @@ This sample shows how to call GetUsersAsync with required parameters and parse t
 <code><![CDATA[
 var client = new BasicClient();
 
-await foreach (var item in client.GetUsersAsync(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"}, new RequestContext()))
+await foreach (var item in client.GetUsersAsync(1234, 1234, 1234, new string[]{"<orderby>"}, "<filter>", new string[]{"<select>"}, new string[]{"<expand>"}, new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
@@ -390,7 +390,7 @@ This sample shows how to call GetUsers with required parameters and parse the re
 <code><![CDATA[
 var client = new BasicClient();
 
-foreach (var item in client.GetUsers(1234, 1234, 1234, new String[]{"<orderby>"}, "<filter>", new String[]{"<select>"}, new String[]{"<expand>"}, new RequestContext()))
+foreach (var item in client.GetUsers(1234, 1234, 1234, new string[]{"<orderby>"}, "<filter>", new string[]{"<select>"}, new string[]{"<expand>"}, new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());

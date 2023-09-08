@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.ValueTypes;
 using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
@@ -85,7 +86,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             var data = new
             {
-                property = 123.45f,
+                property = 3.14f,
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -100,7 +101,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             var data = new
             {
-                property = 123.45f,
+                property = 3.14f,
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -115,7 +116,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             var data = new
             {
-                property = 123.45f,
+                property = 3.14f,
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
@@ -130,7 +131,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             var data = new
             {
-                property = 123.45f,
+                property = 3.14f,
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));

@@ -7,7 +7,7 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> The UnknownTokenizer. </summary>
+    /// <summary> Unknown version of Tokenizer. </summary>
     internal partial class UnknownTokenizer : Tokenizer
     {
         /// <summary> Initializes a new instance of UnknownTokenizer. </summary>

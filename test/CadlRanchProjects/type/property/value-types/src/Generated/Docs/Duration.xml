@@ -53,7 +53,7 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetDurationClient("1.0.0");
 
-var body = new DurationProperty(new TimeSpan(1, 2, 3));
+var body = new DurationProperty(new TimeSpan(1, 23, 45));
 var result = await client.PutAsync(body);
 ]]></code>
 </example>
@@ -64,7 +64,7 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetDurationClient("1.0.0");
 
-var body = new DurationProperty(new TimeSpan(1, 2, 3));
+var body = new DurationProperty(new TimeSpan(1, 23, 45));
 var result = client.Put(body);
 ]]></code>
 </example>

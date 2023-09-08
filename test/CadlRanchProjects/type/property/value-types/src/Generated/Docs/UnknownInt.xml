@@ -76,7 +76,7 @@ This sample shows how to call PutAsync with required request content.
 var client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 var data = new {
-    property = new {},
+    property = BinaryData.FromString("<your binary data content>"),
 };
 
 Response response = await client.PutAsync(RequestContent.Create(data));
@@ -91,7 +91,7 @@ This sample shows how to call Put with required request content.
 var client = new ValueTypesClient().GetUnknownIntClient("1.0.0");
 
 var data = new {
-    property = new {},
+    property = BinaryData.FromString("<your binary data content>"),
 };
 
 Response response = client.Put(RequestContent.Create(data));

@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using Encode.Duration;
 using Encode.Duration.Models;
 using NUnit.Framework;
 
@@ -94,7 +95,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetPropertyClient("1.0.0");
 
-            var body = new DefaultDurationProperty(new TimeSpan(1, 2, 3));
+            var body = new DefaultDurationProperty(new TimeSpan(1, 23, 45));
             var result = await client.DefaultAsync(body);
         }
 
@@ -172,7 +173,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetPropertyClient("1.0.0");
 
-            var body = new ISO8601DurationProperty(new TimeSpan(1, 2, 3));
+            var body = new ISO8601DurationProperty(new TimeSpan(1, 23, 45));
             var result = await client.Iso8601Async(body);
         }
 
@@ -184,7 +185,7 @@ namespace Encode.Duration.Samples
 
             var data = new
             {
-                value = new { },
+                value = "45",
             };
 
             Response response = client.Int32Seconds(RequestContent.Create(data));
@@ -201,7 +202,7 @@ namespace Encode.Duration.Samples
 
             var data = new
             {
-                value = new { },
+                value = "45",
             };
 
             Response response = client.Int32Seconds(RequestContent.Create(data));
@@ -218,7 +219,7 @@ namespace Encode.Duration.Samples
 
             var data = new
             {
-                value = new { },
+                value = "45",
             };
 
             Response response = await client.Int32SecondsAsync(RequestContent.Create(data));
@@ -235,7 +236,7 @@ namespace Encode.Duration.Samples
 
             var data = new
             {
-                value = new { },
+                value = "45",
             };
 
             Response response = await client.Int32SecondsAsync(RequestContent.Create(data));
@@ -250,7 +251,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetPropertyClient("1.0.0");
 
-            var body = new Int32SecondsDurationProperty(new TimeSpan(1, 2, 3));
+            var body = new Int32SecondsDurationProperty(new TimeSpan(1, 23, 45));
             var result = await client.Int32SecondsAsync(body);
         }
 
@@ -262,7 +263,7 @@ namespace Encode.Duration.Samples
 
             var data = new
             {
-                value = new { },
+                value = "45.000",
             };
 
             Response response = client.FloatSeconds(RequestContent.Create(data));
@@ -279,7 +280,7 @@ namespace Encode.Duration.Samples
 
             var data = new
             {
-                value = new { },
+                value = "45.000",
             };
 
             Response response = client.FloatSeconds(RequestContent.Create(data));
@@ -296,7 +297,7 @@ namespace Encode.Duration.Samples
 
             var data = new
             {
-                value = new { },
+                value = "45.000",
             };
 
             Response response = await client.FloatSecondsAsync(RequestContent.Create(data));
@@ -313,7 +314,7 @@ namespace Encode.Duration.Samples
 
             var data = new
             {
-                value = new { },
+                value = "45.000",
             };
 
             Response response = await client.FloatSecondsAsync(RequestContent.Create(data));
@@ -328,7 +329,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetPropertyClient("1.0.0");
 
-            var body = new FloatSecondsDurationProperty(new TimeSpan(1, 2, 3));
+            var body = new FloatSecondsDurationProperty(new TimeSpan(1, 23, 45));
             var result = await client.FloatSecondsAsync(body);
         }
 
@@ -341,7 +342,7 @@ namespace Encode.Duration.Samples
             var data = new
             {
                 value = new[] {
-        new {}
+        "45.000"
     },
             };
 
@@ -360,7 +361,7 @@ namespace Encode.Duration.Samples
             var data = new
             {
                 value = new[] {
-        new {}
+        "45.000"
     },
             };
 
@@ -379,7 +380,7 @@ namespace Encode.Duration.Samples
             var data = new
             {
                 value = new[] {
-        new {}
+        "45.000"
     },
             };
 
@@ -398,7 +399,7 @@ namespace Encode.Duration.Samples
             var data = new
             {
                 value = new[] {
-        new {}
+        "45.000"
     },
             };
 
@@ -416,7 +417,7 @@ namespace Encode.Duration.Samples
 
             var body = new FloatSecondsDurationArrayProperty(new TimeSpan[]
             {
-    new TimeSpan(1, 2, 3)
+    new TimeSpan(1, 23, 45)
             });
             var result = await client.FloatSecondsArrayAsync(body);
         }

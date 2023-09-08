@@ -11,6 +11,7 @@ using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Analytics.Purview.Account;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
@@ -271,7 +272,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             {
                 advancedResourceSet = new
                 {
-                    modifiedAt = "2022-05-10T18:57:31.2311892Z",
+                    modifiedAt = "2022-05-10T14:14:57.0310000Z",
                     resourceSetProcessing = "Default",
                 },
                 pathPatternConfig = new
@@ -326,7 +327,7 @@ namespace Azure.Analytics.Purview.Account.Samples
                     regexStr = "<regexStr>",
                 },
                 replaceWith = "<replaceWith>",
-                version = 123.45d,
+                version = 3.14d,
             }
         },
                     regexReplacers = new[] {
@@ -515,7 +516,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             {
                 advancedResourceSet = new
                 {
-                    modifiedAt = "2022-05-10T18:57:31.2311892Z",
+                    modifiedAt = "2022-05-10T14:14:57.0310000Z",
                     resourceSetProcessing = "Default",
                 },
                 pathPatternConfig = new
@@ -570,7 +571,7 @@ namespace Azure.Analytics.Purview.Account.Samples
                     regexStr = "<regexStr>",
                 },
                 replaceWith = "<replaceWith>",
-                version = 123.45d,
+                version = 3.14d,
             }
         },
                     regexReplacers = new[] {

@@ -14,9 +14,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("fishtype").ToString());
 Console.WriteLine(result.GetProperty("species").ToString());
 Console.WriteLine(result.GetProperty("length").ToString());
-Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
-Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
-Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
 ]]></code>
 </example>
     </member>
@@ -33,9 +30,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("fishtype").ToString());
 Console.WriteLine(result.GetProperty("species").ToString());
 Console.WriteLine(result.GetProperty("length").ToString());
-Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
-Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
-Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
 ]]></code>
 </example>
     </member>
@@ -47,8 +41,8 @@ var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphicrecursiveClient(credential);
 
 var data = new {
-    fishtype = "salmon",
-    length = 123.45f,
+    fishtype = "smart_salmon",
+    length = 3.14f,
 };
 
 Response response = await client.PutValidAsync(RequestContent.Create(data));
@@ -60,11 +54,12 @@ var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphicrecursiveClient(credential);
 
 var data = new {
+    college_degree = "<college_degree>",
     location = "<location>",
     iswild = true,
-    fishtype = "salmon",
+    fishtype = "smart_salmon",
     species = "<species>",
-    length = 123.45f,
+    length = 3.14f,
 };
 
 Response response = await client.PutValidAsync(RequestContent.Create(data));
@@ -80,8 +75,8 @@ var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphicrecursiveClient(credential);
 
 var data = new {
-    fishtype = "salmon",
-    length = 123.45f,
+    fishtype = "smart_salmon",
+    length = 3.14f,
 };
 
 Response response = client.PutValid(RequestContent.Create(data));
@@ -93,11 +88,12 @@ var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphicrecursiveClient(credential);
 
 var data = new {
+    college_degree = "<college_degree>",
     location = "<location>",
     iswild = true,
-    fishtype = "salmon",
+    fishtype = "smart_salmon",
     species = "<species>",
-    length = 123.45f,
+    length = 3.14f,
 };
 
 Response response = client.PutValid(RequestContent.Create(data));

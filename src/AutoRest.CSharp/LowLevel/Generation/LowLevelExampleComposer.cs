@@ -4,22 +4,29 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using Azure;
-using Azure.Core;
+using System.Threading;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Input;
-using Microsoft.CodeAnalysis.CSharp;
-using System.Threading;
-using YamlDotNet.Core.Tokens;
+using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Statements;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Serialization;
+using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Utilities;
-using AutoRest.CSharp.Common.Utilities;
+using Azure;
+using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -29,78 +36,84 @@ namespace AutoRest.CSharp.Generation.Writers
         private static readonly CSharpType KeyAuthType = KnownParameters.KeyAuth.Type;
         private static readonly CSharpType TokenAuthType = KnownParameters.TokenAuth.Type;
 
-        private string ClientTypeName { get; }
-        private IReadOnlyList<MethodSignatureBase> ClientInvocationChain { get; }
-        private LowLevelClient _client;
+        private readonly LowLevelClient _client;
+        private readonly TypeFactory _typeFactory;
+        private IReadOnlyList<LowLevelClient> ClientInvocationChain { get; }
 
-
-        public LowLevelExampleComposer(LowLevelClient client)
+        public LowLevelExampleComposer(LowLevelClient client, TypeFactory typeFactory)
         {
             _client = client;
-            ClientTypeName = client.Type.Name;
+            _typeFactory = typeFactory;
             ClientInvocationChain = GetClientInvocationChain(client);
         }
 
-        public FormattableString Compose(LowLevelClientMethod clientMethod, bool async)
+        public FormattableString ComposeProtocol(RestClientOperationMethods operationMethods, MethodSignature signature, bool async)
         {
             //skip non public protocol methods
-            if ((clientMethod.ProtocolMethodSignature.Modifiers & MethodSignatureModifiers.Public) == 0)
+            if ((signature.Modifiers & MethodSignatureModifiers.Public) == 0)
                 return $"";
 
             //skip obsolete protocol methods
-            if (clientMethod.ProtocolMethodSignature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))))
+            if (signature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))))
                 return $"";
 
             //skip suppressed protocol methods
-            if (_client.IsMethodSuppressed(clientMethod.ProtocolMethodSignature))
+            if (_client.IsMethodSuppressed(signature))
                 return $"";
 
             //skip if there are no valid ctors
             if (!_client.IsSubClient && _client.GetEffectiveCtor() is null)
                 return $"";
 
-            var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);
-            var requestBodyType = clientMethod.RequestBodyType;
+            var requestBodyType = operationMethods.RequestBodyType;
             var builder = new StringBuilder();
 
-            if (HasNoCustomInput(methodSignature.Parameters)) // client.GetAllItems(RequestContext context = null)
+            if (HasNoCustomInput(signature.Parameters)) // client.GetAllItems(RequestContext context = null)
             {
-                ComposeExampleWithoutParameter(clientMethod, methodSignature.Name, async, true, builder);
+                ComposeProtocolExampleWithoutParameter(operationMethods, signature, async, true, builder);
             }
-            else if (HasOptionalInputValue(methodSignature.Parameters, requestBodyType, out var requestModel))
+            else if (HasOptionalInputValue(signature.Parameters, requestBodyType, out var requestModel))
             {
-                if (methodSignature.Parameters.All(p => p.IsOptionalInSignature))
+                if (signature.Parameters.All(p => p.IsOptionalInSignature))
                 {
-                    ComposeExampleWithoutParameter(clientMethod, methodSignature.Name, async, false, builder);
+                    ComposeProtocolExampleWithoutParameter(operationMethods, signature, async, false, builder);
                 }
                 else if (requestBodyType != null && (requestModel == null || HasRequiredAndWritablePropertyFromTop(requestModel)))
                 {
-                    ComposeExampleWithParametersAndRequestContent(clientMethod, methodSignature.Name, async, false, builder);
+                    ComposeProtocolExampleWithParametersAndRequestContent(operationMethods, signature, async, false, builder);
                 }
                 else
                 {
-                    ComposeExampleWithoutRequestContent(clientMethod, methodSignature.Name, async, builder);
+                    ComposeProtocolExampleWithoutRequestContent(operationMethods, signature, async, builder);
                 }
                 builder.AppendLine();
-                ComposeExampleWithParametersAndRequestContent(clientMethod, methodSignature.Name, async, true, builder);
+                ComposeProtocolExampleWithParametersAndRequestContent(operationMethods, signature, async, true, builder);
             }
             else
             {
                 // client.GetAllItems(int a, RequestContext context = null)
-                ComposeExampleWithRequiredParameters(clientMethod, methodSignature.Name, async, builder);
+                ComposeProtocolExampleWithRequiredParameters(operationMethods, signature, async, builder);
             }
 
             return $"{builder.ToString()}";
         }
 
-        public FormattableString Compose(ConvenienceMethod convenienceMethod, bool async)
+        public FormattableString ComposeConvenience(MethodSignature signature, bool async)
         {
-            //skip when body param is obsolete
-            if (convenienceMethod.IsDeprecatedForExamples())
+            // Skip deprecated
+            if (signature.Attributes.Any(c => c.Type.Equals(typeof(ObsoleteAttribute))))
+            {
                 return $"";
+            }
+
+            // Skip with deprecated parameters
+            if (signature.Parameters.Any(p => p.Type is {IsFrameworkType: false, Implementation: ModelTypeProvider {Deprecated: not null}}))
+            {
+                return $"";
+            }
 
             //skip if not public
-            if (!convenienceMethod.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
+            if (!signature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
                 return $"";
 
             //skip if there are no valid ctors
@@ -108,29 +121,30 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"";
 
             //skip suppressed convenience methods
-            if (_client.IsMethodSuppressed(convenienceMethod.Signature))
+            if (_client.IsMethodSuppressed(signature))
                 return $"";
 
-            var methodSignature = convenienceMethod.Signature.WithAsync(async);
+            signature = signature.WithAsync(async);
+
             var builder = new StringBuilder();
-
-            ComposeConvenienceMethodExample(convenienceMethod, async, true, methodSignature.Name, builder);
-
-            return $"{builder.ToString()}";
-        }
-
-        internal void ComposeConvenienceMethodExample(ConvenienceMethod convenienceMethod, bool async, bool shouldWrap, string methodName, StringBuilder builder)
-        {
-            if (HasNoCustomInput(convenienceMethod.Signature.Parameters)) // client.GetAllItems(CancellationToken cancellationToken = default)
+            if (HasNoCustomInput(signature.Parameters))
             {
-                ComposeExampleWithoutParameter(convenienceMethod, methodName, async, true, shouldWrap, builder);
+                // client.GetAllItems(CancellationToken cancellationToken = default)
+                builder.AppendLine($"This sample shows how to call {signature.Name}.");
             }
             else
             {
                 // client.GetAllItems(int a, RequestContext context = null)
-                ComposeExampleWithRequiredParameters(convenienceMethod, methodName, async, shouldWrap, builder);
+                builder.AppendLine($"This sample shows how to call {signature.Name} with required parameters.");
             }
+
+            WriteCodeSnippet(builder, ComposeConvenienceMethodExample(signature, async));
+
+            return $"{builder.ToString()}";
         }
+
+        internal MethodBodyStatement ComposeConvenienceMethodExample(MethodSignature signature, bool async)
+            => ComposeConvenienceCodeSnippet(signature, async).AsStatement();
 
         // `RequestContext = null` or `cancellationToken = default` is excluded
         private static bool HasNoCustomInput(IReadOnlyList<Parameter> parameters)
@@ -140,24 +154,17 @@ namespace AutoRest.CSharp.Generation.Writers
         private static bool HasNonBodyCustomParameter(IReadOnlyList<Parameter> parameters)
             => parameters.Any(p => p.RequestLocation != RequestLocation.Body && !p.Equals(KnownParameters.RequestContext));
 
-        private void ComposeExampleWithoutRequestContent(LowLevelClientMethod clientMethod, string methodName, bool async, StringBuilder builder)
+        private void ComposeProtocolExampleWithoutRequestContent(RestClientOperationMethods operationMethods, MethodSignature signature, bool async, StringBuilder builder)
         {
-            var hasNonBodyParameter = HasNonBodyCustomParameter(clientMethod.ProtocolMethodSignature.Parameters);
-            builder.AppendLine($"This sample shows how to call {methodName}{(hasNonBodyParameter ? " with required parameters" : "")}{(clientMethod.ResponseBodyType != null ? " and parse the result" : "")}.");
-            ComposeWrappedCodeSnippet(clientMethod, methodName, async, false, builder);
+            var hasNonBodyParameter = HasNonBodyCustomParameter(signature.Parameters);
+            builder.AppendLine($"This sample shows how to call {signature.Name}{(hasNonBodyParameter ? " with required parameters" : "")}{(operationMethods.ResponseType is not null ? " and parse the result" : "")}.");
+            ComposeProtocolWrappedCodeSnippet(operationMethods, signature, async, false, builder);
         }
 
-        private void ComposeExampleWithRequiredParameters(LowLevelClientMethod clientMethod, string methodName, bool async, StringBuilder builder)
+        private void ComposeProtocolExampleWithRequiredParameters(RestClientOperationMethods operationMethods, MethodSignature signature, bool async, StringBuilder builder)
         {
-            builder.AppendLine($"This sample shows how to call {methodName} with required {GenerateParameterAndRequestContentDescription(clientMethod.ProtocolMethodSignature.Parameters)}{(clientMethod.ResponseBodyType != null ? " and parse the result" : "")}.");
-            ComposeWrappedCodeSnippet(clientMethod, methodName, async, true, builder);
-        }
-
-        private void ComposeExampleWithRequiredParameters(ConvenienceMethod convenienceMethod, string methodName, bool async, bool shouldWrap, StringBuilder builder)
-        {
-            if (shouldWrap)
-                builder.AppendLine($"This sample shows how to call {methodName} with required parameters.");
-            ComposeCodeSnippet(convenienceMethod, methodName, async, true, shouldWrap, builder);
+            builder.AppendLine($"This sample shows how to call {signature.Name} with required {GenerateParameterAndRequestContentDescription(signature.Parameters)}{(operationMethods.ResponseType is not null ? " and parse the result" : "")}.");
+            ComposeProtocolWrappedCodeSnippet(operationMethods, signature, async, true, builder);
         }
 
         /// <summary>
@@ -221,10 +228,10 @@ namespace AutoRest.CSharp.Generation.Writers
             return false;
         }
 
-        private void ComposeExampleWithParametersAndRequestContent(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        private void ComposeProtocolExampleWithParametersAndRequestContent(RestClientOperationMethods operationMethods, MethodSignature signature, bool async, bool allParameters, StringBuilder builder)
         {
-            builder.AppendLine($"This sample shows how to call {methodName} with {(allParameters ? "all" : "required")} {GenerateParameterAndRequestContentDescription(clientMethod.ProtocolMethodSignature.Parameters)}{(clientMethod.ResponseBodyType != null ? ", and how to parse the result" : "")}.");
-            ComposeWrappedCodeSnippet(clientMethod, methodName, async, allParameters, builder);
+            builder.AppendLine($"This sample shows how to call {signature.Name} with {(allParameters ? "all" : "required")} {GenerateParameterAndRequestContentDescription(signature.Parameters)}{(operationMethods.ResponseType is not null ? ", and how to parse the result" : "")}.");
+            ComposeProtocolWrappedCodeSnippet(operationMethods, signature, async, allParameters, builder);
         }
 
         private string GenerateParameterAndRequestContentDescription(IReadOnlyList<Parameter> parameters)
@@ -243,100 +250,132 @@ namespace AutoRest.CSharp.Generation.Writers
             return "request content";
         }
 
-        private void ComposeExampleWithoutParameter(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        private void ComposeProtocolExampleWithoutParameter(RestClientOperationMethods operationMethods, MethodSignature signature, bool async, bool allParameters, StringBuilder builder)
         {
-            builder.AppendLine($"This sample shows how to call {methodName}{(clientMethod.ResponseBodyType != null ? " and parse the result" : "")}.");
-            ComposeWrappedCodeSnippet(clientMethod, methodName, async, allParameters, builder);
+            builder.AppendLine($"This sample shows how to call {signature.Name}{(operationMethods.ResponseType is not null ? " and parse the result" : "")}.");
+            ComposeProtocolWrappedCodeSnippet(operationMethods, signature, async, allParameters, builder);
         }
 
-        private void ComposeExampleWithoutParameter(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, bool shouldWrap, StringBuilder builder)
+        private void ComposeProtocolWrappedCodeSnippet(RestClientOperationMethods operationMethods, MethodSignature signature, bool async, bool allParameters, StringBuilder builder)
         {
-            if (shouldWrap)
-                builder.AppendLine($"This sample shows how to call {methodName}.");
-            ComposeCodeSnippet(convenienceMethod, methodName, async, allParameters, shouldWrap, builder);
+            var statement = ComposeProtocolCodeSnippet(operationMethods, signature, allParameters, async).AsStatement();
+            WriteCodeSnippet(builder, statement);
         }
 
-        private void ComposeWrappedCodeSnippet(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        private static void WriteCodeSnippet(StringBuilder builder, MethodBodyStatement statement)
         {
             builder.AppendLine("<code><![CDATA[");
-            ComposeCodeSnippet(clientMethod, methodName, async, allParameters, builder);
+
+            var codeWriter = new CodeWriter(appendTypeNameOnly: true);
+            codeWriter.WriteMethodBodyStatement(statement);
+            var code = SamplesFormattingSyntaxRewriter.FormatCodeBlock(codeWriter.ToString(false));
+
+            builder.Append(code);
             builder.Append("]]></code>");
         }
 
-        private void ComposeCodeSnippet(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, bool shouldWrap, StringBuilder builder)
+        private IEnumerable<MethodBodyStatement> ComposeConvenienceCodeSnippet(MethodSignature signature, bool async)
         {
-            if (shouldWrap)
-                builder.AppendLine("<code><![CDATA[");
-            ComposeGetClientCodes(builder);
-            builder.AppendLine();
+            yield return ComposeGetClient(out var client);
+            yield return EmptyLine;
 
             // get input parameters -- only body parameter is not initialized inline in the invocation, therefore we take out all the body parameters.
-            var typeProviderTypedParameters = convenienceMethod.Signature.Parameters.Where(p => p.RequestLocation == RequestLocation.Body);
-            foreach (var parameter in typeProviderTypedParameters)
+            var bodyArguments = new Dictionary<Parameter, ValueExpression>();
+            foreach (var parameter in signature.Parameters.Where(p => p.RequestLocation == RequestLocation.Body))
             {
-                ComposeBodyParameter(allParameters, parameter, builder);
+                yield return Var(parameter.Name, ComposeConvenienceCSharpTypeInstance(true, parameter.Type, null, true, new HashSet<ObjectType>()), out var bodyArgument);
+                bodyArguments[parameter] = bodyArgument;
             }
 
-            if (convenienceMethod.IsLongRunning)
+            var arguments = signature.Parameters
+                //skip last param if its optional and cancellation token or request context
+                .Where((p, i) => i != signature.Parameters.Count - 1 || !p.IsOptionalInSignature || !p.Type.Equals(typeof(CancellationToken)))
+                .Select(p => p.RequestLocation == RequestLocation.Body ? bodyArguments[p] : MockParameterValue(p))
+                .ToList();
+
+            var returnType = signature.ReturnType;
+
+            if (returnType is null)
             {
-                if (convenienceMethod.IsPageable)
-                {
-                    // do nothing, this never happen right now
-                }
-                else
-                {
-                    ComposeHandleLongRunningResponseCode(convenienceMethod, methodName, async, allParameters, builder);
-                }
+                yield return ComposeConvenienceHandleNormalResponseCode(client, signature.Name, arguments, async);
             }
-            else if (convenienceMethod.IsPageable)
+            else if (TypeFactory.IsOperationOfAsyncPageable(returnType) || TypeFactory.IsOperationOfPageable(returnType))
             {
-                ComposeHandlePageableResponseCode(convenienceMethod, methodName, async, allParameters, builder);
+                // do nothing, this never happen right now
+            }
+            else if (TypeFactory.IsOperation(returnType))
+            {
+                yield return ComposeConvenienceHandleLongRunningResponseCode(client, signature.Name, arguments, async);
+            }
+            else if (TypeFactory.IsAsyncPageable(returnType) || TypeFactory.IsPageable(returnType))
+            {
+                yield return ComposeConvenienceHandlePageableResponseCode(client, signature.Name, arguments, async);
             }
             else
             {
-                ComposeHandleNormalResponseCode(convenienceMethod, methodName, async, allParameters, builder);
+                yield return ComposeConvenienceHandleNormalResponseCode(client, signature.Name, arguments, async);
             }
-
-            if (shouldWrap)
-                builder.Append("]]></code>");
         }
 
-        internal void ComposeCodeSnippet(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        internal IEnumerable<MethodBodyStatement> ComposeProtocolCodeSnippet(RestClientOperationMethods operationMethods, MethodSignature signature, bool allParameters, bool async)
         {
-            ComposeGetClientCodes(builder);
-            builder.AppendLine();
-            if (clientMethod.RequestBodyType != null)
+            yield return ComposeGetClient(out var client);
+            yield return EmptyLine;
+
+            ValueExpression? data = null;
+            if (operationMethods.RequestBodyType != null)
             {
-                ComposeRequestContent(allParameters, clientMethod.RequestBodyType, builder);
-                builder.AppendLine();
+                // This is a corner case in swagger DPG when body is a primitive type constant.
+                // In matching legacy data plane case, public method has no body parameter
+                // See StringClient.PutMbcs
+                var dataValueExpression = operationMethods.RequestBodyType is InputPrimitiveType && operationMethods.Operation.Parameters.FirstOrDefault(p => p is { Location: RequestLocation.Body, DefaultValue: {}}) is {DefaultValue: {} defaultValue}
+                    ? new ConstantExpression(BuilderHelpers.ParseConstant(defaultValue.Value, _typeFactory.CreateType(defaultValue.Type)))
+                    : ComposeProtocolCSharpTypeInstance(allParameters, GetTypeSerialization(operationMethods.RequestBodyType), null, new HashSet<ObjectType>());
+
+                yield return Var("data", dataValueExpression, out data);
+                yield return EmptyLine;
             }
 
-            if (clientMethod.LongRunning != null)
+            var arguments = signature.Parameters
+                //skip last param if its optional and cancellation token or request context
+                .Where((p, i) => !(i == signature.Parameters.Count - 1 && p.IsOptionalInSignature && p.Type.Equals(typeof(RequestContext))))
+                .Where(p => allParameters || !p.IsOptionalInSignature)
+                .Select(p => p.RequestLocation == RequestLocation.Body ? RequestContentExpression.Create(data!) : MockParameterValue(p))
+                .ToList();
+
+            var responseType = operationMethods.ResponseType;
+            var pageItemType = operationMethods.PageItemType;
+            var isLongRunning = signature.ReturnType is not null && (TypeFactory.IsOperation(signature.ReturnType) || TypeFactory.IsTaskOfOperation(signature.ReturnType));
+            if (isLongRunning)
             {
-                if (clientMethod.PagingInfo != null && clientMethod.PagingInfo?.NextPageMethod != null)
+                if (pageItemType is not null)
                 {
-                    ComposeHandleLongRunningPageableResponseCode(clientMethod, methodName, async, allParameters, builder);
+                    yield return ComposeProtocolHandleLongRunningPageableResponseCode(client, signature.Name, arguments, pageItemType, allParameters, async);
                 }
                 else
                 {
-                    ComposeHandleLongRunningResponseCode(clientMethod, methodName, async, allParameters, builder);
+                    yield return ComposeProtocolHandleLongRunningResponseCode(client, signature.Name, arguments, responseType, allParameters, async);
                 }
             }
-            else if (clientMethod.PagingInfo != null)
+            else if (pageItemType is not null)
             {
-                ComposeHandlePageableResponseCode(clientMethod, methodName, async, allParameters, builder);
+                yield return ComposeProtocolHandlePageableResponseCode(client, signature.Name, arguments, pageItemType, allParameters, async);
+            }
+            else if (signature.ReturnType is {} returnType && (returnType.Equals(typeof(Response<bool>)) || returnType.Equals(typeof(Task<Response<bool>>))))
+            {
+                yield return ComposeProtocolHandleHeadAsBoolean(client, signature.Name, arguments, async);
             }
             else
             {
-                ComposeHandleNormalResponseCode(clientMethod, methodName, async, allParameters, builder);
+                yield return ComposeProtocolHandleNormalResponse(client, signature.Name, arguments, responseType, allParameters, async);
             }
         }
 
-        private void ComposeHandleLongRunningPageableResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        private MethodBodyStatement ComposeProtocolHandleLongRunningPageableResponseCode(ValueExpression client, string methodName, IReadOnlyList<ValueExpression> arguments, CSharpType? conveniencePageItemType, bool allParameters, bool async)
         {
-            if (clientMethod is not { ResponseBodyType: InputModelType { } responseModel })
+            if (conveniencePageItemType is null)
             {
-                return;
+                return new MethodBodyStatement();
             }
 
             /* CODE PATTEN
@@ -351,15 +390,19 @@ namespace AutoRest.CSharp.Generation.Writers
              *     ...
              * }
              */
-            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), MockParameterValue, allParameters)});");
-            builder.AppendLine();
-            using (Scope($"{(async ? "await " : "")}foreach (var item in operation.Value)", 0, builder, true))
+
+            return new[]
             {
-                ComposeParsingPageableResponseCodes(responseModel, clientMethod.PagingInfo!.ItemName, allParameters, builder);
-            }
+                Var("operation", new OperationExpression(InvokeClientMethod(client, methodName, arguments, async)), out var operation),
+                EmptyLine,
+                new ForeachStatement("item", operation.Value, async, out var binaryDataItem)
+                {
+                    ComposeParsingPageableResponse(new BinaryDataExpression(binaryDataItem), conveniencePageItemType, allParameters)
+                }
+            };
         }
 
-        private void ComposeHandleLongRunningResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        private MethodBodyStatement ComposeProtocolHandleLongRunningResponseCode(ValueExpression client, string methodName, IReadOnlyList<ValueExpression> arguments, CSharpType? operationValueType, bool allProperties, bool async)
         {
             /* GENERATED CODE PATTERN
              * var operation = await client.{methodName}(WaitUntil.Completed, ...);
@@ -371,63 +414,56 @@ namespace AutoRest.CSharp.Generation.Writers
              * Console.WriteLine(result[.GetProperty(...)...].ToString());
              * ...
              */
-            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), MockParameterValue, allParameters)});");
-            builder.AppendLine();
 
-            if (clientMethod.ResponseBodyType == null)
+            return new[]
             {
-                builder.AppendLine("Console.WriteLine(operation.GetRawResponse().Status);");
-            }
-            else
-            {
-                builder.AppendLine($"BinaryData responseData = operation.Value;");
-                ComposeParsingLongRunningResponseCodes(allParameters, clientMethod.ResponseBodyType, builder);
-            }
+                Var("operation", new OperationExpression(InvokeClientMethod(client, methodName, arguments, async)), out var operation),
+                EmptyLine, operationValueType is null
+                    ? InvokeConsoleWriteLine(operation.GetRawResponse().Status)
+                    : new[]
+                    {
+                        Declare("responseData", new BinaryDataExpression(operation.Value), out var responseData),
+                        ComposeParsingLongRunningResponse(responseData, operationValueType, allProperties)
+                    }
+            };
         }
 
-        private void ComposeHandleLongRunningResponseCode(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        private MethodBodyStatement ComposeConvenienceHandleLongRunningResponseCode(ValueExpression client, string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
         {
             /* GENERATED CODE PATTERN
              * var operation = await client.{methodName}(WaitUntil.Completed, ...);
              */
-            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(convenienceMethod.Signature.Parameters.ToList(), MockConvenienceParameterValue, allParameters)});");
+            return Var("operation", InvokeClientMethod(client, methodName, arguments, async), out _);
         }
 
-        private void ComposeParsingLongRunningResponseCodes(bool allProperties, InputType inputType, StringBuilder builder)
+        private MethodBodyStatement ComposeParsingLongRunningResponse(BinaryDataExpression responseData, CSharpType operationValueType, bool allProperties)
         {
-            if (inputType is InputPrimitiveType { Kind: InputTypeKind.Stream })
+            if (operationValueType.Equals(typeof(Stream)))
             {
-                using (Scope("using(Stream outFileStream = File.OpenWrite(\"<filePath>\"))", 0, builder, true))
+                return new MethodBodyStatement[]
                 {
-                    builder.AppendLine("    responseData.ToStream().CopyTo(outFileStream);");
-                }
-                return;
+                    new UsingDeclareVariableStatement(typeof(Stream), "outFileStream", InvokeFileOpenWrite(Literal("<filePath>")), out var outFileStream),
+                    new InvokeInstanceMethodStatement(responseData.ToStream(), nameof(Stream.CopyTo), outFileStream)
+                };
             }
 
-            var apiInvocationChainList = new List<IReadOnlyList<string>>();
-            ComposeResponseParsingCode(allProperties, inputType, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<InputType>());
+            var declareElementStatement = Declare("result", JsonDocumentExpression.Parse(responseData.ToStream()).RootElement, out var result);
 
-            if (apiInvocationChainList.Count == 0)
+            var elementPropertiesStatements = ComposeResponseParsing(result, operationValueType, allProperties, new HashSet<CSharpType> { operationValueType });
+            if (elementPropertiesStatements.Count == 0)
             {
-                builder.AppendLine($"Console.WriteLine(responseData.ToString());");
+                return InvokeConsoleWriteLine(responseData.InvokeToString());
             }
-            else
+
+            return new[]
             {
-                builder.AppendLine($"JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;");
-                foreach (var apiInvocationChain in apiInvocationChainList)
-                {
-                    builder.AppendLine($"Console.WriteLine({string.Join(".", apiInvocationChain)}.ToString());");
-                }
-            }
+                declareElementStatement,
+                elementPropertiesStatements.AsStatement()
+            };
         }
 
-        private void ComposeHandlePageableResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        private MethodBodyStatement ComposeProtocolHandlePageableResponseCode(ValueExpression client, string methodName, IReadOnlyList<ValueExpression> arguments, CSharpType conveniencePageItemType, bool allParameters, bool async)
         {
-            if (clientMethod.ResponseBodyType is not InputModelType modelType)
-            {
-                return;
-            }
-
             /* GENERATED CODE PATTERN
              * await foreach (var item in client.{methodName}(...))
              * {
@@ -438,462 +474,364 @@ namespace AutoRest.CSharp.Generation.Writers
              *     ...
              * }
              */
-            using (Scope($"{(async ? "await " : "")}foreach (var item in client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), MockParameterValue, allParameters)}))", 0, builder, true))
+
+            return new ForeachStatement("item", InvokeClientMethod(client, methodName, arguments, async), async, out var binaryDataItem)
             {
-                ComposeParsingPageableResponseCodes(modelType, clientMethod.PagingInfo!.ItemName, allParameters, builder);
-            }
+                ComposeParsingPageableResponse(new BinaryDataExpression(binaryDataItem), conveniencePageItemType, allParameters)
+            };
         }
 
-        private void ComposeHandlePageableResponseCode(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        private MethodBodyStatement ComposeConvenienceHandlePageableResponseCode(ValueExpression client, string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
+            => new ForeachStatement("item", InvokeClientMethod(client, methodName, arguments, async), async, out _);
+
+        private MethodBodyStatement ComposeParsingPageableResponse(BinaryDataExpression item, CSharpType itemModelType, bool allProperties)
         {
-            var methodSignature = convenienceMethod.Signature;
-            using (Scope($"{(async ? "await " : "")}foreach (var item in client.{methodName}({MockParameterValues(methodSignature.Parameters.ToList(), MockConvenienceParameterValue, allParameters)}))", 0, builder, true))
+            var declareElementStatement = Declare("result", JsonDocumentExpression.Parse(item.ToStream()).RootElement, out var result);
+            var elementPropertiesStatements = ComposeResponseParsing(result, itemModelType, allProperties, new HashSet<CSharpType> { itemModelType });
+            if (elementPropertiesStatements.Count == 0)
             {
+                return InvokeConsoleWriteLine(item.InvokeToString());
             }
+
+            return new[]
+            {
+                declareElementStatement,
+                elementPropertiesStatements.AsStatement()
+            };
         }
 
-        private void ComposeParsingPageableResponseCodes(InputModelType responseModelType, string pagingItemName, bool allProperties, StringBuilder builder)
+        private MethodBodyStatement ComposeProtocolHandleHeadAsBoolean(ValueExpression client, string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
         {
-            foreach (var property in responseModelType.Properties)
+            return new[]
             {
-                if (property.SerializedName == pagingItemName && property.Type is InputListType listType)
+                new DeclareVariableStatement(typeof(Response<bool>), "response", InvokeClientMethod(client, methodName, arguments, async), out var response),
+                InvokeConsoleWriteLine(new ResponseExpression(response.Invoke(nameof(Response<bool>.GetRawResponse))).Status)
+            };
+        }
+
+        private MethodBodyStatement ComposeProtocolHandleNormalResponse(ValueExpression client, string methodName, IReadOnlyList<ValueExpression> arguments, CSharpType? responseType, bool allProperties, bool async)
+        {
+            return new[]
+            {
+                Declare("response", new ResponseExpression(InvokeClientMethod(client, methodName, arguments, async)), out var response),
+                responseType is null
+                    ? InvokeConsoleWriteLine(response.Status)
+                    : ComposeParsingNormalResponseCodes(response, responseType, allProperties)
+            };
+        }
+
+        private MethodBodyStatement ComposeConvenienceHandleNormalResponseCode(ValueExpression client, string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
+            => Var("result", InvokeClientMethod(client, methodName, arguments, async) with {}, out _);
+
+        private MethodBodyStatement ComposeParsingNormalResponseCodes(ResponseExpression response, CSharpType responseType, bool allProperties)
+        {
+            if (responseType.Equals(typeof(Stream)))
+            {
+                return new IfStatement(NotEqual(response.ContentStream, Null))
                 {
-                    var apiInvocationChainList = new List<IReadOnlyList<string>>();
-                    ComposeResponseParsingCode(allProperties, listType.ElementType, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<InputType> { responseModelType });
-                    var parsingCodes = new List<string>(apiInvocationChainList.Count + 1);
+                    new UsingDeclareVariableStatement(typeof(Stream), "outFileStream", InvokeFileOpenWrite(Literal("<filePath>")), out var outFileStream),
+                    new InvokeInstanceMethodStatement(response.ContentStream, nameof(Stream.CopyTo), outFileStream)
+                };
+            }
 
-                    if (apiInvocationChainList.Count == 0)
-                    {
-                        builder.Append(' ', 4);
-                        builder.AppendLine($"Console.WriteLine(item.ToString());");
-                    }
-                    else
-                    {
-                        builder.Append(' ', 4);
-                        builder.AppendLine($"JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;");
-                        foreach (var apiInvocationChain in apiInvocationChainList)
-                        {
-                            builder.Append(' ', 4);
-                            builder.AppendLine($"Console.WriteLine({string.Join(".", apiInvocationChain)}.ToString());");
-                        }
-                    }
-                    break;
+            var declareResultStatement = Declare("result", JsonDocumentExpression.Parse(response.ContentStream).RootElement, out var result);
+            var elementPropertiesStatements = ComposeResponseParsing(result, responseType, allProperties, new HashSet<CSharpType> { responseType });
+            if (elementPropertiesStatements.Count == 0)
+            {
+                return new[]
+                {
+                    EmptyLine,
+                    InvokeConsoleWriteLine(response.InvokeToString())
+                };
+            }
+
+            return new[]
+            {
+                EmptyLine,
+                declareResultStatement,
+                elementPropertiesStatements.AsStatement()
+            };
+        }
+
+        private IReadOnlyList<MethodBodyStatement> ComposeResponseParsing(JsonElementExpression jsonElement, CSharpType expectedJsonElementType, bool allProperties, HashSet<CSharpType> visitedTypes)
+        {
+            if (TypeFactory.IsList(expectedJsonElementType))
+            {
+                var elementType = expectedJsonElementType.Arguments[0];
+                return !visitedTypes.Contains(elementType)
+                    ? ComposeResponseParsing(jsonElement[0], elementType, allProperties, visitedTypes)
+                    : Array.Empty<MethodBodyStatement>();
+            }
+
+            if (TypeFactory.IsDictionary(expectedJsonElementType))
+            {
+                var valueType = expectedJsonElementType.Arguments[1];
+                return !visitedTypes.Contains(valueType)
+                    ? ComposeResponseParsing(jsonElement.GetProperty("<test>"), valueType, allProperties, visitedTypes)
+                    : Array.Empty<MethodBodyStatement>();
+            }
+
+            if (expectedJsonElementType is { IsFrameworkType: false, Implementation: {} implementation })
+            {
+                switch (implementation)
+                {
+                    case SerializableObjectType objectType: return ComposeResponseParsing(jsonElement, objectType, allProperties, visitedTypes);
+                    case SystemObjectType objectType: return ComposeResponseParsing(jsonElement, objectType, allProperties, visitedTypes);
                 }
             }
+
+            return new[]{InvokeConsoleWriteLine(jsonElement.InvokeToString())};
         }
 
-        private void ComposeHandleNormalResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        private IReadOnlyList<MethodBodyStatement> ComposeResponseParsing(JsonElementExpression jsonElement, SystemObjectType systemObjectType, bool allProperties, HashSet<CSharpType> visitedTypes)
         {
-            var resposneType = "Response";
-            var responseVar = "response";
-            if (clientMethod.RequestMethod.Operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean)
-            {
-                resposneType = "Response<bool>";
-                responseVar = "response.GetRawResponse()";
-            }
-            builder.AppendLine($"{resposneType} response = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.ToList(), MockParameterValue, allParameters)});");
-            if (clientMethod.ResponseBodyType != null)
-            {
-                ComposeParsingNormalResponseCodes(allParameters, clientMethod.ResponseBodyType, responseVar, builder);
-            }
-            else
-            {
-                builder.AppendLine($"Console.WriteLine({responseVar}.Status);");
-            }
-        }
+            var propertiesToExplore = allProperties
+                ? systemObjectType.Properties
+                : systemObjectType.Properties.Where(p => p.IsRequired).ToArray();
 
-        private void ComposeHandleNormalResponseCode(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
-        {
-            // TODO -- need refactor to use CodeWriter and then reduce with Roslyn maybe?
-            var methodSignature = convenienceMethod.Signature;
-            builder.AppendLine($"var result = {(async ? "await " : string.Empty)}client.{methodName}({MockParameterValues(methodSignature.Parameters.ToList(), MockConvenienceParameterValue, allParameters)});");
-        }
-
-        private void ComposeParsingNormalResponseCodes(bool allProperties, InputType responseBodyType, string responseVar, StringBuilder builder)
-        {
-            if (responseBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
+            var statements = new List<MethodBodyStatement>();
+            foreach (var property in propertiesToExplore)
             {
-                using (Scope($"if ({responseVar}.ContentStream != null)", 0, builder, true))
-                {
-                    using (Scope("    using(Stream outFileStream = File.OpenWrite(\"<filePath>\"))", 4, builder, true))
-                    {
-                        builder.AppendLine($"        {responseVar}.ContentStream.CopyTo(outFileStream);");
-                    }
-                }
-                return;
-            }
-
-            var apiInvocationChainList = new List<IReadOnlyList<string>>();
-            ComposeResponseParsingCode(allProperties, responseBodyType, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<InputType>());
-
-            builder.AppendLine();
-
-            if (apiInvocationChainList.Count == 0)
-            {
-                builder.AppendLine($"Console.WriteLine(response.ToString());");
-            }
-            else
-            {
-                builder.AppendLine($"JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;");
-                foreach (var apiInvocationChain in apiInvocationChainList)
-                {
-                    builder.AppendLine($"Console.WriteLine({string.Join(".", apiInvocationChain)}.ToString());");
-                }
-            }
-        }
-
-        private void ComposeResponseParsingCode(bool allProperties, InputType type, List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentApiInvocationChain, HashSet<InputType> visitedTypes)
-        {
-            switch (type)
-            {
-                case InputListType listType:
-                    if (visitedTypes.Contains(listType.ElementType))
-                    {
-                        return;
-                    }
-                    // {parentOp}[0]
-                    var parentOp = currentApiInvocationChain.Pop();
-                    currentApiInvocationChain.Push($"{parentOp}[0]");
-                    ComposeResponseParsingCode(allProperties, listType.ElementType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
-                    return;
-                case InputDictionaryType dictionaryType:
-                    if (visitedTypes.Contains(dictionaryType.ValueType))
-                    {
-                        return;
-                    }
-                    // .GetProperty("<test>")
-                    currentApiInvocationChain.Push("GetProperty(\"<test>\")");
-                    ComposeResponseParsingCode(allProperties, dictionaryType.ValueType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
-                    currentApiInvocationChain.Pop();
-                    return;
-                case InputModelType modelType:
-                    ComposeResponseParsingCode(allProperties, modelType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
-                    return;
-            }
-
-            // primitive types, return
-            AddApiInvocationChainResult(apiInvocationChainList, currentApiInvocationChain);
-        }
-
-        private void ComposeResponseParsingCode(bool allProperties, InputModelType model, List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentApiInvocationChain, HashSet<InputType> visitedTypes)
-        {
-            foreach (var modelOrBase in model.GetSelfAndBaseModels())
-            {
-                if (!modelOrBase.Properties.Any())
+                var propertyType = property.ValueType;
+                if (property.SchemaProperty is null || visitedTypes.Contains(propertyType))
                 {
                     continue;
                 }
 
-                var propertiesToExplore = modelOrBase.Properties;
-                if (!allProperties)
-                {
-                    propertiesToExplore = modelOrBase.Properties.Where(p => p.IsRequired).ToArray();
-                }
-
-                if (propertiesToExplore.Count == 0) // if you have a required property, but its child properties are all optional
-                {
-                    // return the object
-                    AddApiInvocationChainResult(apiInvocationChainList, currentApiInvocationChain);
-                    return;
-                }
-
-                foreach (var property in propertiesToExplore)
-                {
-                    if (!visitedTypes.Contains(property.Type))
-                    {
-                        // .GetProperty("{property_name}")
-                        visitedTypes.Add(property.Type);
-                        currentApiInvocationChain.Push($"GetProperty(\"{property.SerializedName}\")");
-                        ComposeResponseParsingCode(allProperties, property.Type, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
-                        currentApiInvocationChain.Pop();
-                        visitedTypes.Remove(property.Type);
-                    }
-                }
-            }
-        }
-
-        private void AddApiInvocationChainResult(List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentApiInvocationChain)
-        {
-            var finalChain = currentApiInvocationChain.ToList();
-            finalChain.Reverse();
-            apiInvocationChainList.Add(finalChain);
-        }
-
-        private string MockParameterValues(IReadOnlyList<Parameter> parameters, Func<Parameter, string> parameterSelector, bool allParameters)
-        {
-            if (parameters.Count == 0)
-            {
-                return string.Empty;
+                var propertyName = property.SchemaProperty.SerializedName;
+                visitedTypes.Add(propertyType);
+                statements.AddRange(ComposeResponseParsing(jsonElement.GetProperty(propertyName), propertyType, allProperties, visitedTypes));
+                visitedTypes.Remove(propertyType);
             }
 
-            var parameterValues = new List<string>(parameters.Count);
-            for (int i = 0; i < parameters.Count; i++)
+            return statements;
+        }
+
+        private IReadOnlyList<MethodBodyStatement> ComposeResponseParsing(JsonElementExpression jsonElement, SerializableObjectType model, bool allProperties, HashSet<CSharpType> visitedTypes)
+        {
+            var propertiesToExplore = allProperties
+                ? model.JsonSerialization?.Properties
+                : model.JsonSerialization?.Properties.Where(p => p.IsRequired).ToArray();
+
+            if (propertiesToExplore is null || !propertiesToExplore.Any()) // if you have a required property, but its child properties are all optional
             {
-                //skip last param if its optional and cancellation token or request context
-                if (i == parameters.Count - 1 && parameters[i].IsOptionalInSignature && (parameters[i].Type.Equals(typeof(CancellationToken)) || parameters[i].Type.Equals(typeof(RequestContext))))
+                // return the object
+                return new[] {InvokeConsoleWriteLine(jsonElement.InvokeToString())};
+            }
+
+            var statements = new List<MethodBodyStatement>();
+            foreach (var propertySerialization in propertiesToExplore)
+            {
+                var propertyType = propertySerialization.ValueType;
+                if (visitedTypes.Contains(propertyType))
+                {
                     continue;
-
-                if (allParameters || parameters[i].DefaultValue == null)
-                {
-                    parameterValues.Add(parameterSelector(parameters[i]));
                 }
+
+                var propertyName = propertySerialization.SerializedName;
+                visitedTypes.Add(propertyType);
+                statements.AddRange(ComposeResponseParsing(jsonElement.GetProperty(propertyName), propertyType, allProperties, visitedTypes));
+                visitedTypes.Remove(propertyType);
             }
-            return string.Join(", ", parameterValues);
+
+            return statements;
         }
 
-        private string MockConvenienceParameterValue(Parameter parameter)
+        private ValueExpression MockParameterValue(Parameter parameter)
         {
-            if (parameter.RequestLocation == RequestLocation.Body)
+            if (parameter.DefaultValue == null)
             {
-                return $"{parameter.Name}";
+                return MockParameterTypeValue(parameter.Name, parameter.Type, null);
             }
 
-            return MockParameterValue(parameter);
+            var defaultValue = parameter.DefaultValue.Value;
+            if (defaultValue is { IsNewInstanceSentinel: true, Type.IsValueType: true })
+            {
+                return Default;
+            }
+
+            // skip null default value like "string a = null"
+            if (defaultValue.Value == null)
+            {
+                return MockParameterTypeValue(parameter.Name, parameter.Type, null);
+            }
+
+            if (defaultValue.Type.IsFrameworkType && defaultValue.Type.FrameworkType == typeof(string))
+            {
+                return Literal(defaultValue.Value.ToString());
+            }
+
+            return new ConstantExpression(defaultValue);
         }
 
-        private string MockParameterValue(Parameter parameter)
-        {
-            if (parameter.RequestLocation == RequestLocation.Body)
-            {
-                return "RequestContent.Create(data)";
-            }
-
-            if (parameter.DefaultValue != null)
-            {
-                var defaultValue = parameter.DefaultValue.Value;
-                if (defaultValue.IsNewInstanceSentinel && defaultValue.Type.IsValueType)
-                {
-                    return "default";
-                }
-
-                if (defaultValue.Value != null) // skip null default value like "string a = null"
-                {
-                    if (defaultValue.Type.IsFrameworkType && defaultValue.Type.FrameworkType == typeof(string))
-                    {
-                        return $"\"{defaultValue.Value}\"";
-                    }
-                    return JsonSerializer.Serialize(defaultValue.Value);
-                }
-            }
-            return MockParameterTypeValue(parameter.Name, parameter.Type);
-        }
-
-        private string MockParameterTypeValue(string parameterName, CSharpType parameterType)
+        private ValueExpression MockParameterTypeValue(string? propertyName, CSharpType parameterType, SerializationFormat? serializationFormat)
         {
             if (parameterType.IsFrameworkType)
             {
                 var type = parameterType.FrameworkType;
+                var format = serializationFormat?.ToFormatSpecifier();
 
                 // Refer to TypeFactory.cs as how number type is created
-                if (type == typeof(long) || type == typeof(int))
+                if (type == typeof(int))
                 {
-                    return "1234";
+                    return Int(1234);
+                }
+
+                if (type == typeof(long))
+                {
+                    return Long(1234L);
                 }
 
                 if (type == typeof(float))
                 {
-                    return "3.14f";
+                    return Float(3.14f);
                 }
 
                 if (type == typeof(decimal) || type == typeof(double))
                 {
-                    return "3.14";
+                    return Double(3.14);
                 }
 
                 if (type == typeof(string))
                 {
-                    return $"\"<{parameterName}>\"";
+                    return string.IsNullOrWhiteSpace(propertyName) ? Literal("<String>") : Literal($"<{propertyName}>");
                 }
 
                 if (type == typeof(bool))
                 {
-                    return "true";
+                    return Bool(true);
                 }
 
                 if (type == typeof(DateTimeOffset))
                 {
-                    return "DateTimeOffset.UtcNow";
+                    return format is null
+                        ? new MemberExpression(typeof(DateTimeOffset), nameof(DateTimeOffset.UtcNow))
+                        : Literal(TypeFormatters.ToString(new DateTimeOffset(2022, 05, 10, 10, 14, 57, 31, TimeSpan.FromHours(-4)), format));
                 }
 
                 if (type == typeof(DateTime))
                 {
-                    return "DateTime.UtcNow";
+                    return format is null
+                        ? new MemberExpression(typeof(DateTime), nameof(DateTime.UtcNow))
+                        : Literal(TypeFormatters.ToString(new DateTime(2022, 05, 10, 10, 14, 57, 31), format));
                 }
 
                 if (type == typeof(TimeSpan))
                 {
-                    return "new TimeSpan(1, 2, 3)";
+                    return format is null
+                        ? New.TimeSpan(1, 23, 45)
+                        : Literal(TypeFormatters.ToString(new TimeSpan(1, 23, 45), format));
                 }
 
                 if (type == typeof(MatchConditions))
                 {
-                    return "new MatchConditions { IfMatch = new ETag(\"<YOUR_ETAG>\") }";
+                    return new FormattableStringToExpression($"new MatchConditions {{ IfMatch = new ETag(\"<YOUR_ETAG>\") }}");
                 }
 
                 if (type == typeof(Guid))
                 {
-                    return "Guid.NewGuid()";
+                    return serializationFormat.HasValue
+                        ? Literal("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
+                        : InvokeGuidNewGuid();
                 }
 
                 if (type == typeof(Uri))
                 {
-                    return "new Uri(\"http://localhost:3000\")";
+                    return serializationFormat.HasValue
+                        ? Literal("http://localhost:3000")
+                        : New.Uri("http://localhost:3000");
                 }
 
                 if (type == typeof(WaitUntil))
                 {
                     // use `Completed`, since we will not generate `operation.WaitForCompletion()` afterwards
-                    return $"{nameof(WaitUntil)}.{nameof(WaitUntil.Completed)}";
+                    return FrameworkEnumValue(WaitUntil.Completed);
                 }
 
                 if (type.IsEnum)
                 {
-                    return $"{type.Name}.{Enum.GetNames(type)[0]}";
+                    return serializationFormat.HasValue
+                        ? Literal(Enum.GetNames(type)[0])
+                        : new MemberExpression(type, Enum.GetNames(type)[0]);
                 }
 
                 if (type == typeof(ContentType))
                 {
-                    return $"{nameof(ContentType)}.{nameof(ContentType.ApplicationOctetStream)}"; // stick to octect-stream?
+                    return new MemberExpression(typeof(ContentType), nameof(ContentType.ApplicationOctetStream)); // stick to octect-stream?
                 }
 
                 if (type == typeof(IEnumerable<>))
                 {
                     var elementType = parameterType.Arguments[0];
-                    return $"new {elementType.Name}[]{{{MockParameterTypeValue(parameterName, elementType)}}}";
+                    return New.Array(elementType, true, MockParameterTypeValue(propertyName, elementType, null));
                 }
 
                 if (type == typeof(IDictionary<,>))
                 {
                     var valueType = parameterType.Arguments[1];
-                    return $"new Dictionary<string, {valueType.Name}>{{ \"<test>\" = {MockParameterTypeValue(parameterName, valueType)} }}";
+                    return New.Dictionary(typeof(string), valueType, (Literal("test"), MockParameterTypeValue(propertyName, valueType, null)));
                 }
 
                 if (type == typeof(BinaryData))
                 {
-                    return $"BinaryData.FromString(\"<your binary data content>\")";
+                    return BinaryDataExpression.FromString(Literal("<your binary data content>"));
                 }
 
-                if (type == typeof(RequestContext))
+                if (type == typeof(Stream))
                 {
-                    return $"new RequestContext()";
+                    return InvokeFileOpenRead(Literal("<filePath>"));
                 }
 
                 if (type == typeof(JsonElement))
                 {
-                    return $"new JsonElement()";
+                    return serializationFormat.HasValue
+                        ? Literal("{}")
+                        : Default;
                 }
 
-                if (type == typeof(object))
+                if (type.GetConstructor(Type.EmptyTypes) is not null)
                 {
-                    return $"new object()";
+                    return New.Instance(type);
                 }
             }
 
-            return "null"; // some unknown found
+            return Null; // some unknown found
         }
 
-        private void ComposeRequestContent(bool composeAll, InputType requestBodyType, StringBuilder builder)
+        private JsonSerialization GetTypeSerialization(InputType inputType)
         {
-            // var data = {value_expression};
-            builder.Append("var data = ");
-            builder.Append(ComposeRequestContent(composeAll, requestBodyType, null, 0, new HashSet<InputModelType>()));
-            builder.AppendLine(";");
-        }
+            var outputType = _typeFactory.CreateType(inputType);
 
-        private void ComposeBodyParameter(bool composeAll, Parameter bodyParameter, StringBuilder builder)
-        {
-            // var <parameterName> = {value_expression};
-            builder.Append($"var {bodyParameter.Name} = ");
-            builder.Append(ComposeCSharpType(composeAll, bodyParameter.Type, null, 0, true, new HashSet<ObjectType>()));
-            builder.AppendLine(";");
-        }
-
-        private string ComposeRequestContent(bool allProperties, InputType inputType, string? propertyDescription, int indent, HashSet<InputModelType> visitedModels) => inputType switch
-        {
-            InputListType listType => ComposeArrayRequestContent(allProperties, listType.ElementType, indent, visitedModels),
-            InputDictionaryType dictionaryType => ComposeDictionaryRequestContent(allProperties, dictionaryType.ValueType, indent, visitedModels),
-            InputEnumType enumType => $"\"{enumType.AllowedValues.First().Value}\"",
-            InputPrimitiveType primitiveType => primitiveType.Kind switch
+            return inputType switch
             {
-                InputTypeKind.Stream => "File.OpenRead(\"<filePath>\")",
-                InputTypeKind.Boolean => "true",
-                InputTypeKind.Date => "\"2022-05-10\"",
-                InputTypeKind.DateTime => "\"2022-05-10T14:57:31.2311892-04:00\"",
-                InputTypeKind.DateTimeISO8601 => "\"2022-05-10T18:57:31.2311892Z\"",
-                InputTypeKind.DateTimeRFC1123 => "\"Tue, 10 May 2022 18:57:31 GMT\"",
-                InputTypeKind.DateTimeRFC3339 => "\"2022-05-10T18:57:31.2311892Z\"",
-                InputTypeKind.DateTimeRFC7231 => "\"Tue, 10 May 2022 18:57:31 GMT\"",
-                InputTypeKind.DateTimeUnix => "\"1652209051\"",
-                InputTypeKind.Float32 => "123.45f",
-                InputTypeKind.Float64 => "123.45d",
-                InputTypeKind.Float128 => "123.45m",
-                InputTypeKind.Guid => "\"73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a\"",
-                InputTypeKind.Int32 => "1234",
-                InputTypeKind.Int64 => "1234L",
-                InputTypeKind.String => string.IsNullOrWhiteSpace(propertyDescription) ? "\"<String>\"" : $"\"<{propertyDescription}>\"",
-                InputTypeKind.DurationISO8601 => "\"PT1H23M45S\"",
-                InputTypeKind.DurationConstant => "\"01:23:45\"",
-                InputTypeKind.Time => "\"01:23:45\"",
-                InputTypeKind.Uri => "\"http://localhost:3000\"",
-                _ => "new {}"
-            },
-            InputLiteralType literalType => ComposeRequestContentForLiteral(literalType),
-            InputModelType modelType => ComposeModelRequestContent(allProperties, modelType, indent, visitedModels),
-            _ => "new {}"
-        };
-
-        private static string ComposeRequestContentForLiteral(InputLiteralType literalType)
-        {
-            var kind = literalType.LiteralValueType switch
-            {
-                InputPrimitiveType primivateType => primivateType.Kind,
-                InputEnumType enumType => enumType.EnumValueType.Kind,
-                _ => throw new InvalidOperationException($"Unsupported type for literal {literalType}")
-            };
-            return kind switch
-            {
-                InputTypeKind.String => $"\"{literalType.Value}\"",
-                InputTypeKind.Boolean => (bool)literalType.Value ? "true" : "false",
-                _ => literalType.Value.ToString()!, // this branch we could get "int", "float". Calling ToString here will get the literal value of it without the quote.
+                InputListType listType => new JsonArraySerialization(TypeFactory.GetImplementationType(outputType), GetTypeSerialization(listType.ElementType), false),
+                InputDictionaryType dictionaryType => new JsonDictionarySerialization(TypeFactory.GetImplementationType(outputType), GetTypeSerialization(dictionaryType.ValueType), false),
+                _ => new JsonValueSerialization(outputType, SerializationBuilder.GetSerializationFormat(inputType), false)
             };
         }
 
-        private string ComposeCSharpType(bool allProperties, CSharpType type, string? propertyDescription, int indent, bool includeCollectionInitialization, HashSet<ObjectType> visitedModels) => type switch
+        private ValueExpression ComposeConvenienceCSharpTypeInstance(bool allProperties, CSharpType type, string? propertyDescription, bool includeCollectionInitialization, HashSet<ObjectType> visitedModels) => type switch
         {
-            _ when TypeFactory.IsIEnumerableOfT(type) => ComposeArrayCSharpType(allProperties, type.Arguments.Single(), indent, includeCollectionInitialization, visitedModels), // IEnumerable<T> is guaranteed to have one and only one generic parameter
-            _ when TypeFactory.IsReadWriteList(type) => ComposeArrayCSharpType(allProperties, type.Arguments.Single(), indent, includeCollectionInitialization, visitedModels), // IList<T> is guaranteed to have one and only one generic parameter
-            _ when TypeFactory.IsReadWriteDictionary(type) => ComposeDictionaryCSharpType(allProperties, type.Arguments[0], type.Arguments[1], indent, includeCollectionInitialization, visitedModels), // IDictionary<K, V> is guaranteed to have two generic parameters
-            { IsFrameworkType: true } => MockParameterTypeValue(propertyDescription ?? "null", type),
-            { IsFrameworkType: false, Implementation: ObjectType objectType } => ComposeObjectType(allProperties, objectType, indent, visitedModels),
-            { IsFrameworkType: false, Implementation: EnumType enumType } => $"{enumType.Type.Name}.{enumType.Values.First().Declaration.Name}",
-            _ => "null",
+            _ when TypeFactory.IsList(type) => ComposeConvenienceArrayCSharpType(allProperties, type.Arguments.Single(), includeCollectionInitialization, visitedModels), // IList<T> is guaranteed to have one and only one generic parameter
+            _ when TypeFactory.IsDictionary(type) => ComposeConvenienceDictionaryInstance(allProperties, type.Arguments[0], type.Arguments[1], includeCollectionInitialization, visitedModels), // IDictionary<K, V> is guaranteed to have two generic parameters
+            { IsFrameworkType: true } => MockParameterTypeValue(propertyDescription, type, null),
+            { Implementation: SerializableObjectType objectType } => ComposeObjectType(GetMostConcreteModel(objectType), allProperties, visitedModels),
+            { Implementation: EnumType enumType } => EnumValue(enumType, enumType.Values.First()),
+            _ => Null
         };
 
-        private string ComposeArrayRequestContent(bool allProperties, InputType elementType, int indent, HashSet<InputModelType> visitedModels)
+
+        private ValueExpression ComposeProtocolCSharpTypeInstance(bool allProperties, JsonSerialization? serialization, string? propertyName, HashSet<ObjectType> visitedModels) => serialization switch
         {
-            /* GENERATED CODE PATTERN
-             * new[] {
-             *     {element_expression}
-             * }
-             * or
-             * new[] {}
-             */
+            JsonArraySerialization array => ComposeProtocolArrayCSharpType(allProperties, array, visitedModels),
+            JsonDictionarySerialization dictionary => ComposeProtocolDictionaryInstance(allProperties, dictionary, visitedModels),
+            JsonValueSerialization { Type.IsFrameworkType: true } value => MockParameterTypeValue(propertyName, value.Type, value.Format),
+            JsonValueSerialization { Type.Implementation: SerializableObjectType model } => ComposeAnonymousObjectType(GetMostConcreteModel(model), allProperties, visitedModels),
+            JsonValueSerialization { Type.Implementation: EnumType enumType } => new ConstantExpression(enumType.Values.First().Value),
+            _ => Null
+        };
 
-            var elementExpr = ComposeRequestContent(allProperties, elementType, null, indent + 4, visitedModels);
-            if (elementExpr == string.Empty)
-            {
-                return "new[] {}";
-            }
-
-            var builder = new StringBuilder();
-            using (Scope("new[] ", indent, builder))
-            {
-                builder.Append(' ', indent + 4).Append(elementExpr).AppendLine();
-            }
-            return builder.ToString();
-        }
-
-        private string ComposeArrayCSharpType(bool allProperties, CSharpType elementType, int indent, bool includeCollectionInitialization, HashSet<ObjectType> visitedModels)
+        private ValueExpression ComposeConvenienceArrayCSharpType(bool allProperties, CSharpType elementType, bool includeCollectionInitialization, HashSet<ObjectType> visitedModels)
         {
             /* GENERATED CODE PATTERN
              * new <TypeName>[] {
@@ -902,56 +840,30 @@ namespace AutoRest.CSharp.Generation.Writers
              * or
              * Array.Empty<TypeName>()
              */
-
-            var elementName = elementType.ConvertParamNameForCode();
-            if (elementName == "IList")
+            if (IsVisitedModel(elementType, visitedModels))
             {
-                elementName = $"{elementType.Arguments[0].Name}[]";
-            }
-            if (elementName == "IDictionary")
-            {
-                elementName = $"Dictionary<string,{elementType.Arguments[1].Name}>";
+                return includeCollectionInitialization
+                    ? New.Array(elementType)
+                    : new ArrayInitializerExpression(null, false);
             }
 
-            var elementExpr = ComposeCSharpType(allProperties, elementType, null, indent + 4, includeCollectionInitialization, visitedModels);
-            if (elementExpr == string.Empty)
-            {
-                return includeCollectionInitialization ? $"Array.Empty<{elementName}>()" : "{}";
-            }
-
-            var builder = new StringBuilder();
-            builder.AppendLine(includeCollectionInitialization ? $"new {elementName}[] " : "");
-            using (Scope("", indent, builder))
-            {
-                builder.Append(' ', indent + 4).Append(elementExpr).AppendLine();
-            }
-            return builder.ToString();
+            var arrayElement = ComposeConvenienceCSharpTypeInstance(allProperties, elementType, null, includeCollectionInitialization, visitedModels);
+            return includeCollectionInitialization
+                ? New.Array(elementType, false, arrayElement)
+                : new ArrayInitializerExpression(new[]{arrayElement}, false);
         }
 
-        private string ComposeDictionaryRequestContent(bool allProperties, InputType elementType, int indent, HashSet<InputModelType> visitedModels)
+        private ValueExpression ComposeProtocolArrayCSharpType(bool allProperties, JsonArraySerialization serialization, HashSet<ObjectType> visitedModels)
         {
             /* GENERATED CODE PATTERN
-             * new {
-             *     key = {value_expression},
+             * new[] {
+             *     {element_expression}
              * }
-             * or
-             * new {}
              */
-            var valueExpr = ComposeRequestContent(allProperties, elementType, null, indent + 4, visitedModels);
-            if (valueExpr == string.Empty)
-            {
-                return "new {}";
-            }
-
-            var builder = new StringBuilder();
-            using (Scope("new ", indent, builder))
-            {
-                builder.Append(' ', indent + 4).AppendLine($"key = {valueExpr},");
-            }
-            return builder.ToString();
+            return New.Array(null, false, ComposeProtocolCSharpTypeInstance(allProperties, serialization.ValueSerialization, null, visitedModels));
         }
 
-        private string ComposeDictionaryCSharpType(bool allProperties, CSharpType keyType, CSharpType valueType, int indent, bool includeCollectionInitialization, HashSet<ObjectType> visitedModels)
+        private ValueExpression ComposeConvenienceDictionaryInstance(bool allProperties, CSharpType keyType, CSharpType valueType, bool includeCollectionInitialization, HashSet<ObjectType> visitedModels)
         {
             /* GENERATED CODE PATTERN
              * new Dictionary<{keyType}, {valueType}>{
@@ -960,237 +872,216 @@ namespace AutoRest.CSharp.Generation.Writers
              * or
              * new Dictionary<{keyType}, {valueType}>()
              */
-            var valueExpr = ComposeCSharpType(allProperties, valueType, null, indent + 4, includeCollectionInitialization, visitedModels);
-            var keyExpr = keyType.Equals(typeof(int)) ? "0" : "\"key\""; //handle dictionary with int key
-            if (valueExpr == string.Empty)
+
+            if (IsVisitedModel(valueType, visitedModels))
             {
-                return includeCollectionInitialization ? $"new Dictionary<{keyType.ConvertParamNameForCode()}, {valueType.ConvertParamNameForCode()}>()" : "{}";
+                return includeCollectionInitialization
+                    ? New.Dictionary(keyType, valueType)
+                    : new DictionaryInitializerExpression();
             }
 
-            var builder = new StringBuilder();
-            builder.AppendLine(includeCollectionInitialization ? $"new Dictionary<{keyType.ConvertParamNameForCode()}, {valueType.ConvertParamNameForCode()}>" : "");
-            using (Scope("", indent, builder))
-            {
-                builder.Append(' ', indent + 4).AppendLine($"[{keyExpr}] = {valueExpr},");
-            }
-            return builder.ToString();
+            var keyExpr = keyType.Equals(typeof(int)) ? Int(0) : Literal("key"); //handle dictionary with int key
+            var valueExpr = ComposeConvenienceCSharpTypeInstance(allProperties, valueType, null, includeCollectionInitialization, visitedModels);
+            return includeCollectionInitialization
+                ? New.Dictionary(keyType, valueType, (keyExpr, valueExpr))
+                : new DictionaryInitializerExpression(new[]{(keyExpr, valueExpr)});
         }
 
-        private string ComposeModelRequestContent(bool allProperties, InputModelType model, int indent, HashSet<InputModelType> visitedModels)
+        private ValueExpression ComposeProtocolDictionaryInstance(bool allProperties, JsonDictionarySerialization serialization, HashSet<ObjectType> visitedModels)
         {
-            using (visitedModels.Push(model))
+            /* GENERATED CODE PATTERN
+             * new Dictionary<{keyType}, {valueType}>{
+             *     [key] = {value_expression},
+             * }
+             * or
+             * new Dictionary<{keyType}, {valueType}>()
+             */
+
+            var keyType = serialization.Type.Arguments[0];  // IDictionary<K, V> is guaranteed to have two generic parameters
+            var valueType = serialization.Type.Arguments[1];
+
+            var valueExpr = ComposeProtocolCSharpTypeInstance(allProperties, serialization.ValueSerialization, null, visitedModels);
+            if (keyType.Equals(typeof(int))) //handle dictionary with int key
             {
-                /* GENERATED CODE PATTERN
-                         * new {
-                         *     prop1 = {value_expression},
-                         *     prop2 = {value_expression},
-                         *     ...
-                         * }
-                         * or
-                         * new {}
-                         */
-                var properties = new List<InputModelProperty>();
-                // We must also include any properties introduced by our parent chain.
-                // Try to get the concrete child type for polymorphism
-                var concreteModel = GetConcreteChildModel(model);
-                foreach (var modelOrBase in concreteModel.GetSelfAndBaseModels())
-                {
-                    if (allProperties)
-                    {
-                        properties.AddRange(modelOrBase.Properties.Where(p => !p.IsReadOnly));
-                    }
-                    else
-                    {
-                        properties.AddRange(modelOrBase.Properties.Where(p => p.IsRequired && !p.IsReadOnly));
-                    }
-                }
-
-                if (!properties.Any())
-                {
-                    return "new {}";
-                }
-
-                //remove references to my stack
-                _ = properties.RemoveAll(p =>
-                    visitedModels.Contains(p.Type) ||
-                    (p.Type is InputListType inputListType && visitedModels.Contains(inputListType.ElementType)) ||
-                    (p.Type is InputDictionaryType inputDictionaryType && visitedModels.Contains(inputDictionaryType.ValueType)));
-
-                var propertyExpressions = new List<string>();
-                foreach (var property in properties)
-                {
-                    string propertyValueExpr;
-                    if (property.IsDiscriminator)
-                    {
-                        propertyValueExpr = property.Type is InputPrimitiveType { Kind: InputTypeKind.Boolean } or InputPrimitiveType { IsNumber: true } ? $"{concreteModel.DiscriminatorValue}" : $"\"{concreteModel.DiscriminatorValue}\"";
-                    }
-                    else
-                    {
-                        propertyValueExpr = ComposeRequestContent(allProperties, property.Type, property.SerializedName, indent + 4, visitedModels);
-
-                    }
-
-                    if (propertyValueExpr != "")
-                    {
-                        var propertyExprBuilder = new StringBuilder();
-                        propertyExprBuilder.Append(' ', indent + 4).Append($"{FixKeyWords(property.SerializedName!)} = {propertyValueExpr},");
-                        propertyExpressions.Add(propertyExprBuilder.ToString());
-                    }
-                }
-
-                if (propertyExpressions.Count == 0)
-                {
-                    return "new {}";
-                }
-
-                var builder = new StringBuilder();
-                using (Scope("new ", indent, builder))
-                {
-                    foreach (var expr in propertyExpressions)
-                    {
-                        builder.AppendLine(expr);
-                    }
-                }
-                return builder.ToString();
+                return New.Dictionary(keyType, valueType, (Int(0), valueExpr));
             }
+
+            return New.Anonymous("key", valueExpr);
         }
 
-        private string ComposeObjectType(bool allProperties, ObjectType model, int indent, HashSet<ObjectType> visitedModels)
+        private static bool IsVisitedModel(JsonSerialization? serialization, IReadOnlySet<ObjectType> visitedModels) => serialization switch
         {
-            if (visitedModels.Contains(model))
-                return string.Empty;
+            JsonArraySerialization array => IsVisitedModel(array.ValueSerialization, visitedModels),
+            JsonDictionarySerialization dictionary => IsVisitedModel(dictionary.ValueSerialization, visitedModels),
+            JsonValueSerialization { Type.IsFrameworkType: false, Type.Implementation: SerializableObjectType model } => visitedModels.Contains(GetMostConcreteModel(model)),
+            _ => false
+        };
 
-            using (visitedModels.Push(model))
+        private static bool IsVisitedModel(CSharpType valueType, IReadOnlySet<ObjectType> visitedModels)
+            => valueType is { IsFrameworkType: false, Implementation: ObjectType objectType } && visitedModels.Contains(objectType);
+
+        private ValueExpression ComposeObjectType(ObjectType model, bool allProperties, HashSet<ObjectType> visitedModels)
+        {
+            visitedModels.Add(model);
+            if (model.Discriminator is { Implementations.Length: > 0 })
             {
-                if (model.Discriminator != null && model.Discriminator.Implementations.Length > 0)
-                {
-                    model = model.Discriminator.Implementations.Where(i => !i.Type.IsFrameworkType && i.Type.Implementation is ObjectType).Select(i => (i.Type.Implementation as ObjectType)!).First();
-                }
+                model = model.Discriminator.Implementations
+                    .Where(i => i.Type is { IsFrameworkType: false })
+                    .Select(i => i.Type.Implementation as ObjectType)
+                    .WhereNotNull()
+                    .First();
+            }
 
-                /* GENERATED CODE PATTERN
-                         * new <ModelName>(parameterInCtor1, parameterInCtor2) {
-                         *     propNotInCtor1 = {value_expression},
-                         *     propNotInCtor2 = {value_expression},
-                         *     ...
-                         * }
-                         */
-                // TODO -- rewrite this logic to use CodeWriterExtensions.WriteInitialization when we migrate to use CodeWriter. The WriteInitialization method will make the logic here a lot simpler
-                var builder = new StringBuilder();
-                var concreteModel = GetConcreteChildModel(model);
-                var ctor = model.InitializationConstructor;
-                // write the ctor
-                var parameterExpressions = new List<string>();
-                foreach (var parameter in ctor.Signature.Parameters)
-                {
-                    var parameterExpr = ComposeCSharpType(allProperties, parameter.Type, parameter.Name, indent, true, visitedModels);
-                    parameterExpressions.Add(parameterExpr);
-                }
-                builder.Append($"new {model.Type.Name}(")
-                    .Append(string.Join(", ", parameterExpressions))
-                    .Append(")");
+            /* GENERATED CODE PATTERN
+             * new <ModelName>(parameterInCtor1, parameterInCtor2)
+             * {
+             *     propNotInCtor1 = {value_expression},
+             *     propNotInCtor2 = {value_expression},
+             *     ...
+             * }
+             */
 
-                // find other properties
-                if (allProperties)
-                {
+            var ctor = model.InitializationConstructor;
+            // write the ctor
+
+            var arguments = ctor.Signature.Parameters
+                .Select(parameter => ComposeConvenienceCSharpTypeInstance(allProperties, parameter.Type, parameter.Name, true, visitedModels))
+                .ToList();
+
+            // find other properties
+            var propertyExpressions = allProperties
                     // get all properties on this model, and then only keep those do not have an initializer on the ctor, which means they are not covered by the signature of the ctor
-                    var propertiesToWrite = model.EnumerateHierarchy().SelectMany(model => model.Properties).Distinct()
-                        .Where(p => p.Declaration.Accessibility == "public" && ctor.FindParameterByInitializedProperty(p) == null && IsPropertyAssignable(p));
+                ? model.EnumerateHierarchy()
+                    .SelectMany(m => m.Properties).Distinct()
+                    .Where(p => p.Declaration.Accessibility == "public" && ctor.FindParameterByInitializedProperty(p) == null && IsPropertyAssignable(p))
+                    .Where(p => !IsVisitedModel(p.Declaration.Type, visitedModels))
+                    .ToDictionary(p => p.Declaration.Name, p => ComposeConvenienceCSharpTypeInstance(allProperties, p.Declaration.Type, p.Declaration.Name, false, visitedModels))
+                : null;
 
-                    var propertyExpressions = new List<string>();
-                    foreach (var property in propertiesToWrite)
-                    {
-                        var propertyExpr = ComposeCSharpType(allProperties, property.Declaration.Type, property.Declaration.Name, indent + 4, false, visitedModels);
-                        if (propertyExpr != string.Empty)
-                        {
-                            propertyExpressions.Add($"{property.Declaration.Name} = {propertyExpr},");
-                        }
-                    }
+            visitedModels.Remove(model);
 
-                    if (propertyExpressions.Any())
-                    {
-                        builder.AppendLine();
-                        using (Scope("", indent, builder))
-                        {
-                            foreach (var propertyExpr in propertyExpressions)
-                            {
-                                builder.Append(' ', indent + 4).AppendLine(propertyExpr);
-                            }
-                        }
-                    }
-                }
+            return new NewInstanceExpression(model.Type, arguments, new ObjectInitializerExpression(propertyExpressions, IsInline: false));
+        }
 
+        private ValueExpression ComposeAnonymousObjectType(SerializableObjectType model, bool allProperties, HashSet<ObjectType> visitedModels)
+        {
+            visitedModels.Add(model);
+            /* GENERATED CODE PATTERN
+             * new
+             * {
+             *     propNotInCtor1 = {value_expression},
+             *     propNotInCtor2 = {value_expression},
+             *     ...
+             * }
+             */
 
-                return builder.ToString();
+            var propertyExpressions = model.JsonSerialization?.Properties
+                .Where(p => !p.ShouldSkipSerialization && !IsVisitedModel(p.ValueSerialization, visitedModels) && (allProperties || p.IsRequired))
+                .ToDictionary(p => p.SerializedName, p => ComposeProtocolPropertyValue(p, visitedModels, model.Discriminator, allProperties));
 
+            visitedModels.Remove(model);
+
+            if (propertyExpressions is not null && propertyExpressions.Keys.Any(name => StringExtensions.IsCSharpKeyword(name) || !name.IsValidIdentifier()))
+            {
+                return New.Dictionary(typeof(string), typeof(object), propertyExpressions.Select(kvp => (Literal(kvp.Key), kvp.Value)).ToArray());
             }
+
+            return New.Anonymous(propertyExpressions);
+        }
+
+        private ValueExpression ComposeProtocolPropertyValue(JsonPropertySerialization propertySerialization, HashSet<ObjectType> visitedModels, ObjectTypeDiscriminator? discriminator, bool allProperties)
+        {
+            if (discriminator is not null && discriminator.SerializedName == propertySerialization.SerializedName && discriminator.Value is {} discriminatorValue)
+            {
+                return new ConstantExpression(discriminatorValue is { Value: EnumTypeValue enumValue } ? enumValue.Value : discriminatorValue);
+            }
+
+            return ComposeProtocolCSharpTypeInstance(allProperties, propertySerialization.ValueSerialization, propertySerialization.SerializedName, visitedModels);
+        }
+
+        private static SerializableObjectType GetMostConcreteModel(SerializableObjectType model)
+        {
+            while (model.Discriminator is { Implementations.Length: > 0 })
+            {
+                model = model.Discriminator.Implementations
+                    .Where(i => i.Type is { IsFrameworkType: false })
+                    .Select(i => i.Type.Implementation as SerializableObjectType)
+                    .WhereNotNull()
+                    .First();
+            }
+
+            return model;
         }
 
         private static bool IsPropertyAssignable(ObjectTypeProperty property)
             => TypeFactory.IsReadWriteDictionary(property.Declaration.Type) || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly;
 
-        private string FixKeyWords(string serializedName)
+        private MethodBodyStatement ComposeGetClient(out ValueExpression client)
         {
-            // TODO -- this is incorrect, we should never change the property name here otherwise the serialized request content is wrong
-            // if the name changed after calling this method, we should use a dictionary instead of using anonymous object
-            var result = serializedName.Replace('-', '_').Replace(".", string.Empty);
-            return SyntaxFacts.GetKeywordKind(result) == SyntaxKind.None ? result : $"@{result}";
-        }
+            var statements = new List<MethodBodyStatement>();
+            var clientConstructor = ClientInvocationChain[0].GetEffectiveCtor()!;
 
-        private void ComposeGetClientCodes(StringBuilder builder)
-        {
-            var clientConstructor = ClientInvocationChain[0];
+            ValueExpression? credential = null;
             if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(KeyAuthType)))
             {
-                builder.AppendLine("var credential = new AzureKeyCredential(\"<key>\");");
+                statements.Add(Var("credential", New.Instance(KeyAuthType, Literal("<key>")), out credential));
             }
             else if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(TokenAuthType)))
             {
-                builder.AppendLine("var credential = new DefaultAzureCredential();");
+                // [TODO] DefaultAzureCredential is in Azure.Identity package, so we can't reference it by type
+                statements.Add(Var("credential", new FormattableStringToExpression($"new DefaultAzureCredential()"), out credential));
             }
 
+            ValueExpression? endpoint = null;
             if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(UriType)))
             {
-                builder.AppendLine($"var endpoint = new Uri(\"<{GetEndpoint()}>\");");
+                statements.Add(Var("endpoint", New.Uri($"<{GetEndpoint()}>"), out endpoint));
             }
 
-            var code = $"var client = new {ClientInvocationChain[0].Name}({MockClientConstructorParameterValues(ClientInvocationChain[0].Parameters)})";
+            var newClientArguments = MockClientConstructorParameterValues(clientConstructor.Parameters, endpoint, credential);
+            var newClientExpression = New.Instance(ClientInvocationChain[0].Type, newClientArguments);
 
             if (ClientInvocationChain.Count > 1)
             {
                 for (int i = 1; i < ClientInvocationChain.Count; i++)
                 {
-                    var factoryMethod = ClientInvocationChain[i];
-                    code += GetFactoryMethodCode(factoryMethod);
+                    var factoryMethod = ClientInvocationChain[i].FactoryMethod!.Signature;
+                    newClientExpression = newClientExpression.Invoke(factoryMethod.Name, factoryMethod.Parameters.Select(MockParameterValue).ToList());
                 }
             }
-            builder.Append(code).AppendLine(";");
+
+            statements.Add(Var("client", newClientExpression, out client));
+
+            return statements;
         }
 
-        private string MockClientConstructorParameterValues(IReadOnlyList<Parameter> parameters)
+        private ValueExpression[] MockClientConstructorParameterValues(IReadOnlyList<Parameter> parameters, ValueExpression? endpoint, ValueExpression? credential)
         {
-            var parameterValues = new List<string>(parameters.Count);
-            foreach (var parameter in parameters)
+            var parameterValues = new ValueExpression[parameters.Count];
+            for (var i = 0; i < parameters.Count; i++)
             {
+                Parameter? parameter = parameters[i];
                 if (parameter.Type.EqualsIgnoreNullable(UriType))
                 {
-                    parameterValues.Add("endpoint");
+                    parameterValues[i] = endpoint!;
                 }
                 else if (parameter.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase))
                 {
                     // sometimes the endpoint parameter cannot be generated as Uri type, best efforts to guesss it
                     // see: https://github.com/Azure/autorest/issues/4571
-                    parameterValues.Add($"\"<{GetEndpoint()}>\"");
+                    parameterValues[i] = Literal($"<{GetEndpoint()}>");
                 }
                 else if (parameter.Type.EqualsIgnoreNullable(KeyAuthType) || parameter.Type.EqualsIgnoreNullable(TokenAuthType))
                 {
-                    parameterValues.Add("credential");
+                    parameterValues[i] = credential!;
                 }
                 else
                 {
-                    parameterValues.Add(MockParameterValue(parameter));
+                    parameterValues[i] = MockParameterValue(parameter);
                 }
             }
-            return string.Join(", ", parameterValues);
+
+            return parameterValues;
         }
 
         /// <summary>
@@ -1198,12 +1089,12 @@ namespace AutoRest.CSharp.Generation.Writers
         /// It's composed of a constructor of non-subclient and a optional list of subclient factory methods.
         /// </summary>
         /// <returns></returns>
-        private static IReadOnlyList<MethodSignatureBase> GetClientInvocationChain(LowLevelClient client)
+        private static IReadOnlyList<LowLevelClient> GetClientInvocationChain(LowLevelClient client)
         {
-            var callChain = new Stack<MethodSignatureBase>();
+            var callChain = new Stack<LowLevelClient>();
             while (client.FactoryMethod != null)
             {
-                callChain.Push(client.FactoryMethod.Signature);
+                callChain.Push(client);
                 if (client.ParentClient == null)
                 {
                     break;
@@ -1211,14 +1102,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 client = client.ParentClient;
             }
-            callChain.Push(client.GetEffectiveCtor()!);
+            callChain.Push(client);
 
             return callChain.ToList();
-        }
-
-        private string GetFactoryMethodCode(MethodSignatureBase factoryMethod)
-        {
-            return $".{factoryMethod.Name}({MockParameterValues(factoryMethod.Parameters, MockParameterValue, true)})";
         }
 
         private static string GetEndpoint()
@@ -1228,49 +1114,9 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         private static InputModelType GetConcreteChildModel(InputModelType model)
-            => model.DerivedModels.Any() ? model.DerivedModels[0] : model;
+            => model;//.DerivedModels.Any() ? model.DerivedModels[0] : model;
 
-        private static ObjectType GetConcreteChildModel(ObjectType model)
-        {
-            if (!model.Declaration.IsAbstract || model.Discriminator is not { } discriminator || !discriminator.Implementations.Any())
-                return model;
-
-            var nonAbstractType = discriminator.Implementations.Select(impl => impl.Type).First(type => type.TryCast<ObjectType>(out var objectType) && !objectType.Declaration.IsAbstract);
-            return (ObjectType)nonAbstractType.Implementation; // we selected this type by asserting it is ObjectType therefore this will never fail
-        }
-
-        private CodeScope Scope(string content, int indent, StringBuilder builder, bool encloseWithNewLine = false)
-        {
-            builder.Append(content);
-            if (encloseWithNewLine)
-            {
-                builder.AppendLine().Append(' ', indent);
-            }
-            builder.AppendLine("{");
-            return new CodeScope(builder, indent, encloseWithNewLine);
-        }
-
-        private class CodeScope : IDisposable
-        {
-            private StringBuilder Builder { get; }
-            private int Indent { get; }
-            private bool EncloseWithNewLine { get; }
-
-            internal CodeScope(StringBuilder builder, int indent, bool encloseWithNewLine)
-            {
-                Builder = builder;
-                Indent = indent;
-                EncloseWithNewLine = encloseWithNewLine;
-            }
-
-            public void Dispose()
-            {
-                Builder.Append(' ', Indent).Append("}");
-                if (EncloseWithNewLine)
-                {
-                    Builder.AppendLine();
-                }
-            }
-        }
+        private static ValueExpression InvokeClientMethod(ValueExpression client, string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
+            => new InvokeInstanceMethodExpression(client, methodName, arguments, null, async, AddConfigureAwaitFalse: false);
     }
 }

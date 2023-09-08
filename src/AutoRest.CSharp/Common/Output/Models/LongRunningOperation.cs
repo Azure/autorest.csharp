@@ -8,6 +8,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Types;
@@ -19,11 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class LongRunningOperation : TypeProvider
     {
-        public LongRunningOperation(InputOperation operation, BuildContext context, LongRunningOperationInfo lroInfo) : this(operation, context, lroInfo, lroInfo.ClientPrefix + operation.CleanName + "Operation")
-        {
-        }
-
-        protected LongRunningOperation(InputOperation operation, BuildContext context, LongRunningOperationInfo lroInfo, string defaultName) : base(context)
+        public LongRunningOperation(InputOperation operation, TypeFactory typeFactory, string accessibility, string clientPrefix, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             Debug.Assert(operation.LongRunning != null);
 
@@ -34,28 +31,28 @@ namespace AutoRest.CSharp.Output.Models.Requests
 
             if (finalResponseType != null)
             {
-                ResultType = TypeFactory.GetOutputType(context.TypeFactory.CreateType(finalResponseType with {IsNullable = false}));
-                ResultSerialization = SerializationBuilder.Build(finalResponse.BodyMediaType, finalResponseType, ResultType, null);
+                ResultType = TypeFactory.GetOutputType(typeFactory.CreateType(finalResponseType with {IsNullable = false}));
+                ResultSerialization = SerializationBuilder.Build(finalResponse.BodyMediaType, finalResponseType, ResultType);
 
                 var paging = operation.Paging;
                 if (paging != null)
                 {
-                    NextPageMethod = lroInfo.NextOperationMethod;
+                    NextPageMethodName = null;
                     PagingResponse = new PagingResponseInfo(paging.NextLinkName, paging.ItemName, ResultType);
                     ResultType = new CSharpType(typeof(AsyncPageable<>), PagingResponse.ItemType);
                 }
             }
 
-            DefaultName = defaultName;
+            DefaultName = clientPrefix + operation.Name.ToCleanName() + "Operation";
             Description = BuilderHelpers.EscapeXmlDocDescription(operation.Description);
-            DefaultAccessibility = lroInfo.Accessibility;
+            DefaultAccessibility = accessibility;
         }
 
         public CSharpType? ResultType { get; }
         public OperationFinalStateVia FinalStateVia { get; }
         public Diagnostic Diagnostics => new Diagnostic(Declaration.Name);
         public ObjectSerialization? ResultSerialization { get; }
-        public RestClientMethod? NextPageMethod { get; }
+        public string? NextPageMethodName { get; }
         public PagingResponseInfo? PagingResponse { get; }
         public string Description { get; }
         protected override string DefaultName { get; }

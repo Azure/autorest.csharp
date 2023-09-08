@@ -82,7 +82,7 @@ namespace ModelShapes.Models
             {
                 writer.WriteNull("RequiredNullableInt");
             }
-            if (RequiredNullableStringList != null && Optional.IsCollectionDefined(RequiredNullableStringList))
+            if (RequiredNullableStringList != null)
             {
                 writer.WritePropertyName("RequiredNullableStringList"u8);
                 writer.WriteStartArray();
@@ -96,7 +96,7 @@ namespace ModelShapes.Models
             {
                 writer.WriteNull("RequiredNullableStringList");
             }
-            if (RequiredNullableIntList != null && Optional.IsCollectionDefined(RequiredNullableIntList))
+            if (RequiredNullableIntList != null)
             {
                 writer.WritePropertyName("RequiredNullableIntList"u8);
                 writer.WriteStartArray();
@@ -343,6 +343,7 @@ namespace ModelShapes.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        nonRequiredNullableStringList = new ChangeTrackingList<string>();
                         continue;
                     }
                     List<string> array = new List<string>();
@@ -357,6 +358,7 @@ namespace ModelShapes.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        nonRequiredNullableIntList = new ChangeTrackingList<int>();
                         continue;
                     }
                     List<int> array = new List<int>();

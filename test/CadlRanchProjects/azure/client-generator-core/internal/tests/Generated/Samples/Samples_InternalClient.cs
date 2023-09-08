@@ -14,7 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Specs_.Azure.ClientGenerator.Core.Internal.Models;
+using _Specs_.Azure.ClientGenerator.Core.Internal;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 {

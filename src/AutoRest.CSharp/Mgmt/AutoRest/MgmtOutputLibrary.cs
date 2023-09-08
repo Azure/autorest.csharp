@@ -6,21 +6,18 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure.ResourceManager;
-using Azure.ResourceManager.ManagementGroups;
-using Azure.ResourceManager.Resources;
 using Humanizer.Inflections;
 using static AutoRest.CSharp.Mgmt.Decorator.Transformer.PartialResourceResolver;
 
@@ -40,11 +37,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// which is a collection of the operations with the same raw request path
         /// </summary>
         internal Dictionary<string, OperationSet> RawRequestPathToOperationSets { get; }
-
-        /// <summary>
-        /// This is a map from operation to its corresponding operation group
-        /// </summary>
-        private CachedDictionary<Operation, OperationGroup> OperationsToOperationGroups { get; }
 
         /// <summary>
         /// This is a map from operation to its request path
@@ -68,11 +60,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// </summary>
         private CachedDictionary<RequestPath, ResourceObjectAssociation> RequestPathToResources { get; }
 
-        public CachedDictionary<RestClientMethod, PagingMethod> PagingMethods { get; }
+        private CachedDictionary<Operation, RestClientOperationMethods> OperationMethods { get; }
 
-        private CachedDictionary<Operation, RestClientMethod> RestClientMethods { get; }
-
-        private CachedDictionary<Schema, TypeProvider> AllSchemaMap { get; }
+        private Dictionary<Schema, TypeProvider> AllSchemaMap { get; }
 
         public CachedDictionary<Schema, TypeProvider> ResourceSchemaMap { get; }
 
@@ -82,7 +72,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private CachedDictionary<RequestPath, HashSet<Operation>> ChildOperations { get; }
 
-        private Dictionary<string, string> _mergedOperations;
+        private readonly InputNamespace _input;
+
+        private readonly IReadOnlyDictionary<Schema, InputEnumType> _schemaToInputEnumMap;
+
+        private readonly IReadOnlyDictionary<InputOperation, Operation> _inputOperationToOperation;
 
         private readonly LookupDictionary<Schema, string, TypeProvider> _schemaOrNameToModels = new(schema => schema.Name);
 
@@ -96,24 +90,32 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// </summary>
         public HashSet<TypeProvider> PropertyBagModels { get; }
 
-        public MgmtOutputLibrary()
+        public TypeFactory TypeFactory { get; }
+
+        public MgmtOutputLibrary(CodeModel codeModel, SchemaUsageProvider schemaUsages)
         {
+            TypeFactory = new TypeFactory(this);
+
             ApplyGlobalConfigurations();
             CodeModelTransformer.Transform();
 
             // these dictionaries are initialized right now and they would not change later
-            RawRequestPathToOperationSets = CategorizeOperationGroups();
+            RawRequestPathToOperationSets = CategorizeOperationGroups(codeModel);
             ResourceDataSchemaNameToOperationSets = DecorateOperationSets();
+            _schemaToInputEnumMap = new CodeModelConverter(codeModel, schemaUsages).CreateEnums();
+
+            AllSchemaMap = InitializeModels(codeModel);
+
+            var codeModelConverter = new CodeModelConverter(codeModel, schemaUsages);
+            _input = codeModelConverter.CreateNamespace();
+            _inputOperationToOperation = codeModelConverter.GetCurrentInputOperationToOperationMap();
 
             // others are populated later
-            OperationsToOperationGroups = new CachedDictionary<Operation, OperationGroup>(PopulateOperationsToOperationGroups);
-            OperationsToRequestPaths = new CachedDictionary<Operation, RequestPath>(PopulateOperationsToRequestPaths);
+            OperationsToRequestPaths = new CachedDictionary<Operation, RequestPath>(() => PopulateOperationsToRequestPaths(codeModel));
             RawRequestPathToRestClient = new CachedDictionary<string, HashSet<MgmtRestClient>>(EnsureRestClients);
             RawRequestPathToResourceData = new CachedDictionary<string, ResourceData>(EnsureRequestPathToResourceData);
             RequestPathToResources = new CachedDictionary<RequestPath, ResourceObjectAssociation>(EnsureRequestPathToResourcesMap);
-            PagingMethods = new CachedDictionary<RestClientMethod, PagingMethod>(EnsurePagingMethods);
-            RestClientMethods = new CachedDictionary<Operation, RestClientMethod>(EnsureRestClientMethods);
-            AllSchemaMap = new CachedDictionary<Schema, TypeProvider>(InitializeModels);
+            OperationMethods = new CachedDictionary<Operation, RestClientOperationMethods>(EnsureRestClientMethods);
             ResourceSchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureResourceSchemaMap);
             SchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureSchemaMap);
             AllEnumMap = new CachedDictionary<InputEnumType, EnumType>(EnsureAllEnumMap);
@@ -122,11 +124,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // initialize the property bag collection
             // TODO -- considering provide a customized comparer
             PropertyBagModels = new HashSet<TypeProvider>();
-
-            // TODO -- remove this since this is never used
-            _mergedOperations = Configuration.MgmtConfiguration.MergeOperations
-                .SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key)))
-                .ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
         }
 
         private static void ApplyGlobalConfigurations()
@@ -144,13 +141,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public ICollection<LongRunningInterimOperation> InterimOperations { get; } = new List<LongRunningInterimOperation>();
 
-        private IEnumerable<Schema> UpdateBodyParameters()
+        private IEnumerable<Schema> UpdateBodyParameters(CodeModel codeModel)
         {
             Dictionary<Schema, int> usageCounts = new Dictionary<Schema, int>();
             List<Schema> updatedModels = new List<Schema>();
 
             // run one pass to get the schema usage count
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            foreach (var operationGroup in codeModel.OperationGroups)
             {
                 foreach (var operation in operationGroup.Operations)
                 {
@@ -178,7 +175,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             // run second pass to rename the ones based on the schema usage count
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            foreach (var operationGroup in codeModel.OperationGroups)
             {
                 foreach (var operation in operationGroup.Operations)
                 {
@@ -198,7 +195,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             continue;
 
                         // get the request path and operation set
-                        RequestPath requestPath = RequestPath.FromOperation(operation, operationGroup);
+                        RequestPath requestPath = RequestPath.FromOperation(operation, operationGroup, TypeFactory);
                         var operationSet = RawRequestPathToOperationSets[requestPath];
                         if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema))
                         {
@@ -232,7 +229,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             // run third pass to rename the corresponding parameters
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            foreach (var operationGroup in codeModel.OperationGroups)
             {
                 foreach (var operation in operationGroup.Operations)
                 {
@@ -268,17 +265,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         // Initialize ResourceData, Models and resource manager common types
-        private Dictionary<Schema, TypeProvider> InitializeModels()
+        private Dictionary<Schema, TypeProvider> InitializeModels(CodeModel codeModel)
         {
             // first, construct resource data models
-            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
+            foreach (var schema in codeModel.AllSchemas)
             {
                 var model = ResourceDataSchemaNameToOperationSets.ContainsKey(schema.Name) ? BuildResourceData(schema) : BuildModel(schema);
                 _schemaOrNameToModels.Add(schema, model);
             }
 
             //this is where we update
-            var updatedModels = UpdateBodyParameters();
+            var updatedModels = UpdateBodyParameters(codeModel);
             foreach (var schema in updatedModels)
             {
                 _schemaOrNameToModels[schema] = BuildModel(schema);
@@ -286,11 +283,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             // second, collect any model which can be replaced as whole (not as a property or as a base class)
             var replacedTypes = new List<MgmtObjectType>();
-            foreach (var schema in MgmtContext.CodeModel.Schemas.Objects)
+            foreach (var schema in codeModel.Schemas.Objects)
             {
-                TypeProvider? type;
-
-                if (_schemaOrNameToModels.TryGetValue(schema, out type))
+                if (_schemaOrNameToModels.TryGetValue(schema, out TypeProvider? type))
                 {
                     if (type is MgmtObjectType mgmtObjectType)
                     {
@@ -301,13 +296,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             switch (mgmtObjectType)
                             {
                                 case ResourceData resourceData:
-                                    replacedTypes.Add(new ResourceData(schema, csharpType.Name, csharpType.Namespace));
+                                    replacedTypes.Add(new ResourceData(schema, TypeFactory, csharpType.Name, csharpType.Namespace));
                                     break;
                                 case MgmtReferenceType referenceType:
-                                    replacedTypes.Add(new MgmtReferenceType(schema, csharpType.Name, csharpType.Namespace));
+                                    replacedTypes.Add(new MgmtReferenceType(schema, TypeFactory, csharpType.Name, csharpType.Namespace));
                                     break;
                                 default:
-                                    replacedTypes.Add(new MgmtObjectType(schema, csharpType.Name, csharpType.Namespace));
+                                    replacedTypes.Add(new MgmtObjectType(schema, TypeFactory, csharpType.Name, csharpType.Namespace));
                                     break;
                             }
                         }
@@ -327,54 +322,43 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private IEnumerable<OperationSet>? _resourceOperationSets;
         public IEnumerable<OperationSet> ResourceOperationSets => _resourceOperationSets ??= ResourceDataSchemaNameToOperationSets.SelectMany(pair => pair.Value);
 
-        public OperationGroup GetOperationGroup(Operation operation) => OperationsToOperationGroups[operation];
-
         public OperationSet GetOperationSet(string requestPath) => RawRequestPathToOperationSets[requestPath];
 
-        public RestClientMethod GetRestClientMethod(Operation operation)
+        public RestClientOperationMethods GetOperationMethods(Operation operation)
         {
-            if (RestClientMethods.TryGetValue(operation, out var restClientMethod))
+            if (OperationMethods.TryGetValue(operation, out var legacyMethods))
             {
-                return restClientMethod;
+                return legacyMethods;
             }
-            throw new Exception($"The {operation.OperationId} method does not exist.");
+            throw new Exception($"The {operation.OperationId} methods do not exist.");
         }
+
+        public MethodSignature GetRestClientPublicMethodSignature(Operation operation)
+            => (MethodSignature)GetOperationMethods(operation).Convenience!.Signature;
 
         public RequestPath GetRequestPath(Operation operation) => OperationsToRequestPaths[operation];
 
-        private Dictionary<RestClientMethod, PagingMethod> EnsurePagingMethods()
+        private Dictionary<Operation, RestClientOperationMethods> EnsureRestClientMethods()
         {
-            var pagingMethods = new Dictionary<RestClientMethod, PagingMethod>();
-            var placeholder = new TypeDeclarationOptions("Placeholder", "Placeholder", "public", false, true);
+            var operationMethods = new Dictionary<Operation, RestClientOperationMethods>();
             foreach (var restClient in RestClients)
             {
-                var methods = ClientBuilder.BuildPagingMethods(restClient.OperationGroup, restClient, placeholder);
-                foreach (var method in methods)
+                foreach (var restClientMethods in restClient.Methods)
                 {
-                    pagingMethods.Add(method.Method, method);
-                }
-            }
-
-            return pagingMethods;
-        }
-
-        private Dictionary<Operation, RestClientMethod> EnsureRestClientMethods()
-        {
-            var restClientMethods = new Dictionary<Operation, RestClientMethod>();
-            foreach (var restClient in RestClients)
-            {
-                foreach (var (operation, restClientMethod) in restClient.Methods)
-                {
-                    if (restClientMethod.Accessibility != MethodSignatureModifiers.Public)
+                    if (!restClientMethods.Convenience!.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
+                    {
                         continue;
-                    if (!restClientMethods.TryAdd(operation, restClientMethod))
+                    }
+
+                    var operation = _inputOperationToOperation[restClientMethods.Operation];
+                    if (!operationMethods.TryAdd(operation, restClientMethods))
                     {
                         throw new Exception($"An rest method '{operation.OperationId}' has already been added");
                     }
                 }
             }
 
-            return restClientMethods;
+            return operationMethods;
         }
 
         private ModelFactoryTypeProvider? _modelFactory;
@@ -445,7 +429,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return AllSchemaMap.Where(kv => !(kv.Value is ResourceData)).ToDictionary(kv => kv.Key, kv => kv.Value);
         }
 
-        public Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
+        private Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
         {
             var dictionary = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
             foreach (var (schema, typeProvider) in AllSchemaMap)
@@ -453,10 +437,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 switch (schema)
                 {
                     case SealedChoiceSchema sealedChoiceSchema:
-                        dictionary.Add(CodeModelConverter.CreateEnumType(sealedChoiceSchema, sealedChoiceSchema.ChoiceType, sealedChoiceSchema.Choices, false), (EnumType)typeProvider);
+                        dictionary.Add(_schemaToInputEnumMap[sealedChoiceSchema], (EnumType)typeProvider);
                         break;
                     case ChoiceSchema choiceSchema:
-                        dictionary.Add(CodeModelConverter.CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true), (EnumType)typeProvider);
+                        dictionary.Add(_schemaToInputEnumMap[choiceSchema], (EnumType)typeProvider);
                         break;
                 }
             }
@@ -525,7 +509,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             if (TryGetRestClients(requestPath, out var restClients))
             {
                 // return the first client that contains this operation
-                return restClients.Single(client => client.OperationGroup.Operations.Contains(operation));
+                return restClients.Single(client => client.Methods.Select(m => _inputOperationToOperation[m.Operation]).Contains(operation));
             }
 
             throw new InvalidOperationException($"Cannot find MgmtRestClient corresponding to {requestPath} with method {operation.GetHttpMethod()}");
@@ -539,15 +523,39 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<string, HashSet<MgmtRestClient>> EnsureRestClients()
         {
             var rawRequestPathToRestClient = new Dictionary<string, HashSet<MgmtRestClient>>();
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+
+            foreach (InputClient inputClient in _input.Clients)
             {
-                var restClient = new MgmtRestClient(operationGroup, new MgmtRestClientBuilder(operationGroup));
-                foreach (var requestPath in _operationGroupToRequestPaths[operationGroup])
+                var ctorParameters = inputClient.Operations
+                    .SelectMany(op => op.Parameters)
+                    .Where(p => p.Kind == InputOperationParameterKind.Client)
+                    .GroupBy(p => p.Name)
+                    .Select(g => RestClientBuilder.BuildConstructorParameter(g.First(), TypeFactory))
+                    .Select(p => p.IsApiVersionParameter ? p with { DefaultValue = Constant.Default(p.Type.WithNullable(true)), Initializer = p.DefaultValue?.GetConstantFormattable() } : p)
+                    .OrderBy(p => p.IsOptionalInSignature)
+                    .ToList();
+
+                var clientParameters = new[] { KnownParameters.Pipeline }.Union(ctorParameters).ToList();
+                var restClientParameters = new[] { KnownParameters.Pipeline, KnownParameters.ApplicationId }.Union(ctorParameters).ToList();
+                var operations = inputClient.Operations.Select(o => _inputOperationToOperation[o]).ToList();
+                var clientName = string.IsNullOrEmpty(inputClient.Name) ? _input.Name : inputClient.Name;
+                var restClient = new MgmtRestClient(inputClient, clientParameters, restClientParameters, operations, clientName, this);
+
+                foreach (var operation in inputClient.Operations)
                 {
+                    // Do not trim the tenant resource path '/'.
+                    var requestPath = operation.Path.Length == 1
+                        ? operation.Path
+                        : operation.Path.TrimEnd('/');
+
                     if (rawRequestPathToRestClient.TryGetValue(requestPath, out var set))
+                    {
                         set.Add(restClient);
+                    }
                     else
+                    {
                         rawRequestPathToRestClient.Add(requestPath, new HashSet<MgmtRestClient> { restClient });
+                    }
                 }
             }
 
@@ -797,7 +805,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public override TypeProvider FindTypeProviderForSchema(Schema schema)
         {
             TypeProvider? result;
-            if (!AllSchemaMap.IsPopulated)
+            if (AllSchemaMap is null)
             {
                 result = ResourceDataSchemaNameToOperationSets.ContainsKey(schema.Name) ? BuildResourceData(schema) : BuildModel(schema);
             }
@@ -834,18 +842,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private TypeProvider BuildModel(Schema schema) => schema switch
         {
-            SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, MgmtContext.Context),
-            ChoiceSchema choiceSchema => new EnumType(choiceSchema, MgmtContext.Context),
+            SealedChoiceSchema sealedChoiceSchema => new EnumType(_schemaToInputEnumMap[sealedChoiceSchema], schema, TypeFactory, MgmtContext.Context),
+            ChoiceSchema choiceSchema => new EnumType(_schemaToInputEnumMap[choiceSchema], schema, TypeFactory, MgmtContext.Context),
             ObjectSchema objectSchema => schema.Extensions != null && (schema.Extensions.MgmtReferenceType || schema.Extensions.MgmtPropertyReferenceType || schema.Extensions.MgmtTypeReferenceType)
-                ? new MgmtReferenceType(objectSchema)
-                : new MgmtObjectType(objectSchema),
+                ? new MgmtReferenceType(objectSchema, TypeFactory)
+                : new MgmtObjectType(objectSchema, TypeFactory),
             _ => throw new NotImplementedException($"Unhandled schema type {schema.GetType()} with name {schema.Name}")
         };
 
         private TypeProvider BuildResourceData(Schema schema) => schema switch
         {
-            EmptyObjectSchema emptyObjectSchema => new EmptyResourceData(emptyObjectSchema),
-            ObjectSchema objectSchema => new ResourceData(objectSchema),
+            EmptyObjectSchema emptyObjectSchema => new EmptyResourceData(emptyObjectSchema, TypeFactory),
+            ObjectSchema objectSchema => new ResourceData(objectSchema, TypeFactory),
             _ => throw new NotImplementedException()
         };
 
@@ -878,10 +886,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return resourceDataSchemaNameToOperationSets;
         }
 
-        private Dictionary<string, OperationSet> CategorizeOperationGroups()
+        private Dictionary<string, OperationSet> CategorizeOperationGroups(CodeModel codeModel)
         {
             var rawRequestPathToOperationSets = new Dictionary<string, OperationSet>();
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            foreach (var operationGroup in codeModel.OperationGroups)
             {
                 var requestPathList = new HashSet<string>();
                 _operationGroupToRequestPaths.Add(operationGroup, requestPathList);
@@ -889,54 +897,36 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     var path = operation.GetHttpPath();
                     requestPathList.Add(path);
-                    if (rawRequestPathToOperationSets.TryGetValue(path, out var operationSet))
+                    if (!rawRequestPathToOperationSets.TryGetValue(path, out var operationSet))
                     {
-                        operationSet.Add(operation);
-                    }
-                    else
-                    {
-                        operationSet = new OperationSet(path)
-                        {
-                            operation
-                        };
+                        operationSet = new OperationSet(path, operationGroup, rawRequestPathToOperationSets, TypeFactory);
                         rawRequestPathToOperationSets.Add(path, operationSet);
                     }
+
+                    operationSet.Add(operation);
                 }
             }
 
             // add operation set for the partial resources here
             foreach (var path in Configuration.MgmtConfiguration.PartialResources.Keys)
             {
-                rawRequestPathToOperationSets.Add(path, new OperationSet(path));
+                rawRequestPathToOperationSets.Add(path, new OperationSet(path, null, rawRequestPathToOperationSets, TypeFactory));
             }
 
             return rawRequestPathToOperationSets;
         }
 
-        private Dictionary<Operation, RequestPath> PopulateOperationsToRequestPaths()
+        private Dictionary<Operation, RequestPath> PopulateOperationsToRequestPaths(CodeModel codeModel)
         {
             var operationsToRequestPath = new Dictionary<Operation, RequestPath>();
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            foreach (var operationGroup in codeModel.OperationGroups)
             {
                 foreach (var operation in operationGroup.Operations)
                 {
-                    operationsToRequestPath[operation] = RequestPath.FromOperation(operation, operationGroup);
+                    operationsToRequestPath[operation] = RequestPath.FromOperation(operation, operationGroup, TypeFactory);
                 }
             }
             return operationsToRequestPath;
-        }
-
-        private Dictionary<Operation, OperationGroup> PopulateOperationsToOperationGroups()
-        {
-            var operationsToOperationGroups = new Dictionary<Operation, OperationGroup>();
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
-            {
-                foreach (var operation in operationGroup.Operations)
-                {
-                    operationsToOperationGroups[operation] = operationGroup;
-                }
-            }
-            return operationsToOperationGroups;
         }
     }
 }

@@ -608,7 +608,7 @@ This sample shows how to call ArrayCsvInPathAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = await client.ArrayCsvInPathAsync(new String[]{"<arrayPath>"});
+Response response = await client.ArrayCsvInPathAsync(new string[]{"<arrayPath>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -620,7 +620,7 @@ This sample shows how to call ArrayCsvInPath with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new PathsClient(credential);
 
-Response response = client.ArrayCsvInPath(new String[]{"<arrayPath>"});
+Response response = client.ArrayCsvInPath(new string[]{"<arrayPath>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

@@ -11,7 +11,7 @@ using Azure.Core.Expressions.DataFactory;
 
 namespace Inheritance.Models
 {
-    /// <summary> The UnknownBaseClassWithDiscriminator. </summary>
+    /// <summary> Unknown version of BaseClassWithDiscriminator. </summary>
     internal partial class UnknownBaseClassWithDiscriminator : BaseClassWithDiscriminator
     {
         /// <summary> Initializes a new instance of UnknownBaseClassWithDiscriminator. </summary>

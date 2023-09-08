@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using MultipleMediaTypes;
 using MultipleMediaTypes.Models;
 using NUnit.Framework;
 
@@ -27,7 +28,7 @@ namespace MultipleMediaTypes.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MultipleMediaTypesClient(endpoint);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = client.OneBinaryBodyTwoContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream);
             Console.WriteLine(response.Status);
@@ -40,7 +41,7 @@ namespace MultipleMediaTypes.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MultipleMediaTypesClient(endpoint);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = client.OneBinaryBodyTwoContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream);
             Console.WriteLine(response.Status);
@@ -53,7 +54,7 @@ namespace MultipleMediaTypes.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MultipleMediaTypesClient(endpoint);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = await client.OneBinaryBodyTwoContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
             Console.WriteLine(response.Status);
@@ -66,7 +67,7 @@ namespace MultipleMediaTypes.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MultipleMediaTypesClient(endpoint);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = await client.OneBinaryBodyTwoContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
             Console.WriteLine(response.Status);
@@ -142,7 +143,7 @@ namespace MultipleMediaTypes.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MultipleMediaTypesClient(endpoint);
 
-            var body = "<null>";
+            var body = "<String>";
             var result = await client.OneStringBodyThreeContentTypesAsync(body, ContentType.ApplicationOctetStream);
         }
 

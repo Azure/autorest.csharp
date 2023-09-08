@@ -8,12 +8,12 @@ This sample shows how to call CreateProjectAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicTypeSpecClient(endpoint);
 
-var resource = new Project()
+var resource = new Project
 {
     Description = "<Description>",
     Name = "<Name>",
 };
-var operation = await client.CreateProjectAsync(WaitUntil.Completed, resource);
+var result = await client.CreateProjectAsync(WaitUntil.Completed, resource);
 ]]></code>
 </example>
     </member>
@@ -24,7 +24,7 @@ This sample shows how to call CreateProject with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicTypeSpecClient(endpoint);
 
-var resource = new Project()
+var resource = new Project
 {
     Description = "<Description>",
     Name = "<Name>",
@@ -98,12 +98,12 @@ This sample shows how to call UpdateProjectAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicTypeSpecClient(endpoint);
 
-var resource = new Project()
+var resource = new Project
 {
     Description = "<Description>",
     Name = "<Name>",
 };
-var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", resource);
+var result = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", resource);
 ]]></code>
 </example>
     </member>
@@ -114,7 +114,7 @@ This sample shows how to call UpdateProject with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicTypeSpecClient(endpoint);
 
-var resource = new Project()
+var resource = new Project
 {
     Description = "<Description>",
     Name = "<Name>",
@@ -201,7 +201,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicTypeSpecClient(endpoint);
 
 var thing = new Thing("<name>");
-var operation = await client.CreateThingAsync(WaitUntil.Completed, thing);
+var result = await client.CreateThingAsync(WaitUntil.Completed, thing);
 ]]></code>
 </example>
     </member>

@@ -14,7 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using ParametersCadl.Models;
+using ParametersCadl;
 
 namespace ParametersCadl.Samples
 {

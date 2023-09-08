@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using LroBasicTypeSpec;
 using LroBasicTypeSpec.Models;
 using NUnit.Framework;
 
@@ -91,12 +92,12 @@ namespace LroBasicTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new LroBasicTypeSpecClient(endpoint);
 
-            var resource = new Project()
+            var resource = new Project
             {
                 Description = "<Description>",
                 Name = "<Name>",
             };
-            var operation = await client.CreateProjectAsync(WaitUntil.Completed, resource);
+            var result = await client.CreateProjectAsync(WaitUntil.Completed, resource);
         }
 
         [Test]
@@ -182,12 +183,12 @@ namespace LroBasicTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new LroBasicTypeSpecClient(endpoint);
 
-            var resource = new Project()
+            var resource = new Project
             {
                 Description = "<Description>",
                 Name = "<Name>",
             };
-            var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", resource);
+            var result = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", resource);
         }
 
         [Test]
@@ -274,7 +275,7 @@ namespace LroBasicTypeSpec.Samples
             var client = new LroBasicTypeSpecClient(endpoint);
 
             var thing = new Thing("<name>");
-            var operation = await client.CreateThingAsync(WaitUntil.Completed, thing);
+            var result = await client.CreateThingAsync(WaitUntil.Completed, thing);
         }
     }
 }

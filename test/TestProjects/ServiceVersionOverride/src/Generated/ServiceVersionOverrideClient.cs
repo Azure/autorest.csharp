@@ -57,7 +57,7 @@ namespace ServiceVersionOverride
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="notApiVersionEnum"> The ApiVersion to use. Allowed values: "2.0". </param>
+        /// <param name="notApiVersionEnum"> The String to use. Allowed values: "2.0". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notApiVersionEnum"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -91,7 +91,7 @@ namespace ServiceVersionOverride
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="notApiVersionEnum"> The ApiVersion to use. Allowed values: "2.0". </param>
+        /// <param name="notApiVersionEnum"> The String to use. Allowed values: "2.0". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notApiVersionEnum"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -123,9 +123,9 @@ namespace ServiceVersionOverride
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/op", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             uri.AppendQuery("not-api-version-constant", "2.0", true);
             uri.AppendQuery("not-api-version-enum", notApiVersionEnum, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             return message;
         }

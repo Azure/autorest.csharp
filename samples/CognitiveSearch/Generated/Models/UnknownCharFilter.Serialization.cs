@@ -10,18 +10,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    internal partial class UnknownCharFilter : IUtf8JsonSerializable
+    internal partial class UnknownCharFilter
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("@odata.type"u8);
-            writer.WriteStringValue(OdataType);
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
-            writer.WriteEndObject();
-        }
-
         internal static UnknownCharFilter DeserializeUnknownCharFilter(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)

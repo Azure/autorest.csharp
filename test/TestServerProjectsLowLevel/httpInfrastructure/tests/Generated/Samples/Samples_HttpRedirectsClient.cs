@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using httpInfrastructure_LowLevel;
 
 namespace httpInfrastructure_LowLevel.Samples
 {
@@ -70,8 +71,10 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = client.Get300();
-            Console.WriteLine(response.Status);
+            Response response = client.Get300(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -81,8 +84,10 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = client.Get300();
-            Console.WriteLine(response.Status);
+            Response response = client.Get300(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -92,8 +97,10 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = await client.Get300Async();
-            Console.WriteLine(response.Status);
+            Response response = await client.Get300Async(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
@@ -103,8 +110,10 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = await client.Get300Async();
-            Console.WriteLine(response.Status);
+            Response response = await client.Get300Async(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
         }
 
         [Test]

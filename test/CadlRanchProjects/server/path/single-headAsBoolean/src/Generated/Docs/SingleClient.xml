@@ -3,7 +3,7 @@
   <members>
     <member name="MyOpAsync(RequestContext)">
 <example>
-This sample shows how to call MyOpAsync.
+This sample shows how to call MyOpAsync and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SingleClient(endpoint);
@@ -15,7 +15,7 @@ Console.WriteLine(response.GetRawResponse().Status);
     </member>
     <member name="MyOp(RequestContext)">
 <example>
-This sample shows how to call MyOp.
+This sample shows how to call MyOp and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SingleClient(endpoint);

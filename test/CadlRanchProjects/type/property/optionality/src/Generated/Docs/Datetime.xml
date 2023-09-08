@@ -99,7 +99,7 @@ This sample shows how to call PutAllAsync with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetDatetimeClient("1.0.0");
 
-var body = new DatetimeProperty()
+var body = new DatetimeProperty
 {
     Property = DateTimeOffset.UtcNow,
 };
@@ -113,7 +113,7 @@ This sample shows how to call PutAll with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetDatetimeClient("1.0.0");
 
-var body = new DatetimeProperty()
+var body = new DatetimeProperty
 {
     Property = DateTimeOffset.UtcNow,
 };
@@ -137,7 +137,7 @@ This sample shows how to call PutAllAsync with all request content.
 var client = new OptionalClient().GetDatetimeClient("1.0.0");
 
 var data = new {
-    property = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T14:14:57.0310000Z",
 };
 
 Response response = await client.PutAllAsync(RequestContent.Create(data));
@@ -161,7 +161,7 @@ This sample shows how to call PutAll with all request content.
 var client = new OptionalClient().GetDatetimeClient("1.0.0");
 
 var data = new {
-    property = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T14:14:57.0310000Z",
 };
 
 Response response = client.PutAll(RequestContent.Create(data));
@@ -175,7 +175,7 @@ This sample shows how to call PutDefaultAsync with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetDatetimeClient("1.0.0");
 
-var body = new DatetimeProperty()
+var body = new DatetimeProperty
 {
     Property = DateTimeOffset.UtcNow,
 };
@@ -189,7 +189,7 @@ This sample shows how to call PutDefault with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetDatetimeClient("1.0.0");
 
-var body = new DatetimeProperty()
+var body = new DatetimeProperty
 {
     Property = DateTimeOffset.UtcNow,
 };
@@ -213,7 +213,7 @@ This sample shows how to call PutDefaultAsync with all request content.
 var client = new OptionalClient().GetDatetimeClient("1.0.0");
 
 var data = new {
-    property = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T14:14:57.0310000Z",
 };
 
 Response response = await client.PutDefaultAsync(RequestContent.Create(data));
@@ -237,7 +237,7 @@ This sample shows how to call PutDefault with all request content.
 var client = new OptionalClient().GetDatetimeClient("1.0.0");
 
 var data = new {
-    property = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T14:14:57.0310000Z",
 };
 
 Response response = client.PutDefault(RequestContent.Create(data));

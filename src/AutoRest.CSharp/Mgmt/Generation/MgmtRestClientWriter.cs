@@ -1,15 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Linq;
-using System.Threading;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Requests;
-using Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -25,23 +21,42 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 using (writer.Scope($"{restClient.Declaration.Accessibility} partial class {restClient.Type:D}"))
                 {
-                    WriteClientFields(writer, restClient);
+                    writer.WriteFieldDeclarations(restClient.Fields);
                     WriteClientCtor(writer, restClient);
 
-                    foreach (var method in restClient.Methods.Select(m => m.Method))
+                    foreach (var methods in restClient.Methods)
                     {
-                        RequestWriterHelpers.WriteRequestCreation(writer, method, "internal", restClient.Fields, null, true, restClient.Parameters);
-                        WriteOperation(writer, restClient, method, true);
-                        WriteOperation(writer, restClient, method, false);
+                        writer.WriteMethod(methods.CreateRequest);
+
+                        WriteMethod(writer, methods.ConvenienceAsync);
+                        WriteMethod(writer, methods.Convenience);
+                    }
+
+                    foreach (var methods in restClient.Methods)
+                    {
+                        if (methods.CreateNextPageMessage is {} nextPageMethod)
+                        {
+                            writer.WriteMethod(nextPageMethod);
+                        }
+
+                        WriteMethod(writer, methods.NextPageConvenienceAsync);
+                        WriteMethod(writer, methods.NextPageConvenience);
                     }
                 }
             }
         }
 
-        protected void WriteClientFields(CodeWriter writer, MgmtRestClient restClient)
+        private static void WriteMethod(CodeWriter writer, Method? method)
         {
-            writer.Line($"private readonly {typeof(TelemetryDetails)} {UserAgentField};");
-            writer.WriteFieldDeclarations(restClient.Fields);
+            if (method is null)
+            {
+                return;
+            }
+
+            writer.WriteXmlDocumentationSummary($"{method.Signature.Description}");
+            writer.WriteMethodDocumentationSignature(method.Signature);
+            writer.WriteMethod(method);
+
         }
 
         private static void WriteClientCtor(CodeWriter writer, MgmtRestClient restClient)
@@ -60,35 +75,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         writer.WriteVariableAssignmentWithNullCheck($"{field.Name}", clientParameter);
                     }
                 }
-                writer.Line($"{UserAgentField} = new {typeof(TelemetryDetails)}(GetType().Assembly, {MgmtRestClient.ApplicationIdParameter.Name});");
-            }
-            writer.Line();
-        }
-
-        private static void WriteOperation(CodeWriter writer, MgmtRestClient restClient, RestClientMethod operation, bool async)
-        {
-            var returnType = operation.ReturnType != null
-                ? new CSharpType(typeof(Response<>), operation.ReturnType)
-                : new CSharpType(typeof(Response));
-
-            var parameters = operation.Parameters.Append(KnownParameters.CancellationTokenParameter).ToArray();
-            var method = new MethodSignature(operation.Name, operation.Summary, operation.Description, MethodSignatureModifiers.Public, returnType, null, parameters).WithAsync(async);
-
-            writer
-                .WriteXmlDocumentationSummary($"{method.Description}")
-                .WriteMethodDocumentationSignature(method);
-
-            using (writer.WriteMethodDeclaration(method))
-            {
-                writer.WriteParametersValidation(parameters);
-                var messageVariable = new CodeWriterDeclaration("message");
-                var requestMethodName = RequestWriterHelpers.CreateRequestMethodName(operation.Name);
-
-                writer
-                    .Line($"using var {messageVariable:D} = {requestMethodName}({operation.Parameters.GetIdentifiersFormattable()});")
-                    .WriteMethodCall(async, $"{restClient.Fields.PipelineField.Name}.SendAsync", $"{restClient.Fields.PipelineField.Name}.Send", $"{messageVariable}, {KnownParameters.CancellationTokenParameter.Name}");
-
-                ResponseWriterHelpers.WriteStatusCodeSwitch(writer, messageVariable.ActualName, operation, async, null);
+                writer.Line($"{UserAgentField} = new {typeof(TelemetryDetails)}(GetType().Assembly, {KnownParameters.ApplicationId.Name});");
             }
             writer.Line();
         }

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -18,6 +19,10 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal class OperationSet : IReadOnlyCollection<Operation>, IEquatable<OperationSet>
     {
+        private readonly OperationGroup? _operationGroup;
+        private readonly IReadOnlyDictionary<string, OperationSet> _rawRequestPathToOperationSets;
+        private readonly TypeFactory _typeFactory;
+
         /// <summary>
         /// The raw request path of string of the operations in this <see cref="OperationSet"/>
         /// </summary>
@@ -26,12 +31,15 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <summary>
         /// The operation set
         /// </summary>
-        public HashSet<Operation> Operations { get; }
+        private HashSet<Operation> Operations { get; }
 
         public int Count => Operations.Count;
 
-        public OperationSet(string requestPath)
+        public OperationSet(string requestPath, OperationGroup? operationGroup, IReadOnlyDictionary<string, OperationSet> rawRequestPathToOperationSets, TypeFactory typeFactory)
         {
+            _operationGroup = operationGroup;
+            _rawRequestPathToOperationSets = rawRequestPathToOperationSets;
+            _typeFactory = typeFactory;
             RequestPath = requestPath;
             Operations = new HashSet<Operation>();
         }
@@ -47,15 +55,6 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (path != RequestPath)
                 throw new InvalidOperationException($"Cannot add operation with path {path} to OperationSet with path {RequestPath}");
             Operations.Add(operation);
-        }
-
-        /// <summary>
-        /// Remove an operation from this <see cref="OperationSet"/>
-        /// </summary>
-        /// <param name="operation">The operation to be removed</param>
-        public void Remove(Operation operation)
-        {
-            Operations.Remove(operation);
         }
 
         public IEnumerator<Operation> GetEnumerator() => Operations.GetEnumerator();
@@ -102,14 +101,19 @@ namespace AutoRest.CSharp.Mgmt.Models
         private RequestPath GetNonHintRequestPath()
         {
             var operation = FindBestOperation();
-            if (operation != null)
-                return Models.RequestPath.FromOperation(operation, MgmtContext.Library.GetOperationGroup(operation));
+            if (_operationGroup is not null && Operations.Any())
+            {
+                if (operation != null)
+                {
+                    return Models.RequestPath.FromOperation(operation, _operationGroup, _typeFactory);
+                }
+            }
 
             // we do not have an operation in this operation set to construct the RequestPath
             // therefore this must be a request path for a virtual resource
             // we find an operation with a prefix of this and take that many segment from its path as the request path of this operation set
             OperationSet? hintOperationSet = null;
-            foreach (var operationSet in MgmtContext.Library.RawRequestPathToOperationSets.Values)
+            foreach (var operationSet in _rawRequestPathToOperationSets.Values)
             {
                 // skip myself
                 if (operationSet == this)

@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Specs_.Azure.Core.Basic;
 using _Specs_.Azure.Core.Basic.Models;
 
 namespace _Specs_.Azure.Core.Basic.Samples
@@ -217,7 +218,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
             var resource = new User("<name>")
             {
                 Orders =
-{
+    {
         new UserOrder(1234, "<detail>")
     },
             };

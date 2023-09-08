@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
@@ -46,9 +47,6 @@ namespace body_complex_LowLevel.Samples
             Console.WriteLine(result.GetProperty("fishtype").ToString());
             Console.WriteLine(result.GetProperty("species").ToString());
             Console.WriteLine(result.GetProperty("length").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
@@ -78,9 +76,6 @@ namespace body_complex_LowLevel.Samples
             Console.WriteLine(result.GetProperty("fishtype").ToString());
             Console.WriteLine(result.GetProperty("species").ToString());
             Console.WriteLine(result.GetProperty("length").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
@@ -92,8 +87,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                fishtype = "salmon",
-                length = 123.45f,
+                fishtype = "smart_salmon",
+                length = 3.14f,
             };
 
             Response response = client.PutValid(RequestContent.Create(data));
@@ -109,11 +104,12 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
+                college_degree = "<college_degree>",
                 location = "<location>",
                 iswild = true,
-                fishtype = "salmon",
+                fishtype = "smart_salmon",
                 species = "<species>",
-                length = 123.45f,
+                length = 3.14f,
             };
 
             Response response = client.PutValid(RequestContent.Create(data));
@@ -129,8 +125,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                fishtype = "salmon",
-                length = 123.45f,
+                fishtype = "smart_salmon",
+                length = 3.14f,
             };
 
             Response response = await client.PutValidAsync(RequestContent.Create(data));
@@ -146,11 +142,12 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
+                college_degree = "<college_degree>",
                 location = "<location>",
                 iswild = true,
-                fishtype = "salmon",
+                fishtype = "smart_salmon",
                 species = "<species>",
-                length = 123.45f,
+                length = 3.14f,
             };
 
             Response response = await client.PutValidAsync(RequestContent.Create(data));

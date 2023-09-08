@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using ResourceClients_LowLevel;
 
 namespace ResourceClients_LowLevel.Samples
 {

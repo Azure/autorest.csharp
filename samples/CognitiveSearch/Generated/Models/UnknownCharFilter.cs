@@ -7,7 +7,7 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> The UnknownCharFilter. </summary>
+    /// <summary> Unknown version of CharFilter. </summary>
     internal partial class UnknownCharFilter : CharFilter
     {
         /// <summary> Initializes a new instance of UnknownCharFilter. </summary>

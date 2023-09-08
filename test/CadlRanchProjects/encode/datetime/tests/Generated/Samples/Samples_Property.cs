@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using Encode.Datetime;
 using Encode.Datetime.Models;
 using NUnit.Framework;
 
@@ -28,7 +29,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "2022-05-10T14:57:31.2311892-04:00",
+                value = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.Default(RequestContent.Create(data));
@@ -45,7 +46,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "2022-05-10T14:57:31.2311892-04:00",
+                value = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.Default(RequestContent.Create(data));
@@ -62,7 +63,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "2022-05-10T14:57:31.2311892-04:00",
+                value = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = await client.DefaultAsync(RequestContent.Create(data));
@@ -79,7 +80,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "2022-05-10T14:57:31.2311892-04:00",
+                value = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = await client.DefaultAsync(RequestContent.Create(data));
@@ -106,7 +107,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "2022-05-10T18:57:31.2311892Z",
+                value = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.Rfc3339(RequestContent.Create(data));
@@ -123,7 +124,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "2022-05-10T18:57:31.2311892Z",
+                value = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.Rfc3339(RequestContent.Create(data));
@@ -140,7 +141,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "2022-05-10T18:57:31.2311892Z",
+                value = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = await client.Rfc3339Async(RequestContent.Create(data));
@@ -157,7 +158,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "2022-05-10T18:57:31.2311892Z",
+                value = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = await client.Rfc3339Async(RequestContent.Create(data));
@@ -184,7 +185,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "Tue, 10 May 2022 18:57:31 GMT",
+                value = "Tue, 10 May 2022 14:14:57 GMT",
             };
 
             Response response = client.Rfc7231(RequestContent.Create(data));
@@ -201,7 +202,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "Tue, 10 May 2022 18:57:31 GMT",
+                value = "Tue, 10 May 2022 14:14:57 GMT",
             };
 
             Response response = client.Rfc7231(RequestContent.Create(data));
@@ -218,7 +219,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "Tue, 10 May 2022 18:57:31 GMT",
+                value = "Tue, 10 May 2022 14:14:57 GMT",
             };
 
             Response response = await client.Rfc7231Async(RequestContent.Create(data));
@@ -235,7 +236,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "Tue, 10 May 2022 18:57:31 GMT",
+                value = "Tue, 10 May 2022 14:14:57 GMT",
             };
 
             Response response = await client.Rfc7231Async(RequestContent.Create(data));
@@ -262,7 +263,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "1652209051",
+                value = "1652192097",
             };
 
             Response response = client.UnixTimestamp(RequestContent.Create(data));
@@ -279,7 +280,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "1652209051",
+                value = "1652192097",
             };
 
             Response response = client.UnixTimestamp(RequestContent.Create(data));
@@ -296,7 +297,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "1652209051",
+                value = "1652192097",
             };
 
             Response response = await client.UnixTimestampAsync(RequestContent.Create(data));
@@ -313,7 +314,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "1652209051",
+                value = "1652192097",
             };
 
             Response response = await client.UnixTimestampAsync(RequestContent.Create(data));
@@ -341,7 +342,7 @@ namespace Encode.Datetime.Samples
             var data = new
             {
                 value = new[] {
-        "1652209051"
+        "1652192097"
     },
             };
 
@@ -360,7 +361,7 @@ namespace Encode.Datetime.Samples
             var data = new
             {
                 value = new[] {
-        "1652209051"
+        "1652192097"
     },
             };
 
@@ -379,7 +380,7 @@ namespace Encode.Datetime.Samples
             var data = new
             {
                 value = new[] {
-        "1652209051"
+        "1652192097"
     },
             };
 
@@ -398,7 +399,7 @@ namespace Encode.Datetime.Samples
             var data = new
             {
                 value = new[] {
-        "1652209051"
+        "1652192097"
     },
             };
 

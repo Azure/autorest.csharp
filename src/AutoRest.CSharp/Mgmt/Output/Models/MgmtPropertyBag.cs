@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -14,40 +13,29 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
 {
     internal class MgmtPropertyBag : PropertyBag
     {
-        public MgmtPropertyBag(string name, InputOperation operation)
+        public MgmtPropertyBag(string name, InputOperation operation, IEnumerable<Parameter> paramsToKeep)
             : base(name)
         {
             _operation = operation;
-            _paramsToKeep = Array.Empty<Parameter>();
-        }
-
-        private MgmtPropertyBag(string name, InputOperation operation, IEnumerable<Parameter> paramsToKeep)
-            : this(name, operation)
-        {
             _paramsToKeep = paramsToKeep;
         }
 
-        public MgmtPropertyBag WithUpdatedInfo(string name, IEnumerable<Parameter> paramsToKeep) =>
-            new MgmtPropertyBag(name, _operation, paramsToKeep);
+        private readonly InputOperation _operation;
 
-        private InputOperation _operation;
-
-        private IEnumerable<Parameter> _paramsToKeep;
+        private readonly IEnumerable<Parameter> _paramsToKeep;
 
         protected override TypeProvider EnsurePackModel()
         {
-            var packModelName = string.IsNullOrEmpty(Name) ?
-            throw new InvalidOperationException("Not enough information is provided for constructing management plane property bag, please make sure you first call the WithUpdatedInfo method of MgmtPropertyBag to update the property bag before using it.") :
-            $"{Name}Options";
+            var packModelName = string.IsNullOrEmpty(Name)
+                ? throw new InvalidOperationException("Not enough information is provided for constructing management plane property bag, please make sure you first call the WithUpdatedInfo method of MgmtPropertyBag to update the property bag before using it.") :
+                $"{Name}Options";
+
             var properties = new List<InputModelProperty>();
             foreach (var parameter in _paramsToKeep)
             {
                 var inputParameter = _operation.Parameters.FirstOrDefault(p => string.Equals(p.Name, parameter.Name, StringComparison.OrdinalIgnoreCase));
-                string? description = parameter.Description ?? $"The {parameter.Name}";
-                var property = new InputModelProperty(parameter.Name, null, description, inputParameter!.Type, parameter.DefaultValue == null, false, false)
-                {
-                    DefaultValue = GetDefaultValue(parameter)
-                };
+                var description = parameter.Description ?? $"The {parameter.Name}";
+                var property = new InputModelProperty(parameter.Name, parameter.Name, description, inputParameter!.Type, parameter.DefaultValue == null ? null : inputParameter.DefaultValue, parameter.DefaultValue == null, false, false);
                 properties.Add(property);
             }
             var defaultNamespace = $"{MgmtContext.Context.DefaultNamespace}.Models";
@@ -63,11 +51,12 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 Array.Empty<InputModelType>(),
                 null,
                 null,
+                null,
                 false)
             {
                 IsPropertyBag = true
             };
-            return new ModelTypeProvider(propertyBagModel, defaultNamespace, MgmtContext.Context.SourceInputModel, MgmtContext.Context.TypeFactory);
+            return new ModelTypeProvider(propertyBagModel, defaultNamespace, MgmtContext.Context.SourceInputModel, MgmtContext.Context.Library.TypeFactory);
         }
 
         protected override bool EnsureShouldValidateParameter()
@@ -77,15 +66,6 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 return mgmtPackModel.Properties.Any(p => p.IsRequired);
             }
             return false;
-        }
-
-        private FormattableString? GetDefaultValue(Parameter parameter)
-        {
-            if (parameter.DefaultValue is { } defaultValue && defaultValue.Value != null)
-            {
-                return defaultValue.GetConstantFormattable();
-            }
-            return null;
         }
     }
 }

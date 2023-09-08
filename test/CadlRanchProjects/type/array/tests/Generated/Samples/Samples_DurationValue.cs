@@ -14,7 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type._Array.Models;
+using _Type._Array;
 
 namespace _Type._Array.Samples
 {
@@ -141,7 +141,7 @@ namespace _Type._Array.Samples
 
             var body = new TimeSpan[]
             {
-    new TimeSpan(1, 2, 3)
+    new TimeSpan(1, 23, 45)
             };
             var result = await client.PutAsync(body);
         }

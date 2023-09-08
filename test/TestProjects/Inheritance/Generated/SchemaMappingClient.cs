@@ -40,6 +40,7 @@ namespace Inheritance
 
         /// <param name="value"> The BaseClass to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<BaseClass>> MixedAsync(BaseClass value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SchemaMappingClient.Mixed");
@@ -57,6 +58,7 @@ namespace Inheritance
 
         /// <param name="value"> The BaseClass to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual Response<BaseClass> Mixed(BaseClass value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SchemaMappingClient.Mixed");

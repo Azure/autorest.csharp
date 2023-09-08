@@ -245,14 +245,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false;
             }
 
-            var properties = model.EnumerateHierarchy().SelectMany(obj => obj.Properties);
+            var properties = model.EnumerateHierarchy().SelectMany(obj => obj.Properties).ToArray();
             // we skip the models with internal properties when the internal property is neither a discriminator or safe flattened
             if (properties.Any(p => p.Declaration.Accessibility != "public" && (model.Discriminator?.Property != p && p.FlattenedProperty == null)))
             {
                 return false;
             }
 
-            if (!properties.Any(p => p.IsReadOnly && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType)))
+            var readOnlyProperties = properties
+                .Where(p => p.IsReadOnly && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType))
+                .ToArray();
+
+            if (!readOnlyProperties.Any())
             {
                 return false;
             }
@@ -264,7 +268,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return model.Constructors
                 .Where(c => c.Signature.Modifiers.HasFlag(Public))
-                .All(c => properties.Any(property => c.FindParameterByInitializedProperty(property) == default));
+                .All(c => readOnlyProperties.Any(property => c.FindParameterByInitializedProperty(property) == default));
         }
     }
 }

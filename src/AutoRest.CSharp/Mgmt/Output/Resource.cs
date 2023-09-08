@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -35,7 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             "The key for the tag.",
             typeof(string),
             null,
-            ValidationType.AssertNotNull,
+            Validation.AssertNotNull,
             null);
 
         private static readonly Parameter TagValueParameter = new Parameter(
@@ -43,7 +45,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             "The value for the tag.",
             typeof(string),
             null,
-            ValidationType.AssertNotNull,
+            Validation.AssertNotNull,
             null);
 
         private static readonly Parameter TagSetParameter = new Parameter(
@@ -51,7 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             "The set of tags to use as replacement.",
             typeof(IDictionary<string, string>),
             null,
-            ValidationType.AssertNotNull,
+            Validation.AssertNotNull,
             null);
 
         /// <summary>
@@ -115,7 +117,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 Parameters: new[] { ArmClientParameter, ResourceDataParameter },
                 Initializer: new(
                     IsBase: false,
-                    Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", ResourceDataIdExpression($"{ResourceDataParameter.Name:I}") }));
+                    Arguments: new[] { ArmClientParameter, ResourceDataIdExpression(ResourceDataParameter) }));
         }
 
         public override CSharpType? BaseType => typeof(ArmResource);
@@ -264,8 +266,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return positions.Contains(Position);
             }
             // In the resource class, we need to exclude the List operations
-            var restClientMethod = MgmtContext.Library.GetRestClientMethod(operation);
-            if (restClientMethod.IsListMethod(out var valueType))
+            if (operation.IsListMethod(out var valueType))
                 return !valueType.EqualsByName(ResourceData.Type);
             return true;
         }
@@ -292,7 +293,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                         getOperation.MgmtReturnType,
                         "Add a tag to the current resource.",
                         TagKeyParameter,
-                        TagValueParameter), isConvenientOperation: true));
+                        TagValueParameter,
+                        KnownParameters.CancellationTokenParameter), isConvenientOperation: true));
 
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
@@ -300,7 +302,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "SetTags",
                         getOperation.MgmtReturnType,
                         "Replace the tags on the resource with the given set.",
-                        TagSetParameter), isConvenientOperation: true));
+                        TagSetParameter,
+                        KnownParameters.CancellationTokenParameter), isConvenientOperation: true));
 
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
@@ -308,7 +311,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "RemoveTag",
                         getOperation.MgmtReturnType,
                         "Removes a tag by key from the resource.",
-                        TagKeyParameter), isConvenientOperation: true));
+                        TagKeyParameter,
+                        KnownParameters.CancellationTokenParameter), isConvenientOperation: true));
             }
             return result;
         }
@@ -320,9 +324,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             return branch.ParentRequestPath().GetResourceType();
         }
 
-        private IEnumerable<ContextualParameterMapping>? _extraContextualParameterMapping;
-        public IEnumerable<ContextualParameterMapping> ExtraContextualParameterMapping => _extraContextualParameterMapping ??= EnsureExtraContextualParameterMapping();
-        protected virtual IEnumerable<ContextualParameterMapping> EnsureExtraContextualParameterMapping() => Enumerable.Empty<ContextualParameterMapping>();
+        private IReadOnlyList<ContextualParameterMapping>? _extraContextualParameterMapping;
+        public IReadOnlyList<ContextualParameterMapping> ExtraContextualParameterMapping => _extraContextualParameterMapping ??= EnsureExtraContextualParameterMapping();
+        protected virtual IReadOnlyList<ContextualParameterMapping> EnsureExtraContextualParameterMapping() => Array.Empty<ContextualParameterMapping>();
 
         /// <summary>
         /// A collection of ClientOperations.
@@ -354,7 +358,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var contextualPath = GetContextualPath(OperationSet, requestPath);
                 var methodName = IsListOperation(operation, OperationSet) ?
                     "GetAll" :// hard-code the name of a resource collection operation to "GetAll"
-                    GetOperationName(operation, resourceRestClient?.OperationGroup.Key ?? string.Empty);
+                    GetOperationName(operation, resourceRestClient?.Key ?? string.Empty);
                 // get the MgmtRestOperation with a proper name
                 var restOperation = new MgmtRestOperation(
                     operation,
@@ -382,7 +386,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         /// <summary>
-        /// This method returns the contextual path from one resource <see cref="Models.OperationSet"/>
+        /// This method returns the contextual path from one resource <see cref="Mgmt.Models.OperationSet"/>
         /// In the <see cref="Resource"/> class, we just use the RequestPath of the OperationSet as its contextual path
         /// Also we need to replace the parameterized scope if there is any with the actual scope value.
         /// </summary>
@@ -442,7 +446,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private Parameter CreateResourceIdentifierParameter(Segment segment)
         {
             CSharpType ctype = ToFormatTypeByName(segment.Reference.Name) is Type type ? new CSharpType(type, false) : segment.Reference.Type;
-            return new Parameter(segment.Reference.Name, null, ctype, null, ValidationType.AssertNotNull, null);
+            return new Parameter(segment.Reference.Name, null, ctype, null, Validation.AssertNotNull, null);
         }
 
         private MethodSignature? _createResourceIdentifierMethodSignature;
@@ -457,23 +461,23 @@ namespace AutoRest.CSharp.Mgmt.Output
             Modifiers: Public | Static,
             ReturnType: typeof(ResourceIdentifier),
             ReturnDescription: null,
-            Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());
+            Parameters: RequestPath.Where(segment => segment.IsReference).Select(CreateResourceIdentifierParameter).ToArray());
 
-        public FormattableString ResourceDataIdExpression(FormattableString dataExpression)
+        public ValueExpression ResourceDataIdExpression(Parameter resourceDataParameter)
         {
             var typeOfId = ResourceData.TypeOfId;
             if (typeOfId != null && typeOfId.Equals(typeof(string)))
             {
-                return $"new {typeof(ResourceIdentifier)}({dataExpression}.Id)";
+                return Snippets.New.ResourceIdentifier(resourceDataParameter);
             }
             else
             {
                 // we have ensured other cases we would have an Id of Azure.Core.ResourceIdentifier type
-                return $"{dataExpression}.Id";
+                return new MemberExpression(resourceDataParameter, "Id");
             }
         }
 
-        public Parameter ResourceParameter => new(Name: "resource", Description: $"The client parameters to use in these operations.", Type: typeof(ArmResource), DefaultValue: null, ValidationType.None, null);
-        public Parameter ResourceDataParameter => new(Name: "data", Description: $"The resource that is the target of operations.", Type: ResourceData.Type, DefaultValue: null, ValidationType.None, null);
+        public Parameter ResourceParameter => new(Name: "resource", Description: $"The client parameters to use in these operations.", Type: typeof(ArmResource), DefaultValue: null, Validation.None, null);
+        public Parameter ResourceDataParameter => new(Name: "data", Description: $"The resource that is the target of operations.", Type: ResourceData.Type, DefaultValue: null, Validation.None, null);
     }
 }

@@ -7,37 +7,37 @@ This sample shows how to call RoundTripAsync with required parameters.
 <code><![CDATA[
 var client = new CustomizationsInTspClient();
 
-var input = new RootModel()
+var input = new RootModel
 {
     PropertyModelToRename = new RenamedModel(1234)
-{
+    {
         OptionalInt = 1234,
     },
     PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 3.14f, 1234, new TimeSpan(1, 2, 3), "<propertyToMakeString>", new JsonElement(), "<propertyToField>", new string[] 
-{
-        "<null>"
+    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 3.14f, 1234, new TimeSpan(1, 23, 45), "<propertyToMakeString>", default, "<propertyToField>", new string[]
+    {
+        "<String>"
     }, new Dictionary<string, string>
-{
-        ["key"] = "<null>",
-    }, new IList<string>[] 
-{
-        new string[] 
-{
-            "<null>"
+    {
+        ["key"] = "<String>"
+    }, new IList<string>[]
+    {
+        new string[]
+        {
+            "<String>"
         }
-    }, new IDictionary<string,string>[] 
-{
+    }, new IDictionary<string, string>[]
+    {
         new Dictionary<string, string>
-{
-            ["key"] = "<null>",
+        {
+            ["key"] = "<String>"
         }
     }),
     PropertyEnumToRename = RenamedEnum.One,
     PropertyEnumWithValueToRename = EnumWithValueToRename.One,
     PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
     PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234)
-{
+    {
         AdditionalSerializableProperty = 1234,
         AdditionalNullableSerializableProperty = 1234,
     },
@@ -53,37 +53,37 @@ This sample shows how to call RoundTrip with required parameters.
 <code><![CDATA[
 var client = new CustomizationsInTspClient();
 
-var input = new RootModel()
+var input = new RootModel
 {
     PropertyModelToRename = new RenamedModel(1234)
-{
+    {
         OptionalInt = 1234,
     },
     PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 3.14f, 1234, new TimeSpan(1, 2, 3), "<propertyToMakeString>", new JsonElement(), "<propertyToField>", new string[] 
-{
-        "<null>"
+    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 3.14f, 1234, new TimeSpan(1, 23, 45), "<propertyToMakeString>", default, "<propertyToField>", new string[]
+    {
+        "<String>"
     }, new Dictionary<string, string>
-{
-        ["key"] = "<null>",
-    }, new IList<string>[] 
-{
-        new string[] 
-{
-            "<null>"
+    {
+        ["key"] = "<String>"
+    }, new IList<string>[]
+    {
+        new string[]
+        {
+            "<String>"
         }
-    }, new IDictionary<string,string>[] 
-{
+    }, new IDictionary<string, string>[]
+    {
         new Dictionary<string, string>
-{
-            ["key"] = "<null>",
+        {
+            ["key"] = "<String>"
         }
     }),
     PropertyEnumToRename = RenamedEnum.One,
     PropertyEnumWithValueToRename = EnumWithValueToRename.One,
     PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
     PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234)
-{
+    {
         AdditionalSerializableProperty = 1234,
         AdditionalNullableSerializableProperty = 1234,
     },
@@ -124,11 +124,11 @@ var data = new {
     propertyModelWithCustomizedProperties = new {
         propertyToMakeInternal = 1234,
         propertyToRename = 1234,
-        propertyToMakeFloat = 1234,
-        propertyToMakeInt = 123.45f,
-        propertyToMakeDuration = "<propertyToMakeDuration>",
-        propertyToMakeString = "PT1H23M45S",
-        propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
+        propertyToMakeFloat = 3.14f,
+        propertyToMakeInt = 1234,
+        propertyToMakeDuration = "PT1H23M45S",
+        propertyToMakeString = "<propertyToMakeString>",
+        propertyToMakeJsonElement = "{}",
         propertyToField = "<propertyToField>",
         badListName = new[] {
             "<String>"
@@ -152,6 +152,8 @@ var data = new {
     propertyEnumToBeMadeExtensible = "1",
     propertyModelToAddAdditionalSerializableProperty = new {
         requiredInt = 1234,
+        additionalSerializableProperty = 1234,
+        additionalNullableSerializableProperty = 1234,
     },
     propertyToMoveToCustomization = "a",
 };
@@ -179,6 +181,8 @@ Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("additionalSerializableProperty").ToString());
+Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("additionalNullableSerializableProperty").ToString());
 Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
 ]]></code>
 </example>
@@ -214,11 +218,11 @@ var data = new {
     propertyModelWithCustomizedProperties = new {
         propertyToMakeInternal = 1234,
         propertyToRename = 1234,
-        propertyToMakeFloat = 1234,
-        propertyToMakeInt = 123.45f,
-        propertyToMakeDuration = "<propertyToMakeDuration>",
-        propertyToMakeString = "PT1H23M45S",
-        propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
+        propertyToMakeFloat = 3.14f,
+        propertyToMakeInt = 1234,
+        propertyToMakeDuration = "PT1H23M45S",
+        propertyToMakeString = "<propertyToMakeString>",
+        propertyToMakeJsonElement = "{}",
         propertyToField = "<propertyToField>",
         badListName = new[] {
             "<String>"
@@ -242,6 +246,8 @@ var data = new {
     propertyEnumToBeMadeExtensible = "1",
     propertyModelToAddAdditionalSerializableProperty = new {
         requiredInt = 1234,
+        additionalSerializableProperty = 1234,
+        additionalNullableSerializableProperty = 1234,
     },
     propertyToMoveToCustomization = "a",
 };
@@ -269,6 +275,8 @@ Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
 Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("additionalSerializableProperty").ToString());
+Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("additionalNullableSerializableProperty").ToString());
 Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
 ]]></code>
 </example>

@@ -3,10 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Utilities;
-using Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Input;
@@ -54,19 +51,5 @@ internal record InputOperation(
         GenerateConvenienceMethod: false)
     { }
 
-    private string? _cleanName;
-    public string CleanName
-    {
-        get
-        {
-            if (_cleanName == null)
-            {
-                _cleanName = Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
-            }
-
-            return _cleanName;
-        }
-    }
-
-    public bool KeepClientDefaultValue { get; set; } = Configuration.MethodsToKeepClientDefaultValue.Contains(Name);
+    public string CleanName => Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
 }

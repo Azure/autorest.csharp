@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using url_multi_collectionFormat_LowLevel;
 
 namespace url_multi_collectionFormat_LowLevel.Samples
 {

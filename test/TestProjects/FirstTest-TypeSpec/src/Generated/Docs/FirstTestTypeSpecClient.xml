@@ -118,11 +118,11 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new[] {
         1234
@@ -148,14 +148,14 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralFloat = 4.56,
+    optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new[] {
@@ -194,11 +194,11 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new[] {
         1234
@@ -224,14 +224,14 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralFloat = 4.56,
+    optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new[] {
@@ -274,11 +274,11 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new[] {
         1234
@@ -304,14 +304,14 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralFloat = 4.56,
+    optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new[] {
@@ -350,11 +350,11 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new[] {
         1234
@@ -380,14 +380,14 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralFloat = 4.56,
+    optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new[] {
@@ -628,7 +628,8 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = await client.ReturnsAnonymousModelAsync(new RequestContext());
 
-Console.WriteLine(response.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
@@ -641,13 +642,14 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = client.ReturnsAnonymousModel(new RequestContext());
 
-Console.WriteLine(response.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
     <member name="HeadAsBooleanAsync(string,RequestContext)">
 <example>
-This sample shows how to call HeadAsBooleanAsync with required parameters.
+This sample shows how to call HeadAsBooleanAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
@@ -659,7 +661,7 @@ Console.WriteLine(response.GetRawResponse().Status);
     </member>
     <member name="HeadAsBoolean(string,RequestContext)">
 <example>
-This sample shows how to call HeadAsBoolean with required parameters.
+This sample shows how to call HeadAsBoolean with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
@@ -743,19 +745,19 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = new object(),
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
-        requiredLiteralBool = false,
+        requiredLiteralFloat = 1.23F,
+        requiredLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         requiredNullableList = new[] {
             1234
         },
     },
-    requiredUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
     requiredRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     modelWithRequiredNullable = new {
         requiredNullablePrimitive = 1234,
@@ -802,14 +804,14 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = new object(),
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
-        requiredLiteralBool = false,
+        requiredLiteralFloat = 1.23F,
+        requiredLiteralBool = true,
         optionalLiteralString = "reject",
         optionalLiteralInt = 456,
-        optionalLiteralFloat = 4.56,
+        optionalLiteralFloat = 4.56F,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         optionalNullableList = new[] {
@@ -819,30 +821,30 @@ var data = new {
             1234
         },
     },
-    intExtensibleEnum = "1",
+    intExtensibleEnum = 1,
     intExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-    floatExtensibleEnum = "1",
+    floatExtensibleEnum = 1,
     floatExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-    floatFixedEnum = "1.1",
+    floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new[] {
-        "1.1"
+        1.1F
     },
-    intFixedEnum = "1",
+    intFixedEnum = 1,
     intFixedEnumCollection = new[] {
-        "1"
+        1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
+    optionalUnknown = BinaryData.FromString("<your binary data content>"),
     requiredRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     optionalRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     modelWithRequiredNullable = new {
         requiredNullablePrimitive = 1234,
@@ -910,19 +912,19 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = new object(),
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
-        requiredLiteralBool = false,
+        requiredLiteralFloat = 1.23F,
+        requiredLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         requiredNullableList = new[] {
             1234
         },
     },
-    requiredUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
     requiredRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     modelWithRequiredNullable = new {
         requiredNullablePrimitive = 1234,
@@ -969,14 +971,14 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = new object(),
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
-        requiredLiteralBool = false,
+        requiredLiteralFloat = 1.23F,
+        requiredLiteralBool = true,
         optionalLiteralString = "reject",
         optionalLiteralInt = 456,
-        optionalLiteralFloat = 4.56,
+        optionalLiteralFloat = 4.56F,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         optionalNullableList = new[] {
@@ -986,30 +988,30 @@ var data = new {
             1234
         },
     },
-    intExtensibleEnum = "1",
+    intExtensibleEnum = 1,
     intExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-    floatExtensibleEnum = "1",
+    floatExtensibleEnum = 1,
     floatExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-    floatFixedEnum = "1.1",
+    floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new[] {
-        "1.1"
+        1.1F
     },
-    intFixedEnum = "1",
+    intFixedEnum = 1,
     intFixedEnumCollection = new[] {
-        "1"
+        1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
+    optionalUnknown = BinaryData.FromString("<your binary data content>"),
     requiredRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     optionalRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     modelWithRequiredNullable = new {
         requiredNullablePrimitive = 1234,
@@ -1077,19 +1079,19 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = new object(),
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
-        requiredLiteralBool = false,
+        requiredLiteralFloat = 1.23F,
+        requiredLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         requiredNullableList = new[] {
             1234
         },
     },
-    requiredUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
     requiredRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     modelWithRequiredNullable = new {
         requiredNullablePrimitive = 1234,
@@ -1136,14 +1138,14 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = new object(),
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
-        requiredLiteralBool = false,
+        requiredLiteralFloat = 1.23F,
+        requiredLiteralBool = true,
         optionalLiteralString = "reject",
         optionalLiteralInt = 456,
-        optionalLiteralFloat = 4.56,
+        optionalLiteralFloat = 4.56F,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         optionalNullableList = new[] {
@@ -1153,30 +1155,30 @@ var data = new {
             1234
         },
     },
-    intExtensibleEnum = "1",
+    intExtensibleEnum = 1,
     intExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-    floatExtensibleEnum = "1",
+    floatExtensibleEnum = 1,
     floatExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-    floatFixedEnum = "1.1",
+    floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new[] {
-        "1.1"
+        1.1F
     },
-    intFixedEnum = "1",
+    intFixedEnum = 1,
     intFixedEnumCollection = new[] {
-        "1"
+        1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
+    optionalUnknown = BinaryData.FromString("<your binary data content>"),
     requiredRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     optionalRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     modelWithRequiredNullable = new {
         requiredNullablePrimitive = 1234,
@@ -1244,19 +1246,19 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = new object(),
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
-        requiredLiteralBool = false,
+        requiredLiteralFloat = 1.23F,
+        requiredLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         requiredNullableList = new[] {
             1234
         },
     },
-    requiredUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
     requiredRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     modelWithRequiredNullable = new {
         requiredNullablePrimitive = 1234,
@@ -1303,14 +1305,14 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = new object(),
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
-        requiredLiteralBool = false,
+        requiredLiteralFloat = 1.23F,
+        requiredLiteralBool = true,
         optionalLiteralString = "reject",
         optionalLiteralInt = 456,
-        optionalLiteralFloat = 4.56,
+        optionalLiteralFloat = 4.56F,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         optionalNullableList = new[] {
@@ -1320,30 +1322,30 @@ var data = new {
             1234
         },
     },
-    intExtensibleEnum = "1",
+    intExtensibleEnum = 1,
     intExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-    floatExtensibleEnum = "1",
+    floatExtensibleEnum = 1,
     floatExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-    floatFixedEnum = "1.1",
+    floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new[] {
-        "1.1"
+        1.1F
     },
-    intFixedEnum = "1",
+    intFixedEnum = 1,
     intFixedEnumCollection = new[] {
-        "1"
+        1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
+    optionalUnknown = BinaryData.FromString("<your binary data content>"),
     requiredRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     optionalRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     modelWithRequiredNullable = new {
         requiredNullablePrimitive = 1234,
@@ -1462,11 +1464,11 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new[] {
         1234
@@ -1492,14 +1494,14 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralFloat = 4.56,
+    optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new[] {
@@ -1538,11 +1540,11 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new[] {
         1234
@@ -1568,14 +1570,14 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralFloat = 4.56,
+    optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new[] {

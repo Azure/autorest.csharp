@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeConstructor BuildConstructor(ConstructorInfo ctor, ObjectTypeConstructor? baseConstructor)
         {
             var parameters = ctor.GetParameters()
-                .Select(param => new Parameter(ToCamelCase(param.Name!), $"The {param.Name}", new CSharpType(param.ParameterType), null, ValidationType.None, null))
+                .Select(param => new Parameter(ToCamelCase(param.Name!), $"The {param.Name}", new CSharpType(param.ParameterType), null, Validation.None, null))
                 .ToArray();
 
             // we should only add initializers when there is a corresponding parameter

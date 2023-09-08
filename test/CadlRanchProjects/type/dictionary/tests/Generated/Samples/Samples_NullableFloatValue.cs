@@ -14,7 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type._Dictionary.Models;
+using _Type._Dictionary;
 
 namespace _Type._Dictionary.Samples
 {
@@ -85,7 +85,7 @@ namespace _Type._Dictionary.Samples
 
             var data = new
             {
-                key = 123.45f,
+                key = 3.14f,
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -100,7 +100,7 @@ namespace _Type._Dictionary.Samples
 
             var data = new
             {
-                key = 123.45f,
+                key = 3.14f,
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -115,7 +115,7 @@ namespace _Type._Dictionary.Samples
 
             var data = new
             {
-                key = 123.45f,
+                key = 3.14f,
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
@@ -130,7 +130,7 @@ namespace _Type._Dictionary.Samples
 
             var data = new
             {
-                key = 123.45f,
+                key = 3.14f,
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
@@ -145,7 +145,7 @@ namespace _Type._Dictionary.Samples
 
             var body = new Dictionary<string, float?>
             {
-                ["key"] = 3.14f,
+                ["key"] = 3.14f
             };
             var result = await client.PutAsync(body);
         }

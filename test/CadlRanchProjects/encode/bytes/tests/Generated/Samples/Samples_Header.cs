@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using Encode.Bytes;
 using NUnit.Framework;
 
 namespace Encode.Bytes.Samples

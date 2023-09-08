@@ -41,6 +41,7 @@ namespace header
         /// <summary> Send a post request with header value "User-Agent": "overwrite". </summary>
         /// <param name="userAgent"> Send a post request with header value "User-Agent": "overwrite". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="userAgent"/> is null. </exception>
         public virtual async Task<Response> ParamExistingKeyAsync(string userAgent, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
@@ -59,6 +60,7 @@ namespace header
         /// <summary> Send a post request with header value "User-Agent": "overwrite". </summary>
         /// <param name="userAgent"> Send a post request with header value "User-Agent": "overwrite". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="userAgent"/> is null. </exception>
         public virtual Response ParamExistingKey(string userAgent, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
@@ -82,7 +84,7 @@ namespace header
             scope.Start();
             try
             {
-                return (await RestClient.ResponseExistingKeyAsync(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseExistingKeyAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -99,7 +101,7 @@ namespace header
             scope.Start();
             try
             {
-                return RestClient.ResponseExistingKey(cancellationToken).GetRawResponse();
+                return RestClient.ResponseExistingKey(cancellationToken);
             }
             catch (Exception e)
             {
@@ -111,6 +113,7 @@ namespace header
         /// <summary> Send a post request with header value "Content-Type": "text/html". </summary>
         /// <param name="contentType"> Send a post request with header value "Content-Type": "text/html". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="contentType"/> is null. </exception>
         public virtual async Task<Response> ParamProtectedKeyAsync(string contentType, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
@@ -129,6 +132,7 @@ namespace header
         /// <summary> Send a post request with header value "Content-Type": "text/html". </summary>
         /// <param name="contentType"> Send a post request with header value "Content-Type": "text/html". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="contentType"/> is null. </exception>
         public virtual Response ParamProtectedKey(string contentType, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
@@ -152,7 +156,7 @@ namespace header
             scope.Start();
             try
             {
-                return (await RestClient.ResponseProtectedKeyAsync(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseProtectedKeyAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -169,7 +173,7 @@ namespace header
             scope.Start();
             try
             {
-                return RestClient.ResponseProtectedKey(cancellationToken).GetRawResponse();
+                return RestClient.ResponseProtectedKey(cancellationToken);
             }
             catch (Exception e)
             {
@@ -182,6 +186,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ParamIntegerAsync(string scenario, int value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
@@ -201,6 +206,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ParamInteger(string scenario, int value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
@@ -219,13 +225,14 @@ namespace header
         /// <summary> Get a response with header value "value": 1 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ResponseIntegerAsync(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
             try
             {
-                return (await RestClient.ResponseIntegerAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseIntegerAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -237,13 +244,14 @@ namespace header
         /// <summary> Get a response with header value "value": 1 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ResponseInteger(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
             try
             {
-                return RestClient.ResponseInteger(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseInteger(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -256,6 +264,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ParamLongAsync(string scenario, long value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
@@ -275,6 +284,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ParamLong(string scenario, long value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
@@ -293,13 +303,14 @@ namespace header
         /// <summary> Get a response with header value "value": 105 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ResponseLongAsync(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
             try
             {
-                return (await RestClient.ResponseLongAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseLongAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -311,13 +322,14 @@ namespace header
         /// <summary> Get a response with header value "value": 105 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ResponseLong(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
             try
             {
-                return RestClient.ResponseLong(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseLong(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -330,6 +342,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ParamFloatAsync(string scenario, float value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
@@ -349,6 +362,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ParamFloat(string scenario, float value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
@@ -367,13 +381,14 @@ namespace header
         /// <summary> Get a response with header value "value": 0.07 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ResponseFloatAsync(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
             try
             {
-                return (await RestClient.ResponseFloatAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseFloatAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -385,13 +400,14 @@ namespace header
         /// <summary> Get a response with header value "value": 0.07 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ResponseFloat(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
             try
             {
-                return RestClient.ResponseFloat(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseFloat(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -404,6 +420,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ParamDoubleAsync(string scenario, double value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
@@ -423,6 +440,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ParamDouble(string scenario, double value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
@@ -441,13 +459,14 @@ namespace header
         /// <summary> Get a response with header value "value": 7e120 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ResponseDoubleAsync(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
             try
             {
-                return (await RestClient.ResponseDoubleAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseDoubleAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -459,13 +478,14 @@ namespace header
         /// <summary> Get a response with header value "value": 7e120 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "positive" or "negative". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ResponseDouble(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
             try
             {
-                return RestClient.ResponseDouble(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseDouble(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -478,6 +498,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "true" or "false". </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ParamBoolAsync(string scenario, bool value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
@@ -497,6 +518,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "true" or "false". </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ParamBool(string scenario, bool value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
@@ -515,13 +537,14 @@ namespace header
         /// <summary> Get a response with header value "value": true or false. </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "true" or "false". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ResponseBoolAsync(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
             try
             {
-                return (await RestClient.ResponseBoolAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseBoolAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -533,13 +556,14 @@ namespace header
         /// <summary> Get a response with header value "value": true or false. </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "true" or "false". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ResponseBool(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
             try
             {
-                return RestClient.ResponseBool(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseBool(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -552,6 +576,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
         /// <param name="value"> Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ParamStringAsync(string scenario, string value = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
@@ -571,6 +596,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
         /// <param name="value"> Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ParamString(string scenario, string value = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
@@ -589,13 +615,14 @@ namespace header
         /// <summary> Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "". </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ResponseStringAsync(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
             try
             {
-                return (await RestClient.ResponseStringAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseStringAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -607,13 +634,14 @@ namespace header
         /// <summary> Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "". </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ResponseString(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
             try
             {
-                return RestClient.ResponseString(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseString(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -626,6 +654,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="value"> Send a post request with header values "2010-01-01" or "0001-01-01". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ParamDateAsync(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
@@ -645,6 +674,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="value"> Send a post request with header values "2010-01-01" or "0001-01-01". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ParamDate(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
@@ -663,13 +693,14 @@ namespace header
         /// <summary> Get a response with header values "2010-01-01" or "0001-01-01". </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ResponseDateAsync(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
             try
             {
-                return (await RestClient.ResponseDateAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseDateAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -681,13 +712,14 @@ namespace header
         /// <summary> Get a response with header values "2010-01-01" or "0001-01-01". </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ResponseDate(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
             try
             {
-                return RestClient.ResponseDate(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseDate(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -700,6 +732,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="value"> Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
@@ -719,6 +752,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="value"> Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ParamDatetime(string scenario, DateTimeOffset value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
@@ -737,13 +771,14 @@ namespace header
         /// <summary> Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z". </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ResponseDatetimeAsync(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
             try
             {
-                return (await RestClient.ResponseDatetimeAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseDatetimeAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -755,13 +790,14 @@ namespace header
         /// <summary> Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z". </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ResponseDatetime(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
             try
             {
-                return RestClient.ResponseDatetime(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseDatetime(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -774,6 +810,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="value"> Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
@@ -793,6 +830,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="value"> Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
@@ -811,13 +849,14 @@ namespace header
         /// <summary> Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT". </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ResponseDatetimeRfc1123Async(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
             try
             {
-                return (await RestClient.ResponseDatetimeRfc1123Async(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseDatetimeRfc1123Async(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -829,13 +868,14 @@ namespace header
         /// <summary> Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT". </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "min". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ResponseDatetimeRfc1123(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
             try
             {
-                return RestClient.ResponseDatetimeRfc1123(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseDatetimeRfc1123(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -848,6 +888,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
         /// <param name="value"> Send a post request with header values "P123DT22H14M12.011S". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ParamDurationAsync(string scenario, TimeSpan value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
@@ -867,6 +908,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
         /// <param name="value"> Send a post request with header values "P123DT22H14M12.011S". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ParamDuration(string scenario, TimeSpan value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
@@ -885,13 +927,14 @@ namespace header
         /// <summary> Get a response with header values "P123DT22H14M12.011S". </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ResponseDurationAsync(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
             try
             {
-                return (await RestClient.ResponseDurationAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseDurationAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -903,13 +946,14 @@ namespace header
         /// <summary> Get a response with header values "P123DT22H14M12.011S". </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ResponseDuration(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
             try
             {
-                return RestClient.ResponseDuration(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseDuration(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -922,6 +966,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
         /// <param name="value"> Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> or <paramref name="value"/> is null. </exception>
         public virtual async Task<Response> ParamByteAsync(string scenario, byte[] value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
@@ -941,6 +986,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
         /// <param name="value"> Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> or <paramref name="value"/> is null. </exception>
         public virtual Response ParamByte(string scenario, byte[] value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
@@ -959,13 +1005,14 @@ namespace header
         /// <summary> Get a response with header values "啊齄丂狛狜隣郎隣兀﨩". </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ResponseByteAsync(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
             try
             {
-                return (await RestClient.ResponseByteAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseByteAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -977,13 +1024,14 @@ namespace header
         /// <summary> Get a response with header values "啊齄丂狛狜隣郎隣兀﨩". </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "valid". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ResponseByte(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
             try
             {
-                return RestClient.ResponseByte(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseByte(scenario, cancellationToken);
             }
             catch (Exception e)
             {
@@ -996,6 +1044,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
         /// <param name="value"> Send a post request with header values 'GREY'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ParamEnumAsync(string scenario, GreyscaleColors? value = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
@@ -1015,6 +1064,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
         /// <param name="value"> Send a post request with header values 'GREY'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ParamEnum(string scenario, GreyscaleColors? value = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
@@ -1033,13 +1083,14 @@ namespace header
         /// <summary> Get a response with header values "GREY" or null. </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual async Task<Response> ResponseEnumAsync(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
             try
             {
-                return (await RestClient.ResponseEnumAsync(scenario, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.ResponseEnumAsync(scenario, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1051,13 +1102,14 @@ namespace header
         /// <summary> Get a response with header values "GREY" or null. </summary>
         /// <param name="scenario"> Send a post request with header values "scenario": "valid" or "null" or "empty". </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         public virtual Response ResponseEnum(string scenario, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
             try
             {
-                return RestClient.ResponseEnum(scenario, cancellationToken).GetRawResponse();
+                return RestClient.ResponseEnum(scenario, cancellationToken);
             }
             catch (Exception e)
             {

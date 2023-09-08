@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.ValueTypes;
 using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
@@ -143,7 +144,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             var client = new ValueTypesClient().GetDurationClient("1.0.0");
 
-            var body = new DurationProperty(new TimeSpan(1, 2, 3));
+            var body = new DurationProperty(new TimeSpan(1, 23, 45));
             var result = await client.PutAsync(body);
         }
     }

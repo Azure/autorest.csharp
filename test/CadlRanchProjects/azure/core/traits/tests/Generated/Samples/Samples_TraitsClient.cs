@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Specs_.Azure.Core.Traits;
 using _Specs_.Azure.Core.Traits.Models;
 
 namespace _Specs_.Azure.Core.Traits.Samples
@@ -26,7 +27,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             var client = new TraitsClient();
 
-            Response response = client.SmokeTest(1234, "<foo>", null, new RequestContext());
+            Response response = client.SmokeTest(1234, "<foo>", new RequestConditions(), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -38,7 +39,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             var client = new TraitsClient();
 
-            Response response = client.SmokeTest(1234, "<foo>", null, new RequestContext());
+            Response response = client.SmokeTest(1234, "<foo>", new RequestConditions(), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -51,7 +52,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             var client = new TraitsClient();
 
-            Response response = await client.SmokeTestAsync(1234, "<foo>", null, new RequestContext());
+            Response response = await client.SmokeTestAsync(1234, "<foo>", new RequestConditions(), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -63,7 +64,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             var client = new TraitsClient();
 
-            Response response = await client.SmokeTestAsync(1234, "<foo>", null, new RequestContext());
+            Response response = await client.SmokeTestAsync(1234, "<foo>", new RequestConditions(), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -76,7 +77,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             var client = new TraitsClient();
 
-            var result = await client.SmokeTestAsync(1234, "<foo>", null);
+            var result = await client.SmokeTestAsync(1234, "<foo>", new RequestConditions());
         }
 
         [Test]

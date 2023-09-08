@@ -75,10 +75,11 @@ This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
 var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-var data = new {
-    derivedname = "<derived.name>",
-    @for = "<for>",
-    modelkind = "derived",
+var data = new Dictionary<string, object>
+{
+    ["derived.name"] = "<derived.name>",
+    ["for"] = "<for>",
+    ["model.kind"] = "derived"
 };
 
 Response response = await client.PutAsync(RequestContent.Create(data));
@@ -92,10 +93,11 @@ This sample shows how to call Put with required request content.
 <code><![CDATA[
 var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-var data = new {
-    derivedname = "<derived.name>",
-    @for = "<for>",
-    modelkind = "derived",
+var data = new Dictionary<string, object>
+{
+    ["derived.name"] = "<derived.name>",
+    ["for"] = "<for>",
+    ["model.kind"] = "derived"
 };
 
 Response response = client.Put(RequestContent.Create(data));

@@ -58,9 +58,9 @@ var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 var body = new Dictionary<string, InnerModel>
 {
     ["key"] = new InnerModel("<property>")
-{
+    {
         Children = {},
-    },
+    }
 };
 var result = await client.PutAsync(body);
 ]]></code>
@@ -75,9 +75,9 @@ var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 var body = new Dictionary<string, InnerModel>
 {
     ["key"] = new InnerModel("<property>")
-{
+    {
         Children = {},
-    },
+    }
 };
 var result = client.Put(body);
 ]]></code>

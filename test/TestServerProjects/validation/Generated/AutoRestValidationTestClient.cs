@@ -45,6 +45,7 @@ namespace validation
         /// <param name="resourceGroupName"> Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+. </param>
         /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
         public virtual async Task<Response<Product>> ValidationOfMethodParametersAsync(string resourceGroupName, int id, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AutoRestValidationTestClient.ValidationOfMethodParameters");
@@ -64,6 +65,7 @@ namespace validation
         /// <param name="resourceGroupName"> Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+. </param>
         /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
         public virtual Response<Product> ValidationOfMethodParameters(string resourceGroupName, int id, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AutoRestValidationTestClient.ValidationOfMethodParameters");
@@ -84,6 +86,7 @@ namespace validation
         /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
         /// <param name="body"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
         public virtual async Task<Response<Product>> ValidationOfBodyAsync(string resourceGroupName, int id, Product body = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AutoRestValidationTestClient.ValidationOfBody");
@@ -104,6 +107,7 @@ namespace validation
         /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
         /// <param name="body"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
         public virtual Response<Product> ValidationOfBody(string resourceGroupName, int id, Product body = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AutoRestValidationTestClient.ValidationOfBody");

@@ -105,7 +105,7 @@ var client = new NullableClient().GetDatetimeClient("1.0.0");
 
 var data = new {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
+    nullableProperty = "2022-05-10T14:14:57.0310000Z",
 };
 
 Response response = await client.PatchNonNullAsync(RequestContent.Create(data));
@@ -121,7 +121,7 @@ var client = new NullableClient().GetDatetimeClient("1.0.0");
 
 var data = new {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
+    nullableProperty = "2022-05-10T14:14:57.0310000Z",
 };
 
 Response response = client.PatchNonNull(RequestContent.Create(data));
@@ -137,7 +137,7 @@ var client = new NullableClient().GetDatetimeClient("1.0.0");
 
 var data = new {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
+    nullableProperty = "2022-05-10T14:14:57.0310000Z",
 };
 
 Response response = await client.PatchNullAsync(RequestContent.Create(data));
@@ -153,7 +153,7 @@ var client = new NullableClient().GetDatetimeClient("1.0.0");
 
 var data = new {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
+    nullableProperty = "2022-05-10T14:14:57.0310000Z",
 };
 
 Response response = client.PatchNull(RequestContent.Create(data));

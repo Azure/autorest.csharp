@@ -5,73 +5,64 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
-using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal class DataPlaneClient : TypeProvider
     {
-        private readonly InputClient _inputClient;
-        private readonly BuildContext<DataPlaneOutputLibrary> _context;
-        private PagingMethod[]? _pagingMethods;
-        private ClientMethod[]? _methods;
-        private LongRunningOperationMethod[]? _longRunningOperationMethods;
-        private DataPlaneRestClient? _restClient;
-
-        public DataPlaneClient(InputClient inputClient, BuildContext<DataPlaneOutputLibrary> context) :
-            this(inputClient, context, ClientBuilder.GetClientPrefix(inputClient.Name, context), ClientBuilder.GetClientSuffix())
-        {
-        }
-
-        private DataPlaneClient(InputClient inputClient, BuildContext<DataPlaneOutputLibrary> context, string clientPrefix, string clientSuffix) : base(context)
-        {
-            _inputClient = inputClient;
-            _context = context;
-            DefaultName = clientPrefix + clientSuffix;
-            ClientShortName = string.IsNullOrEmpty(clientPrefix) ? DefaultName : clientPrefix;
-        }
-
-        public string ClientShortName { get; }
+        private readonly DataPlaneOutputLibrary _library;
         protected override string DefaultName { get; }
-        public string Description => ClientBuilder.CreateDescription(_inputClient.Description, ClientBuilder.GetClientPrefix(Declaration.Name, _context));
-        public DataPlaneRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_inputClient);
-        public ClientMethod[] Methods => _methods ??= ClientBuilder.BuildMethods(_inputClient, RestClient, Declaration).ToArray();
+        public string Description { get; }
+        public RestClient RestClient { get; }
 
-        public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(_inputClient, RestClient, Declaration).ToArray();
-
-        public LongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
-
-        protected override string DefaultAccessibility { get; } = "public";
-
-        private IEnumerable<LongRunningOperationMethod> BuildLongRunningOperationMethods()
+        public DataPlaneClient(InputClient inputClient, RestClient restClient, string defaultName, string defaultNamespace, DataPlaneOutputLibrary library, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
-            foreach (var operation in _inputClient.Operations)
+            _library = library;
+            DefaultName = ClientBuilder.GetClientPrefix(inputClient.Name, defaultName) + ClientBuilder.GetClientSuffix();
+            Description = BuilderHelpers.EscapeXmlDocDescription(ClientBuilder.CreateDescription(inputClient.Description, ClientBuilder.GetClientPrefix(Declaration.Name, defaultName)));
+            RestClient = restClient;
+            Methods = restClient.Methods
+                .OrderBy(m => m.Order)
+                .Select(CreateMethodBuilder)
+                .SelectMany(b => b.Build());
+        }
+
+        private DataPlaneLegacyMethodBuilderBase CreateMethodBuilder(RestClientOperationMethods methods)
+        {
+            var name = Declaration.Name;
+            var fields = RestClient.Fields;
+            var restClientReference = new MemberExpression(null, "RestClient");
+            var convenienceMethod = (MethodSignature)methods.Convenience!.Signature;
+            var createRequestMethod = (MethodSignature)methods.CreateRequest.Signature;
+
+            var lroType = _library.FindLongRunningOperation(methods.Operation)?.Type;
+            if (methods.PageItemType is not null)
             {
-                if (operation.LongRunning == null)
+                var createNextPageRequestMethod = methods.CreateNextPageMessageSignature;
+                if (lroType is not null)
                 {
-                    continue;
+                    return new LroPagingDataPlaneLegacyMethodBuilder(name, fields, restClientReference, convenienceMethod, createRequestMethod, createNextPageRequestMethod, lroType);
                 }
 
-                var name = operation.CleanName;
-                RestClientMethod startMethod = RestClient.GetOperationMethod(operation);
-
-                yield return new LongRunningOperationMethod(
-                    name,
-                    _context.Library.FindLongRunningOperation(operation),
-                    startMethod,
-                    new Diagnostic($"{Declaration.Name}.Start{name}")
-                );
+                var itemPropertyName = methods.Operation.Paging!.ItemName ?? "value";
+                var nextLinkName = methods.Operation.Paging!.NextLinkName;
+                return new PagingDataPlaneLegacyMethodBuilder(name, fields, restClientReference, convenienceMethod, createRequestMethod, createNextPageRequestMethod, methods.PageItemType, itemPropertyName, nextLinkName);
             }
+
+            if (lroType is not null)
+            {
+                return new LroDataPlaneLegacyMethodBuilder(name, fields, restClientReference, convenienceMethod, createRequestMethod, lroType);
+            }
+
+            return new DataPlaneLegacyMethodBuilder(name, fields, restClientReference, convenienceMethod);
         }
 
-        public IReadOnlyCollection<Parameter> GetClientConstructorParameters(CSharpType credentialType)
-        {
-            return RestClientBuilder.GetConstructorParameters(RestClient.ClientBuilder.GetOrderedParametersByRequired(), credentialType, false);
-        }
+        protected override string DefaultAccessibility => "public";
+        public IEnumerable<Method> Methods { get; }
     }
 }

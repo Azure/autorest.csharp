@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type._Enum.Extensible;
 using _Type._Enum.Extensible.Models;
 
 namespace _Type._Enum.Extensible.Samples

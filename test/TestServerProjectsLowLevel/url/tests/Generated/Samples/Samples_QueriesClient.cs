@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using url_LowLevel;
 
 namespace url_LowLevel.Samples
 {
@@ -389,7 +390,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.GetLongNull(1234);
+            Response response = client.GetLongNull(1234L);
             Console.WriteLine(response.Status);
         }
 
@@ -411,7 +412,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.GetLongNullAsync(1234);
+            Response response = await client.GetLongNullAsync(1234L);
             Console.WriteLine(response.Status);
         }
 
@@ -653,7 +654,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = client.DoubleNull(3.14);
+            Response response = client.DoubleNull(3.14d);
             Console.WriteLine(response.Status);
         }
 
@@ -675,7 +676,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.DoubleNullAsync(3.14);
+            Response response = await client.DoubleNullAsync(3.14d);
             Console.WriteLine(response.Status);
         }
 

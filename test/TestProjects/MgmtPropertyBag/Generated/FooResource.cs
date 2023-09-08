@@ -102,7 +102,7 @@ namespace MgmtPropertyBag
         /// </list>
         /// </summary>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
+        /// <param name="top"> The int? to use. </param>
         /// <param name="orderby"> The String to use. </param>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
@@ -139,7 +139,7 @@ namespace MgmtPropertyBag
         /// </list>
         /// </summary>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
+        /// <param name="top"> The int? to use. </param>
         /// <param name="orderby"> The String to use. </param>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>

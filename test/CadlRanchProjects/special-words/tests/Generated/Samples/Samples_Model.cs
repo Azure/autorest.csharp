@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using SpecialWords;
 using SpecialWords.Models;
 
 namespace SpecialWords.Samples
@@ -83,11 +84,11 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-            var data = new
+            var data = new Dictionary<string, object>
             {
-                derivedname = "<derived.name>",
-                @for = "<for>",
-                modelkind = "derived",
+                ["derived.name"] = "<derived.name>",
+                ["for"] = "<for>",
+                ["model.kind"] = "derived"
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -100,11 +101,11 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-            var data = new
+            var data = new Dictionary<string, object>
             {
-                derivedname = "<derived.name>",
-                @for = "<for>",
-                modelkind = "derived",
+                ["derived.name"] = "<derived.name>",
+                ["for"] = "<for>",
+                ["model.kind"] = "derived"
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -117,11 +118,11 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-            var data = new
+            var data = new Dictionary<string, object>
             {
-                derivedname = "<derived.name>",
-                @for = "<for>",
-                modelkind = "derived",
+                ["derived.name"] = "<derived.name>",
+                ["for"] = "<for>",
+                ["model.kind"] = "derived"
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
@@ -134,11 +135,11 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-            var data = new
+            var data = new Dictionary<string, object>
             {
-                derivedname = "<derived.name>",
-                @for = "<for>",
-                modelkind = "derived",
+                ["derived.name"] = "<derived.name>",
+                ["for"] = "<for>",
+                ["model.kind"] = "derived"
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));

@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using CollapseRequestCondition_LowLevel;
 using NUnit.Framework;
 
 namespace CollapseRequestCondition_LowLevel.Samples

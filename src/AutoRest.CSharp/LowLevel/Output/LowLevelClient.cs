@@ -3,12 +3,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
-using System.Text.RegularExpressions;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Responses;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
@@ -16,7 +16,6 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure.Core;
 using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
@@ -24,101 +23,58 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class LowLevelClient : TypeProvider
     {
-        private readonly string _libraryName;
-        private readonly TypeFactory _typeFactory;
-        private readonly IEnumerable<InputParameter> _clientParameters;
-        private readonly InputAuth _authorization;
-        private readonly IEnumerable<InputOperation> _operations;
-        private readonly SourceInputModel? _sourceInputModel;
-
         protected override string DefaultName { get; }
+        protected override string DefaultNamespace { get; }
         protected override string DefaultAccessibility => "public";
 
+        private readonly TypeFactory _typeFactory;
         private ConstructorSignature? _subClientInternalConstructor;
 
         public string Description { get; }
+        public ConstructorSignature[] PrimaryConstructors { get; }
+        public ConstructorSignature[] SecondaryConstructors { get; }
         public ConstructorSignature SubClientInternalConstructor => _subClientInternalConstructor ??= BuildSubClientInternalConstructor();
 
         public IReadOnlyList<LowLevelClient> SubClients { get; init; }
+        public IReadOnlyList<ResponseClassifierType> ResponseClassifierTypes { get; }
+        public IReadOnlyList<RestClientOperationMethods> OperationMethods { get; }
         public LowLevelClient? ParentClient;
+        public LowLevelSubClientFactoryMethod? FactoryMethod { get; }
 
         public ClientOptionsTypeProvider ClientOptions { get; }
-
+        public IReadOnlyList<Parameter> Parameters { get; }
+        public ClientFields Fields { get; }
         public bool IsSubClient { get; }
+        public bool IsResourceClient { get; }
 
-        private bool? _isResourceClient;
-        public bool IsResourceClient => _isResourceClient ??= Parameters.Any(p => p.IsResourceIdentifier);
-
-        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory)
+        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IReadOnlyList<Parameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory)
             : base(ns, sourceInputModel)
         {
-            _libraryName = libraryName;
-            _typeFactory = typeFactory;
             DefaultName = name;
+            DefaultNamespace = ns;
             Description = description;
             IsSubClient = parentClient != null;
             ParentClient = parentClient;
+            _typeFactory = typeFactory;
 
             ClientOptions = clientOptions;
 
-            _clientParameters = clientParameters;
-            _authorization = authorization;
-            _operations = operations;
-            _sourceInputModel = sourceInputModel;
+            Parameters = clientParameters;
+            IsResourceClient = Parameters.Any(p => p.IsResourceIdentifier);
+            Fields = ClientFields.CreateForClient(Parameters, authorization);
+
+            (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
+
+            OperationMethods = new ClientMethodsBuilder(operations, null, sourceInputModel, typeFactory)
+                .Build(Fields, Declaration.Name, Declaration.Namespace)
+                .Select(b => b.BuildDpg())
+                .ToList();
+
+            ResponseClassifierTypes = OperationMethods.Select(rm => rm.ResponseClassifier).Distinct().ToArray();
+
+            FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
 
             SubClients = Array.Empty<LowLevelClient>();
-        }
-
-        private IReadOnlyList<Parameter>? _parameters;
-        public IReadOnlyList<Parameter> Parameters => _parameters ??= new RestClientBuilder(_clientParameters, _typeFactory).GetOrderedParametersByRequired();
-
-        private ClientFields? _fields;
-        public ClientFields Fields => _fields ??= ClientFields.CreateForClient(Parameters, _authorization);
-
-        private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors)? _constructors;
-        private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) Constructors => _constructors ??= BuildPublicConstructors(Parameters);
-        public ConstructorSignature[] PrimaryConstructors => Constructors.PrimaryConstructors;
-        public ConstructorSignature[] SecondaryConstructors => Constructors.SecondaryConstructors;
-
-        private IReadOnlyList<LowLevelClientMethod>? _allClientMethods;
-        private IReadOnlyList<LowLevelClientMethod> AllClientMethods => _allClientMethods ??= BuildMethods(_typeFactory, _operations, Fields, Declaration.Namespace, Declaration.Name, _sourceInputModel).ToArray();
-
-        private IReadOnlyList<LowLevelClientMethod>? _clientMethods;
-        public IReadOnlyList<LowLevelClientMethod> ClientMethods => _clientMethods ??= AllClientMethods
-                .OrderBy(m => m.LongRunning != null ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented
-                .ToArray();
-
-        private IReadOnlyList<RestClientMethod>? _requestMethods;
-        public IReadOnlyList<RestClientMethod> RequestMethods => _requestMethods ??= AllClientMethods.Select(m => m.RequestMethod)
-                .Concat(ClientMethods.Select(m => m.PagingInfo?.NextPageMethod).WhereNotNull())
-                .Distinct()
-                .ToArray();
-
-        private IReadOnlyList<ResponseClassifierType>? _responseClassifierTypes;
-        public IReadOnlyList<ResponseClassifierType> ResponseClassifierTypes => _responseClassifierTypes ??= RequestMethods.Select(m => m.ResponseClassifierType).ToArray();
-
-        private LowLevelSubClientFactoryMethod? _factoryMethod;
-        public LowLevelSubClientFactoryMethod? FactoryMethod => _factoryMethod ??= ParentClient != null ? BuildFactoryMethod(ParentClient.Fields, _libraryName) : null;
-
-        public IEnumerable<LowLevelClientMethod> CustomMethods()
-        {
-            //TODO: get all custom methods using similar method to GetEffectiveCtor
-            yield break;
-        }
-
-
-        public static IEnumerable<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string namespaceName, string clientName, SourceInputModel? sourceInputModel)
-        {
-            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(o, namespaceName, clientName, fields, typeFactory, sourceInputModel));
-            foreach (var (_, builder) in builders)
-            {
-                builder.BuildNextPageMethod(builders);
-            }
-
-            foreach (var (_, builder) in builders)
-            {
-                yield return builder.BuildOperationMethodChain();
-            }
         }
 
         private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) BuildPublicConstructors(IReadOnlyList<Parameter> orderedParameters)
@@ -143,7 +99,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var optionalToRequired = optionalParameters
                 .Select(parameter => ClientOptions.Type.EqualsIgnoreNullable(parameter.Type)
-                ? parameter with { DefaultValue = null, Validation = ValidationType.None }
+                ? parameter with { DefaultValue = null, Validation = Validation.None }
                 : parameter with
                 {
                     DefaultValue = null,
@@ -172,7 +128,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             var optionalParametersArguments = optionalParameters
-                .Select(p => p.Initializer ?? p.Type.GetParameterInitializer(p.DefaultValue!.Value)!)
+                .Select(p => (ValueExpression)new FormattableStringToExpression(p.Initializer ?? p.Type.GetParameterInitializer(p.DefaultValue!.Value)!))
                 .ToArray();
 
             if (Fields.CredentialFields.Count == 0)
@@ -191,10 +147,10 @@ namespace AutoRest.CSharp.Output.Models
         private ConstructorSignature CreatePrimaryConstructor(IReadOnlyList<Parameter> parameters)
             => new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters);
 
-        private ConstructorSignature CreateSecondaryConstructor(IReadOnlyList<Parameter> parameters, FormattableString[] optionalParametersArguments)
+        private ConstructorSignature CreateSecondaryConstructor(IReadOnlyList<Parameter> parameters, ValueExpression[] optionalParametersArguments)
         {
             var arguments = parameters
-                .Select<Parameter, FormattableString>(p => $"{p.Name}")
+                .Select<Parameter, ValueExpression>(p => p)
                 .Concat(optionalParametersArguments)
                 .ToArray();
             return new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters, Initializer: new ConstructorInitializer(false, arguments));
@@ -207,7 +163,7 @@ namespace AutoRest.CSharp.Output.Models
                 "A credential used to authenticate to an Azure Service.",
                 type,
                 null,
-                ValidationType.AssertNotNull,
+                Validation.AssertNotNull,
                 null);
         }
 
@@ -217,13 +173,13 @@ namespace AutoRest.CSharp.Output.Models
         private Parameter CreateOptionsParameter()
         {
             var clientOptionsType = ClientOptions.Type.WithNullable(true);
-            return new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.Default(clientOptionsType), ValidationType.None, Constant.NewInstanceOf(clientOptionsType).GetConstantFormattable());
+            return new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.Default(clientOptionsType), Validation.None, Constant.NewInstanceOf(clientOptionsType).GetConstantFormattable());
         }
 
         private ConstructorSignature BuildSubClientInternalConstructor()
         {
             var constructorParameters = GetSubClientFactoryMethodParameters()
-                .Select(p => p with { DefaultValue = null, Validation = ValidationType.None, Initializer = null })
+                .Select(p => p with { DefaultValue = null, Validation = Validation.None, Initializer = null })
                 .ToArray();
 
             return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Internal, constructorParameters);
@@ -264,54 +220,50 @@ namespace AutoRest.CSharp.Output.Models
             //TODO: This method is needed because we allow roslyn code gen attributes to be run AFTER the writers do their job but before
             //      the code is emitted. This is a hack to allow the writers to know what the effective ctor is after the roslyn code gen attributes
 
-            List<ConstructorSignature> candidates = new List<ConstructorSignature>(SecondaryConstructors.Where(c => c.Modifiers == MethodSignatureModifiers.Public));
+            List<ConstructorSignature> candidates = new(SecondaryConstructors.Where(c => c.Modifiers == MethodSignatureModifiers.Public));
 
-            if (ExistingType is not null)
+            if (ExistingType is null)
             {
-                //    [CodeGenSuppress("ConfidentialLedgerCertificateClient", typeof(Uri), typeof(TokenCredential), typeof(ConfidentialLedgerClientOptions))]
-                //remove suppressed ctors from the candidates
-                foreach (var attribute in ExistingType.GetAttributes().Where(a => a.AttributeClass is not null && a.AttributeClass.Name == "CodeGenSuppressAttribute"))
-                {
-                    if (attribute.ConstructorArguments.Length != 2)
-                        continue;
-                    var classTarget = attribute.ConstructorArguments[0].Value;
-                    if (classTarget is null || !classTarget.Equals(DefaultName))
-                        continue;
-
-                    candidates.RemoveAll(ctor => IsParamMatch(ctor.Parameters, attribute.ConstructorArguments[1].Values.Select(tc => (INamedTypeSymbol)(tc.Value!)).ToArray()));
-                }
-
-                // add custom ctors into the candidates
-                foreach (var existingCtor in ExistingType.Constructors)
-                {
-                    var parameters = existingCtor.Parameters;
-                    var modifiers = GetModifiers(existingCtor);
-                    bool isPublic = modifiers.HasFlag(MethodSignatureModifiers.Public);
-                    //TODO: Currently skipping ctors which use models from the library due to constructing with all empty lists.
-                    if (!isPublic || parameters.Length == 0 || parameters.Any(p => ((INamedTypeSymbol)p.Type).GetCSharpType(_typeFactory) == null))
-                    {
-                        if (!isPublic)
-                            candidates.RemoveAll(ctor => IsParamMatch(ctor.Parameters, existingCtor.Parameters.Select(p => (INamedTypeSymbol)p.Type).ToArray()));
-                        continue;
-                    }
-                    var ctor = new ConstructorSignature(
-                        DefaultName,
-                        GetSummaryPortion(existingCtor.GetDocumentationCommentXml()),
-                        null,
-                        modifiers,
-                        parameters.Select(p => new Parameter(
-                            p.Name,
-                            p.GetDocumentationCommentXml(),
-                            ((INamedTypeSymbol)p.Type).GetCSharpType(_typeFactory)!,
-                            null,
-                            ValidationType.None,
-                            null)).ToArray(),
-                        null);
-                    candidates.Add(ctor);
-                }
+                return candidates.MinBy(c => c.Parameters.Count);
             }
 
-            return candidates.OrderBy(c => c.Parameters.Count).FirstOrDefault();
+            //    [CodeGenSuppress("ConfidentialLedgerCertificateClient", typeof(Uri), typeof(TokenCredential), typeof(ConfidentialLedgerClientOptions))]
+            //remove suppressed ctors from the candidates
+            foreach (var attribute in ExistingType.GetAttributes().Where(a => a.AttributeClass is not null && a.AttributeClass.Name == "CodeGenSuppressAttribute"))
+            {
+                if (attribute.ConstructorArguments.Length != 2)
+                    continue;
+                var classTarget = attribute.ConstructorArguments[0].Value;
+                if (classTarget is null || !classTarget.Equals(DefaultName))
+                    continue;
+
+                candidates.RemoveAll(ctor => IsParamMatch(ctor.Parameters, attribute.ConstructorArguments[1].Values.Select(tc => (INamedTypeSymbol)(tc.Value!)).ToArray()));
+            }
+
+            // add custom ctors into the candidates
+            foreach (var existingCtor in ExistingType.Constructors)
+            {
+                var parameters = existingCtor.Parameters;
+                var modifiers = GetModifiers(existingCtor);
+                bool isPublic = modifiers.HasFlag(Public);
+                //TODO: Currently skipping ctors which use models from the library due to constructing with all empty lists.
+                if (!isPublic || parameters.Length == 0 || parameters.Any(p => ((INamedTypeSymbol)p.Type).GetCSharpType(_typeFactory) == null))
+                {
+                    if (!isPublic)
+                        candidates.RemoveAll(ctor => IsParamMatch(ctor.Parameters, existingCtor.Parameters.Select(p => (INamedTypeSymbol)p.Type).ToArray()));
+                    continue;
+                }
+                var ctor = new ConstructorSignature(
+                    DefaultName,
+                    GetSummaryPortion(existingCtor.GetDocumentationCommentXml()),
+                    null,
+                    modifiers,
+                    parameters.Select(p => new Parameter(p.Name, p.GetDocumentationCommentXml(), ((INamedTypeSymbol)p.Type).GetCSharpType(_typeFactory)!, null, Validation.None, null)).ToArray(),
+                    null);
+                candidates.Add(ctor);
+            }
+
+            return candidates.MinBy(c => c.Parameters.Count);
         }
 
         private string? GetSummaryPortion(string? xmlComment)
@@ -349,24 +301,24 @@ namespace AutoRest.CSharp.Output.Models
             MethodSignatureModifiers result = GetAccessModifier(existingCtor.DeclaredAccessibility);
             if (existingCtor.IsStatic)
             {
-                result |= MethodSignatureModifiers.Static;
+                result |= Static;
             }
             if (existingCtor.IsVirtual)
             {
-                result |= MethodSignatureModifiers.Virtual;
+                result |= Virtual;
             }
             return result;
         }
 
-        private MethodSignatureModifiers GetAccessModifier(Accessibility declaredAccessibility) => declaredAccessibility switch
+        private static MethodSignatureModifiers GetAccessModifier(Accessibility declaredAccessibility) => declaredAccessibility switch
         {
-            Accessibility.Public => MethodSignatureModifiers.Public,
-            Accessibility.Protected => MethodSignatureModifiers.Protected,
-            Accessibility.Internal => MethodSignatureModifiers.Internal,
-            _ => MethodSignatureModifiers.Private
+            Accessibility.Public => Public,
+            Accessibility.Protected => Protected,
+            Accessibility.Internal => Internal,
+            _ => Private
         };
 
-        internal bool IsMethodSuppressed(MethodSignature signature)
+        internal bool IsMethodSuppressed(MethodSignatureBase signature)
         {
             if (ExistingType is null)
                 return false;
@@ -387,44 +339,5 @@ namespace AutoRest.CSharp.Output.Models
 
             return false;
         }
-
-        internal bool HasMatchingCustomMethod(LowLevelClientMethod method)
-        {
-            if (ExistingType is not null)
-            {
-                // add custom ctors into the candidates
-                foreach (var member in ExistingType.GetMembers())
-                {
-                    if (member is not IMethodSymbol methodSymbol)
-                        continue;
-
-                    if (methodSymbol.Name != method.RequestMethod.Name)
-                        continue;
-
-                    if (methodSymbol.Parameters.Length != method.ProtocolMethodSignature.Parameters.Count - 1)
-                        continue;
-
-                    if (methodSymbol.Parameters.Last().Type.Name == "CancellationToken")
-                        continue;
-
-                    bool allEqual = true;
-                    for (int i = 0; i < methodSymbol.Parameters.Length; i++)
-                    {
-                        if (!((INamedTypeSymbol)methodSymbol.Parameters[i].Type).IsSameType(method.ProtocolMethodSignature.Parameters[i].Type))
-                        {
-                            allEqual = false;
-                            break;
-                        }
-                    }
-                    if (allEqual)
-                        return true;
-                }
-            }
-
-            return false;
-        }
-
-        private bool? _hasConvenienceMethods;
-        internal bool HasConvenienceMethods => _hasConvenienceMethods ??= AllClientMethods.Any(m => m.ConvenienceMethod is not null && m.ConvenienceMethod.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public));
     }
 }

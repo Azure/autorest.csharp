@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using BodyAndPath_LowLevel;
 using NUnit.Framework;
 
 namespace BodyAndPath_LowLevel.Samples
@@ -26,7 +27,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = client.Create("<itemName>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -39,7 +40,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = client.Create("<itemName>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -52,7 +53,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = await client.CreateAsync("<itemName>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -65,7 +66,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = await client.CreateAsync("<itemName>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -130,7 +131,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = client.CreateEnum("<enumName1>", "<enumName2>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -143,7 +144,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = client.CreateEnum("<enumName1>", "<enumName2>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -156,7 +157,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = await client.CreateEnumAsync("<enumName1>", "<enumName2>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -169,7 +170,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = await client.CreateEnumAsync("<enumName1>", "<enumName2>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -299,9 +300,9 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            var data = new
+            var data = new Dictionary<string, object>
             {
-                invalid_int_name = 1234,
+                ["invalid-int-name"] = 1234
             };
 
             Response response = client.Update("<item3>", "<item2>", "<item1>", "<item4>", RequestContent.Create(data), "<item5>");
@@ -328,9 +329,9 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            var data = new
+            var data = new Dictionary<string, object>
             {
-                invalid_int_name = 1234,
+                ["invalid-int-name"] = 1234
             };
 
             Response response = await client.UpdateAsync("<item3>", "<item2>", "<item1>", "<item4>", RequestContent.Create(data), "<item5>");

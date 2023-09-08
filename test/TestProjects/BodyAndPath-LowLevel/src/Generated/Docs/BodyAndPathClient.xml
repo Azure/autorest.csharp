@@ -8,7 +8,7 @@ This sample shows how to call CreateAsync with required parameters and request c
 var credential = new AzureKeyCredential("<key>");
 var client = new BodyAndPathClient(credential);
 
-var data = new {};
+var data = BinaryData.FromString("<your binary data content>");
 
 Response response = await client.CreateAsync("<itemName>", RequestContent.Create(data));
 Console.WriteLine(response.Status);
@@ -22,7 +22,7 @@ This sample shows how to call Create with required parameters and request conten
 var credential = new AzureKeyCredential("<key>");
 var client = new BodyAndPathClient(credential);
 
-var data = new {};
+var data = BinaryData.FromString("<your binary data content>");
 
 Response response = client.Create("<itemName>", RequestContent.Create(data));
 Console.WriteLine(response.Status);
@@ -48,7 +48,7 @@ var client = new BodyAndPathClient(credential);
 
 var data = File.OpenRead("<filePath>");
 
-Response response = await client.CreateStreamAsync("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream, new String[]{"<excluded>"});
+Response response = await client.CreateStreamAsync("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream, new string[]{"<excluded>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -72,7 +72,7 @@ var client = new BodyAndPathClient(credential);
 
 var data = File.OpenRead("<filePath>");
 
-Response response = client.CreateStream("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream, new String[]{"<excluded>"});
+Response response = client.CreateStream("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream, new string[]{"<excluded>"});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -84,7 +84,7 @@ This sample shows how to call CreateEnumAsync with required parameters and reque
 var credential = new AzureKeyCredential("<key>");
 var client = new BodyAndPathClient(credential);
 
-var data = new {};
+var data = BinaryData.FromString("<your binary data content>");
 
 Response response = await client.CreateEnumAsync("<enumName1>", "<enumName2>", RequestContent.Create(data));
 Console.WriteLine(response.Status);
@@ -98,7 +98,7 @@ This sample shows how to call CreateEnum with required parameters and request co
 var credential = new AzureKeyCredential("<key>");
 var client = new BodyAndPathClient(credential);
 
-var data = new {};
+var data = BinaryData.FromString("<your binary data content>");
 
 Response response = client.CreateEnum("<enumName1>", "<enumName2>", RequestContent.Create(data));
 Console.WriteLine(response.Status);
@@ -178,8 +178,9 @@ This sample shows how to call UpdateAsync with all parameters and request conten
 var credential = new AzureKeyCredential("<key>");
 var client = new BodyAndPathClient(credential);
 
-var data = new {
-    invalid_int_name = 1234,
+var data = new Dictionary<string, object>
+{
+    ["invalid-int-name"] = 1234
 };
 
 Response response = await client.UpdateAsync("<item3>", "<item2>", "<item1>", "<item4>", RequestContent.Create(data), "<item5>");
@@ -204,8 +205,9 @@ This sample shows how to call Update with all parameters and request content.
 var credential = new AzureKeyCredential("<key>");
 var client = new BodyAndPathClient(credential);
 
-var data = new {
-    invalid_int_name = 1234,
+var data = new Dictionary<string, object>
+{
+    ["invalid-int-name"] = 1234
 };
 
 Response response = client.Update("<item3>", "<item2>", "<item1>", "<item4>", RequestContent.Create(data), "<item5>");

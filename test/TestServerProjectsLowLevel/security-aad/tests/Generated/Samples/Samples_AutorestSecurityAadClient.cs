@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using security_aad_LowLevel;
 
 namespace security_aad_LowLevel.Samples
 {

@@ -152,7 +152,7 @@ namespace _Type._Dictionary
             }
         }
 
-        /// <param name="body"> The Dictionary to use. </param>
+        /// <param name="body"> The IDictionary{string,TimeSpan} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='PutAsync(IDictionary{string,TimeSpan},CancellationToken)']/*" />
@@ -165,7 +165,7 @@ namespace _Type._Dictionary
             return response;
         }
 
-        /// <param name="body"> The Dictionary to use. </param>
+        /// <param name="body"> The IDictionary{string,TimeSpan} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='Put(IDictionary{string,TimeSpan},CancellationToken)']/*" />

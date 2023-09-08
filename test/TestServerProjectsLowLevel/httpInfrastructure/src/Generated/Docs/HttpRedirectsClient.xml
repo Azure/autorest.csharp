@@ -27,25 +27,29 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Get300Async(RequestContext)">
 <example>
-This sample shows how to call Get300Async.
+This sample shows how to call Get300Async with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = await client.Get300Async();
-Console.WriteLine(response.Status);
+Response response = await client.Get300Async(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
     <member name="Get300(RequestContext)">
 <example>
-This sample shows how to call Get300.
+This sample shows how to call Get300 with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRedirectsClient(credential);
 
-Response response = client.Get300();
-Console.WriteLine(response.Status);
+Response response = client.Get300(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>

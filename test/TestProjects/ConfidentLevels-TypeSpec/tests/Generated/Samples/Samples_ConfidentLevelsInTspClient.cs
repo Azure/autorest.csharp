@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using ConfidentLevelsInTsp;
 using ConfidentLevelsInTsp.Models;
 using NUnit.Framework;
 
@@ -29,7 +30,7 @@ namespace ConfidentLevelsInTsp.Samples
 
             var data = new
             {
-                unionProperty = new { },
+                unionProperty = new object(),
             };
 
             Response response = client.UnionInRequestProperty(RequestContent.Create(data));
@@ -45,7 +46,7 @@ namespace ConfidentLevelsInTsp.Samples
 
             var data = new
             {
-                unionProperty = new { },
+                unionProperty = new object(),
             };
 
             Response response = client.UnionInRequestProperty(RequestContent.Create(data));
@@ -61,7 +62,7 @@ namespace ConfidentLevelsInTsp.Samples
 
             var data = new
             {
-                unionProperty = new { },
+                unionProperty = new object(),
             };
 
             Response response = await client.UnionInRequestPropertyAsync(RequestContent.Create(data));
@@ -77,7 +78,7 @@ namespace ConfidentLevelsInTsp.Samples
 
             var data = new
             {
-                unionProperty = new { },
+                unionProperty = new object(),
             };
 
             Response response = await client.UnionInRequestPropertyAsync(RequestContent.Create(data));
@@ -114,7 +115,7 @@ namespace ConfidentLevelsInTsp.Samples
             {
                 name = "<name>",
                 age = 1234,
-                size = 123.45d,
+                size = 3.14d,
             };
 
             Response response = client.UnionInResponseProperty(RequestContent.Create(data));
@@ -153,7 +154,7 @@ namespace ConfidentLevelsInTsp.Samples
             {
                 name = "<name>",
                 age = 1234,
-                size = 123.45d,
+                size = 3.14d,
             };
 
             Response response = await client.UnionInResponsePropertyAsync(RequestContent.Create(data));
@@ -172,7 +173,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 name = "<name>",
-                unionProperty = new { },
+                unionProperty = new object(),
             };
 
             Response response = client.UnionWithSelfReference(RequestContent.Create(data));
@@ -189,7 +190,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 name = "<name>",
-                unionProperty = new { },
+                unionProperty = new object(),
             };
 
             Response response = client.UnionWithSelfReference(RequestContent.Create(data));
@@ -206,7 +207,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 name = "<name>",
-                unionProperty = new { },
+                unionProperty = new object(),
             };
 
             Response response = await client.UnionWithSelfReferenceAsync(RequestContent.Create(data));
@@ -223,7 +224,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 name = "<name>",
-                unionProperty = new { },
+                unionProperty = new object(),
             };
 
             Response response = await client.UnionWithSelfReferenceAsync(RequestContent.Create(data));
@@ -261,9 +262,9 @@ namespace ConfidentLevelsInTsp.Samples
             something = "<something>",
             reference = new {
                 name = "<name>",
-                unionProperty = new {},
+                unionProperty = new object(),
             },
-            unionProperty = new {},
+            unionProperty = new object(),
         }
     },
             };
@@ -303,9 +304,9 @@ namespace ConfidentLevelsInTsp.Samples
             something = "<something>",
             reference = new {
                 name = "<name>",
-                unionProperty = new {},
+                unionProperty = new object(),
             },
-            unionProperty = new {},
+            unionProperty = new object(),
         }
     },
             };
@@ -392,7 +393,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 name = "<name>",
-                id = 3.141592,
+                id = 3.141592F,
             };
 
             Response response = client.LiteralOfFloat(RequestContent.Create(data));
@@ -409,7 +410,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 name = "<name>",
-                id = 3.141592,
+                id = 3.141592F,
             };
 
             Response response = client.LiteralOfFloat(RequestContent.Create(data));
@@ -426,7 +427,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 name = "<name>",
-                id = 3.141592,
+                id = 3.141592F,
             };
 
             Response response = await client.LiteralOfFloatAsync(RequestContent.Create(data));
@@ -443,7 +444,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 name = "<name>",
-                id = 3.141592,
+                id = 3.141592F,
             };
 
             Response response = await client.LiteralOfFloatAsync(RequestContent.Create(data));
@@ -555,7 +556,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 woof = "<woof>",
-                color = new { },
+                color = new object(),
                 kind = "dog",
                 name = "<name>",
             };
@@ -577,7 +578,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 woof = "<woof>",
-                color = new { },
+                color = new object(),
                 kind = "dog",
                 name = "<name>",
             };
@@ -599,7 +600,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 woof = "<woof>",
-                color = new { },
+                color = new object(),
                 kind = "dog",
                 name = "<name>",
             };
@@ -621,7 +622,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 woof = "<woof>",
-                color = new { },
+                color = new object(),
                 kind = "dog",
                 name = "<name>",
             };
@@ -643,7 +644,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 woof = "<woof>",
-                color = new { },
+                color = new object(),
                 kind = "dog",
                 name = "<name>",
             };
@@ -667,7 +668,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 woof = "<woof>",
-                color = new { },
+                color = new object(),
                 kind = "dog",
                 name = "<name>",
             };
@@ -691,7 +692,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 woof = "<woof>",
-                color = new { },
+                color = new object(),
                 kind = "dog",
                 name = "<name>",
             };
@@ -715,7 +716,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 woof = "<woof>",
-                color = new { },
+                color = new object(),
                 kind = "dog",
                 name = "<name>",
             };
@@ -844,7 +845,7 @@ namespace ConfidentLevelsInTsp.Samples
             {
                 age = 1234,
                 name = "<name>",
-                size = 123.45d,
+                size = 3.14d,
             };
 
             Response response = client.UseDerivedModel(RequestContent.Create(data));
@@ -878,7 +879,7 @@ namespace ConfidentLevelsInTsp.Samples
             {
                 age = 1234,
                 name = "<name>",
-                size = 123.45d,
+                size = 3.14d,
             };
 
             Response response = await client.UseDerivedModelAsync(RequestContent.Create(data));
@@ -894,7 +895,7 @@ namespace ConfidentLevelsInTsp.Samples
 
             var data = new
             {
-                unionProperty = new { },
+                unionProperty = new object(),
                 name = "<name>",
             };
 
@@ -911,9 +912,9 @@ namespace ConfidentLevelsInTsp.Samples
 
             var data = new
             {
-                unionProperty = new { },
+                unionProperty = new object(),
                 name = "<name>",
-                size = 123.45d,
+                size = 3.14d,
             };
 
             Response response = client.UseDerivedModelWithUnion(RequestContent.Create(data));
@@ -929,7 +930,7 @@ namespace ConfidentLevelsInTsp.Samples
 
             var data = new
             {
-                unionProperty = new { },
+                unionProperty = new object(),
                 name = "<name>",
             };
 
@@ -946,9 +947,9 @@ namespace ConfidentLevelsInTsp.Samples
 
             var data = new
             {
-                unionProperty = new { },
+                unionProperty = new object(),
                 name = "<name>",
-                size = 123.45d,
+                size = 3.14d,
             };
 
             Response response = await client.UseDerivedModelWithUnionAsync(RequestContent.Create(data));

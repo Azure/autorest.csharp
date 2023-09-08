@@ -14,7 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type._Array.Models;
+using _Type._Array;
 
 namespace _Type._Array.Samples
 {
@@ -141,7 +141,7 @@ namespace _Type._Array.Samples
 
             var body = new long[]
             {
-    1234
+    1234L
             };
             var result = await client.PutAsync(body);
         }

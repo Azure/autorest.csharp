@@ -76,7 +76,7 @@ This sample shows how to call PutAsync with required request content.
 var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
 var data = new {
-    property = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T14:14:57.0310000Z",
 };
 
 Response response = await client.PutAsync(RequestContent.Create(data));
@@ -91,7 +91,7 @@ This sample shows how to call Put with required request content.
 var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
 var data = new {
-    property = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T14:14:57.0310000Z",
 };
 
 Response response = client.Put(RequestContent.Create(data));

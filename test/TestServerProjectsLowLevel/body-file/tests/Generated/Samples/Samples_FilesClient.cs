@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using body_file_LowLevel;
 
 namespace body_file_LowLevel.Samples
 {
@@ -29,10 +30,8 @@ namespace body_file_LowLevel.Samples
             Response response = client.GetFile(new RequestContext());
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filePath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filePath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -46,10 +45,8 @@ namespace body_file_LowLevel.Samples
             Response response = client.GetFile(new RequestContext());
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filePath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filePath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -63,10 +60,8 @@ namespace body_file_LowLevel.Samples
             Response response = await client.GetFileAsync(new RequestContext());
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filePath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filePath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -80,10 +75,8 @@ namespace body_file_LowLevel.Samples
             Response response = await client.GetFileAsync(new RequestContext());
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filePath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filePath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -97,10 +90,8 @@ namespace body_file_LowLevel.Samples
             Response response = client.GetFileLarge(new RequestContext());
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filePath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filePath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -114,10 +105,8 @@ namespace body_file_LowLevel.Samples
             Response response = client.GetFileLarge(new RequestContext());
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filePath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filePath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -131,10 +120,8 @@ namespace body_file_LowLevel.Samples
             Response response = await client.GetFileLargeAsync(new RequestContext());
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filePath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filePath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -148,10 +135,8 @@ namespace body_file_LowLevel.Samples
             Response response = await client.GetFileLargeAsync(new RequestContext());
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filePath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filePath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -165,10 +150,8 @@ namespace body_file_LowLevel.Samples
             Response response = client.GetEmptyFile(new RequestContext());
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filePath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filePath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -182,10 +165,8 @@ namespace body_file_LowLevel.Samples
             Response response = client.GetEmptyFile(new RequestContext());
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filePath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filePath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -199,10 +180,8 @@ namespace body_file_LowLevel.Samples
             Response response = await client.GetEmptyFileAsync(new RequestContext());
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filePath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filePath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
 
@@ -216,10 +195,8 @@ namespace body_file_LowLevel.Samples
             Response response = await client.GetEmptyFileAsync(new RequestContext());
             if (response.ContentStream != null)
             {
-                using (Stream outFileStream = File.OpenWrite("<filePath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
+                using Stream outFileStream = File.OpenWrite("<filePath>");
+                response.ContentStream.CopyTo(outFileStream);
             }
         }
     }

@@ -10,16 +10,8 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    internal partial class UnknownDataDeletionDetectionPolicy : IUtf8JsonSerializable
+    internal partial class UnknownDataDeletionDetectionPolicy
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("@odata.type"u8);
-            writer.WriteStringValue(OdataType);
-            writer.WriteEndObject();
-        }
-
         internal static UnknownDataDeletionDetectionPolicy DeserializeUnknownDataDeletionDetectionPolicy(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)

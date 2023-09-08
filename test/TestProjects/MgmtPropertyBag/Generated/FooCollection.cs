@@ -72,7 +72,7 @@ namespace MgmtPropertyBag
         /// <param name="fooName"> The foo name. </param>
         /// <param name="data"> The foo parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
+        /// <param name="top"> The int? to use. </param>
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -116,7 +116,7 @@ namespace MgmtPropertyBag
         /// <param name="fooName"> The foo name. </param>
         /// <param name="data"> The foo parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
+        /// <param name="top"> The int? to use. </param>
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>

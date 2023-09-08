@@ -61,9 +61,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return string.Join("", segments);
         }
 
-        public static string GetClientPrefix(string name, BuildContext context)
-            => GetClientPrefix(name, context.DefaultName);
-
         public static string GetClientPrefix(string? name, string namespaceName)
         {
             name = string.IsNullOrEmpty(name) ? namespaceName : name.ToCleanName();
@@ -79,114 +76,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             return name;
-        }
-
-        /// <summary>
-        /// This function builds an enumerable of <see cref="ClientMethod"/> from an <see cref="OperationGroup"/> and a <see cref="RestClient"/>
-        /// </summary>
-        /// <param name="inputClient">The InputClient to build methods from</param>
-        /// <param name="restClient">The corresponding RestClient to the operation group</param>
-        /// <param name="declaration">The type declaration options</param>
-        /// <returns>An enumerable of <see cref="ClientMethod"/></returns>
-        public static IEnumerable<ClientMethod> BuildMethods(InputClient inputClient, RestClient restClient, TypeDeclarationOptions declaration)
-        {
-            foreach (var operation in inputClient.Operations)
-            {
-                if (operation.LongRunning != null || operation.Paging != null)
-                {
-                    continue;
-                }
-
-                RestClientMethod startMethod = restClient.GetOperationMethod(operation);
-                var name = operation.CleanName;
-
-                yield return new ClientMethod(
-                    name,
-                    startMethod,
-                    BuilderHelpers.EscapeXmlDocDescription(operation.Description),
-                    new Diagnostic($"{declaration.Name}.{name}", Array.Empty<DiagnosticAttribute>()),
-                    operation.Accessibility ?? "public");
-            }
-        }
-
-        /// <summary>
-        /// This function builds an enumerable of <see cref="PagingMethod"/> from an <see cref="OperationGroup"/> and a <see cref="RestClient"/>
-        /// </summary>
-        /// <param name="inputClient">The InputClient to build methods from</param>
-        /// <param name="restClient">The corresponding RestClient to the operation group</param>
-        /// <param name="declaration">The type declaration options</param>
-        /// <returns>An enumerable of <see cref="PagingMethod"/></returns>
-        public static IEnumerable<PagingMethod> BuildPagingMethods(InputClient inputClient, RestClient restClient, TypeDeclarationOptions declaration)
-        {
-            foreach (var operation in inputClient.Operations)
-            {
-                var paging = operation.Paging;
-                if (paging == null || operation.LongRunning != null)
-                {
-                    continue;
-                }
-
-                RestClientMethod method = restClient.GetOperationMethod(operation);
-                RestClientMethod? nextPageMethod = restClient.GetNextOperationMethod(operation);
-
-                yield return BuildPagingMethod(method.Name, paging.NextLinkName, paging.ItemName, method, nextPageMethod, declaration);
-            }
-        }
-
-        public static PagingMethod BuildPagingMethod(string methodName, string? nextLinkName, string? itemName, RestClientMethod method, RestClientMethod? nextPageMethod, TypeDeclarationOptions declaration)
-        {
-            if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody objectResponseBody))
-            {
-                throw new InvalidOperationException($"Method {method.Name} has to have a return value");
-            }
-
-            return new PagingMethod(
-                method,
-                nextPageMethod,
-                methodName,
-                new Diagnostic($"{declaration.Name}.{methodName}"),
-                new PagingResponseInfo(nextLinkName, itemName, objectResponseBody.Type));
-        }
-
-        /// <summary>
-        /// This function builds an enumerable of <see cref="PagingMethod"/> from an <see cref="OperationGroup"/> and a <see cref="RestClient"/>
-        /// </summary>
-        /// <param name="operationGroup">The OperationGroup to build methods from</param>
-        /// <param name="restClient">The corresponding RestClient to the operation group</param>
-        /// <param name="declaration">The type declaration options</param>
-        /// <param name="nameOverrider">A delegate used for overriding the name of output <see cref="ClientMethod"/></param>
-        /// <returns>An enumerable of <see cref="PagingMethod"/></returns>
-        public static IEnumerable<PagingMethod> BuildPagingMethods(OperationGroup operationGroup, CmcRestClient restClient, TypeDeclarationOptions Declaration,
-            Func<OperationGroup, Operation, RestClientMethod, string>? nameOverrider = default)
-        {
-            foreach (var operation in operationGroup.Operations)
-            {
-                Paging? paging = operation.Language.Default.Paging;
-                if (paging == null || operation.IsLongRunning)
-                {
-                    continue;
-                }
-
-                foreach (var serviceRequest in operation.Requests)
-                {
-                    RestClientMethod method = restClient.GetOperationMethod(serviceRequest);
-                    RestClientMethod? nextPageMethod = restClient.GetNextOperationMethod(serviceRequest);
-
-                    if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody objectResponseBody))
-                    {
-                        throw new InvalidOperationException($"Method {method.Name} has to have a return value");
-                    }
-
-                    var name = nameOverrider?.Invoke(operationGroup, operation, method) ?? method.Name;
-
-                    yield return new PagingMethod(
-                        method,
-                        nextPageMethod,
-                        name,
-                        new Diagnostic($"{Declaration.Name}.{name}"),
-                        new PagingResponseInfo(paging.NextLinkName, paging.ItemName, objectResponseBody.Type));
-                }
-            }
         }
     }
 }

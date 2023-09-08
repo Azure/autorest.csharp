@@ -14,7 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Property.Nullable.Models;
+using _Type.Property.Nullable;
 
 namespace _Type.Property.Nullable.Samples
 {
@@ -152,7 +152,7 @@ namespace _Type.Property.Nullable.Samples
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 
@@ -170,7 +170,7 @@ namespace _Type.Property.Nullable.Samples
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 
@@ -188,7 +188,7 @@ namespace _Type.Property.Nullable.Samples
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 
@@ -206,7 +206,7 @@ namespace _Type.Property.Nullable.Samples
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 
@@ -224,7 +224,7 @@ namespace _Type.Property.Nullable.Samples
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 
@@ -242,7 +242,7 @@ namespace _Type.Property.Nullable.Samples
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 
@@ -260,7 +260,7 @@ namespace _Type.Property.Nullable.Samples
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 
@@ -278,7 +278,7 @@ namespace _Type.Property.Nullable.Samples
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 

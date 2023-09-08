@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using custom_baseUrl_more_options_LowLevel;
 
 namespace custom_baseUrl_more_options_LowLevel.Samples
 {

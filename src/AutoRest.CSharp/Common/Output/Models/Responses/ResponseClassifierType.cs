@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Responses
         {
         }
 
-        public virtual bool Equals(ResponseClassifierType? other) => (other == null ? false : Name == other.Name);
+        public virtual bool Equals(ResponseClassifierType? other) => other != null && Name == other.Name;
 
         public override int GetHashCode() => Name.GetHashCode();
 

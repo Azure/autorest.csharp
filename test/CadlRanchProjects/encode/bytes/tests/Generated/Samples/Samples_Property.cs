@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using Encode.Bytes;
 using Encode.Bytes.Models;
 using NUnit.Framework;
 
@@ -28,7 +29,7 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.Default(RequestContent.Create(data));
@@ -45,7 +46,7 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.Default(RequestContent.Create(data));
@@ -62,7 +63,7 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = await client.DefaultAsync(RequestContent.Create(data));
@@ -79,7 +80,7 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = await client.DefaultAsync(RequestContent.Create(data));
@@ -106,7 +107,7 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.Base64(RequestContent.Create(data));
@@ -123,7 +124,7 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.Base64(RequestContent.Create(data));
@@ -140,7 +141,7 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = await client.Base64Async(RequestContent.Create(data));
@@ -157,7 +158,7 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = await client.Base64Async(RequestContent.Create(data));
@@ -184,7 +185,7 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.Base64url(RequestContent.Create(data));
@@ -201,7 +202,7 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.Base64url(RequestContent.Create(data));
@@ -218,7 +219,7 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = await client.Base64urlAsync(RequestContent.Create(data));
@@ -235,7 +236,7 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = await client.Base64urlAsync(RequestContent.Create(data));
@@ -263,7 +264,7 @@ namespace Encode.Bytes.Samples
             var data = new
             {
                 value = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 
@@ -282,7 +283,7 @@ namespace Encode.Bytes.Samples
             var data = new
             {
                 value = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 
@@ -301,7 +302,7 @@ namespace Encode.Bytes.Samples
             var data = new
             {
                 value = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 
@@ -320,7 +321,7 @@ namespace Encode.Bytes.Samples
             var data = new
             {
                 value = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 

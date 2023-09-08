@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using SingleTopLevelClientWithoutOperations_LowLevel;
 
 namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
 {

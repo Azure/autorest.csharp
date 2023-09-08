@@ -32,7 +32,7 @@ This sample shows how to call OneBinaryBodyTwoContentTypesAsync with required pa
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MultipleMediaTypesClient(endpoint);
 
-var data = new {};
+var data = BinaryData.FromString("<your binary data content>");
 
 Response response = await client.OneBinaryBodyTwoContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
 Console.WriteLine(response.Status);
@@ -46,7 +46,7 @@ This sample shows how to call OneBinaryBodyTwoContentTypes with required paramet
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MultipleMediaTypesClient(endpoint);
 
-var data = new {};
+var data = BinaryData.FromString("<your binary data content>");
 
 Response response = client.OneBinaryBodyTwoContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream);
 Console.WriteLine(response.Status);
@@ -60,7 +60,7 @@ This sample shows how to call OneStringBodyThreeContentTypesAsync with required 
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MultipleMediaTypesClient(endpoint);
 
-var body = "<null>";
+var body = "<String>";
 var result = await client.OneStringBodyThreeContentTypesAsync(body, ContentType.ApplicationOctetStream);
 ]]></code>
 </example>
@@ -72,7 +72,7 @@ This sample shows how to call OneStringBodyThreeContentTypes with required param
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MultipleMediaTypesClient(endpoint);
 
-var body = "<null>";
+var body = "<String>";
 var result = client.OneStringBodyThreeContentTypes(body, ContentType.ApplicationOctetStream);
 ]]></code>
 </example>

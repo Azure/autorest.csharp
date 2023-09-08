@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 $"The <see cref=\"{ArmCoreType}\" /> instance the method will execute against.",
                 ArmCoreType,
                 null,
-                ValidationType.None,
+                Validation.None,
                 null);
         }
 
@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var operationName = base.CalculateOperationName(operation, clientResourceName);
 
-            if (MgmtContext.Library.GetRestClientMethod(operation).IsListMethod(out var itemType) && itemType.TryCastResourceData(out var data))
+            if (operation.IsListMethod(out var itemType) && itemType.TryCastResourceData(out var data))
             {
                 var requestPath = operation.GetRequestPath();
                 // we need to find the correct resource type that links with this resource data

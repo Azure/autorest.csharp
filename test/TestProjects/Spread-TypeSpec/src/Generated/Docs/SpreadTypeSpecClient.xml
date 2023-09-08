@@ -292,7 +292,7 @@ This sample shows how to call SpreadAliasWithOptionalPropsAsync with required pa
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadTypeSpecClient(endpoint);
 
-var result = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new Int32[]{1234}, "<color>", 1234, new String[]{"<elements>"});
+var result = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new int[]{1234}, "<color>", 1234, new string[]{"<elements>"});
 ]]></code>
 </example>
     </member>
@@ -303,7 +303,7 @@ This sample shows how to call SpreadAliasWithOptionalProps with required paramet
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadTypeSpecClient(endpoint);
 
-var result = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new Int32[]{1234}, "<color>", 1234, new String[]{"<elements>"});
+var result = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new int[]{1234}, "<color>", 1234, new string[]{"<elements>"});
 ]]></code>
 </example>
     </member>
@@ -392,7 +392,7 @@ This sample shows how to call SpreadAliasWithCollectionsAsync with required para
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadTypeSpecClient(endpoint);
 
-var result = await client.SpreadAliasWithCollectionsAsync(new String[]{"<requiredStringList>"}, new String[]{"<optionalStringList>"});
+var result = await client.SpreadAliasWithCollectionsAsync(new string[]{"<requiredStringList>"}, new string[]{"<optionalStringList>"});
 ]]></code>
 </example>
     </member>
@@ -403,7 +403,7 @@ This sample shows how to call SpreadAliasWithCollections with required parameter
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SpreadTypeSpecClient(endpoint);
 
-var result = client.SpreadAliasWithCollections(new String[]{"<requiredStringList>"}, new String[]{"<optionalStringList>"});
+var result = client.SpreadAliasWithCollections(new string[]{"<requiredStringList>"}, new string[]{"<optionalStringList>"});
 ]]></code>
 </example>
     </member>

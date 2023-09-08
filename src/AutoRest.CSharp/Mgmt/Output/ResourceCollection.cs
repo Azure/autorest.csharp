@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -17,6 +18,7 @@ using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -34,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override IReadOnlyList<CSharpType> EnsureGetInterfaces()
         {
             if (GetAllOperation is null || GetAllOperation.MethodParameters.Any(p => !p.IsOptionalInSignature &&
-            (!p.IsPropertyBag || p.Validation != ValidationType.None)))
+            (!p.IsPropertyBag || p.Validation != Validation.None)))
                 return base.EnsureGetInterfaces();
 
             var getRestOperation = GetAllOperation.OperationMappings.Values.First();
@@ -77,7 +79,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
         protected override ConstructorSignature? EnsureResourceDataCtor() => null;
 
-        protected override IEnumerable<ContextualParameterMapping> EnsureExtraContextualParameterMapping()
+        protected override IReadOnlyList<ContextualParameterMapping> EnsureExtraContextualParameterMapping()
         {
             var result = new List<ContextualParameterMapping>();
             Operation? op = null;
@@ -93,7 +95,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (op is null)
                 return result;
 
-            RestClientMethod method = MgmtContext.Library.GetRestClientMethod(op);
+            var method = MgmtContext.Library.GetRestClientPublicMethodSignature(op);
             // calculate the ResourceType from the RequestPath of this resource
             var resourceTypeSegments = ResourceType.Select((segment, index) => (segment, index)).Where(tuple => tuple.segment.IsReference).ToList();
             // iterate over all the reference segments in the diff of this GetAll operation
@@ -110,8 +112,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                     // this reference is not in the resource type, therefore this parameter goes to the constructor
                     _extraConstructorParameters.Add(parameter, $"_{segment.ReferenceName}");
                     // there is a key for this parameter, get the key and add this one to contextual parameter mapping
-                    var key = ParameterMappingBuilder.FindKeyOfParameter(parameter, opRequestPath);
-                    result.Add(new ContextualParameterMapping(key, segment, GetFieldName(parameter)));
+                    var key = FindKeyOfParameter(parameter, opRequestPath);
+                    result.Add(new ContextualParameterMapping(key, segment, new FormattableStringToExpression(GetFieldName(parameter))));
                 }
                 else
                 {
@@ -119,11 +121,11 @@ namespace AutoRest.CSharp.Mgmt.Output
                     var value = ResourceType[candidate.index];
                     try
                     {
-                        result.Add(new ContextualParameterMapping("", segment, $"\"{value.ConstantValue}\""));
+                        result.Add(new ContextualParameterMapping("", segment, Literal(value.ConstantValue)));
                     }
                     catch (InvalidOperationException)
                     {
-                        throw new InvalidOperationException($"Expected enum type for the parameter '{segment.ReferenceName}' in method '{method.Operation.Path}'");
+                        throw new InvalidOperationException($"Expected enum type for the parameter '{segment.ReferenceName}' in method '{opRequestPath}'");
                     }
                 }
             }

@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using body_string_LowLevel;
 
 namespace body_string_LowLevel.Samples
 {
@@ -598,7 +599,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = client.PutBase64UrlEncoded(RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -611,7 +612,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = client.PutBase64UrlEncoded(RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -624,7 +625,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = await client.PutBase64UrlEncodedAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -637,7 +638,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = await client.PutBase64UrlEncodedAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);

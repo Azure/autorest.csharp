@@ -106,7 +106,7 @@ var client = new NullableClient().GetCollectionsByteClient("1.0.0");
 var data = new {
     requiredProperty = "<requiredProperty>",
     nullableProperty = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
 };
 
@@ -124,7 +124,7 @@ var client = new NullableClient().GetCollectionsByteClient("1.0.0");
 var data = new {
     requiredProperty = "<requiredProperty>",
     nullableProperty = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
 };
 
@@ -142,7 +142,7 @@ var client = new NullableClient().GetCollectionsByteClient("1.0.0");
 var data = new {
     requiredProperty = "<requiredProperty>",
     nullableProperty = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
 };
 
@@ -160,7 +160,7 @@ var client = new NullableClient().GetCollectionsByteClient("1.0.0");
 var data = new {
     requiredProperty = "<requiredProperty>",
     nullableProperty = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
 };
 

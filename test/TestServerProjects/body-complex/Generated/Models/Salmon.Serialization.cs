@@ -63,7 +63,7 @@ namespace body_complex.Models
             }
             Optional<string> location = default;
             Optional<bool> iswild = default;
-            string fishtype = "salmon";
+            string fishtype = default;
             Optional<string> species = default;
             float length = default;
             Optional<IList<Fish>> siblings = default;

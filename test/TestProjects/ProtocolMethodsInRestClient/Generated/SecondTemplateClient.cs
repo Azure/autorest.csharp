@@ -96,6 +96,7 @@ namespace ProtocolMethodsInRestClient
         /// <summary> Delete resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         public virtual async Task<Response> DeleteAsync(string resourceId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SecondTemplateClient.Delete");
@@ -114,6 +115,7 @@ namespace ProtocolMethodsInRestClient
         /// <summary> Delete resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         public virtual Response Delete(string resourceId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SecondTemplateClient.Delete");
@@ -132,6 +134,7 @@ namespace ProtocolMethodsInRestClient
         /// <summary> Retrieves information about the resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         public virtual async Task<Response<Resource>> GetAsync(string resourceId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SecondTemplateClient.Get");
@@ -150,6 +153,7 @@ namespace ProtocolMethodsInRestClient
         /// <summary> Retrieves information about the resource. </summary>
         /// <param name="resourceId"> The id of the resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         public virtual Response<Resource> Get(string resourceId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SecondTemplateClient.Get");

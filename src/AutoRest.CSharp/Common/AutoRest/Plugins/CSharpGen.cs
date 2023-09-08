@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
+using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
@@ -47,7 +48,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             else
             {
-                await LowLevelTarget.ExecuteAsync(project, new CodeModelConverter().CreateNamespace(codeModel, new SchemaUsageProvider(codeModel)), sourceInputModel, false);
+                ConstantSchemaTransformer.Transform(codeModel);
+                await DpgTarget.ExecuteAsync(project, new CodeModelConverter(codeModel, new SchemaUsageProvider(codeModel)).CreateNamespace(), sourceInputModel, false);
             }
             return project;
         }
@@ -59,7 +61,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             Directory.CreateDirectory(Configuration.OutputFolder);
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync(), await ProtocolCompilationInput.TryCreate());
-            await LowLevelTarget.ExecuteAsync(project, rootNamespace, sourceInputModel, true);
+            await DpgTarget.ExecuteAsync(project, rootNamespace, sourceInputModel, true);
             return project;
         }
 

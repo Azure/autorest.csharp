@@ -105,7 +105,7 @@ var client = new NullableClient().GetBytesClient("1.0.0");
 
 var data = new {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new {},
+    nullableProperty = BinaryData.FromString("<your binary data content>"),
 };
 
 Response response = await client.PatchNonNullAsync(RequestContent.Create(data));
@@ -121,7 +121,7 @@ var client = new NullableClient().GetBytesClient("1.0.0");
 
 var data = new {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new {},
+    nullableProperty = BinaryData.FromString("<your binary data content>"),
 };
 
 Response response = client.PatchNonNull(RequestContent.Create(data));
@@ -137,7 +137,7 @@ var client = new NullableClient().GetBytesClient("1.0.0");
 
 var data = new {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new {},
+    nullableProperty = BinaryData.FromString("<your binary data content>"),
 };
 
 Response response = await client.PatchNullAsync(RequestContent.Create(data));
@@ -153,7 +153,7 @@ var client = new NullableClient().GetBytesClient("1.0.0");
 
 var data = new {
     requiredProperty = "<requiredProperty>",
-    nullableProperty = new {},
+    nullableProperty = BinaryData.FromString("<your binary data content>"),
 };
 
 Response response = client.PatchNull(RequestContent.Create(data));

@@ -576,8 +576,8 @@ namespace Pagination
             uri.AppendPath("/metric-dimensions/", false);
             uri.AppendPath(name, true);
             uri.AppendPath("/values", false);
-            uri.AppendQuery("metricNamespace", metricNamespace, true);
             uri.AppendQuery("api-version", _apiVersion, true);
+            uri.AppendQuery("metricNamespace", metricNamespace, true);
             if (interval != null)
             {
                 uri.AppendQuery("interval", interval, true);

@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using Parameters.Spread;
 using Parameters.Spread.Models;
 
 namespace Parameters.Spread.Samples

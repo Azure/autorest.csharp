@@ -166,7 +166,7 @@ namespace _Type._Array
             }
         }
 
-        /// <param name="body"> The Array to use. </param>
+        /// <param name="body"> The IList{BinaryData} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='PutAsync(IEnumerable{BinaryData},CancellationToken)']/*" />
@@ -179,7 +179,7 @@ namespace _Type._Array
             return response;
         }
 
-        /// <param name="body"> The Array to use. </param>
+        /// <param name="body"> The IList{BinaryData} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='Put(IEnumerable{BinaryData},CancellationToken)']/*" />

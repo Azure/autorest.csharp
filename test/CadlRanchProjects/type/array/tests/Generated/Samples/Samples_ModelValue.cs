@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type._Array;
 using _Type._Array.Models;
 
 namespace _Type._Array.Samples
@@ -152,7 +153,7 @@ namespace _Type._Array.Samples
             var body = new InnerModel[]
             {
     new InnerModel("<property>")
-{
+    {
         Children = {},
     }
             };

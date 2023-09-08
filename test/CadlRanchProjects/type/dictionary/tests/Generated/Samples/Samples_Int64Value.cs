@@ -14,7 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type._Dictionary.Models;
+using _Type._Dictionary;
 
 namespace _Type._Dictionary.Samples
 {
@@ -145,7 +145,7 @@ namespace _Type._Dictionary.Samples
 
             var body = new Dictionary<string, long>
             {
-                ["key"] = 1234,
+                ["key"] = 1234L
             };
             var result = await client.PutAsync(body);
         }

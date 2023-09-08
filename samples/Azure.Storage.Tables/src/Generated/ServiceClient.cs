@@ -45,13 +45,14 @@ namespace Azure.Storage.Tables
         /// <param name="storageServiceProperties"> The StorageService properties. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href="https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="storageServiceProperties"/> is null. </exception>
         public virtual async Task<Response> SetPropertiesAsync(Enum4 restype, Enum5 comp, StorageServiceProperties storageServiceProperties, int? timeout = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ServiceClient.SetProperties");
             scope.Start();
             try
             {
-                return (await RestClient.SetPropertiesAsync(restype, comp, storageServiceProperties, timeout, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.SetPropertiesAsync(restype, comp, storageServiceProperties, timeout, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -66,13 +67,14 @@ namespace Azure.Storage.Tables
         /// <param name="storageServiceProperties"> The StorageService properties. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href="https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="storageServiceProperties"/> is null. </exception>
         public virtual Response SetProperties(Enum4 restype, Enum5 comp, StorageServiceProperties storageServiceProperties, int? timeout = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ServiceClient.SetProperties");
             scope.Start();
             try
             {
-                return RestClient.SetProperties(restype, comp, storageServiceProperties, timeout, cancellationToken).GetRawResponse();
+                return RestClient.SetProperties(restype, comp, storageServiceProperties, timeout, cancellationToken);
             }
             catch (Exception e)
             {

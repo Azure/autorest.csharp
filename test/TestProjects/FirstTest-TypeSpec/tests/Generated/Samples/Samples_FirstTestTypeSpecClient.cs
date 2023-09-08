@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using FirstTestTypeSpec;
 using FirstTestTypeSpec.Models;
 using NUnit.Framework;
 
@@ -210,11 +211,11 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new[] {
         1234
@@ -244,14 +245,14 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 optionalLiteralString = "reject",
                 optionalLiteralInt = 456,
-                optionalLiteralFloat = 4.56,
+                optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 optionalNullableList = new[] {
@@ -290,11 +291,11 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new[] {
         1234
@@ -324,14 +325,14 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 optionalLiteralString = "reject",
                 optionalLiteralInt = 456,
-                optionalLiteralFloat = 4.56,
+                optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 optionalNullableList = new[] {
@@ -370,11 +371,11 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new[] {
         1234
@@ -404,14 +405,14 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 optionalLiteralString = "reject",
                 optionalLiteralInt = 456,
-                optionalLiteralFloat = 4.56,
+                optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 optionalNullableList = new[] {
@@ -450,11 +451,11 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new[] {
         1234
@@ -484,14 +485,14 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 optionalLiteralString = "reject",
                 optionalLiteralInt = 456,
-                optionalLiteralFloat = 4.56,
+                optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 optionalNullableList = new[] {
@@ -818,7 +819,8 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = client.ReturnsAnonymousModel(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -830,7 +832,8 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = client.ReturnsAnonymousModel(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -842,7 +845,8 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = await client.ReturnsAnonymousModelAsync(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -854,7 +858,8 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = await client.ReturnsAnonymousModelAsync(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1012,20 +1017,20 @@ namespace FirstTestTypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                     requiredNullableList = new[] {
             1234
         },
                 },
-                requiredUnknown = new { },
+                requiredUnknown = BinaryData.FromString("<your binary data content>"),
                 requiredRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
                 modelWithRequiredNullable = new
                 {
@@ -1079,14 +1084,14 @@ namespace FirstTestTypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     optionalLiteralString = "reject",
                     optionalLiteralInt = 456,
-                    optionalLiteralFloat = 4.56,
+                    optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                     optionalNullableList = new[] {
@@ -1096,32 +1101,32 @@ namespace FirstTestTypeSpec.Samples
             1234
         },
                 },
-                intExtensibleEnum = "1",
+                intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-                floatExtensibleEnum = "1",
+                floatExtensibleEnum = 1,
                 floatExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-                floatFixedEnum = "1.1",
+                floatFixedEnum = 1.1F,
                 floatFixedEnumCollection = new[] {
-        "1.1"
+        1.1F
     },
-                intFixedEnum = "1",
+                intFixedEnum = 1,
                 intFixedEnumCollection = new[] {
-        "1"
+        1
     },
                 stringFixedEnum = "1",
-                requiredUnknown = new { },
-                optionalUnknown = new { },
+                requiredUnknown = BinaryData.FromString("<your binary data content>"),
+                optionalUnknown = BinaryData.FromString("<your binary data content>"),
                 requiredRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
                 optionalRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
                 modelWithRequiredNullable = new
                 {
@@ -1192,20 +1197,20 @@ namespace FirstTestTypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                     requiredNullableList = new[] {
             1234
         },
                 },
-                requiredUnknown = new { },
+                requiredUnknown = BinaryData.FromString("<your binary data content>"),
                 requiredRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
                 modelWithRequiredNullable = new
                 {
@@ -1259,14 +1264,14 @@ namespace FirstTestTypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     optionalLiteralString = "reject",
                     optionalLiteralInt = 456,
-                    optionalLiteralFloat = 4.56,
+                    optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                     optionalNullableList = new[] {
@@ -1276,32 +1281,32 @@ namespace FirstTestTypeSpec.Samples
             1234
         },
                 },
-                intExtensibleEnum = "1",
+                intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-                floatExtensibleEnum = "1",
+                floatExtensibleEnum = 1,
                 floatExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-                floatFixedEnum = "1.1",
+                floatFixedEnum = 1.1F,
                 floatFixedEnumCollection = new[] {
-        "1.1"
+        1.1F
     },
-                intFixedEnum = "1",
+                intFixedEnum = 1,
                 intFixedEnumCollection = new[] {
-        "1"
+        1
     },
                 stringFixedEnum = "1",
-                requiredUnknown = new { },
-                optionalUnknown = new { },
+                requiredUnknown = BinaryData.FromString("<your binary data content>"),
+                optionalUnknown = BinaryData.FromString("<your binary data content>"),
                 requiredRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
                 optionalRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
                 modelWithRequiredNullable = new
                 {
@@ -1372,20 +1377,20 @@ namespace FirstTestTypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                     requiredNullableList = new[] {
             1234
         },
                 },
-                requiredUnknown = new { },
+                requiredUnknown = BinaryData.FromString("<your binary data content>"),
                 requiredRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
                 modelWithRequiredNullable = new
                 {
@@ -1439,14 +1444,14 @@ namespace FirstTestTypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     optionalLiteralString = "reject",
                     optionalLiteralInt = 456,
-                    optionalLiteralFloat = 4.56,
+                    optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                     optionalNullableList = new[] {
@@ -1456,32 +1461,32 @@ namespace FirstTestTypeSpec.Samples
             1234
         },
                 },
-                intExtensibleEnum = "1",
+                intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-                floatExtensibleEnum = "1",
+                floatExtensibleEnum = 1,
                 floatExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-                floatFixedEnum = "1.1",
+                floatFixedEnum = 1.1F,
                 floatFixedEnumCollection = new[] {
-        "1.1"
+        1.1F
     },
-                intFixedEnum = "1",
+                intFixedEnum = 1,
                 intFixedEnumCollection = new[] {
-        "1"
+        1
     },
                 stringFixedEnum = "1",
-                requiredUnknown = new { },
-                optionalUnknown = new { },
+                requiredUnknown = BinaryData.FromString("<your binary data content>"),
+                optionalUnknown = BinaryData.FromString("<your binary data content>"),
                 requiredRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
                 optionalRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
                 modelWithRequiredNullable = new
                 {
@@ -1552,20 +1557,20 @@ namespace FirstTestTypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                     requiredNullableList = new[] {
             1234
         },
                 },
-                requiredUnknown = new { },
+                requiredUnknown = BinaryData.FromString("<your binary data content>"),
                 requiredRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
                 modelWithRequiredNullable = new
                 {
@@ -1619,14 +1624,14 @@ namespace FirstTestTypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     optionalLiteralString = "reject",
                     optionalLiteralInt = 456,
-                    optionalLiteralFloat = 4.56,
+                    optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                     optionalNullableList = new[] {
@@ -1636,32 +1641,32 @@ namespace FirstTestTypeSpec.Samples
             1234
         },
                 },
-                intExtensibleEnum = "1",
+                intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-                floatExtensibleEnum = "1",
+                floatExtensibleEnum = 1,
                 floatExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-                floatFixedEnum = "1.1",
+                floatFixedEnum = 1.1F,
                 floatFixedEnumCollection = new[] {
-        "1.1"
+        1.1F
     },
-                intFixedEnum = "1",
+                intFixedEnum = 1,
                 intFixedEnumCollection = new[] {
-        "1"
+        1
     },
                 stringFixedEnum = "1",
-                requiredUnknown = new { },
-                optionalUnknown = new { },
+                requiredUnknown = BinaryData.FromString("<your binary data content>"),
+                optionalUnknown = BinaryData.FromString("<your binary data content>"),
                 requiredRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
                 optionalRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
                 modelWithRequiredNullable = new
                 {
@@ -1811,11 +1816,11 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new[] {
         1234
@@ -1845,14 +1850,14 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 optionalLiteralString = "reject",
                 optionalLiteralInt = 456,
-                optionalLiteralFloat = 4.56,
+                optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 optionalNullableList = new[] {
@@ -1891,11 +1896,11 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new[] {
         1234
@@ -1925,14 +1930,14 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 optionalLiteralString = "reject",
                 optionalLiteralInt = 456,
-                optionalLiteralFloat = 4.56,
+                optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 optionalNullableList = new[] {

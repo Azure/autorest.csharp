@@ -14,7 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Property.Nullable.Models;
+using _Type.Property.Nullable;
 
 namespace _Type.Property.Nullable.Samples
 {

@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type._Enum.Fixed;
 using _Type._Enum.Fixed.Models;
 
 namespace _Type._Enum.Fixed.Samples

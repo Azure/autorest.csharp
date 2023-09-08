@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using SpreadTypeSpec;
 using SpreadTypeSpec.Models;
 
 namespace SpreadTypeSpec.Samples

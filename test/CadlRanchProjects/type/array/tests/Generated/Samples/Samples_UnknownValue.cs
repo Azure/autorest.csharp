@@ -14,7 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type._Array.Models;
+using _Type._Array;
 
 namespace _Type._Array.Samples
 {
@@ -84,7 +84,7 @@ namespace _Type._Array.Samples
             var client = new ArrayClient().GetUnknownValueClient("1.0.0");
 
             var data = new[] {
-    new {}
+    BinaryData.FromString("<your binary data content>")
 };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -98,7 +98,7 @@ namespace _Type._Array.Samples
             var client = new ArrayClient().GetUnknownValueClient("1.0.0");
 
             var data = new[] {
-    new {}
+    BinaryData.FromString("<your binary data content>")
 };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -112,7 +112,7 @@ namespace _Type._Array.Samples
             var client = new ArrayClient().GetUnknownValueClient("1.0.0");
 
             var data = new[] {
-    new {}
+    BinaryData.FromString("<your binary data content>")
 };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
@@ -126,7 +126,7 @@ namespace _Type._Array.Samples
             var client = new ArrayClient().GetUnknownValueClient("1.0.0");
 
             var data = new[] {
-    new {}
+    BinaryData.FromString("<your binary data content>")
 };
 
             Response response = await client.PutAsync(RequestContent.Create(data));

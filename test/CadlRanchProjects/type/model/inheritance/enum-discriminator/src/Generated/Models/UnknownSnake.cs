@@ -11,12 +11,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
     internal partial class UnknownSnake : Snake
     {
         /// <summary> Initializes a new instance of UnknownSnake. </summary>
-        /// <param name="length"> Length of the snake. </param>
-        internal UnknownSnake(int length) : base(length)
-        {
-        }
-
-        /// <summary> Initializes a new instance of UnknownSnake. </summary>
         /// <param name="kind"> discriminator property. </param>
         /// <param name="length"> Length of the snake. </param>
         internal UnknownSnake(SnakeKind kind, int length) : base(kind, length)

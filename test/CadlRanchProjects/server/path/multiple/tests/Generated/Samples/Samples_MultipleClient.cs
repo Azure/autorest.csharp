@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using Server.Path.Multiple;
 
 namespace Server.Path.Multiple.Samples
 {

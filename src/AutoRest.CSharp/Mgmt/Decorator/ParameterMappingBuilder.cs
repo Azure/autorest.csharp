@@ -3,21 +3,18 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -35,17 +32,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static IEnumerable<ContextualParameterMapping> BuildContextualParameters(this RequestPath requestPath, string idVariableName)
         {
             var stack = new Stack<ContextualParameterMapping>();
-            BuildContextualParameterMappingHierarchy(requestPath, stack, idVariableName);
+            var idVariable = ResourceIdentifierExpression.ReferenceField(idVariableName);
+            BuildContextualParameterMappingHierarchy(requestPath, stack, idVariable, idVariable);
             return stack;
         }
 
-        private static void BuildContextualParameterMappingHierarchy(RequestPath current, Stack<ContextualParameterMapping> parameterMappingStack, string idVariableName = "Id", string invocationSuffix = "")
+        private static void BuildContextualParameterMappingHierarchy(RequestPath current, Stack<ContextualParameterMapping> parameterMappingStack, ResourceIdentifierExpression idVariable, ResourceIdentifierExpression invocation)
         {
             // Check if the current path is a scope parameter
             if (current.IsRawParameterizedScope())
             {
                 // in this case, we should only have one segment in this current path
-                parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, current.Last(), $"{idVariableName}{invocationSuffix}"));
+                parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, current.Last(), invocation));
                 return;
             }
             // RequestPath of tenant does not have any parameter in it (actually it does not have anything), we take this as an exit
@@ -56,18 +54,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (current == RequestPath.Subscription)
             {
                 // using the reference name of the last segment as the parameter name, aka, subscriptionId
-                parameterMappingStack.Push(new ContextualParameterMapping(current.SkipLast(1).Last().ConstantValue, current.Last(), $"{idVariableName}.SubscriptionId"));
+                parameterMappingStack.Push(new ContextualParameterMapping(current.SkipLast(1).Last().ConstantValue, current.Last(), idVariable.SubscriptionId));
             }
             else if (current == RequestPath.ManagementGroup)
             {
                 // using the reference name of the last segment as the parameter name, aka, groupId
-                parameterMappingStack.Push(new ContextualParameterMapping(current.SkipLast(1).Last().ConstantValue, current.Last(), $"{idVariableName}{invocationSuffix}.Name"));
+                parameterMappingStack.Push(new ContextualParameterMapping(current.SkipLast(1).Last().ConstantValue, current.Last(), invocation.Name));
             }
             // ResourceGroup is not terminal state - Subscription is its parent
             else if (current == RequestPath.ResourceGroup)
             {
                 // using the reference name of the last segment as the parameter name, aka, resourceGroupName
-                parameterMappingStack.Push(new ContextualParameterMapping(current.SkipLast(1).Last().ConstantValue, current.Last(), $"{idVariableName}.ResourceGroupName"));
+                parameterMappingStack.Push(new ContextualParameterMapping(current.SkipLast(1).Last().ConstantValue, current.Last(), idVariable.ResourceGroupName));
             }
             // this branch is for every other cases - all the request path that corresponds to a resource in this swagger
             else
@@ -77,7 +75,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // get the segment in pairs
                 var segmentPairs = SplitDiffIntoPairs(diffPath).ToList();
                 var indexOfProvidersPair = segmentPairs.FindIndex(pair => pair[0] == Segment.Providers);
-                var resourceTypeIdVariableName = idVariableName;
                 // from the tail, check these segments in pairs
                 for (int i = 0; i < segmentPairs.Count; i++)
                 {
@@ -96,17 +93,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                             {
                                 if (current.Count <= 4) // path is /providers/{resourceProviderNamespace} or /subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}
                                 {
-                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, $"{idVariableName}.Provider"));
+                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, idVariable.Provider));
                                 }
                                 else
                                 {
-                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, $"{resourceTypeIdVariableName}.ResourceType.Namespace"));
+                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, idVariable.ResourceType.Namespace));
                                 }
                                 // do not append a new .Parent to the id
                             }
                             else // for all other normal keys
                             {
-                                parameterMappingStack.Push(new ContextualParameterMapping(keySegment.IsConstant ? keySegment.ConstantValue : string.Empty, valueSegment, $"{idVariableName}{invocationSuffix}.Name"));
+                                parameterMappingStack.Push(new ContextualParameterMapping(keySegment.IsConstant ? keySegment.ConstantValue : string.Empty, valueSegment, invocation.Name));
                                 appendParent = true;
                             }
                         }
@@ -120,20 +117,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         }
                         if (keySegment.IsReference)
                         {
-                            parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, keySegment, $"{idVariableName}{invocationSuffix}.ResourceType.GetLastType()", new[] { "System.Linq" }));
-                            resourceTypeIdVariableName = $"{idVariableName}{invocationSuffix}";
+                            parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, keySegment, invocation.ResourceType.GetLastType(), new[] { "System.Linq" }));
                             appendParent = true;
                         }
                         else if (keySegment.IsExpandable)
                         {
                             //this is the case where we have expanded the reference into its enumerations
                             var keyParam = keySegment.Type.Name.ToVariableName();
-                            parameterMappingStack.Push(new ContextualParameterMapping(keyParam, keyParam, keySegment.Type, $"\"{keySegment.ConstantValue}\"", Enumerable.Empty<string>()));
+                            parameterMappingStack.Push(new ContextualParameterMapping(keyParam, keyParam, keySegment.Type, Literal(keySegment.ConstantValue), Enumerable.Empty<string>()));
                             appendParent = true;
                         }
                         // add .Parent suffix
                         if (appendParent)
-                            invocationSuffix += ".Parent";
+                            invocation = invocation.Parent;
                     }
                     else
                     {
@@ -143,13 +139,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                             if (segmentPairs.Count - indexOfProvidersPair != 1)
                                 throw new NotImplementedException("We have a gap between the substring to get and the provider-namespace key pair. We need to update SubstringAfterProviderNamespace function to make sure it can accept an index to adopt this");
                             // if we only have one segment in this group, it should always be a reference
-                            parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, pair[0], $"{idVariableName}{invocationSuffix}.SubstringAfterProviderNamespace()"));
+                            parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, pair[0], invocation.SubstringAfterProviderNamespace()));
                         }
                     }
                 }
             }
             // recursively get the parameters of its parent
-            BuildContextualParameterMappingHierarchy(parent, parameterMappingStack, idVariableName, invocationSuffix);
+            BuildContextualParameterMappingHierarchy(parent, parameterMappingStack, idVariable, invocation);
         }
 
         /// <summary>
@@ -199,18 +195,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
-        public static FormattableString GetValueExpression(CSharpType type, FormattableString rawExpression)
+        public static ValueExpression GetValueExpression(CSharpType type, ValueExpression valueExpression)
         {
             if (TypeFactory.IsStringLike(type))
-                return rawExpression;
+                return valueExpression;
 
             if (!type.IsFrameworkType)
             {
                 if (type.Implementation is EnumType enumType && !enumType.IsExtensible)
                 {
-                    return $"{rawExpression}.To{enumType.Declaration.Name}()";
+                    return valueExpression.Invoke($"To{enumType.Declaration.Name}");
                 }
-                throw new System.InvalidOperationException($"Type {type} is not supported to construct parameter mapping");
+                throw new InvalidOperationException($"Type {type} is not supported to construct parameter mapping");
             }
             // TODO: The deserialize type value logic is existing in multiple writers, similar but slightly different,
             //       should be abstracted into one place in future refactoring.
@@ -222,10 +218,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 type.FrameworkType == typeof(Azure.Core.RequestMethod) ||
                 type.FrameworkType == typeof(Azure.Core.AzureLocation))
             {
-                return $"new {type.FrameworkType}({rawExpression})";
+                return New.Instance(type, valueExpression);
             }
 
-            return $"{type.FrameworkType}.Parse({rawExpression})";
+            return new InvokeStaticMethodExpression(type, "Parse", new[]{valueExpression});
         }
 
         /// <summary>
@@ -245,18 +241,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             /// <summary>
             /// This is the value expression to pass in a method
             /// </summary>
-            public FormattableString ValueExpression;
+            public ValueExpression ValueExpression;
             /// <summary>
             /// The using statements in the ValueExpression
             /// </summary>
             public IEnumerable<string> Usings;
 
-            public ContextualParameterMapping(string key, Segment value, FormattableString valueExpression, IEnumerable<string>? usings = default)
+            public ContextualParameterMapping(string key, Segment value, ValueExpression valueExpression, IEnumerable<string>? usings = default)
                 : this(key, value.Reference.Name, value.Reference.Type, valueExpression, usings ?? Enumerable.Empty<string>())
             {
             }
 
-            internal ContextualParameterMapping(string key, string parameterName, CSharpType parameterType, FormattableString valueExpression, IEnumerable<string> usings)
+            internal ContextualParameterMapping(string key, string parameterName, CSharpType parameterType, ValueExpression valueExpression, IEnumerable<string> usings)
             {
                 Key = key;
                 ParameterName = parameterName;
@@ -278,9 +274,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static IEnumerable<ParameterMapping> BuildParameterMapping(this MgmtRestOperation operation, IEnumerable<ContextualParameterMapping> contextualParameterMappings)
         {
-            var method = operation.Method;
             var contextualParameterMappingCache = new List<ContextualParameterMapping>(contextualParameterMappings);
-            foreach (var parameter in method.Parameters)
+            foreach (var parameter in operation.Parameters)
             {
                 // find this parameter name in the contextual parameter mappings
                 // if there is one, this parameter should use the same value expression
@@ -288,13 +283,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var mapping = FindContextualParameterForMethod(parameter, operation.RequestPath, contextualParameterMappingCache);
                 // Update parameter type if the method is a `ById` method
                 var p = UpdateParameterTypeOfByIdMethod(operation.RequestPath, parameter);
-                if (mapping == null)
+                if (parameter == KnownParameters.CancellationTokenParameter)
                 {
-                    yield return new ParameterMapping(p, true, $"", Enumerable.Empty<string>());
+                    yield return new ParameterMapping(KnownParameters.CancellationTokenParameter, false, KnownParameters.CancellationTokenParameter);
+                }
+                else if (mapping == null)
+                {
+                    yield return new ParameterMapping(p, true, Null);
                 }
                 else
                 {
-                    yield return new ParameterMapping(p, false, mapping.ValueExpression, mapping.Usings);
+                    yield return new ParameterMapping(p, false, mapping.ValueExpression);
                 }
             }
         }
@@ -316,33 +315,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <summary>
         /// Represents how a parameter of rest operation is mapped to a parameter of a collection method or an expression.
         /// </summary>
-        public record ParameterMapping
-        {
-            /// <summary>
-            /// The parameter object in <see cref="RestClientMethod"/>.
-            /// </summary>
-            public Parameter Parameter;
-            /// <summary>
-            /// Should the parameter be passed through from the method in collection class?
-            /// </summary>
-            public bool IsPassThru;
-            /// <summary>
-            /// if not pass-through, this is the value to pass in <see cref="RestClientMethod"/>.
-            /// </summary>
-            public FormattableString ValueExpression;
-            /// <summary>
-            /// the using statements used in the ValueExpression
-            /// </summary>
-            public IEnumerable<string> Usings;
-
-            public ParameterMapping(Parameter parameter, bool isPassThru, FormattableString valueExpression, IEnumerable<string> usings)
-            {
-                Parameter = parameter;
-                IsPassThru = isPassThru;
-                ValueExpression = valueExpression;
-                Usings = usings;
-            }
-        }
+        public record ParameterMapping(
+            // The parameter object in <see cref="RestClientMethod"/>.
+            Parameter Parameter,
+            // Should the parameter be passed through from the method in collection class?
+            bool IsPassThru,
+            // if not pass-through, this is the value to pass in <see cref="RestClientMethod"/>.
+            ValueExpression ValueExpression);
 
         private static ContextualParameterMapping? FindContextualParameterForMethod(Parameter pathParameter, RequestPath requestPath, List<ContextualParameterMapping> contextualParameterMappings)
         {
@@ -355,12 +334,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 contextualParameterMappings.Remove(result);
             if (result is null && pathParameter.Type.IsEnum)
             {
-                var requestSegment = requestPath.Where(s => s.IsExpandable && s.Type.Equals(pathParameter.Type) && s.IsConstant);
-                if (requestSegment.Any())
+                foreach (var keySegment in requestPath.Where(s => s.IsExpandable && s.Type.Equals(pathParameter.Type) && s.IsConstant))
                 {
-                    var keySegment = requestSegment.First();
                     var keyParam = keySegment.Type.Name.ToVariableName();
-                    return new ContextualParameterMapping(keyParam, keyParam, keySegment.Type, $"\"{keySegment.ConstantValue}\"", Enumerable.Empty<string>());
+                    return new ContextualParameterMapping(keyParam, keyParam, keySegment.Type, Literal(keySegment.ConstantValue), Enumerable.Empty<string>());
                 }
             }
             return result;
@@ -396,9 +373,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return parameterMappings.Where(p => p.IsPassThru).Select(p => p.Parameter).ToList();
         }
 
-        public static string GetPropertyBagValueExpression(this Parameter parameter)
+        public static ValueExpression GetPropertyBagValueExpression(this Parameter parameter)
         {
-            return $"options.{parameter.Name.FirstCharToUpperCase()}";
+            return new FormattableStringToExpression($"options.{parameter.Name.FirstCharToUpperCase()}");
         }
     }
 }

@@ -20,7 +20,7 @@ var client = new RequestConditionCollapseClient(credential);
 
 var data = "<String>";
 
-Response response = await client.CollapsePutAsync(RequestContent.Create(data), null);
+Response response = await client.CollapsePutAsync(RequestContent.Create(data), new RequestConditions());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -44,7 +44,7 @@ var client = new RequestConditionCollapseClient(credential);
 
 var data = "<String>";
 
-Response response = client.CollapsePut(RequestContent.Create(data), null);
+Response response = client.CollapsePut(RequestContent.Create(data), new RequestConditions());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -64,7 +64,7 @@ This sample shows how to call CollapseGetAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new RequestConditionCollapseClient(credential);
 
-Response response = await client.CollapseGetAsync(null);
+Response response = await client.CollapseGetAsync(new RequestConditions());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -84,7 +84,7 @@ This sample shows how to call CollapseGet with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new RequestConditionCollapseClient(credential);
 
-Response response = client.CollapseGet(null);
+Response response = client.CollapseGet(new RequestConditions());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -104,7 +104,7 @@ This sample shows how to call MissIfNoneMatchGetAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new RequestConditionCollapseClient(credential);
 
-Response response = await client.MissIfNoneMatchGetAsync(null);
+Response response = await client.MissIfNoneMatchGetAsync(new RequestConditions());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -124,7 +124,7 @@ This sample shows how to call MissIfNoneMatchGet with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new RequestConditionCollapseClient(credential);
 
-Response response = client.MissIfNoneMatchGet(null);
+Response response = client.MissIfNoneMatchGet(new RequestConditions());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -144,7 +144,7 @@ This sample shows how to call MissIfMatchGetAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new RequestConditionCollapseClient(credential);
 
-Response response = await client.MissIfMatchGetAsync(null);
+Response response = await client.MissIfMatchGetAsync(new RequestConditions());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -164,7 +164,7 @@ This sample shows how to call MissIfMatchGet with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new RequestConditionCollapseClient(credential);
 
-Response response = client.MissIfMatchGet(null);
+Response response = client.MissIfMatchGet(new RequestConditions());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -184,7 +184,7 @@ This sample shows how to call MissIfModifiedSinceGetAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new RequestConditionCollapseClient(credential);
 
-Response response = await client.MissIfModifiedSinceGetAsync(null);
+Response response = await client.MissIfModifiedSinceGetAsync(new RequestConditions());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -204,7 +204,7 @@ This sample shows how to call MissIfModifiedSinceGet with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new RequestConditionCollapseClient(credential);
 
-Response response = client.MissIfModifiedSinceGet(null);
+Response response = client.MissIfModifiedSinceGet(new RequestConditions());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -224,7 +224,7 @@ This sample shows how to call MissIfUnmodifiedSinceGetAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new RequestConditionCollapseClient(credential);
 
-Response response = await client.MissIfUnmodifiedSinceGetAsync(null);
+Response response = await client.MissIfUnmodifiedSinceGetAsync(new RequestConditions());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -244,7 +244,7 @@ This sample shows how to call MissIfUnmodifiedSinceGet with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new RequestConditionCollapseClient(credential);
 
-Response response = client.MissIfUnmodifiedSinceGet(null);
+Response response = client.MissIfUnmodifiedSinceGet(new RequestConditions());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -264,7 +264,7 @@ This sample shows how to call MissIfMatchIfNoneMatchGetAsync with all parameters
 var credential = new AzureKeyCredential("<key>");
 var client = new RequestConditionCollapseClient(credential);
 
-Response response = await client.MissIfMatchIfNoneMatchGetAsync(null);
+Response response = await client.MissIfMatchIfNoneMatchGetAsync(new RequestConditions());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -284,7 +284,7 @@ This sample shows how to call MissIfMatchIfNoneMatchGet with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new RequestConditionCollapseClient(credential);
 
-Response response = client.MissIfMatchIfNoneMatchGet(null);
+Response response = client.MissIfMatchIfNoneMatchGet(new RequestConditions());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -304,7 +304,7 @@ This sample shows how to call IfModifiedSinceGetAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new RequestConditionCollapseClient(credential);
 
-Response response = await client.IfModifiedSinceGetAsync(null);
+Response response = await client.IfModifiedSinceGetAsync(new RequestConditions());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -324,7 +324,7 @@ This sample shows how to call IfModifiedSinceGet with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new RequestConditionCollapseClient(credential);
 
-Response response = client.IfModifiedSinceGet(null);
+Response response = client.IfModifiedSinceGet(new RequestConditions());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -344,7 +344,7 @@ This sample shows how to call IfUnmodifiedSinceGetAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new RequestConditionCollapseClient(credential);
 
-Response response = await client.IfUnmodifiedSinceGetAsync(null);
+Response response = await client.IfUnmodifiedSinceGetAsync(new RequestConditions());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -364,7 +364,7 @@ This sample shows how to call IfUnmodifiedSinceGet with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new RequestConditionCollapseClient(credential);
 
-Response response = client.IfUnmodifiedSinceGet(null);
+Response response = client.IfUnmodifiedSinceGet(new RequestConditions());
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

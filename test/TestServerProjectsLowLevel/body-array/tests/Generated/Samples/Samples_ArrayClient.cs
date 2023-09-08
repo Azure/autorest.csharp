@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using body_array_LowLevel;
 
 namespace body_array_LowLevel.Samples
 {
@@ -943,7 +944,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    123.45f
+    3.14f
 };
 
             Response response = client.PutFloatValid(RequestContent.Create(data));
@@ -958,7 +959,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    123.45f
+    3.14f
 };
 
             Response response = client.PutFloatValid(RequestContent.Create(data));
@@ -973,7 +974,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    123.45f
+    3.14f
 };
 
             Response response = await client.PutFloatValidAsync(RequestContent.Create(data));
@@ -988,7 +989,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    123.45f
+    3.14f
 };
 
             Response response = await client.PutFloatValidAsync(RequestContent.Create(data));
@@ -1159,7 +1160,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    123.45d
+    3.14d
 };
 
             Response response = client.PutDoubleValid(RequestContent.Create(data));
@@ -1174,7 +1175,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    123.45d
+    3.14d
 };
 
             Response response = client.PutDoubleValid(RequestContent.Create(data));
@@ -1189,7 +1190,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    123.45d
+    3.14d
 };
 
             Response response = await client.PutDoubleValidAsync(RequestContent.Create(data));
@@ -1204,7 +1205,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    123.45d
+    3.14d
 };
 
             Response response = await client.PutDoubleValidAsync(RequestContent.Create(data));
@@ -2195,7 +2196,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2022-05-10T18:57:31.2311892Z"
+    "2022-05-10T14:14:57.0310000Z"
 };
 
             Response response = client.PutDateTimeValid(RequestContent.Create(data));
@@ -2210,7 +2211,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2022-05-10T18:57:31.2311892Z"
+    "2022-05-10T14:14:57.0310000Z"
 };
 
             Response response = client.PutDateTimeValid(RequestContent.Create(data));
@@ -2225,7 +2226,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2022-05-10T18:57:31.2311892Z"
+    "2022-05-10T14:14:57.0310000Z"
 };
 
             Response response = await client.PutDateTimeValidAsync(RequestContent.Create(data));
@@ -2240,7 +2241,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2022-05-10T18:57:31.2311892Z"
+    "2022-05-10T14:14:57.0310000Z"
 };
 
             Response response = await client.PutDateTimeValidAsync(RequestContent.Create(data));
@@ -2411,7 +2412,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "Tue, 10 May 2022 18:57:31 GMT"
+    "Tue, 10 May 2022 14:14:57 GMT"
 };
 
             Response response = client.PutDateTimeRfc1123Valid(RequestContent.Create(data));
@@ -2426,7 +2427,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "Tue, 10 May 2022 18:57:31 GMT"
+    "Tue, 10 May 2022 14:14:57 GMT"
 };
 
             Response response = client.PutDateTimeRfc1123Valid(RequestContent.Create(data));
@@ -2441,7 +2442,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "Tue, 10 May 2022 18:57:31 GMT"
+    "Tue, 10 May 2022 14:14:57 GMT"
 };
 
             Response response = await client.PutDateTimeRfc1123ValidAsync(RequestContent.Create(data));
@@ -2456,7 +2457,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "Tue, 10 May 2022 18:57:31 GMT"
+    "Tue, 10 May 2022 14:14:57 GMT"
 };
 
             Response response = await client.PutDateTimeRfc1123ValidAsync(RequestContent.Create(data));
@@ -2635,7 +2636,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    new {}
+    BinaryData.FromString("<your binary data content>")
 };
 
             Response response = client.PutByteValid(RequestContent.Create(data));
@@ -2650,7 +2651,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    new {}
+    BinaryData.FromString("<your binary data content>")
 };
 
             Response response = client.PutByteValid(RequestContent.Create(data));
@@ -2665,7 +2666,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    new {}
+    BinaryData.FromString("<your binary data content>")
 };
 
             Response response = await client.PutByteValidAsync(RequestContent.Create(data));
@@ -2680,7 +2681,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    new {}
+    BinaryData.FromString("<your binary data content>")
 };
 
             Response response = await client.PutByteValidAsync(RequestContent.Create(data));
@@ -3084,9 +3085,10 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    new {
-        integer = 1234,
-        @string = "<string>",
+    new Dictionary<string, object>
+    {
+        ["integer"] = 1234,
+        ["string"] = "<string>"
     }
 };
 
@@ -3117,9 +3119,10 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    new {
-        integer = 1234,
-        @string = "<string>",
+    new Dictionary<string, object>
+    {
+        ["integer"] = 1234,
+        ["string"] = "<string>"
     }
 };
 

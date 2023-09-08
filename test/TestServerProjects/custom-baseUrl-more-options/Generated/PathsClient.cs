@@ -45,6 +45,7 @@ namespace custom_baseUrl_more_options
         /// <param name="keyName"> The key name with value 'key1'. </param>
         /// <param name="keyVersion"> The key version. Default value 'v1'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/> or <paramref name="keyName"/> is null. </exception>
         public virtual async Task<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
@@ -66,6 +67,7 @@ namespace custom_baseUrl_more_options
         /// <param name="keyName"> The key name with value 'key1'. </param>
         /// <param name="keyVersion"> The key version. Default value 'v1'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/> or <paramref name="keyName"/> is null. </exception>
         public virtual Response GetEmpty(string vault, string secret, string keyName, string keyVersion = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");

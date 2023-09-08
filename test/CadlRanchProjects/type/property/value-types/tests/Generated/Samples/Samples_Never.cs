@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.ValueTypes;
 using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
@@ -28,7 +29,8 @@ namespace _Type.Property.ValueTypes.Samples
 
             Response response = client.GetNever(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -39,7 +41,8 @@ namespace _Type.Property.ValueTypes.Samples
 
             Response response = client.GetNever(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -50,7 +53,8 @@ namespace _Type.Property.ValueTypes.Samples
 
             Response response = await client.GetNeverAsync(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -61,7 +65,8 @@ namespace _Type.Property.ValueTypes.Samples
 
             Response response = await client.GetNeverAsync(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]

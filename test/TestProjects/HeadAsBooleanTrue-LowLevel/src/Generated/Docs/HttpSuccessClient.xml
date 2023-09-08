@@ -3,7 +3,7 @@
   <members>
     <member name="Head200Async(RequestContext)">
 <example>
-This sample shows how to call Head200Async.
+This sample shows how to call Head200Async and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -15,7 +15,7 @@ Console.WriteLine(response.GetRawResponse().Status);
     </member>
     <member name="Head200(RequestContext)">
 <example>
-This sample shows how to call Head200.
+This sample shows how to call Head200 and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -27,7 +27,7 @@ Console.WriteLine(response.GetRawResponse().Status);
     </member>
     <member name="Head204Async(RequestContext)">
 <example>
-This sample shows how to call Head204Async.
+This sample shows how to call Head204Async and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -39,7 +39,7 @@ Console.WriteLine(response.GetRawResponse().Status);
     </member>
     <member name="Head204(RequestContext)">
 <example>
-This sample shows how to call Head204.
+This sample shows how to call Head204 and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -51,7 +51,7 @@ Console.WriteLine(response.GetRawResponse().Status);
     </member>
     <member name="Head404Async(RequestContext)">
 <example>
-This sample shows how to call Head404Async.
+This sample shows how to call Head404Async and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
@@ -63,7 +63,7 @@ Console.WriteLine(response.GetRawResponse().Status);
     </member>
     <member name="Head404(RequestContext)">
 <example>
-This sample shows how to call Head404.
+This sample shows how to call Head404 and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);

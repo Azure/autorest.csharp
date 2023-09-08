@@ -108,8 +108,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfString to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutEmptyAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
@@ -126,8 +127,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfString to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutEmpty(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
@@ -314,8 +316,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }. </summary>
-        /// <param name="arrayBody"> The DictionaryOfBoolean to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,bool} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutBooleanTfftAsync(IDictionary<string, bool> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutBooleanTfft");
@@ -332,8 +335,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }. </summary>
-        /// <param name="arrayBody"> The DictionaryOfBoolean to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,bool} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutBooleanTfft(IDictionary<string, bool> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutBooleanTfft");
@@ -452,8 +456,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfInteger to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,int} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutIntegerValidAsync(IDictionary<string, int> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutIntegerValid");
@@ -470,8 +475,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfInteger to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,int} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutIntegerValid(IDictionary<string, int> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutIntegerValid");
@@ -590,8 +596,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfInteger to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,long} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutLongValidAsync(IDictionary<string, long> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutLongValid");
@@ -608,8 +615,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfInteger to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,long} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutLongValid(IDictionary<string, long> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutLongValid");
@@ -728,8 +736,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfNumber to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,float} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutFloatValidAsync(IDictionary<string, float> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutFloatValid");
@@ -746,8 +755,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfNumber to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,float} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutFloatValid(IDictionary<string, float> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutFloatValid");
@@ -866,8 +876,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfNumber to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,double} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutDoubleValidAsync(IDictionary<string, double> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDoubleValid");
@@ -884,8 +895,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfNumber to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,double} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutDoubleValid(IDictionary<string, double> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDoubleValid");
@@ -1004,8 +1016,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfString to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutStringValidAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutStringValid");
@@ -1022,8 +1035,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfString to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutStringValid(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutStringValid");
@@ -1142,8 +1156,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfDate to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,DateTimeOffset} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutDateValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateValid");
@@ -1160,8 +1175,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfDate to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,DateTimeOffset} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutDateValid(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateValid");
@@ -1280,8 +1296,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfDateTime to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,DateTimeOffset} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutDateTimeValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeValid");
@@ -1298,8 +1315,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfDateTime to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,DateTimeOffset} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutDateTimeValid(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeValid");
@@ -1418,8 +1436,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfDateTime to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,DateTimeOffset} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutDateTimeRfc1123ValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeRfc1123Valid");
@@ -1436,8 +1455,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfDateTime to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,DateTimeOffset} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutDateTimeRfc1123Valid(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeRfc1123Valid");
@@ -1488,8 +1508,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfDuration to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,TimeSpan} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutDurationValidAsync(IDictionary<string, TimeSpan> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDurationValid");
@@ -1506,8 +1527,9 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfDuration to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,TimeSpan} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutDurationValid(IDictionary<string, TimeSpan> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDurationValid");
@@ -1558,8 +1580,9 @@ namespace body_dictionary
         }
 
         /// <summary> Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64. </summary>
-        /// <param name="arrayBody"> The DictionaryOfByteArray to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,Byte[]} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutByteValidAsync(IDictionary<string, byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutByteValid");
@@ -1576,8 +1599,9 @@ namespace body_dictionary
         }
 
         /// <summary> Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64. </summary>
-        /// <param name="arrayBody"> The DictionaryOfByteArray to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,Byte[]} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutByteValid(IDictionary<string, byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutByteValid");
@@ -1832,8 +1856,9 @@ namespace body_dictionary
         }
 
         /// <summary> Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfWidget to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,Widget} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutComplexValidAsync(IDictionary<string, Widget> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutComplexValid");
@@ -1850,8 +1875,9 @@ namespace body_dictionary
         }
 
         /// <summary> Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfWidget to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,Widget} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutComplexValid(IDictionary<string, Widget> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutComplexValid");
@@ -2038,8 +2064,9 @@ namespace body_dictionary
         }
 
         /// <summary> Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfpaths1Dxz488DictionaryArrayValidPutRequestbodyContentApplicationJsonSchemaAdditionalproperties to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,IList{string}} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutArrayValidAsync(IDictionary<string, IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutArrayValid");
@@ -2056,8 +2083,9 @@ namespace body_dictionary
         }
 
         /// <summary> Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfpaths1Dxz488DictionaryArrayValidPutRequestbodyContentApplicationJsonSchemaAdditionalproperties to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,IList{string}} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutArrayValid(IDictionary<string, IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutArrayValid");
@@ -2244,8 +2272,9 @@ namespace body_dictionary
         }
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfString to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,IDictionary{string,string}} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutDictionaryValidAsync(IDictionary<string, IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDictionaryValid");
@@ -2262,8 +2291,9 @@ namespace body_dictionary
         }
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfString to use. </param>
+        /// <param name="arrayBody"> The IDictionary{string,IDictionary{string,string}} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutDictionaryValid(IDictionary<string, IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDictionaryValid");

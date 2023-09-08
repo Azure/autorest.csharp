@@ -13,7 +13,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
-    unionProperty = new {},
+    unionProperty = new object(),
 };
 
 Response response = await client.UnionInRequestPropertyAsync(RequestContent.Create(data));
@@ -29,7 +29,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
-    unionProperty = new {},
+    unionProperty = new object(),
 };
 
 Response response = client.UnionInRequestProperty(RequestContent.Create(data));
@@ -66,7 +66,7 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 var data = new {
     name = "<name>",
     age = 1234,
-    size = 123.45d,
+    size = 3.14d,
 };
 
 Response response = await client.UnionInResponsePropertyAsync(RequestContent.Create(data));
@@ -101,7 +101,7 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 var data = new {
     name = "<name>",
     age = 1234,
-    size = 123.45d,
+    size = 3.14d,
 };
 
 Response response = client.UnionInResponseProperty(RequestContent.Create(data));
@@ -124,7 +124,7 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
     name = "<name>",
-    unionProperty = new {},
+    unionProperty = new object(),
 };
 
 Response response = await client.UnionWithSelfReferenceAsync(RequestContent.Create(data));
@@ -141,7 +141,7 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
     name = "<name>",
-    unionProperty = new {},
+    unionProperty = new object(),
 };
 
 Response response = client.UnionWithSelfReference(RequestContent.Create(data));
@@ -179,9 +179,9 @@ var data = new {
             something = "<something>",
             reference = new {
                 name = "<name>",
-                unionProperty = new {},
+                unionProperty = new object(),
             },
-            unionProperty = new {},
+            unionProperty = new object(),
         }
     },
 };
@@ -217,9 +217,9 @@ var data = new {
             something = "<something>",
             reference = new {
                 name = "<name>",
-                unionProperty = new {},
+                unionProperty = new object(),
             },
-            unionProperty = new {},
+            unionProperty = new object(),
         }
     },
 };
@@ -280,7 +280,7 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
     name = "<name>",
-    id = 3.141592,
+    id = 3.141592F,
 };
 
 Response response = await client.LiteralOfFloatAsync(RequestContent.Create(data));
@@ -297,7 +297,7 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
     name = "<name>",
-    id = 3.141592,
+    id = 3.141592F,
 };
 
 Response response = client.LiteralOfFloat(RequestContent.Create(data));
@@ -384,7 +384,7 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
     woof = "<woof>",
-    color = new {},
+    color = new object(),
     kind = "dog",
     name = "<name>",
 };
@@ -406,7 +406,7 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
     woof = "<woof>",
-    color = new {},
+    color = new object(),
     kind = "dog",
     name = "<name>",
 };
@@ -432,7 +432,7 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
     woof = "<woof>",
-    color = new {},
+    color = new object(),
     kind = "dog",
     name = "<name>",
 };
@@ -456,7 +456,7 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
     woof = "<woof>",
-    color = new {},
+    color = new object(),
     kind = "dog",
     name = "<name>",
 };
@@ -545,7 +545,7 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 var data = new {
     age = 1234,
     name = "<name>",
-    size = 123.45d,
+    size = 3.14d,
 };
 
 Response response = await client.UseDerivedModelAsync(RequestContent.Create(data));
@@ -575,7 +575,7 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 var data = new {
     age = 1234,
     name = "<name>",
-    size = 123.45d,
+    size = 3.14d,
 };
 
 Response response = client.UseDerivedModel(RequestContent.Create(data));
@@ -595,7 +595,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
-    unionProperty = new {},
+    unionProperty = new object(),
     name = "<name>",
 };
 
@@ -608,9 +608,9 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
-    unionProperty = new {},
+    unionProperty = new object(),
     name = "<name>",
-    size = 123.45d,
+    size = 3.14d,
 };
 
 Response response = await client.UseDerivedModelWithUnionAsync(RequestContent.Create(data));
@@ -626,7 +626,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
-    unionProperty = new {},
+    unionProperty = new object(),
     name = "<name>",
 };
 
@@ -639,9 +639,9 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
-    unionProperty = new {},
+    unionProperty = new object(),
     name = "<name>",
-    size = 123.45d,
+    size = 3.14d,
 };
 
 Response response = client.UseDerivedModelWithUnion(RequestContent.Create(data));

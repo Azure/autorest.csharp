@@ -25,9 +25,18 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         /// <summary> Initializes a new instance of Eagle. </summary>
         /// <param name="kind"></param>
         /// <param name="wingspan"></param>
-        /// <param name="friends"></param>
-        /// <param name="hate"></param>
-        /// <param name="partner"></param>
+        /// <param name="friends">
+        /// Please note <see cref="Bird"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="SeaGull"/>, <see cref="Sparrow"/>, <see cref="Goose"/> and <see cref="Eagle"/>.
+        /// </param>
+        /// <param name="hate">
+        /// Please note <see cref="Bird"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="SeaGull"/>, <see cref="Sparrow"/>, <see cref="Goose"/> and <see cref="Eagle"/>.
+        /// </param>
+        /// <param name="partner">
+        /// Please note <see cref="Bird"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="SeaGull"/>, <see cref="Sparrow"/>, <see cref="Goose"/> and <see cref="Eagle"/>.
+        /// </param>
         internal Eagle(string kind, int wingspan, IList<Bird> friends, IDictionary<string, Bird> hate, Bird partner) : base(kind, wingspan)
         {
             Friends = friends;

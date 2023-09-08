@@ -222,7 +222,7 @@ var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRules
 
 var data = new {
     advancedResourceSet = new {
-        modifiedAt = "2022-05-10T18:57:31.2311892Z",
+        modifiedAt = "2022-05-10T14:14:57.0310000Z",
         resourceSetProcessing = "Default",
     },
     pathPatternConfig = new {
@@ -276,7 +276,7 @@ var data = new {
                     regexStr = "<regexStr>",
                 },
                 replaceWith = "<replaceWith>",
-                version = 123.45d,
+                version = 3.14d,
             }
         },
         regexReplacers = new[] {
@@ -461,7 +461,7 @@ var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRules
 
 var data = new {
     advancedResourceSet = new {
-        modifiedAt = "2022-05-10T18:57:31.2311892Z",
+        modifiedAt = "2022-05-10T14:14:57.0310000Z",
         resourceSetProcessing = "Default",
     },
     pathPatternConfig = new {
@@ -515,7 +515,7 @@ var data = new {
                     regexStr = "<regexStr>",
                 },
                 replaceWith = "<replaceWith>",
-                version = 123.45d,
+                version = 3.14d,
             }
         },
         regexReplacers = new[] {

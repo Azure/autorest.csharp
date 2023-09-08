@@ -54,7 +54,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                return (await RestClient.CheckKeysAsync(name, after, acceptDatetime, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.CheckKeysAsync(name, after, acceptDatetime, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -74,7 +74,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                return RestClient.CheckKeys(name, after, acceptDatetime, cancellationToken).GetRawResponse();
+                return RestClient.CheckKeys(name, after, acceptDatetime, cancellationToken);
             }
             catch (Exception e)
             {
@@ -96,7 +96,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                return (await RestClient.CheckKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.CheckKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -118,7 +118,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                return RestClient.CheckKeyValues(key, label, after, acceptDatetime, select, cancellationToken).GetRawResponse();
+                return RestClient.CheckKeyValues(key, label, after, acceptDatetime, select, cancellationToken);
             }
             catch (Exception e)
             {
@@ -135,6 +135,7 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource's etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response<KeyValue>> GetKeyValueAsync(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Get7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.GetKeyValue");
@@ -158,6 +159,7 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource's etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<KeyValue> GetKeyValue(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Get7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.GetKeyValue");
@@ -180,6 +182,7 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource's etag does not match the value provided. </param>
         /// <param name="entity"> The key-value to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response<KeyValue>> PutKeyValueAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.PutKeyValue");
@@ -202,6 +205,7 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource's etag does not match the value provided. </param>
         /// <param name="entity"> The key-value to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<KeyValue> PutKeyValue(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.PutKeyValue");
@@ -222,6 +226,7 @@ namespace AppConfiguration
         /// <param name="label"> The label of the key-value to delete. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource's etag matches the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response<KeyValue>> DeleteKeyValueAsync(string key, string label = null, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.DeleteKeyValue");
@@ -242,6 +247,7 @@ namespace AppConfiguration
         /// <param name="label"> The label of the key-value to delete. </param>
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource's etag matches the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<KeyValue> DeleteKeyValue(string key, string label = null, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.DeleteKeyValue");
@@ -265,13 +271,14 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource's etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response> CheckKeyValueAsync(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.CheckKeyValue");
             scope.Start();
             try
             {
-                return (await RestClient.CheckKeyValueAsync(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.CheckKeyValueAsync(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -288,13 +295,14 @@ namespace AppConfiguration
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource's etag does not match the value provided. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response CheckKeyValue(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.CheckKeyValue");
             scope.Start();
             try
             {
-                return RestClient.CheckKeyValue(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).GetRawResponse();
+                return RestClient.CheckKeyValue(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken);
             }
             catch (Exception e)
             {
@@ -315,7 +323,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                return (await RestClient.CheckLabelsAsync(name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.CheckLabelsAsync(name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -336,7 +344,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                return RestClient.CheckLabels(name, after, acceptDatetime, select, cancellationToken).GetRawResponse();
+                return RestClient.CheckLabels(name, after, acceptDatetime, select, cancellationToken);
             }
             catch (Exception e)
             {
@@ -351,6 +359,7 @@ namespace AppConfiguration
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource's etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource's etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response<KeyValue>> PutLockAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.PutLock");
@@ -372,6 +381,7 @@ namespace AppConfiguration
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource's etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource's etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<KeyValue> PutLock(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.PutLock");
@@ -393,6 +403,7 @@ namespace AppConfiguration
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource's etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource's etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual async Task<Response<KeyValue>> DeleteLockAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.DeleteLock");
@@ -414,6 +425,7 @@ namespace AppConfiguration
         /// <param name="ifMatch"> Used to perform an operation only if the targeted resource's etag matches the value provided. </param>
         /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource's etag does not match the value provided. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<KeyValue> DeleteLock(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AppConfigurationClient.DeleteLock");
@@ -442,7 +454,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                return (await RestClient.CheckRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.CheckRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -464,7 +476,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                return RestClient.CheckRevisions(key, label, after, acceptDatetime, select, cancellationToken).GetRawResponse();
+                return RestClient.CheckRevisions(key, label, after, acceptDatetime, select, cancellationToken);
             }
             catch (Exception e)
             {

@@ -99,7 +99,7 @@ This sample shows how to call PutAllAsync with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetStringClient("1.0.0");
 
-var body = new StringProperty()
+var body = new StringProperty
 {
     Property = "<Property>",
 };
@@ -113,7 +113,7 @@ This sample shows how to call PutAll with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetStringClient("1.0.0");
 
-var body = new StringProperty()
+var body = new StringProperty
 {
     Property = "<Property>",
 };
@@ -175,7 +175,7 @@ This sample shows how to call PutDefaultAsync with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetStringClient("1.0.0");
 
-var body = new StringProperty()
+var body = new StringProperty
 {
     Property = "<Property>",
 };
@@ -189,7 +189,7 @@ This sample shows how to call PutDefault with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetStringClient("1.0.0");
 
-var body = new StringProperty()
+var body = new StringProperty
 {
     Property = "<Property>",
 };

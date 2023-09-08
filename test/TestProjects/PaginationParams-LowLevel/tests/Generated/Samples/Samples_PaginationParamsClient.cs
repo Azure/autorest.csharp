@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using PaginationParams_LowLevel;
 
 namespace PaginationParams_LowLevel.Samples
 {
@@ -86,7 +87,7 @@ namespace PaginationParams_LowLevel.Samples
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
-            foreach (var item in client.Get2s(1234, 1234, 1234, new RequestContext()))
+            foreach (var item in client.Get2s(1234, 1234, 1234L, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -100,7 +101,7 @@ namespace PaginationParams_LowLevel.Samples
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
-            foreach (var item in client.Get2s(1234, 1234, 1234, new RequestContext()))
+            foreach (var item in client.Get2s(1234, 1234, 1234L, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
@@ -116,7 +117,7 @@ namespace PaginationParams_LowLevel.Samples
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
-            await foreach (var item in client.Get2sAsync(1234, 1234, 1234, new RequestContext()))
+            await foreach (var item in client.Get2sAsync(1234, 1234, 1234L, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -130,7 +131,7 @@ namespace PaginationParams_LowLevel.Samples
             var credential = new DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
-            await foreach (var item in client.Get2sAsync(1234, 1234, 1234, new RequestContext()))
+            await foreach (var item in client.Get2sAsync(1234, 1234, 1234L, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());

@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using dpg_update1_LowLevel;
 
 namespace dpg_update1_LowLevel.Samples
 {

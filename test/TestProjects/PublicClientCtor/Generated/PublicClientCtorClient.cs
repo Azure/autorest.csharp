@@ -91,6 +91,7 @@ namespace PublicClientCtor
 
         /// <param name="value"> The TestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual async Task<Response> OperationAsync(TestModel value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PublicClientCtorClient.Operation");
@@ -108,6 +109,7 @@ namespace PublicClientCtor
 
         /// <param name="value"> The TestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual Response Operation(TestModel value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PublicClientCtorClient.Operation");

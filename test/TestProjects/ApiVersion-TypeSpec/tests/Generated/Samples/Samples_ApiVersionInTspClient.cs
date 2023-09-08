@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-using ApiVersionInTsp.Models;
+using ApiVersionInTsp;
 using Azure;
 using Azure.Core;
 using Azure.Identity;

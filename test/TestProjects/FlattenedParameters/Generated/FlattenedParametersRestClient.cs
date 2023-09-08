@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using FlattenedParameters.Models;
 
 namespace FlattenedParameters
 {
@@ -47,17 +46,31 @@ namespace FlattenedParameters
             uri.AppendPath("/Operation/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema()
-            {
-                Items = items?.ToList()
-            };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteStartObject();
+            if (Optional.IsCollectionDefined(items))
+            {
+                if (items != null)
+                {
+                    content.JsonWriter.WritePropertyName("items"u8);
+                    content.JsonWriter.WriteStartArray();
+                    foreach (var item in items)
+                    {
+                        content.JsonWriter.WriteStringValue(item);
+                    }
+                    content.JsonWriter.WriteEndArray();
+                }
+                else
+                {
+                    content.JsonWriter.WriteNull("items");
+                }
+            }
+            content.JsonWriter.WriteEndObject();
             request.Content = content;
             return message;
         }
 
-        /// <param name="items"> The PatchContentSchemaItems to use. </param>
+        /// <param name="items"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> OperationAsync(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -72,7 +85,7 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="items"> The PatchContentSchemaItems to use. </param>
+        /// <param name="items"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Operation(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -97,22 +110,28 @@ namespace FlattenedParameters
             uri.AppendPath("/OperationNotNull/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema pathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema = new PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema();
-            if (items != null)
+            if (items == null || !items.Any())
             {
-                foreach (var value in items)
-                {
-                    pathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema.Items.Add(value);
-                }
+                items = new ChangeTrackingList<string>();
             }
-            var model = pathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema;
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteStartObject();
+            if (Optional.IsCollectionDefined(items))
+            {
+                content.JsonWriter.WritePropertyName("items"u8);
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in items)
+                {
+                    content.JsonWriter.WriteStringValue(item);
+                }
+                content.JsonWriter.WriteEndArray();
+            }
+            content.JsonWriter.WriteEndObject();
             request.Content = content;
             return message;
         }
 
-        /// <param name="items"> The ArrayOfString to use. </param>
+        /// <param name="items"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> OperationNotNullAsync(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -127,7 +146,7 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="items"> The ArrayOfString to use. </param>
+        /// <param name="items"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response OperationNotNull(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -152,13 +171,22 @@ namespace FlattenedParameters
             uri.AppendPath("/OperationNotRequired/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema()
-            {
-                Required = required,
-                NonRequired = nonRequired
-            };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteStartObject();
+            content.JsonWriter.WritePropertyName("flattened"u8);
+            content.JsonWriter.WriteStartObject();
+            if (Optional.IsDefined(required))
+            {
+                content.JsonWriter.WritePropertyName("required"u8);
+                content.JsonWriter.WriteStringValue(required);
+            }
+            if (Optional.IsDefined(nonRequired))
+            {
+                content.JsonWriter.WritePropertyName("non_required"u8);
+                content.JsonWriter.WriteStringValue(nonRequired);
+            }
+            content.JsonWriter.WriteEndObject();
+            content.JsonWriter.WriteEndObject();
             request.Content = content;
             return message;
         }
@@ -205,12 +233,19 @@ namespace FlattenedParameters
             uri.AppendPath("/OperationRequired/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(required)
-            {
-                NonRequired = nonRequired
-            };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteStartObject();
+            content.JsonWriter.WritePropertyName("flattened"u8);
+            content.JsonWriter.WriteStartObject();
+            content.JsonWriter.WritePropertyName("required"u8);
+            content.JsonWriter.WriteStringValue(required);
+            if (Optional.IsDefined(nonRequired))
+            {
+                content.JsonWriter.WritePropertyName("non_required"u8);
+                content.JsonWriter.WriteStringValue(nonRequired);
+            }
+            content.JsonWriter.WriteEndObject();
+            content.JsonWriter.WriteEndObject();
             request.Content = content;
             return message;
         }

@@ -462,7 +462,7 @@ namespace paging_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxpagesize"> Max page size query param. Don't send. The default value is "5". </param>
+        /// <param name="maxpagesize"> Max page size query param. Don't send. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. Allowed values: "5". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -484,7 +484,7 @@ namespace paging_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxpagesize"> Max page size query param. Don't send. The default value is "5". </param>
+        /// <param name="maxpagesize"> Max page size query param. Don't send. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. Allowed values: "5". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -1356,7 +1356,7 @@ namespace paging_LowLevel
             uri.AppendPath("/paging/multiple", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("client-request-id", request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1441,7 +1441,7 @@ namespace paging_LowLevel
             uri.AppendPath("/paging/multiple/odata", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("client-request-id", request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1464,7 +1464,7 @@ namespace paging_LowLevel
             uri.AppendPath(offset, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("client-request-id", request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1581,7 +1581,7 @@ namespace paging_LowLevel
             uri.AppendPath("/paging/multiple/lro", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("client-request-id", request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1743,7 +1743,7 @@ namespace paging_LowLevel
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("client-request-id", request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1791,7 +1791,7 @@ namespace paging_LowLevel
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("client-request-id", request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1813,7 +1813,7 @@ namespace paging_LowLevel
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("client-request-id", request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1890,6 +1890,28 @@ namespace paging_LowLevel
             return message;
         }
 
+        internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string nextLink, int? maxresults, int? timeout, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("client-request-id", request.ClientRequestId);
+            if (maxresults != null)
+            {
+                request.Headers.Add("maxresults", maxresults.Value);
+            }
+            if (timeout != null)
+            {
+                request.Headers.Add("timeout", timeout.Value);
+            }
+            return message;
+        }
+
         internal HttpMessage CreateAppendApiVersionNextPageRequest(string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -1926,28 +1948,6 @@ namespace paging_LowLevel
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string nextLink, int? maxresults, int? timeout, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
-            if (maxresults != null)
-            {
-                request.Headers.Add("maxresults", maxresults.Value);
-            }
-            if (timeout != null)
-            {
-                request.Headers.Add("timeout", timeout.Value);
-            }
             return message;
         }
 

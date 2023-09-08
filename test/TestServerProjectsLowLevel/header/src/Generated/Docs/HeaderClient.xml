@@ -152,7 +152,7 @@ This sample shows how to call ParamLongAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamLongAsync("<scenario>", 1234);
+Response response = await client.ParamLongAsync("<scenario>", 1234L);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -164,7 +164,7 @@ This sample shows how to call ParamLong with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = client.ParamLong("<scenario>", 1234);
+Response response = client.ParamLong("<scenario>", 1234L);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -248,7 +248,7 @@ This sample shows how to call ParamDoubleAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamDoubleAsync("<scenario>", 3.14);
+Response response = await client.ParamDoubleAsync("<scenario>", 3.14d);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -260,7 +260,7 @@ This sample shows how to call ParamDouble with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = client.ParamDouble("<scenario>", 3.14);
+Response response = client.ParamDouble("<scenario>", 3.14d);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -568,7 +568,7 @@ This sample shows how to call ParamDurationAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamDurationAsync("<scenario>", new TimeSpan(1, 2, 3));
+Response response = await client.ParamDurationAsync("<scenario>", new TimeSpan(1, 23, 45));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -580,7 +580,7 @@ This sample shows how to call ParamDuration with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = client.ParamDuration("<scenario>", new TimeSpan(1, 2, 3));
+Response response = client.ParamDuration("<scenario>", new TimeSpan(1, 23, 45));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

@@ -99,12 +99,12 @@ This sample shows how to call PutAllAsync with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
-var body = new CollectionsModelProperty()
+var body = new CollectionsModelProperty
 {
-    Property = 
-{
-        new StringProperty()
-{
+    Property =
+    {
+        new StringProperty
+        {
             Property = "<Property>",
         }
     },
@@ -119,12 +119,12 @@ This sample shows how to call PutAll with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
-var body = new CollectionsModelProperty()
+var body = new CollectionsModelProperty
 {
-    Property = 
-{
-        new StringProperty()
-{
+    Property =
+    {
+        new StringProperty
+        {
             Property = "<Property>",
         }
     },
@@ -195,12 +195,12 @@ This sample shows how to call PutDefaultAsync with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
-var body = new CollectionsModelProperty()
+var body = new CollectionsModelProperty
 {
-    Property = 
-{
-        new StringProperty()
-{
+    Property =
+    {
+        new StringProperty
+        {
             Property = "<Property>",
         }
     },
@@ -215,12 +215,12 @@ This sample shows how to call PutDefault with required parameters.
 <code><![CDATA[
 var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
-var body = new CollectionsModelProperty()
+var body = new CollectionsModelProperty
 {
-    Property = 
-{
-        new StringProperty()
-{
+    Property =
+    {
+        new StringProperty
+        {
             Property = "<Property>",
         }
     },

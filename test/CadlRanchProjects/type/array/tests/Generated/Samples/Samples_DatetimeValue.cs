@@ -14,7 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type._Array.Models;
+using _Type._Array;
 
 namespace _Type._Array.Samples
 {
@@ -84,7 +84,7 @@ namespace _Type._Array.Samples
             var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
             var data = new[] {
-    "2022-05-10T14:57:31.2311892-04:00"
+    "2022-05-10T14:14:57.0310000Z"
 };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -98,7 +98,7 @@ namespace _Type._Array.Samples
             var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
             var data = new[] {
-    "2022-05-10T14:57:31.2311892-04:00"
+    "2022-05-10T14:14:57.0310000Z"
 };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -112,7 +112,7 @@ namespace _Type._Array.Samples
             var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
             var data = new[] {
-    "2022-05-10T14:57:31.2311892-04:00"
+    "2022-05-10T14:14:57.0310000Z"
 };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
@@ -126,7 +126,7 @@ namespace _Type._Array.Samples
             var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
             var data = new[] {
-    "2022-05-10T14:57:31.2311892-04:00"
+    "2022-05-10T14:14:57.0310000Z"
 };
 
             Response response = await client.PutAsync(RequestContent.Create(data));

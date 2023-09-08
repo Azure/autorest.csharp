@@ -14,6 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.Optionality;
 using _Type.Property.Optionality.Models;
 
 namespace _Type.Property.Optionality.Samples
@@ -154,7 +155,7 @@ namespace _Type.Property.Optionality.Samples
 
             var data = new
             {
-                property = "2022-05-10T14:57:31.2311892-04:00",
+                property = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.PutAll(RequestContent.Create(data));
@@ -181,7 +182,7 @@ namespace _Type.Property.Optionality.Samples
 
             var data = new
             {
-                property = "2022-05-10T14:57:31.2311892-04:00",
+                property = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = await client.PutAllAsync(RequestContent.Create(data));
@@ -194,7 +195,7 @@ namespace _Type.Property.Optionality.Samples
         {
             var client = new OptionalClient().GetDatetimeClient("1.0.0");
 
-            var body = new DatetimeProperty()
+            var body = new DatetimeProperty
             {
                 Property = DateTimeOffset.UtcNow,
             };
@@ -221,7 +222,7 @@ namespace _Type.Property.Optionality.Samples
 
             var data = new
             {
-                property = "2022-05-10T14:57:31.2311892-04:00",
+                property = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.PutDefault(RequestContent.Create(data));
@@ -248,7 +249,7 @@ namespace _Type.Property.Optionality.Samples
 
             var data = new
             {
-                property = "2022-05-10T14:57:31.2311892-04:00",
+                property = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = await client.PutDefaultAsync(RequestContent.Create(data));
@@ -261,7 +262,7 @@ namespace _Type.Property.Optionality.Samples
         {
             var client = new OptionalClient().GetDatetimeClient("1.0.0");
 
-            var body = new DatetimeProperty()
+            var body = new DatetimeProperty
             {
                 Property = DateTimeOffset.UtcNow,
             };

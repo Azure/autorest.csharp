@@ -79,6 +79,7 @@ namespace required_optional
         /// <summary> Test explicitly required body parameter. </summary>
         /// <param name="bodyParameter"> The Stream to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public virtual async Task<Response> PutRequiredBinaryBodyAsync(Stream bodyParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PutRequiredBinaryBody");
@@ -97,6 +98,7 @@ namespace required_optional
         /// <summary> Test explicitly required body parameter. </summary>
         /// <param name="bodyParameter"> The Stream to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public virtual Response PutRequiredBinaryBody(Stream bodyParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PutRequiredBinaryBody");
@@ -113,7 +115,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required integer. Please put null and the client library should throw before the request is sent. </summary>
-        /// <param name="bodyParameter"> The Int32 to use. </param>
+        /// <param name="bodyParameter"> The int to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostRequiredIntegerParameterAsync(int bodyParameter, CancellationToken cancellationToken = default)
         {
@@ -131,7 +133,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required integer. Please put null and the client library should throw before the request is sent. </summary>
-        /// <param name="bodyParameter"> The Int32 to use. </param>
+        /// <param name="bodyParameter"> The int to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostRequiredIntegerParameter(int bodyParameter, CancellationToken cancellationToken = default)
         {
@@ -149,7 +151,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional integer. Please put null. </summary>
-        /// <param name="bodyParameter"> The Int32 to use. </param>
+        /// <param name="bodyParameter"> The int? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostOptionalIntegerParameterAsync(int? bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -167,7 +169,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional integer. Please put null. </summary>
-        /// <param name="bodyParameter"> The Int32 to use. </param>
+        /// <param name="bodyParameter"> The int? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostOptionalIntegerParameter(int? bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -187,6 +189,7 @@ namespace required_optional
         /// <summary> Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The IntWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public virtual async Task<Response> PostRequiredIntegerPropertyAsync(IntWrapper bodyParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredIntegerProperty");
@@ -205,6 +208,7 @@ namespace required_optional
         /// <summary> Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The IntWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public virtual Response PostRequiredIntegerProperty(IntWrapper bodyParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredIntegerProperty");
@@ -257,7 +261,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent. </summary>
-        /// <param name="headerParameter"> The Int32 to use. </param>
+        /// <param name="headerParameter"> The int to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostRequiredIntegerHeaderAsync(int headerParameter, CancellationToken cancellationToken = default)
         {
@@ -275,7 +279,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent. </summary>
-        /// <param name="headerParameter"> The Int32 to use. </param>
+        /// <param name="headerParameter"> The int to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostRequiredIntegerHeader(int headerParameter, CancellationToken cancellationToken = default)
         {
@@ -293,7 +297,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null. </summary>
-        /// <param name="headerParameter"> The Int32 to use. </param>
+        /// <param name="headerParameter"> The int? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostOptionalIntegerHeaderAsync(int? headerParameter = null, CancellationToken cancellationToken = default)
         {
@@ -311,7 +315,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null. </summary>
-        /// <param name="headerParameter"> The Int32 to use. </param>
+        /// <param name="headerParameter"> The int? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostOptionalIntegerHeader(int? headerParameter = null, CancellationToken cancellationToken = default)
         {
@@ -331,6 +335,7 @@ namespace required_optional
         /// <summary> Test explicitly required string. Please put null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public virtual async Task<Response> PostRequiredStringParameterAsync(string bodyParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredStringParameter");
@@ -349,6 +354,7 @@ namespace required_optional
         /// <summary> Test explicitly required string. Please put null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public virtual Response PostRequiredStringParameter(string bodyParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredStringParameter");
@@ -403,6 +409,7 @@ namespace required_optional
         /// <summary> Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The StringWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public virtual async Task<Response> PostRequiredStringPropertyAsync(StringWrapper bodyParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredStringProperty");
@@ -421,6 +428,7 @@ namespace required_optional
         /// <summary> Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The StringWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public virtual Response PostRequiredStringProperty(StringWrapper bodyParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredStringProperty");
@@ -475,6 +483,7 @@ namespace required_optional
         /// <summary> Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent. </summary>
         /// <param name="headerParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="headerParameter"/> is null. </exception>
         public virtual async Task<Response> PostRequiredStringHeaderAsync(string headerParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredStringHeader");
@@ -493,6 +502,7 @@ namespace required_optional
         /// <summary> Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent. </summary>
         /// <param name="headerParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="headerParameter"/> is null. </exception>
         public virtual Response PostRequiredStringHeader(string headerParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredStringHeader");
@@ -547,6 +557,7 @@ namespace required_optional
         /// <summary> Test explicitly required complex object. Please put null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public virtual async Task<Response> PostRequiredClassParameterAsync(Product bodyParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredClassParameter");
@@ -565,6 +576,7 @@ namespace required_optional
         /// <summary> Test explicitly required complex object. Please put null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public virtual Response PostRequiredClassParameter(Product bodyParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredClassParameter");
@@ -619,6 +631,7 @@ namespace required_optional
         /// <summary> Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The ClassWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public virtual async Task<Response> PostRequiredClassPropertyAsync(ClassWrapper bodyParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredClassProperty");
@@ -637,6 +650,7 @@ namespace required_optional
         /// <summary> Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The ClassWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public virtual Response PostRequiredClassProperty(ClassWrapper bodyParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredClassProperty");
@@ -689,8 +703,9 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required array. Please put null and the client library should throw before the request is sent. </summary>
-        /// <param name="bodyParameter"> The ArrayOfPostContentSchemaItem to use. </param>
+        /// <param name="bodyParameter"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public virtual async Task<Response> PostRequiredArrayParameterAsync(IEnumerable<string> bodyParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredArrayParameter");
@@ -707,8 +722,9 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required array. Please put null and the client library should throw before the request is sent. </summary>
-        /// <param name="bodyParameter"> The ArrayOfPostContentSchemaItem to use. </param>
+        /// <param name="bodyParameter"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public virtual Response PostRequiredArrayParameter(IEnumerable<string> bodyParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredArrayParameter");
@@ -725,7 +741,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional array. Please put null. </summary>
-        /// <param name="bodyParameter"> The ArrayOfString to use. </param>
+        /// <param name="bodyParameter"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostOptionalArrayParameterAsync(IEnumerable<string> bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -743,7 +759,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional array. Please put null. </summary>
-        /// <param name="bodyParameter"> The ArrayOfString to use. </param>
+        /// <param name="bodyParameter"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostOptionalArrayParameter(IEnumerable<string> bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -763,6 +779,7 @@ namespace required_optional
         /// <summary> Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The ArrayWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public virtual async Task<Response> PostRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredArrayProperty");
@@ -781,6 +798,7 @@ namespace required_optional
         /// <summary> Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The ArrayWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public virtual Response PostRequiredArrayProperty(ArrayWrapper bodyParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredArrayProperty");
@@ -833,8 +851,9 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent. </summary>
-        /// <param name="headerParameter"> The ArrayOfPost0ItemsItem to use. </param>
+        /// <param name="headerParameter"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="headerParameter"/> is null. </exception>
         public virtual async Task<Response> PostRequiredArrayHeaderAsync(IEnumerable<string> headerParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredArrayHeader");
@@ -851,8 +870,9 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent. </summary>
-        /// <param name="headerParameter"> The ArrayOfPost0ItemsItem to use. </param>
+        /// <param name="headerParameter"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="headerParameter"/> is null. </exception>
         public virtual Response PostRequiredArrayHeader(IEnumerable<string> headerParameter, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExplicitClient.PostRequiredArrayHeader");
@@ -869,7 +889,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null. </summary>
-        /// <param name="headerParameter"> The ArrayOfString to use. </param>
+        /// <param name="headerParameter"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostOptionalArrayHeaderAsync(IEnumerable<string> headerParameter = null, CancellationToken cancellationToken = default)
         {
@@ -887,7 +907,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null. </summary>
-        /// <param name="headerParameter"> The ArrayOfString to use. </param>
+        /// <param name="headerParameter"> The IList{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostOptionalArrayHeader(IEnumerable<string> headerParameter = null, CancellationToken cancellationToken = default)
         {

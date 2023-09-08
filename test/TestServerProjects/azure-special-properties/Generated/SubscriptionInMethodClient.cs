@@ -40,6 +40,7 @@ namespace azure_special_properties
         /// <summary> POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed. </summary>
         /// <param name="subscriptionId"> This should appear as a method parameter, use value '1234-5678-9012-3456'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         public virtual async Task<Response> PostMethodLocalValidAsync(string subscriptionId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionInMethodClient.PostMethodLocalValid");
@@ -58,6 +59,7 @@ namespace azure_special_properties
         /// <summary> POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed. </summary>
         /// <param name="subscriptionId"> This should appear as a method parameter, use value '1234-5678-9012-3456'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         public virtual Response PostMethodLocalValid(string subscriptionId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionInMethodClient.PostMethodLocalValid");
@@ -76,6 +78,7 @@ namespace azure_special_properties
         /// <summary> POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call. </summary>
         /// <param name="subscriptionId"> This should appear as a method parameter, use value null, client-side validation should prvenet the call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         public virtual async Task<Response> PostMethodLocalNullAsync(string subscriptionId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionInMethodClient.PostMethodLocalNull");
@@ -94,6 +97,7 @@ namespace azure_special_properties
         /// <summary> POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call. </summary>
         /// <param name="subscriptionId"> This should appear as a method parameter, use value null, client-side validation should prvenet the call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         public virtual Response PostMethodLocalNull(string subscriptionId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionInMethodClient.PostMethodLocalNull");
@@ -112,6 +116,7 @@ namespace azure_special_properties
         /// <summary> POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed. </summary>
         /// <param name="subscriptionId"> Should appear as a method parameter -use value '1234-5678-9012-3456'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         public virtual async Task<Response> PostPathLocalValidAsync(string subscriptionId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionInMethodClient.PostPathLocalValid");
@@ -130,6 +135,7 @@ namespace azure_special_properties
         /// <summary> POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed. </summary>
         /// <param name="subscriptionId"> Should appear as a method parameter -use value '1234-5678-9012-3456'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         public virtual Response PostPathLocalValid(string subscriptionId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionInMethodClient.PostPathLocalValid");
@@ -148,6 +154,7 @@ namespace azure_special_properties
         /// <summary> POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed. </summary>
         /// <param name="subscriptionId"> The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         public virtual async Task<Response> PostSwaggerLocalValidAsync(string subscriptionId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionInMethodClient.PostSwaggerLocalValid");
@@ -166,6 +173,7 @@ namespace azure_special_properties
         /// <summary> POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed. </summary>
         /// <param name="subscriptionId"> The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         public virtual Response PostSwaggerLocalValid(string subscriptionId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionInMethodClient.PostSwaggerLocalValid");

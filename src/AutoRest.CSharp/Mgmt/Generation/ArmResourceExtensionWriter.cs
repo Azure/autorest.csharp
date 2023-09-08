@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 Description: $"The scope that the resource will apply against.",
                 Type: typeof(ResourceIdentifier),
                 DefaultValue: null,
-                Validation: ValidationType.None,
+                Validation: Validation.None,
                 Initializer: null);
         }
 

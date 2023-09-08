@@ -57,7 +57,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The DurationISO8601 to use. </param>
+        /// <param name="input"> The TimeSpan to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -89,7 +89,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The DurationISO8601 to use. </param>
+        /// <param name="input"> The TimeSpan to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -121,7 +121,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The DurationISO8601 to use. </param>
+        /// <param name="input"> The TimeSpan to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -153,7 +153,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The DurationISO8601 to use. </param>
+        /// <param name="input"> The TimeSpan to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -185,7 +185,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The DurationSeconds to use. </param>
+        /// <param name="input"> The TimeSpan to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -217,7 +217,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The DurationSeconds to use. </param>
+        /// <param name="input"> The TimeSpan to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -249,7 +249,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The DurationSecondsFloat to use. </param>
+        /// <param name="input"> The TimeSpan to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -281,7 +281,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The DurationSecondsFloat to use. </param>
+        /// <param name="input"> The TimeSpan to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -313,7 +313,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The Array to use. </param>
+        /// <param name="input"> The IList{TimeSpan} to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -348,7 +348,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The Array to use. </param>
+        /// <param name="input"> The IList{TimeSpan} to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -440,10 +440,7 @@ namespace Encode.Duration
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/duration/query/int32-seconds-array", false);
-            if (input != null && Optional.IsCollectionDefined(input))
-            {
-                uri.AppendQueryDelimited("input", input, ",", "%s", true);
-            }
+            uri.AppendQueryDelimited("input", input, ",", "%s", true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
