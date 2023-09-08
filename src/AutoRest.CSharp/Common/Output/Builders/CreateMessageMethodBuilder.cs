@@ -7,7 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Responses;
@@ -15,6 +14,7 @@ using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
@@ -24,7 +24,7 @@ using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
-namespace AutoRest.CSharp.Output.Models
+namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal class CreateMessageMethodBuilder
     {

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
@@ -77,20 +78,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private IReadOnlyList<Parameter> BuildNextLinkOperationCreateMessageParameters(InputOperation nextLinkOperation)
-        {
-            var builder = new MethodParametersBuilder(nextLinkOperation, _typeFactory);
-            if (Configuration.AzureArm)
-            {
-                return builder.BuildParametersLegacy(false).CreateMessage;
-            }
-
-            if (Configuration.Generation1ConvenienceClient)
-            {
-                return builder.BuildParametersLegacy(true).CreateMessage;
-            }
-
-            return builder.BuildParameters(_clientName, _clientNamespace).CreateMessage;
-        }
+            => new MethodParametersBuilder(nextLinkOperation, _typeFactory).BuildParameters().CreateMessage;
 
         protected override MethodBodyStatement? BuildCreateNextPageMessageMethodBody(CreateMessageMethodBuilder builder, MethodSignature signature)
         {

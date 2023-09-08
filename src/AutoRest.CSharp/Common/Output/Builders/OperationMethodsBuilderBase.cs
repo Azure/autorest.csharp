@@ -16,6 +16,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
@@ -23,7 +24,7 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
-namespace AutoRest.CSharp.Output.Models
+namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal abstract class OperationMethodsBuilderBase
     {
@@ -92,7 +93,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public RestClientOperationMethods BuildDpg()
         {
-            var parameters = _parametersBuilder.BuildParameters(_clientNamespace, _clientName);
+            var parameters = _parametersBuilder.BuildParameters();
 
             var convenienceMethodIsMeaningless = parameters.Convenience.Where(p => p != KnownParameters.CancellationTokenParameter)
                 .SequenceEqual(parameters.Protocol.Where(p => p != KnownParameters.RequestContext)) && ConvenienceMethodReturnType.Equals(ProtocolMethodReturnType);
@@ -174,7 +175,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public RestClientOperationMethods BuildLegacy()
         {
-            var parameters = _parametersBuilder.BuildParametersLegacy(!Configuration.AzureArm);
+            var parameters = _parametersBuilder.BuildParameters();
             var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, parameters.CreateMessage, null);
 
             var createRequestMessageMethod = BuildCreateRequestMethod(parameters.CreateMessage, createMessageBuilder);

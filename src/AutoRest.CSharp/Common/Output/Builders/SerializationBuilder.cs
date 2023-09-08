@@ -11,6 +11,7 @@ using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
@@ -18,11 +19,10 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Models;
 
-namespace AutoRest.CSharp.Output.Builders
+namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal class SerializationBuilder
     {
-
         public static SerializationFormat GetDefaultSerializationFormat(CSharpType type)
         {
             if (type.EqualsIgnoreNullable(typeof(byte[])))

@@ -3,19 +3,19 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
-namespace AutoRest.CSharp.Output.Models
+namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal class OperationMethodsBuilder : NonPagingOperationMethodsBuilderBase
     {

@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
@@ -14,6 +13,7 @@ using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -22,7 +22,7 @@ using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
-namespace AutoRest.CSharp.Output.Models
+namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal class MethodParametersBuilder
     {
@@ -68,9 +68,19 @@ namespace AutoRest.CSharp.Output.Models
                 .ToArray();
         }
 
-        public RestClientMethodParameters BuildParameters(string clientNamespace, string clientName)
+        public RestClientMethodParameters BuildParameters()
         {
-            var sortedParameters = GetSortedParameters(_operation, _unsortedParameters);
+            if (Configuration.AzureArm)
+            {
+                return BuildParametersLegacy(GetSortedParameters());
+            }
+
+            if (Configuration.Generation1ConvenienceClient)
+            {
+                return BuildParametersLegacy(GetLegacySortedParameters());
+            }
+
+            var sortedParameters = GetSortedParameters();
             var requestConditionHeaders = RequestConditionHeaders.None;
             var requestConditionSerializationFormat = SerializationFormat.Default;
             InputParameter? requestConditionRequestParameter = null;
@@ -119,12 +129,8 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
-        public RestClientMethodParameters BuildParametersLegacy(bool legacyParameterSorting)
+        private RestClientMethodParameters BuildParametersLegacy(IEnumerable<InputParameter> sortedParameters)
         {
-            var sortedParameters = legacyParameterSorting
-                ? GetLegacySortedParameters(_unsortedParameters)
-                : GetSortedParameters(_operation, _unsortedParameters);
-
             var parameters = new Dictionary<InputParameter, Parameter?>();
             foreach (var inputParameter in sortedParameters)
             {
@@ -519,12 +525,12 @@ namespace AutoRest.CSharp.Output.Models
             };
         }
 
-        private static IEnumerable<InputParameter> GetLegacySortedParameters(IEnumerable<InputParameter> inputParameters)
-            => inputParameters.OrderByDescending(p => p is { IsRequired: true, DefaultValue: null });
+        private IEnumerable<InputParameter> GetLegacySortedParameters()
+            => _unsortedParameters.OrderByDescending(p => p is { IsRequired: true, DefaultValue: null });
 
-        private static IEnumerable<InputParameter> GetSortedParameters(InputOperation operation, IEnumerable<InputParameter> inputParameters)
+        private IEnumerable<InputParameter> GetSortedParameters()
         {
-            var keepCurrentDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(operation.Name);
+            var keepCurrentDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(_operation.Name);
             var uriOrPathParameters = new Dictionary<string, InputParameter>();
             var requiredRequestParameters = new List<InputParameter>();
             var optionalRequestParameters = new List<InputParameter>();
@@ -532,7 +538,7 @@ namespace AutoRest.CSharp.Output.Models
             InputParameter? bodyParameter = null;
             InputParameter? contentTypeRequestParameter = null;
 
-            foreach (var operationParameter in inputParameters)
+            foreach (var operationParameter in _unsortedParameters)
             {
                 switch (operationParameter)
                 {
@@ -559,8 +565,8 @@ namespace AutoRest.CSharp.Output.Models
 
             var orderedParameters = new List<InputParameter>();
 
-            SortUriOrPathParameters(operation.Uri, uriOrPathParameters, orderedParameters);
-            SortUriOrPathParameters(operation.Path, uriOrPathParameters, orderedParameters);
+            SortUriOrPathParameters(_operation.Uri, uriOrPathParameters, orderedParameters);
+            SortUriOrPathParameters(_operation.Path, uriOrPathParameters, orderedParameters);
             orderedParameters.AddRange(requiredRequestParameters);
             if (bodyParameter is not null)
             {

@@ -3,14 +3,14 @@
 
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 
-namespace AutoRest.CSharp.Output.Models
+namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal class ClientMethodsBuilder
     {

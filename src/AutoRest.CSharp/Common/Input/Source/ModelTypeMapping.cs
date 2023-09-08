@@ -1,12 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Azure.Core;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Input.Source
@@ -39,7 +35,7 @@ namespace AutoRest.CSharp.Input.Source
                     if (codeGenAttributes.TryGetCodeGenMemberAttributeValue(attributeData, out var schemaMemberName))
                     {
                         hasCodeGenMemberAttribute = true;
-                        _propertyMappings.Add(schemaMemberName, member);
+                        _propertyMappings[schemaMemberName] = member;
                     }
 
                     // handle CodeGenMemberSerialization attribute

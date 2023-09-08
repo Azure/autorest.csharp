@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Responses;
@@ -28,7 +27,7 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using Operation = Azure.Operation;
 using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
 
-namespace AutoRest.CSharp.Output.Models
+namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal class StatusCodeSwitchBuilder
     {
