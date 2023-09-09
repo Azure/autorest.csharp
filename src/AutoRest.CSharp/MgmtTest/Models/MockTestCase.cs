@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
                     {
                         // this parameter is not from body which means its type should be primary which means "default" keyword should be able to handle
                         // the default value (also string because we disabled nullable in generated code)
-                        var warning = $"No example value is provided for {this.Name}.{parameter.Name}. Please consider adding a proper example value for it in swagger";
+                        var warning = $"No value is provided for {parameter.Name} in example '{this.Name}'. Please consider adding a proper example value for it in swagger";
                         AutoRestLogger.Warning(warning).Wait();
                         var pv = new ExampleParameterValue(parameter, $"default; /* Warning: {warning}*/");
                         if (Operation.IsPropertyBagOperation && propertyBagParamNames.Contains(parameter.Name))
