@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -100,9 +101,23 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 }
                 if (exampleParameter == null)
                 {
-                    // if this is a required parameter and we did not find the corresponding parameter in the examples, we throw an exception.
+                    // if this is a required parameter and we did not find the corresponding parameter in the examples
                     if (parameter.DefaultValue == null)
-                        throw new InvalidOperationException($"Cannot find an example value for required parameter `{parameter.Name}` in example {Name}");
+                    {
+                        // this parameter is not from body which means its type should be primary which means "default" keyword should be able to handle
+                        // the default value (also string because we disabled nullable in generated code)
+                        var warning = $"No example value is provided for {this.Name}.{parameter.Name}. Please consider adding a proper example value for it in swagger";
+                        AutoRestLogger.Warning(warning).Wait();
+                        var pv = new ExampleParameterValue(parameter, $"default; /* Warning: {warning}*/");
+                        if (Operation.IsPropertyBagOperation && propertyBagParamNames.Contains(parameter.Name))
+                        {
+                            propertyBagMapping.Add(parameter.Name, pv);
+                        }
+                        else
+                        {
+                            result.Add(parameter.Name, pv);
+                        }
+                    }
                     // if it is optional, we just do not put it in the map indicates that in the invocation we could omit it
                 }
                 else
