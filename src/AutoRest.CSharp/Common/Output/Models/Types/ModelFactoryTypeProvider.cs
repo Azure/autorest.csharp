@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -17,7 +16,6 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
-using Humanizer;
 using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
@@ -25,8 +23,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal sealed class ModelFactoryTypeProvider : TypeProvider
     {
-        private SourceInputModel? _sourceInputModel;
-
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
@@ -42,7 +38,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> objectTypes, string defaultClientName, string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
-            _sourceInputModel = sourceInputModel;
             Models = objectTypes;
             DefaultName = $"{defaultClientName}ModelFactory".ToCleanName();
             DefaultAccessibility = "public";
@@ -99,9 +94,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
 
-        protected override TypeProvider? Customization => new ModelFactoryTypeProvider(PopulateMethodsFromCompilation(_sourceInputModel?.Customization));
-
-        protected override TypeProvider? PreviousContract => new ModelFactoryTypeProvider(PopulateMethodsFromCompilation(_sourceInputModel?.PreviousContract));
+        protected override Func<IReadOnlyList<MethodSignature>, TypeProvider>? InstantiateTypeProvider => methods => new ModelFactoryTypeProvider(methods);
 
         protected override IReadOnlyList<MethodSignature> MethodSignatures => Methods;
 
