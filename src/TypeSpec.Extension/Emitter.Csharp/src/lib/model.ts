@@ -29,7 +29,9 @@ import {
     isRecordModelType,
     Scalar,
     Union,
-    getProjectedNames
+    getProjectedNames,
+    isGlobalNamespace,
+    navigateTypesInNamespace
 } from "@typespec/compiler";
 import { getResourceOperation } from "@typespec/rest";
 import {
@@ -359,12 +361,12 @@ export function getInputType(
             }
             extensibleEnum = {
                 Name: m.name,
+                EnumValueType: innerEnum.EnumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
+                AllowedValues: innerEnum.AllowedValues,
                 Namespace: getFullNamespaceString(e.namespace),
                 Accessibility: undefined, //TODO: need to add accessibility
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
-                EnumValueType: innerEnum.EnumValueType,
-                AllowedValues: innerEnum.AllowedValues,
                 IsExtensible: !isFixed(program, e),
                 IsNullable: false
             } as InputEnumType;
@@ -423,12 +425,12 @@ export function getInputType(
             ];
             const enumType = {
                 Name: enumName,
+                EnumValueType: enumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
+                AllowedValues: allowValues,
                 Namespace: literalContext.Namespace,
                 Accessibility: undefined,
                 Deprecated: undefined,
                 Description: `The ${enumName}`, // TODO -- what should we put here?
-                EnumValueType: enumValueType,
-                AllowedValues: allowValues,
                 IsExtensible: true,
                 IsNullable: false
             } as InputEnumType;
@@ -472,12 +474,12 @@ export function getInputType(
 
             enumType = {
                 Name: e.name,
+                EnumValueType: enumValueType, //EnumValueType and  AllowedValues should be the first field after id and name, so that it can be corrected serialized.
+                AllowedValues: allowValues,
                 Namespace: getFullNamespaceString(e.namespace),
                 Accessibility: getAccess(context, e),
                 Deprecated: getDeprecated(program, e),
                 Description: getDoc(program, e) ?? "",
-                EnumValueType: enumValueType,
-                AllowedValues: allowValues,
                 IsExtensible: !isFixed(program, e),
                 IsNullable: false
             } as InputEnumType;
@@ -553,6 +555,12 @@ export function getInputType(
             setUsage(context, m, model);
             models.set(name, model);
 
+            // open generic type model which has un-instanced template parameter will not be generated. e.g.
+            // model GenericModel<T> { value: T }
+            if (m.isFinished) {
+                models.set(name, model);
+            }
+
             // Resolve properties after model is added to the map to resolve possible circular dependencies
             addModelProperties(model, m.properties, properties);
 
@@ -560,13 +568,19 @@ export function getInputType(
             if (m.derivedModels !== undefined && m.derivedModels.length > 0) {
                 model.DerivedModels = [];
                 for (const dm of m.derivedModels) {
-                    const derivedModel = getInputType(
-                        context,
-                        getFormattedType(program, dm),
-                        models,
-                        enums
-                    );
-                    model.DerivedModels.push(derivedModel as InputModelType);
+                    // skip open generic type model which has un-instanced template parameter. e.g.
+                    // model GenericModel<T> { value: T }
+                    if (dm.isFinished) {
+                        const derivedModel = getInputType(
+                            context,
+                            getFormattedType(program, dm),
+                            models,
+                            enums
+                        );
+                        model.DerivedModels.push(
+                            derivedModel as InputModelType
+                        );
+                    }
                 }
             }
         }
@@ -1011,4 +1025,30 @@ export function getFormattedType(program: Program, type: Type): FormattedType {
         format: format,
         encode: encodeData
     } as FormattedType;
+}
+
+// This is a temporary solution. After we uptake getAllModels we should delete this.
+export function navigateModels(
+    context: SdkContext,
+    namespace: Namespace,
+    models: Map<string, InputModelType>,
+    enums: Map<string, InputEnumType>
+) {
+    const computeModel = (x: Type) =>
+        getInputType(
+            context,
+            getFormattedType(context.program, x),
+            models,
+            enums
+        ) as any;
+    const skipSubNamespaces = isGlobalNamespace(context.program, namespace);
+    navigateTypesInNamespace(
+        namespace,
+        {
+            model: (x) =>
+                x.name !== "" && x.name !== "AuthFlow" && x.kind === "Model" && computeModel(x),
+            enum: computeModel
+        },
+        { skipSubNamespaces }
+    );
 }

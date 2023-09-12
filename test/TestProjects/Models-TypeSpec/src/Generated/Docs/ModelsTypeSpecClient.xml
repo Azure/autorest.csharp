@@ -2131,5 +2131,77 @@ Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code>
 </example>
     </member>
+    <member name="GenericTypeAsync(Int32ValuesFacet,CancellationToken)">
+<example>
+This sample shows how to call GenericTypeAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsTypeSpecClient(endpoint);
+
+var input = new Int32ValuesFacet("<field>", new int[] 
+{
+    1234
+}, 1234);
+var result = await client.GenericTypeAsync(input);
+]]></code>
+</example>
+    </member>
+    <member name="GenericType(Int32ValuesFacet,CancellationToken)">
+<example>
+This sample shows how to call GenericType with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsTypeSpecClient(endpoint);
+
+var input = new Int32ValuesFacet("<field>", new int[] 
+{
+    1234
+}, 1234);
+var result = client.GenericType(input);
+]]></code>
+</example>
+    </member>
+    <member name="GenericTypeAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call GenericTypeAsync with required request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsTypeSpecClient(endpoint);
+
+var data = new {
+    kind = "Int32Values",
+    values = new[] {
+        1234
+    },
+    value = 1234,
+    field = "<field>",
+};
+
+Response response = await client.GenericTypeAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GenericType(RequestContent,RequestContext)">
+<example>
+This sample shows how to call GenericType with required request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsTypeSpecClient(endpoint);
+
+var data = new {
+    kind = "Int32Values",
+    values = new[] {
+        1234
+    },
+    value = 1234,
+    field = "<field>",
+};
+
+Response response = client.GenericType(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
   </members>
 </doc>

@@ -48,7 +48,7 @@ import { InputClient } from "../type/inputClient.js";
 import { ClientKind } from "../type/clientKind.js";
 import { InputOperation } from "../type/inputOperation.js";
 import { getOperationLink } from "@azure-tools/typespec-azure-core";
-import { getUsages } from "./model.js";
+import { getUsages, navigateModels } from "./model.js";
 import { Usage } from "../type/usage.js";
 import { loadOperation } from "./operation.js";
 import { mockApiVersion } from "../constants.js";
@@ -215,6 +215,8 @@ export function createModelForService(
             }
         }
     }
+
+    navigateModels(sdkContext, serviceNamespaceType, modelMap, enumMap);
 
     const usages = getUsages(sdkContext, convenienceOperations, modelMap);
     setUsage(usages, modelMap);

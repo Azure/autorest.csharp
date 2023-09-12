@@ -8,8 +8,6 @@
   {
    "$id": "2",
    "Name": "SimpleEnum",
-   "Namespace": "Demo.HelloWorld",
-   "Description": "Simple enum",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -28,6 +26,8 @@
      "Value": "4"
     }
    ],
+   "Namespace": "Demo.HelloWorld",
+   "Description": "Simple enum",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Input"
@@ -35,8 +35,6 @@
   {
    "$id": "6",
    "Name": "ExtensibleEnum",
-   "Namespace": "Demo.HelloWorld",
-   "Description": "Extensible enum Values",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -55,6 +53,8 @@
      "Value": "4"
     }
    ],
+   "Namespace": "Demo.HelloWorld",
+   "Description": "Extensible enum Values",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Input"

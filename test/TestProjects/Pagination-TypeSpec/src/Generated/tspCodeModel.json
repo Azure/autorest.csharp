@@ -8,8 +8,6 @@
   {
    "$id": "2",
    "Name": "Interval",
-   "Namespace": "Pagination",
-   "Description": "The interval",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -43,14 +41,43 @@
      "Description": "1 hour, available only if test run duration is greater than 1 minute"
     }
    ],
+   "Namespace": "Pagination",
+   "Description": "The interval",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Input"
+  },
+  {
+   "$id": "8",
+   "Name": "LedgerUserRoleKV",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "9",
+     "Name": "Administrator",
+     "Value": "Administrator"
+    },
+    {
+     "$id": "10",
+     "Name": "Contributor",
+     "Value": "Contributor"
+    },
+    {
+     "$id": "11",
+     "Name": "Reader",
+     "Value": "Reader"
+    }
+   ],
+   "Namespace": "Pagination",
+   "Description": "User roles",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "None"
   }
  ],
  "Models": [
   {
-   "$id": "8",
+   "$id": "12",
    "Name": "ListLedgerEntryInputBody",
    "Namespace": "Pagination",
    "Description": "Type for input model body",
@@ -58,12 +85,12 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "9",
+     "$id": "13",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "Required string",
      "Type": {
-      "$id": "10",
+      "$id": "14",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -72,12 +99,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "11",
+     "$id": "15",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "Required int",
      "Type": {
-      "$id": "12",
+      "$id": "16",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -88,7 +115,7 @@
    ]
   },
   {
-   "$id": "13",
+   "$id": "17",
    "Name": "PagedLedgerEntries",
    "Namespace": "Pagination",
    "Description": "Paginated ledger entries",
@@ -96,27 +123,27 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "14",
+     "$id": "18",
      "Name": "entries",
      "SerializedName": "entries",
      "Description": "Array of ledger entries",
      "Type": {
-      "$id": "15",
+      "$id": "19",
       "Name": "Array",
       "ElementType": {
-       "$id": "16",
+       "$id": "20",
        "Name": "LedgerEntry",
        "Namespace": "Pagination",
        "IsNullable": false,
        "Usage": "Output",
        "Properties": [
         {
-         "$id": "17",
+         "$id": "21",
          "Name": "contents",
          "SerializedName": "contents",
          "Description": "Contents of the ledger entry.",
          "Type": {
-          "$id": "18",
+          "$id": "22",
           "Name": "string",
           "Kind": "String",
           "IsNullable": false
@@ -125,12 +152,12 @@
          "IsReadOnly": false
         },
         {
-         "$id": "19",
+         "$id": "23",
          "Name": "collectionId",
          "SerializedName": "collectionId",
          "Description": "",
          "Type": {
-          "$id": "20",
+          "$id": "24",
           "Name": "string",
           "Kind": "String",
           "IsNullable": false
@@ -139,12 +166,12 @@
          "IsReadOnly": true
         },
         {
-         "$id": "21",
+         "$id": "25",
          "Name": "transactionId",
          "SerializedName": "transactionId",
          "Description": "",
          "Type": {
-          "$id": "22",
+          "$id": "26",
           "Name": "string",
           "Kind": "String",
           "IsNullable": false
@@ -160,12 +187,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "23",
+     "$id": "27",
      "Name": "customNextLink",
      "SerializedName": "customNextLink",
      "Description": "Path to retrieve next page of ledger entries",
      "Type": {
-      "$id": "24",
+      "$id": "28",
       "Name": "ResourceLocation",
       "Kind": "Uri",
       "IsNullable": false
@@ -176,10 +203,10 @@
    ]
   },
   {
-   "$ref": "16"
+   "$ref": "20"
   },
   {
-   "$id": "25",
+   "$id": "29",
    "Name": "PagedDimensionValueListItem",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of DimensionValueListItem items",
@@ -187,30 +214,30 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "26",
+     "$id": "30",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The DimensionValueListItem items on this page",
      "Type": {
-      "$id": "27",
+      "$id": "31",
       "Name": "Array",
       "ElementType": {
-       "$id": "28",
+       "$id": "32",
        "Name": "DimensionValueListItem",
        "Namespace": "Pagination",
        "IsNullable": false,
        "Usage": "Output",
        "Properties": [
         {
-         "$id": "29",
+         "$id": "33",
          "Name": "value",
          "SerializedName": "value",
          "Description": "",
          "Type": {
-          "$id": "30",
+          "$id": "34",
           "Name": "Array",
           "ElementType": {
-           "$id": "31",
+           "$id": "35",
            "Name": "string",
            "Kind": "String",
            "IsNullable": false
@@ -228,12 +255,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "32",
+     "$id": "36",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
      "Type": {
-      "$id": "33",
+      "$id": "37",
       "Name": "ResourceLocation",
       "Kind": "Uri",
       "IsNullable": false
@@ -244,10 +271,10 @@
    ]
   },
   {
-   "$ref": "28"
+   "$ref": "32"
   },
   {
-   "$id": "34",
+   "$id": "38",
    "Name": "PagedLedgerEntry",
    "Namespace": "Azure.Core",
    "Description": "Paged collection of LedgerEntry items",
@@ -255,15 +282,15 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "35",
+     "$id": "39",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The LedgerEntry items on this page",
      "Type": {
-      "$id": "36",
+      "$id": "40",
       "Name": "Array",
       "ElementType": {
-       "$ref": "16"
+       "$ref": "20"
       },
       "IsNullable": false
      },
@@ -271,12 +298,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "37",
+     "$id": "41",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
      "Type": {
-      "$id": "38",
+      "$id": "42",
       "Name": "ResourceLocation",
       "Kind": "Uri",
       "IsNullable": false
@@ -287,7 +314,7 @@
    ]
   },
   {
-   "$id": "39",
+   "$id": "43",
    "Name": "PagedTextBlocklist",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of TextBlocklist items",
@@ -295,15 +322,15 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "40",
+     "$id": "44",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The TextBlocklist items on this page",
      "Type": {
-      "$id": "41",
+      "$id": "45",
       "Name": "Array",
       "ElementType": {
-       "$id": "42",
+       "$id": "46",
        "Name": "TextBlocklist",
        "Namespace": "Pagination",
        "Description": "Text Blocklist.",
@@ -311,12 +338,12 @@
        "Usage": "Output",
        "Properties": [
         {
-         "$id": "43",
+         "$id": "47",
          "Name": "blocklistName",
          "SerializedName": "blocklistName",
          "Description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
          "Type": {
-          "$id": "44",
+          "$id": "48",
           "Name": "string",
           "Kind": "String",
           "IsNullable": false
@@ -325,12 +352,12 @@
          "IsReadOnly": false
         },
         {
-         "$id": "45",
+         "$id": "49",
          "Name": "description",
          "SerializedName": "description",
          "Description": "Text blocklist description.",
          "Type": {
-          "$id": "46",
+          "$id": "50",
           "Name": "string",
           "Kind": "String",
           "IsNullable": false
@@ -346,12 +373,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "47",
+     "$id": "51",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
      "Type": {
-      "$id": "48",
+      "$id": "52",
       "Name": "ResourceLocation",
       "Kind": "Uri",
       "IsNullable": false
@@ -362,10 +389,10 @@
    ]
   },
   {
-   "$ref": "42"
+   "$ref": "46"
   },
   {
-   "$id": "49",
+   "$id": "53",
    "Name": "PagedTextBlockItem",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of TextBlockItem items",
@@ -373,15 +400,15 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "50",
+     "$id": "54",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The TextBlockItem items on this page",
      "Type": {
-      "$id": "51",
+      "$id": "55",
       "Name": "Array",
       "ElementType": {
-       "$id": "52",
+       "$id": "56",
        "Name": "TextBlockItem",
        "Namespace": "Pagination",
        "Description": "Item in TextBlocklist.",
@@ -389,38 +416,10 @@
        "Usage": "Output",
        "Properties": [
         {
-         "$id": "53",
+         "$id": "57",
          "Name": "blockItemId",
          "SerializedName": "blockItemId",
          "Description": "Block Item Id. It will be uuid.",
-         "Type": {
-          "$id": "54",
-          "Name": "string",
-          "Kind": "String",
-          "IsNullable": false
-         },
-         "IsRequired": true,
-         "IsReadOnly": false
-        },
-        {
-         "$id": "55",
-         "Name": "description",
-         "SerializedName": "description",
-         "Description": "Block item description.",
-         "Type": {
-          "$id": "56",
-          "Name": "string",
-          "Kind": "String",
-          "IsNullable": false
-         },
-         "IsRequired": false,
-         "IsReadOnly": false
-        },
-        {
-         "$id": "57",
-         "Name": "text",
-         "SerializedName": "text",
-         "Description": "Block item content.",
          "Type": {
           "$id": "58",
           "Name": "string",
@@ -429,6 +428,34 @@
          },
          "IsRequired": true,
          "IsReadOnly": false
+        },
+        {
+         "$id": "59",
+         "Name": "description",
+         "SerializedName": "description",
+         "Description": "Block item description.",
+         "Type": {
+          "$id": "60",
+          "Name": "string",
+          "Kind": "String",
+          "IsNullable": false
+         },
+         "IsRequired": false,
+         "IsReadOnly": false
+        },
+        {
+         "$id": "61",
+         "Name": "text",
+         "SerializedName": "text",
+         "Description": "Block item content.",
+         "Type": {
+          "$id": "62",
+          "Name": "string",
+          "Kind": "String",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false
         }
        ]
       },
@@ -438,12 +465,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "59",
+     "$id": "63",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
      "Type": {
-      "$id": "60",
+      "$id": "64",
       "Name": "ResourceLocation",
       "Kind": "Uri",
       "IsNullable": false
@@ -454,28 +481,74 @@
    ]
   },
   {
-   "$ref": "52"
+   "$ref": "56"
+  },
+  {
+   "$id": "65",
+   "Name": "ListLedgerEntryInput",
+   "Namespace": "Pagination",
+   "Description": "Input model for the ListPaginationLedgerEntries",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "66",
+     "Name": "bodyInput",
+     "SerializedName": "bodyInput",
+     "Description": "Body parameter",
+     "Type": {
+      "$ref": "12"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "67",
+   "Name": "MetricDimensions",
+   "Namespace": "Pagination",
+   "IsNullable": false,
+   "Usage": "None",
+   "Properties": []
+  },
+  {
+   "$id": "68",
+   "Name": "TestRuns",
+   "Namespace": "Pagination",
+   "Description": "Load test run model",
+   "IsNullable": false,
+   "Usage": "None",
+   "Properties": []
+  },
+  {
+   "$id": "69",
+   "Name": "Dimension",
+   "Namespace": "Pagination",
+   "IsNullable": false,
+   "Usage": "None",
+   "Properties": []
   }
  ],
  "Clients": [
   {
-   "$id": "61",
+   "$id": "70",
    "Name": "PaginationClient",
    "Description": "",
    "Operations": [
     {
-     "$id": "62",
+     "$id": "71",
      "Name": "ListPaginationLedgerEntries",
      "ResourceName": "LedgerEntry",
      "Summary": "Gets ledger entries from a collection corresponding to a range.",
      "Description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
      "Parameters": [
       {
-       "$id": "63",
+       "$id": "72",
        "Name": "pagnationUri",
        "NameInRequest": "pagnationUri",
        "Type": {
-        "$id": "64",
+        "$id": "73",
         "Name": "Uri",
         "Kind": "Uri",
         "IsNullable": false
@@ -491,12 +564,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "65",
+       "$id": "74",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "66",
+        "$id": "75",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -511,9 +584,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "67",
+        "$id": "76",
         "Type": {
-         "$id": "68",
+         "$id": "77",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -522,12 +595,12 @@
        }
       },
       {
-       "$id": "69",
+       "$id": "78",
        "Name": "bodyInput",
        "NameInRequest": "bodyInput",
        "Description": "Body parameter",
        "Type": {
-        "$ref": "8"
+        "$ref": "12"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -540,11 +613,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "70",
+       "$id": "79",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "71",
+        "$id": "80",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -559,19 +632,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "72",
+        "$id": "81",
         "Type": {
-         "$ref": "71"
+         "$ref": "80"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "73",
+       "$id": "82",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "74",
+        "$id": "83",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -586,9 +659,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "75",
+        "$id": "84",
         "Type": {
-         "$ref": "74"
+         "$ref": "83"
         },
         "Value": "application/json"
        }
@@ -596,12 +669,12 @@
      ],
      "Responses": [
       {
-       "$id": "76",
+       "$id": "85",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "13"
+        "$ref": "17"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -617,7 +690,7 @@
      ],
      "BufferResponse": true,
      "Paging": {
-      "$id": "77",
+      "$id": "86",
       "NextLinkName": "customNextLink",
       "ItemName": "entries"
      },
@@ -625,25 +698,25 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "78",
+     "$id": "87",
      "Name": "ListMetricDimensionValues",
      "ResourceName": "DimensionValueListItem",
      "Summary": "List the dimension values for the given metric dimension name.",
      "Description": "List the dimension values for the given metric dimension name.",
      "Parameters": [
       {
-       "$ref": "63"
+       "$ref": "72"
       },
       {
-       "$ref": "65"
+       "$ref": "74"
       },
       {
-       "$id": "79",
+       "$id": "88",
        "Name": "testRunId",
        "NameInRequest": "testRunId",
        "Description": "Unique test run name as identifier",
        "Type": {
-        "$id": "80",
+        "$id": "89",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -659,12 +732,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "81",
+       "$id": "90",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "Dimension name",
        "Type": {
-        "$id": "82",
+        "$id": "91",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -680,7 +753,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "83",
+       "$id": "92",
        "Name": "interval",
        "NameInRequest": "interval",
        "Description": "The interval (i.e. timegrain) of the query.",
@@ -698,12 +771,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "84",
+       "$id": "93",
        "Name": "metricName",
        "NameInRequest": "metricName",
        "Description": "Metric name",
        "Type": {
-        "$id": "85",
+        "$id": "94",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -719,12 +792,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "86",
+       "$id": "95",
        "Name": "metricNamespace",
        "NameInRequest": "metricNamespace",
        "Description": "Metric namespace to query metric definitions for.",
        "Type": {
-        "$id": "87",
+        "$id": "96",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -740,12 +813,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "88",
+       "$id": "97",
        "Name": "timespan",
        "NameInRequest": "timespan",
        "Description": "The timespan of the query. It is a string with the following format\n'startDateTime_ISO/endDateTime_ISO'.",
        "Type": {
-        "$id": "89",
+        "$id": "98",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -761,11 +834,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "90",
+       "$id": "99",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "91",
+        "$id": "100",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -780,9 +853,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "92",
+        "$id": "101",
         "Type": {
-         "$ref": "91"
+         "$ref": "100"
         },
         "Value": "application/json"
        }
@@ -790,12 +863,12 @@
      ],
      "Responses": [
       {
-       "$id": "93",
+       "$id": "102",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "25"
+        "$ref": "29"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -808,7 +881,7 @@
      "Path": "/app/test-runs/{testRunId}/metric-dimensions/{name}/values",
      "BufferResponse": true,
      "Paging": {
-      "$id": "94",
+      "$id": "103",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -816,23 +889,23 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "95",
+     "$id": "104",
      "Name": "list",
      "ResourceName": "LedgerEntry",
      "Description": "List upload detail for the discovery resource.",
      "Parameters": [
       {
-       "$ref": "63"
+       "$ref": "72"
       },
       {
-       "$ref": "65"
+       "$ref": "74"
       },
       {
-       "$id": "96",
+       "$id": "105",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "97",
+        "$id": "106",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -847,9 +920,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "98",
+        "$id": "107",
         "Type": {
-         "$ref": "97"
+         "$ref": "106"
         },
         "Value": "application/json"
        }
@@ -857,12 +930,12 @@
      ],
      "Responses": [
       {
-       "$id": "99",
+       "$id": "108",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "34"
+        "$ref": "38"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -875,7 +948,7 @@
      "Path": "/app/adp/transactions",
      "BufferResponse": true,
      "Paging": {
-      "$id": "100",
+      "$id": "109",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -883,24 +956,24 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "101",
+     "$id": "110",
      "Name": "listTextBlocklists",
      "ResourceName": "TextBlocklist",
      "Summary": "Get All Text Blocklists",
      "Description": "Get all text blocklists details.",
      "Parameters": [
       {
-       "$ref": "63"
+       "$ref": "72"
       },
       {
-       "$ref": "65"
+       "$ref": "74"
       },
       {
-       "$id": "102",
+       "$id": "111",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "103",
+        "$id": "112",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -915,9 +988,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "104",
+        "$id": "113",
         "Type": {
-         "$ref": "103"
+         "$ref": "112"
         },
         "Value": "application/json"
        }
@@ -925,12 +998,12 @@
      ],
      "Responses": [
       {
-       "$id": "105",
+       "$id": "114",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "39"
+        "$ref": "43"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -943,7 +1016,7 @@
      "Path": "/app/text/blocklists",
      "BufferResponse": true,
      "Paging": {
-      "$id": "106",
+      "$id": "115",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -951,25 +1024,25 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "107",
+     "$id": "116",
      "Name": "listTextBlocklistItems",
      "ResourceName": "TextBlockItem",
      "Summary": "Get All BlockItems By blocklistName",
      "Description": "Get all blockItems in a text blocklist",
      "Parameters": [
       {
-       "$ref": "63"
+       "$ref": "72"
       },
       {
-       "$ref": "65"
+       "$ref": "74"
       },
       {
-       "$id": "108",
+       "$id": "117",
        "Name": "blocklistName",
        "NameInRequest": "blocklistName",
        "Description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
        "Type": {
-        "$id": "109",
+        "$id": "118",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -985,12 +1058,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "110",
+       "$id": "119",
        "Name": "top",
        "NameInRequest": "top",
        "Description": "The number of result items to return.",
        "Type": {
-        "$id": "111",
+        "$id": "120",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -1006,12 +1079,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "112",
+       "$id": "121",
        "Name": "skip",
        "NameInRequest": "skip",
        "Description": "The number of result items to skip.",
        "Type": {
-        "$id": "113",
+        "$id": "122",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -1027,12 +1100,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "114",
+       "$id": "123",
        "Name": "maxpagesize",
        "NameInRequest": "maxpagesize",
        "Description": "The maximum number of result items per page.",
        "Type": {
-        "$id": "115",
+        "$id": "124",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -1048,11 +1121,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "116",
+       "$id": "125",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "117",
+        "$id": "126",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1067,9 +1140,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "118",
+        "$id": "127",
         "Type": {
-         "$ref": "117"
+         "$ref": "126"
         },
         "Value": "application/json"
        }
@@ -1077,12 +1150,12 @@
      ],
      "Responses": [
       {
-       "$id": "119",
+       "$id": "128",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "49"
+        "$ref": "53"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1095,7 +1168,7 @@
      "Path": "/app/text/blocklists/{blocklistName}/blockItems",
      "BufferResponse": true,
      "Paging": {
-      "$id": "120",
+      "$id": "129",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -1104,15 +1177,15 @@
     }
    ],
    "Protocol": {
-    "$id": "121"
+    "$id": "130"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "122",
+  "$id": "131",
   "OAuth2": {
-   "$id": "123",
+   "$id": "132",
    "Scopes": [
     "https://pagination.azure.com/.default"
    ]
