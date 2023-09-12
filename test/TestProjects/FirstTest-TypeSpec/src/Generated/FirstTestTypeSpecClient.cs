@@ -918,6 +918,214 @@ namespace FirstTestTypeSpec
             }
         }
 
+        /// <summary> head as boolean. </summary>
+        /// <param name="body"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringBodyAsync(string,CancellationToken)']/*" />
+        public virtual async Task<Response> StringBodyAsync(string body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await StringBodyAsync(RequestContentHelper.FromString(body), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> head as boolean. </summary>
+        /// <param name="body"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringBody(string,CancellationToken)']/*" />
+        public virtual Response StringBody(string body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = StringBody(RequestContentHelper.FromString(body), context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] head as boolean.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="StringBodyAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringBodyAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> StringBodyAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.StringBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateStringBodyRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] head as boolean.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="StringBody(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringBody(RequestContent,RequestContext)']/*" />
+        public virtual Response StringBody(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.StringBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateStringBodyRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> head as boolean. </summary>
+        /// <param name="body"> The Boolean to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBodyAsync(bool,CancellationToken)']/*" />
+        public virtual async Task<Response> BoolBodyAsync(bool body, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await BoolBodyAsync(RequestContentHelper.FromBool(body), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> head as boolean. </summary>
+        /// <param name="body"> The Boolean to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBody(bool,CancellationToken)']/*" />
+        public virtual Response BoolBody(bool body, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = BoolBody(RequestContentHelper.FromBool(body), context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] head as boolean.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="BoolBodyAsync(bool,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBodyAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> BoolBodyAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.BoolBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateBoolBodyRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] head as boolean.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="BoolBody(bool,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBody(RequestContent,RequestContext)']/*" />
+        public virtual Response BoolBody(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.BoolBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateBoolBodyRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary>
         /// [Protocol Method] Return hi
         /// <list type="bullet">
@@ -1869,6 +2077,38 @@ namespace FirstTestTypeSpec
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateStringBodyRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/stringBody", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateBoolBodyRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/boolBody", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
             return message;
         }
 

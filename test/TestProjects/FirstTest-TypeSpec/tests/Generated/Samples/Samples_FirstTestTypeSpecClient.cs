@@ -903,6 +903,132 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_StringBody()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new FirstTestTypeSpecClient(endpoint);
+
+            var data = "<String>";
+
+            Response response = client.StringBody(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_StringBody_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new FirstTestTypeSpecClient(endpoint);
+
+            var data = "<String>";
+
+            Response response = client.StringBody(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_StringBody_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new FirstTestTypeSpecClient(endpoint);
+
+            var data = "<String>";
+
+            Response response = await client.StringBodyAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_StringBody_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new FirstTestTypeSpecClient(endpoint);
+
+            var data = "<String>";
+
+            Response response = await client.StringBodyAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_StringBody_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new FirstTestTypeSpecClient(endpoint);
+
+            var body = "<null>";
+            var result = await client.StringBodyAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_BoolBody()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new FirstTestTypeSpecClient(endpoint);
+
+            var data = true;
+
+            Response response = client.BoolBody(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_BoolBody_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new FirstTestTypeSpecClient(endpoint);
+
+            var data = true;
+
+            Response response = client.BoolBody(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_BoolBody_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new FirstTestTypeSpecClient(endpoint);
+
+            var data = true;
+
+            Response response = await client.BoolBodyAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_BoolBody_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new FirstTestTypeSpecClient(endpoint);
+
+            var data = true;
+
+            Response response = await client.BoolBodyAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_BoolBody_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new FirstTestTypeSpecClient(endpoint);
+
+            var body = true;
+            var result = await client.BoolBodyAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_SayHi()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");

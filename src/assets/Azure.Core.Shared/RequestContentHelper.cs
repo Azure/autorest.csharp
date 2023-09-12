@@ -87,5 +87,19 @@ namespace Azure.Core
 
             return content;
         }
+
+        public static RequestContent FromString(string value)
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStringValue(value);
+            return content;
+        }
+
+        public static RequestContent FromBool(bool value)
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBooleanValue(value);
+            return content;
+        }
     }
 }

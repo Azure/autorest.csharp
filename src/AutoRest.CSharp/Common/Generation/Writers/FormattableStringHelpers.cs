@@ -107,6 +107,16 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
+            if (parameter.Type is { IsFrameworkType: true } && parameter.Type.EqualsIgnoreNullable(typeof(string)) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
+            {
+                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromString)}({parameter.Name})";
+            }
+
+            if (parameter.Type is { IsFrameworkType: true } && parameter.Type.EqualsIgnoreNullable(typeof(bool)) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
+            {
+                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromBool)}({parameter.Name})";
+            }
+
             var conversionMethod = GetConversionMethod(parameter.Type, toType);
             if (conversionMethod == null)
             {

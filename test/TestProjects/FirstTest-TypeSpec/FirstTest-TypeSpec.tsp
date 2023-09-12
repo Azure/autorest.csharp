@@ -367,3 +367,17 @@ namespace ProtocolAndConvenient {
 @head
 @convenientAPI(true)
 op headAsBoolean(@path id: string): void;
+
+
+@route("/stringBody")
+@doc("head as boolean.")
+@put
+@convenientAPI(true)
+op stringBody(@body body: string): void;
+
+
+@route("/boolBody")
+@doc("head as boolean.")
+@put
+@convenientAPI(true)
+op boolBody(@body body: boolean): void;

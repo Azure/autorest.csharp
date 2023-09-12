@@ -669,6 +669,110 @@ Console.WriteLine(response.GetRawResponse().Status);
 ]]></code>
 </example>
     </member>
+    <member name="StringBodyAsync(string,CancellationToken)">
+<example>
+This sample shows how to call StringBodyAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+var body = "<null>";
+var result = await client.StringBodyAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="StringBody(string,CancellationToken)">
+<example>
+This sample shows how to call StringBody with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+var body = "<null>";
+var result = client.StringBody(body);
+]]></code>
+</example>
+    </member>
+    <member name="StringBodyAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call StringBodyAsync with required request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+var data = "<String>";
+
+Response response = await client.StringBodyAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="StringBody(RequestContent,RequestContext)">
+<example>
+This sample shows how to call StringBody with required request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+var data = "<String>";
+
+Response response = client.StringBody(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="BoolBodyAsync(bool,CancellationToken)">
+<example>
+This sample shows how to call BoolBodyAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+var body = true;
+var result = await client.BoolBodyAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="BoolBody(bool,CancellationToken)">
+<example>
+This sample shows how to call BoolBody with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+var body = true;
+var result = client.BoolBody(body);
+]]></code>
+</example>
+    </member>
+    <member name="BoolBodyAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call BoolBodyAsync with required request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+var data = true;
+
+Response response = await client.BoolBodyAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="BoolBody(RequestContent,RequestContext)">
+<example>
+This sample shows how to call BoolBody with required request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+var data = true;
+
+Response response = client.BoolBody(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
     <member name="SayHiAsync(string,string,string,RequestContext)">
 <example>
 This sample shows how to call SayHiAsync with required parameters and parse the result.
