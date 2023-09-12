@@ -192,10 +192,6 @@ stages:
         - job: Create_PR
           dependsOn:
             - Update_Code
-            - Update_Samples_A_F
-            - Update_Samples_G_L
-            - Update_Samples_M_R
-            - Update_Samples_S_Z
           steps:
             - checkout: self
             - checkout: azure-sdk-tools
