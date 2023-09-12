@@ -2902,76 +2902,136 @@ Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code></example>
     </member>
     <member name="GenericTypeAsync(Int32ValuesFacet,CancellationToken)">
-<example>
-This sample shows how to call GenericTypeAsync with required parameters.
+      <example>
+This sample shows how to call GenericTypeAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var input = new Int32ValuesFacet("<field>", new int[] 
+Int32ValuesFacet input = new Int32ValuesFacet("<field>", new List<int>()
 {
-    1234
+1234
 }, 1234);
-var result = await client.GenericTypeAsync(input);
+Response response = await client.GenericTypeAsync(input);
+Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call GenericTypeAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Int32ValuesFacet input = new Int32ValuesFacet("<field>", new List<int>()
+{
+1234
+}, 1234);
+Response response = await client.GenericTypeAsync(input);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="GenericType(Int32ValuesFacet,CancellationToken)">
-<example>
-This sample shows how to call GenericType with required parameters.
+      <example>
+This sample shows how to call GenericType.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var input = new Int32ValuesFacet("<field>", new int[] 
+Int32ValuesFacet input = new Int32ValuesFacet("<field>", new List<int>()
 {
-    1234
+1234
 }, 1234);
-var result = client.GenericType(input);
+Response response = client.GenericType(input);
+Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call GenericType with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Int32ValuesFacet input = new Int32ValuesFacet("<field>", new List<int>()
+{
+1234
+}, 1234);
+Response response = client.GenericType(input);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="GenericTypeAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call GenericTypeAsync with required request content.
+      <example>
+This sample shows how to call GenericTypeAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new {
-    kind = "Int32Values",
-    values = new[] {
-        1234
-    },
-    value = 1234,
-    field = "<field>",
-};
-
-Response response = await client.GenericTypeAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["kind"] = "Int32Values",
+    ["values"] = new List<object>()
+{
+1234
+},
+    ["value"] = 1234,
+    ["field"] = "<field>",
+});
+Response response = await client.GenericTypeAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call GenericTypeAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["kind"] = "Int32Values",
+    ["values"] = new List<object>()
+{
+1234
+},
+    ["value"] = 1234,
+    ["field"] = "<field>",
+});
+Response response = await client.GenericTypeAsync(content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="GenericType(RequestContent,RequestContext)">
-<example>
-This sample shows how to call GenericType with required request content.
+      <example>
+This sample shows how to call GenericType.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new ModelsTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new {
-    kind = "Int32Values",
-    values = new[] {
-        1234
-    },
-    value = 1234,
-    field = "<field>",
-};
-
-Response response = client.GenericType(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["kind"] = "Int32Values",
+    ["values"] = new List<object>()
+{
+1234
+},
+    ["value"] = 1234,
+    ["field"] = "<field>",
+});
+Response response = client.GenericType(content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call GenericType with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["kind"] = "Int32Values",
+    ["values"] = new List<object>()
+{
+1234
+},
+    ["value"] = 1234,
+    ["field"] = "<field>",
+});
+Response response = client.GenericType(content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
   </members>
 </doc>
