@@ -1052,7 +1052,10 @@ export function navigateModels(
         namespace,
         {
             model: (x) =>
-                x.name !== "" && !["AuthFlow", "MyFlow"].includes(x.name) && x.kind === "Model" && computeModel(x),
+                x.name !== "" &&
+                !["AuthFlow", "MyFlow"].includes(x.name) &&
+                x.kind === "Model" &&
+                computeModel(x),
             enum: computeModel
         },
         { skipSubNamespaces }
