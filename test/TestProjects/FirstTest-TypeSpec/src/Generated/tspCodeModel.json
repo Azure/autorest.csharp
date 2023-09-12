@@ -9,8 +9,6 @@
   {
    "$id": "2",
    "Name": "Thing_requiredLiteralString",
-   "Namespace": "FirstTestTypeSpec",
-   "Description": "The Thing_requiredLiteralString",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -20,6 +18,8 @@
      "Description": "accept"
     }
    ],
+   "Namespace": "FirstTestTypeSpec",
+   "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -27,8 +27,6 @@
   {
    "$id": "4",
    "Name": "Thing_requiredLiteralInt",
-   "Namespace": "FirstTestTypeSpec",
-   "Description": "The Thing_requiredLiteralInt",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -38,6 +36,8 @@
      "Description": "123"
     }
    ],
+   "Namespace": "FirstTestTypeSpec",
+   "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -45,8 +45,6 @@
   {
    "$id": "6",
    "Name": "Thing_requiredLiteralFloat",
-   "Namespace": "FirstTestTypeSpec",
-   "Description": "The Thing_requiredLiteralFloat",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -56,6 +54,8 @@
      "Description": "1.23"
     }
    ],
+   "Namespace": "FirstTestTypeSpec",
+   "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -63,8 +63,6 @@
   {
    "$id": "8",
    "Name": "Thing_optionalLiteralString",
-   "Namespace": "FirstTestTypeSpec",
-   "Description": "The Thing_optionalLiteralString",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -74,6 +72,8 @@
      "Description": "reject"
     }
    ],
+   "Namespace": "FirstTestTypeSpec",
+   "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -81,8 +81,6 @@
   {
    "$id": "10",
    "Name": "Thing_optionalLiteralInt",
-   "Namespace": "FirstTestTypeSpec",
-   "Description": "The Thing_optionalLiteralInt",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -92,6 +90,8 @@
      "Description": "456"
     }
    ],
+   "Namespace": "FirstTestTypeSpec",
+   "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -99,8 +99,6 @@
   {
    "$id": "12",
    "Name": "Thing_optionalLiteralFloat",
-   "Namespace": "FirstTestTypeSpec",
-   "Description": "The Thing_optionalLiteralFloat",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -110,6 +108,8 @@
      "Description": "4.56"
     }
    ],
+   "Namespace": "FirstTestTypeSpec",
+   "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -117,8 +117,6 @@
   {
    "$id": "14",
    "Name": "StringFixedEnum",
-   "Namespace": "FirstTestTypeSpec",
-   "Description": "Simple enum",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -137,6 +135,8 @@
      "Value": "4"
     }
    ],
+   "Namespace": "FirstTestTypeSpec",
+   "Description": "Simple enum",
    "IsExtensible": false,
    "IsNullable": true,
    "Usage": "RoundTrip"
@@ -144,8 +144,6 @@
   {
    "$id": "18",
    "Name": "StringExtensibleEnum",
-   "Namespace": "FirstTestTypeSpec",
-   "Description": "Extensible enum",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -164,6 +162,8 @@
      "Value": "4"
     }
    ],
+   "Namespace": "FirstTestTypeSpec",
+   "Description": "Extensible enum",
    "IsExtensible": true,
    "IsNullable": true,
    "Usage": "RoundTrip"
@@ -171,8 +171,6 @@
   {
    "$id": "22",
    "Name": "IntExtensibleEnum",
-   "Namespace": "FirstTestTypeSpec",
-   "Description": "Int based extensible enum",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -191,6 +189,8 @@
      "Value": 4
     }
    ],
+   "Namespace": "FirstTestTypeSpec",
+   "Description": "Int based extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -198,8 +198,6 @@
   {
    "$id": "26",
    "Name": "FloatExtensibleEnum",
-   "Namespace": "FirstTestTypeSpec",
-   "Description": "Float based extensible enum",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -218,6 +216,8 @@
      "Value": 4
     }
    ],
+   "Namespace": "FirstTestTypeSpec",
+   "Description": "Float based extensible enum",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -225,8 +225,6 @@
   {
    "$id": "30",
    "Name": "FloatFixedEnum",
-   "Namespace": "FirstTestTypeSpec",
-   "Description": "float fixed enum",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -245,6 +243,8 @@
      "Value": 4.4
     }
    ],
+   "Namespace": "FirstTestTypeSpec",
+   "Description": "float fixed enum",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -252,8 +252,6 @@
   {
    "$id": "34",
    "Name": "IntFixedEnum",
-   "Namespace": "FirstTestTypeSpec",
-   "Description": "int fixed enum",
    "EnumValueType": "Float32",
    "AllowedValues": [
     {
@@ -272,6 +270,8 @@
      "Value": 4
     }
    ],
+   "Namespace": "FirstTestTypeSpec",
+   "Description": "int fixed enum",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
@@ -279,8 +279,6 @@
   {
    "$id": "38",
    "Name": "DaysOfWeekExtensibleEnum",
-   "Namespace": "FirstTestTypeSpec",
-   "Description": "",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -319,6 +317,8 @@
      "Value": "Sunday"
     }
    ],
+   "Namespace": "FirstTestTypeSpec",
+   "Description": "",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "None"
