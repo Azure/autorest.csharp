@@ -9,6 +9,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Shared;
 using Microsoft.CodeAnalysis;
@@ -17,6 +18,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal abstract class TypeProvider
     {
+        private SourceInputModel? _sourceInputModel;
         private readonly Lazy<INamedTypeSymbol?> _existingType;
 
         protected string? _deprecated;
@@ -25,11 +27,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected TypeProvider(string defaultNamespace, SourceInputModel? sourceInputModel)
         {
+            _sourceInputModel = sourceInputModel;
             DefaultNamespace = defaultNamespace;
             _existingType = new Lazy<INamedTypeSymbol?>(() => sourceInputModel?.FindForType(DefaultNamespace, DefaultName));
         }
 
-        protected TypeProvider(BuildContext context) : this(context.DefaultNamespace, context.SourceInputModel) {}
+        protected TypeProvider(BuildContext context) : this(context.DefaultNamespace, context.SourceInputModel) { }
 
         public CSharpType Type => new(this, TypeKind is TypeKind.Struct or TypeKind.Enum, this is EnumType);
         public TypeDeclarationOptions Declaration => _type ??= BuildType();
@@ -45,17 +48,23 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         internal virtual Type? SerializeAs => null;
 
-        protected virtual TypeProvider? Customization => null;
+        private TypeProvider? _customization;
+        private TypeProvider? Customization => _customization ??= InstantiateTypeProvider is null ? null : InstantiateTypeProvider(PopulateMethodsFromCompilation(_sourceInputModel?.Customization));
 
-        protected virtual TypeProvider? PreviousContract => null;
+        private TypeProvider? _previousContract;
+        private TypeProvider? PreviousContract => _previousContract ??= InstantiateTypeProvider is null ? null : InstantiateTypeProvider(PopulateMethodsFromCompilation(_sourceInputModel?.PreviousContract));
+
+        protected virtual Func<IReadOnlyList<MethodSignature>, TypeProvider>? InstantiateTypeProvider => null;
 
         protected virtual IReadOnlyList<MethodSignature> MethodSignatures => new List<MethodSignature>();
 
+        // Missing means the method with the same name is missing from the current contract
+        // Updated means the method with the same name is updated in the current contract, and the list contains the previous method and current methods including overloading ones
         private (IList<MethodSignature> Missing, IList<(List<MethodSignature> Current, MethodSignature Previous)> Updated)? _methodChangeset;
         private (IList<MethodSignature> Missing, IList<(List<MethodSignature> Current, MethodSignature Previous)> Updated)? MethodChangeset
             => _methodChangeset ??= CompareMethods(MethodSignatures.Union(Customization?.MethodSignatures ?? Array.Empty<MethodSignature>(), new MethodSignatureComparer()), PreviousContract?.MethodSignatures);
 
-        public IList<OverloadMethodSignature> OverloadMethods
+        public IList<OverloadMethodSignature> OverloadingMethods
         {
             get
             {
@@ -77,7 +86,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        protected IReadOnlyList<MethodSignature> PopulateMethodsFromCompilation(Compilation? compilation)
+        private IReadOnlyList<MethodSignature> PopulateMethodsFromCompilation(Compilation? compilation)
         {
             if (compilation is null)
             {
@@ -214,6 +223,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
 
                 if (!CurrentContainAllPreviousParameters(previousMethod, item))
+                {
+                    continue;
+                }
+
+                if (!previousMethod.ReturnType.EqualsBySystemType(item.ReturnType))
                 {
                     continue;
                 }
