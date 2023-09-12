@@ -26,7 +26,7 @@ namespace lro_LowLevel
             scope.Start();
             try
             {
-                var delOperation = await Delete204SucceededAsync(waitUntil, requestContext);
+                var delOperation = await Delete204SucceededAsync(waitUntil, requestContext).ConfigureAwait(false);
                 return delOperation;
             }
             catch (Exception e)

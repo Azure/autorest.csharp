@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of VirtualMachineScaleSetInstanceView. </summary>
         internal VirtualMachineScaleSetInstanceView()
         {
-            Extensions = new ChangeTrackingList<VirtualMachineScaleSetVMExtensionsSummary>();
+            Extensions = new ChangeTrackingList<VirtualMachineScaleSetVmExtensionsSummary>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
             OrchestrationServices = new ChangeTrackingList<OrchestrationServiceSummary>();
         }
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The orchestration services information.
         /// Serialized Name: VirtualMachineScaleSetInstanceView.orchestrationServices
         /// </param>
-        internal VirtualMachineScaleSetInstanceView(VirtualMachineScaleSetInstanceViewStatusesSummary virtualMachine, IReadOnlyList<VirtualMachineScaleSetVMExtensionsSummary> extensions, IReadOnlyList<InstanceViewStatus> statuses, IReadOnlyList<OrchestrationServiceSummary> orchestrationServices)
+        internal VirtualMachineScaleSetInstanceView(VirtualMachineScaleSetInstanceViewStatusesSummary virtualMachine, IReadOnlyList<VirtualMachineScaleSetVmExtensionsSummary> extensions, IReadOnlyList<InstanceViewStatus> statuses, IReadOnlyList<OrchestrationServiceSummary> orchestrationServices)
         {
             VirtualMachine = virtualMachine;
             Extensions = extensions;
@@ -67,7 +67,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The extensions information.
         /// Serialized Name: VirtualMachineScaleSetInstanceView.extensions
         /// </summary>
-        public IReadOnlyList<VirtualMachineScaleSetVMExtensionsSummary> Extensions { get; }
+        public IReadOnlyList<VirtualMachineScaleSetVmExtensionsSummary> Extensions { get; }
         /// <summary>
         /// The resource status information.
         /// Serialized Name: VirtualMachineScaleSetInstanceView.statuses

@@ -8,8 +8,6 @@
   {
    "$id": "2",
    "Name": "Interval",
-   "Namespace": "Pagination",
-   "Description": "",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -43,6 +41,8 @@
      "Description": "1 hour, available only if test run duration is greater than 1 minute"
     }
    ],
+   "Namespace": "Pagination",
+   "Description": "The interval",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Input"

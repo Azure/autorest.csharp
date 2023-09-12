@@ -20,10 +20,10 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("imageReference"u8);
                 writer.WriteObjectValue(ImageReference);
             }
-            if (Optional.IsDefined(OsDisk))
+            if (Optional.IsDefined(OSDisk))
             {
                 writer.WritePropertyName("osDisk"u8);
-                writer.WriteObjectValue(OsDisk);
+                writer.WriteObjectValue(OSDisk);
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {

@@ -18,6 +18,7 @@ enum FillNAMethod {
 }
 
 @fixed
+@doc("The batch detection status.")
 enum MultivariateBatchDetectionStatus {
   Created: "CREATED",
   Running: "RUNNING",
@@ -34,12 +35,14 @@ enum DataSchema {
 }
 
 @fixed
+@doc("The alignment mode.")
 enum AlignMode {
   "Inner",
   "Outer",
 }
 
 @fixed
+@doc("the model status.")
 enum ModelStatus {
   Created: "CREATED",
   Running: "RUNNING",

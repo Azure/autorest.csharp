@@ -11,25 +11,25 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
 {
     internal class NameTransformerTests
     {
-        private Dictionary<string, RenameRuleTarget> renameRules;
+        private Dictionary<string, AcronymMappingTarget> acronymMapping;
 
         [OneTimeSetUp]
-        public void SetRenameRules()
+        public void SetAcronymMapping()
         {
-            renameRules = new Dictionary<string, RenameRuleTarget>
+            acronymMapping = new Dictionary<string, AcronymMappingTarget>
             {
-                { "Os", new RenameRuleTarget("OS", null) },
-                { "Ip", new RenameRuleTarget("IP", null) },
-                { "Ips", new RenameRuleTarget("IPs", "ips") },
-                { "ID", new RenameRuleTarget("Id", null) },
-                { "IDs", new RenameRuleTarget("Ids", null) },
-                { "VM", new RenameRuleTarget("Vm", null) },
-                { "VMs", new RenameRuleTarget("Vms", null) },
-                { "VPN", new RenameRuleTarget("Vpn", null) },
-                { "WAN", new RenameRuleTarget("Wan", null) },
-                { "WANs", new RenameRuleTarget("Wans", null) },
-                { "DNS", new RenameRuleTarget("Dns", null) },
-                { "P2s", new RenameRuleTarget("P2S", "p2s") },
+                { "Os", new AcronymMappingTarget("OS", null) },
+                { "Ip", new AcronymMappingTarget("IP", null) },
+                { "Ips", new AcronymMappingTarget("IPs", "ips") },
+                { "ID", new AcronymMappingTarget("Id", null) },
+                { "IDs", new AcronymMappingTarget("Ids", null) },
+                { "VM", new AcronymMappingTarget("Vm", null) },
+                { "VMs", new AcronymMappingTarget("Vms", null) },
+                { "VPN", new AcronymMappingTarget("Vpn", null) },
+                { "WAN", new AcronymMappingTarget("Wan", null) },
+                { "WANs", new AcronymMappingTarget("Wans", null) },
+                { "DNS", new AcronymMappingTarget("Dns", null) },
+                { "P2s", new AcronymMappingTarget("P2S", "p2s") },
             };
         }
 
@@ -62,7 +62,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         [TestCase("P2sServer", "P2SServer", "p2sServer")]
         public void EnsureNameCaseTest(string name, string expectedPropertyName, string expectedVariableName)
         {
-            var transformer = new NameTransformer(renameRules);
+            var transformer = new NameTransformer(acronymMapping);
             var result = transformer.EnsureNameCase(name);
             Assert.AreEqual(expectedPropertyName, result.Name);
             Assert.AreEqual(expectedVariableName, result.VariableName.ToCleanName(false));
