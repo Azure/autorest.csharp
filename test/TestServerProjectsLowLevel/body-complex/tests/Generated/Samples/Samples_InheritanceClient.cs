@@ -90,7 +90,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             InheritanceClient client = new InheritanceClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = client.PutValid(content);
             Console.WriteLine(response.Status);
         }
@@ -102,21 +102,21 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             InheritanceClient client = new InheritanceClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["breed"] = "<breed>",
-                ["color"] = "<color>",
-                ["hates"] = new List<object>()
+                breed = "<breed>",
+                color = "<color>",
+                hates = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["food"] = "<food>",
-["id"] = 1234,
-["name"] = "<name>",
+food = "<food>",
+id = 1234,
+name = "<name>",
 }
 },
-                ["id"] = 1234,
-                ["name"] = "<name>",
+                id = 1234,
+                name = "<name>",
             });
             Response response = client.PutValid(content);
             Console.WriteLine(response.Status);
@@ -129,7 +129,7 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             InheritanceClient client = new InheritanceClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -141,21 +141,21 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             InheritanceClient client = new InheritanceClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["breed"] = "<breed>",
-                ["color"] = "<color>",
-                ["hates"] = new List<object>()
+                breed = "<breed>",
+                color = "<color>",
+                hates = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["food"] = "<food>",
-["id"] = 1234,
-["name"] = "<name>",
+food = "<food>",
+id = 1234,
+name = "<name>",
 }
 },
-                ["id"] = 1234,
-                ["name"] = "<name>",
+                id = 1234,
+                name = "<name>",
             });
             Response response = await client.PutValidAsync(content);
             Console.WriteLine(response.Status);

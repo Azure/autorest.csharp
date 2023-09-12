@@ -110,9 +110,9 @@ namespace _Type._Dictionary.Samples
         {
             DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = "PT1H23M45S",
+                key = "PT1H23M45S",
             });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -124,9 +124,9 @@ namespace _Type._Dictionary.Samples
         {
             DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = "PT1H23M45S",
+                key = "PT1H23M45S",
             });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -164,9 +164,9 @@ namespace _Type._Dictionary.Samples
         {
             DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = "PT1H23M45S",
+                key = "PT1H23M45S",
             });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
@@ -178,9 +178,9 @@ namespace _Type._Dictionary.Samples
         {
             DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = "PT1H23M45S",
+                key = "PT1H23M45S",
             });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);

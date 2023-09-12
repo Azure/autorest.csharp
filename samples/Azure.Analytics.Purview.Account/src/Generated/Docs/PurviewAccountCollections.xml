@@ -81,7 +81,7 @@ Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = await client.CreateOrUpdateCollectionAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -93,13 +93,13 @@ Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["description"] = "<description>",
-    ["friendlyName"] = "<friendlyName>",
-    ["parentCollection"] = new Dictionary<string, object>()
+    description = "<description>",
+    friendlyName = "<friendlyName>",
+    parentCollection = new
     {
-        ["referenceName"] = "<referenceName>",
+        referenceName = "<referenceName>",
     },
 });
 Response response = await client.CreateOrUpdateCollectionAsync(content);
@@ -127,7 +127,7 @@ Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = client.CreateOrUpdateCollection(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -139,13 +139,13 @@ Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["description"] = "<description>",
-    ["friendlyName"] = "<friendlyName>",
-    ["parentCollection"] = new Dictionary<string, object>()
+    description = "<description>",
+    friendlyName = "<friendlyName>",
+    parentCollection = new
     {
-        ["referenceName"] = "<referenceName>",
+        referenceName = "<referenceName>",
     },
 });
 Response response = client.CreateOrUpdateCollection(content);

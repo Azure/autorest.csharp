@@ -110,9 +110,9 @@ namespace _Type.Property.ValueTypes.Samples
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new List<object>()
+                property = new List<object>()
 {
 "<property>"
 },
@@ -127,9 +127,9 @@ namespace _Type.Property.ValueTypes.Samples
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new List<object>()
+                property = new List<object>()
 {
 "<property>"
 },
@@ -172,9 +172,9 @@ namespace _Type.Property.ValueTypes.Samples
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new List<object>()
+                property = new List<object>()
 {
 "<property>"
 },
@@ -189,9 +189,9 @@ namespace _Type.Property.ValueTypes.Samples
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new List<object>()
+                property = new List<object>()
 {
 "<property>"
 },

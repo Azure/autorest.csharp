@@ -920,7 +920,7 @@ This sample shows how to call ParamByteAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HeaderClient client = new HeaderClient(credential);
 
-Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ParamByteAsync with all parameters.
@@ -928,7 +928,7 @@ This sample shows how to call ParamByteAsync with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HeaderClient client = new HeaderClient(credential);
 
-Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -939,7 +939,7 @@ This sample shows how to call ParamByte.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HeaderClient client = new HeaderClient(credential);
 
-Response response = client.ParamByte("<scenario>", BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = client.ParamByte("<scenario>", BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ParamByte with all parameters.
@@ -947,7 +947,7 @@ This sample shows how to call ParamByte with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HeaderClient client = new HeaderClient(credential);
 
-Response response = client.ParamByte("<scenario>", BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = client.ParamByte("<scenario>", BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

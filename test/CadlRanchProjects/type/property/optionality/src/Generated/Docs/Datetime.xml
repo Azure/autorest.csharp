@@ -195,7 +195,7 @@ This sample shows how to call PutAllAsync.
 <code><![CDATA[
 Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutAllAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -203,9 +203,9 @@ This sample shows how to call PutAllAsync with all request content.
 <code><![CDATA[
 Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["property"] = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = await client.PutAllAsync(content);
 Console.WriteLine(response.Status);
@@ -217,7 +217,7 @@ This sample shows how to call PutAll.
 <code><![CDATA[
 Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = client.PutAll(content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -225,9 +225,9 @@ This sample shows how to call PutAll with all request content.
 <code><![CDATA[
 Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["property"] = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = client.PutAll(content);
 Console.WriteLine(response.Status);
@@ -283,7 +283,7 @@ This sample shows how to call PutDefaultAsync.
 <code><![CDATA[
 Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutDefaultAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -291,9 +291,9 @@ This sample shows how to call PutDefaultAsync with all request content.
 <code><![CDATA[
 Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["property"] = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = await client.PutDefaultAsync(content);
 Console.WriteLine(response.Status);
@@ -305,7 +305,7 @@ This sample shows how to call PutDefault.
 <code><![CDATA[
 Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = client.PutDefault(content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -313,9 +313,9 @@ This sample shows how to call PutDefault with all request content.
 <code><![CDATA[
 Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["property"] = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = client.PutDefault(content);
 Console.WriteLine(response.Status);

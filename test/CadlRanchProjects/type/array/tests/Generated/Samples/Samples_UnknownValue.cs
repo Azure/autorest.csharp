@@ -111,7 +111,7 @@ namespace _Type._Array.Samples
 
             RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -125,7 +125,7 @@ new Dictionary<string, object>()
 
             RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -139,7 +139,7 @@ new Dictionary<string, object>()
 
             Response response = client.Put(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new Dictionary<string, object>())
+BinaryData.FromObjectAsJson(new object())
 });
             Console.WriteLine(response.Status);
         }
@@ -152,7 +152,7 @@ BinaryData.FromObjectAsJson(new Dictionary<string, object>())
 
             Response response = client.Put(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new Dictionary<string, object>())
+BinaryData.FromObjectAsJson(new object())
 });
             Console.WriteLine(response.Status);
         }
@@ -165,7 +165,7 @@ BinaryData.FromObjectAsJson(new Dictionary<string, object>())
 
             RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
@@ -179,7 +179,7 @@ new Dictionary<string, object>()
 
             RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
@@ -193,7 +193,7 @@ new Dictionary<string, object>()
 
             Response response = await client.PutAsync(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new Dictionary<string, object>())
+BinaryData.FromObjectAsJson(new object())
 });
             Console.WriteLine(response.Status);
         }
@@ -206,7 +206,7 @@ BinaryData.FromObjectAsJson(new Dictionary<string, object>())
 
             Response response = await client.PutAsync(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new Dictionary<string, object>())
+BinaryData.FromObjectAsJson(new object())
 });
             Console.WriteLine(response.Status);
         }

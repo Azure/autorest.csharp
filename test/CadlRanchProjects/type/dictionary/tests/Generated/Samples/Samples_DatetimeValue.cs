@@ -109,9 +109,9 @@ namespace _Type._Dictionary.Samples
         {
             DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -123,9 +123,9 @@ namespace _Type._Dictionary.Samples
         {
             DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -163,9 +163,9 @@ namespace _Type._Dictionary.Samples
         {
             DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
@@ -177,9 +177,9 @@ namespace _Type._Dictionary.Samples
         {
             DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = "2022-05-10T14:57:31.2311892-04:00",
+                key = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);

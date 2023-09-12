@@ -207,16 +207,16 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["requiredUnion"] = "<requiredUnion>",
-                ["requiredLiteralString"] = "accept",
-                ["requiredLiteralInt"] = 123,
-                ["requiredLiteralFloat"] = 1.23F,
-                ["requiredLiteralBool"] = false,
-                ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["requiredNullableList"] = new List<object>()
+                name = "<name>",
+                requiredUnion = "<requiredUnion>",
+                requiredLiteralString = "accept",
+                requiredLiteralInt = 123,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = false,
+                requiredBadDescription = "<requiredBadDescription>",
+                requiredNullableList = new List<object>()
 {
 1234
 },
@@ -241,24 +241,24 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["requiredUnion"] = "<requiredUnion>",
-                ["requiredLiteralString"] = "accept",
-                ["requiredLiteralInt"] = 123,
-                ["requiredLiteralFloat"] = 1.23F,
-                ["requiredLiteralBool"] = false,
-                ["optionalLiteralString"] = "reject",
-                ["optionalLiteralInt"] = 456,
-                ["optionalLiteralFloat"] = 4.56F,
-                ["optionalLiteralBool"] = true,
-                ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["optionalNullableList"] = new List<object>()
+                name = "<name>",
+                requiredUnion = "<requiredUnion>",
+                requiredLiteralString = "accept",
+                requiredLiteralInt = 123,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = false,
+                optionalLiteralString = "reject",
+                optionalLiteralInt = 456,
+                optionalLiteralFloat = 4.56F,
+                optionalLiteralBool = true,
+                requiredBadDescription = "<requiredBadDescription>",
+                optionalNullableList = new List<object>()
 {
 1234
 },
-                ["requiredNullableList"] = new List<object>()
+                requiredNullableList = new List<object>()
 {
 1234
 },
@@ -288,16 +288,16 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["requiredUnion"] = "<requiredUnion>",
-                ["requiredLiteralString"] = "accept",
-                ["requiredLiteralInt"] = 123,
-                ["requiredLiteralFloat"] = 1.23F,
-                ["requiredLiteralBool"] = false,
-                ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["requiredNullableList"] = new List<object>()
+                name = "<name>",
+                requiredUnion = "<requiredUnion>",
+                requiredLiteralString = "accept",
+                requiredLiteralInt = 123,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = false,
+                requiredBadDescription = "<requiredBadDescription>",
+                requiredNullableList = new List<object>()
 {
 1234
 },
@@ -322,24 +322,24 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["requiredUnion"] = "<requiredUnion>",
-                ["requiredLiteralString"] = "accept",
-                ["requiredLiteralInt"] = 123,
-                ["requiredLiteralFloat"] = 1.23F,
-                ["requiredLiteralBool"] = false,
-                ["optionalLiteralString"] = "reject",
-                ["optionalLiteralInt"] = 456,
-                ["optionalLiteralFloat"] = 4.56F,
-                ["optionalLiteralBool"] = true,
-                ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["optionalNullableList"] = new List<object>()
+                name = "<name>",
+                requiredUnion = "<requiredUnion>",
+                requiredLiteralString = "accept",
+                requiredLiteralInt = 123,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = false,
+                optionalLiteralString = "reject",
+                optionalLiteralInt = 456,
+                optionalLiteralFloat = 4.56F,
+                optionalLiteralBool = true,
+                requiredBadDescription = "<requiredBadDescription>",
+                optionalNullableList = new List<object>()
 {
 1234
 },
-                ["requiredNullableList"] = new List<object>()
+                requiredNullableList = new List<object>()
 {
 1234
 },
@@ -369,16 +369,16 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["requiredUnion"] = "<requiredUnion>",
-                ["requiredLiteralString"] = "accept",
-                ["requiredLiteralInt"] = 123,
-                ["requiredLiteralFloat"] = 1.23F,
-                ["requiredLiteralBool"] = false,
-                ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["requiredNullableList"] = new List<object>()
+                name = "<name>",
+                requiredUnion = "<requiredUnion>",
+                requiredLiteralString = "accept",
+                requiredLiteralInt = 123,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = false,
+                requiredBadDescription = "<requiredBadDescription>",
+                requiredNullableList = new List<object>()
 {
 1234
 },
@@ -403,24 +403,24 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["requiredUnion"] = "<requiredUnion>",
-                ["requiredLiteralString"] = "accept",
-                ["requiredLiteralInt"] = 123,
-                ["requiredLiteralFloat"] = 1.23F,
-                ["requiredLiteralBool"] = false,
-                ["optionalLiteralString"] = "reject",
-                ["optionalLiteralInt"] = 456,
-                ["optionalLiteralFloat"] = 4.56F,
-                ["optionalLiteralBool"] = true,
-                ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["optionalNullableList"] = new List<object>()
+                name = "<name>",
+                requiredUnion = "<requiredUnion>",
+                requiredLiteralString = "accept",
+                requiredLiteralInt = 123,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = false,
+                optionalLiteralString = "reject",
+                optionalLiteralInt = 456,
+                optionalLiteralFloat = 4.56F,
+                optionalLiteralBool = true,
+                requiredBadDescription = "<requiredBadDescription>",
+                optionalNullableList = new List<object>()
 {
 1234
 },
-                ["requiredNullableList"] = new List<object>()
+                requiredNullableList = new List<object>()
 {
 1234
 },
@@ -450,16 +450,16 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["requiredUnion"] = "<requiredUnion>",
-                ["requiredLiteralString"] = "accept",
-                ["requiredLiteralInt"] = 123,
-                ["requiredLiteralFloat"] = 1.23F,
-                ["requiredLiteralBool"] = false,
-                ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["requiredNullableList"] = new List<object>()
+                name = "<name>",
+                requiredUnion = "<requiredUnion>",
+                requiredLiteralString = "accept",
+                requiredLiteralInt = 123,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = false,
+                requiredBadDescription = "<requiredBadDescription>",
+                requiredNullableList = new List<object>()
 {
 1234
 },
@@ -484,24 +484,24 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["requiredUnion"] = "<requiredUnion>",
-                ["requiredLiteralString"] = "accept",
-                ["requiredLiteralInt"] = 123,
-                ["requiredLiteralFloat"] = 1.23F,
-                ["requiredLiteralBool"] = false,
-                ["optionalLiteralString"] = "reject",
-                ["optionalLiteralInt"] = 456,
-                ["optionalLiteralFloat"] = 4.56F,
-                ["optionalLiteralBool"] = true,
-                ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["optionalNullableList"] = new List<object>()
+                name = "<name>",
+                requiredUnion = "<requiredUnion>",
+                requiredLiteralString = "accept",
+                requiredLiteralInt = 123,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = false,
+                optionalLiteralString = "reject",
+                optionalLiteralInt = 456,
+                optionalLiteralFloat = 4.56F,
+                optionalLiteralBool = true,
+                requiredBadDescription = "<requiredBadDescription>",
+                optionalNullableList = new List<object>()
 {
 1234
 },
-                ["requiredNullableList"] = new List<object>()
+                requiredNullableList = new List<object>()
 {
 1234
 },
@@ -531,9 +531,9 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = client.FriendlyModel(content);
 
@@ -548,9 +548,9 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = client.FriendlyModel(content);
 
@@ -587,9 +587,9 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = await client.FriendlyModelAsync(content);
 
@@ -604,9 +604,9 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = await client.FriendlyModelAsync(content);
 
@@ -687,10 +687,10 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["sourceUrl"] = "http://localhost:3000",
-                ["guid"] = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+                sourceUrl = "http://localhost:3000",
+                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
             Console.WriteLine(response.Status);
@@ -703,10 +703,10 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["sourceUrl"] = "http://localhost:3000",
-                ["guid"] = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+                sourceUrl = "http://localhost:3000",
+                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
             Console.WriteLine(response.Status);
@@ -743,10 +743,10 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["sourceUrl"] = "http://localhost:3000",
-                ["guid"] = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+                sourceUrl = "http://localhost:3000",
+                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
             Console.WriteLine(response.Status);
@@ -759,10 +759,10 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["sourceUrl"] = "http://localhost:3000",
-                ["guid"] = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+                sourceUrl = "http://localhost:3000",
+                guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
             Console.WriteLine(response.Status);
@@ -799,9 +799,9 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = client.ProjectedNameModel(content);
 
@@ -816,9 +816,9 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = client.ProjectedNameModel(content);
 
@@ -855,9 +855,9 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = await client.ProjectedNameModelAsync(content);
 
@@ -872,9 +872,9 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = await client.ProjectedNameModelAsync(content);
 
@@ -1093,42 +1093,42 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["requiredCollection"] = new List<object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredCollection = new List<object>()
 {
 "1"
 },
-                ["requiredDictionary"] = new Dictionary<string, object>()
+                requiredDictionary = new
                 {
-                    ["key"] = "1",
+                    key = "1",
                 },
-                ["requiredModel"] = new Dictionary<string, object>()
+                requiredModel = new
                 {
-                    ["name"] = "<name>",
-                    ["requiredUnion"] = "<requiredUnion>",
-                    ["requiredLiteralString"] = "accept",
-                    ["requiredLiteralInt"] = 123,
-                    ["requiredLiteralFloat"] = 1.23F,
-                    ["requiredLiteralBool"] = false,
-                    ["requiredBadDescription"] = "<requiredBadDescription>",
-                    ["requiredNullableList"] = new List<object>()
+                    name = "<name>",
+                    requiredUnion = "<requiredUnion>",
+                    requiredLiteralString = "accept",
+                    requiredLiteralInt = 123,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = false,
+                    requiredBadDescription = "<requiredBadDescription>",
+                    requiredNullableList = new List<object>()
 {
 1234
 },
                 },
-                ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["requiredRecordUnknown"] = new Dictionary<string, object>()
+                requiredUnknown = new object(),
+                requiredRecordUnknown = new
                 {
-                    ["key"] = new Dictionary<string, object>(),
+                    key = new object(),
                 },
-                ["modelWithRequiredNullable"] = new Dictionary<string, object>()
+                modelWithRequiredNullable = new
                 {
-                    ["requiredNullablePrimitive"] = 1234,
-                    ["requiredExtensibleEnum"] = "1",
-                    ["requiredFixedEnum"] = "1",
+                    requiredNullablePrimitive = 1234,
+                    requiredExtensibleEnum = "1",
+                    requiredFixedEnum = "1",
                 },
             });
             Response response = client.HelloAgain("<p2>", "<p1>", content);
@@ -1161,76 +1161,76 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["requiredCollection"] = new List<object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredCollection = new List<object>()
 {
 "1"
 },
-                ["requiredDictionary"] = new Dictionary<string, object>()
+                requiredDictionary = new
                 {
-                    ["key"] = "1",
+                    key = "1",
                 },
-                ["requiredModel"] = new Dictionary<string, object>()
+                requiredModel = new
                 {
-                    ["name"] = "<name>",
-                    ["requiredUnion"] = "<requiredUnion>",
-                    ["requiredLiteralString"] = "accept",
-                    ["requiredLiteralInt"] = 123,
-                    ["requiredLiteralFloat"] = 1.23F,
-                    ["requiredLiteralBool"] = false,
-                    ["optionalLiteralString"] = "reject",
-                    ["optionalLiteralInt"] = 456,
-                    ["optionalLiteralFloat"] = 4.56F,
-                    ["optionalLiteralBool"] = true,
-                    ["requiredBadDescription"] = "<requiredBadDescription>",
-                    ["optionalNullableList"] = new List<object>()
+                    name = "<name>",
+                    requiredUnion = "<requiredUnion>",
+                    requiredLiteralString = "accept",
+                    requiredLiteralInt = 123,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = false,
+                    optionalLiteralString = "reject",
+                    optionalLiteralInt = 456,
+                    optionalLiteralFloat = 4.56F,
+                    optionalLiteralBool = true,
+                    requiredBadDescription = "<requiredBadDescription>",
+                    optionalNullableList = new List<object>()
 {
 1234
 },
-                    ["requiredNullableList"] = new List<object>()
+                    requiredNullableList = new List<object>()
 {
 1234
 },
                 },
-                ["intExtensibleEnum"] = 1,
-                ["intExtensibleEnumCollection"] = new List<object>()
+                intExtensibleEnum = 1,
+                intExtensibleEnumCollection = new List<object>()
 {
 1
 },
-                ["floatExtensibleEnum"] = 1,
-                ["floatExtensibleEnumCollection"] = new List<object>()
+                floatExtensibleEnum = 1,
+                floatExtensibleEnumCollection = new List<object>()
 {
 1
 },
-                ["floatFixedEnum"] = 1.1F,
-                ["floatFixedEnumCollection"] = new List<object>()
+                floatFixedEnum = 1.1F,
+                floatFixedEnumCollection = new List<object>()
 {
 1.1F
 },
-                ["intFixedEnum"] = 1,
-                ["intFixedEnumCollection"] = new List<object>()
+                intFixedEnum = 1,
+                intFixedEnumCollection = new List<object>()
 {
 1
 },
-                ["stringFixedEnum"] = "1",
-                ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["optionalUnknown"] = new Dictionary<string, object>(),
-                ["requiredRecordUnknown"] = new Dictionary<string, object>()
+                stringFixedEnum = "1",
+                requiredUnknown = new object(),
+                optionalUnknown = new object(),
+                requiredRecordUnknown = new
                 {
-                    ["key"] = new Dictionary<string, object>(),
+                    key = new object(),
                 },
-                ["optionalRecordUnknown"] = new Dictionary<string, object>()
+                optionalRecordUnknown = new
                 {
-                    ["key"] = new Dictionary<string, object>(),
+                    key = new object(),
                 },
-                ["modelWithRequiredNullable"] = new Dictionary<string, object>()
+                modelWithRequiredNullable = new
                 {
-                    ["requiredNullablePrimitive"] = 1234,
-                    ["requiredExtensibleEnum"] = "1",
-                    ["requiredFixedEnum"] = "1",
+                    requiredNullablePrimitive = 1234,
+                    requiredExtensibleEnum = "1",
+                    requiredFixedEnum = "1",
                 },
             });
             Response response = client.HelloAgain("<p2>", "<p1>", content);
@@ -1280,42 +1280,42 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["requiredCollection"] = new List<object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredCollection = new List<object>()
 {
 "1"
 },
-                ["requiredDictionary"] = new Dictionary<string, object>()
+                requiredDictionary = new
                 {
-                    ["key"] = "1",
+                    key = "1",
                 },
-                ["requiredModel"] = new Dictionary<string, object>()
+                requiredModel = new
                 {
-                    ["name"] = "<name>",
-                    ["requiredUnion"] = "<requiredUnion>",
-                    ["requiredLiteralString"] = "accept",
-                    ["requiredLiteralInt"] = 123,
-                    ["requiredLiteralFloat"] = 1.23F,
-                    ["requiredLiteralBool"] = false,
-                    ["requiredBadDescription"] = "<requiredBadDescription>",
-                    ["requiredNullableList"] = new List<object>()
+                    name = "<name>",
+                    requiredUnion = "<requiredUnion>",
+                    requiredLiteralString = "accept",
+                    requiredLiteralInt = 123,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = false,
+                    requiredBadDescription = "<requiredBadDescription>",
+                    requiredNullableList = new List<object>()
 {
 1234
 },
                 },
-                ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["requiredRecordUnknown"] = new Dictionary<string, object>()
+                requiredUnknown = new object(),
+                requiredRecordUnknown = new
                 {
-                    ["key"] = new Dictionary<string, object>(),
+                    key = new object(),
                 },
-                ["modelWithRequiredNullable"] = new Dictionary<string, object>()
+                modelWithRequiredNullable = new
                 {
-                    ["requiredNullablePrimitive"] = 1234,
-                    ["requiredExtensibleEnum"] = "1",
-                    ["requiredFixedEnum"] = "1",
+                    requiredNullablePrimitive = 1234,
+                    requiredExtensibleEnum = "1",
+                    requiredFixedEnum = "1",
                 },
             });
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
@@ -1348,76 +1348,76 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["requiredCollection"] = new List<object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredCollection = new List<object>()
 {
 "1"
 },
-                ["requiredDictionary"] = new Dictionary<string, object>()
+                requiredDictionary = new
                 {
-                    ["key"] = "1",
+                    key = "1",
                 },
-                ["requiredModel"] = new Dictionary<string, object>()
+                requiredModel = new
                 {
-                    ["name"] = "<name>",
-                    ["requiredUnion"] = "<requiredUnion>",
-                    ["requiredLiteralString"] = "accept",
-                    ["requiredLiteralInt"] = 123,
-                    ["requiredLiteralFloat"] = 1.23F,
-                    ["requiredLiteralBool"] = false,
-                    ["optionalLiteralString"] = "reject",
-                    ["optionalLiteralInt"] = 456,
-                    ["optionalLiteralFloat"] = 4.56F,
-                    ["optionalLiteralBool"] = true,
-                    ["requiredBadDescription"] = "<requiredBadDescription>",
-                    ["optionalNullableList"] = new List<object>()
+                    name = "<name>",
+                    requiredUnion = "<requiredUnion>",
+                    requiredLiteralString = "accept",
+                    requiredLiteralInt = 123,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = false,
+                    optionalLiteralString = "reject",
+                    optionalLiteralInt = 456,
+                    optionalLiteralFloat = 4.56F,
+                    optionalLiteralBool = true,
+                    requiredBadDescription = "<requiredBadDescription>",
+                    optionalNullableList = new List<object>()
 {
 1234
 },
-                    ["requiredNullableList"] = new List<object>()
+                    requiredNullableList = new List<object>()
 {
 1234
 },
                 },
-                ["intExtensibleEnum"] = 1,
-                ["intExtensibleEnumCollection"] = new List<object>()
+                intExtensibleEnum = 1,
+                intExtensibleEnumCollection = new List<object>()
 {
 1
 },
-                ["floatExtensibleEnum"] = 1,
-                ["floatExtensibleEnumCollection"] = new List<object>()
+                floatExtensibleEnum = 1,
+                floatExtensibleEnumCollection = new List<object>()
 {
 1
 },
-                ["floatFixedEnum"] = 1.1F,
-                ["floatFixedEnumCollection"] = new List<object>()
+                floatFixedEnum = 1.1F,
+                floatFixedEnumCollection = new List<object>()
 {
 1.1F
 },
-                ["intFixedEnum"] = 1,
-                ["intFixedEnumCollection"] = new List<object>()
+                intFixedEnum = 1,
+                intFixedEnumCollection = new List<object>()
 {
 1
 },
-                ["stringFixedEnum"] = "1",
-                ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["optionalUnknown"] = new Dictionary<string, object>(),
-                ["requiredRecordUnknown"] = new Dictionary<string, object>()
+                stringFixedEnum = "1",
+                requiredUnknown = new object(),
+                optionalUnknown = new object(),
+                requiredRecordUnknown = new
                 {
-                    ["key"] = new Dictionary<string, object>(),
+                    key = new object(),
                 },
-                ["optionalRecordUnknown"] = new Dictionary<string, object>()
+                optionalRecordUnknown = new
                 {
-                    ["key"] = new Dictionary<string, object>(),
+                    key = new object(),
                 },
-                ["modelWithRequiredNullable"] = new Dictionary<string, object>()
+                modelWithRequiredNullable = new
                 {
-                    ["requiredNullablePrimitive"] = 1234,
-                    ["requiredExtensibleEnum"] = "1",
-                    ["requiredFixedEnum"] = "1",
+                    requiredNullablePrimitive = 1234,
+                    requiredExtensibleEnum = "1",
+                    requiredFixedEnum = "1",
                 },
             });
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
@@ -1467,42 +1467,42 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["requiredCollection"] = new List<object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredCollection = new List<object>()
 {
 "1"
 },
-                ["requiredDictionary"] = new Dictionary<string, object>()
+                requiredDictionary = new
                 {
-                    ["key"] = "1",
+                    key = "1",
                 },
-                ["requiredModel"] = new Dictionary<string, object>()
+                requiredModel = new
                 {
-                    ["name"] = "<name>",
-                    ["requiredUnion"] = "<requiredUnion>",
-                    ["requiredLiteralString"] = "accept",
-                    ["requiredLiteralInt"] = 123,
-                    ["requiredLiteralFloat"] = 1.23F,
-                    ["requiredLiteralBool"] = false,
-                    ["requiredBadDescription"] = "<requiredBadDescription>",
-                    ["requiredNullableList"] = new List<object>()
+                    name = "<name>",
+                    requiredUnion = "<requiredUnion>",
+                    requiredLiteralString = "accept",
+                    requiredLiteralInt = 123,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = false,
+                    requiredBadDescription = "<requiredBadDescription>",
+                    requiredNullableList = new List<object>()
 {
 1234
 },
                 },
-                ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["requiredRecordUnknown"] = new Dictionary<string, object>()
+                requiredUnknown = new object(),
+                requiredRecordUnknown = new
                 {
-                    ["key"] = new Dictionary<string, object>(),
+                    key = new object(),
                 },
-                ["modelWithRequiredNullable"] = new Dictionary<string, object>()
+                modelWithRequiredNullable = new
                 {
-                    ["requiredNullablePrimitive"] = 1234,
-                    ["requiredExtensibleEnum"] = "1",
-                    ["requiredFixedEnum"] = "1",
+                    requiredNullablePrimitive = 1234,
+                    requiredExtensibleEnum = "1",
+                    requiredFixedEnum = "1",
                 },
             });
             Response response = client.NoContentType("<p2>", "<p1>", content);
@@ -1535,76 +1535,76 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["requiredCollection"] = new List<object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredCollection = new List<object>()
 {
 "1"
 },
-                ["requiredDictionary"] = new Dictionary<string, object>()
+                requiredDictionary = new
                 {
-                    ["key"] = "1",
+                    key = "1",
                 },
-                ["requiredModel"] = new Dictionary<string, object>()
+                requiredModel = new
                 {
-                    ["name"] = "<name>",
-                    ["requiredUnion"] = "<requiredUnion>",
-                    ["requiredLiteralString"] = "accept",
-                    ["requiredLiteralInt"] = 123,
-                    ["requiredLiteralFloat"] = 1.23F,
-                    ["requiredLiteralBool"] = false,
-                    ["optionalLiteralString"] = "reject",
-                    ["optionalLiteralInt"] = 456,
-                    ["optionalLiteralFloat"] = 4.56F,
-                    ["optionalLiteralBool"] = true,
-                    ["requiredBadDescription"] = "<requiredBadDescription>",
-                    ["optionalNullableList"] = new List<object>()
+                    name = "<name>",
+                    requiredUnion = "<requiredUnion>",
+                    requiredLiteralString = "accept",
+                    requiredLiteralInt = 123,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = false,
+                    optionalLiteralString = "reject",
+                    optionalLiteralInt = 456,
+                    optionalLiteralFloat = 4.56F,
+                    optionalLiteralBool = true,
+                    requiredBadDescription = "<requiredBadDescription>",
+                    optionalNullableList = new List<object>()
 {
 1234
 },
-                    ["requiredNullableList"] = new List<object>()
+                    requiredNullableList = new List<object>()
 {
 1234
 },
                 },
-                ["intExtensibleEnum"] = 1,
-                ["intExtensibleEnumCollection"] = new List<object>()
+                intExtensibleEnum = 1,
+                intExtensibleEnumCollection = new List<object>()
 {
 1
 },
-                ["floatExtensibleEnum"] = 1,
-                ["floatExtensibleEnumCollection"] = new List<object>()
+                floatExtensibleEnum = 1,
+                floatExtensibleEnumCollection = new List<object>()
 {
 1
 },
-                ["floatFixedEnum"] = 1.1F,
-                ["floatFixedEnumCollection"] = new List<object>()
+                floatFixedEnum = 1.1F,
+                floatFixedEnumCollection = new List<object>()
 {
 1.1F
 },
-                ["intFixedEnum"] = 1,
-                ["intFixedEnumCollection"] = new List<object>()
+                intFixedEnum = 1,
+                intFixedEnumCollection = new List<object>()
 {
 1
 },
-                ["stringFixedEnum"] = "1",
-                ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["optionalUnknown"] = new Dictionary<string, object>(),
-                ["requiredRecordUnknown"] = new Dictionary<string, object>()
+                stringFixedEnum = "1",
+                requiredUnknown = new object(),
+                optionalUnknown = new object(),
+                requiredRecordUnknown = new
                 {
-                    ["key"] = new Dictionary<string, object>(),
+                    key = new object(),
                 },
-                ["optionalRecordUnknown"] = new Dictionary<string, object>()
+                optionalRecordUnknown = new
                 {
-                    ["key"] = new Dictionary<string, object>(),
+                    key = new object(),
                 },
-                ["modelWithRequiredNullable"] = new Dictionary<string, object>()
+                modelWithRequiredNullable = new
                 {
-                    ["requiredNullablePrimitive"] = 1234,
-                    ["requiredExtensibleEnum"] = "1",
-                    ["requiredFixedEnum"] = "1",
+                    requiredNullablePrimitive = 1234,
+                    requiredExtensibleEnum = "1",
+                    requiredFixedEnum = "1",
                 },
             });
             Response response = client.NoContentType("<p2>", "<p1>", content);
@@ -1654,42 +1654,42 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["requiredCollection"] = new List<object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredCollection = new List<object>()
 {
 "1"
 },
-                ["requiredDictionary"] = new Dictionary<string, object>()
+                requiredDictionary = new
                 {
-                    ["key"] = "1",
+                    key = "1",
                 },
-                ["requiredModel"] = new Dictionary<string, object>()
+                requiredModel = new
                 {
-                    ["name"] = "<name>",
-                    ["requiredUnion"] = "<requiredUnion>",
-                    ["requiredLiteralString"] = "accept",
-                    ["requiredLiteralInt"] = 123,
-                    ["requiredLiteralFloat"] = 1.23F,
-                    ["requiredLiteralBool"] = false,
-                    ["requiredBadDescription"] = "<requiredBadDescription>",
-                    ["requiredNullableList"] = new List<object>()
+                    name = "<name>",
+                    requiredUnion = "<requiredUnion>",
+                    requiredLiteralString = "accept",
+                    requiredLiteralInt = 123,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = false,
+                    requiredBadDescription = "<requiredBadDescription>",
+                    requiredNullableList = new List<object>()
 {
 1234
 },
                 },
-                ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["requiredRecordUnknown"] = new Dictionary<string, object>()
+                requiredUnknown = new object(),
+                requiredRecordUnknown = new
                 {
-                    ["key"] = new Dictionary<string, object>(),
+                    key = new object(),
                 },
-                ["modelWithRequiredNullable"] = new Dictionary<string, object>()
+                modelWithRequiredNullable = new
                 {
-                    ["requiredNullablePrimitive"] = 1234,
-                    ["requiredExtensibleEnum"] = "1",
-                    ["requiredFixedEnum"] = "1",
+                    requiredNullablePrimitive = 1234,
+                    requiredExtensibleEnum = "1",
+                    requiredFixedEnum = "1",
                 },
             });
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
@@ -1722,76 +1722,76 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["requiredCollection"] = new List<object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredCollection = new List<object>()
 {
 "1"
 },
-                ["requiredDictionary"] = new Dictionary<string, object>()
+                requiredDictionary = new
                 {
-                    ["key"] = "1",
+                    key = "1",
                 },
-                ["requiredModel"] = new Dictionary<string, object>()
+                requiredModel = new
                 {
-                    ["name"] = "<name>",
-                    ["requiredUnion"] = "<requiredUnion>",
-                    ["requiredLiteralString"] = "accept",
-                    ["requiredLiteralInt"] = 123,
-                    ["requiredLiteralFloat"] = 1.23F,
-                    ["requiredLiteralBool"] = false,
-                    ["optionalLiteralString"] = "reject",
-                    ["optionalLiteralInt"] = 456,
-                    ["optionalLiteralFloat"] = 4.56F,
-                    ["optionalLiteralBool"] = true,
-                    ["requiredBadDescription"] = "<requiredBadDescription>",
-                    ["optionalNullableList"] = new List<object>()
+                    name = "<name>",
+                    requiredUnion = "<requiredUnion>",
+                    requiredLiteralString = "accept",
+                    requiredLiteralInt = 123,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = false,
+                    optionalLiteralString = "reject",
+                    optionalLiteralInt = 456,
+                    optionalLiteralFloat = 4.56F,
+                    optionalLiteralBool = true,
+                    requiredBadDescription = "<requiredBadDescription>",
+                    optionalNullableList = new List<object>()
 {
 1234
 },
-                    ["requiredNullableList"] = new List<object>()
+                    requiredNullableList = new List<object>()
 {
 1234
 },
                 },
-                ["intExtensibleEnum"] = 1,
-                ["intExtensibleEnumCollection"] = new List<object>()
+                intExtensibleEnum = 1,
+                intExtensibleEnumCollection = new List<object>()
 {
 1
 },
-                ["floatExtensibleEnum"] = 1,
-                ["floatExtensibleEnumCollection"] = new List<object>()
+                floatExtensibleEnum = 1,
+                floatExtensibleEnumCollection = new List<object>()
 {
 1
 },
-                ["floatFixedEnum"] = 1.1F,
-                ["floatFixedEnumCollection"] = new List<object>()
+                floatFixedEnum = 1.1F,
+                floatFixedEnumCollection = new List<object>()
 {
 1.1F
 },
-                ["intFixedEnum"] = 1,
-                ["intFixedEnumCollection"] = new List<object>()
+                intFixedEnum = 1,
+                intFixedEnumCollection = new List<object>()
 {
 1
 },
-                ["stringFixedEnum"] = "1",
-                ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["optionalUnknown"] = new Dictionary<string, object>(),
-                ["requiredRecordUnknown"] = new Dictionary<string, object>()
+                stringFixedEnum = "1",
+                requiredUnknown = new object(),
+                optionalUnknown = new object(),
+                requiredRecordUnknown = new
                 {
-                    ["key"] = new Dictionary<string, object>(),
+                    key = new object(),
                 },
-                ["optionalRecordUnknown"] = new Dictionary<string, object>()
+                optionalRecordUnknown = new
                 {
-                    ["key"] = new Dictionary<string, object>(),
+                    key = new object(),
                 },
-                ["modelWithRequiredNullable"] = new Dictionary<string, object>()
+                modelWithRequiredNullable = new
                 {
-                    ["requiredNullablePrimitive"] = 1234,
-                    ["requiredExtensibleEnum"] = "1",
-                    ["requiredFixedEnum"] = "1",
+                    requiredNullablePrimitive = 1234,
+                    requiredExtensibleEnum = "1",
+                    requiredFixedEnum = "1",
                 },
             });
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
@@ -1931,16 +1931,16 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["requiredUnion"] = "<requiredUnion>",
-                ["requiredLiteralString"] = "accept",
-                ["requiredLiteralInt"] = 123,
-                ["requiredLiteralFloat"] = 1.23F,
-                ["requiredLiteralBool"] = false,
-                ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["requiredNullableList"] = new List<object>()
+                name = "<name>",
+                requiredUnion = "<requiredUnion>",
+                requiredLiteralString = "accept",
+                requiredLiteralInt = 123,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = false,
+                requiredBadDescription = "<requiredBadDescription>",
+                requiredNullableList = new List<object>()
 {
 1234
 },
@@ -1965,24 +1965,24 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["requiredUnion"] = "<requiredUnion>",
-                ["requiredLiteralString"] = "accept",
-                ["requiredLiteralInt"] = 123,
-                ["requiredLiteralFloat"] = 1.23F,
-                ["requiredLiteralBool"] = false,
-                ["optionalLiteralString"] = "reject",
-                ["optionalLiteralInt"] = 456,
-                ["optionalLiteralFloat"] = 4.56F,
-                ["optionalLiteralBool"] = true,
-                ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["optionalNullableList"] = new List<object>()
+                name = "<name>",
+                requiredUnion = "<requiredUnion>",
+                requiredLiteralString = "accept",
+                requiredLiteralInt = 123,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = false,
+                optionalLiteralString = "reject",
+                optionalLiteralInt = 456,
+                optionalLiteralFloat = 4.56F,
+                optionalLiteralBool = true,
+                requiredBadDescription = "<requiredBadDescription>",
+                optionalNullableList = new List<object>()
 {
 1234
 },
-                ["requiredNullableList"] = new List<object>()
+                requiredNullableList = new List<object>()
 {
 1234
 },
@@ -2012,16 +2012,16 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["requiredUnion"] = "<requiredUnion>",
-                ["requiredLiteralString"] = "accept",
-                ["requiredLiteralInt"] = 123,
-                ["requiredLiteralFloat"] = 1.23F,
-                ["requiredLiteralBool"] = false,
-                ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["requiredNullableList"] = new List<object>()
+                name = "<name>",
+                requiredUnion = "<requiredUnion>",
+                requiredLiteralString = "accept",
+                requiredLiteralInt = 123,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = false,
+                requiredBadDescription = "<requiredBadDescription>",
+                requiredNullableList = new List<object>()
 {
 1234
 },
@@ -2046,24 +2046,24 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["requiredUnion"] = "<requiredUnion>",
-                ["requiredLiteralString"] = "accept",
-                ["requiredLiteralInt"] = 123,
-                ["requiredLiteralFloat"] = 1.23F,
-                ["requiredLiteralBool"] = false,
-                ["optionalLiteralString"] = "reject",
-                ["optionalLiteralInt"] = 456,
-                ["optionalLiteralFloat"] = 4.56F,
-                ["optionalLiteralBool"] = true,
-                ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["optionalNullableList"] = new List<object>()
+                name = "<name>",
+                requiredUnion = "<requiredUnion>",
+                requiredLiteralString = "accept",
+                requiredLiteralInt = 123,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = false,
+                optionalLiteralString = "reject",
+                optionalLiteralInt = 456,
+                optionalLiteralFloat = 4.56F,
+                optionalLiteralBool = true,
+                requiredBadDescription = "<requiredBadDescription>",
+                optionalNullableList = new List<object>()
 {
 1234
 },
-                ["requiredNullableList"] = new List<object>()
+                requiredNullableList = new List<object>()
 {
 1234
 },

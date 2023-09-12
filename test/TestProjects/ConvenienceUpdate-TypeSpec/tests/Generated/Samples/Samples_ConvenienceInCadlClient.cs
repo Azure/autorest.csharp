@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -110,9 +109,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = client.ConvenienceOptionalBeforeRequired(content);
             Console.WriteLine(response.Status);
@@ -124,9 +123,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = client.ConvenienceOptionalBeforeRequired(content, optional: 1234);
             Console.WriteLine(response.Status);
@@ -160,9 +159,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = await client.ConvenienceOptionalBeforeRequiredAsync(content);
             Console.WriteLine(response.Status);
@@ -174,9 +173,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = await client.ConvenienceOptionalBeforeRequiredAsync(content, optional: 1234);
             Console.WriteLine(response.Status);
@@ -258,9 +257,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = client.NoConvenienceRequiredBody(content);
             Console.WriteLine(response.Status);
@@ -272,9 +271,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = client.NoConvenienceRequiredBody(content);
             Console.WriteLine(response.Status);
@@ -286,9 +285,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = await client.NoConvenienceRequiredBodyAsync(content);
             Console.WriteLine(response.Status);
@@ -300,9 +299,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = await client.NoConvenienceRequiredBodyAsync(content);
             Console.WriteLine(response.Status);
@@ -325,9 +324,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = client.NoConvenienceOptionalBody(content);
             Console.WriteLine(response.Status);
@@ -350,9 +349,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = await client.NoConvenienceOptionalBodyAsync(content);
             Console.WriteLine(response.Status);
@@ -875,9 +874,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = client.ProtocolOptionalModel(content);
             Console.WriteLine(response.Status);
@@ -921,9 +920,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = await client.ProtocolOptionalModelAsync(content);
             Console.WriteLine(response.Status);
@@ -956,9 +955,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = client.ProtocolRequiredModel(content);
             Console.WriteLine(response.Status);
@@ -970,9 +969,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = client.ProtocolRequiredModel(content);
             Console.WriteLine(response.Status);
@@ -1006,9 +1005,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = await client.ProtocolRequiredModelAsync(content);
             Console.WriteLine(response.Status);
@@ -1020,9 +1019,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = await client.ProtocolRequiredModelAsync(content);
             Console.WriteLine(response.Status);
@@ -1403,9 +1402,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = client.ConvenienceOptionalModelWithOptional(content);
             Console.WriteLine(response.Status);
@@ -1449,9 +1448,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = await client.ConvenienceOptionalModelWithOptionalAsync(content);
             Console.WriteLine(response.Status);
@@ -1484,9 +1483,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = client.ConvenienceRequiredModelWithOptional(content);
             Console.WriteLine(response.Status);
@@ -1498,9 +1497,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = client.ConvenienceRequiredModelWithOptional(content);
             Console.WriteLine(response.Status);
@@ -1534,9 +1533,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = await client.ConvenienceRequiredModelWithOptionalAsync(content);
             Console.WriteLine(response.Status);
@@ -1548,9 +1547,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = await client.ConvenienceRequiredModelWithOptionalAsync(content);
             Console.WriteLine(response.Status);
@@ -1595,9 +1594,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = client.ConvenienceOptionalModelWithRequired(content);
             Console.WriteLine(response.Status);
@@ -1641,9 +1640,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = await client.ConvenienceOptionalModelWithRequiredAsync(content);
             Console.WriteLine(response.Status);
@@ -1676,9 +1675,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = client.ProtocolOptionalBeforeRequired(content);
             Console.WriteLine(response.Status);
@@ -1690,9 +1689,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = client.ProtocolOptionalBeforeRequired(content, optional: 1234);
             Console.WriteLine(response.Status);
@@ -1726,9 +1725,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = await client.ProtocolOptionalBeforeRequiredAsync(content);
             Console.WriteLine(response.Status);
@@ -1740,9 +1739,9 @@ namespace ConvenienceInCadl.Samples
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = "<id>",
+                id = "<id>",
             });
             Response response = await client.ProtocolOptionalBeforeRequiredAsync(content, optional: 1234);
             Console.WriteLine(response.Status);

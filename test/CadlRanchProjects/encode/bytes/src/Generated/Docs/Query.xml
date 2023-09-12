@@ -7,14 +7,14 @@ This sample shows how to call DefaultAsync.
 <code><![CDATA[
 Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.DefaultAsync(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = await client.DefaultAsync(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call DefaultAsync with all parameters.
 <code><![CDATA[
 Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.DefaultAsync(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = await client.DefaultAsync(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -24,14 +24,14 @@ This sample shows how to call Default.
 <code><![CDATA[
 Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Default(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = client.Default(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Default with all parameters.
 <code><![CDATA[
 Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Default(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = client.Default(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -41,14 +41,14 @@ This sample shows how to call Base64Async.
 <code><![CDATA[
 Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.Base64Async(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = await client.Base64Async(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Base64Async with all parameters.
 <code><![CDATA[
 Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.Base64Async(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = await client.Base64Async(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -58,14 +58,14 @@ This sample shows how to call Base64.
 <code><![CDATA[
 Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Base64(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = client.Base64(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Base64 with all parameters.
 <code><![CDATA[
 Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Base64(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = client.Base64(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -75,14 +75,14 @@ This sample shows how to call Base64urlAsync.
 <code><![CDATA[
 Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.Base64urlAsync(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = await client.Base64urlAsync(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Base64urlAsync with all parameters.
 <code><![CDATA[
 Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.Base64urlAsync(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = await client.Base64urlAsync(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -92,14 +92,14 @@ This sample shows how to call Base64url.
 <code><![CDATA[
 Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Base64url(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = client.Base64url(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Base64url with all parameters.
 <code><![CDATA[
 Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Base64url(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = client.Base64url(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -111,7 +111,7 @@ Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = await client.Base64urlArrayAsync(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new Dictionary<string, object>())
+BinaryData.FromObjectAsJson(new object())
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -121,7 +121,7 @@ Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = await client.Base64urlArrayAsync(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new Dictionary<string, object>())
+BinaryData.FromObjectAsJson(new object())
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -134,7 +134,7 @@ Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = client.Base64urlArray(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new Dictionary<string, object>())
+BinaryData.FromObjectAsJson(new object())
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -144,7 +144,7 @@ Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = client.Base64urlArray(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new Dictionary<string, object>())
+BinaryData.FromObjectAsJson(new object())
 });
 Console.WriteLine(response.Status);
 ]]></code></example>

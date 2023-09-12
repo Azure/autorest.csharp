@@ -9,9 +9,9 @@ This sample shows how to call SendIntAsync.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["simpleUnion"] = 1234,
+    simpleUnion = 1234,
 });
 Response response = await client.SendIntAsync(content);
 Console.WriteLine(response.Status);
@@ -20,9 +20,9 @@ This sample shows how to call SendIntAsync with all request content.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["simpleUnion"] = 1234,
+    simpleUnion = 1234,
 });
 Response response = await client.SendIntAsync(content);
 Console.WriteLine(response.Status);
@@ -34,9 +34,9 @@ This sample shows how to call SendInt.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["simpleUnion"] = 1234,
+    simpleUnion = 1234,
 });
 Response response = client.SendInt(content);
 Console.WriteLine(response.Status);
@@ -45,9 +45,9 @@ This sample shows how to call SendInt with all request content.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["simpleUnion"] = 1234,
+    simpleUnion = 1234,
 });
 Response response = client.SendInt(content);
 Console.WriteLine(response.Status);
@@ -61,9 +61,9 @@ This sample shows how to call SendIntArrayAsync.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["simpleUnion"] = 1234,
+    simpleUnion = 1234,
 });
 Response response = await client.SendIntArrayAsync(content);
 Console.WriteLine(response.Status);
@@ -72,9 +72,9 @@ This sample shows how to call SendIntArrayAsync with all request content.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["simpleUnion"] = 1234,
+    simpleUnion = 1234,
 });
 Response response = await client.SendIntArrayAsync(content);
 Console.WriteLine(response.Status);
@@ -86,9 +86,9 @@ This sample shows how to call SendIntArray.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["simpleUnion"] = 1234,
+    simpleUnion = 1234,
 });
 Response response = client.SendIntArray(content);
 Console.WriteLine(response.Status);
@@ -97,9 +97,9 @@ This sample shows how to call SendIntArray with all request content.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["simpleUnion"] = 1234,
+    simpleUnion = 1234,
 });
 Response response = client.SendIntArray(content);
 Console.WriteLine(response.Status);
@@ -113,12 +113,12 @@ This sample shows how to call SendFirstNamedUnionValueAsync.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["namedUnion"] = new Dictionary<string, object>()
+    namedUnion = new
     {
-        ["prop1"] = 1234,
-        ["name"] = "<name>",
+        prop1 = 1234,
+        name = "<name>",
     },
 });
 Response response = await client.SendFirstNamedUnionValueAsync(content);
@@ -128,12 +128,12 @@ This sample shows how to call SendFirstNamedUnionValueAsync with all request con
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["namedUnion"] = new Dictionary<string, object>()
+    namedUnion = new
     {
-        ["prop1"] = 1234,
-        ["name"] = "<name>",
+        prop1 = 1234,
+        name = "<name>",
     },
 });
 Response response = await client.SendFirstNamedUnionValueAsync(content);
@@ -146,12 +146,12 @@ This sample shows how to call SendFirstNamedUnionValue.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["namedUnion"] = new Dictionary<string, object>()
+    namedUnion = new
     {
-        ["prop1"] = 1234,
-        ["name"] = "<name>",
+        prop1 = 1234,
+        name = "<name>",
     },
 });
 Response response = client.SendFirstNamedUnionValue(content);
@@ -161,12 +161,12 @@ This sample shows how to call SendFirstNamedUnionValue with all request content.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["namedUnion"] = new Dictionary<string, object>()
+    namedUnion = new
     {
-        ["prop1"] = 1234,
-        ["name"] = "<name>",
+        prop1 = 1234,
+        name = "<name>",
     },
 });
 Response response = client.SendFirstNamedUnionValue(content);
@@ -181,12 +181,12 @@ This sample shows how to call SendSecondNamedUnionValueAsync.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["namedUnion"] = new Dictionary<string, object>()
+    namedUnion = new
     {
-        ["prop1"] = 1234,
-        ["name"] = "<name>",
+        prop1 = 1234,
+        name = "<name>",
     },
 });
 Response response = await client.SendSecondNamedUnionValueAsync(content);
@@ -196,12 +196,12 @@ This sample shows how to call SendSecondNamedUnionValueAsync with all request co
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["namedUnion"] = new Dictionary<string, object>()
+    namedUnion = new
     {
-        ["prop1"] = 1234,
-        ["name"] = "<name>",
+        prop1 = 1234,
+        name = "<name>",
     },
 });
 Response response = await client.SendSecondNamedUnionValueAsync(content);
@@ -214,12 +214,12 @@ This sample shows how to call SendSecondNamedUnionValue.
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["namedUnion"] = new Dictionary<string, object>()
+    namedUnion = new
     {
-        ["prop1"] = 1234,
-        ["name"] = "<name>",
+        prop1 = 1234,
+        name = "<name>",
     },
 });
 Response response = client.SendSecondNamedUnionValue(content);
@@ -229,12 +229,12 @@ This sample shows how to call SendSecondNamedUnionValue with all request content
 <code><![CDATA[
 UnionClient client = new UnionClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["namedUnion"] = new Dictionary<string, object>()
+    namedUnion = new
     {
-        ["prop1"] = 1234,
-        ["name"] = "<name>",
+        prop1 = 1234,
+        name = "<name>",
     },
 });
 Response response = client.SendSecondNamedUnionValue(content);

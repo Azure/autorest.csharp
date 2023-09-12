@@ -119,32 +119,30 @@ namespace ModelsTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["requiredNullableInt"] = 1234,
-                ["requiredNullableString"] = "<requiredNullableString>",
-                ["requiredModel"] = new Dictionary<string, object>(),
-                ["requiredModel2"] = null
-            ,
-                ["requiredIntList"] = new List<object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                requiredModel = new object(),
+                requiredIntList = new List<object>()
 {
 1234
 },
-                ["requiredStringList"] = new List<object>()
+                requiredStringList = new List<object>()
 {
 "<requiredStringList>"
 },
-                ["requiredModelList"] = new List<object>()
+                requiredModelList = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["requiredModelRecord"] = new Dictionary<string, object>()
+requiredModelRecord = new
 {
-["key"] = new Dictionary<string, object>()
+key = new
 {
-["requiredList"] = new List<object>()
+requiredList = new List<object>()
 {
 null
 },
@@ -152,28 +150,26 @@ null
 },
 }
 },
-                ["requiredModelRecord"] = new Dictionary<string, object>()
+                requiredModelRecord = new
                 {
-                    ["key"] = null
-            ,
                 },
-                ["requiredCollectionWithNullableFloatElement"] = new List<object>()
+                requiredCollectionWithNullableFloatElement = new List<object>()
 {
 123.45F
 },
-                ["requiredCollectionWithNullableBooleanElement"] = new List<object>()
+                requiredCollectionWithNullableBooleanElement = new List<object>()
 {
 true
 },
-                ["requiredNullableModelList"] = new List<object>()
+                requiredNullableModelList = new List<object>()
 {
 null
 },
-                ["requiredNullableStringList"] = new List<object>()
+                requiredNullableStringList = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-                ["requiredNullableIntList"] = new List<object>()
+                requiredNullableIntList = new List<object>()
 {
 1234
 },
@@ -208,34 +204,32 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["requiredNullableInt"] = 1234,
-                ["requiredNullableString"] = "<requiredNullableString>",
-                ["nonRequiredNullableInt"] = 1234,
-                ["nonRequiredNullableString"] = "<nonRequiredNullableString>",
-                ["requiredModel"] = new Dictionary<string, object>(),
-                ["requiredModel2"] = null
-            ,
-                ["requiredIntList"] = new List<object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                nonRequiredNullableInt = 1234,
+                nonRequiredNullableString = "<nonRequiredNullableString>",
+                requiredModel = new object(),
+                requiredIntList = new List<object>()
 {
 1234
 },
-                ["requiredStringList"] = new List<object>()
+                requiredStringList = new List<object>()
 {
 "<requiredStringList>"
 },
-                ["requiredModelList"] = new List<object>()
+                requiredModelList = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["requiredModelRecord"] = new Dictionary<string, object>()
+requiredModelRecord = new
 {
-["key"] = new Dictionary<string, object>()
+key = new
 {
-["requiredList"] = new List<object>()
+requiredList = new List<object>()
 {
 null
 },
@@ -243,52 +237,50 @@ null
 },
 }
 },
-                ["requiredModelRecord"] = new Dictionary<string, object>()
+                requiredModelRecord = new
                 {
-                    ["key"] = null
-            ,
                 },
-                ["requiredCollectionWithNullableFloatElement"] = new List<object>()
+                requiredCollectionWithNullableFloatElement = new List<object>()
 {
 123.45F
 },
-                ["requiredCollectionWithNullableBooleanElement"] = new List<object>()
+                requiredCollectionWithNullableBooleanElement = new List<object>()
 {
 true
 },
-                ["requiredNullableModelList"] = new List<object>()
+                requiredNullableModelList = new List<object>()
 {
 null
 },
-                ["requiredNullableStringList"] = new List<object>()
+                requiredNullableStringList = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-                ["requiredNullableIntList"] = new List<object>()
+                requiredNullableIntList = new List<object>()
 {
 1234
 },
-                ["nonRequiredModelList"] = new List<object>()
+                nonRequiredModelList = new List<object>()
 {
 null
 },
-                ["nonRequiredStringList"] = new List<object>()
+                nonRequiredStringList = new List<object>()
 {
 "<nonRequiredStringList>"
 },
-                ["nonRequiredIntList"] = new List<object>()
+                nonRequiredIntList = new List<object>()
 {
 1234
 },
-                ["nonRequiredNullableModelList"] = new List<object>()
+                nonRequiredNullableModelList = new List<object>()
 {
 null
 },
-                ["nonRequiredNullableStringList"] = new List<object>()
+                nonRequiredNullableStringList = new List<object>()
 {
 "<nonRequiredNullableStringList>"
 },
-                ["nonRequiredNullableIntList"] = new List<object>()
+                nonRequiredNullableIntList = new List<object>()
 {
 1234
 },
@@ -451,32 +443,30 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["requiredNullableInt"] = 1234,
-                ["requiredNullableString"] = "<requiredNullableString>",
-                ["requiredModel"] = new Dictionary<string, object>(),
-                ["requiredModel2"] = null
-            ,
-                ["requiredIntList"] = new List<object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                requiredModel = new object(),
+                requiredIntList = new List<object>()
 {
 1234
 },
-                ["requiredStringList"] = new List<object>()
+                requiredStringList = new List<object>()
 {
 "<requiredStringList>"
 },
-                ["requiredModelList"] = new List<object>()
+                requiredModelList = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["requiredModelRecord"] = new Dictionary<string, object>()
+requiredModelRecord = new
 {
-["key"] = new Dictionary<string, object>()
+key = new
 {
-["requiredList"] = new List<object>()
+requiredList = new List<object>()
 {
 null
 },
@@ -484,28 +474,26 @@ null
 },
 }
 },
-                ["requiredModelRecord"] = new Dictionary<string, object>()
+                requiredModelRecord = new
                 {
-                    ["key"] = null
-            ,
                 },
-                ["requiredCollectionWithNullableFloatElement"] = new List<object>()
+                requiredCollectionWithNullableFloatElement = new List<object>()
 {
 123.45F
 },
-                ["requiredCollectionWithNullableBooleanElement"] = new List<object>()
+                requiredCollectionWithNullableBooleanElement = new List<object>()
 {
 true
 },
-                ["requiredNullableModelList"] = new List<object>()
+                requiredNullableModelList = new List<object>()
 {
 null
 },
-                ["requiredNullableStringList"] = new List<object>()
+                requiredNullableStringList = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-                ["requiredNullableIntList"] = new List<object>()
+                requiredNullableIntList = new List<object>()
 {
 1234
 },
@@ -540,34 +528,32 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["requiredNullableInt"] = 1234,
-                ["requiredNullableString"] = "<requiredNullableString>",
-                ["nonRequiredNullableInt"] = 1234,
-                ["nonRequiredNullableString"] = "<nonRequiredNullableString>",
-                ["requiredModel"] = new Dictionary<string, object>(),
-                ["requiredModel2"] = null
-            ,
-                ["requiredIntList"] = new List<object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                nonRequiredNullableInt = 1234,
+                nonRequiredNullableString = "<nonRequiredNullableString>",
+                requiredModel = new object(),
+                requiredIntList = new List<object>()
 {
 1234
 },
-                ["requiredStringList"] = new List<object>()
+                requiredStringList = new List<object>()
 {
 "<requiredStringList>"
 },
-                ["requiredModelList"] = new List<object>()
+                requiredModelList = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["requiredModelRecord"] = new Dictionary<string, object>()
+requiredModelRecord = new
 {
-["key"] = new Dictionary<string, object>()
+key = new
 {
-["requiredList"] = new List<object>()
+requiredList = new List<object>()
 {
 null
 },
@@ -575,52 +561,50 @@ null
 },
 }
 },
-                ["requiredModelRecord"] = new Dictionary<string, object>()
+                requiredModelRecord = new
                 {
-                    ["key"] = null
-            ,
                 },
-                ["requiredCollectionWithNullableFloatElement"] = new List<object>()
+                requiredCollectionWithNullableFloatElement = new List<object>()
 {
 123.45F
 },
-                ["requiredCollectionWithNullableBooleanElement"] = new List<object>()
+                requiredCollectionWithNullableBooleanElement = new List<object>()
 {
 true
 },
-                ["requiredNullableModelList"] = new List<object>()
+                requiredNullableModelList = new List<object>()
 {
 null
 },
-                ["requiredNullableStringList"] = new List<object>()
+                requiredNullableStringList = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-                ["requiredNullableIntList"] = new List<object>()
+                requiredNullableIntList = new List<object>()
 {
 1234
 },
-                ["nonRequiredModelList"] = new List<object>()
+                nonRequiredModelList = new List<object>()
 {
 null
 },
-                ["nonRequiredStringList"] = new List<object>()
+                nonRequiredStringList = new List<object>()
 {
 "<nonRequiredStringList>"
 },
-                ["nonRequiredIntList"] = new List<object>()
+                nonRequiredIntList = new List<object>()
 {
 1234
 },
-                ["nonRequiredNullableModelList"] = new List<object>()
+                nonRequiredNullableModelList = new List<object>()
 {
 null
 },
-                ["nonRequiredNullableStringList"] = new List<object>()
+                nonRequiredNullableStringList = new List<object>()
 {
 "<nonRequiredNullableStringList>"
 },
-                ["nonRequiredNullableIntList"] = new List<object>()
+                nonRequiredNullableIntList = new List<object>()
 {
 1234
 },
@@ -783,32 +767,30 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["requiredNullableInt"] = 1234,
-                ["requiredNullableString"] = "<requiredNullableString>",
-                ["requiredModel"] = new Dictionary<string, object>(),
-                ["requiredModel2"] = null
-            ,
-                ["requiredIntList"] = new List<object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                requiredModel = new object(),
+                requiredIntList = new List<object>()
 {
 1234
 },
-                ["requiredStringList"] = new List<object>()
+                requiredStringList = new List<object>()
 {
 "<requiredStringList>"
 },
-                ["requiredModelList"] = new List<object>()
+                requiredModelList = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["requiredModelRecord"] = new Dictionary<string, object>()
+requiredModelRecord = new
 {
-["key"] = new Dictionary<string, object>()
+key = new
 {
-["requiredList"] = new List<object>()
+requiredList = new List<object>()
 {
 null
 },
@@ -816,28 +798,26 @@ null
 },
 }
 },
-                ["requiredModelRecord"] = new Dictionary<string, object>()
+                requiredModelRecord = new
                 {
-                    ["key"] = null
-            ,
                 },
-                ["requiredCollectionWithNullableFloatElement"] = new List<object>()
+                requiredCollectionWithNullableFloatElement = new List<object>()
 {
 123.45F
 },
-                ["requiredCollectionWithNullableBooleanElement"] = new List<object>()
+                requiredCollectionWithNullableBooleanElement = new List<object>()
 {
 true
 },
-                ["requiredNullableModelList"] = new List<object>()
+                requiredNullableModelList = new List<object>()
 {
 null
 },
-                ["requiredNullableStringList"] = new List<object>()
+                requiredNullableStringList = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-                ["requiredNullableIntList"] = new List<object>()
+                requiredNullableIntList = new List<object>()
 {
 1234
 },
@@ -864,34 +844,32 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["requiredNullableInt"] = 1234,
-                ["requiredNullableString"] = "<requiredNullableString>",
-                ["nonRequiredNullableInt"] = 1234,
-                ["nonRequiredNullableString"] = "<nonRequiredNullableString>",
-                ["requiredModel"] = new Dictionary<string, object>(),
-                ["requiredModel2"] = null
-            ,
-                ["requiredIntList"] = new List<object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                nonRequiredNullableInt = 1234,
+                nonRequiredNullableString = "<nonRequiredNullableString>",
+                requiredModel = new object(),
+                requiredIntList = new List<object>()
 {
 1234
 },
-                ["requiredStringList"] = new List<object>()
+                requiredStringList = new List<object>()
 {
 "<requiredStringList>"
 },
-                ["requiredModelList"] = new List<object>()
+                requiredModelList = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["requiredModelRecord"] = new Dictionary<string, object>()
+requiredModelRecord = new
 {
-["key"] = new Dictionary<string, object>()
+key = new
 {
-["requiredList"] = new List<object>()
+requiredList = new List<object>()
 {
 null
 },
@@ -899,52 +877,50 @@ null
 },
 }
 },
-                ["requiredModelRecord"] = new Dictionary<string, object>()
+                requiredModelRecord = new
                 {
-                    ["key"] = null
-            ,
                 },
-                ["requiredCollectionWithNullableFloatElement"] = new List<object>()
+                requiredCollectionWithNullableFloatElement = new List<object>()
 {
 123.45F
 },
-                ["requiredCollectionWithNullableBooleanElement"] = new List<object>()
+                requiredCollectionWithNullableBooleanElement = new List<object>()
 {
 true
 },
-                ["requiredNullableModelList"] = new List<object>()
+                requiredNullableModelList = new List<object>()
 {
 null
 },
-                ["requiredNullableStringList"] = new List<object>()
+                requiredNullableStringList = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-                ["requiredNullableIntList"] = new List<object>()
+                requiredNullableIntList = new List<object>()
 {
 1234
 },
-                ["nonRequiredModelList"] = new List<object>()
+                nonRequiredModelList = new List<object>()
 {
 null
 },
-                ["nonRequiredStringList"] = new List<object>()
+                nonRequiredStringList = new List<object>()
 {
 "<nonRequiredStringList>"
 },
-                ["nonRequiredIntList"] = new List<object>()
+                nonRequiredIntList = new List<object>()
 {
 1234
 },
-                ["nonRequiredNullableModelList"] = new List<object>()
+                nonRequiredNullableModelList = new List<object>()
 {
 null
 },
-                ["nonRequiredNullableStringList"] = new List<object>()
+                nonRequiredNullableStringList = new List<object>()
 {
 "<nonRequiredNullableStringList>"
 },
-                ["nonRequiredNullableIntList"] = new List<object>()
+                nonRequiredNullableIntList = new List<object>()
 {
 1234
 },
@@ -1087,32 +1063,30 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["requiredNullableInt"] = 1234,
-                ["requiredNullableString"] = "<requiredNullableString>",
-                ["requiredModel"] = new Dictionary<string, object>(),
-                ["requiredModel2"] = null
-            ,
-                ["requiredIntList"] = new List<object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                requiredModel = new object(),
+                requiredIntList = new List<object>()
 {
 1234
 },
-                ["requiredStringList"] = new List<object>()
+                requiredStringList = new List<object>()
 {
 "<requiredStringList>"
 },
-                ["requiredModelList"] = new List<object>()
+                requiredModelList = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["requiredModelRecord"] = new Dictionary<string, object>()
+requiredModelRecord = new
 {
-["key"] = new Dictionary<string, object>()
+key = new
 {
-["requiredList"] = new List<object>()
+requiredList = new List<object>()
 {
 null
 },
@@ -1120,28 +1094,26 @@ null
 },
 }
 },
-                ["requiredModelRecord"] = new Dictionary<string, object>()
+                requiredModelRecord = new
                 {
-                    ["key"] = null
-            ,
                 },
-                ["requiredCollectionWithNullableFloatElement"] = new List<object>()
+                requiredCollectionWithNullableFloatElement = new List<object>()
 {
 123.45F
 },
-                ["requiredCollectionWithNullableBooleanElement"] = new List<object>()
+                requiredCollectionWithNullableBooleanElement = new List<object>()
 {
 true
 },
-                ["requiredNullableModelList"] = new List<object>()
+                requiredNullableModelList = new List<object>()
 {
 null
 },
-                ["requiredNullableStringList"] = new List<object>()
+                requiredNullableStringList = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-                ["requiredNullableIntList"] = new List<object>()
+                requiredNullableIntList = new List<object>()
 {
 1234
 },
@@ -1168,34 +1140,32 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["requiredNullableInt"] = 1234,
-                ["requiredNullableString"] = "<requiredNullableString>",
-                ["nonRequiredNullableInt"] = 1234,
-                ["nonRequiredNullableString"] = "<nonRequiredNullableString>",
-                ["requiredModel"] = new Dictionary<string, object>(),
-                ["requiredModel2"] = null
-            ,
-                ["requiredIntList"] = new List<object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                nonRequiredNullableInt = 1234,
+                nonRequiredNullableString = "<nonRequiredNullableString>",
+                requiredModel = new object(),
+                requiredIntList = new List<object>()
 {
 1234
 },
-                ["requiredStringList"] = new List<object>()
+                requiredStringList = new List<object>()
 {
 "<requiredStringList>"
 },
-                ["requiredModelList"] = new List<object>()
+                requiredModelList = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["requiredModelRecord"] = new Dictionary<string, object>()
+requiredModelRecord = new
 {
-["key"] = new Dictionary<string, object>()
+key = new
 {
-["requiredList"] = new List<object>()
+requiredList = new List<object>()
 {
 null
 },
@@ -1203,52 +1173,50 @@ null
 },
 }
 },
-                ["requiredModelRecord"] = new Dictionary<string, object>()
+                requiredModelRecord = new
                 {
-                    ["key"] = null
-            ,
                 },
-                ["requiredCollectionWithNullableFloatElement"] = new List<object>()
+                requiredCollectionWithNullableFloatElement = new List<object>()
 {
 123.45F
 },
-                ["requiredCollectionWithNullableBooleanElement"] = new List<object>()
+                requiredCollectionWithNullableBooleanElement = new List<object>()
 {
 true
 },
-                ["requiredNullableModelList"] = new List<object>()
+                requiredNullableModelList = new List<object>()
 {
 null
 },
-                ["requiredNullableStringList"] = new List<object>()
+                requiredNullableStringList = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-                ["requiredNullableIntList"] = new List<object>()
+                requiredNullableIntList = new List<object>()
 {
 1234
 },
-                ["nonRequiredModelList"] = new List<object>()
+                nonRequiredModelList = new List<object>()
 {
 null
 },
-                ["nonRequiredStringList"] = new List<object>()
+                nonRequiredStringList = new List<object>()
 {
 "<nonRequiredStringList>"
 },
-                ["nonRequiredIntList"] = new List<object>()
+                nonRequiredIntList = new List<object>()
 {
 1234
 },
-                ["nonRequiredNullableModelList"] = new List<object>()
+                nonRequiredNullableModelList = new List<object>()
 {
 null
 },
-                ["nonRequiredNullableStringList"] = new List<object>()
+                nonRequiredNullableStringList = new List<object>()
 {
 "<nonRequiredNullableStringList>"
 },
-                ["nonRequiredNullableIntList"] = new List<object>()
+                nonRequiredNullableIntList = new List<object>()
 {
 1234
 },
@@ -1391,7 +1359,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = client.InputToRoundTripOptional(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -1405,27 +1373,27 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["optionalString"] = "<optionalString>",
-                ["optionalInt"] = 1234,
-                ["optionalStringList"] = new List<object>()
+                optionalString = "<optionalString>",
+                optionalInt = 1234,
+                optionalStringList = new List<object>()
 {
 "<optionalStringList>"
 },
-                ["optionalIntList"] = new List<object>()
+                optionalIntList = new List<object>()
 {
 1234
 },
-                ["optionalModelList"] = new List<object>()
+                optionalModelList = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["requiredModelRecord"] = new Dictionary<string, object>()
+requiredModelRecord = new
 {
-["key"] = new Dictionary<string, object>()
+key = new
 {
-["requiredList"] = new List<object>()
+requiredList = new List<object>()
 {
 null
 },
@@ -1433,39 +1401,37 @@ null
 },
 }
 },
-                ["optionalModel"] = new Dictionary<string, object>()
+                optionalModel = new
                 {
-                    ["requiredList"] = new List<object>()
+                    requiredList = new List<object>()
 {
 null
 },
                 },
-                ["optionalModelWithPropertiesOnBase"] = new Dictionary<string, object>()
+                optionalModelWithPropertiesOnBase = new
                 {
-                    ["requiredList"] = new List<object>()
+                    requiredList = new List<object>()
 {
 null
 },
-                    ["optionalPropertyOnBase"] = "<optionalPropertyOnBase>",
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
                 },
-                ["optionalFixedStringEnum"] = "1",
-                ["optionalExtensibleEnum"] = "1",
-                ["optionalIntRecord"] = new Dictionary<string, object>()
+                optionalFixedStringEnum = "1",
+                optionalExtensibleEnum = "1",
+                optionalIntRecord = new
                 {
-                    ["key"] = 1234,
+                    key = 1234,
                 },
-                ["optionalStringRecord"] = new Dictionary<string, object>()
+                optionalStringRecord = new
                 {
-                    ["key"] = "<optionalStringRecord>",
+                    key = "<optionalStringRecord>",
                 },
-                ["optionalModelRecord"] = new Dictionary<string, object>()
+                optionalModelRecord = new
                 {
-                    ["key"] = null
-            ,
                 },
-                ["optionalPlainDate"] = "2022-05-10",
-                ["optionalPlainTime"] = "01:23:45",
-                ["optionalCollectionWithNullableIntElement"] = new List<object>()
+                optionalPlainDate = "2022-05-10",
+                optionalPlainTime = "01:23:45",
+                optionalCollectionWithNullableIntElement = new List<object>()
 {
 1234
 },
@@ -1566,7 +1532,7 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = await client.InputToRoundTripOptionalAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -1580,27 +1546,27 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["optionalString"] = "<optionalString>",
-                ["optionalInt"] = 1234,
-                ["optionalStringList"] = new List<object>()
+                optionalString = "<optionalString>",
+                optionalInt = 1234,
+                optionalStringList = new List<object>()
 {
 "<optionalStringList>"
 },
-                ["optionalIntList"] = new List<object>()
+                optionalIntList = new List<object>()
 {
 1234
 },
-                ["optionalModelList"] = new List<object>()
+                optionalModelList = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["requiredModelRecord"] = new Dictionary<string, object>()
+requiredModelRecord = new
 {
-["key"] = new Dictionary<string, object>()
+key = new
 {
-["requiredList"] = new List<object>()
+requiredList = new List<object>()
 {
 null
 },
@@ -1608,39 +1574,37 @@ null
 },
 }
 },
-                ["optionalModel"] = new Dictionary<string, object>()
+                optionalModel = new
                 {
-                    ["requiredList"] = new List<object>()
+                    requiredList = new List<object>()
 {
 null
 },
                 },
-                ["optionalModelWithPropertiesOnBase"] = new Dictionary<string, object>()
+                optionalModelWithPropertiesOnBase = new
                 {
-                    ["requiredList"] = new List<object>()
+                    requiredList = new List<object>()
 {
 null
 },
-                    ["optionalPropertyOnBase"] = "<optionalPropertyOnBase>",
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
                 },
-                ["optionalFixedStringEnum"] = "1",
-                ["optionalExtensibleEnum"] = "1",
-                ["optionalIntRecord"] = new Dictionary<string, object>()
+                optionalFixedStringEnum = "1",
+                optionalExtensibleEnum = "1",
+                optionalIntRecord = new
                 {
-                    ["key"] = 1234,
+                    key = 1234,
                 },
-                ["optionalStringRecord"] = new Dictionary<string, object>()
+                optionalStringRecord = new
                 {
-                    ["key"] = "<optionalStringRecord>",
+                    key = "<optionalStringRecord>",
                 },
-                ["optionalModelRecord"] = new Dictionary<string, object>()
+                optionalModelRecord = new
                 {
-                    ["key"] = null
-            ,
                 },
-                ["optionalPlainDate"] = "2022-05-10",
-                ["optionalPlainTime"] = "01:23:45",
-                ["optionalCollectionWithNullableIntElement"] = new List<object>()
+                optionalPlainDate = "2022-05-10",
+                optionalPlainTime = "01:23:45",
+                optionalCollectionWithNullableIntElement = new List<object>()
 {
 1234
 },
@@ -1741,30 +1705,30 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["requiredNullableInt"] = 1234,
-                ["requiredNullableString"] = "<requiredNullableString>",
-                ["requiredModel"] = new Dictionary<string, object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                requiredModel = new
                 {
-                    ["requiredString"] = "<requiredString>",
-                    ["discriminatorProperty"] = "A",
-                    ["requiredPropertyOnBase"] = 1234,
+                    requiredString = "<requiredString>",
+                    discriminatorProperty = "A",
+                    requiredPropertyOnBase = 1234,
                 },
-                ["requiredFixedStringEnum"] = "1",
-                ["requiredFixedIntEnum"] = 1,
-                ["requiredExtensibleEnum"] = "1",
-                ["requiredList"] = new List<object>()
+                requiredFixedStringEnum = "1",
+                requiredFixedIntEnum = 1,
+                requiredExtensibleEnum = "1",
+                requiredList = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["requiredModelRecord"] = new Dictionary<string, object>()
+requiredModelRecord = new
 {
-["key"] = new Dictionary<string, object>()
+key = new
 {
-["requiredList"] = new List<object>()
+requiredList = new List<object>()
 {
 null
 },
@@ -1772,34 +1736,32 @@ null
 },
 }
 },
-                ["requiredIntRecord"] = new Dictionary<string, object>()
+                requiredIntRecord = new
                 {
-                    ["key"] = 1234,
+                    key = 1234,
                 },
-                ["requiredStringRecord"] = new Dictionary<string, object>()
+                requiredStringRecord = new
                 {
-                    ["key"] = "<requiredStringRecord>",
+                    key = "<requiredStringRecord>",
                 },
-                ["requiredModelRecord"] = new Dictionary<string, object>()
+                requiredModelRecord = new
                 {
-                    ["key"] = null
-            ,
                 },
-                ["requiredBytes"] = new Dictionary<string, object>(),
-                ["requiredUint8Array"] = new List<object>()
+                requiredBytes = new object(),
+                requiredUint8Array = new List<object>()
 {
 1234
 },
-                ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["requiredInt8Array"] = new List<object>()
+                requiredUnknown = new object(),
+                requiredInt8Array = new List<object>()
 {
 1234
 },
-                ["requiredNullableIntList"] = new List<object>()
+                requiredNullableIntList = new List<object>()
 {
 1234
 },
-                ["requiredNullableStringList"] = new List<object>()
+                requiredNullableStringList = new List<object>()
 {
 "<requiredNullableStringList>"
 },
@@ -1818,35 +1780,35 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["nonRequiredString"] = "<nonRequiredString>",
-                ["nonRequiredInt"] = 1234,
-                ["requiredNullableInt"] = 1234,
-                ["requiredNullableString"] = "<requiredNullableString>",
-                ["nonRequiredNullableInt"] = 1234,
-                ["nonRequiredNullableString"] = "<nonRequiredNullableString>",
-                ["requiredModel"] = new Dictionary<string, object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                nonRequiredString = "<nonRequiredString>",
+                nonRequiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                nonRequiredNullableInt = 1234,
+                nonRequiredNullableString = "<nonRequiredNullableString>",
+                requiredModel = new
                 {
-                    ["requiredString"] = "<requiredString>",
-                    ["discriminatorProperty"] = "A",
-                    ["optionalPropertyOnBase"] = "<optionalPropertyOnBase>",
-                    ["requiredPropertyOnBase"] = 1234,
+                    requiredString = "<requiredString>",
+                    discriminatorProperty = "A",
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
+                    requiredPropertyOnBase = 1234,
                 },
-                ["requiredFixedStringEnum"] = "1",
-                ["requiredFixedIntEnum"] = 1,
-                ["requiredExtensibleEnum"] = "1",
-                ["requiredList"] = new List<object>()
+                requiredFixedStringEnum = "1",
+                requiredFixedIntEnum = 1,
+                requiredExtensibleEnum = "1",
+                requiredList = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["requiredModelRecord"] = new Dictionary<string, object>()
+requiredModelRecord = new
 {
-["key"] = new Dictionary<string, object>()
+key = new
 {
-["requiredList"] = new List<object>()
+requiredList = new List<object>()
 {
 null
 },
@@ -1854,52 +1816,50 @@ null
 },
 }
 },
-                ["requiredIntRecord"] = new Dictionary<string, object>()
+                requiredIntRecord = new
                 {
-                    ["key"] = 1234,
+                    key = 1234,
                 },
-                ["requiredStringRecord"] = new Dictionary<string, object>()
+                requiredStringRecord = new
                 {
-                    ["key"] = "<requiredStringRecord>",
+                    key = "<requiredStringRecord>",
                 },
-                ["requiredModelRecord"] = new Dictionary<string, object>()
+                requiredModelRecord = new
                 {
-                    ["key"] = null
-            ,
                 },
-                ["requiredBytes"] = new Dictionary<string, object>(),
-                ["optionalBytes"] = new Dictionary<string, object>(),
-                ["requiredUint8Array"] = new List<object>()
+                requiredBytes = new object(),
+                optionalBytes = new object(),
+                requiredUint8Array = new List<object>()
 {
 1234
 },
-                ["optionalUint8Array"] = new List<object>()
+                optionalUint8Array = new List<object>()
 {
 1234
 },
-                ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["optionalUnknown"] = new Dictionary<string, object>(),
-                ["requiredInt8Array"] = new List<object>()
+                requiredUnknown = new object(),
+                optionalUnknown = new object(),
+                requiredInt8Array = new List<object>()
 {
 1234
 },
-                ["optionalInt8Array"] = new List<object>()
+                optionalInt8Array = new List<object>()
 {
 1234
 },
-                ["requiredNullableIntList"] = new List<object>()
+                requiredNullableIntList = new List<object>()
 {
 1234
 },
-                ["requiredNullableStringList"] = new List<object>()
+                requiredNullableStringList = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-                ["nonRequiredNullableIntList"] = new List<object>()
+                nonRequiredNullableIntList = new List<object>()
 {
 1234
 },
-                ["nonRequiredNullableStringList"] = new List<object>()
+                nonRequiredNullableStringList = new List<object>()
 {
 "<nonRequiredNullableStringList>"
 },
@@ -1936,10 +1896,10 @@ null
 }, new Dictionary<string, RecordItem>()
 {
     ["key"] = null,
-}, BinaryData.FromObjectAsJson(new Dictionary<string, object>()), new List<int>()
+}, BinaryData.FromObjectAsJson(new object()), new List<int>()
 {
 1234
-}, BinaryData.FromObjectAsJson(new Dictionary<string, object>()), new List<int>()
+}, BinaryData.FromObjectAsJson(new object()), new List<int>()
 {
 1234
 }, new List<int>()
@@ -1980,10 +1940,10 @@ null
 }, new Dictionary<string, RecordItem>()
 {
     ["key"] = null,
-}, BinaryData.FromObjectAsJson(new Dictionary<string, object>()), new List<int>()
+}, BinaryData.FromObjectAsJson(new object()), new List<int>()
 {
 1234
-}, BinaryData.FromObjectAsJson(new Dictionary<string, object>()), new List<int>()
+}, BinaryData.FromObjectAsJson(new object()), new List<int>()
 {
 1234
 }, new List<int>()
@@ -1998,12 +1958,12 @@ null
                 NonRequiredInt = 1234,
                 NonRequiredNullableInt = 1234,
                 NonRequiredNullableString = "<nonRequiredNullableString>",
-                OptionalBytes = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+                OptionalBytes = BinaryData.FromObjectAsJson(new object()),
                 OptionalUint8Array =
 {
 1234
 },
-                OptionalUnknown = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+                OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
                 OptionalInt8Array =
 {
 1234
@@ -2027,30 +1987,30 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["requiredNullableInt"] = 1234,
-                ["requiredNullableString"] = "<requiredNullableString>",
-                ["requiredModel"] = new Dictionary<string, object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                requiredModel = new
                 {
-                    ["requiredString"] = "<requiredString>",
-                    ["discriminatorProperty"] = "A",
-                    ["requiredPropertyOnBase"] = 1234,
+                    requiredString = "<requiredString>",
+                    discriminatorProperty = "A",
+                    requiredPropertyOnBase = 1234,
                 },
-                ["requiredFixedStringEnum"] = "1",
-                ["requiredFixedIntEnum"] = 1,
-                ["requiredExtensibleEnum"] = "1",
-                ["requiredList"] = new List<object>()
+                requiredFixedStringEnum = "1",
+                requiredFixedIntEnum = 1,
+                requiredExtensibleEnum = "1",
+                requiredList = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["requiredModelRecord"] = new Dictionary<string, object>()
+requiredModelRecord = new
 {
-["key"] = new Dictionary<string, object>()
+key = new
 {
-["requiredList"] = new List<object>()
+requiredList = new List<object>()
 {
 null
 },
@@ -2058,34 +2018,32 @@ null
 },
 }
 },
-                ["requiredIntRecord"] = new Dictionary<string, object>()
+                requiredIntRecord = new
                 {
-                    ["key"] = 1234,
+                    key = 1234,
                 },
-                ["requiredStringRecord"] = new Dictionary<string, object>()
+                requiredStringRecord = new
                 {
-                    ["key"] = "<requiredStringRecord>",
+                    key = "<requiredStringRecord>",
                 },
-                ["requiredModelRecord"] = new Dictionary<string, object>()
+                requiredModelRecord = new
                 {
-                    ["key"] = null
-            ,
                 },
-                ["requiredBytes"] = new Dictionary<string, object>(),
-                ["requiredUint8Array"] = new List<object>()
+                requiredBytes = new object(),
+                requiredUint8Array = new List<object>()
 {
 1234
 },
-                ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["requiredInt8Array"] = new List<object>()
+                requiredUnknown = new object(),
+                requiredInt8Array = new List<object>()
 {
 1234
 },
-                ["requiredNullableIntList"] = new List<object>()
+                requiredNullableIntList = new List<object>()
 {
 1234
 },
-                ["requiredNullableStringList"] = new List<object>()
+                requiredNullableStringList = new List<object>()
 {
 "<requiredNullableStringList>"
 },
@@ -2104,35 +2062,35 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
-                ["nonRequiredString"] = "<nonRequiredString>",
-                ["nonRequiredInt"] = 1234,
-                ["requiredNullableInt"] = 1234,
-                ["requiredNullableString"] = "<requiredNullableString>",
-                ["nonRequiredNullableInt"] = 1234,
-                ["nonRequiredNullableString"] = "<nonRequiredNullableString>",
-                ["requiredModel"] = new Dictionary<string, object>()
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                nonRequiredString = "<nonRequiredString>",
+                nonRequiredInt = 1234,
+                requiredNullableInt = 1234,
+                requiredNullableString = "<requiredNullableString>",
+                nonRequiredNullableInt = 1234,
+                nonRequiredNullableString = "<nonRequiredNullableString>",
+                requiredModel = new
                 {
-                    ["requiredString"] = "<requiredString>",
-                    ["discriminatorProperty"] = "A",
-                    ["optionalPropertyOnBase"] = "<optionalPropertyOnBase>",
-                    ["requiredPropertyOnBase"] = 1234,
+                    requiredString = "<requiredString>",
+                    discriminatorProperty = "A",
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
+                    requiredPropertyOnBase = 1234,
                 },
-                ["requiredFixedStringEnum"] = "1",
-                ["requiredFixedIntEnum"] = 1,
-                ["requiredExtensibleEnum"] = "1",
-                ["requiredList"] = new List<object>()
+                requiredFixedStringEnum = "1",
+                requiredFixedIntEnum = 1,
+                requiredExtensibleEnum = "1",
+                requiredList = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["requiredModelRecord"] = new Dictionary<string, object>()
+requiredModelRecord = new
 {
-["key"] = new Dictionary<string, object>()
+key = new
 {
-["requiredList"] = new List<object>()
+requiredList = new List<object>()
 {
 null
 },
@@ -2140,52 +2098,50 @@ null
 },
 }
 },
-                ["requiredIntRecord"] = new Dictionary<string, object>()
+                requiredIntRecord = new
                 {
-                    ["key"] = 1234,
+                    key = 1234,
                 },
-                ["requiredStringRecord"] = new Dictionary<string, object>()
+                requiredStringRecord = new
                 {
-                    ["key"] = "<requiredStringRecord>",
+                    key = "<requiredStringRecord>",
                 },
-                ["requiredModelRecord"] = new Dictionary<string, object>()
+                requiredModelRecord = new
                 {
-                    ["key"] = null
-            ,
                 },
-                ["requiredBytes"] = new Dictionary<string, object>(),
-                ["optionalBytes"] = new Dictionary<string, object>(),
-                ["requiredUint8Array"] = new List<object>()
+                requiredBytes = new object(),
+                optionalBytes = new object(),
+                requiredUint8Array = new List<object>()
 {
 1234
 },
-                ["optionalUint8Array"] = new List<object>()
+                optionalUint8Array = new List<object>()
 {
 1234
 },
-                ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["optionalUnknown"] = new Dictionary<string, object>(),
-                ["requiredInt8Array"] = new List<object>()
+                requiredUnknown = new object(),
+                optionalUnknown = new object(),
+                requiredInt8Array = new List<object>()
 {
 1234
 },
-                ["optionalInt8Array"] = new List<object>()
+                optionalInt8Array = new List<object>()
 {
 1234
 },
-                ["requiredNullableIntList"] = new List<object>()
+                requiredNullableIntList = new List<object>()
 {
 1234
 },
-                ["requiredNullableStringList"] = new List<object>()
+                requiredNullableStringList = new List<object>()
 {
 "<requiredNullableStringList>"
 },
-                ["nonRequiredNullableIntList"] = new List<object>()
+                nonRequiredNullableIntList = new List<object>()
 {
 1234
 },
-                ["nonRequiredNullableStringList"] = new List<object>()
+                nonRequiredNullableStringList = new List<object>()
 {
 "<nonRequiredNullableStringList>"
 },
@@ -2222,10 +2178,10 @@ null
 }, new Dictionary<string, RecordItem>()
 {
     ["key"] = null,
-}, BinaryData.FromObjectAsJson(new Dictionary<string, object>()), new List<int>()
+}, BinaryData.FromObjectAsJson(new object()), new List<int>()
 {
 1234
-}, BinaryData.FromObjectAsJson(new Dictionary<string, object>()), new List<int>()
+}, BinaryData.FromObjectAsJson(new object()), new List<int>()
 {
 1234
 }, new List<int>()
@@ -2266,10 +2222,10 @@ null
 }, new Dictionary<string, RecordItem>()
 {
     ["key"] = null,
-}, BinaryData.FromObjectAsJson(new Dictionary<string, object>()), new List<int>()
+}, BinaryData.FromObjectAsJson(new object()), new List<int>()
 {
 1234
-}, BinaryData.FromObjectAsJson(new Dictionary<string, object>()), new List<int>()
+}, BinaryData.FromObjectAsJson(new object()), new List<int>()
 {
 1234
 }, new List<int>()
@@ -2284,12 +2240,12 @@ null
                 NonRequiredInt = 1234,
                 NonRequiredNullableInt = 1234,
                 NonRequiredNullableString = "<nonRequiredNullableString>",
-                OptionalBytes = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+                OptionalBytes = BinaryData.FromObjectAsJson(new object()),
                 OptionalUint8Array =
 {
 1234
 },
-                OptionalUnknown = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+                OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
                 OptionalInt8Array =
 {
 1234
@@ -2313,9 +2269,9 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["message"] = "<message>",
+                message = "<message>",
             });
             Response response = client.InputRecursive(content);
             Console.WriteLine(response.Status);
@@ -2328,11 +2284,9 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["message"] = "<message>",
-                ["inner"] = null
-            ,
+                message = "<message>",
             });
             Response response = client.InputRecursive(content);
             Console.WriteLine(response.Status);
@@ -2372,9 +2326,9 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["message"] = "<message>",
+                message = "<message>",
             });
             Response response = await client.InputRecursiveAsync(content);
             Console.WriteLine(response.Status);
@@ -2387,11 +2341,9 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["message"] = "<message>",
-                ["inner"] = null
-            ,
+                message = "<message>",
             });
             Response response = await client.InputRecursiveAsync(content);
             Console.WriteLine(response.Status);
@@ -2431,9 +2383,9 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["message"] = "<message>",
+                message = "<message>",
             });
             Response response = client.RoundTripRecursive(content);
 
@@ -2448,11 +2400,9 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["message"] = "<message>",
-                ["inner"] = null
-            ,
+                message = "<message>",
             });
             Response response = client.RoundTripRecursive(content);
 
@@ -2493,9 +2443,9 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["message"] = "<message>",
+                message = "<message>",
             });
             Response response = await client.RoundTripRecursiveAsync(content);
 
@@ -2510,11 +2460,9 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["message"] = "<message>",
-                ["inner"] = null
-            ,
+                message = "<message>",
             });
             Response response = await client.RoundTripRecursiveAsync(content);
 
@@ -2649,17 +2597,17 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredList"] = new List<object>()
+                requiredList = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["requiredModelRecord"] = new Dictionary<string, object>()
+requiredModelRecord = new
 {
-["key"] = new Dictionary<string, object>()
+key = new
 {
-["requiredList"] = new List<object>()
+requiredList = new List<object>()
 {
 null
 },
@@ -2667,7 +2615,7 @@ null
 },
 }
 },
-                ["baseModelProp"] = "<baseModelProp>",
+                baseModelProp = "<baseModelProp>",
             });
             Response response = client.RoundTripToOutputWithNoUseBase(content);
 
@@ -2682,17 +2630,17 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredList"] = new List<object>()
+                requiredList = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["requiredModelRecord"] = new Dictionary<string, object>()
+requiredModelRecord = new
 {
-["key"] = new Dictionary<string, object>()
+key = new
 {
-["requiredList"] = new List<object>()
+requiredList = new List<object>()
 {
 null
 },
@@ -2700,7 +2648,7 @@ null
 },
 }
 },
-                ["baseModelProp"] = "<baseModelProp>",
+                baseModelProp = "<baseModelProp>",
             });
             Response response = client.RoundTripToOutputWithNoUseBase(content);
 
@@ -2755,17 +2703,17 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredList"] = new List<object>()
+                requiredList = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["requiredModelRecord"] = new Dictionary<string, object>()
+requiredModelRecord = new
 {
-["key"] = new Dictionary<string, object>()
+key = new
 {
-["requiredList"] = new List<object>()
+requiredList = new List<object>()
 {
 null
 },
@@ -2773,7 +2721,7 @@ null
 },
 }
 },
-                ["baseModelProp"] = "<baseModelProp>",
+                baseModelProp = "<baseModelProp>",
             });
             Response response = await client.RoundTripToOutputWithNoUseBaseAsync(content);
 
@@ -2788,17 +2736,17 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredList"] = new List<object>()
+                requiredList = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["requiredModelRecord"] = new Dictionary<string, object>()
+requiredModelRecord = new
 {
-["key"] = new Dictionary<string, object>()
+key = new
 {
-["requiredList"] = new List<object>()
+requiredList = new List<object>()
 {
 null
 },
@@ -2806,7 +2754,7 @@ null
 },
 }
 },
-                ["baseModelProp"] = "<baseModelProp>",
+                baseModelProp = "<baseModelProp>",
             });
             Response response = await client.RoundTripToOutputWithNoUseBaseAsync(content);
 
@@ -3055,15 +3003,15 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "Int32Values",
-                ["values"] = new List<object>()
+                kind = "Int32Values",
+                values = new List<object>()
 {
 1234
 },
-                ["value"] = 1234,
-                ["field"] = "<field>",
+                value = 1234,
+                field = "<field>",
             });
             Response response = client.GenericType(content);
             Console.WriteLine(response.Status);
@@ -3076,15 +3024,15 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "Int32Values",
-                ["values"] = new List<object>()
+                kind = "Int32Values",
+                values = new List<object>()
 {
 1234
 },
-                ["value"] = 1234,
-                ["field"] = "<field>",
+                value = 1234,
+                field = "<field>",
             });
             Response response = client.GenericType(content);
             Console.WriteLine(response.Status);
@@ -3127,15 +3075,15 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "Int32Values",
-                ["values"] = new List<object>()
+                kind = "Int32Values",
+                values = new List<object>()
 {
 1234
 },
-                ["value"] = 1234,
-                ["field"] = "<field>",
+                value = 1234,
+                field = "<field>",
             });
             Response response = await client.GenericTypeAsync(content);
             Console.WriteLine(response.Status);
@@ -3148,15 +3096,15 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "Int32Values",
-                ["values"] = new List<object>()
+                kind = "Int32Values",
+                values = new List<object>()
 {
 1234
 },
-                ["value"] = 1234,
-                ["field"] = "<field>",
+                value = 1234,
+                field = "<field>",
             });
             Response response = await client.GenericTypeAsync(content);
             Console.WriteLine(response.Status);

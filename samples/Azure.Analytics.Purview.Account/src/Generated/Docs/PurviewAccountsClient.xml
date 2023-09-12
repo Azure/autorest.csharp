@@ -133,7 +133,7 @@ Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = await client.UpdateAccountPropertiesAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -145,9 +145,9 @@ Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["friendlyName"] = "<friendlyName>",
+    friendlyName = "<friendlyName>",
 });
 Response response = await client.UpdateAccountPropertiesAsync(content);
 
@@ -200,7 +200,7 @@ Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = client.UpdateAccountProperties(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -212,9 +212,9 @@ Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["friendlyName"] = "<friendlyName>",
+    friendlyName = "<friendlyName>",
 });
 Response response = client.UpdateAccountProperties(content);
 
@@ -319,7 +319,7 @@ Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = await client.RegenerateAccessKeyAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -331,9 +331,9 @@ Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["keyType"] = "PrimaryAtlasKafkaKey",
+    keyType = "PrimaryAtlasKafkaKey",
 });
 Response response = await client.RegenerateAccessKeyAsync(content);
 
@@ -350,7 +350,7 @@ Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = client.RegenerateAccessKey(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -362,9 +362,9 @@ Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["keyType"] = "PrimaryAtlasKafkaKey",
+    keyType = "PrimaryAtlasKafkaKey",
 });
 Response response = client.RegenerateAccessKey(content);
 

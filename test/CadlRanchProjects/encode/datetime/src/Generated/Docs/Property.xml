@@ -41,9 +41,9 @@ This sample shows how to call DefaultAsync and parse the result.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = "2022-05-10T14:57:31.2311892-04:00",
+    value = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = await client.DefaultAsync(content);
 
@@ -54,9 +54,9 @@ This sample shows how to call DefaultAsync with all request content and parse th
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = "2022-05-10T14:57:31.2311892-04:00",
+    value = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = await client.DefaultAsync(content);
 
@@ -70,9 +70,9 @@ This sample shows how to call Default and parse the result.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = "2022-05-10T14:57:31.2311892-04:00",
+    value = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = client.Default(content);
 
@@ -83,9 +83,9 @@ This sample shows how to call Default with all request content and parse the res
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = "2022-05-10T14:57:31.2311892-04:00",
+    value = "2022-05-10T14:57:31.2311892-04:00",
 });
 Response response = client.Default(content);
 
@@ -133,9 +133,9 @@ This sample shows how to call Rfc3339Async and parse the result.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = "2022-05-10T18:57:31.2311892Z",
+    value = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = await client.Rfc3339Async(content);
 
@@ -146,9 +146,9 @@ This sample shows how to call Rfc3339Async with all request content and parse th
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = "2022-05-10T18:57:31.2311892Z",
+    value = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = await client.Rfc3339Async(content);
 
@@ -162,9 +162,9 @@ This sample shows how to call Rfc3339 and parse the result.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = "2022-05-10T18:57:31.2311892Z",
+    value = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = client.Rfc3339(content);
 
@@ -175,9 +175,9 @@ This sample shows how to call Rfc3339 with all request content and parse the res
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = "2022-05-10T18:57:31.2311892Z",
+    value = "2022-05-10T18:57:31.2311892Z",
 });
 Response response = client.Rfc3339(content);
 
@@ -225,9 +225,9 @@ This sample shows how to call Rfc7231Async and parse the result.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = "Tue, 10 May 2022 18:57:31 GMT",
+    value = "Tue, 10 May 2022 18:57:31 GMT",
 });
 Response response = await client.Rfc7231Async(content);
 
@@ -238,9 +238,9 @@ This sample shows how to call Rfc7231Async with all request content and parse th
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = "Tue, 10 May 2022 18:57:31 GMT",
+    value = "Tue, 10 May 2022 18:57:31 GMT",
 });
 Response response = await client.Rfc7231Async(content);
 
@@ -254,9 +254,9 @@ This sample shows how to call Rfc7231 and parse the result.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = "Tue, 10 May 2022 18:57:31 GMT",
+    value = "Tue, 10 May 2022 18:57:31 GMT",
 });
 Response response = client.Rfc7231(content);
 
@@ -267,9 +267,9 @@ This sample shows how to call Rfc7231 with all request content and parse the res
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = "Tue, 10 May 2022 18:57:31 GMT",
+    value = "Tue, 10 May 2022 18:57:31 GMT",
 });
 Response response = client.Rfc7231(content);
 
@@ -317,9 +317,9 @@ This sample shows how to call UnixTimestampAsync and parse the result.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = 1652209051,
+    value = 1652209051,
 });
 Response response = await client.UnixTimestampAsync(content);
 
@@ -330,9 +330,9 @@ This sample shows how to call UnixTimestampAsync with all request content and pa
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = 1652209051,
+    value = 1652209051,
 });
 Response response = await client.UnixTimestampAsync(content);
 
@@ -346,9 +346,9 @@ This sample shows how to call UnixTimestamp and parse the result.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = 1652209051,
+    value = 1652209051,
 });
 Response response = client.UnixTimestamp(content);
 
@@ -359,9 +359,9 @@ This sample shows how to call UnixTimestamp with all request content and parse t
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = 1652209051,
+    value = 1652209051,
 });
 Response response = client.UnixTimestamp(content);
 
@@ -421,9 +421,9 @@ This sample shows how to call UnixTimestampArrayAsync and parse the result.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = new List<object>()
+    value = new List<object>()
 {
 1652209051
 },
@@ -437,9 +437,9 @@ This sample shows how to call UnixTimestampArrayAsync with all request content a
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = new List<object>()
+    value = new List<object>()
 {
 1652209051
 },
@@ -456,9 +456,9 @@ This sample shows how to call UnixTimestampArray and parse the result.
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = new List<object>()
+    value = new List<object>()
 {
 1652209051
 },
@@ -472,9 +472,9 @@ This sample shows how to call UnixTimestampArray with all request content and pa
 <code><![CDATA[
 Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["value"] = new List<object>()
+    value = new List<object>()
 {
 1652209051
 },

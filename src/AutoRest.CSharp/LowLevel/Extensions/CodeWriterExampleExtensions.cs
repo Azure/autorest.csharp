@@ -12,6 +12,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -19,6 +20,7 @@ using AutoRest.CSharp.Output.Samples.Models;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.LowLevel.Generation.Extensions
 {
@@ -49,7 +51,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             // handle objects - we usually do not generate object types, but for some rare cases (such as union type) we generate object.
             if (frameworkType == typeof(object))
             {
-                return writer.AppendAnonymousObject(exampleValue, includeCollectionInitialization);
+                return writer.AppendFreeFormObject(exampleValue, includeCollectionInitialization);
             }
 
             // handle RequestContent
@@ -213,7 +215,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             else
             {
                 return writer.Append($"{typeof(RequestContent)}.Create(")
-                    .AppendAnonymousObject(value, true)
+                    .AppendFreeFormObject(value, true)
                     .AppendRaw(")");
             }
         }
@@ -281,20 +283,64 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             // determine which method on BinaryData we want to use to serialize this BinaryData
             string method = exampleValue is InputExampleRawValue exampleRawValue && exampleRawValue.RawValue is string ? "FromString" : "FromObjectAsJson";
             return writer.Append($"{typeof(BinaryData)}.{method}(")
-                .AppendAnonymousObject(exampleValue, true)
+                .AppendFreeFormObject(exampleValue, true)
                 .AppendRaw(")");
         }
 
-        private static CodeWriter AppendAnonymousObject(this CodeWriter writer, InputExampleValue exampleValue, bool includeCollectionInitialization = true) => exampleValue switch
+        private static CodeWriter AppendFreeFormObject(this CodeWriter writer, InputExampleValue exampleValue, bool includeCollectionInitialization = true) => exampleValue switch
         {
             InputExampleRawValue rawValue => rawValue.RawValue == null ?
                             writer.LineRaw("null") :
                             writer.AppendFrameworkTypeValue(exampleValue, rawValue.RawValue.GetType(), SerializationFormat.Default, includeCollectionInitialization),
             InputExampleListValue listValue => writer.AppendListValue(typeof(IList<object>), listValue, SerializationFormat.Default),
-            InputExampleObjectValue objectValue => writer.AppendDictionaryValue(typeof(Dictionary<string, object>), objectValue, SerializationFormat.Default, includeCollectionInitialization),
+            InputExampleObjectValue objectValue => CanBeInstantiatedByAnonymousObject(objectValue) ?
+                            writer.AppendAnonymousObject(objectValue, includeCollectionInitialization) :
+                            writer.AppendDictionaryValue(typeof(Dictionary<string, object>), objectValue, SerializationFormat.Default, includeCollectionInitialization),
             InputExampleStreamValue streamValue => writer.Append($"{typeof(File)}.OpenRead({streamValue.Filename:L})"),
             _ => throw new InvalidOperationException($"unhandled case {exampleValue}")
         };
+
+        private static CodeWriter AppendAnonymousObject(this CodeWriter writer, InputExampleObjectValue exampleObjectValue, bool includeCollectionInitialization = true)
+        {
+            // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
+            var keyValues = exampleObjectValue?.Values ?? new Dictionary<string, InputExampleValue>();
+            if (keyValues.Any())
+            {
+                using (writer.Scope($"new ", newLine: false))
+                {
+                    foreach (var (key, value) in keyValues)
+                    {
+                        // we only write a property when it is not null because an anonymous object cannot have null assignments (causes compilation error)
+                        if (value is InputExampleRawValue rawValue && rawValue.RawValue == null)
+                            continue;
+
+                        // write key
+                        writer.Append($"{key} = ");
+                        // write value
+                        writer.AppendInputExampleValue(value, typeof(object), SerializationFormat.Default, includeCollectionInitialization);
+                        writer.LineRaw(", ");
+                    }
+                }
+            }
+            else
+            {
+                writer.Append($"new object()");
+            }
+            return writer;
+        }
+
+        private static bool CanBeInstantiatedByAnonymousObject(InputExampleObjectValue objectValue)
+        {
+            foreach (var (key, _) in objectValue.Values)
+            {
+                if (!SyntaxFacts.IsValidIdentifier(key) || SyntaxFacts.IsReservedKeyword(SyntaxFacts.GetKeywordKind(key)))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
 
         private static bool IsStringLikeType(CSharpType type) => type.IsFrameworkType && (_newInstanceInitializedTypes.Contains(type.FrameworkType) || _parsableInitializedTypes.Contains(type.FrameworkType));
 
@@ -371,24 +417,19 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             {
                 // try every property, convert them to variable name and see if there are some of them matching
                 var property = propertyDict[parameter.Name];
-                InputExampleValue? exampleValue;
-                if (!valueDict.TryGetValue(property.InputModelProperty!.SerializedName, out exampleValue))
+                if (valueDict.TryGetValue(property.InputModelProperty!.SerializedName, out var exampleValue))
                 {
-                    // we could only stand the case that the missing property here is a collection, in this case, we pass an empty collection
-                    if (TypeFactory.IsCollectionType(property.Declaration.Type))
-                    {
-                        exampleValue = InputExampleValue.List(property.InputModelProperty!.Type, Array.Empty<InputExampleValue>());
-                    }
-                    else if (IsStringLikeType(property.Declaration.Type))
-                    {
-                        // this is a patch that some parameter is not marked as required, but in our generated code, it inherits from ResourceData, in which location is in the constructor and our code will recognize it as required
-                        exampleValue = InputExampleValue.Value(InputPrimitiveType.String, "placeholder");
-                    }
-                    else
-                        throw new InvalidOperationException($"Example value for required property {property.InputModelProperty!.SerializedName} in class {objectType.Type.Name} is not found");
+                    properties.Remove(property);
+                    writer.AppendInputExampleValue(exampleValue, property.Declaration.Type, property.SerializationFormat, includeCollectionInitialization: true).AppendRaw(",");
                 }
-                properties.Remove(property);
-                writer.AppendInputExampleValue(exampleValue, property.Declaration.Type, property.SerializationFormat, includeCollectionInitialization: true).AppendRaw(",");
+                else
+                {
+                    // if no match, we put default here
+                    if (property.Declaration.Type.IsValueType && !property.Declaration.Type.IsNullable)
+                        writer.AppendRaw("default");
+                    else
+                        writer.AppendRaw("null");
+                }
             }
             writer.RemoveTrailingComma();
             writer.AppendRaw(")");

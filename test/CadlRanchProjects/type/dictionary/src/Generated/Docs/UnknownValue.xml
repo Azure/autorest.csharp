@@ -81,7 +81,7 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "
 
 Response response = await client.PutAsync(new Dictionary<string, BinaryData>()
 {
-    ["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+    ["key"] = BinaryData.FromObjectAsJson(new object()),
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -91,7 +91,7 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "
 
 Response response = await client.PutAsync(new Dictionary<string, BinaryData>()
 {
-    ["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+    ["key"] = BinaryData.FromObjectAsJson(new object()),
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -104,7 +104,7 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "
 
 Response response = client.Put(new Dictionary<string, BinaryData>()
 {
-    ["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+    ["key"] = BinaryData.FromObjectAsJson(new object()),
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -114,7 +114,7 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "
 
 Response response = client.Put(new Dictionary<string, BinaryData>()
 {
-    ["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+    ["key"] = BinaryData.FromObjectAsJson(new object()),
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -125,9 +125,9 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["key"] = new Dictionary<string, object>(),
+    key = new object(),
 });
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
@@ -136,9 +136,9 @@ This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["key"] = new Dictionary<string, object>(),
+    key = new object(),
 });
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
@@ -150,9 +150,9 @@ This sample shows how to call Put.
 <code><![CDATA[
 UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["key"] = new Dictionary<string, object>(),
+    key = new object(),
 });
 Response response = client.Put(content);
 Console.WriteLine(response.Status);
@@ -161,9 +161,9 @@ This sample shows how to call Put with all request content.
 <code><![CDATA[
 UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["key"] = new Dictionary<string, object>(),
+    key = new object(),
 });
 Response response = client.Put(content);
 Console.WriteLine(response.Status);

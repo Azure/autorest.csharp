@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -258,7 +257,7 @@ namespace paging_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             foreach (BinaryData item in client.GetSinglePagesWithBodyParams(content))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
@@ -273,9 +272,9 @@ namespace paging_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             foreach (BinaryData item in client.GetSinglePagesWithBodyParams(content))
             {
@@ -292,7 +291,7 @@ namespace paging_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             await foreach (BinaryData item in client.GetSinglePagesWithBodyParamsAsync(content))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
@@ -307,9 +306,9 @@ namespace paging_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             await foreach (BinaryData item in client.GetSinglePagesWithBodyParamsAsync(content))
             {

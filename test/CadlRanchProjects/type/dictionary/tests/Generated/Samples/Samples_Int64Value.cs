@@ -109,9 +109,9 @@ namespace _Type._Dictionary.Samples
         {
             Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = 1234L,
+                key = 1234L,
             });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -123,9 +123,9 @@ namespace _Type._Dictionary.Samples
         {
             Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = 1234L,
+                key = 1234L,
             });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -163,9 +163,9 @@ namespace _Type._Dictionary.Samples
         {
             Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = 1234L,
+                key = 1234L,
             });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
@@ -177,9 +177,9 @@ namespace _Type._Dictionary.Samples
         {
             Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = 1234L,
+                key = 1234L,
             });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);

@@ -772,7 +772,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = client.ByteMultiByte(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = client.ByteMultiByte(BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 
@@ -783,7 +783,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = client.ByteMultiByte(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = client.ByteMultiByte(BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 
@@ -794,7 +794,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = await client.ByteMultiByteAsync(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = await client.ByteMultiByteAsync(BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 
@@ -805,7 +805,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = await client.ByteMultiByteAsync(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = await client.ByteMultiByteAsync(BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 
@@ -860,7 +860,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = client.ByteNull(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = client.ByteNull(BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 
@@ -871,7 +871,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = client.ByteNull(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = client.ByteNull(BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 
@@ -882,7 +882,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = await client.ByteNullAsync(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = await client.ByteNullAsync(BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 
@@ -893,7 +893,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = await client.ByteNullAsync(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = await client.ByteNullAsync(BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 
@@ -1080,7 +1080,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = client.Base64Url(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = client.Base64Url(BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 
@@ -1091,7 +1091,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = client.Base64Url(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = client.Base64Url(BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 
@@ -1102,7 +1102,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = await client.Base64UrlAsync(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = await client.Base64UrlAsync(BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 
@@ -1113,7 +1113,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient(credential);
 
-            Response response = await client.Base64UrlAsync(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = await client.Base64UrlAsync(BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 

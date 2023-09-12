@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -26,11 +25,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["smart"] = true,
-                ["age"] = 1234,
-                ["name"] = "<name>",
+                smart = true,
+                age = 1234,
+                name = "<name>",
             });
             Response response = client.PostValid(content);
             Console.WriteLine(response.Status);
@@ -42,11 +41,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["smart"] = true,
-                ["age"] = 1234,
-                ["name"] = "<name>",
+                smart = true,
+                age = 1234,
+                name = "<name>",
             });
             Response response = client.PostValid(content);
             Console.WriteLine(response.Status);
@@ -80,11 +79,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["smart"] = true,
-                ["age"] = 1234,
-                ["name"] = "<name>",
+                smart = true,
+                age = 1234,
+                name = "<name>",
             });
             Response response = await client.PostValidAsync(content);
             Console.WriteLine(response.Status);
@@ -96,11 +95,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["smart"] = true,
-                ["age"] = 1234,
-                ["name"] = "<name>",
+                smart = true,
+                age = 1234,
+                name = "<name>",
             });
             Response response = await client.PostValidAsync(content);
             Console.WriteLine(response.Status);
@@ -226,11 +225,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["smart"] = true,
-                ["age"] = 1234,
-                ["name"] = "<name>",
+                smart = true,
+                age = 1234,
+                name = "<name>",
             });
             Response response = client.PutValid(content);
 
@@ -246,11 +245,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["smart"] = true,
-                ["age"] = 1234,
-                ["name"] = "<name>",
+                smart = true,
+                age = 1234,
+                name = "<name>",
             });
             Response response = client.PutValid(content);
 
@@ -286,11 +285,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["smart"] = true,
-                ["age"] = 1234,
-                ["name"] = "<name>",
+                smart = true,
+                age = 1234,
+                name = "<name>",
             });
             Response response = await client.PutValidAsync(content);
 
@@ -306,11 +305,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["smart"] = true,
-                ["age"] = 1234,
-                ["name"] = "<name>",
+                smart = true,
+                age = 1234,
+                name = "<name>",
             });
             Response response = await client.PutValidAsync(content);
 

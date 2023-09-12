@@ -26,9 +26,9 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "2022-05-10T14:57:31.2311892-04:00",
+                value = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.Default(content);
 
@@ -42,9 +42,9 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "2022-05-10T14:57:31.2311892-04:00",
+                value = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = client.Default(content);
 
@@ -78,9 +78,9 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "2022-05-10T14:57:31.2311892-04:00",
+                value = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.DefaultAsync(content);
 
@@ -94,9 +94,9 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "2022-05-10T14:57:31.2311892-04:00",
+                value = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.DefaultAsync(content);
 
@@ -130,9 +130,9 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "2022-05-10T18:57:31.2311892Z",
+                value = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = client.Rfc3339(content);
 
@@ -146,9 +146,9 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "2022-05-10T18:57:31.2311892Z",
+                value = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = client.Rfc3339(content);
 
@@ -182,9 +182,9 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "2022-05-10T18:57:31.2311892Z",
+                value = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = await client.Rfc3339Async(content);
 
@@ -198,9 +198,9 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "2022-05-10T18:57:31.2311892Z",
+                value = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = await client.Rfc3339Async(content);
 
@@ -234,9 +234,9 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "Tue, 10 May 2022 18:57:31 GMT",
+                value = "Tue, 10 May 2022 18:57:31 GMT",
             });
             Response response = client.Rfc7231(content);
 
@@ -250,9 +250,9 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "Tue, 10 May 2022 18:57:31 GMT",
+                value = "Tue, 10 May 2022 18:57:31 GMT",
             });
             Response response = client.Rfc7231(content);
 
@@ -286,9 +286,9 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "Tue, 10 May 2022 18:57:31 GMT",
+                value = "Tue, 10 May 2022 18:57:31 GMT",
             });
             Response response = await client.Rfc7231Async(content);
 
@@ -302,9 +302,9 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "Tue, 10 May 2022 18:57:31 GMT",
+                value = "Tue, 10 May 2022 18:57:31 GMT",
             });
             Response response = await client.Rfc7231Async(content);
 
@@ -338,9 +338,9 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = 1652209051,
+                value = 1652209051,
             });
             Response response = client.UnixTimestamp(content);
 
@@ -354,9 +354,9 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = 1652209051,
+                value = 1652209051,
             });
             Response response = client.UnixTimestamp(content);
 
@@ -390,9 +390,9 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = 1652209051,
+                value = 1652209051,
             });
             Response response = await client.UnixTimestampAsync(content);
 
@@ -406,9 +406,9 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = 1652209051,
+                value = 1652209051,
             });
             Response response = await client.UnixTimestampAsync(content);
 
@@ -442,9 +442,9 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new List<object>()
+                value = new List<object>()
 {
 1652209051
 },
@@ -461,9 +461,9 @@ namespace Encode.Datetime.Samples
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new List<object>()
+                value = new List<object>()
 {
 1652209051
 },
@@ -506,9 +506,9 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new List<object>()
+                value = new List<object>()
 {
 1652209051
 },
@@ -525,9 +525,9 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new List<object>()
+                value = new List<object>()
 {
 1652209051
 },

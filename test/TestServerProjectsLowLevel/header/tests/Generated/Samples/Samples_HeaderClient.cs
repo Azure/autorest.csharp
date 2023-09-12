@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml;
 using Azure;
@@ -1081,7 +1080,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = client.ParamByte("<scenario>", BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = client.ParamByte("<scenario>", BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 
@@ -1092,7 +1091,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = client.ParamByte("<scenario>", BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = client.ParamByte("<scenario>", BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 
@@ -1103,7 +1102,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 
@@ -1114,7 +1113,7 @@ namespace header_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HeaderClient client = new HeaderClient(credential);
 
-            Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 

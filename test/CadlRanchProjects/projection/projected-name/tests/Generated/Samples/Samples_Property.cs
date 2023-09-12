@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,9 +24,9 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["wireName"] = true,
+                wireName = true,
             });
             Response response = client.Json(content);
             Console.WriteLine(response.Status);
@@ -39,9 +38,9 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["wireName"] = true,
+                wireName = true,
             });
             Response response = client.Json(content);
             Console.WriteLine(response.Status);
@@ -75,9 +74,9 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["wireName"] = true,
+                wireName = true,
             });
             Response response = await client.JsonAsync(content);
             Console.WriteLine(response.Status);
@@ -89,9 +88,9 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["wireName"] = true,
+                wireName = true,
             });
             Response response = await client.JsonAsync(content);
             Console.WriteLine(response.Status);
@@ -125,9 +124,9 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["defaultName"] = true,
+                defaultName = true,
             });
             Response response = client.Client(content);
             Console.WriteLine(response.Status);
@@ -139,9 +138,9 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["defaultName"] = true,
+                defaultName = true,
             });
             Response response = client.Client(content);
             Console.WriteLine(response.Status);
@@ -175,9 +174,9 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["defaultName"] = true,
+                defaultName = true,
             });
             Response response = await client.ClientAsync(content);
             Console.WriteLine(response.Status);
@@ -189,9 +188,9 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["defaultName"] = true,
+                defaultName = true,
             });
             Response response = await client.ClientAsync(content);
             Console.WriteLine(response.Status);
@@ -225,9 +224,9 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["defaultName"] = true,
+                defaultName = true,
             });
             Response response = client.Language(content);
             Console.WriteLine(response.Status);
@@ -239,9 +238,9 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["defaultName"] = true,
+                defaultName = true,
             });
             Response response = client.Language(content);
             Console.WriteLine(response.Status);
@@ -275,9 +274,9 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["defaultName"] = true,
+                defaultName = true,
             });
             Response response = await client.LanguageAsync(content);
             Console.WriteLine(response.Status);
@@ -289,9 +288,9 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["defaultName"] = true,
+                defaultName = true,
             });
             Response response = await client.LanguageAsync(content);
             Console.WriteLine(response.Status);
@@ -325,9 +324,9 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["wireName"] = true,
+                wireName = true,
             });
             Response response = client.JsonAndClient(content);
             Console.WriteLine(response.Status);
@@ -339,9 +338,9 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["wireName"] = true,
+                wireName = true,
             });
             Response response = client.JsonAndClient(content);
             Console.WriteLine(response.Status);
@@ -375,9 +374,9 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["wireName"] = true,
+                wireName = true,
             });
             Response response = await client.JsonAndClientAsync(content);
             Console.WriteLine(response.Status);
@@ -389,9 +388,9 @@ namespace Projection.ProjectedName.Samples
         {
             Property client = new ProjectedNameClient().GetPropertyClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["wireName"] = true,
+                wireName = true,
             });
             Response response = await client.JsonAndClientAsync(content);
             Console.WriteLine(response.Status);

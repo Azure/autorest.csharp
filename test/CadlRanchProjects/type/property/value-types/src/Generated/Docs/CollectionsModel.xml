@@ -129,13 +129,13 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["property"] = new List<object>()
+    property = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
 });
@@ -146,13 +146,13 @@ This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["property"] = new List<object>()
+    property = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
 });
@@ -166,13 +166,13 @@ This sample shows how to call Put.
 <code><![CDATA[
 CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["property"] = new List<object>()
+    property = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
 });
@@ -183,13 +183,13 @@ This sample shows how to call Put with all request content.
 <code><![CDATA[
 CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["property"] = new List<object>()
+    property = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
 });

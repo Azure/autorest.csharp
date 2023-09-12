@@ -7,9 +7,9 @@ This sample shows how to call CreateOrUpdateAsync and parse the result.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["name"] = "<name>",
+    name = "<name>",
 });
 Response response = await client.CreateOrUpdateAsync(1234, content);
 
@@ -22,15 +22,15 @@ This sample shows how to call CreateOrUpdateAsync with all parameters and reques
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["name"] = "<name>",
-    ["orders"] = new List<object>()
+    name = "<name>",
+    orders = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["userId"] = 1234,
-["detail"] = "<detail>",
+userId = 1234,
+detail = "<detail>",
 }
 },
 });
@@ -51,9 +51,9 @@ This sample shows how to call CreateOrUpdate and parse the result.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["name"] = "<name>",
+    name = "<name>",
 });
 Response response = client.CreateOrUpdate(1234, content);
 
@@ -66,15 +66,15 @@ This sample shows how to call CreateOrUpdate with all parameters and request con
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["name"] = "<name>",
-    ["orders"] = new List<object>()
+    name = "<name>",
+    orders = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["userId"] = 1234,
-["detail"] = "<detail>",
+userId = 1234,
+detail = "<detail>",
 }
 },
 });
@@ -141,9 +141,9 @@ This sample shows how to call CreateOrReplaceAsync and parse the result.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["name"] = "<name>",
+    name = "<name>",
 });
 Response response = await client.CreateOrReplaceAsync(1234, content);
 
@@ -156,15 +156,15 @@ This sample shows how to call CreateOrReplaceAsync with all parameters and reque
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["name"] = "<name>",
-    ["orders"] = new List<object>()
+    name = "<name>",
+    orders = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["userId"] = 1234,
-["detail"] = "<detail>",
+userId = 1234,
+detail = "<detail>",
 }
 },
 });
@@ -185,9 +185,9 @@ This sample shows how to call CreateOrReplace and parse the result.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["name"] = "<name>",
+    name = "<name>",
 });
 Response response = client.CreateOrReplace(1234, content);
 
@@ -200,15 +200,15 @@ This sample shows how to call CreateOrReplace with all parameters and request co
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["name"] = "<name>",
-    ["orders"] = new List<object>()
+    name = "<name>",
+    orders = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["userId"] = 1234,
-["detail"] = "<detail>",
+userId = 1234,
+detail = "<detail>",
 }
 },
 });

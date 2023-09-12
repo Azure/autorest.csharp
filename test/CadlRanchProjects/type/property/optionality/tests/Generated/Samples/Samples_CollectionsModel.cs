@@ -194,7 +194,7 @@ namespace _Type.Property.Optionality.Samples
         {
             CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = client.PutAll(content);
             Console.WriteLine(response.Status);
         }
@@ -205,13 +205,13 @@ namespace _Type.Property.Optionality.Samples
         {
             CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new List<object>()
+                property = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
             });
@@ -256,7 +256,7 @@ Property = "<property>",
         {
             CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAllAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -267,13 +267,13 @@ Property = "<property>",
         {
             CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new List<object>()
+                property = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
             });
@@ -318,7 +318,7 @@ Property = "<property>",
         {
             CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDefault(content);
             Console.WriteLine(response.Status);
         }
@@ -329,13 +329,13 @@ Property = "<property>",
         {
             CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new List<object>()
+                property = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
             });
@@ -380,7 +380,7 @@ Property = "<property>",
         {
             CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDefaultAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -391,13 +391,13 @@ Property = "<property>",
         {
             CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new List<object>()
+                property = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
             });

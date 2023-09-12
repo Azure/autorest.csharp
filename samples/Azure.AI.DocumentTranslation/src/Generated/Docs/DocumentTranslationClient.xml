@@ -680,22 +680,22 @@ This sample shows how to call StartTranslationAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["inputs"] = new List<object>()
+    inputs = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["source"] = new Dictionary<string, object>()
+source = new
 {
-["sourceUrl"] = "<sourceUrl>",
+sourceUrl = "<sourceUrl>",
 },
-["targets"] = new List<object>()
+targets = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["targetUrl"] = "<targetUrl>",
-["language"] = "<language>",
+targetUrl = "<targetUrl>",
+language = "<language>",
 }
 },
 }
@@ -708,44 +708,44 @@ This sample shows how to call StartTranslationAsync with all parameters and requ
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["inputs"] = new List<object>()
+    inputs = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["source"] = new Dictionary<string, object>()
+source = new
 {
-["sourceUrl"] = "<sourceUrl>",
-["filter"] = new Dictionary<string, object>()
+sourceUrl = "<sourceUrl>",
+filter = new
 {
-["prefix"] = "<prefix>",
-["suffix"] = "<suffix>",
+prefix = "<prefix>",
+suffix = "<suffix>",
 },
-["language"] = "<language>",
-["storageSource"] = "AzureBlob",
+language = "<language>",
+storageSource = "AzureBlob",
 },
-["targets"] = new List<object>()
+targets = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["targetUrl"] = "<targetUrl>",
-["category"] = "<category>",
-["language"] = "<language>",
-["glossaries"] = new List<object>()
+targetUrl = "<targetUrl>",
+category = "<category>",
+language = "<language>",
+glossaries = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["glossaryUrl"] = "<glossaryUrl>",
-["format"] = "<format>",
-["version"] = "<version>",
-["storageSource"] = "AzureBlob",
+glossaryUrl = "<glossaryUrl>",
+format = "<format>",
+version = "<version>",
+storageSource = "AzureBlob",
 }
 },
-["storageSource"] = "AzureBlob",
+storageSource = "AzureBlob",
 }
 },
-["storageType"] = "Folder",
+storageType = "Folder",
 }
 },
 });
@@ -759,22 +759,22 @@ This sample shows how to call StartTranslation.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["inputs"] = new List<object>()
+    inputs = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["source"] = new Dictionary<string, object>()
+source = new
 {
-["sourceUrl"] = "<sourceUrl>",
+sourceUrl = "<sourceUrl>",
 },
-["targets"] = new List<object>()
+targets = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["targetUrl"] = "<targetUrl>",
-["language"] = "<language>",
+targetUrl = "<targetUrl>",
+language = "<language>",
 }
 },
 }
@@ -787,44 +787,44 @@ This sample shows how to call StartTranslation with all parameters and request c
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["inputs"] = new List<object>()
+    inputs = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["source"] = new Dictionary<string, object>()
+source = new
 {
-["sourceUrl"] = "<sourceUrl>",
-["filter"] = new Dictionary<string, object>()
+sourceUrl = "<sourceUrl>",
+filter = new
 {
-["prefix"] = "<prefix>",
-["suffix"] = "<suffix>",
+prefix = "<prefix>",
+suffix = "<suffix>",
 },
-["language"] = "<language>",
-["storageSource"] = "AzureBlob",
+language = "<language>",
+storageSource = "AzureBlob",
 },
-["targets"] = new List<object>()
+targets = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["targetUrl"] = "<targetUrl>",
-["category"] = "<category>",
-["language"] = "<language>",
-["glossaries"] = new List<object>()
+targetUrl = "<targetUrl>",
+category = "<category>",
+language = "<language>",
+glossaries = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["glossaryUrl"] = "<glossaryUrl>",
-["format"] = "<format>",
-["version"] = "<version>",
-["storageSource"] = "AzureBlob",
+glossaryUrl = "<glossaryUrl>",
+format = "<format>",
+version = "<version>",
+storageSource = "AzureBlob",
 }
 },
-["storageSource"] = "AzureBlob",
+storageSource = "AzureBlob",
 }
 },
-["storageType"] = "Folder",
+storageType = "Folder",
 }
 },
 });

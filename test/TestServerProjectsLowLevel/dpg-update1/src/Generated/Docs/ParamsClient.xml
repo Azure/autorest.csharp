@@ -146,9 +146,9 @@ This sample shows how to call PostParametersAsync and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParamsClient client = new ParamsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["url"] = "<url>",
+    url = "<url>",
 });
 Response response = await client.PostParametersAsync(content, new ContentType("application/json"));
 
@@ -160,9 +160,9 @@ This sample shows how to call PostParametersAsync with all parameters and reques
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParamsClient client = new ParamsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["url"] = "<url>",
+    url = "<url>",
 });
 Response response = await client.PostParametersAsync(content, new ContentType("application/json"));
 
@@ -177,9 +177,9 @@ This sample shows how to call PostParameters and parse the result.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParamsClient client = new ParamsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["url"] = "<url>",
+    url = "<url>",
 });
 Response response = client.PostParameters(content, new ContentType("application/json"));
 
@@ -191,9 +191,9 @@ This sample shows how to call PostParameters with all parameters and request con
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 ParamsClient client = new ParamsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["url"] = "<url>",
+    url = "<url>",
 });
 Response response = client.PostParameters(content, new ContentType("application/json"));
 

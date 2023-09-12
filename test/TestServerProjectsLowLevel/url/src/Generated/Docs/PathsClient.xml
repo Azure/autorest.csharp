@@ -654,7 +654,7 @@ This sample shows how to call ByteMultiByteAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient(credential);
 
-Response response = await client.ByteMultiByteAsync(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = await client.ByteMultiByteAsync(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ByteMultiByteAsync with all parameters.
@@ -662,7 +662,7 @@ This sample shows how to call ByteMultiByteAsync with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient(credential);
 
-Response response = await client.ByteMultiByteAsync(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = await client.ByteMultiByteAsync(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -673,7 +673,7 @@ This sample shows how to call ByteMultiByte.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient(credential);
 
-Response response = client.ByteMultiByte(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = client.ByteMultiByte(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ByteMultiByte with all parameters.
@@ -681,7 +681,7 @@ This sample shows how to call ByteMultiByte with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient(credential);
 
-Response response = client.ByteMultiByte(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = client.ByteMultiByte(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -730,7 +730,7 @@ This sample shows how to call ByteNullAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient(credential);
 
-Response response = await client.ByteNullAsync(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = await client.ByteNullAsync(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ByteNullAsync with all parameters.
@@ -738,7 +738,7 @@ This sample shows how to call ByteNullAsync with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient(credential);
 
-Response response = await client.ByteNullAsync(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = await client.ByteNullAsync(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -749,7 +749,7 @@ This sample shows how to call ByteNull.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient(credential);
 
-Response response = client.ByteNull(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = client.ByteNull(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ByteNull with all parameters.
@@ -757,7 +757,7 @@ This sample shows how to call ByteNull with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient(credential);
 
-Response response = client.ByteNull(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = client.ByteNull(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -920,7 +920,7 @@ This sample shows how to call Base64UrlAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient(credential);
 
-Response response = await client.Base64UrlAsync(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = await client.Base64UrlAsync(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Base64UrlAsync with all parameters.
@@ -928,7 +928,7 @@ This sample shows how to call Base64UrlAsync with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient(credential);
 
-Response response = await client.Base64UrlAsync(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = await client.Base64UrlAsync(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -939,7 +939,7 @@ This sample shows how to call Base64Url.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient(credential);
 
-Response response = client.Base64Url(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = client.Base64Url(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Base64Url with all parameters.
@@ -947,7 +947,7 @@ This sample shows how to call Base64Url with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 PathsClient client = new PathsClient(credential);
 
-Response response = client.Base64Url(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = client.Base64Url(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

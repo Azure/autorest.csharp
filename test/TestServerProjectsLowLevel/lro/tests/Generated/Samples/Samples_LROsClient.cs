@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -41,17 +40,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.Put200Succeeded(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -88,17 +87,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.Put200SucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -135,17 +134,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.Patch200SucceededIgnoreHeaders(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -182,17 +181,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.Patch200SucceededIgnoreHeadersAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -229,17 +228,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.Patch201RetryWithAsyncHeader(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -276,17 +275,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.Patch201RetryWithAsyncHeaderAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -323,17 +322,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.Patch202RetryWithAsyncAndLocationHeader(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -370,17 +369,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.Patch202RetryWithAsyncAndLocationHeaderAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -417,17 +416,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.Put201Succeeded(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -464,17 +463,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.Put201SucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -579,17 +578,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.Put200SucceededNoState(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -626,17 +625,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.Put200SucceededNoStateAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -673,17 +672,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.Put202Retry200(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -720,17 +719,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.Put202Retry200Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -767,17 +766,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -814,17 +813,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -861,17 +860,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.Put200UpdatingSucceeded204(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -908,17 +907,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.Put200UpdatingSucceeded204Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -955,17 +954,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.Put201CreatingFailed200(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1002,17 +1001,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.Put201CreatingFailed200Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1049,17 +1048,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.Put200Acceptedcanceled200(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1096,17 +1095,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.Put200Acceptedcanceled200Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1143,17 +1142,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.PutNoHeaderInRetry(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1190,17 +1189,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutNoHeaderInRetryAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1237,17 +1236,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1284,17 +1283,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1331,17 +1330,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.PutAsyncNoRetrySucceeded(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1378,17 +1377,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutAsyncNoRetrySucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1425,17 +1424,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.PutAsyncRetryFailed(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1472,17 +1471,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutAsyncRetryFailedAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1519,17 +1518,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.PutAsyncNoRetrycanceled(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1566,17 +1565,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutAsyncNoRetrycanceledAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1613,17 +1612,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.PutAsyncNoHeaderInRetry(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1660,17 +1659,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutAsyncNoHeaderInRetryAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1707,10 +1706,10 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["id"] = "<id>",
+                name = "<name>",
+                id = "<id>",
             });
             Operation<BinaryData> operation = client.PutNonResource(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1742,10 +1741,10 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["id"] = "<id>",
+                name = "<name>",
+                id = "<id>",
             });
             Operation<BinaryData> operation = await client.PutNonResourceAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1777,10 +1776,10 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["id"] = "<id>",
+                name = "<name>",
+                id = "<id>",
             });
             Operation<BinaryData> operation = client.PutAsyncNonResource(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1812,10 +1811,10 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["id"] = "<id>",
+                name = "<name>",
+                id = "<id>",
             });
             Operation<BinaryData> operation = await client.PutAsyncNonResourceAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1847,11 +1846,11 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
             });
             Operation<BinaryData> operation = client.PutSubResource(WaitUntil.Completed, content);
@@ -1885,11 +1884,11 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
             });
             Operation<BinaryData> operation = await client.PutSubResourceAsync(WaitUntil.Completed, content);
@@ -1923,11 +1922,11 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
             });
             Operation<BinaryData> operation = client.PutAsyncSubResource(WaitUntil.Completed, content);
@@ -1961,11 +1960,11 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
             });
             Operation<BinaryData> operation = await client.PutAsyncSubResourceAsync(WaitUntil.Completed, content);
@@ -2673,17 +2672,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = client.Post202Retry200(WaitUntil.Completed, content);
         }
@@ -2706,17 +2705,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = await client.Post202Retry200Async(WaitUntil.Completed, content);
         }
@@ -2743,17 +2742,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.Post202NoRetry204(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -2790,17 +2789,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.Post202NoRetry204Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -3041,17 +3040,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -3088,17 +3087,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -3135,17 +3134,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.PostAsyncNoRetrySucceeded(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -3182,17 +3181,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.PostAsyncNoRetrySucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -3225,17 +3224,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = client.PostAsyncRetryFailed(WaitUntil.Completed, content);
         }
@@ -3258,17 +3257,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = await client.PostAsyncRetryFailedAsync(WaitUntil.Completed, content);
         }
@@ -3291,17 +3290,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = client.PostAsyncRetrycanceled(WaitUntil.Completed, content);
         }
@@ -3324,17 +3323,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LROsClient client = new LROsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = await client.PostAsyncRetrycanceledAsync(WaitUntil.Completed, content);
         }

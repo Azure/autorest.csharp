@@ -959,7 +959,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = client.ByteMultiByte(byteQuery: BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = client.ByteMultiByte(byteQuery: BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 
@@ -981,7 +981,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = await client.ByteMultiByteAsync(byteQuery: BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = await client.ByteMultiByteAsync(byteQuery: BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 
@@ -1047,7 +1047,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = client.ByteNull(byteQuery: BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = client.ByteNull(byteQuery: BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 
@@ -1069,7 +1069,7 @@ namespace url_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             QueriesClient client = new QueriesClient(credential);
 
-            Response response = await client.ByteNullAsync(byteQuery: BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Response response = await client.ByteNullAsync(byteQuery: BinaryData.FromObjectAsJson(new object()));
             Console.WriteLine(response.Status);
         }
 

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
@@ -111,9 +110,9 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = "PT1H23M45S",
+                property = "PT1H23M45S",
             });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -125,9 +124,9 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = "PT1H23M45S",
+                property = "PT1H23M45S",
             });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -161,9 +160,9 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = "PT1H23M45S",
+                property = "PT1H23M45S",
             });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
@@ -175,9 +174,9 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Duration client = new ValueTypesClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = "PT1H23M45S",
+                property = "PT1H23M45S",
             });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);

@@ -498,7 +498,7 @@ This sample shows how to call PutBase64UrlEncodedAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutBase64UrlEncodedAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -507,7 +507,7 @@ This sample shows how to call PutBase64UrlEncodedAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutBase64UrlEncodedAsync(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -519,7 +519,7 @@ This sample shows how to call PutBase64UrlEncoded.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = client.PutBase64UrlEncoded(content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -528,7 +528,7 @@ This sample shows how to call PutBase64UrlEncoded with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 StringClient client = new StringClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = client.PutBase64UrlEncoded(content);
 Console.WriteLine(response.Status);
 ]]></code></example>

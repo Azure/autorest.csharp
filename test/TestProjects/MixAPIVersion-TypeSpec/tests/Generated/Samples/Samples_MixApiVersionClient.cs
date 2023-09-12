@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -128,9 +127,9 @@ namespace MixApiVersion.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["age"] = 1234,
+                age = 1234,
             });
             Response response = client.Create(content);
 
@@ -146,10 +145,10 @@ namespace MixApiVersion.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["tag"] = "<tag>",
-                ["age"] = 1234,
+                tag = "<tag>",
+                age = 1234,
             });
             Response response = client.Create(content);
 
@@ -166,9 +165,9 @@ namespace MixApiVersion.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["age"] = 1234,
+                age = 1234,
             });
             Response response = await client.CreateAsync(content);
 
@@ -184,10 +183,10 @@ namespace MixApiVersion.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["tag"] = "<tag>",
-                ["age"] = 1234,
+                tag = "<tag>",
+                age = 1234,
             });
             Response response = await client.CreateAsync(content);
 

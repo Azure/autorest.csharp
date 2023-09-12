@@ -109,9 +109,9 @@ namespace _Type._Dictionary.Samples
         {
             UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = new Dictionary<string, object>(),
+                key = new object(),
             });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -123,9 +123,9 @@ namespace _Type._Dictionary.Samples
         {
             UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = new Dictionary<string, object>(),
+                key = new object(),
             });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -139,7 +139,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = client.Put(new Dictionary<string, BinaryData>()
             {
-                ["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+                ["key"] = BinaryData.FromObjectAsJson(new object()),
             });
             Console.WriteLine(response.Status);
         }
@@ -152,7 +152,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = client.Put(new Dictionary<string, BinaryData>()
             {
-                ["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+                ["key"] = BinaryData.FromObjectAsJson(new object()),
             });
             Console.WriteLine(response.Status);
         }
@@ -163,9 +163,9 @@ namespace _Type._Dictionary.Samples
         {
             UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = new Dictionary<string, object>(),
+                key = new object(),
             });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
@@ -177,9 +177,9 @@ namespace _Type._Dictionary.Samples
         {
             UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = new Dictionary<string, object>(),
+                key = new object(),
             });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
@@ -193,7 +193,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = await client.PutAsync(new Dictionary<string, BinaryData>()
             {
-                ["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+                ["key"] = BinaryData.FromObjectAsJson(new object()),
             });
             Console.WriteLine(response.Status);
         }
@@ -206,7 +206,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = await client.PutAsync(new Dictionary<string, BinaryData>()
             {
-                ["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+                ["key"] = BinaryData.FromObjectAsJson(new object()),
             });
             Console.WriteLine(response.Status);
         }

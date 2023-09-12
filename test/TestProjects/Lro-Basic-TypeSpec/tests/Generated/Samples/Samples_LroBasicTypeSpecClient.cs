@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -27,7 +26,7 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Operation operation = client.CreateProject(WaitUntil.Completed, content);
         }
 
@@ -38,10 +37,10 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["description"] = "<description>",
-                ["name"] = "<name>",
+                description = "<description>",
+                name = "<name>",
             });
             Operation operation = client.CreateProject(WaitUntil.Completed, content);
         }
@@ -79,7 +78,7 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Operation operation = await client.CreateProjectAsync(WaitUntil.Completed, content);
         }
 
@@ -90,10 +89,10 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["description"] = "<description>",
-                ["name"] = "<name>",
+                description = "<description>",
+                name = "<name>",
             });
             Operation operation = await client.CreateProjectAsync(WaitUntil.Completed, content);
         }
@@ -131,7 +130,7 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Operation<BinaryData> operation = client.UpdateProject(WaitUntil.Completed, "<id>", content);
             BinaryData responseData = operation.Value;
 
@@ -146,10 +145,10 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["description"] = "<description>",
-                ["name"] = "<name>",
+                description = "<description>",
+                name = "<name>",
             });
             Operation<BinaryData> operation = client.UpdateProject(WaitUntil.Completed, "<id>", content);
             BinaryData responseData = operation.Value;
@@ -195,7 +194,7 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Operation<BinaryData> operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", content);
             BinaryData responseData = operation.Value;
 
@@ -210,10 +209,10 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["description"] = "<description>",
-                ["name"] = "<name>",
+                description = "<description>",
+                name = "<name>",
             });
             Operation<BinaryData> operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", content);
             BinaryData responseData = operation.Value;
@@ -259,9 +258,9 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Operation<BinaryData> operation = client.CreateThing(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -277,9 +276,9 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Operation<BinaryData> operation = client.CreateThing(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -319,9 +318,9 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Operation<BinaryData> operation = await client.CreateThingAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -337,9 +336,9 @@ namespace LroBasicTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Operation<BinaryData> operation = await client.CreateThingAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;

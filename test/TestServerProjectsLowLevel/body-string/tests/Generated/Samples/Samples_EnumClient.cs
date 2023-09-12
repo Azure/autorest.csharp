@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -280,9 +279,9 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["ColorConstant"] = "green-color",
+                ColorConstant = "green-color",
             });
             Response response = client.PutReferencedConstant(content);
             Console.WriteLine(response.Status);
@@ -295,10 +294,10 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["ColorConstant"] = "green-color",
-                ["field1"] = "<field1>",
+                ColorConstant = "green-color",
+                field1 = "<field1>",
             });
             Response response = client.PutReferencedConstant(content);
             Console.WriteLine(response.Status);
@@ -311,9 +310,9 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["ColorConstant"] = "green-color",
+                ColorConstant = "green-color",
             });
             Response response = await client.PutReferencedConstantAsync(content);
             Console.WriteLine(response.Status);
@@ -326,10 +325,10 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["ColorConstant"] = "green-color",
-                ["field1"] = "<field1>",
+                ColorConstant = "green-color",
+                field1 = "<field1>",
             });
             Response response = await client.PutReferencedConstantAsync(content);
             Console.WriteLine(response.Status);

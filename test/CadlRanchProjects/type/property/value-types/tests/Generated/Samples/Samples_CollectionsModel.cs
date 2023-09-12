@@ -110,13 +110,13 @@ namespace _Type.Property.ValueTypes.Samples
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new List<object>()
+                property = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
             });
@@ -130,13 +130,13 @@ new Dictionary<string, object>()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new List<object>()
+                property = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
             });
@@ -178,13 +178,13 @@ new InnerModel("<property>")
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new List<object>()
+                property = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
             });
@@ -198,13 +198,13 @@ new Dictionary<string, object>()
         {
             CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new List<object>()
+                property = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
             });

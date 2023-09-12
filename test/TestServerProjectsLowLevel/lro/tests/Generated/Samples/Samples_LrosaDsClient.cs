@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -41,17 +40,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.PutNonRetry400(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -88,17 +87,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutNonRetry400Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -135,17 +134,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.PutNonRetry201Creating400(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -182,17 +181,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutNonRetry201Creating400Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -229,17 +228,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.PutNonRetry201Creating400InvalidJson(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -276,17 +275,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutNonRetry201Creating400InvalidJsonAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -323,17 +322,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.PutAsyncRelativeRetry400(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -370,17 +369,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetry400Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -533,17 +532,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = client.PostNonRetry400(WaitUntil.Completed, content);
         }
@@ -566,17 +565,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = await client.PostNonRetry400Async(WaitUntil.Completed, content);
         }
@@ -599,17 +598,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = client.Post202NonRetry400(WaitUntil.Completed, content);
         }
@@ -632,17 +631,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = await client.Post202NonRetry400Async(WaitUntil.Completed, content);
         }
@@ -665,17 +664,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = client.PostAsyncRelativeRetry400(WaitUntil.Completed, content);
         }
@@ -698,17 +697,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = await client.PostAsyncRelativeRetry400Async(WaitUntil.Completed, content);
         }
@@ -735,17 +734,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.PutError201NoProvisioningStatePayload(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -782,17 +781,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutError201NoProvisioningStatePayloadAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -829,17 +828,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.PutAsyncRelativeRetryNoStatus(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -876,17 +875,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -923,17 +922,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.PutAsyncRelativeRetryNoStatusPayload(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -970,17 +969,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1093,17 +1092,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = client.Post202NoLocation(WaitUntil.Completed, content);
         }
@@ -1126,17 +1125,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = await client.Post202NoLocationAsync(WaitUntil.Completed, content);
         }
@@ -1159,17 +1158,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = client.PostAsyncRelativeRetryNoPayload(WaitUntil.Completed, content);
         }
@@ -1192,17 +1191,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = await client.PostAsyncRelativeRetryNoPayloadAsync(WaitUntil.Completed, content);
         }
@@ -1229,17 +1228,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.Put200InvalidJson(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1276,17 +1275,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.Put200InvalidJsonAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1323,17 +1322,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.PutAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1370,17 +1369,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1417,17 +1416,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = client.PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1464,17 +1463,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
@@ -1627,17 +1626,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = client.Post202RetryInvalidHeader(WaitUntil.Completed, content);
         }
@@ -1660,17 +1659,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = await client.Post202RetryInvalidHeaderAsync(WaitUntil.Completed, content);
         }
@@ -1693,17 +1692,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = client.PostAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, content);
         }
@@ -1726,17 +1725,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = await client.PostAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, content);
         }
@@ -1759,17 +1758,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = client.PostAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, content);
         }
@@ -1792,17 +1791,17 @@ namespace lro_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["properties"] = new Dictionary<string, object>()
+                properties = new
                 {
-                    ["provisioningState"] = "<provisioningState>",
+                    provisioningState = "<provisioningState>",
                 },
-                ["tags"] = new Dictionary<string, object>()
+                tags = new
                 {
-                    ["key"] = "<tags>",
+                    key = "<tags>",
                 },
-                ["location"] = "<location>",
+                location = "<location>",
             });
             Operation operation = await client.PostAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, content);
         }

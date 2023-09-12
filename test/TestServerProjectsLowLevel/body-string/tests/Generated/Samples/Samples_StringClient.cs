@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -582,7 +581,7 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             StringClient client = new StringClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = client.PutBase64UrlEncoded(content);
             Console.WriteLine(response.Status);
         }
@@ -594,7 +593,7 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             StringClient client = new StringClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = client.PutBase64UrlEncoded(content);
             Console.WriteLine(response.Status);
         }
@@ -606,7 +605,7 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             StringClient client = new StringClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutBase64UrlEncodedAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -618,7 +617,7 @@ namespace body_string_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             StringClient client = new StringClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutBase64UrlEncodedAsync(content);
             Console.WriteLine(response.Status);
         }

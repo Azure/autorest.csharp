@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -112,9 +111,9 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             TraitsClient client = new TraitsClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["userActionValue"] = "<userActionValue>",
+                userActionValue = "<userActionValue>",
             });
             Response response = client.RepeatableAction(1234, content);
 
@@ -128,9 +127,9 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             TraitsClient client = new TraitsClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["userActionValue"] = "<userActionValue>",
+                userActionValue = "<userActionValue>",
             });
             Response response = client.RepeatableAction(1234, content);
 
@@ -164,9 +163,9 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             TraitsClient client = new TraitsClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["userActionValue"] = "<userActionValue>",
+                userActionValue = "<userActionValue>",
             });
             Response response = await client.RepeatableActionAsync(1234, content);
 
@@ -180,9 +179,9 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             TraitsClient client = new TraitsClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["userActionValue"] = "<userActionValue>",
+                userActionValue = "<userActionValue>",
             });
             Response response = await client.RepeatableActionAsync(1234, content);
 

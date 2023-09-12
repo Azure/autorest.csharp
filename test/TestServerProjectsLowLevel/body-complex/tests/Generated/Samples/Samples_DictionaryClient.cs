@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -78,7 +77,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DictionaryClient client = new DictionaryClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = client.PutValid(content);
             Console.WriteLine(response.Status);
         }
@@ -90,11 +89,11 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DictionaryClient client = new DictionaryClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["defaultProgram"] = new Dictionary<string, object>()
+                defaultProgram = new
                 {
-                    ["key"] = "<defaultProgram>",
+                    key = "<defaultProgram>",
                 },
             });
             Response response = client.PutValid(content);
@@ -108,7 +107,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DictionaryClient client = new DictionaryClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -120,11 +119,11 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DictionaryClient client = new DictionaryClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["defaultProgram"] = new Dictionary<string, object>()
+                defaultProgram = new
                 {
-                    ["key"] = "<defaultProgram>",
+                    key = "<defaultProgram>",
                 },
             });
             Response response = await client.PutValidAsync(content);
@@ -190,7 +189,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DictionaryClient client = new DictionaryClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = client.PutEmpty(content);
             Console.WriteLine(response.Status);
         }
@@ -202,11 +201,11 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DictionaryClient client = new DictionaryClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["defaultProgram"] = new Dictionary<string, object>()
+                defaultProgram = new
                 {
-                    ["key"] = "<defaultProgram>",
+                    key = "<defaultProgram>",
                 },
             });
             Response response = client.PutEmpty(content);
@@ -220,7 +219,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DictionaryClient client = new DictionaryClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutEmptyAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -232,11 +231,11 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DictionaryClient client = new DictionaryClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["defaultProgram"] = new Dictionary<string, object>()
+                defaultProgram = new
                 {
-                    ["key"] = "<defaultProgram>",
+                    key = "<defaultProgram>",
                 },
             });
             Response response = await client.PutEmptyAsync(content);

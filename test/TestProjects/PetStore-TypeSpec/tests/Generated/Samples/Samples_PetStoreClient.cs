@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -169,10 +168,10 @@ namespace PetStore.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["age"] = 1234,
+                name = "<name>",
+                age = 1234,
             });
             Response response = client.Create(content);
 
@@ -188,11 +187,11 @@ namespace PetStore.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["tag"] = "<tag>",
-                ["age"] = 1234,
+                name = "<name>",
+                tag = "<tag>",
+                age = 1234,
             });
             Response response = client.Create(content);
 
@@ -234,10 +233,10 @@ namespace PetStore.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["age"] = 1234,
+                name = "<name>",
+                age = 1234,
             });
             Response response = await client.CreateAsync(content);
 
@@ -253,11 +252,11 @@ namespace PetStore.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["tag"] = "<tag>",
-                ["age"] = 1234,
+                name = "<name>",
+                tag = "<tag>",
+                age = 1234,
             });
             Response response = await client.CreateAsync(content);
 

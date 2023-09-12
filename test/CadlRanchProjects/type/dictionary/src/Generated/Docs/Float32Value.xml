@@ -125,9 +125,9 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["key"] = 123.45F,
+    key = 123.45F,
 });
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
@@ -136,9 +136,9 @@ This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["key"] = 123.45F,
+    key = 123.45F,
 });
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
@@ -150,9 +150,9 @@ This sample shows how to call Put.
 <code><![CDATA[
 Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["key"] = 123.45F,
+    key = 123.45F,
 });
 Response response = client.Put(content);
 Console.WriteLine(response.Status);
@@ -161,9 +161,9 @@ This sample shows how to call Put with all request content.
 <code><![CDATA[
 Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["key"] = 123.45F,
+    key = 123.45F,
 });
 Response response = client.Put(content);
 Console.WriteLine(response.Status);

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -82,7 +81,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BasicClient client = new BasicClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = client.PutValid(content);
             Console.WriteLine(response.Status);
         }
@@ -94,11 +93,11 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BasicClient client = new BasicClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = 1234,
-                ["name"] = "<name>",
-                ["color"] = "cyan",
+                id = 1234,
+                name = "<name>",
+                color = "cyan",
             });
             Response response = client.PutValid(content);
             Console.WriteLine(response.Status);
@@ -111,7 +110,7 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BasicClient client = new BasicClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutValidAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -123,11 +122,11 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BasicClient client = new BasicClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["id"] = 1234,
-                ["name"] = "<name>",
-                ["color"] = "cyan",
+                id = 1234,
+                name = "<name>",
+                color = "cyan",
             });
             Response response = await client.PutValidAsync(content);
             Console.WriteLine(response.Status);

@@ -54,7 +54,7 @@ This sample shows how to call PutValidAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DictionaryClient client = new DictionaryClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutValidAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -63,11 +63,11 @@ This sample shows how to call PutValidAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DictionaryClient client = new DictionaryClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["defaultProgram"] = new Dictionary<string, object>()
+    defaultProgram = new
     {
-        ["key"] = "<defaultProgram>",
+        key = "<defaultProgram>",
     },
 });
 Response response = await client.PutValidAsync(content);
@@ -81,7 +81,7 @@ This sample shows how to call PutValid.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DictionaryClient client = new DictionaryClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = client.PutValid(content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -90,11 +90,11 @@ This sample shows how to call PutValid with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DictionaryClient client = new DictionaryClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["defaultProgram"] = new Dictionary<string, object>()
+    defaultProgram = new
     {
-        ["key"] = "<defaultProgram>",
+        key = "<defaultProgram>",
     },
 });
 Response response = client.PutValid(content);
@@ -154,7 +154,7 @@ This sample shows how to call PutEmptyAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DictionaryClient client = new DictionaryClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutEmptyAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -163,11 +163,11 @@ This sample shows how to call PutEmptyAsync with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DictionaryClient client = new DictionaryClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["defaultProgram"] = new Dictionary<string, object>()
+    defaultProgram = new
     {
-        ["key"] = "<defaultProgram>",
+        key = "<defaultProgram>",
     },
 });
 Response response = await client.PutEmptyAsync(content);
@@ -181,7 +181,7 @@ This sample shows how to call PutEmpty.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DictionaryClient client = new DictionaryClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = client.PutEmpty(content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -190,11 +190,11 @@ This sample shows how to call PutEmpty with all request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 DictionaryClient client = new DictionaryClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["defaultProgram"] = new Dictionary<string, object>()
+    defaultProgram = new
     {
-        ["key"] = "<defaultProgram>",
+        key = "<defaultProgram>",
     },
 });
 Response response = client.PutEmpty(content);

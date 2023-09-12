@@ -59,10 +59,10 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 PaginationClient client = new PaginationClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["requiredString"] = "<requiredString>",
-    ["requiredInt"] = 1234,
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
 });
 await foreach (BinaryData item in client.GetPaginationLedgerEntriesAsync(content))
 {
@@ -78,10 +78,10 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 PaginationClient client = new PaginationClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["requiredString"] = "<requiredString>",
-    ["requiredInt"] = 1234,
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
 });
 await foreach (BinaryData item in client.GetPaginationLedgerEntriesAsync(content))
 {
@@ -100,10 +100,10 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 PaginationClient client = new PaginationClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["requiredString"] = "<requiredString>",
-    ["requiredInt"] = 1234,
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
 });
 foreach (BinaryData item in client.GetPaginationLedgerEntries(content))
 {
@@ -119,10 +119,10 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
 PaginationClient client = new PaginationClient(endpoint, credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["requiredString"] = "<requiredString>",
-    ["requiredInt"] = 1234,
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
 });
 foreach (BinaryData item in client.GetPaginationLedgerEntries(content))
 {

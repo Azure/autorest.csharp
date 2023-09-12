@@ -814,7 +814,7 @@ This sample shows how to call ByteMultiByteAsync with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
-Response response = await client.ByteMultiByteAsync(byteQuery: BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = await client.ByteMultiByteAsync(byteQuery: BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -833,7 +833,7 @@ This sample shows how to call ByteMultiByte with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
-Response response = client.ByteMultiByte(byteQuery: BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = client.ByteMultiByte(byteQuery: BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -890,7 +890,7 @@ This sample shows how to call ByteNullAsync with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
-Response response = await client.ByteNullAsync(byteQuery: BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = await client.ByteNullAsync(byteQuery: BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -909,7 +909,7 @@ This sample shows how to call ByteNull with all parameters.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 QueriesClient client = new QueriesClient(credential);
 
-Response response = client.ByteNull(byteQuery: BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+Response response = client.ByteNull(byteQuery: BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

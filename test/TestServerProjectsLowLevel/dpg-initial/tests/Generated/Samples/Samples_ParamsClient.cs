@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -182,9 +181,9 @@ namespace dpg_initial_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["url"] = "<url>",
+                url = "<url>",
             });
             Response response = client.PostParameters(content);
 
@@ -199,9 +198,9 @@ namespace dpg_initial_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["url"] = "<url>",
+                url = "<url>",
             });
             Response response = client.PostParameters(content);
 
@@ -216,9 +215,9 @@ namespace dpg_initial_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["url"] = "<url>",
+                url = "<url>",
             });
             Response response = await client.PostParametersAsync(content);
 
@@ -233,9 +232,9 @@ namespace dpg_initial_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["url"] = "<url>",
+                url = "<url>",
             });
             Response response = await client.PostParametersAsync(content);
 

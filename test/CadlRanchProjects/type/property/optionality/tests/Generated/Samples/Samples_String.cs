@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -194,7 +193,7 @@ namespace _Type.Property.Optionality.Samples
         {
             String client = new OptionalClient().GetStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = client.PutAll(content);
             Console.WriteLine(response.Status);
         }
@@ -205,9 +204,9 @@ namespace _Type.Property.Optionality.Samples
         {
             String client = new OptionalClient().GetStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = "<property>",
+                property = "<property>",
             });
             Response response = client.PutAll(content);
             Console.WriteLine(response.Status);
@@ -244,7 +243,7 @@ namespace _Type.Property.Optionality.Samples
         {
             String client = new OptionalClient().GetStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAllAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -255,9 +254,9 @@ namespace _Type.Property.Optionality.Samples
         {
             String client = new OptionalClient().GetStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = "<property>",
+                property = "<property>",
             });
             Response response = await client.PutAllAsync(content);
             Console.WriteLine(response.Status);
@@ -294,7 +293,7 @@ namespace _Type.Property.Optionality.Samples
         {
             String client = new OptionalClient().GetStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDefault(content);
             Console.WriteLine(response.Status);
         }
@@ -305,9 +304,9 @@ namespace _Type.Property.Optionality.Samples
         {
             String client = new OptionalClient().GetStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = "<property>",
+                property = "<property>",
             });
             Response response = client.PutDefault(content);
             Console.WriteLine(response.Status);
@@ -344,7 +343,7 @@ namespace _Type.Property.Optionality.Samples
         {
             String client = new OptionalClient().GetStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDefaultAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -355,9 +354,9 @@ namespace _Type.Property.Optionality.Samples
         {
             String client = new OptionalClient().GetStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = "<property>",
+                property = "<property>",
             });
             Response response = await client.PutDefaultAsync(content);
             Console.WriteLine(response.Status);

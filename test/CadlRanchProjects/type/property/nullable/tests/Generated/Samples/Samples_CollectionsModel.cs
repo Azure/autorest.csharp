@@ -202,14 +202,14 @@ namespace _Type.Property.Nullable.Samples
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new List<object>()
+                requiredProperty = "<requiredProperty>",
+                nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
             });
@@ -223,14 +223,14 @@ new Dictionary<string, object>()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new List<object>()
+                requiredProperty = "<requiredProperty>",
+                nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
             });
@@ -244,14 +244,14 @@ new Dictionary<string, object>()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new List<object>()
+                requiredProperty = "<requiredProperty>",
+                nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
             });
@@ -265,14 +265,14 @@ new Dictionary<string, object>()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new List<object>()
+                requiredProperty = "<requiredProperty>",
+                nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
             });
@@ -286,14 +286,14 @@ new Dictionary<string, object>()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new List<object>()
+                requiredProperty = "<requiredProperty>",
+                nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
             });
@@ -307,14 +307,14 @@ new Dictionary<string, object>()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new List<object>()
+                requiredProperty = "<requiredProperty>",
+                nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
             });
@@ -328,14 +328,14 @@ new Dictionary<string, object>()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new List<object>()
+                requiredProperty = "<requiredProperty>",
+                nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
             });
@@ -349,14 +349,14 @@ new Dictionary<string, object>()
         {
             CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new List<object>()
+                requiredProperty = "<requiredProperty>",
+                nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
             });

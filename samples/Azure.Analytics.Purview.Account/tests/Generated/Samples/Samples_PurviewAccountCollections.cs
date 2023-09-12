@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -105,7 +104,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = client.CreateOrUpdateCollection(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -120,13 +119,13 @@ namespace Azure.Analytics.Purview.Account.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["description"] = "<description>",
-                ["friendlyName"] = "<friendlyName>",
-                ["parentCollection"] = new Dictionary<string, object>()
+                description = "<description>",
+                friendlyName = "<friendlyName>",
+                parentCollection = new
                 {
-                    ["referenceName"] = "<referenceName>",
+                    referenceName = "<referenceName>",
                 },
             });
             Response response = client.CreateOrUpdateCollection(content);
@@ -154,7 +153,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateOrUpdateCollectionAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -169,13 +168,13 @@ namespace Azure.Analytics.Purview.Account.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["description"] = "<description>",
-                ["friendlyName"] = "<friendlyName>",
-                ["parentCollection"] = new Dictionary<string, object>()
+                description = "<description>",
+                friendlyName = "<friendlyName>",
+                parentCollection = new
                 {
-                    ["referenceName"] = "<referenceName>",
+                    referenceName = "<referenceName>",
                 },
             });
             Response response = await client.CreateOrUpdateCollectionAsync(content);

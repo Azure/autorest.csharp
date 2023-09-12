@@ -90,10 +90,10 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["fishtype"] = "salmon",
-                ["length"] = 123.45F,
+                fishtype = "salmon",
+                length = 123.45F,
             });
             Response response = client.PutValid(content);
             Console.WriteLine(response.Status);
@@ -106,14 +106,14 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["location"] = "<location>",
-                ["iswild"] = true,
-                ["fishtype"] = "salmon",
-                ["species"] = "<species>",
-                ["length"] = 123.45F,
-                ["siblings"] = new List<object>()
+                location = "<location>",
+                iswild = true,
+                fishtype = "salmon",
+                species = "<species>",
+                length = 123.45F,
+                siblings = new List<object>()
 {
 null
 },
@@ -129,10 +129,10 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["fishtype"] = "salmon",
-                ["length"] = 123.45F,
+                fishtype = "salmon",
+                length = 123.45F,
             });
             Response response = await client.PutValidAsync(content);
             Console.WriteLine(response.Status);
@@ -145,14 +145,14 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["location"] = "<location>",
-                ["iswild"] = true,
-                ["fishtype"] = "salmon",
-                ["species"] = "<species>",
-                ["length"] = 123.45F,
-                ["siblings"] = new List<object>()
+                location = "<location>",
+                iswild = true,
+                fishtype = "salmon",
+                species = "<species>",
+                length = 123.45F,
+                siblings = new List<object>()
 {
 null
 },

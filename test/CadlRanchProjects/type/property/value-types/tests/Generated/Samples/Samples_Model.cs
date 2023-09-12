@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -110,11 +109,11 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new Dictionary<string, object>()
+                property = new
                 {
-                    ["property"] = "<property>",
+                    property = "<property>",
                 },
             });
             Response response = client.Put(content);
@@ -127,11 +126,11 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new Dictionary<string, object>()
+                property = new
                 {
-                    ["property"] = "<property>",
+                    property = "<property>",
                 },
             });
             Response response = client.Put(content);
@@ -166,11 +165,11 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new Dictionary<string, object>()
+                property = new
                 {
-                    ["property"] = "<property>",
+                    property = "<property>",
                 },
             });
             Response response = await client.PutAsync(content);
@@ -183,11 +182,11 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new Dictionary<string, object>()
+                property = new
                 {
-                    ["property"] = "<property>",
+                    property = "<property>",
                 },
             });
             Response response = await client.PutAsync(content);

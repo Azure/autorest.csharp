@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -78,9 +77,9 @@ namespace dpg_customization_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DPGClient client = new DPGClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["hello"] = "<hello>",
+                hello = "<hello>",
             });
             Response response = client.PostModel("<mode>", content);
 
@@ -95,9 +94,9 @@ namespace dpg_customization_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DPGClient client = new DPGClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["hello"] = "<hello>",
+                hello = "<hello>",
             });
             Response response = client.PostModel("<mode>", content);
 
@@ -112,9 +111,9 @@ namespace dpg_customization_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DPGClient client = new DPGClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["hello"] = "<hello>",
+                hello = "<hello>",
             });
             Response response = await client.PostModelAsync("<mode>", content);
 
@@ -129,9 +128,9 @@ namespace dpg_customization_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DPGClient client = new DPGClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["hello"] = "<hello>",
+                hello = "<hello>",
             });
             Response response = await client.PostModelAsync("<mode>", content);
 

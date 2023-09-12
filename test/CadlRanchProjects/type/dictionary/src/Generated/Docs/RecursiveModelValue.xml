@@ -139,11 +139,11 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["key"] = new Dictionary<string, object>()
+    key = new
     {
-        ["property"] = "<property>",
+        property = "<property>",
     },
 });
 Response response = await client.PutAsync(content);
@@ -153,15 +153,13 @@ This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["key"] = new Dictionary<string, object>()
+    key = new
     {
-        ["property"] = "<property>",
-        ["children"] = new Dictionary<string, object>()
+        property = "<property>",
+        children = new
         {
-            ["key"] = null
-,
         },
     },
 });
@@ -175,11 +173,11 @@ This sample shows how to call Put.
 <code><![CDATA[
 RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["key"] = new Dictionary<string, object>()
+    key = new
     {
-        ["property"] = "<property>",
+        property = "<property>",
     },
 });
 Response response = client.Put(content);
@@ -189,15 +187,13 @@ This sample shows how to call Put with all request content.
 <code><![CDATA[
 RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["key"] = new Dictionary<string, object>()
+    key = new
     {
-        ["property"] = "<property>",
-        ["children"] = new Dictionary<string, object>()
+        property = "<property>",
+        children = new
         {
-            ["key"] = null
-,
         },
     },
 });

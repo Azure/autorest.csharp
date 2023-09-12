@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -92,10 +91,10 @@ namespace Parameters_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["Code"] = "<Code>",
-                ["Status"] = "<Status>",
+                Code = "<Code>",
+                Status = "<Status>",
             });
             Response response = client.RequestBodyResponseBody(content);
 
@@ -125,10 +124,10 @@ namespace Parameters_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["Code"] = "<Code>",
-                ["Status"] = "<Status>",
+                Code = "<Code>",
+                Status = "<Status>",
             });
             Response response = await client.RequestBodyResponseBodyAsync(content);
 
@@ -388,10 +387,10 @@ namespace Parameters_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["Code"] = "<Code>",
-                ["Status"] = "<Status>",
+                Code = "<Code>",
+                Status = "<Status>",
             });
             Response response = client.OptionalPathBodyParametersWithMixedSequence(default, "<name>", 1234, default, content, top: 1234);
             Console.WriteLine(response.Status);
@@ -416,10 +415,10 @@ namespace Parameters_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["Code"] = "<Code>",
-                ["Status"] = "<Status>",
+                Code = "<Code>",
+                Status = "<Status>",
             });
             Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(default, "<name>", 1234, default, content, top: 1234);
             Console.WriteLine(response.Status);
@@ -444,10 +443,10 @@ namespace Parameters_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["Code"] = "<Code>",
-                ["Status"] = "<Status>",
+                Code = "<Code>",
+                Status = "<Status>",
             });
             Response response = client.RepeatableAction(default, "<name>", content);
             Console.WriteLine(response.Status);
@@ -472,10 +471,10 @@ namespace Parameters_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["Code"] = "<Code>",
-                ["Status"] = "<Status>",
+                Code = "<Code>",
+                Status = "<Status>",
             });
             Response response = await client.RepeatableActionAsync(default, "<name>", content);
             Console.WriteLine(response.Status);

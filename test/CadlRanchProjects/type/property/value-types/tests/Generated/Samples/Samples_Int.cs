@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -110,9 +109,9 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = 1234,
+                property = 1234,
             });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -124,9 +123,9 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = 1234,
+                property = 1234,
             });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -160,9 +159,9 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = 1234,
+                property = 1234,
             });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
@@ -174,9 +173,9 @@ namespace _Type.Property.ValueTypes.Samples
         {
             Int client = new ValueTypesClient().GetIntClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = 1234,
+                property = 1234,
             });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -110,9 +109,9 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new Dictionary<string, object>(),
+                property = new object(),
             });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -124,9 +123,9 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new Dictionary<string, object>(),
+                property = new object(),
             });
             Response response = client.Put(content);
             Console.WriteLine(response.Status);
@@ -138,7 +137,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
-            UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = client.Put(body);
             Console.WriteLine(response.Status);
         }
@@ -149,7 +148,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
-            UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = client.Put(body);
             Console.WriteLine(response.Status);
         }
@@ -160,9 +159,9 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new Dictionary<string, object>(),
+                property = new object(),
             });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
@@ -174,9 +173,9 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new Dictionary<string, object>(),
+                property = new object(),
             });
             Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
@@ -188,7 +187,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
-            UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = await client.PutAsync(body);
             Console.WriteLine(response.Status);
         }
@@ -199,7 +198,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
-            UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = await client.PutAsync(body);
             Console.WriteLine(response.Status);
         }

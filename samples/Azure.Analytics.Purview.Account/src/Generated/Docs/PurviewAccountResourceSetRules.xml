@@ -227,7 +227,7 @@ Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = await client.CreateOrUpdateResourceSetRuleAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -239,119 +239,115 @@ Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["advancedResourceSet"] = new Dictionary<string, object>()
+    advancedResourceSet = new
     {
-        ["modifiedAt"] = "2022-05-10T18:57:31.2311892Z",
-        ["resourceSetProcessing"] = "Default",
+        modifiedAt = "2022-05-10T18:57:31.2311892Z",
+        resourceSetProcessing = "Default",
     },
-    ["pathPatternConfig"] = new Dictionary<string, object>()
+    pathPatternConfig = new
     {
-        ["acceptedPatterns"] = new List<object>()
+        acceptedPatterns = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["createdBy"] = "<createdBy>",
-["filterType"] = "Pattern",
-["lastUpdatedTimestamp"] = 1234L,
-["modifiedBy"] = "<modifiedBy>",
-["name"] = "<name>",
-["path"] = "<path>",
+createdBy = "<createdBy>",
+filterType = "Pattern",
+lastUpdatedTimestamp = 1234L,
+modifiedBy = "<modifiedBy>",
+name = "<name>",
+path = "<path>",
 }
 },
-        ["complexReplacers"] = new List<object>()
+        complexReplacers = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["createdBy"] = "<createdBy>",
-["description"] = "<description>",
-["disabled"] = true,
-["disableRecursiveReplacerApplication"] = true,
-["lastUpdatedTimestamp"] = 1234L,
-["modifiedBy"] = "<modifiedBy>",
-["name"] = "<name>",
-["typeName"] = "<typeName>",
+createdBy = "<createdBy>",
+description = "<description>",
+disabled = true,
+disableRecursiveReplacerApplication = true,
+lastUpdatedTimestamp = 1234L,
+modifiedBy = "<modifiedBy>",
+name = "<name>",
+typeName = "<typeName>",
 }
 },
-        ["createdBy"] = "<createdBy>",
-        ["enableDefaultPatterns"] = true,
-        ["lastUpdatedTimestamp"] = 1234L,
-        ["modifiedBy"] = "<modifiedBy>",
-        ["normalizationRules"] = new List<object>()
+        createdBy = "<createdBy>",
+        enableDefaultPatterns = true,
+        lastUpdatedTimestamp = 1234L,
+        modifiedBy = "<modifiedBy>",
+        normalizationRules = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["description"] = "<description>",
-["disabled"] = true,
-["dynamicReplacement"] = true,
-["entityTypes"] = new List<object>()
+description = "<description>",
+disabled = true,
+dynamicReplacement = true,
+entityTypes = new List<object>()
 {
 "<entityTypes>"
 },
-["lastUpdatedTimestamp"] = 1234L,
-["name"] = "<name>",
-["regex"] = new Dictionary<string, object>()
+lastUpdatedTimestamp = 1234L,
+name = "<name>",
+regex = new
 {
-["maxDigits"] = 1234,
-["maxLetters"] = 1234,
-["minDashes"] = 1234,
-["minDigits"] = 1234,
-["minDigitsOrLetters"] = 1234,
-["minDots"] = 1234,
-["minHex"] = 1234,
-["minLetters"] = 1234,
-["minUnderscores"] = 1234,
-["options"] = 1234,
-["regexStr"] = "<regexStr>",
+maxDigits = 1234,
+maxLetters = 1234,
+minDashes = 1234,
+minDigits = 1234,
+minDigitsOrLetters = 1234,
+minDots = 1234,
+minHex = 1234,
+minLetters = 1234,
+minUnderscores = 1234,
+options = 1234,
+regexStr = "<regexStr>",
 },
-["replaceWith"] = "<replaceWith>",
-["version"] = 123.45,
+replaceWith = "<replaceWith>",
+version = 123.45,
 }
 },
-        ["regexReplacers"] = new List<object>()
+        regexReplacers = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["condition"] = "<condition>",
-["createdBy"] = "<createdBy>",
-["description"] = "<description>",
-["disabled"] = true,
-["disableRecursiveReplacerApplication"] = true,
-["doNotReplaceRegex"] = null
-,
-["lastUpdatedTimestamp"] = 1234L,
-["modifiedBy"] = "<modifiedBy>",
-["name"] = "<name>",
-["regex"] = null
-,
-["replaceWith"] = "<replaceWith>",
+condition = "<condition>",
+createdBy = "<createdBy>",
+description = "<description>",
+disabled = true,
+disableRecursiveReplacerApplication = true,
+lastUpdatedTimestamp = 1234L,
+modifiedBy = "<modifiedBy>",
+name = "<name>",
+replaceWith = "<replaceWith>",
 }
 },
-        ["rejectedPatterns"] = new List<object>()
+        rejectedPatterns = new List<object>()
 {
 null
 },
-        ["scopedRules"] = new List<object>()
+        scopedRules = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["bindingUrl"] = "<bindingUrl>",
-["rules"] = new List<object>()
+bindingUrl = "<bindingUrl>",
+rules = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["displayName"] = "<displayName>",
-["isResourceSet"] = true,
-["lastUpdatedTimestamp"] = 1234L,
-["name"] = "<name>",
-["qualifiedName"] = "<qualifiedName>",
+displayName = "<displayName>",
+isResourceSet = true,
+lastUpdatedTimestamp = 1234L,
+name = "<name>",
+qualifiedName = "<qualifiedName>",
 }
 },
-["storeType"] = "<storeType>",
+storeType = "<storeType>",
 }
 },
-        ["version"] = 1234,
+        version = 1234,
     },
 });
 Response response = await client.CreateOrUpdateResourceSetRuleAsync(content);
@@ -452,7 +448,7 @@ Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = client.CreateOrUpdateResourceSetRule(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -464,119 +460,115 @@ Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["advancedResourceSet"] = new Dictionary<string, object>()
+    advancedResourceSet = new
     {
-        ["modifiedAt"] = "2022-05-10T18:57:31.2311892Z",
-        ["resourceSetProcessing"] = "Default",
+        modifiedAt = "2022-05-10T18:57:31.2311892Z",
+        resourceSetProcessing = "Default",
     },
-    ["pathPatternConfig"] = new Dictionary<string, object>()
+    pathPatternConfig = new
     {
-        ["acceptedPatterns"] = new List<object>()
+        acceptedPatterns = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["createdBy"] = "<createdBy>",
-["filterType"] = "Pattern",
-["lastUpdatedTimestamp"] = 1234L,
-["modifiedBy"] = "<modifiedBy>",
-["name"] = "<name>",
-["path"] = "<path>",
+createdBy = "<createdBy>",
+filterType = "Pattern",
+lastUpdatedTimestamp = 1234L,
+modifiedBy = "<modifiedBy>",
+name = "<name>",
+path = "<path>",
 }
 },
-        ["complexReplacers"] = new List<object>()
+        complexReplacers = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["createdBy"] = "<createdBy>",
-["description"] = "<description>",
-["disabled"] = true,
-["disableRecursiveReplacerApplication"] = true,
-["lastUpdatedTimestamp"] = 1234L,
-["modifiedBy"] = "<modifiedBy>",
-["name"] = "<name>",
-["typeName"] = "<typeName>",
+createdBy = "<createdBy>",
+description = "<description>",
+disabled = true,
+disableRecursiveReplacerApplication = true,
+lastUpdatedTimestamp = 1234L,
+modifiedBy = "<modifiedBy>",
+name = "<name>",
+typeName = "<typeName>",
 }
 },
-        ["createdBy"] = "<createdBy>",
-        ["enableDefaultPatterns"] = true,
-        ["lastUpdatedTimestamp"] = 1234L,
-        ["modifiedBy"] = "<modifiedBy>",
-        ["normalizationRules"] = new List<object>()
+        createdBy = "<createdBy>",
+        enableDefaultPatterns = true,
+        lastUpdatedTimestamp = 1234L,
+        modifiedBy = "<modifiedBy>",
+        normalizationRules = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["description"] = "<description>",
-["disabled"] = true,
-["dynamicReplacement"] = true,
-["entityTypes"] = new List<object>()
+description = "<description>",
+disabled = true,
+dynamicReplacement = true,
+entityTypes = new List<object>()
 {
 "<entityTypes>"
 },
-["lastUpdatedTimestamp"] = 1234L,
-["name"] = "<name>",
-["regex"] = new Dictionary<string, object>()
+lastUpdatedTimestamp = 1234L,
+name = "<name>",
+regex = new
 {
-["maxDigits"] = 1234,
-["maxLetters"] = 1234,
-["minDashes"] = 1234,
-["minDigits"] = 1234,
-["minDigitsOrLetters"] = 1234,
-["minDots"] = 1234,
-["minHex"] = 1234,
-["minLetters"] = 1234,
-["minUnderscores"] = 1234,
-["options"] = 1234,
-["regexStr"] = "<regexStr>",
+maxDigits = 1234,
+maxLetters = 1234,
+minDashes = 1234,
+minDigits = 1234,
+minDigitsOrLetters = 1234,
+minDots = 1234,
+minHex = 1234,
+minLetters = 1234,
+minUnderscores = 1234,
+options = 1234,
+regexStr = "<regexStr>",
 },
-["replaceWith"] = "<replaceWith>",
-["version"] = 123.45,
+replaceWith = "<replaceWith>",
+version = 123.45,
 }
 },
-        ["regexReplacers"] = new List<object>()
+        regexReplacers = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["condition"] = "<condition>",
-["createdBy"] = "<createdBy>",
-["description"] = "<description>",
-["disabled"] = true,
-["disableRecursiveReplacerApplication"] = true,
-["doNotReplaceRegex"] = null
-,
-["lastUpdatedTimestamp"] = 1234L,
-["modifiedBy"] = "<modifiedBy>",
-["name"] = "<name>",
-["regex"] = null
-,
-["replaceWith"] = "<replaceWith>",
+condition = "<condition>",
+createdBy = "<createdBy>",
+description = "<description>",
+disabled = true,
+disableRecursiveReplacerApplication = true,
+lastUpdatedTimestamp = 1234L,
+modifiedBy = "<modifiedBy>",
+name = "<name>",
+replaceWith = "<replaceWith>",
 }
 },
-        ["rejectedPatterns"] = new List<object>()
+        rejectedPatterns = new List<object>()
 {
 null
 },
-        ["scopedRules"] = new List<object>()
+        scopedRules = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["bindingUrl"] = "<bindingUrl>",
-["rules"] = new List<object>()
+bindingUrl = "<bindingUrl>",
+rules = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["displayName"] = "<displayName>",
-["isResourceSet"] = true,
-["lastUpdatedTimestamp"] = 1234L,
-["name"] = "<name>",
-["qualifiedName"] = "<qualifiedName>",
+displayName = "<displayName>",
+isResourceSet = true,
+lastUpdatedTimestamp = 1234L,
+name = "<name>",
+qualifiedName = "<qualifiedName>",
 }
 },
-["storeType"] = "<storeType>",
+storeType = "<storeType>",
 }
 },
-        ["version"] = 1234,
+        version = 1234,
     },
 });
 Response response = client.CreateOrUpdateResourceSetRule(content);

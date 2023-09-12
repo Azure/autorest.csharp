@@ -45,11 +45,11 @@ This sample shows how to call PostValidAsync.
 <code><![CDATA[
 NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["smart"] = true,
-    ["age"] = 1234,
-    ["name"] = "<name>",
+    smart = true,
+    age = 1234,
+    name = "<name>",
 });
 Response response = await client.PostValidAsync(content);
 Console.WriteLine(response.Status);
@@ -58,11 +58,11 @@ This sample shows how to call PostValidAsync with all request content.
 <code><![CDATA[
 NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["smart"] = true,
-    ["age"] = 1234,
-    ["name"] = "<name>",
+    smart = true,
+    age = 1234,
+    name = "<name>",
 });
 Response response = await client.PostValidAsync(content);
 Console.WriteLine(response.Status);
@@ -74,11 +74,11 @@ This sample shows how to call PostValid.
 <code><![CDATA[
 NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["smart"] = true,
-    ["age"] = 1234,
-    ["name"] = "<name>",
+    smart = true,
+    age = 1234,
+    name = "<name>",
 });
 Response response = client.PostValid(content);
 Console.WriteLine(response.Status);
@@ -87,11 +87,11 @@ This sample shows how to call PostValid with all request content.
 <code><![CDATA[
 NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["smart"] = true,
-    ["age"] = 1234,
-    ["name"] = "<name>",
+    smart = true,
+    age = 1234,
+    name = "<name>",
 });
 Response response = client.PostValid(content);
 Console.WriteLine(response.Status);
@@ -217,11 +217,11 @@ This sample shows how to call PutValidAsync and parse the result.
 <code><![CDATA[
 NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["smart"] = true,
-    ["age"] = 1234,
-    ["name"] = "<name>",
+    smart = true,
+    age = 1234,
+    name = "<name>",
 });
 Response response = await client.PutValidAsync(content);
 
@@ -234,11 +234,11 @@ This sample shows how to call PutValidAsync with all request content and parse t
 <code><![CDATA[
 NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["smart"] = true,
-    ["age"] = 1234,
-    ["name"] = "<name>",
+    smart = true,
+    age = 1234,
+    name = "<name>",
 });
 Response response = await client.PutValidAsync(content);
 
@@ -254,11 +254,11 @@ This sample shows how to call PutValid and parse the result.
 <code><![CDATA[
 NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["smart"] = true,
-    ["age"] = 1234,
-    ["name"] = "<name>",
+    smart = true,
+    age = 1234,
+    name = "<name>",
 });
 Response response = client.PutValid(content);
 
@@ -271,11 +271,11 @@ This sample shows how to call PutValid with all request content and parse the re
 <code><![CDATA[
 NotDiscriminatedClient client = new NotDiscriminatedClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["smart"] = true,
-    ["age"] = 1234,
-    ["name"] = "<name>",
+    smart = true,
+    age = 1234,
+    name = "<name>",
 });
 Response response = client.PutValid(content);
 

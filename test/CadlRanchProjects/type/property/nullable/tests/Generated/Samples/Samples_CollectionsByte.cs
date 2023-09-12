@@ -202,12 +202,12 @@ namespace _Type.Property.Nullable.Samples
         {
             CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new List<object>()
+                requiredProperty = "<requiredProperty>",
+                nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 },
             });
             Response response = client.PatchNonNull(content);
@@ -220,12 +220,12 @@ new Dictionary<string, object>()
         {
             CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new List<object>()
+                requiredProperty = "<requiredProperty>",
+                nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 },
             });
             Response response = client.PatchNonNull(content);
@@ -238,12 +238,12 @@ new Dictionary<string, object>()
         {
             CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new List<object>()
+                requiredProperty = "<requiredProperty>",
+                nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 },
             });
             Response response = await client.PatchNonNullAsync(content);
@@ -256,12 +256,12 @@ new Dictionary<string, object>()
         {
             CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new List<object>()
+                requiredProperty = "<requiredProperty>",
+                nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 },
             });
             Response response = await client.PatchNonNullAsync(content);
@@ -274,12 +274,12 @@ new Dictionary<string, object>()
         {
             CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new List<object>()
+                requiredProperty = "<requiredProperty>",
+                nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 },
             });
             Response response = client.PatchNull(content);
@@ -292,12 +292,12 @@ new Dictionary<string, object>()
         {
             CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new List<object>()
+                requiredProperty = "<requiredProperty>",
+                nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 },
             });
             Response response = client.PatchNull(content);
@@ -310,12 +310,12 @@ new Dictionary<string, object>()
         {
             CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new List<object>()
+                requiredProperty = "<requiredProperty>",
+                nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 },
             });
             Response response = await client.PatchNullAsync(content);
@@ -328,12 +328,12 @@ new Dictionary<string, object>()
         {
             CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProperty"] = "<requiredProperty>",
-                ["nullableProperty"] = new List<object>()
+                requiredProperty = "<requiredProperty>",
+                nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 },
             });
             Response response = await client.PatchNullAsync(content);

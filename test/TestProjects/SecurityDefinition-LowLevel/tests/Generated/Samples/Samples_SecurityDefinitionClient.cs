@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -26,7 +25,7 @@ namespace SecurityDefinition_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = client.Operation(content);
             Console.WriteLine(response.Status);
         }
@@ -39,10 +38,10 @@ namespace SecurityDefinition_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["Code"] = "<Code>",
-                ["Status"] = "<Status>",
+                Code = "<Code>",
+                Status = "<Status>",
             });
             Response response = client.Operation(content);
             Console.WriteLine(response.Status);
@@ -56,7 +55,7 @@ namespace SecurityDefinition_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = await client.OperationAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -69,10 +68,10 @@ namespace SecurityDefinition_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["Code"] = "<Code>",
-                ["Status"] = "<Status>",
+                Code = "<Code>",
+                Status = "<Status>",
             });
             Response response = await client.OperationAsync(content);
             Console.WriteLine(response.Status);

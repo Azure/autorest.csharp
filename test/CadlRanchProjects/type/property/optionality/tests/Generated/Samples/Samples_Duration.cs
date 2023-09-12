@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
@@ -195,7 +194,7 @@ namespace _Type.Property.Optionality.Samples
         {
             Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = client.PutAll(content);
             Console.WriteLine(response.Status);
         }
@@ -206,9 +205,9 @@ namespace _Type.Property.Optionality.Samples
         {
             Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = "PT1H23M45S",
+                property = "PT1H23M45S",
             });
             Response response = client.PutAll(content);
             Console.WriteLine(response.Status);
@@ -245,7 +244,7 @@ namespace _Type.Property.Optionality.Samples
         {
             Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAllAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -256,9 +255,9 @@ namespace _Type.Property.Optionality.Samples
         {
             Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = "PT1H23M45S",
+                property = "PT1H23M45S",
             });
             Response response = await client.PutAllAsync(content);
             Console.WriteLine(response.Status);
@@ -295,7 +294,7 @@ namespace _Type.Property.Optionality.Samples
         {
             Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDefault(content);
             Console.WriteLine(response.Status);
         }
@@ -306,9 +305,9 @@ namespace _Type.Property.Optionality.Samples
         {
             Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = "PT1H23M45S",
+                property = "PT1H23M45S",
             });
             Response response = client.PutDefault(content);
             Console.WriteLine(response.Status);
@@ -345,7 +344,7 @@ namespace _Type.Property.Optionality.Samples
         {
             Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDefaultAsync(content);
             Console.WriteLine(response.Status);
         }
@@ -356,9 +355,9 @@ namespace _Type.Property.Optionality.Samples
         {
             Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = "PT1H23M45S",
+                property = "PT1H23M45S",
             });
             Response response = await client.PutDefaultAsync(content);
             Console.WriteLine(response.Status);

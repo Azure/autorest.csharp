@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -26,9 +25,9 @@ namespace _Type.Model.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProp"] = "<requiredProp>",
+                requiredProp = "<requiredProp>",
             });
             Response response = client.Input(content);
             Console.WriteLine(response.Status);
@@ -40,9 +39,9 @@ namespace _Type.Model.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProp"] = "<requiredProp>",
+                requiredProp = "<requiredProp>",
             });
             Response response = client.Input(content);
             Console.WriteLine(response.Status);
@@ -76,9 +75,9 @@ namespace _Type.Model.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProp"] = "<requiredProp>",
+                requiredProp = "<requiredProp>",
             });
             Response response = await client.InputAsync(content);
             Console.WriteLine(response.Status);
@@ -90,9 +89,9 @@ namespace _Type.Model.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProp"] = "<requiredProp>",
+                requiredProp = "<requiredProp>",
             });
             Response response = await client.InputAsync(content);
             Console.WriteLine(response.Status);
@@ -210,9 +209,9 @@ namespace _Type.Model.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProp"] = "<requiredProp>",
+                requiredProp = "<requiredProp>",
             });
             Response response = client.InputAndOutput(content);
 
@@ -226,9 +225,9 @@ namespace _Type.Model.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProp"] = "<requiredProp>",
+                requiredProp = "<requiredProp>",
             });
             Response response = client.InputAndOutput(content);
 
@@ -262,9 +261,9 @@ namespace _Type.Model.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProp"] = "<requiredProp>",
+                requiredProp = "<requiredProp>",
             });
             Response response = await client.InputAndOutputAsync(content);
 
@@ -278,9 +277,9 @@ namespace _Type.Model.Usage.Samples
         {
             UsageClient client = new UsageClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredProp"] = "<requiredProp>",
+                requiredProp = "<requiredProp>",
             });
             Response response = await client.InputAndOutputAsync(content);
 

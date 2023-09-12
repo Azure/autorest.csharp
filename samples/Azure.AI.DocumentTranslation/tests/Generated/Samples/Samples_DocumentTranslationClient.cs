@@ -746,22 +746,22 @@ Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["inputs"] = new List<object>()
+                inputs = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["source"] = new Dictionary<string, object>()
+source = new
 {
-["sourceUrl"] = "<sourceUrl>",
+sourceUrl = "<sourceUrl>",
 },
-["targets"] = new List<object>()
+targets = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["targetUrl"] = "<targetUrl>",
-["language"] = "<language>",
+targetUrl = "<targetUrl>",
+language = "<language>",
 }
 },
 }
@@ -777,44 +777,44 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["inputs"] = new List<object>()
+                inputs = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["source"] = new Dictionary<string, object>()
+source = new
 {
-["sourceUrl"] = "<sourceUrl>",
-["filter"] = new Dictionary<string, object>()
+sourceUrl = "<sourceUrl>",
+filter = new
 {
-["prefix"] = "<prefix>",
-["suffix"] = "<suffix>",
+prefix = "<prefix>",
+suffix = "<suffix>",
 },
-["language"] = "<language>",
-["storageSource"] = "AzureBlob",
+language = "<language>",
+storageSource = "AzureBlob",
 },
-["targets"] = new List<object>()
+targets = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["targetUrl"] = "<targetUrl>",
-["category"] = "<category>",
-["language"] = "<language>",
-["glossaries"] = new List<object>()
+targetUrl = "<targetUrl>",
+category = "<category>",
+language = "<language>",
+glossaries = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["glossaryUrl"] = "<glossaryUrl>",
-["format"] = "<format>",
-["version"] = "<version>",
-["storageSource"] = "AzureBlob",
+glossaryUrl = "<glossaryUrl>",
+format = "<format>",
+version = "<version>",
+storageSource = "AzureBlob",
 }
 },
-["storageSource"] = "AzureBlob",
+storageSource = "AzureBlob",
 }
 },
-["storageType"] = "Folder",
+storageType = "Folder",
 }
 },
             });
@@ -828,22 +828,22 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["inputs"] = new List<object>()
+                inputs = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["source"] = new Dictionary<string, object>()
+source = new
 {
-["sourceUrl"] = "<sourceUrl>",
+sourceUrl = "<sourceUrl>",
 },
-["targets"] = new List<object>()
+targets = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["targetUrl"] = "<targetUrl>",
-["language"] = "<language>",
+targetUrl = "<targetUrl>",
+language = "<language>",
 }
 },
 }
@@ -859,44 +859,44 @@ new Dictionary<string, object>()
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["inputs"] = new List<object>()
+                inputs = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["source"] = new Dictionary<string, object>()
+source = new
 {
-["sourceUrl"] = "<sourceUrl>",
-["filter"] = new Dictionary<string, object>()
+sourceUrl = "<sourceUrl>",
+filter = new
 {
-["prefix"] = "<prefix>",
-["suffix"] = "<suffix>",
+prefix = "<prefix>",
+suffix = "<suffix>",
 },
-["language"] = "<language>",
-["storageSource"] = "AzureBlob",
+language = "<language>",
+storageSource = "AzureBlob",
 },
-["targets"] = new List<object>()
+targets = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["targetUrl"] = "<targetUrl>",
-["category"] = "<category>",
-["language"] = "<language>",
-["glossaries"] = new List<object>()
+targetUrl = "<targetUrl>",
+category = "<category>",
+language = "<language>",
+glossaries = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["glossaryUrl"] = "<glossaryUrl>",
-["format"] = "<format>",
-["version"] = "<version>",
-["storageSource"] = "AzureBlob",
+glossaryUrl = "<glossaryUrl>",
+format = "<format>",
+version = "<version>",
+storageSource = "AzureBlob",
 }
 },
-["storageSource"] = "AzureBlob",
+storageSource = "AzureBlob",
 }
 },
-["storageType"] = "Folder",
+storageType = "Folder",
 }
 },
             });

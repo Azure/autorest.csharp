@@ -45,9 +45,9 @@ This sample shows how to call JsonAsync.
 <code><![CDATA[
 Property client = new ProjectedNameClient().GetPropertyClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["wireName"] = true,
+    wireName = true,
 });
 Response response = await client.JsonAsync(content);
 Console.WriteLine(response.Status);
@@ -56,9 +56,9 @@ This sample shows how to call JsonAsync with all request content.
 <code><![CDATA[
 Property client = new ProjectedNameClient().GetPropertyClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["wireName"] = true,
+    wireName = true,
 });
 Response response = await client.JsonAsync(content);
 Console.WriteLine(response.Status);
@@ -70,9 +70,9 @@ This sample shows how to call Json.
 <code><![CDATA[
 Property client = new ProjectedNameClient().GetPropertyClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["wireName"] = true,
+    wireName = true,
 });
 Response response = client.Json(content);
 Console.WriteLine(response.Status);
@@ -81,9 +81,9 @@ This sample shows how to call Json with all request content.
 <code><![CDATA[
 Property client = new ProjectedNameClient().GetPropertyClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["wireName"] = true,
+    wireName = true,
 });
 Response response = client.Json(content);
 Console.WriteLine(response.Status);
@@ -133,9 +133,9 @@ This sample shows how to call ClientAsync.
 <code><![CDATA[
 Property client = new ProjectedNameClient().GetPropertyClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["defaultName"] = true,
+    defaultName = true,
 });
 Response response = await client.ClientAsync(content);
 Console.WriteLine(response.Status);
@@ -144,9 +144,9 @@ This sample shows how to call ClientAsync with all request content.
 <code><![CDATA[
 Property client = new ProjectedNameClient().GetPropertyClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["defaultName"] = true,
+    defaultName = true,
 });
 Response response = await client.ClientAsync(content);
 Console.WriteLine(response.Status);
@@ -158,9 +158,9 @@ This sample shows how to call Client.
 <code><![CDATA[
 Property client = new ProjectedNameClient().GetPropertyClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["defaultName"] = true,
+    defaultName = true,
 });
 Response response = client.Client(content);
 Console.WriteLine(response.Status);
@@ -169,9 +169,9 @@ This sample shows how to call Client with all request content.
 <code><![CDATA[
 Property client = new ProjectedNameClient().GetPropertyClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["defaultName"] = true,
+    defaultName = true,
 });
 Response response = client.Client(content);
 Console.WriteLine(response.Status);
@@ -221,9 +221,9 @@ This sample shows how to call LanguageAsync.
 <code><![CDATA[
 Property client = new ProjectedNameClient().GetPropertyClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["defaultName"] = true,
+    defaultName = true,
 });
 Response response = await client.LanguageAsync(content);
 Console.WriteLine(response.Status);
@@ -232,9 +232,9 @@ This sample shows how to call LanguageAsync with all request content.
 <code><![CDATA[
 Property client = new ProjectedNameClient().GetPropertyClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["defaultName"] = true,
+    defaultName = true,
 });
 Response response = await client.LanguageAsync(content);
 Console.WriteLine(response.Status);
@@ -246,9 +246,9 @@ This sample shows how to call Language.
 <code><![CDATA[
 Property client = new ProjectedNameClient().GetPropertyClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["defaultName"] = true,
+    defaultName = true,
 });
 Response response = client.Language(content);
 Console.WriteLine(response.Status);
@@ -257,9 +257,9 @@ This sample shows how to call Language with all request content.
 <code><![CDATA[
 Property client = new ProjectedNameClient().GetPropertyClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["defaultName"] = true,
+    defaultName = true,
 });
 Response response = client.Language(content);
 Console.WriteLine(response.Status);
@@ -309,9 +309,9 @@ This sample shows how to call JsonAndClientAsync.
 <code><![CDATA[
 Property client = new ProjectedNameClient().GetPropertyClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["wireName"] = true,
+    wireName = true,
 });
 Response response = await client.JsonAndClientAsync(content);
 Console.WriteLine(response.Status);
@@ -320,9 +320,9 @@ This sample shows how to call JsonAndClientAsync with all request content.
 <code><![CDATA[
 Property client = new ProjectedNameClient().GetPropertyClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["wireName"] = true,
+    wireName = true,
 });
 Response response = await client.JsonAndClientAsync(content);
 Console.WriteLine(response.Status);
@@ -334,9 +334,9 @@ This sample shows how to call JsonAndClient.
 <code><![CDATA[
 Property client = new ProjectedNameClient().GetPropertyClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["wireName"] = true,
+    wireName = true,
 });
 Response response = client.JsonAndClient(content);
 Console.WriteLine(response.Status);
@@ -345,9 +345,9 @@ This sample shows how to call JsonAndClient with all request content.
 <code><![CDATA[
 Property client = new ProjectedNameClient().GetPropertyClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["wireName"] = true,
+    wireName = true,
 });
 Response response = client.JsonAndClient(content);
 Console.WriteLine(response.Status);

@@ -79,7 +79,7 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
-UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = await client.PutAsync(body);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -87,7 +87,7 @@ This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
-UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = await client.PutAsync(body);
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -98,7 +98,7 @@ This sample shows how to call Put.
 <code><![CDATA[
 UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
-UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = client.Put(body);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -106,7 +106,7 @@ This sample shows how to call Put with all parameters.
 <code><![CDATA[
 UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
-UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
 Response response = client.Put(body);
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -117,9 +117,9 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["property"] = new Dictionary<string, object>(),
+    property = new object(),
 });
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
@@ -128,9 +128,9 @@ This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["property"] = new Dictionary<string, object>(),
+    property = new object(),
 });
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
@@ -142,9 +142,9 @@ This sample shows how to call Put.
 <code><![CDATA[
 UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["property"] = new Dictionary<string, object>(),
+    property = new object(),
 });
 Response response = client.Put(content);
 Console.WriteLine(response.Status);
@@ -153,9 +153,9 @@ This sample shows how to call Put with all request content.
 <code><![CDATA[
 UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["property"] = new Dictionary<string, object>(),
+    property = new object(),
 });
 Response response = client.Put(content);
 Console.WriteLine(response.Status);

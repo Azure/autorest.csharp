@@ -114,9 +114,9 @@ namespace _Type._Array.Samples
 
             RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 });
             Response response = client.Put(content);
@@ -131,10 +131,10 @@ new Dictionary<string, object>()
 
             RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
-["children"] = new List<object>()
+property = "<property>",
+children = new List<object>()
 {
 null
 },
@@ -184,9 +184,9 @@ null
 
             RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 });
             Response response = await client.PutAsync(content);
@@ -201,10 +201,10 @@ new Dictionary<string, object>()
 
             RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
-["children"] = new List<object>()
+property = "<property>",
+children = new List<object>()
 {
 null
 },

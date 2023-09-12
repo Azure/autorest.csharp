@@ -26,9 +26,9 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new Dictionary<string, object>(),
+                value = new object(),
             });
             Response response = client.Default(content);
 
@@ -42,9 +42,9 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new Dictionary<string, object>(),
+                value = new object(),
             });
             Response response = client.Default(content);
 
@@ -58,7 +58,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            DefaultBytesProperty body = new DefaultBytesProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            DefaultBytesProperty body = new DefaultBytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<DefaultBytesProperty> response = client.Default(body);
         }
 
@@ -68,7 +68,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            DefaultBytesProperty body = new DefaultBytesProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            DefaultBytesProperty body = new DefaultBytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<DefaultBytesProperty> response = client.Default(body);
         }
 
@@ -78,9 +78,9 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new Dictionary<string, object>(),
+                value = new object(),
             });
             Response response = await client.DefaultAsync(content);
 
@@ -94,9 +94,9 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new Dictionary<string, object>(),
+                value = new object(),
             });
             Response response = await client.DefaultAsync(content);
 
@@ -110,7 +110,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            DefaultBytesProperty body = new DefaultBytesProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            DefaultBytesProperty body = new DefaultBytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<DefaultBytesProperty> response = await client.DefaultAsync(body);
         }
 
@@ -120,7 +120,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            DefaultBytesProperty body = new DefaultBytesProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            DefaultBytesProperty body = new DefaultBytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<DefaultBytesProperty> response = await client.DefaultAsync(body);
         }
 
@@ -130,9 +130,9 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new Dictionary<string, object>(),
+                value = new object(),
             });
             Response response = client.Base64(content);
 
@@ -146,9 +146,9 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new Dictionary<string, object>(),
+                value = new object(),
             });
             Response response = client.Base64(content);
 
@@ -162,7 +162,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Base64BytesProperty body = new Base64BytesProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Base64BytesProperty body = new Base64BytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<Base64BytesProperty> response = client.Base64(body);
         }
 
@@ -172,7 +172,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Base64BytesProperty body = new Base64BytesProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Base64BytesProperty body = new Base64BytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<Base64BytesProperty> response = client.Base64(body);
         }
 
@@ -182,9 +182,9 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new Dictionary<string, object>(),
+                value = new object(),
             });
             Response response = await client.Base64Async(content);
 
@@ -198,9 +198,9 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new Dictionary<string, object>(),
+                value = new object(),
             });
             Response response = await client.Base64Async(content);
 
@@ -214,7 +214,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Base64BytesProperty body = new Base64BytesProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Base64BytesProperty body = new Base64BytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<Base64BytesProperty> response = await client.Base64Async(body);
         }
 
@@ -224,7 +224,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Base64BytesProperty body = new Base64BytesProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Base64BytesProperty body = new Base64BytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<Base64BytesProperty> response = await client.Base64Async(body);
         }
 
@@ -234,9 +234,9 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new Dictionary<string, object>(),
+                value = new object(),
             });
             Response response = client.Base64url(content);
 
@@ -250,9 +250,9 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new Dictionary<string, object>(),
+                value = new object(),
             });
             Response response = client.Base64url(content);
 
@@ -266,7 +266,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Base64urlBytesProperty body = new Base64urlBytesProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Base64urlBytesProperty body = new Base64urlBytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<Base64urlBytesProperty> response = client.Base64url(body);
         }
 
@@ -276,7 +276,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Base64urlBytesProperty body = new Base64urlBytesProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Base64urlBytesProperty body = new Base64urlBytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<Base64urlBytesProperty> response = client.Base64url(body);
         }
 
@@ -286,9 +286,9 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new Dictionary<string, object>(),
+                value = new object(),
             });
             Response response = await client.Base64urlAsync(content);
 
@@ -302,9 +302,9 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new Dictionary<string, object>(),
+                value = new object(),
             });
             Response response = await client.Base64urlAsync(content);
 
@@ -318,7 +318,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Base64urlBytesProperty body = new Base64urlBytesProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Base64urlBytesProperty body = new Base64urlBytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<Base64urlBytesProperty> response = await client.Base64urlAsync(body);
         }
 
@@ -328,7 +328,7 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            Base64urlBytesProperty body = new Base64urlBytesProperty(BinaryData.FromObjectAsJson(new Dictionary<string, object>()));
+            Base64urlBytesProperty body = new Base64urlBytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response<Base64urlBytesProperty> response = await client.Base64urlAsync(body);
         }
 
@@ -338,11 +338,11 @@ namespace Encode.Bytes.Samples
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new List<object>()
+                value = new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 },
             });
             Response response = client.Base64urlArray(content);
@@ -357,11 +357,11 @@ new Dictionary<string, object>()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new List<object>()
+                value = new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 },
             });
             Response response = client.Base64urlArray(content);
@@ -378,7 +378,7 @@ new Dictionary<string, object>()
 
             Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new Dictionary<string, object>())
+BinaryData.FromObjectAsJson(new object())
 });
             Response<Base64urlArrayBytesProperty> response = client.Base64urlArray(body);
         }
@@ -391,7 +391,7 @@ BinaryData.FromObjectAsJson(new Dictionary<string, object>())
 
             Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new Dictionary<string, object>())
+BinaryData.FromObjectAsJson(new object())
 });
             Response<Base64urlArrayBytesProperty> response = client.Base64urlArray(body);
         }
@@ -402,11 +402,11 @@ BinaryData.FromObjectAsJson(new Dictionary<string, object>())
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new List<object>()
+                value = new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 },
             });
             Response response = await client.Base64urlArrayAsync(content);
@@ -421,11 +421,11 @@ new Dictionary<string, object>()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new List<object>()
+                value = new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 },
             });
             Response response = await client.Base64urlArrayAsync(content);
@@ -442,7 +442,7 @@ new Dictionary<string, object>()
 
             Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new Dictionary<string, object>())
+BinaryData.FromObjectAsJson(new object())
 });
             Response<Base64urlArrayBytesProperty> response = await client.Base64urlArrayAsync(body);
         }
@@ -455,7 +455,7 @@ BinaryData.FromObjectAsJson(new Dictionary<string, object>())
 
             Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new Dictionary<string, object>())
+BinaryData.FromObjectAsJson(new object())
 });
             Response<Base64urlArrayBytesProperty> response = await client.Base64urlArrayAsync(body);
         }

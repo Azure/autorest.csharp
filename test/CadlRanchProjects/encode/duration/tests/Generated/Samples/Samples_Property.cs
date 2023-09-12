@@ -27,9 +27,9 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "PT1H23M45S",
+                value = "PT1H23M45S",
             });
             Response response = client.Default(content);
 
@@ -43,9 +43,9 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "PT1H23M45S",
+                value = "PT1H23M45S",
             });
             Response response = client.Default(content);
 
@@ -79,9 +79,9 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "PT1H23M45S",
+                value = "PT1H23M45S",
             });
             Response response = await client.DefaultAsync(content);
 
@@ -95,9 +95,9 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "PT1H23M45S",
+                value = "PT1H23M45S",
             });
             Response response = await client.DefaultAsync(content);
 
@@ -131,9 +131,9 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "PT1H23M45S",
+                value = "PT1H23M45S",
             });
             Response response = client.Iso8601(content);
 
@@ -147,9 +147,9 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "PT1H23M45S",
+                value = "PT1H23M45S",
             });
             Response response = client.Iso8601(content);
 
@@ -183,9 +183,9 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "PT1H23M45S",
+                value = "PT1H23M45S",
             });
             Response response = await client.Iso8601Async(content);
 
@@ -199,9 +199,9 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = "PT1H23M45S",
+                value = "PT1H23M45S",
             });
             Response response = await client.Iso8601Async(content);
 
@@ -235,9 +235,9 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = 10,
+                value = 10,
             });
             Response response = client.Int32Seconds(content);
 
@@ -251,9 +251,9 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = 10,
+                value = 10,
             });
             Response response = client.Int32Seconds(content);
 
@@ -287,9 +287,9 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = 10,
+                value = 10,
             });
             Response response = await client.Int32SecondsAsync(content);
 
@@ -303,9 +303,9 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = 10,
+                value = 10,
             });
             Response response = await client.Int32SecondsAsync(content);
 
@@ -339,9 +339,9 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = 10F,
+                value = 10F,
             });
             Response response = client.FloatSeconds(content);
 
@@ -355,9 +355,9 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = 10F,
+                value = 10F,
             });
             Response response = client.FloatSeconds(content);
 
@@ -391,9 +391,9 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = 10F,
+                value = 10F,
             });
             Response response = await client.FloatSecondsAsync(content);
 
@@ -407,9 +407,9 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = 10F,
+                value = 10F,
             });
             Response response = await client.FloatSecondsAsync(content);
 
@@ -443,9 +443,9 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new List<object>()
+                value = new List<object>()
 {
 10F
 },
@@ -462,9 +462,9 @@ namespace Encode.Duration.Samples
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new List<object>()
+                value = new List<object>()
 {
 10F
 },
@@ -507,9 +507,9 @@ TimeSpan.FromSeconds(10F)
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new List<object>()
+                value = new List<object>()
 {
 10F
 },
@@ -526,9 +526,9 @@ TimeSpan.FromSeconds(10F)
         {
             Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["value"] = new List<object>()
+                value = new List<object>()
 {
 10F
 },

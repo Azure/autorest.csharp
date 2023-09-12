@@ -20,17 +20,17 @@ This sample shows how to call PutNonRetry400Async with all parameters and reques
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutNonRetry400Async(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -64,17 +64,17 @@ This sample shows how to call PutNonRetry400 with all parameters and request con
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = client.PutNonRetry400(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -108,17 +108,17 @@ This sample shows how to call PutNonRetry201Creating400Async with all parameters
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutNonRetry201Creating400Async(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -152,17 +152,17 @@ This sample shows how to call PutNonRetry201Creating400 with all parameters and 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = client.PutNonRetry201Creating400(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -196,17 +196,17 @@ This sample shows how to call PutNonRetry201Creating400InvalidJsonAsync with all
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutNonRetry201Creating400InvalidJsonAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -240,17 +240,17 @@ This sample shows how to call PutNonRetry201Creating400InvalidJson with all para
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = client.PutNonRetry201Creating400InvalidJson(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -284,17 +284,17 @@ This sample shows how to call PutAsyncRelativeRetry400Async with all parameters 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetry400Async(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -328,17 +328,17 @@ This sample shows how to call PutAsyncRelativeRetry400 with all parameters and r
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = client.PutAsyncRelativeRetry400(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -470,17 +470,17 @@ This sample shows how to call PostNonRetry400Async with all parameters and reque
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = await client.PostNonRetry400Async(WaitUntil.Completed, content);
 ]]></code></example>
@@ -500,17 +500,17 @@ This sample shows how to call PostNonRetry400 with all parameters and request co
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = client.PostNonRetry400(WaitUntil.Completed, content);
 ]]></code></example>
@@ -530,17 +530,17 @@ This sample shows how to call Post202NonRetry400Async with all parameters and re
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = await client.Post202NonRetry400Async(WaitUntil.Completed, content);
 ]]></code></example>
@@ -560,17 +560,17 @@ This sample shows how to call Post202NonRetry400 with all parameters and request
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = client.Post202NonRetry400(WaitUntil.Completed, content);
 ]]></code></example>
@@ -590,17 +590,17 @@ This sample shows how to call PostAsyncRelativeRetry400Async with all parameters
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = await client.PostAsyncRelativeRetry400Async(WaitUntil.Completed, content);
 ]]></code></example>
@@ -620,17 +620,17 @@ This sample shows how to call PostAsyncRelativeRetry400 with all parameters and 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = client.PostAsyncRelativeRetry400(WaitUntil.Completed, content);
 ]]></code></example>
@@ -654,17 +654,17 @@ This sample shows how to call PutError201NoProvisioningStatePayloadAsync with al
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutError201NoProvisioningStatePayloadAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -698,17 +698,17 @@ This sample shows how to call PutError201NoProvisioningStatePayload with all par
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = client.PutError201NoProvisioningStatePayload(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -742,17 +742,17 @@ This sample shows how to call PutAsyncRelativeRetryNoStatusAsync with all parame
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -786,17 +786,17 @@ This sample shows how to call PutAsyncRelativeRetryNoStatus with all parameters 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryNoStatus(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -830,17 +830,17 @@ This sample shows how to call PutAsyncRelativeRetryNoStatusPayloadAsync with all
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -874,17 +874,17 @@ This sample shows how to call PutAsyncRelativeRetryNoStatusPayload with all para
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryNoStatusPayload(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -982,17 +982,17 @@ This sample shows how to call Post202NoLocationAsync with all parameters and req
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = await client.Post202NoLocationAsync(WaitUntil.Completed, content);
 ]]></code></example>
@@ -1012,17 +1012,17 @@ This sample shows how to call Post202NoLocation with all parameters and request 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = client.Post202NoLocation(WaitUntil.Completed, content);
 ]]></code></example>
@@ -1042,17 +1042,17 @@ This sample shows how to call PostAsyncRelativeRetryNoPayloadAsync with all para
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = await client.PostAsyncRelativeRetryNoPayloadAsync(WaitUntil.Completed, content);
 ]]></code></example>
@@ -1072,17 +1072,17 @@ This sample shows how to call PostAsyncRelativeRetryNoPayload with all parameter
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = client.PostAsyncRelativeRetryNoPayload(WaitUntil.Completed, content);
 ]]></code></example>
@@ -1106,17 +1106,17 @@ This sample shows how to call Put200InvalidJsonAsync with all parameters and req
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = await client.Put200InvalidJsonAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -1150,17 +1150,17 @@ This sample shows how to call Put200InvalidJson with all parameters and request 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = client.Put200InvalidJson(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -1194,17 +1194,17 @@ This sample shows how to call PutAsyncRelativeRetryInvalidHeaderAsync with all p
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -1238,17 +1238,17 @@ This sample shows how to call PutAsyncRelativeRetryInvalidHeader with all parame
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -1282,17 +1282,17 @@ This sample shows how to call PutAsyncRelativeRetryInvalidJsonPollingAsync with 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -1326,17 +1326,17 @@ This sample shows how to call PutAsyncRelativeRetryInvalidJsonPolling with all p
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = client.PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -1468,17 +1468,17 @@ This sample shows how to call Post202RetryInvalidHeaderAsync with all parameters
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = await client.Post202RetryInvalidHeaderAsync(WaitUntil.Completed, content);
 ]]></code></example>
@@ -1498,17 +1498,17 @@ This sample shows how to call Post202RetryInvalidHeader with all parameters and 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = client.Post202RetryInvalidHeader(WaitUntil.Completed, content);
 ]]></code></example>
@@ -1528,17 +1528,17 @@ This sample shows how to call PostAsyncRelativeRetryInvalidHeaderAsync with all 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = await client.PostAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, content);
 ]]></code></example>
@@ -1558,17 +1558,17 @@ This sample shows how to call PostAsyncRelativeRetryInvalidHeader with all param
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = client.PostAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, content);
 ]]></code></example>
@@ -1588,17 +1588,17 @@ This sample shows how to call PostAsyncRelativeRetryInvalidJsonPollingAsync with
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = await client.PostAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, content);
 ]]></code></example>
@@ -1618,17 +1618,17 @@ This sample shows how to call PostAsyncRelativeRetryInvalidJsonPolling with all 
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LrosaDsClient client = new LrosaDsClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = client.PostAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, content);
 ]]></code></example>

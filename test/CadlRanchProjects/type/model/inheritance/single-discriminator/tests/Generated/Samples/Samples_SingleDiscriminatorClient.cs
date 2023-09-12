@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -114,10 +113,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "seagull",
-                ["wingspan"] = 1234,
+                kind = "seagull",
+                wingspan = 1234,
             });
             Response response = client.PutModel(content);
             Console.WriteLine(response.Status);
@@ -129,10 +128,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "seagull",
-                ["wingspan"] = 1234,
+                kind = "seagull",
+                wingspan = 1234,
             });
             Response response = client.PutModel(content);
             Console.WriteLine(response.Status);
@@ -166,10 +165,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "seagull",
-                ["wingspan"] = 1234,
+                kind = "seagull",
+                wingspan = 1234,
             });
             Response response = await client.PutModelAsync(content);
             Console.WriteLine(response.Status);
@@ -181,10 +180,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "seagull",
-                ["wingspan"] = 1234,
+                kind = "seagull",
+                wingspan = 1234,
             });
             Response response = await client.PutModelAsync(content);
             Console.WriteLine(response.Status);
@@ -306,10 +305,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "seagull",
-                ["wingspan"] = 1234,
+                kind = "seagull",
+                wingspan = 1234,
             });
             Response response = client.PutRecursiveModel(content);
             Console.WriteLine(response.Status);
@@ -321,10 +320,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "seagull",
-                ["wingspan"] = 1234,
+                kind = "seagull",
+                wingspan = 1234,
             });
             Response response = client.PutRecursiveModel(content);
             Console.WriteLine(response.Status);
@@ -358,10 +357,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "seagull",
-                ["wingspan"] = 1234,
+                kind = "seagull",
+                wingspan = 1234,
             });
             Response response = await client.PutRecursiveModelAsync(content);
             Console.WriteLine(response.Status);
@@ -373,10 +372,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         {
             SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "seagull",
-                ["wingspan"] = 1234,
+                kind = "seagull",
+                wingspan = 1234,
             });
             Response response = await client.PutRecursiveModelAsync(content);
             Console.WriteLine(response.Status);

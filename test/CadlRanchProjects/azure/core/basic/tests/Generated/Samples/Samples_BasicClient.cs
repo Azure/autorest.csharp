@@ -26,9 +26,9 @@ namespace _Specs_.Azure.Core.Basic.Samples
         {
             BasicClient client = new BasicClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = client.CreateOrUpdate(1234, content);
 
@@ -44,15 +44,15 @@ namespace _Specs_.Azure.Core.Basic.Samples
         {
             BasicClient client = new BasicClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["orders"] = new List<object>()
+                name = "<name>",
+                orders = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["userId"] = 1234,
-["detail"] = "<detail>",
+userId = 1234,
+detail = "<detail>",
 }
 },
             });
@@ -73,9 +73,9 @@ new Dictionary<string, object>()
         {
             BasicClient client = new BasicClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = await client.CreateOrUpdateAsync(1234, content);
 
@@ -91,15 +91,15 @@ new Dictionary<string, object>()
         {
             BasicClient client = new BasicClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["orders"] = new List<object>()
+                name = "<name>",
+                orders = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["userId"] = 1234,
-["detail"] = "<detail>",
+userId = 1234,
+detail = "<detail>",
 }
 },
             });
@@ -120,9 +120,9 @@ new Dictionary<string, object>()
         {
             BasicClient client = new BasicClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = client.CreateOrReplace(1234, content);
 
@@ -138,15 +138,15 @@ new Dictionary<string, object>()
         {
             BasicClient client = new BasicClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["orders"] = new List<object>()
+                name = "<name>",
+                orders = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["userId"] = 1234,
-["detail"] = "<detail>",
+userId = 1234,
+detail = "<detail>",
 }
 },
             });
@@ -193,9 +193,9 @@ new UserOrder(1234,"<detail>")
         {
             BasicClient client = new BasicClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = await client.CreateOrReplaceAsync(1234, content);
 
@@ -211,15 +211,15 @@ new UserOrder(1234,"<detail>")
         {
             BasicClient client = new BasicClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["orders"] = new List<object>()
+                name = "<name>",
+                orders = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["userId"] = 1234,
-["detail"] = "<detail>",
+userId = 1234,
+detail = "<detail>",
 }
 },
             });

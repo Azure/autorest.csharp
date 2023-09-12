@@ -141,9 +141,9 @@ ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 });
 Response response = await client.PutAsync(content);
@@ -155,10 +155,10 @@ ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
-["children"] = new List<object>()
+property = "<property>",
+children = new List<object>()
 {
 null
 },
@@ -176,9 +176,9 @@ ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 });
 Response response = client.Put(content);
@@ -190,10 +190,10 @@ ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
-["children"] = new List<object>()
+property = "<property>",
+children = new List<object>()
 {
 null
 },

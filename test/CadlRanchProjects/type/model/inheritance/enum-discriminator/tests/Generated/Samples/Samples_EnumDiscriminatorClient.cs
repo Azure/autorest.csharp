@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -114,10 +113,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "golden",
-                ["weight"] = 1234,
+                kind = "golden",
+                weight = 1234,
             });
             Response response = client.PutExtensibleModel(content);
             Console.WriteLine(response.Status);
@@ -129,10 +128,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "golden",
-                ["weight"] = 1234,
+                kind = "golden",
+                weight = 1234,
             });
             Response response = client.PutExtensibleModel(content);
             Console.WriteLine(response.Status);
@@ -166,10 +165,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "golden",
-                ["weight"] = 1234,
+                kind = "golden",
+                weight = 1234,
             });
             Response response = await client.PutExtensibleModelAsync(content);
             Console.WriteLine(response.Status);
@@ -181,10 +180,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "golden",
-                ["weight"] = 1234,
+                kind = "golden",
+                weight = 1234,
             });
             Response response = await client.PutExtensibleModelAsync(content);
             Console.WriteLine(response.Status);
@@ -482,10 +481,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "cobra",
-                ["length"] = 1234,
+                kind = "cobra",
+                length = 1234,
             });
             Response response = client.PutFixedModel(content);
             Console.WriteLine(response.Status);
@@ -497,10 +496,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "cobra",
-                ["length"] = 1234,
+                kind = "cobra",
+                length = 1234,
             });
             Response response = client.PutFixedModel(content);
             Console.WriteLine(response.Status);
@@ -534,10 +533,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "cobra",
-                ["length"] = 1234,
+                kind = "cobra",
+                length = 1234,
             });
             Response response = await client.PutFixedModelAsync(content);
             Console.WriteLine(response.Status);
@@ -549,10 +548,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["kind"] = "cobra",
-                ["length"] = 1234,
+                kind = "cobra",
+                length = 1234,
             });
             Response response = await client.PutFixedModelAsync(content);
             Console.WriteLine(response.Status);

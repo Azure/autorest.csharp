@@ -115,9 +115,9 @@ This sample shows how to call RepeatableActionAsync and parse the result.
 <code><![CDATA[
 TraitsClient client = new TraitsClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["userActionValue"] = "<userActionValue>",
+    userActionValue = "<userActionValue>",
 });
 Response response = await client.RepeatableActionAsync(1234, content);
 
@@ -128,9 +128,9 @@ This sample shows how to call RepeatableActionAsync with all parameters and requ
 <code><![CDATA[
 TraitsClient client = new TraitsClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["userActionValue"] = "<userActionValue>",
+    userActionValue = "<userActionValue>",
 });
 Response response = await client.RepeatableActionAsync(1234, content);
 
@@ -144,9 +144,9 @@ This sample shows how to call RepeatableAction and parse the result.
 <code><![CDATA[
 TraitsClient client = new TraitsClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["userActionValue"] = "<userActionValue>",
+    userActionValue = "<userActionValue>",
 });
 Response response = client.RepeatableAction(1234, content);
 
@@ -157,9 +157,9 @@ This sample shows how to call RepeatableAction with all parameters and request c
 <code><![CDATA[
 TraitsClient client = new TraitsClient();
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["userActionValue"] = "<userActionValue>",
+    userActionValue = "<userActionValue>",
 });
 Response response = client.RepeatableAction(1234, content);
 

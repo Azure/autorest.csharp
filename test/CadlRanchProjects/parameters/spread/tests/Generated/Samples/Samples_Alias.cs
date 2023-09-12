@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,9 +23,9 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = client.SpreadAsRequestBody(content);
             Console.WriteLine(response.Status);
@@ -38,9 +37,9 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = client.SpreadAsRequestBody(content);
             Console.WriteLine(response.Status);
@@ -72,9 +71,9 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = await client.SpreadAsRequestBodyAsync(content);
             Console.WriteLine(response.Status);
@@ -86,9 +85,9 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = await client.SpreadAsRequestBodyAsync(content);
             Console.WriteLine(response.Status);
@@ -120,9 +119,9 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = client.SpreadAsRequestParameter("<id>", "<x-ms-test-header>", content);
             Console.WriteLine(response.Status);
@@ -134,9 +133,9 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = client.SpreadAsRequestParameter("<id>", "<x-ms-test-header>", content);
             Console.WriteLine(response.Status);
@@ -168,9 +167,9 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", content);
             Console.WriteLine(response.Status);
@@ -182,9 +181,9 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", content);
             Console.WriteLine(response.Status);
@@ -216,14 +215,14 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["prop1"] = "<prop1>",
-                ["prop2"] = "<prop2>",
-                ["prop3"] = "<prop3>",
-                ["prop4"] = "<prop4>",
-                ["prop5"] = "<prop5>",
-                ["prop6"] = "<prop6>",
+                prop1 = "<prop1>",
+                prop2 = "<prop2>",
+                prop3 = "<prop3>",
+                prop4 = "<prop4>",
+                prop5 = "<prop5>",
+                prop6 = "<prop6>",
             });
             Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", content);
             Console.WriteLine(response.Status);
@@ -235,14 +234,14 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["prop1"] = "<prop1>",
-                ["prop2"] = "<prop2>",
-                ["prop3"] = "<prop3>",
-                ["prop4"] = "<prop4>",
-                ["prop5"] = "<prop5>",
-                ["prop6"] = "<prop6>",
+                prop1 = "<prop1>",
+                prop2 = "<prop2>",
+                prop3 = "<prop3>",
+                prop4 = "<prop4>",
+                prop5 = "<prop5>",
+                prop6 = "<prop6>",
             });
             Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", content);
             Console.WriteLine(response.Status);
@@ -274,14 +273,14 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["prop1"] = "<prop1>",
-                ["prop2"] = "<prop2>",
-                ["prop3"] = "<prop3>",
-                ["prop4"] = "<prop4>",
-                ["prop5"] = "<prop5>",
-                ["prop6"] = "<prop6>",
+                prop1 = "<prop1>",
+                prop2 = "<prop2>",
+                prop3 = "<prop3>",
+                prop4 = "<prop4>",
+                prop5 = "<prop5>",
+                prop6 = "<prop6>",
             });
             Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", content);
             Console.WriteLine(response.Status);
@@ -293,14 +292,14 @@ namespace Parameters.Spread.Samples
         {
             Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["prop1"] = "<prop1>",
-                ["prop2"] = "<prop2>",
-                ["prop3"] = "<prop3>",
-                ["prop4"] = "<prop4>",
-                ["prop5"] = "<prop5>",
-                ["prop6"] = "<prop6>",
+                prop1 = "<prop1>",
+                prop2 = "<prop2>",
+                prop3 = "<prop3>",
+                prop4 = "<prop4>",
+                prop5 = "<prop5>",
+                prop6 = "<prop6>",
             });
             Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", content);
             Console.WriteLine(response.Status);

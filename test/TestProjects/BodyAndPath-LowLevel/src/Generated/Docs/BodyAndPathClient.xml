@@ -8,7 +8,7 @@ This sample shows how to call CreateAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = await client.CreateAsync("<itemName>", content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -17,7 +17,7 @@ This sample shows how to call CreateAsync with all parameters and request conten
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = await client.CreateAsync("<itemName>", content);
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -29,7 +29,7 @@ This sample shows how to call Create.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = client.Create("<itemName>", content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -38,7 +38,7 @@ This sample shows how to call Create with all parameters and request content.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = client.Create("<itemName>", content);
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -98,7 +98,7 @@ This sample shows how to call CreateEnumAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = await client.CreateEnumAsync("current", "latest", content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -107,7 +107,7 @@ This sample shows how to call CreateEnumAsync with all parameters and request co
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = await client.CreateEnumAsync("current", "latest", content);
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -119,7 +119,7 @@ This sample shows how to call CreateEnum.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = client.CreateEnum("current", "latest", content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -128,7 +128,7 @@ This sample shows how to call CreateEnum with all parameters and request content
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = client.CreateEnum("current", "latest", content);
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -232,7 +232,7 @@ This sample shows how to call UpdateAsync.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = await client.UpdateAsync("<item3>", "<item2>", "value", "<item4>", content);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -256,7 +256,7 @@ This sample shows how to call Update.
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 BodyAndPathClient client = new BodyAndPathClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+RequestContent content = RequestContent.Create(new object());
 Response response = client.Update("<item3>", "<item2>", "value", "<item4>", content);
 Console.WriteLine(response.Status);
 ]]></code>

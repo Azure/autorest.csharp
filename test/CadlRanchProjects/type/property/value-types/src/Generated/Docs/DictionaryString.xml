@@ -129,11 +129,11 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["property"] = new Dictionary<string, object>()
+    property = new
     {
-        ["key"] = "<property>",
+        key = "<property>",
     },
 });
 Response response = await client.PutAsync(content);
@@ -143,11 +143,11 @@ This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["property"] = new Dictionary<string, object>()
+    property = new
     {
-        ["key"] = "<property>",
+        key = "<property>",
     },
 });
 Response response = await client.PutAsync(content);
@@ -160,11 +160,11 @@ This sample shows how to call Put.
 <code><![CDATA[
 DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["property"] = new Dictionary<string, object>()
+    property = new
     {
-        ["key"] = "<property>",
+        key = "<property>",
     },
 });
 Response response = client.Put(content);
@@ -174,11 +174,11 @@ This sample shows how to call Put with all request content.
 <code><![CDATA[
 DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["property"] = new Dictionary<string, object>()
+    property = new
     {
-        ["key"] = "<property>",
+        key = "<property>",
     },
 });
 Response response = client.Put(content);

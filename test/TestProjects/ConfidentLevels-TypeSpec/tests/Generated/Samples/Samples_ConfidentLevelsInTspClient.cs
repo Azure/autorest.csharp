@@ -27,9 +27,9 @@ namespace ConfidentLevelsInTsp.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["unionProperty"] = "<unionProperty>",
+                unionProperty = "<unionProperty>",
             });
             Response response = client.UnionInRequestProperty(content);
             Console.WriteLine(response.Status);
@@ -42,9 +42,9 @@ namespace ConfidentLevelsInTsp.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["unionProperty"] = "<unionProperty>",
+                unionProperty = "<unionProperty>",
             });
             Response response = client.UnionInRequestProperty(content);
             Console.WriteLine(response.Status);
@@ -57,9 +57,9 @@ namespace ConfidentLevelsInTsp.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["unionProperty"] = "<unionProperty>",
+                unionProperty = "<unionProperty>",
             });
             Response response = await client.UnionInRequestPropertyAsync(content);
             Console.WriteLine(response.Status);
@@ -72,9 +72,9 @@ namespace ConfidentLevelsInTsp.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["unionProperty"] = "<unionProperty>",
+                unionProperty = "<unionProperty>",
             });
             Response response = await client.UnionInRequestPropertyAsync(content);
             Console.WriteLine(response.Status);
@@ -87,10 +87,10 @@ namespace ConfidentLevelsInTsp.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["age"] = 1234,
+                name = "<name>",
+                age = 1234,
             });
             Response response = client.UnionInResponseProperty(content);
 
@@ -105,11 +105,11 @@ namespace ConfidentLevelsInTsp.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["age"] = 1234,
-                ["size"] = 123.45,
+                name = "<name>",
+                age = 1234,
+                size = 123.45,
             });
             Response response = client.UnionInResponseProperty(content);
 
@@ -124,10 +124,10 @@ namespace ConfidentLevelsInTsp.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["age"] = 1234,
+                name = "<name>",
+                age = 1234,
             });
             Response response = await client.UnionInResponsePropertyAsync(content);
 
@@ -142,11 +142,11 @@ namespace ConfidentLevelsInTsp.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["age"] = 1234,
-                ["size"] = 123.45,
+                name = "<name>",
+                age = 1234,
+                size = 123.45,
             });
             Response response = await client.UnionInResponsePropertyAsync(content);
 
@@ -161,14 +161,14 @@ namespace ConfidentLevelsInTsp.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["selfReference"] = new List<object>()
+                name = "<name>",
+                selfReference = new List<object>()
 {
 null
 },
-                ["unionProperty"] = "<unionProperty>",
+                unionProperty = "<unionProperty>",
             });
             Response response = client.UnionWithSelfReference(content);
             Console.WriteLine(response.Status);
@@ -181,14 +181,14 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["selfReference"] = new List<object>()
+                name = "<name>",
+                selfReference = new List<object>()
 {
 null
 },
-                ["unionProperty"] = "<unionProperty>",
+                unionProperty = "<unionProperty>",
             });
             Response response = client.UnionWithSelfReference(content);
             Console.WriteLine(response.Status);
@@ -201,14 +201,14 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["selfReference"] = new List<object>()
+                name = "<name>",
+                selfReference = new List<object>()
 {
 null
 },
-                ["unionProperty"] = "<unionProperty>",
+                unionProperty = "<unionProperty>",
             });
             Response response = await client.UnionWithSelfReferenceAsync(content);
             Console.WriteLine(response.Status);
@@ -221,14 +221,14 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["selfReference"] = new List<object>()
+                name = "<name>",
+                selfReference = new List<object>()
 {
 null
 },
-                ["unionProperty"] = "<unionProperty>",
+                unionProperty = "<unionProperty>",
             });
             Response response = await client.UnionWithSelfReferenceAsync(content);
             Console.WriteLine(response.Status);
@@ -241,9 +241,9 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = client.UnionWithInderict(content);
             Console.WriteLine(response.Status);
@@ -256,24 +256,24 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["reference"] = new List<object>()
+                name = "<name>",
+                reference = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["something"] = "<something>",
-["reference"] = new Dictionary<string, object>()
+something = "<something>",
+reference = new
 {
-["name"] = "<name>",
-["selfReference"] = new List<object>()
+name = "<name>",
+selfReference = new List<object>()
 {
 null
 },
-["unionProperty"] = "<unionProperty>",
+unionProperty = "<unionProperty>",
 },
-["unionProperty"] = "<unionProperty>",
+unionProperty = "<unionProperty>",
 }
 },
             });
@@ -288,9 +288,9 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = await client.UnionWithInderictAsync(content);
             Console.WriteLine(response.Status);
@@ -303,24 +303,24 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["reference"] = new List<object>()
+                name = "<name>",
+                reference = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["something"] = "<something>",
-["reference"] = new Dictionary<string, object>()
+something = "<something>",
+reference = new
 {
-["name"] = "<name>",
-["selfReference"] = new List<object>()
+name = "<name>",
+selfReference = new List<object>()
 {
 null
 },
-["unionProperty"] = "<unionProperty>",
+unionProperty = "<unionProperty>",
 },
-["unionProperty"] = "<unionProperty>",
+unionProperty = "<unionProperty>",
 }
 },
             });
@@ -335,10 +335,10 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["id"] = 1,
+                name = "<name>",
+                id = 1,
             });
             Response response = client.LiteralOfInteger(content);
             Console.WriteLine(response.Status);
@@ -351,10 +351,10 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["id"] = 1,
+                name = "<name>",
+                id = 1,
             });
             Response response = client.LiteralOfInteger(content);
             Console.WriteLine(response.Status);
@@ -367,10 +367,10 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["id"] = 1,
+                name = "<name>",
+                id = 1,
             });
             Response response = await client.LiteralOfIntegerAsync(content);
             Console.WriteLine(response.Status);
@@ -383,10 +383,10 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["id"] = 1,
+                name = "<name>",
+                id = 1,
             });
             Response response = await client.LiteralOfIntegerAsync(content);
             Console.WriteLine(response.Status);
@@ -399,10 +399,10 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["id"] = 3.141592F,
+                name = "<name>",
+                id = 3.141592F,
             });
             Response response = client.LiteralOfFloat(content);
             Console.WriteLine(response.Status);
@@ -415,10 +415,10 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["id"] = 3.141592F,
+                name = "<name>",
+                id = 3.141592F,
             });
             Response response = client.LiteralOfFloat(content);
             Console.WriteLine(response.Status);
@@ -431,10 +431,10 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["id"] = 3.141592F,
+                name = "<name>",
+                id = 3.141592F,
             });
             Response response = await client.LiteralOfFloatAsync(content);
             Console.WriteLine(response.Status);
@@ -447,10 +447,10 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
-                ["id"] = 3.141592F,
+                name = "<name>",
+                id = 3.141592F,
             });
             Response response = await client.LiteralOfFloatAsync(content);
             Console.WriteLine(response.Status);
@@ -463,11 +463,11 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["meow"] = "<meow>",
-                ["kind"] = "cat",
-                ["name"] = "<name>",
+                meow = "<meow>",
+                kind = "cat",
+                name = "<name>",
             });
             Response response = client.ConfidentOperationWithDiscriminator(content);
 
@@ -483,11 +483,11 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["meow"] = "<meow>",
-                ["kind"] = "cat",
-                ["name"] = "<name>",
+                meow = "<meow>",
+                kind = "cat",
+                name = "<name>",
             });
             Response response = client.ConfidentOperationWithDiscriminator(content);
 
@@ -525,11 +525,11 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["meow"] = "<meow>",
-                ["kind"] = "cat",
-                ["name"] = "<name>",
+                meow = "<meow>",
+                kind = "cat",
+                name = "<name>",
             });
             Response response = await client.ConfidentOperationWithDiscriminatorAsync(content);
 
@@ -545,11 +545,11 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["meow"] = "<meow>",
-                ["kind"] = "cat",
-                ["name"] = "<name>",
+                meow = "<meow>",
+                kind = "cat",
+                name = "<name>",
             });
             Response response = await client.ConfidentOperationWithDiscriminatorAsync(content);
 
@@ -587,12 +587,12 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["woof"] = "<woof>",
-                ["color"] = "<color>",
-                ["kind"] = "dog",
-                ["name"] = "<name>",
+                woof = "<woof>",
+                color = "<color>",
+                kind = "dog",
+                name = "<name>",
             });
             Response response = client.PollutedBaseMethod(content);
 
@@ -608,12 +608,12 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["woof"] = "<woof>",
-                ["color"] = "<color>",
-                ["kind"] = "dog",
-                ["name"] = "<name>",
+                woof = "<woof>",
+                color = "<color>",
+                kind = "dog",
+                name = "<name>",
             });
             Response response = client.PollutedBaseMethod(content);
 
@@ -629,12 +629,12 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["woof"] = "<woof>",
-                ["color"] = "<color>",
-                ["kind"] = "dog",
-                ["name"] = "<name>",
+                woof = "<woof>",
+                color = "<color>",
+                kind = "dog",
+                name = "<name>",
             });
             Response response = await client.PollutedBaseMethodAsync(content);
 
@@ -650,12 +650,12 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["woof"] = "<woof>",
-                ["color"] = "<color>",
-                ["kind"] = "dog",
-                ["name"] = "<name>",
+                woof = "<woof>",
+                color = "<color>",
+                kind = "dog",
+                name = "<name>",
             });
             Response response = await client.PollutedBaseMethodAsync(content);
 
@@ -671,12 +671,12 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["woof"] = "<woof>",
-                ["color"] = "<color>",
-                ["kind"] = "dog",
-                ["name"] = "<name>",
+                woof = "<woof>",
+                color = "<color>",
+                kind = "dog",
+                name = "<name>",
             });
             Response response = client.PollutedDerivedMethod(content);
 
@@ -694,12 +694,12 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["woof"] = "<woof>",
-                ["color"] = "<color>",
-                ["kind"] = "dog",
-                ["name"] = "<name>",
+                woof = "<woof>",
+                color = "<color>",
+                kind = "dog",
+                name = "<name>",
             });
             Response response = client.PollutedDerivedMethod(content);
 
@@ -717,12 +717,12 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["woof"] = "<woof>",
-                ["color"] = "<color>",
-                ["kind"] = "dog",
-                ["name"] = "<name>",
+                woof = "<woof>",
+                color = "<color>",
+                kind = "dog",
+                name = "<name>",
             });
             Response response = await client.PollutedDerivedMethodAsync(content);
 
@@ -740,12 +740,12 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["woof"] = "<woof>",
-                ["color"] = "<color>",
-                ["kind"] = "dog",
-                ["name"] = "<name>",
+                woof = "<woof>",
+                color = "<color>",
+                kind = "dog",
+                name = "<name>",
             });
             Response response = await client.PollutedDerivedMethodAsync(content);
 
@@ -763,11 +763,11 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["meow"] = "<meow>",
-                ["kind"] = "cat",
-                ["name"] = "<name>",
+                meow = "<meow>",
+                kind = "cat",
+                name = "<name>",
             });
             Response response = client.UnpollutedDerivedMethod(content);
 
@@ -784,11 +784,11 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["meow"] = "<meow>",
-                ["kind"] = "cat",
-                ["name"] = "<name>",
+                meow = "<meow>",
+                kind = "cat",
+                name = "<name>",
             });
             Response response = client.UnpollutedDerivedMethod(content);
 
@@ -805,11 +805,11 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["meow"] = "<meow>",
-                ["kind"] = "cat",
-                ["name"] = "<name>",
+                meow = "<meow>",
+                kind = "cat",
+                name = "<name>",
             });
             Response response = await client.UnpollutedDerivedMethodAsync(content);
 
@@ -826,11 +826,11 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["meow"] = "<meow>",
-                ["kind"] = "cat",
-                ["name"] = "<name>",
+                meow = "<meow>",
+                kind = "cat",
+                name = "<name>",
             });
             Response response = await client.UnpollutedDerivedMethodAsync(content);
 
@@ -847,9 +847,9 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = client.UseDerivedModel(content);
             Console.WriteLine(response.Status);
@@ -862,11 +862,11 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["age"] = 1234,
-                ["name"] = "<name>",
-                ["size"] = 123.45,
+                age = 1234,
+                name = "<name>",
+                size = 123.45,
             });
             Response response = client.UseDerivedModel(content);
             Console.WriteLine(response.Status);
@@ -879,9 +879,9 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = await client.UseDerivedModelAsync(content);
             Console.WriteLine(response.Status);
@@ -894,11 +894,11 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["age"] = 1234,
-                ["name"] = "<name>",
-                ["size"] = 123.45,
+                age = 1234,
+                name = "<name>",
+                size = 123.45,
             });
             Response response = await client.UseDerivedModelAsync(content);
             Console.WriteLine(response.Status);
@@ -911,10 +911,10 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["unionProperty"] = "<unionProperty>",
-                ["name"] = "<name>",
+                unionProperty = "<unionProperty>",
+                name = "<name>",
             });
             Response response = client.UseDerivedModelWithUnion(content);
             Console.WriteLine(response.Status);
@@ -927,11 +927,11 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["unionProperty"] = "<unionProperty>",
-                ["name"] = "<name>",
-                ["size"] = 123.45,
+                unionProperty = "<unionProperty>",
+                name = "<name>",
+                size = 123.45,
             });
             Response response = client.UseDerivedModelWithUnion(content);
             Console.WriteLine(response.Status);
@@ -944,10 +944,10 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["unionProperty"] = "<unionProperty>",
-                ["name"] = "<name>",
+                unionProperty = "<unionProperty>",
+                name = "<name>",
             });
             Response response = await client.UseDerivedModelWithUnionAsync(content);
             Console.WriteLine(response.Status);
@@ -960,11 +960,11 @@ null
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["unionProperty"] = "<unionProperty>",
-                ["name"] = "<name>",
-                ["size"] = 123.45,
+                unionProperty = "<unionProperty>",
+                name = "<name>",
+                size = 123.45,
             });
             Response response = await client.UseDerivedModelWithUnionAsync(content);
             Console.WriteLine(response.Status);

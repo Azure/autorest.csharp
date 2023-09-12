@@ -2330,7 +2330,7 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 });
 Response response = await client.PutByteValidAsync(content);
 Console.WriteLine(response.Status);
@@ -2342,7 +2342,7 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 });
 Response response = await client.PutByteValidAsync(content);
 Console.WriteLine(response.Status);
@@ -2357,7 +2357,7 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 });
 Response response = client.PutByteValid(content);
 Console.WriteLine(response.Status);
@@ -2369,7 +2369,7 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 });
 Response response = client.PutByteValid(content);
 Console.WriteLine(response.Status);
@@ -2716,7 +2716,7 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 });
 Response response = await client.PutComplexValidAsync(content);
 Console.WriteLine(response.Status);
@@ -2747,7 +2747,7 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new object()
 });
 Response response = client.PutComplexValid(content);
 Console.WriteLine(response.Status);
@@ -3304,9 +3304,9 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["key"] = "<arrayBody>",
+key = "<arrayBody>",
 }
 });
 Response response = await client.PutDictionaryValidAsync(content);
@@ -3319,9 +3319,9 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["key"] = "<arrayBody>",
+key = "<arrayBody>",
 }
 });
 Response response = await client.PutDictionaryValidAsync(content);
@@ -3337,9 +3337,9 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["key"] = "<arrayBody>",
+key = "<arrayBody>",
 }
 });
 Response response = client.PutDictionaryValid(content);
@@ -3352,9 +3352,9 @@ ArrayClient client = new ArrayClient(credential);
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["key"] = "<arrayBody>",
+key = "<arrayBody>",
 }
 });
 Response response = client.PutDictionaryValid(content);

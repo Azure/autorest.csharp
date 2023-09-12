@@ -110,11 +110,11 @@ namespace _Type.Property.ValueTypes.Samples
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new Dictionary<string, object>()
+                property = new
                 {
-                    ["key"] = "<property>",
+                    key = "<property>",
                 },
             });
             Response response = client.Put(content);
@@ -127,11 +127,11 @@ namespace _Type.Property.ValueTypes.Samples
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new Dictionary<string, object>()
+                property = new
                 {
-                    ["key"] = "<property>",
+                    key = "<property>",
                 },
             });
             Response response = client.Put(content);
@@ -172,11 +172,11 @@ namespace _Type.Property.ValueTypes.Samples
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new Dictionary<string, object>()
+                property = new
                 {
-                    ["key"] = "<property>",
+                    key = "<property>",
                 },
             });
             Response response = await client.PutAsync(content);
@@ -189,11 +189,11 @@ namespace _Type.Property.ValueTypes.Samples
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["property"] = new Dictionary<string, object>()
+                property = new
                 {
-                    ["key"] = "<property>",
+                    key = "<property>",
                 },
             });
             Response response = await client.PutAsync(content);

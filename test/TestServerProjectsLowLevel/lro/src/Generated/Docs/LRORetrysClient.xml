@@ -20,17 +20,17 @@ This sample shows how to call Put201CreatingSucceeded200Async with all parameter
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -64,17 +64,17 @@ This sample shows how to call Put201CreatingSucceeded200 with all parameters and
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -108,17 +108,17 @@ This sample shows how to call PutAsyncRelativeRetrySucceededAsync with all param
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = await client.PutAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -152,17 +152,17 @@ This sample shows how to call PutAsyncRelativeRetrySucceeded with all parameters
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation<BinaryData> operation = client.PutAsyncRelativeRetrySucceeded(WaitUntil.Completed, content);
 BinaryData responseData = operation.Value;
@@ -322,17 +322,17 @@ This sample shows how to call Post202Retry200Async with all parameters and reque
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = await client.Post202Retry200Async(WaitUntil.Completed, content);
 ]]></code></example>
@@ -352,17 +352,17 @@ This sample shows how to call Post202Retry200 with all parameters and request co
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = client.Post202Retry200(WaitUntil.Completed, content);
 ]]></code></example>
@@ -382,17 +382,17 @@ This sample shows how to call PostAsyncRelativeRetrySucceededAsync with all para
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = await client.PostAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, content);
 ]]></code></example>
@@ -412,17 +412,17 @@ This sample shows how to call PostAsyncRelativeRetrySucceeded with all parameter
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 LRORetrysClient client = new LRORetrysClient(credential);
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["properties"] = new Dictionary<string, object>()
+    properties = new
     {
-        ["provisioningState"] = "<provisioningState>",
+        provisioningState = "<provisioningState>",
     },
-    ["tags"] = new Dictionary<string, object>()
+    tags = new
     {
-        ["key"] = "<tags>",
+        key = "<tags>",
     },
-    ["location"] = "<location>",
+    location = "<location>",
 });
 Operation operation = client.PostAsyncRelativeRetrySucceeded(WaitUntil.Completed, content);
 ]]></code></example>

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,9 +24,9 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = client.SpreadAsRequestBody(content);
             Console.WriteLine(response.Status);
@@ -39,9 +38,9 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = client.SpreadAsRequestBody(content);
             Console.WriteLine(response.Status);
@@ -75,9 +74,9 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = await client.SpreadAsRequestBodyAsync(content);
             Console.WriteLine(response.Status);
@@ -89,9 +88,9 @@ namespace Parameters.Spread.Samples
         {
             Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["name"] = "<name>",
+                name = "<name>",
             });
             Response response = await client.SpreadAsRequestBodyAsync(content);
             Console.WriteLine(response.Status);

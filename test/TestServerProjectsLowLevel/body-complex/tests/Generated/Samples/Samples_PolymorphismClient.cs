@@ -90,10 +90,10 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["fishtype"] = "salmon",
-                ["length"] = 123.45F,
+                fishtype = "salmon",
+                length = 123.45F,
             });
             Response response = client.PutValid(content);
             Console.WriteLine(response.Status);
@@ -106,14 +106,14 @@ namespace body_complex_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["location"] = "<location>",
-                ["iswild"] = true,
-                ["fishtype"] = "salmon",
-                ["species"] = "<species>",
-                ["length"] = 123.45F,
-                ["siblings"] = new List<object>()
+                location = "<location>",
+                iswild = true,
+                fishtype = "salmon",
+                species = "<species>",
+                length = 123.45F,
+                siblings = new List<object>()
 {
 null
 },
@@ -129,10 +129,10 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["fishtype"] = "salmon",
-                ["length"] = 123.45F,
+                fishtype = "salmon",
+                length = 123.45F,
             });
             Response response = await client.PutValidAsync(content);
             Console.WriteLine(response.Status);
@@ -145,14 +145,14 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["location"] = "<location>",
-                ["iswild"] = true,
-                ["fishtype"] = "salmon",
-                ["species"] = "<species>",
-                ["length"] = 123.45F,
-                ["siblings"] = new List<object>()
+                location = "<location>",
+                iswild = true,
+                fishtype = "salmon",
+                species = "<species>",
+                length = 123.45F,
+                siblings = new List<object>()
 {
 null
 },
@@ -436,10 +436,10 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["fishtype"] = "smart_salmon",
-                ["length"] = 123.45F,
+                fishtype = "smart_salmon",
+                length = 123.45F,
             });
             Response response = client.PutComplicated(content);
             Console.WriteLine(response.Status);
@@ -452,24 +452,24 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["college_degree"] = "<college_degree>",
-                ["location"] = "<location>",
-                ["iswild"] = true,
-                ["fishtype"] = "smart_salmon",
-                ["species"] = "<species>",
-                ["length"] = 123.45F,
-                ["siblings"] = new List<object>()
+                college_degree = "<college_degree>",
+                location = "<location>",
+                iswild = true,
+                fishtype = "smart_salmon",
+                species = "<species>",
+                length = 123.45F,
+                siblings = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["location"] = "<location>",
-["iswild"] = true,
-["fishtype"] = "salmon",
-["species"] = "<species>",
-["length"] = 123.45F,
-["siblings"] = new List<object>()
+location = "<location>",
+iswild = true,
+fishtype = "salmon",
+species = "<species>",
+length = 123.45F,
+siblings = new List<object>()
 {
 null
 },
@@ -487,10 +487,10 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["fishtype"] = "smart_salmon",
-                ["length"] = 123.45F,
+                fishtype = "smart_salmon",
+                length = 123.45F,
             });
             Response response = await client.PutComplicatedAsync(content);
             Console.WriteLine(response.Status);
@@ -503,24 +503,24 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["college_degree"] = "<college_degree>",
-                ["location"] = "<location>",
-                ["iswild"] = true,
-                ["fishtype"] = "smart_salmon",
-                ["species"] = "<species>",
-                ["length"] = 123.45F,
-                ["siblings"] = new List<object>()
+                college_degree = "<college_degree>",
+                location = "<location>",
+                iswild = true,
+                fishtype = "smart_salmon",
+                species = "<species>",
+                length = 123.45F,
+                siblings = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["location"] = "<location>",
-["iswild"] = true,
-["fishtype"] = "salmon",
-["species"] = "<species>",
-["length"] = 123.45F,
-["siblings"] = new List<object>()
+location = "<location>",
+iswild = true,
+fishtype = "salmon",
+species = "<species>",
+length = 123.45F,
+siblings = new List<object>()
 {
 null
 },
@@ -538,10 +538,10 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["fishtype"] = "smart_salmon",
-                ["length"] = 123.45F,
+                fishtype = "smart_salmon",
+                length = 123.45F,
             });
             Response response = client.PutMissingDiscriminator(content);
 
@@ -556,24 +556,24 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["college_degree"] = "<college_degree>",
-                ["location"] = "<location>",
-                ["iswild"] = true,
-                ["fishtype"] = "smart_salmon",
-                ["species"] = "<species>",
-                ["length"] = 123.45F,
-                ["siblings"] = new List<object>()
+                college_degree = "<college_degree>",
+                location = "<location>",
+                iswild = true,
+                fishtype = "smart_salmon",
+                species = "<species>",
+                length = 123.45F,
+                siblings = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["location"] = "<location>",
-["iswild"] = true,
-["fishtype"] = "salmon",
-["species"] = "<species>",
-["length"] = 123.45F,
-["siblings"] = new List<object>()
+location = "<location>",
+iswild = true,
+fishtype = "salmon",
+species = "<species>",
+length = 123.45F,
+siblings = new List<object>()
 {
 null
 },
@@ -600,10 +600,10 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["fishtype"] = "smart_salmon",
-                ["length"] = 123.45F,
+                fishtype = "smart_salmon",
+                length = 123.45F,
             });
             Response response = await client.PutMissingDiscriminatorAsync(content);
 
@@ -618,24 +618,24 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["college_degree"] = "<college_degree>",
-                ["location"] = "<location>",
-                ["iswild"] = true,
-                ["fishtype"] = "smart_salmon",
-                ["species"] = "<species>",
-                ["length"] = 123.45F,
-                ["siblings"] = new List<object>()
+                college_degree = "<college_degree>",
+                location = "<location>",
+                iswild = true,
+                fishtype = "smart_salmon",
+                species = "<species>",
+                length = 123.45F,
+                siblings = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["location"] = "<location>",
-["iswild"] = true,
-["fishtype"] = "salmon",
-["species"] = "<species>",
-["length"] = 123.45F,
-["siblings"] = new List<object>()
+location = "<location>",
+iswild = true,
+fishtype = "salmon",
+species = "<species>",
+length = 123.45F,
+siblings = new List<object>()
 {
 null
 },
@@ -662,10 +662,10 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["fishtype"] = "salmon",
-                ["length"] = 123.45F,
+                fishtype = "salmon",
+                length = 123.45F,
             });
             Response response = client.PutValidMissingRequired(content);
             Console.WriteLine(response.Status);
@@ -678,14 +678,14 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["location"] = "<location>",
-                ["iswild"] = true,
-                ["fishtype"] = "salmon",
-                ["species"] = "<species>",
-                ["length"] = 123.45F,
-                ["siblings"] = new List<object>()
+                location = "<location>",
+                iswild = true,
+                fishtype = "salmon",
+                species = "<species>",
+                length = 123.45F,
+                siblings = new List<object>()
 {
 null
 },
@@ -701,10 +701,10 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["fishtype"] = "salmon",
-                ["length"] = 123.45F,
+                fishtype = "salmon",
+                length = 123.45F,
             });
             Response response = await client.PutValidMissingRequiredAsync(content);
             Console.WriteLine(response.Status);
@@ -717,14 +717,14 @@ null
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PolymorphismClient client = new PolymorphismClient(credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["location"] = "<location>",
-                ["iswild"] = true,
-                ["fishtype"] = "salmon",
-                ["species"] = "<species>",
-                ["length"] = 123.45F,
-                ["siblings"] = new List<object>()
+                location = "<location>",
+                iswild = true,
+                fishtype = "salmon",
+                species = "<species>",
+                length = 123.45F,
+                siblings = new List<object>()
 {
 null
 },

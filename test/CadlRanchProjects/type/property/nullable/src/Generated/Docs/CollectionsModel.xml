@@ -159,14 +159,14 @@ This sample shows how to call PatchNonNullAsync.
 <code><![CDATA[
 CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["requiredProperty"] = "<requiredProperty>",
-    ["nullableProperty"] = new List<object>()
+    requiredProperty = "<requiredProperty>",
+    nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
 });
@@ -177,14 +177,14 @@ This sample shows how to call PatchNonNullAsync with all request content.
 <code><![CDATA[
 CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["requiredProperty"] = "<requiredProperty>",
-    ["nullableProperty"] = new List<object>()
+    requiredProperty = "<requiredProperty>",
+    nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
 });
@@ -198,14 +198,14 @@ This sample shows how to call PatchNonNull.
 <code><![CDATA[
 CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["requiredProperty"] = "<requiredProperty>",
-    ["nullableProperty"] = new List<object>()
+    requiredProperty = "<requiredProperty>",
+    nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
 });
@@ -216,14 +216,14 @@ This sample shows how to call PatchNonNull with all request content.
 <code><![CDATA[
 CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["requiredProperty"] = "<requiredProperty>",
-    ["nullableProperty"] = new List<object>()
+    requiredProperty = "<requiredProperty>",
+    nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
 });
@@ -237,14 +237,14 @@ This sample shows how to call PatchNullAsync.
 <code><![CDATA[
 CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["requiredProperty"] = "<requiredProperty>",
-    ["nullableProperty"] = new List<object>()
+    requiredProperty = "<requiredProperty>",
+    nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
 });
@@ -255,14 +255,14 @@ This sample shows how to call PatchNullAsync with all request content.
 <code><![CDATA[
 CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["requiredProperty"] = "<requiredProperty>",
-    ["nullableProperty"] = new List<object>()
+    requiredProperty = "<requiredProperty>",
+    nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
 });
@@ -276,14 +276,14 @@ This sample shows how to call PatchNull.
 <code><![CDATA[
 CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["requiredProperty"] = "<requiredProperty>",
-    ["nullableProperty"] = new List<object>()
+    requiredProperty = "<requiredProperty>",
+    nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
 });
@@ -294,14 +294,14 @@ This sample shows how to call PatchNull with all request content.
 <code><![CDATA[
 CollectionsModel client = new NullableClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+RequestContent content = RequestContent.Create(new
 {
-    ["requiredProperty"] = "<requiredProperty>",
-    ["nullableProperty"] = new List<object>()
+    requiredProperty = "<requiredProperty>",
+    nullableProperty = new List<object>()
 {
-new Dictionary<string, object>()
+new
 {
-["property"] = "<property>",
+property = "<property>",
 }
 },
 });

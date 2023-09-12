@@ -112,11 +112,11 @@ namespace _Type._Dictionary.Samples
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = new Dictionary<string, object>()
+                key = new
                 {
-                    ["property"] = "<property>",
+                    property = "<property>",
                 },
             });
             Response response = client.Put(content);
@@ -129,15 +129,13 @@ namespace _Type._Dictionary.Samples
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = new Dictionary<string, object>()
+                key = new
                 {
-                    ["property"] = "<property>",
-                    ["children"] = new Dictionary<string, object>()
+                    property = "<property>",
+                    children = new
                     {
-                        ["key"] = null
-            ,
                     },
                 },
             });
@@ -183,11 +181,11 @@ namespace _Type._Dictionary.Samples
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = new Dictionary<string, object>()
+                key = new
                 {
-                    ["property"] = "<property>",
+                    property = "<property>",
                 },
             });
             Response response = await client.PutAsync(content);
@@ -200,15 +198,13 @@ namespace _Type._Dictionary.Samples
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["key"] = new Dictionary<string, object>()
+                key = new
                 {
-                    ["property"] = "<property>",
-                    ["children"] = new Dictionary<string, object>()
+                    property = "<property>",
+                    children = new
                     {
-                        ["key"] = null
-            ,
                     },
                 },
             });

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,9 +23,9 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["simpleUnion"] = 1234,
+                simpleUnion = 1234,
             });
             Response response = client.SendInt(content);
             Console.WriteLine(response.Status);
@@ -38,9 +37,9 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["simpleUnion"] = 1234,
+                simpleUnion = 1234,
             });
             Response response = client.SendInt(content);
             Console.WriteLine(response.Status);
@@ -52,9 +51,9 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["simpleUnion"] = 1234,
+                simpleUnion = 1234,
             });
             Response response = await client.SendIntAsync(content);
             Console.WriteLine(response.Status);
@@ -66,9 +65,9 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["simpleUnion"] = 1234,
+                simpleUnion = 1234,
             });
             Response response = await client.SendIntAsync(content);
             Console.WriteLine(response.Status);
@@ -80,9 +79,9 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["simpleUnion"] = 1234,
+                simpleUnion = 1234,
             });
             Response response = client.SendIntArray(content);
             Console.WriteLine(response.Status);
@@ -94,9 +93,9 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["simpleUnion"] = 1234,
+                simpleUnion = 1234,
             });
             Response response = client.SendIntArray(content);
             Console.WriteLine(response.Status);
@@ -108,9 +107,9 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["simpleUnion"] = 1234,
+                simpleUnion = 1234,
             });
             Response response = await client.SendIntArrayAsync(content);
             Console.WriteLine(response.Status);
@@ -122,9 +121,9 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["simpleUnion"] = 1234,
+                simpleUnion = 1234,
             });
             Response response = await client.SendIntArrayAsync(content);
             Console.WriteLine(response.Status);
@@ -136,12 +135,12 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["namedUnion"] = new Dictionary<string, object>()
+                namedUnion = new
                 {
-                    ["prop1"] = 1234,
-                    ["name"] = "<name>",
+                    prop1 = 1234,
+                    name = "<name>",
                 },
             });
             Response response = client.SendFirstNamedUnionValue(content);
@@ -154,12 +153,12 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["namedUnion"] = new Dictionary<string, object>()
+                namedUnion = new
                 {
-                    ["prop1"] = 1234,
-                    ["name"] = "<name>",
+                    prop1 = 1234,
+                    name = "<name>",
                 },
             });
             Response response = client.SendFirstNamedUnionValue(content);
@@ -172,12 +171,12 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["namedUnion"] = new Dictionary<string, object>()
+                namedUnion = new
                 {
-                    ["prop1"] = 1234,
-                    ["name"] = "<name>",
+                    prop1 = 1234,
+                    name = "<name>",
                 },
             });
             Response response = await client.SendFirstNamedUnionValueAsync(content);
@@ -190,12 +189,12 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["namedUnion"] = new Dictionary<string, object>()
+                namedUnion = new
                 {
-                    ["prop1"] = 1234,
-                    ["name"] = "<name>",
+                    prop1 = 1234,
+                    name = "<name>",
                 },
             });
             Response response = await client.SendFirstNamedUnionValueAsync(content);
@@ -208,12 +207,12 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["namedUnion"] = new Dictionary<string, object>()
+                namedUnion = new
                 {
-                    ["prop1"] = 1234,
-                    ["name"] = "<name>",
+                    prop1 = 1234,
+                    name = "<name>",
                 },
             });
             Response response = client.SendSecondNamedUnionValue(content);
@@ -226,12 +225,12 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["namedUnion"] = new Dictionary<string, object>()
+                namedUnion = new
                 {
-                    ["prop1"] = 1234,
-                    ["name"] = "<name>",
+                    prop1 = 1234,
+                    name = "<name>",
                 },
             });
             Response response = client.SendSecondNamedUnionValue(content);
@@ -244,12 +243,12 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["namedUnion"] = new Dictionary<string, object>()
+                namedUnion = new
                 {
-                    ["prop1"] = 1234,
-                    ["name"] = "<name>",
+                    prop1 = 1234,
+                    name = "<name>",
                 },
             });
             Response response = await client.SendSecondNamedUnionValueAsync(content);
@@ -262,12 +261,12 @@ namespace _Type.Union.Samples
         {
             UnionClient client = new UnionClient();
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["namedUnion"] = new Dictionary<string, object>()
+                namedUnion = new
                 {
-                    ["prop1"] = 1234,
-                    ["name"] = "<name>",
+                    prop1 = 1234,
+                    name = "<name>",
                 },
             });
             Response response = await client.SendSecondNamedUnionValueAsync(content);

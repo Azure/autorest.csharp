@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure.Core;
@@ -27,10 +26,10 @@ namespace Pagination.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
             });
             foreach (BinaryData item in client.GetPaginationLedgerEntries(content))
             {
@@ -49,10 +48,10 @@ namespace Pagination.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
             });
             foreach (BinaryData item in client.GetPaginationLedgerEntries(content))
             {
@@ -99,10 +98,10 @@ namespace Pagination.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
             });
             await foreach (BinaryData item in client.GetPaginationLedgerEntriesAsync(content))
             {
@@ -121,10 +120,10 @@ namespace Pagination.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            RequestContent content = RequestContent.Create(new
             {
-                ["requiredString"] = "<requiredString>",
-                ["requiredInt"] = 1234,
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
             });
             await foreach (BinaryData item in client.GetPaginationLedgerEntriesAsync(content))
             {
