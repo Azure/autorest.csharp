@@ -428,7 +428,7 @@ namespace AutoRest.CSharp.Output.Models
         /// </summary>
         /// <param name="parameters">Parameters to sort</param>
         /// <returns></returns>
-        private static Parameter[] OrderParametersByRequired(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.IsOptionalInSignature).ToArray();
+        private static Parameter[] OrderParametersByRequired(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.Name == "endpoint").OrderBy(p => p.IsOptionalInSignature).ToArray();
 
         // Merges operations without response types types together
         private static CSharpType? ReduceResponses(List<Response> responses)
@@ -545,6 +545,12 @@ namespace AutoRest.CSharp.Output.Models
         {
             var constructorParameters = new List<Parameter>();
 
+            var endpointParameter = parameters.FirstOrDefault(parameter => parameter.Name == "endpoint");
+            if (endpointParameter != null)
+            {
+                Console.WriteLine("add endpoint");
+                constructorParameters.Add(endpointParameter);
+            }
             constructorParameters.AddRange(GetRequiredParameters(parameters));
 
             if (credentialType != null)
