@@ -87,7 +87,7 @@ namespace Azure.Core
 
             return content;
         }
-
+        /*
         public static RequestContent FromString(string value)
         {
             var content = new Utf8JsonRequestContent();
@@ -99,6 +99,13 @@ namespace Azure.Core
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(value);
+            return content;
+        }
+        */
+        public static RequestContent FromObject(object value)
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(value);
             return content;
         }
     }

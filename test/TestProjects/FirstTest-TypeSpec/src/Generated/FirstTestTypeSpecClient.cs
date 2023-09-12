@@ -929,7 +929,7 @@ namespace FirstTestTypeSpec
             Argument.AssertNotNullOrEmpty(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await StringBodyAsync(RequestContentHelper.FromString(body), context).ConfigureAwait(false);
+            Response response = await StringBodyAsync(RequestContentHelper.FromObject(body), context).ConfigureAwait(false);
             return response;
         }
 
@@ -944,7 +944,7 @@ namespace FirstTestTypeSpec
             Argument.AssertNotNullOrEmpty(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = StringBody(RequestContentHelper.FromString(body), context);
+            Response response = StringBody(RequestContentHelper.FromObject(body), context);
             return response;
         }
 
@@ -1033,7 +1033,7 @@ namespace FirstTestTypeSpec
         public virtual async Task<Response> BoolBodyAsync(bool body, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await BoolBodyAsync(RequestContentHelper.FromBool(body), context).ConfigureAwait(false);
+            Response response = await BoolBodyAsync(RequestContentHelper.FromObject(body), context).ConfigureAwait(false);
             return response;
         }
 
@@ -1044,7 +1044,7 @@ namespace FirstTestTypeSpec
         public virtual Response BoolBody(bool body, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = BoolBody(RequestContentHelper.FromBool(body), context);
+            Response response = BoolBody(RequestContentHelper.FromObject(body), context);
             return response;
         }
 

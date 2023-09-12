@@ -8,6 +8,7 @@ using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Azure.Core;
 using FirstTestTypeSpec;
+using Microsoft.Extensions.Hosting;
 using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
@@ -76,6 +77,18 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(12345, result.GetProperty("optionalLiteralInt").GetInt32());
             Assert.AreEqual(123.45f, result.GetProperty("optionalLiteralFloat").GetSingle());
             Assert.AreEqual(false, result.GetProperty("optionalLiteralBool").GetBoolean());
+        });
+        [Test]
+         public async Task FirstTest_StringBody() => await Test(async (host) =>
+         {
+            Response response = await new FirstTestTypeSpecClient(host).StringBodyAsync("test");
+            Assert.AreEqual(204, response.Status);
+         });
+        [Test]
+        public async Task FirstTest_BoolBody() => await Test(async (host) =>
+         {
+             Response response = await new FirstTestTypeSpecClient(host).BoolBodyAsync(true);
+            Assert.AreEqual(204, response.Status);
         });
     }
 }

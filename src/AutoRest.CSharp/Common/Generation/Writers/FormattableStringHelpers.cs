@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
                 }
             }
-
+            /*
             if (parameter.Type is { IsFrameworkType: true } && parameter.Type.EqualsIgnoreNullable(typeof(string)) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
             {
                 return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromString)}({parameter.Name})";
@@ -116,7 +116,11 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromBool)}({parameter.Name})";
             }
-
+            */
+            if (parameter.Type is { IsFrameworkType: true } && toType.EqualsIgnoreNullable(typeof(RequestContent)))
+            {
+                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromObject)}({parameter.Name})";
+            }
             var conversionMethod = GetConversionMethod(parameter.Type, toType);
             if (conversionMethod == null)
             {

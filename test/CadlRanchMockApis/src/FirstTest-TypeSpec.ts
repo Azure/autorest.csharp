@@ -41,3 +41,21 @@ Scenarios.FirstTest_CreateLiteral = passOnSuccess([
     };
   }),
 ]);
+
+Scenarios.FirstTest_StringBody = passOnSuccess([
+    mockapi.put("/stringBody", (req) => {
+        req.expect.bodyEquals("test");
+        return {
+            status: 204
+        };
+    }),
+]);
+
+Scenarios.FirstTest_BoolBody = passOnSuccess([
+    mockapi.put("/boolBody", (req) => {
+        req.expect.bodyEquals(true);
+        return {
+            status: 204
+        };
+    }),
+]);
