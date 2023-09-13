@@ -37,7 +37,7 @@ namespace MgmtMockAndSample.Tests.Mock
             ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
             ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetVaults();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, default /* Warning: No value is provided for vaultName in example 'Create a new vault or update an existing vault'. Please consider adding a proper example value for it in swagger*/, new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
             {
                 Duration = XmlConvert.ToTimeSpan("P7D"),
                 CreateOn = DateTimeOffset.Parse("2017-05-04T07:12:28.191Z"),
@@ -96,6 +96,45 @@ new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Micros
                 ReadWriteSingleStringPropertySomething = "test",
                 DeepSomething = "deep-value",
             }));
+        }
+
+        [RecordedTest]
+        public async Task CreateOrUpdate_VerifySampleGenCanHandleExamplesWithSomeParameterMissing()
+        {
+            // Example: Verify Sample-gen can handle examples with some parameter missing
+
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            var collection = resourceGroupResource.GetVaults();
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, default /* Warning: No value is provided for vaultName in example 'Verify Sample-gen can handle examples with some parameter missing'. Please consider adding a proper example value for it in swagger*/, new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
+            {
+                Duration = XmlConvert.ToTimeSpan("P7D"),
+                CreateOn = DateTimeOffset.Parse("2017-05-04T07:12:28.191Z"),
+                AccessPolicies =
+{
+new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
+{
+Keys =
+{
+KeyPermission.Encrypt,KeyPermission.Decrypt,KeyPermission.WrapKey,KeyPermission.UnwrapKey,KeyPermission.Sign,KeyPermission.Verify,KeyPermission.Get,KeyPermission.List,KeyPermission.Create,KeyPermission.Update,KeyPermission.Import,KeyPermission.Delete,KeyPermission.Backup,KeyPermission.Restore,KeyPermission.Recover,KeyPermission.Purge
+},
+Secrets =
+{
+SecretPermission.Get,SecretPermission.List,SecretPermission.Set,SecretPermission.Delete,SecretPermission.Backup,SecretPermission.Restore,SecretPermission.Recover,SecretPermission.Purge
+},
+Certificates =
+{
+CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delete,CertificatePermission.Create,CertificatePermission.Import,CertificatePermission.Update,CertificatePermission.Managecontacts,CertificatePermission.Getissuers,CertificatePermission.Listissuers,CertificatePermission.Setissuers,CertificatePermission.Deleteissuers,CertificatePermission.Manageissuers,CertificatePermission.Recover,CertificatePermission.Purge
+},
+})
+},
+                EnabledForDiskEncryption = true,
+                EnabledForTemplateDeployment = true,
+                PublicNetworkAccess = "Enabled",
+            })
+            {
+                Identity = new ManagedServiceIdentity("SystemAssigned"),
+            });
         }
 
         [RecordedTest]

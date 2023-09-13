@@ -4255,7 +4255,7 @@ schemas: !Schemas
           schema: *ref_7
           required: true
           serializedName: location
-          language: !Languages &ref_700
+          language: !Languages &ref_701
             default:
               name: location
               description: The supported Azure location where the key vault should be created.
@@ -4280,7 +4280,7 @@ schemas: !Schemas
                 schema: *ref_9
                 required: false
                 serializedName: duration
-                language: !Languages &ref_702
+                language: !Languages &ref_703
                   default:
                     name: duration
                     description: Time elapsed for task.
@@ -4289,7 +4289,7 @@ schemas: !Schemas
                 schema: *ref_10
                 required: false
                 serializedName: createOn
-                language: !Languages &ref_703
+                language: !Languages &ref_704
                   default:
                     name: createOn
                     description: The date and time when the cluster creating.
@@ -4298,7 +4298,7 @@ schemas: !Schemas
                 schema: *ref_11
                 required: true
                 serializedName: tenantId
-                language: !Languages &ref_704
+                language: !Languages &ref_705
                   default:
                     name: tenantId
                     description: The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
@@ -4314,7 +4314,7 @@ schemas: !Schemas
                       schema: *ref_12
                       required: true
                       serializedName: family
-                      language: !Languages &ref_706
+                      language: !Languages &ref_707
                         default:
                           name: family
                           description: SKU family name
@@ -4323,7 +4323,7 @@ schemas: !Schemas
                       schema: *ref_13
                       required: true
                       serializedName: name
-                      language: !Languages &ref_707
+                      language: !Languages &ref_708
                         default:
                           name: name
                           description: SKU name to specify whether the key vault is a standard vault or a premium vault.
@@ -4341,7 +4341,7 @@ schemas: !Schemas
                   protocol: !Protocols {}
                 required: true
                 serializedName: sku
-                language: !Languages &ref_705
+                language: !Languages &ref_706
                   default:
                     name: sku
                     description: SKU details
@@ -4362,7 +4362,7 @@ schemas: !Schemas
                         schema: *ref_14
                         required: true
                         serializedName: tenantId
-                        language: !Languages &ref_709
+                        language: !Languages &ref_710
                           default:
                             name: tenantId
                             description: The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
@@ -4371,7 +4371,7 @@ schemas: !Schemas
                         schema: *ref_15
                         required: true
                         serializedName: objectId
-                        language: !Languages &ref_710
+                        language: !Languages &ref_711
                           default:
                             name: objectId
                             description: The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies.
@@ -4405,7 +4405,7 @@ schemas: !Schemas
                                     description: Permissions to keys
                                 protocol: !Protocols {}
                               serializedName: keys
-                              language: !Languages &ref_712
+                              language: !Languages &ref_713
                                 default:
                                   name: keys
                                   description: Permissions to keys
@@ -4423,7 +4423,7 @@ schemas: !Schemas
                                     description: Permissions to secrets
                                 protocol: !Protocols {}
                               serializedName: secrets
-                              language: !Languages &ref_713
+                              language: !Languages &ref_714
                                 default:
                                   name: secrets
                                   description: Permissions to secrets
@@ -4441,7 +4441,7 @@ schemas: !Schemas
                                     description: Permissions to certificates
                                 protocol: !Protocols {}
                               serializedName: certificates
-                              language: !Languages &ref_714
+                              language: !Languages &ref_715
                                 default:
                                   name: certificates
                                   description: Permissions to certificates
@@ -4477,7 +4477,7 @@ schemas: !Schemas
                           protocol: !Protocols {}
                         required: true
                         serializedName: permissions
-                        language: !Languages &ref_711
+                        language: !Languages &ref_712
                           default:
                             name: permissions
                             description: Permissions the identity has for keys, secrets and certificates.
@@ -4502,7 +4502,7 @@ schemas: !Schemas
                   protocol: !Protocols {}
                 required: false
                 serializedName: accessPolicies
-                language: !Languages &ref_708
+                language: !Languages &ref_709
                   default:
                     name: accessPolicies
                     description: >-
@@ -4513,7 +4513,7 @@ schemas: !Schemas
                 schema: *ref_21
                 required: false
                 serializedName: vaultUri
-                language: !Languages &ref_734
+                language: !Languages &ref_735
                   default:
                     name: vaultUri
                     description: The URI of the vault for performing operations on keys and secrets.
@@ -4523,7 +4523,7 @@ schemas: !Schemas
                 readOnly: true
                 required: false
                 serializedName: hsmPoolResourceId
-                language: !Languages &ref_735
+                language: !Languages &ref_736
                   default:
                     name: hsmPoolResourceId
                     description: The resource id of HSM Pool.
@@ -4551,7 +4551,7 @@ schemas: !Schemas
                 schema: *ref_24
                 required: false
                 serializedName: enabledForDiskEncryption
-                language: !Languages &ref_715
+                language: !Languages &ref_716
                   default:
                     name: enabledForDiskEncryption
                     description: Property to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys.
@@ -4560,7 +4560,7 @@ schemas: !Schemas
                 schema: *ref_25
                 required: false
                 serializedName: enabledForTemplateDeployment
-                language: !Languages &ref_716
+                language: !Languages &ref_717
                   default:
                     name: enabledForTemplateDeployment
                     description: Property to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault.
@@ -4631,7 +4631,7 @@ schemas: !Schemas
                     - !Property 
                       schema: *ref_31
                       serializedName: bypass
-                      language: !Languages &ref_737
+                      language: !Languages &ref_738
                         default:
                           name: bypass
                           description: Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.
@@ -4639,7 +4639,7 @@ schemas: !Schemas
                     - !Property 
                       schema: *ref_32
                       serializedName: defaultAction
-                      language: !Languages &ref_738
+                      language: !Languages &ref_739
                         default:
                           name: defaultAction
                           description: The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
@@ -4660,7 +4660,7 @@ schemas: !Schemas
                               schema: *ref_33
                               required: true
                               serializedName: value
-                              language: !Languages &ref_740
+                              language: !Languages &ref_741
                                 default:
                                   name: value
                                   description: An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78).
@@ -4682,7 +4682,7 @@ schemas: !Schemas
                             description: The list of IP address rules.
                         protocol: !Protocols {}
                       serializedName: ipRules
-                      language: !Languages &ref_739
+                      language: !Languages &ref_740
                         default:
                           name: ipRules
                           description: The list of IP address rules.
@@ -4703,7 +4703,7 @@ schemas: !Schemas
                               schema: *ref_34
                               required: true
                               serializedName: id
-                              language: !Languages &ref_742
+                              language: !Languages &ref_743
                                 default:
                                   name: id
                                   description: Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'.
@@ -4712,7 +4712,7 @@ schemas: !Schemas
                               schema: *ref_35
                               required: false
                               serializedName: ignoreMissingVnetServiceEndpoint
-                              language: !Languages &ref_743
+                              language: !Languages &ref_744
                                 default:
                                   name: ignoreMissingVnetServiceEndpoint
                                   description: Property to specify whether NRP will ignore the check if parent subnet has serviceEndpoints configured.
@@ -4734,7 +4734,7 @@ schemas: !Schemas
                             description: The list of virtual network rules.
                         protocol: !Protocols {}
                       serializedName: virtualNetworkRules
-                      language: !Languages &ref_741
+                      language: !Languages &ref_742
                         default:
                           name: virtualNetworkRules
                           description: The list of virtual network rules.
@@ -4752,7 +4752,7 @@ schemas: !Schemas
                   protocol: !Protocols {}
                 required: false
                 serializedName: networkAcls
-                language: !Languages &ref_736
+                language: !Languages &ref_737
                   default:
                     name: networkAcls
                     description: Rules governing the accessibility of the key vault from specific network locations.
@@ -4761,7 +4761,7 @@ schemas: !Schemas
                 schema: *ref_36
                 required: false
                 serializedName: provisioningState
-                language: !Languages &ref_744
+                language: !Languages &ref_745
                   default:
                     name: provisioningState
                     description: Provisioning state of the vault.
@@ -4781,7 +4781,7 @@ schemas: !Schemas
                       - !Property 
                         schema: *ref_37
                         serializedName: id
-                        language: !Languages &ref_746
+                        language: !Languages &ref_747
                           default:
                             name: id
                             description: Id of private endpoint connection.
@@ -4789,7 +4789,7 @@ schemas: !Schemas
                       - !Property 
                         schema: *ref_38
                         serializedName: etag
-                        language: !Languages &ref_747
+                        language: !Languages &ref_748
                           default:
                             name: etag
                             description: Modified whenever there is a change in the state of private endpoint connection.
@@ -4805,7 +4805,7 @@ schemas: !Schemas
                               schema: *ref_39
                               readOnly: true
                               serializedName: id
-                              language: !Languages &ref_749
+                              language: !Languages &ref_750
                                 default:
                                   name: id
                                   description: Full identifier of the private endpoint resource.
@@ -4821,11 +4821,11 @@ schemas: !Schemas
                               description: Private endpoint object properties.
                               namespace: ''
                           protocol: !Protocols {}
-                        flattenedNames: &ref_750
+                        flattenedNames: &ref_751
                           - properties
                           - privateEndpoint
                         serializedName: privateEndpoint
-                        language: !Languages &ref_748
+                        language: !Languages &ref_749
                           default:
                             name: privateEndpoint
                             description: Properties of the private endpoint object.
@@ -4840,7 +4840,7 @@ schemas: !Schemas
                             - !Property 
                               schema: *ref_40
                               serializedName: status
-                              language: !Languages &ref_752
+                              language: !Languages &ref_753
                                 default:
                                   name: status
                                   description: Indicates whether the connection has been approved, rejected or removed by the key vault owner.
@@ -4856,7 +4856,7 @@ schemas: !Schemas
                             - !Property 
                               schema: *ref_42
                               serializedName: actionsRequired
-                              language: !Languages &ref_753
+                              language: !Languages &ref_754
                                 default:
                                   name: actionsRequired
                                   description: A message indicating if changes on the service provider require any updates on the consumer.
@@ -4872,22 +4872,22 @@ schemas: !Schemas
                               description: An object that represents the approval state of the private link connection.
                               namespace: ''
                           protocol: !Protocols {}
-                        flattenedNames: &ref_754
+                        flattenedNames: &ref_755
                           - properties
                           - privateLinkServiceConnectionState
                         serializedName: privateLinkServiceConnectionState
-                        language: !Languages &ref_751
+                        language: !Languages &ref_752
                           default:
                             name: connectionState
                             description: Approval state of the private link connection.
                         protocol: !Protocols {}
                       - !Property 
                         schema: *ref_43
-                        flattenedNames: &ref_756
+                        flattenedNames: &ref_757
                           - properties
                           - provisioningState
                         serializedName: provisioningState
-                        language: !Languages &ref_755
+                        language: !Languages &ref_756
                           default:
                             name: provisioningState
                             description: Provisioning state of the private endpoint connection.
@@ -4911,7 +4911,7 @@ schemas: !Schemas
                 readOnly: true
                 required: false
                 serializedName: privateEndpointConnections
-                language: !Languages &ref_745
+                language: !Languages &ref_746
                   default:
                     name: privateEndpointConnections
                     description: List of private endpoint connections associated with the key vault.
@@ -4920,7 +4920,7 @@ schemas: !Schemas
                 schema: *ref_44
                 required: false
                 serializedName: publicNetworkAccess
-                language: !Languages &ref_717
+                language: !Languages &ref_718
                   default:
                     name: publicNetworkAccess
                     description: >-
@@ -5112,7 +5112,7 @@ schemas: !Schemas
             protocol: !Protocols {}
           required: true
           serializedName: properties
-          language: !Languages &ref_701
+          language: !Languages &ref_702
             default:
               name: properties
               description: Properties of the vault
@@ -5128,7 +5128,7 @@ schemas: !Schemas
                 schema: *ref_48
                 readOnly: true
                 serializedName: principalId
-                language: !Languages &ref_758
+                language: !Languages &ref_759
                   default:
                     name: principalId
                     description: The principal id of the vault identity. This property will only be provided for a system assigned identity.
@@ -5137,7 +5137,7 @@ schemas: !Schemas
                 schema: *ref_49
                 readOnly: true
                 serializedName: tenantId
-                language: !Languages &ref_759
+                language: !Languages &ref_760
                   default:
                     name: tenantId
                     description: The tenant id associated with the vault. This property will only be provided for a system assigned identity.
@@ -5145,7 +5145,7 @@ schemas: !Schemas
               - !Property 
                 schema: *ref_50
                 serializedName: type
-                language: !Languages &ref_719
+                language: !Languages &ref_720
                   default:
                     name: type
                     description: >-
@@ -5175,7 +5175,7 @@ schemas: !Schemas
             protocol: !Protocols {}
           required: false
           serializedName: identity
-          language: !Languages &ref_718
+          language: !Languages &ref_719
             default:
               name: identity
               description: Identity for the virtual machine.
@@ -5221,7 +5221,7 @@ schemas: !Schemas
           readOnly: true
           required: false
           serializedName: id
-          language: !Languages &ref_721
+          language: !Languages &ref_722
             default:
               name: id
               description: Fully qualified identifier of the key vault resource.
@@ -5231,7 +5231,7 @@ schemas: !Schemas
           readOnly: true
           required: false
           serializedName: name
-          language: !Languages &ref_722
+          language: !Languages &ref_723
             default:
               name: name
               description: Name of the key vault resource.
@@ -5241,7 +5241,7 @@ schemas: !Schemas
           readOnly: true
           required: false
           serializedName: type
-          language: !Languages &ref_723
+          language: !Languages &ref_724
             default:
               name: type
               description: Resource type of the key vault resource.
@@ -5250,7 +5250,7 @@ schemas: !Schemas
           schema: *ref_72
           required: false
           serializedName: location
-          language: !Languages &ref_724
+          language: !Languages &ref_725
             default:
               name: location
               description: Azure location of the key vault resource.
@@ -5259,7 +5259,7 @@ schemas: !Schemas
           schema: *ref_73
           required: false
           serializedName: tags
-          language: !Languages &ref_725
+          language: !Languages &ref_726
             default:
               name: tags
               description: Tags assigned to the key vault resource.
@@ -5274,7 +5274,7 @@ schemas: !Schemas
               - !Property 
                 schema: *ref_74
                 serializedName: createdBy
-                language: !Languages &ref_727
+                language: !Languages &ref_728
                   default:
                     name: createdBy
                     description: The identity that created the key vault resource.
@@ -5282,7 +5282,7 @@ schemas: !Schemas
               - !Property 
                 schema: *ref_75
                 serializedName: createdByType
-                language: !Languages &ref_728
+                language: !Languages &ref_729
                   default:
                     name: createdByType
                     description: The type of identity that created the key vault resource.
@@ -5290,7 +5290,7 @@ schemas: !Schemas
               - !Property 
                 schema: *ref_76
                 serializedName: createdAt
-                language: !Languages &ref_729
+                language: !Languages &ref_730
                   default:
                     name: createdAt
                     description: The timestamp of the key vault resource creation (UTC).
@@ -5298,7 +5298,7 @@ schemas: !Schemas
               - !Property 
                 schema: *ref_77
                 serializedName: lastModifiedBy
-                language: !Languages &ref_730
+                language: !Languages &ref_731
                   default:
                     name: lastModifiedBy
                     description: The identity that last modified the key vault resource.
@@ -5306,7 +5306,7 @@ schemas: !Schemas
               - !Property 
                 schema: *ref_75
                 serializedName: lastModifiedByType
-                language: !Languages &ref_731
+                language: !Languages &ref_732
                   default:
                     name: lastModifiedByType
                     description: The type of identity that last modified the key vault resource.
@@ -5314,7 +5314,7 @@ schemas: !Schemas
               - !Property 
                 schema: *ref_78
                 serializedName: lastModifiedAt
-                language: !Languages &ref_732
+                language: !Languages &ref_733
                   default:
                     name: lastModifiedAt
                     description: The timestamp of the key vault resource last modification (UTC).
@@ -5333,7 +5333,7 @@ schemas: !Schemas
           readOnly: true
           required: false
           serializedName: systemData
-          language: !Languages &ref_726
+          language: !Languages &ref_727
             default:
               name: systemData
               description: System metadata for the key vault.
@@ -5342,7 +5342,7 @@ schemas: !Schemas
           schema: *ref_52
           required: true
           serializedName: properties
-          language: !Languages &ref_733
+          language: !Languages &ref_734
             default:
               name: properties
               description: Properties of the vault
@@ -5351,7 +5351,7 @@ schemas: !Schemas
           schema: *ref_67
           required: false
           serializedName: identity
-          language: !Languages &ref_757
+          language: !Languages &ref_758
             default:
               name: identity
               description: Identity of the vault
@@ -11143,10 +11143,10 @@ globalParameters:
       http: !HttpParameter 
         in: uri
 operationGroups:
-  - !OperationGroup &ref_762
+  - !OperationGroup &ref_763
     $key: Vaults
     operations:
-      - !Operation &ref_761
+      - !Operation &ref_762
         operationId: Vaults_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
@@ -11169,7 +11169,7 @@ operationGroups:
             schema: *ref_477
             implementation: Method
             required: true
-            language: !Languages &ref_763
+            language: !Languages &ref_697
               default:
                 name: vaultName
                 description: Name of the vault
@@ -11177,12 +11177,12 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_697
+          - !Parameter &ref_698
             schema: *ref_478
             implementation: Method
             origin: modelerfour:synthesized/api-version
             required: true
-            language: !Languages &ref_698
+            language: !Languages &ref_699
               default:
                 name: apiVersion
                 description: Api Version
@@ -11211,7 +11211,7 @@ operationGroups:
                 schema: *ref_481
                 implementation: Method
                 required: true
-                language: !Languages &ref_699
+                language: !Languages &ref_700
                   default:
                     name: parameters
                     description: Parameters to create or update the vault
@@ -11254,7 +11254,7 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_105
-            language: !Languages &ref_720
+            language: !Languages &ref_721
               default:
                 name: ''
                 description: Created or updated vault
@@ -11267,7 +11267,7 @@ operationGroups:
                   - '200'
           - !SchemaResponse 
             schema: *ref_105
-            language: !Languages &ref_760
+            language: !Languages &ref_761
               default:
                 name: ''
                 description: Created or updated vault
@@ -11363,6 +11363,7 @@ operationGroups:
                     tenantId: 00000000-0000-0000-0000-000000000000
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
+                vaultName: sample-vault
               responses:
                 '200':
                   body:
@@ -11614,6 +11615,240 @@ operationGroups:
                           - value: '''10.91.4.0/24'''
                         virtualNetworkRules:
                           - id: /subscriptions/subid/resourcegroups/rg1/providers/microsoft.network/virtualnetworks/test-vnet/subnets/subnet1
+                      sku:
+                        name: standard
+                        family: A
+                      tenantId: 00000000-0000-0000-0000-000000000000
+                      vaultUri: https://sample-vault.vault.azure.net
+                    systemData:
+                      createdAt: '2020-01-01T12:00:00.0000000Z'
+                      createdBy: keyVaultUser1
+                      createdByType: User
+                      lastModifiedAt: '2020-01-01T12:00:00.0000000Z'
+                      lastModifiedBy: keyVaultUser2
+                      lastModifiedByType: User
+                    tags: {}
+            Verify Sample-gen can handle examples with some parameter missing:
+              parameters:
+                api-version: '2021-10-01'
+                parameters:
+                  extremelyDeepStringProperty:
+                    extreme:
+                      super:
+                        very: {}
+                  identity:
+                    type: SystemAssigned
+                  location: westus
+                  properties:
+                    accessPolicies:
+                      - objectId: 00000000-0000-0000-0000-000000000000
+                        permissions:
+                          certificates:
+                            - get
+                            - list
+                            - delete
+                            - create
+                            - import
+                            - update
+                            - managecontacts
+                            - getissuers
+                            - listissuers
+                            - setissuers
+                            - deleteissuers
+                            - manageissuers
+                            - recover
+                            - purge
+                          keys:
+                            - encrypt
+                            - decrypt
+                            - wrapKey
+                            - unwrapKey
+                            - sign
+                            - verify
+                            - get
+                            - list
+                            - create
+                            - update
+                            - import
+                            - delete
+                            - backup
+                            - restore
+                            - recover
+                            - purge
+                          secrets:
+                            - get
+                            - list
+                            - set
+                            - delete
+                            - backup
+                            - restore
+                            - recover
+                            - purge
+                        tenantId: 00000000-0000-0000-0000-000000000000
+                    createOn: '2017-05-04T07:12:28.191Z'
+                    duration: P7D
+                    enabledForDeployment: true
+                    enabledForDiskEncryption: true
+                    enabledForTemplateDeployment: true
+                    publicNetworkAccess: Enabled
+                    sku:
+                      name: standard
+                      family: A
+                    tenantId: 00000000-0000-0000-0000-000000000000
+                resourceGroupName: sample-resource-group
+                subscriptionId: 00000000-0000-0000-0000-000000000000
+              responses:
+                '200':
+                  body:
+                    name: sample-vault
+                    type: Microsoft.KeyVault/vaults
+                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault
+                    identity:
+                      type: SystemAssigned
+                      principalId: 00000000-0000-0000-0000-000000000000
+                      tenantId: 00000000-0000-0000-0000-000000000000
+                    location: westus
+                    properties:
+                      accessPolicies:
+                        - objectId: 00000000-0000-0000-0000-000000000000
+                          permissions:
+                            certificates:
+                              - get
+                              - list
+                              - delete
+                              - create
+                              - import
+                              - update
+                              - managecontacts
+                              - getissuers
+                              - listissuers
+                              - setissuers
+                              - deleteissuers
+                              - manageissuers
+                              - recover
+                              - purge
+                            keys:
+                              - encrypt
+                              - decrypt
+                              - wrapKey
+                              - unwrapKey
+                              - sign
+                              - verify
+                              - get
+                              - list
+                              - create
+                              - update
+                              - import
+                              - delete
+                              - backup
+                              - restore
+                              - recover
+                              - purge
+                            secrets:
+                              - get
+                              - list
+                              - set
+                              - delete
+                              - backup
+                              - restore
+                              - recover
+                              - purge
+                          tenantId: 00000000-0000-0000-0000-000000000000
+                      enabledForDeployment: true
+                      enabledForDiskEncryption: true
+                      enabledForTemplateDeployment: true
+                      hsmPoolResourceId: 00000000-0000-0000-0000-000000000000
+                      networkAcls:
+                        bypass: AzureServices
+                        defaultAction: Deny
+                        ipRules:
+                          - value: ''
+                        virtualNetworkRules:
+                          - id: ''
+                            ignoreMissingVnetServiceEndpoint: false
+                      privateEndpointConnections:
+                        - etag: ''
+                          id: ''
+                          properties:
+                            privateEndpoint:
+                              id: ''
+                            privateLinkServiceConnectionState:
+                              actionsRequired: None
+                              status: Approved
+                            provisioningState: Succeeded
+                      provisioningState: Succeeded
+                      publicNetworkAccess: Enabled
+                      sku:
+                        name: standard
+                        family: A
+                      tenantId: 00000000-0000-0000-0000-000000000000
+                      vaultUri: https://sample-vault.vault.azure.net
+                    systemData:
+                      createdAt: '2020-01-01T12:00:00.0000000Z'
+                      createdBy: keyVaultUser1
+                      createdByType: User
+                      lastModifiedAt: '2020-01-01T12:00:00.0000000Z'
+                      lastModifiedBy: keyVaultUser2
+                      lastModifiedByType: User
+                    tags: {}
+                '201':
+                  body:
+                    name: sample-vault
+                    type: Microsoft.KeyVault/vaults
+                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault
+                    location: westus
+                    properties:
+                      accessPolicies:
+                        - objectId: 00000000-0000-0000-0000-000000000000
+                          permissions:
+                            certificates:
+                              - get
+                              - list
+                              - delete
+                              - create
+                              - import
+                              - update
+                              - managecontacts
+                              - getissuers
+                              - listissuers
+                              - setissuers
+                              - deleteissuers
+                              - manageissuers
+                              - recover
+                              - purge
+                            keys:
+                              - encrypt
+                              - decrypt
+                              - wrapKey
+                              - unwrapKey
+                              - sign
+                              - verify
+                              - get
+                              - list
+                              - create
+                              - update
+                              - import
+                              - delete
+                              - backup
+                              - restore
+                              - recover
+                              - purge
+                            secrets:
+                              - get
+                              - list
+                              - set
+                              - delete
+                              - backup
+                              - restore
+                              - recover
+                              - purge
+                          tenantId: 00000000-0000-0000-0000-000000000000
+                      enabledForDeployment: true
+                      enabledForDiskEncryption: true
+                      enabledForTemplateDeployment: true
+                      hsmPoolResourceId: 00000000-0000-0000-0000-000000000000
+                      provisioningState: Succeeded
+                      publicNetworkAccess: Enabled
                       sku:
                         name: standard
                         family: A
@@ -22927,10 +23162,15 @@ testModel:
                   language: *ref_696
                 parameter: *ref_485
               - exampleValue:
+                  schema: *ref_477
+                  rawValue: sample-vault
+                  language: *ref_697
+                parameter: *ref_486
+              - exampleValue:
                   schema: *ref_478
                   rawValue: '2021-10-01'
-                  language: *ref_698
-                parameter: *ref_697
+                  language: *ref_699
+                parameter: *ref_698
               - exampleValue:
                   schema: *ref_481
                   parentsValue: {}
@@ -22942,12 +23182,12 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: SystemAssigned
-                          language: *ref_719
-                      language: *ref_718
+                          language: *ref_720
+                      language: *ref_719
                     location:
                       schema: *ref_7
                       rawValue: westus
-                      language: *ref_700
+                      language: *ref_701
                     properties:
                       schema: *ref_52
                       parentsValue: {}
@@ -22961,7 +23201,7 @@ testModel:
                                 objectId:
                                   schema: *ref_15
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_710
+                                  language: *ref_711
                                 permissions:
                                   schema: *ref_55
                                   parentsValue: {}
@@ -22997,7 +23237,7 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_19
                                           rawValue: purge
-                                      language: *ref_714
+                                      language: *ref_715
                                     keys:
                                       schema: *ref_394
                                       elements:
@@ -23033,7 +23273,7 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_17
                                           rawValue: purge
-                                      language: *ref_712
+                                      language: *ref_713
                                     secrets:
                                       schema: *ref_395
                                       elements:
@@ -23053,33 +23293,33 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_18
                                           rawValue: purge
-                                      language: *ref_713
-                                  language: *ref_711
+                                      language: *ref_714
+                                  language: *ref_712
                                 tenantId:
                                   schema: *ref_14
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_709
-                          language: *ref_708
+                                  language: *ref_710
+                          language: *ref_709
                         createOn:
                           schema: *ref_10
                           rawValue: '2017-05-04T07:12:28.191Z'
-                          language: *ref_703
+                          language: *ref_704
                         duration:
                           schema: *ref_9
                           rawValue: P7D
-                          language: *ref_702
+                          language: *ref_703
                         enabledForDiskEncryption:
                           schema: *ref_24
                           rawValue: true
-                          language: *ref_715
+                          language: *ref_716
                         enabledForTemplateDeployment:
                           schema: *ref_25
                           rawValue: true
-                          language: *ref_716
+                          language: *ref_717
                         publicNetworkAccess:
                           schema: *ref_44
                           rawValue: Enabled
-                          language: *ref_717
+                          language: *ref_718
                         sku:
                           schema: *ref_53
                           parentsValue: {}
@@ -23087,21 +23327,21 @@ testModel:
                             name:
                               schema: *ref_13
                               rawValue: standard
-                              language: *ref_707
+                              language: *ref_708
                             family:
                               schema: *ref_12
                               rawValue: A
-                              language: *ref_706
-                          language: *ref_705
+                              language: *ref_707
+                          language: *ref_706
                         tenantId:
                           schema: *ref_11
                           rawValue: 00000000-0000-0000-0000-000000000000
-                          language: *ref_704
-                      language: *ref_701
-                  language: *ref_699
+                          language: *ref_705
+                      language: *ref_702
+                  language: *ref_700
                 parameter: *ref_483
-            operation: *ref_761
-            operationGroup: *ref_762
+            operation: *ref_762
+            operationGroup: *ref_763
             originalFile: ''
             responses:
               '200':
@@ -23112,15 +23352,15 @@ testModel:
                     name:
                       schema: *ref_70
                       rawValue: sample-vault
-                      language: *ref_722
+                      language: *ref_723
                     type:
                       schema: *ref_71
                       rawValue: Microsoft.KeyVault/vaults
-                      language: *ref_723
+                      language: *ref_724
                     id:
                       schema: *ref_69
                       rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                      language: *ref_721
+                      language: *ref_722
                     identity:
                       schema: *ref_67
                       parentsValue: {}
@@ -23128,20 +23368,20 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: SystemAssigned
-                          language: *ref_719
+                          language: *ref_720
                         principalId:
                           schema: *ref_48
                           rawValue: 00000000-0000-0000-0000-000000000000
-                          language: *ref_758
+                          language: *ref_759
                         tenantId:
                           schema: *ref_49
                           rawValue: 00000000-0000-0000-0000-000000000000
-                          language: *ref_759
-                      language: *ref_757
+                          language: *ref_760
+                      language: *ref_758
                     location:
                       schema: *ref_72
                       rawValue: westus
-                      language: *ref_724
+                      language: *ref_725
                     properties:
                       schema: *ref_52
                       parentsValue: {}
@@ -23155,7 +23395,7 @@ testModel:
                                 objectId:
                                   schema: *ref_15
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_710
+                                  language: *ref_711
                                 permissions:
                                   schema: *ref_55
                                   parentsValue: {}
@@ -23191,7 +23431,7 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_19
                                           rawValue: purge
-                                      language: *ref_714
+                                      language: *ref_715
                                     keys:
                                       schema: *ref_394
                                       elements:
@@ -23227,7 +23467,7 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_17
                                           rawValue: purge
-                                      language: *ref_712
+                                      language: *ref_713
                                     secrets:
                                       schema: *ref_395
                                       elements:
@@ -23247,25 +23487,25 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_18
                                           rawValue: purge
-                                      language: *ref_713
-                                  language: *ref_711
+                                      language: *ref_714
+                                  language: *ref_712
                                 tenantId:
                                   schema: *ref_14
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_709
-                          language: *ref_708
+                                  language: *ref_710
+                          language: *ref_709
                         enabledForDiskEncryption:
                           schema: *ref_24
                           rawValue: true
-                          language: *ref_715
+                          language: *ref_716
                         enabledForTemplateDeployment:
                           schema: *ref_25
                           rawValue: true
-                          language: *ref_716
+                          language: *ref_717
                         hsmPoolResourceId:
                           schema: *ref_22
                           rawValue: 00000000-0000-0000-0000-000000000000
-                          language: *ref_735
+                          language: *ref_736
                         networkAcls:
                           schema: *ref_56
                           parentsValue: {}
@@ -23273,11 +23513,11 @@ testModel:
                             bypass:
                               schema: *ref_31
                               rawValue: AzureServices
-                              language: *ref_737
+                              language: *ref_738
                             defaultAction:
                               schema: *ref_32
                               rawValue: Deny
-                              language: *ref_738
+                              language: *ref_739
                             ipRules:
                               schema: *ref_400
                               elements:
@@ -23287,8 +23527,8 @@ testModel:
                                     value:
                                       schema: *ref_33
                                       rawValue: ''
-                                      language: *ref_740
-                              language: *ref_739
+                                      language: *ref_741
+                              language: *ref_740
                             virtualNetworkRules:
                               schema: *ref_401
                               elements:
@@ -23298,13 +23538,13 @@ testModel:
                                     id:
                                       schema: *ref_34
                                       rawValue: ''
-                                      language: *ref_742
+                                      language: *ref_743
                                     ignoreMissingVnetServiceEndpoint:
                                       schema: *ref_35
                                       rawValue: false
-                                      language: *ref_743
-                              language: *ref_741
-                          language: *ref_736
+                                      language: *ref_744
+                              language: *ref_742
+                          language: *ref_737
                         privateEndpointConnections:
                           schema: *ref_402
                           elements:
@@ -23314,49 +23554,49 @@ testModel:
                                 etag:
                                   schema: *ref_38
                                   rawValue: ''
-                                  language: *ref_747
+                                  language: *ref_748
                                 id:
                                   schema: *ref_37
                                   rawValue: ''
-                                  language: *ref_746
+                                  language: *ref_747
                                 privateEndpoint:
                                   schema: *ref_60
-                                  flattenedNames: *ref_750
+                                  flattenedNames: *ref_751
                                   parentsValue: {}
                                   properties:
                                     id:
                                       schema: *ref_39
                                       rawValue: ''
-                                      language: *ref_749
-                                  language: *ref_748
+                                      language: *ref_750
+                                  language: *ref_749
                                 privateLinkServiceConnectionState:
                                   schema: *ref_61
-                                  flattenedNames: *ref_754
+                                  flattenedNames: *ref_755
                                   parentsValue: {}
                                   properties:
                                     actionsRequired:
                                       schema: *ref_42
                                       rawValue: None
-                                      language: *ref_753
+                                      language: *ref_754
                                     status:
                                       schema: *ref_40
                                       rawValue: Approved
-                                      language: *ref_752
-                                  language: *ref_751
+                                      language: *ref_753
+                                  language: *ref_752
                                 provisioningState:
                                   schema: *ref_43
-                                  flattenedNames: *ref_756
+                                  flattenedNames: *ref_757
                                   rawValue: Succeeded
-                                  language: *ref_755
-                          language: *ref_745
+                                  language: *ref_756
+                          language: *ref_746
                         provisioningState:
                           schema: *ref_36
                           rawValue: Succeeded
-                          language: *ref_744
+                          language: *ref_745
                         publicNetworkAccess:
                           schema: *ref_44
                           rawValue: Enabled
-                          language: *ref_717
+                          language: *ref_718
                         sku:
                           schema: *ref_53
                           parentsValue: {}
@@ -23364,21 +23604,21 @@ testModel:
                             name:
                               schema: *ref_13
                               rawValue: standard
-                              language: *ref_707
+                              language: *ref_708
                             family:
                               schema: *ref_12
                               rawValue: A
-                              language: *ref_706
-                          language: *ref_705
+                              language: *ref_707
+                          language: *ref_706
                         tenantId:
                           schema: *ref_11
                           rawValue: 00000000-0000-0000-0000-000000000000
-                          language: *ref_704
+                          language: *ref_705
                         vaultUri:
                           schema: *ref_21
                           rawValue: https://sample-vault.vault.azure.net
-                          language: *ref_734
-                      language: *ref_733
+                          language: *ref_735
+                      language: *ref_734
                     systemData:
                       schema: *ref_79
                       parentsValue: {}
@@ -23386,33 +23626,33 @@ testModel:
                         createdAt:
                           schema: *ref_76
                           rawValue: '2020-01-01T12:00:00.0000000Z'
-                          language: *ref_729
+                          language: *ref_730
                         createdBy:
                           schema: *ref_74
                           rawValue: keyVaultUser1
-                          language: *ref_727
+                          language: *ref_728
                         createdByType:
                           schema: *ref_75
                           rawValue: User
-                          language: *ref_728
+                          language: *ref_729
                         lastModifiedAt:
                           schema: *ref_78
                           rawValue: '2020-01-01T12:00:00.0000000Z'
-                          language: *ref_732
+                          language: *ref_733
                         lastModifiedBy:
                           schema: *ref_77
                           rawValue: keyVaultUser2
-                          language: *ref_730
+                          language: *ref_731
                         lastModifiedByType:
                           schema: *ref_75
                           rawValue: User
-                          language: *ref_731
-                      language: *ref_726
+                          language: *ref_732
+                      language: *ref_727
                     tags:
                       schema: *ref_73
                       properties: {}
-                      language: *ref_725
-                  language: *ref_720
+                      language: *ref_726
+                  language: *ref_721
               '201':
                 body:
                   schema: *ref_105
@@ -23421,19 +23661,19 @@ testModel:
                     name:
                       schema: *ref_70
                       rawValue: sample-vault
-                      language: *ref_722
+                      language: *ref_723
                     type:
                       schema: *ref_71
                       rawValue: Microsoft.KeyVault/vaults
-                      language: *ref_723
+                      language: *ref_724
                     id:
                       schema: *ref_69
                       rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                      language: *ref_721
+                      language: *ref_722
                     location:
                       schema: *ref_72
                       rawValue: westus
-                      language: *ref_724
+                      language: *ref_725
                     properties:
                       schema: *ref_52
                       parentsValue: {}
@@ -23447,7 +23687,7 @@ testModel:
                                 objectId:
                                   schema: *ref_15
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_710
+                                  language: *ref_711
                                 permissions:
                                   schema: *ref_55
                                   parentsValue: {}
@@ -23483,7 +23723,7 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_19
                                           rawValue: purge
-                                      language: *ref_714
+                                      language: *ref_715
                                     keys:
                                       schema: *ref_394
                                       elements:
@@ -23519,7 +23759,7 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_17
                                           rawValue: purge
-                                      language: *ref_712
+                                      language: *ref_713
                                     secrets:
                                       schema: *ref_395
                                       elements:
@@ -23539,33 +23779,33 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_18
                                           rawValue: purge
-                                      language: *ref_713
-                                  language: *ref_711
+                                      language: *ref_714
+                                  language: *ref_712
                                 tenantId:
                                   schema: *ref_14
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_709
-                          language: *ref_708
+                                  language: *ref_710
+                          language: *ref_709
                         enabledForDiskEncryption:
                           schema: *ref_24
                           rawValue: true
-                          language: *ref_715
+                          language: *ref_716
                         enabledForTemplateDeployment:
                           schema: *ref_25
                           rawValue: true
-                          language: *ref_716
+                          language: *ref_717
                         hsmPoolResourceId:
                           schema: *ref_22
                           rawValue: 00000000-0000-0000-0000-000000000000
-                          language: *ref_735
+                          language: *ref_736
                         provisioningState:
                           schema: *ref_36
                           rawValue: Succeeded
-                          language: *ref_744
+                          language: *ref_745
                         publicNetworkAccess:
                           schema: *ref_44
                           rawValue: Enabled
-                          language: *ref_717
+                          language: *ref_718
                         sku:
                           schema: *ref_53
                           parentsValue: {}
@@ -23573,21 +23813,21 @@ testModel:
                             name:
                               schema: *ref_13
                               rawValue: standard
-                              language: *ref_707
+                              language: *ref_708
                             family:
                               schema: *ref_12
                               rawValue: A
-                              language: *ref_706
-                          language: *ref_705
+                              language: *ref_707
+                          language: *ref_706
                         tenantId:
                           schema: *ref_11
                           rawValue: 00000000-0000-0000-0000-000000000000
-                          language: *ref_704
+                          language: *ref_705
                         vaultUri:
                           schema: *ref_21
                           rawValue: https://sample-vault.vault.azure.net
-                          language: *ref_734
-                      language: *ref_733
+                          language: *ref_735
+                      language: *ref_734
                     systemData:
                       schema: *ref_79
                       parentsValue: {}
@@ -23595,33 +23835,33 @@ testModel:
                         createdAt:
                           schema: *ref_76
                           rawValue: '2020-01-01T12:00:00.0000000Z'
-                          language: *ref_729
+                          language: *ref_730
                         createdBy:
                           schema: *ref_74
                           rawValue: keyVaultUser1
-                          language: *ref_727
+                          language: *ref_728
                         createdByType:
                           schema: *ref_75
                           rawValue: User
-                          language: *ref_728
+                          language: *ref_729
                         lastModifiedAt:
                           schema: *ref_78
                           rawValue: '2020-01-01T12:00:00.0000000Z'
-                          language: *ref_732
+                          language: *ref_733
                         lastModifiedBy:
                           schema: *ref_77
                           rawValue: keyVaultUser2
-                          language: *ref_730
+                          language: *ref_731
                         lastModifiedByType:
                           schema: *ref_75
                           rawValue: User
-                          language: *ref_731
-                      language: *ref_726
+                          language: *ref_732
+                      language: *ref_727
                     tags:
                       schema: *ref_73
                       properties: {}
-                      language: *ref_725
-                  language: *ref_760
+                      language: *ref_726
+                  language: *ref_761
           - name: Create or update a vault with network acls
             clientParameters:
               - exampleValue:
@@ -23638,13 +23878,13 @@ testModel:
               - exampleValue:
                   schema: *ref_477
                   rawValue: sample-vault
-                  language: *ref_763
+                  language: *ref_697
                 parameter: *ref_486
               - exampleValue:
                   schema: *ref_478
                   rawValue: '2021-10-01'
-                  language: *ref_698
-                parameter: *ref_697
+                  language: *ref_699
+                parameter: *ref_698
               - exampleValue:
                   schema: *ref_481
                   parentsValue: {}
@@ -23652,7 +23892,7 @@ testModel:
                     location:
                       schema: *ref_7
                       rawValue: westus
-                      language: *ref_700
+                      language: *ref_701
                     properties:
                       schema: *ref_52
                       parentsValue: {}
@@ -23660,11 +23900,11 @@ testModel:
                         enabledForDiskEncryption:
                           schema: *ref_24
                           rawValue: true
-                          language: *ref_715
+                          language: *ref_716
                         enabledForTemplateDeployment:
                           schema: *ref_25
                           rawValue: true
-                          language: *ref_716
+                          language: *ref_717
                         extremelyDeepStringProperty:
                           schema: *ref_63
                           parentsValue: {}
@@ -23701,11 +23941,11 @@ testModel:
                             bypass:
                               schema: *ref_31
                               rawValue: AzureServices
-                              language: *ref_737
+                              language: *ref_738
                             defaultAction:
                               schema: *ref_32
                               rawValue: Deny
-                              language: *ref_738
+                              language: *ref_739
                             ipRules:
                               schema: *ref_400
                               elements:
@@ -23715,15 +23955,15 @@ testModel:
                                     value:
                                       schema: *ref_33
                                       rawValue: 124.56.78.91
-                                      language: *ref_740
+                                      language: *ref_741
                                 - schema: *ref_57
                                   parentsValue: {}
                                   properties:
                                     value:
                                       schema: *ref_33
                                       rawValue: '''10.91.4.0/24'''
-                                      language: *ref_740
-                              language: *ref_739
+                                      language: *ref_741
+                              language: *ref_740
                             virtualNetworkRules:
                               schema: *ref_401
                               elements:
@@ -23733,9 +23973,9 @@ testModel:
                                     id:
                                       schema: *ref_34
                                       rawValue: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1
-                                      language: *ref_742
-                              language: *ref_741
-                          language: *ref_736
+                                      language: *ref_743
+                              language: *ref_742
+                          language: *ref_737
                         readOnlySingleStringProperty:
                           schema: *ref_62
                           parentsValue: {}
@@ -23761,21 +24001,21 @@ testModel:
                             name:
                               schema: *ref_13
                               rawValue: standard
-                              language: *ref_707
+                              language: *ref_708
                             family:
                               schema: *ref_12
                               rawValue: A
-                              language: *ref_706
-                          language: *ref_705
+                              language: *ref_707
+                          language: *ref_706
                         tenantId:
                           schema: *ref_11
                           rawValue: 00000000-0000-0000-0000-000000000000
-                          language: *ref_704
-                      language: *ref_701
-                  language: *ref_699
+                          language: *ref_705
+                      language: *ref_702
+                  language: *ref_700
                 parameter: *ref_483
-            operation: *ref_761
-            operationGroup: *ref_762
+            operation: *ref_762
+            operationGroup: *ref_763
             originalFile: ''
             responses:
               '200':
@@ -23786,19 +24026,19 @@ testModel:
                     name:
                       schema: *ref_70
                       rawValue: sample-vault
-                      language: *ref_722
+                      language: *ref_723
                     type:
                       schema: *ref_71
                       rawValue: Microsoft.KeyVault/vaults
-                      language: *ref_723
+                      language: *ref_724
                     id:
                       schema: *ref_69
                       rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                      language: *ref_721
+                      language: *ref_722
                     location:
                       schema: *ref_72
                       rawValue: westus
-                      language: *ref_724
+                      language: *ref_725
                     properties:
                       schema: *ref_52
                       parentsValue: {}
@@ -23806,15 +24046,15 @@ testModel:
                         enabledForDiskEncryption:
                           schema: *ref_24
                           rawValue: true
-                          language: *ref_715
+                          language: *ref_716
                         enabledForTemplateDeployment:
                           schema: *ref_25
                           rawValue: true
-                          language: *ref_716
+                          language: *ref_717
                         hsmPoolResourceId:
                           schema: *ref_22
                           rawValue: 00000000-0000-0000-0000-000000000000
-                          language: *ref_735
+                          language: *ref_736
                         networkAcls:
                           schema: *ref_56
                           parentsValue: {}
@@ -23822,11 +24062,11 @@ testModel:
                             bypass:
                               schema: *ref_31
                               rawValue: AzureServices
-                              language: *ref_737
+                              language: *ref_738
                             defaultAction:
                               schema: *ref_32
                               rawValue: Deny
-                              language: *ref_738
+                              language: *ref_739
                             ipRules:
                               schema: *ref_400
                               elements:
@@ -23836,15 +24076,15 @@ testModel:
                                     value:
                                       schema: *ref_33
                                       rawValue: 124.56.78.91/32
-                                      language: *ref_740
+                                      language: *ref_741
                                 - schema: *ref_57
                                   parentsValue: {}
                                   properties:
                                     value:
                                       schema: *ref_33
                                       rawValue: '''10.91.4.0/24'''
-                                      language: *ref_740
-                              language: *ref_739
+                                      language: *ref_741
+                              language: *ref_740
                             virtualNetworkRules:
                               schema: *ref_401
                               elements:
@@ -23854,9 +24094,9 @@ testModel:
                                     id:
                                       schema: *ref_34
                                       rawValue: /subscriptions/subid/resourcegroups/rg1/providers/microsoft.network/virtualnetworks/test-vnet/subnets/subnet1
-                                      language: *ref_742
-                              language: *ref_741
-                          language: *ref_736
+                                      language: *ref_743
+                              language: *ref_742
+                          language: *ref_737
                         sku:
                           schema: *ref_53
                           parentsValue: {}
@@ -23864,21 +24104,21 @@ testModel:
                             name:
                               schema: *ref_13
                               rawValue: standard
-                              language: *ref_707
+                              language: *ref_708
                             family:
                               schema: *ref_12
                               rawValue: A
-                              language: *ref_706
-                          language: *ref_705
+                              language: *ref_707
+                          language: *ref_706
                         tenantId:
                           schema: *ref_11
                           rawValue: 00000000-0000-0000-0000-000000000000
-                          language: *ref_704
+                          language: *ref_705
                         vaultUri:
                           schema: *ref_21
                           rawValue: https://sample-vault.vault.azure.net
-                          language: *ref_734
-                      language: *ref_733
+                          language: *ref_735
+                      language: *ref_734
                     systemData:
                       schema: *ref_79
                       parentsValue: {}
@@ -23886,33 +24126,33 @@ testModel:
                         createdAt:
                           schema: *ref_76
                           rawValue: '2020-01-01T12:00:00.0000000Z'
-                          language: *ref_729
+                          language: *ref_730
                         createdBy:
                           schema: *ref_74
                           rawValue: keyVaultUser1
-                          language: *ref_727
+                          language: *ref_728
                         createdByType:
                           schema: *ref_75
                           rawValue: User
-                          language: *ref_728
+                          language: *ref_729
                         lastModifiedAt:
                           schema: *ref_78
                           rawValue: '2020-01-01T12:00:00.0000000Z'
-                          language: *ref_732
+                          language: *ref_733
                         lastModifiedBy:
                           schema: *ref_77
                           rawValue: keyVaultUser2
-                          language: *ref_730
+                          language: *ref_731
                         lastModifiedByType:
                           schema: *ref_75
                           rawValue: User
-                          language: *ref_731
-                      language: *ref_726
+                          language: *ref_732
+                      language: *ref_727
                     tags:
                       schema: *ref_73
                       properties: {}
-                      language: *ref_725
-                  language: *ref_720
+                      language: *ref_726
+                  language: *ref_721
               '201':
                 body:
                   schema: *ref_105
@@ -23921,19 +24161,19 @@ testModel:
                     name:
                       schema: *ref_70
                       rawValue: sample-vault
-                      language: *ref_722
+                      language: *ref_723
                     type:
                       schema: *ref_71
                       rawValue: Microsoft.KeyVault/vaults
-                      language: *ref_723
+                      language: *ref_724
                     id:
                       schema: *ref_69
                       rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                      language: *ref_721
+                      language: *ref_722
                     location:
                       schema: *ref_72
                       rawValue: westus
-                      language: *ref_724
+                      language: *ref_725
                     properties:
                       schema: *ref_52
                       parentsValue: {}
@@ -23941,15 +24181,15 @@ testModel:
                         enabledForDiskEncryption:
                           schema: *ref_24
                           rawValue: true
-                          language: *ref_715
+                          language: *ref_716
                         enabledForTemplateDeployment:
                           schema: *ref_25
                           rawValue: true
-                          language: *ref_716
+                          language: *ref_717
                         hsmPoolResourceId:
                           schema: *ref_22
                           rawValue: 00000000-0000-0000-0000-000000000000
-                          language: *ref_735
+                          language: *ref_736
                         networkAcls:
                           schema: *ref_56
                           parentsValue: {}
@@ -23957,11 +24197,11 @@ testModel:
                             bypass:
                               schema: *ref_31
                               rawValue: AzureServices
-                              language: *ref_737
+                              language: *ref_738
                             defaultAction:
                               schema: *ref_32
                               rawValue: Deny
-                              language: *ref_738
+                              language: *ref_739
                             ipRules:
                               schema: *ref_400
                               elements:
@@ -23971,15 +24211,15 @@ testModel:
                                     value:
                                       schema: *ref_33
                                       rawValue: 124.56.78.91/32
-                                      language: *ref_740
+                                      language: *ref_741
                                 - schema: *ref_57
                                   parentsValue: {}
                                   properties:
                                     value:
                                       schema: *ref_33
                                       rawValue: '''10.91.4.0/24'''
-                                      language: *ref_740
-                              language: *ref_739
+                                      language: *ref_741
+                              language: *ref_740
                             virtualNetworkRules:
                               schema: *ref_401
                               elements:
@@ -23989,9 +24229,9 @@ testModel:
                                     id:
                                       schema: *ref_34
                                       rawValue: /subscriptions/subid/resourcegroups/rg1/providers/microsoft.network/virtualnetworks/test-vnet/subnets/subnet1
-                                      language: *ref_742
-                              language: *ref_741
-                          language: *ref_736
+                                      language: *ref_743
+                              language: *ref_742
+                          language: *ref_737
                         sku:
                           schema: *ref_53
                           parentsValue: {}
@@ -23999,21 +24239,21 @@ testModel:
                             name:
                               schema: *ref_13
                               rawValue: standard
-                              language: *ref_707
+                              language: *ref_708
                             family:
                               schema: *ref_12
                               rawValue: A
-                              language: *ref_706
-                          language: *ref_705
+                              language: *ref_707
+                          language: *ref_706
                         tenantId:
                           schema: *ref_11
                           rawValue: 00000000-0000-0000-0000-000000000000
-                          language: *ref_704
+                          language: *ref_705
                         vaultUri:
                           schema: *ref_21
                           rawValue: https://sample-vault.vault.azure.net
-                          language: *ref_734
-                      language: *ref_733
+                          language: *ref_735
+                      language: *ref_734
                     systemData:
                       schema: *ref_79
                       parentsValue: {}
@@ -24021,35 +24261,744 @@ testModel:
                         createdAt:
                           schema: *ref_76
                           rawValue: '2020-01-01T12:00:00.0000000Z'
-                          language: *ref_729
+                          language: *ref_730
                         createdBy:
                           schema: *ref_74
                           rawValue: keyVaultUser1
-                          language: *ref_727
+                          language: *ref_728
                         createdByType:
                           schema: *ref_75
                           rawValue: User
-                          language: *ref_728
+                          language: *ref_729
                         lastModifiedAt:
                           schema: *ref_78
                           rawValue: '2020-01-01T12:00:00.0000000Z'
-                          language: *ref_732
+                          language: *ref_733
                         lastModifiedBy:
                           schema: *ref_77
                           rawValue: keyVaultUser2
-                          language: *ref_730
+                          language: *ref_731
                         lastModifiedByType:
                           schema: *ref_75
                           rawValue: User
-                          language: *ref_731
-                      language: *ref_726
+                          language: *ref_732
+                      language: *ref_727
                     tags:
                       schema: *ref_73
                       properties: {}
+                      language: *ref_726
+                  language: *ref_761
+          - name: Verify Sample-gen can handle examples with some parameter missing
+            clientParameters:
+              - exampleValue:
+                  schema: *ref_475
+                  rawValue: 00000000-0000-0000-0000-000000000000
+                  language: *ref_695
+                parameter: *ref_479
+            methodParameters:
+              - exampleValue:
+                  schema: *ref_2
+                  rawValue: sample-resource-group
+                  language: *ref_696
+                parameter: *ref_485
+              - exampleValue:
+                  schema: *ref_478
+                  rawValue: '2021-10-01'
+                  language: *ref_699
+                parameter: *ref_698
+              - exampleValue:
+                  schema: *ref_481
+                  parentsValue: {}
+                  properties:
+                    identity:
+                      schema: *ref_67
+                      parentsValue: {}
+                      properties:
+                        type:
+                          schema: *ref_50
+                          rawValue: SystemAssigned
+                          language: *ref_720
+                      language: *ref_719
+                    location:
+                      schema: *ref_7
+                      rawValue: westus
+                      language: *ref_701
+                    properties:
+                      schema: *ref_52
+                      parentsValue: {}
+                      properties:
+                        accessPolicies:
+                          schema: *ref_398
+                          elements:
+                            - schema: *ref_54
+                              parentsValue: {}
+                              properties:
+                                objectId:
+                                  schema: *ref_15
+                                  rawValue: 00000000-0000-0000-0000-000000000000
+                                  language: *ref_711
+                                permissions:
+                                  schema: *ref_55
+                                  parentsValue: {}
+                                  properties:
+                                    certificates:
+                                      schema: *ref_396
+                                      elements:
+                                        - schema: *ref_19
+                                          rawValue: get
+                                        - schema: *ref_19
+                                          rawValue: list
+                                        - schema: *ref_19
+                                          rawValue: delete
+                                        - schema: *ref_19
+                                          rawValue: create
+                                        - schema: *ref_19
+                                          rawValue: import
+                                        - schema: *ref_19
+                                          rawValue: update
+                                        - schema: *ref_19
+                                          rawValue: managecontacts
+                                        - schema: *ref_19
+                                          rawValue: getissuers
+                                        - schema: *ref_19
+                                          rawValue: listissuers
+                                        - schema: *ref_19
+                                          rawValue: setissuers
+                                        - schema: *ref_19
+                                          rawValue: deleteissuers
+                                        - schema: *ref_19
+                                          rawValue: manageissuers
+                                        - schema: *ref_19
+                                          rawValue: recover
+                                        - schema: *ref_19
+                                          rawValue: purge
+                                      language: *ref_715
+                                    keys:
+                                      schema: *ref_394
+                                      elements:
+                                        - schema: *ref_17
+                                          rawValue: encrypt
+                                        - schema: *ref_17
+                                          rawValue: decrypt
+                                        - schema: *ref_17
+                                          rawValue: wrapKey
+                                        - schema: *ref_17
+                                          rawValue: unwrapKey
+                                        - schema: *ref_17
+                                          rawValue: sign
+                                        - schema: *ref_17
+                                          rawValue: verify
+                                        - schema: *ref_17
+                                          rawValue: get
+                                        - schema: *ref_17
+                                          rawValue: list
+                                        - schema: *ref_17
+                                          rawValue: create
+                                        - schema: *ref_17
+                                          rawValue: update
+                                        - schema: *ref_17
+                                          rawValue: import
+                                        - schema: *ref_17
+                                          rawValue: delete
+                                        - schema: *ref_17
+                                          rawValue: backup
+                                        - schema: *ref_17
+                                          rawValue: restore
+                                        - schema: *ref_17
+                                          rawValue: recover
+                                        - schema: *ref_17
+                                          rawValue: purge
+                                      language: *ref_713
+                                    secrets:
+                                      schema: *ref_395
+                                      elements:
+                                        - schema: *ref_18
+                                          rawValue: get
+                                        - schema: *ref_18
+                                          rawValue: list
+                                        - schema: *ref_18
+                                          rawValue: set
+                                        - schema: *ref_18
+                                          rawValue: delete
+                                        - schema: *ref_18
+                                          rawValue: backup
+                                        - schema: *ref_18
+                                          rawValue: restore
+                                        - schema: *ref_18
+                                          rawValue: recover
+                                        - schema: *ref_18
+                                          rawValue: purge
+                                      language: *ref_714
+                                  language: *ref_712
+                                tenantId:
+                                  schema: *ref_14
+                                  rawValue: 00000000-0000-0000-0000-000000000000
+                                  language: *ref_710
+                          language: *ref_709
+                        createOn:
+                          schema: *ref_10
+                          rawValue: '2017-05-04T07:12:28.191Z'
+                          language: *ref_704
+                        duration:
+                          schema: *ref_9
+                          rawValue: P7D
+                          language: *ref_703
+                        enabledForDiskEncryption:
+                          schema: *ref_24
+                          rawValue: true
+                          language: *ref_716
+                        enabledForTemplateDeployment:
+                          schema: *ref_25
+                          rawValue: true
+                          language: *ref_717
+                        publicNetworkAccess:
+                          schema: *ref_44
+                          rawValue: Enabled
+                          language: *ref_718
+                        sku:
+                          schema: *ref_53
+                          parentsValue: {}
+                          properties:
+                            name:
+                              schema: *ref_13
+                              rawValue: standard
+                              language: *ref_708
+                            family:
+                              schema: *ref_12
+                              rawValue: A
+                              language: *ref_707
+                          language: *ref_706
+                        tenantId:
+                          schema: *ref_11
+                          rawValue: 00000000-0000-0000-0000-000000000000
+                          language: *ref_705
+                      language: *ref_702
+                  language: *ref_700
+                parameter: *ref_483
+            operation: *ref_762
+            operationGroup: *ref_763
+            originalFile: ''
+            responses:
+              '200':
+                body:
+                  schema: *ref_105
+                  parentsValue: {}
+                  properties:
+                    name:
+                      schema: *ref_70
+                      rawValue: sample-vault
+                      language: *ref_723
+                    type:
+                      schema: *ref_71
+                      rawValue: Microsoft.KeyVault/vaults
+                      language: *ref_724
+                    id:
+                      schema: *ref_69
+                      rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault
+                      language: *ref_722
+                    identity:
+                      schema: *ref_67
+                      parentsValue: {}
+                      properties:
+                        type:
+                          schema: *ref_50
+                          rawValue: SystemAssigned
+                          language: *ref_720
+                        principalId:
+                          schema: *ref_48
+                          rawValue: 00000000-0000-0000-0000-000000000000
+                          language: *ref_759
+                        tenantId:
+                          schema: *ref_49
+                          rawValue: 00000000-0000-0000-0000-000000000000
+                          language: *ref_760
+                      language: *ref_758
+                    location:
+                      schema: *ref_72
+                      rawValue: westus
                       language: *ref_725
-                  language: *ref_760
-        operation: *ref_761
-        operationGroup: *ref_762
+                    properties:
+                      schema: *ref_52
+                      parentsValue: {}
+                      properties:
+                        accessPolicies:
+                          schema: *ref_398
+                          elements:
+                            - schema: *ref_54
+                              parentsValue: {}
+                              properties:
+                                objectId:
+                                  schema: *ref_15
+                                  rawValue: 00000000-0000-0000-0000-000000000000
+                                  language: *ref_711
+                                permissions:
+                                  schema: *ref_55
+                                  parentsValue: {}
+                                  properties:
+                                    certificates:
+                                      schema: *ref_396
+                                      elements:
+                                        - schema: *ref_19
+                                          rawValue: get
+                                        - schema: *ref_19
+                                          rawValue: list
+                                        - schema: *ref_19
+                                          rawValue: delete
+                                        - schema: *ref_19
+                                          rawValue: create
+                                        - schema: *ref_19
+                                          rawValue: import
+                                        - schema: *ref_19
+                                          rawValue: update
+                                        - schema: *ref_19
+                                          rawValue: managecontacts
+                                        - schema: *ref_19
+                                          rawValue: getissuers
+                                        - schema: *ref_19
+                                          rawValue: listissuers
+                                        - schema: *ref_19
+                                          rawValue: setissuers
+                                        - schema: *ref_19
+                                          rawValue: deleteissuers
+                                        - schema: *ref_19
+                                          rawValue: manageissuers
+                                        - schema: *ref_19
+                                          rawValue: recover
+                                        - schema: *ref_19
+                                          rawValue: purge
+                                      language: *ref_715
+                                    keys:
+                                      schema: *ref_394
+                                      elements:
+                                        - schema: *ref_17
+                                          rawValue: encrypt
+                                        - schema: *ref_17
+                                          rawValue: decrypt
+                                        - schema: *ref_17
+                                          rawValue: wrapKey
+                                        - schema: *ref_17
+                                          rawValue: unwrapKey
+                                        - schema: *ref_17
+                                          rawValue: sign
+                                        - schema: *ref_17
+                                          rawValue: verify
+                                        - schema: *ref_17
+                                          rawValue: get
+                                        - schema: *ref_17
+                                          rawValue: list
+                                        - schema: *ref_17
+                                          rawValue: create
+                                        - schema: *ref_17
+                                          rawValue: update
+                                        - schema: *ref_17
+                                          rawValue: import
+                                        - schema: *ref_17
+                                          rawValue: delete
+                                        - schema: *ref_17
+                                          rawValue: backup
+                                        - schema: *ref_17
+                                          rawValue: restore
+                                        - schema: *ref_17
+                                          rawValue: recover
+                                        - schema: *ref_17
+                                          rawValue: purge
+                                      language: *ref_713
+                                    secrets:
+                                      schema: *ref_395
+                                      elements:
+                                        - schema: *ref_18
+                                          rawValue: get
+                                        - schema: *ref_18
+                                          rawValue: list
+                                        - schema: *ref_18
+                                          rawValue: set
+                                        - schema: *ref_18
+                                          rawValue: delete
+                                        - schema: *ref_18
+                                          rawValue: backup
+                                        - schema: *ref_18
+                                          rawValue: restore
+                                        - schema: *ref_18
+                                          rawValue: recover
+                                        - schema: *ref_18
+                                          rawValue: purge
+                                      language: *ref_714
+                                  language: *ref_712
+                                tenantId:
+                                  schema: *ref_14
+                                  rawValue: 00000000-0000-0000-0000-000000000000
+                                  language: *ref_710
+                          language: *ref_709
+                        enabledForDiskEncryption:
+                          schema: *ref_24
+                          rawValue: true
+                          language: *ref_716
+                        enabledForTemplateDeployment:
+                          schema: *ref_25
+                          rawValue: true
+                          language: *ref_717
+                        hsmPoolResourceId:
+                          schema: *ref_22
+                          rawValue: 00000000-0000-0000-0000-000000000000
+                          language: *ref_736
+                        networkAcls:
+                          schema: *ref_56
+                          parentsValue: {}
+                          properties:
+                            bypass:
+                              schema: *ref_31
+                              rawValue: AzureServices
+                              language: *ref_738
+                            defaultAction:
+                              schema: *ref_32
+                              rawValue: Deny
+                              language: *ref_739
+                            ipRules:
+                              schema: *ref_400
+                              elements:
+                                - schema: *ref_57
+                                  parentsValue: {}
+                                  properties:
+                                    value:
+                                      schema: *ref_33
+                                      rawValue: ''
+                                      language: *ref_741
+                              language: *ref_740
+                            virtualNetworkRules:
+                              schema: *ref_401
+                              elements:
+                                - schema: *ref_58
+                                  parentsValue: {}
+                                  properties:
+                                    id:
+                                      schema: *ref_34
+                                      rawValue: ''
+                                      language: *ref_743
+                                    ignoreMissingVnetServiceEndpoint:
+                                      schema: *ref_35
+                                      rawValue: false
+                                      language: *ref_744
+                              language: *ref_742
+                          language: *ref_737
+                        privateEndpointConnections:
+                          schema: *ref_402
+                          elements:
+                            - schema: *ref_59
+                              parentsValue: {}
+                              properties:
+                                etag:
+                                  schema: *ref_38
+                                  rawValue: ''
+                                  language: *ref_748
+                                id:
+                                  schema: *ref_37
+                                  rawValue: ''
+                                  language: *ref_747
+                                privateEndpoint:
+                                  schema: *ref_60
+                                  flattenedNames: *ref_751
+                                  parentsValue: {}
+                                  properties:
+                                    id:
+                                      schema: *ref_39
+                                      rawValue: ''
+                                      language: *ref_750
+                                  language: *ref_749
+                                privateLinkServiceConnectionState:
+                                  schema: *ref_61
+                                  flattenedNames: *ref_755
+                                  parentsValue: {}
+                                  properties:
+                                    actionsRequired:
+                                      schema: *ref_42
+                                      rawValue: None
+                                      language: *ref_754
+                                    status:
+                                      schema: *ref_40
+                                      rawValue: Approved
+                                      language: *ref_753
+                                  language: *ref_752
+                                provisioningState:
+                                  schema: *ref_43
+                                  flattenedNames: *ref_757
+                                  rawValue: Succeeded
+                                  language: *ref_756
+                          language: *ref_746
+                        provisioningState:
+                          schema: *ref_36
+                          rawValue: Succeeded
+                          language: *ref_745
+                        publicNetworkAccess:
+                          schema: *ref_44
+                          rawValue: Enabled
+                          language: *ref_718
+                        sku:
+                          schema: *ref_53
+                          parentsValue: {}
+                          properties:
+                            name:
+                              schema: *ref_13
+                              rawValue: standard
+                              language: *ref_708
+                            family:
+                              schema: *ref_12
+                              rawValue: A
+                              language: *ref_707
+                          language: *ref_706
+                        tenantId:
+                          schema: *ref_11
+                          rawValue: 00000000-0000-0000-0000-000000000000
+                          language: *ref_705
+                        vaultUri:
+                          schema: *ref_21
+                          rawValue: https://sample-vault.vault.azure.net
+                          language: *ref_735
+                      language: *ref_734
+                    systemData:
+                      schema: *ref_79
+                      parentsValue: {}
+                      properties:
+                        createdAt:
+                          schema: *ref_76
+                          rawValue: '2020-01-01T12:00:00.0000000Z'
+                          language: *ref_730
+                        createdBy:
+                          schema: *ref_74
+                          rawValue: keyVaultUser1
+                          language: *ref_728
+                        createdByType:
+                          schema: *ref_75
+                          rawValue: User
+                          language: *ref_729
+                        lastModifiedAt:
+                          schema: *ref_78
+                          rawValue: '2020-01-01T12:00:00.0000000Z'
+                          language: *ref_733
+                        lastModifiedBy:
+                          schema: *ref_77
+                          rawValue: keyVaultUser2
+                          language: *ref_731
+                        lastModifiedByType:
+                          schema: *ref_75
+                          rawValue: User
+                          language: *ref_732
+                      language: *ref_727
+                    tags:
+                      schema: *ref_73
+                      properties: {}
+                      language: *ref_726
+                  language: *ref_721
+              '201':
+                body:
+                  schema: *ref_105
+                  parentsValue: {}
+                  properties:
+                    name:
+                      schema: *ref_70
+                      rawValue: sample-vault
+                      language: *ref_723
+                    type:
+                      schema: *ref_71
+                      rawValue: Microsoft.KeyVault/vaults
+                      language: *ref_724
+                    id:
+                      schema: *ref_69
+                      rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault
+                      language: *ref_722
+                    location:
+                      schema: *ref_72
+                      rawValue: westus
+                      language: *ref_725
+                    properties:
+                      schema: *ref_52
+                      parentsValue: {}
+                      properties:
+                        accessPolicies:
+                          schema: *ref_398
+                          elements:
+                            - schema: *ref_54
+                              parentsValue: {}
+                              properties:
+                                objectId:
+                                  schema: *ref_15
+                                  rawValue: 00000000-0000-0000-0000-000000000000
+                                  language: *ref_711
+                                permissions:
+                                  schema: *ref_55
+                                  parentsValue: {}
+                                  properties:
+                                    certificates:
+                                      schema: *ref_396
+                                      elements:
+                                        - schema: *ref_19
+                                          rawValue: get
+                                        - schema: *ref_19
+                                          rawValue: list
+                                        - schema: *ref_19
+                                          rawValue: delete
+                                        - schema: *ref_19
+                                          rawValue: create
+                                        - schema: *ref_19
+                                          rawValue: import
+                                        - schema: *ref_19
+                                          rawValue: update
+                                        - schema: *ref_19
+                                          rawValue: managecontacts
+                                        - schema: *ref_19
+                                          rawValue: getissuers
+                                        - schema: *ref_19
+                                          rawValue: listissuers
+                                        - schema: *ref_19
+                                          rawValue: setissuers
+                                        - schema: *ref_19
+                                          rawValue: deleteissuers
+                                        - schema: *ref_19
+                                          rawValue: manageissuers
+                                        - schema: *ref_19
+                                          rawValue: recover
+                                        - schema: *ref_19
+                                          rawValue: purge
+                                      language: *ref_715
+                                    keys:
+                                      schema: *ref_394
+                                      elements:
+                                        - schema: *ref_17
+                                          rawValue: encrypt
+                                        - schema: *ref_17
+                                          rawValue: decrypt
+                                        - schema: *ref_17
+                                          rawValue: wrapKey
+                                        - schema: *ref_17
+                                          rawValue: unwrapKey
+                                        - schema: *ref_17
+                                          rawValue: sign
+                                        - schema: *ref_17
+                                          rawValue: verify
+                                        - schema: *ref_17
+                                          rawValue: get
+                                        - schema: *ref_17
+                                          rawValue: list
+                                        - schema: *ref_17
+                                          rawValue: create
+                                        - schema: *ref_17
+                                          rawValue: update
+                                        - schema: *ref_17
+                                          rawValue: import
+                                        - schema: *ref_17
+                                          rawValue: delete
+                                        - schema: *ref_17
+                                          rawValue: backup
+                                        - schema: *ref_17
+                                          rawValue: restore
+                                        - schema: *ref_17
+                                          rawValue: recover
+                                        - schema: *ref_17
+                                          rawValue: purge
+                                      language: *ref_713
+                                    secrets:
+                                      schema: *ref_395
+                                      elements:
+                                        - schema: *ref_18
+                                          rawValue: get
+                                        - schema: *ref_18
+                                          rawValue: list
+                                        - schema: *ref_18
+                                          rawValue: set
+                                        - schema: *ref_18
+                                          rawValue: delete
+                                        - schema: *ref_18
+                                          rawValue: backup
+                                        - schema: *ref_18
+                                          rawValue: restore
+                                        - schema: *ref_18
+                                          rawValue: recover
+                                        - schema: *ref_18
+                                          rawValue: purge
+                                      language: *ref_714
+                                  language: *ref_712
+                                tenantId:
+                                  schema: *ref_14
+                                  rawValue: 00000000-0000-0000-0000-000000000000
+                                  language: *ref_710
+                          language: *ref_709
+                        enabledForDiskEncryption:
+                          schema: *ref_24
+                          rawValue: true
+                          language: *ref_716
+                        enabledForTemplateDeployment:
+                          schema: *ref_25
+                          rawValue: true
+                          language: *ref_717
+                        hsmPoolResourceId:
+                          schema: *ref_22
+                          rawValue: 00000000-0000-0000-0000-000000000000
+                          language: *ref_736
+                        provisioningState:
+                          schema: *ref_36
+                          rawValue: Succeeded
+                          language: *ref_745
+                        publicNetworkAccess:
+                          schema: *ref_44
+                          rawValue: Enabled
+                          language: *ref_718
+                        sku:
+                          schema: *ref_53
+                          parentsValue: {}
+                          properties:
+                            name:
+                              schema: *ref_13
+                              rawValue: standard
+                              language: *ref_708
+                            family:
+                              schema: *ref_12
+                              rawValue: A
+                              language: *ref_707
+                          language: *ref_706
+                        tenantId:
+                          schema: *ref_11
+                          rawValue: 00000000-0000-0000-0000-000000000000
+                          language: *ref_705
+                        vaultUri:
+                          schema: *ref_21
+                          rawValue: https://sample-vault.vault.azure.net
+                          language: *ref_735
+                      language: *ref_734
+                    systemData:
+                      schema: *ref_79
+                      parentsValue: {}
+                      properties:
+                        createdAt:
+                          schema: *ref_76
+                          rawValue: '2020-01-01T12:00:00.0000000Z'
+                          language: *ref_730
+                        createdBy:
+                          schema: *ref_74
+                          rawValue: keyVaultUser1
+                          language: *ref_728
+                        createdByType:
+                          schema: *ref_75
+                          rawValue: User
+                          language: *ref_729
+                        lastModifiedAt:
+                          schema: *ref_78
+                          rawValue: '2020-01-01T12:00:00.0000000Z'
+                          language: *ref_733
+                        lastModifiedBy:
+                          schema: *ref_77
+                          rawValue: keyVaultUser2
+                          language: *ref_731
+                        lastModifiedByType:
+                          schema: *ref_75
+                          rawValue: User
+                          language: *ref_732
+                      language: *ref_727
+                    tags:
+                      schema: *ref_73
+                      properties: {}
+                      language: *ref_726
+                  language: *ref_761
+        operation: *ref_762
+        operationGroup: *ref_763
       - operationId: Vaults_Update
         examples:
           - name: Update an existing vault
@@ -24092,7 +25041,7 @@ testModel:
                                 objectId:
                                   schema: *ref_15
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_710
+                                  language: *ref_711
                                 permissions:
                                   schema: *ref_55
                                   parentsValue: {}
@@ -24128,7 +25077,7 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_19
                                           rawValue: purge
-                                      language: *ref_714
+                                      language: *ref_715
                                     keys:
                                       schema: *ref_394
                                       elements:
@@ -24164,7 +25113,7 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_17
                                           rawValue: purge
-                                      language: *ref_712
+                                      language: *ref_713
                                     secrets:
                                       schema: *ref_395
                                       elements:
@@ -24184,12 +25133,12 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_18
                                           rawValue: purge
-                                      language: *ref_713
-                                  language: *ref_711
+                                      language: *ref_714
+                                  language: *ref_712
                                 tenantId:
                                   schema: *ref_14
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_709
+                                  language: *ref_710
                           language: *ref_781
                         enabledForDeployment:
                           schema: *ref_85
@@ -24214,11 +25163,11 @@ testModel:
                             name:
                               schema: *ref_13
                               rawValue: standard
-                              language: *ref_707
+                              language: *ref_708
                             family:
                               schema: *ref_12
                               rawValue: A
-                              language: *ref_706
+                              language: *ref_707
                           language: *ref_780
                         tenantId:
                           schema: *ref_84
@@ -24228,7 +25177,7 @@ testModel:
                   language: *ref_777
                 parameter: *ref_489
             operation: *ref_788
-            operationGroup: *ref_762
+            operationGroup: *ref_763
             originalFile: ''
             responses:
               '200':
@@ -24239,19 +25188,19 @@ testModel:
                     name:
                       schema: *ref_70
                       rawValue: sample-vault
-                      language: *ref_722
+                      language: *ref_723
                     type:
                       schema: *ref_71
                       rawValue: Microsoft.KeyVault/vaults
-                      language: *ref_723
+                      language: *ref_724
                     id:
                       schema: *ref_69
                       rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                      language: *ref_721
+                      language: *ref_722
                     location:
                       schema: *ref_72
                       rawValue: westus
-                      language: *ref_724
+                      language: *ref_725
                     properties:
                       schema: *ref_52
                       parentsValue: {}
@@ -24265,7 +25214,7 @@ testModel:
                                 objectId:
                                   schema: *ref_15
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_710
+                                  language: *ref_711
                                 permissions:
                                   schema: *ref_55
                                   parentsValue: {}
@@ -24301,7 +25250,7 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_19
                                           rawValue: purge
-                                      language: *ref_714
+                                      language: *ref_715
                                     keys:
                                       schema: *ref_394
                                       elements:
@@ -24337,7 +25286,7 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_17
                                           rawValue: purge
-                                      language: *ref_712
+                                      language: *ref_713
                                     secrets:
                                       schema: *ref_395
                                       elements:
@@ -24357,25 +25306,25 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_18
                                           rawValue: purge
-                                      language: *ref_713
-                                  language: *ref_711
+                                      language: *ref_714
+                                  language: *ref_712
                                 tenantId:
                                   schema: *ref_14
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_709
-                          language: *ref_708
+                                  language: *ref_710
+                          language: *ref_709
                         enabledForDiskEncryption:
                           schema: *ref_24
                           rawValue: true
-                          language: *ref_715
+                          language: *ref_716
                         enabledForTemplateDeployment:
                           schema: *ref_25
                           rawValue: true
-                          language: *ref_716
+                          language: *ref_717
                         hsmPoolResourceId:
                           schema: *ref_22
                           rawValue: 00000000-0000-0000-0000-000000000000
-                          language: *ref_735
+                          language: *ref_736
                         networkAcls:
                           schema: *ref_56
                           parentsValue: {}
@@ -24383,11 +25332,11 @@ testModel:
                             bypass:
                               schema: *ref_31
                               rawValue: AzureServices
-                              language: *ref_737
+                              language: *ref_738
                             defaultAction:
                               schema: *ref_32
                               rawValue: Deny
-                              language: *ref_738
+                              language: *ref_739
                             ipRules:
                               schema: *ref_400
                               elements:
@@ -24397,8 +25346,8 @@ testModel:
                                     value:
                                       schema: *ref_33
                                       rawValue: ''
-                                      language: *ref_740
-                              language: *ref_739
+                                      language: *ref_741
+                              language: *ref_740
                             virtualNetworkRules:
                               schema: *ref_401
                               elements:
@@ -24408,13 +25357,13 @@ testModel:
                                     id:
                                       schema: *ref_34
                                       rawValue: ''
-                                      language: *ref_742
+                                      language: *ref_743
                                     ignoreMissingVnetServiceEndpoint:
                                       schema: *ref_35
                                       rawValue: false
-                                      language: *ref_743
-                              language: *ref_741
-                          language: *ref_736
+                                      language: *ref_744
+                              language: *ref_742
+                          language: *ref_737
                         privateEndpointConnections:
                           schema: *ref_402
                           elements:
@@ -24424,45 +25373,45 @@ testModel:
                                 id:
                                   schema: *ref_37
                                   rawValue: ''
-                                  language: *ref_746
+                                  language: *ref_747
                                 privateEndpoint:
                                   schema: *ref_60
-                                  flattenedNames: *ref_750
+                                  flattenedNames: *ref_751
                                   parentsValue: {}
                                   properties:
                                     id:
                                       schema: *ref_39
                                       rawValue: ''
-                                      language: *ref_749
-                                  language: *ref_748
+                                      language: *ref_750
+                                  language: *ref_749
                                 privateLinkServiceConnectionState:
                                   schema: *ref_61
-                                  flattenedNames: *ref_754
+                                  flattenedNames: *ref_755
                                   parentsValue: {}
                                   properties:
                                     actionsRequired:
                                       schema: *ref_42
                                       rawValue: None
-                                      language: *ref_753
+                                      language: *ref_754
                                     status:
                                       schema: *ref_40
                                       rawValue: Approved
-                                      language: *ref_752
-                                  language: *ref_751
+                                      language: *ref_753
+                                  language: *ref_752
                                 provisioningState:
                                   schema: *ref_43
-                                  flattenedNames: *ref_756
+                                  flattenedNames: *ref_757
                                   rawValue: Succeeded
-                                  language: *ref_755
-                          language: *ref_745
+                                  language: *ref_756
+                          language: *ref_746
                         provisioningState:
                           schema: *ref_36
                           rawValue: Succeeded
-                          language: *ref_744
+                          language: *ref_745
                         publicNetworkAccess:
                           schema: *ref_44
                           rawValue: Enabled
-                          language: *ref_717
+                          language: *ref_718
                         sku:
                           schema: *ref_53
                           parentsValue: {}
@@ -24470,21 +25419,21 @@ testModel:
                             name:
                               schema: *ref_13
                               rawValue: standard
-                              language: *ref_707
+                              language: *ref_708
                             family:
                               schema: *ref_12
                               rawValue: A
-                              language: *ref_706
-                          language: *ref_705
+                              language: *ref_707
+                          language: *ref_706
                         tenantId:
                           schema: *ref_11
                           rawValue: 00000000-0000-0000-0000-000000000000
-                          language: *ref_704
+                          language: *ref_705
                         vaultUri:
                           schema: *ref_21
                           rawValue: https://sample-vault.vault.azure.net
-                          language: *ref_734
-                      language: *ref_733
+                          language: *ref_735
+                      language: *ref_734
                     systemData:
                       schema: *ref_79
                       parentsValue: {}
@@ -24492,32 +25441,32 @@ testModel:
                         createdAt:
                           schema: *ref_76
                           rawValue: '2020-01-01T12:00:00.0000000Z'
-                          language: *ref_729
+                          language: *ref_730
                         createdBy:
                           schema: *ref_74
                           rawValue: keyVaultUser1
-                          language: *ref_727
+                          language: *ref_728
                         createdByType:
                           schema: *ref_75
                           rawValue: User
-                          language: *ref_728
+                          language: *ref_729
                         lastModifiedAt:
                           schema: *ref_78
                           rawValue: '2020-01-01T12:00:00.0000000Z'
-                          language: *ref_732
+                          language: *ref_733
                         lastModifiedBy:
                           schema: *ref_77
                           rawValue: keyVaultUser2
-                          language: *ref_730
+                          language: *ref_731
                         lastModifiedByType:
                           schema: *ref_75
                           rawValue: User
-                          language: *ref_731
-                      language: *ref_726
+                          language: *ref_732
+                      language: *ref_727
                     tags:
                       schema: *ref_73
                       properties: {}
-                      language: *ref_725
+                      language: *ref_726
                   language: *ref_786
               '201':
                 body:
@@ -24527,19 +25476,19 @@ testModel:
                     name:
                       schema: *ref_70
                       rawValue: sample-vault
-                      language: *ref_722
+                      language: *ref_723
                     type:
                       schema: *ref_71
                       rawValue: Microsoft.KeyVault/vaults
-                      language: *ref_723
+                      language: *ref_724
                     id:
                       schema: *ref_69
                       rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                      language: *ref_721
+                      language: *ref_722
                     location:
                       schema: *ref_72
                       rawValue: westus
-                      language: *ref_724
+                      language: *ref_725
                     properties:
                       schema: *ref_52
                       parentsValue: {}
@@ -24553,7 +25502,7 @@ testModel:
                                 objectId:
                                   schema: *ref_15
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_710
+                                  language: *ref_711
                                 permissions:
                                   schema: *ref_55
                                   parentsValue: {}
@@ -24589,7 +25538,7 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_19
                                           rawValue: purge
-                                      language: *ref_714
+                                      language: *ref_715
                                     keys:
                                       schema: *ref_394
                                       elements:
@@ -24625,7 +25574,7 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_17
                                           rawValue: purge
-                                      language: *ref_712
+                                      language: *ref_713
                                     secrets:
                                       schema: *ref_395
                                       elements:
@@ -24645,33 +25594,33 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_18
                                           rawValue: purge
-                                      language: *ref_713
-                                  language: *ref_711
+                                      language: *ref_714
+                                  language: *ref_712
                                 tenantId:
                                   schema: *ref_14
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_709
-                          language: *ref_708
+                                  language: *ref_710
+                          language: *ref_709
                         enabledForDiskEncryption:
                           schema: *ref_24
                           rawValue: true
-                          language: *ref_715
+                          language: *ref_716
                         enabledForTemplateDeployment:
                           schema: *ref_25
                           rawValue: true
-                          language: *ref_716
+                          language: *ref_717
                         hsmPoolResourceId:
                           schema: *ref_22
                           rawValue: 00000000-0000-0000-0000-000000000000
-                          language: *ref_735
+                          language: *ref_736
                         provisioningState:
                           schema: *ref_36
                           rawValue: Succeeded
-                          language: *ref_744
+                          language: *ref_745
                         publicNetworkAccess:
                           schema: *ref_44
                           rawValue: Enabled
-                          language: *ref_717
+                          language: *ref_718
                         sku:
                           schema: *ref_53
                           parentsValue: {}
@@ -24679,21 +25628,21 @@ testModel:
                             name:
                               schema: *ref_13
                               rawValue: standard
-                              language: *ref_707
+                              language: *ref_708
                             family:
                               schema: *ref_12
                               rawValue: A
-                              language: *ref_706
-                          language: *ref_705
+                              language: *ref_707
+                          language: *ref_706
                         tenantId:
                           schema: *ref_11
                           rawValue: 00000000-0000-0000-0000-000000000000
-                          language: *ref_704
+                          language: *ref_705
                         vaultUri:
                           schema: *ref_21
                           rawValue: https://sample-vault.vault.azure.net
-                          language: *ref_734
-                      language: *ref_733
+                          language: *ref_735
+                      language: *ref_734
                     systemData:
                       schema: *ref_79
                       parentsValue: {}
@@ -24701,35 +25650,35 @@ testModel:
                         createdAt:
                           schema: *ref_76
                           rawValue: '2020-01-01T12:00:00.0000000Z'
-                          language: *ref_729
+                          language: *ref_730
                         createdBy:
                           schema: *ref_74
                           rawValue: keyVaultUser1
-                          language: *ref_727
+                          language: *ref_728
                         createdByType:
                           schema: *ref_75
                           rawValue: User
-                          language: *ref_728
+                          language: *ref_729
                         lastModifiedAt:
                           schema: *ref_78
                           rawValue: '2020-01-01T12:00:00.0000000Z'
-                          language: *ref_732
+                          language: *ref_733
                         lastModifiedBy:
                           schema: *ref_77
                           rawValue: keyVaultUser2
-                          language: *ref_730
+                          language: *ref_731
                         lastModifiedByType:
                           schema: *ref_75
                           rawValue: User
-                          language: *ref_731
-                      language: *ref_726
+                          language: *ref_732
+                      language: *ref_727
                     tags:
                       schema: *ref_73
                       properties: {}
-                      language: *ref_725
+                      language: *ref_726
                   language: *ref_787
         operation: *ref_788
-        operationGroup: *ref_762
+        operationGroup: *ref_763
       - operationId: Vaults_Delete
         examples:
           - name: Delete a vault
@@ -24756,7 +25705,7 @@ testModel:
                   language: *ref_792
                 parameter: *ref_791
             operation: *ref_795
-            operationGroup: *ref_762
+            operationGroup: *ref_763
             originalFile: ''
             responses:
               '200':
@@ -24764,7 +25713,7 @@ testModel:
               '204':
                 headers: *ref_794
         operation: *ref_795
-        operationGroup: *ref_762
+        operationGroup: *ref_763
       - operationId: Vaults_Get
         examples:
           - name: Retrieve a vault
@@ -24791,7 +25740,7 @@ testModel:
                   language: *ref_799
                 parameter: *ref_798
             operation: *ref_801
-            operationGroup: *ref_762
+            operationGroup: *ref_763
             originalFile: ''
             responses:
               '200':
@@ -24802,19 +25751,19 @@ testModel:
                     name:
                       schema: *ref_70
                       rawValue: sample-vault
-                      language: *ref_722
+                      language: *ref_723
                     type:
                       schema: *ref_71
                       rawValue: Microsoft.KeyVault/vaults
-                      language: *ref_723
+                      language: *ref_724
                     id:
                       schema: *ref_69
                       rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                      language: *ref_721
+                      language: *ref_722
                     location:
                       schema: *ref_72
                       rawValue: westus
-                      language: *ref_724
+                      language: *ref_725
                     properties:
                       schema: *ref_52
                       parentsValue: {}
@@ -24828,7 +25777,7 @@ testModel:
                                 objectId:
                                   schema: *ref_15
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_710
+                                  language: *ref_711
                                 permissions:
                                   schema: *ref_55
                                   parentsValue: {}
@@ -24864,7 +25813,7 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_19
                                           rawValue: purge
-                                      language: *ref_714
+                                      language: *ref_715
                                     keys:
                                       schema: *ref_394
                                       elements:
@@ -24900,7 +25849,7 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_17
                                           rawValue: purge
-                                      language: *ref_712
+                                      language: *ref_713
                                     secrets:
                                       schema: *ref_395
                                       elements:
@@ -24920,33 +25869,33 @@ testModel:
                                           rawValue: recover
                                         - schema: *ref_18
                                           rawValue: purge
-                                      language: *ref_713
-                                  language: *ref_711
+                                      language: *ref_714
+                                  language: *ref_712
                                 tenantId:
                                   schema: *ref_14
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_709
-                          language: *ref_708
+                                  language: *ref_710
+                          language: *ref_709
                         enabledForDiskEncryption:
                           schema: *ref_24
                           rawValue: true
-                          language: *ref_715
+                          language: *ref_716
                         enabledForTemplateDeployment:
                           schema: *ref_25
                           rawValue: true
-                          language: *ref_716
+                          language: *ref_717
                         hsmPoolResourceId:
                           schema: *ref_22
                           rawValue: 00000000-0000-0000-0000-000000000000
-                          language: *ref_735
+                          language: *ref_736
                         provisioningState:
                           schema: *ref_36
                           rawValue: Succeeded
-                          language: *ref_744
+                          language: *ref_745
                         publicNetworkAccess:
                           schema: *ref_44
                           rawValue: Enabled
-                          language: *ref_717
+                          language: *ref_718
                         sku:
                           schema: *ref_53
                           parentsValue: {}
@@ -24954,21 +25903,21 @@ testModel:
                             name:
                               schema: *ref_13
                               rawValue: standard
-                              language: *ref_707
+                              language: *ref_708
                             family:
                               schema: *ref_12
                               rawValue: A
-                              language: *ref_706
-                          language: *ref_705
+                              language: *ref_707
+                          language: *ref_706
                         tenantId:
                           schema: *ref_11
                           rawValue: 00000000-0000-0000-0000-000000000000
-                          language: *ref_704
+                          language: *ref_705
                         vaultUri:
                           schema: *ref_21
                           rawValue: https://sample-vault.vault.azure.net
-                          language: *ref_734
-                      language: *ref_733
+                          language: *ref_735
+                      language: *ref_734
                     systemData:
                       schema: *ref_79
                       parentsValue: {}
@@ -24976,35 +25925,35 @@ testModel:
                         createdAt:
                           schema: *ref_76
                           rawValue: '2020-01-01T12:00:00.0000000Z'
-                          language: *ref_729
+                          language: *ref_730
                         createdBy:
                           schema: *ref_74
                           rawValue: keyVaultUser1
-                          language: *ref_727
+                          language: *ref_728
                         createdByType:
                           schema: *ref_75
                           rawValue: User
-                          language: *ref_728
+                          language: *ref_729
                         lastModifiedAt:
                           schema: *ref_78
                           rawValue: '2020-01-01T12:00:00.0000000Z'
-                          language: *ref_732
+                          language: *ref_733
                         lastModifiedBy:
                           schema: *ref_77
                           rawValue: keyVaultUser2
-                          language: *ref_730
+                          language: *ref_731
                         lastModifiedByType:
                           schema: *ref_75
                           rawValue: User
-                          language: *ref_731
-                      language: *ref_726
+                          language: *ref_732
+                      language: *ref_727
                     tags:
                       schema: *ref_73
                       properties: {}
-                      language: *ref_725
+                      language: *ref_726
                   language: *ref_800
         operation: *ref_801
-        operationGroup: *ref_762
+        operationGroup: *ref_763
       - operationId: Vaults_ListKeys
         examples:
           - name: List keys on an existing vault
@@ -25031,7 +25980,7 @@ testModel:
                   language: *ref_805
                 parameter: *ref_804
             operation: *ref_810
-            operationGroup: *ref_762
+            operationGroup: *ref_763
             originalFile: ''
             responses:
               '200':
@@ -25067,7 +26016,7 @@ testModel:
                       language: *ref_807
                   language: *ref_806
         operation: *ref_810
-        operationGroup: *ref_762
+        operationGroup: *ref_763
       - operationId: Vaults_Validate
         examples:
           - name: Validate an existing vault
@@ -25094,7 +26043,7 @@ testModel:
                   language: *ref_814
                 parameter: *ref_813
             operation: *ref_821
-            operationGroup: *ref_762
+            operationGroup: *ref_763
             originalFile: ''
             responses:
               '200':
@@ -25142,7 +26091,7 @@ testModel:
                       language: *ref_820
                   language: *ref_815
         operation: *ref_821
-        operationGroup: *ref_762
+        operationGroup: *ref_763
       - operationId: Vaults_Disable
         examples:
           - name: Disable a vault
@@ -25169,12 +26118,12 @@ testModel:
                   language: *ref_825
                 parameter: *ref_824
             operation: *ref_826
-            operationGroup: *ref_762
+            operationGroup: *ref_763
             originalFile: ''
             responses:
               '200': {}
         operation: *ref_826
-        operationGroup: *ref_762
+        operationGroup: *ref_763
       - operationId: Vaults_UpdateAccessPolicy
         examples:
           - name: Add an access policy, or update an access policy with new permissions
@@ -25222,7 +26171,7 @@ testModel:
                                 objectId:
                                   schema: *ref_15
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_710
+                                  language: *ref_711
                                 permissions:
                                   schema: *ref_55
                                   parentsValue: {}
@@ -25232,30 +26181,30 @@ testModel:
                                       elements:
                                         - schema: *ref_19
                                           rawValue: get
-                                      language: *ref_714
+                                      language: *ref_715
                                     keys:
                                       schema: *ref_394
                                       elements:
                                         - schema: *ref_17
                                           rawValue: encrypt
-                                      language: *ref_712
+                                      language: *ref_713
                                     secrets:
                                       schema: *ref_395
                                       elements:
                                         - schema: *ref_18
                                           rawValue: get
-                                      language: *ref_713
-                                  language: *ref_711
+                                      language: *ref_714
+                                  language: *ref_712
                                 tenantId:
                                   schema: *ref_14
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_709
+                                  language: *ref_710
                           language: *ref_834
                       language: *ref_833
                   language: *ref_832
                 parameter: *ref_507
             operation: *ref_839
-            operationGroup: *ref_762
+            operationGroup: *ref_763
             originalFile: ''
             responses:
               '200':
@@ -25284,7 +26233,7 @@ testModel:
                                 objectId:
                                   schema: *ref_15
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_710
+                                  language: *ref_711
                                 permissions:
                                   schema: *ref_55
                                   parentsValue: {}
@@ -25294,24 +26243,24 @@ testModel:
                                       elements:
                                         - schema: *ref_19
                                           rawValue: get
-                                      language: *ref_714
+                                      language: *ref_715
                                     keys:
                                       schema: *ref_394
                                       elements:
                                         - schema: *ref_17
                                           rawValue: encrypt
-                                      language: *ref_712
+                                      language: *ref_713
                                     secrets:
                                       schema: *ref_395
                                       elements:
                                         - schema: *ref_18
                                           rawValue: get
-                                      language: *ref_713
-                                  language: *ref_711
+                                      language: *ref_714
+                                  language: *ref_712
                                 tenantId:
                                   schema: *ref_14
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_709
+                                  language: *ref_710
                           language: *ref_834
                       language: *ref_833
                   language: *ref_835
@@ -25341,7 +26290,7 @@ testModel:
                                 objectId:
                                   schema: *ref_15
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_710
+                                  language: *ref_711
                                 permissions:
                                   schema: *ref_55
                                   parentsValue: {}
@@ -25351,29 +26300,29 @@ testModel:
                                       elements:
                                         - schema: *ref_19
                                           rawValue: get
-                                      language: *ref_714
+                                      language: *ref_715
                                     keys:
                                       schema: *ref_394
                                       elements:
                                         - schema: *ref_17
                                           rawValue: encrypt
-                                      language: *ref_712
+                                      language: *ref_713
                                     secrets:
                                       schema: *ref_395
                                       elements:
                                         - schema: *ref_18
                                           rawValue: get
-                                      language: *ref_713
-                                  language: *ref_711
+                                      language: *ref_714
+                                  language: *ref_712
                                 tenantId:
                                   schema: *ref_14
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_709
+                                  language: *ref_710
                           language: *ref_834
                       language: *ref_833
                   language: *ref_838
         operation: *ref_839
-        operationGroup: *ref_762
+        operationGroup: *ref_763
       - operationId: Vaults_ListByResourceGroup
         examples:
           - name: List vaults in the specified resource group
@@ -25400,7 +26349,7 @@ testModel:
                   language: *ref_843
                 parameter: *ref_842
             operation: *ref_848
-            operationGroup: *ref_762
+            operationGroup: *ref_763
             originalFile: ''
             responses:
               '200':
@@ -25421,19 +26370,19 @@ testModel:
                             name:
                               schema: *ref_70
                               rawValue: sample-vault
-                              language: *ref_722
+                              language: *ref_723
                             type:
                               schema: *ref_71
                               rawValue: Microsoft.KeyVault/vaults
-                              language: *ref_723
+                              language: *ref_724
                             id:
                               schema: *ref_69
                               rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                              language: *ref_721
+                              language: *ref_722
                             location:
                               schema: *ref_72
                               rawValue: westus
-                              language: *ref_724
+                              language: *ref_725
                             properties:
                               schema: *ref_52
                               parentsValue: {}
@@ -25447,7 +26396,7 @@ testModel:
                                         objectId:
                                           schema: *ref_15
                                           rawValue: 00000000-0000-0000-0000-000000000000
-                                          language: *ref_710
+                                          language: *ref_711
                                         permissions:
                                           schema: *ref_55
                                           parentsValue: {}
@@ -25483,7 +26432,7 @@ testModel:
                                                   rawValue: recover
                                                 - schema: *ref_19
                                                   rawValue: purge
-                                              language: *ref_714
+                                              language: *ref_715
                                             keys:
                                               schema: *ref_394
                                               elements:
@@ -25519,7 +26468,7 @@ testModel:
                                                   rawValue: recover
                                                 - schema: *ref_17
                                                   rawValue: purge
-                                              language: *ref_712
+                                              language: *ref_713
                                             secrets:
                                               schema: *ref_395
                                               elements:
@@ -25539,13 +26488,13 @@ testModel:
                                                   rawValue: recover
                                                 - schema: *ref_18
                                                   rawValue: purge
-                                              language: *ref_713
-                                          language: *ref_711
+                                              language: *ref_714
+                                          language: *ref_712
                                         tenantId:
                                           schema: *ref_14
                                           rawValue: 00000000-0000-0000-0000-000000000000
-                                          language: *ref_709
-                                  language: *ref_708
+                                          language: *ref_710
+                                  language: *ref_709
                                 enableSoftDelete:
                                   schema: *ref_26
                                   rawValue: true
@@ -25553,19 +26502,19 @@ testModel:
                                 enabledForDiskEncryption:
                                   schema: *ref_24
                                   rawValue: true
-                                  language: *ref_715
+                                  language: *ref_716
                                 enabledForTemplateDeployment:
                                   schema: *ref_25
                                   rawValue: true
-                                  language: *ref_716
+                                  language: *ref_717
                                 hsmPoolResourceId:
                                   schema: *ref_22
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_735
+                                  language: *ref_736
                                 provisioningState:
                                   schema: *ref_36
                                   rawValue: Succeeded
-                                  language: *ref_744
+                                  language: *ref_745
                                 sku:
                                   schema: *ref_53
                                   parentsValue: {}
@@ -25573,21 +26522,21 @@ testModel:
                                     name:
                                       schema: *ref_13
                                       rawValue: premium
-                                      language: *ref_707
+                                      language: *ref_708
                                     family:
                                       schema: *ref_12
                                       rawValue: A
-                                      language: *ref_706
-                                  language: *ref_705
+                                      language: *ref_707
+                                  language: *ref_706
                                 tenantId:
                                   schema: *ref_11
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_704
+                                  language: *ref_705
                                 vaultUri:
                                   schema: *ref_21
                                   rawValue: https://sample-vault.vault.azure.net/
-                                  language: *ref_734
-                              language: *ref_733
+                                  language: *ref_735
+                              language: *ref_734
                             systemData:
                               schema: *ref_79
                               parentsValue: {}
@@ -25595,36 +26544,36 @@ testModel:
                                 createdAt:
                                   schema: *ref_76
                                   rawValue: '2020-01-01T12:00:00.0000000Z'
-                                  language: *ref_729
+                                  language: *ref_730
                                 createdBy:
                                   schema: *ref_74
                                   rawValue: keyVaultUser1
-                                  language: *ref_727
+                                  language: *ref_728
                                 createdByType:
                                   schema: *ref_75
                                   rawValue: User
-                                  language: *ref_728
+                                  language: *ref_729
                                 lastModifiedAt:
                                   schema: *ref_78
                                   rawValue: '2020-01-01T12:00:00.0000000Z'
-                                  language: *ref_732
+                                  language: *ref_733
                                 lastModifiedBy:
                                   schema: *ref_77
                                   rawValue: keyVaultUser2
-                                  language: *ref_730
+                                  language: *ref_731
                                 lastModifiedByType:
                                   schema: *ref_75
                                   rawValue: User
-                                  language: *ref_731
-                              language: *ref_726
+                                  language: *ref_732
+                              language: *ref_727
                             tags:
                               schema: *ref_73
                               properties: {}
-                              language: *ref_725
+                              language: *ref_726
                       language: *ref_845
                   language: *ref_844
         operation: *ref_848
-        operationGroup: *ref_762
+        operationGroup: *ref_763
       - operationId: Vaults_ListBySubscription
         examples:
           - name: List vaults in the specified subscription
@@ -25646,7 +26595,7 @@ testModel:
                   language: *ref_851
                 parameter: *ref_850
             operation: *ref_853
-            operationGroup: *ref_762
+            operationGroup: *ref_763
             originalFile: ''
             responses:
               '200':
@@ -25667,19 +26616,19 @@ testModel:
                             name:
                               schema: *ref_70
                               rawValue: sample-vault
-                              language: *ref_722
+                              language: *ref_723
                             type:
                               schema: *ref_71
                               rawValue: Microsoft.KeyVault/vaults
-                              language: *ref_723
+                              language: *ref_724
                             id:
                               schema: *ref_69
                               rawValue: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault
-                              language: *ref_721
+                              language: *ref_722
                             location:
                               schema: *ref_72
                               rawValue: westus
-                              language: *ref_724
+                              language: *ref_725
                             properties:
                               schema: *ref_52
                               parentsValue: {}
@@ -25693,7 +26642,7 @@ testModel:
                                         objectId:
                                           schema: *ref_15
                                           rawValue: 00000000-0000-0000-0000-000000000000
-                                          language: *ref_710
+                                          language: *ref_711
                                         permissions:
                                           schema: *ref_55
                                           parentsValue: {}
@@ -25729,7 +26678,7 @@ testModel:
                                                   rawValue: recover
                                                 - schema: *ref_19
                                                   rawValue: purge
-                                              language: *ref_714
+                                              language: *ref_715
                                             keys:
                                               schema: *ref_394
                                               elements:
@@ -25765,7 +26714,7 @@ testModel:
                                                   rawValue: recover
                                                 - schema: *ref_17
                                                   rawValue: purge
-                                              language: *ref_712
+                                              language: *ref_713
                                             secrets:
                                               schema: *ref_395
                                               elements:
@@ -25785,13 +26734,13 @@ testModel:
                                                   rawValue: recover
                                                 - schema: *ref_18
                                                   rawValue: purge
-                                              language: *ref_713
-                                          language: *ref_711
+                                              language: *ref_714
+                                          language: *ref_712
                                         tenantId:
                                           schema: *ref_14
                                           rawValue: 00000000-0000-0000-0000-000000000000
-                                          language: *ref_709
-                                  language: *ref_708
+                                          language: *ref_710
+                                  language: *ref_709
                                 enableSoftDelete:
                                   schema: *ref_26
                                   rawValue: true
@@ -25799,19 +26748,19 @@ testModel:
                                 enabledForDiskEncryption:
                                   schema: *ref_24
                                   rawValue: true
-                                  language: *ref_715
+                                  language: *ref_716
                                 enabledForTemplateDeployment:
                                   schema: *ref_25
                                   rawValue: true
-                                  language: *ref_716
+                                  language: *ref_717
                                 hsmPoolResourceId:
                                   schema: *ref_22
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_735
+                                  language: *ref_736
                                 provisioningState:
                                   schema: *ref_36
                                   rawValue: Succeeded
-                                  language: *ref_744
+                                  language: *ref_745
                                 sku:
                                   schema: *ref_53
                                   parentsValue: {}
@@ -25819,21 +26768,21 @@ testModel:
                                     name:
                                       schema: *ref_13
                                       rawValue: premium
-                                      language: *ref_707
+                                      language: *ref_708
                                     family:
                                       schema: *ref_12
                                       rawValue: A
-                                      language: *ref_706
-                                  language: *ref_705
+                                      language: *ref_707
+                                  language: *ref_706
                                 tenantId:
                                   schema: *ref_11
                                   rawValue: 00000000-0000-0000-0000-000000000000
-                                  language: *ref_704
+                                  language: *ref_705
                                 vaultUri:
                                   schema: *ref_21
                                   rawValue: https://sample-vault.vault.azure.net/
-                                  language: *ref_734
-                              language: *ref_733
+                                  language: *ref_735
+                              language: *ref_734
                             systemData:
                               schema: *ref_79
                               parentsValue: {}
@@ -25841,36 +26790,36 @@ testModel:
                                 createdAt:
                                   schema: *ref_76
                                   rawValue: '2020-01-01T12:00:00.0000000Z'
-                                  language: *ref_729
+                                  language: *ref_730
                                 createdBy:
                                   schema: *ref_74
                                   rawValue: keyVaultUser1
-                                  language: *ref_727
+                                  language: *ref_728
                                 createdByType:
                                   schema: *ref_75
                                   rawValue: User
-                                  language: *ref_728
+                                  language: *ref_729
                                 lastModifiedAt:
                                   schema: *ref_78
                                   rawValue: '2020-01-01T12:00:00.0000000Z'
-                                  language: *ref_732
+                                  language: *ref_733
                                 lastModifiedBy:
                                   schema: *ref_77
                                   rawValue: keyVaultUser2
-                                  language: *ref_730
+                                  language: *ref_731
                                 lastModifiedByType:
                                   schema: *ref_75
                                   rawValue: User
-                                  language: *ref_731
-                              language: *ref_726
+                                  language: *ref_732
+                              language: *ref_727
                             tags:
                               schema: *ref_73
                               properties: {}
-                              language: *ref_725
+                              language: *ref_726
                       language: *ref_845
                   language: *ref_852
         operation: *ref_853
-        operationGroup: *ref_762
+        operationGroup: *ref_763
       - operationId: Vaults_ListDeleted
         examples:
           - name: List deleted vaults in the specified subscription
@@ -25887,7 +26836,7 @@ testModel:
                   language: *ref_855
                 parameter: *ref_854
             operation: *ref_869
-            operationGroup: *ref_762
+            operationGroup: *ref_763
             originalFile: ''
             responses:
               '200':
@@ -25950,7 +26899,7 @@ testModel:
                       language: *ref_857
                   language: *ref_856
         operation: *ref_869
-        operationGroup: *ref_762
+        operationGroup: *ref_763
       - operationId: Vaults_GetDeleted
         examples:
           - name: Retrieve a deleted vault
@@ -25977,7 +26926,7 @@ testModel:
                   language: *ref_873
                 parameter: *ref_872
             operation: *ref_876
-            operationGroup: *ref_762
+            operationGroup: *ref_763
             originalFile: ''
             responses:
               '200':
@@ -26029,7 +26978,7 @@ testModel:
                   language: *ref_874
                 headers: *ref_875
         operation: *ref_876
-        operationGroup: *ref_762
+        operationGroup: *ref_763
       - operationId: Vaults_PurgeDeleted
         examples:
           - name: Purge a deleted vault
@@ -26056,7 +27005,7 @@ testModel:
                   language: *ref_880
                 parameter: *ref_879
             operation: *ref_883
-            operationGroup: *ref_762
+            operationGroup: *ref_763
             originalFile: ''
             responses:
               '200':
@@ -26064,7 +27013,7 @@ testModel:
               '202':
                 headers: *ref_882
         operation: *ref_883
-        operationGroup: *ref_762
+        operationGroup: *ref_763
       - operationId: Vaults_CheckNameAvailability
         examples:
           - name: Validate a vault name
@@ -26095,7 +27044,7 @@ testModel:
                   language: *ref_886
                 parameter: *ref_523
             operation: *ref_891
-            operationGroup: *ref_762
+            operationGroup: *ref_763
             originalFile: ''
             responses:
               '200':
@@ -26109,7 +27058,7 @@ testModel:
                       language: *ref_890
                   language: *ref_889
         operation: *ref_891
-        operationGroup: *ref_762
+        operationGroup: *ref_763
       - operationId: PrivateEndpointConnections_Get
         examples:
           - name: KeyVaultGetPrivateEndpointConnection
@@ -26173,7 +27122,7 @@ testModel:
                         id:
                           schema: *ref_39
                           rawValue: /subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe
-                          language: *ref_749
+                          language: *ref_750
                       language: *ref_899
                     privateLinkServiceConnectionState:
                       schema: *ref_61
@@ -26187,11 +27136,11 @@ testModel:
                         actionsRequired:
                           schema: *ref_42
                           rawValue: None
-                          language: *ref_753
+                          language: *ref_754
                         status:
                           schema: *ref_40
                           rawValue: Approved
-                          language: *ref_752
+                          language: *ref_753
                       language: *ref_901
                     provisioningState:
                       schema: *ref_43
@@ -26253,7 +27202,7 @@ testModel:
                         status:
                           schema: *ref_40
                           rawValue: Approved
-                          language: *ref_752
+                          language: *ref_753
                       language: *ref_901
                   language: *ref_917
                 parameter: *ref_529
@@ -26290,7 +27239,7 @@ testModel:
                         id:
                           schema: *ref_39
                           rawValue: /subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe
-                          language: *ref_749
+                          language: *ref_750
                       language: *ref_899
                     privateLinkServiceConnectionState:
                       schema: *ref_61
@@ -26304,11 +27253,11 @@ testModel:
                         actionsRequired:
                           schema: *ref_42
                           rawValue: None
-                          language: *ref_753
+                          language: *ref_754
                         status:
                           schema: *ref_40
                           rawValue: Approved
-                          language: *ref_752
+                          language: *ref_753
                       language: *ref_901
                     provisioningState:
                       schema: *ref_43
@@ -26448,7 +27397,7 @@ testModel:
                                 id:
                                   schema: *ref_39
                                   rawValue: /subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe
-                                  language: *ref_749
+                                  language: *ref_750
                               language: *ref_899
                             privateLinkServiceConnectionState:
                               schema: *ref_61
@@ -26462,11 +27411,11 @@ testModel:
                                 actionsRequired:
                                   schema: *ref_42
                                   rawValue: None
-                                  language: *ref_753
+                                  language: *ref_754
                                 status:
                                   schema: *ref_40
                                   rawValue: Approved
-                                  language: *ref_752
+                                  language: *ref_753
                               language: *ref_901
                             provisioningState:
                               schema: *ref_43
@@ -26500,7 +27449,7 @@ testModel:
                                 id:
                                   schema: *ref_39
                                   rawValue: /subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe
-                                  language: *ref_749
+                                  language: *ref_750
                               language: *ref_899
                             privateLinkServiceConnectionState:
                               schema: *ref_61
@@ -26514,11 +27463,11 @@ testModel:
                                 actionsRequired:
                                   schema: *ref_42
                                   rawValue: None
-                                  language: *ref_753
+                                  language: *ref_754
                                 status:
                                   schema: *ref_40
                                   rawValue: Approved
-                                  language: *ref_752
+                                  language: *ref_753
                               language: *ref_901
                             provisioningState:
                               schema: *ref_43
@@ -27086,7 +28035,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: SystemAssigned
-                          language: *ref_719
+                          language: *ref_720
                       language: *ref_992
                     location:
                       schema: *ref_149
@@ -27134,7 +28083,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: SystemAssigned
-                          language: *ref_719
+                          language: *ref_720
                       language: *ref_992
                     location:
                       schema: *ref_149
@@ -27177,7 +28126,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: SystemAssigned
-                          language: *ref_719
+                          language: *ref_720
                       language: *ref_992
                     location:
                       schema: *ref_149
@@ -27243,7 +28192,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: UserAssigned
-                          language: *ref_719
+                          language: *ref_720
                         userAssignedIdentities:
                           schema: *ref_51
                           properties:
@@ -27299,7 +28248,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: UserAssigned
-                          language: *ref_719
+                          language: *ref_720
                         userAssignedIdentities:
                           schema: *ref_51
                           properties:
@@ -27355,7 +28304,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: UserAssigned
-                          language: *ref_719
+                          language: *ref_720
                         userAssignedIdentities:
                           schema: *ref_51
                           properties:
@@ -27433,7 +28382,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: SystemAssigned
-                          language: *ref_719
+                          language: *ref_720
                       language: *ref_992
                     location:
                       schema: *ref_149
@@ -27485,7 +28434,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: SystemAssigned
-                          language: *ref_719
+                          language: *ref_720
                       language: *ref_992
                     location:
                       schema: *ref_149
@@ -27537,7 +28486,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: SystemAssigned
-                          language: *ref_719
+                          language: *ref_720
                       language: *ref_992
                     location:
                       schema: *ref_149
@@ -27602,7 +28551,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: SystemAssigned
-                          language: *ref_719
+                          language: *ref_720
                       language: *ref_1016
                     rotationToLatestKeyVersionEnabled:
                       schema: *ref_139
@@ -27654,7 +28603,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: SystemAssigned
-                          language: *ref_719
+                          language: *ref_720
                       language: *ref_992
                     lastKeyRotationTimestamp:
                       schema: *ref_140
@@ -27715,7 +28664,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: SystemAssigned
-                          language: *ref_719
+                          language: *ref_720
                       language: *ref_992
                     location:
                       schema: *ref_149
@@ -27777,7 +28726,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: SystemAssigned
-                          language: *ref_719
+                          language: *ref_720
                       language: *ref_1016
                     rotationToLatestKeyVersionEnabled:
                       schema: *ref_139
@@ -27829,7 +28778,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: SystemAssigned
-                          language: *ref_719
+                          language: *ref_720
                       language: *ref_992
                     lastKeyRotationTimestamp:
                       schema: *ref_140
@@ -27902,7 +28851,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: SystemAssigned
-                          language: *ref_719
+                          language: *ref_720
                       language: *ref_992
                     location:
                       schema: *ref_149
@@ -28022,7 +28971,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: SystemAssigned
-                          language: *ref_719
+                          language: *ref_720
                       language: *ref_992
                     lastKeyRotationTimestamp:
                       schema: *ref_140
@@ -28089,7 +29038,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: SystemAssigned
-                          language: *ref_719
+                          language: *ref_720
                       language: *ref_992
                     location:
                       schema: *ref_149
@@ -28191,7 +29140,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: SystemAssigned
-                          language: *ref_719
+                          language: *ref_720
                       language: *ref_992
                     location:
                       schema: *ref_149
@@ -28298,7 +29247,7 @@ testModel:
                         type:
                           schema: *ref_50
                           rawValue: SystemAssigned
-                          language: *ref_719
+                          language: *ref_720
                       language: *ref_992
                     location:
                       schema: *ref_149
@@ -28443,7 +29392,7 @@ testModel:
                                 type:
                                   schema: *ref_50
                                   rawValue: SystemAssigned
-                                  language: *ref_719
+                                  language: *ref_720
                               language: *ref_992
                             location:
                               schema: *ref_149
@@ -28515,7 +29464,7 @@ testModel:
                                 type:
                                   schema: *ref_50
                                   rawValue: SystemAssigned
-                                  language: *ref_719
+                                  language: *ref_720
                               language: *ref_992
                             location:
                               schema: *ref_149
@@ -28622,7 +29571,7 @@ testModel:
                                 type:
                                   schema: *ref_50
                                   rawValue: SystemAssigned
-                                  language: *ref_719
+                                  language: *ref_720
                               language: *ref_992
                             location:
                               schema: *ref_149
@@ -28694,7 +29643,7 @@ testModel:
                                 type:
                                   schema: *ref_50
                                   rawValue: SystemAssigned
-                                  language: *ref_719
+                                  language: *ref_720
                               language: *ref_992
                             location:
                               schema: *ref_149
