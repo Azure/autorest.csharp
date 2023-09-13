@@ -178,7 +178,6 @@ stages:
           parameters:
             AutorestCSharpVersion: $(AutorestCSharpVersion)
             TypeSpecEmitterVersion: $(TypeSpecEmitterVersion)
-# update codes
         - template: generate-sdk-job-matrix-files.yml
           parameters:
             Name: Generate_Job_Matrix
@@ -190,30 +189,9 @@ stages:
             AutorestCSharpVersion: $(AutorestCSharpVersion)
             TypeSpecEmitterVersion: $(TypeSpecEmitterVersion)
             DependsOn: Generate_Job_Matrix
-# update samples
-        - template: update-azure-sdk-for-net-samples.yml
-          parameters:
-            name: Update_Samples_A_F
-            filter: "a*,b*,c*,d*,e*,f*"
-        - template: update-azure-sdk-for-net-samples.yml
-          parameters:
-            name: Update_Samples_G_L
-            filter: "g*,h*,i*,j*,k*,l*"
-        - template: update-azure-sdk-for-net-samples.yml
-          parameters:
-            name: Update_Samples_M_R
-            filter: "m*,n*,o*,p*,q*,r*"
-        - template: update-azure-sdk-for-net-samples.yml
-          parameters:
-            name: Update_Samples_S_Z
-            filter: "s*,t*,u*,v*,w*,x*,y*,z*"
         - job: Create_PR
           dependsOn:
             - Update_Code
-            - Update_Samples_A_F
-            - Update_Samples_G_L
-            - Update_Samples_M_R
-            - Update_Samples_S_Z
           steps:
             - checkout: self
             - checkout: azure-sdk-tools
