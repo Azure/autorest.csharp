@@ -14,6 +14,50 @@ namespace CadlRanchProjects.Tests
     public class EncodeDateTimeTests : CadlRanchTestBase
     {
         [Test]
+        public Task Encode_Datetime_ResponseHeader_default() => Test(async (host) =>
+        {
+            var response = await new DatetimeClient(host, null).GetResponseHeaderClient().DefaultAsync();
+            Assert.AreEqual(204, response.Status);
+
+            Assert.IsTrue(response.Headers.TryGetValue("value", out DateTimeOffset? header));
+
+            Assert.AreEqual(DateTimeOffset.Parse("Fri, 26 Aug 2022 14:38:00 GMT"), header);
+        });
+
+        [Test]
+        public Task Encode_Datetime_ResponseHeader_rfc3339() => Test(async (host) =>
+        {
+            var response = await new DatetimeClient(host, null).GetResponseHeaderClient().Rfc3339Async();
+            Assert.AreEqual(204, response.Status);
+
+            Assert.IsTrue(response.Headers.TryGetValue("value", out DateTimeOffset? header));
+
+            Assert.AreEqual(DateTimeOffset.Parse("2022-08-26T18:38:00.000Z"), header);
+        });
+
+        [Test]
+        public Task Encode_Datetime_ResponseHeader_rfc7231() => Test(async (host) =>
+        {
+            var response = await new DatetimeClient(host, null).GetResponseHeaderClient().Rfc7231Async();
+            Assert.AreEqual(204, response.Status);
+
+            Assert.IsTrue(response.Headers.TryGetValue("value", out DateTimeOffset? header));
+
+            Assert.AreEqual(DateTimeOffset.Parse("Fri, 26 Aug 2022 14:38:00 GMT"), header);
+        });
+
+        [Test]
+        public Task Encode_Datetime_ResponseHeader_unixTimestamp() => Test(async (host) =>
+        {
+            var response = await new DatetimeClient(host, null).GetResponseHeaderClient().UnixTimestampAsync();
+            Assert.AreEqual(204, response.Status);
+
+            Assert.IsTrue(response.Headers.TryGetValue("value", out string header)); // in azure.core, the value of headers are always stored in string
+
+            Assert.AreEqual("1686566864", header);
+        });
+
+        [Test]
         public Task Encode_DateTime_Header_Default() => Test(async (host) =>
         {
             DateTimeOffset data = DateTimeOffset.Parse("Fri, 26 Aug 2022 14:38:00 GMT");

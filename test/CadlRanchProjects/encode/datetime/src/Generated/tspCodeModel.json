@@ -1562,6 +1562,302 @@
    },
    "Creatable": false,
    "Parent": "DatetimeClient"
+  },
+  {
+   "$id": "151",
+   "Name": "ResponseHeader",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "152",
+     "Name": "default",
+     "ResourceName": "ResponseHeader",
+     "Parameters": [
+      {
+       "$ref": "22"
+      },
+      {
+       "$id": "153",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "154",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "155",
+        "Type": {
+         "$ref": "154"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "31"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "156",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [
+        {
+         "$id": "157",
+         "Name": "value",
+         "NameInResponse": "value",
+         "Description": "",
+         "Type": {
+          "$id": "158",
+          "Name": "utcDateTime",
+          "Kind": "DateTime",
+          "IsNullable": false
+         }
+        }
+       ],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/encode/datetime/responseheader/default",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "159",
+     "Name": "rfc3339",
+     "ResourceName": "ResponseHeader",
+     "Parameters": [
+      {
+       "$ref": "22"
+      },
+      {
+       "$id": "160",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "161",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "162",
+        "Type": {
+         "$ref": "161"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "31"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "163",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [
+        {
+         "$id": "164",
+         "Name": "value",
+         "NameInResponse": "value",
+         "Description": "",
+         "Type": {
+          "$id": "165",
+          "Name": "utcDateTime",
+          "Kind": "DateTime",
+          "IsNullable": false
+         }
+        }
+       ],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/encode/datetime/responseheader/rfc3339",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "166",
+     "Name": "rfc7231",
+     "ResourceName": "ResponseHeader",
+     "Parameters": [
+      {
+       "$ref": "22"
+      },
+      {
+       "$id": "167",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "168",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "169",
+        "Type": {
+         "$ref": "168"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "31"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "170",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [
+        {
+         "$id": "171",
+         "Name": "value",
+         "NameInResponse": "value",
+         "Description": "",
+         "Type": {
+          "$id": "172",
+          "Name": "utcDateTime",
+          "Kind": "DateTime",
+          "IsNullable": false
+         }
+        }
+       ],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/encode/datetime/responseheader/rfc7231",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "173",
+     "Name": "unixTimestamp",
+     "ResourceName": "ResponseHeader",
+     "Parameters": [
+      {
+       "$ref": "22"
+      },
+      {
+       "$id": "174",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "175",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "176",
+        "Type": {
+         "$ref": "175"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "31"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "177",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [
+        {
+         "$id": "178",
+         "Name": "value",
+         "NameInResponse": "value",
+         "Description": "",
+         "Type": {
+          "$id": "179",
+          "Name": "utcDateTime",
+          "Kind": "DateTime",
+          "IsNullable": false
+         }
+        }
+       ],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/encode/datetime/responseheader/unix-timestamp",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "180"
+   },
+   "Creatable": false,
+   "Parent": "DatetimeClient"
   }
  ]
 }
