@@ -1,10 +1,7 @@
 using System;
-using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
-using Azure.Core;
 using Encode.Datetime;
 using Encode.Datetime.Models;
 using NUnit.Framework;
@@ -19,9 +16,10 @@ namespace CadlRanchProjects.Tests
             var response = await new DatetimeClient(host, null).GetResponseHeaderClient().DefaultAsync();
             Assert.AreEqual(204, response.Status);
 
-            Assert.IsTrue(response.Headers.TryGetValue("value", out DateTimeOffset? header));
+            // we cannot use the extension method TryGetValue("value", out DateTimeOffset? header) here because it is in an internal static class
+            Assert.IsTrue(response.Headers.TryGetValue("value", out string header));
 
-            Assert.AreEqual(DateTimeOffset.Parse("Fri, 26 Aug 2022 14:38:00 GMT"), header);
+            Assert.AreEqual("Fri, 26 Aug 2022 14:38:00 GMT", header);
         });
 
         [Test]
@@ -30,9 +28,10 @@ namespace CadlRanchProjects.Tests
             var response = await new DatetimeClient(host, null).GetResponseHeaderClient().Rfc3339Async();
             Assert.AreEqual(204, response.Status);
 
-            Assert.IsTrue(response.Headers.TryGetValue("value", out DateTimeOffset? header));
+            // we cannot use the extension method TryGetValue("value", out DateTimeOffset? header) here because it is in an internal static class
+            Assert.IsTrue(response.Headers.TryGetValue("value", out string header));
 
-            Assert.AreEqual(DateTimeOffset.Parse("2022-08-26T18:38:00.000Z"), header);
+            Assert.AreEqual("2022-08-26T18:38:00.000Z", header);
         });
 
         [Test]
@@ -41,9 +40,10 @@ namespace CadlRanchProjects.Tests
             var response = await new DatetimeClient(host, null).GetResponseHeaderClient().Rfc7231Async();
             Assert.AreEqual(204, response.Status);
 
-            Assert.IsTrue(response.Headers.TryGetValue("value", out DateTimeOffset? header));
+            // we cannot use the extension method TryGetValue("value", out DateTimeOffset? header) here because it is in an internal static class
+            Assert.IsTrue(response.Headers.TryGetValue("value", out string header));
 
-            Assert.AreEqual(DateTimeOffset.Parse("Fri, 26 Aug 2022 14:38:00 GMT"), header);
+            Assert.AreEqual("Fri, 26 Aug 2022 14:38:00 GMT", header);
         });
 
         [Test]
@@ -52,7 +52,7 @@ namespace CadlRanchProjects.Tests
             var response = await new DatetimeClient(host, null).GetResponseHeaderClient().UnixTimestampAsync();
             Assert.AreEqual(204, response.Status);
 
-            Assert.IsTrue(response.Headers.TryGetValue("value", out string header)); // in azure.core, the value of headers are always stored in string
+            Assert.IsTrue(response.Headers.TryGetValue("value", out string header));
 
             Assert.AreEqual("1686566864", header);
         });
