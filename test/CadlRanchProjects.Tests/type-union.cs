@@ -89,7 +89,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Union_receiveFirstNamedUnionValue() => Test(async (host) =>
         {
-            var response = await new UnionClient(host, null).ReceiveFirstNamedUnionValueAsync(null);
+            var response = await new UnionClient(host, null).ReceiveFirstNamedUnionValueAsync(null); // explicitly pass null to call the protocol method
             Assert.AreEqual(200, response.Status);
 
             var root = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -100,7 +100,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Type_Union_receiveSecondNamedUnionValue() => Test(async (host) =>
         {
-            var response = await new UnionClient(host, null).ReceiveSecondNamedUnionValueAsync(null);
+            var response = await new UnionClient(host, null).ReceiveSecondNamedUnionValueAsync(null); // explicitly pass null to call the protocol method
             Assert.AreEqual(200, response.Status);
 
             var root = JsonDocument.Parse(response.ContentStream).RootElement;
