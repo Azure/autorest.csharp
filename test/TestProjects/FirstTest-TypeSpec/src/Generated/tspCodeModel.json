@@ -2049,7 +2049,7 @@
      "$id": "228",
      "Name": "stringBody",
      "ResourceName": "FirstTestTypeSpec",
-     "Description": "head as boolean.",
+     "Description": "The body parameter type is string.",
      "Parameters": [
       {
        "$ref": "145"
@@ -2158,7 +2158,7 @@
      "$id": "238",
      "Name": "boolBody",
      "ResourceName": "FirstTestTypeSpec",
-     "Description": "head as boolean.",
+     "Description": "The body parameter type is bool.",
      "Parameters": [
       {
        "$ref": "145"

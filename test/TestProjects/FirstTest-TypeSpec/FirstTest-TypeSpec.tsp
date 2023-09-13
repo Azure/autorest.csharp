@@ -370,14 +370,14 @@ op headAsBoolean(@path id: string): void;
 
 
 @route("/stringBody")
-@doc("head as boolean.")
+@doc("The body parameter type is string.")
 @put
 @convenientAPI(true)
 op stringBody(@body body: string): void;
 
 
 @route("/boolBody")
-@doc("head as boolean.")
+@doc("The body parameter type is bool.")
 @put
 @convenientAPI(true)
 op boolBody(@body body: boolean): void;

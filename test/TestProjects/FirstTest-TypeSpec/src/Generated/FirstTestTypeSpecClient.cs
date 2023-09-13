@@ -918,7 +918,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> head as boolean. </summary>
+        /// <summary> The body parameter type is string. </summary>
         /// <param name="body"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -933,7 +933,7 @@ namespace FirstTestTypeSpec
             return response;
         }
 
-        /// <summary> head as boolean. </summary>
+        /// <summary> The body parameter type is string. </summary>
         /// <param name="body"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -949,7 +949,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] head as boolean.
+        /// [Protocol Method] The body parameter type is string.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -988,7 +988,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] head as boolean.
+        /// [Protocol Method] The body parameter type is string.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1026,7 +1026,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> head as boolean. </summary>
+        /// <summary> The body parameter type is bool. </summary>
         /// <param name="body"> The Boolean to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBodyAsync(bool,CancellationToken)']/*" />
@@ -1037,7 +1037,7 @@ namespace FirstTestTypeSpec
             return response;
         }
 
-        /// <summary> head as boolean. </summary>
+        /// <summary> The body parameter type is bool. </summary>
         /// <param name="body"> The Boolean to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBody(bool,CancellationToken)']/*" />
@@ -1049,7 +1049,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] head as boolean.
+        /// [Protocol Method] The body parameter type is bool.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1088,7 +1088,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] head as boolean.
+        /// [Protocol Method] The body parameter type is bool.
         /// <list type="bullet">
         /// <item>
         /// <description>
