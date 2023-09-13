@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
                         // the default value (also string because we disabled nullable in generated code)
                         var warning = $"No value is provided for {parameter.Name} in example '{this.Name}'. Please consider adding a proper example value for it in swagger";
                         AutoRestLogger.Warning(warning).Wait();
-                        var pv = new ExampleParameterValue(parameter, $"default; /* Warning: {warning}*/");
+                        var pv = new ExampleParameterValue(parameter, $"default /* Warning: {warning}*/");
                         if (Operation.IsPropertyBagOperation && propertyBagParamNames.Contains(parameter.Name))
                         {
                             propertyBagMapping.Add(parameter.Name, pv);

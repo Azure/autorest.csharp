@@ -11363,7 +11363,6 @@ operationGroups:
                     tenantId: 00000000-0000-0000-0000-000000000000
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-                vaultName: sample-vault
               responses:
                 '200':
                   body:
