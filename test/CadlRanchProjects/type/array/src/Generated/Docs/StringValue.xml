@@ -81,7 +81,7 @@ StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0")
 
 Response response = await client.PutAsync(new List<string>()
 {
-"<body>"
+    "<body>"
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -91,7 +91,7 @@ StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0")
 
 Response response = await client.PutAsync(new List<string>()
 {
-"<body>"
+    "<body>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -104,7 +104,7 @@ StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0")
 
 Response response = client.Put(new List<string>()
 {
-"<body>"
+    "<body>"
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -114,7 +114,7 @@ StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0")
 
 Response response = client.Put(new List<string>()
 {
-"<body>"
+    "<body>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -127,7 +127,7 @@ StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0")
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-"<body>"
+    "<body>"
 });
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
@@ -138,7 +138,7 @@ StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0")
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-"<body>"
+    "<body>"
 });
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
@@ -152,7 +152,7 @@ StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0")
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-"<body>"
+    "<body>"
 });
 Response response = client.Put(content);
 Console.WriteLine(response.Status);
@@ -163,7 +163,7 @@ StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0")
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-"<body>"
+    "<body>"
 });
 Response response = client.Put(content);
 Console.WriteLine(response.Status);

@@ -23,9 +23,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var methods = await GetMethods(syntaxTree);
             // first we need to get the members
             // TODO -- we should have a reference to the members we have in the writer and directly go to them
-            var members = document.Element("doc")!
-                .Element("members")!
-                .Elements("member")!;
+            var members = writer.Members;
 
             foreach (var member in members)
             {
@@ -83,8 +81,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         /// </summary>
         /// <param name="lines"></param>
         /// <returns></returns>
-        private static string FormatContent(string[] lines)
+        internal static string FormatContent(string[] lines)
         {
+            const int spaceIncrement = 4;
             if (!lines.Any())
                 return string.Empty;
 
@@ -100,39 +99,52 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     lineNumber = i;
                     break;
                 }
-                builder.AppendLine().Append(line);
+                if (i > 0)
+                    builder.AppendLine(); // we do not need a new line when it is the first line
+                builder.Append(line);
             }
 
             if (lineNumber < 0)
                 return string.Empty; // every line is whitespaces
 
-            var first = lines[lineNumber].AsSpan();
-            // find how many spaces are there in the first line
-            int firstLineSpaces = CountLeadingSpaces(first);
-            builder.AppendLine().Append(first.Slice(firstLineSpaces));
+            // the following code is a temporarily workaround the Roslyn's format issue around collection initializers: https://github.com/dotnet/roslyn/issues/8269
+            // if Roslyn could properly format the collection initializers and everything, this code should be as simple as: take a amount of spaces on the first line, trim spaces with the same amount on every line
+            // since the code we are processing here has been formatted by Roslyn, we only take the cases that lines starts or ends with { or } to format.
+            var stack = new Stack<int>();
+            stack.Push(0);
 
-            for (int i = lineNumber + 1; i < lines.Length; i++)
+            for (int i = lineNumber; i < lines.Length; i++)
             {
                 var line = lines[i].AsSpan();
-                var spaceCount = CountLeadingSpaces(line);
-                var spacesToTrim = Math.Min(firstLineSpaces, spaceCount);
-                builder.AppendLine().Append(line.Slice(spacesToTrim));
+                // first we count how many leading spaces we are having on this line
+                int count = 0;
+                while (count < line.Length && char.IsWhiteSpace(line[count]))
+                {
+                    count++;
+                }
+                var spaceCount = count;
+                // if the rest part of the line leads by a }, we should decrease the amount of leading spaces
+                if (count < line.Length && line[count] == '}')
+                {
+                    stack.Pop();
+                }
+                // find out how many spaces we would like to prepend
+                var leadingSpaces = stack.Peek();
+                // if the rest part of the line leads by a {, we increment the leading space
+                if (count < line.Length && line[count] == '{')
+                {
+                    stack.Push(stack.Peek() + spaceIncrement);
+                }
+                builder.AppendLine();
+                while (leadingSpaces > 0)
+                {
+                    builder.Append(' ');
+                    leadingSpaces--;
+                }
+                builder.Append(line.Slice(spaceCount));
             }
 
             return builder.ToString();
-        }
-
-        private static int CountLeadingSpaces(ReadOnlySpan<char> line)
-        {
-            int count = 0;
-            while (count < line.Length)
-            {
-                if (!char.IsWhiteSpace(line[count]))
-                    break;
-                count++;
-            }
-
-            return count;
         }
 
         private static async Task<Dictionary<string, MethodDeclarationSyntax>> GetMethods(SyntaxTree syntaxTree)

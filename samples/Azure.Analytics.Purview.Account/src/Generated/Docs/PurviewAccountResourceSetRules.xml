@@ -249,104 +249,104 @@ RequestContent content = RequestContent.Create(new
     pathPatternConfig = new
     {
         acceptedPatterns = new List<object>()
-{
-new
-{
-createdBy = "<createdBy>",
-filterType = "Pattern",
-lastUpdatedTimestamp = 1234L,
-modifiedBy = "<modifiedBy>",
-name = "<name>",
-path = "<path>",
-}
-},
+        {
+            new
+            {
+                createdBy = "<createdBy>",
+                filterType = "Pattern",
+                lastUpdatedTimestamp = 1234L,
+                modifiedBy = "<modifiedBy>",
+                name = "<name>",
+                path = "<path>",
+            }
+        },
         complexReplacers = new List<object>()
-{
-new
-{
-createdBy = "<createdBy>",
-description = "<description>",
-disabled = true,
-disableRecursiveReplacerApplication = true,
-lastUpdatedTimestamp = 1234L,
-modifiedBy = "<modifiedBy>",
-name = "<name>",
-typeName = "<typeName>",
-}
-},
+        {
+            new
+            {
+                createdBy = "<createdBy>",
+                description = "<description>",
+                disabled = true,
+                disableRecursiveReplacerApplication = true,
+                lastUpdatedTimestamp = 1234L,
+                modifiedBy = "<modifiedBy>",
+                name = "<name>",
+                typeName = "<typeName>",
+            }
+        },
         createdBy = "<createdBy>",
         enableDefaultPatterns = true,
         lastUpdatedTimestamp = 1234L,
         modifiedBy = "<modifiedBy>",
         normalizationRules = new List<object>()
-{
-new
-{
-description = "<description>",
-disabled = true,
-dynamicReplacement = true,
-entityTypes = new List<object>()
-{
-"<entityTypes>"
-},
-lastUpdatedTimestamp = 1234L,
-name = "<name>",
-regex = new
-{
-maxDigits = 1234,
-maxLetters = 1234,
-minDashes = 1234,
-minDigits = 1234,
-minDigitsOrLetters = 1234,
-minDots = 1234,
-minHex = 1234,
-minLetters = 1234,
-minUnderscores = 1234,
-options = 1234,
-regexStr = "<regexStr>",
-},
-replaceWith = "<replaceWith>",
-version = 123.45,
-}
-},
+        {
+            new
+            {
+                description = "<description>",
+                disabled = true,
+                dynamicReplacement = true,
+                entityTypes = new List<object>()
+                {
+                    "<entityTypes>"
+                },
+                lastUpdatedTimestamp = 1234L,
+                name = "<name>",
+                regex = new
+                {
+                    maxDigits = 1234,
+                    maxLetters = 1234,
+                    minDashes = 1234,
+                    minDigits = 1234,
+                    minDigitsOrLetters = 1234,
+                    minDots = 1234,
+                    minHex = 1234,
+                    minLetters = 1234,
+                    minUnderscores = 1234,
+                    options = 1234,
+                    regexStr = "<regexStr>",
+                },
+                replaceWith = "<replaceWith>",
+                version = 123.45,
+            }
+        },
         regexReplacers = new List<object>()
-{
-new
-{
-condition = "<condition>",
-createdBy = "<createdBy>",
-description = "<description>",
-disabled = true,
-disableRecursiveReplacerApplication = true,
-lastUpdatedTimestamp = 1234L,
-modifiedBy = "<modifiedBy>",
-name = "<name>",
-replaceWith = "<replaceWith>",
-}
-},
+        {
+            new
+            {
+                condition = "<condition>",
+                createdBy = "<createdBy>",
+                description = "<description>",
+                disabled = true,
+                disableRecursiveReplacerApplication = true,
+                lastUpdatedTimestamp = 1234L,
+                modifiedBy = "<modifiedBy>",
+                name = "<name>",
+                replaceWith = "<replaceWith>",
+            }
+        },
         rejectedPatterns = new List<object>()
-{
-null
-},
+        {
+            null
+        },
         scopedRules = new List<object>()
-{
-new
-{
-bindingUrl = "<bindingUrl>",
-rules = new List<object>()
-{
-new
-{
-displayName = "<displayName>",
-isResourceSet = true,
-lastUpdatedTimestamp = 1234L,
-name = "<name>",
-qualifiedName = "<qualifiedName>",
-}
-},
-storeType = "<storeType>",
-}
-},
+        {
+            new
+            {
+                bindingUrl = "<bindingUrl>",
+                rules = new List<object>()
+                {
+                    new
+                    {
+                        displayName = "<displayName>",
+                        isResourceSet = true,
+                        lastUpdatedTimestamp = 1234L,
+                        name = "<name>",
+                        qualifiedName = "<qualifiedName>",
+                    }
+                },
+                storeType = "<storeType>",
+            }
+        },
         version = 1234,
     },
 });
@@ -470,104 +470,104 @@ RequestContent content = RequestContent.Create(new
     pathPatternConfig = new
     {
         acceptedPatterns = new List<object>()
-{
-new
-{
-createdBy = "<createdBy>",
-filterType = "Pattern",
-lastUpdatedTimestamp = 1234L,
-modifiedBy = "<modifiedBy>",
-name = "<name>",
-path = "<path>",
-}
-},
+        {
+            new
+            {
+                createdBy = "<createdBy>",
+                filterType = "Pattern",
+                lastUpdatedTimestamp = 1234L,
+                modifiedBy = "<modifiedBy>",
+                name = "<name>",
+                path = "<path>",
+            }
+        },
         complexReplacers = new List<object>()
-{
-new
-{
-createdBy = "<createdBy>",
-description = "<description>",
-disabled = true,
-disableRecursiveReplacerApplication = true,
-lastUpdatedTimestamp = 1234L,
-modifiedBy = "<modifiedBy>",
-name = "<name>",
-typeName = "<typeName>",
-}
-},
+        {
+            new
+            {
+                createdBy = "<createdBy>",
+                description = "<description>",
+                disabled = true,
+                disableRecursiveReplacerApplication = true,
+                lastUpdatedTimestamp = 1234L,
+                modifiedBy = "<modifiedBy>",
+                name = "<name>",
+                typeName = "<typeName>",
+            }
+        },
         createdBy = "<createdBy>",
         enableDefaultPatterns = true,
         lastUpdatedTimestamp = 1234L,
         modifiedBy = "<modifiedBy>",
         normalizationRules = new List<object>()
-{
-new
-{
-description = "<description>",
-disabled = true,
-dynamicReplacement = true,
-entityTypes = new List<object>()
-{
-"<entityTypes>"
-},
-lastUpdatedTimestamp = 1234L,
-name = "<name>",
-regex = new
-{
-maxDigits = 1234,
-maxLetters = 1234,
-minDashes = 1234,
-minDigits = 1234,
-minDigitsOrLetters = 1234,
-minDots = 1234,
-minHex = 1234,
-minLetters = 1234,
-minUnderscores = 1234,
-options = 1234,
-regexStr = "<regexStr>",
-},
-replaceWith = "<replaceWith>",
-version = 123.45,
-}
-},
+        {
+            new
+            {
+                description = "<description>",
+                disabled = true,
+                dynamicReplacement = true,
+                entityTypes = new List<object>()
+                {
+                    "<entityTypes>"
+                },
+                lastUpdatedTimestamp = 1234L,
+                name = "<name>",
+                regex = new
+                {
+                    maxDigits = 1234,
+                    maxLetters = 1234,
+                    minDashes = 1234,
+                    minDigits = 1234,
+                    minDigitsOrLetters = 1234,
+                    minDots = 1234,
+                    minHex = 1234,
+                    minLetters = 1234,
+                    minUnderscores = 1234,
+                    options = 1234,
+                    regexStr = "<regexStr>",
+                },
+                replaceWith = "<replaceWith>",
+                version = 123.45,
+            }
+        },
         regexReplacers = new List<object>()
-{
-new
-{
-condition = "<condition>",
-createdBy = "<createdBy>",
-description = "<description>",
-disabled = true,
-disableRecursiveReplacerApplication = true,
-lastUpdatedTimestamp = 1234L,
-modifiedBy = "<modifiedBy>",
-name = "<name>",
-replaceWith = "<replaceWith>",
-}
-},
+        {
+            new
+            {
+                condition = "<condition>",
+                createdBy = "<createdBy>",
+                description = "<description>",
+                disabled = true,
+                disableRecursiveReplacerApplication = true,
+                lastUpdatedTimestamp = 1234L,
+                modifiedBy = "<modifiedBy>",
+                name = "<name>",
+                replaceWith = "<replaceWith>",
+            }
+        },
         rejectedPatterns = new List<object>()
-{
-null
-},
+        {
+            null
+        },
         scopedRules = new List<object>()
-{
-new
-{
-bindingUrl = "<bindingUrl>",
-rules = new List<object>()
-{
-new
-{
-displayName = "<displayName>",
-isResourceSet = true,
-lastUpdatedTimestamp = 1234L,
-name = "<name>",
-qualifiedName = "<qualifiedName>",
-}
-},
-storeType = "<storeType>",
-}
-},
+        {
+            new
+            {
+                bindingUrl = "<bindingUrl>",
+                rules = new List<object>()
+                {
+                    new
+                    {
+                        displayName = "<displayName>",
+                        isResourceSet = true,
+                        lastUpdatedTimestamp = 1234L,
+                        name = "<name>",
+                        qualifiedName = "<qualifiedName>",
+                    }
+                },
+                storeType = "<storeType>",
+            }
+        },
         version = 1234,
     },
 });

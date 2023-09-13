@@ -87,9 +87,9 @@ RequestContent content = RequestContent.Create(new
     species = "<species>",
     length = 123.45F,
     siblings = new List<object>()
-{
-null
-},
+    {
+        null
+    },
 });
 Response response = await client.PutValidAsync(content);
 Console.WriteLine(response.Status);
@@ -123,9 +123,9 @@ RequestContent content = RequestContent.Create(new
     species = "<species>",
     length = 123.45F,
     siblings = new List<object>()
-{
-null
-},
+    {
+        null
+    },
 });
 Response response = client.PutValid(content);
 Console.WriteLine(response.Status);

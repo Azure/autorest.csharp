@@ -62,7 +62,7 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"), excluded: new List<string>()
 {
-"<excluded>"
+    "<excluded>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -86,7 +86,7 @@ BodyAndPathClient client = new BodyAndPathClient(credential);
 RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
 Response response = client.CreateStream("<itemNameStream>", content, new ContentType("application/json"), excluded: new List<string>()
 {
-"<excluded>"
+    "<excluded>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>

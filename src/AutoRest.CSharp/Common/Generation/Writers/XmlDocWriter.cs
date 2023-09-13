@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.Generation.Writers
     internal class XmlDocWriter
     {
         private readonly XElement _membersElement;
+
         public XmlDocWriter()
         {
             _membersElement = new XElement("members");
@@ -26,6 +27,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 new XElement("doc", _membersElement)
                 );
         }
+
+        public IEnumerable<XElement> Members => _membersElement.Elements("member");
 
         public XDocument Document { get; }
 

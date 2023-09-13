@@ -81,7 +81,7 @@ DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0
 
 Response response = await client.PutAsync(new List<TimeSpan>()
 {
-XmlConvert.ToTimeSpan("PT1H23M45S")
+    XmlConvert.ToTimeSpan("PT1H23M45S")
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -91,7 +91,7 @@ DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0
 
 Response response = await client.PutAsync(new List<TimeSpan>()
 {
-XmlConvert.ToTimeSpan("PT1H23M45S")
+    XmlConvert.ToTimeSpan("PT1H23M45S")
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -104,7 +104,7 @@ DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0
 
 Response response = client.Put(new List<TimeSpan>()
 {
-XmlConvert.ToTimeSpan("PT1H23M45S")
+    XmlConvert.ToTimeSpan("PT1H23M45S")
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -114,7 +114,7 @@ DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0
 
 Response response = client.Put(new List<TimeSpan>()
 {
-XmlConvert.ToTimeSpan("PT1H23M45S")
+    XmlConvert.ToTimeSpan("PT1H23M45S")
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -127,7 +127,7 @@ DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-"PT1H23M45S"
+    "PT1H23M45S"
 });
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
@@ -138,7 +138,7 @@ DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-"PT1H23M45S"
+    "PT1H23M45S"
 });
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
@@ -152,7 +152,7 @@ DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-"PT1H23M45S"
+    "PT1H23M45S"
 });
 Response response = client.Put(content);
 Console.WriteLine(response.Status);
@@ -163,7 +163,7 @@ DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-"PT1H23M45S"
+    "PT1H23M45S"
 });
 Response response = client.Put(content);
 Console.WriteLine(response.Status);

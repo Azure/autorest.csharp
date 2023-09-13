@@ -498,7 +498,7 @@ SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
 Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new List<int>()
 {
-1234
+    1234
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -509,10 +509,10 @@ SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
 Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new List<int>()
 {
-1234
+    1234
 }, color: "<color>", age: 1234, elements: new List<string>()
 {
-"<elements>"
+    "<elements>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -526,7 +526,7 @@ SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
 Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new List<int>()
 {
-1234
+    1234
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -537,10 +537,10 @@ SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
 Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, "<name>", new List<int>()
 {
-1234
+    1234
 }, color: "<color>", age: 1234, elements: new List<string>()
 {
-"<elements>"
+    "<elements>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -556,9 +556,9 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     items = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
 });
 Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, content);
 Console.WriteLine(response.Status);
@@ -574,13 +574,13 @@ RequestContent content = RequestContent.Create(new
     color = "<color>",
     age = 1234,
     items = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
     elements = new List<object>()
-{
-"<elements>"
-},
+    {
+        "<elements>"
+    },
 });
 Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, content);
 Console.WriteLine(response.Status);
@@ -597,9 +597,9 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     items = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
 });
 Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, content);
 Console.WriteLine(response.Status);
@@ -615,13 +615,13 @@ RequestContent content = RequestContent.Create(new
     color = "<color>",
     age = 1234,
     items = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
     elements = new List<object>()
-{
-"<elements>"
-},
+    {
+        "<elements>"
+    },
 });
 Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, content);
 Console.WriteLine(response.Status);
@@ -636,7 +636,7 @@ SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
 Response response = await client.SpreadAliasWithCollectionsAsync(new List<string>()
 {
-"<requiredStringList>"
+    "<requiredStringList>"
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -647,10 +647,10 @@ SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
 Response response = await client.SpreadAliasWithCollectionsAsync(new List<string>()
 {
-"<requiredStringList>"
+    "<requiredStringList>"
 }, optionalStringList: new List<string>()
 {
-"<optionalStringList>"
+    "<optionalStringList>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -664,7 +664,7 @@ SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
 Response response = client.SpreadAliasWithCollections(new List<string>()
 {
-"<requiredStringList>"
+    "<requiredStringList>"
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -675,10 +675,10 @@ SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 
 Response response = client.SpreadAliasWithCollections(new List<string>()
 {
-"<requiredStringList>"
+    "<requiredStringList>"
 }, optionalStringList: new List<string>()
 {
-"<optionalStringList>"
+    "<optionalStringList>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -693,9 +693,9 @@ SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 RequestContent content = RequestContent.Create(new
 {
     requiredStringList = new List<object>()
-{
-"<requiredStringList>"
-},
+    {
+        "<requiredStringList>"
+    },
 });
 Response response = await client.SpreadAliasWithCollectionsAsync(content);
 Console.WriteLine(response.Status);
@@ -708,13 +708,13 @@ SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 RequestContent content = RequestContent.Create(new
 {
     requiredStringList = new List<object>()
-{
-"<requiredStringList>"
-},
+    {
+        "<requiredStringList>"
+    },
     optionalStringList = new List<object>()
-{
-"<optionalStringList>"
-},
+    {
+        "<optionalStringList>"
+    },
 });
 Response response = await client.SpreadAliasWithCollectionsAsync(content);
 Console.WriteLine(response.Status);
@@ -730,9 +730,9 @@ SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 RequestContent content = RequestContent.Create(new
 {
     requiredStringList = new List<object>()
-{
-"<requiredStringList>"
-},
+    {
+        "<requiredStringList>"
+    },
 });
 Response response = client.SpreadAliasWithCollections(content);
 Console.WriteLine(response.Status);
@@ -745,13 +745,13 @@ SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
 RequestContent content = RequestContent.Create(new
 {
     requiredStringList = new List<object>()
-{
-"<requiredStringList>"
-},
+    {
+        "<requiredStringList>"
+    },
     optionalStringList = new List<object>()
-{
-"<optionalStringList>"
-},
+    {
+        "<optionalStringList>"
+    },
 });
 Response response = client.SpreadAliasWithCollections(content);
 Console.WriteLine(response.Status);

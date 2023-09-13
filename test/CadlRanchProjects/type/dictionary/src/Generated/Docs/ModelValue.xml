@@ -96,9 +96,9 @@ Response response = await client.PutAsync(new Dictionary<string, InnerModel>()
     ["key"] = new InnerModel("<property>")
     {
         Children =
-{
-["key"] = null,
-},
+        {
+            ["key"] = null,
+        },
     },
 });
 Console.WriteLine(response.Status);
@@ -125,9 +125,9 @@ Response response = client.Put(new Dictionary<string, InnerModel>()
     ["key"] = new InnerModel("<property>")
     {
         Children =
-{
-["key"] = null,
-},
+        {
+            ["key"] = null,
+        },
     },
 });
 Console.WriteLine(response.Status);

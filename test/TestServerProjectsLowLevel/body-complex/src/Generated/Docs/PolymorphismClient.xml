@@ -87,9 +87,9 @@ RequestContent content = RequestContent.Create(new
     species = "<species>",
     length = 123.45F,
     siblings = new List<object>()
-{
-null
-},
+    {
+        null
+    },
 });
 Response response = await client.PutValidAsync(content);
 Console.WriteLine(response.Status);
@@ -123,9 +123,9 @@ RequestContent content = RequestContent.Create(new
     species = "<species>",
     length = 123.45F,
     siblings = new List<object>()
-{
-null
-},
+    {
+        null
+    },
 });
 Response response = client.PutValid(content);
 Console.WriteLine(response.Status);
@@ -404,20 +404,20 @@ RequestContent content = RequestContent.Create(new
     species = "<species>",
     length = 123.45F,
     siblings = new List<object>()
-{
-new
-{
-location = "<location>",
-iswild = true,
-fishtype = "salmon",
-species = "<species>",
-length = 123.45F,
-siblings = new List<object>()
-{
-null
-},
-}
-},
+    {
+        new
+        {
+            location = "<location>",
+            iswild = true,
+            fishtype = "salmon",
+            species = "<species>",
+            length = 123.45F,
+            siblings = new List<object>()
+            {
+                null
+            },
+        }
+    },
 });
 Response response = await client.PutComplicatedAsync(content);
 Console.WriteLine(response.Status);
@@ -452,20 +452,20 @@ RequestContent content = RequestContent.Create(new
     species = "<species>",
     length = 123.45F,
     siblings = new List<object>()
-{
-new
-{
-location = "<location>",
-iswild = true,
-fishtype = "salmon",
-species = "<species>",
-length = 123.45F,
-siblings = new List<object>()
-{
-null
-},
-}
-},
+    {
+        new
+        {
+            location = "<location>",
+            iswild = true,
+            fishtype = "salmon",
+            species = "<species>",
+            length = 123.45F,
+            siblings = new List<object>()
+            {
+                null
+            },
+        }
+    },
 });
 Response response = client.PutComplicated(content);
 Console.WriteLine(response.Status);
@@ -502,20 +502,20 @@ RequestContent content = RequestContent.Create(new
     species = "<species>",
     length = 123.45F,
     siblings = new List<object>()
-{
-new
-{
-location = "<location>",
-iswild = true,
-fishtype = "salmon",
-species = "<species>",
-length = 123.45F,
-siblings = new List<object>()
-{
-null
-},
-}
-},
+    {
+        new
+        {
+            location = "<location>",
+            iswild = true,
+            fishtype = "salmon",
+            species = "<species>",
+            length = 123.45F,
+            siblings = new List<object>()
+            {
+                null
+            },
+        }
+    },
 });
 Response response = await client.PutMissingDiscriminatorAsync(content);
 
@@ -561,20 +561,20 @@ RequestContent content = RequestContent.Create(new
     species = "<species>",
     length = 123.45F,
     siblings = new List<object>()
-{
-new
-{
-location = "<location>",
-iswild = true,
-fishtype = "salmon",
-species = "<species>",
-length = 123.45F,
-siblings = new List<object>()
-{
-null
-},
-}
-},
+    {
+        new
+        {
+            location = "<location>",
+            iswild = true,
+            fishtype = "salmon",
+            species = "<species>",
+            length = 123.45F,
+            siblings = new List<object>()
+            {
+                null
+            },
+        }
+    },
 });
 Response response = client.PutMissingDiscriminator(content);
 
@@ -617,9 +617,9 @@ RequestContent content = RequestContent.Create(new
     species = "<species>",
     length = 123.45F,
     siblings = new List<object>()
-{
-null
-},
+    {
+        null
+    },
 });
 Response response = await client.PutValidMissingRequiredAsync(content);
 Console.WriteLine(response.Status);
@@ -653,9 +653,9 @@ RequestContent content = RequestContent.Create(new
     species = "<species>",
     length = 123.45F,
     siblings = new List<object>()
-{
-null
-},
+    {
+        null
+    },
 });
 Response response = client.PutValidMissingRequired(content);
 Console.WriteLine(response.Status);

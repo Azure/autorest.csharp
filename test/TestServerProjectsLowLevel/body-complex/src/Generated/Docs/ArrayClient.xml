@@ -66,9 +66,9 @@ ArrayClient client = new ArrayClient(credential);
 RequestContent content = RequestContent.Create(new
 {
     array = new List<object>()
-{
-"<array>"
-},
+    {
+        "<array>"
+    },
 });
 Response response = await client.PutValidAsync(content);
 Console.WriteLine(response.Status);
@@ -93,9 +93,9 @@ ArrayClient client = new ArrayClient(credential);
 RequestContent content = RequestContent.Create(new
 {
     array = new List<object>()
-{
-"<array>"
-},
+    {
+        "<array>"
+    },
 });
 Response response = client.PutValid(content);
 Console.WriteLine(response.Status);
@@ -166,9 +166,9 @@ ArrayClient client = new ArrayClient(credential);
 RequestContent content = RequestContent.Create(new
 {
     array = new List<object>()
-{
-"<array>"
-},
+    {
+        "<array>"
+    },
 });
 Response response = await client.PutEmptyAsync(content);
 Console.WriteLine(response.Status);
@@ -193,9 +193,9 @@ ArrayClient client = new ArrayClient(credential);
 RequestContent content = RequestContent.Create(new
 {
     array = new List<object>()
-{
-"<array>"
-},
+    {
+        "<array>"
+    },
 });
 Response response = client.PutEmpty(content);
 Console.WriteLine(response.Status);

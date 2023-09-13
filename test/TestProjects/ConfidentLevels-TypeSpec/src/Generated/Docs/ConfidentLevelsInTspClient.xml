@@ -140,9 +140,9 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     selfReference = new List<object>()
-{
-null
-},
+    {
+        null
+    },
     unionProperty = "<unionProperty>",
 });
 Response response = await client.UnionWithSelfReferenceAsync(content);
@@ -157,9 +157,9 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     selfReference = new List<object>()
-{
-null
-},
+    {
+        null
+    },
     unionProperty = "<unionProperty>",
 });
 Response response = await client.UnionWithSelfReferenceAsync(content);
@@ -177,9 +177,9 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     selfReference = new List<object>()
-{
-null
-},
+    {
+        null
+    },
     unionProperty = "<unionProperty>",
 });
 Response response = client.UnionWithSelfReference(content);
@@ -194,9 +194,9 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     selfReference = new List<object>()
-{
-null
-},
+    {
+        null
+    },
     unionProperty = "<unionProperty>",
 });
 Response response = client.UnionWithSelfReference(content);
@@ -228,22 +228,22 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     reference = new List<object>()
-{
-new
-{
-something = "<something>",
-reference = new
-{
-name = "<name>",
-selfReference = new List<object>()
-{
-null
-},
-unionProperty = "<unionProperty>",
-},
-unionProperty = "<unionProperty>",
-}
-},
+    {
+        new
+        {
+            something = "<something>",
+            reference = new
+            {
+                name = "<name>",
+                selfReference = new List<object>()
+                {
+                    null
+                },
+                unionProperty = "<unionProperty>",
+            },
+            unionProperty = "<unionProperty>",
+        }
+    },
 });
 Response response = await client.UnionWithInderictAsync(content);
 Console.WriteLine(response.Status);
@@ -272,22 +272,22 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     reference = new List<object>()
-{
-new
-{
-something = "<something>",
-reference = new
-{
-name = "<name>",
-selfReference = new List<object>()
-{
-null
-},
-unionProperty = "<unionProperty>",
-},
-unionProperty = "<unionProperty>",
-}
-},
+    {
+        new
+        {
+            something = "<something>",
+            reference = new
+            {
+                name = "<name>",
+                selfReference = new List<object>()
+                {
+                    null
+                },
+                unionProperty = "<unionProperty>",
+            },
+            unionProperty = "<unionProperty>",
+        }
+    },
 });
 Response response = client.UnionWithInderict(content);
 Console.WriteLine(response.Status);

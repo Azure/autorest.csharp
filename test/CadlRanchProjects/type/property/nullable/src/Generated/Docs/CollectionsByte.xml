@@ -163,9 +163,9 @@ RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = new List<object>()
-{
-new object()
-},
+    {
+        new object()
+    },
 });
 Response response = await client.PatchNonNullAsync(content);
 Console.WriteLine(response.Status);
@@ -178,9 +178,9 @@ RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = new List<object>()
-{
-new object()
-},
+    {
+        new object()
+    },
 });
 Response response = await client.PatchNonNullAsync(content);
 Console.WriteLine(response.Status);
@@ -196,9 +196,9 @@ RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = new List<object>()
-{
-new object()
-},
+    {
+        new object()
+    },
 });
 Response response = client.PatchNonNull(content);
 Console.WriteLine(response.Status);
@@ -211,9 +211,9 @@ RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = new List<object>()
-{
-new object()
-},
+    {
+        new object()
+    },
 });
 Response response = client.PatchNonNull(content);
 Console.WriteLine(response.Status);
@@ -229,9 +229,9 @@ RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = new List<object>()
-{
-new object()
-},
+    {
+        new object()
+    },
 });
 Response response = await client.PatchNullAsync(content);
 Console.WriteLine(response.Status);
@@ -244,9 +244,9 @@ RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = new List<object>()
-{
-new object()
-},
+    {
+        new object()
+    },
 });
 Response response = await client.PatchNullAsync(content);
 Console.WriteLine(response.Status);
@@ -262,9 +262,9 @@ RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = new List<object>()
-{
-new object()
-},
+    {
+        new object()
+    },
 });
 Response response = client.PatchNull(content);
 Console.WriteLine(response.Status);
@@ -277,9 +277,9 @@ RequestContent content = RequestContent.Create(new
 {
     requiredProperty = "<requiredProperty>",
     nullableProperty = new List<object>()
-{
-new object()
-},
+    {
+        new object()
+    },
 });
 Response response = client.PatchNull(content);
 Console.WriteLine(response.Status);

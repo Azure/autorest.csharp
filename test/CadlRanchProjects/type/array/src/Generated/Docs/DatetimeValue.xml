@@ -81,7 +81,7 @@ DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0
 
 Response response = await client.PutAsync(new List<DateTimeOffset>()
 {
-DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
+    DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -91,7 +91,7 @@ DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0
 
 Response response = await client.PutAsync(new List<DateTimeOffset>()
 {
-DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
+    DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -104,7 +104,7 @@ DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0
 
 Response response = client.Put(new List<DateTimeOffset>()
 {
-DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
+    DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -114,7 +114,7 @@ DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0
 
 Response response = client.Put(new List<DateTimeOffset>()
 {
-DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
+    DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -127,7 +127,7 @@ DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-"2022-05-10T14:57:31.2311892-04:00"
+    "2022-05-10T14:57:31.2311892-04:00"
 });
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
@@ -138,7 +138,7 @@ DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-"2022-05-10T14:57:31.2311892-04:00"
+    "2022-05-10T14:57:31.2311892-04:00"
 });
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
@@ -152,7 +152,7 @@ DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-"2022-05-10T14:57:31.2311892-04:00"
+    "2022-05-10T14:57:31.2311892-04:00"
 });
 Response response = client.Put(content);
 Console.WriteLine(response.Status);
@@ -163,7 +163,7 @@ DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0
 
 RequestContent content = RequestContent.Create(new List<object>()
 {
-"2022-05-10T14:57:31.2311892-04:00"
+    "2022-05-10T14:57:31.2311892-04:00"
 });
 Response response = client.Put(content);
 Console.WriteLine(response.Status);

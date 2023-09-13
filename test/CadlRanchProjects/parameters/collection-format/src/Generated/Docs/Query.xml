@@ -9,7 +9,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = await client.MultiAsync(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -19,7 +19,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = await client.MultiAsync(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -32,7 +32,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = client.Multi(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -42,7 +42,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = client.Multi(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -55,7 +55,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = await client.SsvAsync(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -65,7 +65,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = await client.SsvAsync(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -78,7 +78,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = client.Ssv(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -88,7 +88,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = client.Ssv(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -101,7 +101,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = await client.TsvAsync(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -111,7 +111,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = await client.TsvAsync(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -124,7 +124,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = client.Tsv(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -134,7 +134,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = client.Tsv(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -147,7 +147,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = await client.PipesAsync(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -157,7 +157,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = await client.PipesAsync(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -170,7 +170,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = client.Pipes(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -180,7 +180,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = client.Pipes(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -193,7 +193,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = await client.CsvAsync(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -203,7 +203,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = await client.CsvAsync(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -216,7 +216,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = client.Csv(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -226,7 +226,7 @@ Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = client.Csv(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>

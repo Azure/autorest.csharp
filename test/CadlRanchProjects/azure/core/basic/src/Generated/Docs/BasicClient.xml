@@ -26,13 +26,13 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     orders = new List<object>()
-{
-new
-{
-userId = 1234,
-detail = "<detail>",
-}
-},
+    {
+        new
+        {
+            userId = 1234,
+            detail = "<detail>",
+        }
+    },
 });
 Response response = await client.CreateOrUpdateAsync(1234, content);
 
@@ -70,13 +70,13 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     orders = new List<object>()
-{
-new
-{
-userId = 1234,
-detail = "<detail>",
-}
-},
+    {
+        new
+        {
+            userId = 1234,
+            detail = "<detail>",
+        }
+    },
 });
 Response response = client.CreateOrUpdate(1234, content);
 
@@ -105,9 +105,9 @@ BasicClient client = new BasicClient();
 User resource = new User("<name>")
 {
     Orders =
-{
-new UserOrder(1234,"<detail>")
-},
+    {
+        new UserOrder(1234,"<detail>")
+    },
 };
 Response<User> response = await client.CreateOrReplaceAsync(1234, resource);
 ]]></code></example>
@@ -128,9 +128,9 @@ BasicClient client = new BasicClient();
 User resource = new User("<name>")
 {
     Orders =
-{
-new UserOrder(1234,"<detail>")
-},
+    {
+        new UserOrder(1234,"<detail>")
+    },
 };
 Response<User> response = client.CreateOrReplace(1234, resource);
 ]]></code></example>
@@ -160,13 +160,13 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     orders = new List<object>()
-{
-new
-{
-userId = 1234,
-detail = "<detail>",
-}
-},
+    {
+        new
+        {
+            userId = 1234,
+            detail = "<detail>",
+        }
+    },
 });
 Response response = await client.CreateOrReplaceAsync(1234, content);
 
@@ -204,13 +204,13 @@ RequestContent content = RequestContent.Create(new
 {
     name = "<name>",
     orders = new List<object>()
-{
-new
-{
-userId = 1234,
-detail = "<detail>",
-}
-},
+    {
+        new
+        {
+            userId = 1234,
+            detail = "<detail>",
+        }
+    },
 });
 Response response = client.CreateOrReplace(1234, content);
 
@@ -445,13 +445,13 @@ BasicClient client = new BasicClient();
 
 await foreach (User item in client.GetUsersAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new List<string>()
 {
-"<orderby>"
+    "<orderby>"
 }, filter: "<filter>", select: new List<string>()
 {
-"<select>"
+    "<select>"
 }, expand: new List<string>()
 {
-"<expand>"
+    "<expand>"
 }))
 {
 }
@@ -473,13 +473,13 @@ BasicClient client = new BasicClient();
 
 foreach (User item in client.GetUsers(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new List<string>()
 {
-"<orderby>"
+    "<orderby>"
 }, filter: "<filter>", select: new List<string>()
 {
-"<select>"
+    "<select>"
 }, expand: new List<string>()
 {
-"<expand>"
+    "<expand>"
 }))
 {
 }
@@ -505,13 +505,13 @@ BasicClient client = new BasicClient();
 
 await foreach (BinaryData item in client.GetUsersAsync(1234, 1234, 1234, new List<string>()
 {
-"<orderby>"
+    "<orderby>"
 }, "<filter>", new List<string>()
 {
-"<select>"
+    "<select>"
 }, new List<string>()
 {
-"<expand>"
+    "<expand>"
 }, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
@@ -544,13 +544,13 @@ BasicClient client = new BasicClient();
 
 foreach (BinaryData item in client.GetUsers(1234, 1234, 1234, new List<string>()
 {
-"<orderby>"
+    "<orderby>"
 }, "<filter>", new List<string>()
 {
-"<select>"
+    "<select>"
 }, new List<string>()
 {
-"<expand>"
+    "<expand>"
 }, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;

@@ -285,7 +285,7 @@ Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
 Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new object())
+    BinaryData.FromObjectAsJson(new object())
 });
 Response<Base64urlArrayBytesProperty> response = await client.Base64urlArrayAsync(body);
 ]]></code>
@@ -295,7 +295,7 @@ Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
 Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new object())
+    BinaryData.FromObjectAsJson(new object())
 });
 Response<Base64urlArrayBytesProperty> response = await client.Base64urlArrayAsync(body);
 ]]></code></example>
@@ -308,7 +308,7 @@ Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
 Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new object())
+    BinaryData.FromObjectAsJson(new object())
 });
 Response<Base64urlArrayBytesProperty> response = client.Base64urlArray(body);
 ]]></code>
@@ -318,7 +318,7 @@ Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
 Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new object())
+    BinaryData.FromObjectAsJson(new object())
 });
 Response<Base64urlArrayBytesProperty> response = client.Base64urlArray(body);
 ]]></code></example>
@@ -332,9 +332,9 @@ Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 RequestContent content = RequestContent.Create(new
 {
     value = new List<object>()
-{
-new object()
-},
+    {
+        new object()
+    },
 });
 Response response = await client.Base64urlArrayAsync(content);
 
@@ -348,9 +348,9 @@ Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 RequestContent content = RequestContent.Create(new
 {
     value = new List<object>()
-{
-new object()
-},
+    {
+        new object()
+    },
 });
 Response response = await client.Base64urlArrayAsync(content);
 
@@ -367,9 +367,9 @@ Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 RequestContent content = RequestContent.Create(new
 {
     value = new List<object>()
-{
-new object()
-},
+    {
+        new object()
+    },
 });
 Response response = client.Base64urlArray(content);
 
@@ -383,9 +383,9 @@ Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 RequestContent content = RequestContent.Create(new
 {
     value = new List<object>()
-{
-new object()
-},
+    {
+        new object()
+    },
 });
 Response response = client.Base64urlArray(content);
 

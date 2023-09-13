@@ -377,7 +377,7 @@ Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
 FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new List<TimeSpan>()
 {
-TimeSpan.FromSeconds(10F)
+    TimeSpan.FromSeconds(10F)
 });
 Response<FloatSecondsDurationArrayProperty> response = await client.FloatSecondsArrayAsync(body);
 ]]></code>
@@ -387,7 +387,7 @@ Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
 FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new List<TimeSpan>()
 {
-TimeSpan.FromSeconds(10F)
+    TimeSpan.FromSeconds(10F)
 });
 Response<FloatSecondsDurationArrayProperty> response = await client.FloatSecondsArrayAsync(body);
 ]]></code></example>
@@ -400,7 +400,7 @@ Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
 FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new List<TimeSpan>()
 {
-TimeSpan.FromSeconds(10F)
+    TimeSpan.FromSeconds(10F)
 });
 Response<FloatSecondsDurationArrayProperty> response = client.FloatSecondsArray(body);
 ]]></code>
@@ -410,7 +410,7 @@ Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
 FloatSecondsDurationArrayProperty body = new FloatSecondsDurationArrayProperty(new List<TimeSpan>()
 {
-TimeSpan.FromSeconds(10F)
+    TimeSpan.FromSeconds(10F)
 });
 Response<FloatSecondsDurationArrayProperty> response = client.FloatSecondsArray(body);
 ]]></code></example>
@@ -424,9 +424,9 @@ Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 RequestContent content = RequestContent.Create(new
 {
     value = new List<object>()
-{
-10F
-},
+    {
+        10F
+    },
 });
 Response response = await client.FloatSecondsArrayAsync(content);
 
@@ -440,9 +440,9 @@ Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 RequestContent content = RequestContent.Create(new
 {
     value = new List<object>()
-{
-10F
-},
+    {
+        10F
+    },
 });
 Response response = await client.FloatSecondsArrayAsync(content);
 
@@ -459,9 +459,9 @@ Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 RequestContent content = RequestContent.Create(new
 {
     value = new List<object>()
-{
-10F
-},
+    {
+        10F
+    },
 });
 Response response = client.FloatSecondsArray(content);
 
@@ -475,9 +475,9 @@ Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 RequestContent content = RequestContent.Create(new
 {
     value = new List<object>()
-{
-10F
-},
+    {
+        10F
+    },
 });
 Response response = client.FloatSecondsArray(content);
 

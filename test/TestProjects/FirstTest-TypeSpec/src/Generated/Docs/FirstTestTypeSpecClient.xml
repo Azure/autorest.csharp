@@ -188,9 +188,9 @@ RequestContent content = RequestContent.Create(new
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
 });
 Response response = await client.PatchActionAsync(content);
 
@@ -223,13 +223,13 @@ RequestContent content = RequestContent.Create(new
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
     requiredNullableList = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
 });
 Response response = await client.PatchActionAsync(content);
 
@@ -266,9 +266,9 @@ RequestContent content = RequestContent.Create(new
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
 });
 Response response = client.PatchAction(content);
 
@@ -301,13 +301,13 @@ RequestContent content = RequestContent.Create(new
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
     requiredNullableList = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
 });
 Response response = client.PatchAction(content);
 
@@ -346,9 +346,9 @@ RequestContent content = RequestContent.Create(new
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
 });
 Response response = await client.AnonymousBodyAsync(content);
 
@@ -381,13 +381,13 @@ RequestContent content = RequestContent.Create(new
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
     requiredNullableList = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
 });
 Response response = await client.AnonymousBodyAsync(content);
 
@@ -424,9 +424,9 @@ RequestContent content = RequestContent.Create(new
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
 });
 Response response = client.AnonymousBody(content);
 
@@ -459,13 +459,13 @@ RequestContent content = RequestContent.Create(new
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
     requiredNullableList = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
 });
 Response response = client.AnonymousBody(content);
 
@@ -1001,9 +1001,9 @@ RequestContent content = RequestContent.Create(new
     requiredString = "<requiredString>",
     requiredInt = 1234,
     requiredCollection = new List<object>()
-{
-"1"
-},
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -1018,9 +1018,9 @@ RequestContent content = RequestContent.Create(new
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
         requiredNullableList = new List<object>()
-{
-1234
-},
+        {
+            1234
+        },
     },
     requiredUnknown = new object(),
     requiredRecordUnknown = new
@@ -1066,9 +1066,9 @@ RequestContent content = RequestContent.Create(new
     requiredString = "<requiredString>",
     requiredInt = 1234,
     requiredCollection = new List<object>()
-{
-"1"
-},
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -1087,34 +1087,34 @@ RequestContent content = RequestContent.Create(new
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         optionalNullableList = new List<object>()
-{
-1234
-},
+        {
+            1234
+        },
         requiredNullableList = new List<object>()
-{
-1234
-},
+        {
+            1234
+        },
     },
     intExtensibleEnum = 1,
     intExtensibleEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     floatExtensibleEnum = 1,
     floatExtensibleEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new List<object>()
-{
-1.1F
-},
+    {
+        1.1F
+    },
     intFixedEnum = 1,
     intFixedEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     stringFixedEnum = "1",
     requiredUnknown = new object(),
     optionalUnknown = new object(),
@@ -1185,9 +1185,9 @@ RequestContent content = RequestContent.Create(new
     requiredString = "<requiredString>",
     requiredInt = 1234,
     requiredCollection = new List<object>()
-{
-"1"
-},
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -1202,9 +1202,9 @@ RequestContent content = RequestContent.Create(new
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
         requiredNullableList = new List<object>()
-{
-1234
-},
+        {
+            1234
+        },
     },
     requiredUnknown = new object(),
     requiredRecordUnknown = new
@@ -1250,9 +1250,9 @@ RequestContent content = RequestContent.Create(new
     requiredString = "<requiredString>",
     requiredInt = 1234,
     requiredCollection = new List<object>()
-{
-"1"
-},
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -1271,34 +1271,34 @@ RequestContent content = RequestContent.Create(new
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         optionalNullableList = new List<object>()
-{
-1234
-},
+        {
+            1234
+        },
         requiredNullableList = new List<object>()
-{
-1234
-},
+        {
+            1234
+        },
     },
     intExtensibleEnum = 1,
     intExtensibleEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     floatExtensibleEnum = 1,
     floatExtensibleEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new List<object>()
-{
-1.1F
-},
+    {
+        1.1F
+    },
     intFixedEnum = 1,
     intFixedEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     stringFixedEnum = "1",
     requiredUnknown = new object(),
     optionalUnknown = new object(),
@@ -1369,9 +1369,9 @@ RequestContent content = RequestContent.Create(new
     requiredString = "<requiredString>",
     requiredInt = 1234,
     requiredCollection = new List<object>()
-{
-"1"
-},
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -1386,9 +1386,9 @@ RequestContent content = RequestContent.Create(new
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
         requiredNullableList = new List<object>()
-{
-1234
-},
+        {
+            1234
+        },
     },
     requiredUnknown = new object(),
     requiredRecordUnknown = new
@@ -1434,9 +1434,9 @@ RequestContent content = RequestContent.Create(new
     requiredString = "<requiredString>",
     requiredInt = 1234,
     requiredCollection = new List<object>()
-{
-"1"
-},
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -1455,34 +1455,34 @@ RequestContent content = RequestContent.Create(new
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         optionalNullableList = new List<object>()
-{
-1234
-},
+        {
+            1234
+        },
         requiredNullableList = new List<object>()
-{
-1234
-},
+        {
+            1234
+        },
     },
     intExtensibleEnum = 1,
     intExtensibleEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     floatExtensibleEnum = 1,
     floatExtensibleEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new List<object>()
-{
-1.1F
-},
+    {
+        1.1F
+    },
     intFixedEnum = 1,
     intFixedEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     stringFixedEnum = "1",
     requiredUnknown = new object(),
     optionalUnknown = new object(),
@@ -1553,9 +1553,9 @@ RequestContent content = RequestContent.Create(new
     requiredString = "<requiredString>",
     requiredInt = 1234,
     requiredCollection = new List<object>()
-{
-"1"
-},
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -1570,9 +1570,9 @@ RequestContent content = RequestContent.Create(new
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
         requiredNullableList = new List<object>()
-{
-1234
-},
+        {
+            1234
+        },
     },
     requiredUnknown = new object(),
     requiredRecordUnknown = new
@@ -1618,9 +1618,9 @@ RequestContent content = RequestContent.Create(new
     requiredString = "<requiredString>",
     requiredInt = 1234,
     requiredCollection = new List<object>()
-{
-"1"
-},
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -1639,34 +1639,34 @@ RequestContent content = RequestContent.Create(new
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         optionalNullableList = new List<object>()
-{
-1234
-},
+        {
+            1234
+        },
         requiredNullableList = new List<object>()
-{
-1234
-},
+        {
+            1234
+        },
     },
     intExtensibleEnum = 1,
     intExtensibleEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     floatExtensibleEnum = 1,
     floatExtensibleEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new List<object>()
-{
-1.1F
-},
+    {
+        1.1F
+    },
     intFixedEnum = 1,
     intFixedEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     stringFixedEnum = "1",
     requiredUnknown = new object(),
     optionalUnknown = new object(),
@@ -1830,9 +1830,9 @@ RequestContent content = RequestContent.Create(new
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
 });
 Response response = await client.CreateLiteralAsync(content);
 
@@ -1865,13 +1865,13 @@ RequestContent content = RequestContent.Create(new
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
     requiredNullableList = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
 });
 Response response = await client.CreateLiteralAsync(content);
 
@@ -1908,9 +1908,9 @@ RequestContent content = RequestContent.Create(new
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
 });
 Response response = client.CreateLiteral(content);
 
@@ -1943,13 +1943,13 @@ RequestContent content = RequestContent.Create(new
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
     requiredNullableList = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
 });
 Response response = client.CreateLiteral(content);
 

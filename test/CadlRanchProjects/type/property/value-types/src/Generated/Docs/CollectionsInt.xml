@@ -81,7 +81,7 @@ CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersio
 
 CollectionsIntProperty body = new CollectionsIntProperty(new List<int>()
 {
-1234
+    1234
 });
 Response response = await client.PutAsync(body);
 Console.WriteLine(response.Status);
@@ -92,7 +92,7 @@ CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersio
 
 CollectionsIntProperty body = new CollectionsIntProperty(new List<int>()
 {
-1234
+    1234
 });
 Response response = await client.PutAsync(body);
 Console.WriteLine(response.Status);
@@ -106,7 +106,7 @@ CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersio
 
 CollectionsIntProperty body = new CollectionsIntProperty(new List<int>()
 {
-1234
+    1234
 });
 Response response = client.Put(body);
 Console.WriteLine(response.Status);
@@ -117,7 +117,7 @@ CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersio
 
 CollectionsIntProperty body = new CollectionsIntProperty(new List<int>()
 {
-1234
+    1234
 });
 Response response = client.Put(body);
 Console.WriteLine(response.Status);
@@ -132,9 +132,9 @@ CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersio
 RequestContent content = RequestContent.Create(new
 {
     property = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
 });
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
@@ -146,9 +146,9 @@ CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersio
 RequestContent content = RequestContent.Create(new
 {
     property = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
 });
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
@@ -163,9 +163,9 @@ CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersio
 RequestContent content = RequestContent.Create(new
 {
     property = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
 });
 Response response = client.Put(content);
 Console.WriteLine(response.Status);
@@ -177,9 +177,9 @@ CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersio
 RequestContent content = RequestContent.Create(new
 {
     property = new List<object>()
-{
-1234
-},
+    {
+        1234
+    },
 });
 Response response = client.Put(content);
 Console.WriteLine(response.Status);

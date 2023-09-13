@@ -11,7 +11,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint(123.45F)
+    new TimeSeriesPoint(123.45F)
 });
 Response<UnivariateEntireDetectionResult> response = await client.DetectUnivariateEntireSeriesAsync(options);
 ]]></code>
@@ -23,10 +23,10 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint(123.45F)
-{
-Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-}
+    new TimeSeriesPoint(123.45F)
+    {
+        Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+    }
 })
 {
     Granularity = TimeGranularity.Yearly,
@@ -50,7 +50,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint(123.45F)
+    new TimeSeriesPoint(123.45F)
 });
 Response<UnivariateEntireDetectionResult> response = client.DetectUnivariateEntireSeries(options);
 ]]></code>
@@ -62,10 +62,10 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint(123.45F)
-{
-Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-}
+    new TimeSeriesPoint(123.45F)
+    {
+        Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+    }
 })
 {
     Granularity = TimeGranularity.Yearly,
@@ -90,12 +90,12 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 RequestContent content = RequestContent.Create(new
 {
     series = new List<object>()
-{
-new
-{
-value = 123.45F,
-}
-},
+    {
+        new
+        {
+            value = 123.45F,
+        }
+    },
 });
 Response response = await client.DetectUnivariateEntireSeriesAsync(content);
 
@@ -117,13 +117,13 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 RequestContent content = RequestContent.Create(new
 {
     series = new List<object>()
-{
-new
-{
-timestamp = "2022-05-10T14:57:31.2311892-04:00",
-value = 123.45F,
-}
-},
+    {
+        new
+        {
+            timestamp = "2022-05-10T14:57:31.2311892-04:00",
+            value = 123.45F,
+        }
+    },
     granularity = "yearly",
     customInterval = 1234,
     period = 1234,
@@ -156,12 +156,12 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 RequestContent content = RequestContent.Create(new
 {
     series = new List<object>()
-{
-new
-{
-value = 123.45F,
-}
-},
+    {
+        new
+        {
+            value = 123.45F,
+        }
+    },
 });
 Response response = client.DetectUnivariateEntireSeries(content);
 
@@ -183,13 +183,13 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 RequestContent content = RequestContent.Create(new
 {
     series = new List<object>()
-{
-new
-{
-timestamp = "2022-05-10T14:57:31.2311892-04:00",
-value = 123.45F,
-}
-},
+    {
+        new
+        {
+            timestamp = "2022-05-10T14:57:31.2311892-04:00",
+            value = 123.45F,
+        }
+    },
     granularity = "yearly",
     customInterval = 1234,
     period = 1234,
@@ -221,7 +221,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint(123.45F)
+    new TimeSeriesPoint(123.45F)
 });
 Response<UnivariateLastDetectionResult> response = await client.DetectUnivariateLastPointAsync(options);
 ]]></code>
@@ -233,10 +233,10 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint(123.45F)
-{
-Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-}
+    new TimeSeriesPoint(123.45F)
+    {
+        Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+    }
 })
 {
     Granularity = TimeGranularity.Yearly,
@@ -260,7 +260,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint(123.45F)
+    new TimeSeriesPoint(123.45F)
 });
 Response<UnivariateLastDetectionResult> response = client.DetectUnivariateLastPoint(options);
 ]]></code>
@@ -272,10 +272,10 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 UnivariateDetectionOptions options = new UnivariateDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint(123.45F)
-{
-Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-}
+    new TimeSeriesPoint(123.45F)
+    {
+        Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+    }
 })
 {
     Granularity = TimeGranularity.Yearly,
@@ -300,12 +300,12 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 RequestContent content = RequestContent.Create(new
 {
     series = new List<object>()
-{
-new
-{
-value = 123.45F,
-}
-},
+    {
+        new
+        {
+            value = 123.45F,
+        }
+    },
 });
 Response response = await client.DetectUnivariateLastPointAsync(content);
 
@@ -328,13 +328,13 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 RequestContent content = RequestContent.Create(new
 {
     series = new List<object>()
-{
-new
-{
-timestamp = "2022-05-10T14:57:31.2311892-04:00",
-value = 123.45F,
-}
-},
+    {
+        new
+        {
+            timestamp = "2022-05-10T14:57:31.2311892-04:00",
+            value = 123.45F,
+        }
+    },
     granularity = "yearly",
     customInterval = 1234,
     period = 1234,
@@ -368,12 +368,12 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 RequestContent content = RequestContent.Create(new
 {
     series = new List<object>()
-{
-new
-{
-value = 123.45F,
-}
-},
+    {
+        new
+        {
+            value = 123.45F,
+        }
+    },
 });
 Response response = client.DetectUnivariateLastPoint(content);
 
@@ -396,13 +396,13 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 RequestContent content = RequestContent.Create(new
 {
     series = new List<object>()
-{
-new
-{
-timestamp = "2022-05-10T14:57:31.2311892-04:00",
-value = 123.45F,
-}
-},
+    {
+        new
+        {
+            timestamp = "2022-05-10T14:57:31.2311892-04:00",
+            value = 123.45F,
+        }
+    },
     granularity = "yearly",
     customInterval = 1234,
     period = 1234,
@@ -435,7 +435,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint(123.45F)
+    new TimeSeriesPoint(123.45F)
 }, TimeGranularity.Yearly);
 Response<UnivariateChangePointDetectionResult> response = await client.DetectUnivariateChangePointAsync(options);
 ]]></code>
@@ -447,10 +447,10 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint(123.45F)
-{
-Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-}
+    new TimeSeriesPoint(123.45F)
+    {
+        Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+    }
 }, TimeGranularity.Yearly)
 {
     CustomInterval = 1234,
@@ -471,7 +471,7 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint(123.45F)
+    new TimeSeriesPoint(123.45F)
 }, TimeGranularity.Yearly);
 Response<UnivariateChangePointDetectionResult> response = client.DetectUnivariateChangePoint(options);
 ]]></code>
@@ -483,10 +483,10 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 UnivariateChangePointDetectionOptions options = new UnivariateChangePointDetectionOptions(new List<TimeSeriesPoint>()
 {
-new TimeSeriesPoint(123.45F)
-{
-Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-}
+    new TimeSeriesPoint(123.45F)
+    {
+        Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+    }
 }, TimeGranularity.Yearly)
 {
     CustomInterval = 1234,
@@ -508,12 +508,12 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 RequestContent content = RequestContent.Create(new
 {
     series = new List<object>()
-{
-new
-{
-value = 123.45F,
-}
-},
+    {
+        new
+        {
+            value = 123.45F,
+        }
+    },
     granularity = "yearly",
 });
 Response response = await client.DetectUnivariateChangePointAsync(content);
@@ -530,13 +530,13 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 RequestContent content = RequestContent.Create(new
 {
     series = new List<object>()
-{
-new
-{
-timestamp = "2022-05-10T14:57:31.2311892-04:00",
-value = 123.45F,
-}
-},
+    {
+        new
+        {
+            timestamp = "2022-05-10T14:57:31.2311892-04:00",
+            value = 123.45F,
+        }
+    },
     granularity = "yearly",
     customInterval = 1234,
     period = 1234,
@@ -562,12 +562,12 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 RequestContent content = RequestContent.Create(new
 {
     series = new List<object>()
-{
-new
-{
-value = 123.45F,
-}
-},
+    {
+        new
+        {
+            value = 123.45F,
+        }
+    },
     granularity = "yearly",
 });
 Response response = client.DetectUnivariateChangePoint(content);
@@ -584,13 +584,13 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 RequestContent content = RequestContent.Create(new
 {
     series = new List<object>()
-{
-new
-{
-timestamp = "2022-05-10T14:57:31.2311892-04:00",
-value = 123.45F,
-}
-},
+    {
+        new
+        {
+            timestamp = "2022-05-10T14:57:31.2311892-04:00",
+            value = 123.45F,
+        }
+    },
     granularity = "yearly",
     customInterval = 1234,
     period = 1234,
@@ -781,33 +781,33 @@ ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-0
         ModelState = new ModelState()
         {
             EpochIds =
-{
-1234
-},
+            {
+                1234
+            },
             TrainLosses =
-{
-123.45F
-},
+            {
+                123.45F
+            },
             ValidationLosses =
-{
-123.45F
-},
+            {
+                123.45F
+            },
             LatenciesInSeconds =
-{
-123.45F
-},
+            {
+                123.45F
+            },
         },
         VariableStates =
-{
-new VariableState()
-{
-Variable = "<variable>",
-FilledNARatio = 123.45F,
-EffectiveCount = 1234,
-FirstTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-}
-},
+        {
+            new VariableState()
+            {
+                Variable = "<variable>",
+                FilledNARatio = 123.45F,
+                EffectiveCount = 1234,
+                FirstTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+                LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+            }
+        },
     },
 };
 Response<AnomalyDetectionModel> response = await client.TrainMultivariateModelAsync(modelInfo);
@@ -847,33 +847,33 @@ ModelInfo modelInfo = new ModelInfo("<dataSource>", DateTimeOffset.Parse("2022-0
         ModelState = new ModelState()
         {
             EpochIds =
-{
-1234
-},
+            {
+                1234
+            },
             TrainLosses =
-{
-123.45F
-},
+            {
+                123.45F
+            },
             ValidationLosses =
-{
-123.45F
-},
+            {
+                123.45F
+            },
             LatenciesInSeconds =
-{
-123.45F
-},
+            {
+                123.45F
+            },
         },
         VariableStates =
-{
-new VariableState()
-{
-Variable = "<variable>",
-FilledNARatio = 123.45F,
-EffectiveCount = 1234,
-FirstTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
-}
-},
+        {
+            new VariableState()
+            {
+                Variable = "<variable>",
+                FilledNARatio = 123.45F,
+                EffectiveCount = 1234,
+                FirstTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+                LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+            }
+        },
     },
 };
 Response<AnomalyDetectionModel> response = client.TrainMultivariateModel(modelInfo);
@@ -926,33 +926,33 @@ RequestContent content = RequestContent.Create(new
         modelState = new
         {
             epochIds = new List<object>()
-{
-1234
-},
+            {
+                1234
+            },
             trainLosses = new List<object>()
-{
-123.45F
-},
+            {
+                123.45F
+            },
             validationLosses = new List<object>()
-{
-123.45F
-},
+            {
+                123.45F
+            },
             latenciesInSeconds = new List<object>()
-{
-123.45F
-},
+            {
+                123.45F
+            },
         },
         variableStates = new List<object>()
-{
-new
-{
-variable = "<variable>",
-filledNARatio = 123.45F,
-effectiveCount = 1234,
-firstTimestamp = "2022-05-10T14:57:31.2311892-04:00",
-lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
-}
-},
+        {
+            new
+            {
+                variable = "<variable>",
+                filledNARatio = 123.45F,
+                effectiveCount = 1234,
+                firstTimestamp = "2022-05-10T14:57:31.2311892-04:00",
+                lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
+            }
+        },
     },
 });
 Response response = await client.TrainMultivariateModelAsync(content);
@@ -1031,33 +1031,33 @@ RequestContent content = RequestContent.Create(new
         modelState = new
         {
             epochIds = new List<object>()
-{
-1234
-},
+            {
+                1234
+            },
             trainLosses = new List<object>()
-{
-123.45F
-},
+            {
+                123.45F
+            },
             validationLosses = new List<object>()
-{
-123.45F
-},
+            {
+                123.45F
+            },
             latenciesInSeconds = new List<object>()
-{
-123.45F
-},
+            {
+                123.45F
+            },
         },
         variableStates = new List<object>()
-{
-new
-{
-variable = "<variable>",
-filledNARatio = 123.45F,
-effectiveCount = 1234,
-firstTimestamp = "2022-05-10T14:57:31.2311892-04:00",
-lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
-}
-},
+        {
+            new
+            {
+                variable = "<variable>",
+                filledNARatio = 123.45F,
+                effectiveCount = 1234,
+                firstTimestamp = "2022-05-10T14:57:31.2311892-04:00",
+                lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
+            }
+        },
     },
 });
 Response response = client.TrainMultivariateModel(content);
@@ -1453,13 +1453,13 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new List<VariableValues>()
 {
-new VariableValues("<variable>",new List<string>()
-{
-"<timestamps>"
-},new List<float>()
-{
-123.45F
-})
+    new VariableValues("<variable>",new List<string>()
+    {
+        "<timestamps>"
+    },new List<float>()
+    {
+        123.45F
+    })
 }, 1234);
 Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
 ]]></code>
@@ -1471,13 +1471,13 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new List<VariableValues>()
 {
-new VariableValues("<variable>",new List<string>()
-{
-"<timestamps>"
-},new List<float>()
-{
-123.45F
-})
+    new VariableValues("<variable>",new List<string>()
+    {
+        "<timestamps>"
+    },new List<float>()
+    {
+        123.45F
+    })
 }, 1234);
 Response<MultivariateLastDetectionResult> response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", options);
 ]]></code></example>
@@ -1492,13 +1492,13 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new List<VariableValues>()
 {
-new VariableValues("<variable>",new List<string>()
-{
-"<timestamps>"
-},new List<float>()
-{
-123.45F
-})
+    new VariableValues("<variable>",new List<string>()
+    {
+        "<timestamps>"
+    },new List<float>()
+    {
+        123.45F
+    })
 }, 1234);
 Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("<modelId>", options);
 ]]></code>
@@ -1510,13 +1510,13 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 
 MultivariateLastDetectionOptions options = new MultivariateLastDetectionOptions(new List<VariableValues>()
 {
-new VariableValues("<variable>",new List<string>()
-{
-"<timestamps>"
-},new List<float>()
-{
-123.45F
-})
+    new VariableValues("<variable>",new List<string>()
+    {
+        "<timestamps>"
+    },new List<float>()
+    {
+        123.45F
+    })
 }, 1234);
 Response<MultivariateLastDetectionResult> response = client.DetectMultivariateLastAnomaly("<modelId>", options);
 ]]></code></example>
@@ -1532,20 +1532,20 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 RequestContent content = RequestContent.Create(new
 {
     variables = new List<object>()
-{
-new
-{
-variable = "<variable>",
-timestamps = new List<object>()
-{
-"<timestamps>"
-},
-values = new List<object>()
-{
-123.45F
-},
-}
-},
+    {
+        new
+        {
+            variable = "<variable>",
+            timestamps = new List<object>()
+            {
+                "<timestamps>"
+            },
+            values = new List<object>()
+            {
+                123.45F
+            },
+        }
+    },
     topContributorCount = 1234,
 });
 Response response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", content);
@@ -1562,20 +1562,20 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 RequestContent content = RequestContent.Create(new
 {
     variables = new List<object>()
-{
-new
-{
-variable = "<variable>",
-timestamps = new List<object>()
-{
-"<timestamps>"
-},
-values = new List<object>()
-{
-123.45F
-},
-}
-},
+    {
+        new
+        {
+            variable = "<variable>",
+            timestamps = new List<object>()
+            {
+                "<timestamps>"
+            },
+            values = new List<object>()
+            {
+                123.45F
+            },
+        }
+    },
     topContributorCount = 1234,
 });
 Response response = await client.DetectMultivariateLastAnomalyAsync("<modelId>", content);
@@ -1608,20 +1608,20 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 RequestContent content = RequestContent.Create(new
 {
     variables = new List<object>()
-{
-new
-{
-variable = "<variable>",
-timestamps = new List<object>()
-{
-"<timestamps>"
-},
-values = new List<object>()
-{
-123.45F
-},
-}
-},
+    {
+        new
+        {
+            variable = "<variable>",
+            timestamps = new List<object>()
+            {
+                "<timestamps>"
+            },
+            values = new List<object>()
+            {
+                123.45F
+            },
+        }
+    },
     topContributorCount = 1234,
 });
 Response response = client.DetectMultivariateLastAnomaly("<modelId>", content);
@@ -1638,20 +1638,20 @@ AnomalyDetectorClient client = new AnomalyDetectorClient(endpoint, credential);
 RequestContent content = RequestContent.Create(new
 {
     variables = new List<object>()
-{
-new
-{
-variable = "<variable>",
-timestamps = new List<object>()
-{
-"<timestamps>"
-},
-values = new List<object>()
-{
-123.45F
-},
-}
-},
+    {
+        new
+        {
+            variable = "<variable>",
+            timestamps = new List<object>()
+            {
+                "<timestamps>"
+            },
+            values = new List<object>()
+            {
+                123.45F
+            },
+        }
+    },
     topContributorCount = 1234,
 });
 Response response = client.DetectMultivariateLastAnomaly("<modelId>", content);

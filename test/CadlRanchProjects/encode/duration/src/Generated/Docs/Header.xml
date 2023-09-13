@@ -77,7 +77,7 @@ Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
 
 Response response = await client.Iso8601ArrayAsync(new List<TimeSpan>()
 {
-XmlConvert.ToTimeSpan("PT1H23M45S")
+    XmlConvert.ToTimeSpan("PT1H23M45S")
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -87,7 +87,7 @@ Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
 
 Response response = await client.Iso8601ArrayAsync(new List<TimeSpan>()
 {
-XmlConvert.ToTimeSpan("PT1H23M45S")
+    XmlConvert.ToTimeSpan("PT1H23M45S")
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -100,7 +100,7 @@ Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
 
 Response response = client.Iso8601Array(new List<TimeSpan>()
 {
-XmlConvert.ToTimeSpan("PT1H23M45S")
+    XmlConvert.ToTimeSpan("PT1H23M45S")
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -110,7 +110,7 @@ Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
 
 Response response = client.Iso8601Array(new List<TimeSpan>()
 {
-XmlConvert.ToTimeSpan("PT1H23M45S")
+    XmlConvert.ToTimeSpan("PT1H23M45S")
 });
 Console.WriteLine(response.Status);
 ]]></code></example>

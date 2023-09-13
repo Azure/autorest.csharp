@@ -145,7 +145,7 @@ Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = await client.Int32SecondsArrayAsync(new List<TimeSpan>()
 {
-TimeSpan.FromSeconds(10)
+    TimeSpan.FromSeconds(10)
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -155,7 +155,7 @@ Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = await client.Int32SecondsArrayAsync(new List<TimeSpan>()
 {
-TimeSpan.FromSeconds(10)
+    TimeSpan.FromSeconds(10)
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -168,7 +168,7 @@ Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = client.Int32SecondsArray(new List<TimeSpan>()
 {
-TimeSpan.FromSeconds(10)
+    TimeSpan.FromSeconds(10)
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -178,7 +178,7 @@ Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = client.Int32SecondsArray(new List<TimeSpan>()
 {
-TimeSpan.FromSeconds(10)
+    TimeSpan.FromSeconds(10)
 });
 Console.WriteLine(response.Status);
 ]]></code></example>

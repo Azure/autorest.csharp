@@ -162,12 +162,12 @@ CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVers
 CollectionsModelProperty body = new CollectionsModelProperty()
 {
     Property =
-{
-new StringProperty()
-{
-Property = "<property>",
-}
-},
+    {
+        new StringProperty()
+        {
+            Property = "<property>",
+        }
+    },
 };
 Response response = await client.PutAllAsync(body);
 Console.WriteLine(response.Status);
@@ -190,12 +190,12 @@ CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVers
 CollectionsModelProperty body = new CollectionsModelProperty()
 {
     Property =
-{
-new StringProperty()
-{
-Property = "<property>",
-}
-},
+    {
+        new StringProperty()
+        {
+            Property = "<property>",
+        }
+    },
 };
 Response response = client.PutAll(body);
 Console.WriteLine(response.Status);
@@ -218,12 +218,12 @@ CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVers
 RequestContent content = RequestContent.Create(new
 {
     property = new List<object>()
-{
-new
-{
-property = "<property>",
-}
-},
+    {
+        new
+        {
+            property = "<property>",
+        }
+    },
 });
 Response response = await client.PutAllAsync(content);
 Console.WriteLine(response.Status);
@@ -246,12 +246,12 @@ CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVers
 RequestContent content = RequestContent.Create(new
 {
     property = new List<object>()
-{
-new
-{
-property = "<property>",
-}
-},
+    {
+        new
+        {
+            property = "<property>",
+        }
+    },
 });
 Response response = client.PutAll(content);
 Console.WriteLine(response.Status);
@@ -274,12 +274,12 @@ CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVers
 CollectionsModelProperty body = new CollectionsModelProperty()
 {
     Property =
-{
-new StringProperty()
-{
-Property = "<property>",
-}
-},
+    {
+        new StringProperty()
+        {
+            Property = "<property>",
+        }
+    },
 };
 Response response = await client.PutDefaultAsync(body);
 Console.WriteLine(response.Status);
@@ -302,12 +302,12 @@ CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVers
 CollectionsModelProperty body = new CollectionsModelProperty()
 {
     Property =
-{
-new StringProperty()
-{
-Property = "<property>",
-}
-},
+    {
+        new StringProperty()
+        {
+            Property = "<property>",
+        }
+    },
 };
 Response response = client.PutDefault(body);
 Console.WriteLine(response.Status);
@@ -330,12 +330,12 @@ CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVers
 RequestContent content = RequestContent.Create(new
 {
     property = new List<object>()
-{
-new
-{
-property = "<property>",
-}
-},
+    {
+        new
+        {
+            property = "<property>",
+        }
+    },
 });
 Response response = await client.PutDefaultAsync(content);
 Console.WriteLine(response.Status);
@@ -358,12 +358,12 @@ CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVers
 RequestContent content = RequestContent.Create(new
 {
     property = new List<object>()
-{
-new
-{
-property = "<property>",
-}
-},
+    {
+        new
+        {
+            property = "<property>",
+        }
+    },
 });
 Response response = client.PutDefault(content);
 Console.WriteLine(response.Status);

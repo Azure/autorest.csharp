@@ -81,7 +81,7 @@ CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVe
 
 CollectionsModelProperty body = new CollectionsModelProperty(new List<InnerModel>()
 {
-new InnerModel("<property>")
+    new InnerModel("<property>")
 });
 Response response = await client.PutAsync(body);
 Console.WriteLine(response.Status);
@@ -92,7 +92,7 @@ CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVe
 
 CollectionsModelProperty body = new CollectionsModelProperty(new List<InnerModel>()
 {
-new InnerModel("<property>")
+    new InnerModel("<property>")
 });
 Response response = await client.PutAsync(body);
 Console.WriteLine(response.Status);
@@ -106,7 +106,7 @@ CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVe
 
 CollectionsModelProperty body = new CollectionsModelProperty(new List<InnerModel>()
 {
-new InnerModel("<property>")
+    new InnerModel("<property>")
 });
 Response response = client.Put(body);
 Console.WriteLine(response.Status);
@@ -117,7 +117,7 @@ CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVe
 
 CollectionsModelProperty body = new CollectionsModelProperty(new List<InnerModel>()
 {
-new InnerModel("<property>")
+    new InnerModel("<property>")
 });
 Response response = client.Put(body);
 Console.WriteLine(response.Status);
@@ -132,12 +132,12 @@ CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVe
 RequestContent content = RequestContent.Create(new
 {
     property = new List<object>()
-{
-new
-{
-property = "<property>",
-}
-},
+    {
+        new
+        {
+            property = "<property>",
+        }
+    },
 });
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
@@ -149,12 +149,12 @@ CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVe
 RequestContent content = RequestContent.Create(new
 {
     property = new List<object>()
-{
-new
-{
-property = "<property>",
-}
-},
+    {
+        new
+        {
+            property = "<property>",
+        }
+    },
 });
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
@@ -169,12 +169,12 @@ CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVe
 RequestContent content = RequestContent.Create(new
 {
     property = new List<object>()
-{
-new
-{
-property = "<property>",
-}
-},
+    {
+        new
+        {
+            property = "<property>",
+        }
+    },
 });
 Response response = client.Put(content);
 Console.WriteLine(response.Status);
@@ -186,12 +186,12 @@ CollectionsModel client = new ValueTypesClient().GetCollectionsModelClient(apiVe
 RequestContent content = RequestContent.Create(new
 {
     property = new List<object>()
-{
-new
-{
-property = "<property>",
-}
-},
+    {
+        new
+        {
+            property = "<property>",
+        }
+    },
 });
 Response response = client.Put(content);
 Console.WriteLine(response.Status);

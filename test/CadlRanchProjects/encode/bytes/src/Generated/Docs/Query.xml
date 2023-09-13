@@ -111,7 +111,7 @@ Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = await client.Base64urlArrayAsync(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new object())
+    BinaryData.FromObjectAsJson(new object())
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -121,7 +121,7 @@ Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = await client.Base64urlArrayAsync(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new object())
+    BinaryData.FromObjectAsJson(new object())
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -134,7 +134,7 @@ Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = client.Base64urlArray(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new object())
+    BinaryData.FromObjectAsJson(new object())
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -144,7 +144,7 @@ Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = client.Base64urlArray(new List<BinaryData>()
 {
-BinaryData.FromObjectAsJson(new object())
+    BinaryData.FromObjectAsJson(new object())
 });
 Console.WriteLine(response.Status);
 ]]></code></example>

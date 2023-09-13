@@ -784,9 +784,9 @@ RequestContent content = RequestContent.Create(new
     requiredString = "<requiredString>",
     requiredInt = 1234,
     requiredCollection = new List<object>()
-{
-"1"
-},
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -836,9 +836,9 @@ RequestContent content = RequestContent.Create(new
     requiredString = "<requiredString>",
     requiredInt = 1234,
     requiredCollection = new List<object>()
-{
-"1"
-},
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -859,24 +859,24 @@ RequestContent content = RequestContent.Create(new
     },
     intExtensibleEnum = 1,
     intExtensibleEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     floatExtensibleEnum = 1,
     floatExtensibleEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new List<object>()
-{
-1.1F
-},
+    {
+        1.1F
+    },
     intFixedEnum = 1,
     intFixedEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     stringFixedEnum = "1",
     requiredUnknown = new object(),
     optionalUnknown = new object(),
@@ -937,9 +937,9 @@ RequestContent content = RequestContent.Create(new
     requiredString = "<requiredString>",
     requiredInt = 1234,
     requiredCollection = new List<object>()
-{
-"1"
-},
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -989,9 +989,9 @@ RequestContent content = RequestContent.Create(new
     requiredString = "<requiredString>",
     requiredInt = 1234,
     requiredCollection = new List<object>()
-{
-"1"
-},
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -1012,24 +1012,24 @@ RequestContent content = RequestContent.Create(new
     },
     intExtensibleEnum = 1,
     intExtensibleEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     floatExtensibleEnum = 1,
     floatExtensibleEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new List<object>()
-{
-1.1F
-},
+    {
+        1.1F
+    },
     intFixedEnum = 1,
     intFixedEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     stringFixedEnum = "1",
     requiredUnknown = new object(),
     optionalUnknown = new object(),
@@ -1090,9 +1090,9 @@ RequestContent content = RequestContent.Create(new
     requiredString = "<requiredString>",
     requiredInt = 1234,
     requiredCollection = new List<object>()
-{
-"1"
-},
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -1142,9 +1142,9 @@ RequestContent content = RequestContent.Create(new
     requiredString = "<requiredString>",
     requiredInt = 1234,
     requiredCollection = new List<object>()
-{
-"1"
-},
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -1165,24 +1165,24 @@ RequestContent content = RequestContent.Create(new
     },
     intExtensibleEnum = 1,
     intExtensibleEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     floatExtensibleEnum = 1,
     floatExtensibleEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new List<object>()
-{
-1.1F
-},
+    {
+        1.1F
+    },
     intFixedEnum = 1,
     intFixedEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     stringFixedEnum = "1",
     requiredUnknown = new object(),
     optionalUnknown = new object(),
@@ -1243,9 +1243,9 @@ RequestContent content = RequestContent.Create(new
     requiredString = "<requiredString>",
     requiredInt = 1234,
     requiredCollection = new List<object>()
-{
-"1"
-},
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -1295,9 +1295,9 @@ RequestContent content = RequestContent.Create(new
     requiredString = "<requiredString>",
     requiredInt = 1234,
     requiredCollection = new List<object>()
-{
-"1"
-},
+    {
+        "1"
+    },
     requiredDictionary = new
     {
         key = "1",
@@ -1318,24 +1318,24 @@ RequestContent content = RequestContent.Create(new
     },
     intExtensibleEnum = 1,
     intExtensibleEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     floatExtensibleEnum = 1,
     floatExtensibleEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new List<object>()
-{
-1.1F
-},
+    {
+        1.1F
+    },
     intFixedEnum = 1,
     intFixedEnumCollection = new List<object>()
-{
-1
-},
+    {
+        1
+    },
     stringFixedEnum = "1",
     requiredUnknown = new object(),
     optionalUnknown = new object(),

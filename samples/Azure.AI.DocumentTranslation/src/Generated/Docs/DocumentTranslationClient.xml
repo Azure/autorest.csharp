@@ -475,13 +475,13 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 await foreach (BinaryData item in client.GetTranslationsStatusAsync(top: 1234, skip: 1234, maxpagesize: 1234, ids: new List<Guid>()
 {
-Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
+    Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
 }, statuses: new List<string>()
 {
-"<statuses>"
+    "<statuses>"
 }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new List<string>()
 {
-"<orderBy>"
+    "<orderBy>"
 }))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
@@ -535,13 +535,13 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 foreach (BinaryData item in client.GetTranslationsStatus(top: 1234, skip: 1234, maxpagesize: 1234, ids: new List<Guid>()
 {
-Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
+    Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
 }, statuses: new List<string>()
 {
-"<statuses>"
+    "<statuses>"
 }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new List<string>()
 {
-"<orderBy>"
+    "<orderBy>"
 }))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
@@ -591,13 +591,13 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 await foreach (BinaryData item in client.GetDocumentsStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), top: 1234, skip: 1234, maxpagesize: 1234, ids: new List<Guid>()
 {
-Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
+    Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
 }, statuses: new List<string>()
 {
-"<statuses>"
+    "<statuses>"
 }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new List<string>()
 {
-"<orderBy>"
+    "<orderBy>"
 }))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
@@ -645,13 +645,13 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 
 foreach (BinaryData item in client.GetDocumentsStatus(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), top: 1234, skip: 1234, maxpagesize: 1234, ids: new List<Guid>()
 {
-Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
+    Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
 }, statuses: new List<string>()
 {
-"<statuses>"
+    "<statuses>"
 }, createdDateTimeUtcStart: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), createdDateTimeUtcEnd: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"), orderBy: new List<string>()
 {
-"<orderBy>"
+    "<orderBy>"
 }))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
@@ -683,23 +683,23 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 RequestContent content = RequestContent.Create(new
 {
     inputs = new List<object>()
-{
-new
-{
-source = new
-{
-sourceUrl = "<sourceUrl>",
-},
-targets = new List<object>()
-{
-new
-{
-targetUrl = "<targetUrl>",
-language = "<language>",
-}
-},
-}
-},
+    {
+        new
+        {
+            source = new
+            {
+                sourceUrl = "<sourceUrl>",
+            },
+            targets = new List<object>()
+            {
+                new
+                {
+                    targetUrl = "<targetUrl>",
+                    language = "<language>",
+                }
+            },
+        }
+    },
 });
 Operation operation = await client.StartTranslationAsync(WaitUntil.Completed, content, new ContentType("application/json"));
 ]]></code>
@@ -711,43 +711,43 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 RequestContent content = RequestContent.Create(new
 {
     inputs = new List<object>()
-{
-new
-{
-source = new
-{
-sourceUrl = "<sourceUrl>",
-filter = new
-{
-prefix = "<prefix>",
-suffix = "<suffix>",
-},
-language = "<language>",
-storageSource = "AzureBlob",
-},
-targets = new List<object>()
-{
-new
-{
-targetUrl = "<targetUrl>",
-category = "<category>",
-language = "<language>",
-glossaries = new List<object>()
-{
-new
-{
-glossaryUrl = "<glossaryUrl>",
-format = "<format>",
-version = "<version>",
-storageSource = "AzureBlob",
-}
-},
-storageSource = "AzureBlob",
-}
-},
-storageType = "Folder",
-}
-},
+    {
+        new
+        {
+            source = new
+            {
+                sourceUrl = "<sourceUrl>",
+                filter = new
+                {
+                    prefix = "<prefix>",
+                    suffix = "<suffix>",
+                },
+                language = "<language>",
+                storageSource = "AzureBlob",
+            },
+            targets = new List<object>()
+            {
+                new
+                {
+                    targetUrl = "<targetUrl>",
+                    category = "<category>",
+                    language = "<language>",
+                    glossaries = new List<object>()
+                    {
+                        new
+                        {
+                            glossaryUrl = "<glossaryUrl>",
+                            format = "<format>",
+                            version = "<version>",
+                            storageSource = "AzureBlob",
+                        }
+                    },
+                    storageSource = "AzureBlob",
+                }
+            },
+            storageType = "Folder",
+        }
+    },
 });
 Operation operation = await client.StartTranslationAsync(WaitUntil.Completed, content, new ContentType("application/json"));
 ]]></code></example>
@@ -762,23 +762,23 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 RequestContent content = RequestContent.Create(new
 {
     inputs = new List<object>()
-{
-new
-{
-source = new
-{
-sourceUrl = "<sourceUrl>",
-},
-targets = new List<object>()
-{
-new
-{
-targetUrl = "<targetUrl>",
-language = "<language>",
-}
-},
-}
-},
+    {
+        new
+        {
+            source = new
+            {
+                sourceUrl = "<sourceUrl>",
+            },
+            targets = new List<object>()
+            {
+                new
+                {
+                    targetUrl = "<targetUrl>",
+                    language = "<language>",
+                }
+            },
+        }
+    },
 });
 Operation operation = client.StartTranslation(WaitUntil.Completed, content, new ContentType("application/json"));
 ]]></code>
@@ -790,43 +790,43 @@ DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", c
 RequestContent content = RequestContent.Create(new
 {
     inputs = new List<object>()
-{
-new
-{
-source = new
-{
-sourceUrl = "<sourceUrl>",
-filter = new
-{
-prefix = "<prefix>",
-suffix = "<suffix>",
-},
-language = "<language>",
-storageSource = "AzureBlob",
-},
-targets = new List<object>()
-{
-new
-{
-targetUrl = "<targetUrl>",
-category = "<category>",
-language = "<language>",
-glossaries = new List<object>()
-{
-new
-{
-glossaryUrl = "<glossaryUrl>",
-format = "<format>",
-version = "<version>",
-storageSource = "AzureBlob",
-}
-},
-storageSource = "AzureBlob",
-}
-},
-storageType = "Folder",
-}
-},
+    {
+        new
+        {
+            source = new
+            {
+                sourceUrl = "<sourceUrl>",
+                filter = new
+                {
+                    prefix = "<prefix>",
+                    suffix = "<suffix>",
+                },
+                language = "<language>",
+                storageSource = "AzureBlob",
+            },
+            targets = new List<object>()
+            {
+                new
+                {
+                    targetUrl = "<targetUrl>",
+                    category = "<category>",
+                    language = "<language>",
+                    glossaries = new List<object>()
+                    {
+                        new
+                        {
+                            glossaryUrl = "<glossaryUrl>",
+                            format = "<format>",
+                            version = "<version>",
+                            storageSource = "AzureBlob",
+                        }
+                    },
+                    storageSource = "AzureBlob",
+                }
+            },
+            storageType = "Folder",
+        }
+    },
 });
 Operation operation = client.StartTranslation(WaitUntil.Completed, content, new ContentType("application/json"));
 ]]></code></example>

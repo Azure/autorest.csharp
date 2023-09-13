@@ -960,7 +960,7 @@ PathsClient client = new PathsClient(credential);
 
 Response response = await client.ArrayCsvInPathAsync(new List<string>()
 {
-"<arrayPath>"
+    "<arrayPath>"
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -971,7 +971,7 @@ PathsClient client = new PathsClient(credential);
 
 Response response = await client.ArrayCsvInPathAsync(new List<string>()
 {
-"<arrayPath>"
+    "<arrayPath>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -985,7 +985,7 @@ PathsClient client = new PathsClient(credential);
 
 Response response = client.ArrayCsvInPath(new List<string>()
 {
-"<arrayPath>"
+    "<arrayPath>"
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -996,7 +996,7 @@ PathsClient client = new PathsClient(credential);
 
 Response response = client.ArrayCsvInPath(new List<string>()
 {
-"<arrayPath>"
+    "<arrayPath>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>

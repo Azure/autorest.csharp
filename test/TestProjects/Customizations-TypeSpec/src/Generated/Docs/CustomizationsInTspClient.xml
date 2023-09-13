@@ -22,24 +22,24 @@ RootModel input = new RootModel()
     },
     PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
     PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new List<string>()
-{
-"<badListName>"
-}, new Dictionary<string, string>()
-{
-["key"] = "<badDictionaryName>",
-}, new List<IList<string>>()
-{
-new List<string>()
-{
-"<badListOfListName>"
-}
-}, new List<IDictionary<string, string>>()
-{
-new Dictionary<string, string>()
-{
-["key"] = "<badListOfDictionaryName>",
-}
-}),
+    {
+        "<badListName>"
+    }, new Dictionary<string, string>()
+    {
+        ["key"] = "<badDictionaryName>",
+    }, new List<IList<string>>()
+    {
+        new List<string>()
+        {
+            "<badListOfListName>"
+        }
+    }, new List<IDictionary<string, string>>()
+    {
+        new Dictionary<string, string>()
+        {
+            ["key"] = "<badListOfDictionaryName>",
+        }
+    }),
     PropertyEnumToRename = RenamedEnum.One,
     PropertyEnumWithValueToRename = EnumWithValueToRename.One,
     PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
@@ -70,24 +70,24 @@ RootModel input = new RootModel()
     },
     PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
     PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new List<string>()
-{
-"<badListName>"
-}, new Dictionary<string, string>()
-{
-["key"] = "<badDictionaryName>",
-}, new List<IList<string>>()
-{
-new List<string>()
-{
-"<badListOfListName>"
-}
-}, new List<IDictionary<string, string>>()
-{
-new Dictionary<string, string>()
-{
-["key"] = "<badListOfDictionaryName>",
-}
-}),
+    {
+        "<badListName>"
+    }, new Dictionary<string, string>()
+    {
+        ["key"] = "<badDictionaryName>",
+    }, new List<IList<string>>()
+    {
+        new List<string>()
+        {
+            "<badListOfListName>"
+        }
+    }, new List<IDictionary<string, string>>()
+    {
+        new Dictionary<string, string>()
+        {
+            ["key"] = "<badListOfDictionaryName>",
+        }
+    }),
     PropertyEnumToRename = RenamedEnum.One,
     PropertyEnumWithValueToRename = EnumWithValueToRename.One,
     PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
@@ -139,27 +139,27 @@ RequestContent content = RequestContent.Create(new
         propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
         propertyToField = "<propertyToField>",
         badListName = new List<object>()
-{
-"<badListName>"
-},
+        {
+            "<badListName>"
+        },
         badDictionaryName = new
         {
             key = "<badDictionaryName>",
         },
         badListOfListName = new List<object>()
-{
-new List<object>()
-{
-"<badListOfListName>"
-}
-},
+        {
+            new List<object>()
+            {
+                "<badListOfListName>"
+            }
+        },
         badListOfDictionaryName = new List<object>()
-{
-new
-{
-key = "<badListOfDictionaryName>",
-}
-},
+        {
+            new
+            {
+                key = "<badListOfDictionaryName>",
+            }
+        },
     },
     propertyEnumToRename = "1",
     propertyEnumWithValueToRename = "1",
@@ -238,27 +238,27 @@ RequestContent content = RequestContent.Create(new
         propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
         propertyToField = "<propertyToField>",
         badListName = new List<object>()
-{
-"<badListName>"
-},
+        {
+            "<badListName>"
+        },
         badDictionaryName = new
         {
             key = "<badDictionaryName>",
         },
         badListOfListName = new List<object>()
-{
-new List<object>()
-{
-"<badListOfListName>"
-}
-},
+        {
+            new List<object>()
+            {
+                "<badListOfListName>"
+            }
+        },
         badListOfDictionaryName = new List<object>()
-{
-new
-{
-key = "<badListOfDictionaryName>",
-}
-},
+        {
+            new
+            {
+                key = "<badListOfDictionaryName>",
+            }
+        },
     },
     propertyEnumToRename = "1",
     propertyEnumWithValueToRename = "1",

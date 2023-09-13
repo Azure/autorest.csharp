@@ -145,7 +145,7 @@ Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = await client.UnixTimestampArrayAsync(new List<DateTimeOffset>()
 {
-DateTimeOffset.FromUnixTimeSeconds(1652209051)
+    DateTimeOffset.FromUnixTimeSeconds(1652209051)
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -155,7 +155,7 @@ Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = await client.UnixTimestampArrayAsync(new List<DateTimeOffset>()
 {
-DateTimeOffset.FromUnixTimeSeconds(1652209051)
+    DateTimeOffset.FromUnixTimeSeconds(1652209051)
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -168,7 +168,7 @@ Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = client.UnixTimestampArray(new List<DateTimeOffset>()
 {
-DateTimeOffset.FromUnixTimeSeconds(1652209051)
+    DateTimeOffset.FromUnixTimeSeconds(1652209051)
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -178,7 +178,7 @@ Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
 Response response = client.UnixTimestampArray(new List<DateTimeOffset>()
 {
-DateTimeOffset.FromUnixTimeSeconds(1652209051)
+    DateTimeOffset.FromUnixTimeSeconds(1652209051)
 });
 Console.WriteLine(response.Status);
 ]]></code></example>

@@ -9,7 +9,7 @@ Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0"
 
 Response response = await client.CsvAsync(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -19,7 +19,7 @@ Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0"
 
 Response response = await client.CsvAsync(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -32,7 +32,7 @@ Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0"
 
 Response response = client.Csv(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code>
@@ -42,7 +42,7 @@ Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0"
 
 Response response = client.Csv(new List<string>()
 {
-"<colors>"
+    "<colors>"
 });
 Console.WriteLine(response.Status);
 ]]></code></example>
