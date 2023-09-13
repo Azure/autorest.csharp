@@ -45,7 +45,7 @@ namespace MgmtMockAndSample.Samples
             VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
-            string vaultName = "sample-vault";
+            string vaultName = default /* Warning: No value is provided for vaultName in example 'Create a new vault or update an existing vault'. Please consider adding a proper example value for it in swagger*/;
             VaultCreateOrUpdateContent content = new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
             {
                 Duration = XmlConvert.ToTimeSpan("P7D"),

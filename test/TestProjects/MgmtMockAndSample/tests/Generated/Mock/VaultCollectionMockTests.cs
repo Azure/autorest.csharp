@@ -37,7 +37,7 @@ namespace MgmtMockAndSample.Tests.Mock
             ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
             ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
             var collection = resourceGroupResource.GetVaults();
-            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "sample-vault", new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, default /* Warning: No value is provided for vaultName in example 'Create a new vault or update an existing vault'. Please consider adding a proper example value for it in swagger*/, new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
             {
                 Duration = XmlConvert.ToTimeSpan("P7D"),
                 CreateOn = DateTimeOffset.Parse("2017-05-04T07:12:28.191Z"),
