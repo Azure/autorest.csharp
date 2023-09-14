@@ -7,13 +7,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type._Dictionary;
 using _Type._Dictionary.Models;
 
 namespace _Type._Dictionary.Samples
@@ -24,76 +24,102 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetRecursiveModelValue()
         {
-            var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-            Response response = client.GetRecursiveModelValue(new RequestContext());
+            Response response = client.GetRecursiveModelValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").GetProperty("property").ToString());
+            Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetRecursiveModelValue_AllParameters()
         {
-            var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-            Response response = client.GetRecursiveModelValue(new RequestContext());
+            Response response = client.GetRecursiveModelValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").GetProperty("property").ToString());
-            Console.WriteLine(result.GetProperty("<test>").GetProperty("children").GetProperty("<test>").GetProperty("property").ToString());
+            Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
+            Console.WriteLine(result.GetProperty("<key>").GetProperty("children").GetProperty("<key>").GetProperty("property").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetRecursiveModelValue_Convenience()
+        {
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyDictionary<string, InnerModel>> response = client.GetRecursiveModelValue();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetRecursiveModelValue_AllParameters_Convenience()
+        {
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyDictionary<string, InnerModel>> response = client.GetRecursiveModelValue();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetRecursiveModelValue_Async()
         {
-            var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetRecursiveModelValueAsync(new RequestContext());
+            Response response = await client.GetRecursiveModelValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").GetProperty("property").ToString());
+            Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetRecursiveModelValue_AllParameters_Async()
         {
-            var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetRecursiveModelValueAsync(new RequestContext());
+            Response response = await client.GetRecursiveModelValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").GetProperty("property").ToString());
-            Console.WriteLine(result.GetProperty("<test>").GetProperty("children").GetProperty("<test>").GetProperty("property").ToString());
+            Console.WriteLine(result.GetProperty("<key>").GetProperty("property").ToString());
+            Console.WriteLine(result.GetProperty("<key>").GetProperty("children").GetProperty("<key>").GetProperty("property").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetRecursiveModelValue_Convenience_Async()
         {
-            var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-            var result = await client.GetRecursiveModelValueAsync();
+            Response<IReadOnlyDictionary<string, InnerModel>> response = await client.GetRecursiveModelValueAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetRecursiveModelValue_AllParameters_Convenience_Async()
+        {
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyDictionary<string, InnerModel>> response = await client.GetRecursiveModelValueAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 key = new
                 {
                     property = "<property>",
                 },
-            };
-
-            Response response = client.Put(RequestContent.Create(data));
+            });
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -101,17 +127,51 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 key = new
                 {
                     property = "<property>",
+                    children = new
+                    {
+                    },
                 },
-            };
+            });
+            Response response = client.Put(content);
+            Console.WriteLine(response.Status);
+        }
 
-            Response response = client.Put(RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_Convenience()
+        {
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
+
+            Response response = client.Put(new Dictionary<string, InnerModel>()
+            {
+                ["key"] = new InnerModel("<property>"),
+            });
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_AllParameters_Convenience()
+        {
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
+
+            Response response = client.Put(new Dictionary<string, InnerModel>()
+            {
+                ["key"] = new InnerModel("<property>")
+                {
+                    Children =
+{
+["key"] = null,
+},
+                },
+            });
             Console.WriteLine(response.Status);
         }
 
@@ -119,17 +179,16 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 key = new
                 {
                     property = "<property>",
                 },
-            };
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -137,17 +196,19 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 key = new
                 {
                     property = "<property>",
+                    children = new
+                    {
+                    },
                 },
-            };
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -155,16 +216,32 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Convenience_Async()
         {
-            var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
 
-            var body = new Dictionary<string, InnerModel>
+            Response response = await client.PutAsync(new Dictionary<string, InnerModel>()
+            {
+                ["key"] = new InnerModel("<property>"),
+            });
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_AllParameters_Convenience_Async()
+        {
+            RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient(apiVersion: "1.0.0");
+
+            Response response = await client.PutAsync(new Dictionary<string, InnerModel>()
             {
                 ["key"] = new InnerModel("<property>")
                 {
-                    Children = { },
+                    Children =
+{
+["key"] = null,
+},
                 },
-            };
-            var result = await client.PutAsync(body);
+            });
+            Console.WriteLine(response.Status);
         }
     }
 }

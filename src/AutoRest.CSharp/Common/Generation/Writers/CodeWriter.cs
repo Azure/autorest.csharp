@@ -389,6 +389,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 double d => SyntaxFactory.Literal(d).ToString(),
                 float f => SyntaxFactory.Literal(f).ToString(),
                 bool b => b ? "true" : "false",
+                char c => SyntaxFactory.Literal(c).ToString(),
                 BinaryData bd => bd.ToArray().Length == 0 ? "new byte[] { }" : SyntaxFactory.Literal(bd.ToString()).ToString(),
                 _ => throw new NotImplementedException()
             });

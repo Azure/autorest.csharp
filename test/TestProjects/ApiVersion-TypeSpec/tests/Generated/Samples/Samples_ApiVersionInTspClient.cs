@@ -6,13 +6,11 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using ApiVersionInTsp;
 using ApiVersionInTsp.Models;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 
@@ -24,11 +22,11 @@ namespace ApiVersionInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBatchDetectionResult()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ApiVersionInTspClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
-            Response response = client.GetBatchDetectionResult(Guid.NewGuid(), new RequestContext());
+            Response response = client.GetBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -38,11 +36,11 @@ namespace ApiVersionInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetBatchDetectionResult_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ApiVersionInTspClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
-            Response response = client.GetBatchDetectionResult(Guid.NewGuid(), new RequestContext());
+            Response response = client.GetBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -50,13 +48,35 @@ namespace ApiVersionInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetBatchDetectionResult_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
+
+            Response<DetectionResult> response = client.GetBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetBatchDetectionResult_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
+
+            Response<DetectionResult> response = client.GetBatchDetectionResult(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBatchDetectionResult_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ApiVersionInTspClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
-            Response response = await client.GetBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext());
+            Response response = await client.GetBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -66,11 +86,11 @@ namespace ApiVersionInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBatchDetectionResult_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ApiVersionInTspClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
-            Response response = await client.GetBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext());
+            Response response = await client.GetBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -80,11 +100,22 @@ namespace ApiVersionInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetBatchDetectionResult_Convenience_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ApiVersionInTspClient(endpoint, credential);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
 
-            var result = await client.GetBatchDetectionResultAsync(Guid.NewGuid());
+            Response<DetectionResult> response = await client.GetBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetBatchDetectionResult_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ApiVersionInTspClient client = new ApiVersionInTspClient(endpoint, credential);
+
+            Response<DetectionResult> response = await client.GetBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
         }
     }
 }

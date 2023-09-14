@@ -5,19 +5,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Output.Samples.Models;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Configuration = AutoRest.CSharp.Input.Configuration;
-using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -33,7 +34,9 @@ namespace AutoRest.CSharp.Output.Models
 
         private readonly string _namespaceName;
         private readonly string _clientName;
+        private readonly LowLevelClient? _client;
         private readonly ClientFields _fields;
+        private readonly IReadOnlyDictionary<string, InputClientExample>? _clientParameterExamples;
         private readonly TypeFactory _typeFactory;
         private readonly SourceInputModel? _sourceInputModel;
         private readonly List<ParameterChain> _orderedParameters;
@@ -47,11 +50,13 @@ namespace AutoRest.CSharp.Output.Models
 
         private InputOperation Operation { get; }
 
-        public OperationMethodChainBuilder(InputOperation operation, string namespaceName, string clientName, ClientFields fields, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+        public OperationMethodChainBuilder(LowLevelClient? client, InputOperation operation, string namespaceName, string clientName, ClientFields fields, TypeFactory typeFactory, SourceInputModel? sourceInputModel, IReadOnlyDictionary<string, InputClientExample>? clientParameterExamples)
         {
+            _client = client;
             _namespaceName = namespaceName;
             _clientName = clientName;
             _fields = fields;
+            _clientParameterExamples = clientParameterExamples;
             _typeFactory = typeFactory;
             _sourceInputModel = sourceInputModel;
             _orderedParameters = new List<ParameterChain>();
@@ -100,7 +105,67 @@ namespace AutoRest.CSharp.Output.Models
 
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
             var responseBodyType = Operation.Responses.FirstOrDefault()?.BodyType;
-            return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag, convenienceMethodInfo.Message);
+
+            // samples will build below
+            var samples = new List<DpgOperationSample>();
+
+            var method = new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag, samples, convenienceMethodInfo.Message);
+
+            BuildSamples(method, samples);
+
+            return method;
+        }
+
+        private void BuildSamples(LowLevelClientMethod method, List<DpgOperationSample> samples)
+        {
+            // we do not generate any sample if these variables are null
+            // they are only null when HLC calling methods in this class
+            if (_clientParameterExamples == null || _client == null)
+                return;
+            var shouldGenerateSample = DpgOperationSample.ShouldGenerateSample(_client, method.ProtocolMethodSignature);
+
+            if (!shouldGenerateSample)
+                return;
+
+            // short version samples
+            var shouldGenerateShortVersion = DpgOperationSample.ShouldGenerateShortVersion(_client, method);
+
+            foreach (var (exampleKey, clientExample) in _clientParameterExamples)
+            {
+                if (!shouldGenerateShortVersion && exampleKey != ExampleMockValueBuilder.ShortVersionMockExampleKey)
+                    continue; // skip the short example when we decide not to generate it
+                if (Operation.Examples.TryGetValue(exampleKey, out var operationExample))
+                {
+                    samples.Add(new(
+                        _client,
+                        method,
+                        clientExample.ClientParameters,
+                        operationExample,
+                        false,
+                        exampleKey == ExampleMockValueBuilder.ShortVersionMockExampleKey ? string.Empty : exampleKey)); // TODO -- this is temporary to minimize the diff
+                }
+            }
+
+            // TODO -- this is intentional to keep the order of existing samples unchanged to minimize the amount of changes in the PR
+            // TODO -- will use a follow up PR to remove the double iteration
+            if (method.ConvenienceMethod != null && method.ConvenienceMethod.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
+            {
+                foreach (var (exampleKey, clientExample) in _clientParameterExamples)
+                {
+                    if (!shouldGenerateShortVersion && exampleKey != ExampleMockValueBuilder.ShortVersionMockExampleKey)
+                        continue; // skip the short example when we decide not to generate it
+                    if (Operation.Examples.TryGetValue(exampleKey, out var operationExample))
+                    {
+                        samples.Add(new(
+                            _client,
+                            method,
+                            clientExample.ClientParameters,
+                            operationExample,
+                            true,
+                            exampleKey == ExampleMockValueBuilder.ShortVersionMockExampleKey ? string.Empty : exampleKey)); // TODO -- this is temporary to minimize the diff
+                    }
+                }
+            }
         }
 
         private ConvenienceMethodGenerationInfo ShouldGenerateConvenienceMethod()

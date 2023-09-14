@@ -6,14 +6,13 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Property.Nullable;
 using _Type.Property.Nullable.Models;
 
 namespace _Type.Property.Nullable.Samples
@@ -24,9 +23,9 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNonNull()
         {
-            var client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-            Response response = client.GetNonNull(new RequestContext());
+            Response response = client.GetNonNull(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
@@ -37,9 +36,9 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNonNull_AllParameters()
         {
-            var client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-            Response response = client.GetNonNull(new RequestContext());
+            Response response = client.GetNonNull(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
@@ -48,11 +47,29 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetNonNull_Convenience()
+        {
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
+
+            Response<StringProperty> response = client.GetNonNull();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetNonNull_AllParameters_Convenience()
+        {
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
+
+            Response<StringProperty> response = client.GetNonNull();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNonNull_Async()
         {
-            var client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetNonNullAsync(new RequestContext());
+            Response response = await client.GetNonNullAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
@@ -63,9 +80,9 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNonNull_AllParameters_Async()
         {
-            var client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetNonNullAsync(new RequestContext());
+            Response response = await client.GetNonNullAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
@@ -76,18 +93,27 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNonNull_Convenience_Async()
         {
-            var client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-            var result = await client.GetNonNullAsync();
+            Response<StringProperty> response = await client.GetNonNullAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetNonNull_AllParameters_Convenience_Async()
+        {
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
+
+            Response<StringProperty> response = await client.GetNonNullAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNull()
         {
-            var client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-            Response response = client.GetNull(new RequestContext());
+            Response response = client.GetNull(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
@@ -98,9 +124,9 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNull_AllParameters()
         {
-            var client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-            Response response = client.GetNull(new RequestContext());
+            Response response = client.GetNull(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
@@ -109,11 +135,29 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetNull_Convenience()
+        {
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
+
+            Response<StringProperty> response = client.GetNull();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetNull_AllParameters_Convenience()
+        {
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
+
+            Response<StringProperty> response = client.GetNull();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNull_Async()
         {
-            var client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetNullAsync(new RequestContext());
+            Response response = await client.GetNullAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
@@ -124,9 +168,9 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNull_AllParameters_Async()
         {
-            var client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetNullAsync(new RequestContext());
+            Response response = await client.GetNullAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
@@ -137,24 +181,32 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNull_Convenience_Async()
         {
-            var client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-            var result = await client.GetNullAsync();
+            Response<StringProperty> response = await client.GetNullAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetNull_AllParameters_Convenience_Async()
+        {
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
+
+            Response<StringProperty> response = await client.GetNullAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_PatchNonNull()
         {
-            var client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "<nullableProperty>",
-            };
-
-            Response response = client.PatchNonNull(RequestContent.Create(data));
+            });
+            Response response = client.PatchNonNull(content);
             Console.WriteLine(response.Status);
         }
 
@@ -162,15 +214,14 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PatchNonNull_AllParameters()
         {
-            var client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "<nullableProperty>",
-            };
-
-            Response response = client.PatchNonNull(RequestContent.Create(data));
+            });
+            Response response = client.PatchNonNull(content);
             Console.WriteLine(response.Status);
         }
 
@@ -178,15 +229,14 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PatchNonNull_Async()
         {
-            var client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "<nullableProperty>",
-            };
-
-            Response response = await client.PatchNonNullAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PatchNonNullAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -194,15 +244,14 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PatchNonNull_AllParameters_Async()
         {
-            var client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "<nullableProperty>",
-            };
-
-            Response response = await client.PatchNonNullAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PatchNonNullAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -210,15 +259,14 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PatchNull()
         {
-            var client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "<nullableProperty>",
-            };
-
-            Response response = client.PatchNull(RequestContent.Create(data));
+            });
+            Response response = client.PatchNull(content);
             Console.WriteLine(response.Status);
         }
 
@@ -226,15 +274,14 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PatchNull_AllParameters()
         {
-            var client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "<nullableProperty>",
-            };
-
-            Response response = client.PatchNull(RequestContent.Create(data));
+            });
+            Response response = client.PatchNull(content);
             Console.WriteLine(response.Status);
         }
 
@@ -242,15 +289,14 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PatchNull_Async()
         {
-            var client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "<nullableProperty>",
-            };
-
-            Response response = await client.PatchNullAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PatchNullAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -258,15 +304,14 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PatchNull_AllParameters_Async()
         {
-            var client = new NullableClient().GetStringClient("1.0.0");
+            String client = new NullableClient().GetStringClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "<nullableProperty>",
-            };
-
-            Response response = await client.PatchNullAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PatchNullAsync(content);
             Console.WriteLine(response.Status);
         }
     }

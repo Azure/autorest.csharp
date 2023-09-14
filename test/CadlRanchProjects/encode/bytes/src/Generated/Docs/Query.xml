@@ -2,92 +2,152 @@
 <doc>
   <members>
     <member name="DefaultAsync(BinaryData,RequestContext)">
-<example>
-This sample shows how to call DefaultAsync with required parameters.
+      <example>
+This sample shows how to call DefaultAsync.
 <code><![CDATA[
-var client = new BytesClient().GetQueryClient("1.0.0");
+Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.DefaultAsync(BinaryData.FromString("<your binary data content>"));
+Response response = await client.DefaultAsync(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call DefaultAsync with all parameters.
+<code><![CDATA[
+Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
+
+Response response = await client.DefaultAsync(BinaryData.FromObjectAsJson(new object()));
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Default(BinaryData,RequestContext)">
-<example>
-This sample shows how to call Default with required parameters.
+      <example>
+This sample shows how to call Default.
 <code><![CDATA[
-var client = new BytesClient().GetQueryClient("1.0.0");
+Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Default(BinaryData.FromString("<your binary data content>"));
+Response response = client.Default(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Default with all parameters.
+<code><![CDATA[
+Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
+
+Response response = client.Default(BinaryData.FromObjectAsJson(new object()));
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Base64Async(BinaryData,RequestContext)">
-<example>
-This sample shows how to call Base64Async with required parameters.
+      <example>
+This sample shows how to call Base64Async.
 <code><![CDATA[
-var client = new BytesClient().GetQueryClient("1.0.0");
+Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.Base64Async(BinaryData.FromString("<your binary data content>"));
+Response response = await client.Base64Async(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Base64Async with all parameters.
+<code><![CDATA[
+Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
+
+Response response = await client.Base64Async(BinaryData.FromObjectAsJson(new object()));
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Base64(BinaryData,RequestContext)">
-<example>
-This sample shows how to call Base64 with required parameters.
+      <example>
+This sample shows how to call Base64.
 <code><![CDATA[
-var client = new BytesClient().GetQueryClient("1.0.0");
+Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Base64(BinaryData.FromString("<your binary data content>"));
+Response response = client.Base64(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Base64 with all parameters.
+<code><![CDATA[
+Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
+
+Response response = client.Base64(BinaryData.FromObjectAsJson(new object()));
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Base64urlAsync(BinaryData,RequestContext)">
-<example>
-This sample shows how to call Base64urlAsync with required parameters.
+      <example>
+This sample shows how to call Base64urlAsync.
 <code><![CDATA[
-var client = new BytesClient().GetQueryClient("1.0.0");
+Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.Base64urlAsync(BinaryData.FromString("<your binary data content>"));
+Response response = await client.Base64urlAsync(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Base64urlAsync with all parameters.
+<code><![CDATA[
+Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
+
+Response response = await client.Base64urlAsync(BinaryData.FromObjectAsJson(new object()));
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Base64url(BinaryData,RequestContext)">
-<example>
-This sample shows how to call Base64url with required parameters.
+      <example>
+This sample shows how to call Base64url.
 <code><![CDATA[
-var client = new BytesClient().GetQueryClient("1.0.0");
+Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Base64url(BinaryData.FromString("<your binary data content>"));
+Response response = client.Base64url(BinaryData.FromObjectAsJson(new object()));
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Base64url with all parameters.
+<code><![CDATA[
+Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
+
+Response response = client.Base64url(BinaryData.FromObjectAsJson(new object()));
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Base64urlArrayAsync(IEnumerable{BinaryData},RequestContext)">
-<example>
-This sample shows how to call Base64urlArrayAsync with required parameters.
+      <example>
+This sample shows how to call Base64urlArrayAsync.
 <code><![CDATA[
-var client = new BytesClient().GetQueryClient("1.0.0");
+Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.Base64urlArrayAsync(new BinaryData[]{BinaryData.FromString("<your binary data content>")});
+Response response = await client.Base64urlArrayAsync(new List<BinaryData>()
+{
+    BinaryData.FromObjectAsJson(new object())
+});
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Base64urlArrayAsync with all parameters.
+<code><![CDATA[
+Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
+
+Response response = await client.Base64urlArrayAsync(new List<BinaryData>()
+{
+    BinaryData.FromObjectAsJson(new object())
+});
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Base64urlArray(IEnumerable{BinaryData},RequestContext)">
-<example>
-This sample shows how to call Base64urlArray with required parameters.
+      <example>
+This sample shows how to call Base64urlArray.
 <code><![CDATA[
-var client = new BytesClient().GetQueryClient("1.0.0");
+Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Base64urlArray(new BinaryData[]{BinaryData.FromString("<your binary data content>")});
+Response response = client.Base64urlArray(new List<BinaryData>()
+{
+    BinaryData.FromObjectAsJson(new object())
+});
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Base64urlArray with all parameters.
+<code><![CDATA[
+Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
+
+Response response = client.Base64urlArray(new List<BinaryData>()
+{
+    BinaryData.FromObjectAsJson(new object())
+});
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
   </members>
 </doc>
