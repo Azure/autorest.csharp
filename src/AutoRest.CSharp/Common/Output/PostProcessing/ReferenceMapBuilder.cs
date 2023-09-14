@@ -209,14 +209,16 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
                 return; // we short cut if the valueTypeSymbol has already existed in the list to avoid infinite loops
             }
             // add the base type
-            AddTypeSymbol(keyTypeSymbol, valueSymbol.BaseType, referenceMap);
-            if (valueSymbol is INamedTypeSymbol namedType)
+            AddTypeSymbol(keyTypeSymbol, valueTypeSymbol.BaseType, referenceMap);
+            // add the interfaces if there is any
+            foreach (var interfaceSymbol in valueTypeSymbol.Interfaces)
             {
-                // add the generic type arguments
-                foreach (var typeArgument in namedType.TypeArguments)
-                {
-                    AddTypeSymbol(keyTypeSymbol, typeArgument, referenceMap);
-                }
+                AddTypeSymbol(keyTypeSymbol, interfaceSymbol, referenceMap);
+            }
+            // add the generic type arguments
+            foreach (var typeArgument in valueTypeSymbol.TypeArguments)
+            {
+                AddTypeSymbol(keyTypeSymbol, typeArgument, referenceMap);
             }
         }
 
