@@ -38,7 +38,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_AllParameters()
+        public async Task Example_Default_Async()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -46,7 +46,7 @@ namespace Encode.Bytes.Samples
             {
                 value = new object(),
             });
-            Response response = client.Default(content);
+            Response response = await client.DefaultAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -64,17 +64,17 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_AllParameters_Convenience()
+        public async Task Example_Default_Convenience_Async()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             DefaultBytesProperty body = new DefaultBytesProperty(BinaryData.FromObjectAsJson(new object()));
-            Response<DefaultBytesProperty> response = client.Default(body);
+            Response<DefaultBytesProperty> response = await client.DefaultAsync(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_Async()
+        public void Example_Default_AllParameters()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -82,7 +82,7 @@ namespace Encode.Bytes.Samples
             {
                 value = new object(),
             });
-            Response response = await client.DefaultAsync(content);
+            Response response = client.Default(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -106,12 +106,12 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_Convenience_Async()
+        public void Example_Default_AllParameters_Convenience()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             DefaultBytesProperty body = new DefaultBytesProperty(BinaryData.FromObjectAsJson(new object()));
-            Response<DefaultBytesProperty> response = await client.DefaultAsync(body);
+            Response<DefaultBytesProperty> response = client.Default(body);
         }
 
         [Test]
@@ -142,7 +142,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64_AllParameters()
+        public async Task Example_Base64_Async()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -150,7 +150,7 @@ namespace Encode.Bytes.Samples
             {
                 value = new object(),
             });
-            Response response = client.Base64(content);
+            Response response = await client.Base64Async(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -168,17 +168,17 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64_AllParameters_Convenience()
+        public async Task Example_Base64_Convenience_Async()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Base64BytesProperty body = new Base64BytesProperty(BinaryData.FromObjectAsJson(new object()));
-            Response<Base64BytesProperty> response = client.Base64(body);
+            Response<Base64BytesProperty> response = await client.Base64Async(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64_Async()
+        public void Example_Base64_AllParameters()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -186,7 +186,7 @@ namespace Encode.Bytes.Samples
             {
                 value = new object(),
             });
-            Response response = await client.Base64Async(content);
+            Response response = client.Base64(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -210,12 +210,12 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64_Convenience_Async()
+        public void Example_Base64_AllParameters_Convenience()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Base64BytesProperty body = new Base64BytesProperty(BinaryData.FromObjectAsJson(new object()));
-            Response<Base64BytesProperty> response = await client.Base64Async(body);
+            Response<Base64BytesProperty> response = client.Base64(body);
         }
 
         [Test]
@@ -246,7 +246,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64url_AllParameters()
+        public async Task Example_Base64url_Async()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -254,7 +254,7 @@ namespace Encode.Bytes.Samples
             {
                 value = new object(),
             });
-            Response response = client.Base64url(content);
+            Response response = await client.Base64urlAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -272,17 +272,17 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64url_AllParameters_Convenience()
+        public async Task Example_Base64url_Convenience_Async()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Base64urlBytesProperty body = new Base64urlBytesProperty(BinaryData.FromObjectAsJson(new object()));
-            Response<Base64urlBytesProperty> response = client.Base64url(body);
+            Response<Base64urlBytesProperty> response = await client.Base64urlAsync(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64url_Async()
+        public void Example_Base64url_AllParameters()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -290,7 +290,7 @@ namespace Encode.Bytes.Samples
             {
                 value = new object(),
             });
-            Response response = await client.Base64urlAsync(content);
+            Response response = client.Base64url(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -314,12 +314,12 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64url_Convenience_Async()
+        public void Example_Base64url_AllParameters_Convenience()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Base64urlBytesProperty body = new Base64urlBytesProperty(BinaryData.FromObjectAsJson(new object()));
-            Response<Base64urlBytesProperty> response = await client.Base64urlAsync(body);
+            Response<Base64urlBytesProperty> response = client.Base64url(body);
         }
 
         [Test]
@@ -353,7 +353,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64urlArray_AllParameters()
+        public async Task Example_Base64urlArray_Async()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -364,7 +364,7 @@ new object()
 new object()
 },
             });
-            Response response = client.Base64urlArray(content);
+            Response response = await client.Base64urlArrayAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value")[0].ToString());
@@ -385,7 +385,7 @@ BinaryData.FromObjectAsJson(new object())
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64urlArray_AllParameters_Convenience()
+        public async Task Example_Base64urlArray_Convenience_Async()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -393,12 +393,12 @@ BinaryData.FromObjectAsJson(new object())
 {
 BinaryData.FromObjectAsJson(new object())
 });
-            Response<Base64urlArrayBytesProperty> response = client.Base64urlArray(body);
+            Response<Base64urlArrayBytesProperty> response = await client.Base64urlArrayAsync(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64urlArray_Async()
+        public void Example_Base64urlArray_AllParameters()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -409,7 +409,7 @@ BinaryData.FromObjectAsJson(new object())
 new object()
 },
             });
-            Response response = await client.Base64urlArrayAsync(content);
+            Response response = client.Base64urlArray(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value")[0].ToString());
@@ -436,7 +436,7 @@ new object()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64urlArray_Convenience_Async()
+        public void Example_Base64urlArray_AllParameters_Convenience()
         {
             Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -444,7 +444,7 @@ new object()
 {
 BinaryData.FromObjectAsJson(new object())
 });
-            Response<Base64urlArrayBytesProperty> response = await client.Base64urlArrayAsync(body);
+            Response<Base64urlArrayBytesProperty> response = client.Base64urlArray(body);
         }
 
         [Test]

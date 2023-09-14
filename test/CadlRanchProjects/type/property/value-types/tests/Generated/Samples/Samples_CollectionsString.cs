@@ -34,11 +34,11 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollectionsString_AllParameters()
+        public async Task Example_GetCollectionsString_Async()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
-            Response response = client.GetCollectionsString(null);
+            Response response = await client.GetCollectionsStringAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property")[0].ToString());
@@ -55,20 +55,20 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollectionsString_AllParameters_Convenience()
+        public async Task Example_GetCollectionsString_Convenience_Async()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
-            Response<CollectionsStringProperty> response = client.GetCollectionsString();
+            Response<CollectionsStringProperty> response = await client.GetCollectionsStringAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollectionsString_Async()
+        public void Example_GetCollectionsString_AllParameters()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetCollectionsStringAsync(null);
+            Response response = client.GetCollectionsString(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property")[0].ToString());
@@ -88,11 +88,11 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollectionsString_Convenience_Async()
+        public void Example_GetCollectionsString_AllParameters_Convenience()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
-            Response<CollectionsStringProperty> response = await client.GetCollectionsStringAsync();
+            Response<CollectionsStringProperty> response = client.GetCollectionsString();
         }
 
         [Test]
@@ -123,7 +123,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public async Task Example_Put_Async()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
@@ -134,7 +134,7 @@ namespace _Type.Property.ValueTypes.Samples
 "<property>"
 },
             });
-            Response response = client.Put(content);
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -154,7 +154,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public async Task Example_Put_Convenience_Async()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
@@ -162,13 +162,13 @@ namespace _Type.Property.ValueTypes.Samples
 {
 "<property>"
 });
-            Response response = client.Put(body);
+            Response response = await client.PutAsync(body);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public void Example_Put_AllParameters()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
@@ -179,7 +179,7 @@ namespace _Type.Property.ValueTypes.Samples
 "<property>"
 },
             });
-            Response response = await client.PutAsync(content);
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -202,7 +202,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public void Example_Put_AllParameters_Convenience()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient(apiVersion: "1.0.0");
 
@@ -210,7 +210,7 @@ namespace _Type.Property.ValueTypes.Samples
 {
 "<property>"
 });
-            Response response = await client.PutAsync(body);
+            Response response = client.Put(body);
             Console.WriteLine(response.Status);
         }
 

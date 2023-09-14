@@ -33,14 +33,13 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAll_AllParameters()
+        public async Task Example_GetAll_Async()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            Response response = client.GetAll(null);
+            Response response = await client.GetAllAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("optionalProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
         }
 
@@ -55,22 +54,23 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAll_AllParameters_Convenience()
+        public async Task Example_GetAll_Convenience_Async()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            Response<RequiredAndOptionalProperty> response = client.GetAll();
+            Response<RequiredAndOptionalProperty> response = await client.GetAllAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAll_Async()
+        public void Example_GetAll_AllParameters()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetAllAsync(null);
+            Response response = client.GetAll(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("optionalProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
         }
 
@@ -89,11 +89,11 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAll_Convenience_Async()
+        public void Example_GetAll_AllParameters_Convenience()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            Response<RequiredAndOptionalProperty> response = await client.GetAllAsync();
+            Response<RequiredAndOptionalProperty> response = client.GetAll();
         }
 
         [Test]
@@ -119,14 +119,13 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetRequiredOnly_AllParameters()
+        public async Task Example_GetRequiredOnly_Async()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            Response response = client.GetRequiredOnly(null);
+            Response response = await client.GetRequiredOnlyAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("optionalProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
         }
 
@@ -141,22 +140,23 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetRequiredOnly_AllParameters_Convenience()
+        public async Task Example_GetRequiredOnly_Convenience_Async()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            Response<RequiredAndOptionalProperty> response = client.GetRequiredOnly();
+            Response<RequiredAndOptionalProperty> response = await client.GetRequiredOnlyAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetRequiredOnly_Async()
+        public void Example_GetRequiredOnly_AllParameters()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetRequiredOnlyAsync(null);
+            Response response = client.GetRequiredOnly(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("optionalProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
         }
 
@@ -175,11 +175,11 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetRequiredOnly_Convenience_Async()
+        public void Example_GetRequiredOnly_AllParameters_Convenience()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            Response<RequiredAndOptionalProperty> response = await client.GetRequiredOnlyAsync();
+            Response<RequiredAndOptionalProperty> response = client.GetRequiredOnly();
         }
 
         [Test]
@@ -207,16 +207,15 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAll_AllParameters()
+        public async Task Example_PutAll_Async()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
-                optionalProperty = "<optionalProperty>",
                 requiredProperty = 1234,
             });
-            Response response = client.PutAll(content);
+            Response response = await client.PutAllAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -233,29 +232,27 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAll_AllParameters_Convenience()
+        public async Task Example_PutAll_Convenience_Async()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            RequiredAndOptionalProperty body = new RequiredAndOptionalProperty(1234)
-            {
-                OptionalProperty = "<optionalProperty>",
-            };
-            Response response = client.PutAll(body);
+            RequiredAndOptionalProperty body = new RequiredAndOptionalProperty(1234);
+            Response response = await client.PutAllAsync(body);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAll_Async()
+        public void Example_PutAll_AllParameters()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
+                optionalProperty = "<optionalProperty>",
                 requiredProperty = 1234,
             });
-            Response response = await client.PutAllAsync(content);
+            Response response = client.PutAll(content);
             Console.WriteLine(response.Status);
         }
 
@@ -276,12 +273,15 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAll_Convenience_Async()
+        public void Example_PutAll_AllParameters_Convenience()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            RequiredAndOptionalProperty body = new RequiredAndOptionalProperty(1234);
-            Response response = await client.PutAllAsync(body);
+            RequiredAndOptionalProperty body = new RequiredAndOptionalProperty(1234)
+            {
+                OptionalProperty = "<optionalProperty>",
+            };
+            Response response = client.PutAll(body);
             Console.WriteLine(response.Status);
         }
 
@@ -315,16 +315,15 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutRequiredOnly_AllParameters()
+        public async Task Example_PutRequiredOnly_Async()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
-                optionalProperty = "<optionalProperty>",
                 requiredProperty = 1234,
             });
-            Response response = client.PutRequiredOnly(content);
+            Response response = await client.PutRequiredOnlyAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -341,29 +340,27 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutRequiredOnly_AllParameters_Convenience()
+        public async Task Example_PutRequiredOnly_Convenience_Async()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            RequiredAndOptionalProperty body = new RequiredAndOptionalProperty(1234)
-            {
-                OptionalProperty = "<optionalProperty>",
-            };
-            Response response = client.PutRequiredOnly(body);
+            RequiredAndOptionalProperty body = new RequiredAndOptionalProperty(1234);
+            Response response = await client.PutRequiredOnlyAsync(body);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutRequiredOnly_Async()
+        public void Example_PutRequiredOnly_AllParameters()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
             RequestContent content = RequestContent.Create(new
             {
+                optionalProperty = "<optionalProperty>",
                 requiredProperty = 1234,
             });
-            Response response = await client.PutRequiredOnlyAsync(content);
+            Response response = client.PutRequiredOnly(content);
             Console.WriteLine(response.Status);
         }
 
@@ -384,12 +381,15 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutRequiredOnly_Convenience_Async()
+        public void Example_PutRequiredOnly_AllParameters_Convenience()
         {
             RequiredAndOptional client = new OptionalClient().GetRequiredAndOptionalClient(apiVersion: "1.0.0");
 
-            RequiredAndOptionalProperty body = new RequiredAndOptionalProperty(1234);
-            Response response = await client.PutRequiredOnlyAsync(body);
+            RequiredAndOptionalProperty body = new RequiredAndOptionalProperty(1234)
+            {
+                OptionalProperty = "<optionalProperty>",
+            };
+            Response response = client.PutRequiredOnly(body);
             Console.WriteLine(response.Status);
         }
 

@@ -30,23 +30,23 @@ namespace security_aad_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Head_AllParameters()
-        {
-            TokenCredential credential = new DefaultAzureCredential();
-            AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
-
-            Response response = client.Head();
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_Head_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
             AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
 
             Response response = await client.HeadAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Head_AllParameters()
+        {
+            TokenCredential credential = new DefaultAzureCredential();
+            AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
+
+            Response response = client.Head();
             Console.WriteLine(response.Status);
         }
 

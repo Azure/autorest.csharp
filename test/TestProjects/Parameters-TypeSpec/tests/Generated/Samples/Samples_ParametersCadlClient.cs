@@ -32,11 +32,11 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_AllParameters()
+        public async Task Example_Operation_Async()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
-            Response response = client.Operation(1234, 1234, null);
+            Response response = await client.OperationAsync(1234, null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -53,20 +53,20 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_AllParameters_Convenience()
+        public async Task Example_Operation_Convenience_Async()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
-            Response<Result> response = client.Operation(1234, end: 1234);
+            Response<Result> response = await client.OperationAsync(1234);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_Async()
+        public void Example_Operation_AllParameters()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
-            Response response = await client.OperationAsync(1234, null, null);
+            Response response = client.Operation(1234, 1234, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -86,11 +86,11 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_Convenience_Async()
+        public void Example_Operation_AllParameters_Convenience()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
-            Response<Result> response = await client.OperationAsync(1234);
+            Response<Result> response = client.Operation(1234, end: 1234);
         }
 
         [Test]
@@ -116,11 +116,11 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation2_AllParameters()
+        public async Task Example_Operation2_Async()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
-            Response response = client.Operation2(1234, 1234, null);
+            Response response = await client.Operation2Async(1234, null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -137,20 +137,20 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation2_AllParameters_Convenience()
+        public async Task Example_Operation2_Convenience_Async()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
-            Response<Result> response = client.Operation2(1234, start: 1234);
+            Response<Result> response = await client.Operation2Async(1234);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation2_Async()
+        public void Example_Operation2_AllParameters()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
-            Response response = await client.Operation2Async(1234, null, null);
+            Response response = client.Operation2(1234, 1234, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -170,11 +170,11 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation2_Convenience_Async()
+        public void Example_Operation2_AllParameters_Convenience()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
-            Response<Result> response = await client.Operation2Async(1234);
+            Response<Result> response = client.Operation2(1234, start: 1234);
         }
 
         [Test]

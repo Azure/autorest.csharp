@@ -32,11 +32,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PublicOnly_AllParameters()
+        public async Task Example_PublicOnly_Async()
         {
             InternalClient client = new InternalClient();
 
-            Response response = client.PublicOnly("<name>", null);
+            Response response = await client.PublicOnlyAsync("<name>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -53,20 +53,20 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PublicOnly_AllParameters_Convenience()
+        public async Task Example_PublicOnly_Convenience_Async()
         {
             InternalClient client = new InternalClient();
 
-            Response<PublicModel> response = client.PublicOnly("<name>");
+            Response<PublicModel> response = await client.PublicOnlyAsync("<name>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PublicOnly_Async()
+        public void Example_PublicOnly_AllParameters()
         {
             InternalClient client = new InternalClient();
 
-            Response response = await client.PublicOnlyAsync("<name>", null);
+            Response response = client.PublicOnly("<name>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -86,11 +86,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PublicOnly_Convenience_Async()
+        public void Example_PublicOnly_AllParameters_Convenience()
         {
             InternalClient client = new InternalClient();
 
-            Response<PublicModel> response = await client.PublicOnlyAsync("<name>");
+            Response<PublicModel> response = client.PublicOnly("<name>");
         }
 
         [Test]

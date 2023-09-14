@@ -32,12 +32,12 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Zero_AllParameters()
+        public async Task Example_Zero_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
-            Response response = client.Zero(null);
+            Response response = await client.ZeroAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -45,12 +45,12 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Zero_Async()
+        public void Example_Zero_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
-            Response response = await client.ZeroAsync(null);
+            Response response = client.Zero(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -84,12 +84,12 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_One_AllParameters()
+        public async Task Example_One_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
-            Response response = client.One(null);
+            Response response = await client.OneAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -97,12 +97,12 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_One_Async()
+        public void Example_One_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
-            Response response = await client.OneAsync(null);
+            Response response = client.One(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

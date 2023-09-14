@@ -32,11 +32,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Public_AllParameters()
+        public async Task Example_Public_Async()
         {
             Shared client = new InternalClient().GetSharedClient();
 
-            Response response = client.Public("<name>", null);
+            Response response = await client.PublicAsync("<name>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -53,20 +53,20 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Public_AllParameters_Convenience()
+        public async Task Example_Public_Convenience_Async()
         {
             Shared client = new InternalClient().GetSharedClient();
 
-            Response<SharedModel> response = client.Public("<name>");
+            Response<SharedModel> response = await client.PublicAsync("<name>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Public_Async()
+        public void Example_Public_AllParameters()
         {
             Shared client = new InternalClient().GetSharedClient();
 
-            Response response = await client.PublicAsync("<name>", null);
+            Response response = client.Public("<name>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -86,11 +86,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Public_Convenience_Async()
+        public void Example_Public_AllParameters_Convenience()
         {
             Shared client = new InternalClient().GetSharedClient();
 
-            Response<SharedModel> response = await client.PublicAsync("<name>");
+            Response<SharedModel> response = client.Public("<name>");
         }
 
         [Test]

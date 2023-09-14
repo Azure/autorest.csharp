@@ -35,6 +35,20 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetValid_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
+
+            Response response = await client.GetValidAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetValid_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -49,20 +63,6 @@ namespace body_complex_LowLevel.Samples
             Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
             Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
             Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
-
-            Response response = await client.GetValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -101,6 +101,22 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutValid_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
+
+            RequestContent content = RequestContent.Create(new
+            {
+                fishtype = "salmon",
+                length = 123.45F,
+            });
+            Response response = await client.PutValidAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutValid_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -119,22 +135,6 @@ null
 },
             });
             Response response = client.PutValid(content);
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValid_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            PolymorphicrecursiveClient client = new PolymorphicrecursiveClient(credential);
-
-            RequestContent content = RequestContent.Create(new
-            {
-                fishtype = "salmon",
-                length = 123.45F,
-            });
-            Response response = await client.PutValidAsync(content);
             Console.WriteLine(response.Status);
         }
 

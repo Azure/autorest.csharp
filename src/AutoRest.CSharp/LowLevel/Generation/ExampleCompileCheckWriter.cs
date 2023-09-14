@@ -39,15 +39,9 @@ namespace AutoRest.CSharp.LowLevel.Generation
                 {
                     foreach (var method in _client.ClientMethods)
                     {
-                        // TODO -- we keep two iterations here because we do not want to change the sequence of the method writing to get less changes in this PR
-                        // TODO -- we could have a follow up PR that purely changes the order of methods
                         foreach (var sample in method.Samples)
                         {
                             WriteTestMethod(sample, false);
-                        }
-
-                        foreach (var sample in method.Samples)
-                        {
                             WriteTestMethod(sample, true);
                         }
                     }

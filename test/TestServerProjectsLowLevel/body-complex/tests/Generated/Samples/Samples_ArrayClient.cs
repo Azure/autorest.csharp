@@ -34,19 +34,6 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetValid_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ArrayClient client = new ArrayClient(credential);
-
-            Response response = client.GetValid(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("array")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -56,6 +43,19 @@ namespace body_complex_LowLevel.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetValid_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ArrayClient client = new ArrayClient(credential);
+
+            Response response = client.GetValid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("array")[0].ToString());
         }
 
         [Test]
@@ -85,6 +85,18 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutValid_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ArrayClient client = new ArrayClient(credential);
+
+            RequestContent content = RequestContent.Create(new object());
+            Response response = await client.PutValidAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutValid_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -98,18 +110,6 @@ namespace body_complex_LowLevel.Samples
 },
             });
             Response response = client.PutValid(content);
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValid_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ArrayClient client = new ArrayClient(credential);
-
-            RequestContent content = RequestContent.Create(new object());
-            Response response = await client.PutValidAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -146,19 +146,6 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmpty_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ArrayClient client = new ArrayClient(credential);
-
-            Response response = client.GetEmpty(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("array")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -168,6 +155,19 @@ namespace body_complex_LowLevel.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetEmpty_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ArrayClient client = new ArrayClient(credential);
+
+            Response response = client.GetEmpty(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("array")[0].ToString());
         }
 
         [Test]
@@ -197,6 +197,18 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutEmpty_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ArrayClient client = new ArrayClient(credential);
+
+            RequestContent content = RequestContent.Create(new object());
+            Response response = await client.PutEmptyAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutEmpty_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -210,18 +222,6 @@ namespace body_complex_LowLevel.Samples
 },
             });
             Response response = client.PutEmpty(content);
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutEmpty_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ArrayClient client = new ArrayClient(credential);
-
-            RequestContent content = RequestContent.Create(new object());
-            Response response = await client.PutEmptyAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -258,19 +258,6 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNotProvided_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ArrayClient client = new ArrayClient(credential);
-
-            Response response = client.GetNotProvided(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("array")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNotProvided_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -280,6 +267,19 @@ namespace body_complex_LowLevel.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetNotProvided_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ArrayClient client = new ArrayClient(credential);
+
+            Response response = client.GetNotProvided(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("array")[0].ToString());
         }
 
         [Test]
