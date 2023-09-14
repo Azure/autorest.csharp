@@ -204,7 +204,10 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
             // add the class and all its partial classes to the map
             // this will make all the partial classes are referencing each other in the reference map
             // when we make the travesal over the reference map, we will not only remove one of the partial class, instead we will either keep all the partial classes (if at least one of them has references), or remove all of them (if none of them has references)
-            referenceMap.AddInList(keyTypeSymbol, valueTypeSymbol);
+            if (!referenceMap.AddInList(keyTypeSymbol, valueTypeSymbol))
+            {
+                return; // we short cut if the valueTypeSymbol has already existed in the list to avoid infinite loops
+            }
             // add the base type
             AddTypeSymbol(keyTypeSymbol, valueSymbol.BaseType, referenceMap);
             if (valueSymbol is INamedTypeSymbol namedType)
