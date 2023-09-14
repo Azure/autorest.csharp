@@ -38,13 +38,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 _writer.WriteXmlDocumentationSummary(This.Description);
                 using (_writer.Scope($"{This.Declaration.Accessibility} static partial class {This.Type:D}"))
                 {
-                    foreach (var method in This.Methods)
+                    foreach (var method in This.Methods.Where(x => !This.SignatureTypeProvider!.MethodsToSkip.Contains(x)))
                     {
                         WriteFactoryMethod(method);
                         _writer.Line();
                     }
 
-                    foreach (OverloadMethodSignature overloadMethod in This.OverloadingMethods)
+                    foreach (OverloadMethodSignature overloadMethod in This.SignatureTypeProvider!.OverloadingMethods)
                     {
                         _writer.WriteMissingOverloadMethod(overloadMethod);
                         _writer.Line();

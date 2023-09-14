@@ -29,7 +29,6 @@ namespace AutoRest.CSharp.Output.Models
         private readonly IEnumerable<InputParameter> _clientParameters;
         private readonly InputAuth _authorization;
         private readonly IEnumerable<InputOperation> _operations;
-        private readonly SourceInputModel? _sourceInputModel;
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility => "public";
@@ -64,7 +63,6 @@ namespace AutoRest.CSharp.Output.Models
             _clientParameters = clientParameters;
             _authorization = authorization;
             _operations = operations;
-            _sourceInputModel = sourceInputModel;
 
             SubClients = Array.Empty<LowLevelClient>();
         }

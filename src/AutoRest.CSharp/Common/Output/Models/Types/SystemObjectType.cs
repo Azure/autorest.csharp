@@ -37,12 +37,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         private readonly Type _type;
-        private readonly SourceInputModel? _sourceInputModel;
 
         private SystemObjectType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             _type = type;
-            _sourceInputModel = sourceInputModel;
             DefaultName = GetNameWithoutGeneric(type);
         }
 
