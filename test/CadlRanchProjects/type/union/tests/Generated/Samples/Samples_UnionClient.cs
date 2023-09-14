@@ -258,5 +258,197 @@ namespace _Type.Union.Samples
             Response response = await client.SendSecondNamedUnionValueAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ReceiveString()
+        {
+            var client = new UnionClient();
+
+            Response response = client.ReceiveString(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ReceiveString_AllParameters()
+        {
+            var client = new UnionClient();
+
+            Response response = client.ReceiveString(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ReceiveString_Async()
+        {
+            var client = new UnionClient();
+
+            Response response = await client.ReceiveStringAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ReceiveString_AllParameters_Async()
+        {
+            var client = new UnionClient();
+
+            Response response = await client.ReceiveStringAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ReceiveIntArray()
+        {
+            var client = new UnionClient();
+
+            Response response = client.ReceiveIntArray(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ReceiveIntArray_AllParameters()
+        {
+            var client = new UnionClient();
+
+            Response response = client.ReceiveIntArray(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ReceiveIntArray_Async()
+        {
+            var client = new UnionClient();
+
+            Response response = await client.ReceiveIntArrayAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ReceiveIntArray_AllParameters_Async()
+        {
+            var client = new UnionClient();
+
+            Response response = await client.ReceiveIntArrayAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ReceiveFirstNamedUnionValue()
+        {
+            var client = new UnionClient();
+
+            Response response = client.ReceiveFirstNamedUnionValue(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("namedUnion").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ReceiveFirstNamedUnionValue_AllParameters()
+        {
+            var client = new UnionClient();
+
+            Response response = client.ReceiveFirstNamedUnionValue(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("namedUnion").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ReceiveFirstNamedUnionValue_Async()
+        {
+            var client = new UnionClient();
+
+            Response response = await client.ReceiveFirstNamedUnionValueAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("namedUnion").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ReceiveFirstNamedUnionValue_AllParameters_Async()
+        {
+            var client = new UnionClient();
+
+            Response response = await client.ReceiveFirstNamedUnionValueAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("namedUnion").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ReceiveSecondNamedUnionValue()
+        {
+            var client = new UnionClient();
+
+            Response response = client.ReceiveSecondNamedUnionValue(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("namedUnion").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ReceiveSecondNamedUnionValue_AllParameters()
+        {
+            var client = new UnionClient();
+
+            Response response = client.ReceiveSecondNamedUnionValue(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("namedUnion").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ReceiveSecondNamedUnionValue_Async()
+        {
+            var client = new UnionClient();
+
+            Response response = await client.ReceiveSecondNamedUnionValueAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("namedUnion").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ReceiveSecondNamedUnionValue_AllParameters_Async()
+        {
+            var client = new UnionClient();
+
+            Response response = await client.ReceiveSecondNamedUnionValueAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("namedUnion").ToString());
+        }
     }
 }

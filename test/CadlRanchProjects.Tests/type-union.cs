@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using _Type.Union;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -61,6 +63,49 @@ namespace CadlRanchProjects.Tests
             };
             var response = await new UnionClient(host, null).SendIntArrayAsync(RequestContent.Create(data));
             Assert.AreEqual(200, response.Status);
+        });
+
+        [Test]
+        public Task Type_Union_receiveString() => Test(async (host) =>
+        {
+            var response = await new UnionClient(host, null).ReceiveStringAsync(null); // explicitly pass null to call the protocol method
+            Assert.AreEqual(200, response.Status);
+
+            var root = JsonDocument.Parse(response.ContentStream).RootElement;
+            Assert.AreEqual("string", root.GetProperty("simpleUnion").GetString());
+        });
+
+        [Test]
+        public Task Type_Union_receiveIntArray() => Test(async (host) =>
+        {
+            var response = await new UnionClient(host, null).ReceiveIntArrayAsync(null); // explicitly pass null to call the protocol method
+            Assert.AreEqual(200, response.Status);
+
+            var root = JsonDocument.Parse(response.ContentStream).RootElement;
+            var array = root.GetProperty("simpleUnion").EnumerateArray().Select(e => e.GetInt32());
+            CollectionAssert.AreEquivalent(new[] { 1, 2 }, array);
+        });
+
+        [Test]
+        public Task Type_Union_receiveFirstNamedUnionValue() => Test(async (host) =>
+        {
+            var response = await new UnionClient(host, null).ReceiveFirstNamedUnionValueAsync(null); // explicitly pass null to call the protocol method
+            Assert.AreEqual(200, response.Status);
+
+            var root = JsonDocument.Parse(response.ContentStream).RootElement;
+            Assert.AreEqual("model1", root.GetProperty("namedUnion").GetProperty("name").GetString());
+            Assert.AreEqual(1, root.GetProperty("namedUnion").GetProperty("prop1").GetInt32());
+        });
+
+        [Test]
+        public Task Type_Union_receiveSecondNamedUnionValue() => Test(async (host) =>
+        {
+            var response = await new UnionClient(host, null).ReceiveSecondNamedUnionValueAsync(null); // explicitly pass null to call the protocol method
+            Assert.AreEqual(200, response.Status);
+
+            var root = JsonDocument.Parse(response.ContentStream).RootElement;
+            Assert.AreEqual("model2", root.GetProperty("namedUnion").GetProperty("name").GetString());
+            Assert.AreEqual(2, root.GetProperty("namedUnion").GetProperty("prop2").GetInt32());
         });
     }
 }
