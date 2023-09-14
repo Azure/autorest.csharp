@@ -560,7 +560,7 @@ namespace AutoRest.CSharp.Output.Models
 
             constructorParameters.AddRange(GetOptionalParameters(parameters, includeAPIVersion));
 
-            return constructorParameters.OrderBy(parameter => parameter.Name != "endpoint").ToList();
+            return constructorParameters;
         }
     }
 

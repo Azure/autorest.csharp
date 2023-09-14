@@ -274,7 +274,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private IEnumerable<Parameter> GetSubClientFactoryMethodParameters()
             => new[] { KnownParameters.ClientDiagnostics, KnownParameters.Pipeline, KnownParameters.KeyAuth, KnownParameters.TokenAuth }
-                .Concat(RestClientBuilder.GetConstructorParameters(Parameters, null, includeAPIVersion: true))
+                .Concat(RestClientBuilder.GetConstructorParameters(Parameters, null, includeAPIVersion: true).OrderBy(parameter => parameter.Name != "endpoint"))
                 .Where(p => Fields.GetFieldByParameter(p) != null);
 
         internal MethodSignatureBase? GetEffectiveCtor()
