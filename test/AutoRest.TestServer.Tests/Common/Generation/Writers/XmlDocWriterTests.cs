@@ -18,25 +18,23 @@ namespace AutoRest.CSharp.Generation.Writers
         [Test]
         public void EmptyContent()
         {
-            var expected = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            Assert.AreEqual(@"<?xml version=""1.0"" encoding=""utf-8""?>
 <doc>
   <members />
-</doc>";
-
-            Assert.AreEqual(expected, Writer.ToString());
+</doc>", Writer.ToString());
         }
 
         [Test]
         public void EmptyMember()
         {
             Writer.AddMember("foo");
-            var expected = @"<?xml version=""1.0"" encoding=""utf-8""?>
+
+            Assert.AreEqual(@"<?xml version=""1.0"" encoding=""utf-8""?>
 <doc>
   <members>
     <member name=""foo"" />
   </members>
-</doc>";
-            Assert.AreEqual(expected, Writer.ToString());
+</doc>", Writer.ToString());
         }
 
         [Test]
@@ -48,7 +46,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 ("", "")
             });
 
-            var expected = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            Assert.AreEqual(@"<?xml version=""1.0"" encoding=""utf-8""?>
 <doc>
   <members>
     <member name=""foo"">
@@ -57,8 +55,7 @@ namespace AutoRest.CSharp.Generation.Writers
 <code></code></example>
     </member>
   </members>
-</doc>";
-            Assert.AreEqual(expected, Writer.ToString());
+</doc>", Writer.ToString());
         }
 
         [Test]
@@ -70,7 +67,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 ("test", "Hello, world!")
             });
 
-            var expected = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            Assert.AreEqual(@"<?xml version=""1.0"" encoding=""utf-8""?>
 <doc>
   <members>
     <member name=""foo"">
@@ -79,8 +76,7 @@ test
 <code>Hello, world!</code></example>
     </member>
   </members>
-</doc>";
-            Assert.AreEqual(expected, Writer.ToString());
+</doc>", Writer.ToString());
         }
 
         [Test]
@@ -92,7 +88,8 @@ test
                 ("test", "Hello, world!"),
                 ("test2", "Hello, world, again!")
             });
-            var expected = @"<?xml version=""1.0"" encoding=""utf-8""?>
+
+            Assert.AreEqual(@"<?xml version=""1.0"" encoding=""utf-8""?>
 <doc>
   <members>
     <member name=""foo"">
@@ -103,8 +100,7 @@ test2
 <code>Hello, world, again!</code></example>
     </member>
   </members>
-</doc>";
-            Assert.AreEqual(expected, Writer.ToString());
+</doc>", Writer.ToString());
         }
 
         [Test]
@@ -119,7 +115,7 @@ test2
                 ("test2", "Hello, world, again!"),
             });
 
-            var expected = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            Assert.AreEqual(@"<?xml version=""1.0"" encoding=""utf-8""?>
 <doc>
   <members>
     <member name=""foo"">
@@ -133,8 +129,7 @@ test2
 <code>Hello, world, again!</code></example>
     </member>
   </members>
-</doc>";
-            Assert.AreEqual(expected, Writer.ToString());
+</doc>", Writer.ToString());
         }
     }
 }

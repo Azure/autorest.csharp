@@ -12,7 +12,6 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -48,7 +47,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
 
         private static CodeWriter AppendFrameworkTypeValue(this CodeWriter writer, InputExampleValue exampleValue, Type frameworkType, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
         {
-            // handle objects - we usually do not generate object types, but for some rare cases (such as union type) we generate object.
+            // handle objects - we usually do not generate object types, but for some rare cases (such as union type) we generate object
             if (frameworkType == typeof(object))
             {
                 return writer.AppendFreeFormObject(exampleValue, includeCollectionInitialization);
@@ -234,7 +233,6 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                 {
                     foreach (var itemValue in elements)
                     {
-                        // TODO -- bad formatting will happen in collection initializer because roslyn formatter ignores things in these places: https://github.com/dotnet/roslyn/issues/8269
                         writer.AppendInputExampleValue(itemValue, elementType, serializationFormat);
                         if (elementType.IsFrameworkType)
                             writer.AppendRaw(",");
@@ -400,9 +398,9 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
         {
             if (valueDict == null)
             {
-                writer.AppendRaw("null");
-                return writer;
+                return writer.AppendRaw("null");
             }
+
             // need to get the actual ObjectType if this type has a discrinimator
             objectType = GetActualImplementation(objectType, valueDict);
             // get all the properties on this type, including the properties from its base type

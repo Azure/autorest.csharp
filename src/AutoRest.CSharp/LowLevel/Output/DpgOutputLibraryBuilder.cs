@@ -391,8 +391,6 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private record ClientParametersAndExamples(IReadOnlyList<InputParameter> ClientParameters, IReadOnlyDictionary<string, InputClientExample> Examples);
-
         private class ClientInfo
         {
             public string OperationGroupKey { get; }

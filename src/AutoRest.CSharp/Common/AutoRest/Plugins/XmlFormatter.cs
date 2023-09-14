@@ -20,9 +20,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         internal static async Task<string> FormatAsync(XmlDocWriter writer, SyntaxTree syntaxTree)
         {
             var document = writer.Document;
-            var methods = await GetMethods(syntaxTree);
+            var methods = await GetMethodsAsync(syntaxTree);
             // first we need to get the members
-            // TODO -- we should have a reference to the members we have in the writer and directly go to them
             var members = writer.Members;
 
             foreach (var member in members)
@@ -83,7 +82,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         /// <returns></returns>
         internal static string FormatContent(string[] lines)
         {
-            const int spaceIncrement = 4;
             if (!lines.Any())
                 return string.Empty;
 
@@ -112,6 +110,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             // since the code we are processing here has been formatted by Roslyn, we only take the cases that lines starts or ends with { or } to format.
             var stack = new Stack<int>();
             stack.Push(0);
+            const int spaceIncrement = 4;
 
             for (int i = lineNumber; i < lines.Length; i++)
             {
@@ -147,7 +146,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return builder.ToString();
         }
 
-        private static async Task<Dictionary<string, MethodDeclarationSyntax>> GetMethods(SyntaxTree syntaxTree)
+        private static async Task<Dictionary<string, MethodDeclarationSyntax>> GetMethodsAsync(SyntaxTree syntaxTree)
         {
             var result = new Dictionary<string, MethodDeclarationSyntax>();
             var root = await syntaxTree.GetRootAsync();
