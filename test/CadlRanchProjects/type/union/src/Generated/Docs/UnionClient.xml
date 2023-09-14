@@ -241,5 +241,125 @@ Response response = client.SendSecondNamedUnionValue(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
+    <member name="ReceiveStringAsync(CancellationToken)">
+    </member>
+    <member name="ReceiveString(CancellationToken)">
+    </member>
+    <member name="ReceiveStringAsync(RequestContext)">
+<example>
+This sample shows how to call ReceiveStringAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new UnionClient();
+
+Response response = await client.ReceiveStringAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="ReceiveString(RequestContext)">
+<example>
+This sample shows how to call ReceiveString with required parameters and parse the result.
+<code><![CDATA[
+var client = new UnionClient();
+
+Response response = client.ReceiveString(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="ReceiveIntArrayAsync(CancellationToken)">
+    </member>
+    <member name="ReceiveIntArray(CancellationToken)">
+    </member>
+    <member name="ReceiveIntArrayAsync(RequestContext)">
+<example>
+This sample shows how to call ReceiveIntArrayAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new UnionClient();
+
+Response response = await client.ReceiveIntArrayAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="ReceiveIntArray(RequestContext)">
+<example>
+This sample shows how to call ReceiveIntArray with required parameters and parse the result.
+<code><![CDATA[
+var client = new UnionClient();
+
+Response response = client.ReceiveIntArray(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("simpleUnion").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="ReceiveFirstNamedUnionValueAsync(CancellationToken)">
+    </member>
+    <member name="ReceiveFirstNamedUnionValue(CancellationToken)">
+    </member>
+    <member name="ReceiveFirstNamedUnionValueAsync(RequestContext)">
+<example>
+This sample shows how to call ReceiveFirstNamedUnionValueAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new UnionClient();
+
+Response response = await client.ReceiveFirstNamedUnionValueAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="ReceiveFirstNamedUnionValue(RequestContext)">
+<example>
+This sample shows how to call ReceiveFirstNamedUnionValue with required parameters and parse the result.
+<code><![CDATA[
+var client = new UnionClient();
+
+Response response = client.ReceiveFirstNamedUnionValue(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="ReceiveSecondNamedUnionValueAsync(CancellationToken)">
+    </member>
+    <member name="ReceiveSecondNamedUnionValue(CancellationToken)">
+    </member>
+    <member name="ReceiveSecondNamedUnionValueAsync(RequestContext)">
+<example>
+This sample shows how to call ReceiveSecondNamedUnionValueAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new UnionClient();
+
+Response response = await client.ReceiveSecondNamedUnionValueAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="ReceiveSecondNamedUnionValue(RequestContext)">
+<example>
+This sample shows how to call ReceiveSecondNamedUnionValue with required parameters and parse the result.
+<code><![CDATA[
+var client = new UnionClient();
+
+Response response = client.ReceiveSecondNamedUnionValue(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("namedUnion").ToString());
+]]></code>
+</example>
+    </member>
   </members>
 </doc>
