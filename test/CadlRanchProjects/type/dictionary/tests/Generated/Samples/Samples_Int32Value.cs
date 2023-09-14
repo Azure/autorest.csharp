@@ -7,14 +7,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type._Dictionary.Models;
+using _Type._Dictionary;
 
 namespace _Type._Dictionary.Samples
 {
@@ -24,71 +23,97 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt32Value()
         {
-            var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            Response response = client.GetInt32Value(new RequestContext());
+            Response response = client.GetInt32Value(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt32Value_AllParameters()
         {
-            var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            Response response = client.GetInt32Value(new RequestContext());
+            Response response = client.GetInt32Value(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("<key>").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetInt32Value_Convenience()
+        {
+            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyDictionary<string, int>> response = client.GetInt32Value();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetInt32Value_AllParameters_Convenience()
+        {
+            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyDictionary<string, int>> response = client.GetInt32Value();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt32Value_Async()
         {
-            var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetInt32ValueAsync(new RequestContext());
+            Response response = await client.GetInt32ValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt32Value_AllParameters_Async()
         {
-            var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetInt32ValueAsync(new RequestContext());
+            Response response = await client.GetInt32ValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt32Value_Convenience_Async()
         {
-            var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            var result = await client.GetInt32ValueAsync();
+            Response<IReadOnlyDictionary<string, int>> response = await client.GetInt32ValueAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetInt32Value_AllParameters_Convenience_Async()
+        {
+            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyDictionary<string, int>> response = await client.GetInt32ValueAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 key = 1234,
-            };
-
-            Response response = client.Put(RequestContent.Create(data));
+            });
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -96,14 +121,39 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 key = 1234,
-            };
+            });
+            Response response = client.Put(content);
+            Console.WriteLine(response.Status);
+        }
 
-            Response response = client.Put(RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_Convenience()
+        {
+            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+            Response response = client.Put(new Dictionary<string, int>()
+            {
+                ["key"] = 1234,
+            });
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_AllParameters_Convenience()
+        {
+            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+            Response response = client.Put(new Dictionary<string, int>()
+            {
+                ["key"] = 1234,
+            });
             Console.WriteLine(response.Status);
         }
 
@@ -111,14 +161,13 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 key = 1234,
-            };
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -126,14 +175,13 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 key = 1234,
-            };
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -141,13 +189,26 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Convenience_Async()
         {
-            var client = new DictionaryClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            var body = new Dictionary<string, int>
+            Response response = await client.PutAsync(new Dictionary<string, int>()
             {
                 ["key"] = 1234,
-            };
-            var result = await client.PutAsync(body);
+            });
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_AllParameters_Convenience_Async()
+        {
+            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+            Response response = await client.PutAsync(new Dictionary<string, int>()
+            {
+                ["key"] = 1234,
+            });
+            Console.WriteLine(response.Status);
         }
     }
 }

@@ -2,26 +2,38 @@
 <doc>
   <members>
     <member name="OperationAsync(string,RequestContext)">
-<example>
-This sample shows how to call OperationAsync with required parameters.
+      <example>
+This sample shows how to call OperationAsync.
 <code><![CDATA[
-var client = new ServiceVersionOverrideClient();
+ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
 
-Response response = await client.OperationAsync("<notApiVersionEnum>");
+Response response = await client.OperationAsync("2.0");
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call OperationAsync with all parameters.
+<code><![CDATA[
+ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
+
+Response response = await client.OperationAsync("2.0");
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Operation(string,RequestContext)">
-<example>
-This sample shows how to call Operation with required parameters.
+      <example>
+This sample shows how to call Operation.
 <code><![CDATA[
-var client = new ServiceVersionOverrideClient();
+ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
 
-Response response = client.Operation("<notApiVersionEnum>");
+Response response = client.Operation("2.0");
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Operation with all parameters.
+<code><![CDATA[
+ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
+
+Response response = client.Operation("2.0");
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
   </members>
 </doc>

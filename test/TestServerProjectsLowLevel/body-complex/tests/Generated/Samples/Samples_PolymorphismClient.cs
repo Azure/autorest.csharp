@@ -7,13 +7,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using body_complex_LowLevel;
 
 namespace body_complex_LowLevel.Samples
 {
@@ -23,10 +23,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetValid()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = client.GetValid(new RequestContext());
+            Response response = client.GetValid(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fishtype").ToString());
@@ -37,10 +37,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetValid_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = client.GetValid(new RequestContext());
+            Response response = client.GetValid(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fishtype").ToString());
@@ -55,10 +55,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetValid_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = await client.GetValidAsync(new RequestContext());
+            Response response = await client.GetValidAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fishtype").ToString());
@@ -69,10 +69,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetValid_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = await client.GetValidAsync(new RequestContext());
+            Response response = await client.GetValidAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fishtype").ToString());
@@ -87,16 +87,15 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutValid()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 fishtype = "salmon",
-                length = 123.45f,
-            };
-
-            Response response = client.PutValid(RequestContent.Create(data));
+                length = 123.45F,
+            });
+            Response response = client.PutValid(content);
             Console.WriteLine(response.Status);
         }
 
@@ -104,19 +103,22 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutValid_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 location = "<location>",
                 iswild = true,
                 fishtype = "salmon",
                 species = "<species>",
-                length = 123.45f,
-            };
-
-            Response response = client.PutValid(RequestContent.Create(data));
+                length = 123.45F,
+                siblings = new List<object>()
+{
+null
+},
+            });
+            Response response = client.PutValid(content);
             Console.WriteLine(response.Status);
         }
 
@@ -124,16 +126,15 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutValid_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 fishtype = "salmon",
-                length = 123.45f,
-            };
-
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
+                length = 123.45F,
+            });
+            Response response = await client.PutValidAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -141,19 +142,22 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutValid_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 location = "<location>",
                 iswild = true,
                 fishtype = "salmon",
                 species = "<species>",
-                length = 123.45f,
-            };
-
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
+                length = 123.45F,
+                siblings = new List<object>()
+{
+null
+},
+            });
+            Response response = await client.PutValidAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -161,10 +165,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDotSyntax()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = client.GetDotSyntax(new RequestContext());
+            Response response = client.GetDotSyntax(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fish.type").ToString());
@@ -174,10 +178,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDotSyntax_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = client.GetDotSyntax(new RequestContext());
+            Response response = client.GetDotSyntax(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fish.type").ToString());
@@ -188,10 +192,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDotSyntax_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = await client.GetDotSyntaxAsync(new RequestContext());
+            Response response = await client.GetDotSyntaxAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fish.type").ToString());
@@ -201,10 +205,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDotSyntax_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = await client.GetDotSyntaxAsync(new RequestContext());
+            Response response = await client.GetDotSyntaxAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("fish.type").ToString());
@@ -215,10 +219,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetComposedWithDiscriminator()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = client.GetComposedWithDiscriminator(new RequestContext());
+            Response response = client.GetComposedWithDiscriminator(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -228,10 +232,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetComposedWithDiscriminator_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = client.GetComposedWithDiscriminator(new RequestContext());
+            Response response = client.GetComposedWithDiscriminator(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
@@ -252,10 +256,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetComposedWithDiscriminator_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = await client.GetComposedWithDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetComposedWithDiscriminatorAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -265,10 +269,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetComposedWithDiscriminator_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = await client.GetComposedWithDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetComposedWithDiscriminatorAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
@@ -289,10 +293,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetComposedWithoutDiscriminator()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = client.GetComposedWithoutDiscriminator(new RequestContext());
+            Response response = client.GetComposedWithoutDiscriminator(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -302,10 +306,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetComposedWithoutDiscriminator_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = client.GetComposedWithoutDiscriminator(new RequestContext());
+            Response response = client.GetComposedWithoutDiscriminator(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
@@ -326,10 +330,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetComposedWithoutDiscriminator_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = await client.GetComposedWithoutDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetComposedWithoutDiscriminatorAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -339,10 +343,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetComposedWithoutDiscriminator_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = await client.GetComposedWithoutDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetComposedWithoutDiscriminatorAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
@@ -363,10 +367,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetComplicated()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = client.GetComplicated(new RequestContext());
+            Response response = client.GetComplicated(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -376,10 +380,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetComplicated_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = client.GetComplicated(new RequestContext());
+            Response response = client.GetComplicated(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("location").ToString());
@@ -396,10 +400,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetComplicated_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = await client.GetComplicatedAsync(new RequestContext());
+            Response response = await client.GetComplicatedAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -409,10 +413,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetComplicated_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            Response response = await client.GetComplicatedAsync(new RequestContext());
+            Response response = await client.GetComplicatedAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("location").ToString());
@@ -429,16 +433,15 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutComplicated()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 fishtype = "smart_salmon",
-                length = 123.45f,
-            };
-
-            Response response = client.PutComplicated(RequestContent.Create(data));
+                length = 123.45F,
+            });
+            Response response = client.PutComplicated(content);
             Console.WriteLine(response.Status);
         }
 
@@ -446,29 +449,34 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutComplicated_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 college_degree = "<college_degree>",
                 location = "<location>",
                 iswild = true,
                 fishtype = "smart_salmon",
                 species = "<species>",
-                length = 123.45f,
-                siblings = new[] {
-        new {
-            location = "<location>",
-            iswild = true,
-            fishtype = "salmon",
-            species = "<species>",
-            length = 123.45f,
-        }
-    },
-            };
-
-            Response response = client.PutComplicated(RequestContent.Create(data));
+                length = 123.45F,
+                siblings = new List<object>()
+{
+new
+{
+location = "<location>",
+iswild = true,
+fishtype = "salmon",
+species = "<species>",
+length = 123.45F,
+siblings = new List<object>()
+{
+null
+},
+}
+},
+            });
+            Response response = client.PutComplicated(content);
             Console.WriteLine(response.Status);
         }
 
@@ -476,16 +484,15 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutComplicated_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 fishtype = "smart_salmon",
-                length = 123.45f,
-            };
-
-            Response response = await client.PutComplicatedAsync(RequestContent.Create(data));
+                length = 123.45F,
+            });
+            Response response = await client.PutComplicatedAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -493,29 +500,34 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutComplicated_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 college_degree = "<college_degree>",
                 location = "<location>",
                 iswild = true,
                 fishtype = "smart_salmon",
                 species = "<species>",
-                length = 123.45f,
-                siblings = new[] {
-        new {
-            location = "<location>",
-            iswild = true,
-            fishtype = "salmon",
-            species = "<species>",
-            length = 123.45f,
-        }
-    },
-            };
-
-            Response response = await client.PutComplicatedAsync(RequestContent.Create(data));
+                length = 123.45F,
+                siblings = new List<object>()
+{
+new
+{
+location = "<location>",
+iswild = true,
+fishtype = "salmon",
+species = "<species>",
+length = 123.45F,
+siblings = new List<object>()
+{
+null
+},
+}
+},
+            });
+            Response response = await client.PutComplicatedAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -523,16 +535,15 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutMissingDiscriminator()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 fishtype = "smart_salmon",
-                length = 123.45f,
-            };
-
-            Response response = client.PutMissingDiscriminator(RequestContent.Create(data));
+                length = 123.45F,
+            });
+            Response response = client.PutMissingDiscriminator(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -542,29 +553,34 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutMissingDiscriminator_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 college_degree = "<college_degree>",
                 location = "<location>",
                 iswild = true,
                 fishtype = "smart_salmon",
                 species = "<species>",
-                length = 123.45f,
-                siblings = new[] {
-        new {
-            location = "<location>",
-            iswild = true,
-            fishtype = "salmon",
-            species = "<species>",
-            length = 123.45f,
-        }
-    },
-            };
-
-            Response response = client.PutMissingDiscriminator(RequestContent.Create(data));
+                length = 123.45F,
+                siblings = new List<object>()
+{
+new
+{
+location = "<location>",
+iswild = true,
+fishtype = "salmon",
+species = "<species>",
+length = 123.45F,
+siblings = new List<object>()
+{
+null
+},
+}
+},
+            });
+            Response response = client.PutMissingDiscriminator(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("location").ToString());
@@ -581,16 +597,15 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutMissingDiscriminator_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 fishtype = "smart_salmon",
-                length = 123.45f,
-            };
-
-            Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data));
+                length = 123.45F,
+            });
+            Response response = await client.PutMissingDiscriminatorAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -600,29 +615,34 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutMissingDiscriminator_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 college_degree = "<college_degree>",
                 location = "<location>",
                 iswild = true,
                 fishtype = "smart_salmon",
                 species = "<species>",
-                length = 123.45f,
-                siblings = new[] {
-        new {
-            location = "<location>",
-            iswild = true,
-            fishtype = "salmon",
-            species = "<species>",
-            length = 123.45f,
-        }
-    },
-            };
-
-            Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data));
+                length = 123.45F,
+                siblings = new List<object>()
+{
+new
+{
+location = "<location>",
+iswild = true,
+fishtype = "salmon",
+species = "<species>",
+length = 123.45F,
+siblings = new List<object>()
+{
+null
+},
+}
+},
+            });
+            Response response = await client.PutMissingDiscriminatorAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("location").ToString());
@@ -639,16 +659,15 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutValidMissingRequired()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 fishtype = "salmon",
-                length = 123.45f,
-            };
-
-            Response response = client.PutValidMissingRequired(RequestContent.Create(data));
+                length = 123.45F,
+            });
+            Response response = client.PutValidMissingRequired(content);
             Console.WriteLine(response.Status);
         }
 
@@ -656,19 +675,22 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutValidMissingRequired_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 location = "<location>",
                 iswild = true,
                 fishtype = "salmon",
                 species = "<species>",
-                length = 123.45f,
-            };
-
-            Response response = client.PutValidMissingRequired(RequestContent.Create(data));
+                length = 123.45F,
+                siblings = new List<object>()
+{
+null
+},
+            });
+            Response response = client.PutValidMissingRequired(content);
             Console.WriteLine(response.Status);
         }
 
@@ -676,16 +698,15 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutValidMissingRequired_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 fishtype = "salmon",
-                length = 123.45f,
-            };
-
-            Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data));
+                length = 123.45F,
+            });
+            Response response = await client.PutValidMissingRequiredAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -693,19 +714,22 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutValidMissingRequired_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PolymorphismClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = new PolymorphismClient(credential);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 location = "<location>",
                 iswild = true,
                 fishtype = "salmon",
                 species = "<species>",
-                length = 123.45f,
-            };
-
-            Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data));
+                length = 123.45F,
+                siblings = new List<object>()
+{
+null
+},
+            });
+            Response response = await client.PutValidMissingRequiredAsync(content);
             Console.WriteLine(response.Status);
         }
     }

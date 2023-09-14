@@ -6,14 +6,11 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using SpecialHeaders.Repeatability;
 
 namespace SpecialHeaders.Repeatability.Samples
 {
@@ -23,7 +20,7 @@ namespace SpecialHeaders.Repeatability.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ImmediateSuccess()
         {
-            var client = new RepeatabilityClient();
+            RepeatabilityClient client = new RepeatabilityClient();
 
             Response response = client.ImmediateSuccess();
             Console.WriteLine(response.Status);
@@ -33,7 +30,7 @@ namespace SpecialHeaders.Repeatability.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ImmediateSuccess_AllParameters()
         {
-            var client = new RepeatabilityClient();
+            RepeatabilityClient client = new RepeatabilityClient();
 
             Response response = client.ImmediateSuccess();
             Console.WriteLine(response.Status);
@@ -43,7 +40,7 @@ namespace SpecialHeaders.Repeatability.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ImmediateSuccess_Async()
         {
-            var client = new RepeatabilityClient();
+            RepeatabilityClient client = new RepeatabilityClient();
 
             Response response = await client.ImmediateSuccessAsync();
             Console.WriteLine(response.Status);
@@ -53,7 +50,7 @@ namespace SpecialHeaders.Repeatability.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ImmediateSuccess_AllParameters_Async()
         {
-            var client = new RepeatabilityClient();
+            RepeatabilityClient client = new RepeatabilityClient();
 
             Response response = await client.ImmediateSuccessAsync();
             Console.WriteLine(response.Status);

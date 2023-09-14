@@ -2,248 +2,324 @@
 <doc>
   <members>
     <member name="GetAllAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetAllAsync.
 <code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-var result = await client.GetAllAsync();
+Response<DatetimeProperty> response = await client.GetAllAsync();
 ]]></code>
-</example>
+This sample shows how to call GetAllAsync with all parameters.
+<code><![CDATA[
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
+
+Response<DatetimeProperty> response = await client.GetAllAsync();
+]]></code></example>
     </member>
     <member name="GetAll(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetAll.
 <code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-var result = client.GetAll();
+Response<DatetimeProperty> response = client.GetAll();
 ]]></code>
-</example>
+This sample shows how to call GetAll with all parameters.
+<code><![CDATA[
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
+
+Response<DatetimeProperty> response = client.GetAll();
+]]></code></example>
     </member>
     <member name="GetAllAsync(RequestContext)">
-<example>
-This sample shows how to call GetAllAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call GetAllAsync and parse the result.
 <code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-Response response = await client.GetAllAsync(new RequestContext());
+Response response = await client.GetAllAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetAllAsync with all parameters and parse the result.
+<code><![CDATA[
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
+
+Response response = await client.GetAllAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetAll(RequestContext)">
-<example>
-This sample shows how to call GetAll with required parameters and parse the result.
+      <example>
+This sample shows how to call GetAll and parse the result.
 <code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-Response response = client.GetAll(new RequestContext());
+Response response = client.GetAll(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetAll with all parameters and parse the result.
+<code><![CDATA[
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
+
+Response response = client.GetAll(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetDefaultAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetDefaultAsync.
 <code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-var result = await client.GetDefaultAsync();
+Response<DatetimeProperty> response = await client.GetDefaultAsync();
 ]]></code>
-</example>
+This sample shows how to call GetDefaultAsync with all parameters.
+<code><![CDATA[
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
+
+Response<DatetimeProperty> response = await client.GetDefaultAsync();
+]]></code></example>
     </member>
     <member name="GetDefault(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetDefault.
 <code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-var result = client.GetDefault();
+Response<DatetimeProperty> response = client.GetDefault();
 ]]></code>
-</example>
+This sample shows how to call GetDefault with all parameters.
+<code><![CDATA[
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
+
+Response<DatetimeProperty> response = client.GetDefault();
+]]></code></example>
     </member>
     <member name="GetDefaultAsync(RequestContext)">
-<example>
-This sample shows how to call GetDefaultAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call GetDefaultAsync and parse the result.
 <code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-Response response = await client.GetDefaultAsync(new RequestContext());
+Response response = await client.GetDefaultAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetDefaultAsync with all parameters and parse the result.
+<code><![CDATA[
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
+
+Response response = await client.GetDefaultAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetDefault(RequestContext)">
-<example>
-This sample shows how to call GetDefault with required parameters and parse the result.
+      <example>
+This sample shows how to call GetDefault and parse the result.
 <code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-Response response = client.GetDefault(new RequestContext());
+Response response = client.GetDefault(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetDefault with all parameters and parse the result.
+<code><![CDATA[
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
+
+Response response = client.GetDefault(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAllAsync(DatetimeProperty,CancellationToken)">
-<example>
-This sample shows how to call PutAllAsync with required parameters.
-<code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
-
-var body = new DatetimeProperty()
-{
-    Property = DateTimeOffset.UtcNow,
-};
-var result = await client.PutAllAsync(body);
-]]></code>
-</example>
-    </member>
-    <member name="PutAll(DatetimeProperty,CancellationToken)">
-<example>
-This sample shows how to call PutAll with required parameters.
-<code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
-
-var body = new DatetimeProperty()
-{
-    Property = DateTimeOffset.UtcNow,
-};
-var result = client.PutAll(body);
-]]></code>
-</example>
-    </member>
-    <member name="PutAllAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutAllAsync.
 <code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-var data = new {};
+DatetimeProperty body = new DatetimeProperty();
+Response response = await client.PutAllAsync(body);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAllAsync with all parameters.
+<code><![CDATA[
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-Response response = await client.PutAllAsync(RequestContent.Create(data));
+DatetimeProperty body = new DatetimeProperty()
+{
+    Property = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+};
+Response response = await client.PutAllAsync(body);
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="PutAll(DatetimeProperty,CancellationToken)">
+      <example>
+This sample shows how to call PutAll.
+<code><![CDATA[
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
+
+DatetimeProperty body = new DatetimeProperty();
+Response response = client.PutAll(body);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAll with all parameters.
+<code><![CDATA[
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
+
+DatetimeProperty body = new DatetimeProperty()
+{
+    Property = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+};
+Response response = client.PutAll(body);
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="PutAllAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PutAllAsync.
+<code><![CDATA[
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new object());
+Response response = await client.PutAllAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAllAsync with all request content.
 <code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     property = "2022-05-10T14:57:31.2311892-04:00",
-};
-
-Response response = await client.PutAllAsync(RequestContent.Create(data));
+});
+Response response = await client.PutAllAsync(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAll(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutAll.
 <code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-var data = new {};
-
-Response response = client.PutAll(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new object());
+Response response = client.PutAll(content);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAll with all request content.
 <code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     property = "2022-05-10T14:57:31.2311892-04:00",
-};
-
-Response response = client.PutAll(RequestContent.Create(data));
+});
+Response response = client.PutAll(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutDefaultAsync(DatetimeProperty,CancellationToken)">
-<example>
-This sample shows how to call PutDefaultAsync with required parameters.
-<code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
-
-var body = new DatetimeProperty()
-{
-    Property = DateTimeOffset.UtcNow,
-};
-var result = await client.PutDefaultAsync(body);
-]]></code>
-</example>
-    </member>
-    <member name="PutDefault(DatetimeProperty,CancellationToken)">
-<example>
-This sample shows how to call PutDefault with required parameters.
-<code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
-
-var body = new DatetimeProperty()
-{
-    Property = DateTimeOffset.UtcNow,
-};
-var result = client.PutDefault(body);
-]]></code>
-</example>
-    </member>
-    <member name="PutDefaultAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutDefaultAsync.
 <code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-var data = new {};
+DatetimeProperty body = new DatetimeProperty();
+Response response = await client.PutDefaultAsync(body);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutDefaultAsync with all parameters.
+<code><![CDATA[
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-Response response = await client.PutDefaultAsync(RequestContent.Create(data));
+DatetimeProperty body = new DatetimeProperty()
+{
+    Property = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+};
+Response response = await client.PutDefaultAsync(body);
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="PutDefault(DatetimeProperty,CancellationToken)">
+      <example>
+This sample shows how to call PutDefault.
+<code><![CDATA[
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
+
+DatetimeProperty body = new DatetimeProperty();
+Response response = client.PutDefault(body);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutDefault with all parameters.
+<code><![CDATA[
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
+
+DatetimeProperty body = new DatetimeProperty()
+{
+    Property = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+};
+Response response = client.PutDefault(body);
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="PutDefaultAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call PutDefaultAsync.
+<code><![CDATA[
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new object());
+Response response = await client.PutDefaultAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDefaultAsync with all request content.
 <code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     property = "2022-05-10T14:57:31.2311892-04:00",
-};
-
-Response response = await client.PutDefaultAsync(RequestContent.Create(data));
+});
+Response response = await client.PutDefaultAsync(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutDefault(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PutDefault.
 <code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-var data = new {};
-
-Response response = client.PutDefault(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new object());
+Response response = client.PutDefault(content);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutDefault with all request content.
 <code><![CDATA[
-var client = new OptionalClient().GetDatetimeClient("1.0.0");
+Datetime client = new OptionalClient().GetDatetimeClient(apiVersion: "1.0.0");
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     property = "2022-05-10T14:57:31.2311892-04:00",
-};
-
-Response response = client.PutDefault(RequestContent.Create(data));
+});
+Response response = client.PutDefault(content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

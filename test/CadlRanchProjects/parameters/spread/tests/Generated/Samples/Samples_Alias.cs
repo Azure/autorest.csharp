@@ -6,15 +6,12 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using Parameters.Spread.Models;
+using Parameters.Spread;
 
 namespace Parameters.Spread.Samples
 {
@@ -24,14 +21,13 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestBody()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-            };
-
-            Response response = client.SpreadAsRequestBody(RequestContent.Create(data));
+            });
+            Response response = client.SpreadAsRequestBody(content);
             Console.WriteLine(response.Status);
         }
 
@@ -39,14 +35,33 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestBody_AllParameters()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-            };
+            });
+            Response response = client.SpreadAsRequestBody(content);
+            Console.WriteLine(response.Status);
+        }
 
-            Response response = client.SpreadAsRequestBody(RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_SpreadAsRequestBody_Convenience()
+        {
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
+
+            Response response = client.SpreadAsRequestBody("<name>");
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_SpreadAsRequestBody_AllParameters_Convenience()
+        {
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
+
+            Response response = client.SpreadAsRequestBody("<name>");
             Console.WriteLine(response.Status);
         }
 
@@ -54,14 +69,13 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_Async()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-            };
-
-            Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data));
+            });
+            Response response = await client.SpreadAsRequestBodyAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -69,14 +83,13 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_AllParameters_Async()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-            };
-
-            Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data));
+            });
+            Response response = await client.SpreadAsRequestBodyAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -84,23 +97,33 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_Convenience_Async()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            var result = await client.SpreadAsRequestBodyAsync("<name>");
+            Response response = await client.SpreadAsRequestBodyAsync("<name>");
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_SpreadAsRequestBody_AllParameters_Convenience_Async()
+        {
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
+
+            Response response = await client.SpreadAsRequestBodyAsync("<name>");
+            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestParameter()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-            };
-
-            Response response = client.SpreadAsRequestParameter("<id>", "<xMsTestHeader>", RequestContent.Create(data));
+            });
+            Response response = client.SpreadAsRequestParameter("<id>", "<x-ms-test-header>", content);
             Console.WriteLine(response.Status);
         }
 
@@ -108,14 +131,33 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestParameter_AllParameters()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-            };
+            });
+            Response response = client.SpreadAsRequestParameter("<id>", "<x-ms-test-header>", content);
+            Console.WriteLine(response.Status);
+        }
 
-            Response response = client.SpreadAsRequestParameter("<id>", "<xMsTestHeader>", RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_SpreadAsRequestParameter_Convenience()
+        {
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
+
+            Response response = client.SpreadAsRequestParameter("<id>", "<x-ms-test-header>", "<name>");
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_SpreadAsRequestParameter_AllParameters_Convenience()
+        {
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
+
+            Response response = client.SpreadAsRequestParameter("<id>", "<x-ms-test-header>", "<name>");
             Console.WriteLine(response.Status);
         }
 
@@ -123,14 +165,13 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestParameter_Async()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-            };
-
-            Response response = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data));
+            });
+            Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", content);
             Console.WriteLine(response.Status);
         }
 
@@ -138,14 +179,13 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestParameter_AllParameters_Async()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-            };
-
-            Response response = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data));
+            });
+            Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", content);
             Console.WriteLine(response.Status);
         }
 
@@ -153,18 +193,29 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestParameter_Convenience_Async()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            var result = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", "<name>");
+            Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", "<name>");
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_SpreadAsRequestParameter_AllParameters_Convenience_Async()
+        {
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
+
+            Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", "<name>");
+            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadWithMultipleParameters()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 prop1 = "<prop1>",
                 prop2 = "<prop2>",
@@ -172,9 +223,8 @@ namespace Parameters.Spread.Samples
                 prop4 = "<prop4>",
                 prop5 = "<prop5>",
                 prop6 = "<prop6>",
-            };
-
-            Response response = client.SpreadWithMultipleParameters("<id>", "<xMsTestHeader>", RequestContent.Create(data));
+            });
+            Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", content);
             Console.WriteLine(response.Status);
         }
 
@@ -182,9 +232,9 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadWithMultipleParameters_AllParameters()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 prop1 = "<prop1>",
                 prop2 = "<prop2>",
@@ -192,9 +242,28 @@ namespace Parameters.Spread.Samples
                 prop4 = "<prop4>",
                 prop5 = "<prop5>",
                 prop6 = "<prop6>",
-            };
+            });
+            Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", content);
+            Console.WriteLine(response.Status);
+        }
 
-            Response response = client.SpreadWithMultipleParameters("<id>", "<xMsTestHeader>", RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_SpreadWithMultipleParameters_Convenience()
+        {
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
+
+            Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_SpreadWithMultipleParameters_AllParameters_Convenience()
+        {
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
+
+            Response response = client.SpreadWithMultipleParameters("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
             Console.WriteLine(response.Status);
         }
 
@@ -202,9 +271,9 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadWithMultipleParameters_Async()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 prop1 = "<prop1>",
                 prop2 = "<prop2>",
@@ -212,9 +281,8 @@ namespace Parameters.Spread.Samples
                 prop4 = "<prop4>",
                 prop5 = "<prop5>",
                 prop6 = "<prop6>",
-            };
-
-            Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data));
+            });
+            Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", content);
             Console.WriteLine(response.Status);
         }
 
@@ -222,9 +290,9 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadWithMultipleParameters_AllParameters_Async()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 prop1 = "<prop1>",
                 prop2 = "<prop2>",
@@ -232,9 +300,8 @@ namespace Parameters.Spread.Samples
                 prop4 = "<prop4>",
                 prop5 = "<prop5>",
                 prop6 = "<prop6>",
-            };
-
-            Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data));
+            });
+            Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", content);
             Console.WriteLine(response.Status);
         }
 
@@ -242,9 +309,20 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadWithMultipleParameters_Convenience_Async()
         {
-            var client = new SpreadClient().GetAliasClient("1.0.0");
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
 
-            var result = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
+            Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_SpreadWithMultipleParameters_AllParameters_Convenience_Async()
+        {
+            Alias client = new SpreadClient().GetAliasClient(apiVersion: "1.0.0");
+
+            Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
+            Console.WriteLine(response.Status);
         }
     }
 }

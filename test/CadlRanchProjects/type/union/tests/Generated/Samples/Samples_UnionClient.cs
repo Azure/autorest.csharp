@@ -6,14 +6,13 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Union;
 
 namespace _Type.Union.Samples
 {
@@ -23,14 +22,13 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SendInt()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                simpleUnion = new { },
-            };
-
-            Response response = client.SendInt(RequestContent.Create(data));
+                simpleUnion = 1234,
+            });
+            Response response = client.SendInt(content);
             Console.WriteLine(response.Status);
         }
 
@@ -38,14 +36,13 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SendInt_AllParameters()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                simpleUnion = new { },
-            };
-
-            Response response = client.SendInt(RequestContent.Create(data));
+                simpleUnion = 1234,
+            });
+            Response response = client.SendInt(content);
             Console.WriteLine(response.Status);
         }
 
@@ -53,14 +50,13 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SendInt_Async()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                simpleUnion = new { },
-            };
-
-            Response response = await client.SendIntAsync(RequestContent.Create(data));
+                simpleUnion = 1234,
+            });
+            Response response = await client.SendIntAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -68,14 +64,13 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SendInt_AllParameters_Async()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                simpleUnion = new { },
-            };
-
-            Response response = await client.SendIntAsync(RequestContent.Create(data));
+                simpleUnion = 1234,
+            });
+            Response response = await client.SendIntAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -83,14 +78,13 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SendIntArray()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                simpleUnion = new { },
-            };
-
-            Response response = client.SendIntArray(RequestContent.Create(data));
+                simpleUnion = 1234,
+            });
+            Response response = client.SendIntArray(content);
             Console.WriteLine(response.Status);
         }
 
@@ -98,14 +92,13 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SendIntArray_AllParameters()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                simpleUnion = new { },
-            };
-
-            Response response = client.SendIntArray(RequestContent.Create(data));
+                simpleUnion = 1234,
+            });
+            Response response = client.SendIntArray(content);
             Console.WriteLine(response.Status);
         }
 
@@ -113,14 +106,13 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SendIntArray_Async()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                simpleUnion = new { },
-            };
-
-            Response response = await client.SendIntArrayAsync(RequestContent.Create(data));
+                simpleUnion = 1234,
+            });
+            Response response = await client.SendIntArrayAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -128,14 +120,13 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SendIntArray_AllParameters_Async()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                simpleUnion = new { },
-            };
-
-            Response response = await client.SendIntArrayAsync(RequestContent.Create(data));
+                simpleUnion = 1234,
+            });
+            Response response = await client.SendIntArrayAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -143,14 +134,17 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SendFirstNamedUnionValue()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                namedUnion = new { },
-            };
-
-            Response response = client.SendFirstNamedUnionValue(RequestContent.Create(data));
+                namedUnion = new
+                {
+                    prop1 = 1234,
+                    name = "<name>",
+                },
+            });
+            Response response = client.SendFirstNamedUnionValue(content);
             Console.WriteLine(response.Status);
         }
 
@@ -158,14 +152,17 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SendFirstNamedUnionValue_AllParameters()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                namedUnion = new { },
-            };
-
-            Response response = client.SendFirstNamedUnionValue(RequestContent.Create(data));
+                namedUnion = new
+                {
+                    prop1 = 1234,
+                    name = "<name>",
+                },
+            });
+            Response response = client.SendFirstNamedUnionValue(content);
             Console.WriteLine(response.Status);
         }
 
@@ -173,14 +170,17 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SendFirstNamedUnionValue_Async()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                namedUnion = new { },
-            };
-
-            Response response = await client.SendFirstNamedUnionValueAsync(RequestContent.Create(data));
+                namedUnion = new
+                {
+                    prop1 = 1234,
+                    name = "<name>",
+                },
+            });
+            Response response = await client.SendFirstNamedUnionValueAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -188,14 +188,17 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SendFirstNamedUnionValue_AllParameters_Async()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                namedUnion = new { },
-            };
-
-            Response response = await client.SendFirstNamedUnionValueAsync(RequestContent.Create(data));
+                namedUnion = new
+                {
+                    prop1 = 1234,
+                    name = "<name>",
+                },
+            });
+            Response response = await client.SendFirstNamedUnionValueAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -203,14 +206,17 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SendSecondNamedUnionValue()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                namedUnion = new { },
-            };
-
-            Response response = client.SendSecondNamedUnionValue(RequestContent.Create(data));
+                namedUnion = new
+                {
+                    prop1 = 1234,
+                    name = "<name>",
+                },
+            });
+            Response response = client.SendSecondNamedUnionValue(content);
             Console.WriteLine(response.Status);
         }
 
@@ -218,14 +224,17 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SendSecondNamedUnionValue_AllParameters()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                namedUnion = new { },
-            };
-
-            Response response = client.SendSecondNamedUnionValue(RequestContent.Create(data));
+                namedUnion = new
+                {
+                    prop1 = 1234,
+                    name = "<name>",
+                },
+            });
+            Response response = client.SendSecondNamedUnionValue(content);
             Console.WriteLine(response.Status);
         }
 
@@ -233,14 +242,17 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SendSecondNamedUnionValue_Async()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                namedUnion = new { },
-            };
-
-            Response response = await client.SendSecondNamedUnionValueAsync(RequestContent.Create(data));
+                namedUnion = new
+                {
+                    prop1 = 1234,
+                    name = "<name>",
+                },
+            });
+            Response response = await client.SendSecondNamedUnionValueAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -248,14 +260,17 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SendSecondNamedUnionValue_AllParameters_Async()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                namedUnion = new { },
-            };
-
-            Response response = await client.SendSecondNamedUnionValueAsync(RequestContent.Create(data));
+                namedUnion = new
+                {
+                    prop1 = 1234,
+                    name = "<name>",
+                },
+            });
+            Response response = await client.SendSecondNamedUnionValueAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -263,9 +278,9 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ReceiveString()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            Response response = client.ReceiveString(new RequestContext());
+            Response response = client.ReceiveString(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("simpleUnion").ToString());
@@ -275,9 +290,9 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ReceiveString_AllParameters()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            Response response = client.ReceiveString(new RequestContext());
+            Response response = client.ReceiveString(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("simpleUnion").ToString());
@@ -287,9 +302,9 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ReceiveString_Async()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            Response response = await client.ReceiveStringAsync(new RequestContext());
+            Response response = await client.ReceiveStringAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("simpleUnion").ToString());
@@ -299,9 +314,9 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ReceiveString_AllParameters_Async()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            Response response = await client.ReceiveStringAsync(new RequestContext());
+            Response response = await client.ReceiveStringAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("simpleUnion").ToString());
@@ -311,9 +326,9 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ReceiveIntArray()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            Response response = client.ReceiveIntArray(new RequestContext());
+            Response response = client.ReceiveIntArray(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("simpleUnion").ToString());
@@ -323,9 +338,9 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ReceiveIntArray_AllParameters()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            Response response = client.ReceiveIntArray(new RequestContext());
+            Response response = client.ReceiveIntArray(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("simpleUnion").ToString());
@@ -335,9 +350,9 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ReceiveIntArray_Async()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            Response response = await client.ReceiveIntArrayAsync(new RequestContext());
+            Response response = await client.ReceiveIntArrayAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("simpleUnion").ToString());
@@ -347,9 +362,9 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ReceiveIntArray_AllParameters_Async()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            Response response = await client.ReceiveIntArrayAsync(new RequestContext());
+            Response response = await client.ReceiveIntArrayAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("simpleUnion").ToString());
@@ -359,9 +374,9 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ReceiveFirstNamedUnionValue()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            Response response = client.ReceiveFirstNamedUnionValue(new RequestContext());
+            Response response = client.ReceiveFirstNamedUnionValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("namedUnion").ToString());
@@ -371,9 +386,9 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ReceiveFirstNamedUnionValue_AllParameters()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            Response response = client.ReceiveFirstNamedUnionValue(new RequestContext());
+            Response response = client.ReceiveFirstNamedUnionValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("namedUnion").ToString());
@@ -383,9 +398,9 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ReceiveFirstNamedUnionValue_Async()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            Response response = await client.ReceiveFirstNamedUnionValueAsync(new RequestContext());
+            Response response = await client.ReceiveFirstNamedUnionValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("namedUnion").ToString());
@@ -395,9 +410,9 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ReceiveFirstNamedUnionValue_AllParameters_Async()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            Response response = await client.ReceiveFirstNamedUnionValueAsync(new RequestContext());
+            Response response = await client.ReceiveFirstNamedUnionValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("namedUnion").ToString());
@@ -407,9 +422,9 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ReceiveSecondNamedUnionValue()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            Response response = client.ReceiveSecondNamedUnionValue(new RequestContext());
+            Response response = client.ReceiveSecondNamedUnionValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("namedUnion").ToString());
@@ -419,9 +434,9 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ReceiveSecondNamedUnionValue_AllParameters()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            Response response = client.ReceiveSecondNamedUnionValue(new RequestContext());
+            Response response = client.ReceiveSecondNamedUnionValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("namedUnion").ToString());
@@ -431,9 +446,9 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ReceiveSecondNamedUnionValue_Async()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            Response response = await client.ReceiveSecondNamedUnionValueAsync(new RequestContext());
+            Response response = await client.ReceiveSecondNamedUnionValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("namedUnion").ToString());
@@ -443,9 +458,9 @@ namespace _Type.Union.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ReceiveSecondNamedUnionValue_AllParameters_Async()
         {
-            var client = new UnionClient();
+            UnionClient client = new UnionClient();
 
-            Response response = await client.ReceiveSecondNamedUnionValueAsync(new RequestContext());
+            Response response = await client.ReceiveSecondNamedUnionValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("namedUnion").ToString());
