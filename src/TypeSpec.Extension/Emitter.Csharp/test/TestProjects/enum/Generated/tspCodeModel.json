@@ -9,8 +9,6 @@
   {
    "$id": "2",
    "Name": "DayOfTheWeek",
-   "Namespace": "TypeSpec.EnumPropertiesBasic",
-   "Description": "Represents the days of the week using a standard, non-string enum.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -50,6 +48,8 @@
      "Value": "Sunday"
     }
    ],
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
+   "Description": "Represents the days of the week using a standard, non-string enum.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Input"
@@ -57,8 +57,6 @@
   {
    "$id": "10",
    "Name": "FixedDayOfTheWeek",
-   "Namespace": "TypeSpec.EnumPropertiesBasic",
-   "Description": "Represents the days of the week using a standard, non-string enum.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -98,6 +96,8 @@
      "Value": "Sunday"
     }
    ],
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
+   "Description": "Represents the days of the week using a standard, non-string enum.",
    "IsExtensible": false,
    "IsNullable": false,
    "Usage": "Input"
@@ -105,8 +105,6 @@
   {
    "$id": "18",
    "Name": "TranslationLanguage",
-   "Namespace": "TypeSpec.EnumPropertiesBasic",
-   "Description": "The language to translate the input text into.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -133,6 +131,8 @@
      "Value": "Undocumented"
     }
    ],
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
+   "Description": "The language to translate the input text into.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "None"
@@ -140,8 +140,6 @@
   {
    "$id": "23",
    "Name": "EnumWithStringValue",
-   "Namespace": "TypeSpec.EnumPropertiesBasic",
-   "Description": "Represents the simple enum with enum string value.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -160,6 +158,8 @@
      "Value": "3"
     }
    ],
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
+   "Description": "Represents the simple enum with enum string value.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Input"

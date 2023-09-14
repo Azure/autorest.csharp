@@ -8,8 +8,6 @@
   {
    "$id": "2",
    "Name": "ProjectKind",
-   "Namespace": "RenameGetList",
-   "Description": "Represents the project kind.",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -31,6 +29,8 @@
      "Description": "For building an extraction model to identify your domain categories using your own data."
     }
    ],
+   "Namespace": "RenameGetList",
+   "Description": "Represents the project kind.",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "None"

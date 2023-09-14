@@ -6,14 +6,12 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using PaginationParams_LowLevel;
 
 namespace PaginationParams_LowLevel.Samples
 {
@@ -23,13 +21,13 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPaginationParams()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new PaginationParamsClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            foreach (var item in client.GetPaginationParams(1234, 1234, 1234, new RequestContext()))
+            foreach (BinaryData item in client.GetPaginationParams(null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
+                Console.WriteLine(result[0].ToString());
             }
         }
 
@@ -37,15 +35,15 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPaginationParams_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new PaginationParamsClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            foreach (var item in client.GetPaginationParams(1234, 1234, 1234, new RequestContext()))
+            foreach (BinaryData item in client.GetPaginationParams(1234, 1234, 1234, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("type").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("type").ToString());
             }
         }
 
@@ -53,13 +51,13 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPaginationParams_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new PaginationParamsClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            await foreach (var item in client.GetPaginationParamsAsync(1234, 1234, 1234, new RequestContext()))
+            await foreach (BinaryData item in client.GetPaginationParamsAsync(null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
+                Console.WriteLine(result[0].ToString());
             }
         }
 
@@ -67,15 +65,15 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPaginationParams_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new PaginationParamsClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            await foreach (var item in client.GetPaginationParamsAsync(1234, 1234, 1234, new RequestContext()))
+            await foreach (BinaryData item in client.GetPaginationParamsAsync(1234, 1234, 1234, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("type").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("type").ToString());
             }
         }
 
@@ -83,13 +81,13 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Get2s()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new PaginationParamsClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            foreach (var item in client.Get2s(1234, 1234, 1234, new RequestContext()))
+            foreach (BinaryData item in client.Get2s(null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
+                Console.WriteLine(result[0].ToString());
             }
         }
 
@@ -97,15 +95,15 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Get2s_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new PaginationParamsClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            foreach (var item in client.Get2s(1234, 1234, 1234, new RequestContext()))
+            foreach (BinaryData item in client.Get2s(1234, 1234, 1234L, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("type").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("type").ToString());
             }
         }
 
@@ -113,13 +111,13 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Get2s_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new PaginationParamsClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            await foreach (var item in client.Get2sAsync(1234, 1234, 1234, new RequestContext()))
+            await foreach (BinaryData item in client.Get2sAsync(null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
+                Console.WriteLine(result[0].ToString());
             }
         }
 
@@ -127,15 +125,15 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Get2s_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new PaginationParamsClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            await foreach (var item in client.Get2sAsync(1234, 1234, 1234, new RequestContext()))
+            await foreach (BinaryData item in client.Get2sAsync(1234, 1234, 1234L, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("type").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("type").ToString());
             }
         }
 
@@ -143,13 +141,13 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Get3s()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new PaginationParamsClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            foreach (var item in client.Get3s(1234, 1234, 1234, new RequestContext()))
+            foreach (BinaryData item in client.Get3s(null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
+                Console.WriteLine(result[0].ToString());
             }
         }
 
@@ -157,15 +155,15 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Get3s_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new PaginationParamsClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            foreach (var item in client.Get3s(1234, 1234, 1234, new RequestContext()))
+            foreach (BinaryData item in client.Get3s(1234, 1234, 1234, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("type").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("type").ToString());
             }
         }
 
@@ -173,13 +171,13 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Get3s_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new PaginationParamsClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            await foreach (var item in client.Get3sAsync(1234, 1234, 1234, new RequestContext()))
+            await foreach (BinaryData item in client.Get3sAsync(null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
+                Console.WriteLine(result[0].ToString());
             }
         }
 
@@ -187,15 +185,15 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Get3s_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new PaginationParamsClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            await foreach (var item in client.Get3sAsync(1234, 1234, 1234, new RequestContext()))
+            await foreach (BinaryData item in client.Get3sAsync(1234, 1234, 1234, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("type").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("type").ToString());
             }
         }
 
@@ -203,13 +201,13 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Get4s()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new PaginationParamsClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            foreach (var item in client.Get4s(1234, 1234, 3.14f, new RequestContext()))
+            foreach (BinaryData item in client.Get4s(null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
+                Console.WriteLine(result[0].ToString());
             }
         }
 
@@ -217,15 +215,15 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Get4s_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new PaginationParamsClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            foreach (var item in client.Get4s(1234, 1234, 3.14f, new RequestContext()))
+            foreach (BinaryData item in client.Get4s(1234, 1234, 123.45F, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("type").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("type").ToString());
             }
         }
 
@@ -233,13 +231,13 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Get4s_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new PaginationParamsClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            await foreach (var item in client.Get4sAsync(1234, 1234, 3.14f, new RequestContext()))
+            await foreach (BinaryData item in client.Get4sAsync(null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
+                Console.WriteLine(result[0].ToString());
             }
         }
 
@@ -247,15 +245,15 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Get4s_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new PaginationParamsClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            await foreach (var item in client.Get4sAsync(1234, 1234, 3.14f, new RequestContext()))
+            await foreach (BinaryData item in client.Get4sAsync(1234, 1234, 123.45F, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("type").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("type").ToString());
             }
         }
     }

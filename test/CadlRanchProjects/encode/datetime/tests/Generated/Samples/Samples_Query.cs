@@ -7,12 +7,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
+using Encode.Datetime;
 using NUnit.Framework;
 
 namespace Encode.Datetime.Samples
@@ -23,9 +21,9 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Default()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Default(DateTimeOffset.UtcNow);
+            Response response = client.Default(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
             Console.WriteLine(response.Status);
         }
 
@@ -33,9 +31,9 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Default_AllParameters()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Default(DateTimeOffset.UtcNow);
+            Response response = client.Default(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
             Console.WriteLine(response.Status);
         }
 
@@ -43,9 +41,9 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_Async()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.DefaultAsync(DateTimeOffset.UtcNow);
+            Response response = await client.DefaultAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
             Console.WriteLine(response.Status);
         }
 
@@ -53,9 +51,9 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_AllParameters_Async()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.DefaultAsync(DateTimeOffset.UtcNow);
+            Response response = await client.DefaultAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
             Console.WriteLine(response.Status);
         }
 
@@ -63,9 +61,9 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Rfc3339()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Rfc3339(DateTimeOffset.UtcNow);
+            Response response = client.Rfc3339(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
             Console.WriteLine(response.Status);
         }
 
@@ -73,9 +71,9 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Rfc3339_AllParameters()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Rfc3339(DateTimeOffset.UtcNow);
+            Response response = client.Rfc3339(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
             Console.WriteLine(response.Status);
         }
 
@@ -83,9 +81,9 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Rfc3339_Async()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.Rfc3339Async(DateTimeOffset.UtcNow);
+            Response response = await client.Rfc3339Async(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
             Console.WriteLine(response.Status);
         }
 
@@ -93,9 +91,9 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Rfc3339_AllParameters_Async()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.Rfc3339Async(DateTimeOffset.UtcNow);
+            Response response = await client.Rfc3339Async(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
             Console.WriteLine(response.Status);
         }
 
@@ -103,9 +101,9 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Rfc7231()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Rfc7231(DateTimeOffset.UtcNow);
+            Response response = client.Rfc7231(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
             Console.WriteLine(response.Status);
         }
 
@@ -113,9 +111,9 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Rfc7231_AllParameters()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Rfc7231(DateTimeOffset.UtcNow);
+            Response response = client.Rfc7231(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
             Console.WriteLine(response.Status);
         }
 
@@ -123,9 +121,9 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Rfc7231_Async()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.Rfc7231Async(DateTimeOffset.UtcNow);
+            Response response = await client.Rfc7231Async(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
             Console.WriteLine(response.Status);
         }
 
@@ -133,9 +131,9 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Rfc7231_AllParameters_Async()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.Rfc7231Async(DateTimeOffset.UtcNow);
+            Response response = await client.Rfc7231Async(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
             Console.WriteLine(response.Status);
         }
 
@@ -143,9 +141,9 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnixTimestamp()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.UnixTimestamp(DateTimeOffset.UtcNow);
+            Response response = client.UnixTimestamp(DateTimeOffset.FromUnixTimeSeconds(1652209051));
             Console.WriteLine(response.Status);
         }
 
@@ -153,9 +151,9 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnixTimestamp_AllParameters()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.UnixTimestamp(DateTimeOffset.UtcNow);
+            Response response = client.UnixTimestamp(DateTimeOffset.FromUnixTimeSeconds(1652209051));
             Console.WriteLine(response.Status);
         }
 
@@ -163,9 +161,9 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnixTimestamp_Async()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.UnixTimestampAsync(DateTimeOffset.UtcNow);
+            Response response = await client.UnixTimestampAsync(DateTimeOffset.FromUnixTimeSeconds(1652209051));
             Console.WriteLine(response.Status);
         }
 
@@ -173,9 +171,9 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnixTimestamp_AllParameters_Async()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.UnixTimestampAsync(DateTimeOffset.UtcNow);
+            Response response = await client.UnixTimestampAsync(DateTimeOffset.FromUnixTimeSeconds(1652209051));
             Console.WriteLine(response.Status);
         }
 
@@ -183,9 +181,12 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnixTimestampArray()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.UnixTimestampArray(new DateTimeOffset[] { DateTimeOffset.UtcNow });
+            Response response = client.UnixTimestampArray(new List<DateTimeOffset>()
+{
+DateTimeOffset.FromUnixTimeSeconds(1652209051)
+});
             Console.WriteLine(response.Status);
         }
 
@@ -193,9 +194,12 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UnixTimestampArray_AllParameters()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.UnixTimestampArray(new DateTimeOffset[] { DateTimeOffset.UtcNow });
+            Response response = client.UnixTimestampArray(new List<DateTimeOffset>()
+{
+DateTimeOffset.FromUnixTimeSeconds(1652209051)
+});
             Console.WriteLine(response.Status);
         }
 
@@ -203,9 +207,12 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnixTimestampArray_Async()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.UnixTimestampArrayAsync(new DateTimeOffset[] { DateTimeOffset.UtcNow });
+            Response response = await client.UnixTimestampArrayAsync(new List<DateTimeOffset>()
+{
+DateTimeOffset.FromUnixTimeSeconds(1652209051)
+});
             Console.WriteLine(response.Status);
         }
 
@@ -213,9 +220,12 @@ namespace Encode.Datetime.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UnixTimestampArray_AllParameters_Async()
         {
-            var client = new DatetimeClient().GetQueryClient("1.0.0");
+            Query client = new DatetimeClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.UnixTimestampArrayAsync(new DateTimeOffset[] { DateTimeOffset.UtcNow });
+            Response response = await client.UnixTimestampArrayAsync(new List<DateTimeOffset>()
+{
+DateTimeOffset.FromUnixTimeSeconds(1652209051)
+});
             Console.WriteLine(response.Status);
         }
     }

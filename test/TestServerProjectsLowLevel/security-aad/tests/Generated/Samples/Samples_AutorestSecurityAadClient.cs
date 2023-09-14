@@ -6,14 +6,12 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using security_aad_LowLevel;
 
 namespace security_aad_LowLevel.Samples
 {
@@ -23,8 +21,8 @@ namespace security_aad_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Head()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new AutorestSecurityAadClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
 
             Response response = client.Head();
             Console.WriteLine(response.Status);
@@ -34,8 +32,8 @@ namespace security_aad_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Head_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new AutorestSecurityAadClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
 
             Response response = client.Head();
             Console.WriteLine(response.Status);
@@ -45,8 +43,8 @@ namespace security_aad_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Head_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new AutorestSecurityAadClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
 
             Response response = await client.HeadAsync();
             Console.WriteLine(response.Status);
@@ -56,8 +54,8 @@ namespace security_aad_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Head_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var client = new AutorestSecurityAadClient(credential);
+            TokenCredential credential = new DefaultAzureCredential();
+            AutorestSecurityAadClient client = new AutorestSecurityAadClient(credential);
 
             Response response = await client.HeadAsync();
             Console.WriteLine(response.Status);

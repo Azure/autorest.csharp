@@ -6,14 +6,12 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using Parameters.Spread;
 using Parameters.Spread.Models;
 
 namespace Parameters.Spread.Samples
@@ -24,14 +22,13 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestBody()
         {
-            var client = new SpreadClient().GetModelClient("1.0.0");
+            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-            };
-
-            Response response = client.SpreadAsRequestBody(RequestContent.Create(data));
+            });
+            Response response = client.SpreadAsRequestBody(content);
             Console.WriteLine(response.Status);
         }
 
@@ -39,14 +36,35 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestBody_AllParameters()
         {
-            var client = new SpreadClient().GetModelClient("1.0.0");
+            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-            };
+            });
+            Response response = client.SpreadAsRequestBody(content);
+            Console.WriteLine(response.Status);
+        }
 
-            Response response = client.SpreadAsRequestBody(RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_SpreadAsRequestBody_Convenience()
+        {
+            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+
+            BodyParameter bodyParameter = new BodyParameter("<name>");
+            Response response = client.SpreadAsRequestBody(bodyParameter);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_SpreadAsRequestBody_AllParameters_Convenience()
+        {
+            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+
+            BodyParameter bodyParameter = new BodyParameter("<name>");
+            Response response = client.SpreadAsRequestBody(bodyParameter);
             Console.WriteLine(response.Status);
         }
 
@@ -54,14 +72,13 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_Async()
         {
-            var client = new SpreadClient().GetModelClient("1.0.0");
+            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-            };
-
-            Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data));
+            });
+            Response response = await client.SpreadAsRequestBodyAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -69,14 +86,13 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_AllParameters_Async()
         {
-            var client = new SpreadClient().GetModelClient("1.0.0");
+            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-            };
-
-            Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data));
+            });
+            Response response = await client.SpreadAsRequestBodyAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -84,10 +100,22 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_Convenience_Async()
         {
-            var client = new SpreadClient().GetModelClient("1.0.0");
+            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-            var bodyParameter = new BodyParameter("<name>");
-            var result = await client.SpreadAsRequestBodyAsync(bodyParameter);
+            BodyParameter bodyParameter = new BodyParameter("<name>");
+            Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_SpreadAsRequestBody_AllParameters_Convenience_Async()
+        {
+            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+
+            BodyParameter bodyParameter = new BodyParameter("<name>");
+            Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
+            Console.WriteLine(response.Status);
         }
     }
 }

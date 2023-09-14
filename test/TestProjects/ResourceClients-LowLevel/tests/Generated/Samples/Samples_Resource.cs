@@ -6,14 +6,12 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using ResourceClients_LowLevel;
 
 namespace ResourceClients_LowLevel.Samples
 {
@@ -23,10 +21,10 @@ namespace ResourceClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetItem()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new ResourceServiceClient(credential).GetResourceGroup("<groupId>").GetResource("<itemId>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
-            Response response = client.GetItem(new RequestContext());
+            Response response = client.GetItem(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -36,10 +34,10 @@ namespace ResourceClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetItem_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new ResourceServiceClient(credential).GetResourceGroup("<groupId>").GetResource("<itemId>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
-            Response response = client.GetItem(new RequestContext());
+            Response response = client.GetItem(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -49,10 +47,10 @@ namespace ResourceClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetItem_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new ResourceServiceClient(credential).GetResourceGroup("<groupId>").GetResource("<itemId>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
-            Response response = await client.GetItemAsync(new RequestContext());
+            Response response = await client.GetItemAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -62,10 +60,10 @@ namespace ResourceClients_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetItem_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new ResourceServiceClient(credential).GetResourceGroup("<groupId>").GetResource("<itemId>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
-            Response response = await client.GetItemAsync(new RequestContext());
+            Response response = await client.GetItemAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

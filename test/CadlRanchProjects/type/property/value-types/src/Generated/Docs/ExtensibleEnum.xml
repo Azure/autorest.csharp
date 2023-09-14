@@ -2,102 +2,164 @@
 <doc>
   <members>
     <member name="GetExtensibleEnumAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetExtensibleEnumAsync.
 <code><![CDATA[
-var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
+ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
 
-var result = await client.GetExtensibleEnumAsync();
+Response<ExtensibleEnumProperty> response = await client.GetExtensibleEnumAsync();
 ]]></code>
-</example>
+This sample shows how to call GetExtensibleEnumAsync with all parameters.
+<code><![CDATA[
+ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+
+Response<ExtensibleEnumProperty> response = await client.GetExtensibleEnumAsync();
+]]></code></example>
     </member>
     <member name="GetExtensibleEnum(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetExtensibleEnum.
 <code><![CDATA[
-var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
+ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
 
-var result = client.GetExtensibleEnum();
+Response<ExtensibleEnumProperty> response = client.GetExtensibleEnum();
 ]]></code>
-</example>
+This sample shows how to call GetExtensibleEnum with all parameters.
+<code><![CDATA[
+ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+
+Response<ExtensibleEnumProperty> response = client.GetExtensibleEnum();
+]]></code></example>
     </member>
     <member name="GetExtensibleEnumAsync(RequestContext)">
-<example>
-This sample shows how to call GetExtensibleEnumAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call GetExtensibleEnumAsync and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
+ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
 
-Response response = await client.GetExtensibleEnumAsync(new RequestContext());
+Response response = await client.GetExtensibleEnumAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
-</example>
+This sample shows how to call GetExtensibleEnumAsync with all parameters and parse the result.
+<code><![CDATA[
+ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+
+Response response = await client.GetExtensibleEnumAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code></example>
     </member>
     <member name="GetExtensibleEnum(RequestContext)">
-<example>
-This sample shows how to call GetExtensibleEnum with required parameters and parse the result.
+      <example>
+This sample shows how to call GetExtensibleEnum and parse the result.
 <code><![CDATA[
-var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
+ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
 
-Response response = client.GetExtensibleEnum(new RequestContext());
+Response response = client.GetExtensibleEnum(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
-</example>
+This sample shows how to call GetExtensibleEnum with all parameters and parse the result.
+<code><![CDATA[
+ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+
+Response response = client.GetExtensibleEnum(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code></example>
     </member>
     <member name="PutAsync(ExtensibleEnumProperty,CancellationToken)">
-<example>
-This sample shows how to call PutAsync with required parameters.
+      <example>
+This sample shows how to call PutAsync.
 <code><![CDATA[
-var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
+ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
 
-var body = new ExtensibleEnumProperty(InnerEnum.ValueOne);
-var result = await client.PutAsync(body);
+ExtensibleEnumProperty body = new ExtensibleEnumProperty(InnerEnum.ValueOne);
+Response response = await client.PutAsync(body);
+Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+
+ExtensibleEnumProperty body = new ExtensibleEnumProperty(InnerEnum.ValueOne);
+Response response = await client.PutAsync(body);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Put(ExtensibleEnumProperty,CancellationToken)">
-<example>
-This sample shows how to call Put with required parameters.
+      <example>
+This sample shows how to call Put.
 <code><![CDATA[
-var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
+ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
 
-var body = new ExtensibleEnumProperty(InnerEnum.ValueOne);
-var result = client.Put(body);
+ExtensibleEnumProperty body = new ExtensibleEnumProperty(InnerEnum.ValueOne);
+Response response = client.Put(body);
+Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+
+ExtensibleEnumProperty body = new ExtensibleEnumProperty(InnerEnum.ValueOne);
+Response response = client.Put(body);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call PutAsync with required request content.
+      <example>
+This sample shows how to call PutAsync.
 <code><![CDATA[
-var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
+ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     property = "ValueOne",
-};
-
-Response response = await client.PutAsync(RequestContent.Create(data));
+});
+Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call PutAsync with all request content.
+<code><![CDATA[
+ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    property = "ValueOne",
+});
+Response response = await client.PutAsync(content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Put with required request content.
+      <example>
+This sample shows how to call Put.
 <code><![CDATA[
-var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
+ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     property = "ValueOne",
-};
-
-Response response = client.Put(RequestContent.Create(data));
+});
+Response response = client.Put(content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Put with all request content.
+<code><![CDATA[
+ExtensibleEnum client = new ValueTypesClient().GetExtensibleEnumClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    property = "ValueOne",
+});
+Response response = client.Put(content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
   </members>
 </doc>

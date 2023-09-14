@@ -8,8 +8,6 @@
   {
    "$id": "2",
    "Name": "DaysOfWeekExtensibleEnum",
-   "Namespace": "Type.Enum.Extensible",
-   "Description": "Days of the week",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -55,6 +53,8 @@
      "Description": "Sunday."
     }
    ],
+   "Namespace": "Type.Enum.Extensible",
+   "Description": "Days of the week",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
