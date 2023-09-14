@@ -180,34 +180,22 @@ namespace AutoRest.CSharp.Output.Models
             {
                 arguments.Add(optionalEndpoint.Initializer ?? optionalEndpoint.Type.GetParameterInitializer(optionalEndpoint.DefaultValue!.Value)!);
             }
-            /*
+
             arguments.AddRange(requiredParameters
                 .Select<Parameter, FormattableString>(p => $"{p.Name}"));
-            */
-            //var optionalParametersArguments = optionalParameters.ToDictionary(p => p.Name, p =>p.Initializer ?? p.Type.GetParameterInitializer(p.DefaultValue!.Value)!);
-            foreach (var item in optionalParametersArguments)
-            {
-                Console.WriteLine($"parameter argument: {item}");
-            }
 
             if (Fields.CredentialFields.Count == 0)
             {
-                //arguments.AddRange(optionalParametersArguments);
-                var allarguments = arguments.Concat(requiredParameters
-                .Select<Parameter, FormattableString>(p => $"{p.Name}")).Concat(optionalParametersArguments);
+                var allarguments = arguments.Concat(optionalParametersArguments);
                 yield return CreateSecondaryConstructor(requiredParameters, allarguments.ToArray());
             }
             else
             {
                 foreach (var credentialField in Fields.CredentialFields)
                 {
-                    //arguments.Add($"{ CreateCredentialParameter(credentialField!.Type).Name}");
-                    //arguments.AddRange(optionalParametersArguments);
-                    var parameters = requiredParameters.Append(CreateCredentialParameter(credentialField!.Type));
-                    var allarguments = arguments.Concat(parameters
-                .Select<Parameter, FormattableString>(p => $"{p.Name}")).Concat(optionalParametersArguments);
-                    yield return CreateSecondaryConstructor(parameters.ToArray(), allarguments.ToArray());
-                    //yield return CreateSecondaryConstructor(requiredParameters.Append(CreateCredentialParameter(credentialField!.Type)).ToArray(), arguments.Concat(new List<FormattableString>() { $"{CreateCredentialParameter(credentialField!.Type).Name}" }).Contact(optionalParametersArguments).ToArray());
+                    var credentialParameter = CreateCredentialParameter(credentialField!.Type);
+                    var allarguments = arguments.Concat(new List<FormattableString>() { $"{credentialParameter.Name}" }).Concat(optionalParametersArguments);
+                    yield return CreateSecondaryConstructor(requiredParameters.Append(credentialParameter).ToArray(), allarguments.ToArray());
                 }
             }
         }
