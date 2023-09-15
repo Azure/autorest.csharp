@@ -18,7 +18,7 @@ namespace AutoRest.TestServer.Tests
         {
             var options = new AutorestSecurityAadClientOptions();
             options.AddPolicy(new MockBearerTokenAuthenticationPolicy(new MockCredential(), AutorestSecurityAadClient.TokenScopes, options.Transport), HttpPipelinePosition.PerCall);
-            var client = new AutorestSecurityAadClient(new MockCredential(), host, options);
+            var client = new AutorestSecurityAadClient(host, new MockCredential(), options);
             await client.HeadAsync();
         });
 
