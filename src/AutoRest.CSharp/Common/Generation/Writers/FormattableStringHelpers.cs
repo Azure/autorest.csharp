@@ -87,70 +87,26 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (toType.EqualsIgnoreNullable(typeof(RequestContent)))
             {
-                if (TypeFactory.IsReadWriteDictionary(parameter.Type))
+                switch (parameter.Type)
                 {
-                    return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
+                    case { IsFrameworkType: true } when TypeFactory.IsReadWriteDictionary(parameter.Type):
+                        return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
+                    case { IsFrameworkType: true } when TypeFactory.IsList(parameter.Type):
+                        return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
+                    case { IsFrameworkType: false, Implementation: EnumType enumType }:
+                        if (enumType.IsExtensible)
+                        {
+                            return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({parameter.Name}.{enumType.SerializationMethodName}())";
+                        }
+                        else
+                        {
+                            return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
+                        }
+                    case { IsFrameworkType: true }:
+                        return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromObject)}({parameter.Name})";
                 }
-                if (TypeFactory.IsList(parameter.Type))
-                {
-                    return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
-                }
-                if (parameter.Type is { IsFrameworkType: false, Implementation: EnumType enumType })
-                {
-                    if (enumType.IsExtensible)
-                    {
-                        return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({parameter.Name}.{enumType.SerializationMethodName}())";
-                    }
-                    else
-                    {
-                        return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
-                    }
-                }
-                if (parameter.Type is { IsFrameworkType: true })
-                {
-                    return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromObject)}({parameter.Name})";
-                }
-            }
-            /*
-            if (TypeFactory.IsReadWriteDictionary(parameter.Type) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
-            {
-                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromDictionary)}({parameter.Name})";
             }
 
-            if (TypeFactory.IsList(parameter.Type) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
-            {
-                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
-            }
-
-            if (parameter.Type is { IsFrameworkType: false, Implementation: EnumType enumType } && toType.EqualsIgnoreNullable(typeof(RequestContent)))
-            {
-                if (enumType.IsExtensible)
-                {
-                    return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({parameter.Name}.{enumType.SerializationMethodName}())";
-                }
-                else
-                {
-                    return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
-                }
-            }
-            */
-            /*
-            if (parameter.Type is { IsFrameworkType: true } && parameter.Type.EqualsIgnoreNullable(typeof(string)) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
-            {
-                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromString)}({parameter.Name})";
-            }
-
-            if (parameter.Type is { IsFrameworkType: true } && parameter.Type.EqualsIgnoreNullable(typeof(bool)) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
-            {
-                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromBool)}({parameter.Name})";
-            }
-            */
-            /*
-            if (parameter.Type is { IsFrameworkType: true } && toType.EqualsIgnoreNullable(typeof(RequestContent)))
-            {
-                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromObject)}({parameter.Name})";
-            }
-            */
             var conversionMethod = GetConversionMethod(parameter.Type, toType);
             if (conversionMethod == null)
             {
