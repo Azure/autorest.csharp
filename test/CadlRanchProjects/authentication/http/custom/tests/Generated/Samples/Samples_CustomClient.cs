@@ -29,23 +29,23 @@ namespace Authentication.Http.Custom.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Valid_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            CustomClient client = new CustomClient(credential);
-
-            Response response = client.Valid();
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             CustomClient client = new CustomClient(credential);
 
             Response response = await client.ValidAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Valid_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            CustomClient client = new CustomClient(credential);
+
+            Response response = client.Valid();
             Console.WriteLine(response.Status);
         }
 
@@ -73,23 +73,23 @@ namespace Authentication.Http.Custom.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Invalid_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            CustomClient client = new CustomClient(credential);
-
-            Response response = client.Invalid();
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_Invalid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             CustomClient client = new CustomClient(credential);
 
             Response response = await client.InvalidAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Invalid_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            CustomClient client = new CustomClient(credential);
+
+            Response response = client.Invalid();
             Console.WriteLine(response.Status);
         }
 

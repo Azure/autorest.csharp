@@ -35,6 +35,21 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutNonRetry400_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            RequestContent content = null;
+            Operation<BinaryData> operation = await client.PutNonRetry400Async(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutNonRetry400_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -63,21 +78,6 @@ namespace lro_LowLevel.Samples
             Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutNonRetry400_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            RequestContent content = null;
-            Operation<BinaryData> operation = await client.PutNonRetry400Async(WaitUntil.Completed, content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -129,6 +129,21 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutNonRetry201Creating400_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            RequestContent content = null;
+            Operation<BinaryData> operation = await client.PutNonRetry201Creating400Async(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutNonRetry201Creating400_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -157,21 +172,6 @@ namespace lro_LowLevel.Samples
             Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutNonRetry201Creating400_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            RequestContent content = null;
-            Operation<BinaryData> operation = await client.PutNonRetry201Creating400Async(WaitUntil.Completed, content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -223,6 +223,21 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutNonRetry201Creating400InvalidJson_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            RequestContent content = null;
+            Operation<BinaryData> operation = await client.PutNonRetry201Creating400InvalidJsonAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutNonRetry201Creating400InvalidJson_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -251,21 +266,6 @@ namespace lro_LowLevel.Samples
             Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutNonRetry201Creating400InvalidJson_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            RequestContent content = null;
-            Operation<BinaryData> operation = await client.PutNonRetry201Creating400InvalidJsonAsync(WaitUntil.Completed, content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -317,6 +317,21 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutAsyncRelativeRetry400_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            RequestContent content = null;
+            Operation<BinaryData> operation = await client.PutAsyncRelativeRetry400Async(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutAsyncRelativeRetry400_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -345,21 +360,6 @@ namespace lro_LowLevel.Samples
             Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAsyncRelativeRetry400_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            RequestContent content = null;
-            Operation<BinaryData> operation = await client.PutAsyncRelativeRetry400Async(WaitUntil.Completed, content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -406,22 +406,22 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteNonRetry400_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            Operation operation = client.DeleteNonRetry400(WaitUntil.Completed);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteNonRetry400_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
             Operation operation = await client.DeleteNonRetry400Async(WaitUntil.Completed);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DeleteNonRetry400_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            Operation operation = client.DeleteNonRetry400(WaitUntil.Completed);
         }
 
         [Test]
@@ -446,22 +446,22 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete202NonRetry400_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            Operation operation = client.Delete202NonRetry400(WaitUntil.Completed);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_Delete202NonRetry400_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
             Operation operation = await client.Delete202NonRetry400Async(WaitUntil.Completed);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Delete202NonRetry400_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            Operation operation = client.Delete202NonRetry400(WaitUntil.Completed);
         }
 
         [Test]
@@ -486,22 +486,22 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteAsyncRelativeRetry400_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            Operation operation = client.DeleteAsyncRelativeRetry400(WaitUntil.Completed);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteAsyncRelativeRetry400_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
             Operation operation = await client.DeleteAsyncRelativeRetry400Async(WaitUntil.Completed);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DeleteAsyncRelativeRetry400_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            Operation operation = client.DeleteAsyncRelativeRetry400(WaitUntil.Completed);
         }
 
         [Test]
@@ -527,6 +527,17 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PostNonRetry400_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            RequestContent content = null;
+            Operation operation = await client.PostNonRetry400Async(WaitUntil.Completed, content);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PostNonRetry400_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -545,17 +556,6 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation operation = client.PostNonRetry400(WaitUntil.Completed, content);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostNonRetry400_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            RequestContent content = null;
-            Operation operation = await client.PostNonRetry400Async(WaitUntil.Completed, content);
         }
 
         [Test]
@@ -593,6 +593,17 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_Post202NonRetry400_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            RequestContent content = null;
+            Operation operation = await client.Post202NonRetry400Async(WaitUntil.Completed, content);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Post202NonRetry400_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -611,17 +622,6 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation operation = client.Post202NonRetry400(WaitUntil.Completed, content);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post202NonRetry400_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            RequestContent content = null;
-            Operation operation = await client.Post202NonRetry400Async(WaitUntil.Completed, content);
         }
 
         [Test]
@@ -659,6 +659,17 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PostAsyncRelativeRetry400_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            RequestContent content = null;
+            Operation operation = await client.PostAsyncRelativeRetry400Async(WaitUntil.Completed, content);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PostAsyncRelativeRetry400_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -677,17 +688,6 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation operation = client.PostAsyncRelativeRetry400(WaitUntil.Completed, content);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostAsyncRelativeRetry400_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            RequestContent content = null;
-            Operation operation = await client.PostAsyncRelativeRetry400Async(WaitUntil.Completed, content);
         }
 
         [Test]
@@ -729,6 +729,21 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutError201NoProvisioningStatePayload_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            RequestContent content = null;
+            Operation<BinaryData> operation = await client.PutError201NoProvisioningStatePayloadAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutError201NoProvisioningStatePayload_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -757,21 +772,6 @@ namespace lro_LowLevel.Samples
             Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutError201NoProvisioningStatePayload_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            RequestContent content = null;
-            Operation<BinaryData> operation = await client.PutError201NoProvisioningStatePayloadAsync(WaitUntil.Completed, content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -823,6 +823,21 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutAsyncRelativeRetryNoStatus_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            RequestContent content = null;
+            Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutAsyncRelativeRetryNoStatus_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -851,21 +866,6 @@ namespace lro_LowLevel.Samples
             Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAsyncRelativeRetryNoStatus_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            RequestContent content = null;
-            Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed, content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -917,6 +917,21 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutAsyncRelativeRetryNoStatusPayload_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            RequestContent content = null;
+            Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutAsyncRelativeRetryNoStatusPayload_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -945,21 +960,6 @@ namespace lro_LowLevel.Samples
             Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAsyncRelativeRetryNoStatusPayload_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            RequestContent content = null;
-            Operation<BinaryData> operation = await client.PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil.Completed, content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1006,22 +1006,22 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete204Succeeded_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            Operation operation = client.Delete204Succeeded(WaitUntil.Completed);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_Delete204Succeeded_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
             Operation operation = await client.Delete204SucceededAsync(WaitUntil.Completed);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Delete204Succeeded_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            Operation operation = client.Delete204Succeeded(WaitUntil.Completed);
         }
 
         [Test]
@@ -1046,22 +1046,22 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteAsyncRelativeRetryNoStatus_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            Operation operation = client.DeleteAsyncRelativeRetryNoStatus(WaitUntil.Completed);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteAsyncRelativeRetryNoStatus_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
             Operation operation = await client.DeleteAsyncRelativeRetryNoStatusAsync(WaitUntil.Completed);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DeleteAsyncRelativeRetryNoStatus_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            Operation operation = client.DeleteAsyncRelativeRetryNoStatus(WaitUntil.Completed);
         }
 
         [Test]
@@ -1087,6 +1087,17 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_Post202NoLocation_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            RequestContent content = null;
+            Operation operation = await client.Post202NoLocationAsync(WaitUntil.Completed, content);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Post202NoLocation_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1105,17 +1116,6 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation operation = client.Post202NoLocation(WaitUntil.Completed, content);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post202NoLocation_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            RequestContent content = null;
-            Operation operation = await client.Post202NoLocationAsync(WaitUntil.Completed, content);
         }
 
         [Test]
@@ -1153,6 +1153,17 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PostAsyncRelativeRetryNoPayload_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            RequestContent content = null;
+            Operation operation = await client.PostAsyncRelativeRetryNoPayloadAsync(WaitUntil.Completed, content);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PostAsyncRelativeRetryNoPayload_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1171,17 +1182,6 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation operation = client.PostAsyncRelativeRetryNoPayload(WaitUntil.Completed, content);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostAsyncRelativeRetryNoPayload_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            RequestContent content = null;
-            Operation operation = await client.PostAsyncRelativeRetryNoPayloadAsync(WaitUntil.Completed, content);
         }
 
         [Test]
@@ -1223,6 +1223,21 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put200InvalidJson_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            RequestContent content = null;
+            Operation<BinaryData> operation = await client.Put200InvalidJsonAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Put200InvalidJson_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1251,21 +1266,6 @@ namespace lro_LowLevel.Samples
             Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put200InvalidJson_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            RequestContent content = null;
-            Operation<BinaryData> operation = await client.Put200InvalidJsonAsync(WaitUntil.Completed, content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1317,6 +1317,21 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutAsyncRelativeRetryInvalidHeader_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            RequestContent content = null;
+            Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutAsyncRelativeRetryInvalidHeader_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1345,21 +1360,6 @@ namespace lro_LowLevel.Samples
             Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAsyncRelativeRetryInvalidHeader_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            RequestContent content = null;
-            Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1411,6 +1411,21 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutAsyncRelativeRetryInvalidJsonPolling_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            RequestContent content = null;
+            Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutAsyncRelativeRetryInvalidJsonPolling_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1439,21 +1454,6 @@ namespace lro_LowLevel.Samples
             Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAsyncRelativeRetryInvalidJsonPolling_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            RequestContent content = null;
-            Operation<BinaryData> operation = await client.PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1500,22 +1500,22 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete202RetryInvalidHeader_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            Operation operation = client.Delete202RetryInvalidHeader(WaitUntil.Completed);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_Delete202RetryInvalidHeader_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
             Operation operation = await client.Delete202RetryInvalidHeaderAsync(WaitUntil.Completed);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Delete202RetryInvalidHeader_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            Operation operation = client.Delete202RetryInvalidHeader(WaitUntil.Completed);
         }
 
         [Test]
@@ -1540,22 +1540,22 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteAsyncRelativeRetryInvalidHeader_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            Operation operation = client.DeleteAsyncRelativeRetryInvalidHeader(WaitUntil.Completed);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteAsyncRelativeRetryInvalidHeader_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
             Operation operation = await client.DeleteAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DeleteAsyncRelativeRetryInvalidHeader_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            Operation operation = client.DeleteAsyncRelativeRetryInvalidHeader(WaitUntil.Completed);
         }
 
         [Test]
@@ -1580,22 +1580,22 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteAsyncRelativeRetryInvalidJsonPolling_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            Operation operation = client.DeleteAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteAsyncRelativeRetryInvalidJsonPolling_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             LrosaDsClient client = new LrosaDsClient(credential);
 
             Operation operation = await client.DeleteAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_DeleteAsyncRelativeRetryInvalidJsonPolling_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            Operation operation = client.DeleteAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed);
         }
 
         [Test]
@@ -1621,6 +1621,17 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_Post202RetryInvalidHeader_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            RequestContent content = null;
+            Operation operation = await client.Post202RetryInvalidHeaderAsync(WaitUntil.Completed, content);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Post202RetryInvalidHeader_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1639,17 +1650,6 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation operation = client.Post202RetryInvalidHeader(WaitUntil.Completed, content);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post202RetryInvalidHeader_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            RequestContent content = null;
-            Operation operation = await client.Post202RetryInvalidHeaderAsync(WaitUntil.Completed, content);
         }
 
         [Test]
@@ -1687,6 +1687,17 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PostAsyncRelativeRetryInvalidHeader_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            RequestContent content = null;
+            Operation operation = await client.PostAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, content);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PostAsyncRelativeRetryInvalidHeader_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1705,17 +1716,6 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation operation = client.PostAsyncRelativeRetryInvalidHeader(WaitUntil.Completed, content);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostAsyncRelativeRetryInvalidHeader_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            RequestContent content = null;
-            Operation operation = await client.PostAsyncRelativeRetryInvalidHeaderAsync(WaitUntil.Completed, content);
         }
 
         [Test]
@@ -1753,6 +1753,17 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PostAsyncRelativeRetryInvalidJsonPolling_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LrosaDsClient client = new LrosaDsClient(credential);
+
+            RequestContent content = null;
+            Operation operation = await client.PostAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, content);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PostAsyncRelativeRetryInvalidJsonPolling_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1771,17 +1782,6 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation operation = client.PostAsyncRelativeRetryInvalidJsonPolling(WaitUntil.Completed, content);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostAsyncRelativeRetryInvalidJsonPolling_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LrosaDsClient client = new LrosaDsClient(credential);
-
-            RequestContent content = null;
-            Operation operation = await client.PostAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil.Completed, content);
         }
 
         [Test]

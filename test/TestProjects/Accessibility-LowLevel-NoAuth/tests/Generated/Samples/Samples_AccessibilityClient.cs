@@ -30,23 +30,23 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_AllParameters()
-        {
-            AccessibilityClient client = new AccessibilityClient();
-
-            RequestContent content = RequestContent.Create("<body>");
-            Response response = client.Operation(content);
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_Async()
         {
             AccessibilityClient client = new AccessibilityClient();
 
             RequestContent content = null;
             Response response = await client.OperationAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Operation_AllParameters()
+        {
+            AccessibilityClient client = new AccessibilityClient();
+
+            RequestContent content = RequestContent.Create("<body>");
+            Response response = client.Operation(content);
             Console.WriteLine(response.Status);
         }
 

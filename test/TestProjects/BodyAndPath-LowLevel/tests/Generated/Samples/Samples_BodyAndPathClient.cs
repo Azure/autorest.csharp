@@ -34,18 +34,6 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Create_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            BodyAndPathClient client = new BodyAndPathClient(credential);
-
-            RequestContent content = RequestContent.Create(new object());
-            Response response = client.Create("<itemName>", content);
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_Create_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -53,6 +41,18 @@ namespace BodyAndPath_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateAsync("<itemName>", content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Create_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = new BodyAndPathClient(credential);
+
+            RequestContent content = RequestContent.Create(new object());
+            Response response = client.Create("<itemName>", content);
             Console.WriteLine(response.Status);
         }
 
@@ -82,6 +82,18 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateStream_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = new BodyAndPathClient(credential);
+
+            RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
+            Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_CreateStream_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -92,18 +104,6 @@ namespace BodyAndPath_LowLevel.Samples
 {
 "<excluded>"
 });
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateStream_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            BodyAndPathClient client = new BodyAndPathClient(credential);
-
-            RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
-            Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"));
             Console.WriteLine(response.Status);
         }
 
@@ -136,18 +136,6 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateEnum_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            BodyAndPathClient client = new BodyAndPathClient(credential);
-
-            RequestContent content = RequestContent.Create(new object());
-            Response response = client.CreateEnum("current", "latest", content);
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateEnum_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -155,6 +143,18 @@ namespace BodyAndPath_LowLevel.Samples
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateEnumAsync("current", "latest", content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateEnum_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = new BodyAndPathClient(credential);
+
+            RequestContent content = RequestContent.Create(new object());
+            Response response = client.CreateEnum("current", "latest", content);
             Console.WriteLine(response.Status);
         }
 
@@ -185,12 +185,12 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBodyAndPaths_AllParameters()
+        public async Task Example_GetBodyAndPaths_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
-            Response response = client.GetBodyAndPaths(null);
+            Response response = await client.GetBodyAndPathsAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -198,12 +198,12 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBodyAndPaths_Async()
+        public void Example_GetBodyAndPaths_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
-            Response response = await client.GetBodyAndPathsAsync(null);
+            Response response = client.GetBodyAndPaths(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -237,12 +237,12 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetItems_AllParameters()
+        public async Task Example_GetItems_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
-            Response response = client.GetItems(null);
+            Response response = await client.GetItemsAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -250,12 +250,12 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetItems_Async()
+        public void Example_GetItems_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             BodyAndPathClient client = new BodyAndPathClient(credential);
 
-            Response response = await client.GetItemsAsync(null);
+            Response response = client.GetItems(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -288,6 +288,18 @@ namespace BodyAndPath_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_Update_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = new BodyAndPathClient(credential);
+
+            RequestContent content = RequestContent.Create(new object());
+            Response response = await client.UpdateAsync("<item3>", "<item2>", "value", "<item4>", content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Update_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -298,18 +310,6 @@ namespace BodyAndPath_LowLevel.Samples
                 ["invalid-int-name"] = 1234,
             });
             Response response = client.Update("<item3>", "<item2>", "value", "<item4>", content, item5: "<item5>");
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Update_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            BodyAndPathClient client = new BodyAndPathClient(credential);
-
-            RequestContent content = RequestContent.Create(new object());
-            Response response = await client.UpdateAsync("<item3>", "<item2>", "value", "<item4>", content);
             Console.WriteLine(response.Status);
         }
 

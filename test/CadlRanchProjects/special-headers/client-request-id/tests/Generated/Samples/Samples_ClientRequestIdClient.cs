@@ -28,21 +28,21 @@ namespace SpecialHeaders.ClientRequestId.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetClientRequestId_AllParameters()
-        {
-            ClientRequestIdClient client = new ClientRequestIdClient();
-
-            Response response = client.GetClientRequestId();
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetClientRequestId_Async()
         {
             ClientRequestIdClient client = new ClientRequestIdClient();
 
             Response response = await client.GetClientRequestIdAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetClientRequestId_AllParameters()
+        {
+            ClientRequestIdClient client = new ClientRequestIdClient();
+
+            Response response = client.GetClientRequestId();
             Console.WriteLine(response.Status);
         }
 

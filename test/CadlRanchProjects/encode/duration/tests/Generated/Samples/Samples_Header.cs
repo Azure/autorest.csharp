@@ -30,21 +30,21 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_AllParameters()
-        {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
-
-            Response response = client.Default(XmlConvert.ToTimeSpan("PT1H23M45S"));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_Async()
         {
             Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync(XmlConvert.ToTimeSpan("PT1H23M45S"));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Default_AllParameters()
+        {
+            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+
+            Response response = client.Default(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Console.WriteLine(response.Status);
         }
 
@@ -70,21 +70,21 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Iso8601_AllParameters()
-        {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
-
-            Response response = client.Iso8601(XmlConvert.ToTimeSpan("PT1H23M45S"));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_Iso8601_Async()
         {
             Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Iso8601Async(XmlConvert.ToTimeSpan("PT1H23M45S"));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Iso8601_AllParameters()
+        {
+            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+
+            Response response = client.Iso8601(XmlConvert.ToTimeSpan("PT1H23M45S"));
             Console.WriteLine(response.Status);
         }
 
@@ -113,11 +113,11 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Iso8601Array_AllParameters()
+        public async Task Example_Iso8601Array_Async()
         {
             Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = client.Iso8601Array(new List<TimeSpan>()
+            Response response = await client.Iso8601ArrayAsync(new List<TimeSpan>()
 {
 XmlConvert.ToTimeSpan("PT1H23M45S")
 });
@@ -126,11 +126,11 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Iso8601Array_Async()
+        public void Example_Iso8601Array_AllParameters()
         {
             Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
 
-            Response response = await client.Iso8601ArrayAsync(new List<TimeSpan>()
+            Response response = client.Iso8601Array(new List<TimeSpan>()
 {
 XmlConvert.ToTimeSpan("PT1H23M45S")
 });
@@ -162,21 +162,21 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Int32Seconds_AllParameters()
-        {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
-
-            Response response = client.Int32Seconds(TimeSpan.FromSeconds(10));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_Int32Seconds_Async()
         {
             Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Int32SecondsAsync(TimeSpan.FromSeconds(10));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Int32Seconds_AllParameters()
+        {
+            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+
+            Response response = client.Int32Seconds(TimeSpan.FromSeconds(10));
             Console.WriteLine(response.Status);
         }
 
@@ -202,21 +202,21 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FloatSeconds_AllParameters()
-        {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
-
-            Response response = client.FloatSeconds(TimeSpan.FromSeconds(10F));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatSeconds_Async()
         {
             Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.FloatSecondsAsync(TimeSpan.FromSeconds(10F));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FloatSeconds_AllParameters()
+        {
+            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+
+            Response response = client.FloatSeconds(TimeSpan.FromSeconds(10F));
             Console.WriteLine(response.Status);
         }
 

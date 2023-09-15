@@ -33,12 +33,12 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNotExpandable_AllParameters()
+        public async Task Example_GetNotExpandable_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            Response response = client.GetNotExpandable(null);
+            Response response = await client.GetNotExpandableAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -46,12 +46,12 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNotExpandable_Async()
+        public void Example_GetNotExpandable_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            Response response = await client.GetNotExpandableAsync(null);
+            Response response = client.GetNotExpandable(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -84,18 +84,6 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutNotExpandable_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            EnumClient client = new EnumClient(credential);
-
-            RequestContent content = RequestContent.Create("red color");
-            Response response = client.PutNotExpandable(content);
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_PutNotExpandable_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -103,6 +91,18 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("red color");
             Response response = await client.PutNotExpandableAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutNotExpandable_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            EnumClient client = new EnumClient(credential);
+
+            RequestContent content = RequestContent.Create("red color");
+            Response response = client.PutNotExpandable(content);
             Console.WriteLine(response.Status);
         }
 
@@ -133,12 +133,12 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetReferenced_AllParameters()
+        public async Task Example_GetReferenced_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            Response response = client.GetReferenced(null);
+            Response response = await client.GetReferencedAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -146,12 +146,12 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetReferenced_Async()
+        public void Example_GetReferenced_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumClient client = new EnumClient(credential);
 
-            Response response = await client.GetReferencedAsync(null);
+            Response response = client.GetReferenced(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -184,18 +184,6 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutReferenced_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            EnumClient client = new EnumClient(credential);
-
-            RequestContent content = RequestContent.Create("red color");
-            Response response = client.PutReferenced(content);
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_PutReferenced_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -203,6 +191,18 @@ namespace body_string_LowLevel.Samples
 
             RequestContent content = RequestContent.Create("red color");
             Response response = await client.PutReferencedAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutReferenced_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            EnumClient client = new EnumClient(credential);
+
+            RequestContent content = RequestContent.Create("red color");
+            Response response = client.PutReferenced(content);
             Console.WriteLine(response.Status);
         }
 
@@ -233,6 +233,19 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetReferencedConstant_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            EnumClient client = new EnumClient(credential);
+
+            Response response = await client.GetReferencedConstantAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("ColorConstant").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetReferencedConstant_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -243,19 +256,6 @@ namespace body_string_LowLevel.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("ColorConstant").ToString());
             Console.WriteLine(result.GetProperty("field1").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetReferencedConstant_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            EnumClient client = new EnumClient(credential);
-
-            Response response = await client.GetReferencedConstantAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("ColorConstant").ToString());
         }
 
         [Test]
@@ -289,6 +289,21 @@ namespace body_string_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutReferencedConstant_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            EnumClient client = new EnumClient(credential);
+
+            RequestContent content = RequestContent.Create(new
+            {
+                ColorConstant = "green-color",
+            });
+            Response response = await client.PutReferencedConstantAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutReferencedConstant_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -300,21 +315,6 @@ namespace body_string_LowLevel.Samples
                 field1 = "<field1>",
             });
             Response response = client.PutReferencedConstant(content);
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutReferencedConstant_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            EnumClient client = new EnumClient(credential);
-
-            RequestContent content = RequestContent.Create(new
-            {
-                ColorConstant = "green-color",
-            });
-            Response response = await client.PutReferencedConstantAsync(content);
             Console.WriteLine(response.Status);
         }
 

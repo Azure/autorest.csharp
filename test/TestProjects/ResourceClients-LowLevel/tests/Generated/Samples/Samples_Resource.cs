@@ -32,12 +32,12 @@ namespace ResourceClients_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetItem_AllParameters()
+        public async Task Example_GetItem_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
-            Response response = client.GetItem(null);
+            Response response = await client.GetItemAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -45,12 +45,12 @@ namespace ResourceClients_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetItem_Async()
+        public void Example_GetItem_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Resource client = new ResourceServiceClient(credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
-            Response response = await client.GetItemAsync(null);
+            Response response = client.GetItem(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

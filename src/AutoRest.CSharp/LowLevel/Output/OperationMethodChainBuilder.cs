@@ -134,27 +134,20 @@ namespace AutoRest.CSharp.Output.Models
             {
                 if (!shouldGenerateShortVersion && exampleKey != ExampleMockValueBuilder.ShortVersionMockExampleKey)
                     continue; // skip the short example when we decide not to generate it
+
                 if (Operation.Examples.TryGetValue(exampleKey, out var operationExample))
                 {
+                    // add protocol method sample
                     samples.Add(new(
                         _client,
                         method,
                         clientExample.ClientParameters,
                         operationExample,
                         false,
-                        exampleKey == ExampleMockValueBuilder.ShortVersionMockExampleKey ? string.Empty : exampleKey)); // TODO -- this is temporary to minimize the diff
-                }
-            }
+                        exampleKey));
 
-            // TODO -- this is intentional to keep the order of existing samples unchanged to minimize the amount of changes in the PR
-            // TODO -- will use a follow up PR to remove the double iteration
-            if (method.ConvenienceMethod != null && method.ConvenienceMethod.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
-            {
-                foreach (var (exampleKey, clientExample) in _clientParameterExamples)
-                {
-                    if (!shouldGenerateShortVersion && exampleKey != ExampleMockValueBuilder.ShortVersionMockExampleKey)
-                        continue; // skip the short example when we decide not to generate it
-                    if (Operation.Examples.TryGetValue(exampleKey, out var operationExample))
+                    // add convenience method sample
+                    if (method.ConvenienceMethod != null && method.ConvenienceMethod.Signature.Modifiers.HasFlag(Public))
                     {
                         samples.Add(new(
                             _client,
@@ -162,7 +155,7 @@ namespace AutoRest.CSharp.Output.Models
                             clientExample.ClientParameters,
                             operationExample,
                             true,
-                            exampleKey == ExampleMockValueBuilder.ShortVersionMockExampleKey ? string.Empty : exampleKey)); // TODO -- this is temporary to minimize the diff
+                            exampleKey));
                     }
                 }
             }
