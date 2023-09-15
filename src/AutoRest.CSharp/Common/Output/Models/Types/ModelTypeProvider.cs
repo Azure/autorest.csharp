@@ -38,7 +38,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ConstructorSignature? _serializationConstructor;
         private InputModelType _inputModel;
         private TypeFactory _typeFactory;
-        private SourceInputModel? _sourceInputModel;
         private InputModelType[]? _derivedTypes;
         private ObjectType? _defaultDerivedType;
 
@@ -60,7 +59,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _typeFactory = typeFactory!;
             _inputModel = inputModel;
-            _sourceInputModel = sourceInputModel;
             DefaultName = GetValidIdentifier(inputModel.Name); // TODO -- this is only a workaround only to solve the anonymous model names, in other cases, the name is unchanged.
             DefaultAccessibility = inputModel.Accessibility ?? "public";
             _deprecated = inputModel.Deprecated;

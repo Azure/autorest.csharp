@@ -27,7 +27,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultAccessibility { get; }
 
         private IReadOnlyList<MethodSignature>? _methods;
-        public IReadOnlyList<MethodSignature> Methods => _methods ??= Models!.Select(CreateMethod).ToList();
+        public IReadOnlyList<MethodSignature> Methods => _methods ??= EnsureMethods();
+        private IReadOnlyList<MethodSignature> EnsureMethods() => Models!.Select(CreateMethod).ToList();
 
         public IEnumerable<SerializableObjectType>? Models { get; }
 
@@ -43,15 +44,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultAccessibility = "public";
             ExistingModelFactoryMethods = typeof(ResourceManagerModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet();
             ExistingModelFactoryMethods.UnionWith(typeof(DataFactoryModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet());
-        }
-
-        private ModelFactoryTypeProvider(IReadOnlyList<MethodSignature> methods)
-            : base(string.Empty, null)
-        {
-            _methods = methods;
-            DefaultName = string.Empty;
-            DefaultAccessibility = "public";
-            ExistingModelFactoryMethods = new HashSet<MethodInfo>();
         }
 
         public static ModelFactoryTypeProvider? TryCreate(IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
@@ -94,9 +86,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
 
-        protected override Func<IReadOnlyList<MethodSignature>, TypeProvider>? InstantiateTypeProvider => methods => new ModelFactoryTypeProvider(methods);
-
-        protected override IReadOnlyList<MethodSignature> MethodSignatures => Methods;
+        private SignatureTypeProvider? _signatureTypeProvider;
+        public override SignatureTypeProvider? SignatureTypeProvider => _signatureTypeProvider ??= new SignatureTypeProvider(Methods, _sourceInputModel, DefaultNamespace, DefaultName);
 
         private (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignmentForSimpleProperty(CodeWriter writer, SerializableObjectType model, Parameter parameter, ObjectTypeProperty property)
         {

@@ -31,7 +31,6 @@ namespace AutoRest.CSharp.Output.Models
         private readonly IReadOnlyDictionary<string, InputClientExample> _clientParameterExamples;
         private readonly InputAuth _authorization;
         private readonly IEnumerable<InputOperation> _operations;
-        private readonly SourceInputModel? _sourceInputModel;
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility => "public";
@@ -67,7 +66,6 @@ namespace AutoRest.CSharp.Output.Models
             _clientParameterExamples = examples;
             _authorization = authorization;
             _operations = operations;
-            _sourceInputModel = sourceInputModel;
 
             SubClients = Array.Empty<LowLevelClient>();
         }
