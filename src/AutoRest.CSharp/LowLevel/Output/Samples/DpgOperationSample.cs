@@ -327,7 +327,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 return bodyParameterExample.ExampleValue;
             }
 
-            return InputExampleValue.Null(Method.RequestBodyType!);
+            return InputExampleValue.Null(Method.RequestBodyType);
         }
 
         private static bool IsSameParameter(Parameter parameter, Parameter knownParameter)
