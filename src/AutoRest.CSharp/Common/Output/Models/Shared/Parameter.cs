@@ -298,7 +298,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 return false;
             }
 
-            var result = x.Type.EqualsBySystemType(y.Type) && x.Name == y.Name;
+            var result = x.Type.EqualsByName(y.Type) && x.Name == y.Name;
             return result;
         }
 

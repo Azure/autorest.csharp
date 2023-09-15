@@ -368,7 +368,52 @@ namespace AutoRest.CSharp.Generation.Types
 
         public bool TryCreateType(ITypeSymbol symbol, Func<System.Type, bool> validator, [NotNullWhen(true)] out CSharpType? type)
         {
-            type = null;
+            //type = CreateTypeCore(symbol, validator);
+            var stack = new Stack<(string WrappedType, IList<CSharpType> Arguments)>();
+            type = UnWrapType(symbol, validator, stack);
+            while (stack.TryPop(out var item))
+            {
+                var (wrappedType, arguments) = item;
+                arguments.Insert(0, type!);
+                switch (wrappedType)
+                {
+                    case "ArmOperation":
+                        type = new CSharpType(typeof(ArmOperation<>), arguments.ToArray());
+                        break;
+                    case "Task":
+                        type = new CSharpType(typeof(Task<>), type!);
+                        break;
+                    case "AsyncPageable":
+                        type = new CSharpType(typeof(AsyncPageable<>), type!);
+                        break;
+                    case "Pageable":
+                        type = new CSharpType(typeof(Pageable<>), type!);
+                        break;
+                    case "Response":
+                        type = new CSharpType(typeof(Response<>), type!);
+                        break;
+                    case "Nullable":
+                        type = type!.WithNullable(true);
+                        break;
+                }
+            }
+            if (type == null)
+            {
+                return false;
+            }
+
+            if (!type.IsValueType &&
+                symbol.NullableAnnotation != NullableAnnotation.NotAnnotated)
+            {
+                type = type.WithNullable(true);
+            }
+
+            return true;
+        }
+
+        private CSharpType? CreateTypeCore(ITypeSymbol symbol, Func<System.Type, bool> validator)
+        {
+            CSharpType? type = null;
             INamedTypeSymbol? namedTypeSymbol = symbol as INamedTypeSymbol;
             if (namedTypeSymbol == null)
             {
@@ -378,7 +423,7 @@ namespace AutoRest.CSharp.Generation.Types
             if (namedTypeSymbol.ConstructedFrom.SpecialType == SpecialType.System_Nullable_T)
             {
                 type = CreateType(namedTypeSymbol.TypeArguments[0]).WithNullable(true);
-                return true;
+                return type;
             }
 
             var fullMetadataName = GetFullMetadataName(namedTypeSymbol);
@@ -394,19 +439,7 @@ namespace AutoRest.CSharp.Generation.Types
             {
                 type = _library.FindTypeByName(namedTypeSymbol.Name);
             }
-
-            if (type == null)
-            {
-                return false;
-            }
-
-            if (!type.IsValueType &&
-                symbol.NullableAnnotation != NullableAnnotation.NotAnnotated)
-            {
-                type = type.WithNullable(true);
-            }
-
-            return true;
+            return type;
         }
 
         private string GetFullMetadataName(ISymbol namedTypeSymbol)
@@ -449,36 +482,7 @@ namespace AutoRest.CSharp.Generation.Types
             return to.FrameworkType == typeof(IReadOnlyList<>) || to.FrameworkType == typeof(IList<>);
         }
 
-        public CSharpType? GetCsharpType(ITypeSymbol symbol)
-        {
-            var stack = new Stack<string>();
-            var type = UnWrapType(symbol, stack);
-
-            while (stack.TryPop(out var wrappedType))
-            {
-                switch (wrappedType)
-                {
-                    case "ArmOperation":
-                        type = new CSharpType(typeof(ArmOperation<>), type!);
-                        break;
-                    case "Task":
-                        type = new CSharpType(typeof(Task<>), type!);
-                        break;
-                    case "AsyncPageable":
-                        type = new CSharpType(typeof(AsyncPageable<>), type!);
-                        break;
-                    case "Pageable":
-                        type = new CSharpType(typeof(Pageable<>), type!);
-                        break;
-                    case "Response":
-                        type = new CSharpType(typeof(Response<>), type!);
-                        break;
-                }
-            }
-            return type;
-        }
-
-        private CSharpType? UnWrapType(ITypeSymbol symbol, Stack<string> wrapers)
+        private CSharpType? UnWrapType(ITypeSymbol symbol, Func<System.Type, bool> validator, Stack<(string Wraper, IList<CSharpType> Arguments)> wrapers)
         {
             var namedTypeSymbol = symbol as INamedTypeSymbol;
             if (namedTypeSymbol == null)
@@ -486,17 +490,23 @@ namespace AutoRest.CSharp.Generation.Types
                 throw new InvalidCastException($"Unexpected type {symbol}");
             }
 
-            if (namedTypeSymbol.TypeArguments.Any())
+            if (namedTypeSymbol.TypeArguments.Count() > 0)
             {
-                wrapers.Push(namedTypeSymbol.Name);
-                return UnWrapType(namedTypeSymbol.TypeArguments[0], wrapers);
+                var args = new List<CSharpType>();
+                for (var i = 1; i < namedTypeSymbol.TypeArguments.Count(); i++)
+                {
+                    var arg = CreateTypeCore(namedTypeSymbol.TypeArguments[i], validator);
+                    if (arg is not null)
+                    {
+                        args.Add(arg);
+                    }
+                    // should we throw if we can't create the type? Because this will silently miss an argument.
+                }
+                wrapers.Push((namedTypeSymbol.Name, args));
+                return UnWrapType(namedTypeSymbol.TypeArguments[0], validator, wrapers);
             }
 
-            if (TryCreateType(namedTypeSymbol, out var result))
-            {
-                return result;
-            }
-            return null;
+            return CreateTypeCore(namedTypeSymbol, validator);
         }
     }
 }

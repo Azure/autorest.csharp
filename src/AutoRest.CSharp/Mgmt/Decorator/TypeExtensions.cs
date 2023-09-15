@@ -23,8 +23,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool EqualsByName(this CSharpType left, CSharpType right)
+        public static bool EqualsByName(this CSharpType? left, CSharpType? right)
         {
+            if (ReferenceEquals(left, right))
+            {
+                return true;
+            }
+
+            if (left is null || right is null)
+            {
+                return false;
+            }
+
             if (left.Name != right.Name)
                 return false;
 
@@ -38,20 +48,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             return true;
-        }
-
-        public static bool EqualsBySystemType(this CSharpType? left, CSharpType? right)
-        {
-            if (ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (left is null || right is null)
-            {
-                return false;
-            }
-            return left.GetType().Equals(right.GetType());
         }
 
         public static CSharpType WrapPageable(this CSharpType type, bool isAsync)

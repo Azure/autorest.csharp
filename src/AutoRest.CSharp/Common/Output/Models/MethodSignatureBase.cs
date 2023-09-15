@@ -3,12 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models
 {

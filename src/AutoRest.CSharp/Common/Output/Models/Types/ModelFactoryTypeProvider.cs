@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IReadOnlyList<MethodSignature> Methods => _methods ??= EnsureMethods();
         private IReadOnlyList<MethodSignature> EnsureMethods() => Models!.Select(CreateMethod).ToList();
 
-        public IEnumerable<SerializableObjectType>? Models { get; }
+        public IEnumerable<SerializableObjectType> Models { get; }
 
         public FormattableString Description => $"Model factory for models.";
 

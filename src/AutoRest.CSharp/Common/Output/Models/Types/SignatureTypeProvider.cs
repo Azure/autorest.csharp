@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     continue;
                 }
 
-                if (!previousMethod.ReturnType.EqualsBySystemType(item.ReturnType))
+                if (!previousMethod.ReturnType.EqualsByName(item.ReturnType))
                 {
                     continue;
                 }
@@ -181,8 +181,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var method in methods)
             {
                 var description = method.GetDocumentationCommentXml();
-                var returnType = MgmtContext.TypeFactory.GetCsharpType(method.ReturnType);
-                if (returnType is null)
+                //var returnType = MgmtContext.TypeFactory.GetCsharpType(method.ReturnType);
+                if (!MgmtContext.TypeFactory.TryCreateType(method.ReturnType, out var returnType))
                 {
                     // TODO: handle missing method return type from MgmtOutputLibrary
                     continue;
