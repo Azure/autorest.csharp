@@ -1,6 +1,6 @@
 {
   "output-folder": ".",
-  "namespace": "ServiceVersionOverride",
+  "namespace": "ServiceVersionOverride_LowLevel",
   "library-name": "ServiceVersionOverride",
   "shared-source-folders": [
     "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",

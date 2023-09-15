@@ -2,48 +2,72 @@
 <doc>
   <members>
     <member name="GetWithIfAsync(string,RequestContext)">
-<example>
-This sample shows how to call GetWithIfAsync with required parameters.
+      <example>
+This sample shows how to call GetWithIfAsync.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetParameterClient("1.0.0");
+Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
 Response response = await client.GetWithIfAsync("<if>");
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call GetWithIfAsync with all parameters.
+<code><![CDATA[
+Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
+
+Response response = await client.GetWithIfAsync("<if>");
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="GetWithIf(string,RequestContext)">
-<example>
-This sample shows how to call GetWithIf with required parameters.
+      <example>
+This sample shows how to call GetWithIf.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetParameterClient("1.0.0");
+Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
 Response response = client.GetWithIf("<if>");
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call GetWithIf with all parameters.
+<code><![CDATA[
+Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
+
+Response response = client.GetWithIf("<if>");
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="GetWithFilterAsync(string,RequestContext)">
-<example>
-This sample shows how to call GetWithFilterAsync with required parameters.
+      <example>
+This sample shows how to call GetWithFilterAsync.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetParameterClient("1.0.0");
+Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
 Response response = await client.GetWithFilterAsync("<filter>");
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call GetWithFilterAsync with all parameters.
+<code><![CDATA[
+Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
+
+Response response = await client.GetWithFilterAsync("<filter>");
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="GetWithFilter(string,RequestContext)">
-<example>
-This sample shows how to call GetWithFilter with required parameters.
+      <example>
+This sample shows how to call GetWithFilter.
 <code><![CDATA[
-var client = new SpecialWordsClient().GetParameterClient("1.0.0");
+Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
 Response response = client.GetWithFilter("<filter>");
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call GetWithFilter with all parameters.
+<code><![CDATA[
+Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
+
+Response response = client.GetWithFilter("<filter>");
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
   </members>
 </doc>

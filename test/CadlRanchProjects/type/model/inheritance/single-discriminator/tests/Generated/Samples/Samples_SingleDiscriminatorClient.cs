@@ -6,14 +6,13 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Model.Inheritance.SingleDiscriminator;
 using _Type.Model.Inheritance.SingleDiscriminator.Models;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
@@ -24,22 +23,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetModel()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            Response response = client.GetModel(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("wingspan").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetModel_AllParameters()
-        {
-            var client = new SingleDiscriminatorClient();
-
-            Response response = client.GetModel(new RequestContext());
+            Response response = client.GetModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -50,9 +36,40 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModel_Async()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            Response response = await client.GetModelAsync(new RequestContext());
+            Response response = await client.GetModelAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("wingspan").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetModel_Convenience()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response<Bird> response = client.GetModel();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetModel_Convenience_Async()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response<Bird> response = await client.GetModelAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetModel_AllParameters()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response response = client.GetModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -63,9 +80,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModel_AllParameters_Async()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            Response response = await client.GetModelAsync(new RequestContext());
+            Response response = await client.GetModelAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -74,42 +91,34 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModel_Convenience_Async()
+        public void Example_GetModel_AllParameters_Convenience()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            var result = await client.GetModelAsync();
+            Response<Bird> response = client.GetModel();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetModel_AllParameters_Convenience_Async()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response<Bird> response = await client.GetModelAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_PutModel()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 kind = "seagull",
                 wingspan = 1234,
-            };
-
-            Response response = client.PutModel(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_PutModel_AllParameters()
-        {
-            var client = new SingleDiscriminatorClient();
-
-            var data = new
-            {
-                kind = "seagull",
-                wingspan = 1234,
-            };
-
-            Response response = client.PutModel(RequestContent.Create(data));
+            });
+            Response response = client.PutModel(content);
             Console.WriteLine(response.Status);
         }
 
@@ -117,31 +126,25 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutModel_Async()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 kind = "seagull",
                 wingspan = 1234,
-            };
-
-            Response response = await client.PutModelAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PutModelAsync(content);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutModel_AllParameters_Async()
+        public void Example_PutModel_Convenience()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            var data = new
-            {
-                kind = "seagull",
-                wingspan = 1234,
-            };
-
-            Response response = await client.PutModelAsync(RequestContent.Create(data));
+            Bird input = new SeaGull(1234);
+            Response response = client.PutModel(input);
             Console.WriteLine(response.Status);
         }
 
@@ -149,32 +152,72 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutModel_Convenience_Async()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            var input = new SeaGull(1234);
-            var result = await client.PutModelAsync(input);
+            Bird input = new SeaGull(1234);
+            Response response = await client.PutModelAsync(input);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutModel_AllParameters()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            RequestContent content = RequestContent.Create(new
+            {
+                kind = "seagull",
+                wingspan = 1234,
+            });
+            Response response = client.PutModel(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutModel_AllParameters_Async()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            RequestContent content = RequestContent.Create(new
+            {
+                kind = "seagull",
+                wingspan = 1234,
+            });
+            Response response = await client.PutModelAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutModel_AllParameters_Convenience()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Bird input = new SeaGull(1234);
+            Response response = client.PutModel(input);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutModel_AllParameters_Convenience_Async()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Bird input = new SeaGull(1234);
+            Response response = await client.PutModelAsync(input);
+            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetRecursiveModel()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            Response response = client.GetRecursiveModel(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("wingspan").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetRecursiveModel_AllParameters()
-        {
-            var client = new SingleDiscriminatorClient();
-
-            Response response = client.GetRecursiveModel(new RequestContext());
+            Response response = client.GetRecursiveModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -185,9 +228,40 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetRecursiveModel_Async()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            Response response = await client.GetRecursiveModelAsync(new RequestContext());
+            Response response = await client.GetRecursiveModelAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("wingspan").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetRecursiveModel_Convenience()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response<Bird> response = client.GetRecursiveModel();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetRecursiveModel_Convenience_Async()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response<Bird> response = await client.GetRecursiveModelAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetRecursiveModel_AllParameters()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response response = client.GetRecursiveModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -198,9 +272,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetRecursiveModel_AllParameters_Async()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            Response response = await client.GetRecursiveModelAsync(new RequestContext());
+            Response response = await client.GetRecursiveModelAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -209,42 +283,34 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetRecursiveModel_Convenience_Async()
+        public void Example_GetRecursiveModel_AllParameters_Convenience()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            var result = await client.GetRecursiveModelAsync();
+            Response<Bird> response = client.GetRecursiveModel();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetRecursiveModel_AllParameters_Convenience_Async()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response<Bird> response = await client.GetRecursiveModelAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_PutRecursiveModel()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 kind = "seagull",
                 wingspan = 1234,
-            };
-
-            Response response = client.PutRecursiveModel(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_PutRecursiveModel_AllParameters()
-        {
-            var client = new SingleDiscriminatorClient();
-
-            var data = new
-            {
-                kind = "seagull",
-                wingspan = 1234,
-            };
-
-            Response response = client.PutRecursiveModel(RequestContent.Create(data));
+            });
+            Response response = client.PutRecursiveModel(content);
             Console.WriteLine(response.Status);
         }
 
@@ -252,31 +318,25 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutRecursiveModel_Async()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 kind = "seagull",
                 wingspan = 1234,
-            };
-
-            Response response = await client.PutRecursiveModelAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PutRecursiveModelAsync(content);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutRecursiveModel_AllParameters_Async()
+        public void Example_PutRecursiveModel_Convenience()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            var data = new
-            {
-                kind = "seagull",
-                wingspan = 1234,
-            };
-
-            Response response = await client.PutRecursiveModelAsync(RequestContent.Create(data));
+            Bird input = new SeaGull(1234);
+            Response response = client.PutRecursiveModel(input);
             Console.WriteLine(response.Status);
         }
 
@@ -284,32 +344,72 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutRecursiveModel_Convenience_Async()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            var input = new SeaGull(1234);
-            var result = await client.PutRecursiveModelAsync(input);
+            Bird input = new SeaGull(1234);
+            Response response = await client.PutRecursiveModelAsync(input);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutRecursiveModel_AllParameters()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            RequestContent content = RequestContent.Create(new
+            {
+                kind = "seagull",
+                wingspan = 1234,
+            });
+            Response response = client.PutRecursiveModel(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutRecursiveModel_AllParameters_Async()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            RequestContent content = RequestContent.Create(new
+            {
+                kind = "seagull",
+                wingspan = 1234,
+            });
+            Response response = await client.PutRecursiveModelAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutRecursiveModel_AllParameters_Convenience()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Bird input = new SeaGull(1234);
+            Response response = client.PutRecursiveModel(input);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutRecursiveModel_AllParameters_Convenience_Async()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Bird input = new SeaGull(1234);
+            Response response = await client.PutRecursiveModelAsync(input);
+            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetMissingDiscriminator()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            Response response = client.GetMissingDiscriminator(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("wingspan").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetMissingDiscriminator_AllParameters()
-        {
-            var client = new SingleDiscriminatorClient();
-
-            Response response = client.GetMissingDiscriminator(new RequestContext());
+            Response response = client.GetMissingDiscriminator(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -320,9 +420,40 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetMissingDiscriminator_Async()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            Response response = await client.GetMissingDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetMissingDiscriminatorAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("wingspan").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetMissingDiscriminator_Convenience()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response<Bird> response = client.GetMissingDiscriminator();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetMissingDiscriminator_Convenience_Async()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response<Bird> response = await client.GetMissingDiscriminatorAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetMissingDiscriminator_AllParameters()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response response = client.GetMissingDiscriminator(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -333,9 +464,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetMissingDiscriminator_AllParameters_Async()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            Response response = await client.GetMissingDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetMissingDiscriminatorAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -344,33 +475,29 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMissingDiscriminator_Convenience_Async()
+        public void Example_GetMissingDiscriminator_AllParameters_Convenience()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            var result = await client.GetMissingDiscriminatorAsync();
+            Response<Bird> response = client.GetMissingDiscriminator();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetMissingDiscriminator_AllParameters_Convenience_Async()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response<Bird> response = await client.GetMissingDiscriminatorAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetWrongDiscriminator()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            Response response = client.GetWrongDiscriminator(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("wingspan").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetWrongDiscriminator_AllParameters()
-        {
-            var client = new SingleDiscriminatorClient();
-
-            Response response = client.GetWrongDiscriminator(new RequestContext());
+            Response response = client.GetWrongDiscriminator(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -381,9 +508,40 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetWrongDiscriminator_Async()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            Response response = await client.GetWrongDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetWrongDiscriminatorAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("wingspan").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetWrongDiscriminator_Convenience()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response<Bird> response = client.GetWrongDiscriminator();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetWrongDiscriminator_Convenience_Async()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response<Bird> response = await client.GetWrongDiscriminatorAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetWrongDiscriminator_AllParameters()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response response = client.GetWrongDiscriminator(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -394,9 +552,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetWrongDiscriminator_AllParameters_Async()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            Response response = await client.GetWrongDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetWrongDiscriminatorAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -405,33 +563,29 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWrongDiscriminator_Convenience_Async()
+        public void Example_GetWrongDiscriminator_AllParameters_Convenience()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            var result = await client.GetWrongDiscriminatorAsync();
+            Response<Bird> response = client.GetWrongDiscriminator();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetWrongDiscriminator_AllParameters_Convenience_Async()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response<Bird> response = await client.GetWrongDiscriminatorAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetLegacyModel()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            Response response = client.GetLegacyModel(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetLegacyModel_AllParameters()
-        {
-            var client = new SingleDiscriminatorClient();
-
-            Response response = client.GetLegacyModel(new RequestContext());
+            Response response = client.GetLegacyModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -442,9 +596,40 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetLegacyModel_Async()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            Response response = await client.GetLegacyModelAsync(new RequestContext());
+            Response response = await client.GetLegacyModelAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("size").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetLegacyModel_Convenience()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response<Dinosaur> response = client.GetLegacyModel();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetLegacyModel_Convenience_Async()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response<Dinosaur> response = await client.GetLegacyModelAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetLegacyModel_AllParameters()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response response = client.GetLegacyModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -455,9 +640,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetLegacyModel_AllParameters_Async()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            Response response = await client.GetLegacyModelAsync(new RequestContext());
+            Response response = await client.GetLegacyModelAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -466,11 +651,20 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetLegacyModel_Convenience_Async()
+        public void Example_GetLegacyModel_AllParameters_Convenience()
         {
-            var client = new SingleDiscriminatorClient();
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-            var result = await client.GetLegacyModelAsync();
+            Response<Dinosaur> response = client.GetLegacyModel();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetLegacyModel_AllParameters_Convenience_Async()
+        {
+            SingleDiscriminatorClient client = new SingleDiscriminatorClient();
+
+            Response<Dinosaur> response = await client.GetLegacyModelAsync();
         }
     }
 }
