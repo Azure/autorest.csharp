@@ -26,6 +26,7 @@ namespace AutoRest.CSharp.Generation.Types
     internal class TypeFactory
     {
         private readonly OutputLibrary _library;
+        private static readonly HashSet<string> _wrappingTypes = new HashSet<string> { "ArmOperation", "Task", "AsyncPageable", "Pageable", "Response" };
 
         public TypeFactory(OutputLibrary library)
         {
@@ -375,6 +376,7 @@ namespace AutoRest.CSharp.Generation.Types
             {
                 var (wrappedType, arguments) = item;
                 arguments.Insert(0, type!);
+                type = new CSharpType(wrappedType.GetType(), arguments.ToArray());
                 switch (wrappedType)
                 {
                     case "ArmOperation":
@@ -391,9 +393,6 @@ namespace AutoRest.CSharp.Generation.Types
                         break;
                     case "Response":
                         type = new CSharpType(typeof(Response<>), type!);
-                        break;
-                    case "Nullable":
-                        type = type!.WithNullable(true);
                         break;
                 }
             }
@@ -482,7 +481,7 @@ namespace AutoRest.CSharp.Generation.Types
             return to.FrameworkType == typeof(IReadOnlyList<>) || to.FrameworkType == typeof(IList<>);
         }
 
-        private CSharpType? UnWrapType(ITypeSymbol symbol, Func<System.Type, bool> validator, Stack<(string Wraper, IList<CSharpType> Arguments)> wrapers)
+        private CSharpType? UnWrapType(ITypeSymbol symbol, Func<Type, bool> validator, Stack<(string Wraper, IList<CSharpType> Arguments)> wrapers)
         {
             var namedTypeSymbol = symbol as INamedTypeSymbol;
             if (namedTypeSymbol == null)
@@ -502,8 +501,12 @@ namespace AutoRest.CSharp.Generation.Types
                     }
                     // should we throw if we can't create the type? Because this will silently miss an argument.
                 }
-                wrapers.Push((namedTypeSymbol.Name, args));
-                return UnWrapType(namedTypeSymbol.TypeArguments[0], validator, wrapers);
+                var wrapper = namedTypeSymbol.Name;
+                if (_wrappingTypes.Contains(wrapper))
+                {
+                    wrapers.Push((wrapper, args));
+                    return UnWrapType(namedTypeSymbol.TypeArguments[0], validator, wrapers);
+                }
             }
 
             return CreateTypeCore(namedTypeSymbol, validator);
