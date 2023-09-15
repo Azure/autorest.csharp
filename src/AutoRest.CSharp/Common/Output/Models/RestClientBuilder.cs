@@ -544,6 +544,7 @@ namespace AutoRest.CSharp.Output.Models
         public static IReadOnlyCollection<Parameter> GetConstructorParameters(IReadOnlyList<Parameter> parameters, CSharpType? credentialType, bool includeAPIVersion = false)
         {
             var constructorParameters = new List<Parameter>();
+
             constructorParameters.AddRange(GetRequiredParameters(parameters));
 
             if (credentialType != null)

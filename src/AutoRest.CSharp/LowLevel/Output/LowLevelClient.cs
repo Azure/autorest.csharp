@@ -153,6 +153,7 @@ namespace AutoRest.CSharp.Output.Models
                     Validation = parameter.Initializer != null ? Parameter.GetValidation(parameter.Type, parameter.RequestLocation, parameter.SkipUrlEncoding) : parameter.Validation,
                     Initializer = null
                 }).ToArray();
+
             if (Fields.CredentialFields.Count == 0)
             {
                 yield return CreatePrimaryConstructor(requiredParameters.Concat(optionalToRequired).OrderBy(parameter => parameter.Name != "endpoint").ToArray());
@@ -208,13 +209,6 @@ namespace AutoRest.CSharp.Output.Models
 
         private ConstructorSignature CreateSecondaryConstructor(IReadOnlyList<Parameter> parameters, FormattableString[] arguments)
         {
-            /*
-            var arguments = parameters
-                .Select<Parameter, FormattableString>(p => $"{p.Name}")
-                .Concat(optionalParametersArguments)
-                .ToArray();
-            */
-
             return new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters, Initializer: new ConstructorInitializer(false, arguments));
         }
 
