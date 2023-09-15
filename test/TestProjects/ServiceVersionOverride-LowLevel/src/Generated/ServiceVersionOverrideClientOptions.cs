@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace ServiceVersionOverride
+namespace ServiceVersionOverride_LowLevel
 {
     /// <summary> Client options for ServiceVersionOverrideClient. </summary>
     public partial class ServiceVersionOverrideClientOptions : ClientOptions

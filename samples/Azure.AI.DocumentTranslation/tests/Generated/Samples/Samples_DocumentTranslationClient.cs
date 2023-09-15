@@ -40,6 +40,25 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetDocumentStatus_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+
+            Response response = await client.GetDocumentStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("sourcePath").ToString());
+            Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+            Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("to").ToString());
+            Console.WriteLine(result.GetProperty("progress").ToString());
+            Console.WriteLine(result.GetProperty("id").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetDocumentStatus_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -63,25 +82,6 @@ namespace Azure.AI.DocumentTranslation.Samples
             Console.WriteLine(result.GetProperty("progress").ToString());
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("characterCharged").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDocumentStatus_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
-
-            Response response = await client.GetDocumentStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("sourcePath").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
-            Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("to").ToString());
-            Console.WriteLine(result.GetProperty("progress").ToString());
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
@@ -136,6 +136,29 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetTranslationStatus_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+
+            Response response = await client.GetTranslationStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+            Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetTranslationStatus_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -154,29 +177,6 @@ namespace Azure.AI.DocumentTranslation.Samples
             Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetTranslationStatus_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
-
-            Response response = await client.GetTranslationStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
-            Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
             Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
             Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
             Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
@@ -240,6 +240,29 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_CancelTranslation_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+
+            Response response = await client.CancelTranslationAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
+            Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
+            Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_CancelTranslation_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -258,29 +281,6 @@ namespace Azure.AI.DocumentTranslation.Samples
             Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
             Console.WriteLine(result.GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("inProgress").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("notYetStarted").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("cancelled").ToString());
-            Console.WriteLine(result.GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CancelTranslation_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
-
-            Response response = await client.CancelTranslationAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTimeUtc").ToString());
-            Console.WriteLine(result.GetProperty("lastActionDateTimeUtc").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
             Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
             Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
             Console.WriteLine(result.GetProperty("summary").GetProperty("success").ToString());
@@ -336,6 +336,21 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetSupportedDocumentFormats_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+
+            Response response = await client.GetSupportedDocumentFormatsAsync();
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
+            Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
+            Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetSupportedDocumentFormats_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -349,21 +364,6 @@ namespace Azure.AI.DocumentTranslation.Samples
             Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
             Console.WriteLine(result.GetProperty("value")[0].GetProperty("defaultVersion").ToString());
             Console.WriteLine(result.GetProperty("value")[0].GetProperty("versions")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetSupportedDocumentFormats_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
-
-            Response response = await client.GetSupportedDocumentFormatsAsync();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
-            Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
-            Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
         }
 
         [Test]
@@ -400,6 +400,21 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetSupportedGlossaryFormats_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+
+            Response response = await client.GetSupportedGlossaryFormatsAsync();
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
+            Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
+            Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetSupportedGlossaryFormats_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -413,21 +428,6 @@ namespace Azure.AI.DocumentTranslation.Samples
             Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
             Console.WriteLine(result.GetProperty("value")[0].GetProperty("defaultVersion").ToString());
             Console.WriteLine(result.GetProperty("value")[0].GetProperty("versions")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetSupportedGlossaryFormats_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
-
-            Response response = await client.GetSupportedGlossaryFormatsAsync();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
-            Console.WriteLine(result.GetProperty("value")[0].GetProperty("fileExtensions")[0].ToString());
-            Console.WriteLine(result.GetProperty("value")[0].GetProperty("contentTypes")[0].ToString());
         }
 
         [Test]
@@ -462,12 +462,12 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetSupportedStorageSources_AllParameters()
+        public async Task Example_GetSupportedStorageSources_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-            Response response = client.GetSupportedStorageSources();
+            Response response = await client.GetSupportedStorageSourcesAsync();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value")[0].ToString());
@@ -475,12 +475,12 @@ namespace Azure.AI.DocumentTranslation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetSupportedStorageSources_Async()
+        public void Example_GetSupportedStorageSources_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
-            Response response = await client.GetSupportedStorageSourcesAsync();
+            Response response = client.GetSupportedStorageSources();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value")[0].ToString());
@@ -507,6 +507,30 @@ namespace Azure.AI.DocumentTranslation.Samples
             DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
 
             foreach (BinaryData item in client.GetTranslationsStatus())
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("createdDateTimeUtc").ToString());
+                Console.WriteLine(result[0].GetProperty("lastActionDateTimeUtc").ToString());
+                Console.WriteLine(result[0].GetProperty("status").ToString());
+                Console.WriteLine(result[0].GetProperty("summary").GetProperty("total").ToString());
+                Console.WriteLine(result[0].GetProperty("summary").GetProperty("failed").ToString());
+                Console.WriteLine(result[0].GetProperty("summary").GetProperty("success").ToString());
+                Console.WriteLine(result[0].GetProperty("summary").GetProperty("inProgress").ToString());
+                Console.WriteLine(result[0].GetProperty("summary").GetProperty("notYetStarted").ToString());
+                Console.WriteLine(result[0].GetProperty("summary").GetProperty("cancelled").ToString());
+                Console.WriteLine(result[0].GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetTranslationsStatus_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+
+            await foreach (BinaryData item in client.GetTranslationsStatusAsync())
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("id").ToString());
@@ -552,30 +576,6 @@ Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
                 Console.WriteLine(result[0].GetProperty("error").GetProperty("innerError").GetProperty("code").ToString());
                 Console.WriteLine(result[0].GetProperty("error").GetProperty("innerError").GetProperty("message").ToString());
                 Console.WriteLine(result[0].GetProperty("error").GetProperty("innerError").GetProperty("target").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("total").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("failed").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("success").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("inProgress").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("notYetStarted").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("cancelled").ToString());
-                Console.WriteLine(result[0].GetProperty("summary").GetProperty("totalCharacterCharged").ToString());
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetTranslationsStatus_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
-
-            await foreach (BinaryData item in client.GetTranslationsStatusAsync())
-            {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("createdDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("lastActionDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("status").ToString());
                 Console.WriteLine(result[0].GetProperty("summary").GetProperty("total").ToString());
                 Console.WriteLine(result[0].GetProperty("summary").GetProperty("failed").ToString());
                 Console.WriteLine(result[0].GetProperty("summary").GetProperty("success").ToString());
@@ -647,6 +647,26 @@ Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetDocumentsStatus_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+
+            await foreach (BinaryData item in client.GetDocumentsStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("sourcePath").ToString());
+                Console.WriteLine(result[0].GetProperty("createdDateTimeUtc").ToString());
+                Console.WriteLine(result[0].GetProperty("lastActionDateTimeUtc").ToString());
+                Console.WriteLine(result[0].GetProperty("status").ToString());
+                Console.WriteLine(result[0].GetProperty("to").ToString());
+                Console.WriteLine(result[0].GetProperty("progress").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetDocumentsStatus_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -679,26 +699,6 @@ Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
                 Console.WriteLine(result[0].GetProperty("progress").ToString());
                 Console.WriteLine(result[0].GetProperty("id").ToString());
                 Console.WriteLine(result[0].GetProperty("characterCharged").ToString());
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDocumentsStatus_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
-
-            await foreach (BinaryData item in client.GetDocumentsStatusAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")))
-            {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("sourcePath").ToString());
-                Console.WriteLine(result[0].GetProperty("createdDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("lastActionDateTimeUtc").ToString());
-                Console.WriteLine(result[0].GetProperty("status").ToString());
-                Console.WriteLine(result[0].GetProperty("to").ToString());
-                Console.WriteLine(result[0].GetProperty("progress").ToString());
-                Console.WriteLine(result[0].GetProperty("id").ToString());
             }
         }
 
@@ -772,6 +772,37 @@ language = "<language>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_StartTranslation_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
+
+            RequestContent content = RequestContent.Create(new
+            {
+                inputs = new List<object>()
+{
+new
+{
+source = new
+{
+sourceUrl = "<sourceUrl>",
+},
+targets = new List<object>()
+{
+new
+{
+targetUrl = "<targetUrl>",
+language = "<language>",
+}
+},
+}
+},
+            });
+            Operation operation = await client.StartTranslationAsync(WaitUntil.Completed, content, new ContentType("application/json"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_StartTranslation_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -819,37 +850,6 @@ storageType = "Folder",
 },
             });
             Operation operation = client.StartTranslation(WaitUntil.Completed, content, new ContentType("application/json"));
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_StartTranslation_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            DocumentTranslationClient client = new DocumentTranslationClient("<Endpoint>", credential);
-
-            RequestContent content = RequestContent.Create(new
-            {
-                inputs = new List<object>()
-{
-new
-{
-source = new
-{
-sourceUrl = "<sourceUrl>",
-},
-targets = new List<object>()
-{
-new
-{
-targetUrl = "<targetUrl>",
-language = "<language>",
-}
-},
-}
-},
-            });
-            Operation operation = await client.StartTranslationAsync(WaitUntil.Completed, content, new ContentType("application/json"));
         }
 
         [Test]

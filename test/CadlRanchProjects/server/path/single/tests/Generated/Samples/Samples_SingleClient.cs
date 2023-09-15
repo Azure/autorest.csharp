@@ -29,23 +29,23 @@ namespace Server.Path.Single.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_MyOp_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            SingleClient client = new SingleClient(endpoint);
-
-            Response response = client.MyOp();
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_MyOp_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleClient client = new SingleClient(endpoint);
 
             Response response = await client.MyOpAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_MyOp_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            SingleClient client = new SingleClient(endpoint);
+
+            Response response = client.MyOp();
             Console.WriteLine(response.Status);
         }
 

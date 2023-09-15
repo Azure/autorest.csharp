@@ -32,11 +32,11 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Multi_AllParameters()
+        public async Task Example_Multi_Async()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Multi(new List<string>()
+            Response response = await client.MultiAsync(new List<string>()
 {
 "<colors>"
 });
@@ -45,11 +45,11 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Multi_Async()
+        public void Example_Multi_AllParameters()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.MultiAsync(new List<string>()
+            Response response = client.Multi(new List<string>()
 {
 "<colors>"
 });
@@ -84,11 +84,11 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Ssv_AllParameters()
+        public async Task Example_Ssv_Async()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Ssv(new List<string>()
+            Response response = await client.SsvAsync(new List<string>()
 {
 "<colors>"
 });
@@ -97,11 +97,11 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Ssv_Async()
+        public void Example_Ssv_AllParameters()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.SsvAsync(new List<string>()
+            Response response = client.Ssv(new List<string>()
 {
 "<colors>"
 });
@@ -136,11 +136,11 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Tsv_AllParameters()
+        public async Task Example_Tsv_Async()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Tsv(new List<string>()
+            Response response = await client.TsvAsync(new List<string>()
 {
 "<colors>"
 });
@@ -149,11 +149,11 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Tsv_Async()
+        public void Example_Tsv_AllParameters()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.TsvAsync(new List<string>()
+            Response response = client.Tsv(new List<string>()
 {
 "<colors>"
 });
@@ -188,11 +188,11 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Pipes_AllParameters()
+        public async Task Example_Pipes_Async()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Pipes(new List<string>()
+            Response response = await client.PipesAsync(new List<string>()
 {
 "<colors>"
 });
@@ -201,11 +201,11 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Pipes_Async()
+        public void Example_Pipes_AllParameters()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.PipesAsync(new List<string>()
+            Response response = client.Pipes(new List<string>()
 {
 "<colors>"
 });
@@ -240,11 +240,11 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Csv_AllParameters()
+        public async Task Example_Csv_Async()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Csv(new List<string>()
+            Response response = await client.CsvAsync(new List<string>()
 {
 "<colors>"
 });
@@ -253,11 +253,11 @@ namespace Parameters.CollectionFormat.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Csv_Async()
+        public void Example_Csv_AllParameters()
         {
             Query client = new CollectionFormatClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.CsvAsync(new List<string>()
+            Response response = client.Csv(new List<string>()
 {
 "<colors>"
 });

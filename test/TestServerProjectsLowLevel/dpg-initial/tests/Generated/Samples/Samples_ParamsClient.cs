@@ -33,12 +33,12 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_HeadNoParams_AllParameters()
+        public async Task Example_HeadNoParams_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            Response response = client.HeadNoParams(null);
+            Response response = await client.HeadNoParamsAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -46,12 +46,12 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HeadNoParams_Async()
+        public void Example_HeadNoParams_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            Response response = await client.HeadNoParamsAsync(null);
+            Response response = client.HeadNoParams(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -85,12 +85,12 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetRequired_AllParameters()
+        public async Task Example_GetRequired_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            Response response = client.GetRequired("<parameter>", null);
+            Response response = await client.GetRequiredAsync("<parameter>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -98,12 +98,12 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetRequired_Async()
+        public void Example_GetRequired_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            Response response = await client.GetRequiredAsync("<parameter>", null);
+            Response response = client.GetRequired("<parameter>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -137,12 +137,12 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutRequiredOptional_AllParameters()
+        public async Task Example_PutRequiredOptional_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            Response response = client.PutRequiredOptional("<requiredParam>", "<optionalParam>", null);
+            Response response = await client.PutRequiredOptionalAsync("<requiredParam>", null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -150,12 +150,12 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutRequiredOptional_Async()
+        public void Example_PutRequiredOptional_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            Response response = await client.PutRequiredOptionalAsync("<requiredParam>", null, null);
+            Response response = client.PutRequiredOptional("<requiredParam>", "<optionalParam>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -193,23 +193,6 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostParameters_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            ParamsClient client = new ParamsClient(credential);
-
-            RequestContent content = RequestContent.Create(new
-            {
-                url = "<url>",
-            });
-            Response response = client.PostParameters(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_PostParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -220,6 +203,23 @@ namespace dpg_initial_LowLevel.Samples
                 url = "<url>",
             });
             Response response = await client.PostParametersAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PostParameters_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParamsClient client = new ParamsClient(credential);
+
+            RequestContent content = RequestContent.Create(new
+            {
+                url = "<url>",
+            });
+            Response response = client.PostParameters(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -257,12 +257,12 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetOptional_AllParameters()
+        public async Task Example_GetOptional_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            Response response = client.GetOptional("<optionalParam>", null);
+            Response response = await client.GetOptionalAsync(null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -270,12 +270,12 @@ namespace dpg_initial_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetOptional_Async()
+        public void Example_GetOptional_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParamsClient client = new ParamsClient(credential);
 
-            Response response = await client.GetOptionalAsync(null, null);
+            Response response = client.GetOptional("<optionalParam>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

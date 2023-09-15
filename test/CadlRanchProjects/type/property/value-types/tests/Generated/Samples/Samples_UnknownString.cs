@@ -33,11 +33,11 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownString_AllParameters()
+        public async Task Example_GetUnknownString_Async()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion: "1.0.0");
 
-            Response response = client.GetUnknownString(null);
+            Response response = await client.GetUnknownStringAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property").ToString());
@@ -54,20 +54,20 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownString_AllParameters_Convenience()
+        public async Task Example_GetUnknownString_Convenience_Async()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion: "1.0.0");
 
-            Response<UnknownStringProperty> response = client.GetUnknownString();
+            Response<UnknownStringProperty> response = await client.GetUnknownStringAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownString_Async()
+        public void Example_GetUnknownString_AllParameters()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetUnknownStringAsync(null);
+            Response response = client.GetUnknownString(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property").ToString());
@@ -87,11 +87,11 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownString_Convenience_Async()
+        public void Example_GetUnknownString_AllParameters_Convenience()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion: "1.0.0");
 
-            Response<UnknownStringProperty> response = await client.GetUnknownStringAsync();
+            Response<UnknownStringProperty> response = client.GetUnknownString();
         }
 
         [Test]
@@ -119,7 +119,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public async Task Example_Put_Async()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion: "1.0.0");
 
@@ -127,7 +127,7 @@ namespace _Type.Property.ValueTypes.Samples
             {
                 property = new object(),
             });
-            Response response = client.Put(content);
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -144,18 +144,18 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public async Task Example_Put_Convenience_Async()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion: "1.0.0");
 
             UnknownStringProperty body = new UnknownStringProperty(BinaryData.FromObjectAsJson(new object()));
-            Response response = client.Put(body);
+            Response response = await client.PutAsync(body);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public void Example_Put_AllParameters()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion: "1.0.0");
 
@@ -163,7 +163,7 @@ namespace _Type.Property.ValueTypes.Samples
             {
                 property = new object(),
             });
-            Response response = await client.PutAsync(content);
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -183,12 +183,12 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public void Example_Put_AllParameters_Convenience()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient(apiVersion: "1.0.0");
 
             UnknownStringProperty body = new UnknownStringProperty(BinaryData.FromObjectAsJson(new object()));
-            Response response = await client.PutAsync(body);
+            Response response = client.Put(body);
             Console.WriteLine(response.Status);
         }
 

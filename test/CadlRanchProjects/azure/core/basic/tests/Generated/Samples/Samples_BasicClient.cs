@@ -40,6 +40,24 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateOrUpdate_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+            });
+            Response response = await client.CreateOrUpdateAsync(1234, content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_CreateOrUpdate_AllParameters()
         {
             BasicClient client = new BasicClient();
@@ -64,24 +82,6 @@ detail = "<detail>",
             Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
             Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-            Console.WriteLine(result.GetProperty("etag").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrUpdate_Async()
-        {
-            BasicClient client = new BasicClient();
-
-            RequestContent content = RequestContent.Create(new
-            {
-                name = "<name>",
-            });
-            Response response = await client.CreateOrUpdateAsync(1234, content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
@@ -134,6 +134,44 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateOrReplace_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+            });
+            Response response = await client.CreateOrReplaceAsync(1234, content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateOrReplace_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            User resource = new User("<name>");
+            Response<User> response = client.CreateOrReplace(1234, resource);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateOrReplace_Convenience_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            User resource = new User("<name>");
+            Response<User> response = await client.CreateOrReplaceAsync(1234, resource);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_CreateOrReplace_AllParameters()
         {
             BasicClient client = new BasicClient();
@@ -158,50 +196,6 @@ detail = "<detail>",
             Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
             Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-            Console.WriteLine(result.GetProperty("etag").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrReplace_Convenience()
-        {
-            BasicClient client = new BasicClient();
-
-            User resource = new User("<name>");
-            Response<User> response = client.CreateOrReplace(1234, resource);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrReplace_AllParameters_Convenience()
-        {
-            BasicClient client = new BasicClient();
-
-            User resource = new User("<name>")
-            {
-                Orders =
-{
-new UserOrder(1234,"<detail>")
-},
-            };
-            Response<User> response = client.CreateOrReplace(1234, resource);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrReplace_Async()
-        {
-            BasicClient client = new BasicClient();
-
-            RequestContent content = RequestContent.Create(new
-            {
-                name = "<name>",
-            });
-            Response response = await client.CreateOrReplaceAsync(1234, content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
@@ -236,12 +230,18 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrReplace_Convenience_Async()
+        public void Example_CreateOrReplace_AllParameters_Convenience()
         {
             BasicClient client = new BasicClient();
 
-            User resource = new User("<name>");
-            Response<User> response = await client.CreateOrReplaceAsync(1234, resource);
+            User resource = new User("<name>")
+            {
+                Orders =
+{
+new UserOrder(1234,"<detail>")
+},
+            };
+            Response<User> response = client.CreateOrReplace(1234, resource);
         }
 
         [Test]
@@ -276,18 +276,15 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUser_AllParameters()
+        public async Task Example_GetUser_Async()
         {
             BasicClient client = new BasicClient();
 
-            Response response = client.GetUser(1234, null);
+            Response response = await client.GetUserAsync(1234, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
             Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
@@ -302,24 +299,27 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUser_AllParameters_Convenience()
+        public async Task Example_GetUser_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
-            Response<User> response = client.GetUser(1234);
+            Response<User> response = await client.GetUserAsync(1234);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUser_Async()
+        public void Example_GetUser_AllParameters()
         {
             BasicClient client = new BasicClient();
 
-            Response response = await client.GetUserAsync(1234, null);
+            Response response = client.GetUser(1234, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
             Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
@@ -342,11 +342,11 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUser_Convenience_Async()
+        public void Example_GetUser_AllParameters_Convenience()
         {
             BasicClient client = new BasicClient();
 
-            Response<User> response = await client.GetUserAsync(1234);
+            Response<User> response = client.GetUser(1234);
         }
 
         [Test]
@@ -370,21 +370,21 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete_AllParameters()
-        {
-            BasicClient client = new BasicClient();
-
-            Response response = client.Delete(1234);
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_Delete_Async()
         {
             BasicClient client = new BasicClient();
 
             Response response = await client.DeleteAsync(1234);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Delete_AllParameters()
+        {
+            BasicClient client = new BasicClient();
+
+            Response response = client.Delete(1234);
             Console.WriteLine(response.Status);
         }
 
@@ -414,18 +414,15 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Export_AllParameters()
+        public async Task Example_Export_Async()
         {
             BasicClient client = new BasicClient();
 
-            Response response = client.Export(1234, "<format>", null);
+            Response response = await client.ExportAsync(1234, "<format>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
             Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
@@ -440,24 +437,27 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Export_AllParameters_Convenience()
+        public async Task Example_Export_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
-            Response<User> response = client.Export(1234, "<format>");
+            Response<User> response = await client.ExportAsync(1234, "<format>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_Async()
+        public void Example_Export_AllParameters()
         {
             BasicClient client = new BasicClient();
 
-            Response response = await client.ExportAsync(1234, "<format>", null);
+            Response response = client.Export(1234, "<format>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
             Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
@@ -480,11 +480,11 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_Convenience_Async()
+        public void Example_Export_AllParameters_Convenience()
         {
             BasicClient client = new BasicClient();
 
-            Response<User> response = await client.ExportAsync(1234, "<format>");
+            Response<User> response = client.Export(1234, "<format>");
         }
 
         [Test]
@@ -513,6 +513,43 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetUsers_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            await foreach (BinaryData item in client.GetUsersAsync(null, null, null, null, null, null, null, null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetUsers_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            foreach (User item in client.GetUsers())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetUsers_Convenience_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            await foreach (User item in client.GetUsersAsync())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetUsers_AllParameters()
         {
             BasicClient client = new BasicClient();
@@ -534,52 +571,6 @@ new UserOrder(1234,"<detail>")
                 Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
                 Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
                 Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetUsers_Convenience()
-        {
-            BasicClient client = new BasicClient();
-
-            foreach (User item in client.GetUsers())
-            {
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetUsers_AllParameters_Convenience()
-        {
-            BasicClient client = new BasicClient();
-
-            foreach (User item in client.GetUsers(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new List<string>()
-{
-"<orderby>"
-}, filter: "<filter>", select: new List<string>()
-{
-"<select>"
-}, expand: new List<string>()
-{
-"<expand>"
-}))
-            {
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUsers_Async()
-        {
-            BasicClient client = new BasicClient();
-
-            await foreach (BinaryData item in client.GetUsersAsync(null, null, null, null, null, null, null, null))
-            {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
                 Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
@@ -613,11 +604,20 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUsers_Convenience_Async()
+        public void Example_GetUsers_AllParameters_Convenience()
         {
             BasicClient client = new BasicClient();
 
-            await foreach (User item in client.GetUsersAsync())
+            foreach (User item in client.GetUsers(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new List<string>()
+{
+"<orderby>"
+}, filter: "<filter>", select: new List<string>()
+{
+"<select>"
+}, expand: new List<string>()
+{
+"<expand>"
+}))
             {
             }
         }
@@ -659,18 +659,15 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithPage_AllParameters()
+        public async Task Example_GetWithPage_Async()
         {
             BasicClient client = new BasicClient();
 
-            foreach (BinaryData item in client.GetWithPage(null))
+            await foreach (BinaryData item in client.GetWithPageAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("id").ToString());
                 Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
                 Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
@@ -688,26 +685,29 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithPage_AllParameters_Convenience()
+        public async Task Example_GetWithPage_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
-            foreach (User item in client.GetWithPage())
+            await foreach (User item in client.GetWithPageAsync())
             {
             }
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithPage_Async()
+        public void Example_GetWithPage_AllParameters()
         {
             BasicClient client = new BasicClient();
 
-            await foreach (BinaryData item in client.GetWithPageAsync(null))
+            foreach (BinaryData item in client.GetWithPage(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("id").ToString());
                 Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
                 Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
@@ -732,11 +732,11 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithPage_Convenience_Async()
+        public void Example_GetWithPage_AllParameters_Convenience()
         {
             BasicClient client = new BasicClient();
 
-            await foreach (User item in client.GetWithPageAsync())
+            foreach (User item in client.GetWithPage())
             {
             }
         }
@@ -769,18 +769,15 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithCustomPageModel_AllParameters()
+        public async Task Example_GetWithCustomPageModel_Async()
         {
             BasicClient client = new BasicClient();
 
-            foreach (BinaryData item in client.GetWithCustomPageModel(null))
+            await foreach (BinaryData item in client.GetWithCustomPageModelAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("id").ToString());
                 Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
                 Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
@@ -798,26 +795,29 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithCustomPageModel_AllParameters_Convenience()
+        public async Task Example_GetWithCustomPageModel_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
-            foreach (User item in client.GetWithCustomPageModel())
+            await foreach (User item in client.GetWithCustomPageModelAsync())
             {
             }
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithCustomPageModel_Async()
+        public void Example_GetWithCustomPageModel_AllParameters()
         {
             BasicClient client = new BasicClient();
 
-            await foreach (BinaryData item in client.GetWithCustomPageModelAsync(null))
+            foreach (BinaryData item in client.GetWithCustomPageModel(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("id").ToString());
                 Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
                 Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
@@ -842,11 +842,11 @@ new UserOrder(1234,"<detail>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithCustomPageModel_Convenience_Async()
+        public void Example_GetWithCustomPageModel_AllParameters_Convenience()
         {
             BasicClient client = new BasicClient();
 
-            await foreach (User item in client.GetWithCustomPageModelAsync())
+            foreach (User item in client.GetWithCustomPageModel())
             {
             }
         }

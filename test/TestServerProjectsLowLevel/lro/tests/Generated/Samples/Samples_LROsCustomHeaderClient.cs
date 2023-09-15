@@ -35,6 +35,21 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutAsyncRetrySucceeded_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
+
+            RequestContent content = null;
+            Operation<BinaryData> operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PutAsyncRetrySucceeded_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -63,21 +78,6 @@ namespace lro_LowLevel.Samples
             Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAsyncRetrySucceeded_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
-
-            RequestContent content = null;
-            Operation<BinaryData> operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -129,6 +129,21 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put201CreatingSucceeded200_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
+
+            RequestContent content = null;
+            Operation<BinaryData> operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, content);
+            BinaryData responseData = operation.Value;
+
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Put201CreatingSucceeded200_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -157,21 +172,6 @@ namespace lro_LowLevel.Samples
             Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put201CreatingSucceeded200_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
-
-            RequestContent content = null;
-            Operation<BinaryData> operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, content);
-            BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -219,6 +219,17 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_Post202Retry200_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
+
+            RequestContent content = null;
+            Operation operation = await client.Post202Retry200Async(WaitUntil.Completed, content);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Post202Retry200_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -237,17 +248,6 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation operation = client.Post202Retry200(WaitUntil.Completed, content);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Post202Retry200_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
-
-            RequestContent content = null;
-            Operation operation = await client.Post202Retry200Async(WaitUntil.Completed, content);
         }
 
         [Test]
@@ -285,6 +285,17 @@ namespace lro_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PostAsyncRetrySucceeded_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
+
+            RequestContent content = null;
+            Operation operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, content);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PostAsyncRetrySucceeded_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -303,17 +314,6 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             });
             Operation operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, content);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostAsyncRetrySucceeded_Async()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            LROsCustomHeaderClient client = new LROsCustomHeaderClient(credential);
-
-            RequestContent content = null;
-            Operation operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, content);
         }
 
         [Test]

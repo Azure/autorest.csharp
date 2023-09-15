@@ -32,12 +32,12 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Patch_AllParameters()
+        public async Task Example_Patch_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<ClientParameter>");
 
-            Response response = client.Patch("<filter>", null);
+            Response response = await client.PatchAsync("<filter>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -45,12 +45,12 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Patch_Async()
+        public void Example_Patch_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<ClientParameter>");
 
-            Response response = await client.PatchAsync("<filter>", null);
+            Response response = client.Patch("<filter>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

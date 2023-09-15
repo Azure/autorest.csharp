@@ -33,11 +33,11 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModel_AllParameters()
+        public async Task Example_GetModel_Async()
         {
             Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
-            Response response = client.GetModel(null);
+            Response response = await client.GetModelAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property").GetProperty("property").ToString());
@@ -54,20 +54,20 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModel_AllParameters_Convenience()
+        public async Task Example_GetModel_Convenience_Async()
         {
             Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
-            Response<ModelProperty> response = client.GetModel();
+            Response<ModelProperty> response = await client.GetModelAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModel_Async()
+        public void Example_GetModel_AllParameters()
         {
             Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetModelAsync(null);
+            Response response = client.GetModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property").GetProperty("property").ToString());
@@ -87,11 +87,11 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModel_Convenience_Async()
+        public void Example_GetModel_AllParameters_Convenience()
         {
             Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
-            Response<ModelProperty> response = await client.GetModelAsync();
+            Response<ModelProperty> response = client.GetModel();
         }
 
         [Test]
@@ -122,7 +122,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public async Task Example_Put_Async()
         {
             Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
@@ -133,7 +133,7 @@ namespace _Type.Property.ValueTypes.Samples
                     property = "<property>",
                 },
             });
-            Response response = client.Put(content);
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -150,18 +150,18 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public async Task Example_Put_Convenience_Async()
         {
             Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
             ModelProperty body = new ModelProperty(new InnerModel("<property>"));
-            Response response = client.Put(body);
+            Response response = await client.PutAsync(body);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public void Example_Put_AllParameters()
         {
             Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
@@ -172,7 +172,7 @@ namespace _Type.Property.ValueTypes.Samples
                     property = "<property>",
                 },
             });
-            Response response = await client.PutAsync(content);
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -195,12 +195,12 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public void Example_Put_AllParameters_Convenience()
         {
             Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
 
             ModelProperty body = new ModelProperty(new InnerModel("<property>"));
-            Response response = await client.PutAsync(body);
+            Response response = client.Put(body);
             Console.WriteLine(response.Status);
         }
 
