@@ -118,14 +118,17 @@ namespace AutoRest.CSharp.Mgmt.Models
                 if (operationSet.Count == 0)
                     continue;
 
-                if (operationSet.RequestPath.StartsWith(RequestPath))
+                if (Models.RequestPath.IsPrefix(RequestPath, operationSet.RequestPath))
                 {
                     hintOperationSet = operationSet;
                     break;
                 }
             }
 
-            Debug.Assert(hintOperationSet != null);
+            if (hintOperationSet == null)
+            {
+                throw new InvalidOperationException($"cannot build request path for {RequestPath}. This usually happens when `partial-resource` is assigned but when there is no operation actually with this prefix, please double check");
+            }
             return BuildRequestPathFromHint(hintOperationSet);
         }
 
