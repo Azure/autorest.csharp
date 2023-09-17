@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="TopActionAsync(DateTimeOffset,CancellationToken)">
-    </member>
-    <member name="TopAction(DateTimeOffset,CancellationToken)">
-    </member>
+    <member name="TopActionAsync(DateTimeOffset,CancellationToken)" />
+    <member name="TopAction(DateTimeOffset,CancellationToken)" />
     <member name="TopActionAsync(DateTimeOffset,RequestContext)">
-<example>
-This sample shows how to call TopActionAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call TopActionAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.TopActionAsync(DateTimeOffset.UtcNow, new RequestContext());
+Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+]]></code>
+This sample shows how to call TopActionAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -28,17 +43,33 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="TopAction(DateTimeOffset,RequestContext)">
-<example>
-This sample shows how to call TopAction with required parameters and parse the result.
+      <example>
+This sample shows how to call TopAction and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = client.TopAction(DateTimeOffset.UtcNow, new RequestContext());
+Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+]]></code>
+This sample shows how to call TopAction with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -54,17 +85,33 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="TopAction2Async(RequestContext)">
-<example>
-This sample shows how to call TopAction2Async with required parameters and parse the result.
+      <example>
+This sample shows how to call TopAction2Async and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.TopAction2Async(new RequestContext());
+Response response = await client.TopAction2Async(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+]]></code>
+This sample shows how to call TopAction2Async with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.TopAction2Async(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -80,17 +127,33 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="TopAction2(RequestContext)">
-<example>
-This sample shows how to call TopAction2 with required parameters and parse the result.
+      <example>
+This sample shows how to call TopAction2 and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = client.TopAction2(new RequestContext());
+Response response = client.TopAction2(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+]]></code>
+This sample shows how to call TopAction2 with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.TopAction2(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -106,30 +169,30 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PatchActionAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call PatchActionAsync with required request content, and how to parse the result.
+      <example>
+This sample shows how to call PatchActionAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = "<requiredUnion>",
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
+    requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
-    requiredNullableList = new[] {
+    requiredNullableList = new List<object>()
+    {
         1234
     },
-};
-
-Response response = await client.PatchActionAsync(RequestContent.Create(data));
+});
+Response response = await client.PatchActionAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -141,32 +204,34 @@ Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
-This sample shows how to call PatchActionAsync with all request content, and how to parse the result.
+This sample shows how to call PatchActionAsync with all request content and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = "<requiredUnion>",
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
+    requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralFloat = 4.56,
+    optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
-    optionalNullableList = new[] {
+    optionalNullableList = new List<object>()
+    {
         1234
     },
-    requiredNullableList = new[] {
+    requiredNullableList = new List<object>()
+    {
         1234
     },
-};
-
-Response response = await client.PatchActionAsync(RequestContent.Create(data));
+});
+Response response = await client.PatchActionAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -182,30 +247,30 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PatchAction(RequestContent,RequestContext)">
-<example>
-This sample shows how to call PatchAction with required request content, and how to parse the result.
+      <example>
+This sample shows how to call PatchAction and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = "<requiredUnion>",
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
+    requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
-    requiredNullableList = new[] {
+    requiredNullableList = new List<object>()
+    {
         1234
     },
-};
-
-Response response = client.PatchAction(RequestContent.Create(data));
+});
+Response response = client.PatchAction(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -217,32 +282,34 @@ Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
-This sample shows how to call PatchAction with all request content, and how to parse the result.
+This sample shows how to call PatchAction with all request content and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = "<requiredUnion>",
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
+    requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralFloat = 4.56,
+    optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
-    optionalNullableList = new[] {
+    optionalNullableList = new List<object>()
+    {
         1234
     },
-    requiredNullableList = new[] {
+    requiredNullableList = new List<object>()
+    {
         1234
     },
-};
-
-Response response = client.PatchAction(RequestContent.Create(data));
+});
+Response response = client.PatchAction(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -258,34 +325,32 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
-    <member name="AnonymousBodyAsync(Thing,CancellationToken)">
-    </member>
-    <member name="AnonymousBody(Thing,CancellationToken)">
-    </member>
+    <member name="AnonymousBodyAsync(Thing,CancellationToken)" />
+    <member name="AnonymousBody(Thing,CancellationToken)" />
     <member name="AnonymousBodyAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call AnonymousBodyAsync with required request content, and how to parse the result.
+      <example>
+This sample shows how to call AnonymousBodyAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = "<requiredUnion>",
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
+    requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
-    requiredNullableList = new[] {
+    requiredNullableList = new List<object>()
+    {
         1234
     },
-};
-
-Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
+});
+Response response = await client.AnonymousBodyAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -297,32 +362,34 @@ Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
-This sample shows how to call AnonymousBodyAsync with all request content, and how to parse the result.
+This sample shows how to call AnonymousBodyAsync with all request content and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = "<requiredUnion>",
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
+    requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralFloat = 4.56,
+    optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
-    optionalNullableList = new[] {
+    optionalNullableList = new List<object>()
+    {
         1234
     },
-    requiredNullableList = new[] {
+    requiredNullableList = new List<object>()
+    {
         1234
     },
-};
-
-Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
+});
+Response response = await client.AnonymousBodyAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -338,30 +405,30 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="AnonymousBody(RequestContent,RequestContext)">
-<example>
-This sample shows how to call AnonymousBody with required request content, and how to parse the result.
+      <example>
+This sample shows how to call AnonymousBody and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = "<requiredUnion>",
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
+    requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
-    requiredNullableList = new[] {
+    requiredNullableList = new List<object>()
+    {
         1234
     },
-};
-
-Response response = client.AnonymousBody(RequestContent.Create(data));
+});
+Response response = client.AnonymousBody(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -373,32 +440,34 @@ Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
-This sample shows how to call AnonymousBody with all request content, and how to parse the result.
+This sample shows how to call AnonymousBody with all request content and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = "<requiredUnion>",
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
+    requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralFloat = 4.56,
+    optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
-    optionalNullableList = new[] {
+    optionalNullableList = new List<object>()
+    {
         1234
     },
-    requiredNullableList = new[] {
+    requiredNullableList = new List<object>()
+    {
         1234
     },
-};
-
-Response response = client.AnonymousBody(RequestContent.Create(data));
+});
+Response response = client.AnonymousBody(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -414,269 +483,451 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="FriendlyModelAsync(Friend,CancellationToken)">
-<example>
-This sample shows how to call FriendlyModelAsync with required parameters.
+      <example>
+This sample shows how to call FriendlyModelAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var notFriend = new Friend("<name>");
-var result = await client.FriendlyModelAsync(notFriend);
+Friend notFriend = new Friend("<name>");
+Response<Friend> response = await client.FriendlyModelAsync(notFriend);
 ]]></code>
-</example>
+This sample shows how to call FriendlyModelAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Friend notFriend = new Friend("<name>");
+Response<Friend> response = await client.FriendlyModelAsync(notFriend);
+]]></code></example>
     </member>
     <member name="FriendlyModel(Friend,CancellationToken)">
-<example>
-This sample shows how to call FriendlyModel with required parameters.
+      <example>
+This sample shows how to call FriendlyModel.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var notFriend = new Friend("<name>");
-var result = client.FriendlyModel(notFriend);
+Friend notFriend = new Friend("<name>");
+Response<Friend> response = client.FriendlyModel(notFriend);
 ]]></code>
-</example>
+This sample shows how to call FriendlyModel with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Friend notFriend = new Friend("<name>");
+Response<Friend> response = client.FriendlyModel(notFriend);
+]]></code></example>
     </member>
     <member name="FriendlyModelAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call FriendlyModelAsync with required request content and parse the result.
+      <example>
+This sample shows how to call FriendlyModelAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-};
-
-Response response = await client.FriendlyModelAsync(RequestContent.Create(data));
+});
+Response response = await client.FriendlyModelAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-</example>
+This sample shows how to call FriendlyModelAsync with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = await client.FriendlyModelAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code></example>
     </member>
     <member name="FriendlyModel(RequestContent,RequestContext)">
-<example>
-This sample shows how to call FriendlyModel with required request content and parse the result.
+      <example>
+This sample shows how to call FriendlyModel and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-};
-
-Response response = client.FriendlyModel(RequestContent.Create(data));
+});
+Response response = client.FriendlyModel(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-</example>
+This sample shows how to call FriendlyModel with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = client.FriendlyModel(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code></example>
     </member>
     <member name="AddTimeHeaderAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call AddTimeHeaderAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = await client.AddTimeHeaderAsync();
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call AddTimeHeaderAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.AddTimeHeaderAsync();
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="AddTimeHeader(RequestContext)">
-<example>
+      <example>
 This sample shows how to call AddTimeHeader.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = client.AddTimeHeader();
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call AddTimeHeader with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.AddTimeHeader();
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="StringFormatAsync(Guid,ModelWithFormat,CancellationToken)">
-<example>
-This sample shows how to call StringFormatAsync with required parameters.
+      <example>
+This sample shows how to call StringFormatAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.NewGuid());
-var result = await client.StringFormatAsync(Guid.NewGuid(), body);
+ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
+Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call StringFormatAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="StringFormat(Guid,ModelWithFormat,CancellationToken)">
-<example>
-This sample shows how to call StringFormat with required parameters.
+      <example>
+This sample shows how to call StringFormat.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.NewGuid());
-var result = client.StringFormat(Guid.NewGuid(), body);
+ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
+Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call StringFormat with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="StringFormatAsync(Guid,RequestContent,RequestContext)">
-<example>
-This sample shows how to call StringFormatAsync with required parameters and request content.
+      <example>
+This sample shows how to call StringFormatAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     sourceUrl = "http://localhost:3000",
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-};
-
-Response response = await client.StringFormatAsync(Guid.NewGuid(), RequestContent.Create(data));
+});
+Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call StringFormatAsync with all parameters and request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+RequestContent content = RequestContent.Create(new
+{
+    sourceUrl = "http://localhost:3000",
+    guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+});
+Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="StringFormat(Guid,RequestContent,RequestContext)">
-<example>
-This sample shows how to call StringFormat with required parameters and request content.
+      <example>
+This sample shows how to call StringFormat.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     sourceUrl = "http://localhost:3000",
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
-};
-
-Response response = client.StringFormat(Guid.NewGuid(), RequestContent.Create(data));
+});
+Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call StringFormat with all parameters and request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+RequestContent content = RequestContent.Create(new
+{
+    sourceUrl = "http://localhost:3000",
+    guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
+});
+Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="ProjectedNameModelAsync(ProjectedModel,CancellationToken)">
-<example>
-This sample shows how to call ProjectedNameModelAsync with required parameters.
+      <example>
+This sample shows how to call ProjectedNameModelAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var modelWithProjectedName = new ProjectedModel("<name>");
-var result = await client.ProjectedNameModelAsync(modelWithProjectedName);
+ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
+Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
 ]]></code>
-</example>
+This sample shows how to call ProjectedNameModelAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
+Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
+]]></code></example>
     </member>
     <member name="ProjectedNameModel(ProjectedModel,CancellationToken)">
-<example>
-This sample shows how to call ProjectedNameModel with required parameters.
+      <example>
+This sample shows how to call ProjectedNameModel.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var modelWithProjectedName = new ProjectedModel("<name>");
-var result = client.ProjectedNameModel(modelWithProjectedName);
+ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
+Response<ProjectedModel> response = client.ProjectedNameModel(modelWithProjectedName);
 ]]></code>
-</example>
+This sample shows how to call ProjectedNameModel with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
+Response<ProjectedModel> response = client.ProjectedNameModel(modelWithProjectedName);
+]]></code></example>
     </member>
     <member name="ProjectedNameModelAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call ProjectedNameModelAsync with required request content and parse the result.
+      <example>
+This sample shows how to call ProjectedNameModelAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-};
-
-Response response = await client.ProjectedNameModelAsync(RequestContent.Create(data));
+});
+Response response = await client.ProjectedNameModelAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-</example>
+This sample shows how to call ProjectedNameModelAsync with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = await client.ProjectedNameModelAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code></example>
     </member>
     <member name="ProjectedNameModel(RequestContent,RequestContext)">
-<example>
-This sample shows how to call ProjectedNameModel with required request content and parse the result.
+      <example>
+This sample shows how to call ProjectedNameModel and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-};
-
-Response response = client.ProjectedNameModel(RequestContent.Create(data));
+});
+Response response = client.ProjectedNameModel(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-</example>
+This sample shows how to call ProjectedNameModel with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = client.ProjectedNameModel(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code></example>
     </member>
     <member name="ReturnsAnonymousModelAsync(RequestContext)">
-<example>
-This sample shows how to call ReturnsAnonymousModelAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call ReturnsAnonymousModelAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.ReturnsAnonymousModelAsync(new RequestContext());
+Response response = await client.ReturnsAnonymousModelAsync(null);
 
 Console.WriteLine(response.ToString());
 ]]></code>
-</example>
+This sample shows how to call ReturnsAnonymousModelAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.ReturnsAnonymousModelAsync(null);
+
+Console.WriteLine(response.ToString());
+]]></code></example>
     </member>
     <member name="ReturnsAnonymousModel(RequestContext)">
-<example>
-This sample shows how to call ReturnsAnonymousModel with required parameters and parse the result.
+      <example>
+This sample shows how to call ReturnsAnonymousModel and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = client.ReturnsAnonymousModel(new RequestContext());
+Response response = client.ReturnsAnonymousModel(null);
 
 Console.WriteLine(response.ToString());
 ]]></code>
-</example>
+This sample shows how to call ReturnsAnonymousModel with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.ReturnsAnonymousModel(null);
+
+Console.WriteLine(response.ToString());
+]]></code></example>
     </member>
     <member name="HeadAsBooleanAsync(string,RequestContext)">
-<example>
-This sample shows how to call HeadAsBooleanAsync with required parameters.
+      <example>
+This sample shows how to call HeadAsBooleanAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Response<bool> response = await client.HeadAsBooleanAsync("<id>");
 Console.WriteLine(response.GetRawResponse().Status);
 ]]></code>
-</example>
+This sample shows how to call HeadAsBooleanAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response<bool> response = await client.HeadAsBooleanAsync("<id>");
+Console.WriteLine(response.GetRawResponse().Status);
+]]></code></example>
     </member>
     <member name="HeadAsBoolean(string,RequestContext)">
-<example>
-This sample shows how to call HeadAsBoolean with required parameters.
+      <example>
+This sample shows how to call HeadAsBoolean.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
 Response<bool> response = client.HeadAsBoolean("<id>");
 Console.WriteLine(response.GetRawResponse().Status);
 ]]></code>
-</example>
+This sample shows how to call HeadAsBoolean with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response<bool> response = client.HeadAsBoolean("<id>");
+Console.WriteLine(response.GetRawResponse().Status);
+]]></code></example>
     </member>
     <member name="SayHiAsync(string,string,string,RequestContext)">
-<example>
-This sample shows how to call SayHiAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call SayHiAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
+Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+]]></code>
+This sample shows how to call SayHiAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -692,17 +943,33 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="SayHi(string,string,string,RequestContext)">
-<example>
-This sample shows how to call SayHi with required parameters and parse the result.
+      <example>
+This sample shows how to call SayHi and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
+Response response = client.SayHi("<headParameter>", "<queryParameter>", null, null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+]]></code>
+This sample shows how to call SayHi with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -718,59 +985,62 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
-    <member name="HelloAgainAsync(string,string,RoundTripModel,CancellationToken)">
-    </member>
-    <member name="HelloAgain(string,string,RoundTripModel,CancellationToken)">
-    </member>
+    <member name="HelloAgainAsync(string,string,RoundTripModel,CancellationToken)" />
+    <member name="HelloAgain(string,string,RoundTripModel,CancellationToken)" />
     <member name="HelloAgainAsync(string,string,RequestContent,RequestContext)">
-<example>
-This sample shows how to call HelloAgainAsync with required parameters and request content, and how to parse the result.
+      <example>
+This sample shows how to call HelloAgainAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredCollection = new[] {
+    requiredCollection = new List<object>()
+    {
         "1"
     },
-    requiredDictionary = new {
+    requiredDictionary = new
+    {
         key = "1",
     },
-    requiredModel = new {
+    requiredModel = new
+    {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = "<requiredUnion>",
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
+        requiredLiteralFloat = 1.23F,
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
-        requiredNullableList = new[] {
+        requiredNullableList = new List<object>()
+        {
             1234
         },
     },
-    requiredUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
+    requiredUnknown = new object(),
+    requiredRecordUnknown = new
+    {
+        key = new object(),
     },
-    modelWithRequiredNullable = new {
+    modelWithRequiredNullable = new
+    {
         requiredNullablePrimitive = 1234,
         requiredExtensibleEnum = "1",
         requiredFixedEnum = "1",
     },
-};
-
-Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data));
+});
+Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -780,84 +1050,96 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiter
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
 ]]></code>
-This sample shows how to call HelloAgainAsync with all parameters and request content, and how to parse the result.
+This sample shows how to call HelloAgainAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredCollection = new[] {
+    requiredCollection = new List<object>()
+    {
         "1"
     },
-    requiredDictionary = new {
+    requiredDictionary = new
+    {
         key = "1",
     },
-    requiredModel = new {
+    requiredModel = new
+    {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = "<requiredUnion>",
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
+        requiredLiteralFloat = 1.23F,
         requiredLiteralBool = false,
         optionalLiteralString = "reject",
         optionalLiteralInt = 456,
-        optionalLiteralFloat = 4.56,
+        optionalLiteralFloat = 4.56F,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
-        optionalNullableList = new[] {
+        optionalNullableList = new List<object>()
+        {
             1234
         },
-        requiredNullableList = new[] {
+        requiredNullableList = new List<object>()
+        {
             1234
         },
     },
-    intExtensibleEnum = "1",
-    intExtensibleEnumCollection = new[] {
-        "1"
+    intExtensibleEnum = 1,
+    intExtensibleEnumCollection = new List<object>()
+    {
+        1
     },
-    floatExtensibleEnum = "1",
-    floatExtensibleEnumCollection = new[] {
-        "1"
+    floatExtensibleEnum = 1,
+    floatExtensibleEnumCollection = new List<object>()
+    {
+        1
     },
-    floatFixedEnum = "1.1",
-    floatFixedEnumCollection = new[] {
-        "1.1"
+    floatFixedEnum = 1.1F,
+    floatFixedEnumCollection = new List<object>()
+    {
+        1.1F
     },
-    intFixedEnum = "1",
-    intFixedEnumCollection = new[] {
-        "1"
+    intFixedEnum = 1,
+    intFixedEnumCollection = new List<object>()
+    {
+        1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
+    requiredUnknown = new object(),
+    optionalUnknown = new object(),
+    requiredRecordUnknown = new
+    {
+        key = new object(),
     },
-    optionalRecordUnknown = new {
-        key = new {},
+    optionalRecordUnknown = new
+    {
+        key = new object(),
     },
-    modelWithRequiredNullable = new {
+    modelWithRequiredNullable = new
+    {
         requiredNullablePrimitive = 1234,
         requiredExtensibleEnum = "1",
         requiredFixedEnum = "1",
     },
-};
-
-Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data));
+});
+Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -882,62 +1164,67 @@ Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
 Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="HelloAgain(string,string,RequestContent,RequestContext)">
-<example>
-This sample shows how to call HelloAgain with required parameters and request content, and how to parse the result.
+      <example>
+This sample shows how to call HelloAgain and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredCollection = new[] {
+    requiredCollection = new List<object>()
+    {
         "1"
     },
-    requiredDictionary = new {
+    requiredDictionary = new
+    {
         key = "1",
     },
-    requiredModel = new {
+    requiredModel = new
+    {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = "<requiredUnion>",
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
+        requiredLiteralFloat = 1.23F,
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
-        requiredNullableList = new[] {
+        requiredNullableList = new List<object>()
+        {
             1234
         },
     },
-    requiredUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
+    requiredUnknown = new object(),
+    requiredRecordUnknown = new
+    {
+        key = new object(),
     },
-    modelWithRequiredNullable = new {
+    modelWithRequiredNullable = new
+    {
         requiredNullablePrimitive = 1234,
         requiredExtensibleEnum = "1",
         requiredFixedEnum = "1",
     },
-};
-
-Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data));
+});
+Response response = client.HelloAgain("<p2>", "<p1>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -947,84 +1234,96 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiter
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
 ]]></code>
-This sample shows how to call HelloAgain with all parameters and request content, and how to parse the result.
+This sample shows how to call HelloAgain with all parameters and request content and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredCollection = new[] {
+    requiredCollection = new List<object>()
+    {
         "1"
     },
-    requiredDictionary = new {
+    requiredDictionary = new
+    {
         key = "1",
     },
-    requiredModel = new {
+    requiredModel = new
+    {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = "<requiredUnion>",
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
+        requiredLiteralFloat = 1.23F,
         requiredLiteralBool = false,
         optionalLiteralString = "reject",
         optionalLiteralInt = 456,
-        optionalLiteralFloat = 4.56,
+        optionalLiteralFloat = 4.56F,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
-        optionalNullableList = new[] {
+        optionalNullableList = new List<object>()
+        {
             1234
         },
-        requiredNullableList = new[] {
+        requiredNullableList = new List<object>()
+        {
             1234
         },
     },
-    intExtensibleEnum = "1",
-    intExtensibleEnumCollection = new[] {
-        "1"
+    intExtensibleEnum = 1,
+    intExtensibleEnumCollection = new List<object>()
+    {
+        1
     },
-    floatExtensibleEnum = "1",
-    floatExtensibleEnumCollection = new[] {
-        "1"
+    floatExtensibleEnum = 1,
+    floatExtensibleEnumCollection = new List<object>()
+    {
+        1
     },
-    floatFixedEnum = "1.1",
-    floatFixedEnumCollection = new[] {
-        "1.1"
+    floatFixedEnum = 1.1F,
+    floatFixedEnumCollection = new List<object>()
+    {
+        1.1F
     },
-    intFixedEnum = "1",
-    intFixedEnumCollection = new[] {
-        "1"
+    intFixedEnum = 1,
+    intFixedEnumCollection = new List<object>()
+    {
+        1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
+    requiredUnknown = new object(),
+    optionalUnknown = new object(),
+    requiredRecordUnknown = new
+    {
+        key = new object(),
     },
-    optionalRecordUnknown = new {
-        key = new {},
+    optionalRecordUnknown = new
+    {
+        key = new object(),
     },
-    modelWithRequiredNullable = new {
+    modelWithRequiredNullable = new
+    {
         requiredNullablePrimitive = 1234,
         requiredExtensibleEnum = "1",
         requiredFixedEnum = "1",
     },
-};
-
-Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data));
+});
+Response response = client.HelloAgain("<p2>", "<p1>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -1049,62 +1348,67 @@ Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
 Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="NoContentTypeAsync(string,string,RequestContent,RequestContext)">
-<example>
-This sample shows how to call NoContentTypeAsync with required parameters and request content, and how to parse the result.
+      <example>
+This sample shows how to call NoContentTypeAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredCollection = new[] {
+    requiredCollection = new List<object>()
+    {
         "1"
     },
-    requiredDictionary = new {
+    requiredDictionary = new
+    {
         key = "1",
     },
-    requiredModel = new {
+    requiredModel = new
+    {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = "<requiredUnion>",
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
+        requiredLiteralFloat = 1.23F,
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
-        requiredNullableList = new[] {
+        requiredNullableList = new List<object>()
+        {
             1234
         },
     },
-    requiredUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
+    requiredUnknown = new object(),
+    requiredRecordUnknown = new
+    {
+        key = new object(),
     },
-    modelWithRequiredNullable = new {
+    modelWithRequiredNullable = new
+    {
         requiredNullablePrimitive = 1234,
         requiredExtensibleEnum = "1",
         requiredFixedEnum = "1",
     },
-};
-
-Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data));
+});
+Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -1114,84 +1418,96 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiter
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
 ]]></code>
-This sample shows how to call NoContentTypeAsync with all parameters and request content, and how to parse the result.
+This sample shows how to call NoContentTypeAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredCollection = new[] {
+    requiredCollection = new List<object>()
+    {
         "1"
     },
-    requiredDictionary = new {
+    requiredDictionary = new
+    {
         key = "1",
     },
-    requiredModel = new {
+    requiredModel = new
+    {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = "<requiredUnion>",
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
+        requiredLiteralFloat = 1.23F,
         requiredLiteralBool = false,
         optionalLiteralString = "reject",
         optionalLiteralInt = 456,
-        optionalLiteralFloat = 4.56,
+        optionalLiteralFloat = 4.56F,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
-        optionalNullableList = new[] {
+        optionalNullableList = new List<object>()
+        {
             1234
         },
-        requiredNullableList = new[] {
+        requiredNullableList = new List<object>()
+        {
             1234
         },
     },
-    intExtensibleEnum = "1",
-    intExtensibleEnumCollection = new[] {
-        "1"
+    intExtensibleEnum = 1,
+    intExtensibleEnumCollection = new List<object>()
+    {
+        1
     },
-    floatExtensibleEnum = "1",
-    floatExtensibleEnumCollection = new[] {
-        "1"
+    floatExtensibleEnum = 1,
+    floatExtensibleEnumCollection = new List<object>()
+    {
+        1
     },
-    floatFixedEnum = "1.1",
-    floatFixedEnumCollection = new[] {
-        "1.1"
+    floatFixedEnum = 1.1F,
+    floatFixedEnumCollection = new List<object>()
+    {
+        1.1F
     },
-    intFixedEnum = "1",
-    intFixedEnumCollection = new[] {
-        "1"
+    intFixedEnum = 1,
+    intFixedEnumCollection = new List<object>()
+    {
+        1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
+    requiredUnknown = new object(),
+    optionalUnknown = new object(),
+    requiredRecordUnknown = new
+    {
+        key = new object(),
     },
-    optionalRecordUnknown = new {
-        key = new {},
+    optionalRecordUnknown = new
+    {
+        key = new object(),
     },
-    modelWithRequiredNullable = new {
+    modelWithRequiredNullable = new
+    {
         requiredNullablePrimitive = 1234,
         requiredExtensibleEnum = "1",
         requiredFixedEnum = "1",
     },
-};
-
-Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data));
+});
+Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -1216,62 +1532,67 @@ Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
 Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="NoContentType(string,string,RequestContent,RequestContext)">
-<example>
-This sample shows how to call NoContentType with required parameters and request content, and how to parse the result.
+      <example>
+This sample shows how to call NoContentType and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredCollection = new[] {
+    requiredCollection = new List<object>()
+    {
         "1"
     },
-    requiredDictionary = new {
+    requiredDictionary = new
+    {
         key = "1",
     },
-    requiredModel = new {
+    requiredModel = new
+    {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = "<requiredUnion>",
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
+        requiredLiteralFloat = 1.23F,
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
-        requiredNullableList = new[] {
+        requiredNullableList = new List<object>()
+        {
             1234
         },
     },
-    requiredUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
+    requiredUnknown = new object(),
+    requiredRecordUnknown = new
+    {
+        key = new object(),
     },
-    modelWithRequiredNullable = new {
+    modelWithRequiredNullable = new
+    {
         requiredNullablePrimitive = 1234,
         requiredExtensibleEnum = "1",
         requiredFixedEnum = "1",
     },
-};
-
-Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(data));
+});
+Response response = client.NoContentType("<p2>", "<p1>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -1281,84 +1602,96 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiter
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
 ]]></code>
-This sample shows how to call NoContentType with all parameters and request content, and how to parse the result.
+This sample shows how to call NoContentType with all parameters and request content and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredCollection = new[] {
+    requiredCollection = new List<object>()
+    {
         "1"
     },
-    requiredDictionary = new {
+    requiredDictionary = new
+    {
         key = "1",
     },
-    requiredModel = new {
+    requiredModel = new
+    {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = "<requiredUnion>",
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
+        requiredLiteralFloat = 1.23F,
         requiredLiteralBool = false,
         optionalLiteralString = "reject",
         optionalLiteralInt = 456,
-        optionalLiteralFloat = 4.56,
+        optionalLiteralFloat = 4.56F,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
-        optionalNullableList = new[] {
+        optionalNullableList = new List<object>()
+        {
             1234
         },
-        requiredNullableList = new[] {
+        requiredNullableList = new List<object>()
+        {
             1234
         },
     },
-    intExtensibleEnum = "1",
-    intExtensibleEnumCollection = new[] {
-        "1"
+    intExtensibleEnum = 1,
+    intExtensibleEnumCollection = new List<object>()
+    {
+        1
     },
-    floatExtensibleEnum = "1",
-    floatExtensibleEnumCollection = new[] {
-        "1"
+    floatExtensibleEnum = 1,
+    floatExtensibleEnumCollection = new List<object>()
+    {
+        1
     },
-    floatFixedEnum = "1.1",
-    floatFixedEnumCollection = new[] {
-        "1.1"
+    floatFixedEnum = 1.1F,
+    floatFixedEnumCollection = new List<object>()
+    {
+        1.1F
     },
-    intFixedEnum = "1",
-    intFixedEnumCollection = new[] {
-        "1"
+    intFixedEnum = 1,
+    intFixedEnumCollection = new List<object>()
+    {
+        1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
+    requiredUnknown = new object(),
+    optionalUnknown = new object(),
+    requiredRecordUnknown = new
+    {
+        key = new object(),
     },
-    optionalRecordUnknown = new {
-        key = new {},
+    optionalRecordUnknown = new
+    {
+        key = new object(),
     },
-    modelWithRequiredNullable = new {
+    modelWithRequiredNullable = new
+    {
         requiredNullablePrimitive = 1234,
         requiredExtensibleEnum = "1",
         requiredFixedEnum = "1",
     },
-};
-
-Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(data));
+});
+Response response = client.NoContentType("<p2>", "<p1>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -1383,28 +1716,42 @@ Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
 Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
-    <member name="HelloDemo2Async(CancellationToken)">
-    </member>
-    <member name="HelloDemo2(CancellationToken)">
-    </member>
+    <member name="HelloDemo2Async(CancellationToken)" />
+    <member name="HelloDemo2(CancellationToken)" />
     <member name="HelloDemo2Async(RequestContext)">
-<example>
-This sample shows how to call HelloDemo2Async with required parameters and parse the result.
+      <example>
+This sample shows how to call HelloDemo2Async and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.HelloDemo2Async(new RequestContext());
+Response response = await client.HelloDemo2Async(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+]]></code>
+This sample shows how to call HelloDemo2Async with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.HelloDemo2Async(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1420,17 +1767,33 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="HelloDemo2(RequestContext)">
-<example>
-This sample shows how to call HelloDemo2 with required parameters and parse the result.
+      <example>
+This sample shows how to call HelloDemo2 and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = client.HelloDemo2(new RequestContext());
+Response response = client.HelloDemo2(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+]]></code>
+This sample shows how to call HelloDemo2 with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.HelloDemo2(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1446,34 +1809,32 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
-    <member name="CreateLiteralAsync(Thing,CancellationToken)">
-    </member>
-    <member name="CreateLiteral(Thing,CancellationToken)">
-    </member>
+    <member name="CreateLiteralAsync(Thing,CancellationToken)" />
+    <member name="CreateLiteral(Thing,CancellationToken)" />
     <member name="CreateLiteralAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call CreateLiteralAsync with required request content, and how to parse the result.
+      <example>
+This sample shows how to call CreateLiteralAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = "<requiredUnion>",
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
+    requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
-    requiredNullableList = new[] {
+    requiredNullableList = new List<object>()
+    {
         1234
     },
-};
-
-Response response = await client.CreateLiteralAsync(RequestContent.Create(data));
+});
+Response response = await client.CreateLiteralAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1485,32 +1846,34 @@ Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
-This sample shows how to call CreateLiteralAsync with all request content, and how to parse the result.
+This sample shows how to call CreateLiteralAsync with all request content and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = "<requiredUnion>",
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
+    requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralFloat = 4.56,
+    optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
-    optionalNullableList = new[] {
+    optionalNullableList = new List<object>()
+    {
         1234
     },
-    requiredNullableList = new[] {
+    requiredNullableList = new List<object>()
+    {
         1234
     },
-};
-
-Response response = await client.CreateLiteralAsync(RequestContent.Create(data));
+});
+Response response = await client.CreateLiteralAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1526,30 +1889,30 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="CreateLiteral(RequestContent,RequestContext)">
-<example>
-This sample shows how to call CreateLiteral with required request content, and how to parse the result.
+      <example>
+This sample shows how to call CreateLiteral and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = "<requiredUnion>",
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
+    requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
-    requiredNullableList = new[] {
+    requiredNullableList = new List<object>()
+    {
         1234
     },
-};
-
-Response response = client.CreateLiteral(RequestContent.Create(data));
+});
+Response response = client.CreateLiteral(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1561,32 +1924,34 @@ Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
-This sample shows how to call CreateLiteral with all request content, and how to parse the result.
+This sample shows how to call CreateLiteral with all request content and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = "<requiredUnion>",
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
+    requiredLiteralFloat = 1.23F,
     requiredLiteralBool = false,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralFloat = 4.56,
+    optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
-    optionalNullableList = new[] {
+    optionalNullableList = new List<object>()
+    {
         1234
     },
-    requiredNullableList = new[] {
+    requiredNullableList = new List<object>()
+    {
         1234
     },
-};
-
-Response response = client.CreateLiteral(RequestContent.Create(data));
+});
+Response response = client.CreateLiteral(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1602,21 +1967,35 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
-    <member name="HelloLiteralAsync(CancellationToken)">
-    </member>
-    <member name="HelloLiteral(CancellationToken)">
-    </member>
+    <member name="HelloLiteralAsync(CancellationToken)" />
+    <member name="HelloLiteral(CancellationToken)" />
     <member name="HelloLiteralAsync(RequestContext)">
-<example>
-This sample shows how to call HelloLiteralAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call HelloLiteralAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.HelloLiteralAsync(new RequestContext());
+Response response = await client.HelloLiteralAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+]]></code>
+This sample shows how to call HelloLiteralAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.HelloLiteralAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1632,17 +2011,33 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="HelloLiteral(RequestContext)">
-<example>
-This sample shows how to call HelloLiteral with required parameters and parse the result.
+      <example>
+This sample shows how to call HelloLiteral and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = client.HelloLiteral(new RequestContext());
+Response response = client.HelloLiteral(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+]]></code>
+This sample shows how to call HelloLiteral with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.HelloLiteral(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1658,70 +2053,61 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetUnknownValueAsync(RequestContext)">
-<example>
-This sample shows how to call GetUnknownValueAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call GetUnknownValueAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.GetUnknownValueAsync(new RequestContext());
+Response response = await client.GetUnknownValueAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-</example>
+This sample shows how to call GetUnknownValueAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.GetUnknownValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code></example>
     </member>
     <member name="GetUnknownValue(RequestContext)">
-<example>
-This sample shows how to call GetUnknownValue with required parameters and parse the result.
+      <example>
+This sample shows how to call GetUnknownValue and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = client.GetUnknownValue(new RequestContext());
+Response response = client.GetUnknownValue(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
-</example>
-    </member>
-    <member name="InternalProtocolAsync(Thing,CancellationToken)">
-    </member>
-    <member name="InternalProtocol(Thing,CancellationToken)">
-    </member>
-    <member name="InternalProtocolAsync(RequestContent,RequestContext)">
-    </member>
-    <member name="InternalProtocol(RequestContent,RequestContext)">
-    </member>
-    <member name="StillConvenientValueAsync(CancellationToken)">
-<example>
-This sample shows how to call StillConvenientValueAsync.
+This sample shows how to call GetUnknownValue with all parameters and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-var result = await client.StillConvenientValueAsync();
-]]></code>
-</example>
-    </member>
-    <member name="StillConvenientValue(CancellationToken)">
-<example>
-This sample shows how to call StillConvenientValue.
-<code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
+Response response = client.GetUnknownValue(null);
 
-var result = client.StillConvenientValue();
-]]></code>
-</example>
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code></example>
     </member>
-    <member name="StillConvenientAsync(RequestContext)">
-    </member>
-    <member name="StillConvenient(RequestContext)">
-    </member>
+    <member name="InternalProtocolAsync(Thing,CancellationToken)" />
+    <member name="InternalProtocol(Thing,CancellationToken)" />
+    <member name="InternalProtocolAsync(RequestContent,RequestContext)" />
+    <member name="InternalProtocol(RequestContent,RequestContext)" />
+    <member name="StillConvenientValueAsync(CancellationToken)" />
+    <member name="StillConvenientValue(CancellationToken)" />
+    <member name="StillConvenientAsync(RequestContext)" />
+    <member name="StillConvenient(RequestContext)" />
   </members>
 </doc>

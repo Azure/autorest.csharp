@@ -2,120 +2,206 @@
 <doc>
   <members>
     <member name="GetModelValueAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetModelValueAsync.
 <code><![CDATA[
-var client = new ArrayClient().GetModelValueClient("1.0.0");
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-var result = await client.GetModelValueAsync();
+Response<IReadOnlyList<InnerModel>> response = await client.GetModelValueAsync();
 ]]></code>
-</example>
+This sample shows how to call GetModelValueAsync with all parameters.
+<code><![CDATA[
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyList<InnerModel>> response = await client.GetModelValueAsync();
+]]></code></example>
     </member>
     <member name="GetModelValue(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetModelValue.
 <code><![CDATA[
-var client = new ArrayClient().GetModelValueClient("1.0.0");
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-var result = client.GetModelValue();
+Response<IReadOnlyList<InnerModel>> response = client.GetModelValue();
 ]]></code>
-</example>
+This sample shows how to call GetModelValue with all parameters.
+<code><![CDATA[
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyList<InnerModel>> response = client.GetModelValue();
+]]></code></example>
     </member>
     <member name="GetModelValueAsync(RequestContext)">
-<example>
-This sample shows how to call GetModelValueAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call GetModelValueAsync and parse the result.
 <code><![CDATA[
-var client = new ArrayClient().GetModelValueClient("1.0.0");
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-Response response = await client.GetModelValueAsync(new RequestContext());
+Response response = await client.GetModelValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].GetProperty("property").ToString());
+]]></code>
+This sample shows how to call GetModelValueAsync with all parameters and parse the result.
+<code><![CDATA[
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
+
+Response response = await client.GetModelValueAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("property").ToString());
 Console.WriteLine(result[0].GetProperty("children")[0].GetProperty("property").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetModelValue(RequestContext)">
-<example>
-This sample shows how to call GetModelValue with required parameters and parse the result.
+      <example>
+This sample shows how to call GetModelValue and parse the result.
 <code><![CDATA[
-var client = new ArrayClient().GetModelValueClient("1.0.0");
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-Response response = client.GetModelValue(new RequestContext());
+Response response = client.GetModelValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].GetProperty("property").ToString());
+]]></code>
+This sample shows how to call GetModelValue with all parameters and parse the result.
+<code><![CDATA[
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
+
+Response response = client.GetModelValue(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].GetProperty("property").ToString());
 Console.WriteLine(result[0].GetProperty("children")[0].GetProperty("property").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PutAsync(IEnumerable{InnerModel},CancellationToken)">
-<example>
-This sample shows how to call PutAsync with required parameters.
+      <example>
+This sample shows how to call PutAsync.
 <code><![CDATA[
-var client = new ArrayClient().GetModelValueClient("1.0.0");
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-var body = new InnerModel[] 
+Response response = await client.PutAsync(new List<InnerModel>()
 {
     new InnerModel("<property>")
-{
-        Children = {},
-    }
-};
-var result = await client.PutAsync(body);
+});
+Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new List<InnerModel>()
+{
+    new InnerModel("<property>")
+    {
+        Children =
+        {
+            null
+        },
+    }
+});
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Put(IEnumerable{InnerModel},CancellationToken)">
-<example>
-This sample shows how to call Put with required parameters.
+      <example>
+This sample shows how to call Put.
 <code><![CDATA[
-var client = new ArrayClient().GetModelValueClient("1.0.0");
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-var body = new InnerModel[] 
+Response response = client.Put(new List<InnerModel>()
 {
     new InnerModel("<property>")
-{
-        Children = {},
-    }
-};
-var result = client.Put(body);
+});
+Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new List<InnerModel>()
+{
+    new InnerModel("<property>")
+    {
+        Children =
+        {
+            null
+        },
+    }
+});
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call PutAsync with required request content.
+      <example>
+This sample shows how to call PutAsync.
 <code><![CDATA[
-var client = new ArrayClient().GetModelValueClient("1.0.0");
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-var data = new[] {
-    new {
+RequestContent content = RequestContent.Create(new List<object>()
+{
+    new
+    {
         property = "<property>",
     }
-};
-
-Response response = await client.PutAsync(RequestContent.Create(data));
+});
+Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call PutAsync with all request content.
+<code><![CDATA[
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new List<object>()
+{
+    new
+    {
+        property = "<property>",
+        children = new List<object>()
+        {
+            null
+        },
+    }
+});
+Response response = await client.PutAsync(content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Put with required request content.
+      <example>
+This sample shows how to call Put.
 <code><![CDATA[
-var client = new ArrayClient().GetModelValueClient("1.0.0");
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-var data = new[] {
-    new {
+RequestContent content = RequestContent.Create(new List<object>()
+{
+    new
+    {
         property = "<property>",
     }
-};
-
-Response response = client.Put(RequestContent.Create(data));
+});
+Response response = client.Put(content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Put with all request content.
+<code><![CDATA[
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new List<object>()
+{
+    new
+    {
+        property = "<property>",
+        children = new List<object>()
+        {
+            null
+        },
+    }
+});
+Response response = client.Put(content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
   </members>
 </doc>

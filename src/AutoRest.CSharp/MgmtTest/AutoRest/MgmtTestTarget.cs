@@ -9,9 +9,12 @@ using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.MgmtTest.AutoRest;
 using AutoRest.CSharp.MgmtTest.Generation.Mock;
 using AutoRest.CSharp.MgmtTest.Generation.Samples;
+using AutoRest.CSharp.Output.Models.Types;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -33,6 +36,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var sourceFolder = GetSourceFolder();
                 var sourceCodeProject = new SourceCodeProject(sourceFolder, Configuration.SharedSourceFolders);
                 sourceInputModel = new SourceInputModel(await sourceCodeProject.GetCompilationAsync());
+                InitializeMgmtContext(codeModel, sourceInputModel);
                 library = new MgmtTestOutputLibrary(codeModel, sourceInputModel);
                 project.AddDirectory(sourceFolder);
             }
@@ -57,6 +61,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (Configuration.MgmtTestConfiguration.ClearOutputFolder)
             {
                 ClearOutputFolder();
+            }
+        }
+
+        private static void InitializeMgmtContext(CodeModel codeModel, SourceInputModel sourceInputModel)
+        {
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
+
+            // force trigger the model initialization
+            foreach (var _ in MgmtContext.Library.ResourceSchemaMap)
+            {
             }
         }
 
