@@ -2,58 +2,80 @@
 <doc>
   <members>
     <member name="PublicOnlyAsync(string,CancellationToken)">
-<example>
-This sample shows how to call PublicOnlyAsync with required parameters.
+      <example>
+This sample shows how to call PublicOnlyAsync.
 <code><![CDATA[
-var client = new InternalClient();
+InternalClient client = new InternalClient();
 
-var result = await client.PublicOnlyAsync("<name>");
+Response<PublicModel> response = await client.PublicOnlyAsync("<name>");
 ]]></code>
-</example>
+This sample shows how to call PublicOnlyAsync with all parameters.
+<code><![CDATA[
+InternalClient client = new InternalClient();
+
+Response<PublicModel> response = await client.PublicOnlyAsync("<name>");
+]]></code></example>
     </member>
     <member name="PublicOnly(string,CancellationToken)">
-<example>
-This sample shows how to call PublicOnly with required parameters.
+      <example>
+This sample shows how to call PublicOnly.
 <code><![CDATA[
-var client = new InternalClient();
+InternalClient client = new InternalClient();
 
-var result = client.PublicOnly("<name>");
+Response<PublicModel> response = client.PublicOnly("<name>");
 ]]></code>
-</example>
+This sample shows how to call PublicOnly with all parameters.
+<code><![CDATA[
+InternalClient client = new InternalClient();
+
+Response<PublicModel> response = client.PublicOnly("<name>");
+]]></code></example>
     </member>
     <member name="PublicOnlyAsync(string,RequestContext)">
-<example>
-This sample shows how to call PublicOnlyAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call PublicOnlyAsync and parse the result.
 <code><![CDATA[
-var client = new InternalClient();
+InternalClient client = new InternalClient();
 
-Response response = await client.PublicOnlyAsync("<name>", new RequestContext());
+Response response = await client.PublicOnlyAsync("<name>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-</example>
+This sample shows how to call PublicOnlyAsync with all parameters and parse the result.
+<code><![CDATA[
+InternalClient client = new InternalClient();
+
+Response response = await client.PublicOnlyAsync("<name>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code></example>
     </member>
     <member name="PublicOnly(string,RequestContext)">
-<example>
-This sample shows how to call PublicOnly with required parameters and parse the result.
+      <example>
+This sample shows how to call PublicOnly and parse the result.
 <code><![CDATA[
-var client = new InternalClient();
+InternalClient client = new InternalClient();
 
-Response response = client.PublicOnly("<name>", new RequestContext());
+Response response = client.PublicOnly("<name>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-</example>
+This sample shows how to call PublicOnly with all parameters and parse the result.
+<code><![CDATA[
+InternalClient client = new InternalClient();
+
+Response response = client.PublicOnly("<name>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code></example>
     </member>
-    <member name="InternalOnlyAsync(string,CancellationToken)">
-    </member>
-    <member name="InternalOnly(string,CancellationToken)">
-    </member>
-    <member name="InternalOnlyAsync(string,RequestContext)">
-    </member>
-    <member name="InternalOnly(string,RequestContext)">
-    </member>
+    <member name="InternalOnlyAsync(string,CancellationToken)" />
+    <member name="InternalOnly(string,CancellationToken)" />
+    <member name="InternalOnlyAsync(string,RequestContext)" />
+    <member name="InternalOnly(string,RequestContext)" />
   </members>
 </doc>
