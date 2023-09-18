@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 _customization = new SignatureTypeProvider(PopulateMethodsFromCompilation(sourceInputModel?.Customization), null, defaultNamespace, defaultName);
                 _previousContract = new SignatureTypeProvider(PopulateMethodsFromCompilation(sourceInputModel?.PreviousContract), null, defaultNamespace, defaultName);
-                _methodChangeset ??= CompareMethods(Methods.Union(_customization?.Methods ?? Array.Empty<MethodSignature>(), new MethodSignatureComparer()), _previousContract?.Methods);
+                _methodChangeset ??= CompareMethods(Methods.Union(_customization?.Methods ?? Array.Empty<MethodSignature>(), MethodSignature.ParameterAndReturnTypeEqualityComparer), _previousContract?.Methods);
             }
         }
 
@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 if (TryGetPreviousMethodWithLessOptionalParameters(current, previous, out var currentMethodToCall, out var missingParameters))
                 {
-                    overloadMethods.Add(new OverloadMethodSignature(currentMethodToCall, previous.DisableOptionalParameters(), missingParameters, previous.FormattableDescription));
+                    overloadMethods.Add(new OverloadMethodSignature(currentMethodToCall, previous.DisableOptionalParameters(), missingParameters, previous.FormattableDescription, true));
                 }
             }
             return overloadMethods;
@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 return new HashSet<MethodSignature>();
             }
-            return Methods.Intersect(_customization.Methods, new MethodSignatureComparer()).ToHashSet(new MethodSignatureComparer());
+            return Methods.Intersect(_customization.Methods, MethodSignature.ParameterAndReturnTypeEqualityComparer).ToHashSet(MethodSignature.ParameterAndReturnTypeEqualityComparer);
         }
 
         private bool TryGetPreviousMethodWithLessOptionalParameters(IList<MethodSignature> currentMethods, MethodSignature previousMethod, [NotNullWhen(true)] out MethodSignature? currentMethodToCall, [NotNullWhen(true)] out IReadOnlyList<Parameter>? missingParameters)
@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     continue;
                 }
 
-                var parameters = item.Parameters.Except(previousMethod.Parameters, new ParameterComparer());
+                var parameters = item.Parameters.Except(previousMethod.Parameters, Parameter.TypeAndNameEqualityComparer);
                 if (parameters.All(x => x.IsOptionalInSignature))
                 {
                     missingParameters = parameters.ToList();
@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private bool CurrentContainAllPreviousParameters(MethodSignature previousMethod, MethodSignature currentMethod)
         {
-            var set = currentMethod.Parameters.ToHashSet(new ParameterComparer());
+            var set = currentMethod.Parameters.ToHashSet(Parameter.TypeAndNameEqualityComparer);
             foreach (var parameter in previousMethod.Parameters)
             {
                 if (!set.Contains(parameter))
@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             var missing = new List<MethodSignature>();
             var updated = new List<(List<MethodSignature> Current, MethodSignature Previous)>();
-            var set = currentMethods.ToHashSet(new MethodSignatureComparer());
+            var set = currentMethods.ToHashSet(MethodSignature.ParameterAndReturnTypeEqualityComparer);
             var dict = new Dictionary<string, List<MethodSignature>>();
             foreach (var item in currentMethods)
             {

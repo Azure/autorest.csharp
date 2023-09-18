@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
@@ -659,6 +660,35 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"{nameof(RedirectPolicy)}.{nameof(RedirectPolicy.SetAllowAutoRedirect)}({messageVariable}, true);");
             }
             return writer;
+        }
+
+        public static void WriteOverloadMethod(this CodeWriter writer, OverloadMethodSignature overloadMethod)
+        {
+            writer.WriteXmlDocumentationSummary(overloadMethod.Description);
+            if (overloadMethod.IsHiddenFromUser)
+            {
+                writer.Line($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]");
+            }
+            using (writer.WriteMethodDeclaration(overloadMethod.PreviousMethodSignature))
+            {
+                writer.Line();
+                var awaitOperation = overloadMethod.PreviousMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Async) ? "await " : "";
+                writer.Append($"return {awaitOperation}{overloadMethod.MethodSignature.Name}(");
+                var set = overloadMethod.MissingParameters.ToHashSet(Parameter.TypeAndNameEqualityComparer);
+                foreach (var parameter in overloadMethod.MethodSignature.Parameters)
+                {
+                    if (set.Contains(parameter))
+                    {
+                        writer.Append($"{parameter.DefaultValue?.Value ?? "default"}, ");
+                    }
+                    else
+                    {
+                        writer.Append($"{parameter.Name}, ");
+                    }
+                }
+                writer.RemoveTrailingComma();
+                writer.Line($");");
+            }
         }
     }
 }

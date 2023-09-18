@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.Output.Models
     internal record MethodSignature(string Name, string? Summary, string? Description, MethodSignatureModifiers Modifiers, CSharpType? ReturnType, FormattableString? ReturnDescription, IReadOnlyList<Parameter> Parameters, IReadOnlyList<CSharpAttribute>? Attributes = null, IReadOnlyList<CSharpType>? GenericArguments = null, IReadOnlyDictionary<CSharpType, FormattableString>? GenericParameterConstraints = null)
         : MethodSignatureBase(Name, Summary, Description, Modifiers, Parameters, Attributes ?? Array.Empty<CSharpAttribute>())
     {
+        public static IEqualityComparer<MethodSignature> ParameterAndReturnTypeEqualityComparer = new MethodSignatureParameterAndReturnTypeEqualityComparer();
         public FormattableString? FormattableDescription => Description is null ? (FormattableString?)null : $"{Description}";
 
         public MethodSignature WithAsync(bool isAsync)
@@ -108,31 +109,31 @@ namespace AutoRest.CSharp.Output.Models
                     : null
             };
         }
-    }
 
-    internal class MethodSignatureComparer : IEqualityComparer<MethodSignature>
-    {
-        public bool Equals(MethodSignature? x, MethodSignature? y)
+        private class MethodSignatureParameterAndReturnTypeEqualityComparer : IEqualityComparer<MethodSignature>
         {
-            if (ReferenceEquals(x, y))
+            public bool Equals(MethodSignature? x, MethodSignature? y)
             {
-                return true;
+                if (ReferenceEquals(x, y))
+                {
+                    return true;
+                }
+
+                if (x is null || y is null)
+                {
+                    return false;
+                }
+
+                var result = x.Name == x.Name
+                    && x.ReturnType.EqualsByName(y.ReturnType)
+                    && x.Parameters.SequenceEqual(y.Parameters, Parameter.TypeAndNameEqualityComparer);
+                return result;
             }
 
-            if (x is null || y is null)
+            public int GetHashCode([DisallowNull] MethodSignature obj)
             {
-                return false;
+                return HashCode.Combine(obj.Name, obj.ReturnType);
             }
-
-            var result = x.Name == x.Name
-                && x.ReturnType.EqualsByName(y.ReturnType)
-                && x.Parameters.SequenceEqual(y.Parameters, new ParameterComparer());
-            return result;
-        }
-
-        public int GetHashCode([DisallowNull] MethodSignature obj)
-        {
-            return HashCode.Combine(obj.Name, obj.ReturnType);
         }
     }
 }

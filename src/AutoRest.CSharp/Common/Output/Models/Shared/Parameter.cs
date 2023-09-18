@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 {
     internal record Parameter(string Name, string? Description, CSharpType Type, Constant? DefaultValue = null, ValidationType Validation = ValidationType.None, FormattableString? Initializer = null, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, SerializationFormat SerializationFormat = SerializationFormat.Default, bool IsPropertyBag = false)
     {
+        public static IEqualityComparer<Parameter> TypeAndNameEqualityComparer = new ParameterTypeAndNameEqualityComparer();
         public FormattableString? FormattableDescription => Description is null ? (FormattableString?)null : $"{Description}";
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
@@ -275,6 +276,30 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
             public int GetHashCode([DisallowNull] Parameter obj) => obj.Type.GetHashCode();
         }
+
+        private class ParameterTypeAndNameEqualityComparer : IEqualityComparer<Parameter>
+        {
+            public bool Equals(Parameter? x, Parameter? y)
+            {
+                if (Object.ReferenceEquals(x, y))
+                {
+                    return true;
+                }
+
+                if (x is null || y is null)
+                {
+                    return false;
+                }
+
+                var result = x.Type.EqualsByName(y.Type) && x.Name == y.Name;
+                return result;
+            }
+
+            public int GetHashCode([DisallowNull] Parameter obj)
+            {
+                return HashCode.Combine(obj.Type, obj.Name);
+            }
+        }
     }
 
     internal enum ValidationType
@@ -282,29 +307,5 @@ namespace AutoRest.CSharp.Output.Models.Shared
         None,
         AssertNotNull,
         AssertNotNullOrEmpty
-    }
-
-    internal class ParameterComparer : IEqualityComparer<Parameter>
-    {
-        public bool Equals(Parameter? x, Parameter? y)
-        {
-            if (Object.ReferenceEquals(x, y))
-            {
-                return true;
-            }
-
-            if (x is null || y is null)
-            {
-                return false;
-            }
-
-            var result = x.Type.EqualsByName(y.Type) && x.Name == y.Name;
-            return result;
-        }
-
-        public int GetHashCode([DisallowNull] Parameter obj)
-        {
-            return HashCode.Combine(obj.Type, obj.Name);
-        }
     }
 }
