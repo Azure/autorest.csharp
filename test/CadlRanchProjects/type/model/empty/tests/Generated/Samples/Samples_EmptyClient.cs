@@ -6,14 +6,12 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Type.Model.Empty;
 using _Type.Model.Empty.Models;
 
 namespace _Type.Model.Empty.Samples
@@ -24,23 +22,10 @@ namespace _Type.Model.Empty.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutEmpty()
         {
-            var client = new EmptyClient();
+            EmptyClient client = new EmptyClient();
 
-            var data = new { };
-
-            Response response = client.PutEmpty(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_PutEmpty_AllParameters()
-        {
-            var client = new EmptyClient();
-
-            var data = new { };
-
-            Response response = client.PutEmpty(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new object());
+            Response response = client.PutEmpty(content);
             Console.WriteLine(response.Status);
         }
 
@@ -48,23 +33,21 @@ namespace _Type.Model.Empty.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutEmpty_Async()
         {
-            var client = new EmptyClient();
+            EmptyClient client = new EmptyClient();
 
-            var data = new { };
-
-            Response response = await client.PutEmptyAsync(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new object());
+            Response response = await client.PutEmptyAsync(content);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutEmpty_AllParameters_Async()
+        public void Example_PutEmpty_Convenience()
         {
-            var client = new EmptyClient();
+            EmptyClient client = new EmptyClient();
 
-            var data = new { };
-
-            Response response = await client.PutEmptyAsync(RequestContent.Create(data));
+            EmptyInput input = new EmptyInput();
+            Response response = client.PutEmpty(input);
             Console.WriteLine(response.Status);
         }
 
@@ -72,30 +55,64 @@ namespace _Type.Model.Empty.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutEmpty_Convenience_Async()
         {
-            var client = new EmptyClient();
+            EmptyClient client = new EmptyClient();
 
-            var input = new EmptyInput();
-            var result = await client.PutEmptyAsync(input);
+            EmptyInput input = new EmptyInput();
+            Response response = await client.PutEmptyAsync(input);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutEmpty_AllParameters()
+        {
+            EmptyClient client = new EmptyClient();
+
+            RequestContent content = RequestContent.Create(new object());
+            Response response = client.PutEmpty(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutEmpty_AllParameters_Async()
+        {
+            EmptyClient client = new EmptyClient();
+
+            RequestContent content = RequestContent.Create(new object());
+            Response response = await client.PutEmptyAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutEmpty_AllParameters_Convenience()
+        {
+            EmptyClient client = new EmptyClient();
+
+            EmptyInput input = new EmptyInput();
+            Response response = client.PutEmpty(input);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutEmpty_AllParameters_Convenience_Async()
+        {
+            EmptyClient client = new EmptyClient();
+
+            EmptyInput input = new EmptyInput();
+            Response response = await client.PutEmptyAsync(input);
+            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetEmpty()
         {
-            var client = new EmptyClient();
+            EmptyClient client = new EmptyClient();
 
-            Response response = client.GetEmpty(new RequestContext());
-
-            Console.WriteLine(response.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmpty_AllParameters()
-        {
-            var client = new EmptyClient();
-
-            Response response = client.GetEmpty(new RequestContext());
+            Response response = client.GetEmpty(null);
 
             Console.WriteLine(response.ToString());
         }
@@ -104,9 +121,38 @@ namespace _Type.Model.Empty.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetEmpty_Async()
         {
-            var client = new EmptyClient();
+            EmptyClient client = new EmptyClient();
 
-            Response response = await client.GetEmptyAsync(new RequestContext());
+            Response response = await client.GetEmptyAsync(null);
+
+            Console.WriteLine(response.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetEmpty_Convenience()
+        {
+            EmptyClient client = new EmptyClient();
+
+            Response<EmptyOutput> response = client.GetEmpty();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetEmpty_Convenience_Async()
+        {
+            EmptyClient client = new EmptyClient();
+
+            Response<EmptyOutput> response = await client.GetEmptyAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetEmpty_AllParameters()
+        {
+            EmptyClient client = new EmptyClient();
+
+            Response response = client.GetEmpty(null);
 
             Console.WriteLine(response.ToString());
         }
@@ -115,44 +161,39 @@ namespace _Type.Model.Empty.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetEmpty_AllParameters_Async()
         {
-            var client = new EmptyClient();
+            EmptyClient client = new EmptyClient();
 
-            Response response = await client.GetEmptyAsync(new RequestContext());
+            Response response = await client.GetEmptyAsync(null);
 
             Console.WriteLine(response.ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmpty_Convenience_Async()
+        public void Example_GetEmpty_AllParameters_Convenience()
         {
-            var client = new EmptyClient();
+            EmptyClient client = new EmptyClient();
 
-            var result = await client.GetEmptyAsync();
+            Response<EmptyOutput> response = client.GetEmpty();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetEmpty_AllParameters_Convenience_Async()
+        {
+            EmptyClient client = new EmptyClient();
+
+            Response<EmptyOutput> response = await client.GetEmptyAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_PostRoundTripEmpty()
         {
-            var client = new EmptyClient();
+            EmptyClient client = new EmptyClient();
 
-            var data = new { };
-
-            Response response = client.PostRoundTripEmpty(RequestContent.Create(data));
-
-            Console.WriteLine(response.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_PostRoundTripEmpty_AllParameters()
-        {
-            var client = new EmptyClient();
-
-            var data = new { };
-
-            Response response = client.PostRoundTripEmpty(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new object());
+            Response response = client.PostRoundTripEmpty(content);
 
             Console.WriteLine(response.ToString());
         }
@@ -161,11 +202,42 @@ namespace _Type.Model.Empty.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PostRoundTripEmpty_Async()
         {
-            var client = new EmptyClient();
+            EmptyClient client = new EmptyClient();
 
-            var data = new { };
+            RequestContent content = RequestContent.Create(new object());
+            Response response = await client.PostRoundTripEmptyAsync(content);
 
-            Response response = await client.PostRoundTripEmptyAsync(RequestContent.Create(data));
+            Console.WriteLine(response.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PostRoundTripEmpty_Convenience()
+        {
+            EmptyClient client = new EmptyClient();
+
+            EmptyInputOutput body = new EmptyInputOutput();
+            Response<EmptyInputOutput> response = client.PostRoundTripEmpty(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PostRoundTripEmpty_Convenience_Async()
+        {
+            EmptyClient client = new EmptyClient();
+
+            EmptyInputOutput body = new EmptyInputOutput();
+            Response<EmptyInputOutput> response = await client.PostRoundTripEmptyAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PostRoundTripEmpty_AllParameters()
+        {
+            EmptyClient client = new EmptyClient();
+
+            RequestContent content = RequestContent.Create(new object());
+            Response response = client.PostRoundTripEmpty(content);
 
             Console.WriteLine(response.ToString());
         }
@@ -174,23 +246,32 @@ namespace _Type.Model.Empty.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PostRoundTripEmpty_AllParameters_Async()
         {
-            var client = new EmptyClient();
+            EmptyClient client = new EmptyClient();
 
-            var data = new { };
-
-            Response response = await client.PostRoundTripEmptyAsync(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new object());
+            Response response = await client.PostRoundTripEmptyAsync(content);
 
             Console.WriteLine(response.ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostRoundTripEmpty_Convenience_Async()
+        public void Example_PostRoundTripEmpty_AllParameters_Convenience()
         {
-            var client = new EmptyClient();
+            EmptyClient client = new EmptyClient();
 
-            var body = new EmptyInputOutput();
-            var result = await client.PostRoundTripEmptyAsync(body);
+            EmptyInputOutput body = new EmptyInputOutput();
+            Response<EmptyInputOutput> response = client.PostRoundTripEmpty(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PostRoundTripEmpty_AllParameters_Convenience_Async()
+        {
+            EmptyClient client = new EmptyClient();
+
+            EmptyInputOutput body = new EmptyInputOutput();
+            Response<EmptyInputOutput> response = await client.PostRoundTripEmptyAsync(body);
         }
     }
 }

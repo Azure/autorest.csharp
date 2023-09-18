@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "_Type.Model.Empty",
-  "LibraryName": "Type.Model.Empty",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "_Type.Model.Empty",
+  "library-name": "_Type.Model.Empty",
+  "shared-source-folders": [
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
   ],
