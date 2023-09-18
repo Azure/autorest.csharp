@@ -447,17 +447,15 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteConstant(this CodeWriter writer, Constant constant) => writer.Append(constant.GetConstantFormattable());
 
-        public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async, CodeWriterDeclaration? variable, FormattableString responseVariable, CSharpType? type)
+        public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async, ResponseExpression responseExpression, CSharpType? type)
         {
-            var responseExpression = new ResponseExpression(new FormattableStringToExpression(responseVariable));
-            var variableExpression = variable is not null ? (ValueExpression)variable : null;
             switch (serialization)
             {
                 case JsonSerialization jsonSerialization:
-                    writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, variableExpression, responseExpression, type is not null && type.Equals(typeof(BinaryData))));
+                    writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, null, responseExpression, type is not null && type.Equals(typeof(BinaryData))));
                     break;
                 case XmlElementSerialization xmlSerialization:
-                    writer.WriteMethodBodyStatement(XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, variableExpression, responseExpression));
+                    writer.WriteMethodBodyStatement(XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, null, responseExpression));
                     break;
                 default:
                     throw new NotImplementedException(serialization.ToString());

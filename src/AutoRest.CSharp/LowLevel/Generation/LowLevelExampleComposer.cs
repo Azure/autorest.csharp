@@ -284,7 +284,8 @@ namespace AutoRest.CSharp.Generation.Writers
             var bodyArguments = new Dictionary<Parameter, ValueExpression>();
             foreach (var parameter in signature.Parameters.Where(p => p.RequestLocation == RequestLocation.Body))
             {
-                yield return Var(parameter.Name, ComposeConvenienceCSharpTypeInstance(true, parameter.Type, null, true, new HashSet<ObjectType>()), out var bodyArgument);
+                var bodyArgument = new VariableReference(parameter.Type, parameter.Name);
+                yield return Var(bodyArgument, ComposeConvenienceCSharpTypeInstance(true, parameter.Type, null, true, new HashSet<ObjectType>()));
                 bodyArguments[parameter] = bodyArgument;
             }
 
@@ -298,7 +299,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (returnType is null)
             {
-                yield return ComposeConvenienceHandleNormalResponseCode(client, signature.Name, arguments, async);
+                yield return ComposeConvenienceHandleNormalResponseCode(client, signature.Name, arguments, typeof(Response), async);
             }
             else if (TypeFactory.IsOperationOfAsyncPageable(returnType) || TypeFactory.IsOperationOfPageable(returnType))
             {
@@ -306,7 +307,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else if (TypeFactory.IsOperation(returnType))
             {
-                yield return ComposeConvenienceHandleLongRunningResponseCode(client, signature.Name, arguments, async);
+                yield return ComposeConvenienceHandleLongRunningResponseCode(client, signature.Name, arguments, returnType, async);
             }
             else if (TypeFactory.IsAsyncPageable(returnType) || TypeFactory.IsPageable(returnType))
             {
@@ -314,7 +315,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else
             {
-                yield return ComposeConvenienceHandleNormalResponseCode(client, signature.Name, arguments, async);
+                yield return ComposeConvenienceHandleNormalResponseCode(client, signature.Name, arguments, returnType, async);
             }
         }
 
@@ -323,7 +324,7 @@ namespace AutoRest.CSharp.Generation.Writers
             yield return ComposeGetClient(out var client);
             yield return EmptyLine;
 
-            ValueExpression? data = null;
+            VariableReference? data = null;
             if (operationMethods.RequestBodyType != null)
             {
                 // This is a corner case in swagger DPG when body is a primitive type constant.
@@ -333,7 +334,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     ? new ConstantExpression(BuilderHelpers.ParseConstant(defaultValue.Value, _typeFactory.CreateType(defaultValue.Type)))
                     : ComposeProtocolCSharpTypeInstance(allParameters, GetTypeSerialization(operationMethods.RequestBodyType), null, new HashSet<ObjectType>());
 
-                yield return Var("data", dataValueExpression, out data);
+                data = new VariableReference(typeof(object), "data");
+                yield return Var(data, dataValueExpression);
                 yield return EmptyLine;
             }
 
@@ -396,7 +398,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 Var("operation", new OperationExpression(InvokeClientMethod(client, methodName, arguments, async)), out var operation),
                 EmptyLine,
-                new ForeachStatement("item", operation.Value, async, out var binaryDataItem)
+                new ForeachStatement("item", new EnumerableExpression(typeof(BinaryData), operation.Value), async, out TypedValueExpression binaryDataItem)
                 {
                     ComposeParsingPageableResponse(new BinaryDataExpression(binaryDataItem), conveniencePageItemType, allParameters)
                 }
@@ -429,12 +431,12 @@ namespace AutoRest.CSharp.Generation.Writers
             };
         }
 
-        private MethodBodyStatement ComposeConvenienceHandleLongRunningResponseCode(ValueExpression client, string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
+        private MethodBodyStatement ComposeConvenienceHandleLongRunningResponseCode(ValueExpression client, string methodName, IReadOnlyList<ValueExpression> arguments, CSharpType returnType, bool async)
         {
             /* GENERATED CODE PATTERN
              * var operation = await client.{methodName}(WaitUntil.Completed, ...);
              */
-            return Var("operation", InvokeClientMethod(client, methodName, arguments, async), out _);
+            return Var(new VariableReference(returnType, "operation"), InvokeClientMethod(client, methodName, arguments, async));
         }
 
         private MethodBodyStatement ComposeParsingLongRunningResponse(BinaryDataExpression responseData, CSharpType operationValueType, bool allProperties)
@@ -476,14 +478,14 @@ namespace AutoRest.CSharp.Generation.Writers
              * }
              */
 
-            return new ForeachStatement("item", InvokeClientMethod(client, methodName, arguments, async), async, out var binaryDataItem)
+            return new ForeachStatement("item", new EnumerableExpression(typeof(BinaryData), InvokeClientMethod(client, methodName, arguments, false)), async, out TypedValueExpression binaryDataItem)
             {
                 ComposeParsingPageableResponse(new BinaryDataExpression(binaryDataItem), conveniencePageItemType, allParameters)
             };
         }
 
         private MethodBodyStatement ComposeConvenienceHandlePageableResponseCode(ValueExpression client, string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
-            => new ForeachStatement("item", InvokeClientMethod(client, methodName, arguments, async), async, out _);
+            => new ForeachStatement("item", new EnumerableExpression(typeof(object), InvokeClientMethod(client, methodName, arguments, false)), async, out _);
 
         private MethodBodyStatement ComposeParsingPageableResponse(BinaryDataExpression item, CSharpType itemModelType, bool allProperties)
         {
@@ -521,8 +523,8 @@ namespace AutoRest.CSharp.Generation.Writers
             };
         }
 
-        private MethodBodyStatement ComposeConvenienceHandleNormalResponseCode(ValueExpression client, string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
-            => Var("result", InvokeClientMethod(client, methodName, arguments, async) with {}, out _);
+        private MethodBodyStatement ComposeConvenienceHandleNormalResponseCode(ValueExpression client, string methodName, IReadOnlyList<ValueExpression> arguments, CSharpType returnType, bool async)
+            => Var(new VariableReference(returnType, "result"), InvokeClientMethod(client, methodName, arguments, async));
 
         private MethodBodyStatement ComposeParsingNormalResponseCodes(ResponseExpression response, CSharpType responseType, bool allProperties)
         {
@@ -733,7 +735,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     return serializationFormat.HasValue
                         ? Literal("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
-                        : InvokeGuidNewGuid();
+                        : GuidExpression.NewGuid();
                 }
 
                 if (type == typeof(Uri))
@@ -854,7 +856,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 : new ArrayInitializerExpression(new[]{arrayElement}, false);
         }
 
-        private ValueExpression ComposeProtocolArrayCSharpType(bool allProperties, JsonArraySerialization serialization, HashSet<ObjectType> visitedModels)
+        private EnumerableExpression ComposeProtocolArrayCSharpType(bool allProperties, JsonArraySerialization serialization, HashSet<ObjectType> visitedModels)
         {
             /* GENERATED CODE PATTERN
              * new[] {
@@ -984,7 +986,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (propertyExpressions is not null && propertyExpressions.Keys.Any(name => StringExtensions.IsCSharpKeyword(name) || !name.IsValidIdentifier()))
             {
-                return New.Dictionary(typeof(string), typeof(object), propertyExpressions.Select(kvp => (Literal(kvp.Key), kvp.Value)).ToArray());
+                return New.Dictionary(typeof(string), typeof(object), propertyExpressions.Select(kvp => ((ValueExpression)Literal(kvp.Key), kvp.Value)).ToArray());
             }
 
             return New.Anonymous(propertyExpressions);
@@ -1017,20 +1019,22 @@ namespace AutoRest.CSharp.Generation.Writers
         private static bool IsPropertyAssignable(ObjectTypeProperty property)
             => TypeFactory.IsReadWriteDictionary(property.Declaration.Type) || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly;
 
-        private MethodBodyStatement ComposeGetClient(out ValueExpression client)
+        private MethodBodyStatement ComposeGetClient(out VariableReference client)
         {
             var statements = new List<MethodBodyStatement>();
             var clientConstructor = ClientInvocationChain[0].GetEffectiveCtor()!;
 
-            ValueExpression? credential = null;
+            VariableReference? credential = null;
             if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(KeyAuthType)))
             {
-                statements.Add(Var("credential", New.Instance(KeyAuthType, Literal("<key>")), out credential));
+                credential = new VariableReference(KeyAuthType, "credential");
+                statements.Add(new DeclareVariableStatement(null, credential.Declaration, New.Instance(KeyAuthType, Literal("<key>"))));
             }
             else if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(TokenAuthType)))
             {
                 // [TODO] DefaultAzureCredential is in Azure.Identity package, so we can't reference it by type
-                statements.Add(Var("credential", new FormattableStringToExpression($"new DefaultAzureCredential()"), out credential));
+                credential = new VariableReference(typeof(TokenCredential), "credential");
+                statements.Add(new DeclareVariableStatement(null, credential.Declaration, new FormattableStringToExpression($"new DefaultAzureCredential()")));
             }
 
             ValueExpression? endpoint = null;
@@ -1051,7 +1055,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            statements.Add(Var("client", newClientExpression, out client));
+            client = new VariableReference(ClientInvocationChain.Last().Type, "client");
+            statements.Add(Var(client, newClientExpression));
 
             return statements;
         }
@@ -1115,7 +1120,7 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         private static InputModelType GetConcreteChildModel(InputModelType model)
-            => model;//.DerivedModels.Any() ? model.DerivedModels[0] : model;
+            => model.DerivedModels.Any() ? model.DerivedModels[0] : model;
 
         private static ValueExpression InvokeClientMethod(ValueExpression client, string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
             => new InvokeInstanceMethodExpression(client, methodName, arguments, null, async, AddConfigureAwaitFalse: false);

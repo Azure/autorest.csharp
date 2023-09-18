@@ -1,18 +1,22 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using Azure;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record ResponseExpression(ValueExpression Untyped) : TypedValueExpression(typeof(Response), Untyped)
     {
-        public ValueExpression Status => new MemberExpression(Untyped, nameof(Response.Status));
-        public BinaryDataExpression Content => new(new MemberExpression(Untyped, nameof(Response.Content)));
-        public StringExpression ContentStream => new(new MemberExpression(Untyped, nameof(Response.ContentStream)));
+        public ResponseExpression(CodeWriterDeclaration variable) : this(new VariableReference(typeof(Response), variable)){}
+
+        public ValueExpression Status => Property(nameof(Response.Status));
+        public ValueExpression Value => Property(nameof(Response<object>.Value));
+
+        public StringExpression ContentStream => new(Property(nameof(Response.ContentStream)));
+        public BinaryDataExpression Content => new(Property(nameof(Response.Content)));
 
         public static ResponseExpression FromValue(ValueExpression value, ResponseExpression rawResponse)
             => new(new InvokeStaticMethodExpression(typeof(Response), nameof(Response.FromValue), new[]{ value, rawResponse }));

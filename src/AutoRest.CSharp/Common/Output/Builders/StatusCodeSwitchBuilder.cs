@@ -189,9 +189,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 );
             }
 
+            var headers = new VariableReference(_headerModelType, "headers");
             return new MethodBodyStatement[]
             {
-                new DeclareVariableStatement(null, "headers", New.Instance(_headerModelType, httpMessage.Response), out var headers),
+                new DeclareVariableStatement(null, headers.Declaration, New.Instance(_headerModelType, httpMessage.Response)),
                 new SwitchStatement
                 (
                     httpMessage.Response.Status,
@@ -352,7 +353,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (type.Equals(typeof(Stream)))
             {
-                return new DeclareVariableStatement(null, "value", httpMessage.ExtractResponseContent(), out value);
+                return new DeclareVariableStatement("value", httpMessage.ExtractResponseContent(), out value);
             }
 
             if (type.Equals(typeof(string)))

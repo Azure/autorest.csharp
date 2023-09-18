@@ -265,8 +265,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static IReadOnlyList<JsonPropertySerialization> GetPropertySerializations(ModelTypeProvider model)
             => GetPropertySerializationsFromBag(PopulatePropertyBag(model), CreateJsonPropertySerializationFromInputModelProperty).ToArray();
 
-        public static IReadOnlyList<JsonPropertySerialization> GetPropertySerializations(IEnumerable<InputModelProperty> properties, Func<InputModelProperty, JsonPropertySerialization?> jsonPropertySerializationFactory)
-            => GetPropertySerializationsFromBag(PopulatePropertyBag(properties), jsonPropertySerializationFactory).ToArray();
+        public static IReadOnlyList<JsonPropertySerialization> GetPropertiesForSerializationOnly(IReadOnlyDictionary<InputModelProperty, TypedValueExpression> properties)
+            => GetPropertySerializationsFromBag(PopulatePropertyBag(properties.Keys), p => CreateJsonPropertySerializationForSerializationOnly(p, properties[p])).ToArray();
 
         private static IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag<T>(PropertyBag<T> propertyBag, Func<T, JsonPropertySerialization?> jsonPropertySerializationFactory)
         {
@@ -315,6 +315,24 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 false,
                 customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
                 customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);
+        }
+
+        private static JsonPropertySerialization CreateJsonPropertySerializationForSerializationOnly(InputModelProperty inputModelProperty, TypedValueExpression value)
+        {
+            var serializedName = inputModelProperty.SerializedName;
+            var valueSerialization = BuildJsonSerialization(inputModelProperty.Type, value.Type, false);
+            var optionalViaNullability = inputModelProperty is { IsRequired: false, Type.IsNullable: false };
+
+            return new JsonPropertySerialization(
+                string.Empty,
+                value,
+                serializedName,
+                value.Type,
+                value.Type.IsNullable && optionalViaNullability ? value.Type.WithNullable(false) : value.Type,
+                valueSerialization,
+                inputModelProperty.IsRequired,
+                false,
+                false);
         }
 
         private static JsonPropertySerialization? CreateJsonPropertySerializationFromInputModelProperty(ObjectTypeProperty property)

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -23,16 +24,16 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static ValueExpression NotImplementedException(string name)
                 => Instance(typeof(NotImplementedException), Literal($"Method {name} is implemented in customized code."));
 
-            public static EnumerableExpression Array(CSharpType? elementType) => new(new NewArrayExpression(elementType));
-            public static EnumerableExpression Array(CSharpType? elementType, params ValueExpression[] items) => new(new NewArrayExpression(elementType, new ArrayInitializerExpression(items)));
-            public static EnumerableExpression Array(CSharpType? elementType, bool isInline, params ValueExpression[] items) => new(new NewArrayExpression(elementType, new ArrayInitializerExpression(items, isInline)));
+            public static EnumerableExpression Array(CSharpType? elementType) => new(elementType ?? typeof(object), new NewArrayExpression(elementType));
+            public static EnumerableExpression Array(CSharpType? elementType, params ValueExpression[] items) => new(elementType ?? typeof(object), new NewArrayExpression(elementType, new ArrayInitializerExpression(items)));
+            public static EnumerableExpression Array(CSharpType? elementType, bool isInline, params ValueExpression[] items) => new(elementType ?? typeof(object), new NewArrayExpression(elementType, new ArrayInitializerExpression(items, isInline)));
 
-            public static DictionaryExpression Dictionary(CSharpType dictionaryType) => new(new NewDictionaryExpression(dictionaryType));
+            public static DictionaryExpression Dictionary(CSharpType dictionaryType) => new(TypeFactory.GetElementType(dictionaryType), new NewDictionaryExpression(dictionaryType));
             public static DictionaryExpression Dictionary(CSharpType keyType, CSharpType valueType) => Dictionary(new CSharpType(typeof(Dictionary<,>), keyType, valueType));
             public static DictionaryExpression Dictionary(CSharpType keyType, CSharpType valueType, params (ValueExpression Key, ValueExpression Value)[] values)
-                => new(new NewDictionaryExpression(new CSharpType(typeof(Dictionary<,>), keyType, valueType), new DictionaryInitializerExpression(values)));
+                => new(valueType, new NewDictionaryExpression(new CSharpType(typeof(Dictionary<,>), keyType, valueType), new DictionaryInitializerExpression(values)));
 
-            public static ValueExpression JsonSerializerOptions() => new NewJsonSerializerOptionsExpression();
+            public static TypedValueExpression JsonSerializerOptions() => new FrameworkTypeExpression(typeof(JsonSerializerOptions), new NewJsonSerializerOptionsExpression());
 
             public static ListExpression List(CSharpType listType) => new(Instance(listType));
 
@@ -52,8 +53,8 @@ namespace AutoRest.CSharp.Common.Output.Models
 
             public static StringRequestContentExpression StringRequestContent(ValueExpression value) => new(Instance(typeof(StringRequestContent), value));
 
-            public static ValueExpression TimeSpan(int hours, int minutes, int seconds) => Instance(typeof(TimeSpan), Int(hours), Int(minutes), Int(seconds));
-            public static ValueExpression Uri(string uri) => Instance(typeof(Uri), Literal(uri));
+            public static TimeSpanExpression TimeSpan(int hours, int minutes, int seconds) => new(Instance(typeof(TimeSpan), Int(hours), Int(minutes), Int(seconds)));
+            public static TypedValueExpression Uri(string uri) => Instance(typeof(Uri), Literal(uri));
             public static Utf8JsonRequestContentExpression Utf8JsonRequestContent() => new(Instance(typeof(Utf8JsonRequestContent)));
             public static XmlWriterContentExpression XmlWriterContent() => new(Instance(typeof(XmlWriterContent)));
 
@@ -61,6 +62,8 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static ValueExpression Anonymous(IReadOnlyDictionary<string, ValueExpression>? properties) => new KeywordExpression("new", new ObjectInitializerExpression(properties, IsInline: false));
             public static ValueExpression Instance(CSharpType type, params ValueExpression[] arguments) => new NewInstanceExpression(type, arguments);
             public static ValueExpression Instance(CSharpType type, IReadOnlyDictionary<string, ValueExpression> properties) => new NewInstanceExpression(type, System.Array.Empty<ValueExpression>(), new ObjectInitializerExpression(properties));
+            public static TypedValueExpression Instance(Type type, params ValueExpression[] arguments) => new FrameworkTypeExpression(type, new NewInstanceExpression(type, arguments));
+            public static TypedValueExpression Instance(Type type, IReadOnlyDictionary<string, ValueExpression> properties) => new FrameworkTypeExpression(type, new NewInstanceExpression(type, System.Array.Empty<ValueExpression>(), new ObjectInitializerExpression(properties)));
         }
     }
 }

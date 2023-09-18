@@ -4,10 +4,11 @@
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record DictionaryExpression(ValueExpression Untyped) : TypedValueExpression(typeof(Dictionary<,>), Untyped)
+    internal sealed record DictionaryExpression(CSharpType ValueType, ValueExpression Untyped) : TypedValueExpression(typeof(Dictionary<,>), Untyped)
     {
         public MethodBodyStatement Add(ValueExpression key, ValueExpression value)
             => new InvokeInstanceMethodStatement(Untyped, nameof(Dictionary<object, object>.Add), key, value);

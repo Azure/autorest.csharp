@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Output.Models
 
             OperationMethods = new ClientMethodsBuilder(operations, null, sourceInputModel, typeFactory)
                 .Build(Fields, Declaration.Name, Declaration.Namespace)
-                .Select(b => b.BuildDpg())
+                .Select(b => b.Build())
                 .ToList();
 
             ResponseClassifierTypes = OperationMethods.Select(rm => rm.ResponseClassifier).Distinct().ToArray();

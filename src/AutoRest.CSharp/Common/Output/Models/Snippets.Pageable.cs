@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
@@ -48,8 +49,8 @@ namespace AutoRest.CSharp.Common.Output.Models
         {
             var arguments = new List<ValueExpression>
             {
-                createFirstPageRequest,
-                createNextPageRequest ?? Null,
+                new VariableReference(typeof(Func<int?, HttpMessage>), createFirstPageRequest),
+                createNextPageRequest is not null ? new VariableReference(typeof(Func<int?, string, HttpMessage>), createNextPageRequest) : Null,
                 GetValueFactory(pageItemType),
                 clientDiagnostics,
                 pipeline,
@@ -82,9 +83,9 @@ namespace AutoRest.CSharp.Common.Output.Models
         {
             var arguments = new List<ValueExpression>
             {
-                new ParameterReference(KnownParameters.WaitForCompletion),
+                KnownParameters.WaitForCompletion,
                 message,
-                createNextPageRequest ?? Null,
+                createNextPageRequest is not null ? new VariableReference(typeof(Func<int?, string, HttpMessage>), createNextPageRequest) : Null,
                 GetValueFactory(pageItemType),
                 clientDiagnostics,
                 pipeline,
@@ -114,8 +115,8 @@ namespace AutoRest.CSharp.Common.Output.Models
             {
                 // When `JsonElement` provides access to its UTF8 buffer, change this code to create `BinaryData` from it.
                 // See also PageableHelpers.ParseResponseForBinaryData
-                var e = new CodeWriterDeclaration("e");
-                return new FuncExpression(new[] { e }, BinaryDataExpression.FromString(new JsonElementExpression(e).GetRawText()));
+                var e = new VariableReference(typeof(JsonElement), "e");
+                return new FuncExpression(new[] { e.Declaration }, BinaryDataExpression.FromString(new JsonElementExpression(e).GetRawText()));
             }
 
             if (pageItemType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } type })
@@ -123,9 +124,9 @@ namespace AutoRest.CSharp.Common.Output.Models
                 return SerializableObjectTypeExpression.DeserializeDelegate(type);
             }
 
-            var variable = new CodeWriterDeclaration("e");
+            var variable = new VariableReference(typeof(JsonElement), "e");
             var deserializeImplementation = JsonSerializationMethodsBuilder.GetDeserializeValueExpression(new JsonElementExpression(variable), pageItemType);
-            return new FuncExpression(new[] { variable }, deserializeImplementation);
+            return new FuncExpression(new[] { variable.Declaration }, deserializeImplementation);
         }
     }
 }

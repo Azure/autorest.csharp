@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
@@ -11,7 +12,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
     {
     }
 
-    internal sealed record EnumerableExpression(ValueExpression Untyped) : TypedValueExpression(typeof(IEnumerable<>), Untyped)
+    internal sealed record EnumerableExpression(CSharpType ItemType, ValueExpression Untyped) : TypedValueExpression(typeof(IEnumerable<>), Untyped)
     {
         public BoolExpression Any() => new(new InvokeStaticMethodExpression(typeof(Enumerable), nameof(Enumerable.Any), new[]{Untyped}, CallAsExtension: true));
     }

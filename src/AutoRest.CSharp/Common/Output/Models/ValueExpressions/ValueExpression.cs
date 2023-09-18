@@ -19,8 +19,7 @@ namespace AutoRest.CSharp.Common.Output.Models.ValueExpressions
         public static implicit operator ValueExpression(Type type) => new TypeReference(type);
         public static implicit operator ValueExpression(CSharpType type) => new TypeReference(type);
         public static implicit operator ValueExpression(Parameter parameter) => new ParameterReference(parameter);
-        public static implicit operator ValueExpression(CodeWriterDeclaration name) => new VariableReference(name);
-        public static implicit operator ValueExpression(FieldDeclaration name) => new VariableReference(name.Declaration);
+        public static implicit operator ValueExpression(FieldDeclaration name) => new VariableReference(name.Type, name.Declaration);
 
         public ValueExpression NullConditional(CSharpType type) => type.IsNullable ? new NullConditionalExpression(this) : this;
         public ValueExpression NullableStructValue(CSharpType candidateType) => this is not ConstantExpression && candidateType is { IsNullable: true, IsValueType: true } ? new MemberExpression(this, nameof(Nullable<int>.Value)) : this;

@@ -12,12 +12,15 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record JsonElementExpression(ValueExpression Untyped) : TypedValueExpression(typeof(JsonElement), Untyped)
     {
-        public EnumerableExpression EnumerateArray() => new(Untyped.Invoke(nameof(JsonElement.EnumerateArray)));
-        public EnumerableExpression EnumerateObject() => new(Untyped.Invoke(nameof(JsonElement.EnumerateObject)));
+        public JsonElementExpression(TypedValueExpression typed) : this(ValidateType(typed, typeof(JsonElement))) {}
+        public JsonElementExpression(CodeWriterDeclaration declaration) : this(new VariableReference(typeof(JsonElement), declaration)) {}
+
+        public EnumerableExpression EnumerateArray() => new(typeof(JsonElement), Untyped.Invoke(nameof(JsonElement.EnumerateArray)));
+        public EnumerableExpression EnumerateObject() => new(typeof(JsonProperty), Untyped.Invoke(nameof(JsonElement.EnumerateObject)));
         public JsonElementExpression this[int index] =>new(new IndexerExpression(Untyped, Int(index)));
         public JsonElementExpression GetProperty(string propertyName) => new(Untyped.Invoke(nameof(JsonElement.GetProperty), Literal(propertyName)));
 
-        public ValueExpression CallClone() => Untyped.Invoke(nameof(JsonElement.Clone));
+        public ValueExpression InvokeClone() => Untyped.Invoke(nameof(JsonElement.Clone));
         public ValueExpression GetBoolean() => Untyped.Invoke(nameof(JsonElement.GetBoolean));
         public ValueExpression GetBytesFromBase64(string? format) => InvokeStaticMethodExpression.Extension(typeof(JsonElementExtensions), nameof(JsonElementExtensions.GetBytesFromBase64), Untyped, Literal(format));
         public ValueExpression GetChar() => InvokeStaticMethodExpression.Extension(typeof(JsonElementExtensions), nameof(JsonElementExtensions.GetChar), Untyped);
@@ -45,9 +48,9 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 
         public BoolExpression TryGetProperty(string elementName, string propertyName, out JsonElementExpression discriminator)
         {
-            var discriminatorDeclaration = new CodeWriterDeclaration("discriminator");
+            var discriminatorDeclaration = new VariableReference(typeof(JsonElement), "discriminator");
             discriminator = new JsonElementExpression(discriminatorDeclaration);
-            return new BoolExpression(new FormattableStringToExpression($"{elementName}.{nameof(System.Text.Json.JsonElement.TryGetProperty)}({propertyName:L}, out {typeof(JsonElement)} {discriminatorDeclaration:D})"));
+            return new BoolExpression(new FormattableStringToExpression($"{elementName}.{nameof(System.Text.Json.JsonElement.TryGetProperty)}({propertyName:L}, out {typeof(JsonElement)} {discriminatorDeclaration.Declaration:D})"));
         }
     }
 }

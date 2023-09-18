@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.Output.Models
                 uriBuilder.AppendRawNextLink(KnownParameters.NextLink, false),
                 Assign(request.Uri, uriBuilder),
 
-                builder.AddHeaders(request, false).AsStatement(),
+                builder.AddHeaders(request),
                 builder.AddUserAgent(message),
                 Return(message)
             };

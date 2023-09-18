@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Output.Models
         protected DataPlaneLegacyMethodBuilderBase(string clientName, ClientFields fields)
         {
             _clientName = clientName;
-            PipelineField = new HttpPipelineExpression(fields.PipelineField.Declaration);
+            PipelineField = new HttpPipelineExpression(fields.PipelineField);
             ClientDiagnosticsField = new Reference($"_{KnownParameters.ClientDiagnostics.Name}", KnownParameters.ClientDiagnostics.Type);
         }
 

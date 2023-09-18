@@ -29,14 +29,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         protected override MethodBodyStatement CreateProtocolMethodBody(MethodSignatureBase createMessageSignature, MethodSignature? createNextPageMessageSignature, bool async)
         {
-            var createRequestArguments = createMessageSignature.Parameters.Select(p => new ParameterReference(p));
+            var createRequestArguments = createMessageSignature.Parameters.Select(p => (ValueExpression)p);
             MethodBodyStatement firstPageRequestLine = DeclareFirstPageRequestLocalFunction(null, CreateMessageMethodName, createRequestArguments, out var createFirstPageRequest);
 
             CodeWriterDeclaration? createNextPageRequest = null;
             MethodBodyStatement? nextPageRequestLine = null;
             if (createNextPageMessageSignature is not null)
             {
-                var nextPageArguments = createNextPageMessageSignature.Parameters.Select(p => new ParameterReference(p));
+                var nextPageArguments = createNextPageMessageSignature.Parameters.Select(p => (ValueExpression)p);
                 nextPageRequestLine = DeclareNextPageRequestLocalFunction(null, createNextPageMessageSignature.Name, nextPageArguments, out createNextPageRequest);
             }
 

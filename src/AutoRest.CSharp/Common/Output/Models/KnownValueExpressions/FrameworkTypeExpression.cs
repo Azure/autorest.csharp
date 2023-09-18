@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
     /// <summary>
     /// Represents expression which has a return value of a framework type
     /// </summary>
-    /// <param name="Type">Framework type</param>
+    /// <param name="FrameworkType">Framework type</param>
     /// <param name="Untyped"></param>
-    internal sealed record FrameworkTypeExpression(CSharpType Type, ValueExpression Untyped) : TypedValueExpression(Type, Untyped);
+    internal sealed record FrameworkTypeExpression(System.Type FrameworkType, ValueExpression Untyped) : TypedValueExpression(FrameworkType, Untyped);
 }

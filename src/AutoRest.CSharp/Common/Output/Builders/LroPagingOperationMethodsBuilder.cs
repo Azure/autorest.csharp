@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             MethodBodyStatement? nextPageRequestLine = null;
             if (createNextPageMessageSignature is not null)
             {
-                var nextPageArguments = createNextPageMessageSignature.Parameters.Select(p => new ParameterReference(p));
+                var nextPageArguments = createNextPageMessageSignature.Parameters.Select(p => (ValueExpression)p);
                 nextPageRequestLine = DeclareNextPageRequestLocalFunction(null, createNextPageMessageSignature.Name, nextPageArguments, out createNextPageRequest);
             }
 

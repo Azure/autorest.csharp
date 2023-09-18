@@ -2,9 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Common.Output.Builders
@@ -49,4 +51,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             };
         }
     }
+
+    internal record RequestPart(string? NameInRequest, TypedValueExpression Value, MethodBodyStatement? Conversion, SerializationFormat SerializationFormat, string? ArraySerializationDelimiter = null, bool Explode = false, bool Escape = false, bool SkipNullCheck = false);
+
+    internal record BodyRequestPart(TypedValueExpression Value, RequestContentExpression Content, MethodBodyStatement? Conversion, bool SkipNullCheck = false) : RequestPart(null, Value, Conversion, SerializationFormat.Default, SkipNullCheck: SkipNullCheck);
 }

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
@@ -34,18 +35,22 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static ValueExpression Nameof(ValueExpression expression) => new InvokeInstanceMethodExpression(null, "nameof", new[]{expression}, null, false);
         public static ValueExpression ThrowExpression(ValueExpression expression) => new KeywordExpression("throw", expression);
 
-        public static ValueExpression NullConditional(Parameter parameter) => new ParameterReference(parameter).NullConditional(parameter.Type);
+        public static ValueExpression NullConditional(Parameter parameter) => ((ValueExpression)parameter).NullConditional(parameter.Type);
         public static ValueExpression NullCoalescing(ValueExpression left, ValueExpression right) => new BinaryOperatorExpression("??", left, right);
         public static ValueExpression EnumValue(EnumType type, EnumTypeValue value) => new MemberExpression(new TypeReference(type.Type), value.Declaration.Name);
         public static ValueExpression FrameworkEnumValue<TEnum>(TEnum value) where TEnum : struct, Enum => new MemberExpression(new TypeReference(typeof(TEnum)), Enum.GetName(value)!);
 
         public static ValueExpression RemoveAllNullConditional(ValueExpression expression)
-            => expression is MemberExpression { Inner: NullConditionalExpression { Inner: {} inner }, MemberName: {} memberName }
-                ? new MemberExpression(RemoveAllNullConditional(inner), memberName)
-                : expression;
+            => expression switch
+            {
+                NullConditionalExpression nullConditional => nullConditional.Inner,
+                MemberExpression { Inner: {} inner } member => member with {Inner = RemoveAllNullConditional(inner)},
+                TypedValueExpression typed => typed with {Untyped = RemoveAllNullConditional(typed.Untyped)},
+                _ => expression
+            };
 
-        public static ValueExpression Literal(string? value) => value is null ? Null : new LiteralExpression(value, false);
-        public static ValueExpression LiteralU8(string value) => new LiteralExpression(value, true);
+        public static StringExpression Literal(string? value) => new(value is null ? Null : new LiteralExpression(value, false));
+        public static StringExpression LiteralU8(string value) => new(new LiteralExpression(value, true));
 
         public static BoolExpression Equal(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("==", left, right));
         public static BoolExpression NotEqual(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("!=", left, right));
@@ -65,12 +70,6 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static KeywordStatement Return(ValueExpression expression) => new("return", expression);
         public static KeywordStatement Throw(ValueExpression expression) => new("throw", expression);
 
-        public static MemberExpression InvokeDateTimeOffsetNow() =>
-            new(typeof(DateTimeOffset), nameof(DateTimeOffset.Now));
-        public static InvokeStaticMethodExpression InvokeDateTimeOffsetFromUnixTimeSeconds(ValueExpression expression)
-            => new(typeof(DateTimeOffset), nameof(DateTimeOffset.FromUnixTimeSeconds), new[]{expression});
-        public static InvokeStaticMethodExpression InvokeGuidNewGuid()
-            => new(typeof(Guid), nameof(Guid.NewGuid));
         public static InvokeStaticMethodExpression InvokeFileOpenRead(ValueExpression expression)
             => new(typeof(System.IO.File), nameof(System.IO.File.OpenRead), new[]{expression});
         public static InvokeStaticMethodExpression InvokeFileOpenWrite(ValueExpression expression)
@@ -92,11 +91,11 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static MethodBodyStatement InvokeConsoleWriteLine(ValueExpression expression)
             => new InvokeStaticMethodStatement(typeof(Console), nameof(Console.WriteLine), expression);
 
-        private static BoolExpression Is<T>(T value, string name, Func<CodeWriterDeclaration, T> factory, out T variable) where T : TypedValueExpression
+        private static BoolExpression Is<T>(T value, string name, Func<ValueExpression, T> factory, out T variable) where T : TypedValueExpression
         {
             var declaration = new CodeWriterDeclaration(name);
-            variable = factory(declaration);
-            return new(new BinaryOperatorExpression("is", value, new FormattableStringToExpression($"{value.ReturnType} {declaration:D}")));
+            variable = factory(new VariableReference(value.Type, declaration));
+            return new(new BinaryOperatorExpression("is", value, new FormattableStringToExpression($"{value.Type} {declaration:D}")));
         }
     }
 }

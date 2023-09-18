@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using System.IO;
-using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using Azure.Core;
 

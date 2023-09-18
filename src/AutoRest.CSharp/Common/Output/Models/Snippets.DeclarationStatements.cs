@@ -13,9 +13,6 @@ namespace AutoRest.CSharp.Common.Output.Models
 {
     internal static partial class Snippets
     {
-        public static DeclarationStatement Declare(CSharpType responseType, string name, FrameworkTypeExpression value, out FrameworkTypeExpression variable)
-            => Declare(name, value, d => new FrameworkTypeExpression(responseType, d), out variable);
-
         public static DeclarationStatement Declare(CSharpType responseType, string name, ResponseExpression value, out ResponseExpression variable)
         {
             var declare = new DeclareVariableStatement(responseType, name, value, out var untypedVariable);
@@ -48,7 +45,7 @@ namespace AutoRest.CSharp.Common.Output.Models
             => UsingVar(name, value, d => new JsonDocumentExpression(d), out variable);
 
         public static DeclarationStatement Var(string name, DictionaryExpression value, out DictionaryExpression variable)
-            => Var(name, value, d => new DictionaryExpression(d), out variable);
+            => Var(name, value, d => new DictionaryExpression(value.ValueType, d), out variable);
 
         public static DeclarationStatement Var(string name, FormUrlEncodedContentExpression value, out FormUrlEncodedContentExpression variable)
             => Var(name, value, d => new FormUrlEncodedContentExpression(d), out variable);
@@ -86,34 +83,37 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Var(string name, XmlWriterContentExpression value, out XmlWriterContentExpression variable)
             => Var(name, value, d => new XmlWriterContentExpression(d), out variable);
 
-        public static DeclarationStatement Var(string name, ValueExpression value, out ValueExpression variable)
-            => new DeclareVariableStatement(null, name, value, out variable);
+        public static DeclarationStatement Var(string name, TypedValueExpression value, out ValueExpression variable)
+            => new DeclareVariableStatement(name, value, out variable);
 
-        private static DeclarationStatement UsingDeclare<T>(string name, T value, Func<CodeWriterDeclaration, T> factory, out T variable) where T : TypedValueExpression
+        public static DeclarationStatement Var(VariableReference variable, ValueExpression value)
+            => new DeclareVariableStatement(null, variable.Declaration, value);
+
+        private static DeclarationStatement UsingDeclare<T>(string name, T value, Func<ValueExpression, T> factory, out T variable) where T : TypedValueExpression
         {
             var declaration = new CodeWriterDeclaration(name);
-            variable = factory(declaration);
-            return new UsingDeclareVariableStatement(value.ReturnType, declaration, value);
+            variable = factory(new VariableReference(value.Type, declaration));
+            return new UsingDeclareVariableStatement(value.Type, declaration, value);
         }
 
-        private static DeclarationStatement UsingVar<T>(string name, T value, Func<CodeWriterDeclaration, T> factory, out T variable) where T : TypedValueExpression
+        private static DeclarationStatement UsingVar<T>(string name, T value, Func<ValueExpression, T> factory, out T variable) where T : TypedValueExpression
         {
             var declaration = new CodeWriterDeclaration(name);
-            variable = factory(declaration);
+            variable = factory(new VariableReference(value.Type, declaration));
             return new UsingDeclareVariableStatement(null, declaration, value);
         }
 
-        private static DeclarationStatement Declare<T>(string name, T value, Func<CodeWriterDeclaration, T> factory, out T variable) where T : TypedValueExpression
+        private static DeclarationStatement Declare<T>(string name, T value, Func<ValueExpression, T> factory, out T variable) where T : TypedValueExpression
         {
             var declaration = new CodeWriterDeclaration(name);
-            variable = factory(declaration);
-            return new DeclareVariableStatement(value.ReturnType, declaration, value);
+            variable = factory(new VariableReference(value.Type, declaration));
+            return new DeclareVariableStatement(value.Type, declaration, value);
         }
 
-        private static DeclarationStatement Var<T>(string name, T value, Func<CodeWriterDeclaration, T> factory, out T variable) where T : TypedValueExpression
+        private static DeclarationStatement Var<T>(string name, T value, Func<ValueExpression, T> factory, out T variable) where T : TypedValueExpression
         {
             var declaration = new CodeWriterDeclaration(name);
-            variable = factory(declaration);
+            variable = factory(new VariableReference(value.Type, declaration));
             return new DeclareVariableStatement(null, declaration, value);
         }
     }

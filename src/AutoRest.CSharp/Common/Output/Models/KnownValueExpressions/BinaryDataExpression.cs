@@ -9,8 +9,10 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record BinaryDataExpression(ValueExpression Untyped) : TypedValueExpression(typeof(BinaryData), Untyped)
     {
-        public FrameworkTypeExpression ToObjectFromJson(CSharpType responseType)
-            => new(responseType, new InvokeInstanceMethodExpression(Untyped, nameof(BinaryData.ToObjectFromJson), Array.Empty<ValueExpression>(), new[]{responseType}, false));
+        public BinaryDataExpression(TypedValueExpression typed) : this(ValidateType(typed, typeof(BinaryData))) {}
+
+        public FrameworkTypeExpression ToObjectFromJson(Type responseType)
+            => new(responseType, new InvokeInstanceMethodExpression(Untyped, nameof(BinaryData.ToObjectFromJson), Array.Empty<ValueExpression>(), new[]{new CSharpType(responseType)}, false));
 
         public static BinaryDataExpression FromStream(ResponseExpression response, bool async)
         {

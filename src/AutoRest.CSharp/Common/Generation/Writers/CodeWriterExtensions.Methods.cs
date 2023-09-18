@@ -9,6 +9,7 @@ using AutoRest.CSharp.Common.Output.Models.KnownCodeBlocks;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Shared;
 using Azure.ResourceManager.Models;
 using SwitchExpression = AutoRest.CSharp.Common.Output.Models.ValueExpressions.SwitchExpression;
 
@@ -105,12 +106,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         writer.AppendRawIf("await ", foreachStatement.IsAsync);
                         writer.Append($"foreach (var {foreachStatement.Item:D} in ");
-                        writer.WriteValueExpression(foreachStatement.Enumerable switch
-                        {
-                            InvokeInstanceMethodExpression invokeInstance => invokeInstance with {CallAsAsync = false},
-                            InvokeStaticMethodExpression invokeStatic => invokeStatic with {CallAsAsync = false},
-                            _ => foreachStatement.Enumerable
-                        });
+                        writer.WriteValueExpression(foreachStatement.Enumerable);
                         //writer.AppendRawIf(".ConfigureAwait(false)", foreachStatement.IsAsync);
                         writer.LineRaw(")");
                         writer.LineRaw("{");
@@ -551,7 +547,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($"{typeReference.Type}");
                     break;
                 case VariableReference variable:
-                    writer.Append($"{variable.Name:I}");
+                    writer.Append($"{variable.Declaration:I}");
                     break;
                 case TypedValueExpression typed:
                     writer.WriteValueExpression(typed.Untyped);
@@ -562,9 +558,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         writer.AppendRaw(" ").WriteValueExpression(inner);
                     }
-                    break;
-                case ConstantExpression(var constant):
-                    writer.WriteConstant(constant);
                     break;
                 case LiteralExpression(var literal, true):
                     writer.Literal(literal).AppendRaw("u8");

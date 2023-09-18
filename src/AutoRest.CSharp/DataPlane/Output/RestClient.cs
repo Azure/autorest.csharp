@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models
 
             ProtocolMethods = protocolMethodsBuilder?
                 .Build(Fields, clientPrefix + GetClientSuffix(), Declaration.Namespace)
-                .Select(b => b.BuildDpg())
+                .Select(b => b.Build())
                 .ToList();
         }
     }

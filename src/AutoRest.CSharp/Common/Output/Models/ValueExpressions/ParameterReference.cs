@@ -5,5 +5,5 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Common.Output.Models.ValueExpressions
 {
-    internal record ParameterReference(Parameter Parameter) : ValueExpression;
+    internal record ParameterReference(Parameter Parameter) : TypedValueExpression(Parameter.Type, new FormattableStringToExpression($"{Parameter.Name:I}"));
 }

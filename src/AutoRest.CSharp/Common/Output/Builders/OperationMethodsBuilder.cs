@@ -59,14 +59,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 var firstResponseBodyType = Operation.Responses.Where(r => r is { IsErrorResponse: false, BodyType: {} }).Select(r => r.BodyType).Distinct().First();
                 var serialization = SerializationBuilder.BuildJsonSerialization(firstResponseBodyType!, ResponseType, false);
+                var value = new VariableReference(ResponseType, "value");
 
-                yield return Declare(ResponseType, "value", new FrameworkTypeExpression(ResponseType, Default), out var value);
+                yield return new DeclareVariableStatement(value.Type, value.Declaration, Default);
                 yield return JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, response, false);
                 yield return Return(ResponseExpression.FromValue(value, response));
             }
             else if (ResponseType is { IsFrameworkType: true })
             {
-                yield return Return(ResponseExpression.FromValue(response.Content.ToObjectFromJson(ResponseType), response));
+                yield return Return(ResponseExpression.FromValue(response.Content.ToObjectFromJson(ResponseType.FrameworkType), response));
             }
         }
     }

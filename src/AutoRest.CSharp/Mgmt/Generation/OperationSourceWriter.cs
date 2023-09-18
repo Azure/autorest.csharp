@@ -17,8 +17,6 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -160,7 +158,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     deserializeExpression = new InvokeInstanceMethodExpression(null, "ScrubId", new[]{deserializeExpression}, null, false);
                 }
 
-                yield return new DeclareVariableStatement(null, "data", deserializeExpression, out var dataVariable);
+                var dataVariable = new VariableReference(resourceData.Type, "data");
+
+                yield return new DeclareVariableStatement(null, dataVariable.Declaration, deserializeExpression);
                 if (resourceData.ShouldSetResourceIdentifier)
                 {
                     yield return Assign(new MemberExpression(dataVariable, "Id"), new MemberExpression(_opSource.ArmClientField, "Id"));

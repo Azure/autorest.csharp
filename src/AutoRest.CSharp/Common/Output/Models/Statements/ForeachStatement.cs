@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.Common.Output.Models.Statements
@@ -13,22 +14,22 @@ namespace AutoRest.CSharp.Common.Output.Models.Statements
         private readonly List<MethodBodyStatement> _body = new();
         public IReadOnlyList<MethodBodyStatement> Body => _body;
 
-        public ForeachStatement(string itemName, ValueExpression enumerable, out ValueExpression item)
+        public ForeachStatement(string itemName, EnumerableExpression enumerable, out TypedValueExpression item)
             : this(new CodeWriterDeclaration(itemName), enumerable)
         {
-            item = Item;
+            item = new VariableReference(enumerable.ItemType, Item);
         }
 
-        public ForeachStatement(string itemName, ValueExpression enumerable, bool isAsync, out ValueExpression item)
+        public ForeachStatement(string itemName, EnumerableExpression enumerable, bool isAsync, out TypedValueExpression item)
             : this(new CodeWriterDeclaration(itemName), enumerable, isAsync)
         {
-            item = Item;
+            item = new VariableReference(enumerable.ItemType, Item);
         }
 
         public ForeachStatement(string itemName, DictionaryExpression dictionary, out KeyValuePairExpression item)
             : this(new CodeWriterDeclaration(itemName), dictionary)
         {
-            item = new KeyValuePairExpression(Item);
+            item = new KeyValuePairExpression(new VariableReference(dictionary.ValueType, Item));
         }
 
         public void Add(MethodBodyStatement statement) => _body.Add(statement);

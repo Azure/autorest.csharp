@@ -17,5 +17,18 @@ namespace AutoRest.CSharp.Common.Output.Models
                header.Equals(ReturnClientRequestId, StringComparison.OrdinalIgnoreCase) ||
                header.Equals(RepeatabilityRequestId, StringComparison.OrdinalIgnoreCase) ||
                header.Equals(RepeatabilityFirstSent, StringComparison.OrdinalIgnoreCase);
+
+        public static bool IsContentHeader(string header)
+            => header.Equals("Allow", StringComparison.OrdinalIgnoreCase) ||
+               header.Equals("Content-Disposition", StringComparison.OrdinalIgnoreCase) ||
+               header.Equals("Content-Encoding", StringComparison.OrdinalIgnoreCase) ||
+               header.Equals("Content-Language", StringComparison.OrdinalIgnoreCase) ||
+               header.Equals("Content-Length", StringComparison.OrdinalIgnoreCase) ||
+               header.Equals("Content-Location", StringComparison.OrdinalIgnoreCase) ||
+               header.Equals("Content-MD5", StringComparison.OrdinalIgnoreCase) ||
+               header.Equals("Content-Range", StringComparison.OrdinalIgnoreCase) ||
+               header.Equals("Content-Type", StringComparison.OrdinalIgnoreCase) ||
+               header.Equals("Expires", StringComparison.OrdinalIgnoreCase) ||
+               header.Equals("Last-Modified", StringComparison.OrdinalIgnoreCase);
     }
 }

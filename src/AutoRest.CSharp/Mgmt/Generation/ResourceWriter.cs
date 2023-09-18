@@ -294,7 +294,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteArguments(_writer, parameterMappings, true);
             _writer.Line($"){GetConfigureAwait(isAsync)};");
 
-            var armResource = new ArmResourceExpression(new MemberExpression(originalResponse, nameof(Response<object>.Value)));
+            var armResource = new ArmResourceExpression(new ResponseExpression(originalResponse).Value);
             if (This.ResourceData.ShouldSetResourceIdentifier)
             {
                 _writer.WriteMethodBodyStatement(Assign(armResource.Id, InvokeCreateResourceIdentifier(This, getOperation.RequestPath, parameterMappings, armResource)));

@@ -14,6 +14,8 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record HttpPipelineExpression(ValueExpression Untyped) : TypedValueExpression(typeof(HttpPipeline), Untyped)
     {
+        public HttpPipelineExpression(CodeWriterDeclaration variable) : this(new VariableReference(typeof(HttpPipeline), variable)){}
+
         public HttpMessageExpression CreateMessage() => new(Untyped.Invoke(nameof(HttpPipeline.CreateMessage)));
         public HttpMessageExpression CreateMessage(RequestContextExpression requestContext) => new(Untyped.Invoke(nameof(HttpPipeline.CreateMessage), requestContext));
         public HttpMessageExpression CreateMessage(RequestContextExpression requestContext, ValueExpression responseClassifier) => new(Untyped.Invoke(nameof(HttpPipeline.CreateMessage), requestContext, responseClassifier));

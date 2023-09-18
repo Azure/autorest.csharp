@@ -83,8 +83,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static MethodBodyStatement SerializeExpression(XmlWriterExpression xmlWriter, XmlElementSerialization serialization, ValueExpression expression)
             => serialization switch
             {
-                XmlArraySerialization array => SerializeArray(xmlWriter, array, new EnumerableExpression(expression)).AsStatement(),
-                XmlDictionarySerialization dictionary => SerializeDictionary(xmlWriter, dictionary, new DictionaryExpression(expression)),
+                XmlArraySerialization array => SerializeArray(xmlWriter, array, new EnumerableExpression(TypeFactory.GetElementType(array.Type), expression)).AsStatement(),
+                XmlDictionarySerialization dictionary => SerializeDictionary(xmlWriter, dictionary, new DictionaryExpression(TypeFactory.GetElementType(dictionary.Type), expression)),
                 XmlElementValueSerialization value => SerializeElement(xmlWriter, value, expression),
                 _ => throw new NotSupportedException()
             };
@@ -175,13 +175,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static IEnumerable<MethodBodyStatement> BuildDeserializeBody(XElementExpression element, XmlObjectSerialization objectSerialization)
         {
-            var propertyVariables = new Dictionary<XmlPropertySerialization, CodeWriterDeclaration>();
+            var propertyVariables = new Dictionary<XmlPropertySerialization, VariableReference>();
 
             CollectProperties(propertyVariables, objectSerialization);
 
-            foreach (var (property, declaration) in propertyVariables)
+            foreach (var (property, variable) in propertyVariables)
             {
-                yield return new DeclareVariableStatement(property.ValueType, declaration, Default);
+                yield return new DeclareVariableStatement(variable.Type, variable.Declaration, Default);
             }
 
             foreach (XmlObjectAttributeSerialization attribute in objectSerialization.Attributes)
@@ -383,26 +383,26 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private static void CollectProperties(Dictionary<XmlPropertySerialization, CodeWriterDeclaration> propertyVariables, XmlObjectSerialization element)
+        private static void CollectProperties(Dictionary<XmlPropertySerialization, VariableReference> propertyVariables, XmlObjectSerialization element)
         {
             foreach (var attribute in element.Attributes)
             {
-                propertyVariables.Add(attribute, new CodeWriterDeclaration(attribute.SerializationConstructorParameterName));
+                propertyVariables.Add(attribute, new VariableReference(attribute.ValueType, attribute.SerializationConstructorParameterName));
             }
 
             foreach (var attribute in element.Elements)
             {
-                propertyVariables.Add(attribute, new CodeWriterDeclaration(attribute.SerializationConstructorParameterName));
+                propertyVariables.Add(attribute, new VariableReference(attribute.ValueType, attribute.SerializationConstructorParameterName));
             }
 
             foreach (var attribute in element.EmbeddedArrays)
             {
-                propertyVariables.Add(attribute, new CodeWriterDeclaration(attribute.SerializationConstructorParameterName));
+                propertyVariables.Add(attribute, new VariableReference(attribute.ValueType, attribute.SerializationConstructorParameterName));
             }
 
-            if (element.ContentSerialization != null)
+            if (element.ContentSerialization is {} contentSerialization)
             {
-                propertyVariables.Add(element.ContentSerialization, new CodeWriterDeclaration(element.ContentSerialization.SerializationConstructorParameterName));
+                propertyVariables.Add(contentSerialization, new VariableReference(contentSerialization.ValueType, contentSerialization.SerializationConstructorParameterName));
             }
         }
     }

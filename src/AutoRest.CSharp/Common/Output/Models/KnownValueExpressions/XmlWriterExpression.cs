@@ -5,6 +5,7 @@ using System;
 using System.Xml;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Serialization;
 using Azure.Core;
 
@@ -12,6 +13,8 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record XmlWriterExpression(ValueExpression Untyped) : TypedValueExpression(typeof(XmlWriter), Untyped)
     {
+        public XmlWriterExpression(CodeWriterDeclaration variable) : this(new VariableReference(typeof(XmlWriter), variable)){}
+
         public MethodBodyStatement WriteStartAttribute(string localName) => new InvokeInstanceMethodStatement(Untyped, nameof(XmlWriter.WriteStartAttribute), Snippets.Literal(localName));
         public MethodBodyStatement WriteEndAttribute() => new InvokeInstanceMethodStatement(Untyped, nameof(XmlWriter.WriteEndAttribute));
 

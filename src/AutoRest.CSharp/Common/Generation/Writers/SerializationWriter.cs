@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Append($"void {typeof(IXmlSerializable)}.{nameof(IXmlSerializable.Write)}({typeof(XmlWriter)} {xmlWriter:D}, {typeof(string)} {nameHint:D})");
             using (writer.Scope())
             {
-                writer.WriteMethodBodyStatement(XmlSerializationMethodsBuilder.SerializeExpression(new XmlWriterExpression(xmlWriter), serialization, nameHint).AsStatement());
+                writer.WriteMethodBodyStatement(XmlSerializationMethodsBuilder.SerializeExpression(new XmlWriterExpression(xmlWriter), serialization, new StringExpression(nameHint)).AsStatement());
             }
             writer.Line();
         }

@@ -684,7 +684,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteArguments(_writer, parameterMappings);
                 _writer.Line($"){GetConfigureAwait(async)};");
 
-                var armResource = new ArmResourceExpression(new MemberExpression(response, nameof(Response<object>.Value)));
+                var armResource = new ArmResourceExpression(new ResponseExpression(response).Value);
 
                 if (operation.ThrowIfNull)
                 {
