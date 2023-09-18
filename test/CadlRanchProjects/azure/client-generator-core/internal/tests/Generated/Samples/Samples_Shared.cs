@@ -6,15 +6,13 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 using _Specs_.Azure.ClientGenerator.Core.Internal;
+using _Specs_.Azure.ClientGenerator.Core.Internal.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 {
@@ -24,21 +22,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Public()
         {
-            var client = new InternalClient().GetSharedClient();
+            Shared client = new InternalClient().GetSharedClient();
 
-            Response response = client.Public("<name>", new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Public_AllParameters()
-        {
-            var client = new InternalClient().GetSharedClient();
-
-            Response response = client.Public("<name>", new RequestContext());
+            Response response = client.Public("<name>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -48,9 +34,39 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Public_Async()
         {
-            var client = new InternalClient().GetSharedClient();
+            Shared client = new InternalClient().GetSharedClient();
 
-            Response response = await client.PublicAsync("<name>", new RequestContext());
+            Response response = await client.PublicAsync("<name>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Public_Convenience()
+        {
+            Shared client = new InternalClient().GetSharedClient();
+
+            Response<SharedModel> response = client.Public("<name>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Public_Convenience_Async()
+        {
+            Shared client = new InternalClient().GetSharedClient();
+
+            Response<SharedModel> response = await client.PublicAsync("<name>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Public_AllParameters()
+        {
+            Shared client = new InternalClient().GetSharedClient();
+
+            Response response = client.Public("<name>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -60,9 +76,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Public_AllParameters_Async()
         {
-            var client = new InternalClient().GetSharedClient();
+            Shared client = new InternalClient().GetSharedClient();
 
-            Response response = await client.PublicAsync("<name>", new RequestContext());
+            Response response = await client.PublicAsync("<name>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -70,11 +86,20 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Public_Convenience_Async()
+        public void Example_Public_AllParameters_Convenience()
         {
-            var client = new InternalClient().GetSharedClient();
+            Shared client = new InternalClient().GetSharedClient();
 
-            var result = await client.PublicAsync("<name>");
+            Response<SharedModel> response = client.Public("<name>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Public_AllParameters_Convenience_Async()
+        {
+            Shared client = new InternalClient().GetSharedClient();
+
+            Response<SharedModel> response = await client.PublicAsync("<name>");
         }
     }
 }

@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -25,33 +24,21 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll()
         {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            Response response = client.GetAll(new RequestContext());
+            Response response = client.GetAll(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetAll_AllParameters()
-        {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
-
-            Response response = client.GetAll(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_Async()
         {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetAllAsync(new RequestContext());
+            Response response = await client.GetAllAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -59,56 +46,83 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAll_AllParameters_Async()
+        public void Example_GetAll_Convenience()
         {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetAllAsync(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
+            Response<CollectionsModelProperty> response = client.GetAll();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_Convenience_Async()
         {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            var result = await client.GetAllAsync();
+            Response<CollectionsModelProperty> response = await client.GetAllAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetAll_AllParameters()
+        {
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+            Response response = client.GetAll(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetAll_AllParameters_Async()
+        {
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+            Response response = await client.GetAllAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetAll_AllParameters_Convenience()
+        {
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+            Response<CollectionsModelProperty> response = client.GetAll();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetAll_AllParameters_Convenience_Async()
+        {
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+            Response<CollectionsModelProperty> response = await client.GetAllAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDefault()
         {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            Response response = client.GetDefault(new RequestContext());
+            Response response = client.GetDefault(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetDefault_AllParameters()
-        {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
-
-            Response response = client.GetDefault(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDefault_Async()
         {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetDefaultAsync(new RequestContext());
+            Response response = await client.GetDefaultAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -116,11 +130,29 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDefault_AllParameters_Async()
+        public void Example_GetDefault_Convenience()
         {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetDefaultAsync(new RequestContext());
+            Response<CollectionsModelProperty> response = client.GetDefault();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetDefault_Convenience_Async()
+        {
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+            Response<CollectionsModelProperty> response = await client.GetDefaultAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetDefault_AllParameters()
+        {
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+            Response response = client.GetDefault(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
@@ -128,41 +160,42 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDefault_Convenience_Async()
+        public async Task Example_GetDefault_AllParameters_Async()
         {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            var result = await client.GetDefaultAsync();
+            Response response = await client.GetDefaultAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetDefault_AllParameters_Convenience()
+        {
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+            Response<CollectionsModelProperty> response = client.GetDefault();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetDefault_AllParameters_Convenience_Async()
+        {
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+            Response<CollectionsModelProperty> response = await client.GetDefaultAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAll()
         {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            var data = new { };
-
-            Response response = client.PutAll(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_PutAll_AllParameters()
-        {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
-
-            var data = new
-            {
-                property = new[] {
-        new {
-            property = "<property>",
-        }
-    },
-            };
-
-            Response response = client.PutAll(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new object());
+            Response response = client.PutAll(content);
             Console.WriteLine(response.Status);
         }
 
@@ -170,30 +203,21 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAll_Async()
         {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            var data = new { };
-
-            Response response = await client.PutAllAsync(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new object());
+            Response response = await client.PutAllAsync(content);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAll_AllParameters_Async()
+        public void Example_PutAll_Convenience()
         {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            var data = new
-            {
-                property = new[] {
-        new {
-            property = "<property>",
-        }
-    },
-            };
-
-            Response response = await client.PutAllAsync(RequestContent.Create(data));
+            CollectionsModelProperty body = new CollectionsModelProperty();
+            Response response = client.PutAll(body);
             Console.WriteLine(response.Status);
         }
 
@@ -201,49 +225,101 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAll_Convenience_Async()
         {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            var body = new CollectionsModelProperty
+            CollectionsModelProperty body = new CollectionsModelProperty();
+            Response response = await client.PutAllAsync(body);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutAll_AllParameters()
+        {
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+            RequestContent content = RequestContent.Create(new
+            {
+                property = new List<object>()
+{
+new
+{
+property = "<property>",
+}
+},
+            });
+            Response response = client.PutAll(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutAll_AllParameters_Async()
+        {
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+            RequestContent content = RequestContent.Create(new
+            {
+                property = new List<object>()
+{
+new
+{
+property = "<property>",
+}
+},
+            });
+            Response response = await client.PutAllAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutAll_AllParameters_Convenience()
+        {
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+            CollectionsModelProperty body = new CollectionsModelProperty()
             {
                 Property =
-    {
-        new StringProperty
-        {
-            Property = "<Property>",
-        }
-    },
+{
+new StringProperty()
+{
+Property = "<property>",
+}
+},
             };
-            var result = await client.PutAllAsync(body);
+            Response response = client.PutAll(body);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutAll_AllParameters_Convenience_Async()
+        {
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+            CollectionsModelProperty body = new CollectionsModelProperty()
+            {
+                Property =
+{
+new StringProperty()
+{
+Property = "<property>",
+}
+},
+            };
+            Response response = await client.PutAllAsync(body);
+            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_PutDefault()
         {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            var data = new { };
-
-            Response response = client.PutDefault(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_PutDefault_AllParameters()
-        {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
-
-            var data = new
-            {
-                property = new[] {
-        new {
-            property = "<property>",
-        }
-    },
-            };
-
-            Response response = client.PutDefault(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new object());
+            Response response = client.PutDefault(content);
             Console.WriteLine(response.Status);
         }
 
@@ -251,30 +327,21 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutDefault_Async()
         {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            var data = new { };
-
-            Response response = await client.PutDefaultAsync(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new object());
+            Response response = await client.PutDefaultAsync(content);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDefault_AllParameters_Async()
+        public void Example_PutDefault_Convenience()
         {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            var data = new
-            {
-                property = new[] {
-        new {
-            property = "<property>",
-        }
-    },
-            };
-
-            Response response = await client.PutDefaultAsync(RequestContent.Create(data));
+            CollectionsModelProperty body = new CollectionsModelProperty();
+            Response response = client.PutDefault(body);
             Console.WriteLine(response.Status);
         }
 
@@ -282,19 +349,91 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutDefault_Convenience_Async()
         {
-            var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
 
-            var body = new CollectionsModelProperty
+            CollectionsModelProperty body = new CollectionsModelProperty();
+            Response response = await client.PutDefaultAsync(body);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutDefault_AllParameters()
+        {
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+            RequestContent content = RequestContent.Create(new
+            {
+                property = new List<object>()
+{
+new
+{
+property = "<property>",
+}
+},
+            });
+            Response response = client.PutDefault(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutDefault_AllParameters_Async()
+        {
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+            RequestContent content = RequestContent.Create(new
+            {
+                property = new List<object>()
+{
+new
+{
+property = "<property>",
+}
+},
+            });
+            Response response = await client.PutDefaultAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutDefault_AllParameters_Convenience()
+        {
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+            CollectionsModelProperty body = new CollectionsModelProperty()
             {
                 Property =
-    {
-        new StringProperty
-        {
-            Property = "<Property>",
-        }
-    },
+{
+new StringProperty()
+{
+Property = "<property>",
+}
+},
             };
-            var result = await client.PutDefaultAsync(body);
+            Response response = client.PutDefault(body);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutDefault_AllParameters_Convenience_Async()
+        {
+            CollectionsModel client = new OptionalClient().GetCollectionsModelClient(apiVersion: "1.0.0");
+
+            CollectionsModelProperty body = new CollectionsModelProperty()
+            {
+                Property =
+{
+new StringProperty()
+{
+Property = "<property>",
+}
+},
+            };
+            Response response = await client.PutDefaultAsync(body);
+            Console.WriteLine(response.Status);
         }
     }
 }

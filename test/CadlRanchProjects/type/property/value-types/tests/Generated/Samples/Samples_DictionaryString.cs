@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -25,92 +24,100 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDictionaryString()
         {
-            var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            Response response = client.GetDictionaryString(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property").GetProperty("<test>").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetDictionaryString_AllParameters()
-        {
-            var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
-
-            Response response = client.GetDictionaryString(new RequestContext());
+            Response response = client.GetDictionaryString(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDictionaryString_Async()
         {
-            var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetDictionaryStringAsync(new RequestContext());
+            Response response = await client.GetDictionaryStringAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDictionaryString_AllParameters_Async()
+        public void Example_GetDictionaryString_Convenience()
         {
-            var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetDictionaryStringAsync(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property").GetProperty("<test>").ToString());
+            Response<DictionaryStringProperty> response = client.GetDictionaryString();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDictionaryString_Convenience_Async()
         {
-            var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            var result = await client.GetDictionaryStringAsync();
+            Response<DictionaryStringProperty> response = await client.GetDictionaryStringAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetDictionaryString_AllParameters()
+        {
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+
+            Response response = client.GetDictionaryString(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetDictionaryString_AllParameters_Async()
+        {
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+
+            Response response = await client.GetDictionaryStringAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetDictionaryString_AllParameters_Convenience()
+        {
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+
+            Response<DictionaryStringProperty> response = client.GetDictionaryString();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetDictionaryString_AllParameters_Convenience_Async()
+        {
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+
+            Response<DictionaryStringProperty> response = await client.GetDictionaryStringAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 property = new
                 {
-                    key = "<String>",
+                    key = "<property>",
                 },
-            };
-
-            Response response = client.Put(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
-        {
-            var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
-
-            var data = new
-            {
-                property = new
-                {
-                    key = "<String>",
-                },
-            };
-
-            Response response = client.Put(RequestContent.Create(data));
+            });
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -118,35 +125,30 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 property = new
                 {
-                    key = "<String>",
+                    key = "<property>",
                 },
-            };
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public void Example_Put_Convenience()
         {
-            var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            var data = new
+            DictionaryStringProperty body = new DictionaryStringProperty(new Dictionary<string, string>()
             {
-                property = new
-                {
-                    key = "<String>",
-                },
-            };
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+                ["key"] = "<property>",
+            });
+            Response response = client.Put(body);
             Console.WriteLine(response.Status);
         }
 
@@ -154,13 +156,76 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Convenience_Async()
         {
-            var client = new ValueTypesClient().GetDictionaryStringClient("1.0.0");
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
-            var body = new DictionaryStringProperty(new Dictionary<string, string>
+            DictionaryStringProperty body = new DictionaryStringProperty(new Dictionary<string, string>()
             {
-                ["key"] = "<String>"
+                ["key"] = "<property>",
             });
-            var result = await client.PutAsync(body);
+            Response response = await client.PutAsync(body);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_AllParameters()
+        {
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+
+            RequestContent content = RequestContent.Create(new
+            {
+                property = new
+                {
+                    key = "<property>",
+                },
+            });
+            Response response = client.Put(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_AllParameters_Async()
+        {
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+
+            RequestContent content = RequestContent.Create(new
+            {
+                property = new
+                {
+                    key = "<property>",
+                },
+            });
+            Response response = await client.PutAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_AllParameters_Convenience()
+        {
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+
+            DictionaryStringProperty body = new DictionaryStringProperty(new Dictionary<string, string>()
+            {
+                ["key"] = "<property>",
+            });
+            Response response = client.Put(body);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_AllParameters_Convenience_Async()
+        {
+            DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
+
+            DictionaryStringProperty body = new DictionaryStringProperty(new Dictionary<string, string>()
+            {
+                ["key"] = "<property>",
+            });
+            Response response = await client.PutAsync(body);
+            Console.WriteLine(response.Status);
         }
     }
 }

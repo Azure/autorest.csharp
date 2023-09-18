@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -24,86 +23,97 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetUnknownValue()
         {
-            var client = new DictionaryClient().GetUnknownValueClient("1.0.0");
+            UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            Response response = client.GetUnknownValue(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownValue_AllParameters()
-        {
-            var client = new DictionaryClient().GetUnknownValueClient("1.0.0");
-
-            Response response = client.GetUnknownValue(new RequestContext());
+            Response response = client.GetUnknownValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUnknownValue_Async()
         {
-            var client = new DictionaryClient().GetUnknownValueClient("1.0.0");
+            UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetUnknownValueAsync(new RequestContext());
+            Response response = await client.GetUnknownValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownValue_AllParameters_Async()
+        public void Example_GetUnknownValue_Convenience()
         {
-            var client = new DictionaryClient().GetUnknownValueClient("1.0.0");
+            UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetUnknownValueAsync(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").ToString());
+            Response<IReadOnlyDictionary<string, BinaryData>> response = client.GetUnknownValue();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUnknownValue_Convenience_Async()
         {
-            var client = new DictionaryClient().GetUnknownValueClient("1.0.0");
+            UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            var result = await client.GetUnknownValueAsync();
+            Response<IReadOnlyDictionary<string, BinaryData>> response = await client.GetUnknownValueAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetUnknownValue_AllParameters()
+        {
+            UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
+
+            Response response = client.GetUnknownValue(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetUnknownValue_AllParameters_Async()
+        {
+            UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
+
+            Response response = await client.GetUnknownValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetUnknownValue_AllParameters_Convenience()
+        {
+            UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyDictionary<string, BinaryData>> response = client.GetUnknownValue();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetUnknownValue_AllParameters_Convenience_Async()
+        {
+            UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyDictionary<string, BinaryData>> response = await client.GetUnknownValueAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            var client = new DictionaryClient().GetUnknownValueClient("1.0.0");
+            UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                key = BinaryData.FromString("<your binary data content>"),
-            };
-
-            Response response = client.Put(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
-        {
-            var client = new DictionaryClient().GetUnknownValueClient("1.0.0");
-
-            var data = new
-            {
-                key = BinaryData.FromString("<your binary data content>"),
-            };
-
-            Response response = client.Put(RequestContent.Create(data));
+                key = new object(),
+            });
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -111,29 +121,26 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            var client = new DictionaryClient().GetUnknownValueClient("1.0.0");
+            UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                key = BinaryData.FromString("<your binary data content>"),
-            };
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+                key = new object(),
+            });
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public void Example_Put_Convenience()
         {
-            var client = new DictionaryClient().GetUnknownValueClient("1.0.0");
+            UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            Response response = client.Put(new Dictionary<string, BinaryData>()
             {
-                key = BinaryData.FromString("<your binary data content>"),
-            };
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+                ["key"] = BinaryData.FromObjectAsJson(new object()),
+            });
             Console.WriteLine(response.Status);
         }
 
@@ -141,13 +148,67 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Convenience_Async()
         {
-            var client = new DictionaryClient().GetUnknownValueClient("1.0.0");
+            UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            var body = new Dictionary<string, BinaryData>
+            Response response = await client.PutAsync(new Dictionary<string, BinaryData>()
             {
-                ["key"] = BinaryData.FromString("<your binary data content>")
-            };
-            var result = await client.PutAsync(body);
+                ["key"] = BinaryData.FromObjectAsJson(new object()),
+            });
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_AllParameters()
+        {
+            UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
+
+            RequestContent content = RequestContent.Create(new
+            {
+                key = new object(),
+            });
+            Response response = client.Put(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_AllParameters_Async()
+        {
+            UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
+
+            RequestContent content = RequestContent.Create(new
+            {
+                key = new object(),
+            });
+            Response response = await client.PutAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_AllParameters_Convenience()
+        {
+            UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
+
+            Response response = client.Put(new Dictionary<string, BinaryData>()
+            {
+                ["key"] = BinaryData.FromObjectAsJson(new object()),
+            });
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_AllParameters_Convenience_Async()
+        {
+            UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
+
+            Response response = await client.PutAsync(new Dictionary<string, BinaryData>()
+            {
+                ["key"] = BinaryData.FromObjectAsJson(new object()),
+            });
+            Console.WriteLine(response.Status);
         }
     }
 }

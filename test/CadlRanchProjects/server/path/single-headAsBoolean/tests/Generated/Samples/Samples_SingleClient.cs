@@ -6,12 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 using Server.Path.SingleHeadAsBoolean;
@@ -24,19 +20,8 @@ namespace Server.Path.SingleHeadAsBoolean.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MyOp()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new SingleClient(endpoint);
-
-            Response<bool> response = client.MyOp();
-            Console.WriteLine(response.GetRawResponse().Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_MyOp_AllParameters()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new SingleClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            SingleClient client = new SingleClient(endpoint);
 
             Response<bool> response = client.MyOp();
             Console.WriteLine(response.GetRawResponse().Status);
@@ -46,8 +31,8 @@ namespace Server.Path.SingleHeadAsBoolean.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MyOp_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new SingleClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            SingleClient client = new SingleClient(endpoint);
 
             Response<bool> response = await client.MyOpAsync();
             Console.WriteLine(response.GetRawResponse().Status);
@@ -55,10 +40,21 @@ namespace Server.Path.SingleHeadAsBoolean.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_MyOp_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            SingleClient client = new SingleClient(endpoint);
+
+            Response<bool> response = client.MyOp();
+            Console.WriteLine(response.GetRawResponse().Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_MyOp_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new SingleClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            SingleClient client = new SingleClient(endpoint);
 
             Response<bool> response = await client.MyOpAsync();
             Console.WriteLine(response.GetRawResponse().Status);

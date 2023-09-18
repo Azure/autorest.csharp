@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -25,22 +23,9 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetExtensibleModel()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            Response response = client.GetExtensibleModel(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("weight").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleModel_AllParameters()
-        {
-            var client = new EnumDiscriminatorClient();
-
-            Response response = client.GetExtensibleModel(new RequestContext());
+            Response response = client.GetExtensibleModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -51,9 +36,40 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetExtensibleModel_Async()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetExtensibleModelAsync(new RequestContext());
+            Response response = await client.GetExtensibleModelAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("weight").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetExtensibleModel_Convenience()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response<Dog> response = client.GetExtensibleModel();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetExtensibleModel_Convenience_Async()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response<Dog> response = await client.GetExtensibleModelAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetExtensibleModel_AllParameters()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response response = client.GetExtensibleModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -64,9 +80,9 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetExtensibleModel_AllParameters_Async()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetExtensibleModelAsync(new RequestContext());
+            Response response = await client.GetExtensibleModelAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -75,42 +91,34 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleModel_Convenience_Async()
+        public void Example_GetExtensibleModel_AllParameters_Convenience()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            var result = await client.GetExtensibleModelAsync();
+            Response<Dog> response = client.GetExtensibleModel();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetExtensibleModel_AllParameters_Convenience_Async()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response<Dog> response = await client.GetExtensibleModelAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_PutExtensibleModel()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 kind = "golden",
                 weight = 1234,
-            };
-
-            Response response = client.PutExtensibleModel(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_PutExtensibleModel_AllParameters()
-        {
-            var client = new EnumDiscriminatorClient();
-
-            var data = new
-            {
-                kind = "golden",
-                weight = 1234,
-            };
-
-            Response response = client.PutExtensibleModel(RequestContent.Create(data));
+            });
+            Response response = client.PutExtensibleModel(content);
             Console.WriteLine(response.Status);
         }
 
@@ -118,31 +126,25 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutExtensibleModel_Async()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 kind = "golden",
                 weight = 1234,
-            };
-
-            Response response = await client.PutExtensibleModelAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PutExtensibleModelAsync(content);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutExtensibleModel_AllParameters_Async()
+        public void Example_PutExtensibleModel_Convenience()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            var data = new
-            {
-                kind = "golden",
-                weight = 1234,
-            };
-
-            Response response = await client.PutExtensibleModelAsync(RequestContent.Create(data));
+            Dog input = new Golden(1234);
+            Response response = client.PutExtensibleModel(input);
             Console.WriteLine(response.Status);
         }
 
@@ -150,32 +152,72 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutExtensibleModel_Convenience_Async()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            var input = new Golden(1234);
-            var result = await client.PutExtensibleModelAsync(input);
+            Dog input = new Golden(1234);
+            Response response = await client.PutExtensibleModelAsync(input);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutExtensibleModel_AllParameters()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            RequestContent content = RequestContent.Create(new
+            {
+                kind = "golden",
+                weight = 1234,
+            });
+            Response response = client.PutExtensibleModel(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutExtensibleModel_AllParameters_Async()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            RequestContent content = RequestContent.Create(new
+            {
+                kind = "golden",
+                weight = 1234,
+            });
+            Response response = await client.PutExtensibleModelAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutExtensibleModel_AllParameters_Convenience()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Dog input = new Golden(1234);
+            Response response = client.PutExtensibleModel(input);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutExtensibleModel_AllParameters_Convenience_Async()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Dog input = new Golden(1234);
+            Response response = await client.PutExtensibleModelAsync(input);
+            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetExtensibleModelMissingDiscriminator()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            Response response = client.GetExtensibleModelMissingDiscriminator(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("weight").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleModelMissingDiscriminator_AllParameters()
-        {
-            var client = new EnumDiscriminatorClient();
-
-            Response response = client.GetExtensibleModelMissingDiscriminator(new RequestContext());
+            Response response = client.GetExtensibleModelMissingDiscriminator(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -186,9 +228,40 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetExtensibleModelMissingDiscriminator_Async()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetExtensibleModelMissingDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetExtensibleModelMissingDiscriminatorAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("weight").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetExtensibleModelMissingDiscriminator_Convenience()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response<Dog> response = client.GetExtensibleModelMissingDiscriminator();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetExtensibleModelMissingDiscriminator_Convenience_Async()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response<Dog> response = await client.GetExtensibleModelMissingDiscriminatorAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetExtensibleModelMissingDiscriminator_AllParameters()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response response = client.GetExtensibleModelMissingDiscriminator(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -199,9 +272,9 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetExtensibleModelMissingDiscriminator_AllParameters_Async()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetExtensibleModelMissingDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetExtensibleModelMissingDiscriminatorAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -210,33 +283,29 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleModelMissingDiscriminator_Convenience_Async()
+        public void Example_GetExtensibleModelMissingDiscriminator_AllParameters_Convenience()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            var result = await client.GetExtensibleModelMissingDiscriminatorAsync();
+            Response<Dog> response = client.GetExtensibleModelMissingDiscriminator();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetExtensibleModelMissingDiscriminator_AllParameters_Convenience_Async()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response<Dog> response = await client.GetExtensibleModelMissingDiscriminatorAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetExtensibleModelWrongDiscriminator()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            Response response = client.GetExtensibleModelWrongDiscriminator(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("weight").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetExtensibleModelWrongDiscriminator_AllParameters()
-        {
-            var client = new EnumDiscriminatorClient();
-
-            Response response = client.GetExtensibleModelWrongDiscriminator(new RequestContext());
+            Response response = client.GetExtensibleModelWrongDiscriminator(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -247,9 +316,40 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetExtensibleModelWrongDiscriminator_Async()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetExtensibleModelWrongDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetExtensibleModelWrongDiscriminatorAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("weight").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetExtensibleModelWrongDiscriminator_Convenience()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response<Dog> response = client.GetExtensibleModelWrongDiscriminator();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetExtensibleModelWrongDiscriminator_Convenience_Async()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response<Dog> response = await client.GetExtensibleModelWrongDiscriminatorAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetExtensibleModelWrongDiscriminator_AllParameters()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response response = client.GetExtensibleModelWrongDiscriminator(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -260,9 +360,9 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetExtensibleModelWrongDiscriminator_AllParameters_Async()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetExtensibleModelWrongDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetExtensibleModelWrongDiscriminatorAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -271,33 +371,29 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetExtensibleModelWrongDiscriminator_Convenience_Async()
+        public void Example_GetExtensibleModelWrongDiscriminator_AllParameters_Convenience()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            var result = await client.GetExtensibleModelWrongDiscriminatorAsync();
+            Response<Dog> response = client.GetExtensibleModelWrongDiscriminator();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetExtensibleModelWrongDiscriminator_AllParameters_Convenience_Async()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response<Dog> response = await client.GetExtensibleModelWrongDiscriminatorAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetFixedModel()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            Response response = client.GetFixedModel(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetFixedModel_AllParameters()
-        {
-            var client = new EnumDiscriminatorClient();
-
-            Response response = client.GetFixedModel(new RequestContext());
+            Response response = client.GetFixedModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -308,9 +404,40 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFixedModel_Async()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetFixedModelAsync(new RequestContext());
+            Response response = await client.GetFixedModelAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetFixedModel_Convenience()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response<Snake> response = client.GetFixedModel();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetFixedModel_Convenience_Async()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response<Snake> response = await client.GetFixedModelAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetFixedModel_AllParameters()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response response = client.GetFixedModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -321,9 +448,9 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFixedModel_AllParameters_Async()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetFixedModelAsync(new RequestContext());
+            Response response = await client.GetFixedModelAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -332,42 +459,34 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFixedModel_Convenience_Async()
+        public void Example_GetFixedModel_AllParameters_Convenience()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            var result = await client.GetFixedModelAsync();
+            Response<Snake> response = client.GetFixedModel();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetFixedModel_AllParameters_Convenience_Async()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response<Snake> response = await client.GetFixedModelAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_PutFixedModel()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 kind = "cobra",
                 length = 1234,
-            };
-
-            Response response = client.PutFixedModel(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_PutFixedModel_AllParameters()
-        {
-            var client = new EnumDiscriminatorClient();
-
-            var data = new
-            {
-                kind = "cobra",
-                length = 1234,
-            };
-
-            Response response = client.PutFixedModel(RequestContent.Create(data));
+            });
+            Response response = client.PutFixedModel(content);
             Console.WriteLine(response.Status);
         }
 
@@ -375,31 +494,25 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutFixedModel_Async()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 kind = "cobra",
                 length = 1234,
-            };
-
-            Response response = await client.PutFixedModelAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PutFixedModelAsync(content);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutFixedModel_AllParameters_Async()
+        public void Example_PutFixedModel_Convenience()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            var data = new
-            {
-                kind = "cobra",
-                length = 1234,
-            };
-
-            Response response = await client.PutFixedModelAsync(RequestContent.Create(data));
+            Snake input = new Cobra(1234);
+            Response response = client.PutFixedModel(input);
             Console.WriteLine(response.Status);
         }
 
@@ -407,32 +520,72 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutFixedModel_Convenience_Async()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            var input = new Cobra(1234);
-            var result = await client.PutFixedModelAsync(input);
+            Snake input = new Cobra(1234);
+            Response response = await client.PutFixedModelAsync(input);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutFixedModel_AllParameters()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            RequestContent content = RequestContent.Create(new
+            {
+                kind = "cobra",
+                length = 1234,
+            });
+            Response response = client.PutFixedModel(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutFixedModel_AllParameters_Async()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            RequestContent content = RequestContent.Create(new
+            {
+                kind = "cobra",
+                length = 1234,
+            });
+            Response response = await client.PutFixedModelAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutFixedModel_AllParameters_Convenience()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Snake input = new Cobra(1234);
+            Response response = client.PutFixedModel(input);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_PutFixedModel_AllParameters_Convenience_Async()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Snake input = new Cobra(1234);
+            Response response = await client.PutFixedModelAsync(input);
+            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetFixedModelMissingDiscriminator()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            Response response = client.GetFixedModelMissingDiscriminator(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetFixedModelMissingDiscriminator_AllParameters()
-        {
-            var client = new EnumDiscriminatorClient();
-
-            Response response = client.GetFixedModelMissingDiscriminator(new RequestContext());
+            Response response = client.GetFixedModelMissingDiscriminator(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -443,9 +596,40 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFixedModelMissingDiscriminator_Async()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetFixedModelMissingDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetFixedModelMissingDiscriminatorAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetFixedModelMissingDiscriminator_Convenience()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response<Snake> response = client.GetFixedModelMissingDiscriminator();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetFixedModelMissingDiscriminator_Convenience_Async()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response<Snake> response = await client.GetFixedModelMissingDiscriminatorAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetFixedModelMissingDiscriminator_AllParameters()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response response = client.GetFixedModelMissingDiscriminator(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -456,9 +640,9 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFixedModelMissingDiscriminator_AllParameters_Async()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetFixedModelMissingDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetFixedModelMissingDiscriminatorAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -467,33 +651,29 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFixedModelMissingDiscriminator_Convenience_Async()
+        public void Example_GetFixedModelMissingDiscriminator_AllParameters_Convenience()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            var result = await client.GetFixedModelMissingDiscriminatorAsync();
+            Response<Snake> response = client.GetFixedModelMissingDiscriminator();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetFixedModelMissingDiscriminator_AllParameters_Convenience_Async()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response<Snake> response = await client.GetFixedModelMissingDiscriminatorAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetFixedModelWrongDiscriminator()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            Response response = client.GetFixedModelWrongDiscriminator(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetFixedModelWrongDiscriminator_AllParameters()
-        {
-            var client = new EnumDiscriminatorClient();
-
-            Response response = client.GetFixedModelWrongDiscriminator(new RequestContext());
+            Response response = client.GetFixedModelWrongDiscriminator(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -504,9 +684,40 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFixedModelWrongDiscriminator_Async()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetFixedModelWrongDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetFixedModelWrongDiscriminatorAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetFixedModelWrongDiscriminator_Convenience()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response<Snake> response = client.GetFixedModelWrongDiscriminator();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetFixedModelWrongDiscriminator_Convenience_Async()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response<Snake> response = await client.GetFixedModelWrongDiscriminatorAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetFixedModelWrongDiscriminator_AllParameters()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response response = client.GetFixedModelWrongDiscriminator(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -517,9 +728,9 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFixedModelWrongDiscriminator_AllParameters_Async()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetFixedModelWrongDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetFixedModelWrongDiscriminatorAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -528,11 +739,20 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFixedModelWrongDiscriminator_Convenience_Async()
+        public void Example_GetFixedModelWrongDiscriminator_AllParameters_Convenience()
         {
-            var client = new EnumDiscriminatorClient();
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
 
-            var result = await client.GetFixedModelWrongDiscriminatorAsync();
+            Response<Snake> response = client.GetFixedModelWrongDiscriminator();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetFixedModelWrongDiscriminator_AllParameters_Convenience_Async()
+        {
+            EnumDiscriminatorClient client = new EnumDiscriminatorClient();
+
+            Response<Snake> response = await client.GetFixedModelWrongDiscriminatorAsync();
         }
     }
 }

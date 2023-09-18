@@ -2,294 +2,488 @@
 <doc>
   <members>
     <member name="DefaultAsync(DefaultDatetimeProperty,CancellationToken)">
-<example>
-This sample shows how to call DefaultAsync with required parameters.
+      <example>
+This sample shows how to call DefaultAsync.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var body = new DefaultDatetimeProperty(DateTimeOffset.UtcNow);
-var result = await client.DefaultAsync(body);
+DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+Response<DefaultDatetimeProperty> response = await client.DefaultAsync(body);
 ]]></code>
-</example>
+This sample shows how to call DefaultAsync with all parameters.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+Response<DefaultDatetimeProperty> response = await client.DefaultAsync(body);
+]]></code></example>
     </member>
     <member name="Default(DefaultDatetimeProperty,CancellationToken)">
-<example>
-This sample shows how to call Default with required parameters.
+      <example>
+This sample shows how to call Default.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var body = new DefaultDatetimeProperty(DateTimeOffset.UtcNow);
-var result = client.Default(body);
+DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+Response<DefaultDatetimeProperty> response = client.Default(body);
 ]]></code>
-</example>
+This sample shows how to call Default with all parameters.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+Response<DefaultDatetimeProperty> response = client.Default(body);
+]]></code></example>
     </member>
     <member name="DefaultAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call DefaultAsync with required request content and parse the result.
+      <example>
+This sample shows how to call DefaultAsync and parse the result.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new {
-    value = "2022-05-10T14:14:57.0310000Z",
-};
-
-Response response = await client.DefaultAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new
+{
+    value = "2022-05-10T14:57:31.2311892-04:00",
+});
+Response response = await client.DefaultAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
-</example>
+This sample shows how to call DefaultAsync with all request content and parse the result.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    value = "2022-05-10T14:57:31.2311892-04:00",
+});
+Response response = await client.DefaultAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
     </member>
     <member name="Default(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Default with required request content and parse the result.
+      <example>
+This sample shows how to call Default and parse the result.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new {
-    value = "2022-05-10T14:14:57.0310000Z",
-};
-
-Response response = client.Default(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new
+{
+    value = "2022-05-10T14:57:31.2311892-04:00",
+});
+Response response = client.Default(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
-</example>
+This sample shows how to call Default with all request content and parse the result.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    value = "2022-05-10T14:57:31.2311892-04:00",
+});
+Response response = client.Default(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
     </member>
     <member name="Rfc3339Async(Rfc3339DatetimeProperty,CancellationToken)">
-<example>
-This sample shows how to call Rfc3339Async with required parameters.
+      <example>
+This sample shows how to call Rfc3339Async.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var body = new Rfc3339DatetimeProperty(DateTimeOffset.UtcNow);
-var result = await client.Rfc3339Async(body);
+Rfc3339DatetimeProperty body = new Rfc3339DatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+Response<Rfc3339DatetimeProperty> response = await client.Rfc3339Async(body);
 ]]></code>
-</example>
+This sample shows how to call Rfc3339Async with all parameters.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+Rfc3339DatetimeProperty body = new Rfc3339DatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+Response<Rfc3339DatetimeProperty> response = await client.Rfc3339Async(body);
+]]></code></example>
     </member>
     <member name="Rfc3339(Rfc3339DatetimeProperty,CancellationToken)">
-<example>
-This sample shows how to call Rfc3339 with required parameters.
+      <example>
+This sample shows how to call Rfc3339.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var body = new Rfc3339DatetimeProperty(DateTimeOffset.UtcNow);
-var result = client.Rfc3339(body);
+Rfc3339DatetimeProperty body = new Rfc3339DatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+Response<Rfc3339DatetimeProperty> response = client.Rfc3339(body);
 ]]></code>
-</example>
+This sample shows how to call Rfc3339 with all parameters.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+Rfc3339DatetimeProperty body = new Rfc3339DatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
+Response<Rfc3339DatetimeProperty> response = client.Rfc3339(body);
+]]></code></example>
     </member>
     <member name="Rfc3339Async(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Rfc3339Async with required request content and parse the result.
+      <example>
+This sample shows how to call Rfc3339Async and parse the result.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new {
-    value = "2022-05-10T14:14:57.0310000Z",
-};
-
-Response response = await client.Rfc3339Async(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new
+{
+    value = "2022-05-10T18:57:31.2311892Z",
+});
+Response response = await client.Rfc3339Async(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
-</example>
+This sample shows how to call Rfc3339Async with all request content and parse the result.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    value = "2022-05-10T18:57:31.2311892Z",
+});
+Response response = await client.Rfc3339Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
     </member>
     <member name="Rfc3339(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Rfc3339 with required request content and parse the result.
+      <example>
+This sample shows how to call Rfc3339 and parse the result.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new {
-    value = "2022-05-10T14:14:57.0310000Z",
-};
-
-Response response = client.Rfc3339(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new
+{
+    value = "2022-05-10T18:57:31.2311892Z",
+});
+Response response = client.Rfc3339(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
-</example>
+This sample shows how to call Rfc3339 with all request content and parse the result.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    value = "2022-05-10T18:57:31.2311892Z",
+});
+Response response = client.Rfc3339(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
     </member>
     <member name="Rfc7231Async(Rfc7231DatetimeProperty,CancellationToken)">
-<example>
-This sample shows how to call Rfc7231Async with required parameters.
+      <example>
+This sample shows how to call Rfc7231Async.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var body = new Rfc7231DatetimeProperty(DateTimeOffset.UtcNow);
-var result = await client.Rfc7231Async(body);
+Rfc7231DatetimeProperty body = new Rfc7231DatetimeProperty(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
+Response<Rfc7231DatetimeProperty> response = await client.Rfc7231Async(body);
 ]]></code>
-</example>
+This sample shows how to call Rfc7231Async with all parameters.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+Rfc7231DatetimeProperty body = new Rfc7231DatetimeProperty(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
+Response<Rfc7231DatetimeProperty> response = await client.Rfc7231Async(body);
+]]></code></example>
     </member>
     <member name="Rfc7231(Rfc7231DatetimeProperty,CancellationToken)">
-<example>
-This sample shows how to call Rfc7231 with required parameters.
+      <example>
+This sample shows how to call Rfc7231.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var body = new Rfc7231DatetimeProperty(DateTimeOffset.UtcNow);
-var result = client.Rfc7231(body);
+Rfc7231DatetimeProperty body = new Rfc7231DatetimeProperty(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
+Response<Rfc7231DatetimeProperty> response = client.Rfc7231(body);
 ]]></code>
-</example>
+This sample shows how to call Rfc7231 with all parameters.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+Rfc7231DatetimeProperty body = new Rfc7231DatetimeProperty(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
+Response<Rfc7231DatetimeProperty> response = client.Rfc7231(body);
+]]></code></example>
     </member>
     <member name="Rfc7231Async(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Rfc7231Async with required request content and parse the result.
+      <example>
+This sample shows how to call Rfc7231Async and parse the result.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new {
-    value = "Tue, 10 May 2022 14:14:57 GMT",
-};
-
-Response response = await client.Rfc7231Async(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new
+{
+    value = "Tue, 10 May 2022 18:57:31 GMT",
+});
+Response response = await client.Rfc7231Async(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
-</example>
+This sample shows how to call Rfc7231Async with all request content and parse the result.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    value = "Tue, 10 May 2022 18:57:31 GMT",
+});
+Response response = await client.Rfc7231Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
     </member>
     <member name="Rfc7231(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Rfc7231 with required request content and parse the result.
+      <example>
+This sample shows how to call Rfc7231 and parse the result.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new {
-    value = "Tue, 10 May 2022 14:14:57 GMT",
-};
-
-Response response = client.Rfc7231(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new
+{
+    value = "Tue, 10 May 2022 18:57:31 GMT",
+});
+Response response = client.Rfc7231(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
-</example>
+This sample shows how to call Rfc7231 with all request content and parse the result.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    value = "Tue, 10 May 2022 18:57:31 GMT",
+});
+Response response = client.Rfc7231(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
     </member>
     <member name="UnixTimestampAsync(UnixTimestampDatetimeProperty,CancellationToken)">
-<example>
-This sample shows how to call UnixTimestampAsync with required parameters.
+      <example>
+This sample shows how to call UnixTimestampAsync.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var body = new UnixTimestampDatetimeProperty(DateTimeOffset.UtcNow);
-var result = await client.UnixTimestampAsync(body);
+UnixTimestampDatetimeProperty body = new UnixTimestampDatetimeProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051));
+Response<UnixTimestampDatetimeProperty> response = await client.UnixTimestampAsync(body);
 ]]></code>
-</example>
+This sample shows how to call UnixTimestampAsync with all parameters.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+UnixTimestampDatetimeProperty body = new UnixTimestampDatetimeProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051));
+Response<UnixTimestampDatetimeProperty> response = await client.UnixTimestampAsync(body);
+]]></code></example>
     </member>
     <member name="UnixTimestamp(UnixTimestampDatetimeProperty,CancellationToken)">
-<example>
-This sample shows how to call UnixTimestamp with required parameters.
+      <example>
+This sample shows how to call UnixTimestamp.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var body = new UnixTimestampDatetimeProperty(DateTimeOffset.UtcNow);
-var result = client.UnixTimestamp(body);
+UnixTimestampDatetimeProperty body = new UnixTimestampDatetimeProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051));
+Response<UnixTimestampDatetimeProperty> response = client.UnixTimestamp(body);
 ]]></code>
-</example>
+This sample shows how to call UnixTimestamp with all parameters.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+UnixTimestampDatetimeProperty body = new UnixTimestampDatetimeProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051));
+Response<UnixTimestampDatetimeProperty> response = client.UnixTimestamp(body);
+]]></code></example>
     </member>
     <member name="UnixTimestampAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call UnixTimestampAsync with required request content and parse the result.
+      <example>
+This sample shows how to call UnixTimestampAsync and parse the result.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new {
-    value = "1652192097",
-};
-
-Response response = await client.UnixTimestampAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new
+{
+    value = 1652209051,
+});
+Response response = await client.UnixTimestampAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
-</example>
+This sample shows how to call UnixTimestampAsync with all request content and parse the result.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    value = 1652209051,
+});
+Response response = await client.UnixTimestampAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
     </member>
     <member name="UnixTimestamp(RequestContent,RequestContext)">
-<example>
-This sample shows how to call UnixTimestamp with required request content and parse the result.
+      <example>
+This sample shows how to call UnixTimestamp and parse the result.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new {
-    value = "1652192097",
-};
-
-Response response = client.UnixTimestamp(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new
+{
+    value = 1652209051,
+});
+Response response = client.UnixTimestamp(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
-</example>
+This sample shows how to call UnixTimestamp with all request content and parse the result.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    value = 1652209051,
+});
+Response response = client.UnixTimestamp(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
     </member>
     <member name="UnixTimestampArrayAsync(UnixTimestampArrayDatetimeProperty,CancellationToken)">
-<example>
-This sample shows how to call UnixTimestampArrayAsync with required parameters.
+      <example>
+This sample shows how to call UnixTimestampArrayAsync.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var body = new UnixTimestampArrayDatetimeProperty(new DateTimeOffset[]
+UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new List<DateTimeOffset>()
 {
-    DateTimeOffset.UtcNow
+    DateTimeOffset.FromUnixTimeSeconds(1652209051)
 });
-var result = await client.UnixTimestampArrayAsync(body);
+Response<UnixTimestampArrayDatetimeProperty> response = await client.UnixTimestampArrayAsync(body);
 ]]></code>
-</example>
+This sample shows how to call UnixTimestampArrayAsync with all parameters.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new List<DateTimeOffset>()
+{
+    DateTimeOffset.FromUnixTimeSeconds(1652209051)
+});
+Response<UnixTimestampArrayDatetimeProperty> response = await client.UnixTimestampArrayAsync(body);
+]]></code></example>
     </member>
     <member name="UnixTimestampArray(UnixTimestampArrayDatetimeProperty,CancellationToken)">
-<example>
-This sample shows how to call UnixTimestampArray with required parameters.
+      <example>
+This sample shows how to call UnixTimestampArray.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var body = new UnixTimestampArrayDatetimeProperty(new DateTimeOffset[]
+UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new List<DateTimeOffset>()
 {
-    DateTimeOffset.UtcNow
+    DateTimeOffset.FromUnixTimeSeconds(1652209051)
 });
-var result = client.UnixTimestampArray(body);
+Response<UnixTimestampArrayDatetimeProperty> response = client.UnixTimestampArray(body);
 ]]></code>
-</example>
+This sample shows how to call UnixTimestampArray with all parameters.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+UnixTimestampArrayDatetimeProperty body = new UnixTimestampArrayDatetimeProperty(new List<DateTimeOffset>()
+{
+    DateTimeOffset.FromUnixTimeSeconds(1652209051)
+});
+Response<UnixTimestampArrayDatetimeProperty> response = client.UnixTimestampArray(body);
+]]></code></example>
     </member>
     <member name="UnixTimestampArrayAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call UnixTimestampArrayAsync with required request content and parse the result.
+      <example>
+This sample shows how to call UnixTimestampArrayAsync and parse the result.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new {
-    value = new[] {
-        "1652192097"
+RequestContent content = RequestContent.Create(new
+{
+    value = new List<object>()
+    {
+        1652209051
     },
-};
-
-Response response = await client.UnixTimestampArrayAsync(RequestContent.Create(data));
+});
+Response response = await client.UnixTimestampArrayAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
-</example>
+This sample shows how to call UnixTimestampArrayAsync with all request content and parse the result.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    value = new List<object>()
+    {
+        1652209051
+    },
+});
+Response response = await client.UnixTimestampArrayAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
+]]></code></example>
     </member>
     <member name="UnixTimestampArray(RequestContent,RequestContext)">
-<example>
-This sample shows how to call UnixTimestampArray with required request content and parse the result.
+      <example>
+This sample shows how to call UnixTimestampArray and parse the result.
 <code><![CDATA[
-var client = new DatetimeClient().GetPropertyClient("1.0.0");
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new {
-    value = new[] {
-        "1652192097"
+RequestContent content = RequestContent.Create(new
+{
+    value = new List<object>()
+    {
+        1652209051
     },
-};
-
-Response response = client.UnixTimestampArray(RequestContent.Create(data));
+});
+Response response = client.UnixTimestampArray(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
-</example>
+This sample shows how to call UnixTimestampArray with all request content and parse the result.
+<code><![CDATA[
+Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    value = new List<object>()
+    {
+        1652209051
+    },
+});
+Response response = client.UnixTimestampArray(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
+]]></code></example>
     </member>
   </members>
 </doc>

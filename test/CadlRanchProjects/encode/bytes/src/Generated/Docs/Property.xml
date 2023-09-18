@@ -2,238 +2,396 @@
 <doc>
   <members>
     <member name="DefaultAsync(DefaultBytesProperty,CancellationToken)">
-<example>
-This sample shows how to call DefaultAsync with required parameters.
+      <example>
+This sample shows how to call DefaultAsync.
 <code><![CDATA[
-var client = new BytesClient().GetPropertyClient("1.0.0");
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var body = new DefaultBytesProperty(BinaryData.FromString("<your binary data content>"));
-var result = await client.DefaultAsync(body);
+DefaultBytesProperty body = new DefaultBytesProperty(BinaryData.FromObjectAsJson(new object()));
+Response<DefaultBytesProperty> response = await client.DefaultAsync(body);
 ]]></code>
-</example>
+This sample shows how to call DefaultAsync with all parameters.
+<code><![CDATA[
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
+
+DefaultBytesProperty body = new DefaultBytesProperty(BinaryData.FromObjectAsJson(new object()));
+Response<DefaultBytesProperty> response = await client.DefaultAsync(body);
+]]></code></example>
     </member>
     <member name="Default(DefaultBytesProperty,CancellationToken)">
-<example>
-This sample shows how to call Default with required parameters.
+      <example>
+This sample shows how to call Default.
 <code><![CDATA[
-var client = new BytesClient().GetPropertyClient("1.0.0");
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var body = new DefaultBytesProperty(BinaryData.FromString("<your binary data content>"));
-var result = client.Default(body);
+DefaultBytesProperty body = new DefaultBytesProperty(BinaryData.FromObjectAsJson(new object()));
+Response<DefaultBytesProperty> response = client.Default(body);
 ]]></code>
-</example>
+This sample shows how to call Default with all parameters.
+<code><![CDATA[
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
+
+DefaultBytesProperty body = new DefaultBytesProperty(BinaryData.FromObjectAsJson(new object()));
+Response<DefaultBytesProperty> response = client.Default(body);
+]]></code></example>
     </member>
     <member name="DefaultAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call DefaultAsync with required request content and parse the result.
+      <example>
+This sample shows how to call DefaultAsync and parse the result.
 <code><![CDATA[
-var client = new BytesClient().GetPropertyClient("1.0.0");
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new {
-    value = BinaryData.FromString("<your binary data content>"),
-};
-
-Response response = await client.DefaultAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new
+{
+    value = new object(),
+});
+Response response = await client.DefaultAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
-</example>
+This sample shows how to call DefaultAsync with all request content and parse the result.
+<code><![CDATA[
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    value = new object(),
+});
+Response response = await client.DefaultAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
     </member>
     <member name="Default(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Default with required request content and parse the result.
+      <example>
+This sample shows how to call Default and parse the result.
 <code><![CDATA[
-var client = new BytesClient().GetPropertyClient("1.0.0");
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new {
-    value = BinaryData.FromString("<your binary data content>"),
-};
-
-Response response = client.Default(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new
+{
+    value = new object(),
+});
+Response response = client.Default(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
-</example>
+This sample shows how to call Default with all request content and parse the result.
+<code><![CDATA[
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    value = new object(),
+});
+Response response = client.Default(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
     </member>
     <member name="Base64Async(Base64BytesProperty,CancellationToken)">
-<example>
-This sample shows how to call Base64Async with required parameters.
+      <example>
+This sample shows how to call Base64Async.
 <code><![CDATA[
-var client = new BytesClient().GetPropertyClient("1.0.0");
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var body = new Base64BytesProperty(BinaryData.FromString("<your binary data content>"));
-var result = await client.Base64Async(body);
+Base64BytesProperty body = new Base64BytesProperty(BinaryData.FromObjectAsJson(new object()));
+Response<Base64BytesProperty> response = await client.Base64Async(body);
 ]]></code>
-</example>
+This sample shows how to call Base64Async with all parameters.
+<code><![CDATA[
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
+
+Base64BytesProperty body = new Base64BytesProperty(BinaryData.FromObjectAsJson(new object()));
+Response<Base64BytesProperty> response = await client.Base64Async(body);
+]]></code></example>
     </member>
     <member name="Base64(Base64BytesProperty,CancellationToken)">
-<example>
-This sample shows how to call Base64 with required parameters.
+      <example>
+This sample shows how to call Base64.
 <code><![CDATA[
-var client = new BytesClient().GetPropertyClient("1.0.0");
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var body = new Base64BytesProperty(BinaryData.FromString("<your binary data content>"));
-var result = client.Base64(body);
+Base64BytesProperty body = new Base64BytesProperty(BinaryData.FromObjectAsJson(new object()));
+Response<Base64BytesProperty> response = client.Base64(body);
 ]]></code>
-</example>
+This sample shows how to call Base64 with all parameters.
+<code><![CDATA[
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
+
+Base64BytesProperty body = new Base64BytesProperty(BinaryData.FromObjectAsJson(new object()));
+Response<Base64BytesProperty> response = client.Base64(body);
+]]></code></example>
     </member>
     <member name="Base64Async(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Base64Async with required request content and parse the result.
+      <example>
+This sample shows how to call Base64Async and parse the result.
 <code><![CDATA[
-var client = new BytesClient().GetPropertyClient("1.0.0");
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new {
-    value = BinaryData.FromString("<your binary data content>"),
-};
-
-Response response = await client.Base64Async(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new
+{
+    value = new object(),
+});
+Response response = await client.Base64Async(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
-</example>
+This sample shows how to call Base64Async with all request content and parse the result.
+<code><![CDATA[
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    value = new object(),
+});
+Response response = await client.Base64Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
     </member>
     <member name="Base64(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Base64 with required request content and parse the result.
+      <example>
+This sample shows how to call Base64 and parse the result.
 <code><![CDATA[
-var client = new BytesClient().GetPropertyClient("1.0.0");
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new {
-    value = BinaryData.FromString("<your binary data content>"),
-};
-
-Response response = client.Base64(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new
+{
+    value = new object(),
+});
+Response response = client.Base64(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
-</example>
+This sample shows how to call Base64 with all request content and parse the result.
+<code><![CDATA[
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    value = new object(),
+});
+Response response = client.Base64(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
     </member>
     <member name="Base64urlAsync(Base64urlBytesProperty,CancellationToken)">
-<example>
-This sample shows how to call Base64urlAsync with required parameters.
+      <example>
+This sample shows how to call Base64urlAsync.
 <code><![CDATA[
-var client = new BytesClient().GetPropertyClient("1.0.0");
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var body = new Base64urlBytesProperty(BinaryData.FromString("<your binary data content>"));
-var result = await client.Base64urlAsync(body);
+Base64urlBytesProperty body = new Base64urlBytesProperty(BinaryData.FromObjectAsJson(new object()));
+Response<Base64urlBytesProperty> response = await client.Base64urlAsync(body);
 ]]></code>
-</example>
+This sample shows how to call Base64urlAsync with all parameters.
+<code><![CDATA[
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
+
+Base64urlBytesProperty body = new Base64urlBytesProperty(BinaryData.FromObjectAsJson(new object()));
+Response<Base64urlBytesProperty> response = await client.Base64urlAsync(body);
+]]></code></example>
     </member>
     <member name="Base64url(Base64urlBytesProperty,CancellationToken)">
-<example>
-This sample shows how to call Base64url with required parameters.
+      <example>
+This sample shows how to call Base64url.
 <code><![CDATA[
-var client = new BytesClient().GetPropertyClient("1.0.0");
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var body = new Base64urlBytesProperty(BinaryData.FromString("<your binary data content>"));
-var result = client.Base64url(body);
+Base64urlBytesProperty body = new Base64urlBytesProperty(BinaryData.FromObjectAsJson(new object()));
+Response<Base64urlBytesProperty> response = client.Base64url(body);
 ]]></code>
-</example>
+This sample shows how to call Base64url with all parameters.
+<code><![CDATA[
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
+
+Base64urlBytesProperty body = new Base64urlBytesProperty(BinaryData.FromObjectAsJson(new object()));
+Response<Base64urlBytesProperty> response = client.Base64url(body);
+]]></code></example>
     </member>
     <member name="Base64urlAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Base64urlAsync with required request content and parse the result.
+      <example>
+This sample shows how to call Base64urlAsync and parse the result.
 <code><![CDATA[
-var client = new BytesClient().GetPropertyClient("1.0.0");
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new {
-    value = BinaryData.FromString("<your binary data content>"),
-};
-
-Response response = await client.Base64urlAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new
+{
+    value = new object(),
+});
+Response response = await client.Base64urlAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
-</example>
+This sample shows how to call Base64urlAsync with all request content and parse the result.
+<code><![CDATA[
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    value = new object(),
+});
+Response response = await client.Base64urlAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
     </member>
     <member name="Base64url(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Base64url with required request content and parse the result.
+      <example>
+This sample shows how to call Base64url and parse the result.
 <code><![CDATA[
-var client = new BytesClient().GetPropertyClient("1.0.0");
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new {
-    value = BinaryData.FromString("<your binary data content>"),
-};
-
-Response response = client.Base64url(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new
+{
+    value = new object(),
+});
+Response response = client.Base64url(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
 ]]></code>
-</example>
+This sample shows how to call Base64url with all request content and parse the result.
+<code><![CDATA[
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    value = new object(),
+});
+Response response = client.Base64url(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
     </member>
     <member name="Base64urlArrayAsync(Base64urlArrayBytesProperty,CancellationToken)">
-<example>
-This sample shows how to call Base64urlArrayAsync with required parameters.
+      <example>
+This sample shows how to call Base64urlArrayAsync.
 <code><![CDATA[
-var client = new BytesClient().GetPropertyClient("1.0.0");
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var body = new Base64urlArrayBytesProperty(new BinaryData[]
+Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
 {
-    BinaryData.FromString("<your binary data content>")
+    BinaryData.FromObjectAsJson(new object())
 });
-var result = await client.Base64urlArrayAsync(body);
+Response<Base64urlArrayBytesProperty> response = await client.Base64urlArrayAsync(body);
 ]]></code>
-</example>
+This sample shows how to call Base64urlArrayAsync with all parameters.
+<code><![CDATA[
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
+
+Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
+{
+    BinaryData.FromObjectAsJson(new object())
+});
+Response<Base64urlArrayBytesProperty> response = await client.Base64urlArrayAsync(body);
+]]></code></example>
     </member>
     <member name="Base64urlArray(Base64urlArrayBytesProperty,CancellationToken)">
-<example>
-This sample shows how to call Base64urlArray with required parameters.
+      <example>
+This sample shows how to call Base64urlArray.
 <code><![CDATA[
-var client = new BytesClient().GetPropertyClient("1.0.0");
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var body = new Base64urlArrayBytesProperty(new BinaryData[]
+Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
 {
-    BinaryData.FromString("<your binary data content>")
+    BinaryData.FromObjectAsJson(new object())
 });
-var result = client.Base64urlArray(body);
+Response<Base64urlArrayBytesProperty> response = client.Base64urlArray(body);
 ]]></code>
-</example>
+This sample shows how to call Base64urlArray with all parameters.
+<code><![CDATA[
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
+
+Base64urlArrayBytesProperty body = new Base64urlArrayBytesProperty(new List<BinaryData>()
+{
+    BinaryData.FromObjectAsJson(new object())
+});
+Response<Base64urlArrayBytesProperty> response = client.Base64urlArray(body);
+]]></code></example>
     </member>
     <member name="Base64urlArrayAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Base64urlArrayAsync with required request content and parse the result.
+      <example>
+This sample shows how to call Base64urlArrayAsync and parse the result.
 <code><![CDATA[
-var client = new BytesClient().GetPropertyClient("1.0.0");
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new {
-    value = new[] {
-        BinaryData.FromString("<your binary data content>")
+RequestContent content = RequestContent.Create(new
+{
+    value = new List<object>()
+    {
+        new object()
     },
-};
-
-Response response = await client.Base64urlArrayAsync(RequestContent.Create(data));
+});
+Response response = await client.Base64urlArrayAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
-</example>
+This sample shows how to call Base64urlArrayAsync with all request content and parse the result.
+<code><![CDATA[
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    value = new List<object>()
+    {
+        new object()
+    },
+});
+Response response = await client.Base64urlArrayAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
+]]></code></example>
     </member>
     <member name="Base64urlArray(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Base64urlArray with required request content and parse the result.
+      <example>
+This sample shows how to call Base64urlArray and parse the result.
 <code><![CDATA[
-var client = new BytesClient().GetPropertyClient("1.0.0");
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new {
-    value = new[] {
-        BinaryData.FromString("<your binary data content>")
+RequestContent content = RequestContent.Create(new
+{
+    value = new List<object>()
+    {
+        new object()
     },
-};
-
-Response response = client.Base64urlArray(RequestContent.Create(data));
+});
+Response response = client.Base64urlArray(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
 ]]></code>
-</example>
+This sample shows how to call Base64urlArray with all request content and parse the result.
+<code><![CDATA[
+Property client = new BytesClient().GetPropertyClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    value = new List<object>()
+    {
+        new object()
+    },
+});
+Response response = client.Base64urlArray(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value")[0].ToString());
+]]></code></example>
     </member>
   </members>
 </doc>

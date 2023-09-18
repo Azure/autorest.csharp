@@ -6,12 +6,9 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 using custom_baseUrl_paging_LowLevel;
@@ -24,28 +21,13 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPagesPartialUrl()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PagingClient("<host>", credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PagingClient client = new PagingClient("host", credential);
 
-            foreach (var item in client.GetPagesPartialUrl("<accountName>", new RequestContext()))
+            foreach (BinaryData item in client.GetPagesPartialUrl("<accountName>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetPagesPartialUrl_AllParameters()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PagingClient("<host>", credential);
-
-            foreach (var item in client.GetPagesPartialUrl("<accountName>", new RequestContext()))
-            {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+                Console.WriteLine(result[0].ToString());
             }
         }
 
@@ -53,13 +35,28 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPagesPartialUrl_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PagingClient("<host>", credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PagingClient client = new PagingClient("host", credential);
 
-            await foreach (var item in client.GetPagesPartialUrlAsync("<accountName>", new RequestContext()))
+            await foreach (BinaryData item in client.GetPagesPartialUrlAsync("<accountName>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
+                Console.WriteLine(result[0].ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetPagesPartialUrl_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PagingClient client = new PagingClient("host", credential);
+
+            foreach (BinaryData item in client.GetPagesPartialUrl("<accountName>", null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -67,14 +64,14 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPagesPartialUrl_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PagingClient("<host>", credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PagingClient client = new PagingClient("host", credential);
 
-            await foreach (var item in client.GetPagesPartialUrlAsync("<accountName>", new RequestContext()))
+            await foreach (BinaryData item in client.GetPagesPartialUrlAsync("<accountName>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -82,28 +79,13 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPagesPartialUrlOperation()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PagingClient("<host>", credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PagingClient client = new PagingClient("host", credential);
 
-            foreach (var item in client.GetPagesPartialUrlOperation("<accountName>", new RequestContext()))
+            foreach (BinaryData item in client.GetPagesPartialUrlOperation("<accountName>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetPagesPartialUrlOperation_AllParameters()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PagingClient("<host>", credential);
-
-            foreach (var item in client.GetPagesPartialUrlOperation("<accountName>", new RequestContext()))
-            {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+                Console.WriteLine(result[0].ToString());
             }
         }
 
@@ -111,13 +93,28 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPagesPartialUrlOperation_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PagingClient("<host>", credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PagingClient client = new PagingClient("host", credential);
 
-            await foreach (var item in client.GetPagesPartialUrlOperationAsync("<accountName>", new RequestContext()))
+            await foreach (BinaryData item in client.GetPagesPartialUrlOperationAsync("<accountName>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
+                Console.WriteLine(result[0].ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetPagesPartialUrlOperation_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PagingClient client = new PagingClient("host", credential);
+
+            foreach (BinaryData item in client.GetPagesPartialUrlOperation("<accountName>", null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -125,14 +122,14 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPagesPartialUrlOperation_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PagingClient("<host>", credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PagingClient client = new PagingClient("host", credential);
 
-            await foreach (var item in client.GetPagesPartialUrlOperationAsync("<accountName>", new RequestContext()))
+            await foreach (BinaryData item in client.GetPagesPartialUrlOperationAsync("<accountName>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -140,28 +137,13 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPagesPartialUrlOperationNext()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PagingClient("<host>", credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PagingClient client = new PagingClient("host", credential);
 
-            foreach (var item in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>", new RequestContext()))
+            foreach (BinaryData item in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetPagesPartialUrlOperationNext_AllParameters()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PagingClient("<host>", credential);
-
-            foreach (var item in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>", new RequestContext()))
-            {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+                Console.WriteLine(result[0].ToString());
             }
         }
 
@@ -169,13 +151,28 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPagesPartialUrlOperationNext_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PagingClient("<host>", credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PagingClient client = new PagingClient("host", credential);
 
-            await foreach (var item in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>", new RequestContext()))
+            await foreach (BinaryData item in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
+                Console.WriteLine(result[0].ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetPagesPartialUrlOperationNext_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PagingClient client = new PagingClient("host", credential);
+
+            foreach (BinaryData item in client.GetPagesPartialUrlOperationNext("<accountName>", "<nextLink>", null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
@@ -183,14 +180,14 @@ namespace custom_baseUrl_paging_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPagesPartialUrlOperationNext_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new PagingClient("<host>", credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PagingClient client = new PagingClient("host", credential);
 
-            await foreach (var item in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>", new RequestContext()))
+            await foreach (BinaryData item in client.GetPagesPartialUrlOperationNextAsync("<accountName>", "<nextLink>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
     }

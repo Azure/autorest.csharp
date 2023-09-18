@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -24,21 +23,9 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt32Value()
         {
-            var client = new ArrayClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            Response response = client.GetInt32Value(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetInt32Value_AllParameters()
-        {
-            var client = new ArrayClient().GetInt32ValueClient("1.0.0");
-
-            Response response = client.GetInt32Value(new RequestContext());
+            Response response = client.GetInt32Value(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -48,9 +35,39 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt32Value_Async()
         {
-            var client = new ArrayClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetInt32ValueAsync(new RequestContext());
+            Response response = await client.GetInt32ValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetInt32Value_Convenience()
+        {
+            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyList<int>> response = client.GetInt32Value();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetInt32Value_Convenience_Async()
+        {
+            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyList<int>> response = await client.GetInt32ValueAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetInt32Value_AllParameters()
+        {
+            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+            Response response = client.GetInt32Value(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -60,9 +77,9 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt32Value_AllParameters_Async()
         {
-            var client = new ArrayClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetInt32ValueAsync(new RequestContext());
+            Response response = await client.GetInt32ValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -70,38 +87,33 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetInt32Value_Convenience_Async()
+        public void Example_GetInt32Value_AllParameters_Convenience()
         {
-            var client = new ArrayClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            var result = await client.GetInt32ValueAsync();
+            Response<IReadOnlyList<int>> response = client.GetInt32Value();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetInt32Value_AllParameters_Convenience_Async()
+        {
+            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyList<int>> response = await client.GetInt32ValueAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            var client = new ArrayClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            var data = new[] {
-    1234
-};
-
-            Response response = client.Put(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
-        {
-            var client = new ArrayClient().GetInt32ValueClient("1.0.0");
-
-            var data = new[] {
-    1234
-};
-
-            Response response = client.Put(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new List<object>()
+{
+1234
+});
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -109,27 +121,26 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            var client = new ArrayClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            var data = new[] {
-    1234
-};
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new List<object>()
+{
+1234
+});
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public void Example_Put_Convenience()
         {
-            var client = new ArrayClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            var data = new[] {
-    1234
-};
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = client.Put(new List<int>()
+{
+1234
+});
             Console.WriteLine(response.Status);
         }
 
@@ -137,13 +148,67 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Convenience_Async()
         {
-            var client = new ArrayClient().GetInt32ValueClient("1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
 
-            var body = new int[]
-            {
-    1234
-            };
-            var result = await client.PutAsync(body);
+            Response response = await client.PutAsync(new List<int>()
+{
+1234
+});
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_AllParameters()
+        {
+            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+            RequestContent content = RequestContent.Create(new List<object>()
+{
+1234
+});
+            Response response = client.Put(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_AllParameters_Async()
+        {
+            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+            RequestContent content = RequestContent.Create(new List<object>()
+{
+1234
+});
+            Response response = await client.PutAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_AllParameters_Convenience()
+        {
+            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+            Response response = client.Put(new List<int>()
+{
+1234
+});
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_AllParameters_Convenience_Async()
+        {
+            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+
+            Response response = await client.PutAsync(new List<int>()
+{
+1234
+});
+            Console.WriteLine(response.Status);
         }
     }
 }

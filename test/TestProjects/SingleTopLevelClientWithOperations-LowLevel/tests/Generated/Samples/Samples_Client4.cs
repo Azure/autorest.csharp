@@ -6,12 +6,9 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 using SingleTopLevelClientWithOperations_LowLevel;
@@ -24,23 +21,10 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Patch()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new TopLevelClientWithOperationClient(credential).GetClient4("<clientParameter>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<ClientParameter>");
 
-            Response response = client.Patch("<filter>", new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Patch_AllParameters()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new TopLevelClientWithOperationClient(credential).GetClient4("<clientParameter>");
-
-            Response response = client.Patch("<filter>", new RequestContext());
+            Response response = client.Patch("<filter>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -50,10 +34,23 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Patch_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new TopLevelClientWithOperationClient(credential).GetClient4("<clientParameter>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<ClientParameter>");
 
-            Response response = await client.PatchAsync("<filter>", new RequestContext());
+            Response response = await client.PatchAsync("<filter>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Patch_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<ClientParameter>");
+
+            Response response = client.Patch("<filter>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -63,10 +60,10 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Patch_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new TopLevelClientWithOperationClient(credential).GetClient4("<clientParameter>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Client4 client = new TopLevelClientWithOperationClient(credential).GetClient4("<ClientParameter>");
 
-            Response response = await client.PatchAsync("<filter>", new RequestContext());
+            Response response = await client.PatchAsync("<filter>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

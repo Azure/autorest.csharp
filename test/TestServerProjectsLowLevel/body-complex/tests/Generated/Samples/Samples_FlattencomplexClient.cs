@@ -6,12 +6,9 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 using body_complex_LowLevel;
@@ -24,10 +21,23 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetValid()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new FlattencomplexClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            FlattencomplexClient client = new FlattencomplexClient(credential);
 
-            Response response = client.GetValid(new RequestContext());
+            Response response = client.GetValid(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetValid_Async()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            FlattencomplexClient client = new FlattencomplexClient(credential);
+
+            Response response = await client.GetValidAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -37,10 +47,10 @@ namespace body_complex_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetValid_AllParameters()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new FlattencomplexClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            FlattencomplexClient client = new FlattencomplexClient(credential);
 
-            Response response = client.GetValid(new RequestContext());
+            Response response = client.GetValid(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -50,25 +60,12 @@ namespace body_complex_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new FlattencomplexClient(credential);
-
-            Response response = await client.GetValidAsync(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetValid_AllParameters_Async()
         {
-            var credential = new AzureKeyCredential("<key>");
-            var client = new FlattencomplexClient(credential);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            FlattencomplexClient client = new FlattencomplexClient(credential);
 
-            Response response = await client.GetValidAsync(new RequestContext());
+            Response response = await client.GetValidAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());

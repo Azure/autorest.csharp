@@ -7,9 +7,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -24,86 +24,97 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDurationValue()
         {
-            var client = new DictionaryClient().GetDurationValueClient("1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            Response response = client.GetDurationValue(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetDurationValue_AllParameters()
-        {
-            var client = new DictionaryClient().GetDurationValueClient("1.0.0");
-
-            Response response = client.GetDurationValue(new RequestContext());
+            Response response = client.GetDurationValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDurationValue_Async()
         {
-            var client = new DictionaryClient().GetDurationValueClient("1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetDurationValueAsync(new RequestContext());
+            Response response = await client.GetDurationValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("<key>").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDurationValue_AllParameters_Async()
+        public void Example_GetDurationValue_Convenience()
         {
-            var client = new DictionaryClient().GetDurationValueClient("1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetDurationValueAsync(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<test>").ToString());
+            Response<IReadOnlyDictionary<string, TimeSpan>> response = client.GetDurationValue();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDurationValue_Convenience_Async()
         {
-            var client = new DictionaryClient().GetDurationValueClient("1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            var result = await client.GetDurationValueAsync();
+            Response<IReadOnlyDictionary<string, TimeSpan>> response = await client.GetDurationValueAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetDurationValue_AllParameters()
+        {
+            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+
+            Response response = client.GetDurationValue(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetDurationValue_AllParameters_Async()
+        {
+            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+
+            Response response = await client.GetDurationValueAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("<key>").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetDurationValue_AllParameters_Convenience()
+        {
+            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyDictionary<string, TimeSpan>> response = client.GetDurationValue();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetDurationValue_AllParameters_Convenience_Async()
+        {
+            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+
+            Response<IReadOnlyDictionary<string, TimeSpan>> response = await client.GetDurationValueAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            var client = new DictionaryClient().GetDurationValueClient("1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 key = "PT1H23M45S",
-            };
-
-            Response response = client.Put(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
-        {
-            var client = new DictionaryClient().GetDurationValueClient("1.0.0");
-
-            var data = new
-            {
-                key = "PT1H23M45S",
-            };
-
-            Response response = client.Put(RequestContent.Create(data));
+            });
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -111,29 +122,26 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            var client = new DictionaryClient().GetDurationValueClient("1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 key = "PT1H23M45S",
-            };
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public void Example_Put_Convenience()
         {
-            var client = new DictionaryClient().GetDurationValueClient("1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            var data = new
+            Response response = client.Put(new Dictionary<string, TimeSpan>()
             {
-                key = "PT1H23M45S",
-            };
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+                ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S"),
+            });
             Console.WriteLine(response.Status);
         }
 
@@ -141,13 +149,67 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Convenience_Async()
         {
-            var client = new DictionaryClient().GetDurationValueClient("1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            var body = new Dictionary<string, TimeSpan>
+            Response response = await client.PutAsync(new Dictionary<string, TimeSpan>()
             {
-                ["key"] = new TimeSpan(1, 23, 45)
-            };
-            var result = await client.PutAsync(body);
+                ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S"),
+            });
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_AllParameters()
+        {
+            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+
+            RequestContent content = RequestContent.Create(new
+            {
+                key = "PT1H23M45S",
+            });
+            Response response = client.Put(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_AllParameters_Async()
+        {
+            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+
+            RequestContent content = RequestContent.Create(new
+            {
+                key = "PT1H23M45S",
+            });
+            Response response = await client.PutAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_AllParameters_Convenience()
+        {
+            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+
+            Response response = client.Put(new Dictionary<string, TimeSpan>()
+            {
+                ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S"),
+            });
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_AllParameters_Convenience_Async()
+        {
+            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+
+            Response response = await client.PutAsync(new Dictionary<string, TimeSpan>()
+            {
+                ["key"] = XmlConvert.ToTimeSpan("PT1H23M45S"),
+            });
+            Console.WriteLine(response.Status);
         }
     }
 }

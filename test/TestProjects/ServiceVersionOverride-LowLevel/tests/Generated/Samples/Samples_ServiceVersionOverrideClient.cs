@@ -6,17 +6,13 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using ServiceVersionOverride;
+using ServiceVersionOverride_LowLevel;
 
-namespace ServiceVersionOverride.Samples
+namespace ServiceVersionOverride_LowLevel.Samples
 {
     public class Samples_ServiceVersionOverrideClient
     {
@@ -24,19 +20,9 @@ namespace ServiceVersionOverride.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Operation()
         {
-            var client = new ServiceVersionOverrideClient();
+            ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
 
-            Response response = client.Operation("<notApiVersionEnum>");
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_AllParameters()
-        {
-            var client = new ServiceVersionOverrideClient();
-
-            Response response = client.Operation("<notApiVersionEnum>");
+            Response response = client.Operation("2.0");
             Console.WriteLine(response.Status);
         }
 
@@ -44,9 +30,19 @@ namespace ServiceVersionOverride.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_Async()
         {
-            var client = new ServiceVersionOverrideClient();
+            ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
 
-            Response response = await client.OperationAsync("<notApiVersionEnum>");
+            Response response = await client.OperationAsync("2.0");
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Operation_AllParameters()
+        {
+            ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
+
+            Response response = client.Operation("2.0");
             Console.WriteLine(response.Status);
         }
 
@@ -54,9 +50,9 @@ namespace ServiceVersionOverride.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_AllParameters_Async()
         {
-            var client = new ServiceVersionOverrideClient();
+            ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
 
-            Response response = await client.OperationAsync("<notApiVersionEnum>");
+            Response response = await client.OperationAsync("2.0");
             Console.WriteLine(response.Status);
         }
     }

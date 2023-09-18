@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -25,21 +23,9 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetFloat()
         {
-            var client = new ValueTypesClient().GetFloatClient("1.0.0");
+            Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-            Response response = client.GetFloat(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetFloat_AllParameters()
-        {
-            var client = new ValueTypesClient().GetFloatClient("1.0.0");
-
-            Response response = client.GetFloat(new RequestContext());
+            Response response = client.GetFloat(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property").ToString());
@@ -49,9 +35,39 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFloat_Async()
         {
-            var client = new ValueTypesClient().GetFloatClient("1.0.0");
+            Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetFloatAsync(new RequestContext());
+            Response response = await client.GetFloatAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("property").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetFloat_Convenience()
+        {
+            Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
+
+            Response<FloatProperty> response = client.GetFloat();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetFloat_Convenience_Async()
+        {
+            Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
+
+            Response<FloatProperty> response = await client.GetFloatAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetFloat_AllParameters()
+        {
+            Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
+
+            Response response = client.GetFloat(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property").ToString());
@@ -61,9 +77,9 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetFloat_AllParameters_Async()
         {
-            var client = new ValueTypesClient().GetFloatClient("1.0.0");
+            Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetFloatAsync(new RequestContext());
+            Response response = await client.GetFloatAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property").ToString());
@@ -71,40 +87,33 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFloat_Convenience_Async()
+        public void Example_GetFloat_AllParameters_Convenience()
         {
-            var client = new ValueTypesClient().GetFloatClient("1.0.0");
+            Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-            var result = await client.GetFloatAsync();
+            Response<FloatProperty> response = client.GetFloat();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetFloat_AllParameters_Convenience_Async()
+        {
+            Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
+
+            Response<FloatProperty> response = await client.GetFloatAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            var client = new ValueTypesClient().GetFloatClient("1.0.0");
+            Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                property = 3.14f,
-            };
-
-            Response response = client.Put(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
-        {
-            var client = new ValueTypesClient().GetFloatClient("1.0.0");
-
-            var data = new
-            {
-                property = 3.14f,
-            };
-
-            Response response = client.Put(RequestContent.Create(data));
+                property = 123.45F,
+            });
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -112,29 +121,24 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            var client = new ValueTypesClient().GetFloatClient("1.0.0");
+            Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
-                property = 3.14f,
-            };
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+                property = 123.45F,
+            });
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public void Example_Put_Convenience()
         {
-            var client = new ValueTypesClient().GetFloatClient("1.0.0");
+            Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-            var data = new
-            {
-                property = 3.14f,
-            };
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            FloatProperty body = new FloatProperty(123.45F);
+            Response response = client.Put(body);
             Console.WriteLine(response.Status);
         }
 
@@ -142,10 +146,61 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Convenience_Async()
         {
-            var client = new ValueTypesClient().GetFloatClient("1.0.0");
+            Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
 
-            var body = new FloatProperty(3.14f);
-            var result = await client.PutAsync(body);
+            FloatProperty body = new FloatProperty(123.45F);
+            Response response = await client.PutAsync(body);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_AllParameters()
+        {
+            Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
+
+            RequestContent content = RequestContent.Create(new
+            {
+                property = 123.45F,
+            });
+            Response response = client.Put(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_AllParameters_Async()
+        {
+            Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
+
+            RequestContent content = RequestContent.Create(new
+            {
+                property = 123.45F,
+            });
+            Response response = await client.PutAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_AllParameters_Convenience()
+        {
+            Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
+
+            FloatProperty body = new FloatProperty(123.45F);
+            Response response = client.Put(body);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Put_AllParameters_Convenience_Async()
+        {
+            Float client = new ValueTypesClient().GetFloatClient(apiVersion: "1.0.0");
+
+            FloatProperty body = new FloatProperty(123.45F);
+            Response response = await client.PutAsync(body);
+            Console.WriteLine(response.Status);
         }
     }
 }

@@ -12,6 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\ServiceVersionOverride.csproj" />
+    <ProjectReference Include="..\src\ServiceVersionOverride_LowLevel.csproj" />
   </ItemGroup>
 </Project>
