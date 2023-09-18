@@ -10,7 +10,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -18,7 +17,6 @@ using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
-using Azure.ResourceManager;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Generation.Types
@@ -26,7 +24,6 @@ namespace AutoRest.CSharp.Generation.Types
     internal class TypeFactory
     {
         private readonly OutputLibrary _library;
-        private static readonly HashSet<string> _wrappingTypes = new HashSet<string> { "ArmOperation", "Task", "AsyncPageable", "Pageable", "Response" };
 
         public TypeFactory(OutputLibrary library)
         {
@@ -369,50 +366,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         public bool TryCreateType(ITypeSymbol symbol, Func<System.Type, bool> validator, [NotNullWhen(true)] out CSharpType? type)
         {
-            //type = CreateTypeCore(symbol, validator);
-            var stack = new Stack<(string WrappedType, IList<CSharpType> Arguments)>();
-            type = UnWrapType(symbol, validator, stack);
-            while (stack.TryPop(out var item))
-            {
-                var (wrappedType, arguments) = item;
-                arguments.Insert(0, type!);
-                type = new CSharpType(wrappedType.GetType(), arguments.ToArray());
-                switch (wrappedType)
-                {
-                    case "ArmOperation":
-                        type = new CSharpType(typeof(ArmOperation<>), arguments.ToArray());
-                        break;
-                    case "Task":
-                        type = new CSharpType(typeof(Task<>), type!);
-                        break;
-                    case "AsyncPageable":
-                        type = new CSharpType(typeof(AsyncPageable<>), type!);
-                        break;
-                    case "Pageable":
-                        type = new CSharpType(typeof(Pageable<>), type!);
-                        break;
-                    case "Response":
-                        type = new CSharpType(typeof(Response<>), type!);
-                        break;
-                }
-            }
-            if (type == null)
-            {
-                return false;
-            }
-
-            if (!type.IsValueType &&
-                symbol.NullableAnnotation != NullableAnnotation.NotAnnotated)
-            {
-                type = type.WithNullable(true);
-            }
-
-            return true;
-        }
-
-        private CSharpType? CreateTypeCore(ITypeSymbol symbol, Func<System.Type, bool> validator)
-        {
-            CSharpType? type = null;
+            type = null;
             INamedTypeSymbol? namedTypeSymbol = symbol as INamedTypeSymbol;
             if (namedTypeSymbol == null)
             {
@@ -422,7 +376,7 @@ namespace AutoRest.CSharp.Generation.Types
             if (namedTypeSymbol.ConstructedFrom.SpecialType == SpecialType.System_Nullable_T)
             {
                 type = CreateType(namedTypeSymbol.TypeArguments[0]).WithNullable(true);
-                return type;
+                return true;
             }
 
             var fullMetadataName = GetFullMetadataName(namedTypeSymbol);
@@ -438,7 +392,19 @@ namespace AutoRest.CSharp.Generation.Types
             {
                 type = _library.FindTypeByName(namedTypeSymbol.Name);
             }
-            return type;
+
+            if (type == null)
+            {
+                return false;
+            }
+
+            if (!type.IsValueType &&
+                symbol.NullableAnnotation != NullableAnnotation.NotAnnotated)
+            {
+                type = type.WithNullable(true);
+            }
+
+            return true;
         }
 
         private string GetFullMetadataName(ISymbol namedTypeSymbol)
@@ -479,37 +445,6 @@ namespace AutoRest.CSharp.Generation.Types
             }
 
             return to.FrameworkType == typeof(IReadOnlyList<>) || to.FrameworkType == typeof(IList<>);
-        }
-
-        private CSharpType? UnWrapType(ITypeSymbol symbol, Func<Type, bool> validator, Stack<(string Wraper, IList<CSharpType> Arguments)> wrapers)
-        {
-            var namedTypeSymbol = symbol as INamedTypeSymbol;
-            if (namedTypeSymbol == null)
-            {
-                throw new InvalidCastException($"Unexpected type {symbol}");
-            }
-
-            if (namedTypeSymbol.TypeArguments.Count() > 0)
-            {
-                var args = new List<CSharpType>();
-                for (var i = 1; i < namedTypeSymbol.TypeArguments.Count(); i++)
-                {
-                    var arg = CreateTypeCore(namedTypeSymbol.TypeArguments[i], validator);
-                    if (arg is not null)
-                    {
-                        args.Add(arg);
-                    }
-                    // should we throw if we can't create the type? Because this will silently miss an argument.
-                }
-                var wrapper = namedTypeSymbol.Name;
-                if (_wrappingTypes.Contains(wrapper))
-                {
-                    wrapers.Push((wrapper, args));
-                    return UnWrapType(namedTypeSymbol.TypeArguments[0], validator, wrapers);
-                }
-            }
-
-            return CreateTypeCore(namedTypeSymbol, validator);
         }
     }
 }
