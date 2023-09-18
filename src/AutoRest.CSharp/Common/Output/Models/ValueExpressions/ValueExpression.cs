@@ -43,6 +43,9 @@ namespace AutoRest.CSharp.Common.Output.Models.ValueExpressions
         public ValueExpression Invoke(MethodSignature method, bool async)
             => new InvokeInstanceMethodExpression(this, method.Name, method.Parameters.Select(p => (ValueExpression)p).ToList(), null, async);
 
+        public ValueExpression Invoke(string methodName, bool async)
+            => new InvokeInstanceMethodExpression(this, methodName, Array.Empty<ValueExpression>(), null, async);
+
         public ValueExpression Invoke(string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
             => new InvokeInstanceMethodExpression(this, methodName, arguments, null, async);
 

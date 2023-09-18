@@ -13,6 +13,12 @@ namespace AutoRest.CSharp.Common.Output.Models
 {
     internal static partial class Snippets
     {
+        public static DeclarationStatement UsingDeclare(string name, StreamExpression value, out StreamExpression variable)
+            => UsingDeclare(name, value, d => new StreamExpression(d), out variable);
+
+        public static DeclarationStatement UsingDeclare(string name, HttpMessageExpression value, out HttpMessageExpression variable)
+            => UsingDeclare(name, value, d => new HttpMessageExpression(d), out variable);
+
         public static DeclarationStatement Declare(CSharpType responseType, string name, ResponseExpression value, out ResponseExpression variable)
         {
             var declare = new DeclareVariableStatement(responseType, name, value, out var untypedVariable);
@@ -26,9 +32,6 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Declare(string name, BinaryDataExpression value, out BinaryDataExpression variable)
             => Declare(name, value, d => new BinaryDataExpression(d), out variable);
 
-        public static DeclarationStatement Declare(string name, HttpMessageExpression value, out HttpMessageExpression variable)
-            => UsingDeclare(name, value, d => new HttpMessageExpression(d), out variable);
-
         public static DeclarationStatement Declare(string name, JsonElementExpression value, out JsonElementExpression variable)
             => Declare(name, value, d => new JsonElementExpression(d), out variable);
 
@@ -37,6 +40,12 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         public static DeclarationStatement Declare(string name, StreamReaderExpression value, out StreamReaderExpression variable)
             => Declare(name, value, d => new StreamReaderExpression(d), out variable);
+
+        public static DeclarationStatement Declare(string name, TypedValueExpression value, out ValueExpression variable)
+            => new DeclareVariableStatement(value.Type, name, value, out variable);
+
+        public static DeclarationStatement Declare(VariableReference variable, ValueExpression value)
+            => new DeclareVariableStatement(variable.Type, variable.Declaration, value);
 
         public static DeclarationStatement UsingVar(string name, HttpMessageExpression value, out HttpMessageExpression variable)
             => UsingVar(name, value, d => new HttpMessageExpression(d), out variable);

@@ -39,59 +39,61 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
         public void Write()
         {
-            // [TODO] These UseNamespace calls are needed to reduce the change footprint. Can be removed during cleanup phase
-            _writer.UseNamespace("Azure");
-            _writer.UseNamespace("Azure.Core");
-            _writer.UseNamespace("Azure.Identity");
-            _writer.UseNamespace("System");
-            _writer.UseNamespace("System.Collections.Generic");
-            _writer.UseNamespace("System.IO");
-            _writer.UseNamespace("System.Text.Json");
-
             using (_writer.Namespace($"{_client.Declaration.Namespace}.Samples"))
             {
                 using (_writer.Scope($"public class Samples_{_client.Declaration.Name}"))
                 {
+                    if (!_client.IsSubClient && _client.GetEffectiveCtor() is null)
+                    {
+                        return;
+                    }
+
                     foreach (var method in _client.OperationMethods.OrderBy(o => o.Order))
                     {
-                        //TODO: we should make this more obvious to determine if something is convenience only
-                        if (method.Protocol is {} protocol)
+                        if (ShouldGenerateShortVersion(method))
                         {
-                            var signature = (MethodSignature)protocol.Signature;
-
-                            if (signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
-                                !signature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))) &&
-                                (_client.IsSubClient || _client.GetEffectiveCtor() is not null) &&
-                                !_client.IsMethodSuppressed(signature))
-                            {
-
-                                if (ShouldGenerateShortVersion(method))
-                                {
-                                    WriteProtocolTestCompilation(method, signature.WithAsync(false), false, false);
-                                }
-                                WriteProtocolTestCompilation(method, signature.WithAsync(false), false, true);
-
-                                if (ShouldGenerateShortVersion(method))
-                                {
-                                    WriteProtocolTestCompilation(method, signature.WithAsync(true), true, false);
-                                }
-                                WriteProtocolTestCompilation(method, signature.WithAsync(true), true, true);
-                            }
+                            WriteProtocolTestCompilation(method, false);
+                            WriteConvenienceTestCompilation(method, false);
                         }
 
-                        if (method.ConvenienceAsync is {} convenience)
-                        {
-                            if (convenience.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
-                                (_client.IsSubClient || _client.GetEffectiveCtor() is not null) &&
-                                !_client.IsMethodSuppressed(convenience.Signature))
-                            {
-                                WriteConvenienceTestCompilation((MethodSignature)convenience.Signature, true, false);
-                            }
-                        }
+                        WriteProtocolTestCompilation(method, true);
+                        WriteConvenienceTestCompilation(method, true);
                     }
                 }
             }
         }
+
+        private void WriteProtocolTestCompilation(RestClientOperationMethods method, bool useAllParameters)
+        {
+            if (method.Protocol is {Signature: MethodSignature signature} protocol && ShouldGenerateProtocol(protocol))
+            {
+                WriteProtocolTestCompilation(method, signature, false, useAllParameters);
+            }
+
+            if (method.ProtocolAsync is {Signature: MethodSignature signatureAsync} protocolAsync && ShouldGenerateProtocol(protocolAsync))
+            {
+                WriteProtocolTestCompilation(method, signatureAsync, true, useAllParameters);
+            }
+        }
+
+        private void WriteConvenienceTestCompilation(RestClientOperationMethods method, bool useAllParameters)
+        {
+            if (method.Convenience is { Signature: MethodSignature signature } convenience && ShouldGenerateSample(convenience))
+            {
+                WriteConvenienceTestCompilation(signature, false, useAllParameters);
+            }
+
+            if (method.ConvenienceAsync is { Signature: MethodSignature signatureAsync } convenienceAsync && ShouldGenerateSample(convenienceAsync))
+            {
+                WriteConvenienceTestCompilation(signatureAsync, true, useAllParameters);
+            }
+        }
+
+        private bool ShouldGenerateProtocol(Method protocolMethod)
+            => ShouldGenerateSample(protocolMethod) && !protocolMethod.Signature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute)));
+
+        private bool ShouldGenerateSample(Method method)
+            => method.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) && !_client.IsMethodSuppressed(method.Signature);
 
         private void WriteConvenienceTestCompilation(MethodSignature signature, bool isAsync, bool useAllParameters)
         {

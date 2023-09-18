@@ -70,10 +70,10 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static KeywordStatement Return(ValueExpression expression) => new("return", expression);
         public static KeywordStatement Throw(ValueExpression expression) => new("throw", expression);
 
-        public static InvokeStaticMethodExpression InvokeFileOpenRead(ValueExpression expression)
-            => new(typeof(System.IO.File), nameof(System.IO.File.OpenRead), new[]{expression});
-        public static InvokeStaticMethodExpression InvokeFileOpenWrite(ValueExpression expression)
-            => new(typeof(System.IO.File), nameof(System.IO.File.OpenWrite), new[]{expression});
+        public static StreamExpression InvokeFileOpenRead(string filePath)
+            => new(new InvokeStaticMethodExpression(typeof(System.IO.File), nameof(System.IO.File.OpenRead), new[]{Literal(filePath)}));
+        public static StreamExpression InvokeFileOpenWrite(string filePath)
+            => new(new InvokeStaticMethodExpression(typeof(System.IO.File), nameof(System.IO.File.OpenWrite), new[]{Literal(filePath)}));
 
         // Expected signature: MethodName(Utf8JsonWriter writer);
         public static MethodBodyStatement InvokeCustomSerializationMethod(string methodName, Utf8JsonWriterExpression utf8JsonWriter)

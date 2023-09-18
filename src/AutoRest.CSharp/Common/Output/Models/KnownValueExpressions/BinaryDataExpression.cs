@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
             return new BinaryDataExpression(new InvokeStaticMethodExpression(typeof(BinaryData), methodName, new[]{response.ContentStream}));
         }
 
-        public ValueExpression ToStream() => Invoke(nameof(BinaryData.ToStream));
+        public StreamExpression ToStream() => new(Invoke(nameof(BinaryData.ToStream)));
 
         public ValueExpression ToArray() => Invoke(nameof(BinaryData.ToArray));
 

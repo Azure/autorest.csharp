@@ -13,10 +13,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Statements
             : this(type, new CodeWriterDeclaration(name), value)
         { }
 
-        public DeclareVariableStatement(string name, ValueExpression value)
-            : this(null, new CodeWriterDeclaration(name), value)
-        { }
-
         public DeclareVariableStatement(CSharpType type, string name, ValueExpression value, out ValueExpression variable)
             : this(type, new CodeWriterDeclaration(name), value)
         {

@@ -15,8 +15,10 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
         public ValueExpression Status => Property(nameof(Response.Status));
         public ValueExpression Value => Property(nameof(Response<object>.Value));
 
-        public StringExpression ContentStream => new(Property(nameof(Response.ContentStream)));
+        public StreamExpression ContentStream => new(Property(nameof(Response.ContentStream)));
         public BinaryDataExpression Content => new(Property(nameof(Response.Content)));
+
+        public ResponseExpression GetRawResponse() => new(Invoke(nameof(GetRawResponse)));
 
         public static ResponseExpression FromValue(ValueExpression value, ResponseExpression rawResponse)
             => new(new InvokeStaticMethodExpression(typeof(Response), nameof(Response.FromValue), new[]{ value, rawResponse }));

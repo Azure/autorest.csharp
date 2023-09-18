@@ -3,12 +3,16 @@
 
 using System;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record GuidExpression(ValueExpression Untyped) : TypedValueExpression(typeof(Guid), Untyped)
+    internal sealed record GuidExpression(ValueExpression Untyped) : TypedValueExpression<Guid>(Untyped)
     {
         public static GuidExpression NewGuid()
-            => new(new InvokeStaticMethodExpression(typeof(Guid), nameof(Guid.NewGuid)));
+            => new(InvokeStatic(nameof(Guid.NewGuid)));
+
+        public static GuidExpression Parse(string input)
+            => new(InvokeStatic(nameof(Guid.Parse), Literal(input)));
     }
 }

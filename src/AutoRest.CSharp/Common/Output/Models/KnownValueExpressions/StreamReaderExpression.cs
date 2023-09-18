@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
         public ValueExpression ReadToEnd(bool async)
         {
             var methodName = async ? nameof(StreamReader.ReadToEndAsync) : nameof(StreamReader.ReadToEnd);
-            return Untyped.Invoke(methodName, Array.Empty<ValueExpression>(), async);
+            return Invoke(methodName, Array.Empty<ValueExpression>(), async);
         }
     }
 }

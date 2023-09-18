@@ -443,10 +443,10 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (operationValueType.Equals(typeof(Stream)))
             {
-                return new MethodBodyStatement[]
+                return new[]
                 {
-                    new UsingDeclareVariableStatement(typeof(Stream), "outFileStream", InvokeFileOpenWrite(Literal("<filePath>")), out var outFileStream),
-                    new InvokeInstanceMethodStatement(responseData.ToStream(), nameof(Stream.CopyTo), outFileStream)
+                    UsingDeclare("outFileStream", InvokeFileOpenWrite("<filePath>"), out var outFileStream),
+                    responseData.ToStream().CopyTo(outFileStream)
                 };
             }
 
@@ -507,8 +507,8 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             return new[]
             {
-                new DeclareVariableStatement(typeof(Response<bool>), "response", InvokeClientMethod(client, methodName, arguments, async), out var response),
-                InvokeConsoleWriteLine(new ResponseExpression(response.Invoke(nameof(Response<bool>.GetRawResponse))).Status)
+                Declare(typeof(Response<bool>), "response", new ResponseExpression(InvokeClientMethod(client, methodName, arguments, async)), out var response),
+                InvokeConsoleWriteLine(response.GetRawResponse().Status)
             };
         }
 
@@ -524,7 +524,7 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         private MethodBodyStatement ComposeConvenienceHandleNormalResponseCode(ValueExpression client, string methodName, IReadOnlyList<ValueExpression> arguments, CSharpType returnType, bool async)
-            => Var(new VariableReference(returnType, "result"), InvokeClientMethod(client, methodName, arguments, async));
+            => Declare(new VariableReference(async ? returnType.Arguments[0] : returnType, "response"), InvokeClientMethod(client, methodName, arguments, async));
 
         private MethodBodyStatement ComposeParsingNormalResponseCodes(ResponseExpression response, CSharpType responseType, bool allProperties)
         {
@@ -532,8 +532,8 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 return new IfStatement(NotEqual(response.ContentStream, Null))
                 {
-                    new UsingDeclareVariableStatement(typeof(Stream), "outFileStream", InvokeFileOpenWrite(Literal("<filePath>")), out var outFileStream),
-                    new InvokeInstanceMethodStatement(response.ContentStream, nameof(Stream.CopyTo), outFileStream)
+                    UsingDeclare("outFileStream", InvokeFileOpenWrite("<filePath>"), out var outFileStream),
+                    response.ContentStream.CopyTo(outFileStream)
                 };
             }
 
@@ -735,7 +735,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     return serializationFormat.HasValue
                         ? Literal("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
-                        : GuidExpression.NewGuid();
+                        : GuidExpression.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a");
                 }
 
                 if (type == typeof(Uri))
@@ -782,7 +782,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (type == typeof(Stream))
                 {
-                    return InvokeFileOpenRead(Literal("<filePath>"));
+                    return InvokeFileOpenRead("<filePath>");
                 }
 
                 if (type == typeof(JsonElement))
@@ -1024,23 +1024,22 @@ namespace AutoRest.CSharp.Generation.Writers
             var statements = new List<MethodBodyStatement>();
             var clientConstructor = ClientInvocationChain[0].GetEffectiveCtor()!;
 
+            ValueExpression? endpoint = null;
+            if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(UriType)))
+            {
+                statements.Add(Declare("endpoint", New.Uri($"<{GetEndpoint()}>"), out endpoint));
+            }
+
             VariableReference? credential = null;
             if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(KeyAuthType)))
             {
                 credential = new VariableReference(KeyAuthType, "credential");
-                statements.Add(new DeclareVariableStatement(null, credential.Declaration, New.Instance(KeyAuthType, Literal("<key>"))));
+                statements.Add(Declare(credential, New.Instance(KeyAuthType, Literal("<key>"))));
             }
             else if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(TokenAuthType)))
             {
-                // [TODO] DefaultAzureCredential is in Azure.Identity package, so we can't reference it by type
-                credential = new VariableReference(typeof(TokenCredential), "credential");
-                statements.Add(new DeclareVariableStatement(null, credential.Declaration, new FormattableStringToExpression($"new DefaultAzureCredential()")));
-            }
-
-            ValueExpression? endpoint = null;
-            if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(UriType)))
-            {
-                statements.Add(Var("endpoint", New.Uri($"<{GetEndpoint()}>"), out endpoint));
+                credential = new VariableReference(TokenAuthType, "credential");
+                statements.Add(Declare(credential, New.Instance(TokenAuthType, Literal("<key>"))));
             }
 
             var newClientArguments = MockClientConstructorParameterValues(clientConstructor.Parameters, endpoint, credential);
@@ -1056,7 +1055,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             client = new VariableReference(ClientInvocationChain.Last().Type, "client");
-            statements.Add(Var(client, newClientExpression));
+            statements.Add(Declare(client, newClientExpression));
 
             return statements;
         }
