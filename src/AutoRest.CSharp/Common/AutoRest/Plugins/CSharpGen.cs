@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel);
                     if (Configuration.MgmtTestConfiguration is not null)
-                        await MgmtTestTarget.ExecuteAsync (project, codeModel, sourceInputModel);
+                        await MgmtTestTarget.ExecuteAsync(project, codeModel, sourceInputModel);
                 }
             }
             else
