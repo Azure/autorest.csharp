@@ -141,7 +141,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private Parameter? _factoryBuilderParameter;
         public Parameter FactoryBuilderParameter => _factoryBuilderParameter ??= new Parameter(
             "builder",
-            "The builder to register with.",
+            $"The builder to register with.",
             TBuilderType,
             null,
             ValidationType.None,
@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private Parameter? _configurationParameter;
         public Parameter ConfigurationParameter => _configurationParameter ??= new Parameter(
             "configuration",
-            "The configuration values.",
+            $"The configuration values.",
             TConfigurationType,
             null,
             ValidationType.None,

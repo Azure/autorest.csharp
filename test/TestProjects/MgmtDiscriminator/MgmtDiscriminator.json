@@ -319,6 +319,11 @@
                         },
                         "pet": {
                             "$ref": "#/definitions/Pet"
+                        },
+                        "foo": {
+                            "type": "string",
+                            "readOnly": true,
+                            "description": "put a readonly property here so that this model will show up in the model factory"
                         }
                     }
                 }

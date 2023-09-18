@@ -207,7 +207,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             return new Parameter(
                 "credential",
-                "A credential used to authenticate to an Azure Service.",
+                $"A credential used to authenticate to an Azure Service.",
                 type,
                 null,
                 ValidationType.AssertNotNull,
@@ -220,7 +220,7 @@ namespace AutoRest.CSharp.Output.Models
         private Parameter CreateOptionsParameter()
         {
             var clientOptionsType = ClientOptions.Type.WithNullable(true);
-            return new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.Default(clientOptionsType), ValidationType.None, Constant.NewInstanceOf(clientOptionsType).GetConstantFormattable());
+            return new Parameter("options", $"The options for configuring the client.", clientOptionsType, Constant.Default(clientOptionsType), ValidationType.None, Constant.NewInstanceOf(clientOptionsType).GetConstantFormattable());
         }
 
         private ConstructorSignature BuildSubClientInternalConstructor()
@@ -304,7 +304,7 @@ namespace AutoRest.CSharp.Output.Models
                         modifiers,
                         parameters.Select(p => new Parameter(
                             p.Name,
-                            p.GetDocumentationCommentXml(),
+                            $"{p.GetDocumentationCommentXml()}",
                             ((INamedTypeSymbol)p.Type).GetCSharpType(_typeFactory)!,
                             null,
                             ValidationType.None,

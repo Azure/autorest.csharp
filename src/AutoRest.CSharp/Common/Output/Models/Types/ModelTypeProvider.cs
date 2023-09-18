@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal sealed class ModelTypeProvider : SerializableObjectType
     {
-        private static readonly Parameter[] _fromResponseParameters = { new Parameter("response", "The response to deserialize the model from.", new CSharpType(typeof(Response)), null, ValidationType.None, null) };
+        private static readonly Parameter[] _fromResponseParameters = { new Parameter("response", $"The response to deserialize the model from.", new CSharpType(typeof(Response)), null, ValidationType.None, null) };
         private MethodSignature FromResponseSignature => new MethodSignature("FromResponse", null, "Deserializes the model from a raw response.", GetFromResponseModifiers(), Type, null, _fromResponseParameters);
 
         private static readonly Parameter[] _toRequestContentParameters = Array.Empty<Parameter>();
@@ -111,9 +111,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             return signatures;
         }
 
-        protected override string CreateDescription()
+        protected override FormattableString CreateDescription()
         {
-            return _inputModel.Description ?? $"The {_inputModel.Name}.";
+            return _inputModel.Description != null ? (FormattableString)$"{_inputModel.Description}" : $"The {_inputModel.Name}.";
         }
 
         private ModelTypeProviderFields EnsureFields()
