@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.LowLevel.Output.Tests;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -45,6 +46,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ModelFactoryTypeProvider? _modelFactoryProvider;
         public ModelFactoryTypeProvider? ModelFactory => _modelFactoryProvider ??= ModelFactoryTypeProvider.TryCreate(AllModels, _sourceInputModel);
+
+        private DpgTestBase? _dpgTestBase;
+        public DpgTestBase DpgTestBase => _dpgTestBase ??= new DpgTestBase(Configuration.Namespace, RestClients, DpgTestEnvironment, _sourceInputModel);
+
+        private DpgTestEnvironment? _dpgTestEnvironment;
+        public DpgTestEnvironment DpgTestEnvironment => _dpgTestEnvironment ??= new DpgTestEnvironment(Configuration.Namespace, _sourceInputModel);
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {

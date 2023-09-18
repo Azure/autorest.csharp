@@ -15,12 +15,12 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Samples.Models;
 
-namespace AutoRest.CSharp.LowLevel.Generation
+namespace AutoRest.CSharp.LowLevel.Generation.Samples
 {
     internal class ExampleCompileCheckWriter
     {
-        private LowLevelClient _client;
-        private CodeWriter _writer;
+        private readonly LowLevelClient _client;
+        private readonly CodeWriter _writer;
 
         public ExampleCompileCheckWriter(LowLevelClient client)
         {

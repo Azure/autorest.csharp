@@ -88,7 +88,7 @@ internal class PostProcessor
             documentCache.ToDictionary(kv => kv.Key, kv => kv.Value.ToImmutableHashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default)));
     }
 
-    protected virtual bool ShouldIncludeDocument(Document document) => !GeneratedCodeWorkspace.IsSharedDocument(document);
+    protected virtual bool ShouldIncludeDocument(Document document) => !GeneratedCodeWorkspace.IsSharedDocument(document) && !GeneratedCodeWorkspace.IsGeneratedTestDocument(document);
 
     /// <summary>
     /// This method marks the "not publicly" referenced types as internal if they are previously defined as public. It will do this job in the following steps:

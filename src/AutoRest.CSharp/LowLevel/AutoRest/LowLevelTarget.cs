@@ -10,6 +10,8 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.LowLevel.Generation;
+using AutoRest.CSharp.LowLevel.Generation.Samples;
+using AutoRest.CSharp.LowLevel.Generation.Tests;
 using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -45,7 +47,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var exampleCompileCheckWriter = new ExampleCompileCheckWriter(client);
                 exampleCompileCheckWriter.Write();
                 var exampleFileCheckFilename = $"../../tests/Generated/Samples/Samples_{client.Type.Name}.cs";
-                project.AddGeneratedFile(exampleFileCheckFilename, exampleCompileCheckWriter.ToString());
+                project.AddGeneratedTestFile(exampleFileCheckFilename, exampleCompileCheckWriter.ToString());
 
                 project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", new XmlDocumentFile(exampleFileCheckFilename, xmlDocWriter));
             }
@@ -65,6 +67,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 modelFactoryWriter.Write();
                 project.AddGeneratedFile($"{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
             }
+
+            var testBaseWriter = new DpgTestBaseWriter(library.DpgTestBase);
+            testBaseWriter.Write();
+            project.AddGeneratedTestFile($"../../tests/Generated/Tests/{library.DpgTestBase.Type.Name}.cs", testBaseWriter.ToString());
+
+            var testEnvWriter = new DpgTestEnvironmentWriter(library.DpgTestEnvironment);
+            testEnvWriter.Write();
+            project.AddGeneratedTestFile($"../../tests/Generated/Tests/{library.DpgTestEnvironment.Type.Name}.cs", testEnvWriter.ToString());
 
             await project.PostProcessAsync(new PostProcessor(
                 modelFactoryFullName: modelFactoryProvider?.FullName,

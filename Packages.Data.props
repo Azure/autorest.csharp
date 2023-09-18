@@ -5,6 +5,10 @@
   <!-- Test only dependencies. -->
   <ItemGroup Condition="'$(IsTestGenerationTestProject)' == 'true'">
     <PackageReference Update="Moq" Version="[4.18.2]" />
+    <!-- Include the basic related files for the test framework to ensure our generated test code could build here-->
+    <Compile Include="$(FakeAzureCoreTestFrameworkSources)/RecordedTestMode.cs" LinkBase="Shared/TestFramework" />
+    <Compile Include="$(FakeAzureCoreTestFrameworkSources)/RecordedTestBase.cs" LinkBase="Shared/TestFramework" />
+    <Compile Include="$(FakeAzureCoreTestFrameworkSources)/TestEnvironment.cs" LinkBase="Shared/TestFramework" />
   </ItemGroup>
 
   <ItemGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
