@@ -34,9 +34,9 @@ pipeline:
     scope: output-scope
 ```
 
-```yaml $(testgen)
+```yaml $(sample-gen)
 use-extension:
-  "@autorest/testmodeler": "2.6.0"
+  "@autorest/testmodeler": "2.6.1"
 
 pipeline:
   test-modeler:
@@ -54,6 +54,8 @@ testmodeler:
   use-parents-value: true
   split-parents-value: false
   add-armtemplate-payload-string: true
+
+include-x-ms-examples-original-file: true
 #   export-explicit-type: true
 ```
 

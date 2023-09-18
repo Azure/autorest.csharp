@@ -106,7 +106,7 @@ namespace body_formdata_urlencoded
             }
         }
 
-        internal HttpMessage CreatePartialConstantBodyRequest(PostContentSchemaGrantType grantType, string service, string accessToken)
+        internal HttpMessage CreatePartialConstantBodyRequest(string service, string accessToken)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -117,7 +117,7 @@ namespace body_formdata_urlencoded
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
             var content = new FormUrlEncodedContent();
-            content.Add("grant_type", grantType.ToString());
+            content.Add("grant_type", PostContentSchemaGrantType.AccessToken.ToString());
             content.Add("service", service);
             content.Add("access_token", accessToken);
             request.Content = content;
@@ -125,12 +125,11 @@ namespace body_formdata_urlencoded
         }
 
         /// <summary> Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service: 'bar' } to pass the test. </summary>
-        /// <param name="grantType"> Constant part of a formdata body. </param>
         /// <param name="service"> Indicates the name of your Azure container registry. </param>
         /// <param name="accessToken"> AAD access token, mandatory when grant_type is access_token_refresh_token or access_token. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="service"/> or <paramref name="accessToken"/> is null. </exception>
-        public async Task<Response> PartialConstantBodyAsync(PostContentSchemaGrantType grantType, string service, string accessToken, CancellationToken cancellationToken = default)
+        public async Task<Response> PartialConstantBodyAsync(string service, string accessToken, CancellationToken cancellationToken = default)
         {
             if (service == null)
             {
@@ -141,7 +140,7 @@ namespace body_formdata_urlencoded
                 throw new ArgumentNullException(nameof(accessToken));
             }
 
-            using var message = CreatePartialConstantBodyRequest(grantType, service, accessToken);
+            using var message = CreatePartialConstantBodyRequest(service, accessToken);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -153,12 +152,11 @@ namespace body_formdata_urlencoded
         }
 
         /// <summary> Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service: 'bar' } to pass the test. </summary>
-        /// <param name="grantType"> Constant part of a formdata body. </param>
         /// <param name="service"> Indicates the name of your Azure container registry. </param>
         /// <param name="accessToken"> AAD access token, mandatory when grant_type is access_token_refresh_token or access_token. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="service"/> or <paramref name="accessToken"/> is null. </exception>
-        public Response PartialConstantBody(PostContentSchemaGrantType grantType, string service, string accessToken, CancellationToken cancellationToken = default)
+        public Response PartialConstantBody(string service, string accessToken, CancellationToken cancellationToken = default)
         {
             if (service == null)
             {
@@ -169,7 +167,7 @@ namespace body_formdata_urlencoded
                 throw new ArgumentNullException(nameof(accessToken));
             }
 
-            using var message = CreatePartialConstantBodyRequest(grantType, service, accessToken);
+            using var message = CreatePartialConstantBodyRequest(service, accessToken);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

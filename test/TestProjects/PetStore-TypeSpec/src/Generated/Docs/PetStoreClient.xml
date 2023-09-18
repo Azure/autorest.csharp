@@ -2,348 +2,502 @@
 <doc>
   <members>
     <member name="DeleteAsync(int,RequestContext)">
-<example>
-This sample shows how to call DeleteAsync with required parameters.
+      <example>
+This sample shows how to call DeleteAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
 Response response = await client.DeleteAsync(1234);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call DeleteAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Response response = await client.DeleteAsync(1234);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Delete(int,RequestContext)">
-<example>
-This sample shows how to call Delete with required parameters.
+      <example>
+This sample shows how to call Delete.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
 Response response = client.Delete(1234);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Delete with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Response response = client.Delete(1234);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="ReadAsync(int,CancellationToken)">
-<example>
-This sample shows how to call ReadAsync with required parameters.
+      <example>
+This sample shows how to call ReadAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-var result = await client.ReadAsync(1234);
+Response<Pet> response = await client.ReadAsync(1234);
 ]]></code>
-</example>
+This sample shows how to call ReadAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Response<Pet> response = await client.ReadAsync(1234);
+]]></code></example>
     </member>
     <member name="Read(int,CancellationToken)">
-<example>
-This sample shows how to call Read with required parameters.
+      <example>
+This sample shows how to call Read.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-var result = client.Read(1234);
+Response<Pet> response = client.Read(1234);
 ]]></code>
-</example>
+This sample shows how to call Read with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Response<Pet> response = client.Read(1234);
+]]></code></example>
     </member>
     <member name="ReadAsync(int,RequestContext)">
-<example>
-This sample shows how to call ReadAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call ReadAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-Response response = await client.ReadAsync(1234, new RequestContext());
+Response response = await client.ReadAsync(1234, null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+This sample shows how to call ReadAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Response response = await client.ReadAsync(1234, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("tag").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Read(int,RequestContext)">
-<example>
-This sample shows how to call Read with required parameters and parse the result.
+      <example>
+This sample shows how to call Read and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-Response response = client.Read(1234, new RequestContext());
+Response response = client.Read(1234, null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+This sample shows how to call Read with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Response response = client.Read(1234, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("tag").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="CreateAsync(Pet,CancellationToken)">
-<example>
-This sample shows how to call CreateAsync with required parameters.
+      <example>
+This sample shows how to call CreateAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-var pet = new Pet("<name>", 1234)
-{
-    Tag = "<Tag>",
-};
-var result = await client.CreateAsync(pet);
+Pet pet = new Pet("<name>", 1234);
+Response<Pet> response = await client.CreateAsync(pet);
 ]]></code>
-</example>
+This sample shows how to call CreateAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Pet pet = new Pet("<name>", 1234)
+{
+    Tag = "<tag>",
+};
+Response<Pet> response = await client.CreateAsync(pet);
+]]></code></example>
     </member>
     <member name="Create(Pet,CancellationToken)">
-<example>
-This sample shows how to call Create with required parameters.
+      <example>
+This sample shows how to call Create.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-var pet = new Pet("<name>", 1234)
-{
-    Tag = "<Tag>",
-};
-var result = client.Create(pet);
+Pet pet = new Pet("<name>", 1234);
+Response<Pet> response = client.Create(pet);
 ]]></code>
-</example>
+This sample shows how to call Create with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Pet pet = new Pet("<name>", 1234)
+{
+    Tag = "<tag>",
+};
+Response<Pet> response = client.Create(pet);
+]]></code></example>
     </member>
     <member name="CreateAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call CreateAsync with required request content, and how to parse the result.
+      <example>
+This sample shows how to call CreateAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
     age = 1234,
-};
-
-Response response = await client.CreateAsync(RequestContent.Create(data));
+});
+Response response = await client.CreateAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
-This sample shows how to call CreateAsync with all request content, and how to parse the result.
+This sample shows how to call CreateAsync with all request content and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
     tag = "<tag>",
     age = 1234,
-};
-
-Response response = await client.CreateAsync(RequestContent.Create(data));
+});
+Response response = await client.CreateAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("tag").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Create(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Create with required request content, and how to parse the result.
+      <example>
+This sample shows how to call Create and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
     age = 1234,
-};
-
-Response response = client.Create(RequestContent.Create(data));
+});
+Response response = client.Create(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 ]]></code>
-This sample shows how to call Create with all request content, and how to parse the result.
+This sample shows how to call Create with all request content and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
     tag = "<tag>",
     age = 1234,
-};
-
-Response response = client.Create(RequestContent.Create(data));
+});
+Response response = client.Create(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("tag").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetPetByKindAsync(PetKind,CancellationToken)">
-<example>
-This sample shows how to call GetPetByKindAsync with required parameters.
+      <example>
+This sample shows how to call GetPetByKindAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-var result = await client.GetPetByKindAsync(null);
+Response<Pet> response = await client.GetPetByKindAsync(PetKind.Dog);
 ]]></code>
-</example>
+This sample shows how to call GetPetByKindAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Response<Pet> response = await client.GetPetByKindAsync(PetKind.Dog);
+]]></code></example>
     </member>
     <member name="GetPetByKind(PetKind,CancellationToken)">
-<example>
-This sample shows how to call GetPetByKind with required parameters.
+      <example>
+This sample shows how to call GetPetByKind.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-var result = client.GetPetByKind(null);
+Response<Pet> response = client.GetPetByKind(PetKind.Dog);
 ]]></code>
-</example>
+This sample shows how to call GetPetByKind with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Response<Pet> response = client.GetPetByKind(PetKind.Dog);
+]]></code></example>
     </member>
     <member name="GetPetByKindAsync(string,RequestContext)">
-<example>
-This sample shows how to call GetPetByKindAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call GetPetByKindAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-Response response = await client.GetPetByKindAsync("<kind>");
+Response response = await client.GetPetByKindAsync("dog");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+This sample shows how to call GetPetByKindAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Response response = await client.GetPetByKindAsync("dog");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("tag").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetPetByKind(string,RequestContext)">
-<example>
-This sample shows how to call GetPetByKind with required parameters and parse the result.
+      <example>
+This sample shows how to call GetPetByKind and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-Response response = client.GetPetByKind("<kind>");
+Response response = client.GetPetByKind("dog");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+This sample shows how to call GetPetByKind with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Response response = client.GetPetByKind("dog");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("tag").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetFirstPetAsync(int?,CancellationToken)">
-<example>
-This sample shows how to call GetFirstPetAsync with required parameters.
+      <example>
+This sample shows how to call GetFirstPetAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-var result = await client.GetFirstPetAsync(1234);
+Response<Pet> response = await client.GetFirstPetAsync();
 ]]></code>
-</example>
+This sample shows how to call GetFirstPetAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Response<Pet> response = await client.GetFirstPetAsync(start: 1234);
+]]></code></example>
     </member>
     <member name="GetFirstPet(int?,CancellationToken)">
-<example>
-This sample shows how to call GetFirstPet with required parameters.
+      <example>
+This sample shows how to call GetFirstPet.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-var result = client.GetFirstPet(1234);
+Response<Pet> response = client.GetFirstPet();
 ]]></code>
-</example>
+This sample shows how to call GetFirstPet with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Response<Pet> response = client.GetFirstPet(start: 1234);
+]]></code></example>
     </member>
     <member name="GetFirstPetAsync(int?,RequestContext)">
-<example>
-This sample shows how to call GetFirstPetAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call GetFirstPetAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-Response response = await client.GetFirstPetAsync(1234, new RequestContext());
+Response response = await client.GetFirstPetAsync(null, null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+This sample shows how to call GetFirstPetAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Response response = await client.GetFirstPetAsync(1234, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("tag").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetFirstPet(int?,RequestContext)">
-<example>
-This sample shows how to call GetFirstPet with required parameters and parse the result.
+      <example>
+This sample shows how to call GetFirstPet and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-Response response = client.GetFirstPet(1234, new RequestContext());
+Response response = client.GetFirstPet(null, null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+This sample shows how to call GetFirstPet with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Response response = client.GetFirstPet(1234, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("tag").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetFishAsync(string,CancellationToken)">
-<example>
-This sample shows how to call GetFishAsync with required parameters.
+      <example>
+This sample shows how to call GetFishAsync.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-var result = await client.GetFishAsync("<kind>");
+Response<Fish> response = await client.GetFishAsync();
 ]]></code>
-</example>
+This sample shows how to call GetFishAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Response<Fish> response = await client.GetFishAsync(kind: "<kind>");
+]]></code></example>
     </member>
     <member name="GetFish(string,CancellationToken)">
-<example>
-This sample shows how to call GetFish with required parameters.
+      <example>
+This sample shows how to call GetFish.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-var result = client.GetFish("<kind>");
+Response<Fish> response = client.GetFish();
 ]]></code>
-</example>
+This sample shows how to call GetFish with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Response<Fish> response = client.GetFish(kind: "<kind>");
+]]></code></example>
     </member>
     <member name="GetFishAsync(string,RequestContext)">
-<example>
-This sample shows how to call GetFishAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call GetFishAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-Response response = await client.GetFishAsync("<kind>", new RequestContext());
+Response response = await client.GetFishAsync(null, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code>
-</example>
+This sample shows how to call GetFishAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Response response = await client.GetFishAsync("<kind>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("size").ToString());
+]]></code></example>
     </member>
     <member name="GetFish(string,RequestContext)">
-<example>
-This sample shows how to call GetFish with required parameters and parse the result.
+      <example>
+This sample shows how to call GetFish and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
 
-Response response = client.GetFish("<kind>", new RequestContext());
+Response response = client.GetFish(null, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("size").ToString());
 ]]></code>
-</example>
+This sample shows how to call GetFish with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+PetStoreClient client = new PetStoreClient(endpoint);
+
+Response response = client.GetFish("<kind>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("size").ToString());
+]]></code></example>
     </member>
   </members>
 </doc>

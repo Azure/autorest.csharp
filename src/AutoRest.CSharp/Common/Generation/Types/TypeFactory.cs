@@ -34,8 +34,8 @@ namespace AutoRest.CSharp.Generation.Types
 
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
-            InputLiteralType literalType       => CreateType(literalType.LiteralValueType), //TODO -- need to support literal type with the value.
-            InputUnionType unionType           => CreateType(unionType.UnionItemTypes[0]), //TODO -- need to support multiple union types.
+            InputLiteralType literalType       => CreateType(literalType.LiteralValueType),
+            InputUnionType unionType           => new CSharpType(typeof(object), unionType.IsNullable),
             InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType             => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
@@ -225,6 +225,8 @@ namespace AutoRest.CSharp.Generation.Types
             type.FrameworkType.IsGenericType && type.FrameworkType.GetGenericTypeDefinition() == typeof(IEnumerable<>));
 
         internal static bool IsIEnumerableOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(IEnumerable<>);
+
+        internal static bool IsOperationOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>);
 
         internal static bool IsIAsyncEnumerableOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(IAsyncEnumerable<>);
 

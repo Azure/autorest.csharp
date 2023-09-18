@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace FirstTestTypeSpec.Models
 {
     /// <summary> Extensible enum. </summary>
-    public readonly partial struct StringExtensibleEnum : IEquatable<StringExtensibleEnum>
+    internal readonly partial struct StringExtensibleEnum : IEquatable<StringExtensibleEnum>
     {
         private readonly string _value;
 

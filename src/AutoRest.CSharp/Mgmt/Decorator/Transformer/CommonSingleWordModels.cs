@@ -46,11 +46,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
             foreach (var schema in MgmtContext.CodeModel.AllSchemas)
             {
-                if (_schemasToChange.Contains(schema.Name))
+                string serializedName = schema.Language.Default.SerializedName ?? schema.Language.Default.Name;
+                if (_schemasToChange.Contains(serializedName))
                 {
                     string prefix = MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : MgmtContext.RPName;
-                    string suffix = schema.Language.Default.Name.Equals("Resource") ? "Data" : string.Empty;
-                    schema.Language.Default.Name = prefix + schema.Name + suffix;
+                    string suffix = serializedName.Equals("Resource") ? "Data" : string.Empty;
+                    schema.Language.Default.SerializedName ??= schema.Language.Default.Name;
+                    schema.Language.Default.Name = prefix + serializedName + suffix;
                 }
             }
         }

@@ -8,8 +8,6 @@
   {
    "$id": "2",
    "Name": "Interval",
-   "Namespace": "Pagination",
-   "Description": "",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -43,6 +41,8 @@
      "Description": "1 hour, available only if test run duration is greater than 1 minute"
     }
    ],
+   "Namespace": "Pagination",
+   "Description": "The interval",
    "IsExtensible": true,
    "IsNullable": false,
    "Usage": "Input"
@@ -180,11 +180,11 @@
   },
   {
    "$id": "25",
-   "Name": "CustomPageDimensionValueListItem",
+   "Name": "PagedDimensionValueListItem",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of DimensionValueListItem items",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "26",
@@ -288,11 +288,11 @@
   },
   {
    "$id": "39",
-   "Name": "CustomPageTextBlocklist",
+   "Name": "PagedTextBlocklist",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of TextBlocklist items",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "40",
@@ -366,11 +366,11 @@
   },
   {
    "$id": "49",
-   "Name": "CustomPageTextBlockItem",
+   "Name": "PagedTextBlockItem",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of TextBlockItem items",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "50",

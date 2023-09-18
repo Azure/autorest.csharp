@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Common.Input.Examples;
 
 namespace AutoRest.CSharp.Common.Input;
 
@@ -17,4 +18,16 @@ internal record InputClient(string Name, string Description, IReadOnlyList<Input
     }
 
     public InputClient() : this(string.Empty, string.Empty, Array.Empty<InputOperation>(), true, Array.Empty<InputParameter>(), null) { }
+
+    private IReadOnlyDictionary<string, InputClientExample>? _examples;
+    public IReadOnlyDictionary<string, InputClientExample> Examples => _examples ??= EnsureExamples();
+
+    private IReadOnlyDictionary<string, InputClientExample> EnsureExamples()
+    {
+        return new Dictionary<string, InputClientExample>()
+        {
+            [ExampleMockValueBuilder.ShortVersionMockExampleKey] = ExampleMockValueBuilder.BuildClientExample(this, false),
+            [ExampleMockValueBuilder.MockExampleAllParameterKey] = ExampleMockValueBuilder.BuildClientExample(this, true)
+        };
+    }
 }
