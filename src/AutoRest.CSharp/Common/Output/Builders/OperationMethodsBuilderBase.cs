@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         protected CSharpType? ResponseType { get; }
         protected CSharpType ProtocolMethodReturnType { get; }
-        protected CSharpType RestConvenienceMethodReturnType { get; }
+        protected CSharpType RestClientConvenienceMethodReturnType { get; }
         protected CSharpType ConvenienceMethodReturnType { get; }
         protected ResponseClassifierType ResponseClassifier { get; }
 
@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             ResponseType = _statusCodeSwitchBuilder.ResponseType;
             ProtocolMethodReturnType = _statusCodeSwitchBuilder.ProtocolReturnType;
-            RestConvenienceMethodReturnType = _statusCodeSwitchBuilder.RestClientConvenienceReturnType;
+            RestClientConvenienceMethodReturnType = _statusCodeSwitchBuilder.RestClientConvenienceReturnType;
             ConvenienceMethodReturnType = _statusCodeSwitchBuilder.ClientConvenienceReturnType;
             ResponseClassifier = _statusCodeSwitchBuilder.ResponseClassifier;
 
@@ -111,7 +111,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             var requestContext = new RequestContextExpression(KnownParameters.RequestContext);
-            var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, parameters.CreateMessage, requestContext);
+            var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, parameters.CreateMessage, requestContext, Operation.RequestBodyMediaType);
 
             var createMessageMethod = BuildCreateRequestMethod(parameters.CreateMessage, createMessageBuilder);
             var createNextPageMessageMethodSignature = BuildCreateNextPageMessageSignature(parameters.CreateMessage);
@@ -176,7 +176,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public RestClientOperationMethods BuildLegacy()
         {
             var parameters = _parametersBuilder.BuildParameters();
-            var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, parameters.CreateMessage, null);
+            var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, parameters.CreateMessage, null, Operation.RequestBodyMediaType);
 
             var createRequestMessageMethod = BuildCreateRequestMethod(parameters.CreateMessage, createMessageBuilder);
             var createNextPageMessageMethodSignature = BuildCreateNextPageMessageSignature(parameters.CreateMessage);
@@ -229,7 +229,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 Assign(request.Uri, uriBuilder),
 
                 builder.AddHeaders(request),
-                builder.AddBody(Operation, request),
+                builder.AddBody(request),
                 builder.AddUserAgent(message),
                 Return(message)
             };
@@ -242,7 +242,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return null;
             }
 
-            var builder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, signature.Parameters, requestContext);
+            var builder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, signature.Parameters, requestContext, Operation.RequestBodyMediaType);
             var body = BuildCreateNextPageMessageMethodBody(builder, signature);
             return body is not null ? new Method(signature, body) : null;
         }
@@ -284,7 +284,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         protected Method BuildLegacyConvenienceMethod(string methodName, IReadOnlyList<Parameter> parameters, HttpMessageExpression invokeCreateRequestMethod, StatusCodeSwitchBuilder statusCodeSwitchBuilder, bool async)
         {
-            var signature = CreateMethodSignature(methodName, ConvenienceModifiers, parameters, statusCodeSwitchBuilder.RestClientConvenienceReturnType, null);
+            var signature = CreateMethodSignature(methodName, ConvenienceModifiers, parameters, RestClientConvenienceMethodReturnType, null);
             var body = new[]
             {
                 new ParameterValidationBlock(signature.Parameters, IsLegacy: !Configuration.AzureArm),

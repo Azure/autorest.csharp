@@ -23,8 +23,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 Return(PipelineField.ProcessHeadAsBoolMessage(message, ClientDiagnosticsProperty, new RequestContextExpression(KnownParameters.RequestContext), async))
             );
 
-        protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName,
-            RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async)
+        protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName, RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async)
             => throw new System.NotImplementedException();
     }
 }

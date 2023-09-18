@@ -168,6 +168,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var client = new LowLevelClient(
                     clientInfo.Name,
                     clientInfo.Namespace,
+                    clientInfo.OperationGroupKey,
                     description,
                     libraryName,
                     parentClient,

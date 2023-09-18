@@ -47,18 +47,21 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private readonly IReadOnlyList<Parameter> _parameters;
         private readonly HttpPipelineExpression _pipeline;
         private readonly RequestContextExpression? _requestContext;
+        private readonly BodyMediaType _bodyMediaType;
         private readonly IReadOnlyList<RequestPart> _uriRequestParts;
         private readonly IReadOnlyList<RequestPart> _pathRequestParts;
         private readonly IReadOnlyList<RequestPart> _queryRequestParts;
         private readonly IReadOnlyList<RequestPart> _headerRequestParts;
         private readonly IReadOnlyList<RequestPart> _contentHeaderRequestParts;
+        private readonly IReadOnlyList<RequestPart> _bodyRequestParts;
 
-        public CreateMessageMethodBuilder(ClientFields fields, IReadOnlyList<RequestPartSource> requestParts, IReadOnlyList<Parameter> parameters, RequestContextExpression? requestContext)
+        public CreateMessageMethodBuilder(ClientFields fields, IReadOnlyList<RequestPartSource> requestParts, IReadOnlyList<Parameter> parameters, RequestContextExpression? requestContext, BodyMediaType bodyMediaType)
         {
             _fields = fields;
             _requestParts = requestParts;
             _parameters = parameters;
             _requestContext = requestContext;
+            _bodyMediaType = bodyMediaType;
             _pipeline  = new HttpPipelineExpression(_fields.PipelineField.Declaration);
 
             _uriRequestParts = requestParts
@@ -86,6 +89,18 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 .Where(p => p.InputParameter?.Location == RequestLocation.Header && ContentHeaders.Contains(p.NameInRequest))
                 .Select(p => new RequestPart(p.InputParameter!.HeaderCollectionPrefix ?? p.NameInRequest, GetValueForRequestPart(p.InputParameter!, p.OutputParameter!), null, p.SerializationFormat, p.InputParameter!.ArraySerializationDelimiter))
                 .ToList();
+
+            var bodyParameters = _requestParts
+                .Where(p => p.InputParameter is {Location: RequestLocation.Body})
+                .ToList();
+
+            _bodyRequestParts = _bodyMediaType switch
+            {
+                BodyMediaType.Multipart => CreateMultipartBodyRequestParts(bodyParameters),
+                BodyMediaType.Form => CreateFormBodyRequestParts(bodyParameters),
+                _ when bodyParameters.Count == 1 => new[]{GetBodyRequestPart(bodyMediaType, bodyParameters[0].InputParameter!, bodyParameters[0].OutputParameter!)},
+                _ => Array.Empty<BodyRequestPart>()
+            };
         }
 
         public MethodBodyStatement CreateHttpMessage(RequestMethod requestMethod, bool bufferResponse, ResponseClassifierType? responseClassifierType, out HttpMessageExpression message, out RequestExpression request, out RawRequestUriBuilderExpression uriBuilder)
@@ -255,36 +270,23 @@ namespace AutoRest.CSharp.Common.Output.Builders
             throw new InvalidOperationException($"Unknown non-parameterized header {nameInRequest}.");
         }
 
-        public MethodBodyStatement AddBody(InputOperation operation, RequestExpression request)
-        {
-            var bodyParameters = _requestParts
-                .Where(p => p.InputParameter is {Location: RequestLocation.Body})
-                .ToList();
-
-            var requestParts = operation.RequestBodyMediaType switch
-            {
-                BodyMediaType.Multipart => CreateMultipartBodyRequestParts(bodyParameters),
-                BodyMediaType.Form => CreateFormBodyRequestParts(bodyParameters),
-                _ when bodyParameters.Count == 1 => new[]{GetBodyRequestPart(operation, bodyParameters[0].InputParameter!, bodyParameters[0].OutputParameter!)},
-                _ => Array.Empty<BodyRequestPart>()
-            };
-
-            return operation.RequestBodyMediaType switch
+        public MethodBodyStatement AddBody(RequestExpression request)
+            => _bodyMediaType switch
             {
                 BodyMediaType.Multipart => new[]
                 {
                     AddContentHeaders(request),
                     Var("content", New.MultipartFormDataContent(), out var multipartContent),
-                    requestParts.Select(rp => NullCheckRequestPartValue(rp, GetAddMultipartBodyPartStatement(multipartContent, rp))).AsStatement(),
+                    _bodyRequestParts.Select(rp => NullCheckRequestPartValue(rp, GetAddMultipartBodyPartStatement(multipartContent, rp))).AsStatement(),
                     multipartContent.ApplyToRequest(request)
                 },
                 BodyMediaType.Form => new[]
                 {
                     AddContentHeaders(request), Var("content", New.FormUrlEncodedContent(), out var urlContent),
-                    requestParts.Select(rp => NullCheckRequestPartValue(rp, urlContent.Add(rp.NameInRequest!, ConvertToString(rp.Value)))).AsStatement(),
+                    _bodyRequestParts.Select(rp => NullCheckRequestPartValue(rp, urlContent.Add(rp.NameInRequest!, ConvertToString(rp.Value)))).AsStatement(),
                     Assign(request.Content, urlContent)
                 },
-                _ when requestParts is [BodyRequestPart bodyRequestPart] =>
+                _ when _bodyRequestParts is [BodyRequestPart bodyRequestPart] =>
                     NullCheckRequestPartValue(bodyRequestPart, new[]
                     {
                         AddContentHeaders(request), bodyRequestPart.Conversion ?? new MethodBodyStatement(),
@@ -292,7 +294,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     }),
                 _ => new MethodBodyStatement()
             };
-        }
 
         private static IReadOnlyList<RequestPart> CreateMultipartBodyRequestParts(IEnumerable<RequestPartSource> bodyParameters)
         {
@@ -334,7 +335,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return requestParts;
         }
 
-        private BodyRequestPart GetBodyRequestPart(InputOperation operation, InputParameter inputParameter, Parameter outputParameter)
+        private BodyRequestPart GetBodyRequestPart(BodyMediaType bodyMediaType, InputParameter inputParameter, Parameter outputParameter)
         {
             if (outputParameter == KnownParameters.RequestContent || outputParameter == KnownParameters.RequestContentNullable)
             {
@@ -342,7 +343,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             var value = GetValueForRequestPart(inputParameter, outputParameter);
-            switch (operation.RequestBodyMediaType)
+            switch (bodyMediaType)
             {
                 case BodyMediaType.Binary:
                     return new BodyRequestPart(value, RequestContentExpression.Create(RemoveAllNullConditional(value)), null);
@@ -354,7 +355,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return GetFlattenedBodyRequestPart(value);
 
                 default:
-                    var serialization = SerializationBuilder.Build(operation.RequestBodyMediaType, inputParameter.Type, outputParameter.Type);
+                    var serialization = SerializationBuilder.Build(bodyMediaType, inputParameter.Type, outputParameter.Type);
                     var content = GetRequestContentForSerialization(serialization, RemoveAllNullConditional(value), out var conversion);
 
                     return new BodyRequestPart(value, content, conversion);

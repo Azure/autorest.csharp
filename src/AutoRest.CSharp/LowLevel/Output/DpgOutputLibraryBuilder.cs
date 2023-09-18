@@ -140,12 +140,12 @@ namespace AutoRest.CSharp.Output.Models
 
             if (sourceInputModel?.FindForType(clientNamespace, clientName) is not {} existingType)
             {
-                return new ClientInfo(ns.Name, clientName, clientNamespace, clientDescription, operations, clientParameters, resourceParameters);
+                return new ClientInfo(ns.Key, clientName, clientNamespace, clientDescription, operations, clientParameters, resourceParameters);
             }
 
             clientName = existingType.Name;
             clientNamespace = existingType.ContainingNamespace.ToDisplayString();
-            return new ClientInfo(ns.Name, clientName, clientNamespace, clientDescription, existingType, operations, clientParameters, resourceParameters);
+            return new ClientInfo(ns.Key, clientName, clientNamespace, clientDescription, existingType, operations, clientParameters, resourceParameters);
         }
 
         private IReadOnlyList<ClientInfo> SetHierarchy(IReadOnlyDictionary<string, ClientInfo> clientInfosByName)

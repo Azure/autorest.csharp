@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
@@ -18,12 +19,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         private readonly IReadOnlyList<Operation> _operations;
         private IReadOnlyList<Resource>? _resources;
 
-        public string Key { get; }
-
         public MgmtRestClient(InputClient inputClient, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, List<Operation> operations, string clientName, MgmtOutputLibrary library)
-            : base(new ClientMethodsBuilder(inputClient.Operations, library, null, library.TypeFactory), null, clientParameters, restClientParameters, clientName, MgmtContext.Context.DefaultNamespace, MgmtContext.Context.SourceInputModel)
+            : base(new ClientMethodsBuilder(inputClient.Operations, library, MgmtContext.Context.SourceInputModel, library.TypeFactory), clientParameters, restClientParameters, clientName, MgmtContext.Context.DefaultNamespace, inputClient.Key, MgmtContext.Context.SourceInputModel)
         {
-            Key = inputClient.Key;
             _operations = operations;
         }
 
