@@ -42,7 +42,7 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPaginationLedgerEntries_AllParameters()
+        public async Task Example_GetPaginationLedgerEntries_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -53,7 +53,7 @@ namespace Pagination.Samples
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
             });
-            foreach (BinaryData item in client.GetPaginationLedgerEntries(content))
+            await foreach (BinaryData item in client.GetPaginationLedgerEntriesAsync(content))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("contents").ToString());
@@ -78,21 +78,21 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPaginationLedgerEntries_AllParameters_Convenience()
+        public async Task Example_GetPaginationLedgerEntries_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
             ListLedgerEntryInputBody bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
-            foreach (LedgerEntry item in client.GetPaginationLedgerEntries(bodyInput))
+            await foreach (LedgerEntry item in client.GetPaginationLedgerEntriesAsync(bodyInput))
             {
             }
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPaginationLedgerEntries_Async()
+        public void Example_GetPaginationLedgerEntries_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
@@ -103,7 +103,7 @@ namespace Pagination.Samples
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
             });
-            await foreach (BinaryData item in client.GetPaginationLedgerEntriesAsync(content))
+            foreach (BinaryData item in client.GetPaginationLedgerEntries(content))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("contents").ToString());
@@ -136,14 +136,14 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPaginationLedgerEntries_Convenience_Async()
+        public void Example_GetPaginationLedgerEntries_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
             ListLedgerEntryInputBody bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
-            await foreach (LedgerEntry item in client.GetPaginationLedgerEntriesAsync(bodyInput))
+            foreach (LedgerEntry item in client.GetPaginationLedgerEntries(bodyInput))
             {
             }
         }
@@ -179,13 +179,13 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMetricDimensionValues_AllParameters()
+        public async Task Example_GetMetricDimensionValues_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            foreach (BinaryData item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>", "PT5S", "<metricName>", "<timespan>", null))
+            await foreach (BinaryData item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>", null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("value")[0].ToString());
@@ -207,26 +207,26 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMetricDimensionValues_AllParameters_Convenience()
+        public async Task Example_GetMetricDimensionValues_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            foreach (DimensionValueListItem item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>", interval: Interval.PT5S, metricName: "<metricName>", timespan: "<timespan>"))
+            await foreach (DimensionValueListItem item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>"))
             {
             }
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMetricDimensionValues_Async()
+        public void Example_GetMetricDimensionValues_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            await foreach (BinaryData item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>", null, null, null, null))
+            foreach (BinaryData item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>", "PT5S", "<metricName>", "<timespan>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("value")[0].ToString());
@@ -250,13 +250,13 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMetricDimensionValues_Convenience_Async()
+        public void Example_GetMetricDimensionValues_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            await foreach (DimensionValueListItem item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>"))
+            foreach (DimensionValueListItem item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>", interval: Interval.PT5S, metricName: "<metricName>", timespan: "<timespan>"))
             {
             }
         }
@@ -293,13 +293,13 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetLedgerEntries_AllParameters()
+        public async Task Example_GetLedgerEntries_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            foreach (BinaryData item in client.GetLedgerEntries(null))
+            await foreach (BinaryData item in client.GetLedgerEntriesAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("contents").ToString());
@@ -323,26 +323,26 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetLedgerEntries_AllParameters_Convenience()
+        public async Task Example_GetLedgerEntries_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            foreach (LedgerEntry item in client.GetLedgerEntries())
+            await foreach (LedgerEntry item in client.GetLedgerEntriesAsync())
             {
             }
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetLedgerEntries_Async()
+        public void Example_GetLedgerEntries_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            await foreach (BinaryData item in client.GetLedgerEntriesAsync(null))
+            foreach (BinaryData item in client.GetLedgerEntries(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("contents").ToString());
@@ -370,13 +370,13 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetLedgerEntries_Convenience_Async()
+        public void Example_GetLedgerEntries_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            await foreach (LedgerEntry item in client.GetLedgerEntriesAsync())
+            foreach (LedgerEntry item in client.GetLedgerEntries())
             {
             }
         }
@@ -411,17 +411,16 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetTextBlocklists_AllParameters()
+        public async Task Example_GetTextBlocklists_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            foreach (BinaryData item in client.GetTextBlocklists(null))
+            await foreach (BinaryData item in client.GetTextBlocklistsAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("blocklistName").ToString());
-                Console.WriteLine(result[0].GetProperty("description").ToString());
             }
         }
 
@@ -440,29 +439,30 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetTextBlocklists_AllParameters_Convenience()
+        public async Task Example_GetTextBlocklists_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            foreach (TextBlocklist item in client.GetTextBlocklists())
+            await foreach (TextBlocklist item in client.GetTextBlocklistsAsync())
             {
             }
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetTextBlocklists_Async()
+        public void Example_GetTextBlocklists_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            await foreach (BinaryData item in client.GetTextBlocklistsAsync(null))
+            foreach (BinaryData item in client.GetTextBlocklists(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("blocklistName").ToString());
+                Console.WriteLine(result[0].GetProperty("description").ToString());
             }
         }
 
@@ -484,13 +484,13 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetTextBlocklists_Convenience_Async()
+        public void Example_GetTextBlocklists_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            await foreach (TextBlocklist item in client.GetTextBlocklistsAsync())
+            foreach (TextBlocklist item in client.GetTextBlocklists())
             {
             }
         }
@@ -526,17 +526,16 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetTextBlocklistItems_AllParameters()
+        public async Task Example_GetTextBlocklistItems_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            foreach (BinaryData item in client.GetTextBlocklistItems("<blocklistName>", 1234, 1234, 1234, null))
+            await foreach (BinaryData item in client.GetTextBlocklistItemsAsync("<blocklistName>", null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("blockItemId").ToString());
-                Console.WriteLine(result[0].GetProperty("description").ToString());
                 Console.WriteLine(result[0].GetProperty("text").ToString());
             }
         }
@@ -556,29 +555,30 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetTextBlocklistItems_AllParameters_Convenience()
+        public async Task Example_GetTextBlocklistItems_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            foreach (TextBlockItem item in client.GetTextBlocklistItems("<blocklistName>", maxCount: 1234, skip: 1234, maxpagesize: 1234))
+            await foreach (TextBlockItem item in client.GetTextBlocklistItemsAsync("<blocklistName>"))
             {
             }
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetTextBlocklistItems_Async()
+        public void Example_GetTextBlocklistItems_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            await foreach (BinaryData item in client.GetTextBlocklistItemsAsync("<blocklistName>", null, null, null, null))
+            foreach (BinaryData item in client.GetTextBlocklistItems("<blocklistName>", 1234, 1234, 1234, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].GetProperty("blockItemId").ToString());
+                Console.WriteLine(result[0].GetProperty("description").ToString());
                 Console.WriteLine(result[0].GetProperty("text").ToString());
             }
         }
@@ -602,13 +602,13 @@ namespace Pagination.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetTextBlocklistItems_Convenience_Async()
+        public void Example_GetTextBlocklistItems_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PaginationClient client = new PaginationClient(endpoint, credential);
 
-            await foreach (TextBlockItem item in client.GetTextBlocklistItemsAsync("<blocklistName>"))
+            foreach (TextBlockItem item in client.GetTextBlocklistItems("<blocklistName>", maxCount: 1234, skip: 1234, maxpagesize: 1234))
             {
             }
         }

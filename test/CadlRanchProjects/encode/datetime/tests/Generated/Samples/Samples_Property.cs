@@ -38,7 +38,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_AllParameters()
+        public async Task Example_Default_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -46,7 +46,7 @@ namespace Encode.Datetime.Samples
             {
                 value = "2022-05-10T14:57:31.2311892-04:00",
             });
-            Response response = client.Default(content);
+            Response response = await client.DefaultAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -64,17 +64,17 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_AllParameters_Convenience()
+        public async Task Example_Default_Convenience_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
             DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-            Response<DefaultDatetimeProperty> response = client.Default(body);
+            Response<DefaultDatetimeProperty> response = await client.DefaultAsync(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_Async()
+        public void Example_Default_AllParameters()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -82,7 +82,7 @@ namespace Encode.Datetime.Samples
             {
                 value = "2022-05-10T14:57:31.2311892-04:00",
             });
-            Response response = await client.DefaultAsync(content);
+            Response response = client.Default(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -106,12 +106,12 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_Convenience_Async()
+        public void Example_Default_AllParameters_Convenience()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
             DefaultDatetimeProperty body = new DefaultDatetimeProperty(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-            Response<DefaultDatetimeProperty> response = await client.DefaultAsync(body);
+            Response<DefaultDatetimeProperty> response = client.Default(body);
         }
 
         [Test]
@@ -142,7 +142,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc3339_AllParameters()
+        public async Task Example_Rfc3339_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -150,7 +150,7 @@ namespace Encode.Datetime.Samples
             {
                 value = "2022-05-10T18:57:31.2311892Z",
             });
-            Response response = client.Rfc3339(content);
+            Response response = await client.Rfc3339Async(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -168,17 +168,17 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc3339_AllParameters_Convenience()
+        public async Task Example_Rfc3339_Convenience_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Rfc3339DatetimeProperty body = new Rfc3339DatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
-            Response<Rfc3339DatetimeProperty> response = client.Rfc3339(body);
+            Response<Rfc3339DatetimeProperty> response = await client.Rfc3339Async(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc3339_Async()
+        public void Example_Rfc3339_AllParameters()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -186,7 +186,7 @@ namespace Encode.Datetime.Samples
             {
                 value = "2022-05-10T18:57:31.2311892Z",
             });
-            Response response = await client.Rfc3339Async(content);
+            Response response = client.Rfc3339(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -210,12 +210,12 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc3339_Convenience_Async()
+        public void Example_Rfc3339_AllParameters_Convenience()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Rfc3339DatetimeProperty body = new Rfc3339DatetimeProperty(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
-            Response<Rfc3339DatetimeProperty> response = await client.Rfc3339Async(body);
+            Response<Rfc3339DatetimeProperty> response = client.Rfc3339(body);
         }
 
         [Test]
@@ -246,7 +246,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc7231_AllParameters()
+        public async Task Example_Rfc7231_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -254,7 +254,7 @@ namespace Encode.Datetime.Samples
             {
                 value = "Tue, 10 May 2022 18:57:31 GMT",
             });
-            Response response = client.Rfc7231(content);
+            Response response = await client.Rfc7231Async(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -272,17 +272,17 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc7231_AllParameters_Convenience()
+        public async Task Example_Rfc7231_Convenience_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Rfc7231DatetimeProperty body = new Rfc7231DatetimeProperty(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
-            Response<Rfc7231DatetimeProperty> response = client.Rfc7231(body);
+            Response<Rfc7231DatetimeProperty> response = await client.Rfc7231Async(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc7231_Async()
+        public void Example_Rfc7231_AllParameters()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -290,7 +290,7 @@ namespace Encode.Datetime.Samples
             {
                 value = "Tue, 10 May 2022 18:57:31 GMT",
             });
-            Response response = await client.Rfc7231Async(content);
+            Response response = client.Rfc7231(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -314,12 +314,12 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc7231_Convenience_Async()
+        public void Example_Rfc7231_AllParameters_Convenience()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
             Rfc7231DatetimeProperty body = new Rfc7231DatetimeProperty(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
-            Response<Rfc7231DatetimeProperty> response = await client.Rfc7231Async(body);
+            Response<Rfc7231DatetimeProperty> response = client.Rfc7231(body);
         }
 
         [Test]
@@ -350,7 +350,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnixTimestamp_AllParameters()
+        public async Task Example_UnixTimestamp_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -358,7 +358,7 @@ namespace Encode.Datetime.Samples
             {
                 value = 1652209051,
             });
-            Response response = client.UnixTimestamp(content);
+            Response response = await client.UnixTimestampAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -376,17 +376,17 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnixTimestamp_AllParameters_Convenience()
+        public async Task Example_UnixTimestamp_Convenience_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
             UnixTimestampDatetimeProperty body = new UnixTimestampDatetimeProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051));
-            Response<UnixTimestampDatetimeProperty> response = client.UnixTimestamp(body);
+            Response<UnixTimestampDatetimeProperty> response = await client.UnixTimestampAsync(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnixTimestamp_Async()
+        public void Example_UnixTimestamp_AllParameters()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -394,7 +394,7 @@ namespace Encode.Datetime.Samples
             {
                 value = 1652209051,
             });
-            Response response = await client.UnixTimestampAsync(content);
+            Response response = client.UnixTimestamp(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -418,12 +418,12 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnixTimestamp_Convenience_Async()
+        public void Example_UnixTimestamp_AllParameters_Convenience()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
             UnixTimestampDatetimeProperty body = new UnixTimestampDatetimeProperty(DateTimeOffset.FromUnixTimeSeconds(1652209051));
-            Response<UnixTimestampDatetimeProperty> response = await client.UnixTimestampAsync(body);
+            Response<UnixTimestampDatetimeProperty> response = client.UnixTimestamp(body);
         }
 
         [Test]
@@ -457,7 +457,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnixTimestampArray_AllParameters()
+        public async Task Example_UnixTimestampArray_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -468,7 +468,7 @@ namespace Encode.Datetime.Samples
 1652209051
 },
             });
-            Response response = client.UnixTimestampArray(content);
+            Response response = await client.UnixTimestampArrayAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value")[0].ToString());
@@ -489,7 +489,7 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnixTimestampArray_AllParameters_Convenience()
+        public async Task Example_UnixTimestampArray_Convenience_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -497,12 +497,12 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
 {
 DateTimeOffset.FromUnixTimeSeconds(1652209051)
 });
-            Response<UnixTimestampArrayDatetimeProperty> response = client.UnixTimestampArray(body);
+            Response<UnixTimestampArrayDatetimeProperty> response = await client.UnixTimestampArrayAsync(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnixTimestampArray_Async()
+        public void Example_UnixTimestampArray_AllParameters()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -513,7 +513,7 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
 1652209051
 },
             });
-            Response response = await client.UnixTimestampArrayAsync(content);
+            Response response = client.UnixTimestampArray(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value")[0].ToString());
@@ -540,7 +540,7 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnixTimestampArray_Convenience_Async()
+        public void Example_UnixTimestampArray_AllParameters_Convenience()
         {
             Property client = new DatetimeClient().GetPropertyClient(apiVersion: "1.0.0");
 
@@ -548,7 +548,7 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
 {
 DateTimeOffset.FromUnixTimeSeconds(1652209051)
 });
-            Response<UnixTimestampArrayDatetimeProperty> response = await client.UnixTimestampArrayAsync(body);
+            Response<UnixTimestampArrayDatetimeProperty> response = client.UnixTimestampArray(body);
         }
 
         [Test]

@@ -36,6 +36,39 @@ namespace CustomizationsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_RoundTrip_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            RequestContent content = RequestContent.Create(new object());
+            Response response = await client.RoundTripAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_RoundTrip_Convenience()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            RootModel input = new RootModel();
+            Response<RootModel> response = client.RoundTrip(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_RoundTrip_Convenience_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            RootModel input = new RootModel();
+            Response<RootModel> response = await client.RoundTripAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_RoundTrip_AllParameters()
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
@@ -121,70 +154,6 @@ key = "<badListOfDictionaryName>",
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializableProperty").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_RoundTrip_Convenience()
-        {
-            CustomizationsInTspClient client = new CustomizationsInTspClient();
-
-            RootModel input = new RootModel();
-            Response<RootModel> response = client.RoundTrip(input);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_RoundTrip_AllParameters_Convenience()
-        {
-            CustomizationsInTspClient client = new CustomizationsInTspClient();
-
-            RootModel input = new RootModel()
-            {
-                PropertyModelToRename = new RenamedModel(1234)
-                {
-                    OptionalInt = 1234,
-                },
-                PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new List<string>()
-{
-"<badListName>"
-}, new Dictionary<string, string>()
-{
-    ["key"] = "<badDictionaryName>",
-}, new List<IList<string>>()
-{
-new List<string>()
-{
-"<badListOfListName>"
-}
-}, new List<IDictionary<string, string>>()
-{
-new Dictionary<string, string>()
-{
-["key"] = "<badListOfDictionaryName>",
-}
-}),
-                PropertyEnumToRename = RenamedEnum.One,
-                PropertyEnumWithValueToRename = EnumWithValueToRename.One,
-                PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
-                PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
-                PropertyToMoveToCustomization = NormalEnum.A,
-            };
-            Response<RootModel> response = client.RoundTrip(input);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_RoundTrip_Async()
-        {
-            CustomizationsInTspClient client = new CustomizationsInTspClient();
-
-            RequestContent content = RequestContent.Create(new object());
-            Response response = await client.RoundTripAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -278,12 +247,43 @@ key = "<badListOfDictionaryName>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RoundTrip_Convenience_Async()
+        public void Example_RoundTrip_AllParameters_Convenience()
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-            RootModel input = new RootModel();
-            Response<RootModel> response = await client.RoundTripAsync(input);
+            RootModel input = new RootModel()
+            {
+                PropertyModelToRename = new RenamedModel(1234)
+                {
+                    OptionalInt = 1234,
+                },
+                PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new List<string>()
+{
+"<badListName>"
+}, new Dictionary<string, string>()
+{
+    ["key"] = "<badDictionaryName>",
+}, new List<IList<string>>()
+{
+new List<string>()
+{
+"<badListOfListName>"
+}
+}, new List<IDictionary<string, string>>()
+{
+new Dictionary<string, string>()
+{
+["key"] = "<badListOfDictionaryName>",
+}
+}),
+                PropertyEnumToRename = RenamedEnum.One,
+                PropertyEnumWithValueToRename = EnumWithValueToRename.One,
+                PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
+                PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
+                PropertyToMoveToCustomization = NormalEnum.A,
+            };
+            Response<RootModel> response = client.RoundTrip(input);
         }
 
         [Test]

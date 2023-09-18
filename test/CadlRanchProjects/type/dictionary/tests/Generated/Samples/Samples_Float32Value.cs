@@ -33,11 +33,11 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFloat32Value_AllParameters()
+        public async Task Example_GetFloat32Value_Async()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-            Response response = client.GetFloat32Value(null);
+            Response response = await client.GetFloat32ValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("<key>").ToString());
@@ -54,20 +54,20 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFloat32Value_AllParameters_Convenience()
+        public async Task Example_GetFloat32Value_Convenience_Async()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-            Response<IReadOnlyDictionary<string, float>> response = client.GetFloat32Value();
+            Response<IReadOnlyDictionary<string, float>> response = await client.GetFloat32ValueAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFloat32Value_Async()
+        public void Example_GetFloat32Value_AllParameters()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetFloat32ValueAsync(null);
+            Response response = client.GetFloat32Value(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("<key>").ToString());
@@ -87,11 +87,11 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFloat32Value_Convenience_Async()
+        public void Example_GetFloat32Value_AllParameters_Convenience()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-            Response<IReadOnlyDictionary<string, float>> response = await client.GetFloat32ValueAsync();
+            Response<IReadOnlyDictionary<string, float>> response = client.GetFloat32Value();
         }
 
         [Test]
@@ -119,7 +119,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public async Task Example_Put_Async()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
@@ -127,7 +127,7 @@ namespace _Type._Dictionary.Samples
             {
                 key = 123.45F,
             });
-            Response response = client.Put(content);
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -146,11 +146,11 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public async Task Example_Put_Convenience_Async()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new Dictionary<string, float>()
+            Response response = await client.PutAsync(new Dictionary<string, float>()
             {
                 ["key"] = 123.45F,
             });
@@ -159,7 +159,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public void Example_Put_AllParameters()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
@@ -167,7 +167,7 @@ namespace _Type._Dictionary.Samples
             {
                 key = 123.45F,
             });
-            Response response = await client.PutAsync(content);
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -187,11 +187,11 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public void Example_Put_AllParameters_Convenience()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new Dictionary<string, float>()
+            Response response = client.Put(new Dictionary<string, float>()
             {
                 ["key"] = 123.45F,
             });

@@ -30,23 +30,23 @@ namespace Authentication.OAuth2.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Valid_AllParameters()
-        {
-            TokenCredential credential = new DefaultAzureCredential();
-            OAuth2Client client = new OAuth2Client(credential);
-
-            Response response = client.Valid();
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_Valid_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
             OAuth2Client client = new OAuth2Client(credential);
 
             Response response = await client.ValidAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Valid_AllParameters()
+        {
+            TokenCredential credential = new DefaultAzureCredential();
+            OAuth2Client client = new OAuth2Client(credential);
+
+            Response response = client.Valid();
             Console.WriteLine(response.Status);
         }
 
@@ -74,23 +74,23 @@ namespace Authentication.OAuth2.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Invalid_AllParameters()
-        {
-            TokenCredential credential = new DefaultAzureCredential();
-            OAuth2Client client = new OAuth2Client(credential);
-
-            Response response = client.Invalid();
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_Invalid_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
             OAuth2Client client = new OAuth2Client(credential);
 
             Response response = await client.InvalidAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Invalid_AllParameters()
+        {
+            TokenCredential credential = new DefaultAzureCredential();
+            OAuth2Client client = new OAuth2Client(credential);
+
+            Response response = client.Invalid();
             Console.WriteLine(response.Status);
         }
 

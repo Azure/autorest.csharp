@@ -34,11 +34,11 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDurationValue_AllParameters()
+        public async Task Example_GetDurationValue_Async()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            Response response = client.GetDurationValue(null);
+            Response response = await client.GetDurationValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -55,20 +55,20 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDurationValue_AllParameters_Convenience()
+        public async Task Example_GetDurationValue_Convenience_Async()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            Response<IReadOnlyList<TimeSpan>> response = client.GetDurationValue();
+            Response<IReadOnlyList<TimeSpan>> response = await client.GetDurationValueAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDurationValue_Async()
+        public void Example_GetDurationValue_AllParameters()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.GetDurationValueAsync(null);
+            Response response = client.GetDurationValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -88,11 +88,11 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDurationValue_Convenience_Async()
+        public void Example_GetDurationValue_AllParameters_Convenience()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            Response<IReadOnlyList<TimeSpan>> response = await client.GetDurationValueAsync();
+            Response<IReadOnlyList<TimeSpan>> response = client.GetDurationValue();
         }
 
         [Test]
@@ -120,7 +120,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public async Task Example_Put_Async()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
@@ -128,7 +128,7 @@ namespace _Type._Array.Samples
 {
 "PT1H23M45S"
 });
-            Response response = client.Put(content);
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -147,11 +147,11 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public async Task Example_Put_Convenience_Async()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new List<TimeSpan>()
+            Response response = await client.PutAsync(new List<TimeSpan>()
 {
 XmlConvert.ToTimeSpan("PT1H23M45S")
 });
@@ -160,7 +160,7 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public void Example_Put_AllParameters()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
@@ -168,7 +168,7 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
 {
 "PT1H23M45S"
 });
-            Response response = await client.PutAsync(content);
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -188,11 +188,11 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public void Example_Put_AllParameters_Convenience()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new List<TimeSpan>()
+            Response response = client.Put(new List<TimeSpan>()
 {
 XmlConvert.ToTimeSpan("PT1H23M45S")
 });

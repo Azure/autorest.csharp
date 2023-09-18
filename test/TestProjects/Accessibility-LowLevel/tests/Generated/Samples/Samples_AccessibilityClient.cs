@@ -31,18 +31,6 @@ namespace Accessibility_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            AccessibilityClient client = new AccessibilityClient(credential);
-
-            RequestContent content = RequestContent.Create("<body>");
-            Response response = client.Operation(content);
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -50,6 +38,18 @@ namespace Accessibility_LowLevel.Samples
 
             RequestContent content = null;
             Response response = await client.OperationAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Operation_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AccessibilityClient client = new AccessibilityClient(credential);
+
+            RequestContent content = RequestContent.Create("<body>");
+            Response response = client.Operation(content);
             Console.WriteLine(response.Status);
         }
 

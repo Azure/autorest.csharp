@@ -35,12 +35,12 @@ namespace body_file_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFile_AllParameters()
+        public async Task Example_GetFile_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FilesClient client = new FilesClient(credential);
 
-            Response response = client.GetFile(null);
+            Response response = await client.GetFileAsync(null);
             if (response.ContentStream != null)
             {
                 using (Stream outFileStream = File.OpenWrite("<filepath>"))
@@ -52,12 +52,12 @@ namespace body_file_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFile_Async()
+        public void Example_GetFile_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FilesClient client = new FilesClient(credential);
 
-            Response response = await client.GetFileAsync(null);
+            Response response = client.GetFile(null);
             if (response.ContentStream != null)
             {
                 using (Stream outFileStream = File.OpenWrite("<filepath>"))
@@ -103,12 +103,12 @@ namespace body_file_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFileLarge_AllParameters()
+        public async Task Example_GetFileLarge_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FilesClient client = new FilesClient(credential);
 
-            Response response = client.GetFileLarge(null);
+            Response response = await client.GetFileLargeAsync(null);
             if (response.ContentStream != null)
             {
                 using (Stream outFileStream = File.OpenWrite("<filepath>"))
@@ -120,12 +120,12 @@ namespace body_file_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFileLarge_Async()
+        public void Example_GetFileLarge_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FilesClient client = new FilesClient(credential);
 
-            Response response = await client.GetFileLargeAsync(null);
+            Response response = client.GetFileLarge(null);
             if (response.ContentStream != null)
             {
                 using (Stream outFileStream = File.OpenWrite("<filepath>"))
@@ -171,12 +171,12 @@ namespace body_file_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmptyFile_AllParameters()
+        public async Task Example_GetEmptyFile_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FilesClient client = new FilesClient(credential);
 
-            Response response = client.GetEmptyFile(null);
+            Response response = await client.GetEmptyFileAsync(null);
             if (response.ContentStream != null)
             {
                 using (Stream outFileStream = File.OpenWrite("<filepath>"))
@@ -188,12 +188,12 @@ namespace body_file_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmptyFile_Async()
+        public void Example_GetEmptyFile_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             FilesClient client = new FilesClient(credential);
 
-            Response response = await client.GetEmptyFileAsync(null);
+            Response response = client.GetEmptyFile(null);
             if (response.ContentStream != null)
             {
                 using (Stream outFileStream = File.OpenWrite("<filepath>"))
