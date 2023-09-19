@@ -12,7 +12,6 @@ using AuthoringTypeSpec;
 using AuthoringTypeSpec.Models;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace AuthoringTypeSpec.Samples
@@ -32,6 +31,7 @@ namespace AuthoringTypeSpec.Samples
                 storageInputContainerName = "<storageInputContainerName>",
                 language = "<language>",
             });
+
             Response response = client.CreateOrUpdate("<projectName>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -58,6 +58,7 @@ namespace AuthoringTypeSpec.Samples
                 storageInputContainerName = "<storageInputContainerName>",
                 language = "<language>",
             });
+
             Response response = await client.CreateOrUpdateAsync("<projectName>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;

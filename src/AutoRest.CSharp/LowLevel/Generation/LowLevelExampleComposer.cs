@@ -21,6 +21,7 @@ using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -36,6 +37,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static readonly CSharpType UriType = new CSharpType(typeof(Uri));
         private static readonly CSharpType KeyAuthType = KnownParameters.KeyAuth.Type;
         private static readonly CSharpType TokenAuthType = KnownParameters.TokenAuth.Type;
+        private static readonly CSharpType DefaultAzureCredentialType = new DefaultAzureCredentialTypeProvider().Type;
 
         private readonly LowLevelClient _client;
         private readonly TypeFactory _typeFactory;
@@ -280,20 +282,21 @@ namespace AutoRest.CSharp.Generation.Writers
             yield return ComposeGetClient(out var client);
             yield return EmptyLine;
 
-            // get input parameters -- only body parameter is not initialized inline in the invocation, therefore we take out all the body parameters.
-            var bodyArguments = new Dictionary<Parameter, ValueExpression>();
-            foreach (var parameter in signature.Parameters.Where(p => p.RequestLocation == RequestLocation.Body))
+            var arguments = new List<ValueExpression>();
+            foreach (var parameter in signature.Parameters.Where((p, i) => i != signature.Parameters.Count - 1 || !p.IsOptionalInSignature || !p.Type.Equals(typeof(CancellationToken))))
             {
-                var bodyArgument = new VariableReference(parameter.Type, parameter.Name);
-                yield return Var(bodyArgument, ComposeConvenienceCSharpTypeInstance(true, parameter.Type, null, true, new HashSet<ObjectType>()));
-                bodyArguments[parameter] = bodyArgument;
+                if (parameter.Type is {IsFrameworkType: false, Implementation: SerializableObjectType})
+                {
+                    // model parameters can't be initialized in - create an instance in the variable
+                    var argument = new VariableReference(parameter.Type, parameter.Name);
+                    yield return Declare(argument, ComposeConvenienceCSharpTypeInstance(true, parameter.Type, null, true, new HashSet<ObjectType>()));
+                    arguments.Add(argument);
+                }
+                else
+                {
+                    arguments.Add(MockParameterValue(parameter));
+                }
             }
-
-            var arguments = signature.Parameters
-                //skip last param if its optional and cancellation token or request context
-                .Where((p, i) => i != signature.Parameters.Count - 1 || !p.IsOptionalInSignature || !p.Type.Equals(typeof(CancellationToken)))
-                .Select(p => p.RequestLocation == RequestLocation.Body ? bodyArguments[p] : MockParameterValue(p))
-                .ToList();
 
             var returnType = signature.ReturnType;
 
@@ -324,7 +327,7 @@ namespace AutoRest.CSharp.Generation.Writers
             yield return ComposeGetClient(out var client);
             yield return EmptyLine;
 
-            VariableReference? data = null;
+            VariableReference? requestContent = null;
             if (operationMethods.RequestBodyType != null)
             {
                 // This is a corner case in swagger DPG when body is a primitive type constant.
@@ -334,8 +337,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     ? new ConstantExpression(BuilderHelpers.ParseConstant(defaultValue.Value, _typeFactory.CreateType(defaultValue.Type)))
                     : ComposeProtocolCSharpTypeInstance(allParameters, GetTypeSerialization(operationMethods.RequestBodyType), null, new HashSet<ObjectType>());
 
-                data = new VariableReference(typeof(object), "data");
-                yield return Var(data, dataValueExpression);
+                requestContent = new VariableReference(typeof(RequestContent), "content");
+                yield return Declare(requestContent, RequestContentExpression.Create(dataValueExpression));
                 yield return EmptyLine;
             }
 
@@ -343,7 +346,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 //skip last param if its optional and cancellation token or request context
                 .Where((p, i) => !(i == signature.Parameters.Count - 1 && p.IsOptionalInSignature && p.Type.Equals(typeof(RequestContext))))
                 .Where(p => allParameters || !p.IsOptionalInSignature)
-                .Select(p => p.RequestLocation == RequestLocation.Body ? RequestContentExpression.Create(data!) : MockParameterValue(p))
+                .Select(p => p.RequestLocation == RequestLocation.Body ? requestContent! : MockParameterValue(p))
                 .ToList();
 
             var responseType = operationMethods.ResponseType;
@@ -792,10 +795,19 @@ namespace AutoRest.CSharp.Generation.Writers
                         : Default;
                 }
 
+                if (type == typeof(RequestContext))
+                {
+                    return Null;
+                }
+
                 if (type.GetConstructor(Type.EmptyTypes) is not null)
                 {
                     return New.Instance(type);
                 }
+            }
+            else if (parameterType.Implementation is EnumType enumType)
+            {
+                return EnumValue(enumType, enumType.Values.First());
             }
 
             return Null; // some unknown found
@@ -1039,7 +1051,7 @@ namespace AutoRest.CSharp.Generation.Writers
             else if (clientConstructor.Parameters.Any(p => p.Type.EqualsIgnoreNullable(TokenAuthType)))
             {
                 credential = new VariableReference(TokenAuthType, "credential");
-                statements.Add(Declare(credential, New.Instance(TokenAuthType, Literal("<key>"))));
+                statements.Add(Declare(credential, New.Instance(DefaultAzureCredentialType)));
             }
 
             var newClientArguments = MockClientConstructorParameterValues(clientConstructor.Parameters, endpoint, credential);
@@ -1123,5 +1135,13 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static ValueExpression InvokeClientMethod(ValueExpression client, string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
             => new InvokeInstanceMethodExpression(client, methodName, arguments, null, async, AddConfigureAwaitFalse: false);
+
+        private class DefaultAzureCredentialTypeProvider : TypeProvider
+        {
+            public DefaultAzureCredentialTypeProvider() : base("Azure.Identity", null) { }
+
+            protected override string DefaultName => "DefaultAzureCredential";
+            protected override string DefaultAccessibility => "public";
+        }
     }
 }

@@ -9,7 +9,6 @@ using System;
 using System.Threading.Tasks;
 using Authentication.Http.Custom;
 using Azure;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace Authentication.Http.Custom.Samples

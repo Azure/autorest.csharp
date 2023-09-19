@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using Azure.Identity;
-
 namespace _Type.Property.ValueTypes.Samples
 {
     public class Samples_ValueTypesClient

@@ -9,7 +9,6 @@ using System;
 using System.Threading.Tasks;
 using Authentication.ApiKey;
 using Azure;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace Authentication.ApiKey.Samples
