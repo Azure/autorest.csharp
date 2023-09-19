@@ -213,7 +213,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _type.BaseType == null || _type.BaseType == typeof(object) ? null : CSharpType.FromSystemType(_type.BaseType, base.DefaultNamespace, _sourceInputModel);
         }
 
-        protected override string CreateDescription()
+        protected override FormattableString CreateDescription()
         {
             throw new NotImplementedException("Currently we don't support getting description in SystemObjectType");
         }

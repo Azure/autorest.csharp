@@ -20,10 +20,9 @@ using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
-    internal record Parameter(string Name, string? Description, CSharpType Type, Constant? DefaultValue = null, ValidationType Validation = ValidationType.None, FormattableString? Initializer = null, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, SerializationFormat SerializationFormat = SerializationFormat.Default, bool IsPropertyBag = false)
+    internal record Parameter(string Name, FormattableString? Description, CSharpType Type, Constant? DefaultValue = null, ValidationType Validation = ValidationType.None, FormattableString? Initializer = null, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, SerializationFormat SerializationFormat = SerializationFormat.Default, bool IsPropertyBag = false)
     {
         public static IEqualityComparer<Parameter> TypeAndNameEqualityComparer = new ParameterTypeAndNameEqualityComparer();
-        public FormattableString? FormattableDescription => Description is null ? (FormattableString?)null : $"{Description}";
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
 
@@ -36,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         {
             // we do not validate a parameter when it is a value type (struct or int, etc), or it is readonly, or it is optional, or it it nullable
             var validation = propertyType.IsValueType || property.IsReadOnly || !property.IsRequired || property.Type.IsNullable ? ValidationType.None : ValidationType.AssertNotNull;
-            return new Parameter(name, property.Description, propertyType, null, validation, null);
+            return new Parameter(name, $"{property.Description}", propertyType, null, validation, null);
         }
 
         public static Parameter? FromParameterSymbol(IParameterSymbol parameterSymbol)
@@ -114,15 +113,15 @@ namespace AutoRest.CSharp.Output.Models.Shared
             _ => (Constant?)null,
         };
 
-        public static string CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values, Constant? defaultValue = null)
+        public static FormattableString CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values, Constant? defaultValue = null)
         {
-            string description = string.IsNullOrWhiteSpace(operationParameter.Description)
-                ? $"The {operationParameter.Type.Name} to use."
-                : BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description);
+            FormattableString description = string.IsNullOrWhiteSpace(operationParameter.Description)
+                ? (FormattableString)$"The {operationParameter.Type.Name} to use."
+                : $"{BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description)}";
             if (defaultValue != null)
             {
                 var defaultValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
-                description = $"{description}{(description.EndsWith(".") ? "" : ".")} The default value is {defaultValueString}";
+                description = $"{description}{(description.ToString().EndsWith(".") ? "" : ".")} The default value is {defaultValueString}";
             }
 
             if (!type.IsFrameworkType || values == null)
@@ -131,7 +130,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             }
 
             var allowedValues = string.Join(" | ", values.Select(v => $"\"{v}\""));
-            return $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues)}";
+            return $"{description}{(description.ToString().EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues)}";
         }
 
         public static ValidationType GetValidation(CSharpType type, RequestLocation requestLocation, bool skipUrlEncoding)
@@ -209,15 +208,15 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 _ => RequestLocation.None
             };
 
-        private static string CreateDescription(RequestParameter requestParameter, CSharpType type, Constant? defaultValue = null)
+        private static FormattableString CreateDescription(RequestParameter requestParameter, CSharpType type, Constant? defaultValue = null)
         {
-            var description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
-                $"The {requestParameter.Schema.Name} to use." :
-                BuilderHelpers.EscapeXmlDocDescription(requestParameter.Language.Default.Description);
+            FormattableString description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
+                (FormattableString)$"The {requestParameter.Schema.Name} to use." :
+                $"{BuilderHelpers.EscapeXmlDocDescription(requestParameter.Language.Default.Description)}";
             if (defaultValue != null)
             {
                 var defaultValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
-                description = $"{description}{(description.EndsWith(".") ? "" : ".")} The default value is {defaultValueString}";
+                description = $"{description}{(description.ToString().EndsWith(".") ? "" : ".")} The default value is {defaultValueString}";
             }
 
             return requestParameter.Schema switch
@@ -227,13 +226,13 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 _ => description
             };
 
-            static string AddAllowedValues(string description, ICollection<ChoiceValue> choices)
+            static FormattableString AddAllowedValues(FormattableString description, ICollection<ChoiceValue> choices)
             {
                 var allowedValues = string.Join(" | ", choices.Select(c => c.Value).Select(v => $"\"{v}\""));
 
                 return string.IsNullOrEmpty(allowedValues)
                     ? description
-                    : $"{description}{(description.EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues)}";
+                    : $"{description}{(description.ToString().EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues)}";
             }
         }
 

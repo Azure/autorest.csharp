@@ -79,12 +79,12 @@ namespace AutoRest.CSharp.Generation.Writers
             };
 
             var parameters = operation.Parameters.Where(p => p.Name != KnownParameters.RequestContext.Name).Append(KnownParameters.CancellationTokenParameter).ToArray();
-            var method = new MethodSignature($"{methodName ?? operation.Name}", operation.Summary, operation.Description, modifiers, returnType, null, parameters).WithAsync(async);
+            var method = new MethodSignature($"{methodName ?? operation.Name}", $"{operation.Summary}", $"{operation.Description}", modifiers, returnType, null, parameters).WithAsync(async);
 
-            writer.WriteXmlDocumentationSummary($"{method.SummaryText}")
+            writer.WriteXmlDocumentationSummary(method.SummaryText)
                 .WriteXmlDocumentationParameters(method.Parameters)
                 .WriteXmlDocumentationRequiredParametersException(method.Parameters)
-                .WriteXmlDocumentation("remarks", $"{method.DescriptionText}");
+                .WriteXmlDocumentation("remarks", method.DescriptionText);
 
             if (method.ReturnDescription != null)
             {

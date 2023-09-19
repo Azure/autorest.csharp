@@ -66,6 +66,7 @@ namespace MgmtDiscriminator.Models
             Optional<IList<DeliveryRuleAction>> actions = default;
             Optional<IDictionary<string, DeliveryRuleAction>> extraMappingInfo = default;
             Optional<Pet> pet = default;
+            Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("order"u8))
@@ -123,8 +124,13 @@ namespace MgmtDiscriminator.Models
                     pet = Pet.DeserializePet(property.Value);
                     continue;
                 }
+                if (property.NameEquals("foo"u8))
+                {
+                    foo = property.Value.GetString();
+                    continue;
+                }
             }
-            return new DeliveryRuleProperties(Optional.ToNullable(order), conditions.Value, Optional.ToList(actions), Optional.ToDictionary(extraMappingInfo), pet.Value);
+            return new DeliveryRuleProperties(Optional.ToNullable(order), conditions.Value, Optional.ToList(actions), Optional.ToDictionary(extraMappingInfo), pet.Value, foo.Value);
         }
     }
 }

@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 if (TryGetPreviousMethodWithLessOptionalParameters(current, previous, out var currentMethodToCall, out var missingParameters))
                 {
-                    overloadMethods.Add(new OverloadMethodSignature(currentMethodToCall, previous.DisableOptionalParameters(), missingParameters, previous.FormattableDescription, true));
+                    overloadMethods.Add(new OverloadMethodSignature(currentMethodToCall, previous.DisableOptionalParameters(), missingParameters, previous.Description, true));
                 }
             }
             return overloadMethods;
@@ -198,7 +198,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         parameters.Add(methodParameter);
                     }
                 }
-                result.Add(new MethodSignature(method.Name, null, description, MapModifiers(method), returnType, null, parameters));
+                result.Add(new MethodSignature(method.Name, null, $"{description}", MapModifiers(method), returnType, null, parameters));
             }
             return result;
         }
