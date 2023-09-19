@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         public static readonly string SharedFolder = "shared";
         public static readonly string GeneratedFolder = "Generated";
-        public static readonly string GeneratedTestFolder = "tests";
+        public static readonly string GeneratedTestFolder = "GeneratedTests";
 
         private static readonly IReadOnlyList<MetadataReference> AssemblyMetadataReferences;
 
@@ -73,20 +73,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             _cachedProject = Task.Run(CreateGeneratedCodeProject);
         }
 
-        public void AddGeneratedFile(string name, string text)
-        {
-            var document = _project.AddDocument(name, text, GeneratedFolders);
-            var root = document.GetSyntaxRootAsync().GetAwaiter().GetResult();
-            Debug.Assert(root != null);
+        public void AddGeneratedFile(string name, string text) => AddGeneratedFile(name, text, GeneratedFolders);
 
-            root = root.WithAdditionalAnnotations(Simplifier.Annotation);
-            document = document.WithSyntaxRoot(root);
-            _project = document.Project;
-        }
+        public void AddGeneratedTestFile(string name, string text) => AddGeneratedFile(name, text, GeneratedTestFolders);
 
-        public void AddGeneratedTestFile(string name, string text)
+        private void AddGeneratedFile(string name, string text, string[] folders)
         {
-            var document = _project.AddDocument(name, text, GeneratedTestFolders);
+            var document = _project.AddDocument(name, text, folders);
             var root = document.GetSyntaxRootAsync().GetAwaiter().GetResult();
             Debug.Assert(root != null);
 
