@@ -15,7 +15,7 @@ using NUnit.Framework;
 
 namespace Encode.Datetime.Samples
 {
-    internal class Samples_Header
+    public class Samples_Header
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

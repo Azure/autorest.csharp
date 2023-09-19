@@ -18,7 +18,7 @@ using SpecialWords.Models;
 
 namespace SpecialWords.Samples
 {
-    internal class Samples_Model
+    public class Samples_Model
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

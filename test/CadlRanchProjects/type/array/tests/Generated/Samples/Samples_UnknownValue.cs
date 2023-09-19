@@ -17,7 +17,7 @@ using _Type._Array;
 
 namespace _Type._Array.Samples
 {
-    internal class Samples_UnknownValue
+    public class Samples_UnknownValue
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

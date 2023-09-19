@@ -17,7 +17,7 @@ using _Type.Property.Optionality.Models;
 
 namespace _Type.Property.Optionality.Samples
 {
-    internal class Samples_Datetime
+    public class Samples_Datetime
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

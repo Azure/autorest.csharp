@@ -18,7 +18,7 @@ using _Type.Property.Optionality.Models;
 
 namespace _Type.Property.Optionality.Samples
 {
-    internal class Samples_CollectionsByte
+    public class Samples_CollectionsByte
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

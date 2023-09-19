@@ -17,7 +17,7 @@ using _Type._Dictionary;
 
 namespace _Type._Dictionary.Samples
 {
-    internal class Samples_Float32Value
+    public class Samples_Float32Value
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

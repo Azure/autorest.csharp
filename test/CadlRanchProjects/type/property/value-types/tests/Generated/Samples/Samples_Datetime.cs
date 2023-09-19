@@ -17,7 +17,7 @@ using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    internal class Samples_Datetime
+    public class Samples_Datetime
     {
         [Test]
         [Ignore("Only validating compilation of examples")]

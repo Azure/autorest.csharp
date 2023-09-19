@@ -15,7 +15,7 @@ using Parameters.CollectionFormat;
 
 namespace Parameters.CollectionFormat.Samples
 {
-    internal class Samples_Header
+    public class Samples_Header
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
