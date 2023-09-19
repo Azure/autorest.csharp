@@ -71,7 +71,8 @@ import {
     SdkContext,
     getAccess,
     getClientType,
-    getUsageOverride
+    getUsageOverride,
+    isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import { capitalize, getModelName } from "./utils.js";
 import { FormattedType } from "../type/formattedType.js";
@@ -336,8 +337,7 @@ export function getInputType(
             Kind: "unknown",
             IsNullable: false
         } as InputUnknownType;
-    }
-    else {
+    } else {
         throw new Error(`Unsupported type ${type.kind}`);
     }
 
@@ -546,7 +546,9 @@ export function getInputType(
             model = {
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
-                Accessibility: getAccess(context, m),
+                Accessibility: isInternal(context, m)
+                    ? "internal"
+                    : getAccess(context, m),
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,
@@ -1056,10 +1058,7 @@ export function navigateModels(
         namespace,
         {
             model: (x) =>
-                x.name !== "" &&
-                !["AuthFlow", "MyFlow"].includes(x.name) &&
-                x.kind === "Model" &&
-                computeModel(x),
+                x.name !== "" && x.kind === "Model" && computeModel(x),
             enum: computeModel
         },
         { skipSubNamespaces }

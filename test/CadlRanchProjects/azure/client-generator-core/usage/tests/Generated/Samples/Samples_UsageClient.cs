@@ -6,14 +6,13 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Specs_.Azure.ClientGenerator.Core.Usage;
 using _Specs_.Azure.ClientGenerator.Core.Usage.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
@@ -24,29 +23,13 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_InputToInputOutput()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-            };
-
-            Response response = client.InputToInputOutput(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_InputToInputOutput_AllParameters()
-        {
-            var client = new UsageClient();
-
-            var data = new
-            {
-                name = "<name>",
-            };
-
-            Response response = client.InputToInputOutput(RequestContent.Create(data));
+            });
+            Response response = client.InputToInputOutput(content);
             Console.WriteLine(response.Status);
         }
 
@@ -54,29 +37,24 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_InputToInputOutput_Async()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new
             {
                 name = "<name>",
-            };
-
-            Response response = await client.InputToInputOutputAsync(RequestContent.Create(data));
+            });
+            Response response = await client.InputToInputOutputAsync(content);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputToInputOutput_AllParameters_Async()
+        public void Example_InputToInputOutput_Convenience()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
-            var data = new
-            {
-                name = "<name>",
-            };
-
-            Response response = await client.InputToInputOutputAsync(RequestContent.Create(data));
+            InputModel body = new InputModel("<name>");
+            Response response = client.InputToInputOutput(body);
             Console.WriteLine(response.Status);
         }
 
@@ -84,31 +62,70 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_InputToInputOutput_Convenience_Async()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
-            var body = new InputModel("<name>");
-            var result = await client.InputToInputOutputAsync(body);
+            InputModel body = new InputModel("<name>");
+            Response response = await client.InputToInputOutputAsync(body);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_InputToInputOutput_AllParameters()
+        {
+            UsageClient client = new UsageClient();
+
+            RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+            });
+            Response response = client.InputToInputOutput(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_InputToInputOutput_AllParameters_Async()
+        {
+            UsageClient client = new UsageClient();
+
+            RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+            });
+            Response response = await client.InputToInputOutputAsync(content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_InputToInputOutput_AllParameters_Convenience()
+        {
+            UsageClient client = new UsageClient();
+
+            InputModel body = new InputModel("<name>");
+            Response response = client.InputToInputOutput(body);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_InputToInputOutput_AllParameters_Convenience_Async()
+        {
+            UsageClient client = new UsageClient();
+
+            InputModel body = new InputModel("<name>");
+            Response response = await client.InputToInputOutputAsync(body);
+            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_OutputToInputOutput()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
-            Response response = client.OutputToInputOutput(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_OutputToInputOutput_AllParameters()
-        {
-            var client = new UsageClient();
-
-            Response response = client.OutputToInputOutput(new RequestContext());
+            Response response = client.OutputToInputOutput(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -118,9 +135,39 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_OutputToInputOutput_Async()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
-            Response response = await client.OutputToInputOutputAsync(new RequestContext());
+            Response response = await client.OutputToInputOutputAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_OutputToInputOutput_Convenience()
+        {
+            UsageClient client = new UsageClient();
+
+            Response<OutputModel> response = client.OutputToInputOutput();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_OutputToInputOutput_Convenience_Async()
+        {
+            UsageClient client = new UsageClient();
+
+            Response<OutputModel> response = await client.OutputToInputOutputAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_OutputToInputOutput_AllParameters()
+        {
+            UsageClient client = new UsageClient();
+
+            Response response = client.OutputToInputOutput(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -130,9 +177,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_OutputToInputOutput_AllParameters_Async()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
-            Response response = await client.OutputToInputOutputAsync(new RequestContext());
+            Response response = await client.OutputToInputOutputAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -140,11 +187,20 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OutputToInputOutput_Convenience_Async()
+        public void Example_OutputToInputOutput_AllParameters_Convenience()
         {
-            var client = new UsageClient();
+            UsageClient client = new UsageClient();
 
-            var result = await client.OutputToInputOutputAsync();
+            Response<OutputModel> response = client.OutputToInputOutput();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_OutputToInputOutput_AllParameters_Convenience_Async()
+        {
+            UsageClient client = new UsageClient();
+
+            Response<OutputModel> response = await client.OutputToInputOutputAsync();
         }
     }
 }

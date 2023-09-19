@@ -6,14 +6,12 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Specs_.Azure.ClientGenerator.Core.Access;
 using _Specs_.Azure.ClientGenerator.Core.Access.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
@@ -24,21 +22,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Public()
         {
-            var client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
-            Response response = client.Public("<name>", new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Public_AllParameters()
-        {
-            var client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
-
-            Response response = client.Public("<name>", new RequestContext());
+            Response response = client.Public("<name>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -48,9 +34,39 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Public_Async()
         {
-            var client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
-            Response response = await client.PublicAsync("<name>", new RequestContext());
+            Response response = await client.PublicAsync("<name>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Public_Convenience()
+        {
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
+
+            Response<SharedModel> response = client.Public("<name>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Public_Convenience_Async()
+        {
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
+
+            Response<SharedModel> response = await client.PublicAsync("<name>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Public_AllParameters()
+        {
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
+
+            Response response = client.Public("<name>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -60,9 +76,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Public_AllParameters_Async()
         {
-            var client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
-            Response response = await client.PublicAsync("<name>", new RequestContext());
+            Response response = await client.PublicAsync("<name>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -70,11 +86,20 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Public_Convenience_Async()
+        public void Example_Public_AllParameters_Convenience()
         {
-            var client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
 
-            var result = await client.PublicAsync("<name>");
+            Response<SharedModel> response = client.Public("<name>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Public_AllParameters_Convenience_Async()
+        {
+            SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient(apiVersion: "1.0.0");
+
+            Response<SharedModel> response = await client.PublicAsync("<name>");
         }
     }
 }

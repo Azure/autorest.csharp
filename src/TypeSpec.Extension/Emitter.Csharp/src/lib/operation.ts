@@ -8,7 +8,8 @@ import {
     shouldGenerateConvenient,
     shouldGenerateProtocol,
     SdkContext,
-    getAccess
+    getAccess,
+    isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -199,7 +200,9 @@ export function loadOperation(
         Summary: summary,
         Deprecated: getDeprecated(program, op),
         Description: desc,
-        Accessibility: getAccess(sdkContext, op),
+        Accessibility: isInternal(sdkContext, op)
+            ? "internal"
+            : getAccess(sdkContext, op),
         Parameters: parameters,
         Responses: responses,
         HttpMethod: requestMethod,

@@ -2,102 +2,164 @@
 <doc>
   <members>
     <member name="InputToInputOutputAsync(InputModel,CancellationToken)">
-<example>
-This sample shows how to call InputToInputOutputAsync with required parameters.
+      <example>
+This sample shows how to call InputToInputOutputAsync.
 <code><![CDATA[
-var client = new UsageClient();
+UsageClient client = new UsageClient();
 
-var body = new InputModel("<name>");
-var result = await client.InputToInputOutputAsync(body);
+InputModel body = new InputModel("<name>");
+Response response = await client.InputToInputOutputAsync(body);
+Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call InputToInputOutputAsync with all parameters.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+InputModel body = new InputModel("<name>");
+Response response = await client.InputToInputOutputAsync(body);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="InputToInputOutput(InputModel,CancellationToken)">
-<example>
-This sample shows how to call InputToInputOutput with required parameters.
+      <example>
+This sample shows how to call InputToInputOutput.
 <code><![CDATA[
-var client = new UsageClient();
+UsageClient client = new UsageClient();
 
-var body = new InputModel("<name>");
-var result = client.InputToInputOutput(body);
+InputModel body = new InputModel("<name>");
+Response response = client.InputToInputOutput(body);
+Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call InputToInputOutput with all parameters.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+InputModel body = new InputModel("<name>");
+Response response = client.InputToInputOutput(body);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="InputToInputOutputAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call InputToInputOutputAsync with required request content.
+      <example>
+This sample shows how to call InputToInputOutputAsync.
 <code><![CDATA[
-var client = new UsageClient();
+UsageClient client = new UsageClient();
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-};
-
-Response response = await client.InputToInputOutputAsync(RequestContent.Create(data));
+});
+Response response = await client.InputToInputOutputAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call InputToInputOutputAsync with all request content.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = await client.InputToInputOutputAsync(content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="InputToInputOutput(RequestContent,RequestContext)">
-<example>
-This sample shows how to call InputToInputOutput with required request content.
+      <example>
+This sample shows how to call InputToInputOutput.
 <code><![CDATA[
-var client = new UsageClient();
+UsageClient client = new UsageClient();
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-};
-
-Response response = client.InputToInputOutput(RequestContent.Create(data));
+});
+Response response = client.InputToInputOutput(content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call InputToInputOutput with all request content.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = client.InputToInputOutput(content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="OutputToInputOutputAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call OutputToInputOutputAsync.
 <code><![CDATA[
-var client = new UsageClient();
+UsageClient client = new UsageClient();
 
-var result = await client.OutputToInputOutputAsync();
+Response<OutputModel> response = await client.OutputToInputOutputAsync();
 ]]></code>
-</example>
+This sample shows how to call OutputToInputOutputAsync with all parameters.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+Response<OutputModel> response = await client.OutputToInputOutputAsync();
+]]></code></example>
     </member>
     <member name="OutputToInputOutput(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call OutputToInputOutput.
 <code><![CDATA[
-var client = new UsageClient();
+UsageClient client = new UsageClient();
 
-var result = client.OutputToInputOutput();
+Response<OutputModel> response = client.OutputToInputOutput();
 ]]></code>
-</example>
+This sample shows how to call OutputToInputOutput with all parameters.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+Response<OutputModel> response = client.OutputToInputOutput();
+]]></code></example>
     </member>
     <member name="OutputToInputOutputAsync(RequestContext)">
-<example>
-This sample shows how to call OutputToInputOutputAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call OutputToInputOutputAsync and parse the result.
 <code><![CDATA[
-var client = new UsageClient();
+UsageClient client = new UsageClient();
 
-Response response = await client.OutputToInputOutputAsync(new RequestContext());
+Response response = await client.OutputToInputOutputAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-</example>
+This sample shows how to call OutputToInputOutputAsync with all parameters and parse the result.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+Response response = await client.OutputToInputOutputAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code></example>
     </member>
     <member name="OutputToInputOutput(RequestContext)">
-<example>
-This sample shows how to call OutputToInputOutput with required parameters and parse the result.
+      <example>
+This sample shows how to call OutputToInputOutput and parse the result.
 <code><![CDATA[
-var client = new UsageClient();
+UsageClient client = new UsageClient();
 
-Response response = client.OutputToInputOutput(new RequestContext());
+Response response = client.OutputToInputOutput(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-</example>
+This sample shows how to call OutputToInputOutput with all parameters and parse the result.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+Response response = client.OutputToInputOutput(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code></example>
     </member>
   </members>
 </doc>

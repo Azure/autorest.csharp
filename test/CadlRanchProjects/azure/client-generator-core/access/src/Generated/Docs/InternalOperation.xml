@@ -1,29 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="NoDecoratorInInternalAsync(string,CancellationToken)">
-    </member>
-    <member name="NoDecoratorInInternal(string,CancellationToken)">
-    </member>
-    <member name="NoDecoratorInInternalAsync(string,RequestContext)">
-    </member>
-    <member name="NoDecoratorInInternal(string,RequestContext)">
-    </member>
-    <member name="InternalDecoratorInInternalAsync(string,CancellationToken)">
-    </member>
-    <member name="InternalDecoratorInInternal(string,CancellationToken)">
-    </member>
-    <member name="InternalDecoratorInInternalAsync(string,RequestContext)">
-    </member>
-    <member name="InternalDecoratorInInternal(string,RequestContext)">
-    </member>
-    <member name="PublicDecoratorInInternalAsync(string,CancellationToken)">
-    </member>
-    <member name="PublicDecoratorInInternal(string,CancellationToken)">
-    </member>
-    <member name="PublicDecoratorInInternalAsync(string,RequestContext)">
-    </member>
-    <member name="PublicDecoratorInInternal(string,RequestContext)">
-    </member>
+    <member name="NoDecoratorInInternalAsync(string,CancellationToken)" />
+    <member name="NoDecoratorInInternal(string,CancellationToken)" />
+    <member name="NoDecoratorInInternalAsync(string,RequestContext)" />
+    <member name="NoDecoratorInInternal(string,RequestContext)" />
+    <member name="InternalDecoratorInInternalAsync(string,CancellationToken)" />
+    <member name="InternalDecoratorInInternal(string,CancellationToken)" />
+    <member name="InternalDecoratorInInternalAsync(string,RequestContext)" />
+    <member name="InternalDecoratorInInternal(string,RequestContext)" />
+    <member name="PublicDecoratorInInternalAsync(string,CancellationToken)" />
+    <member name="PublicDecoratorInInternal(string,CancellationToken)" />
+    <member name="PublicDecoratorInInternalAsync(string,RequestContext)" />
+    <member name="PublicDecoratorInInternal(string,RequestContext)" />
   </members>
 </doc>

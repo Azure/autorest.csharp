@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="OperationAsync(string,CancellationToken)">
-    </member>
-    <member name="Operation(string,CancellationToken)">
-    </member>
-    <member name="OperationAsync(string,RequestContext)">
-    </member>
-    <member name="Operation(string,RequestContext)">
-    </member>
-    <member name="DiscriminatorAsync(string,CancellationToken)">
-    </member>
-    <member name="Discriminator(string,CancellationToken)">
-    </member>
-    <member name="DiscriminatorAsync(string,RequestContext)">
-    </member>
-    <member name="Discriminator(string,RequestContext)">
-    </member>
+    <member name="OperationAsync(string,CancellationToken)" />
+    <member name="Operation(string,CancellationToken)" />
+    <member name="OperationAsync(string,RequestContext)" />
+    <member name="Operation(string,RequestContext)" />
+    <member name="DiscriminatorAsync(string,CancellationToken)" />
+    <member name="Discriminator(string,CancellationToken)" />
+    <member name="DiscriminatorAsync(string,RequestContext)" />
+    <member name="Discriminator(string,RequestContext)" />
   </members>
 </doc>

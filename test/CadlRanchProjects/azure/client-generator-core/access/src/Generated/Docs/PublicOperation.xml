@@ -2,96 +2,148 @@
 <doc>
   <members>
     <member name="NoDecoratorInPublicAsync(string,CancellationToken)">
-<example>
-This sample shows how to call NoDecoratorInPublicAsync with required parameters.
+      <example>
+This sample shows how to call NoDecoratorInPublicAsync.
 <code><![CDATA[
-var client = new AccessClient().GetPublicOperationClient("1.0.0");
+PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
-var result = await client.NoDecoratorInPublicAsync("<name>");
+Response<NoDecoratorModelInPublic> response = await client.NoDecoratorInPublicAsync("<name>");
 ]]></code>
-</example>
+This sample shows how to call NoDecoratorInPublicAsync with all parameters.
+<code><![CDATA[
+PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+
+Response<NoDecoratorModelInPublic> response = await client.NoDecoratorInPublicAsync("<name>");
+]]></code></example>
     </member>
     <member name="NoDecoratorInPublic(string,CancellationToken)">
-<example>
-This sample shows how to call NoDecoratorInPublic with required parameters.
+      <example>
+This sample shows how to call NoDecoratorInPublic.
 <code><![CDATA[
-var client = new AccessClient().GetPublicOperationClient("1.0.0");
+PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
-var result = client.NoDecoratorInPublic("<name>");
+Response<NoDecoratorModelInPublic> response = client.NoDecoratorInPublic("<name>");
 ]]></code>
-</example>
+This sample shows how to call NoDecoratorInPublic with all parameters.
+<code><![CDATA[
+PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+
+Response<NoDecoratorModelInPublic> response = client.NoDecoratorInPublic("<name>");
+]]></code></example>
     </member>
     <member name="NoDecoratorInPublicAsync(string,RequestContext)">
-<example>
-This sample shows how to call NoDecoratorInPublicAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call NoDecoratorInPublicAsync and parse the result.
 <code><![CDATA[
-var client = new AccessClient().GetPublicOperationClient("1.0.0");
+PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
-Response response = await client.NoDecoratorInPublicAsync("<name>", new RequestContext());
+Response response = await client.NoDecoratorInPublicAsync("<name>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-</example>
+This sample shows how to call NoDecoratorInPublicAsync with all parameters and parse the result.
+<code><![CDATA[
+PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+
+Response response = await client.NoDecoratorInPublicAsync("<name>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code></example>
     </member>
     <member name="NoDecoratorInPublic(string,RequestContext)">
-<example>
-This sample shows how to call NoDecoratorInPublic with required parameters and parse the result.
+      <example>
+This sample shows how to call NoDecoratorInPublic and parse the result.
 <code><![CDATA[
-var client = new AccessClient().GetPublicOperationClient("1.0.0");
+PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
-Response response = client.NoDecoratorInPublic("<name>", new RequestContext());
+Response response = client.NoDecoratorInPublic("<name>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-</example>
+This sample shows how to call NoDecoratorInPublic with all parameters and parse the result.
+<code><![CDATA[
+PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+
+Response response = client.NoDecoratorInPublic("<name>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code></example>
     </member>
     <member name="PublicDecoratorInPublicAsync(string,CancellationToken)">
-<example>
-This sample shows how to call PublicDecoratorInPublicAsync with required parameters.
+      <example>
+This sample shows how to call PublicDecoratorInPublicAsync.
 <code><![CDATA[
-var client = new AccessClient().GetPublicOperationClient("1.0.0");
+PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
-var result = await client.PublicDecoratorInPublicAsync("<name>");
+Response<PublicDecoratorModelInPublic> response = await client.PublicDecoratorInPublicAsync("<name>");
 ]]></code>
-</example>
+This sample shows how to call PublicDecoratorInPublicAsync with all parameters.
+<code><![CDATA[
+PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+
+Response<PublicDecoratorModelInPublic> response = await client.PublicDecoratorInPublicAsync("<name>");
+]]></code></example>
     </member>
     <member name="PublicDecoratorInPublic(string,CancellationToken)">
-<example>
-This sample shows how to call PublicDecoratorInPublic with required parameters.
+      <example>
+This sample shows how to call PublicDecoratorInPublic.
 <code><![CDATA[
-var client = new AccessClient().GetPublicOperationClient("1.0.0");
+PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
-var result = client.PublicDecoratorInPublic("<name>");
+Response<PublicDecoratorModelInPublic> response = client.PublicDecoratorInPublic("<name>");
 ]]></code>
-</example>
+This sample shows how to call PublicDecoratorInPublic with all parameters.
+<code><![CDATA[
+PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+
+Response<PublicDecoratorModelInPublic> response = client.PublicDecoratorInPublic("<name>");
+]]></code></example>
     </member>
     <member name="PublicDecoratorInPublicAsync(string,RequestContext)">
-<example>
-This sample shows how to call PublicDecoratorInPublicAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call PublicDecoratorInPublicAsync and parse the result.
 <code><![CDATA[
-var client = new AccessClient().GetPublicOperationClient("1.0.0");
+PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
-Response response = await client.PublicDecoratorInPublicAsync("<name>", new RequestContext());
+Response response = await client.PublicDecoratorInPublicAsync("<name>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-</example>
+This sample shows how to call PublicDecoratorInPublicAsync with all parameters and parse the result.
+<code><![CDATA[
+PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+
+Response response = await client.PublicDecoratorInPublicAsync("<name>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code></example>
     </member>
     <member name="PublicDecoratorInPublic(string,RequestContext)">
-<example>
-This sample shows how to call PublicDecoratorInPublic with required parameters and parse the result.
+      <example>
+This sample shows how to call PublicDecoratorInPublic and parse the result.
 <code><![CDATA[
-var client = new AccessClient().GetPublicOperationClient("1.0.0");
+PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
-Response response = client.PublicDecoratorInPublic("<name>", new RequestContext());
+Response response = client.PublicDecoratorInPublic("<name>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-</example>
+This sample shows how to call PublicDecoratorInPublic with all parameters and parse the result.
+<code><![CDATA[
+PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+
+Response response = client.PublicDecoratorInPublic("<name>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code></example>
     </member>
   </members>
 </doc>
