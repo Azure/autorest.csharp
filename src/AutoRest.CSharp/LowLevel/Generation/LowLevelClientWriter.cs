@@ -559,7 +559,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var methodSignature = convenienceMethod.Signature.WithAsync(isAsync);
 
             _writer.WriteMethodDocumentation(methodSignature);
-            _writer.WriteXmlDocumentation("remarks", $"{methodSignature.DescriptionText}");
+            _writer.WriteXmlDocumentation("remarks", methodSignature.DescriptionText);
             var docRef = GetMethodSignatureString(methodSignature);
             _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
 

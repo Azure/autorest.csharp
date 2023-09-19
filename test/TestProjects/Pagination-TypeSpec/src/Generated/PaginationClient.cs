@@ -169,6 +169,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="testRunId"/>, <paramref name="name"/> or <paramref name="metricNamespace"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="testRunId"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> List the dimension values for the given metric dimension name. </remarks>
         /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetMetricDimensionValuesAsync(string,string,string,Interval?,string,string,CancellationToken)']/*" />
         public virtual AsyncPageable<DimensionValueListItem> GetMetricDimensionValuesAsync(string testRunId, string name, string metricNamespace, Interval? interval = null, string metricName = null, string timespan = null, CancellationToken cancellationToken = default)
         {
@@ -195,6 +196,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="testRunId"/>, <paramref name="name"/> or <paramref name="metricNamespace"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="testRunId"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> List the dimension values for the given metric dimension name. </remarks>
         /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetMetricDimensionValues(string,string,string,Interval?,string,string,CancellationToken)']/*" />
         public virtual Pageable<DimensionValueListItem> GetMetricDimensionValues(string testRunId, string name, string metricNamespace, Interval? interval = null, string metricName = null, string timespan = null, CancellationToken cancellationToken = default)
         {
