@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationSummary(method.SummaryText)
                 .WriteXmlDocumentationParameters(method.Parameters)
                 .WriteXmlDocumentationRequiredParametersException(method.Parameters)
-                .WriteXmlDocumentation("remarks", $"{method.DescriptionText}");
+                .WriteXmlDocumentation("remarks", method.DescriptionText);
 
             if (method.ReturnDescription != null)
             {

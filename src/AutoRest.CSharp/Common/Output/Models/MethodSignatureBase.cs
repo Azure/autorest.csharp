@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Output.Models
     {
         private bool IsSummaryNullOrEmpty => string.IsNullOrEmpty(Summary?.ToString());
         public FormattableString? SummaryText => IsSummaryNullOrEmpty ? Description : Summary;
-        public FormattableString? DescriptionText => IsSummaryNullOrEmpty || Description == Summary ? $"" : Description;
+        public FormattableString? DescriptionText => IsSummaryNullOrEmpty || Description == Summary || Description?.ToString() == Summary?.ToString() ? $"" : Description;
     }
 
     [Flags]
