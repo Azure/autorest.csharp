@@ -590,7 +590,7 @@ namespace AutoRest.CSharp.Output.Models
                 return;
             }
 
-            var convenienceMethodParameter = BuildParameter(inputParameter);
+            var convenienceMethodParameter = BuildParameter(inputParameter, frameworkParameterType);
             var parameterChain = inputParameter.Location == RequestLocation.None
                 ? new ParameterChain(convenienceMethodParameter, null, null)
                 : new ParameterChain(convenienceMethodParameter, protocolMethodParameter, protocolMethodParameter);
