@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 _writer.WriteXmlDocumentationSummary(This.Description);
                 using (_writer.Scope($"{This.Declaration.Accessibility} static partial class {This.Type:D}"))
                 {
-                    foreach (var method in This.Methods.Where(x => !This.SignatureTypeProvider!.MethodsToSkip.Contains(x)))
+                    foreach (var method in This.OutputMethods)
                     {
                         WriteFactoryMethod(method);
                         _writer.Line();

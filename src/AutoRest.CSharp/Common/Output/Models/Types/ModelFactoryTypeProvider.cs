@@ -27,8 +27,19 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultAccessibility { get; }
 
         private IReadOnlyList<MethodSignature>? _methods;
-        public IReadOnlyList<MethodSignature> Methods => _methods ??= EnsureMethods();
-        private IReadOnlyList<MethodSignature> EnsureMethods() => Models!.Select(CreateMethod).ToList();
+        public IReadOnlyList<MethodSignature> Methods => _methods ??= Models!.Select(CreateMethod).ToList();
+
+        private IReadOnlyList<MethodSignature>? _outputMethods;
+        public IReadOnlyList<MethodSignature> OutputMethods
+            => _outputMethods ??= EnsureOutputMethods();
+        private IReadOnlyList<MethodSignature> EnsureOutputMethods()
+        {
+            if (SignatureTypeProvider is null)
+            {
+                return Methods;
+            }
+            return Methods.Where(x => !SignatureTypeProvider.MethodsToSkip.Contains(x)).ToList();
+        }
 
         public IEnumerable<SerializableObjectType> Models { get; }
 
