@@ -317,7 +317,7 @@ namespace AutoRest.CSharp.Output.Models
             return candidates.OrderBy(c => c.Parameters.Count).FirstOrDefault();
         }
 
-        private string? GetSummaryPortion(string? xmlComment)
+        private FormattableString? GetSummaryPortion(string? xmlComment)
         {
             if (xmlComment is null)
                 return null;
@@ -330,7 +330,7 @@ namespace AutoRest.CSharp.Output.Models
             int end = span.IndexOf("</summary>");
             if (end == -1)
                 return null;
-            return span.Slice(start, end - start).Trim().ToString();
+            return $"{span.Slice(start, end - start).Trim().ToString()}";
         }
 
         private bool IsParamMatch(IReadOnlyList<Parameter> methodParameters, INamedTypeSymbol[] suppressionParameters)

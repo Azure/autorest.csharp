@@ -270,7 +270,7 @@ namespace AutoRest.CSharp.Generation.Writers
         public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignatureBase methodBase, FormattableString? summaryText = null)
         {
             return writer
-                .WriteXmlDocumentationSummary(summaryText ?? $"{methodBase.SummaryText}")
+                .WriteXmlDocumentationSummary(summaryText ?? methodBase.SummaryText)
                 .WriteMethodDocumentationSignature(methodBase);
         }
 
@@ -628,7 +628,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static IDisposable WriteCommonMethodWithoutValidation(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType)
         {
-            writer.WriteXmlDocumentationSummary(signature.FormattableDescription);
+            writer.WriteXmlDocumentationSummary(signature.Description);
             writer.WriteXmlDocumentationParameters(signature.Parameters);
             if (isPublicType)
             {

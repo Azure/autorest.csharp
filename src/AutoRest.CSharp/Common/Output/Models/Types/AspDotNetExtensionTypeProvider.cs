@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                         }
                     }
 
-                    var summary = $"Registers a <see cref=\"{client.Declaration.Name}\"/> instance";
+                    FormattableString summary = $"Registers a <see cref=\"{client.Type}\"/> instance";
                     var constrait = includeCredential
                         ? (FormattableString)$"{typeof(IAzureClientFactoryBuilderWithCredential)}"
                         : $"{typeof(IAzureClientFactoryBuilder)}";
@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             {
                 var returnType = new CSharpType(typeof(IAzureClientBuilder<,>), client.Type, client.ClientOptions.Type);
 
-                var summary = $"Registers a <see cref=\"{client.Declaration.Name}\"/> instance";
+                FormattableString summary = $"Registers a <see cref=\"{client.Type}\"/> instance";
                 yield return new MethodSignature(
                     $"Add{client.Declaration.Name}",
                     summary,
