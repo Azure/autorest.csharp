@@ -112,7 +112,9 @@ namespace MgmtListMethods
             {
                 var response = await _mgmtGrpParentWithNonResChRestClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new MgmtGrpParentWithNonResChResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -144,7 +146,9 @@ namespace MgmtListMethods
             {
                 var response = _mgmtGrpParentWithNonResChRestClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new MgmtGrpParentWithNonResChResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

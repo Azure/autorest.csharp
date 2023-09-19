@@ -15,12 +15,12 @@ namespace AutoRest.CSharp.Output.Models
     internal class LroPagingDataPlaneLegacyMethodBuilder : DataPlaneLegacyMethodBuilderBase
     {
         private readonly CSharpType _lroType;
-        private readonly ValueExpression _restClient;
+        private readonly TypedValueExpression _restClient;
         private readonly MethodSignature _convenienceMethod;
         private readonly MethodSignature _createMessageMethod;
         private readonly MethodSignature? _createNextPageMessageMethod;
 
-        public LroPagingDataPlaneLegacyMethodBuilder(string clientName, ClientFields fields, ValueExpression restClientReference, MethodSignature convenienceMethod, MethodSignature createMessageMethod, MethodSignature? createNextPageMessageMethod, CSharpType lroType)
+        public LroPagingDataPlaneLegacyMethodBuilder(string clientName, ClientFields fields, TypedValueExpression restClientReference, MethodSignature convenienceMethod, MethodSignature createMessageMethod, MethodSignature? createNextPageMessageMethod, CSharpType lroType)
             : base(clientName, fields)
         {
             _restClient = restClientReference;

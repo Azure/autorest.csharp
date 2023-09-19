@@ -7,11 +7,11 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record XDocumentExpression(ValueExpression Untyped) : TypedValueExpression(typeof(XDocument), Untyped)
+    internal sealed record XDocumentExpression(ValueExpression Untyped) : TypedValueExpression<XDocument>(Untyped)
     {
         public static XDocumentExpression Load(StreamExpression stream, LoadOptions loadOptions)
-            => new(new InvokeStaticMethodExpression(typeof(XDocument), nameof(XDocument.Load), new[]{stream, FrameworkEnumValue(loadOptions)}));
+            => new(InvokeStatic(nameof(XDocument.Load), stream, FrameworkEnumValue(loadOptions)));
 
-        public XElementExpression Element(string name) => new(Untyped.Invoke(nameof(XDocument.Element), Literal(name)));
+        public XElementExpression Element(string name) => new(Invoke(nameof(XDocument.Element), Literal(name)));
     }
 }

@@ -7,10 +7,10 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record TimeSpanExpression(ValueExpression Untyped) : TypedValueExpression(typeof(TimeSpan), Untyped)
+    internal sealed record TimeSpanExpression(ValueExpression Untyped) : TypedValueExpression<TimeSpan>(Untyped)
     {
         public StringExpression ToString(string? format) => new(Invoke(nameof(TimeSpan.ToString), new[] { Literal(format) }));
 
-        public static ValueExpression FromSeconds(ValueExpression value) => new InvokeStaticMethodExpression(typeof(TimeSpan), nameof(TimeSpan.FromSeconds), new[] { value });
+        public static TimeSpanExpression FromSeconds(ValueExpression value) => new(InvokeStatic(nameof(TimeSpan.FromSeconds), value));
     }
 }

@@ -109,7 +109,9 @@ namespace MgmtListMethods
             {
                 var response = await _fakeConfigurationConfigurationsRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new FakeConfigurationResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -141,7 +143,9 @@ namespace MgmtListMethods
             {
                 var response = _fakeConfigurationConfigurationsRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new FakeConfigurationResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

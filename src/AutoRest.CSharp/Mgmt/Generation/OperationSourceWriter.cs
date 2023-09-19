@@ -127,8 +127,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteCreateResult()
         {
-            var responseVariable = new CodeWriterDeclaration("response");
-            using (_writer.Scope($"{_opSource.ReturnType} {_opSource.Interface}.CreateResult({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
+            var responseVariable = new VariableReference(typeof(Response), "response");
+            using (_writer.Scope($"{_opSource.ReturnType} {_opSource.Interface}.CreateResult({typeof(Response)} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
                 _writer.WriteMethodBodyStatement(BuildCreateResultBody(new ResponseExpression(responseVariable), false).AsStatement());
             }
@@ -136,8 +136,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteCreateResultAsync()
         {
-            var responseVariable = new CodeWriterDeclaration("response");
-            using (_writer.Scope($"async {new CSharpType(typeof(ValueTask<>), _opSource.ReturnType)} {_opSource.Interface}.CreateResultAsync({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
+            var responseVariable = new VariableReference(typeof(Response), "response");
+            using (_writer.Scope($"async {new CSharpType(typeof(ValueTask<>), _opSource.ReturnType)} {_opSource.Interface}.CreateResultAsync({typeof(Response)} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
                 _writer.WriteMethodBodyStatement(BuildCreateResultBody(new ResponseExpression(responseVariable), true).AsStatement());
             }
@@ -160,7 +160,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 var dataVariable = new VariableReference(resourceData.Type, "data");
 
-                yield return new DeclareVariableStatement(null, dataVariable.Declaration, deserializeExpression);
+                yield return Var(dataVariable, deserializeExpression);
                 if (resourceData.ShouldSetResourceIdentifier)
                 {
                     yield return Assign(new MemberExpression(dataVariable, "Id"), new MemberExpression(_opSource.ArmClientField, "Id"));

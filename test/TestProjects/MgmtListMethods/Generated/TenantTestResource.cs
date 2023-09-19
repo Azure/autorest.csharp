@@ -323,7 +323,9 @@ namespace MgmtListMethods
             {
                 var response = await _tenantTestRestClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new TenantTestResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -356,7 +358,9 @@ namespace MgmtListMethods
             {
                 var response = _tenantTestRestClient.Get(Id.Name, expand, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new TenantTestResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

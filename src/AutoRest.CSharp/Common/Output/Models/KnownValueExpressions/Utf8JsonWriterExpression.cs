@@ -10,16 +10,16 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record Utf8JsonWriterExpression(ValueExpression Untyped) : TypedValueExpression(typeof(Utf8JsonWriter), Untyped)
+    internal sealed record Utf8JsonWriterExpression(ValueExpression Untyped) : TypedValueExpression<Utf8JsonWriter>(Untyped)
     {
         public MethodBodyStatement WriteStartObject() => new InvokeInstanceMethodStatement(Untyped, nameof(Utf8JsonWriter.WriteStartObject));
         public MethodBodyStatement WriteEndObject() => new InvokeInstanceMethodStatement(Untyped, nameof(Utf8JsonWriter.WriteEndObject));
         public MethodBodyStatement WriteStartArray() => new InvokeInstanceMethodStatement(Untyped, nameof(Utf8JsonWriter.WriteStartArray));
         public MethodBodyStatement WriteEndArray() => new InvokeInstanceMethodStatement(Untyped, nameof(Utf8JsonWriter.WriteEndArray));
         public MethodBodyStatement WritePropertyName(string propertyName) => WritePropertyName(LiteralU8(propertyName));
-        public MethodBodyStatement WritePropertyName(ValueExpression propertyName) => new InvokeInstanceMethodStatement(Untyped, nameof(System.Text.Json.Utf8JsonWriter.WritePropertyName), propertyName);
+        public MethodBodyStatement WritePropertyName(ValueExpression propertyName) => new InvokeInstanceMethodStatement(Untyped, nameof(Utf8JsonWriter.WritePropertyName), propertyName);
         public MethodBodyStatement WriteNull(string propertyName) => WriteNull(Literal(propertyName));
-        public MethodBodyStatement WriteNull(ValueExpression propertyName) => new InvokeInstanceMethodStatement(Untyped, nameof(System.Text.Json.Utf8JsonWriter.WriteNull), propertyName);
+        public MethodBodyStatement WriteNull(ValueExpression propertyName) => new InvokeInstanceMethodStatement(Untyped, nameof(Utf8JsonWriter.WriteNull), propertyName);
         public MethodBodyStatement WriteNullValue() => new InvokeInstanceMethodStatement(Untyped, nameof(Utf8JsonWriter.WriteNullValue));
 
         public MethodBodyStatement WriteNumberValue(ValueExpression value)

@@ -112,7 +112,9 @@ namespace Azure.ResourceManager.Sample
             {
                 var response = await _proximityPlacementGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, includeColocationStatus, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new ProximityPlacementGroupResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -145,7 +147,9 @@ namespace Azure.ResourceManager.Sample
             {
                 var response = _proximityPlacementGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, includeColocationStatus, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new ProximityPlacementGroupResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

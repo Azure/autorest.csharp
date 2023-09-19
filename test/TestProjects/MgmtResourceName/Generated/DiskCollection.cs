@@ -160,7 +160,9 @@ namespace MgmtResourceName
             {
                 var response = await _diskRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, diskResourceName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new Disk(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -196,7 +198,9 @@ namespace MgmtResourceName
             {
                 var response = _diskRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, diskResourceName, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new Disk(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

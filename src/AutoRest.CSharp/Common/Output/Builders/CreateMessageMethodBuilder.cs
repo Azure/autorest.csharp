@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _parameters = parameters;
             _requestContext = requestContext;
             _bodyMediaType = bodyMediaType;
-            _pipeline  = new HttpPipelineExpression(_fields.PipelineField.Declaration);
+            _pipeline  = new HttpPipelineExpression(_fields.PipelineField);
 
             _uriRequestParts = requestParts
                 .Where(p => p.InputParameter?.Location == RequestLocation.Uri)
@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             var callPipelineCreateMessage = _requestContext is not null
                 ? responseClassifierType is not null
-                    ? _pipeline.CreateMessage(_requestContext, new FormattableStringToExpression($"{responseClassifierType.Name}"))
+                    ? _pipeline.CreateMessage(_requestContext, new MemberExpression(null, responseClassifierType.Name))
                     : _pipeline.CreateMessage(_requestContext)
                 : _pipeline.CreateMessage();
 

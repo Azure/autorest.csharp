@@ -7,9 +7,9 @@ using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record ArmResourceExpression(ValueExpression Untyped) : TypedValueExpression(typeof(ArmResource), Untyped)
+    internal sealed record ArmResourceExpression(ValueExpression Untyped) : TypedValueExpression<ArmResource>(Untyped)
     {
-        public ResourceIdentifierExpression Id { get; } = new(new MemberExpression(Untyped, nameof(ArmResource.Id)));
-        public ResourceIdentifierExpression Name { get; } = new(new MemberExpression(Untyped, "Name"));
+        public ResourceIdentifierExpression Id => new(Property(nameof(ArmResource.Id)));
+        public ResourceIdentifierExpression Name => new(Property("Name"));
     }
 }

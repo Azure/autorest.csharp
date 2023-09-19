@@ -111,7 +111,9 @@ namespace MgmtListMethods
             {
                 var response = await _fakeParentWithNonResChRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new FakeParentWithNonResChResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -143,7 +145,9 @@ namespace MgmtListMethods
             {
                 var response = _fakeParentWithNonResChRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new FakeParentWithNonResChResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

@@ -7,7 +7,7 @@ using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record StreamExpression(ValueExpression Untyped) : TypedValueExpression(typeof(Stream), Untyped)
+    internal sealed record StreamExpression(ValueExpression Untyped) : TypedValueExpression<Stream>(Untyped)
     {
         public MethodBodyStatement CopyTo(StreamExpression destination) => new InvokeInstanceMethodStatement(Untyped, nameof(Stream.CopyTo), destination);
     }

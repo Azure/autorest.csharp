@@ -383,8 +383,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var additionalProperties = serialization.AdditionalProperties;
             if (additionalProperties != null)
             {
-                var propertyDeclaration = new CodeWriterDeclaration(additionalProperties.SerializationConstructorParameterName);
-                propertyVariables.Add(additionalProperties, new VariableReference(additionalProperties.ValueType, propertyDeclaration));
+                propertyVariables.Add(additionalProperties, new VariableReference(additionalProperties.ValueType, additionalProperties.SerializationConstructorParameterName));
             }
 
             bool isThisTheDefaultDerivedType = serialization.Type.Equals(serialization.Discriminator?.DefaultObjectType.Type);
@@ -397,11 +396,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     (!serialization.Discriminator.Property.ValueType.IsEnum || serialization.Discriminator.Property.ValueType.Implementation is EnumType { IsExtensible: true }))
                 {
                     var defaultValue = serialization.Discriminator.Value.Value.Value?.ToString();
-                    yield return new DeclareVariableStatement(variable.Value.Type, variable.Value.Declaration, Literal(defaultValue));
+                    yield return Declare(variable.Value, Literal(defaultValue));
                 }
                 else
                 {
-                    yield return new DeclareVariableStatement(variable.Value.Type, variable.Value.Declaration, Snippets.Default);
+                    yield return Declare(variable.Value, Snippets.Default);
                 }
             }
 
@@ -409,7 +408,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var objAdditionalProperties = serialization.AdditionalProperties;
             if (objAdditionalProperties != null)
             {
-                yield return new DeclareVariableStatement(objAdditionalProperties.Type, "additionalPropertiesDictionary", New.Instance(objAdditionalProperties.Type), out var dictionary);
+                var dictionary = new VariableReference(objAdditionalProperties.Type, "additionalPropertiesDictionary");
+                yield return Declare(dictionary, New.Instance(objAdditionalProperties.Type));
                 yield return new ForeachStatement("property", element.EnumerateObject(), out var property)
                 {
                     DeserializeIntoObjectProperties(serialization.Properties, objAdditionalProperties.ValueSerialization, new JsonPropertyExpression(property), new DictionaryExpression(TypeFactory.GetElementType(objAdditionalProperties.Type), dictionary), propertyVariables, shouldTreatEmptyStringAsNull)
@@ -562,7 +562,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return jsonElement.ValueKindEqualsNull();
             }
 
-            return Or(jsonElement.ValueKindEqualsNull(), And(jsonElement.ValueKindEqualsString(), Equal(jsonElement.GetString().Length, new FormattableStringToExpression($"0"))));
+            return Or(jsonElement.ValueKindEqualsNull(), And(jsonElement.ValueKindEqualsString(), Equal(jsonElement.GetString().Length, Int(0))));
 
         }
 
@@ -626,19 +626,23 @@ namespace AutoRest.CSharp.Common.Output.Builders
             switch (serialization)
             {
                 case JsonArraySerialization jsonArray:
+                    var array = new VariableReference(jsonArray.ImplementationType, "array");
+                    value = array;
                     return new MethodBodyStatement[]
                     {
-                        new DeclareVariableStatement(jsonArray.ImplementationType, "array", New.Instance(jsonArray.ImplementationType), out value),
-                        new ForeachStatement("item", element.EnumerateArray(), out TypedValueExpression item)
+                        Declare(array, New.Instance(jsonArray.ImplementationType)),
+                        new ForeachStatement("item", element.EnumerateArray(), out ValueExpression item)
                         {
                             DeserializeArrayItem(jsonArray.ValueSerialization, value, new JsonElementExpression(item))
                         }
                     };
 
                 case JsonDictionarySerialization jsonDictionary:
+                    var dictionary = new VariableReference(jsonDictionary.Type, "dictionary");
+                    value = dictionary;
                     return new MethodBodyStatement[]
                     {
-                        new DeclareVariableStatement(jsonDictionary.Type, "dictionary", New.Instance(jsonDictionary.Type), out value),
+                        Declare(dictionary, New.Instance(jsonDictionary.Type)),
                         new ForeachStatement("property", element.EnumerateObject(), out var property)
                         {
                             DeserializeDictionaryValue(jsonDictionary.ValueSerialization, new DictionaryExpression(TypeFactory.GetElementType(jsonDictionary.Type), value), new JsonPropertyExpression(property))
@@ -730,7 +734,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return InvokeJsonSerializerDeserializeMethod(element, implementation.Type, serializerOptions);
 
                 case Resource { ResourceData: SerializableObjectType { IncludeDeserializer: true } resourceDataType } resource:
-                    return New.Instance(resource.Type, new FormattableStringToExpression($"Client"), SerializableObjectTypeExpression.Deserialize(resourceDataType, element));
+                    return New.Instance(resource.Type, new MemberExpression(null, "Client"), SerializableObjectTypeExpression.Deserialize(resourceDataType, element));
 
                 case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema):
                     return InvokeJsonSerializerDeserializeMethod(element, implementation.Type);

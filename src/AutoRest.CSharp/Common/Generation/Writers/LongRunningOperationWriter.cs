@@ -197,8 +197,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteCreateResult(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType resultType, CSharpType interfaceType)
         {
-            var responseVariable = new CodeWriterDeclaration("response");
-            using (writer.Scope($"{resultType} {interfaceType}.CreateResult({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
+            var responseVariable = new VariableReference(typeof(Response), "response");
+            using (writer.Scope($"{resultType} {interfaceType}.CreateResult({typeof(Response)} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
                 WriteCreateResultBody(writer, operation, responseVariable, pagingResponse, resultType, false);
             }
@@ -206,22 +206,22 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteCreateResultAsync(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType resultType, CSharpType interfaceType)
         {
-            var responseVariable = new CodeWriterDeclaration("response");
+            var responseVariable = new VariableReference(typeof(Response), "response");
             var asyncKeyword = pagingResponse == null && operation.ResultSerialization != null ? "async " : "";
-            using (writer.Scope($"{asyncKeyword}{new CSharpType(typeof(ValueTask<>), resultType)} {interfaceType}.CreateResultAsync({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
+            using (writer.Scope($"{asyncKeyword}{new CSharpType(typeof(ValueTask<>), resultType)} {interfaceType}.CreateResultAsync({typeof(Response)} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
                 WriteCreateResultBody(writer, operation, responseVariable, pagingResponse, resultType, true);
             }
         }
 
-        private static void WriteCreateResultBody(CodeWriter writer, LongRunningOperation operation, CodeWriterDeclaration responseVariable, PagingResponseInfo? pagingResponse, CSharpType resultType, bool async)
+        private static void WriteCreateResultBody(CodeWriter writer, LongRunningOperation operation, VariableReference responseVariable, PagingResponseInfo? pagingResponse, CSharpType resultType, bool async)
         {
             if (pagingResponse != null)
             {
                 var scopeName = operation.Diagnostics.ScopeName;
                 var nextLinkName = pagingResponse.NextLinkPropertyName;
                 var itemName = pagingResponse.ItemPropertyName;
-                FormattableString returnValue = $"{typeof(GeneratorPageableHelpers)}.{nameof(GeneratorPageableHelpers.CreateAsyncPageable)}({responseVariable}, _nextPageFunc, Product.DeserializeProduct, _clientDiagnostics, _pipeline, {scopeName:L}, {itemName:L}, {nextLinkName:L}, cancellationToken)";
+                FormattableString returnValue = $"{typeof(GeneratorPageableHelpers)}.{nameof(GeneratorPageableHelpers.CreateAsyncPageable)}({responseVariable.Declaration}, _nextPageFunc, Product.DeserializeProduct, _clientDiagnostics, _pipeline, {scopeName:L}, {itemName:L}, {nextLinkName:L}, cancellationToken)";
                 WriteCreateResultReturnValue(writer, resultType, returnValue, async);
             }
             else if (operation.ResultSerialization != null)

@@ -160,7 +160,9 @@ namespace MgmtResourceName
             {
                 var response = await _networkNetworkResourcesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, networkResourceName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new NetworkResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -196,7 +198,9 @@ namespace MgmtResourceName
             {
                 var response = _networkNetworkResourcesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, networkResourceName, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new NetworkResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

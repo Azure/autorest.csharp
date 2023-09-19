@@ -109,7 +109,9 @@ namespace MgmtExpandResourceTypes
             {
                 var response = await _recordSetCaaRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "CAA".ToRecordType(), Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new RecordSetCaaResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -141,7 +143,9 @@ namespace MgmtExpandResourceTypes
             {
                 var response = _recordSetCaaRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "CAA".ToRecordType(), Id.Name, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new RecordSetCaaResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

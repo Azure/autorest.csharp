@@ -9,7 +9,7 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record ResponseWithHeadersExpression(ValueExpression Untyped) : TypedValueExpression(typeof(ResponseWithHeaders), Untyped)
+    internal sealed record ResponseWithHeadersExpression(ValueExpression Untyped) : TypedValueExpression(typeof(ResponseWithHeaders<,>), Untyped)
     {
         public static ResponseWithHeadersExpression FromValue(ValueExpression value, ValueExpression headers, ResponseExpression response)
             => new(new InvokeStaticMethodExpression(typeof(ResponseWithHeaders), nameof(ResponseWithHeaders.FromValue), new[]{ value, headers, response }));

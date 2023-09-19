@@ -108,7 +108,9 @@ namespace MgmtPagination
             {
                 var response = await _pageSizeDecimalModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new PageSizeDecimalModelResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -139,7 +141,9 @@ namespace MgmtPagination
             {
                 var response = _pageSizeDecimalModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new PageSizeDecimalModelResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

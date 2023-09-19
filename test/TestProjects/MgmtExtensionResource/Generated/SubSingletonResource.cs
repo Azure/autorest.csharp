@@ -109,7 +109,9 @@ namespace MgmtExtensionResource
             {
                 var response = await _subSingletonRestClient.GetAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new SubSingletonResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -141,7 +143,9 @@ namespace MgmtExtensionResource
             {
                 var response = _subSingletonRestClient.Get(Id.SubscriptionId, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new SubSingletonResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

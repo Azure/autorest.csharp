@@ -169,7 +169,9 @@ namespace MgmtPropertyBag
             {
                 var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, options.BarName, options.IfMatch, options.Filter, options.Top, options.Skip, options.Items, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -205,7 +207,9 @@ namespace MgmtPropertyBag
             {
                 var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, options.BarName, options.IfMatch, options.Filter, options.Top, options.Skip, options.Items, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

@@ -401,7 +401,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 Var("operation", new OperationExpression(InvokeClientMethod(client, methodName, arguments, async)), out var operation),
                 EmptyLine,
-                new ForeachStatement("item", new EnumerableExpression(typeof(BinaryData), operation.Value), async, out TypedValueExpression binaryDataItem)
+                new ForeachStatement("item", new EnumerableExpression(typeof(BinaryData), operation.Value), async, out ValueExpression binaryDataItem)
                 {
                     ComposeParsingPageableResponse(new BinaryDataExpression(binaryDataItem), conveniencePageItemType, allParameters)
                 }
@@ -481,7 +481,7 @@ namespace AutoRest.CSharp.Generation.Writers
              * }
              */
 
-            return new ForeachStatement("item", new EnumerableExpression(typeof(BinaryData), InvokeClientMethod(client, methodName, arguments, false)), async, out TypedValueExpression binaryDataItem)
+            return new ForeachStatement("item", new EnumerableExpression(typeof(BinaryData), InvokeClientMethod(client, methodName, arguments, false)), async, out ValueExpression binaryDataItem)
             {
                 ComposeParsingPageableResponse(new BinaryDataExpression(binaryDataItem), conveniencePageItemType, allParameters)
             };
@@ -711,7 +711,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (type == typeof(DateTimeOffset))
                 {
                     return format is null
-                        ? new MemberExpression(typeof(DateTimeOffset), nameof(DateTimeOffset.UtcNow))
+                        ? DateTimeOffsetExpression.UtcNow
                         : Literal(TypeFormatters.ToString(new DateTimeOffset(2022, 05, 10, 10, 14, 57, 31, TimeSpan.FromHours(-4)), format));
                 }
 

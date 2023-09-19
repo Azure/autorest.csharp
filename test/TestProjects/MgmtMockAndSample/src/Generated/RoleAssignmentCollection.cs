@@ -154,7 +154,9 @@ namespace MgmtMockAndSample
             {
                 var response = await _roleAssignmentRestClient.GetAsync(Id, roleAssignmentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new RoleAssignmentResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -191,7 +193,9 @@ namespace MgmtMockAndSample
             {
                 var response = _roleAssignmentRestClient.Get(Id, roleAssignmentName, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new RoleAssignmentResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

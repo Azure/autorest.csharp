@@ -7,17 +7,15 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record BinaryDataExpression(ValueExpression Untyped) : TypedValueExpression(typeof(BinaryData), Untyped)
+    internal sealed record BinaryDataExpression(ValueExpression Untyped) : TypedValueExpression<BinaryData>(Untyped)
     {
-        public BinaryDataExpression(TypedValueExpression typed) : this(ValidateType(typed, typeof(BinaryData))) {}
-
         public FrameworkTypeExpression ToObjectFromJson(Type responseType)
             => new(responseType, new InvokeInstanceMethodExpression(Untyped, nameof(BinaryData.ToObjectFromJson), Array.Empty<ValueExpression>(), new[]{new CSharpType(responseType)}, false));
 
         public static BinaryDataExpression FromStream(ResponseExpression response, bool async)
         {
             var methodName = async ? nameof(BinaryData.FromStreamAsync) : nameof(BinaryData.FromStream);
-            return new BinaryDataExpression(new InvokeStaticMethodExpression(typeof(BinaryData), methodName, new[]{response.ContentStream}));
+            return new BinaryDataExpression(InvokeStatic(methodName, response.ContentStream, async));
         }
 
         public StreamExpression ToStream() => new(Invoke(nameof(BinaryData.ToStream)));
@@ -25,12 +23,12 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
         public ValueExpression ToArray() => Invoke(nameof(BinaryData.ToArray));
 
         public static BinaryDataExpression FromBytes(ValueExpression data)
-            => new(new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromBytes), new[]{data}));
+            => new(InvokeStatic(nameof(BinaryData.FromBytes), data));
 
         public static BinaryDataExpression FromObjectAsJson(ValueExpression data)
-            => new(new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[]{data}));
+            => new(InvokeStatic(nameof(BinaryData.FromObjectAsJson),data));
 
         public static BinaryDataExpression FromString(ValueExpression data)
-            => new(new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromString), new[]{data}));
+            => new(InvokeStatic(nameof(BinaryData.FromString), data));
     }
 }

@@ -7,6 +7,7 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -230,7 +231,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <param name="valueVariable"></param>
         /// <param name="mgmtReturnType"></param>
         /// <returns></returns>
-        public FormattableString? GetValueConverter(FormattableString clientVariable, FormattableString valueVariable, CSharpType? mgmtReturnType)
+        public ValueExpression? GetConvertedValue(ValueExpression clientVariable, ValueExpression valueVariable, CSharpType? mgmtReturnType)
         {
             var restReturnType = IsPagingOperation ? PagingMethod!.ItemType : OriginalReturnType;
             // when the method returns nothing, when this happens, the methodReturnType should either be Response, or ArmOperation
@@ -253,16 +254,17 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (isRestReturnTypeResourceData && mgmtReturnType.TryCastResource(out var returnResource))
             {
                 // in this case we should call the constructor of the resource to wrap it into a resource
-                return GetValueConverter(returnResource, clientVariable, valueVariable);
+                return GetConvertedValue(returnResource, clientVariable, valueVariable);
             }
 
             // otherwise we return null
             return null;
         }
 
-        public FormattableString? GetValueConverter(FormattableString clientVariable, FormattableString valueVariable) => GetValueConverter(clientVariable, valueVariable, MgmtReturnType);
+        public ValueExpression? GetConvertedValue(ValueExpression clientVariable, ValueExpression valueVariable) => GetConvertedValue(clientVariable, valueVariable, MgmtReturnType);
 
-        private FormattableString GetValueConverter(Resource resource, FormattableString clientVariable, FormattableString valueVariable) => $"new {resource.Type}({clientVariable}, {valueVariable})";
+        private ValueExpression GetConvertedValue(Resource resource, ValueExpression clientVariable, ValueExpression valueVariable)
+            => Snippets.New.Instance(resource.Type, clientVariable, valueVariable);
 
         internal enum ResourceMatchType
         {

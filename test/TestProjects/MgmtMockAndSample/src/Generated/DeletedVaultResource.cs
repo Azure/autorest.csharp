@@ -109,7 +109,9 @@ namespace MgmtMockAndSample
             {
                 var response = await _deletedVaultVaultsRestClient.GetDeletedAsync(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new DeletedVaultResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -141,7 +143,9 @@ namespace MgmtMockAndSample
             {
                 var response = _deletedVaultVaultsRestClient.GetDeleted(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new DeletedVaultResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

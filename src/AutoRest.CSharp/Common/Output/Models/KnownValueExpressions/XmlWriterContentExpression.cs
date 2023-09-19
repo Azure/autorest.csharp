@@ -6,8 +6,8 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record XmlWriterContentExpression(ValueExpression Untyped) : TypedValueExpression(typeof(XmlWriterContent), Untyped)
+    internal sealed record XmlWriterContentExpression(ValueExpression Untyped) : TypedValueExpression<XmlWriterContent>(Untyped)
     {
-        public XmlWriterExpression XmlWriter { get; }  = new(new MemberExpression(Untyped, nameof(XmlWriterContent.XmlWriter)));
+        public XmlWriterExpression XmlWriter => new(Property(nameof(XmlWriterContent.XmlWriter)));
     }
 }

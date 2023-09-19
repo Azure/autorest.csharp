@@ -109,7 +109,9 @@ namespace Azure.ResourceManager.Storage
             {
                 var response = await _deletedAccountRestClient.GetAsync(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new DeletedAccountResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -141,7 +143,9 @@ namespace Azure.ResourceManager.Storage
             {
                 var response = _deletedAccountRestClient.Get(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new DeletedAccountResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

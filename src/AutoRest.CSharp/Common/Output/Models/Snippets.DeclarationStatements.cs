@@ -19,11 +19,11 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement UsingDeclare(string name, HttpMessageExpression value, out HttpMessageExpression variable)
             => UsingDeclare(name, value, d => new HttpMessageExpression(d), out variable);
 
-        public static DeclarationStatement Declare(CSharpType responseType, string name, ResponseExpression value, out ResponseExpression variable)
+        public static DeclarationStatement Declare(CSharpType responseType, string name, ResponseExpression value, out ResponseExpression response)
         {
-            var declare = new DeclareVariableStatement(responseType, name, value, out var untypedVariable);
-            variable = new ResponseExpression(untypedVariable);
-            return declare;
+            var variable = new VariableReference(responseType, name);
+            response = new ResponseExpression(variable);
+            return Declare(variable, value);
         }
 
         public static DeclarationStatement Declare(RequestContextExpression value, out RequestContextExpression variable)
@@ -42,7 +42,11 @@ namespace AutoRest.CSharp.Common.Output.Models
             => Declare(name, value, d => new StreamReaderExpression(d), out variable);
 
         public static DeclarationStatement Declare(string name, TypedValueExpression value, out ValueExpression variable)
-            => new DeclareVariableStatement(value.Type, name, value, out variable);
+        {
+            var declaration = new VariableReference(value.Type, name);
+            variable = declaration;
+            return Declare(declaration, value);
+        }
 
         public static DeclarationStatement Declare(VariableReference variable, ValueExpression value)
             => new DeclareVariableStatement(variable.Type, variable.Declaration, value);
@@ -93,7 +97,11 @@ namespace AutoRest.CSharp.Common.Output.Models
             => Var(name, value, d => new XmlWriterContentExpression(d), out variable);
 
         public static DeclarationStatement Var(string name, TypedValueExpression value, out ValueExpression variable)
-            => new DeclareVariableStatement(name, value, out variable);
+        {
+            var reference = new VariableReference(value.Type, name);
+            variable = reference;
+            return Var(reference, value);
+        }
 
         public static DeclarationStatement Var(VariableReference variable, ValueExpression value)
             => new DeclareVariableStatement(null, variable.Declaration, value);

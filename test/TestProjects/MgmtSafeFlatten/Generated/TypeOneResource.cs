@@ -110,7 +110,9 @@ namespace MgmtSafeFlatten
             {
                 var response = await _typeOneCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new TypeOneResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -142,7 +144,9 @@ namespace MgmtSafeFlatten
             {
                 var response = _typeOneCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new TypeOneResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

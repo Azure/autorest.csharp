@@ -2,29 +2,23 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
-using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
-using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record HttpPipelineExpression(ValueExpression Untyped) : TypedValueExpression(typeof(HttpPipeline), Untyped)
+    internal sealed record HttpPipelineExpression(ValueExpression Untyped) : TypedValueExpression<HttpPipeline>(Untyped)
     {
-        public HttpPipelineExpression(CodeWriterDeclaration variable) : this(new VariableReference(typeof(HttpPipeline), variable)){}
-
-        public HttpMessageExpression CreateMessage() => new(Untyped.Invoke(nameof(HttpPipeline.CreateMessage)));
-        public HttpMessageExpression CreateMessage(RequestContextExpression requestContext) => new(Untyped.Invoke(nameof(HttpPipeline.CreateMessage), requestContext));
-        public HttpMessageExpression CreateMessage(RequestContextExpression requestContext, ValueExpression responseClassifier) => new(Untyped.Invoke(nameof(HttpPipeline.CreateMessage), requestContext, responseClassifier));
+        public HttpMessageExpression CreateMessage() => new(Invoke(nameof(HttpPipeline.CreateMessage)));
+        public HttpMessageExpression CreateMessage(RequestContextExpression requestContext) => new(Invoke(nameof(HttpPipeline.CreateMessage), requestContext));
+        public HttpMessageExpression CreateMessage(RequestContextExpression requestContext, ValueExpression responseClassifier) => new(Invoke(nameof(HttpPipeline.CreateMessage), requestContext, responseClassifier));
 
         public ValueExpression ProcessMessage(HttpMessageExpression message, RequestContextExpression? requestContext, CancellationTokenExpression? cancellationToken, bool async)
         {
             var arguments = new List<ValueExpression>
             {
-                Untyped,
                 message,
                 requestContext ?? Snippets.Null
             };
@@ -35,27 +29,26 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
             }
 
             var methodName = async ? nameof(HttpPipelineExtensions.ProcessMessageAsync) : nameof(HttpPipelineExtensions.ProcessMessage);
-            return new InvokeStaticMethodExpression(typeof(HttpPipelineExtensions), methodName, arguments, null, true, async);
-        }
-
-        public MethodBodyStatement Send(HttpMessageExpression message, CancellationTokenExpression cancellationToken, bool async)
-        {
-            var methodName = async ? nameof(HttpPipeline.SendAsync) : nameof(HttpPipeline.Send);
-            return new InvokeInstanceMethodStatement(Untyped, methodName, new ValueExpression[]{message, cancellationToken}, async);
+            return InvokeExtension(typeof(HttpPipelineExtensions), methodName, arguments, async);
         }
 
         public ValueExpression ProcessHeadAsBoolMessage(HttpMessageExpression message, ValueExpression clientDiagnostics, RequestContextExpression? requestContext, bool async)
         {
             var arguments = new List<ValueExpression>
             {
-                Untyped,
                 message,
                 clientDiagnostics,
                 requestContext ?? Snippets.Null
             };
 
             var methodName = async ? nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessageAsync) : nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessage);
-            return new InvokeStaticMethodExpression(typeof(HttpPipelineExtensions), methodName, arguments, null, true, async);
+            return InvokeExtension(typeof(HttpPipelineExtensions), methodName, arguments, async);
+        }
+
+        public MethodBodyStatement Send(HttpMessageExpression message, CancellationTokenExpression cancellationToken, bool async)
+        {
+            var methodName = async ? nameof(HttpPipeline.SendAsync) : nameof(HttpPipeline.Send);
+            return new InvokeInstanceMethodStatement(Untyped, methodName, new ValueExpression[]{message, cancellationToken}, async);
         }
     }
 }

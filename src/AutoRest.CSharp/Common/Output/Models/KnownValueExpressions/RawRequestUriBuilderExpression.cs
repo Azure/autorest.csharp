@@ -9,7 +9,7 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record RawRequestUriBuilderExpression(ValueExpression Untyped) : TypedValueExpression(typeof(RawRequestUriBuilder), Untyped)
+    internal sealed record RawRequestUriBuilderExpression(ValueExpression Untyped) : TypedValueExpression<RawRequestUriBuilder>(Untyped)
     {
         public MethodBodyStatement Reset(ValueExpression uri) => new InvokeInstanceMethodStatement(Untyped, nameof(RawRequestUriBuilder.Reset), uri);
 

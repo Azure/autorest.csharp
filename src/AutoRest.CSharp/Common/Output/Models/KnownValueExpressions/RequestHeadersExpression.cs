@@ -9,7 +9,7 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record RequestHeadersExpression(ValueExpression Untyped) : TypedValueExpression(typeof(RequestHeaders), Untyped)
+    internal sealed record RequestHeadersExpression(ValueExpression Untyped) : TypedValueExpression<RequestHeaders>(Untyped)
     {
         public MethodBodyStatement Add(ValueExpression conditions)
             => new InvokeStaticMethodStatement(typeof(RequestUriBuilderExtensions), nameof(RequestHeaderExtensions.Add), new[]{Untyped, conditions}, CallAsExtension: true);

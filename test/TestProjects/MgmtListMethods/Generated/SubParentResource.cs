@@ -110,7 +110,9 @@ namespace MgmtListMethods
             {
                 var response = await _subParentRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new SubParentResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -142,7 +144,9 @@ namespace MgmtListMethods
             {
                 var response = _subParentRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new SubParentResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

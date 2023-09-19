@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             Operation = args.Operation;
             ClientDiagnosticsProperty = _fields.ClientDiagnosticsProperty;
-            PipelineField = new HttpPipelineExpression(_fields.PipelineField.Declaration);
+            PipelineField = new HttpPipelineExpression(_fields.PipelineField);
 
             ProtocolMethodName = Operation.Name.ToCleanName();
             CreateMessageMethodName = $"Create{ProtocolMethodName}Request";

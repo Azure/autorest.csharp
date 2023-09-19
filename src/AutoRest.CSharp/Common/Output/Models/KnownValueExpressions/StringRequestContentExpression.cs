@@ -6,5 +6,5 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record StringRequestContentExpression(ValueExpression Untyped) : TypedValueExpression(typeof(StringRequestContent), Untyped);
+    internal sealed record StringRequestContentExpression(ValueExpression Untyped) : TypedValueExpression<StringRequestContent>(Untyped);
 }

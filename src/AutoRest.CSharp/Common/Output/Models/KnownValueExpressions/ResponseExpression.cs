@@ -8,10 +8,8 @@ using Azure;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record ResponseExpression(ValueExpression Untyped) : TypedValueExpression(typeof(Response), Untyped)
+    internal sealed record ResponseExpression(ValueExpression Untyped) : TypedValueExpression<Response>(Untyped)
     {
-        public ResponseExpression(CodeWriterDeclaration variable) : this(new VariableReference(typeof(Response), variable)){}
-
         public ValueExpression Status => Property(nameof(Response.Status));
         public ValueExpression Value => Property(nameof(Response<object>.Value));
 
@@ -21,7 +19,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
         public ResponseExpression GetRawResponse() => new(Invoke(nameof(GetRawResponse)));
 
         public static ResponseExpression FromValue(ValueExpression value, ResponseExpression rawResponse)
-            => new(new InvokeStaticMethodExpression(typeof(Response), nameof(Response.FromValue), new[]{ value, rawResponse }));
+            => new(InvokeStatic(nameof(Response.FromValue), value, rawResponse));
 
         public static ResponseExpression FromValue(CSharpType explicitValueType, ValueExpression value, ResponseExpression rawResponse)
             => new(new InvokeStaticMethodExpression(typeof(Response), nameof(Response.FromValue), new[]{ value, rawResponse }, new[]{ explicitValueType }));

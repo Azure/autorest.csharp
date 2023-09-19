@@ -13,10 +13,10 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class DataPlaneLegacyMethodBuilder : DataPlaneLegacyMethodBuilderBase
     {
-        private readonly ValueExpression _restClient;
+        private readonly TypedValueExpression _restClient;
         private readonly MethodSignature _method;
 
-        public DataPlaneLegacyMethodBuilder(string clientName, ClientFields fields, ValueExpression restClientReference, MethodSignature restClientMethod)
+        public DataPlaneLegacyMethodBuilder(string clientName, ClientFields fields, TypedValueExpression restClientReference, MethodSignature restClientMethod)
             : base(clientName, fields)
         {
             _restClient = restClientReference;

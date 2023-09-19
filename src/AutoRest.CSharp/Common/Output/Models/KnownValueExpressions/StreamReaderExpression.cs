@@ -7,12 +7,12 @@ using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record StreamReaderExpression(ValueExpression Untyped) : TypedValueExpression(typeof(StreamReader), Untyped)
+    internal sealed record StreamReaderExpression(ValueExpression Untyped) : TypedValueExpression<StreamReader>(Untyped)
     {
-        public ValueExpression ReadToEnd(bool async)
+        public StringExpression ReadToEnd(bool async)
         {
             var methodName = async ? nameof(StreamReader.ReadToEndAsync) : nameof(StreamReader.ReadToEnd);
-            return Invoke(methodName, Array.Empty<ValueExpression>(), async);
+            return new(Invoke(methodName, Array.Empty<ValueExpression>(), async));
         }
     }
 }

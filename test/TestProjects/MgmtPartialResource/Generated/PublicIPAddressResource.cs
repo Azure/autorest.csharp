@@ -110,7 +110,9 @@ namespace MgmtPartialResource
             {
                 var response = await _publicIPAddressRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new PublicIPAddressResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -143,7 +145,9 @@ namespace MgmtPartialResource
             {
                 var response = _publicIPAddressRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new PublicIPAddressResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

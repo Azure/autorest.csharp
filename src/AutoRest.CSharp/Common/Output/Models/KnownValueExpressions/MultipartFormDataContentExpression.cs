@@ -8,7 +8,7 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record MultipartFormDataContentExpression(ValueExpression Untyped) : TypedValueExpression(typeof(MultipartFormDataContent), Untyped)
+    internal sealed record MultipartFormDataContentExpression(ValueExpression Untyped) : TypedValueExpression<MultipartFormDataContent>(Untyped)
     {
         public MethodBodyStatement Add(RequestContentExpression requestContent, string name, ValueExpression headers)
             => new InvokeInstanceMethodStatement(Untyped, nameof(MultipartFormDataContent.Add), new[]{requestContent, Literal(name), headers}, false);

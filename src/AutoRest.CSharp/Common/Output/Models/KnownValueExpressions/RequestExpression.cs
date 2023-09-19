@@ -7,12 +7,12 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record RequestExpression(ValueExpression Untyped) : TypedValueExpression(typeof(Request), Untyped)
+    internal sealed record RequestExpression(ValueExpression Untyped) : TypedValueExpression<Request>(Untyped)
     {
-        public RequestContentExpression ClientRequestId => new(new MemberExpression(Untyped, nameof(Request.ClientRequestId)));
-        public RequestContentExpression Content => new(new MemberExpression(Untyped, nameof(Request.Content)));
-        public RequestHeadersExpression Headers => new(new MemberExpression(Untyped, nameof(Request.Headers)));
-        public ValueExpression Method => new MemberExpression(Untyped, nameof(Request.Method));
-        public RawRequestUriBuilderExpression Uri => new(new MemberExpression(Untyped, nameof(Request.Uri)));
+        public RequestContentExpression ClientRequestId => new(Property(nameof(Request.ClientRequestId)));
+        public RequestContentExpression Content => new(Property(nameof(Request.Content)));
+        public RequestHeadersExpression Headers => new(Property(nameof(Request.Headers)));
+        public ValueExpression Method => Property(nameof(Request.Method));
+        public RawRequestUriBuilderExpression Uri => new(Property(nameof(Request.Uri)));
     }
 }

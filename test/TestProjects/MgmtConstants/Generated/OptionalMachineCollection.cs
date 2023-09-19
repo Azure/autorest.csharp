@@ -169,7 +169,9 @@ namespace MgmtConstants
             {
                 var response = await _optionalMachineOptionalsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new OptionalMachineResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -207,7 +209,9 @@ namespace MgmtConstants
             {
                 var response = _optionalMachineOptionalsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, expand, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new OptionalMachineResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

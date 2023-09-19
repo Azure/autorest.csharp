@@ -160,7 +160,9 @@ namespace MgmtResourceName
             {
                 var response = await _displayResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new DisplayResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -196,7 +198,9 @@ namespace MgmtResourceName
             {
                 var response = _displayResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, displayResourceName, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new DisplayResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

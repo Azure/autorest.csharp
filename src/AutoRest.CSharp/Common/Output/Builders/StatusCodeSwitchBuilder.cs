@@ -294,7 +294,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             return new MethodBodyStatement[]
             {
-                new DeclareVariableStatement(typeof(bool), "value", valueConstant, out var value),
+                Declare("value", valueConstant, out var value),
                 Return(ResponseExpression.FromValue(value, httpMessage.Response))
             };
         }
@@ -353,7 +353,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (type.Equals(typeof(Stream)))
             {
-                return new DeclareVariableStatement("value", httpMessage.ExtractResponseContent(), out value);
+                return Var("value", httpMessage.ExtractResponseContent(), out value);
             }
 
             if (type.Equals(typeof(string)))
@@ -361,7 +361,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return new[]
                 {
                     Declare("streamReader", New.StreamReader(httpMessage.Response.ContentStream), out StreamReaderExpression streamReader),
-                    new DeclareVariableStatement(type, "value", streamReader.ReadToEnd(async), out value)
+                    Declare("value", streamReader.ReadToEnd(async), out value)
                 };
             }
 

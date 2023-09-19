@@ -286,28 +286,30 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteTaggableCommonMethodBranch(MgmtRestOperation getOperation, IReadOnlyList<ParameterMapping> parameterMappings, bool isAsync)
         {
-            var originalResponse = new CodeWriterDeclaration("originalResponse");
+            var responseVariable = new VariableReference(typeof(Response), "originalResponse");
+            var response = new ResponseExpression(responseVariable);
+
             _writer
-                .Append($"var {originalResponse:D} = {GetAwait(isAsync)} ")
+                .Append($"var {responseVariable.Declaration:D} = {GetAwait(isAsync)} ")
                 .Append($"{GetRestClientName(getOperation)}.{CreateMethodName(getOperation.MethodName, isAsync)}(");
 
             WriteArguments(_writer, parameterMappings, true);
             _writer.Line($"){GetConfigureAwait(isAsync)};");
 
-            var armResource = new ArmResourceExpression(new ResponseExpression(originalResponse).Value);
+            var armResource = new ArmResourceExpression(response.Value);
             if (This.ResourceData.ShouldSetResourceIdentifier)
             {
                 _writer.WriteMethodBodyStatement(Assign(armResource.Id, InvokeCreateResourceIdentifier(This, getOperation.RequestPath, parameterMappings, armResource)));
             }
 
-            var valueConverter = getOperation.GetValueConverter($"{ArmClientReference}", $"{originalResponse}.Value", getOperation.MgmtReturnType);
-            if (valueConverter != null)
+            var convertedValue = getOperation.GetConvertedValue(new MemberExpression(null, ArmClientReference), armResource, getOperation.MgmtReturnType);
+            if (convertedValue != null)
             {
-                _writer.Line($"return {typeof(Response)}.FromValue({valueConverter}, {originalResponse}.GetRawResponse());");
+                _writer.WriteMethodBodyStatement(Return(ResponseExpression.FromValue(convertedValue, response.GetRawResponse())));
             }
             else
             {
-                _writer.Line($"return {originalResponse}");
+                _writer.WriteMethodBodyStatement(Return(responseVariable));
             }
         }
     }

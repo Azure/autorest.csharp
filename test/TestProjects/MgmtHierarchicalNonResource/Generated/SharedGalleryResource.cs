@@ -119,7 +119,9 @@ namespace MgmtHierarchicalNonResource
             {
                 var response = await _sharedGalleryRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name);
                 return Response.FromValue(new SharedGalleryResource(Client, response.Value), response.GetRawResponse());
             }
@@ -152,7 +154,9 @@ namespace MgmtHierarchicalNonResource
             {
                 var response = _sharedGalleryRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name);
                 return Response.FromValue(new SharedGalleryResource(Client, response.Value), response.GetRawResponse());
             }

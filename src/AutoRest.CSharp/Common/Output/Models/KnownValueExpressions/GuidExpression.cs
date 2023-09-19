@@ -9,10 +9,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record GuidExpression(ValueExpression Untyped) : TypedValueExpression<Guid>(Untyped)
     {
-        public static GuidExpression NewGuid()
-            => new(InvokeStatic(nameof(Guid.NewGuid)));
-
-        public static GuidExpression Parse(string input)
-            => new(InvokeStatic(nameof(Guid.Parse), Literal(input)));
+        public static GuidExpression NewGuid() => new(InvokeStatic(nameof(Guid.NewGuid)));
+        public static GuidExpression Parse(string input) => new(InvokeStatic(nameof(Guid.Parse), Literal(input)));
     }
 }

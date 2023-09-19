@@ -111,7 +111,9 @@ namespace Azure.ResourceManager.Storage
             {
                 var response = await _fileShareRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, expand, xMsSnapshot, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new FileShareResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -145,7 +147,9 @@ namespace Azure.ResourceManager.Storage
             {
                 var response = _fileShareRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, expand, xMsSnapshot, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new FileShareResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

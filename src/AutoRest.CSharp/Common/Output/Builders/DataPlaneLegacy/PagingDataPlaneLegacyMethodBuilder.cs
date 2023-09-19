@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class PagingDataPlaneLegacyMethodBuilder : DataPlaneLegacyMethodBuilderBase
     {
-        private readonly ValueExpression _restClient;
+        private readonly TypedValueExpression _restClient;
         private readonly MethodSignature _convenienceMethod;
         private readonly MethodSignature _createMessageMethod;
         private readonly MethodSignature? _createNextPageMessageMethod;
@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Output.Models
         private string? _nextLinkName;
         private string _itemPropertyName;
 
-        public PagingDataPlaneLegacyMethodBuilder(string clientName, ClientFields fields, ValueExpression restClient, MethodSignature convenienceMethod, MethodSignature createMessageMethod, MethodSignature? createNextPageMessageMethod, CSharpType pageItemType, string itemPropertyName, string? nextLinkName)
+        public PagingDataPlaneLegacyMethodBuilder(string clientName, ClientFields fields, TypedValueExpression restClient, MethodSignature convenienceMethod, MethodSignature createMessageMethod, MethodSignature? createNextPageMessageMethod, CSharpType pageItemType, string itemPropertyName, string? nextLinkName)
             : base(clientName, fields)
         {
             _restClient = restClient;

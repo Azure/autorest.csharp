@@ -109,7 +109,9 @@ namespace MgmtExactMatchInheritance
             {
                 var response = await _exactMatchModel5RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new ExactMatchModel5Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -140,7 +142,9 @@ namespace MgmtExactMatchInheritance
             {
                 var response = _exactMatchModel5RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new ExactMatchModel5Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

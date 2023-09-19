@@ -11,10 +11,8 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record XmlWriterExpression(ValueExpression Untyped) : TypedValueExpression(typeof(XmlWriter), Untyped)
+    internal sealed record XmlWriterExpression(ValueExpression Untyped) : TypedValueExpression<XmlWriter>(Untyped)
     {
-        public XmlWriterExpression(CodeWriterDeclaration variable) : this(new VariableReference(typeof(XmlWriter), variable)){}
-
         public MethodBodyStatement WriteStartAttribute(string localName) => new InvokeInstanceMethodStatement(Untyped, nameof(XmlWriter.WriteStartAttribute), Snippets.Literal(localName));
         public MethodBodyStatement WriteEndAttribute() => new InvokeInstanceMethodStatement(Untyped, nameof(XmlWriter.WriteEndAttribute));
 

@@ -163,7 +163,9 @@ namespace MgmtListMethods
             {
                 var response = await _resGrpParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new ResGrpParentResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -200,7 +202,9 @@ namespace MgmtListMethods
             {
                 var response = _resGrpParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new ResGrpParentResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

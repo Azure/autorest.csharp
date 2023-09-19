@@ -7,7 +7,7 @@ using Azure;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record RequestContextExpression(ValueExpression Untyped) : TypedValueExpression(typeof(RequestContext), Untyped)
+    internal sealed record RequestContextExpression(ValueExpression Untyped) : TypedValueExpression<RequestContext>(Untyped)
     {
         public static RequestContextExpression FromCancellationToken()
             => new(new InvokeStaticMethodExpression(null, "FromCancellationToken", new ValueExpression[]{KnownParameters.CancellationTokenParameter}));

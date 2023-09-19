@@ -8,7 +8,7 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record FormUrlEncodedContentExpression(ValueExpression Untyped) : TypedValueExpression(typeof(FormUrlEncodedContent), Untyped)
+    internal sealed record FormUrlEncodedContentExpression(ValueExpression Untyped) : TypedValueExpression<FormUrlEncodedContent>(Untyped)
     {
         public MethodBodyStatement Add(string name, StringExpression value)
             => new InvokeInstanceMethodStatement(Untyped, nameof(FormUrlEncodedContent.Add), Literal(name), value);

@@ -7,7 +7,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Common.Generation.Writers;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -29,6 +31,7 @@ using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using Parameter = AutoRest.CSharp.Output.Models.Shared.Parameter;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -609,7 +612,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var firstPageRequestArguments = GetArguments(_writer, parameterMappings);
             firstPageRequestArguments.RemoveAt(firstPageRequestArguments.Count - 1);
 
-            var restClient = new FormattableStringToExpression($"{GetRestClientName(operation)}");
+            var restClient = new MemberExpression(null, GetRestClientName(operation));
 
             _writer.WriteMethodBodyStatement(DeclareFirstPageRequestLocalFunction(restClient, pagingMethod.CreateRequestMethodName, firstPageRequestArguments, out var firstPageRequest));
             CodeWriterDeclaration? nextPageRequest = null;
@@ -619,8 +622,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteMethodBodyStatement(DeclareNextPageRequestLocalFunction(restClient, nextPageMethod, nextPageRequestArguments, out nextPageRequest));
             }
 
-            var clientDiagnostics = new FormattableStringToExpression($"{clientDiagnosticsReference.Name}");
-            var pipeline = new FormattableStringToExpression($"Pipeline");
+            var clientDiagnostics = new MemberExpression(null, clientDiagnosticsReference.Name);
+            var pipeline = new MemberExpression(null, "Pipeline");
             var scopeName = diagnostic.ScopeName;
             var itemName = pagingMethod.ItemName;
             var nextLinkName = pagingMethod.NextLinkName;
@@ -673,24 +676,26 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected virtual void WriteNormalMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, Diagnostic diagnostic, bool async)
+        protected virtual void WriteNormalMethodBranch(MgmtRestOperation operation, IReadOnlyList<ParameterMapping> parameterMappings, Diagnostic diagnostic, bool async)
         {
             using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(operation)))
             {
-                var response = new CodeWriterDeclaration("response");
+                var responseVariable = new VariableReference(typeof(Response), "response");
                 _writer
-                    .Append($"var {response:D} = {GetAwait(async)} ")
+                    .Append($"var {responseVariable.Declaration:D} = {GetAwait(async)} ")
                     .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
                 WriteArguments(_writer, parameterMappings);
                 _writer.Line($"){GetConfigureAwait(async)};");
 
-                var armResource = new ArmResourceExpression(new ResponseExpression(response).Value);
+                var response = new ResponseExpression(responseVariable);
+                var armResource = new ArmResourceExpression(response.Value);
 
                 if (operation.ThrowIfNull)
                 {
-                    _writer
-                        .Line($"if ({response}.Value == null)")
-                        .Line($"throw new {typeof(RequestFailedException)}({response}.GetRawResponse());");
+                    _writer.WriteMethodBodyStatement(new IfStatement(Equal(response.Value, Null))
+                    {
+                        Throw(Snippets.New.RequestFailedException(response.GetRawResponse()))
+                    });
                 }
                 var realReturnType = operation.MgmtReturnType;
                 if (realReturnType != null && realReturnType.TryCastResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
@@ -699,14 +704,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
 
                 // the case that we did not need to wrap the result
-                var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"{response}.Value");
+                var valueConverter = operation.GetConvertedValue(new MemberExpression(null, ArmClientReference), armResource);
                 if (valueConverter != null)
                 {
-                    _writer.Line($"return {typeof(Response)}.FromValue({valueConverter}, {response}.GetRawResponse());");
+                    _writer.WriteMethodBodyStatement(Return(ResponseExpression.FromValue(valueConverter, response.GetRawResponse())));
                 }
                 else
                 {
-                    _writer.Line($"return {response};");
+                    _writer.WriteMethodBodyStatement(Return(response));
                 }
             }
         }
@@ -768,16 +773,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected virtual void WriteLROMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
+        protected void WriteLROMethodBranch(MgmtRestOperation operation, IReadOnlyList<ParameterMapping> parameterMapping, bool async)
         {
-            _writer.Append($"var response = {GetAwait(async)} {GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
+            var response = new VariableReference(typeof(Response), "response");
+            _writer.Append($"var {response.Declaration:D} = {GetAwait(async)} {GetRestClientName(operation)}.{CreateMethodName(operation.MethodName, async)}(");
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"){GetConfigureAwait(async)};");
 
-            WriteLROResponse(GetDiagnosticReference(operation).Name, PipelineProperty, operation, parameterMapping, async);
+            WriteLROResponse(GetDiagnosticReference(operation).Name, PipelineProperty, operation, parameterMapping, new ResponseExpression(response), async);
         }
 
-        protected virtual void WriteLROResponse(string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool isAsync)
+        private void WriteLROResponse(string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IReadOnlyList<ParameterMapping> parameterMapping, ResponseExpression response, bool isAsync)
         {
             if (operation.InterimOperation is not null)
             {
@@ -794,14 +800,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Append($"(");
             if (operation.IsFakeLongRunningOperation)
             {
-                var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"response");
-                if (valueConverter != null)
+                var convertedValue = operation.GetConvertedValue(new MemberExpression(null, ArmClientReference), response);
+                if (convertedValue != null)
                 {
-                    _writer.Append($"{typeof(Response)}.FromValue({valueConverter}, response.GetRawResponse())");
+                    _writer.WriteValueExpression(ResponseExpression.FromValue(convertedValue, response.GetRawResponse()));
                 }
                 else
                 {
-                    _writer.Append($"response");
+                    _writer.WriteValueExpression(response);
                 }
             }
             else

@@ -110,7 +110,9 @@ namespace MgmtMockAndSample
             {
                 var response = await _diskEncryptionSetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new DiskEncryptionSetResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -142,7 +144,9 @@ namespace MgmtMockAndSample
             {
                 var response = _diskEncryptionSetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new DiskEncryptionSetResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

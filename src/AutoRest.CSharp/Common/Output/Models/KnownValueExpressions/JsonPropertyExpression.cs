@@ -8,12 +8,12 @@ using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record JsonPropertyExpression(ValueExpression Untyped) : TypedValueExpression(typeof(JsonProperty), Untyped)
+    internal sealed record JsonPropertyExpression(ValueExpression Untyped) : TypedValueExpression<JsonProperty>(Untyped)
     {
-        public StringExpression Name { get; } = new(new MemberExpression(Untyped, nameof(JsonProperty.Name)));
-        public JsonElementExpression Value { get; } = new(new MemberExpression(Untyped, nameof(JsonProperty.Value)));
+        public StringExpression Name => new(Property(nameof(JsonProperty.Name)));
+        public JsonElementExpression Value =>  new(Property(nameof(JsonProperty.Value)));
 
-        public BoolExpression NameEquals(string value) => new(Untyped.Invoke(nameof(JsonProperty.NameEquals), LiteralU8(value)));
+        public BoolExpression NameEquals(string value) => new(Invoke(nameof(JsonProperty.NameEquals), LiteralU8(value)));
 
         public MethodBodyStatement ThrowNonNullablePropertyIsNull()
             => new InvokeStaticMethodStatement(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.ThrowNonNullablePropertyIsNull), new[]{Untyped}, CallAsExtension: true);

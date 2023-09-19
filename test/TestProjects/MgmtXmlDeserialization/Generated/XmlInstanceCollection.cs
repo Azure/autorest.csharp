@@ -165,7 +165,9 @@ namespace MgmtXmlDeserialization
             {
                 var response = await _xmlInstanceXmlDeserializationRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, xmlName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new XmlInstanceResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -202,7 +204,9 @@ namespace MgmtXmlDeserialization
             {
                 var response = _xmlInstanceXmlDeserializationRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, xmlName, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new XmlInstanceResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

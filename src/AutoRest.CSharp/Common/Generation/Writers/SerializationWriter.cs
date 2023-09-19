@@ -127,31 +127,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteXmlSerialize(CodeWriter writer, XmlObjectSerialization serialization)
         {
-            var xmlWriter = new CodeWriterDeclaration("writer");
-            var nameHint = new CodeWriterDeclaration("nameHint");
-            writer.Append($"void {typeof(IXmlSerializable)}.{nameof(IXmlSerializable.Write)}({typeof(XmlWriter)} {xmlWriter:D}, {typeof(string)} {nameHint:D})");
+            var xmlWriter = new VariableReference(typeof(XmlWriter), "writer");
+            var nameHint = new VariableReference(typeof(string), "nameHint");
+            writer.Append($"void {typeof(IXmlSerializable)}.{nameof(IXmlSerializable.Write)}({typeof(XmlWriter)} {xmlWriter.Declaration:D}, {typeof(string)} {nameHint.Declaration:D})");
             using (writer.Scope())
             {
                 writer.WriteMethodBodyStatement(XmlSerializationMethodsBuilder.SerializeExpression(new XmlWriterExpression(xmlWriter), serialization, new StringExpression(nameHint)).AsStatement());
-            }
-            writer.Line();
-        }
-
-        private static void WriteXmlDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, XmlObjectSerialization serialization)
-        {
-            var element = new CodeWriterDeclaration("element");
-            using (writer.Scope($"internal static {serialization.Type} Deserialize{declaration.Name}({typeof(XElement)} {element:D})"))
-            {
-                var propertyVariables = writer.ToDeserializeObjectCall(serialization, element);
-                var initializers = new List<PropertyInitializer>();
-                foreach (var propertyVariable in propertyVariables)
-                {
-                    var property = propertyVariable.Key;
-                    initializers.Add(new PropertyInitializer(property.PropertyName, property.ValueType, property.ShouldSkipSerialization, $"{propertyVariable.Value.ActualName}"));
-                }
-
-                var objectType = (ObjectType)serialization.Type.Implementation;
-                writer.WriteInitialization(v => writer.Line($"return {v};"), objectType, objectType.SerializationConstructor, initializers);
             }
             writer.Line();
         }

@@ -110,7 +110,9 @@ namespace MgmtResourceName
             {
                 var response = await _providerOperationRestClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new ProviderOperationResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -143,7 +145,9 @@ namespace MgmtResourceName
             {
                 var response = _providerOperationRestClient.Get(Id.Name, expand, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new ProviderOperationResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

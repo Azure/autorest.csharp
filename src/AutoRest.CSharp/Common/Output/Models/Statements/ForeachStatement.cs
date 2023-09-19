@@ -14,13 +14,13 @@ namespace AutoRest.CSharp.Common.Output.Models.Statements
         private readonly List<MethodBodyStatement> _body = new();
         public IReadOnlyList<MethodBodyStatement> Body => _body;
 
-        public ForeachStatement(string itemName, EnumerableExpression enumerable, out TypedValueExpression item)
+        public ForeachStatement(string itemName, EnumerableExpression enumerable, out ValueExpression item)
             : this(new CodeWriterDeclaration(itemName), enumerable)
         {
             item = new VariableReference(enumerable.ItemType, Item);
         }
 
-        public ForeachStatement(string itemName, EnumerableExpression enumerable, bool isAsync, out TypedValueExpression item)
+        public ForeachStatement(string itemName, EnumerableExpression enumerable, bool isAsync, out ValueExpression item)
             : this(new CodeWriterDeclaration(itemName), enumerable, isAsync)
         {
             item = new VariableReference(enumerable.ItemType, Item);

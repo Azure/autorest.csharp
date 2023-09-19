@@ -219,7 +219,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (_operation.Paging is not null)
             {
-                _conversions[KnownParameters.RequestContext] = Declare(IfCancellationTokenCanBeCanceled(CancellationTokenExpression.KnownParameter), out var requestContext);
+                _conversions[KnownParameters.RequestContext] = Declare(IfCancellationTokenCanBeCanceled(new CancellationTokenExpression(KnownParameters.CancellationTokenParameter)), out var requestContext);
                 _arguments[KnownParameters.RequestContext] = requestContext;
             }
             else

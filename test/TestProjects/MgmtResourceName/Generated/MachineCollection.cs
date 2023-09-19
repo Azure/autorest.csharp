@@ -160,7 +160,9 @@ namespace MgmtResourceName
             {
                 var response = await _machineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, machineName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new MachineResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -196,7 +198,9 @@ namespace MgmtResourceName
             {
                 var response = _machineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, machineName, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new MachineResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

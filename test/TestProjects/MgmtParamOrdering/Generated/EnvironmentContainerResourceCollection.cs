@@ -162,7 +162,9 @@ namespace MgmtParamOrdering
             {
                 var response = await _environmentContainerResourceEnvironmentContainersRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new EnvironmentContainerResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -199,7 +201,9 @@ namespace MgmtParamOrdering
             {
                 var response = _environmentContainerResourceEnvironmentContainersRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 return Response.FromValue(new EnvironmentContainerResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

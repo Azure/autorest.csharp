@@ -17,12 +17,12 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class LroDataPlaneLegacyMethodBuilder : DataPlaneLegacyMethodBuilderBase
     {
-        private readonly ValueExpression _restClient;
+        private readonly TypedValueExpression _restClient;
         private readonly MethodSignature _convenienceMethod;
         private readonly MethodSignature _createMessageMethod;
         private readonly CSharpType _lroType;
 
-        public LroDataPlaneLegacyMethodBuilder(string clientName, ClientFields fields, ValueExpression restClientReference, MethodSignature convenienceMethod, MethodSignature createMessageMethod, CSharpType lroType)
+        public LroDataPlaneLegacyMethodBuilder(string clientName, ClientFields fields, TypedValueExpression restClientReference, MethodSignature convenienceMethod, MethodSignature createMessageMethod, CSharpType lroType)
             : base(clientName, fields)
         {
             _restClient = restClientReference;

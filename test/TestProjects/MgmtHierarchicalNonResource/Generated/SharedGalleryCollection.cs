@@ -87,7 +87,9 @@ namespace MgmtHierarchicalNonResource
             {
                 var response = await _sharedGalleryRestClient.GetAsync(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 response.Value.Id = SharedGalleryResource.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
                 return Response.FromValue(new SharedGalleryResource(Client, response.Value), response.GetRawResponse());
             }
@@ -125,7 +127,9 @@ namespace MgmtHierarchicalNonResource
             {
                 var response = _sharedGalleryRestClient.Get(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken);
                 if (response.Value == null)
+                {
                     throw new RequestFailedException(response.GetRawResponse());
+                }
                 response.Value.Id = SharedGalleryResource.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
                 return Response.FromValue(new SharedGalleryResource(Client, response.Value), response.GetRawResponse());
             }

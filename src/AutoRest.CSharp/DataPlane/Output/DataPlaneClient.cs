@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var name = Declaration.Name;
             var fields = RestClient.Fields;
-            var restClientReference = new MemberExpression(null, "RestClient");
+            var restClientReference = new TypedMemberExpression(null, "RestClient", RestClient.Type);
             var convenienceMethod = (MethodSignature)methods.Convenience!.Signature;
             var createRequestMethod = (MethodSignature)methods.CreateRequest.Signature;
 
