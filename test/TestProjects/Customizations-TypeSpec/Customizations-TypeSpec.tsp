@@ -17,6 +17,15 @@ using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 
+@doc("Extensible enum to customize operator")
+enum ExtensibleEnumWithOperator {
+  @doc("Monday.")
+  Monday,
+
+  @doc("Tuesday.")
+  Tuesday,
+}
+
 @doc("Model to add additional serializable property")
 model ModelToAddAdditionalSerializableProperty {
     @doc("Required int")
@@ -115,6 +124,9 @@ enum NormalEnum
 
 @doc("Root RoundTrip model to reference all other types to ensure generation")
 model RootModel {  
+  @doc("ExtensibleEnumWithOperator")
+  propertyExtensibleEnum?: ExtensibleEnumWithOperator;
+
   @doc("ModelToMakeInternal")
   propertyModelToMakeInternal?: ModelToMakeInternal; 
   
