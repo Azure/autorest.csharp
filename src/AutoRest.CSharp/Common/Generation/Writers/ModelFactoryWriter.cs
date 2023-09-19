@@ -58,22 +58,6 @@ namespace AutoRest.CSharp.Generation.Writers
             return _writer.ToString();
         }
 
-        public void WriteModelFactory()
-        {
-            using (_writer.Namespace(This.Type.Namespace))
-            {
-                _writer.WriteXmlDocumentationSummary($"Model factory for read-only models.");
-                using (_writer.Scope($"{This.Declaration.Accessibility} static partial class {This.Type.Name}"))
-                {
-                    foreach (var method in This.Methods)
-                    {
-                        WriteFactoryMethod(method);
-                        _writer.Line();
-                    }
-                }
-            }
-        }
-
         private void WriteFactoryMethod(MethodSignature method)
         {
             if (!method.ReturnType!.TryCast<SerializableObjectType>(out var model))

@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultAccessibility { get; }
 
         private IReadOnlyList<MethodSignature>? _methods;
-        public IReadOnlyList<MethodSignature> Methods => _methods ??= Models!.Select(CreateMethod).ToList();
+        private IReadOnlyList<MethodSignature> Methods => _methods ??= Models!.Select(CreateMethod).ToList();
 
         private IReadOnlyList<MethodSignature>? _outputMethods;
         public IReadOnlyList<MethodSignature> OutputMethods
