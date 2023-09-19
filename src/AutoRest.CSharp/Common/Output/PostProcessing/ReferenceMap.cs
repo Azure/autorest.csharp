@@ -22,19 +22,28 @@ internal class ReferenceMap : IReadOnlyDictionary<INamedTypeSymbol, IEnumerable<
         _globalReference = new();
     }
 
-    internal void AddInList(INamedTypeSymbol key, INamedTypeSymbol value)
+    /// <summary>
+    /// Adds the value into the list corresponding to key
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <returns><code>true</code> if the value is added into the list, <code>false</code> if the value already exists in the list</returns>
+    internal bool AddInList(INamedTypeSymbol key, INamedTypeSymbol value)
     {
         if (_referenceMap.TryGetValue(key, out var list))
         {
             // the list is guaranteed to be a HashSet
             var set = (HashSet<INamedTypeSymbol>)list;
-            set.Add(value);
+            return set.Add(value);
         }
         else
         {
-            var newList = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
-            newList.Add(value);
+            var newList = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default)
+            {
+                value
+            };
             _referenceMap.Add(key, newList);
+            return true;
         }
     }
 

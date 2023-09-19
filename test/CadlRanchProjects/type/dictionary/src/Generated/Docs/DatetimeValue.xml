@@ -2,108 +2,172 @@
 <doc>
   <members>
     <member name="GetDatetimeValueAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetDatetimeValueAsync.
 <code><![CDATA[
-var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-var result = await client.GetDatetimeValueAsync();
+Response<IReadOnlyDictionary<string, DateTimeOffset>> response = await client.GetDatetimeValueAsync();
 ]]></code>
-</example>
+This sample shows how to call GetDatetimeValueAsync with all parameters.
+<code><![CDATA[
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, DateTimeOffset>> response = await client.GetDatetimeValueAsync();
+]]></code></example>
     </member>
     <member name="GetDatetimeValue(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetDatetimeValue.
 <code><![CDATA[
-var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-var result = client.GetDatetimeValue();
+Response<IReadOnlyDictionary<string, DateTimeOffset>> response = client.GetDatetimeValue();
 ]]></code>
-</example>
+This sample shows how to call GetDatetimeValue with all parameters.
+<code><![CDATA[
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, DateTimeOffset>> response = client.GetDatetimeValue();
+]]></code></example>
     </member>
     <member name="GetDatetimeValueAsync(RequestContext)">
-<example>
-This sample shows how to call GetDatetimeValueAsync with required parameters and parse the result.
+      <example>
+This sample shows how to call GetDatetimeValueAsync and parse the result.
 <code><![CDATA[
-var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-Response response = await client.GetDatetimeValueAsync(new RequestContext());
+Response response = await client.GetDatetimeValueAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
-</example>
+This sample shows how to call GetDatetimeValueAsync with all parameters and parse the result.
+<code><![CDATA[
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+
+Response response = await client.GetDatetimeValueAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code></example>
     </member>
     <member name="GetDatetimeValue(RequestContext)">
-<example>
-This sample shows how to call GetDatetimeValue with required parameters and parse the result.
+      <example>
+This sample shows how to call GetDatetimeValue and parse the result.
 <code><![CDATA[
-var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-Response response = client.GetDatetimeValue(new RequestContext());
+Response response = client.GetDatetimeValue(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
-</example>
+This sample shows how to call GetDatetimeValue with all parameters and parse the result.
+<code><![CDATA[
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+
+Response response = client.GetDatetimeValue(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code></example>
     </member>
     <member name="PutAsync(IDictionary{string,DateTimeOffset},CancellationToken)">
-<example>
-This sample shows how to call PutAsync with required parameters.
+      <example>
+This sample shows how to call PutAsync.
 <code><![CDATA[
-var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-var body = new Dictionary<string, DateTimeOffset>
+Response response = await client.PutAsync(new Dictionary<string, DateTimeOffset>()
 {
-    ["key"] = DateTimeOffset.UtcNow,
-};
-var result = await client.PutAsync(body);
+    ["key"] = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+});
+Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new Dictionary<string, DateTimeOffset>()
+{
+    ["key"] = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+});
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Put(IDictionary{string,DateTimeOffset},CancellationToken)">
-<example>
-This sample shows how to call Put with required parameters.
+      <example>
+This sample shows how to call Put.
 <code><![CDATA[
-var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-var body = new Dictionary<string, DateTimeOffset>
+Response response = client.Put(new Dictionary<string, DateTimeOffset>()
 {
-    ["key"] = DateTimeOffset.UtcNow,
-};
-var result = client.Put(body);
+    ["key"] = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+});
+Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new Dictionary<string, DateTimeOffset>()
+{
+    ["key"] = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
+});
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call PutAsync with required request content.
+      <example>
+This sample shows how to call PutAsync.
 <code><![CDATA[
-var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     key = "2022-05-10T14:57:31.2311892-04:00",
-};
-
-Response response = await client.PutAsync(RequestContent.Create(data));
+});
+Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call PutAsync with all request content.
+<code><![CDATA[
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    key = "2022-05-10T14:57:31.2311892-04:00",
+});
+Response response = await client.PutAsync(content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="Put(RequestContent,RequestContext)">
-<example>
-This sample shows how to call Put with required request content.
+      <example>
+This sample shows how to call Put.
 <code><![CDATA[
-var client = new DictionaryClient().GetDatetimeValueClient("1.0.0");
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     key = "2022-05-10T14:57:31.2311892-04:00",
-};
-
-Response response = client.Put(RequestContent.Create(data));
+});
+Response response = client.Put(content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call Put with all request content.
+<code><![CDATA[
+DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    key = "2022-05-10T14:57:31.2311892-04:00",
+});
+Response response = client.Put(content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
   </members>
 </doc>

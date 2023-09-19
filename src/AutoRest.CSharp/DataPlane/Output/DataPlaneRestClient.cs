@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Select(m => m.Operation)
                 .Where(operation => IsProtocolMethodExists(operation, inputClient, context));
 
-            return LowLevelClient.BuildMethods(_context.TypeFactory, operations, Fields, GetNamespaceName(inputClient, context), GetClientName(inputClient, context), null);
+            return LowLevelClient.BuildMethods(null, _context.TypeFactory, operations, Fields, GetNamespaceName(inputClient, context), GetClientName(inputClient, context), null);
         }
 
         private static string GetNamespaceName(InputClient inputClient, BuildContext<DataPlaneOutputLibrary> context)

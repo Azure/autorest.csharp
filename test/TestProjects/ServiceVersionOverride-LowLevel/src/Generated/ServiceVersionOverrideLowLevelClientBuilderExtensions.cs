@@ -7,12 +7,12 @@
 
 using System;
 using Azure.Core.Extensions;
-using ServiceVersionOverride;
+using ServiceVersionOverride_LowLevel;
 
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="ServiceVersionOverrideClient"/> to client builder. </summary>
-    public static partial class ServiceVersionOverrideClientBuilderExtensions
+    public static partial class ServiceVersionOverrideLowLevelClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="ServiceVersionOverrideClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace ServiceVersionOverride
+namespace ServiceVersionOverride_LowLevel
 {
     // Data plane generated client.
     /// <summary> The ServiceVersionOverride service client. </summary>

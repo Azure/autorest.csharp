@@ -2,56 +2,92 @@
 <doc>
   <members>
     <member name="SpreadAsRequestBodyAsync(BodyParameter,CancellationToken)">
-<example>
-This sample shows how to call SpreadAsRequestBodyAsync with required parameters.
+      <example>
+This sample shows how to call SpreadAsRequestBodyAsync.
 <code><![CDATA[
-var client = new SpreadClient().GetModelClient("1.0.0");
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-var bodyParameter = new BodyParameter("<name>");
-var result = await client.SpreadAsRequestBodyAsync(bodyParameter);
+BodyParameter bodyParameter = new BodyParameter("<name>");
+Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
+Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call SpreadAsRequestBodyAsync with all parameters.
+<code><![CDATA[
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+
+BodyParameter bodyParameter = new BodyParameter("<name>");
+Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="SpreadAsRequestBody(BodyParameter,CancellationToken)">
-<example>
-This sample shows how to call SpreadAsRequestBody with required parameters.
+      <example>
+This sample shows how to call SpreadAsRequestBody.
 <code><![CDATA[
-var client = new SpreadClient().GetModelClient("1.0.0");
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-var bodyParameter = new BodyParameter("<name>");
-var result = client.SpreadAsRequestBody(bodyParameter);
+BodyParameter bodyParameter = new BodyParameter("<name>");
+Response response = client.SpreadAsRequestBody(bodyParameter);
+Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call SpreadAsRequestBody with all parameters.
+<code><![CDATA[
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+
+BodyParameter bodyParameter = new BodyParameter("<name>");
+Response response = client.SpreadAsRequestBody(bodyParameter);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="SpreadAsRequestBodyAsync(RequestContent,RequestContext)">
-<example>
-This sample shows how to call SpreadAsRequestBodyAsync with required request content.
+      <example>
+This sample shows how to call SpreadAsRequestBodyAsync.
 <code><![CDATA[
-var client = new SpreadClient().GetModelClient("1.0.0");
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-};
-
-Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data));
+});
+Response response = await client.SpreadAsRequestBodyAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call SpreadAsRequestBodyAsync with all request content.
+<code><![CDATA[
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = await client.SpreadAsRequestBodyAsync(content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
     <member name="SpreadAsRequestBody(RequestContent,RequestContext)">
-<example>
-This sample shows how to call SpreadAsRequestBody with required request content.
+      <example>
+This sample shows how to call SpreadAsRequestBody.
 <code><![CDATA[
-var client = new SpreadClient().GetModelClient("1.0.0");
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-var data = new {
+RequestContent content = RequestContent.Create(new
+{
     name = "<name>",
-};
-
-Response response = client.SpreadAsRequestBody(RequestContent.Create(data));
+});
+Response response = client.SpreadAsRequestBody(content);
 Console.WriteLine(response.Status);
 ]]></code>
-</example>
+This sample shows how to call SpreadAsRequestBody with all request content.
+<code><![CDATA[
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+
+RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = client.SpreadAsRequestBody(content);
+Console.WriteLine(response.Status);
+]]></code></example>
     </member>
   </members>
 </doc>
