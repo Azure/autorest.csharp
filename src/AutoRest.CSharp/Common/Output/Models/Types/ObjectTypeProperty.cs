@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -137,13 +138,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         public bool IsRequired { get; }
         public MemberDeclarationOptions Declaration { get; }
         public string Description { get; }
-        private string? _propertyDescription;
-        public string PropertyDescription => _propertyDescription ??= Description + CreateExtraPropertyDiscriminatorSummary(ValueType);
+        private FormattableString? _propertyDescription;
+        public FormattableString PropertyDescription => _propertyDescription ??= $"{Description}{CreateExtraPropertyDiscriminatorSummary(ValueType)}";
         public Property? SchemaProperty { get; }
         public InputModelProperty? InputModelProperty { get; }
-        private string? _parameterDescription;
+        private FormattableString? _parameterDescription;
         private string _baseParameterDescription; // inherited type "FlattenedObjectTypeProperty" need to pass this value into the base constructor so that some appended information will not be appended again in the flattened property
-        public string ParameterDescription => _parameterDescription ??= _baseParameterDescription + CreateExtraPropertyDiscriminatorSummary(ValueType);
+        public FormattableString ParameterDescription => _parameterDescription ??= $"{_baseParameterDescription}{CreateExtraPropertyDiscriminatorSummary(ValueType)}";
 
         /// <summary>
         /// Gets or sets the value indicating whether nullable type of this property represents optionality of the value.
@@ -192,9 +193,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             return extraDescription;
         }
 
-        private static string CreateExtraPropertyDiscriminatorSummary(CSharpType valueType)
+        private static FormattableString CreateExtraPropertyDiscriminatorSummary(CSharpType valueType)
         {
-            string updatedDescription = string.Empty;
+            FormattableString? updatedDescription = null;
             if (valueType.IsFrameworkType)
             {
                 if (TypeFactory.IsList(valueType))
@@ -209,8 +210,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var objectTypes = valueType.Arguments.Where(arg => !arg.IsFrameworkType && arg.Implementation is ObjectType);
                     if (objectTypes.Count() > 0)
                     {
-                        var subDescription = objectTypes.Select(o => ((ObjectType)o.Implementation).CreateExtraDescriptionWithDiscriminator());
-                        updatedDescription = string.Join("", subDescription);
+                        var subDescription = objectTypes.Select(o => ((ObjectType)o.Implementation).CreateExtraDescriptionWithDiscriminator()).ToArray();
+                        updatedDescription = subDescription.Join("");
                     }
                 }
             }
@@ -218,7 +219,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
             }
-            return updatedDescription;
+            return updatedDescription ?? $"";
         }
 
         public override string ToString()

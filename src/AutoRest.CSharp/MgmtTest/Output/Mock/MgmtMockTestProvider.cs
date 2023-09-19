@@ -3,14 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 

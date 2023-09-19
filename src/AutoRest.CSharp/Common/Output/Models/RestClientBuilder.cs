@@ -488,7 +488,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var nextPageUrlParameter = new Parameter(
                 "nextLink",
-                "The URL to the next page of results.",
+                $"The URL to the next page of results.",
                 typeof(string),
                 DefaultValue: null,
                 ValidationType.AssertNotNull,
@@ -551,7 +551,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 var credentialParam = new Parameter(
                     "credential",
-                    "A credential used to authenticate to an Azure Service.",
+                    $"A credential used to authenticate to an Azure Service.",
                     credentialType,
                     null,
                     ValidationType.AssertNotNull,
