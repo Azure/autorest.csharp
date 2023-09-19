@@ -310,6 +310,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             Description = $"The resource representing the parent resource."
         };
 
-        protected override string IdParamDescription => $"The identifier of the parent resource that is the target of operations.";
+        protected override FormattableString IdParamDescription => $"The identifier of the parent resource that is the target of operations.";
     }
 }
