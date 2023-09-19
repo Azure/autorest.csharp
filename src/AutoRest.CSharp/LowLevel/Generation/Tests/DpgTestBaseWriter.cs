@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Tests
                 {
                     WriteConstructors();
 
-                    // TODO -- write the client factory methods
+                    WriteClientFactoryMethods();
                 }
             }
         }
@@ -38,6 +38,18 @@ namespace AutoRest.CSharp.LowLevel.Generation.Tests
             {
                 using (_writer.WriteMethodDeclaration(ctor))
                 { }
+            }
+        }
+
+        private void WriteClientFactoryMethods()
+        {
+            foreach (var method in _testBase.CreateClientMethods)
+            {
+                _writer.Line();
+                using (_writer.WriteMethodDeclaration(method))
+                {
+                    _writer.Line($"return null;");
+                }
             }
         }
 

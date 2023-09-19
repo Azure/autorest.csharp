@@ -7,6 +7,7 @@
 
 using Azure.Core.TestFramework;
 using Azure.Identity;
+using FirstTestTypeSpec;
 
 namespace FirstTestTypeSpec.Tests
 {
@@ -14,6 +15,11 @@ namespace FirstTestTypeSpec.Tests
     {
         public FirstTestTypeSpecTestBase(bool isAsync) : base(isAsync)
         {
+        }
+
+        protected FirstTestTypeSpecClient CreateFirstTestTypeSpecClient()
+        {
+            return null;
         }
     }
 }

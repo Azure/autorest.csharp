@@ -16,13 +16,15 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
     internal class DpgTestBase : TypeProvider
     {
         private static readonly Parameter IsAsyncParameter = new("isAsync", null, typeof(bool), null, ValidationType.None, null);
-        private readonly IEnumerable<LowLevelClient> _rootClients;
-        public DpgTestBase(string defaultNamespace, IEnumerable<LowLevelClient> rootClients, DpgTestEnvironment dpgTestEnvironment, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
+
+        private readonly IEnumerable<LowLevelClient> _clients;
+
+        public DpgTestBase(string defaultNamespace, IEnumerable<LowLevelClient> clients, DpgTestEnvironment dpgTestEnvironment, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             TestEnvironment = dpgTestEnvironment;
             DefaultNamespace = $"{defaultNamespace}.Tests";
             DefaultName = $"{ClientBuilder.GetRPName(defaultNamespace)}TestBase";
-            _rootClients = rootClients;
+            _clients = clients;
             BaseType = new CSharpType(typeof(RecordedTestBase<>), TestEnvironment.Type);
         }
 
@@ -50,6 +52,27 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
                         IsBase: true,
                         Arguments: new FormattableString[] { $"{IsAsyncParameter.Name:I}" })
                     );
+            }
+        }
+
+        private IEnumerable<MethodSignature>? _createClientMethods;
+        public IEnumerable<MethodSignature> CreateClientMethods => _createClientMethods ??= EnsureCreateClientMethods();
+
+        private IEnumerable<MethodSignature> EnsureCreateClientMethods()
+        {
+            foreach (var client in _clients)
+            {
+                if (client.IsSubClient)
+                    continue;
+
+                yield return new MethodSignature(
+                    Name: $"Create{client.Type.Name}",
+                    Summary: null,
+                    Description: null,
+                    Modifiers: MethodSignatureModifiers.Protected,
+                    ReturnType: client.Type,
+                    ReturnDescription: null,
+                    Parameters: Array.Empty<Parameter>());
             }
         }
     }
