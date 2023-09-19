@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
-        public bool IsAccessibilityOverride { get; }
+        public bool IsAccessibilityOverridden { get; }
         public override bool IncludeConverter => false;
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null;
 
@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _sourceInputModel = sourceInputModel;
             DefaultName = GetValidIdentifier(inputModel.Name); // TODO -- this is only a workaround only to solve the anonymous model names, in other cases, the name is unchanged.
             DefaultAccessibility = inputModel.Accessibility ?? "public";
-            IsAccessibilityOverride = inputModel.Accessibility != null;
+            IsAccessibilityOverridden = inputModel.Accessibility != null;
             _deprecated = inputModel.Deprecated;
             _derivedTypes = derivedTypes;
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);

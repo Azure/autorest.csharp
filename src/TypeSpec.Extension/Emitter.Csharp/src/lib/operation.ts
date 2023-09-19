@@ -5,7 +5,6 @@ import { getOperationLink } from "@azure-tools/typespec-azure-core";
 import {
     createSdkContext,
     isApiVersion,
-    isInternal,
     shouldGenerateConvenient,
     shouldGenerateProtocol,
     SdkContext,
@@ -200,9 +199,7 @@ export function loadOperation(
         Summary: summary,
         Deprecated: getDeprecated(program, op),
         Description: desc,
-        Accessibility: isInternal(sdkContext, op)
-            ? "internal"
-            : getAccess(sdkContext, op),
+        Accessibility: getAccess(sdkContext, op),
         Parameters: parameters,
         Responses: responses,
         HttpMethod: requestMethod,

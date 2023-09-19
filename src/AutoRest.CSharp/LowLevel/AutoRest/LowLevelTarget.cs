@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             await project.PostProcessAsync(new PostProcessor(
-                modelsToKeep: library.AccessOverrideModels.ToImmutableHashSet(),
+                modelsToKeep: library.AccessOverriddenModels.ToImmutableHashSet(),
                 modelFactoryFullName: modelFactoryProvider?.FullName,
                 aspExtensionClassName: library.AspDotNetExtension.FullName));
         }

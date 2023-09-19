@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var key in _models.Keys)
                 {
-                    if (key is { Namespace: "Azure.Core.Foundations", Name: "Error" })
+                    if (TypeFactory.IsErrorType(key))
                     {
                         continue;
                     }
@@ -40,8 +40,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IReadOnlyList<LowLevelClient> RestClients { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
         public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(Models);
-        public IEnumerable<string> AccessOverrideModels => Enums.Where(e => e.IsAccessibilityOverride).Select(e => e.Declaration.Name)
-            .Concat(Models.Where(m => m.IsAccessibilityOverride).Select(m => m.Declaration.Name));
 
         public DpgOutputLibrary(string libraryName, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
         {
@@ -54,6 +52,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             RestClients = restClients;
             ClientOptions = clientOptions;
         }
+
+        private IEnumerable<string>? _accessOverriddenModels;
+        public IEnumerable<string> AccessOverriddenModels => _accessOverriddenModels ??= Enums.Where(e => e.IsAccessibilityOverridden).Select(e => e.Declaration.Name)
+            .Concat(Models.Where(m => m.IsAccessibilityOverridden).Select(m => m.Declaration.Name));
 
         private AspDotNetExtensionTypeProvider? _aspDotNetExtension;
         public AspDotNetExtensionTypeProvider AspDotNetExtension => _aspDotNetExtension ??= new AspDotNetExtensionTypeProvider(RestClients, Configuration.Namespace, _sourceInputModel);

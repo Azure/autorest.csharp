@@ -71,8 +71,7 @@ import {
     SdkContext,
     getAccess,
     getClientType,
-    getUsageOverride,
-    isInternal
+    getUsageOverride
 } from "@azure-tools/typespec-client-generator-core";
 import { capitalize, getModelName } from "./utils.js";
 import { FormattedType } from "../type/formattedType.js";
@@ -331,7 +330,14 @@ export function getInputType(
         }
     } else if (type.kind === "Union") {
         return getInputTypeForUnion(type);
-    } else {
+    } else if (type.kind === "Tuple") {
+        return {
+            Name: "Intrinsic",
+            Kind: "unknown",
+            IsNullable: false
+        } as InputUnknownType;
+    }
+    else {
         throw new Error(`Unsupported type ${type.kind}`);
     }
 
@@ -540,9 +546,7 @@ export function getInputType(
             model = {
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
-                Accessibility: isInternal(context, m)
-                    ? "internal"
-                    : getAccess(context, m),
+                Accessibility: getAccess(context, m),
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,
