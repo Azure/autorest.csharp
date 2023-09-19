@@ -19,7 +19,7 @@ namespace MgmtCustomizations.Models
         /// <param name="order"> The order. </param>
         /// <param name="pet">
         /// A pet
-        /// Please note <see cref="Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// Please note <see cref="Models.Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="Cat"/> and <see cref="Dog"/>.
         /// </param>
         internal PetStoreProperties(int? order, Pet pet)
@@ -29,7 +29,7 @@ namespace MgmtCustomizations.Models
         }
         /// <summary>
         /// A pet
-        /// Please note <see cref="Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// Please note <see cref="Models.Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="Cat"/> and <see cref="Dog"/>.
         /// </summary>
         public Pet Pet { get; set; }

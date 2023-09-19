@@ -559,7 +559,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var methodSignature = convenienceMethod.Signature.WithAsync(isAsync);
 
             _writer.WriteMethodDocumentation(methodSignature);
-            _writer.WriteXmlDocumentation("remarks", $"{methodSignature.DescriptionText}");
+            _writer.WriteXmlDocumentation("remarks", methodSignature.DescriptionText);
             var docRef = GetMethodSignatureString(methodSignature);
             _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
 
@@ -609,8 +609,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteConvenienceMethodDocumentation(CodeWriter writer, MethodSignature convenienceMethod)
         {
-            writer.WriteMethodDocumentation(convenienceMethod, $"{convenienceMethod.SummaryText}");
-            writer.WriteXmlDocumentation("remarks", $"{convenienceMethod.DescriptionText}");
+            writer.WriteMethodDocumentation(convenienceMethod, convenienceMethod.SummaryText);
+            writer.WriteXmlDocumentation("remarks", convenienceMethod.DescriptionText);
         }
 
         private void WriteCancellationTokenToRequestContextMethod()
@@ -733,7 +733,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            if (addDescription && !methodSignature.DescriptionText.IsNullOrEmpty())
+            if (addDescription && !string.IsNullOrEmpty(methodSignature.DescriptionText?.ToString()))
             {
                 schemaDesription = $"{methodSignature.DescriptionText}{Environment.NewLine}{Environment.NewLine}{schemaDesription}";
             }

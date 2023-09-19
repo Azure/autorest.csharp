@@ -111,7 +111,7 @@ namespace AutoRest.CSharp.Output.Builders
         private const string EscapedQuote = "&quot;";
         public static string EscapeXmlDocDescription(string s)
         {
-            if (String.IsNullOrEmpty(s))
+            if (string.IsNullOrEmpty(s))
                 return s;
 
             var span = s.AsSpan();
