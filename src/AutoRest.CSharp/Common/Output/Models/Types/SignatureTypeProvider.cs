@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly SignatureTypeProvider? _previousContract;
 
         // Missing means the method with the same name is missing from the current contract
-        // Updated means the method with the same name is updated in the current contract, and the list contains the previous method and current methods including overloading ones
+        // Updated means the method with the same name is updated in the current contract, and the list contains the previous method and current methods including overload ones
         private readonly (IReadOnlyList<MethodSignature> Missing, IReadOnlyList<(List<MethodSignature> Current, MethodSignature Previous)> Updated)? _methodChangeset;
 
         public SignatureTypeProvider(IReadOnlyList<MethodSignature> methods, SourceInputModel? sourceInputModel, string defaultNamespace, string defaultName)
@@ -37,10 +37,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        private IReadOnlyList<OverloadMethodSignature>? _overloadingMethods;
-        public IReadOnlyList<OverloadMethodSignature> OverloadingMethods => _overloadingMethods ??= EnsureOverloadingMethods();
+        private IReadOnlyList<OverloadMethodSignature>? _overloadMethods;
+        public IReadOnlyList<OverloadMethodSignature> OverloadMethods => _overloadMethods ??= EnsureOverloadMethods();
 
-        private IReadOnlyList<OverloadMethodSignature> EnsureOverloadingMethods()
+        private IReadOnlyList<OverloadMethodSignature> EnsureOverloadMethods()
         {
             var overloadMethods = new List<OverloadMethodSignature>();
             var updated = _methodChangeset?.Updated;
