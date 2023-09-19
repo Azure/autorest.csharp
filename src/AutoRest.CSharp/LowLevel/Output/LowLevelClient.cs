@@ -156,12 +156,18 @@ namespace AutoRest.CSharp.Output.Models
 
             if (Fields.CredentialFields.Count == 0)
             {
+                /* order the constructor paramters as (endpoint, requiredParameters, OptionalParamters).
+                 * use the OrderBy to put endpoint as the first parameter.
+                 * */
                 yield return CreatePrimaryConstructor(requiredParameters.Concat(optionalToRequired).OrderBy(parameter => parameter.Name != "endpoint").ToArray());
             }
             else
             {
                 foreach (var credentialField in Fields.CredentialFields)
                 {
+                    /* order the constructor paramters as (endpoint, requiredParameters, CredentialParamter, OptionalParamters).
+                     * use the OrderBy to put endpoint as the first parameter.
+                     * */
                     yield return CreatePrimaryConstructor(requiredParameters.Append(CreateCredentialParameter(credentialField!.Type)).Concat(optionalToRequired).OrderBy(parameter => parameter.Name != "endpoint").ToArray());
                 }
             }
@@ -174,6 +180,10 @@ namespace AutoRest.CSharp.Output.Models
                 yield return CreateMockingConstructor();
             }
 
+            /* Construct the parameter arguments to call primitive constructor.
+             * In primitive constructor, the endpoint is the first parameter,
+             * so put the endpoint as the first parameter argument if the endpoint is optional paramter.
+             * */
             var optionalParametersArguments = optionalParameters
                 .Where(p => p.Name != "endpoint")
                 .Select(p => p.Initializer ?? p.Type.GetParameterInitializer(p.DefaultValue!.Value)!)
