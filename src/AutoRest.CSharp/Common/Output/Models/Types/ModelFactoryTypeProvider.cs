@@ -31,21 +31,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IReadOnlyList<MethodSignature>? _methods;
         private IReadOnlyList<MethodSignature> ShouldNotBeUsedForOutPut([CallerMemberName] string caller = "")
         {
-            Debug.Assert(caller == nameof(EnsureOutputMethods) || caller == nameof(SignatureType), $"This method should not be used for output. Caller: {caller}");
+            Debug.Assert(caller == nameof(OutputMethods) || caller == nameof(SignatureType), $"This method should not be used for output. Caller: {caller}");
             return _methods ??= Models!.Select(CreateMethod).ToList();
         }
 
         private IReadOnlyList<MethodSignature>? _outputMethods;
         public IReadOnlyList<MethodSignature> OutputMethods
-            => _outputMethods ??= EnsureOutputMethods();
-        private IReadOnlyList<MethodSignature> EnsureOutputMethods()
-        {
-            if (SignatureType is null)
-            {
-                return ShouldNotBeUsedForOutPut();
-            }
-            return ShouldNotBeUsedForOutPut().Where(x => !SignatureType.MethodsToSkip.Contains(x)).ToList();
-        }
+            => _outputMethods ??= ShouldNotBeUsedForOutPut().Where(x => !SignatureType.MethodsToSkip.Contains(x)).ToList();
 
         public IEnumerable<SerializableObjectType> Models { get; }
 
@@ -103,8 +95,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
 
-        private SignatureType? _signatureTypeProvider;
-        public override SignatureType? SignatureType => _signatureTypeProvider ??= new SignatureType(ShouldNotBeUsedForOutPut(), _sourceInputModel, DefaultNamespace, DefaultName);
+        private SignatureType? _signatureType;
+        public override SignatureType SignatureType => _signatureType ??= new SignatureType(ShouldNotBeUsedForOutPut(), _sourceInputModel, DefaultNamespace, DefaultName);
 
         private (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignmentForSimpleProperty(CodeWriter writer, SerializableObjectType model, Parameter parameter, ObjectTypeProperty property)
         {
