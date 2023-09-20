@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input.Examples;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 

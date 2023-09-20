@@ -2,17 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
-using AutoRest.CSharp.AutoRest.Communication;
-using AutoRest.CSharp.AutoRest.Plugins;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Types;
-using static System.Net.Mime.MediaTypeNames;
+using AutoRest.CSharp.Common.Input;
 
 namespace AutoRest.CSharp.Common.AutoRest.Plugins
 {

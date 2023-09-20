@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
 using NUnit.Framework;

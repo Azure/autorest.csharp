@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using AutoRest.CSharp.Output.Models.Responses;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using YamlDotNet.Serialization;

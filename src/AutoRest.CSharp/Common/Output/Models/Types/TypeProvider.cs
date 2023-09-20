@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 
 using System;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using Microsoft.CodeAnalysis;

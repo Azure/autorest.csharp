@@ -1,26 +1,19 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Generation.Writers;
-using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Response = Azure.Response;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -63,8 +56,8 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             CSharpType? bodyType = clientMethod.RestClientMethod.ReturnType;
             CSharpType responseType = bodyType != null ?
-                new CSharpType(typeof(Response<>), bodyType) :
-                typeof(Response);
+                new CSharpType(Configuration.ApiTypes.ResponseOfTType, bodyType) :
+                Configuration.ApiTypes.ResponseType;
 
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
 

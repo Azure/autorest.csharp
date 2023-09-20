@@ -6,13 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -24,7 +22,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Operation = Azure.Operation;
-using Response = Azure.Response;
 using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -303,20 +300,20 @@ namespace AutoRest.CSharp.Generation.Writers
                     string declaredTypeName = enumType.Declaration.Name;
                     if (enumType.IsExtensible)
                     {
-                        _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}(new {declaredTypeName}({responseVariable:I}.Content.ToObjectFromJson<{enumType.ValueType}>()), {responseVariable:I});");
+                        _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}(new {declaredTypeName}({responseVariable:I}.Content.ToObjectFromJson<{enumType.ValueType}>()), {responseVariable:I});");
                     }
                     else
                     {
-                        _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseVariable:I}.Content.ToObjectFromJson<{enumType.ValueType}>().To{declaredTypeName}(), {responseVariable:I});");
+                        _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}({responseVariable:I}.Content.ToObjectFromJson<{enumType.ValueType}>().To{declaredTypeName}(), {responseVariable:I});");
                     }
                 }
                 else if (responseType.IsFrameworkType)
                 {
-                    _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseVariable:I}.Content.ToObjectFromJson<{responseType}>(), {responseVariable:I});");
+                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}({responseVariable:I}.Content.ToObjectFromJson<{responseType}>(), {responseVariable:I});");
                 }
                 else
                 {
-                    _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseType}.FromResponse({responseVariable:I}), {responseVariable:I});");
+                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}({responseType}.FromResponse({responseVariable:I}), {responseVariable:I});");
                 }
             }
             _writer.Line();
@@ -494,7 +491,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     using (writer.Scope($"public override bool {nameof(ResponseClassifier.IsErrorResponse)}({typeof(HttpMessage)} message)"))
                     {
-                        using (writer.Scope($"return message.{nameof(HttpMessage.Response)}.{nameof(Response.Status)} switch", end: "};"))
+                        using (writer.Scope($"return message.{nameof(HttpMessage.Response)}.{Configuration.ApiTypes.StatusName} switch", end: "};"))
                         {
                             foreach (var statusCode in statusCodes)
                             {
@@ -679,11 +676,11 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 text = (FormattableString)$"The <see cref=\"{nameof(Operation)}\"/> representing an asynchronous operation on the service.";
             }
-            else if (returnType.EqualsIgnoreNullable(typeof(Task<Response>)) || returnType.EqualsIgnoreNullable(typeof(Response)))
+            else if (returnType.EqualsIgnoreNullable(Configuration.ApiTypes.GetTaskOfResponse()) || returnType.EqualsIgnoreNullable(Configuration.ApiTypes.ResponseType))
             {
                 text = (FormattableString)$"The response returned from the service.";
             }
-            else if (returnType.EqualsIgnoreNullable(typeof(Task<Response<bool>>)) || returnType.EqualsIgnoreNullable(typeof(Response<bool>)))
+            else if (returnType.EqualsIgnoreNullable(Configuration.ApiTypes.GetTaskOfResponse(typeof(bool))) || returnType.EqualsIgnoreNullable(Configuration.ApiTypes.GetResponseOfT<bool>()))
             {
                 text = $"The response returned from the service.";
             }

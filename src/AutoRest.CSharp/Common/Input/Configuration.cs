@@ -9,9 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
+using AutoRest.CSharp.Input;
 using Azure.Core;
 
-namespace AutoRest.CSharp.Input
+namespace AutoRest.CSharp.Common.Input
 {
     internal static class Configuration
     {
@@ -112,7 +113,7 @@ namespace AutoRest.CSharp.Input
             UnreferencedTypesHandling = unreferencedTypesHandling;
             UseOverloadsBetweenProtocolAndConvenience = useOverloadsBetweenProtocolAndConvenience;
             KeepNonOverloadableProtocolSignature = keepNonOverloadableProtocolSignature;
-            ShouldTreatBase64AsBinaryData = (!azureArm && !generation1ConvenienceClient) ? shouldTreatBase64AsBinaryData : false;
+            ShouldTreatBase64AsBinaryData = !azureArm && !generation1ConvenienceClient ? shouldTreatBase64AsBinaryData : false;
             UseCoreDataFactoryReplacements = useCoreDataFactoryReplacements;
             projectFolder ??= ProjectFolderDefault;
             (_absoluteProjectFolder, _relativeProjectFolder) = ParseProjectFolders(outputFolder, projectFolder);
@@ -131,11 +132,11 @@ namespace AutoRest.CSharp.Input
                         //TODO Remove after resolving https://github.com/Azure/autorest.csharp/issues/3151
                         var absoluteProjectFolderSPlit = new HashSet<string>(_absoluteProjectFolder.Split(Path.DirectorySeparatorChar), StringComparer.Ordinal);
                         if (!absoluteProjectFolderSPlit.Contains("src") ||
-                            (!absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.Spark") &&
+                            !absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.Spark") &&
                             !absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.Monitoring") &&
                             !absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.ManagedPrivateEndpoints") &&
                             !absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.Artifacts") &&
-                            !absoluteProjectFolderSPlit.Contains("Azure.Communication.PhoneNumbers")))
+                            !absoluteProjectFolderSPlit.Contains("Azure.Communication.PhoneNumbers"))
                             throw new Exception($"Unsupported combination of settings both {Options.PublicClients} and {Options.Generation1ConvenienceClient} cannot be true at the same time.");
                     }
                 }
@@ -151,6 +152,7 @@ namespace AutoRest.CSharp.Input
             _modelsToTreatEmptyStringAsNull = new HashSet<string>(modelsToTreatEmptyStringAsNull);
             _intrinsicTypesToTreatEmptyStringAsNull.UnionWith(additionalIntrinsicTypesToTreatEmptyStringAsNull);
             _methodsToKeepClientDefaultValue = methodsToKeepClientDefaultValue ?? Array.Empty<string>();
+            _apiTypes = new AzureApiTypes();
         }
 
         internal static (string AbsoluteProjectFolder, string RelativeProjectFolder) ParseProjectFolders(string outputFolder, string projectFolder)
@@ -204,6 +206,9 @@ namespace AutoRest.CSharp.Input
 
             return null;
         }
+
+        private static ApiTypes? _apiTypes;
+        public static ApiTypes ApiTypes => _apiTypes ?? throw new InvalidOperationException("Configuration has not been initialized");
 
         public static bool ShouldTreatBase64AsBinaryData { get; private set; }
 
@@ -410,7 +415,7 @@ namespace AutoRest.CSharp.Input
         }
 
         public static bool DeserializeBoolean(JsonElement? jsonElement, bool defaultValue = false)
-            => jsonElement == null || !Configuration.IsValidJsonElement(jsonElement) ? defaultValue : Convert.ToBoolean(jsonElement.ToString());
+            => jsonElement == null || !IsValidJsonElement(jsonElement) ? defaultValue : Convert.ToBoolean(jsonElement.ToString());
 
         public static IReadOnlyList<string> DeserializeArray(JsonElement jsonElement)
             => jsonElement.ValueKind != JsonValueKind.Array ? Array.Empty<string>() : jsonElement.EnumerateArray().Select(t => t.ToString()).ToArray();
@@ -424,19 +429,19 @@ namespace AutoRest.CSharp.Input
             }
 
             root.TryGetProperty(Options.ProtocolMethodList, out var protocolMethodList);
-            var protocolMethods = Configuration.DeserializeArray(protocolMethodList);
+            var protocolMethods = DeserializeArray(protocolMethodList);
             root.TryGetProperty(Options.SuppressAbstractBaseClasses, out var suppressAbstractBaseClassesElement);
-            var suppressAbstractBaseClasses = Configuration.DeserializeArray(suppressAbstractBaseClassesElement);
+            var suppressAbstractBaseClasses = DeserializeArray(suppressAbstractBaseClassesElement);
             root.TryGetProperty(Options.ModelsToTreatEmptyStringAsNull, out var modelsToTreatEmptyStringAsNullElement);
-            var modelsToTreatEmptyStringAsNull = Configuration.DeserializeArray(modelsToTreatEmptyStringAsNullElement);
+            var modelsToTreatEmptyStringAsNull = DeserializeArray(modelsToTreatEmptyStringAsNullElement);
             root.TryGetProperty(Options.IntrinsicTypesToTreatEmptyStringAsNull, out var intrinsicTypesToTreatEmptyStringAsNullElement);
-            var intrinsicTypesToTreatEmptyStringAsNull = Configuration.DeserializeArray(intrinsicTypesToTreatEmptyStringAsNullElement);
+            var intrinsicTypesToTreatEmptyStringAsNull = DeserializeArray(intrinsicTypesToTreatEmptyStringAsNullElement);
             root.TryGetProperty(Options.ModelFactoryForHlc, out var oldModelFactoryEntriesElement);
-            var oldModelFactoryEntries = Configuration.DeserializeArray(oldModelFactoryEntriesElement);
+            var oldModelFactoryEntries = DeserializeArray(oldModelFactoryEntriesElement);
             root.TryGetProperty(Options.MethodsToKeepClientDefaultValue, out var methodsToKeepClientDefaultValueElement);
-            var methodsToKeepClientDefaultValue = Configuration.DeserializeArray(methodsToKeepClientDefaultValueElement);
+            var methodsToKeepClientDefaultValue = DeserializeArray(methodsToKeepClientDefaultValueElement);
 
-            Configuration.Initialize(
+            Initialize(
                 Path.Combine(outputPath, root.GetProperty(Options.OutputFolder).GetString()!),
                 root.GetProperty(Options.Namespace).GetString()!,
                 root.GetProperty(Options.LibraryName).GetString()!,
@@ -492,41 +497,41 @@ namespace AutoRest.CSharp.Input
         private static void WriteConfiguration(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WriteString(Options.OutputFolder, Path.GetRelativePath(Configuration.OutputFolder, Configuration.OutputFolder));
-            writer.WriteString(Options.Namespace, Configuration.Namespace);
-            writer.WriteString(Options.LibraryName, Configuration.LibraryName);
+            writer.WriteString(Options.OutputFolder, Path.GetRelativePath(OutputFolder, OutputFolder));
+            writer.WriteString(Options.Namespace, Namespace);
+            writer.WriteString(Options.LibraryName, LibraryName);
             writer.WriteStartArray(Options.SharedSourceFolders);
-            foreach (var sharedSourceFolder in Configuration.SharedSourceFolders)
+            foreach (var sharedSourceFolder in SharedSourceFolders)
             {
                 writer.WriteStringValue(NormalizePath(sharedSourceFolder));
             }
             writer.WriteEndArray();
-            WriteIfNotDefault(writer, Options.AzureArm, Configuration.AzureArm);
-            WriteIfNotDefault(writer, Options.PublicClients, Configuration.PublicClients);
-            WriteIfNotDefault(writer, Options.ModelNamespace, Configuration.ModelNamespace);
-            WriteIfNotDefault(writer, Options.HeadAsBoolean, Configuration.HeadAsBoolean);
-            WriteIfNotDefault(writer, Options.SkipCSProjPackageReference, Configuration.SkipCSProjPackageReference);
-            WriteIfNotDefault(writer, Options.Generation1ConvenienceClient, Configuration.Generation1ConvenienceClient);
-            WriteIfNotDefault(writer, Options.SingleTopLevelClient, Configuration.SingleTopLevelClient);
-            WriteIfNotDefault(writer, Options.GenerateModelFactory, Configuration.GenerateModelFactory);
-            writer.WriteNonEmptyArray(Options.ModelFactoryForHlc, Configuration.ModelFactoryForHlc);
-            WriteIfNotDefault(writer, Options.UnreferencedTypesHandling, Configuration.UnreferencedTypesHandling);
-            WriteIfNotDefault(writer, Options.UseOverloadsBetweenProtocolAndConvenience, Configuration.UseOverloadsBetweenProtocolAndConvenience);
-            WriteIfNotDefault(writer, Options.ProjectFolder, Configuration.RelativeProjectFolder);
-            WriteIfNotDefault(writer, Options.UseCoreDataFactoryReplacements, Configuration.UseCoreDataFactoryReplacements);
-            writer.WriteNonEmptyArray(Options.ProtocolMethodList, Configuration.ProtocolMethodList);
-            writer.WriteNonEmptyArray(Options.SuppressAbstractBaseClasses, Configuration.SuppressAbstractBaseClasses);
-            writer.WriteNonEmptyArray(Options.ModelsToTreatEmptyStringAsNull, Configuration.ModelsToTreatEmptyStringAsNull.ToList());
-            if (Configuration.ModelsToTreatEmptyStringAsNull.Any())
+            WriteIfNotDefault(writer, Options.AzureArm, AzureArm);
+            WriteIfNotDefault(writer, Options.PublicClients, PublicClients);
+            WriteIfNotDefault(writer, Options.ModelNamespace, ModelNamespace);
+            WriteIfNotDefault(writer, Options.HeadAsBoolean, HeadAsBoolean);
+            WriteIfNotDefault(writer, Options.SkipCSProjPackageReference, SkipCSProjPackageReference);
+            WriteIfNotDefault(writer, Options.Generation1ConvenienceClient, Generation1ConvenienceClient);
+            WriteIfNotDefault(writer, Options.SingleTopLevelClient, SingleTopLevelClient);
+            WriteIfNotDefault(writer, Options.GenerateModelFactory, GenerateModelFactory);
+            writer.WriteNonEmptyArray(Options.ModelFactoryForHlc, ModelFactoryForHlc);
+            WriteIfNotDefault(writer, Options.UnreferencedTypesHandling, UnreferencedTypesHandling);
+            WriteIfNotDefault(writer, Options.UseOverloadsBetweenProtocolAndConvenience, UseOverloadsBetweenProtocolAndConvenience);
+            WriteIfNotDefault(writer, Options.ProjectFolder, RelativeProjectFolder);
+            WriteIfNotDefault(writer, Options.UseCoreDataFactoryReplacements, UseCoreDataFactoryReplacements);
+            writer.WriteNonEmptyArray(Options.ProtocolMethodList, ProtocolMethodList);
+            writer.WriteNonEmptyArray(Options.SuppressAbstractBaseClasses, SuppressAbstractBaseClasses);
+            writer.WriteNonEmptyArray(Options.ModelsToTreatEmptyStringAsNull, ModelsToTreatEmptyStringAsNull.ToList());
+            if (ModelsToTreatEmptyStringAsNull.Any())
             {
-                writer.WriteNonEmptyArray(Options.IntrinsicTypesToTreatEmptyStringAsNull, Configuration.IntrinsicTypesToTreatEmptyStringAsNull.ToList());
+                writer.WriteNonEmptyArray(Options.IntrinsicTypesToTreatEmptyStringAsNull, IntrinsicTypesToTreatEmptyStringAsNull.ToList());
             }
 
-            Configuration.MgmtConfiguration.SaveConfiguration(writer);
+            MgmtConfiguration.SaveConfiguration(writer);
 
-            if (Configuration.MgmtTestConfiguration != null)
+            if (MgmtTestConfiguration != null)
             {
-                Configuration.MgmtTestConfiguration.SaveConfiguration(writer);
+                MgmtTestConfiguration.SaveConfiguration(writer);
             }
 
             writer.WriteEndObject();
@@ -534,12 +539,12 @@ namespace AutoRest.CSharp.Input
 
         private static string NormalizePath(string sharedSourceFolder)
         {
-            return Path.GetRelativePath(Configuration.OutputFolder, sharedSourceFolder);
+            return Path.GetRelativePath(OutputFolder, sharedSourceFolder);
         }
 
         private static void WriteIfNotDefault<T>(Utf8JsonWriter writer, string option, T enumValue) where T : struct, Enum
         {
-            var defaultValue = Configuration.GetDefaultEnumOptionValue(option);
+            var defaultValue = GetDefaultEnumOptionValue(option);
             if (!enumValue.Equals(defaultValue))
             {
                 writer.WriteString(option, enumValue.ToString());
@@ -548,7 +553,7 @@ namespace AutoRest.CSharp.Input
 
         private static void WriteIfNotDefault(Utf8JsonWriter writer, string option, bool value)
         {
-            var defaultValue = Configuration.GetDefaultBoolOptionValue(option);
+            var defaultValue = GetDefaultBoolOptionValue(option);
             if (!defaultValue.HasValue || defaultValue.Value != value)
             {
                 writer.WriteBoolean(option, value);
@@ -564,8 +569,8 @@ namespace AutoRest.CSharp.Input
 
             switch (option)
             {
-                case Configuration.Options.ProjectFolder:
-                    if (value != Configuration.ProjectFolderDefault)
+                case Options.ProjectFolder:
+                    if (value != ProjectFolderDefault)
                         writer.WriteString(option, value);
                     break;
                 default:
@@ -582,14 +587,14 @@ namespace AutoRest.CSharp.Input
             }
             else
             {
-                return Configuration.GetDefaultBoolOptionValue(option)!.Value;
+                return GetDefaultBoolOptionValue(option)!.Value;
             }
         }
 
         private static T ReadEnumOption<T>(JsonElement root, string option) where T : struct, Enum
         {
             var enumStr = ReadStringOption(root, option);
-            return Configuration.GetOptionEnumValueFromString<T>(option, enumStr);
+            return GetOptionEnumValueFromString<T>(option, enumStr);
         }
 
         private static string? ReadStringOption(JsonElement root, string option)

@@ -5,12 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -18,16 +16,13 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
-using Azure;
 using Azure.Core;
-using Microsoft.CodeAnalysis.CSharp;
-using static Azure.Core.HttpHeader;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal sealed class ModelTypeProvider : SerializableObjectType
     {
-        private static readonly Parameter[] _fromResponseParameters = { new Parameter("response", $"The response to deserialize the model from.", new CSharpType(typeof(Response)), null, ValidationType.None, null) };
+        private static readonly Parameter[] _fromResponseParameters = { new Parameter("response", $"The response to deserialize the model from.", new CSharpType(Configuration.ApiTypes.ResponseType), null, ValidationType.None, null) };
         private MethodSignature FromResponseSignature => new MethodSignature("FromResponse", null, $"Deserializes the model from a raw response.", GetFromResponseModifiers(), Type, null, _fromResponseParameters);
 
         private static readonly Parameter[] _toRequestContentParameters = Array.Empty<Parameter>();

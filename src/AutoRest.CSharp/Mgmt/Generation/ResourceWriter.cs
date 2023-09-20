@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -254,7 +254,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 else
                 {
-                    _writer.Line($"return {typeof(Response)}.FromValue(result.Value, result.GetRawResponse());");
+                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue(result.Value, result.GetRawResponse());");
                 }
             }
             else
@@ -300,7 +300,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var valueConverter = getOperation.GetValueConverter($"{ArmClientReference}", $"{originalResponse}.Value", getOperation.MgmtReturnType);
             if (valueConverter != null)
             {
-                _writer.Line($"return {typeof(Response)}.FromValue({valueConverter}, {originalResponse}.GetRawResponse());");
+                _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue({valueConverter}, {originalResponse}.GetRawResponse());");
             }
             else
             {

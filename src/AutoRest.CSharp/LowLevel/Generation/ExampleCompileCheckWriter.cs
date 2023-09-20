@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.LowLevel.Generation.Extensions;
@@ -179,7 +180,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
                 WriteNormalOperationResponse(sample, $"{response}", $"{response}.ContentStream");
             else
             {
-                if (returnType.EqualsIgnoreNullable(typeof(Azure.Response)))
+                if (returnType.EqualsIgnoreNullable(Configuration.ApiTypes.ResponseType))
                 {
                     _writer.ConsoleWriteLine($"{response}.Status");
                 }

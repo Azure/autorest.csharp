@@ -18,7 +18,7 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
-using Configuration = AutoRest.CSharp.Input.Configuration;
+using Configuration = AutoRest.CSharp.Common.Input.Configuration;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -315,10 +315,10 @@ namespace AutoRest.CSharp.Output.Models
 
             if (responseType != null)
             {
-                return new ReturnTypeChain(new CSharpType(typeof(Response<>), responseType), typeof(Response), responseType);
+                return new ReturnTypeChain(new CSharpType(Configuration.ApiTypes.ResponseOfTType, responseType), Configuration.ApiTypes.ResponseType, responseType);
             }
 
-            return new ReturnTypeChain(typeof(Response), typeof(Response), null);
+            return new ReturnTypeChain(Configuration.ApiTypes.ResponseType, Configuration.ApiTypes.ResponseType, null);
         }
 
         private ConvenienceMethod? BuildConvenienceMethod(bool shouldRequestContextOptional, ConvenienceMethodGenerationInfo generationInfo)

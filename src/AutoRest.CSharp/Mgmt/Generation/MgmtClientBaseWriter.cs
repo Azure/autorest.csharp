@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Common.Generation.Writers;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -22,7 +22,6 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
@@ -690,7 +689,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"{response}.Value");
                 if (valueConverter != null)
                 {
-                    _writer.Line($"return {typeof(Response)}.FromValue({valueConverter}, {response}.GetRawResponse());");
+                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue({valueConverter}, {response}.GetRawResponse());");
                 }
                 else
                 {
@@ -785,7 +784,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"response");
                 if (valueConverter != null)
                 {
-                    _writer.Append($"{typeof(Response)}.FromValue({valueConverter}, response.GetRawResponse())");
+                    _writer.Append($"{Configuration.ApiTypes.ResponseType}.FromValue({valueConverter}, response.GetRawResponse())");
                 }
                 else
                 {

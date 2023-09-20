@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
 using NUnit.Framework;
 
