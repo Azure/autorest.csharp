@@ -13,26 +13,26 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal class SignatureTypeProvider
+    internal class SignatureType
     {
         private readonly string _defaultNamespace;
         private readonly string _defaultName;
-        private readonly SignatureTypeProvider? _customization;
-        private readonly SignatureTypeProvider? _previousContract;
+        private readonly SignatureType? _customization;
+        private readonly SignatureType? _previousContract;
 
         // Missing means the method with the same name is missing from the current contract
         // Updated means the method with the same name is updated in the current contract, and the list contains the previous method and current methods including overload ones
         private readonly (IReadOnlyList<MethodSignature> Missing, IReadOnlyList<(List<MethodSignature> Current, MethodSignature Previous)> Updated)? _methodChangeset;
 
-        public SignatureTypeProvider(IReadOnlyList<MethodSignature> methods, SourceInputModel? sourceInputModel, string defaultNamespace, string defaultName)
+        public SignatureType(IReadOnlyList<MethodSignature> methods, SourceInputModel? sourceInputModel, string defaultNamespace, string defaultName)
         {
             Methods = methods;
             _defaultNamespace = defaultNamespace;
             _defaultName = defaultName;
             if (sourceInputModel is not null)
             {
-                _customization = new SignatureTypeProvider(PopulateMethodsFromCompilation(sourceInputModel?.Customization), null, defaultNamespace, defaultName);
-                _previousContract = new SignatureTypeProvider(PopulateMethodsFromCompilation(sourceInputModel?.PreviousContract), null, defaultNamespace, defaultName);
+                _customization = new SignatureType(PopulateMethodsFromCompilation(sourceInputModel?.Customization), null, defaultNamespace, defaultName);
+                _previousContract = new SignatureType(PopulateMethodsFromCompilation(sourceInputModel?.PreviousContract), null, defaultNamespace, defaultName);
                 _methodChangeset ??= CompareMethods(Methods.Union(_customization?.Methods ?? Array.Empty<MethodSignature>(), MethodSignature.ParameterAndReturnTypeEqualityComparer), _previousContract?.Methods);
             }
         }

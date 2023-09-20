@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
@@ -26,19 +27,24 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
+        // TODO: remove this intermediate state once we generate it before output types
         private IReadOnlyList<MethodSignature>? _methods;
-        private IReadOnlyList<MethodSignature> Methods => _methods ??= Models!.Select(CreateMethod).ToList();
+        private IReadOnlyList<MethodSignature> ShouldNotBeUsedForOutPut([CallerMemberName] string caller = "")
+        {
+            Debug.Assert(caller == nameof(EnsureOutputMethods) || caller == nameof(SignatureType), $"This method should not be used for output. Caller: {caller}");
+            return _methods ??= Models!.Select(CreateMethod).ToList();
+        }
 
         private IReadOnlyList<MethodSignature>? _outputMethods;
         public IReadOnlyList<MethodSignature> OutputMethods
             => _outputMethods ??= EnsureOutputMethods();
         private IReadOnlyList<MethodSignature> EnsureOutputMethods()
         {
-            if (SignatureTypeProvider is null)
+            if (SignatureType is null)
             {
-                return Methods;
+                return ShouldNotBeUsedForOutPut();
             }
-            return Methods.Where(x => !SignatureTypeProvider.MethodsToSkip.Contains(x)).ToList();
+            return ShouldNotBeUsedForOutPut().Where(x => !SignatureType.MethodsToSkip.Contains(x)).ToList();
         }
 
         public IEnumerable<SerializableObjectType> Models { get; }
@@ -97,8 +103,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
 
-        private SignatureTypeProvider? _signatureTypeProvider;
-        public override SignatureTypeProvider? SignatureTypeProvider => _signatureTypeProvider ??= new SignatureTypeProvider(Methods, _sourceInputModel, DefaultNamespace, DefaultName);
+        private SignatureType? _signatureTypeProvider;
+        public override SignatureType? SignatureType => _signatureTypeProvider ??= new SignatureType(ShouldNotBeUsedForOutPut(), _sourceInputModel, DefaultNamespace, DefaultName);
 
         private (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignmentForSimpleProperty(CodeWriter writer, SerializableObjectType model, Parameter parameter, ObjectTypeProperty property)
         {

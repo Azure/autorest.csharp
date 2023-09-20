@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected virtual TypeKind TypeKind { get; } = TypeKind.Class;
         protected virtual bool IsAbstract { get; } = false;
         protected INamedTypeSymbol? ExistingType => _existingType.Value;
-        public virtual SignatureTypeProvider? SignatureTypeProvider => null;
+        public virtual SignatureType? SignatureType => null;
 
         internal virtual Type? SerializeAs => null;
 
