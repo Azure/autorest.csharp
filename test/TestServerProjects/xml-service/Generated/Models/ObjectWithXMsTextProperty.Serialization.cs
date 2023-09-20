@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Xml.Linq;
+using Azure.Core;
 
 namespace xml_service.Models
 {
@@ -19,7 +20,7 @@ namespace xml_service.Models
             {
                 language = (string)languageAttribute;
             }
-            content = element.Value;
+            content = (string)element;
             return new ObjectWithXMsTextProperty(language, content);
         }
     }

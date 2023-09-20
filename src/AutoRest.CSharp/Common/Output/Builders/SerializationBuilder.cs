@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -165,7 +166,7 @@ namespace AutoRest.CSharp.Output.Builders
             };
         }
 
-        private static JsonSerialization BuildSerialization(Schema schema, CSharpType type, bool isCollectionElement)
+        public static JsonSerialization BuildSerialization(Schema schema, CSharpType type, bool isCollectionElement)
         {
             if (type.IsFrameworkType && type.FrameworkType == typeof(JsonElement))
             {
@@ -268,19 +269,23 @@ namespace AutoRest.CSharp.Output.Builders
                     throw new InvalidOperationException($"Serialization constructor of the type {objectType.Declaration.Name} has no parameter for {schemaProperty.SerializedName} input property");
                 }
 
+                var serializedName = schemaProperty.SerializedName;
+                var isRequired = schemaProperty.IsRequired;
+                var isReadOnly = schemaProperty.IsReadOnly;
+                var serialization = BuildSerialization(schemaProperty.Schema, property.Declaration.Type, false);
+
                 yield return new JsonPropertySerialization(
                     parameter.Name,
-                    property.Declaration.Name,
-                    property.SerializationMapping?.SerializationPath?.Last() ?? schemaProperty.SerializedName,
+                    new MemberExpression(null, property.Declaration.Name),
+                    serializedName,
                     property.Declaration.Type,
                     property.ValueType,
-                    BuildSerialization(schemaProperty.Schema, property.ValueType, false),
-                    schemaProperty.IsRequired,
-                    schemaProperty.IsReadOnly,
+                    serialization,
+                    isRequired,
+                    isReadOnly,
                     false,
-                    property.OptionalViaNullability,
-                    serializationValueHook: property.SerializationMapping?.SerializationValueHook,
-                    deserializationValueHook: property.SerializationMapping?.DeserializationValueHook);
+                    customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
+                    customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);
             }
 
             foreach ((string name, SerializationPropertyBag innerBag) in propertyBag.Bag)
@@ -307,7 +312,7 @@ namespace AutoRest.CSharp.Output.Builders
             PopulatePropertyBag(propertyBag, 0);
             var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
             var additionalProperties = CreateAdditionalProperties(objectSchema, objectType);
-            return new JsonObjectSerialization(objectType.Type, objectType.SerializationConstructor.Signature, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter, false, false);
+            return new JsonObjectSerialization(objectType.Type, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter);
         }
 
         private class SerializationPropertyBag

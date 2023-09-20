@@ -8,6 +8,7 @@ namespace AutoRest.CSharp.Generation.Writers
     internal class CodeWriterDeclaration
     {
         private string? _actualName;
+        private string? _debuggerName;
 
         public CodeWriterDeclaration(string name)
         {
@@ -16,16 +17,24 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public string RequestedName { get; }
 
-        public string ActualName => _actualName ?? throw new InvalidOperationException("Declaration not initialized");
+        public string ActualName => _actualName ?? _debuggerName ?? throw new InvalidOperationException($"Declaration {RequestedName} is not initialized");
 
-        internal void SetActualName(string actualName)
+        internal void SetActualName(string? actualName)
         {
-            if (_actualName != null)
+            if (_actualName != null && actualName != null)
             {
-                throw new InvalidOperationException($"Declaration {_actualName} already initialized");
+                throw new InvalidOperationException($"Declaration {_actualName} already initialized, can't initialize it with {actualName} name.");
             }
 
             _actualName = actualName;
+        }
+
+        internal void SetDebuggerName(string? debuggerName)
+        {
+            if (_actualName == null)
+            {
+                _debuggerName = debuggerName;
+            }
         }
     }
 }
