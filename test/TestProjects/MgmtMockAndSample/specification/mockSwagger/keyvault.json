@@ -80,6 +80,9 @@
           "Create a new vault or update an existing vault": {
             "$ref": "./examples/createVault.json"
           },
+          "Verify Sample-gen can handle examples with some parameter missing":{
+            "$ref": "./examples/createVaultMissingNameParam.json"
+          },
           "Create or update a vault with network acls": {
             "$ref": "./examples/createVaultWithNetworkAcls.json"
           }

@@ -394,7 +394,9 @@ internal class PostProcessor
                     var descendantNodes = filteredTriviaList.First().GetStructure()?.DescendantNodes().ToList();
                     var filteredDescendantNodes = FilterTriviaWithDiscriminator(descendantNodes);
                     var identifierNodes = filteredDescendantNodes.SelectMany(node => node.DescendantNodes().OfType<XmlCrefAttributeSyntax>());
-                    identifiers = identifierNodes.Select(identifier => identifier.Cref.ToFullString()).ToHashSet();
+                    // this is getting plain the cref content out, therefore if we write `cref="global::Azure.ResourceManager.Models.Cat"`, we will have
+                    // global::Azure.ResourceManager.Models.Cat. But in the place we consume this set, we only need the name, therefore here we just trim off the prefixes here
+                    identifiers = identifierNodes.Select(identifier => GetCleanName(identifier.Cref)).ToHashSet();
                     return true;
                 }
             }
@@ -402,6 +404,12 @@ internal class PostProcessor
         }
 
         return false;
+    }
+
+    private static string GetCleanName(CrefSyntax cref)
+    {
+        var fullString = cref.ToFullString();
+        return fullString.Split('.', StringSplitOptions.RemoveEmptyEntries).Last();
     }
 
     private static IEnumerable<SyntaxNode> FilterTriviaWithDiscriminator(List<SyntaxNode>? nodes)

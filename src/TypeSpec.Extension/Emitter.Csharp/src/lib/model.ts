@@ -6,65 +6,67 @@ import {
     EncodeData,
     Enum,
     EnumMember,
-    getDoc,
-    getDeprecated,
-    getEffectiveModelType,
-    getEncode,
-    getFormat,
-    getKnownValues,
-    getVisibility,
+    IntrinsicType,
     Model,
     ModelProperty,
     Namespace,
     NeverType,
     Operation,
     Program,
-    resolveUsages,
+    Scalar,
     Type,
+    Union,
     UsageFlags,
+    getDeprecated,
     getDiscriminator,
-    IntrinsicType,
-    isVoidType,
+    getDoc,
+    getEffectiveModelType,
+    getEncode,
+    getFormat,
+    getKnownValues,
+    getProjectedNames,
+    getVisibility,
     isArrayModelType,
     isRecordModelType,
-    Scalar,
-    Union,
-    getProjectedNames,
     isGlobalNamespace,
-    navigateTypesInNamespace
+    navigateTypesInNamespace,
+    isVoidType,
+    resolveUsages
 } from "@typespec/compiler";
-import { getResourceOperation } from "@typespec/rest";
 import {
+    HttpOperation,
     getHeaderFieldName,
     getPathParamName,
     getQueryParamName,
-    HttpOperation,
     isStatusCode
 } from "@typespec/http";
+import { getResourceOperation } from "@typespec/rest";
 import {
-    projectedNameClientKey,
     projectedNameCSharpKey,
+    projectedNameClientKey,
     projectedNameJsonKey
 } from "../constants.js";
+import { FormattedType } from "../type/formattedType.js";
 import { InputEnumTypeValue } from "../type/inputEnumTypeValue.js";
 import { InputModelProperty } from "../type/inputModelProperty.js";
 import {
     InputDictionaryType,
     InputEnumType,
+    InputIntrinsicType,
     InputListType,
     InputLiteralType,
     InputModelType,
+    InputNullType,
     InputPrimitiveType,
     InputType,
     InputUnionType,
-    InputNullType,
-    InputIntrinsicType,
     InputUnknownType,
     isInputEnumType,
     isInputLiteralType,
     isInputModelType
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
+import { LiteralTypeContext } from "../type/literalTypeContext.js";
 import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
 import {
@@ -75,8 +77,6 @@ import {
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import { capitalize, getModelName } from "./utils.js";
-import { FormattedType } from "../type/formattedType.js";
-import { LiteralTypeContext } from "../type/literalTypeContext.js";
 /**
  * Map calType to csharp InputTypeKind
  */

@@ -8,10 +8,11 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal abstract record MethodSignatureBase(string Name, string? Summary, string? Description, MethodSignatureModifiers Modifiers, IReadOnlyList<Parameter> Parameters, IReadOnlyList<CSharpAttribute> Attributes)
+    internal abstract record MethodSignatureBase(string Name, FormattableString? Summary, FormattableString? Description, MethodSignatureModifiers Modifiers, IReadOnlyList<Parameter> Parameters, IReadOnlyList<CSharpAttribute> Attributes)
     {
-        public string? SummaryText => Summary.IsNullOrEmpty() ? Description : Summary;
-        public string? DescriptionText => Summary.IsNullOrEmpty() || Description == Summary ? string.Empty : Description;
+        private bool IsSummaryNullOrEmpty => string.IsNullOrEmpty(Summary?.ToString());
+        public FormattableString? SummaryText => IsSummaryNullOrEmpty ? Description : Summary;
+        public FormattableString? DescriptionText => IsSummaryNullOrEmpty || Description == Summary || Description?.ToString() == Summary?.ToString() ? $"" : Description;
     }
 
     [Flags]
