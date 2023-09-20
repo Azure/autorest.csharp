@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line();
 
                     writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override {Configuration.ApiTypes.ValueTaskOfResponseType} UpdateStatusAsync({typeof(CancellationToken)} cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);");
+                    writer.Line($"public override {Configuration.ApiTypes.GetValueTaskOfResponse()} UpdateStatusAsync({typeof(CancellationToken)} cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);");
                     writer.Line();
 
                     WriteWaitForCompletionVariants(writer, operation);

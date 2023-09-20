@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Threading.Tasks;
 using Azure;
 
 namespace AutoRest.CSharp.Common.Input
@@ -11,7 +10,5 @@ namespace AutoRest.CSharp.Common.Input
     {
         public override Type ResponseType => typeof(Response);
         public override Type ResponseOfTType => typeof(Response<>);
-
-        public override Type ValueTaskOfResponseType => typeof(ValueTask<Response>);
     }
 }

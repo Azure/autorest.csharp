@@ -11,7 +11,6 @@ namespace AutoRest.CSharp.Common.Input
     {
         public abstract Type ResponseType { get; }
         public abstract Type ResponseOfTType { get; }
-        public abstract Type ValueTaskOfResponseType { get; }
 
         public string ContentStreamName => nameof(Result.ContentStream);
         public string ContentName => nameof(Result.Content);
