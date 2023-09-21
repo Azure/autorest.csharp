@@ -65,7 +65,8 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 shouldTreatBase64AsBinaryData: true,
                 methodsToKeepClientDefaultValue: Array.Empty<string>(),
                 mgmtConfiguration: null,
-                mgmtTestConfiguration: null);
+                mgmtTestConfiguration: null,
+                branded: true);
         }
 
 

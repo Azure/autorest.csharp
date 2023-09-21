@@ -21,7 +21,6 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
-using Azure.Core.Pipeline;
 using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
@@ -418,7 +417,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected FormattableString ConstructClientDiagnostic(CodeWriter writer, FormattableString providerNamespace, string diagnosticsOptionsVariable)
         {
-            return $"new {typeof(ClientDiagnostics)}(\"{This.Type.Namespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
+            return $"new {Configuration.ApiTypes.ClientDiagnosticsType}(\"{This.Type.Namespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
         }
 
         protected FormattableString GetRestConstructorString(MgmtRestClient restClient, FormattableString? apiVersionExpression)
@@ -448,7 +447,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return UseField ? names.RestField : names.RestProperty;
         }
 
-        protected Reference GetDiagnosticReference(MgmtRestOperation operation) => new Reference(GetDiagnosticName(operation.RestClient, operation.Resource), typeof(ClientDiagnostics));
+        protected Reference GetDiagnosticReference(MgmtRestOperation operation) => new Reference(GetDiagnosticName(operation.RestClient, operation.Resource), Configuration.ApiTypes.ClientDiagnosticsType);
         private string GetDiagnosticName(MgmtRestClient client, Resource? resource)
         {
             var names = This.GetRestDiagNames(new NameSetKey(client, resource));
@@ -608,7 +607,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             FormattableString firstPageRequest = $"{GetRestClientName(operation)}.Create{pagingMethod.Method.Name}Request({firstPageRequestArguments})";
             FormattableString? nextPageRequest = pagingMethod.NextPageMethod != null ? $"{GetRestClientName(operation)}.Create{pagingMethod.NextPageMethod.Name}Request({nextPageRequestArguments})" : (FormattableString?)null;
-            var pipelineReference = new Reference("Pipeline", typeof(HttpPipeline));
+            var pipelineReference = new Reference("Pipeline", Configuration.ApiTypes.HttpPipelineType);
             var scopeName = diagnostic.ScopeName;
             var itemName = pagingMethod.ItemName;
             var nextLinkName = pagingMethod.NextLinkName;
@@ -677,7 +676,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer
                         .Line($"if ({response}.Value == null)")
-                        .Line($"throw new {typeof(RequestFailedException)}({response}.GetRawResponse());");
+                        .Line($"throw new {typeof(RequestFailedException)}({response}.{Configuration.ApiTypes.GetRawResponseName}());");
                 }
                 var realReturnType = operation.MgmtReturnType;
                 if (realReturnType != null && realReturnType.TryCastResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
@@ -689,7 +688,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"{response}.Value");
                 if (valueConverter != null)
                 {
-                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue({valueConverter}, {response}.GetRawResponse());");
+                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue({valueConverter}, {response}.{Configuration.ApiTypes.GetRawResponseName}());");
                 }
                 else
                 {
@@ -784,7 +783,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"response");
                 if (valueConverter != null)
                 {
-                    _writer.Append($"{Configuration.ApiTypes.ResponseType}.FromValue({valueConverter}, response.GetRawResponse())");
+                    _writer.Append($"{Configuration.ApiTypes.ResponseType}.FromValue({valueConverter}, response.{Configuration.ApiTypes.GetRawResponseName}())");
                 }
                 else
                 {

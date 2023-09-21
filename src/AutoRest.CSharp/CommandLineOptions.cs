@@ -1,9 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using CommandLine;
 
 namespace AutoRest.CSharp
@@ -33,5 +30,8 @@ namespace AutoRest.CSharp
 
         [Option('x', "clear-output-folder", Required = false, Default = false, HelpText = "Clear the output folder before generating code.")]
         public bool ClearOutputFolder { get; set; }
+
+        [Option('b', "branded", Required = false, Default = true, HelpText = "Creates an Azure branded client.")]
+        public bool IsBranded { get; set; }
     }
 }

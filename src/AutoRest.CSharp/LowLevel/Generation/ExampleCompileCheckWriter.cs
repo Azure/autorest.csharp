@@ -186,7 +186,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
                 }
                 else
                 {
-                    _writer.ConsoleWriteLine($"{response}.GetRawResponse().Status");
+                    _writer.ConsoleWriteLine($"{response}.{Configuration.ApiTypes.GetRawResponseName}().Status");
                 }
             }
         }

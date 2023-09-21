@@ -244,7 +244,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var documentVariable = new CodeWriterDeclaration("document");
             writer
-                .Line($"using var {documentVariable:D} = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}(response.{Configuration.ApiTypes.ContentName});")
+                .Line($"using var {documentVariable:D} = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}({Configuration.ApiTypes.ResponseParameterName}.{Configuration.ApiTypes.ContentName});")
                 .Line($"return Deserialize{objectType.Declaration.Name}({documentVariable:I}.{nameof(JsonDocument.RootElement)});");
         }
 

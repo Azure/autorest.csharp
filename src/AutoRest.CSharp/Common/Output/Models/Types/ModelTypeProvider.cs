@@ -22,8 +22,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal sealed class ModelTypeProvider : SerializableObjectType
     {
-        private static readonly Parameter[] _fromResponseParameters = { new Parameter("response", $"The response to deserialize the model from.", new CSharpType(Configuration.ApiTypes.ResponseType), null, ValidationType.None, null) };
-        private MethodSignature FromResponseSignature => new MethodSignature("FromResponse", null, $"Deserializes the model from a raw response.", GetFromResponseModifiers(), Type, null, _fromResponseParameters);
+        private static readonly Parameter[] _fromResponseParameters = { new Parameter(Configuration.ApiTypes.ResponseParameterName, $"The response to deserialize the model from.", new CSharpType(Configuration.ApiTypes.ResponseType), null, ValidationType.None, null) };
+        private MethodSignature FromResponseSignature => new MethodSignature(Configuration.ApiTypes.FromResponseName, null, $"Deserializes the model from a raw response.", GetFromResponseModifiers(), Type, null, _fromResponseParameters);
 
         private static readonly Parameter[] _toRequestContentParameters = Array.Empty<Parameter>();
         private MethodSignature ToRequestContentSignature => new MethodSignature("ToRequestContent", null, $"Convert into a Utf8JsonRequestContent.", GetToRequestContentModifiers(), typeof(RequestContent), null, _toRequestContentParameters);
@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var parent = GetBaseObjectType();
             if (parent is ModelTypeProvider parentModelType)
             {
-                if (parentModelType.Methods.Any(m => m.Signature.Name == "FromResponse"))
+                if (parentModelType.Methods.Any(m => m.Signature.Name == Configuration.ApiTypes.FromResponseName))
                     signatures |= MethodSignatureModifiers.New;
             }
             return signatures;

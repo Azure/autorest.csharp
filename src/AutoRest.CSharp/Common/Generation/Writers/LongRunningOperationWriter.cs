@@ -10,7 +10,6 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using Azure;
 using Azure.Core;
-using Azure.Core.Pipeline;
 using Request = Azure.Core.Request;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -72,7 +71,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
 
                     writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override {Configuration.ApiTypes.ResponseType} GetRawResponse() => _operation.RawResponse;");
+                    writer.Line($"public override {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.GetRawResponseName}() => _operation.RawResponse;");
                     writer.Line();
 
                     writer.WriteXmlDocumentationInheritDoc();
@@ -127,19 +126,19 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (pagingResponse != null)
             {
-                writer.Line($"private readonly {typeof(Func<int?, string, HttpMessage>)} _nextPageFunc;");
-                writer.Line($"private readonly {typeof(ClientDiagnostics)} _clientDiagnostics;");
-                writer.Line($"private readonly {typeof(HttpPipeline)} _pipeline;");
+                writer.Line($"private readonly {Configuration.ApiTypes.GetNextPageFuncType()} _nextPageFunc;");
+                writer.Line($"private readonly {Configuration.ApiTypes.ClientDiagnosticsType} _clientDiagnostics;");
+                writer.Line($"private readonly {Configuration.ApiTypes.HttpPipelineType} _pipeline;");
             }
         }
 
         private void WriteConstructor(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType lroType, CSharpType helperType)
         {
-            writer.Append($"internal {lroType.Name}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} response");
+            writer.Append($"internal {lroType.Name}({Configuration.ApiTypes.ClientDiagnosticsType} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} response");
 
             if (pagingResponse != null)
             {
-                writer.Append($", {typeof(Func<int?, string, HttpMessage>)} nextPageFunc");
+                writer.Append($", {Configuration.ApiTypes.GetNextPageFuncType()} nextPageFunc");
             }
             writer.Line($")");
 

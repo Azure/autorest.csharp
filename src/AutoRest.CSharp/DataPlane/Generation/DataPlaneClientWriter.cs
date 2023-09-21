@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     if (bodyType == null && clientMethod.RestClientMethod.HeaderModel != null)
                     {
-                        writer.Append($".GetRawResponse()");
+                        writer.Append($".{Configuration.ApiTypes.GetRawResponseName}()");
                     }
 
                     writer.Line($";");
@@ -158,7 +158,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line();
 
                     writer.Line($"{OptionsVariable} ??= new {clientOptionsName}();");
-                    writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
+                    writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {Configuration.ApiTypes.ClientDiagnosticsType}({OptionsVariable});");
                     writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(AzureKeyCredentialPolicy)}({CredentialVariable}, \"{library.Authentication.ApiKey.Name}\"));");
                     writer.Append($"this.RestClient = new {client.RestClient.Type}(");
                     foreach (var parameter in client.RestClient.Parameters)
@@ -209,7 +209,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line();
 
                     writer.Line($"{OptionsVariable} ??= new {clientOptionsName}();");
-                    writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
+                    writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {Configuration.ApiTypes.ClientDiagnosticsType}({OptionsVariable});");
                     var scopesParam = new CodeWriterDeclaration("scopes");
                     writer.Append($"string[] {scopesParam:D} = ");
                     writer.Append($"{{ ");
@@ -267,7 +267,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Append(KnownParameters.CancellationTokenParameter)
                 .ToList();
 
-            var pipelineReference = new Reference(PipelineField, typeof(HttpPipeline));
+            var pipelineReference = new Reference(PipelineField, Configuration.ApiTypes.HttpPipelineType);
             var scopeName = pagingMethod.Diagnostics.ScopeName;
             var nextLinkName = pagingMethod.PagingResponse.NextLinkPropertyName;
             var itemName = pagingMethod.PagingResponse.ItemPropertyName;

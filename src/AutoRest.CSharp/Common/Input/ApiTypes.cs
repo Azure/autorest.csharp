@@ -12,6 +12,10 @@ namespace AutoRest.CSharp.Common.Input
         public abstract Type ResponseType { get; }
         public abstract Type ResponseOfTType { get; }
 
+        public abstract string FromResponseName { get; }
+        public abstract string ResponseParameterName { get; }
+
+        public abstract string GetRawResponseName { get; }
         public string ContentStreamName => nameof(Result.ContentStream);
         public string ContentName => nameof(Result.Content);
         public string FromValueName = nameof(Result.FromValue);
@@ -22,5 +26,22 @@ namespace AutoRest.CSharp.Common.Input
             valueType is null ? typeof(Task<>).MakeGenericType(ResponseType) : typeof(Task<>).MakeGenericType(ResponseOfTType.MakeGenericType(valueType));
         public Type GetValueTaskOfResponse(Type? valueType = default) =>
             valueType is null ? typeof(ValueTask<>).MakeGenericType(ResponseType) : typeof(ValueTask<>).MakeGenericType(ResponseOfTType.MakeGenericType(valueType));
+
+        public abstract Type PipelineExtensionsType { get; }
+        protected abstract string ProcessHeadAsBoolMessageName { get; }
+        public string GetProcessHeadAsBoolMessageName(bool isAsync = false) => isAsync ? $"{ProcessHeadAsBoolMessageName}Async" : ProcessHeadAsBoolMessageName;
+        protected abstract string ProcessMessageName { get; }
+        public string GetProcessMessageName(bool isAsync = false) => isAsync ? $"{ProcessMessageName}Async" : ProcessMessageName;
+
+        public abstract Type HttpPipelineType { get; }
+        public abstract string HttpPipelineCreateMessageName { get; }
+        public abstract FormattableString GetHttpPipelineCreateMessageFormat(bool withContext);
+
+        public abstract Type HttpMessageType { get; }
+        public abstract string HttpMessageResponseName { get; }
+        public Type GetNextPageFuncType() => typeof(Func<>).MakeGenericType(typeof(int?), typeof(string), HttpMessageType);
+
+        public abstract Type ClientDiagnosticsType { get; }
+        public abstract string ClientDiagnosticsCreateScopeName { get; }
     }
 }

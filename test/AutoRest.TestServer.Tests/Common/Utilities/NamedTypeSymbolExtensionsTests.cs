@@ -106,7 +106,8 @@ namespace NamedTypeSymbolExtensionsTests
                 shouldTreatBase64AsBinaryData: true,
                 methodsToKeepClientDefaultValue: Array.Empty<string>(),
                 mgmtConfiguration: null,
-                mgmtTestConfiguration: null);
+                mgmtTestConfiguration: null,
+                branded: true);
         }
 
         [Test]

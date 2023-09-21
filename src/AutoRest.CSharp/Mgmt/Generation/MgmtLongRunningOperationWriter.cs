@@ -10,7 +10,6 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using Azure.Core;
-using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Request = Azure.Core.Request;
 
@@ -44,7 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _responseType = isGeneric ? Configuration.ApiTypes.ResponseOfTType : Configuration.ApiTypes.ResponseType;
             _operationInternalType = isGeneric ? typeof(OperationInternal<>) : typeof(OperationInternal);
             _operationSourceString = isGeneric ? (FormattableString)$"{typeof(IOperationSource<>)} source, " : (FormattableString)$"";
-            _responseString = isGeneric ? "response.GetRawResponse(), response.Value" : "response";
+            _responseString = isGeneric ? $"response.{Configuration.ApiTypes.GetRawResponseName}(), response.Value" : "response";
             _sourceString = isGeneric ? "source, " : string.Empty;
         }
 
@@ -72,7 +71,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line();
 
-                    using (_writer.Scope($"internal {_name}({_operationSourceString}{typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} response, {typeof(OperationFinalStateVia)} finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)"))
+                    using (_writer.Scope($"internal {_name}({_operationSourceString}{Configuration.ApiTypes.ClientDiagnosticsType} clientDiagnostics, {Configuration.ApiTypes.HttpPipelineType} pipeline, {typeof(Request)} request, {Configuration.ApiTypes.ResponseType} response, {typeof(OperationFinalStateVia)} finalStateVia, bool skipApiVersionOverride = false, string apiVersionOverrideValue = null)"))
                     {
                         var nextLinkOperation = new CodeWriterDeclaration("nextLinkOperation");
                         _writer.Line($"var {nextLinkOperation:D} = {typeof(NextLinkOperationImplementation)}.{nameof(NextLinkOperationImplementation.Create)}({_sourceString}pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride, apiVersionOverrideValue);");
@@ -104,7 +103,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationInheritDoc();
-                    _writer.Line($"public override {Configuration.ApiTypes.ResponseType} GetRawResponse() => _operation.RawResponse;");
+                    _writer.Line($"public override {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.GetRawResponseName}() => _operation.RawResponse;");
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationInheritDoc();

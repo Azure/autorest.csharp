@@ -310,7 +310,7 @@ namespace AutoRest.CSharp.Output.Models
             var headAsBoolean = Operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
             if (headAsBoolean)
             {
-                return new ReturnTypeChain(typeof(Response<bool>), typeof(Response<bool>), null);
+                return new ReturnTypeChain(Configuration.ApiTypes.GetResponseOfT<bool>(), Configuration.ApiTypes.GetResponseOfT<bool>(), null);
             }
 
             if (responseType != null)

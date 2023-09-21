@@ -254,7 +254,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 else
                 {
-                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue(result.Value, result.GetRawResponse());");
+                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue(result.Value, result.{Configuration.ApiTypes.GetRawResponseName}());");
                 }
             }
             else
@@ -300,7 +300,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var valueConverter = getOperation.GetValueConverter($"{ArmClientReference}", $"{originalResponse}.Value", getOperation.MgmtReturnType);
             if (valueConverter != null)
             {
-                _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue({valueConverter}, {originalResponse}.GetRawResponse());");
+                _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue({valueConverter}, {originalResponse}.{Configuration.ApiTypes.GetRawResponseName}());");
             }
             else
             {

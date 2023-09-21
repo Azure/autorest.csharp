@@ -162,7 +162,7 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer
                 .Line()
                 .WriteXmlDocumentationSummary($"The HTTP pipeline for sending and receiving REST requests and responses.")
-                .Line($"public virtual {typeof(HttpPipeline)} Pipeline => {_client.Fields.PipelineField.Name};");
+                .Line($"public virtual {Configuration.ApiTypes.HttpPipelineType} Pipeline => {_client.Fields.PipelineField.Name};");
 
             _writer.Line();
         }
@@ -313,7 +313,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else
                 {
-                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}({responseType}.FromResponse({responseVariable:I}), {responseVariable:I});");
+                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}({responseType}.{Configuration.ApiTypes.FromResponseName}({responseVariable:I}), {responseVariable:I});");
                 }
             }
             _writer.Line();
@@ -385,7 +385,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     var processMessageParameters = (FormattableString)$"{fields.PipelineField.Name:I}, {messageVariable}, {fields.ClientDiagnosticsProperty.Name:I}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {KnownParameters.RequestContext.Name:I}, {KnownParameters.WaitForCompletion.Name:I}";
 
                     writer
-                        .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
+                        .Line($"using {Configuration.ApiTypes.HttpMessageType} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
                         .AppendRaw("return ")
                         .WriteMethodCall(async, clientMethod.ResponseBodyType != null ? LroProcessMessageMethodAsyncName : LroProcessMessageWithoutResponseValueMethodAsyncName, clientMethod.ResponseBodyType != null ? LroProcessMessageMethodName : LroProcessMessageWithoutResponseValueMethodName, processMessageParameters);
                 }
@@ -411,12 +411,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
                     writer
-                        .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(restMethod.Name)}({restMethod.Parameters.GetIdentifiersFormattable()});")
+                        .Line($"using {Configuration.ApiTypes.HttpMessageType} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(restMethod.Name)}({restMethod.Parameters.GetIdentifiersFormattable()});")
                         .WriteEnableHttpRedirectIfNecessary(clientMethod.RequestMethod, messageVariable);
 
-                    var methodName = async
-                        ? headAsBoolean ? nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessageAsync) : nameof(HttpPipelineExtensions.ProcessMessageAsync)
-                        : headAsBoolean ? nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessage) : nameof(HttpPipelineExtensions.ProcessMessage);
+                    writer.UseNamespace(Configuration.ApiTypes.PipelineExtensionsType.Namespace!);
+                    var methodName = headAsBoolean ? Configuration.ApiTypes.GetProcessHeadAsBoolMessageName(async) : Configuration.ApiTypes.GetProcessMessageName(async);
 
                     FormattableString paramString = headAsBoolean
                         ? (FormattableString)$"{messageVariable}, {fields.ClientDiagnosticsProperty.Name}, {KnownParameters.RequestContext.Name:I}"
@@ -489,9 +488,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 // After fixing https://github.com/Azure/autorest.csharp/issues/2018 issue remove "hasStatusCodeRanges" condition and this class
                 using (writer.Scope($"private sealed class {responseClassifierTypeName}Override : {typeof(ResponseClassifier)}"))
                 {
-                    using (writer.Scope($"public override bool {nameof(ResponseClassifier.IsErrorResponse)}({typeof(HttpMessage)} message)"))
+                    using (writer.Scope($"public override bool {nameof(ResponseClassifier.IsErrorResponse)}({Configuration.ApiTypes.HttpMessageType} message)"))
                     {
-                        using (writer.Scope($"return message.{nameof(HttpMessage.Response)}.{Configuration.ApiTypes.StatusName} switch", end: "};"))
+                        using (writer.Scope($"return message.{Configuration.ApiTypes.HttpMessageResponseName}.{Configuration.ApiTypes.StatusName} switch", end: "};"))
                         {
                             foreach (var statusCode in statusCodes)
                             {
@@ -820,6 +819,5 @@ namespace AutoRest.CSharp.Generation.Writers
                 DocumentationRows = documentationRows;
             }
         }
-
     }
 }

@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
                 WriteArguments(_writer, clientOperation.ParameterMappings.Values.First());
                 _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
-                _writer.Line($"return Response.FromValue(response.Value != null, response.GetRawResponse());");
+                _writer.Line($"return Response.FromValue(response.Value != null, response.{Configuration.ApiTypes.GetRawResponseName}());");
             }
         }
 
@@ -93,14 +93,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
             writer.Line($"if ({response}.Value == null)");
-            writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue<{operation.MgmtReturnType}>(null, {response}.GetRawResponse());");
+            writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue<{operation.MgmtReturnType}>(null, {response}.{Configuration.ApiTypes.GetRawResponseName}());");
 
             if (This.Resource.ResourceData.ShouldSetResourceIdentifier)
             {
                 writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(This.Resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
             }
 
-            writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue(new {operation.MgmtReturnType}({ArmClientReference}, {response}.Value), {response}.GetRawResponse());");
+            writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue(new {operation.MgmtReturnType}({ArmClientReference}, {response}.Value), {response}.{Configuration.ApiTypes.GetRawResponseName}());");
         }
     }
 }

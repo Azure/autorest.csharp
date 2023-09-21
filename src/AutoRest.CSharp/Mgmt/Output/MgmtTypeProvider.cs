@@ -16,7 +16,6 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
-using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
@@ -102,7 +101,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var nameSet = GetRestDiagNames(set);
                 yield return new FieldDeclaration(
                     FieldModifiers,
-                    typeof(ClientDiagnostics),
+                    Configuration.ApiTypes.ClientDiagnosticsType,
                     nameSet.DiagnosticField);
                 yield return new FieldDeclaration(
                     FieldModifiers,

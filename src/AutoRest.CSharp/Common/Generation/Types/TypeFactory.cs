@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Generation.Types
             _library = library;
         }
 
-        private Type AzureResponseErrorType => typeof(Azure.ResponseError);
+        private Type AzureResponseErrorType => typeof(ResponseError);
 
         public CSharpType CreateType(InputType inputType) => inputType switch
         {

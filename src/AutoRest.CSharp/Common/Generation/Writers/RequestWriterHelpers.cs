@@ -4,17 +4,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Serialization;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
-using Azure.Core;
+using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -26,7 +27,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var parameters = clientMethod.Parameters;
 
             var methodName = CreateRequestMethodName(clientMethod.Name);
-            writer.Append($"{methodAccessibility} {typeof(HttpMessage)} {methodName}(");
+            writer.Append($"{methodAccessibility} {Configuration.ApiTypes.HttpMessageType} {methodName}(");
             foreach (Parameter clientParameter in parameters)
             {
                 writer.Append($"{clientParameter.Type} {clientParameter.Name:D},");
@@ -39,18 +40,19 @@ namespace AutoRest.CSharp.Generation.Writers
                 var request = new CodeWriterDeclaration("request");
                 var uri = new CodeWriterDeclaration("uri");
 
+                var extraCloseParen = Configuration.ApiTypes is AzureApiTypes ? string.Empty : ")";
                 if (clientMethod.Parameters.Contains(KnownParameters.RequestContext))
                 {
-                    writer.Append($"var {message:D} = _pipeline.CreateMessage({KnownParameters.RequestContext.Name:I}");
+                    writer.Append($"var {message:D} = {Configuration.ApiTypes.GetHttpPipelineCreateMessageFormat(true)}");
                     if (responseClassifierType != default)
                     {
                         writer.Append($", {responseClassifierType}");
                     }
-                    writer.Line($");");
+                    writer.Line($"){extraCloseParen};");
                 }
                 else
                 {
-                    writer.Line($"var {message:D} = _pipeline.CreateMessage();");
+                    writer.Line($"var {message:D} = {Configuration.ApiTypes.GetHttpPipelineCreateMessageFormat(false)}){extraCloseParen};");
                 }
 
                 writer.Line($"var {request:D} = {message}.Request;");
