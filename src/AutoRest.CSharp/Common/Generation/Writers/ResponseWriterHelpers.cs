@@ -3,14 +3,13 @@
 
 using System;
 using System.IO;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using Azure.Core;
-using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Generation.Writers
 {

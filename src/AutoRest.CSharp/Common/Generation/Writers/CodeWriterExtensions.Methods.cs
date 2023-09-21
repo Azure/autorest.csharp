@@ -4,14 +4,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using AutoRest.CSharp.Common.Output.Expressions.KnownCodeBlocks;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.KnownCodeBlocks;
-using AutoRest.CSharp.Common.Output.Models.Statements;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.ResourceManager.Models;
-using SwitchExpression = AutoRest.CSharp.Common.Output.Models.ValueExpressions.SwitchExpression;
+using SwitchExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.SwitchExpression;
 
 namespace AutoRest.CSharp.Generation.Writers
 {

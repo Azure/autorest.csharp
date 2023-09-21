@@ -10,6 +10,7 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Common.Output.Models.Types
 {
@@ -21,6 +22,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         protected SerializableObjectType(string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
         }
+
+        public INamedTypeSymbol? GetExistingType() => ExistingType;
 
         private bool? _includeSerializer;
         public bool IncludeSerializer => _includeSerializer ??= EnsureIncludeSerializer();

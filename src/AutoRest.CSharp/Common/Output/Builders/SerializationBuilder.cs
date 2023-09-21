@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -21,7 +21,6 @@ namespace AutoRest.CSharp.Output.Builders
 {
     internal class SerializationBuilder
     {
-
         public static SerializationFormat GetDefaultSerializationFormat(CSharpType type)
         {
             if (type.EqualsIgnoreNullable(typeof(byte[])))

@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         if (includeDeserializer)
                         {
-                            WriteJsonDeserialize(writer, declaration, jsonSerialization);
+                            WriteJsonDeserialize(writer, declaration, jsonSerialization, model);
                         }
                     }
 
@@ -160,9 +160,12 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteMethod(XmlSerializationMethodsBuilder.BuildDeserialize(declaration, serialization));
         }
 
-        private static void WriteJsonDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, JsonObjectSerialization serialization)
+        private static void WriteJsonDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, JsonObjectSerialization serialization, SerializableObjectType model)
         {
-            writer.WriteMethod(JsonSerializationMethodsBuilder.BuildDeserialize(declaration, serialization));
+            if (JsonSerializationMethodsBuilder.BuildDeserialize(declaration, serialization, model.GetExistingType()) is {} deserialize)
+            {
+                writer.WriteMethod(deserialize);
+            }
         }
 
         private static void WriteJsonSerialize(CodeWriter writer, JsonObjectSerialization jsonSerialization)

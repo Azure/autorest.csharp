@@ -8,11 +8,11 @@ using System.Net;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -311,11 +311,16 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 ? new IfStatement(Equal(value, Null)) {utf8JsonWriter.WriteNullValue(), Continue}
                 : new MethodBodyStatement();
 
-        public static Method BuildDeserialize(TypeDeclarationOptions declaration, JsonObjectSerialization serialization)
+        public static Method? BuildDeserialize(TypeDeclarationOptions declaration, JsonObjectSerialization serialization, INamedTypeSymbol? existingType)
         {
             var methodName = $"Deserialize{declaration.Name}";
             var element = new Parameter("element", null, typeof(JsonElement), null, ValidationType.None, null);
             var signature = new MethodSignature(methodName, null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[]{element});
+            if (SourceInputHelper.TryGetExistingMethod(existingType, signature, out _))
+            {
+                return null;
+            }
+
             return new Method(signature, BuildDeserializeBody(element, serialization).ToArray());
         }
 
