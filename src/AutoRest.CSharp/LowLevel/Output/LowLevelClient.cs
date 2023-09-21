@@ -159,7 +159,7 @@ namespace AutoRest.CSharp.Output.Models
                 /* order the constructor paramters as (endpoint, requiredParameters, OptionalParamters).
                  * use the OrderBy to put endpoint as the first parameter.
                  * */
-                yield return CreatePrimaryConstructor(requiredParameters.Concat(optionalToRequired).OrderBy(parameter => parameter.Name != "endpoint").ToArray());
+                yield return CreatePrimaryConstructor(requiredParameters.Concat(optionalToRequired).OrderBy(parameter => !parameter.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase)).ToArray());
             }
             else
             {
@@ -168,7 +168,7 @@ namespace AutoRest.CSharp.Output.Models
                     /* order the constructor paramters as (endpoint, requiredParameters, CredentialParamter, OptionalParamters).
                      * use the OrderBy to put endpoint as the first parameter.
                      * */
-                    yield return CreatePrimaryConstructor(requiredParameters.Append(CreateCredentialParameter(credentialField!.Type)).Concat(optionalToRequired).OrderBy(parameter => parameter.Name != "endpoint").ToArray());
+                    yield return CreatePrimaryConstructor(requiredParameters.Append(CreateCredentialParameter(credentialField!.Type)).Concat(optionalToRequired).OrderBy(parameter => !parameter.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase)).ToArray());
                 }
             }
         }
@@ -185,10 +185,10 @@ namespace AutoRest.CSharp.Output.Models
              * so put the endpoint as the first parameter argument if the endpoint is optional paramter.
              * */
             var optionalParametersArguments = optionalParameters
-                .Where(p => p.Name != "endpoint")
+                .Where(p => !p.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase))
                 .Select(p => p.Initializer ?? p.Type.GetParameterInitializer(p.DefaultValue!.Value)!)
                 .ToArray();
-            var optionalEndpoint = optionalParameters.Where(p => p.Name == "endpoint").FirstOrDefault();
+            var optionalEndpoint = optionalParameters.Where(p => p.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
             var arguments = new List<FormattableString>();
             if (optionalEndpoint != null)
             {
@@ -200,16 +200,16 @@ namespace AutoRest.CSharp.Output.Models
 
             if (Fields.CredentialFields.Count == 0)
             {
-                var allarguments = arguments.Concat(optionalParametersArguments);
-                yield return CreateSecondaryConstructor(requiredParameters, allarguments.ToArray());
+                var allArguments = arguments.Concat(optionalParametersArguments);
+                yield return CreateSecondaryConstructor(requiredParameters, allArguments.ToArray());
             }
             else
             {
                 foreach (var credentialField in Fields.CredentialFields)
                 {
                     var credentialParameter = CreateCredentialParameter(credentialField!.Type);
-                    var allarguments = arguments.Concat(new List<FormattableString>() { $"{credentialParameter.Name}" }).Concat(optionalParametersArguments);
-                    yield return CreateSecondaryConstructor(requiredParameters.Append(credentialParameter).ToArray(), allarguments.ToArray());
+                    var allArguments = arguments.Concat(new List<FormattableString>() { $"{credentialParameter.Name}" }).Concat(optionalParametersArguments);
+                    yield return CreateSecondaryConstructor(requiredParameters.Append(credentialParameter).ToArray(), allArguments.ToArray());
                 }
             }
         }
@@ -278,7 +278,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private IEnumerable<Parameter> GetSubClientFactoryMethodParameters()
             => new[] { KnownParameters.ClientDiagnostics, KnownParameters.Pipeline, KnownParameters.KeyAuth, KnownParameters.TokenAuth }
-                .Concat(RestClientBuilder.GetConstructorParameters(Parameters, null, includeAPIVersion: true).OrderBy(parameter => parameter.Name != "endpoint"))
+                .Concat(RestClientBuilder.GetConstructorParameters(Parameters, null, includeAPIVersion: true).OrderBy(parameter => !parameter.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase)))
                 .Where(p => Fields.GetFieldByParameter(p) != null);
 
         internal MethodSignatureBase? GetEffectiveCtor()
