@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         /// It's composed of a constructor of non-subclient and a optional list of subclient factory methods.
         /// </summary>
         /// <returns></returns>
-        private static IReadOnlyList<MethodSignatureBase> GetClientInvocationChain(LowLevelClient client)
+        protected virtual IReadOnlyList<MethodSignatureBase> GetClientInvocationChain(LowLevelClient client)
         {
             var callChain = new Stack<MethodSignatureBase>();
             while (client.FactoryMethod != null)

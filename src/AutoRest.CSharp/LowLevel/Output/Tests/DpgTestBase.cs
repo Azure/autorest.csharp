@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
@@ -55,25 +56,35 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
             }
         }
 
-        private IEnumerable<MethodSignature>? _createClientMethods;
-        public IEnumerable<MethodSignature> CreateClientMethods => _createClientMethods ??= EnsureCreateClientMethods();
+        private Dictionary<LowLevelClient, MethodSignature>? _createClientMethods;
 
-        private IEnumerable<MethodSignature> EnsureCreateClientMethods()
+        public Dictionary<LowLevelClient, MethodSignature> CreateClientMethods => _createClientMethods ??= EnsureCreateClientMethods();
+
+        private Dictionary<LowLevelClient, MethodSignature> EnsureCreateClientMethods()
         {
+            var result = new Dictionary<LowLevelClient, MethodSignature>();
             foreach (var client in _clients)
             {
                 if (client.IsSubClient)
                     continue;
 
-                yield return new MethodSignature(
+                var ctor = client.GetEffectiveCtorWithClientOptions();
+
+                if (ctor == null)
+                    continue;
+
+                result.Add(client, new MethodSignature(
                     Name: $"Create{client.Type.Name}",
                     Summary: null,
                     Description: null,
                     Modifiers: MethodSignatureModifiers.Protected,
                     ReturnType: client.Type,
                     ReturnDescription: null,
-                    Parameters: Array.Empty<Parameter>());
+                    Parameters: ctor.Parameters.Where(p => !p.Type.EqualsIgnoreNullable(client.ClientOptions.Type)).ToArray()
+                ));
             }
+
+            return result;
         }
     }
 }

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using FirstTestTypeSpec;
@@ -17,9 +19,10 @@ namespace FirstTestTypeSpec.Tests
         {
         }
 
-        protected FirstTestTypeSpecClient CreateFirstTestTypeSpecClient()
+        protected FirstTestTypeSpecClient CreateFirstTestTypeSpecClient(Uri endpoint, AzureKeyCredential credential)
         {
-            return null;
+            var options = InstrumentClientOptions(new FirstTestTypeSpecClientOptions());
+            return new FirstTestTypeSpecClient(endpoint, credential, options: options);
         }
     }
 }

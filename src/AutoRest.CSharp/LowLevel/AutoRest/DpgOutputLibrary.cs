@@ -53,6 +53,14 @@ namespace AutoRest.CSharp.Output.Models.Types
         private DpgTestEnvironment? _dpgTestEnvironment;
         public DpgTestEnvironment DpgTestEnvironment => _dpgTestEnvironment ??= new DpgTestEnvironment(Configuration.Namespace, _sourceInputModel);
 
+        private IEnumerable<DpgTestCase>? _dpgTestCases;
+        public IEnumerable<DpgTestCase> DpgTestCases => _dpgTestCases ??= EnsureDpgTestCases();
+
+        private IEnumerable<DpgTestCase> EnsureDpgTestCases()
+        {
+            yield break;
+        }
+
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {
             if (!_isTspInput || enumType.Usage == InputModelTypeUsage.None)

@@ -43,12 +43,22 @@ namespace AutoRest.CSharp.LowLevel.Generation.Tests
 
         private void WriteClientFactoryMethods()
         {
-            foreach (var method in _testBase.CreateClientMethods)
+            foreach (var (client, method) in _testBase.CreateClientMethods)
             {
                 _writer.Line();
                 using (_writer.WriteMethodDeclaration(method))
                 {
-                    _writer.Line($"return null;");
+                    // instrumenting the client options
+                    var clientOptionType = client.ClientOptions.Type;
+                    _writer.Line($"var options = InstrumentClientOptions(new {clientOptionType}());");
+                    _writer.Append($"var client = new {client.Type}(");
+                    foreach (var parameter in method.Parameters)
+                    {
+                        _writer.Append($"{parameter.Name:I},");
+                    }
+                    _writer.Line($"options: options);");
+
+                    _writer.Line($"return InstrumentClient(client);");
                 }
             }
         }

@@ -317,6 +317,61 @@ namespace AutoRest.CSharp.Output.Models
             return candidates.OrderBy(c => c.Parameters.Count).FirstOrDefault();
         }
 
+        internal MethodSignatureBase? GetEffectiveCtorWithClientOptions()
+        {
+            //TODO: This method is needed because we allow roslyn code gen attributes to be run AFTER the writers do their job but before
+            //      the code is emitted. This is a hack to allow the writers to know what the effective ctor is after the roslyn code gen attributes
+
+            List<ConstructorSignature> candidates = new List<ConstructorSignature>(PrimaryConstructors.Where(c => c.Modifiers == MethodSignatureModifiers.Public));
+
+            if (ExistingType is not null)
+            {
+                //    [CodeGenSuppress("ConfidentialLedgerCertificateClient", typeof(Uri), typeof(TokenCredential), typeof(ConfidentialLedgerClientOptions))]
+                //remove suppressed ctors from the candidates
+                foreach (var attribute in ExistingType.GetAttributes().Where(a => a.AttributeClass is not null && a.AttributeClass.Name == "CodeGenSuppressAttribute"))
+                {
+                    if (attribute.ConstructorArguments.Length != 2)
+                        continue;
+                    var classTarget = attribute.ConstructorArguments[0].Value;
+                    if (classTarget is null || !classTarget.Equals(DefaultName))
+                        continue;
+
+                    candidates.RemoveAll(ctor => IsParamMatch(ctor.Parameters, attribute.ConstructorArguments[1].Values.Select(tc => (INamedTypeSymbol)(tc.Value!)).ToArray()));
+                }
+
+                // add custom ctors into the candidates
+                foreach (var existingCtor in ExistingType.Constructors)
+                {
+                    var parameters = existingCtor.Parameters;
+                    var modifiers = GetModifiers(existingCtor);
+                    bool isPublic = modifiers.HasFlag(MethodSignatureModifiers.Public);
+                    //TODO: Currently skipping ctors which use models from the library due to constructing with all empty lists.
+                    if (!isPublic || parameters.Length == 0 || parameters.Any(p => ((INamedTypeSymbol)p.Type).GetCSharpType(_typeFactory) == null))
+                    {
+                        if (!isPublic)
+                            candidates.RemoveAll(ctor => IsParamMatch(ctor.Parameters, existingCtor.Parameters.Select(p => (INamedTypeSymbol)p.Type).ToArray()));
+                        continue;
+                    }
+                    var ctor = new ConstructorSignature(
+                        DefaultName,
+                        GetSummaryPortion(existingCtor.GetDocumentationCommentXml()),
+                        null,
+                        modifiers,
+                        parameters.Select(p => new Parameter(
+                            p.Name,
+                            $"{p.GetDocumentationCommentXml()}",
+                            ((INamedTypeSymbol)p.Type).GetCSharpType(_typeFactory)!,
+                            null,
+                            ValidationType.None,
+                            null)).ToArray(),
+                        null);
+                    candidates.Add(ctor);
+                }
+            }
+
+            return candidates.OrderBy(c => c.Parameters.Count).FirstOrDefault(c => c.Parameters.Last().Type.EqualsIgnoreNullable(ClientOptions.Type));
+        }
+
         private FormattableString? GetSummaryPortion(string? xmlComment)
         {
             if (xmlComment is null)

@@ -8,5 +8,12 @@ namespace Azure.Core.TestFramework
         protected RecordedTestBase(bool isAsync, RecordedTestMode? mode = null)
         {
         }
+
+        public T InstrumentClientOptions<T>(T clientOptions) where T : ClientOptions
+        {
+            return clientOptions;
+        }
+
+        public TClient InstrumentClient<TClient>(TClient client) where TClient : class => client;
     }
 }
