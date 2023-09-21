@@ -27,13 +27,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             get
             {
-                foreach (var key in _models.Keys)
+                foreach (var (key, model) in _models)
                 {
-                    if (TypeFactory.IsErrorType(key))
+                    var type = TypeFactory.CreateType(key);
+                    if (type is { IsFrameworkType: false, Implementation: ModelTypeProvider implementation} && model == implementation)
                     {
-                        continue;
+                        yield return model;
                     }
-                    yield return _models[key];
                 }
             }
         }
