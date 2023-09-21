@@ -48,11 +48,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var sampleProvider = library.GetSampleForClient(client);
                 if (sampleProvider != null)
                 {
-                    var exampleFileCheckFilename = $"../../tests/Generated/Samples/{sampleProvider.Type.Name}.cs";
+                    var clientExampleFilename = $"../../tests/Generated/Samples/{sampleProvider.Type.Name}.cs";
                     var clientSampleWriter = new DpgClientSampleWriter(sampleProvider);
                     clientSampleWriter.Write();
-                    project.AddGeneratedTestFile(exampleFileCheckFilename, clientSampleWriter.ToString());
-                    project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", new XmlDocumentFile(exampleFileCheckFilename, xmlDocWriter));
+                    project.AddGeneratedTestFile(clientExampleFilename, clientSampleWriter.ToString());
+                    project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", new XmlDocumentFile(clientExampleFilename, xmlDocWriter));
                 }
 
                 // write test cases
@@ -61,6 +61,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     var clientTestFilename = $"../../tests/Generated/Tests/{clientTestProvider.Type.Name}.cs";
                     var clientTestWriter = new DpgClientTestWriter(clientTestProvider);
+                    clientTestWriter.Write();
+                    project.AddGeneratedTestFile(clientTestFilename, clientTestWriter.ToString());
                 }
             }
 

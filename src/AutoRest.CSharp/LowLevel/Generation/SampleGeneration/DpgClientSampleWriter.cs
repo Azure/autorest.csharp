@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.SampleGeneration
 
             using (_writer.Namespace(_sampleProvider.Declaration.Namespace))
             {
-                using (_writer.Scope($"public class {_sampleProvider.Declaration.Name}"))
+                using (_writer.Scope($"public class {_sampleProvider.Type:D}"))
                 {
                     foreach (var sample in _sampleProvider.Samples)
                     {

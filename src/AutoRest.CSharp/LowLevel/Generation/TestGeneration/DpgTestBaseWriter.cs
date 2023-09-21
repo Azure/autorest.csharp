@@ -36,9 +36,12 @@ namespace AutoRest.CSharp.LowLevel.Generation.TestGeneration
         {
             foreach (var ctor in _testBase.Constructors)
             {
+                _writer.Line();
                 using (_writer.WriteMethodDeclaration(ctor))
                 { }
             }
+
+            _writer.Line();
         }
 
         private void WriteClientFactoryMethods()

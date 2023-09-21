@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var result = new Dictionary<LowLevelClient, DpgClientTestProvider>();
             foreach (var client in RestClients)
             {
-                var testCaseProvider = new DpgClientTestProvider(Configuration.Namespace, client, _sourceInputModel);
+                var testCaseProvider = new DpgClientTestProvider(Configuration.Namespace, client, DpgTestBase, _sourceInputModel);
                 if (!testCaseProvider.IsEmpty)
                 {
                     result.Add(client, testCaseProvider);

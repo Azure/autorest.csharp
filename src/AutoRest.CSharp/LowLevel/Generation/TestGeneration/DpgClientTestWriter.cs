@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.LowLevel.Output.Tests;
 
 namespace AutoRest.CSharp.LowLevel.Generation.TestGeneration
@@ -21,15 +22,29 @@ namespace AutoRest.CSharp.LowLevel.Generation.TestGeneration
 
             using (_writer.Namespace(_testProvider.Declaration.Namespace))
             {
-                using (_writer.Scope($"public class {_testProvider.Declaration.Name}"))
+                using (_writer.Scope($"public class {_testProvider.Type:D} : {_testProvider.BaseType:D}"))
                 {
+                    WriteConstructors();
+
                     foreach (var sample in _testProvider.TestCases)
                     {
-                        WriteTestMethod(sample, false);
+                        // we do not need to write the non-async test cases
                         WriteTestMethod(sample, true);
                     }
                 }
             }
+        }
+
+        private void WriteConstructors()
+        {
+            foreach (var ctor in _testProvider.Constructors)
+            {
+                _writer.Line();
+                using (_writer.WriteMethodDeclaration(ctor))
+                { }
+            }
+
+            _writer.Line();
         }
     }
 }
