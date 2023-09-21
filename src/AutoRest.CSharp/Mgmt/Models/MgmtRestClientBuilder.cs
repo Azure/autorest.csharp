@@ -1,20 +1,16 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.IO.MemoryMappedFiles;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -44,11 +40,28 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
         }
 
-        public static IEnumerable<RequestParameter> GetMgmtParametersFromOperations(ICollection<Operation> operations) =>
-            operations
+        private static IReadOnlyList<RequestParameter> GetMgmtParametersFromOperations(ICollection<Operation> operations)
+        {
+            var parameters = operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
                 .Where(p => p.Implementation == ImplementationLocation.Client)
-                .Distinct(new ParameterCompareer());
+                .Distinct(new ParameterCompareer()).ToList();
+            ValidateMgmtOperationParameters(parameters);
+            return parameters;
+        }
+
+        private static void ValidateMgmtOperationParameters(IReadOnlyList<RequestParameter> parameters)
+        {
+            var set = new HashSet<string> { "$host", "apiVersion" };
+            foreach (var parameter in parameters)
+            {
+                var parameterName = parameter.Language.Default.Name;
+                if (!set.Contains(parameterName))
+                {
+                    throw new InvalidOperationException($"{parameterName} should be method parameter for operation");
+                }
+            }
+        }
 
         public override Parameter BuildConstructorParameter(RequestParameter requestParameter)
         {
