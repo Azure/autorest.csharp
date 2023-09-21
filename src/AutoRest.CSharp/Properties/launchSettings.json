@@ -648,6 +648,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\encode\\duration\\src\\Generated -n"
     },
+    "typespec-parameters/body-optionality": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\parameters\\body-optionality\\src\\Generated -n"
+    },
     "typespec-parameters/collection-format": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\parameters\\collection-format\\src\\Generated -n"
