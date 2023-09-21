@@ -54,9 +54,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Namespace(declaration.Namespace))
             {
-                //[TODO] Azure.Core is not needed to compile, but previous version of writer has been adding it.
-                writer.UseNamespace("Azure.Core");
-
                 if (jsonSerialization is { IncludeConverter: true })
                 {
                     writer.Append($"[{typeof(JsonConverter)}(typeof({declaration.Name}Converter))]");
