@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using body_string_LowLevel;
@@ -17,14 +19,18 @@ namespace body_string_LowLevel.Tests
         {
         }
 
-        protected StringClient CreateStringClient()
+        protected StringClient CreateStringClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestSwaggerBATServiceClientOptions());
+            var client = new StringClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected EnumClient CreateEnumClient()
+        protected EnumClient CreateEnumClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestSwaggerBATServiceClientOptions());
+            var client = new EnumClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

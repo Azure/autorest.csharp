@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using body_array_LowLevel;
@@ -17,9 +19,11 @@ namespace body_array_LowLevel.Tests
         {
         }
 
-        protected ArrayClient CreateArrayClient()
+        protected ArrayClient CreateArrayClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new ArrayClientOptions());
+            var client = new ArrayClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using _Type.Property.Nullable;
@@ -17,9 +18,11 @@ namespace _Type.Property.Nullable.Tests
         {
         }
 
-        protected NullableClient CreateNullableClient()
+        protected NullableClient CreateNullableClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new NullableClientOptions());
+            var client = new NullableClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

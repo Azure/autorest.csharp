@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using RenameGetList;
@@ -17,9 +18,11 @@ namespace RenameGetList.Tests
         {
         }
 
-        protected RenameGetListClient CreateRenameGetListClient()
+        protected RenameGetListClient CreateRenameGetListClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new RenameGetListClientOptions());
+            var client = new RenameGetListClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

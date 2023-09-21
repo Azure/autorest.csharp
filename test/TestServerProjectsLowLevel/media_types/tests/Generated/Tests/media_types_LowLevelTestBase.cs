@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using media_types_LowLevel;
@@ -17,9 +19,11 @@ namespace media_types_LowLevel.Tests
         {
         }
 
-        protected MediaTypesClient CreateMediaTypesClient()
+        protected MediaTypesClient CreateMediaTypesClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new MediaTypesClientOptions());
+            var client = new MediaTypesClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

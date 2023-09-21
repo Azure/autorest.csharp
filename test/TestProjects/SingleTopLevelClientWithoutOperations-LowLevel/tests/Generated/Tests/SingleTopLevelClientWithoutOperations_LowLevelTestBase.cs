@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using SingleTopLevelClientWithoutOperations_LowLevel;
@@ -17,9 +19,11 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Tests
         {
         }
 
-        protected TopLevelClientWithoutOperationClient CreateTopLevelClientWithoutOperationClient()
+        protected TopLevelClientWithoutOperationClient CreateTopLevelClientWithoutOperationClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new TopLevelClientWithoutOperationClientOptions());
+            var client = new TopLevelClientWithoutOperationClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

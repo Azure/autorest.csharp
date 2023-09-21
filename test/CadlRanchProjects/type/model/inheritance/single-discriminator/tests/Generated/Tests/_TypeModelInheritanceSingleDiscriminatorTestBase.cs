@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using _Type.Model.Inheritance.SingleDiscriminator;
@@ -17,9 +18,11 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
         {
         }
 
-        protected SingleDiscriminatorClient CreateSingleDiscriminatorClient()
+        protected SingleDiscriminatorClient CreateSingleDiscriminatorClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new SingleDiscriminatorClientOptions());
+            var client = new SingleDiscriminatorClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

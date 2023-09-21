@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using _Type.Union;
@@ -17,9 +18,11 @@ namespace _Type.Union.Tests
         {
         }
 
-        protected UnionClient CreateUnionClient()
+        protected UnionClient CreateUnionClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new UnionClientOptions());
+            var client = new UnionClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

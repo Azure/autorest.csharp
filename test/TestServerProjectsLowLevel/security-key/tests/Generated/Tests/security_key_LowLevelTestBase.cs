@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using security_key_LowLevel;
@@ -17,9 +19,11 @@ namespace security_key_LowLevel.Tests
         {
         }
 
-        protected AutorestSecurityKeyClient CreateAutorestSecurityKeyClient()
+        protected AutorestSecurityKeyClient CreateAutorestSecurityKeyClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutorestSecurityKeyClientOptions());
+            var client = new AutorestSecurityKeyClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using ModelsTypeSpec;
@@ -17,9 +18,11 @@ namespace ModelsTypeSpec.Tests
         {
         }
 
-        protected ModelsTypeSpecClient CreateModelsTypeSpecClient()
+        protected ModelsTypeSpecClient CreateModelsTypeSpecClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new ModelsTypeSpecClientOptions());
+            var client = new ModelsTypeSpecClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using BodyAndPath_LowLevel;
@@ -17,9 +19,11 @@ namespace BodyAndPath_LowLevel.Tests
         {
         }
 
-        protected BodyAndPathClient CreateBodyAndPathClient()
+        protected BodyAndPathClient CreateBodyAndPathClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new BodyAndPathClientOptions());
+            var client = new BodyAndPathClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

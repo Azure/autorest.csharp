@@ -8,24 +8,24 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Output.Samples.Models;
 
-namespace AutoRest.CSharp.LowLevel.Output.Tests
+namespace AutoRest.CSharp.LowLevel.Output.Samples
 {
-    internal class DpgClientTestProvider : TypeProvider
+    internal class DpgClientSampleProvider : TypeProvider
     {
         public LowLevelClient Client { get; }
 
-        public DpgClientTestProvider(string defaultNamespace, LowLevelClient client, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
+        public DpgClientSampleProvider(string defaultNamespace, LowLevelClient client, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             Client = client;
-            DefaultNamespace = $"{defaultNamespace}.Tests";
-            DefaultName = $"{client.Declaration.Name}Tests";
+            DefaultNamespace = $"{defaultNamespace}.Samples";
+            DefaultName = $"Samples_{client.Declaration.Name}";
         }
 
         private bool? _isEmpty;
-        public bool IsEmpty => _isEmpty ??= !TestCases.Any();
+        public bool IsEmpty => _isEmpty ??= !Samples.Any();
 
-        private IEnumerable<DpgTestCase>? _testCases;
-        public IEnumerable<DpgTestCase> TestCases => _testCases ??= Client.ClientMethods.SelectMany(m => m.Samples).Select(s => new DpgTestCase(s));
+        private IEnumerable<DpgOperationSample>? _samples;
+        public IEnumerable<DpgOperationSample> Samples => _samples ??= Client.ClientMethods.SelectMany(m => m.Samples);
 
         protected override string DefaultNamespace { get; }
 

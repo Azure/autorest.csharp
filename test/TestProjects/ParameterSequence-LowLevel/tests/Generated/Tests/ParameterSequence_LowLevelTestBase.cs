@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using ParameterSequence_LowLevel;
@@ -17,9 +19,11 @@ namespace ParameterSequence_LowLevel.Tests
         {
         }
 
-        protected ParameterSequenceClient CreateParameterSequenceClient()
+        protected ParameterSequenceClient CreateParameterSequenceClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new ParameterSequenceClientOptions());
+            var client = new ParameterSequenceClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

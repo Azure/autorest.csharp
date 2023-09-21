@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using _Type.Property.Optionality;
@@ -17,9 +18,11 @@ namespace _Type.Property.Optionality.Tests
         {
         }
 
-        protected OptionalClient CreateOptionalClient()
+        protected OptionalClient CreateOptionalClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new OptionalClientOptions());
+            var client = new OptionalClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

@@ -8,9 +8,9 @@ namespace AutoRest.CSharp.LowLevel.Generation.Tests
 {
     internal class DpgTestBaseWriter
     {
-        private readonly DpgTestBase _testBase;
+        private readonly DpgTestBaseProvider _testBase;
         private readonly CodeWriter _writer;
-        public DpgTestBaseWriter(DpgTestBase dpgTestBase)
+        public DpgTestBaseWriter(DpgTestBaseProvider dpgTestBase)
         {
             _testBase = dpgTestBase;
             _writer = new CodeWriter();

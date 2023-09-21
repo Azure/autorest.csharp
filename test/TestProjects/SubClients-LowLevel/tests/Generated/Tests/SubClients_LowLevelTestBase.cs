@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using SubClients_LowLevel;
@@ -17,9 +19,11 @@ namespace SubClients_LowLevel.Tests
         {
         }
 
-        protected RootClient CreateRootClient()
+        protected RootClient CreateRootClient(string cachedParameter, AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new RootClientOptions());
+            var client = new RootClient(cachedParameter, credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

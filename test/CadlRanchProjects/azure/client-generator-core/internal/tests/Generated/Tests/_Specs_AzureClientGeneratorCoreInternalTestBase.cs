@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using _Specs_.Azure.ClientGenerator.Core.Internal;
@@ -17,9 +18,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Tests
         {
         }
 
-        protected InternalClient CreateInternalClient()
+        protected InternalClient CreateInternalClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new InternalClientOptions());
+            var client = new InternalClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

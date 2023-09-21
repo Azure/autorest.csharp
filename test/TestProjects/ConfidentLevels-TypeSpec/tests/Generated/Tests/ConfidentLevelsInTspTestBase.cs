@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using ConfidentLevelsInTsp;
@@ -17,9 +18,11 @@ namespace ConfidentLevelsInTsp.Tests
         {
         }
 
-        protected ConfidentLevelsInTspClient CreateConfidentLevelsInTspClient()
+        protected ConfidentLevelsInTspClient CreateConfidentLevelsInTspClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new ConfidentLevelsInTspClientOptions());
+            var client = new ConfidentLevelsInTspClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

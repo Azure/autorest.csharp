@@ -14,13 +14,13 @@ using Azure.Core.TestFramework;
 
 namespace AutoRest.CSharp.LowLevel.Output.Tests
 {
-    internal class DpgTestBase : TypeProvider
+    internal class DpgTestBaseProvider : TypeProvider
     {
         private static readonly Parameter IsAsyncParameter = new("isAsync", null, typeof(bool), null, ValidationType.None, null);
 
         private readonly IEnumerable<LowLevelClient> _clients;
 
-        public DpgTestBase(string defaultNamespace, IEnumerable<LowLevelClient> clients, DpgTestEnvironment dpgTestEnvironment, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
+        public DpgTestBaseProvider(string defaultNamespace, IEnumerable<LowLevelClient> clients, DpgTestEnvironmentProvider dpgTestEnvironment, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             TestEnvironment = dpgTestEnvironment;
             DefaultNamespace = $"{defaultNamespace}.Tests";
@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
 
         public CSharpType BaseType { get; }
 
-        public DpgTestEnvironment TestEnvironment { get; }
+        public DpgTestEnvironmentProvider TestEnvironment { get; }
 
         protected override string DefaultNamespace { get; }
 

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using custom_baseUrl_paging_LowLevel;
@@ -17,9 +18,11 @@ namespace custom_baseUrl_paging_LowLevel.Tests
         {
         }
 
-        protected PagingClient CreatePagingClient()
+        protected PagingClient CreatePagingClient(string host, AzureKeyCredential credential)
         {
-            return null;
+            var options = InstrumentClientOptions(new PagingClientOptions());
+            var client = new PagingClient(host, credential, options: options);
+            return InstrumentClient(client);
         }
     }
 }

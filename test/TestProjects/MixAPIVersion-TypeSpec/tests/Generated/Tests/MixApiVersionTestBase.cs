@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using MixApiVersion;
@@ -17,9 +18,11 @@ namespace MixApiVersion.Tests
         {
         }
 
-        protected MixApiVersionClient CreateMixApiVersionClient()
+        protected MixApiVersionClient CreateMixApiVersionClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new MixApiVersionClientOptions());
+            var client = new MixApiVersionClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

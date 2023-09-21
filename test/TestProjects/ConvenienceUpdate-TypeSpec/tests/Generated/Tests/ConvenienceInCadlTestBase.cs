@@ -19,7 +19,9 @@ namespace ConvenienceInCadl.Tests
 
         protected ConvenienceInCadlClient CreateConvenienceInCadlClient()
         {
-            return null;
+            var options = InstrumentClientOptions(new ConvenienceInCadlClientOptions());
+            var client = new ConvenienceInCadlClient(options: options);
+            return InstrumentClient(client);
         }
     }
 }

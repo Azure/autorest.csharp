@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using Pagination;
@@ -17,9 +19,11 @@ namespace Pagination.Tests
         {
         }
 
-        protected PaginationClient CreatePaginationClient()
+        protected PaginationClient CreatePaginationClient(Uri endpoint, TokenCredential credential)
         {
-            return null;
+            var options = InstrumentClientOptions(new PaginationClientOptions());
+            var client = new PaginationClient(endpoint, credential, options: options);
+            return InstrumentClient(client);
         }
     }
 }

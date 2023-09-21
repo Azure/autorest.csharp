@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using _Type.Model.Empty;
@@ -17,9 +18,11 @@ namespace _Type.Model.Empty.Tests
         {
         }
 
-        protected EmptyClient CreateEmptyClient()
+        protected EmptyClient CreateEmptyClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new EmptyClientOptions());
+            var client = new EmptyClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

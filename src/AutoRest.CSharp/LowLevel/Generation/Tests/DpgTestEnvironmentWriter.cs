@@ -8,9 +8,9 @@ namespace AutoRest.CSharp.LowLevel.Generation.Tests
 {
     internal class DpgTestEnvironmentWriter
     {
-        private readonly DpgTestEnvironment _dpgTestEnvironment;
+        private readonly DpgTestEnvironmentProvider _dpgTestEnvironment;
         private readonly CodeWriter _writer;
-        public DpgTestEnvironmentWriter(DpgTestEnvironment dpgTestEnvironment)
+        public DpgTestEnvironmentWriter(DpgTestEnvironmentProvider dpgTestEnvironment)
         {
             _dpgTestEnvironment = dpgTestEnvironment;
             _writer = new CodeWriter();

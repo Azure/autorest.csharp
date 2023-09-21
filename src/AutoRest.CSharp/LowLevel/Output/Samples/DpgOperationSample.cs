@@ -30,17 +30,17 @@ namespace AutoRest.CSharp.Output.Samples.Models
             _inputOperationExample = inputOperationExample;
             ClientInvocationChain = GetClientInvocationChain(client);
             IsConvenienceSample = isConvenienceSample;
-            _exampleKey = exampleKey;
+            ExampleKey = exampleKey;
             _useAllParameters = exampleKey == ExampleMockValueBuilder.MockExampleAllParameterKey; // TODO -- only work around for the response usage building.
             _operationMethodSignature = isConvenienceSample ? method.ConvenienceMethod!.Signature : method.ProtocolMethodSignature;
         }
 
-        private readonly string _exampleKey;
         private readonly bool _useAllParameters;
-        private readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
-        private readonly InputOperationExample _inputOperationExample;
+        protected internal readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
+        protected internal readonly InputOperationExample _inputOperationExample;
         private readonly MethodSignature _operationMethodSignature;
 
+        public string ExampleKey { get; }
         public bool IsConvenienceSample { get; }
         public LowLevelClient Client { get; }
         public LowLevelClientMethod Method { get; }

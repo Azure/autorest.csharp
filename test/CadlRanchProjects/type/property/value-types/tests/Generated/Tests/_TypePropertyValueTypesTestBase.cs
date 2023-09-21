@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using _Type.Property.ValueTypes;
@@ -17,9 +18,11 @@ namespace _Type.Property.ValueTypes.Tests
         {
         }
 
-        protected ValueTypesClient CreateValueTypesClient()
+        protected ValueTypesClient CreateValueTypesClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new ValueTypesClientOptions());
+            var client = new ValueTypesClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

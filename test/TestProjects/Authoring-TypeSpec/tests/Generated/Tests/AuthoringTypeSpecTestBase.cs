@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using AuthoringTypeSpec;
 using Azure.Core.TestFramework;
 using Azure.Identity;
@@ -17,9 +18,11 @@ namespace AuthoringTypeSpec.Tests
         {
         }
 
-        protected AuthoringTypeSpecClient CreateAuthoringTypeSpecClient()
+        protected AuthoringTypeSpecClient CreateAuthoringTypeSpecClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AuthoringTypeSpecClientOptions());
+            var client = new AuthoringTypeSpecClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

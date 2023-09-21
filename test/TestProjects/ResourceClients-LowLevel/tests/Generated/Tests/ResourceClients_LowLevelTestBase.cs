@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using ResourceClients_LowLevel;
@@ -17,9 +19,11 @@ namespace ResourceClients_LowLevel.Tests
         {
         }
 
-        protected ResourceServiceClient CreateResourceServiceClient()
+        protected ResourceServiceClient CreateResourceServiceClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new ResourceServiceClientOptions());
+            var client = new ResourceServiceClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

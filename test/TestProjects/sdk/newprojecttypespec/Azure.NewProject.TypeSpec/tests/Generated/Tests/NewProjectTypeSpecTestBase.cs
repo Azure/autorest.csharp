@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using Azure.NewProject.TypeSpec;
@@ -17,9 +19,11 @@ namespace Azure.NewProject.TypeSpec.Tests
         {
         }
 
-        protected NewProjectTypeSpecClient CreateNewProjectTypeSpecClient()
+        protected NewProjectTypeSpecClient CreateNewProjectTypeSpecClient(Uri endpoint, AzureKeyCredential credential)
         {
-            return null;
+            var options = InstrumentClientOptions(new NewProjectTypeSpecClientOptions());
+            var client = new NewProjectTypeSpecClient(endpoint, credential, options: options);
+            return InstrumentClient(client);
         }
     }
 }

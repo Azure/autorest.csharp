@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using _Type._Enum.Fixed;
@@ -17,9 +18,11 @@ namespace _Type._Enum.Fixed.Tests
         {
         }
 
-        protected FixedClient CreateFixedClient()
+        protected FixedClient CreateFixedClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new FixedClientOptions());
+            var client = new FixedClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

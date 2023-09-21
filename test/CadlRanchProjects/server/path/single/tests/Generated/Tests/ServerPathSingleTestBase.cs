@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using Server.Path.Single;
@@ -17,9 +18,11 @@ namespace Server.Path.Single.Tests
         {
         }
 
-        protected SingleClient CreateSingleClient()
+        protected SingleClient CreateSingleClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new SingleClientOptions());
+            var client = new SingleClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

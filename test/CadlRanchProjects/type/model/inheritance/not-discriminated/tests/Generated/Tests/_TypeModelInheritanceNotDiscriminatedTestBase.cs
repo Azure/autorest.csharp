@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using _Type.Model.Inheritance.NotDiscriminated;
@@ -17,9 +18,11 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Tests
         {
         }
 
-        protected NotDiscriminatedClient CreateNotDiscriminatedClient()
+        protected NotDiscriminatedClient CreateNotDiscriminatedClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new NotDiscriminatedClientOptions());
+            var client = new NotDiscriminatedClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

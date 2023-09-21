@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using security_aad_LowLevel;
@@ -17,9 +19,11 @@ namespace security_aad_LowLevel.Tests
         {
         }
 
-        protected AutorestSecurityAadClient CreateAutorestSecurityAadClient()
+        protected AutorestSecurityAadClient CreateAutorestSecurityAadClient(TokenCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutorestSecurityAadClientOptions());
+            var client = new AutorestSecurityAadClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

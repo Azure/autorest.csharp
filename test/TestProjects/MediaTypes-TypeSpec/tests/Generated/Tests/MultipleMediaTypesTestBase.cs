@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using MultipleMediaTypes;
@@ -17,9 +18,11 @@ namespace MultipleMediaTypes.Tests
         {
         }
 
-        protected MultipleMediaTypesClient CreateMultipleMediaTypesClient()
+        protected MultipleMediaTypesClient CreateMultipleMediaTypesClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new MultipleMediaTypesClientOptions());
+            var client = new MultipleMediaTypesClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using dpg_update1_LowLevel;
@@ -17,9 +19,11 @@ namespace dpg_update1_LowLevel.Tests
         {
         }
 
-        protected ParamsClient CreateParamsClient()
+        protected ParamsClient CreateParamsClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new ParamsClientOptions());
+            var client = new ParamsClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

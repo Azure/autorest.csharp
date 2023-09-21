@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using dpg_customization_LowLevel;
@@ -17,9 +19,11 @@ namespace dpg_customization_LowLevel.Tests
         {
         }
 
-        protected DPGClient CreateDPGClient()
+        protected DPGClient CreateDPGClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new DPGClientOptions());
+            var client = new DPGClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using ServiceVersionOverride_LowLevel;
@@ -17,9 +18,11 @@ namespace ServiceVersionOverride_LowLevel.Tests
         {
         }
 
-        protected ServiceVersionOverrideClient CreateServiceVersionOverrideClient()
+        protected ServiceVersionOverrideClient CreateServiceVersionOverrideClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new ServiceVersionOverrideClientOptions());
+            var client = new ServiceVersionOverrideClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

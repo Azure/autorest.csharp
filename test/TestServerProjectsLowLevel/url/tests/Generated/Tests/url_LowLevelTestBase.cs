@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using url_LowLevel;
@@ -17,19 +19,25 @@ namespace url_LowLevel.Tests
         {
         }
 
-        protected PathsClient CreatePathsClient()
+        protected PathsClient CreatePathsClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestUrlTestServiceClientOptions());
+            var client = new PathsClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected QueriesClient CreateQueriesClient()
+        protected QueriesClient CreateQueriesClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestUrlTestServiceClientOptions());
+            var client = new QueriesClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected PathItemsClient CreatePathItemsClient()
+        protected PathItemsClient CreatePathItemsClient(string globalStringPath, AzureKeyCredential credential, Uri endpoint, string globalStringQuery)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestUrlTestServiceClientOptions());
+            var client = new PathItemsClient(globalStringPath, credential, endpoint, globalStringQuery, options: options);
+            return InstrumentClient(client);
         }
     }
 }

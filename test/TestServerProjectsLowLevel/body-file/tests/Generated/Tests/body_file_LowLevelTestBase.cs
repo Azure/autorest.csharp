@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using body_file_LowLevel;
@@ -17,9 +19,11 @@ namespace body_file_LowLevel.Tests
         {
         }
 
-        protected FilesClient CreateFilesClient()
+        protected FilesClient CreateFilesClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new FilesClientOptions());
+            var client = new FilesClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using HeadAsBooleanTrue_LowLevel;
@@ -17,9 +19,11 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
         {
         }
 
-        protected HttpSuccessClient CreateHttpSuccessClient()
+        protected HttpSuccessClient CreateHttpSuccessClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new HttpSuccessClientOptions());
+            var client = new HttpSuccessClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

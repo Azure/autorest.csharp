@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using SecurityDefinition_LowLevel;
@@ -17,9 +19,11 @@ namespace SecurityDefinition_LowLevel.Tests
         {
         }
 
-        protected SecurityDefinitionClient CreateSecurityDefinitionClient()
+        protected SecurityDefinitionClient CreateSecurityDefinitionClient(Uri endpoint, AzureKeyCredential credential)
         {
-            return null;
+            var options = InstrumentClientOptions(new SecurityDefinitionClientOptions());
+            var client = new SecurityDefinitionClient(endpoint, credential, options: options);
+            return InstrumentClient(client);
         }
     }
 }

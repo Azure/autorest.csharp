@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using Encode.Bytes;
@@ -17,9 +18,11 @@ namespace Encode.Bytes.Tests
         {
         }
 
-        protected BytesClient CreateBytesClient()
+        protected BytesClient CreateBytesClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new BytesClientOptions());
+            var client = new BytesClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

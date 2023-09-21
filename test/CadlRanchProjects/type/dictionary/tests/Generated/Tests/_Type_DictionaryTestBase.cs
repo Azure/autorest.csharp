@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using _Type._Dictionary;
@@ -17,9 +18,11 @@ namespace _Type._Dictionary.Tests
         {
         }
 
-        protected DictionaryClient CreateDictionaryClient()
+        protected DictionaryClient CreateDictionaryClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new DictionaryClientOptions());
+            var client = new DictionaryClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

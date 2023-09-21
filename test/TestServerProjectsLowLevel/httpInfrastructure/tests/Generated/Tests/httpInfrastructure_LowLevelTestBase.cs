@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using httpInfrastructure_LowLevel;
@@ -17,39 +19,53 @@ namespace httpInfrastructure_LowLevel.Tests
         {
         }
 
-        protected HttpFailureClient CreateHttpFailureClient()
+        protected HttpFailureClient CreateHttpFailureClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestHttpInfrastructureTestServiceClientOptions());
+            var client = new HttpFailureClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected HttpSuccessClient CreateHttpSuccessClient()
+        protected HttpSuccessClient CreateHttpSuccessClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestHttpInfrastructureTestServiceClientOptions());
+            var client = new HttpSuccessClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected HttpRedirectsClient CreateHttpRedirectsClient()
+        protected HttpRedirectsClient CreateHttpRedirectsClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestHttpInfrastructureTestServiceClientOptions());
+            var client = new HttpRedirectsClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected HttpClientFailureClient CreateHttpClientFailureClient()
+        protected HttpClientFailureClient CreateHttpClientFailureClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestHttpInfrastructureTestServiceClientOptions());
+            var client = new HttpClientFailureClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected HttpServerFailureClient CreateHttpServerFailureClient()
+        protected HttpServerFailureClient CreateHttpServerFailureClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestHttpInfrastructureTestServiceClientOptions());
+            var client = new HttpServerFailureClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected HttpRetryClient CreateHttpRetryClient()
+        protected HttpRetryClient CreateHttpRetryClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestHttpInfrastructureTestServiceClientOptions());
+            var client = new HttpRetryClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected MultipleResponsesClient CreateMultipleResponsesClient()
+        protected MultipleResponsesClient CreateMultipleResponsesClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestHttpInfrastructureTestServiceClientOptions());
+            var client = new MultipleResponsesClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using SpecialHeaders.ClientRequestId;
@@ -17,9 +18,11 @@ namespace SpecialHeaders.ClientRequestId.Tests
         {
         }
 
-        protected ClientRequestIdClient CreateClientRequestIdClient()
+        protected ClientRequestIdClient CreateClientRequestIdClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new ClientRequestIdClientOptions());
+            var client = new ClientRequestIdClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

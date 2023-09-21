@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using ClientAndOperationGroup;
@@ -17,9 +18,11 @@ namespace ClientAndOperationGroup.Tests
         {
         }
 
-        protected ClientAndOperationGroupClient CreateClientAndOperationGroupClient()
+        protected ClientAndOperationGroupClient CreateClientAndOperationGroupClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new ClientAndOperationGroupClientOptions());
+            var client = new ClientAndOperationGroupClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using Parameters_LowLevel;
@@ -17,9 +19,11 @@ namespace Parameters_LowLevel.Tests
         {
         }
 
-        protected ParametersLowlevelClient CreateParametersLowlevelClient()
+        protected ParametersLowlevelClient CreateParametersLowlevelClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new ParametersLowlevelClientOptions());
+            var client = new ParametersLowlevelClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

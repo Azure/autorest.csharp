@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
 {
     internal class DpgTestCase : DpgOperationSample
     {
-        public DpgTestCase(LowLevelClient client, LowLevelClientMethod method, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey) : base(client, method, inputClientParameterExamples, inputOperationExample, isConvenienceSample, exampleKey)
+        public DpgTestCase(DpgOperationSample sample) : base(sample.Client, sample.Method, sample._inputClientParameterExamples, sample._inputOperationExample, sample.IsConvenienceSample, sample.ExampleKey)
         {
         }
 

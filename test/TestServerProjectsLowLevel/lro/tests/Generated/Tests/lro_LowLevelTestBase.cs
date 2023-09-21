@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using lro_LowLevel;
@@ -17,24 +19,32 @@ namespace lro_LowLevel.Tests
         {
         }
 
-        protected LROsClient CreateLROsClient()
+        protected LROsClient CreateLROsClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestLongRunningOperationTestServiceClientOptions());
+            var client = new LROsClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected LRORetrysClient CreateLRORetrysClient()
+        protected LRORetrysClient CreateLRORetrysClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestLongRunningOperationTestServiceClientOptions());
+            var client = new LRORetrysClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected LrosaDsClient CreateLrosaDsClient()
+        protected LrosaDsClient CreateLrosaDsClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestLongRunningOperationTestServiceClientOptions());
+            var client = new LrosaDsClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected LROsCustomHeaderClient CreateLROsCustomHeaderClient()
+        protected LROsCustomHeaderClient CreateLROsCustomHeaderClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestLongRunningOperationTestServiceClientOptions());
+            var client = new LROsCustomHeaderClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

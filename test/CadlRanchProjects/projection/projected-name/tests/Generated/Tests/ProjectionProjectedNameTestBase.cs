@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using Projection.ProjectedName;
@@ -17,9 +18,11 @@ namespace Projection.ProjectedName.Tests
         {
         }
 
-        protected ProjectedNameClient CreateProjectedNameClient()
+        protected ProjectedNameClient CreateProjectedNameClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new ProjectedNameClientOptions());
+            var client = new ProjectedNameClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

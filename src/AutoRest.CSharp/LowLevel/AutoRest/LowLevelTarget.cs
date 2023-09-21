@@ -44,12 +44,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 lowLevelClientWriter.WriteClient();
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
 
-                var exampleCompileCheckWriter = new ExampleCompileCheckWriter(client);
-                exampleCompileCheckWriter.Write();
+                // write samples
                 var exampleFileCheckFilename = $"../../tests/Generated/Samples/Samples_{client.Type.Name}.cs";
-                project.AddGeneratedTestFile(exampleFileCheckFilename, exampleCompileCheckWriter.ToString());
+                var sampleProvider = library.GetSampleForClient(client);
+                if (sampleProvider != null)
+                {
+                    var exampleCompileCheckWriter = new DpgClientSampleWriter(sampleProvider);
+                    exampleCompileCheckWriter.Write();
+                    project.AddGeneratedTestFile(exampleFileCheckFilename, exampleCompileCheckWriter.ToString());
+                }
 
                 project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", new XmlDocumentFile(exampleFileCheckFilename, xmlDocWriter));
+
+                // write test cases
             }
 
             var optionsWriter = new CodeWriter();

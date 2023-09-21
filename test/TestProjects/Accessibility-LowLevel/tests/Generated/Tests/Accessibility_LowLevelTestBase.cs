@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using Accessibility_LowLevel;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 
@@ -17,9 +19,11 @@ namespace Accessibility_LowLevel.Tests
         {
         }
 
-        protected AccessibilityClient CreateAccessibilityClient()
+        protected AccessibilityClient CreateAccessibilityClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AccessibilityClientOptions());
+            var client = new AccessibilityClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

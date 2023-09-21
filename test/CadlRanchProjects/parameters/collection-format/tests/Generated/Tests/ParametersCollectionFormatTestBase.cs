@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using Parameters.CollectionFormat;
@@ -17,9 +18,11 @@ namespace Parameters.CollectionFormat.Tests
         {
         }
 
-        protected CollectionFormatClient CreateCollectionFormatClient()
+        protected CollectionFormatClient CreateCollectionFormatClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new CollectionFormatClientOptions());
+            var client = new CollectionFormatClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

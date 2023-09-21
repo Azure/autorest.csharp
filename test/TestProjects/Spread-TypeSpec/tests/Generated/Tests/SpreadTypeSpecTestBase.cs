@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using SpreadTypeSpec;
@@ -17,9 +18,11 @@ namespace SpreadTypeSpec.Tests
         {
         }
 
-        protected SpreadTypeSpecClient CreateSpreadTypeSpecClient()
+        protected SpreadTypeSpecClient CreateSpreadTypeSpecClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new SpreadTypeSpecClientOptions());
+            var client = new SpreadTypeSpecClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

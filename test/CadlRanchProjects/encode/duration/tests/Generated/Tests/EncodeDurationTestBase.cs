@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using Encode.Duration;
@@ -17,9 +18,11 @@ namespace Encode.Duration.Tests
         {
         }
 
-        protected DurationClient CreateDurationClient()
+        protected DurationClient CreateDurationClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new DurationClientOptions());
+            var client = new DurationClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

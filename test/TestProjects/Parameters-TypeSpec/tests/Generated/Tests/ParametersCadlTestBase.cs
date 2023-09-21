@@ -19,7 +19,9 @@ namespace ParametersCadl.Tests
 
         protected ParametersCadlClient CreateParametersCadlClient()
         {
-            return null;
+            var options = InstrumentClientOptions(new ParametersCadlClientOptions());
+            var client = new ParametersCadlClient(options: options);
+            return InstrumentClient(client);
         }
     }
 }

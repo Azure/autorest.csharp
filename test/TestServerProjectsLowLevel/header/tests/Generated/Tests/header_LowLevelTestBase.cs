@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using header_LowLevel;
@@ -17,9 +19,11 @@ namespace header_LowLevel.Tests
         {
         }
 
-        protected HeaderClient CreateHeaderClient()
+        protected HeaderClient CreateHeaderClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new HeaderClientOptions());
+            var client = new HeaderClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

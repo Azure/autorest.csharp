@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using CollapseRequestCondition_LowLevel;
@@ -17,19 +19,25 @@ namespace CollapseRequestCondition_LowLevel.Tests
         {
         }
 
-        protected RequestConditionCollapseClient CreateRequestConditionCollapseClient()
+        protected RequestConditionCollapseClient CreateRequestConditionCollapseClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new CollapseRequestConditionsClientOptions());
+            var client = new RequestConditionCollapseClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected MatchConditionCollapseClient CreateMatchConditionCollapseClient()
+        protected MatchConditionCollapseClient CreateMatchConditionCollapseClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new CollapseRequestConditionsClientOptions());
+            var client = new MatchConditionCollapseClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected NonCollapseClient CreateNonCollapseClient()
+        protected NonCollapseClient CreateNonCollapseClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new CollapseRequestConditionsClientOptions());
+            var client = new NonCollapseClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using Server.Path.Multiple;
@@ -17,9 +18,11 @@ namespace Server.Path.Multiple.Tests
         {
         }
 
-        protected MultipleClient CreateMultipleClient()
+        protected MultipleClient CreateMultipleClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new MultipleClientOptions());
+            var client = new MultipleClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

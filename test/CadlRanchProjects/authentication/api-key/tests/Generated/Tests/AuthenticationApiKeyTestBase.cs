@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using Authentication.ApiKey;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 
@@ -17,9 +19,11 @@ namespace Authentication.ApiKey.Tests
         {
         }
 
-        protected ApiKeyClient CreateApiKeyClient()
+        protected ApiKeyClient CreateApiKeyClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new ApiKeyClientOptions());
+            var client = new ApiKeyClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

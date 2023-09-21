@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using Encode.Datetime;
@@ -17,9 +18,11 @@ namespace Encode.Datetime.Tests
         {
         }
 
-        protected DatetimeClient CreateDatetimeClient()
+        protected DatetimeClient CreateDatetimeClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new DatetimeClientOptions());
+            var client = new DatetimeClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

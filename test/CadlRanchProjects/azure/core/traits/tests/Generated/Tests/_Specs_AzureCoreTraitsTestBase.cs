@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using _Specs_.Azure.Core.Traits;
@@ -17,9 +18,11 @@ namespace _Specs_.Azure.Core.Traits.Tests
         {
         }
 
-        protected TraitsClient CreateTraitsClient()
+        protected TraitsClient CreateTraitsClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new TraitsClientOptions());
+            var client = new TraitsClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

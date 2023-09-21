@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using body_complex_LowLevel;
@@ -17,49 +19,67 @@ namespace body_complex_LowLevel.Tests
         {
         }
 
-        protected BasicClient CreateBasicClient()
+        protected BasicClient CreateBasicClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestComplexTestServiceClientOptions());
+            var client = new BasicClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected PrimitiveClient CreatePrimitiveClient()
+        protected PrimitiveClient CreatePrimitiveClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestComplexTestServiceClientOptions());
+            var client = new PrimitiveClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected ArrayClient CreateArrayClient()
+        protected ArrayClient CreateArrayClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestComplexTestServiceClientOptions());
+            var client = new ArrayClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected DictionaryClient CreateDictionaryClient()
+        protected DictionaryClient CreateDictionaryClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestComplexTestServiceClientOptions());
+            var client = new DictionaryClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected InheritanceClient CreateInheritanceClient()
+        protected InheritanceClient CreateInheritanceClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestComplexTestServiceClientOptions());
+            var client = new InheritanceClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected PolymorphismClient CreatePolymorphismClient()
+        protected PolymorphismClient CreatePolymorphismClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestComplexTestServiceClientOptions());
+            var client = new PolymorphismClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected PolymorphicrecursiveClient CreatePolymorphicrecursiveClient()
+        protected PolymorphicrecursiveClient CreatePolymorphicrecursiveClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestComplexTestServiceClientOptions());
+            var client = new PolymorphicrecursiveClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected ReadonlypropertyClient CreateReadonlypropertyClient()
+        protected ReadonlypropertyClient CreateReadonlypropertyClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestComplexTestServiceClientOptions());
+            var client = new ReadonlypropertyClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
 
-        protected FlattencomplexClient CreateFlattencomplexClient()
+        protected FlattencomplexClient CreateFlattencomplexClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new AutoRestComplexTestServiceClientOptions());
+            var client = new FlattencomplexClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

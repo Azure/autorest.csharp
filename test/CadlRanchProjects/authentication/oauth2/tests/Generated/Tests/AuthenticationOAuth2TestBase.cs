@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using Authentication.OAuth2;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 
@@ -17,9 +19,11 @@ namespace Authentication.OAuth2.Tests
         {
         }
 
-        protected OAuth2Client CreateOAuth2Client()
+        protected OAuth2Client CreateOAuth2Client(TokenCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new OAuth2ClientOptions());
+            var client = new OAuth2Client(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

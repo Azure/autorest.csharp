@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using custom_baseUrl_LowLevel;
@@ -17,9 +18,11 @@ namespace custom_baseUrl_LowLevel.Tests
         {
         }
 
-        protected PathsClient CreatePathsClient()
+        protected PathsClient CreatePathsClient(string host, AzureKeyCredential credential)
         {
-            return null;
+            var options = InstrumentClientOptions(new PathsClientOptions());
+            var client = new PathsClient(host, credential, options: options);
+            return InstrumentClient(client);
         }
     }
 }

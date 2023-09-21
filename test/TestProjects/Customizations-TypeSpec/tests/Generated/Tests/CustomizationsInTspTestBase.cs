@@ -19,7 +19,9 @@ namespace CustomizationsInTsp.Tests
 
         protected CustomizationsInTspClient CreateCustomizationsInTspClient()
         {
-            return null;
+            var options = InstrumentClientOptions(new CustomizationsInTspClientOptions());
+            var client = new CustomizationsInTspClient(options: options);
+            return InstrumentClient(client);
         }
     }
 }

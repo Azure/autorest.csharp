@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using Parameters.Spread;
@@ -17,9 +18,11 @@ namespace Parameters.Spread.Tests
         {
         }
 
-        protected SpreadClient CreateSpreadClient()
+        protected SpreadClient CreateSpreadClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new SpreadClientOptions());
+            var client = new SpreadClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

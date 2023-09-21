@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using Authentication.Http.Custom;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 
@@ -17,9 +19,11 @@ namespace Authentication.Http.Custom.Tests
         {
         }
 
-        protected CustomClient CreateCustomClient()
+        protected CustomClient CreateCustomClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new CustomClientOptions());
+            var client = new CustomClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

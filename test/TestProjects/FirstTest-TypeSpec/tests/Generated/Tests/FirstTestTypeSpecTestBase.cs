@@ -22,7 +22,8 @@ namespace FirstTestTypeSpec.Tests
         protected FirstTestTypeSpecClient CreateFirstTestTypeSpecClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new FirstTestTypeSpecClientOptions());
-            return new FirstTestTypeSpecClient(endpoint, credential, options: options);
+            var client = new FirstTestTypeSpecClient(endpoint, credential, options: options);
+            return InstrumentClient(client);
         }
     }
 }

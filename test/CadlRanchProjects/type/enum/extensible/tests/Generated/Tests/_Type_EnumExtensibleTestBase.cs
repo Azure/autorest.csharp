@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using _Type._Enum.Extensible;
@@ -17,9 +18,11 @@ namespace _Type._Enum.Extensible.Tests
         {
         }
 
-        protected ExtensibleClient CreateExtensibleClient()
+        protected ExtensibleClient CreateExtensibleClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new ExtensibleClientOptions());
+            var client = new ExtensibleClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

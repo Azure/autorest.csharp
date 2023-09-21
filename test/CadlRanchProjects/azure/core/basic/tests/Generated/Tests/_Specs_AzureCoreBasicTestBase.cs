@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using _Specs_.Azure.Core.Basic;
@@ -17,9 +18,11 @@ namespace _Specs_.Azure.Core.Basic.Tests
         {
         }
 
-        protected BasicClient CreateBasicClient()
+        protected BasicClient CreateBasicClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new BasicClientOptions());
+            var client = new BasicClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

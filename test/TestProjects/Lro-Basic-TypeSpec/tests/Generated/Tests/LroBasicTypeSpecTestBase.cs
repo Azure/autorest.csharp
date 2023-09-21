@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using LroBasicTypeSpec;
@@ -17,9 +18,11 @@ namespace LroBasicTypeSpec.Tests
         {
         }
 
-        protected LroBasicTypeSpecClient CreateLroBasicTypeSpecClient()
+        protected LroBasicTypeSpecClient CreateLroBasicTypeSpecClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new LroBasicTypeSpecClientOptions());
+            var client = new LroBasicTypeSpecClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using _Type.Model.Usage;
@@ -17,9 +18,11 @@ namespace _Type.Model.Usage.Tests
         {
         }
 
-        protected UsageClient CreateUsageClient()
+        protected UsageClient CreateUsageClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new UsageClientOptions());
+            var client = new UsageClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

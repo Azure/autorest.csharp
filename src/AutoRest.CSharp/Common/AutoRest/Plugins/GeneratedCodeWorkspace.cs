@@ -134,9 +134,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var (docName, doc) in _xmlDocFiles)
             {
                 var xmlWriter = doc.XmlDocWriter;
-                var testDocument = generatedDocs[doc.TestFileName];
-                var content = await XmlFormatter.FormatAsync(xmlWriter, testDocument);
-                yield return (docName, content);
+                if (generatedDocs.TryGetValue(doc.TestFileName, out var testDocument))
+                {
+                    var content = await XmlFormatter.FormatAsync(xmlWriter, testDocument);
+                    yield return (docName, content);
+                }
             }
         }
 

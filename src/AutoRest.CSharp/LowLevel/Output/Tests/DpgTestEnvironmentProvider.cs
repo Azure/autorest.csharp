@@ -9,9 +9,9 @@ using Azure.Core.TestFramework;
 
 namespace AutoRest.CSharp.LowLevel.Output.Tests
 {
-    internal class DpgTestEnvironment : TypeProvider
+    internal class DpgTestEnvironmentProvider : TypeProvider
     {
-        public DpgTestEnvironment(string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
+        public DpgTestEnvironmentProvider(string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             DefaultNamespace = $"{defaultNamespace}.Tests";
             DefaultName = $"{ClientBuilder.GetRPName(defaultNamespace)}TestEnvironment";

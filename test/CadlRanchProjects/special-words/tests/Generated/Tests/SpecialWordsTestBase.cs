@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using SpecialWords;
@@ -17,9 +18,11 @@ namespace SpecialWords.Tests
         {
         }
 
-        protected SpecialWordsClient CreateSpecialWordsClient()
+        protected SpecialWordsClient CreateSpecialWordsClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new SpecialWordsClientOptions());
+            var client = new SpecialWordsClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

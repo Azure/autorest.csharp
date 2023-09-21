@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using Authentication.Union;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 
@@ -17,9 +19,11 @@ namespace Authentication.Union.Tests
         {
         }
 
-        protected UnionClient CreateUnionClient()
+        protected UnionClient CreateUnionClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new UnionClientOptions());
+            var client = new UnionClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

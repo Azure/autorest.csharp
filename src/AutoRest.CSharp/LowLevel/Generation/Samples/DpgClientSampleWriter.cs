@@ -11,20 +11,21 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.LowLevel.Generation.Extensions;
+using AutoRest.CSharp.LowLevel.Output.Samples;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Samples.Models;
 
 namespace AutoRest.CSharp.LowLevel.Generation.Samples
 {
-    internal class ExampleCompileCheckWriter
+    internal class DpgClientSampleWriter
     {
-        private readonly LowLevelClient _client;
+        private readonly DpgClientSampleProvider _sampleProvider;
         private readonly CodeWriter _writer;
 
-        public ExampleCompileCheckWriter(LowLevelClient client)
+        public DpgClientSampleWriter(DpgClientSampleProvider sampleProvider)
         {
-            _client = client;
+            _sampleProvider = sampleProvider;
             _writer = new CodeWriter();
         }
 
@@ -33,17 +34,14 @@ namespace AutoRest.CSharp.LowLevel.Generation.Samples
             // since our generator source code does not have the Azure.Identity dependency, we have to add this dependency separately
             _writer.UseNamespace("Azure.Identity");
 
-            using (_writer.Namespace($"{_client.Declaration.Namespace}.Samples"))
+            using (_writer.Namespace(_sampleProvider.Declaration.Namespace))
             {
-                using (_writer.Scope($"public class Samples_{_client.Declaration.Name}"))
+                using (_writer.Scope($"public class {_sampleProvider.Declaration.Name}"))
                 {
-                    foreach (var method in _client.ClientMethods)
+                    foreach (var sample in _sampleProvider.Samples)
                     {
-                        foreach (var sample in method.Samples)
-                        {
-                            WriteTestMethod(sample, false);
-                            WriteTestMethod(sample, true);
-                        }
+                        WriteTestMethod(sample, false);
+                        WriteTestMethod(sample, true);
                     }
                 }
             }

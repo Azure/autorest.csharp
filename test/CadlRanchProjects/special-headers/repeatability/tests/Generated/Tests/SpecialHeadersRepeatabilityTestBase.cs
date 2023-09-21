@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using SpecialHeaders.Repeatability;
@@ -17,9 +18,11 @@ namespace SpecialHeaders.Repeatability.Tests
         {
         }
 
-        protected RepeatabilityClient CreateRepeatabilityClient()
+        protected RepeatabilityClient CreateRepeatabilityClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new RepeatabilityClientOptions());
+            var client = new RepeatabilityClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using url_multi_collectionFormat_LowLevel;
@@ -17,9 +19,11 @@ namespace url_multi_collectionFormat_LowLevel.Tests
         {
         }
 
-        protected QueriesClient CreateQueriesClient()
+        protected QueriesClient CreateQueriesClient(AzureKeyCredential credential, Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new QueriesClientOptions());
+            var client = new QueriesClient(credential, endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

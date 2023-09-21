@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using _Type._Array;
@@ -17,9 +18,11 @@ namespace _Type._Array.Tests
         {
         }
 
-        protected ArrayClient CreateArrayClient()
+        protected ArrayClient CreateArrayClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new ArrayClientOptions());
+            var client = new ArrayClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

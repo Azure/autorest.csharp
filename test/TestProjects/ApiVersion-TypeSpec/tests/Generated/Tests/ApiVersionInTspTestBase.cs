@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using ApiVersionInTsp;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 
@@ -17,9 +19,11 @@ namespace ApiVersionInTsp.Tests
         {
         }
 
-        protected ApiVersionInTspClient CreateApiVersionInTspClient()
+        protected ApiVersionInTspClient CreateApiVersionInTspClient(Uri endpoint, AzureKeyCredential credential)
         {
-            return null;
+            var options = InstrumentClientOptions(new ApiVersionInTspClientOptions());
+            var client = new ApiVersionInTspClient(endpoint, credential, options: options);
+            return InstrumentClient(client);
         }
     }
 }

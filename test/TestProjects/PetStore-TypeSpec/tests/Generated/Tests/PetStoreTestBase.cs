@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using PetStore;
@@ -17,9 +18,11 @@ namespace PetStore.Tests
         {
         }
 
-        protected PetStoreClient CreatePetStoreClient()
+        protected PetStoreClient CreatePetStoreClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new PetStoreClientOptions());
+            var client = new PetStoreClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }

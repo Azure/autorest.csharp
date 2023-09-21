@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.TestFramework;
 using Azure.Identity;
 using _Type.Model.Inheritance.EnumDiscriminator;
@@ -17,9 +18,11 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
         {
         }
 
-        protected EnumDiscriminatorClient CreateEnumDiscriminatorClient()
+        protected EnumDiscriminatorClient CreateEnumDiscriminatorClient(Uri endpoint)
         {
-            return null;
+            var options = InstrumentClientOptions(new EnumDiscriminatorClientOptions());
+            var client = new EnumDiscriminatorClient(endpoint, options: options);
+            return InstrumentClient(client);
         }
     }
 }
