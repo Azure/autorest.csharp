@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private static void ValidateMgmtOperationParameters(IReadOnlyList<RequestParameter> parameters)
         {
-            var set = new HashSet<string> { "$host", "apiVersion" };
+            var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "$host", "apiVersion" };
             foreach (var parameter in parameters)
             {
                 var parameterName = parameter.Language.Default.Name;
