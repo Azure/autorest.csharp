@@ -16,12 +16,15 @@ namespace AutoRest.CSharp.Mgmt.Models
 {
     internal class NameTransformer
     {
+        private record AppliedCache(NameInfo NewName, List<ApplyDetailStep> AppliedDetailSteps);
+        public record ApplyDetailStep(string MappingKey, AcronymMappingTarget MappingValue, NameInfo NewName);
+
         private static NameTransformer? _instance;
         public static NameTransformer Instance => _instance ??= new NameTransformer(Configuration.MgmtConfiguration.AcronymMapping);
 
         private IReadOnlyDictionary<string, AcronymMappingTarget> _acronymMapping;
         private Regex _regex;
-        private ConcurrentDictionary<string, NameInfo> _wordCache;
+        private ConcurrentDictionary<string, AppliedCache> _wordCache;
 
         /// <summary>
         /// Instanciate a NameTransformer which uses the dictionary to transform the abbreviations in this word to correct casing
@@ -31,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             _acronymMapping = acronymMapping;
             _regex = BuildRegex(acronymMapping.Keys);
-            _wordCache = new ConcurrentDictionary<string, NameInfo>();
+            _wordCache = new ConcurrentDictionary<string, AppliedCache>();
         }
 
         private static Regex BuildRegex(IEnumerable<string> renameItems)
@@ -53,23 +56,30 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public NameInfo EnsureNameCase(string name)
+        public NameInfo EnsureNameCase(string name, Action<ApplyDetailStep>? onMappingApplied)
         {
             if (_wordCache.TryGetValue(name, out var result))
-                return result;
+            {
+                if (onMappingApplied != null)
+                    result.AppliedDetailSteps.ForEach(record => onMappingApplied(record));
+                return result.NewName;
+            }
 
             // escape the following logic if we do not have any rules
             if (_acronymMapping.Count == 0)
             {
-                result = new NameInfo(name, name);
+                result = new AppliedCache(
+                    new NameInfo(name, name),
+                    new List<ApplyDetailStep>());
                 _wordCache.TryAdd(name, result);
-                return result;
+                return result.NewName;
             }
 
             var propertyNameBuilder = new StringBuilder();
             var parameterNameBuilder = new StringBuilder();
             var strToMatch = name.FirstCharToUpperCase();
             var match = _regex.Match(strToMatch);
+            var detailStep = new List<ApplyDetailStep>();
             bool hasFirstWord = false;
             while (match.Success)
             {
@@ -93,19 +103,22 @@ namespace AutoRest.CSharp.Mgmt.Models
                     parameterNameBuilder.Append(replaceValue.Value);
                 // move to whatever is left unmatched
                 strToMatch = strToMatch.Substring(matchGroup.Index + matchGroup.Length);
+
+                string tempPropertyName = propertyNameBuilder.ToString() + strToMatch;
+                string tempParameterName = parameterNameBuilder.ToString() + strToMatch;
+                NameInfo tempNameInfo = new NameInfo(tempPropertyName, tempParameterName);
+                var step = new ApplyDetailStep(matchGroup.Value, replaceValue, tempNameInfo);
+                if (onMappingApplied != null)
+                    onMappingApplied(step);
+                detailStep.Add(step);
                 match = _regex.Match(strToMatch);
             }
-            if (strToMatch.Length > 0)
-            {
-                propertyNameBuilder.Append(strToMatch);
-                parameterNameBuilder.Append(strToMatch);
-            }
 
-            result = new NameInfo(propertyNameBuilder.ToString(), parameterNameBuilder.ToString());
+            result = new AppliedCache(detailStep.Last().NewName, detailStep);
             _wordCache.TryAdd(name, result);
-            _wordCache.TryAdd(result.Name, result); // in some other scenarios we might need to use the property name as keys
+            _wordCache.TryAdd(result.NewName.Name, result); // in some other scenarios we might need to use the property name as keys
 
-            return result;
+            return result.NewName;
         }
 
         private static bool IsEquivelantEmpty(string s) => string.IsNullOrWhiteSpace(s) || s.All(c => !SyntaxFacts.IsIdentifierStartCharacter(c));

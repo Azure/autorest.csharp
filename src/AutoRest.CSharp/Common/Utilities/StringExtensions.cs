@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Report;
 using Humanizer;
 using Humanizer.Inflections;
 using Microsoft.CodeAnalysis.CSharp;
@@ -97,9 +98,15 @@ namespace AutoRest.CSharp.Utilities
         [return: NotNullIfNotNull("name")]
         public static string ToMgmtVariableName(this string name)
         {
-            var variableName = NameTransformer.Instance.EnsureNameCase(name).VariableName;
+            string? tempName = name;
+            var newName = NameTransformer.Instance.EnsureNameCase(name, (applyStep) =>
+            {
+                ReportManager.Instance.AddTransformLogForApplyChange("acronym-mapping", applyStep.MappingKey, applyStep.MappingValue.RawValue, $"Variables.{name}",
+                    "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
+                tempName = applyStep.NewName.Name;
+            });
 
-            return ToCleanName(variableName, isCamelCase: false);
+            return ToCleanName(newName.VariableName, isCamelCase: false);
         }
 
         public static GetPathPartsEnumerator GetPathParts(string? path) => new GetPathPartsEnumerator(path);

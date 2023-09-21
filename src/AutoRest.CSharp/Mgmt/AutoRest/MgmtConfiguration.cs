@@ -76,16 +76,16 @@ namespace AutoRest.CSharp.Input
             }
         }
 
-        public record AcronymMappingTarget(string Value, string? ParameterValue)
+        public record AcronymMappingTarget(string Value, string? ParameterValue, string RawValue)
         {
             internal static AcronymMappingTarget Parse(string rawValue)
             {
                 var spans = rawValue.AsSpan();
                 var index = spans.IndexOf('|');
                 if (index < 0)
-                    return new AcronymMappingTarget(rawValue, null);
+                    return new AcronymMappingTarget(rawValue, null, rawValue);
 
-                return new AcronymMappingTarget(spans.Slice(0, index).ToString(), spans.Slice(index, rawValue.Length - index).ToString());
+                return new AcronymMappingTarget(spans.Slice(0, index).ToString(), spans.Slice(index, rawValue.Length - index).ToString(), rawValue);
             }
         }
 

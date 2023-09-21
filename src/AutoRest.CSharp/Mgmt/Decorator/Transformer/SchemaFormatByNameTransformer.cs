@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Builders;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
@@ -26,13 +27,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             internal FormatPattern FormatPattern { get; init; }
         }
 
-        internal record FormatPattern(bool IsPrimitiveType, AllSchemaTypes? PrimitiveType, string? ExtensionType)
+        internal record FormatPattern(bool IsPrimitiveType, AllSchemaTypes? PrimitiveType, string RawValue, string? ExtensionType)
         {
             internal static FormatPattern Parse(string value)
             {
                 if (TypeFactory.ToXMsFormatType(value) != null)
                 {
-                    return new FormatPattern(false, null, value);
+                    return new FormatPattern(false, null, value, value);
                 }
                 else
                 {
@@ -40,18 +41,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     {
                         throw new Exception($"Invalid FormatByName rule value: {value}.");
                     }
-                    return new FormatPattern(true, primitiveType, null);
+                    return new FormatPattern(true, primitiveType, value, null);
                 }
             }
         }
 
-        internal record NamePattern(MatchPattern Pattern, string Name)
+        internal record NamePattern(MatchPattern Pattern, string Name, string RawValue)
         {
             internal static NamePattern Parse(string key) => key switch
             {
-                _ when key.StartsWith('*') => new NamePattern(MatchPattern.EndWith, key.TrimStart('*')),
-                _ when key.EndsWith('*') => new NamePattern(MatchPattern.StartWith, key.TrimEnd('*')),
-                _ => new NamePattern(MatchPattern.Full, key)
+                _ when key.StartsWith('*') => new NamePattern(MatchPattern.EndWith, key.TrimStart('*'), key),
+                _ when key.EndsWith('*') => new NamePattern(MatchPattern.StartWith, key.TrimEnd('*'), key),
+                _ => new NamePattern(MatchPattern.Full, key, key)
             };
         }
 
@@ -123,13 +124,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 int ruleIdx = CheckRules(parameter.CSharpName(), rules);
                 if (ruleIdx >= 0)
                 {
-                    var formatPattern = rules[ruleIdx].FormatPattern;
+                    var curRule = rules[ruleIdx];
+                    var formatPattern = curRule.FormatPattern;
                     if (!formatPattern.IsPrimitiveType)
                     {
                         // As the Schema is shared by parameter, so here only can change the ext. format
                         if (parameter.Extensions == null)
                             parameter.Extensions = new RecordOfStringAndAny();
+                        var oriFormat = parameter.Extensions.Format;
                         parameter.Extensions.Format = formatPattern.ExtensionType;
+                        ReportManager.Instance.AddTransformLogForApplyChange("format-by-name-rules", curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue, parameter.GetFullSerializedName(),
+                            "ApplyNewExFormat", oriFormat, parameter.Extensions.Format);
                     }
                 }
             }
@@ -160,14 +165,23 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             ruleIdx = CheckRules(name, rules);
             if (ruleIdx >= 0)
             {
-                var formatPattern = rules[ruleIdx].FormatPattern;
+                var curRule = rules[ruleIdx];
+                var formatPattern = curRule.FormatPattern;
                 if (formatPattern.IsPrimitiveType)
+                {
+                    var oriType = schema.Type;
                     schema.Type = formatPattern.PrimitiveType!.Value;
+                    ReportManager.Instance.AddTransformLogForApplyChange("format-by-name-rules", curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue, schema.GetFullSerializedName(),
+                        "ApplyNewType", oriType.ToString(), schema.Type.ToString());
+                }
                 else
                 {
                     if (schema.Extensions == null)
                         schema.Extensions = new RecordOfStringAndAny();
+                    string? oriExFormat = schema.Extensions.Format;
                     schema.Extensions.Format = formatPattern.ExtensionType!;
+                    ReportManager.Instance.AddTransformLogForApplyChange("format-by-name-rules", curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue, schema.GetFullSerializedName(),
+                        "ApplyNewExFormat", oriExFormat, schema.Extensions.Format);
                 }
             }
             schemaCache[schema] = name;

@@ -218,5 +218,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             return candidates;
         }
+
+        internal static string GetFullSerializedName(this Operation operation)
+        {
+            return operation.Language.Default.SerializedName ?? operation.Language.Default.Name;
+        }
+
+        internal static string GetFullSerializedName(this Operation operation, RequestParameter parameter)
+        {
+            return $"{operation.GetFullSerializedName()}.{parameter.GetOriginalName()}";
+        }
     }
 }
