@@ -1,5 +1,6 @@
 ﻿using _Specs_.Azure.ClientGenerator.Core.Access;
 using _Specs_.Azure.ClientGenerator.Core.Access.Models;
+using _Specs_.Azure.ClientGenerator.Core.Usage.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using NUnit.Framework;
@@ -96,5 +97,11 @@ namespace CadlRanchProjects.Tests
             Assert.IsFalse(typeof(AbstractModel).IsVisible);
             Assert.IsFalse(typeof(RealModel).IsVisible);
         });
+
+        [Test]
+        public void OrphanModelShouldBeGenerated()
+        {
+            Assert.IsTrue(typeof(OrphanModel).IsVisible);
+        }
     }
 }
