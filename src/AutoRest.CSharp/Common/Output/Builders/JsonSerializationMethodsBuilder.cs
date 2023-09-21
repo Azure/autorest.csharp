@@ -504,7 +504,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement CreatePropertyNullCheckStatement(JsonPropertySerialization jsonPropertySerialization, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
         {
-            if (jsonPropertySerialization.CustomSerializationMethodName is not null)
+            if (jsonPropertySerialization.CustomDeserializationMethodName is not null)
             {
                 // if we have the deserialization hook here, we do not need to do any check, all these checks should be taken care of by the hook
                 return new MethodBodyStatement();

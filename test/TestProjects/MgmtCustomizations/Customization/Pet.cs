@@ -16,7 +16,7 @@ namespace MgmtCustomizations.Models
         /// <summary> The size of the pet. Despite we write type string here, in the real payload of this request, it is actually sending using a number, therefore the type in this swagger here is wrong and we need to fix it using customization code. </summary>
         [CodeGenMemberSerializationHooks(SerializationValueHook = nameof(SerializeSizeProperty), DeserializationValueHook = nameof(DeserializeSizeProperty))]
         public int Size { get; set; }
-        
+
         /// <summary> Pet date of birth. </summary>
         [CodeGenMemberSerializationHooks(SerializationValueHook = nameof(SerializeDateOfBirthProperty))]
         public DateTimeOffset? DateOfBirth { get; set; }
