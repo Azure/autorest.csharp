@@ -331,6 +331,78 @@ namespace MgmtPropertyBag
             }
         }
 
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual async Task<NullableResponse<FooResource>> GetIfExistsAsync(FooCollectionGetIfExistsOptions options, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(options, nameof(options));
+
+            using var scope = _fooClientDiagnostics.CreateScope("FooCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _fooRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, options.FooName, options.Filter, options.Top, options.Orderby, options.IfMatch, options.Skip, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<FooResource>(response.GetRawResponse());
+                return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual NullableResponse<FooResource> GetIfExists(FooCollectionGetIfExistsOptions options, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(options, nameof(options));
+
+            using var scope = _fooClientDiagnostics.CreateScope("FooCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _fooRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, options.FooName, options.Filter, options.Top, options.Orderby, options.IfMatch, options.Skip, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<FooResource>(response.GetRawResponse());
+                return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         IEnumerator<FooResource> IEnumerable<FooResource>.GetEnumerator()
         {
             return GetAll(options: null).GetEnumerator();
