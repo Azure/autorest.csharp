@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -310,6 +311,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseVariable:I}.Content.ToObjectFromJson<{enumType.ValueType}>().To{declaredTypeName}(), {responseVariable:I});");
                     }
+                }
+                else if (responseType is { IsFrameworkType: true } && responseType.EqualsIgnoreNullable(typeof(BinaryData)))
+                {
+                    _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseVariable:I}.Content, {responseVariable:I});");
                 }
                 else if (responseType.IsFrameworkType)
                 {
