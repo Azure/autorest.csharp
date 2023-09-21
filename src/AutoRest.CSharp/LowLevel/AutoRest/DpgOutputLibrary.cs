@@ -27,6 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             get
             {
+                // Skip the replaced model, e.g. the replaced ErrorResponse.
                 foreach (var (key, model) in _models)
                 {
                     var type = TypeFactory.CreateType(key);
