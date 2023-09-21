@@ -29,23 +29,23 @@ namespace custom_baseUrl_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmpty_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            PathsClient client = new PathsClient("host", credential);
-
-            Response response = client.GetEmpty("<accountName>");
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = new PathsClient("host", credential);
 
             Response response = await client.GetEmptyAsync("<accountName>");
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetEmpty_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PathsClient client = new PathsClient("host", credential);
+
+            Response response = client.GetEmpty("<accountName>");
             Console.WriteLine(response.Status);
         }
 

@@ -32,12 +32,12 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetEmptyError_AllParameters()
+        public async Task Example_GetEmptyError_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpFailureClient client = new HttpFailureClient(credential);
 
-            Response response = client.GetEmptyError(null);
+            Response response = await client.GetEmptyErrorAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -45,12 +45,12 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetEmptyError_Async()
+        public void Example_GetEmptyError_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpFailureClient client = new HttpFailureClient(credential);
 
-            Response response = await client.GetEmptyErrorAsync(null);
+            Response response = client.GetEmptyError(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -84,12 +84,12 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNoModelError_AllParameters()
+        public async Task Example_GetNoModelError_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpFailureClient client = new HttpFailureClient(credential);
 
-            Response response = client.GetNoModelError(null);
+            Response response = await client.GetNoModelErrorAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -97,12 +97,12 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNoModelError_Async()
+        public void Example_GetNoModelError_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpFailureClient client = new HttpFailureClient(credential);
 
-            Response response = await client.GetNoModelErrorAsync(null);
+            Response response = client.GetNoModelError(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -136,12 +136,12 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNoModelEmpty_AllParameters()
+        public async Task Example_GetNoModelEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpFailureClient client = new HttpFailureClient(credential);
 
-            Response response = client.GetNoModelEmpty(null);
+            Response response = await client.GetNoModelEmptyAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -149,12 +149,12 @@ namespace httpInfrastructure_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNoModelEmpty_Async()
+        public void Example_GetNoModelEmpty_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HttpFailureClient client = new HttpFailureClient(credential);
 
-            Response response = await client.GetNoModelEmptyAsync(null);
+            Response response = client.GetNoModelEmpty(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

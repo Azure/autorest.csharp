@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             ClientInvocationChain = GetClientInvocationChain(client);
             IsConvenienceSample = isConvenienceSample;
             _exampleKey = exampleKey;
-            _useAllParameters = exampleKey == ExampleMockValueBuilder.MockExampleAllParameterKey; // TODO -- only work around
+            _useAllParameters = exampleKey == ExampleMockValueBuilder.MockExampleAllParameterKey; // TODO -- only work around for the response usage building.
             _operationMethodSignature = isConvenienceSample ? method.ConvenienceMethod!.Signature : method.ProtocolMethodSignature;
         }
 
@@ -327,7 +327,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 return bodyParameterExample.ExampleValue;
             }
 
-            return InputExampleValue.Null(Method.RequestBodyType!);
+            return InputExampleValue.Null(Method.RequestBodyType);
         }
 
         private static bool IsSameParameter(Parameter parameter, Parameter knownParameter)

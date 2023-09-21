@@ -32,12 +32,12 @@ namespace ParameterSequence_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetItem_AllParameters()
+        public async Task Example_GetItem_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
-            Response response = client.GetItem("<itemName>", "<origin>", "<version>", null);
+            Response response = await client.GetItemAsync("<itemName>", "<origin>", null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -45,12 +45,12 @@ namespace ParameterSequence_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetItem_Async()
+        public void Example_GetItem_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
-            Response response = await client.GetItemAsync("<itemName>", "<origin>", null, null);
+            Response response = client.GetItem("<itemName>", "<origin>", "<version>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -84,12 +84,12 @@ namespace ParameterSequence_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SelectItem_AllParameters()
+        public async Task Example_SelectItem_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
-            Response response = client.SelectItem("<itemName>", "<origin>", "<version>", null);
+            Response response = await client.SelectItemAsync("<itemName>", "<origin>", null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -97,12 +97,12 @@ namespace ParameterSequence_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SelectItem_Async()
+        public void Example_SelectItem_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParameterSequenceClient client = new ParameterSequenceClient(credential);
 
-            Response response = await client.SelectItemAsync("<itemName>", "<origin>", null, null);
+            Response response = client.SelectItem("<itemName>", "<origin>", "<version>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

@@ -26,12 +26,12 @@ namespace body_complex.Models
         /// <param name="sampleSalmon"></param>
         /// <param name="salmons"></param>
         /// <param name="sampleFish">
-        /// Please note <see cref="DotFish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="DotSalmon"/>.
+        /// Please note <see cref="Models.DotFish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="Models.DotSalmon"/>.
         /// </param>
         /// <param name="fishes">
-        /// Please note <see cref="DotFish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="DotSalmon"/>.
+        /// Please note <see cref="Models.DotFish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="Models.DotSalmon"/>.
         /// </param>
         /// <returns> A new <see cref="Models.DotFishMarket"/> instance for mocking. </returns>
         public static DotFishMarket DotFishMarket(DotSalmon sampleSalmon = null, IEnumerable<DotSalmon> salmons = null, DotFish sampleFish = null, IEnumerable<DotFish> fishes = null)

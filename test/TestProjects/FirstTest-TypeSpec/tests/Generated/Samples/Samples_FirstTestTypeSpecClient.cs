@@ -42,6 +42,26 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_TopAction_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_TopAction_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -62,26 +82,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_TopAction_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
@@ -132,6 +132,26 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_TopAction2_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.TopAction2Async(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_TopAction2_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -152,26 +172,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_TopAction2_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response response = await client.TopAction2Async(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
@@ -236,6 +236,40 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_PatchAction_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+                requiredUnion = "<requiredUnion>",
+                requiredLiteralString = "accept",
+                requiredLiteralInt = 123,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = false,
+                requiredBadDescription = "<requiredBadDescription>",
+                requiredNullableList = new List<object>()
+{
+1234
+},
+            });
+            Response response = await client.PatchActionAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_PatchAction_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -278,40 +312,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchAction_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            RequestContent content = RequestContent.Create(new
-            {
-                name = "<name>",
-                requiredUnion = "<requiredUnion>",
-                requiredLiteralString = "accept",
-                requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23F,
-                requiredLiteralBool = false,
-                requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
-1234
-},
-            });
-            Response response = await client.PatchActionAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
@@ -398,6 +398,40 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_AnonymousBody_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+                requiredUnion = "<requiredUnion>",
+                requiredLiteralString = "accept",
+                requiredLiteralInt = 123,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = false,
+                requiredBadDescription = "<requiredBadDescription>",
+                requiredNullableList = new List<object>()
+{
+1234
+},
+            });
+            Response response = await client.AnonymousBodyAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_AnonymousBody_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -440,40 +474,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_AnonymousBody_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            RequestContent content = RequestContent.Create(new
-            {
-                name = "<name>",
-                requiredUnion = "<requiredUnion>",
-                requiredLiteralString = "accept",
-                requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23F,
-                requiredLiteralBool = false,
-                requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
-1234
-},
-            });
-            Response response = await client.AnonymousBodyAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
@@ -543,7 +543,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FriendlyModel_AllParameters()
+        public async Task Example_FriendlyModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -552,7 +552,7 @@ namespace FirstTestTypeSpec.Samples
             {
                 name = "<name>",
             });
-            Response response = client.FriendlyModel(content);
+            Response response = await client.FriendlyModelAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -571,18 +571,18 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FriendlyModel_AllParameters_Convenience()
+        public async Task Example_FriendlyModel_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Friend notFriend = new Friend("<name>");
-            Response<Friend> response = client.FriendlyModel(notFriend);
+            Response<Friend> response = await client.FriendlyModelAsync(notFriend);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FriendlyModel_Async()
+        public void Example_FriendlyModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -591,7 +591,7 @@ namespace FirstTestTypeSpec.Samples
             {
                 name = "<name>",
             });
-            Response response = await client.FriendlyModelAsync(content);
+            Response response = client.FriendlyModel(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -616,13 +616,13 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FriendlyModel_Convenience_Async()
+        public void Example_FriendlyModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Friend notFriend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(notFriend);
+            Response<Friend> response = client.FriendlyModel(notFriend);
         }
 
         [Test]
@@ -649,23 +649,23 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_AddTimeHeader_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response response = client.AddTimeHeader();
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_AddTimeHeader_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.AddTimeHeaderAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_AddTimeHeader_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.AddTimeHeader();
             Console.WriteLine(response.Status);
         }
 
@@ -698,7 +698,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_StringFormat_AllParameters()
+        public async Task Example_StringFormat_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -708,7 +708,7 @@ namespace FirstTestTypeSpec.Samples
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
-            Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+            Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
             Console.WriteLine(response.Status);
         }
 
@@ -726,19 +726,19 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_StringFormat_AllParameters_Convenience()
+        public async Task Example_StringFormat_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-            Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
+            Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_StringFormat_Async()
+        public void Example_StringFormat_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -748,7 +748,7 @@ namespace FirstTestTypeSpec.Samples
                 sourceUrl = "http://localhost:3000",
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
-            Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+            Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
             Console.WriteLine(response.Status);
         }
 
@@ -770,13 +770,13 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_StringFormat_Convenience_Async()
+        public void Example_StringFormat_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
-            Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
+            Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
             Console.WriteLine(response.Status);
         }
 
@@ -811,7 +811,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProjectedNameModel_AllParameters()
+        public async Task Example_ProjectedNameModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -820,7 +820,7 @@ namespace FirstTestTypeSpec.Samples
             {
                 name = "<name>",
             });
-            Response response = client.ProjectedNameModel(content);
+            Response response = await client.ProjectedNameModelAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -839,18 +839,18 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProjectedNameModel_AllParameters_Convenience()
+        public async Task Example_ProjectedNameModel_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = client.ProjectedNameModel(modelWithProjectedName);
+            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProjectedNameModel_Async()
+        public void Example_ProjectedNameModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
@@ -859,7 +859,7 @@ namespace FirstTestTypeSpec.Samples
             {
                 name = "<name>",
             });
-            Response response = await client.ProjectedNameModelAsync(content);
+            Response response = client.ProjectedNameModel(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -884,13 +884,13 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProjectedNameModel_Convenience_Async()
+        public void Example_ProjectedNameModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             ProjectedModel modelWithProjectedName = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(modelWithProjectedName);
+            Response<ProjectedModel> response = client.ProjectedNameModel(modelWithProjectedName);
         }
 
         [Test]
@@ -918,24 +918,24 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ReturnsAnonymousModel_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response response = client.ReturnsAnonymousModel(null);
-
-            Console.WriteLine(response.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_ReturnsAnonymousModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response response = await client.ReturnsAnonymousModelAsync(null);
+
+            Console.WriteLine(response.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ReturnsAnonymousModel_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.ReturnsAnonymousModel(null);
 
             Console.WriteLine(response.ToString());
         }
@@ -965,23 +965,23 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_HeadAsBoolean_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response<bool> response = client.HeadAsBoolean("<id>");
-            Console.WriteLine(response.GetRawResponse().Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_HeadAsBoolean_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response<bool> response = await client.HeadAsBooleanAsync("<id>");
+            Console.WriteLine(response.GetRawResponse().Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_HeadAsBoolean_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<bool> response = client.HeadAsBoolean("<id>");
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -1018,6 +1018,26 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_SayHi_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_SayHi_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1038,26 +1058,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_SayHi_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
@@ -1132,6 +1132,74 @@ namespace FirstTestTypeSpec.Samples
                 },
             });
             Response response = client.HelloAgain("<p2>", "<p1>", content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloAgain_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RequestContent content = RequestContent.Create(new
+            {
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredCollection = new List<object>()
+{
+"1"
+},
+                requiredDictionary = new
+                {
+                    key = "1",
+                },
+                requiredModel = new
+                {
+                    name = "<name>",
+                    requiredUnion = "<requiredUnion>",
+                    requiredLiteralString = "accept",
+                    requiredLiteralInt = 123,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = false,
+                    requiredBadDescription = "<requiredBadDescription>",
+                    requiredNullableList = new List<object>()
+{
+1234
+},
+                },
+                requiredUnknown = new object(),
+                requiredRecordUnknown = new
+                {
+                    key = new object(),
+                },
+                modelWithRequiredNullable = new
+                {
+                    requiredNullablePrimitive = 1234,
+                    requiredExtensibleEnum = "1",
+                    requiredFixedEnum = "1",
+                },
+            });
+            Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1268,74 +1336,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
-            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloAgain_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            RequestContent content = RequestContent.Create(new
-            {
-                requiredString = "<requiredString>",
-                requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
-"1"
-},
-                requiredDictionary = new
-                {
-                    key = "1",
-                },
-                requiredModel = new
-                {
-                    name = "<name>",
-                    requiredUnion = "<requiredUnion>",
-                    requiredLiteralString = "accept",
-                    requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23F,
-                    requiredLiteralBool = false,
-                    requiredBadDescription = "<requiredBadDescription>",
-                    requiredNullableList = new List<object>()
-{
-1234
-},
-                },
-                requiredUnknown = new object(),
-                requiredRecordUnknown = new
-                {
-                    key = new object(),
-                },
-                modelWithRequiredNullable = new
-                {
-                    requiredNullablePrimitive = 1234,
-                    requiredExtensibleEnum = "1",
-                    requiredFixedEnum = "1",
-                },
-            });
-            Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
@@ -1530,6 +1530,74 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_NoContentType_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RequestContent content = RequestContent.Create(new
+            {
+                requiredString = "<requiredString>",
+                requiredInt = 1234,
+                requiredCollection = new List<object>()
+{
+"1"
+},
+                requiredDictionary = new
+                {
+                    key = "1",
+                },
+                requiredModel = new
+                {
+                    name = "<name>",
+                    requiredUnion = "<requiredUnion>",
+                    requiredLiteralString = "accept",
+                    requiredLiteralInt = 123,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = false,
+                    requiredBadDescription = "<requiredBadDescription>",
+                    requiredNullableList = new List<object>()
+{
+1234
+},
+                },
+                requiredUnknown = new object(),
+                requiredRecordUnknown = new
+                {
+                    key = new object(),
+                },
+                modelWithRequiredNullable = new
+                {
+                    requiredNullablePrimitive = 1234,
+                    requiredExtensibleEnum = "1",
+                    requiredFixedEnum = "1",
+                },
+            });
+            Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("requiredString").ToString());
+            Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
+            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_NoContentType_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1642,74 +1710,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
-            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoContentType_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            RequestContent content = RequestContent.Create(new
-            {
-                requiredString = "<requiredString>",
-                requiredInt = 1234,
-                requiredCollection = new List<object>()
-{
-"1"
-},
-                requiredDictionary = new
-                {
-                    key = "1",
-                },
-                requiredModel = new
-                {
-                    name = "<name>",
-                    requiredUnion = "<requiredUnion>",
-                    requiredLiteralString = "accept",
-                    requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23F,
-                    requiredLiteralBool = false,
-                    requiredBadDescription = "<requiredBadDescription>",
-                    requiredNullableList = new List<object>()
-{
-1234
-},
-                },
-                requiredUnknown = new object(),
-                requiredRecordUnknown = new
-                {
-                    key = new object(),
-                },
-                modelWithRequiredNullable = new
-                {
-                    requiredNullablePrimitive = 1234,
-                    requiredExtensibleEnum = "1",
-                    requiredFixedEnum = "1",
-                },
-            });
-            Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
@@ -1856,6 +1856,26 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloDemo2_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.HelloDemo2Async(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_HelloDemo2_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1876,26 +1896,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloDemo2_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response response = await client.HelloDemo2Async(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
@@ -1960,6 +1960,40 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateLiteral_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RequestContent content = RequestContent.Create(new
+            {
+                name = "<name>",
+                requiredUnion = "<requiredUnion>",
+                requiredLiteralString = "accept",
+                requiredLiteralInt = 123,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = false,
+                requiredBadDescription = "<requiredBadDescription>",
+                requiredNullableList = new List<object>()
+{
+1234
+},
+            });
+            Response response = await client.CreateLiteralAsync(content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_CreateLiteral_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -2002,40 +2036,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateLiteral_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            RequestContent content = RequestContent.Create(new
-            {
-                name = "<name>",
-                requiredUnion = "<requiredUnion>",
-                requiredLiteralString = "accept",
-                requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23F,
-                requiredLiteralBool = false,
-                requiredBadDescription = "<requiredBadDescription>",
-                requiredNullableList = new List<object>()
-{
-1234
-},
-            });
-            Response response = await client.CreateLiteralAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
@@ -2108,6 +2108,26 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloLiteral_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.HelloLiteralAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_HelloLiteral_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -2128,26 +2148,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloLiteral_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response response = await client.HelloLiteralAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-            Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-            Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
@@ -2191,12 +2191,12 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownValue_AllParameters()
+        public async Task Example_GetUnknownValue_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.GetUnknownValue(null);
+            Response response = await client.GetUnknownValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -2204,12 +2204,12 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownValue_Async()
+        public void Example_GetUnknownValue_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.GetUnknownValueAsync(null);
+            Response response = client.GetUnknownValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

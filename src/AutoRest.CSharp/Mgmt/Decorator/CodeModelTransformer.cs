@@ -19,13 +19,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             PartialResourceResolver.Update();
             SubscriptionIdUpdater.Update();
             ConstantSchemaTransformer.Transform(MgmtContext.CodeModel);
+            CommonSingleWordModels.Update();
             SchemaNameAndFormatUpdater.ApplyRenameMapping();
             SchemaNameAndFormatUpdater.UpdateAcronyms();
             UrlToUri.UpdateSuffix();
             FrameworkTypeUpdater.ValidateAndUpdate();
             SchemaFormatByNameTransformer.Update();
             SealedChoicesUpdater.UpdateSealChoiceTypes();
-            CommonSingleWordModels.Update();
             RenameTimeToOn.Update();
             RearrangeParameterOrder.Update();
             RenamePluralEnums.Update();

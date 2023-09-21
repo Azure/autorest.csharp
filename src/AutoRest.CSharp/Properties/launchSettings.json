@@ -580,9 +580,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SecurityDefinition-LowLevel\\src\\Generated"
     },
-    "ServiceVersionOverride": {
+    "ServiceVersionOverride-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ServiceVersionOverride\\src\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ServiceVersionOverride-LowLevel\\src\\Generated"
     },
     "SingleTopLevelClientWithOperations-LowLevel": {
       "commandName": "Project",
@@ -648,6 +648,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\encode\\duration\\src\\Generated -n"
     },
+    "typespec-parameters/body-optionality": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\parameters\\body-optionality\\src\\Generated -n"
+    },
     "typespec-parameters/collection-format": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\parameters\\collection-format\\src\\Generated -n"
@@ -695,6 +699,10 @@
     "typespec-type/enum/fixed": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\enum\\fixed\\src\\Generated -n"
+    },
+    "typespec-type/model/empty": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\empty\\src\\Generated -n"
     },
     "typespec-type/model/inheritance/enum-discriminator": {
       "commandName": "Project",

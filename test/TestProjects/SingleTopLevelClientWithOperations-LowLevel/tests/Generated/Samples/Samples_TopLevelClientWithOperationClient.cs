@@ -32,12 +32,12 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_AllParameters()
+        public async Task Example_Operation_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
-            Response response = client.Operation(null);
+            Response response = await client.OperationAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -45,12 +45,12 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_Async()
+        public void Example_Operation_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
-            Response response = await client.OperationAsync(null);
+            Response response = client.Operation(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -85,12 +85,12 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAll_AllParameters()
+        public async Task Example_GetAll_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
-            foreach (BinaryData item in client.GetAll("<filter>", null))
+            await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].ToString());
@@ -99,12 +99,12 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAll_Async()
+        public void Example_GetAll_AllParameters()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             TopLevelClientWithOperationClient client = new TopLevelClientWithOperationClient(credential);
 
-            await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
+            foreach (BinaryData item in client.GetAll("<filter>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result[0].ToString());

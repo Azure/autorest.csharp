@@ -5,6 +5,7 @@
         "type/enum/extensible",
         "type/enum/fixed",
         "type/model/usage",
+        "type/model/empty",
         "type/model/inheritance/single-discriminator",
         "type/model/inheritance/not-discriminated",
         "type/model/inheritance/enum-discriminator",
@@ -29,7 +30,8 @@
         "special-headers/repeatability",
         "special-words",
         "parameters/collection-format",
-        "parameters/spread"
+        "parameters/spread",
+        "parameters/body-optionality"
     ],
     "TestServerProjects": [
         "additionalProperties",

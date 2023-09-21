@@ -33,11 +33,11 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetKnownValue_AllParameters()
+        public async Task Example_GetKnownValue_Async()
         {
             ExtensibleClient client = new ExtensibleClient();
 
-            Response response = client.GetKnownValue(null);
+            Response response = await client.GetKnownValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -54,20 +54,20 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetKnownValue_AllParameters_Convenience()
+        public async Task Example_GetKnownValue_Convenience_Async()
         {
             ExtensibleClient client = new ExtensibleClient();
 
-            Response<DaysOfWeekExtensibleEnum> response = client.GetKnownValue();
+            Response<DaysOfWeekExtensibleEnum> response = await client.GetKnownValueAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetKnownValue_Async()
+        public void Example_GetKnownValue_AllParameters()
         {
             ExtensibleClient client = new ExtensibleClient();
 
-            Response response = await client.GetKnownValueAsync(null);
+            Response response = client.GetKnownValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -87,11 +87,11 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetKnownValue_Convenience_Async()
+        public void Example_GetKnownValue_AllParameters_Convenience()
         {
             ExtensibleClient client = new ExtensibleClient();
 
-            Response<DaysOfWeekExtensibleEnum> response = await client.GetKnownValueAsync();
+            Response<DaysOfWeekExtensibleEnum> response = client.GetKnownValue();
         }
 
         [Test]
@@ -117,11 +117,11 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownValue_AllParameters()
+        public async Task Example_GetUnknownValue_Async()
         {
             ExtensibleClient client = new ExtensibleClient();
 
-            Response response = client.GetUnknownValue(null);
+            Response response = await client.GetUnknownValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -138,20 +138,20 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownValue_AllParameters_Convenience()
+        public async Task Example_GetUnknownValue_Convenience_Async()
         {
             ExtensibleClient client = new ExtensibleClient();
 
-            Response<DaysOfWeekExtensibleEnum> response = client.GetUnknownValue();
+            Response<DaysOfWeekExtensibleEnum> response = await client.GetUnknownValueAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownValue_Async()
+        public void Example_GetUnknownValue_AllParameters()
         {
             ExtensibleClient client = new ExtensibleClient();
 
-            Response response = await client.GetUnknownValueAsync(null);
+            Response response = client.GetUnknownValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -171,11 +171,11 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownValue_Convenience_Async()
+        public void Example_GetUnknownValue_AllParameters_Convenience()
         {
             ExtensibleClient client = new ExtensibleClient();
 
-            Response<DaysOfWeekExtensibleEnum> response = await client.GetUnknownValueAsync();
+            Response<DaysOfWeekExtensibleEnum> response = client.GetUnknownValue();
         }
 
         [Test]
@@ -200,12 +200,12 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutKnownValue_AllParameters()
+        public async Task Example_PutKnownValue_Async()
         {
             ExtensibleClient client = new ExtensibleClient();
 
             RequestContent content = RequestContent.Create("Monday");
-            Response response = client.PutKnownValue(content);
+            Response response = await client.PutKnownValueAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -221,22 +221,22 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutKnownValue_AllParameters_Convenience()
+        public async Task Example_PutKnownValue_Convenience_Async()
         {
             ExtensibleClient client = new ExtensibleClient();
 
-            Response response = client.PutKnownValue(DaysOfWeekExtensibleEnum.Monday);
+            Response response = await client.PutKnownValueAsync(DaysOfWeekExtensibleEnum.Monday);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutKnownValue_Async()
+        public void Example_PutKnownValue_AllParameters()
         {
             ExtensibleClient client = new ExtensibleClient();
 
             RequestContent content = RequestContent.Create("Monday");
-            Response response = await client.PutKnownValueAsync(content);
+            Response response = client.PutKnownValue(content);
             Console.WriteLine(response.Status);
         }
 
@@ -253,11 +253,11 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutKnownValue_Convenience_Async()
+        public void Example_PutKnownValue_AllParameters_Convenience()
         {
             ExtensibleClient client = new ExtensibleClient();
 
-            Response response = await client.PutKnownValueAsync(DaysOfWeekExtensibleEnum.Monday);
+            Response response = client.PutKnownValue(DaysOfWeekExtensibleEnum.Monday);
             Console.WriteLine(response.Status);
         }
 
@@ -284,12 +284,12 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutUnknownValue_AllParameters()
+        public async Task Example_PutUnknownValue_Async()
         {
             ExtensibleClient client = new ExtensibleClient();
 
             RequestContent content = RequestContent.Create("Monday");
-            Response response = client.PutUnknownValue(content);
+            Response response = await client.PutUnknownValueAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -305,22 +305,22 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutUnknownValue_AllParameters_Convenience()
+        public async Task Example_PutUnknownValue_Convenience_Async()
         {
             ExtensibleClient client = new ExtensibleClient();
 
-            Response response = client.PutUnknownValue(DaysOfWeekExtensibleEnum.Monday);
+            Response response = await client.PutUnknownValueAsync(DaysOfWeekExtensibleEnum.Monday);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutUnknownValue_Async()
+        public void Example_PutUnknownValue_AllParameters()
         {
             ExtensibleClient client = new ExtensibleClient();
 
             RequestContent content = RequestContent.Create("Monday");
-            Response response = await client.PutUnknownValueAsync(content);
+            Response response = client.PutUnknownValue(content);
             Console.WriteLine(response.Status);
         }
 
@@ -337,11 +337,11 @@ namespace _Type._Enum.Extensible.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutUnknownValue_Convenience_Async()
+        public void Example_PutUnknownValue_AllParameters_Convenience()
         {
             ExtensibleClient client = new ExtensibleClient();
 
-            Response response = await client.PutUnknownValueAsync(DaysOfWeekExtensibleEnum.Monday);
+            Response response = client.PutUnknownValue(DaysOfWeekExtensibleEnum.Monday);
             Console.WriteLine(response.Status);
         }
 

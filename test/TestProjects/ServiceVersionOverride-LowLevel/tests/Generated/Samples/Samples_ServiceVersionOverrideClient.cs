@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using ServiceVersionOverride;
+using ServiceVersionOverride_LowLevel;
 
-namespace ServiceVersionOverride.Samples
+namespace ServiceVersionOverride_LowLevel.Samples
 {
     public class Samples_ServiceVersionOverrideClient
     {
@@ -28,21 +28,21 @@ namespace ServiceVersionOverride.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_AllParameters()
-        {
-            ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
-
-            Response response = client.Operation("2.0");
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_Async()
         {
             ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
 
             Response response = await client.OperationAsync("2.0");
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Operation_AllParameters()
+        {
+            ServiceVersionOverrideClient client = new ServiceVersionOverrideClient();
+
+            Response response = client.Operation("2.0");
             Console.WriteLine(response.Status);
         }
 

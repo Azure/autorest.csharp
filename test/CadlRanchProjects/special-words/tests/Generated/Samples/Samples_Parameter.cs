@@ -28,21 +28,21 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithIf_AllParameters()
-        {
-            Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
-
-            Response response = client.GetWithIf("<if>");
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetWithIf_Async()
         {
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
             Response response = await client.GetWithIfAsync("<if>");
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetWithIf_AllParameters()
+        {
+            Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
+
+            Response response = client.GetWithIf("<if>");
             Console.WriteLine(response.Status);
         }
 
@@ -68,21 +68,21 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithFilter_AllParameters()
-        {
-            Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
-
-            Response response = client.GetWithFilter("<filter>");
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetWithFilter_Async()
         {
             Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
 
             Response response = await client.GetWithFilterAsync("<filter>");
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetWithFilter_AllParameters()
+        {
+            Parameter client = new SpecialWordsClient().GetParameterClient(apiVersion: "1.0.0");
+
+            Response response = client.GetWithFilter("<filter>");
             Console.WriteLine(response.Status);
         }
 

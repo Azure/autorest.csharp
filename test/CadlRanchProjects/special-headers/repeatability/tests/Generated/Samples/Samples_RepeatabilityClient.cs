@@ -28,21 +28,21 @@ namespace SpecialHeaders.Repeatability.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ImmediateSuccess_AllParameters()
-        {
-            RepeatabilityClient client = new RepeatabilityClient();
-
-            Response response = client.ImmediateSuccess();
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_ImmediateSuccess_Async()
         {
             RepeatabilityClient client = new RepeatabilityClient();
 
             Response response = await client.ImmediateSuccessAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ImmediateSuccess_AllParameters()
+        {
+            RepeatabilityClient client = new RepeatabilityClient();
+
+            Response response = client.ImmediateSuccess();
             Console.WriteLine(response.Status);
         }
 

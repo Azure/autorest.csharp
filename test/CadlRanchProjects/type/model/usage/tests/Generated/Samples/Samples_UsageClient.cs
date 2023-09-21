@@ -35,7 +35,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Input_AllParameters()
+        public async Task Example_Input_Async()
         {
             UsageClient client = new UsageClient();
 
@@ -43,7 +43,7 @@ namespace _Type.Model.Usage.Samples
             {
                 requiredProp = "<requiredProp>",
             });
-            Response response = client.Input(content);
+            Response response = await client.InputAsync(content);
             Console.WriteLine(response.Status);
         }
 
@@ -60,18 +60,18 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Input_AllParameters_Convenience()
+        public async Task Example_Input_Convenience_Async()
         {
             UsageClient client = new UsageClient();
 
             InputRecord input = new InputRecord("<requiredProp>");
-            Response response = client.Input(input);
+            Response response = await client.InputAsync(input);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Input_Async()
+        public void Example_Input_AllParameters()
         {
             UsageClient client = new UsageClient();
 
@@ -79,7 +79,7 @@ namespace _Type.Model.Usage.Samples
             {
                 requiredProp = "<requiredProp>",
             });
-            Response response = await client.InputAsync(content);
+            Response response = client.Input(content);
             Console.WriteLine(response.Status);
         }
 
@@ -99,12 +99,12 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Input_Convenience_Async()
+        public void Example_Input_AllParameters_Convenience()
         {
             UsageClient client = new UsageClient();
 
             InputRecord input = new InputRecord("<requiredProp>");
-            Response response = await client.InputAsync(input);
+            Response response = client.Input(input);
             Console.WriteLine(response.Status);
         }
 
@@ -133,11 +133,11 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Output_AllParameters()
+        public async Task Example_Output_Async()
         {
             UsageClient client = new UsageClient();
 
-            Response response = client.Output(null);
+            Response response = await client.OutputAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProp").ToString());
@@ -154,20 +154,20 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Output_AllParameters_Convenience()
+        public async Task Example_Output_Convenience_Async()
         {
             UsageClient client = new UsageClient();
 
-            Response<OutputRecord> response = client.Output();
+            Response<OutputRecord> response = await client.OutputAsync();
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Output_Async()
+        public void Example_Output_AllParameters()
         {
             UsageClient client = new UsageClient();
 
-            Response response = await client.OutputAsync(null);
+            Response response = client.Output(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProp").ToString());
@@ -187,11 +187,11 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Output_Convenience_Async()
+        public void Example_Output_AllParameters_Convenience()
         {
             UsageClient client = new UsageClient();
 
-            Response<OutputRecord> response = await client.OutputAsync();
+            Response<OutputRecord> response = client.Output();
         }
 
         [Test]
@@ -221,7 +221,7 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputAndOutput_AllParameters()
+        public async Task Example_InputAndOutput_Async()
         {
             UsageClient client = new UsageClient();
 
@@ -229,7 +229,7 @@ namespace _Type.Model.Usage.Samples
             {
                 requiredProp = "<requiredProp>",
             });
-            Response response = client.InputAndOutput(content);
+            Response response = await client.InputAndOutputAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProp").ToString());
@@ -247,17 +247,17 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputAndOutput_AllParameters_Convenience()
+        public async Task Example_InputAndOutput_Convenience_Async()
         {
             UsageClient client = new UsageClient();
 
             InputOutputRecord body = new InputOutputRecord("<requiredProp>");
-            Response<InputOutputRecord> response = client.InputAndOutput(body);
+            Response<InputOutputRecord> response = await client.InputAndOutputAsync(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputAndOutput_Async()
+        public void Example_InputAndOutput_AllParameters()
         {
             UsageClient client = new UsageClient();
 
@@ -265,7 +265,7 @@ namespace _Type.Model.Usage.Samples
             {
                 requiredProp = "<requiredProp>",
             });
-            Response response = await client.InputAndOutputAsync(content);
+            Response response = client.InputAndOutput(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProp").ToString());
@@ -289,12 +289,12 @@ namespace _Type.Model.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputAndOutput_Convenience_Async()
+        public void Example_InputAndOutput_AllParameters_Convenience()
         {
             UsageClient client = new UsageClient();
 
             InputOutputRecord body = new InputOutputRecord("<requiredProp>");
-            Response<InputOutputRecord> response = await client.InputAndOutputAsync(body);
+            Response<InputOutputRecord> response = client.InputAndOutput(body);
         }
 
         [Test]
