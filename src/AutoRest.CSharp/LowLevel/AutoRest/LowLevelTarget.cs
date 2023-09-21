@@ -10,8 +10,8 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.LowLevel.Generation;
-using AutoRest.CSharp.LowLevel.Generation.Samples;
-using AutoRest.CSharp.LowLevel.Generation.Tests;
+using AutoRest.CSharp.LowLevel.Generation.SampleGeneration;
+using AutoRest.CSharp.LowLevel.Generation.TestGeneration;
 using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -45,18 +45,23 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
 
                 // write samples
-                var exampleFileCheckFilename = $"../../tests/Generated/Samples/Samples_{client.Type.Name}.cs";
                 var sampleProvider = library.GetSampleForClient(client);
                 if (sampleProvider != null)
                 {
-                    var exampleCompileCheckWriter = new DpgClientSampleWriter(sampleProvider);
-                    exampleCompileCheckWriter.Write();
-                    project.AddGeneratedTestFile(exampleFileCheckFilename, exampleCompileCheckWriter.ToString());
+                    var exampleFileCheckFilename = $"../../tests/Generated/Samples/{sampleProvider.Type.Name}.cs";
+                    var clientSampleWriter = new DpgClientSampleWriter(sampleProvider);
+                    clientSampleWriter.Write();
+                    project.AddGeneratedTestFile(exampleFileCheckFilename, clientSampleWriter.ToString());
+                    project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", new XmlDocumentFile(exampleFileCheckFilename, xmlDocWriter));
                 }
 
-                project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", new XmlDocumentFile(exampleFileCheckFilename, xmlDocWriter));
-
                 // write test cases
+                var clientTestProvider = library.GetTestForClient(client);
+                if (clientTestProvider != null)
+                {
+                    var clientTestFilename = $"../../tests/Generated/Tests/{clientTestProvider.Type.Name}.cs";
+                    var clientTestWriter = new DpgClientTestWriter(clientTestProvider);
+                }
             }
 
             var optionsWriter = new CodeWriter();

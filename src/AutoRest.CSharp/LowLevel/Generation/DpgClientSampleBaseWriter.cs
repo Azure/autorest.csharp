@@ -11,43 +11,23 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.LowLevel.Generation.Extensions;
-using AutoRest.CSharp.LowLevel.Output.Samples;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Samples.Models;
 
-namespace AutoRest.CSharp.LowLevel.Generation.Samples
+namespace AutoRest.CSharp.LowLevel.Generation
 {
-    internal class DpgClientSampleWriter
+    internal abstract class DpgClientSampleBaseWriter
     {
-        private readonly DpgClientSampleProvider _sampleProvider;
-        private readonly CodeWriter _writer;
-
-        public DpgClientSampleWriter(DpgClientSampleProvider sampleProvider)
+        protected readonly CodeWriter _writer;
+        protected DpgClientSampleBaseWriter()
         {
-            _sampleProvider = sampleProvider;
             _writer = new CodeWriter();
         }
 
-        public void Write()
-        {
-            // since our generator source code does not have the Azure.Identity dependency, we have to add this dependency separately
-            _writer.UseNamespace("Azure.Identity");
+        public abstract void Write();
 
-            using (_writer.Namespace(_sampleProvider.Declaration.Namespace))
-            {
-                using (_writer.Scope($"public class {_sampleProvider.Declaration.Name}"))
-                {
-                    foreach (var sample in _sampleProvider.Samples)
-                    {
-                        WriteTestMethod(sample, false);
-                        WriteTestMethod(sample, true);
-                    }
-                }
-            }
-        }
-
-        private void WriteTestMethod(DpgOperationSample sample, bool isAsync)
+        protected void WriteTestMethod(DpgOperationSample sample, bool isAsync)
         {
             using (_writer.WriteMethodDeclaration(sample.GetExampleMethodSignature(isAsync)))
             {

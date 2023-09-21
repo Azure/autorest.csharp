@@ -6,7 +6,6 @@ using System.Linq;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Output.Samples.Models;
 
 namespace AutoRest.CSharp.LowLevel.Output.Tests
 {

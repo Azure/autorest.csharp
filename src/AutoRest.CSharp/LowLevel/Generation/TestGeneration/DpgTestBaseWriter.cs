@@ -4,7 +4,7 @@
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.LowLevel.Output.Tests;
 
-namespace AutoRest.CSharp.LowLevel.Generation.Tests
+namespace AutoRest.CSharp.LowLevel.Generation.TestGeneration
 {
     internal class DpgTestBaseWriter
     {

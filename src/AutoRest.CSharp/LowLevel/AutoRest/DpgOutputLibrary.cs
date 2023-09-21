@@ -54,13 +54,25 @@ namespace AutoRest.CSharp.Output.Models.Types
         private DpgTestEnvironmentProvider? _dpgTestEnvironment;
         public DpgTestEnvironmentProvider DpgTestEnvironment => _dpgTestEnvironment ??= new DpgTestEnvironmentProvider(Configuration.Namespace, _sourceInputModel);
 
-        private IEnumerable<DpgTestCase>? _dpgTestCases;
-        public IEnumerable<DpgTestCase> DpgTestCases => _dpgTestCases ??= EnsureDpgTestCases();
+        private Dictionary<LowLevelClient, DpgClientTestProvider>? _dpgClientTestProviders;
+        private Dictionary<LowLevelClient, DpgClientTestProvider> DpgClientTestProviders => _dpgClientTestProviders ??= EnsureDpgClientTestProviders();
 
-        private IEnumerable<DpgTestCase> EnsureDpgTestCases()
+        private Dictionary<LowLevelClient, DpgClientTestProvider> EnsureDpgClientTestProviders()
         {
-            yield break;
+            var result = new Dictionary<LowLevelClient, DpgClientTestProvider>();
+            foreach (var client in RestClients)
+            {
+                var testCaseProvider = new DpgClientTestProvider(Configuration.Namespace, client, _sourceInputModel);
+                if (!testCaseProvider.IsEmpty)
+                {
+                    result.Add(client, testCaseProvider);
+                }
+            }
+
+            return result;
         }
+
+        public DpgClientTestProvider? GetTestForClient(LowLevelClient client) => DpgClientTestProviders.TryGetValue(client, out var test) ? test : null;
 
         private Dictionary<LowLevelClient, DpgClientSampleProvider>? _dpgClientSampleProviders;
         private Dictionary<LowLevelClient, DpgClientSampleProvider> DpgClientSampleProviders => _dpgClientSampleProviders ??= EnsureDpgSampleProviders();
