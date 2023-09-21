@@ -589,7 +589,7 @@
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
      "Uri": "{lroBasicUrl}",
-     "Path": "/",
+     "Path": "/thing",
      "RequestMediaTypes": [
       "application/json"
      ],

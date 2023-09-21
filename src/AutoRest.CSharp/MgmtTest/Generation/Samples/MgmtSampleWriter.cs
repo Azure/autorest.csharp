@@ -14,6 +14,7 @@ using AutoRest.CSharp.MgmtTest.Extensions;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.MgmtTest.Output.Samples;
 using AutoRest.CSharp.Output.Models.Shared;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
@@ -108,7 +109,29 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             {
                 _writer.Line($"{typeof(Console)}.WriteLine($\"Succeeded\");");
             }
-            else if (result.Type.TryCastResource(out var resource))
+            else
+            {
+                if (result.Type.IsNullable)
+                {
+                    using (_writer.Scope($"if({result.Declaration} == null)"))
+                    {
+                        _writer.Line($"{typeof(Console)}.WriteLine($\"Succeeded with null as result\");");
+                    }
+                    using (_writer.Scope($"else"))
+                    {
+                        WriteNotNullResultHandling(result);
+                    }
+                }
+                else
+                {
+                    WriteNotNullResultHandling(result);
+                }
+            }
+        }
+
+        private void WriteNotNullResultHandling(CodeWriterVariableDeclaration result)
+        {
+            if (result.Type.TryCastResource(out var resource))
             {
                 WriteResourceResultHandling(result, resource);
             }
@@ -361,10 +384,10 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             var returnType = sample.Operation.ReturnType;
             if (returnType.IsGenericType)
             {
-                // an operation with a response
-                var unwrappedReturnType = returnType.Arguments.First();
-                if (unwrappedReturnType.IsGenericType) // if the type inside Response<T> is a generic type, somehow the implicit convert Response<T> => T does not work, we have to explicitly unwrap it
+                // if the type is NullableResponse, there is no implicit convert, so have to explicitly unwrap it
+                if (returnType.IsFrameworkType && returnType.FrameworkType == typeof(NullableResponse<>))
                 {
+                    var unwrappedReturnType = returnType.Arguments.First().WithNullable(true);
                     var valueResponse = new CodeWriterVariableDeclaration("response", returnType);
                     _writer.AppendDeclaration(valueResponse).AppendRaw(" = ");
                     // write the method invocation
@@ -372,16 +395,35 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                     // unwrap the response
                     var valueResult = new CodeWriterVariableDeclaration("result", unwrappedReturnType);
                     _writer.AppendDeclaration(valueResult).AppendRaw(" = ")
-                        .Line($"{valueResponse.Declaration}.Value;");
+                        .Line($"{valueResponse.Declaration}.HasValue ? {valueResponse.Declaration}.Value : null;");
                     return valueResult;
+
                 }
-                else // if it is a type provider type, we could rely on the implicit convert Response<T> => T
+                else
                 {
-                    var valueResult = new CodeWriterVariableDeclaration("result", unwrappedReturnType);
-                    _writer.AppendDeclaration(valueResult).AppendRaw(" = ");
-                    // write the method invocation
-                    WriteOperationInvocation(instanceVar, parameters, sample);
-                    return valueResult;
+                    // an operation with a response
+                    var unwrappedReturnType = returnType.Arguments.First();
+                    // if the type inside Response<T> is a generic type, somehow the implicit convert Response<T> => T does not work, we have to explicitly unwrap it
+                    if (unwrappedReturnType.IsGenericType)
+                    {
+                        var valueResponse = new CodeWriterVariableDeclaration("response", returnType);
+                        _writer.AppendDeclaration(valueResponse).AppendRaw(" = ");
+                        // write the method invocation
+                        WriteOperationInvocation(instanceVar, parameters, sample);
+                        // unwrap the response
+                        var valueResult = new CodeWriterVariableDeclaration("result", unwrappedReturnType);
+                        _writer.AppendDeclaration(valueResult).AppendRaw(" = ")
+                            .Line($"{valueResponse.Declaration}.Value;");
+                        return valueResult;
+                    }
+                    else // if it is a type provider type, we could rely on the implicit convert Response<T> => T
+                    {
+                        var valueResult = new CodeWriterVariableDeclaration("result", unwrappedReturnType);
+                        _writer.AppendDeclaration(valueResult).AppendRaw(" = ");
+                        // write the method invocation
+                        WriteOperationInvocation(instanceVar, parameters, sample);
+                        return valueResult;
+                    }
                 }
             }
             else

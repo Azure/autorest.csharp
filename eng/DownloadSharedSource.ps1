@@ -46,6 +46,7 @@ $files = @('AsyncLockWithValue.cs', 'ClientDiagnostics.cs', 'DiagnosticScope.cs'
     'IXmlSerializable.cs',
     'JsonElementExtensions.cs',
     'NextLinkOperationImplementation.cs',
+    'NoValueResponseOfT.cs',
     'OperationFinalStateVia.cs',
     'Optional.cs',
     'Page.cs',

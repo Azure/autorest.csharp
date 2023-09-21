@@ -328,6 +328,82 @@ namespace MgmtPartialResource
             }
         }
 
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PublicIPAddresses_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="publicIpAddressName"> The name of the public IP address. </param>
+        /// <param name="expand"> Expands referenced resources. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
+        public virtual async Task<NullableResponse<PublicIPAddressResource>> GetIfExistsAsync(string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(publicIpAddressName, nameof(publicIpAddressName));
+
+            using var scope = _publicIPAddressClientDiagnostics.CreateScope("PublicIPAddressCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _publicIPAddressRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, publicIpAddressName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<PublicIPAddressResource>(response.GetRawResponse());
+                return Response.FromValue(new PublicIPAddressResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PublicIPAddresses_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="publicIpAddressName"> The name of the public IP address. </param>
+        /// <param name="expand"> Expands referenced resources. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
+        public virtual NullableResponse<PublicIPAddressResource> GetIfExists(string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(publicIpAddressName, nameof(publicIpAddressName));
+
+            using var scope = _publicIPAddressClientDiagnostics.CreateScope("PublicIPAddressCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _publicIPAddressRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, publicIpAddressName, expand, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<PublicIPAddressResource>(response.GetRawResponse());
+                return Response.FromValue(new PublicIPAddressResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         IEnumerator<PublicIPAddressResource> IEnumerable<PublicIPAddressResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();

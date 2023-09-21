@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
             writer.Line($"if ({response}.Value == null)");
-            writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue<{operation.MgmtReturnType}>(null, {response}.{Configuration.ApiTypes.GetRawResponseName}());");
+            writer.Line($"return new {new CSharpType(typeof(NoValueResponse<>), operation.MgmtReturnType!)}({response}.{Configuration.ApiTypes.GetRawResponseName}());");
 
             if (This.Resource.ResourceData.ShouldSetResourceIdentifier)
             {

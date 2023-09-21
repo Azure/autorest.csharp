@@ -30,7 +30,8 @@
         "special-headers/repeatability",
         "special-words",
         "parameters/collection-format",
-        "parameters/spread"
+        "parameters/spread",
+        "parameters/body-optionality"
     ],
     "TestServerProjects": [
         "additionalProperties",
