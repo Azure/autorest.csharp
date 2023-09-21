@@ -73,8 +73,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement WrapInNullCheck(PropertySerialization serialization, MethodBodyStatement statement)
         {
-            if (serialization.SerializedType is {IsNullable: true} && TypeFactory.IsCollectionType(serialization.SerializedType))
+            if (serialization.SerializedType is {IsNullable: true} serializedType)
             {
+                if (TypeFactory.IsCollectionType(serializedType) && serialization.IsRequired)
+                {
+                    return new IfElseStatement(And(NotEqual(serialization.Value, Null), InvokeOptional.IsCollectionDefined(serialization.Value)), statement, null);
+                }
+
                 return new IfElseStatement(NotEqual(serialization.Value, Null), statement, null);
             }
 

@@ -22,6 +22,11 @@ namespace MgmtCustomizations.Models
                 writer.WritePropertyName("size"u8);
                 SerializeSizeProperty(writer);
             }
+            if (Optional.IsDefined(DateOfBirth))
+            {
+                writer.WritePropertyName("dateOfBirth"u8);
+                SerializeDateOfBirthProperty(writer);
+            }
             writer.WriteEndObject();
         }
 
