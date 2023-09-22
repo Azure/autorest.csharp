@@ -19,10 +19,10 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
         {
         }
 
-        protected HttpSuccessClient CreateHttpSuccessClient(AzureKeyCredential credential, Uri endpoint)
+        protected HttpSuccessClient CreateHttpSuccessClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new HttpSuccessClientOptions());
-            var client = new HttpSuccessClient(credential, endpoint, options: options);
+            var client = new HttpSuccessClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
     }

@@ -19,10 +19,10 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Tests
         {
         }
 
-        protected TopLevelClientWithoutOperationClient CreateTopLevelClientWithoutOperationClient(AzureKeyCredential credential, Uri endpoint)
+        protected TopLevelClientWithoutOperationClient CreateTopLevelClientWithoutOperationClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new TopLevelClientWithoutOperationClientOptions());
-            var client = new TopLevelClientWithoutOperationClient(credential, endpoint, options: options);
+            var client = new TopLevelClientWithoutOperationClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
     }

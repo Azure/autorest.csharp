@@ -24,9 +24,9 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head200_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HttpSuccessClient client = CreateHttpSuccessClient(endpoint, credential);
 
             Response<bool> response = await client.Head200Async();
         }
@@ -35,9 +35,9 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head200_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HttpSuccessClient client = CreateHttpSuccessClient(endpoint, credential);
 
             Response<bool> response = await client.Head200Async();
         }
@@ -46,9 +46,9 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head204_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HttpSuccessClient client = CreateHttpSuccessClient(endpoint, credential);
 
             Response<bool> response = await client.Head204Async();
         }
@@ -57,9 +57,9 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head204_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HttpSuccessClient client = CreateHttpSuccessClient(endpoint, credential);
 
             Response<bool> response = await client.Head204Async();
         }
@@ -68,9 +68,9 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head404_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HttpSuccessClient client = CreateHttpSuccessClient(endpoint, credential);
 
             Response<bool> response = await client.Head404Async();
         }
@@ -79,9 +79,9 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head404_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            HttpSuccessClient client = CreateHttpSuccessClient(endpoint, credential);
 
             Response<bool> response = await client.Head404Async();
         }

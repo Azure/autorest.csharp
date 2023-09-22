@@ -19,10 +19,10 @@ namespace ParameterSequence_LowLevel.Tests
         {
         }
 
-        protected ParameterSequenceClient CreateParameterSequenceClient(AzureKeyCredential credential, Uri endpoint)
+        protected ParameterSequenceClient CreateParameterSequenceClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new ParameterSequenceClientOptions());
-            var client = new ParameterSequenceClient(credential, endpoint, options: options);
+            var client = new ParameterSequenceClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
     }

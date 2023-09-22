@@ -19,10 +19,10 @@ namespace BodyAndPath_LowLevel.Tests
         {
         }
 
-        protected BodyAndPathClient CreateBodyAndPathClient(AzureKeyCredential credential, Uri endpoint)
+        protected BodyAndPathClient CreateBodyAndPathClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new BodyAndPathClientOptions());
-            var client = new BodyAndPathClient(credential, endpoint, options: options);
+            var client = new BodyAndPathClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
     }

@@ -24,9 +24,9 @@ namespace SubClients_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetSubParameter_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Parameter client = CreateRootClient(null, credential, endpoint).GetParameterClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Parameter client = CreateRootClient(endpoint, null, credential).GetParameterClient();
 
             Response response = await client.GetSubParameterAsync("<subParameter>", null);
         }
@@ -35,9 +35,9 @@ namespace SubClients_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetSubParameter_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Parameter client = CreateRootClient(null, credential, endpoint).GetParameterClient();
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Parameter client = CreateRootClient(endpoint, null, credential).GetParameterClient();
 
             Response response = await client.GetSubParameterAsync("<subParameter>", null);
         }

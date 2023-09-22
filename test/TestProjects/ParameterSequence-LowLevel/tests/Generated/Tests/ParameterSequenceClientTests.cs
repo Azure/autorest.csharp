@@ -24,9 +24,9 @@ namespace ParameterSequence_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetItem_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParameterSequenceClient client = CreateParameterSequenceClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParameterSequenceClient client = CreateParameterSequenceClient(endpoint, credential);
 
             Response response = await client.GetItemAsync("<itemName>", "<origin>", null, null);
         }
@@ -35,9 +35,9 @@ namespace ParameterSequence_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetItem_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParameterSequenceClient client = CreateParameterSequenceClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParameterSequenceClient client = CreateParameterSequenceClient(endpoint, credential);
 
             Response response = await client.GetItemAsync("<itemName>", "<origin>", "<version>", null);
         }
@@ -46,9 +46,9 @@ namespace ParameterSequence_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SelectItem_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParameterSequenceClient client = CreateParameterSequenceClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParameterSequenceClient client = CreateParameterSequenceClient(endpoint, credential);
 
             Response response = await client.SelectItemAsync("<itemName>", "<origin>", null, null);
         }
@@ -57,9 +57,9 @@ namespace ParameterSequence_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SelectItem_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParameterSequenceClient client = CreateParameterSequenceClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParameterSequenceClient client = CreateParameterSequenceClient(endpoint, credential);
 
             Response response = await client.SelectItemAsync("<itemName>", "<origin>", "<version>", null);
         }

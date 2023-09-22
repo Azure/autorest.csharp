@@ -2,23 +2,21 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
-using Azure.Core;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.AutoRest.Communication
 {
     internal class StandaloneGeneratorRunner
     {
+        private static readonly string[] keepFiles = new string[] { "CodeModel.yaml", "Configuration.json", "tspCodeModel.json" };
         public static async Task RunAsync(CommandLineOptions options)
         {
             string? projectPath = null;
@@ -72,7 +70,6 @@ namespace AutoRest.CSharp.AutoRest.Communication
 
             if (options.ClearOutputFolder)
             {
-                var keepFiles = new string[] { "CodeModel.yaml", "Configuration.json", "tspCodeModel.json" };
                 DeleteDirectory(outputPath, keepFiles);
                 DeleteDirectory(generatedTestOutputPath, keepFiles);
             }

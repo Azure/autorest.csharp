@@ -24,9 +24,9 @@ namespace SubClients_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetCachedParameter_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RootClient client = CreateRootClient("<CachedParameter>", credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RootClient client = CreateRootClient(endpoint, "<CachedParameter>", credential);
 
             Response response = await client.GetCachedParameterAsync(null);
         }
@@ -35,9 +35,9 @@ namespace SubClients_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetCachedParameter_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RootClient client = CreateRootClient("<CachedParameter>", credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RootClient client = CreateRootClient(endpoint, "<CachedParameter>", credential);
 
             Response response = await client.GetCachedParameterAsync(null);
         }

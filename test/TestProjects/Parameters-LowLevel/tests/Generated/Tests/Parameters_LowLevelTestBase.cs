@@ -19,10 +19,10 @@ namespace Parameters_LowLevel.Tests
         {
         }
 
-        protected ParametersLowlevelClient CreateParametersLowlevelClient(AzureKeyCredential credential, Uri endpoint)
+        protected ParametersLowlevelClient CreateParametersLowlevelClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new ParametersLowlevelClientOptions());
-            var client = new ParametersLowlevelClient(credential, endpoint, options: options);
+            var client = new ParametersLowlevelClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
     }

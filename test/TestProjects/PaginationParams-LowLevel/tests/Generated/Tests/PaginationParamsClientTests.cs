@@ -24,9 +24,9 @@ namespace PaginationParams_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetPaginationParams_Async()
         {
-            TokenCredential credential = new DefaultAzureCredential();
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PaginationParamsClient client = CreatePaginationParamsClient(credential, endpoint);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = CreatePaginationParamsClient(endpoint, credential);
 
             await foreach (BinaryData item in client.GetPaginationParamsAsync(null, null, null, null))
             {
@@ -37,9 +37,9 @@ namespace PaginationParams_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetPaginationParams_AllParameters_Async()
         {
-            TokenCredential credential = new DefaultAzureCredential();
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PaginationParamsClient client = CreatePaginationParamsClient(credential, endpoint);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = CreatePaginationParamsClient(endpoint, credential);
 
             await foreach (BinaryData item in client.GetPaginationParamsAsync(1234, 1234, 1234, null))
             {
@@ -50,9 +50,9 @@ namespace PaginationParams_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get2s_Async()
         {
-            TokenCredential credential = new DefaultAzureCredential();
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PaginationParamsClient client = CreatePaginationParamsClient(credential, endpoint);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = CreatePaginationParamsClient(endpoint, credential);
 
             await foreach (BinaryData item in client.Get2sAsync(null, null, null, null))
             {
@@ -63,9 +63,9 @@ namespace PaginationParams_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get2s_AllParameters_Async()
         {
-            TokenCredential credential = new DefaultAzureCredential();
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PaginationParamsClient client = CreatePaginationParamsClient(credential, endpoint);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = CreatePaginationParamsClient(endpoint, credential);
 
             await foreach (BinaryData item in client.Get2sAsync(1234, 1234, 1234L, null))
             {
@@ -76,9 +76,9 @@ namespace PaginationParams_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get3s_Async()
         {
-            TokenCredential credential = new DefaultAzureCredential();
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PaginationParamsClient client = CreatePaginationParamsClient(credential, endpoint);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = CreatePaginationParamsClient(endpoint, credential);
 
             await foreach (BinaryData item in client.Get3sAsync(null, null, null, null))
             {
@@ -89,9 +89,9 @@ namespace PaginationParams_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get3s_AllParameters_Async()
         {
-            TokenCredential credential = new DefaultAzureCredential();
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PaginationParamsClient client = CreatePaginationParamsClient(credential, endpoint);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = CreatePaginationParamsClient(endpoint, credential);
 
             await foreach (BinaryData item in client.Get3sAsync(1234, 1234, 1234, null))
             {
@@ -102,9 +102,9 @@ namespace PaginationParams_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get4s_Async()
         {
-            TokenCredential credential = new DefaultAzureCredential();
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PaginationParamsClient client = CreatePaginationParamsClient(credential, endpoint);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = CreatePaginationParamsClient(endpoint, credential);
 
             await foreach (BinaryData item in client.Get4sAsync(null, null, null, null))
             {
@@ -115,9 +115,9 @@ namespace PaginationParams_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get4s_AllParameters_Async()
         {
-            TokenCredential credential = new DefaultAzureCredential();
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PaginationParamsClient client = CreatePaginationParamsClient(credential, endpoint);
+            TokenCredential credential = new DefaultAzureCredential();
+            PaginationParamsClient client = CreatePaginationParamsClient(endpoint, credential);
 
             await foreach (BinaryData item in client.Get4sAsync(1234, 1234, 123.45F, null))
             {

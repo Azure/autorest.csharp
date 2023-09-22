@@ -19,10 +19,10 @@ namespace PaginationParams_LowLevel.Tests
         {
         }
 
-        protected PaginationParamsClient CreatePaginationParamsClient(TokenCredential credential, Uri endpoint)
+        protected PaginationParamsClient CreatePaginationParamsClient(Uri endpoint, TokenCredential credential)
         {
             var options = InstrumentClientOptions(new PaginationParamsClientOptions());
-            var client = new PaginationParamsClient(credential, endpoint, options: options);
+            var client = new PaginationParamsClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
     }

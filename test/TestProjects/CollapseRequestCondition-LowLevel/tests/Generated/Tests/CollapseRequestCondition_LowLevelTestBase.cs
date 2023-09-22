@@ -19,24 +19,24 @@ namespace CollapseRequestCondition_LowLevel.Tests
         {
         }
 
-        protected RequestConditionCollapseClient CreateRequestConditionCollapseClient(AzureKeyCredential credential, Uri endpoint)
+        protected RequestConditionCollapseClient CreateRequestConditionCollapseClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new CollapseRequestConditionsClientOptions());
-            var client = new RequestConditionCollapseClient(credential, endpoint, options: options);
+            var client = new RequestConditionCollapseClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
 
-        protected MatchConditionCollapseClient CreateMatchConditionCollapseClient(AzureKeyCredential credential, Uri endpoint)
+        protected MatchConditionCollapseClient CreateMatchConditionCollapseClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new CollapseRequestConditionsClientOptions());
-            var client = new MatchConditionCollapseClient(credential, endpoint, options: options);
+            var client = new MatchConditionCollapseClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
 
-        protected NonCollapseClient CreateNonCollapseClient(AzureKeyCredential credential, Uri endpoint)
+        protected NonCollapseClient CreateNonCollapseClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new CollapseRequestConditionsClientOptions());
-            var client = new NonCollapseClient(credential, endpoint, options: options);
+            var client = new NonCollapseClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
     }

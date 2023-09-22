@@ -27,9 +27,9 @@ namespace BodyAndPath_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Create_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BodyAndPathClient client = CreateBodyAndPathClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateAsync("<itemName>", content);
@@ -39,9 +39,9 @@ namespace BodyAndPath_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Create_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BodyAndPathClient client = CreateBodyAndPathClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateAsync("<itemName>", content);
@@ -51,9 +51,9 @@ namespace BodyAndPath_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CreateStream_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BodyAndPathClient client = CreateBodyAndPathClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"));
@@ -63,9 +63,9 @@ namespace BodyAndPath_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CreateStream_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BodyAndPathClient client = CreateBodyAndPathClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"), excluded: new List<string>()
@@ -78,9 +78,9 @@ namespace BodyAndPath_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CreateEnum_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BodyAndPathClient client = CreateBodyAndPathClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateEnumAsync("current", "latest", content);
@@ -90,9 +90,9 @@ namespace BodyAndPath_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CreateEnum_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BodyAndPathClient client = CreateBodyAndPathClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateEnumAsync("current", "latest", content);
@@ -102,9 +102,9 @@ namespace BodyAndPath_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBodyAndPaths_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BodyAndPathClient client = CreateBodyAndPathClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
             Response response = await client.GetBodyAndPathsAsync(null);
         }
@@ -113,9 +113,9 @@ namespace BodyAndPath_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBodyAndPaths_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BodyAndPathClient client = CreateBodyAndPathClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
             Response response = await client.GetBodyAndPathsAsync(null);
         }
@@ -124,9 +124,9 @@ namespace BodyAndPath_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetItems_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BodyAndPathClient client = CreateBodyAndPathClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
             Response response = await client.GetItemsAsync(null);
         }
@@ -135,9 +135,9 @@ namespace BodyAndPath_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetItems_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BodyAndPathClient client = CreateBodyAndPathClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
             Response response = await client.GetItemsAsync(null);
         }
@@ -146,9 +146,9 @@ namespace BodyAndPath_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Update_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BodyAndPathClient client = CreateBodyAndPathClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.UpdateAsync("<item3>", "<item2>", "value", "<item4>", content);
@@ -158,9 +158,9 @@ namespace BodyAndPath_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Update_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BodyAndPathClient client = CreateBodyAndPathClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            BodyAndPathClient client = CreateBodyAndPathClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {

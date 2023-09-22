@@ -24,9 +24,9 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Patch_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Client4 client = CreateTopLevelClientWithOperationClient(credential, endpoint).GetClient4("<ClientParameter>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Client4 client = CreateTopLevelClientWithOperationClient(endpoint, credential).GetClient4("<ClientParameter>");
 
             Response response = await client.PatchAsync("<filter>", null);
         }
@@ -35,9 +35,9 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Patch_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Client4 client = CreateTopLevelClientWithOperationClient(credential, endpoint).GetClient4("<ClientParameter>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Client4 client = CreateTopLevelClientWithOperationClient(endpoint, credential).GetClient4("<ClientParameter>");
 
             Response response = await client.PatchAsync("<filter>", null);
         }

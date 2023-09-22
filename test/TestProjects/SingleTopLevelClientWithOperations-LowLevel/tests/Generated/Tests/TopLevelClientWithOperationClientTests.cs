@@ -24,9 +24,9 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            TopLevelClientWithOperationClient client = CreateTopLevelClientWithOperationClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            TopLevelClientWithOperationClient client = CreateTopLevelClientWithOperationClient(endpoint, credential);
 
             Response response = await client.OperationAsync(null);
         }
@@ -35,9 +35,9 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            TopLevelClientWithOperationClient client = CreateTopLevelClientWithOperationClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            TopLevelClientWithOperationClient client = CreateTopLevelClientWithOperationClient(endpoint, credential);
 
             Response response = await client.OperationAsync(null);
         }
@@ -46,9 +46,9 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetAll_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            TopLevelClientWithOperationClient client = CreateTopLevelClientWithOperationClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            TopLevelClientWithOperationClient client = CreateTopLevelClientWithOperationClient(endpoint, credential);
 
             await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
             {
@@ -59,9 +59,9 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetAll_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            TopLevelClientWithOperationClient client = CreateTopLevelClientWithOperationClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            TopLevelClientWithOperationClient client = CreateTopLevelClientWithOperationClient(endpoint, credential);
 
             await foreach (BinaryData item in client.GetAllAsync("<filter>", null))
             {

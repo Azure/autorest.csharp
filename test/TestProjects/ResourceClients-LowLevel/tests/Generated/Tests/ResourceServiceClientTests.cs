@@ -24,9 +24,9 @@ namespace ResourceClients_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ResourceServiceClient client = CreateResourceServiceClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ResourceServiceClient client = CreateResourceServiceClient(endpoint, credential);
 
             Response response = await client.GetParametersAsync(null);
         }
@@ -35,9 +35,9 @@ namespace ResourceClients_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetParameters_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ResourceServiceClient client = CreateResourceServiceClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ResourceServiceClient client = CreateResourceServiceClient(endpoint, credential);
 
             Response response = await client.GetParametersAsync(null);
         }
@@ -46,9 +46,9 @@ namespace ResourceClients_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetGroups_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ResourceServiceClient client = CreateResourceServiceClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ResourceServiceClient client = CreateResourceServiceClient(endpoint, credential);
 
             await foreach (BinaryData item in client.GetGroupsAsync(null))
             {
@@ -59,9 +59,9 @@ namespace ResourceClients_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetGroups_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ResourceServiceClient client = CreateResourceServiceClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ResourceServiceClient client = CreateResourceServiceClient(endpoint, credential);
 
             await foreach (BinaryData item in client.GetGroupsAsync(null))
             {
@@ -72,9 +72,9 @@ namespace ResourceClients_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetAllItems_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ResourceServiceClient client = CreateResourceServiceClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ResourceServiceClient client = CreateResourceServiceClient(endpoint, credential);
 
             await foreach (BinaryData item in client.GetAllItemsAsync(null))
             {
@@ -85,9 +85,9 @@ namespace ResourceClients_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetAllItems_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ResourceServiceClient client = CreateResourceServiceClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ResourceServiceClient client = CreateResourceServiceClient(endpoint, credential);
 
             await foreach (BinaryData item in client.GetAllItemsAsync(null))
             {

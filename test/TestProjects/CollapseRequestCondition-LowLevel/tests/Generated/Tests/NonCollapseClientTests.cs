@@ -25,9 +25,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task IfMatchPut_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            NonCollapseClient client = CreateNonCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NonCollapseClient client = CreateNonCollapseClient(endpoint, credential);
 
             RequestContent content = null;
             Response response = await client.IfMatchPutAsync(content);
@@ -37,9 +37,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task IfMatchPut_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            NonCollapseClient client = CreateNonCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NonCollapseClient client = CreateNonCollapseClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.IfMatchPutAsync(content, ifMatch: new ETag("<ifMatch>"));
@@ -49,9 +49,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task IfNoneMatchPut_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            NonCollapseClient client = CreateNonCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NonCollapseClient client = CreateNonCollapseClient(endpoint, credential);
 
             RequestContent content = null;
             Response response = await client.IfNoneMatchPutAsync(content);
@@ -61,9 +61,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task IfNoneMatchPut_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            NonCollapseClient client = CreateNonCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            NonCollapseClient client = CreateNonCollapseClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.IfNoneMatchPutAsync(content, ifNoneMatch: new ETag("<ifNoneMatch>"));

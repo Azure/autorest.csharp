@@ -25,9 +25,9 @@ namespace Parameters_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoRequestBodyResponseBody_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
             Response response = await client.NoRequestBodyResponseBodyAsync(1234, default, null, null, null);
         }
@@ -36,9 +36,9 @@ namespace Parameters_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoRequestBodyResponseBody_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
             Response response = await client.NoRequestBodyResponseBodyAsync(1234, default, 1234, "start", null);
         }
@@ -47,9 +47,9 @@ namespace Parameters_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RequestBodyResponseBody_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
             RequestContent content = null;
             Response response = await client.RequestBodyResponseBodyAsync(content);
@@ -59,9 +59,9 @@ namespace Parameters_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RequestBodyResponseBody_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -75,9 +75,9 @@ namespace Parameters_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DeleteNoRequestBodyResponseBody_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
             Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>", null);
         }
@@ -86,9 +86,9 @@ namespace Parameters_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DeleteNoRequestBodyResponseBody_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
             Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>", null);
         }
@@ -97,9 +97,9 @@ namespace Parameters_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoRequestBodyNoResponseBody_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
             Response response = await client.NoRequestBodyNoResponseBodyAsync();
         }
@@ -108,9 +108,9 @@ namespace Parameters_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoRequestBodyNoResponseBody_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
             Response response = await client.NoRequestBodyNoResponseBodyAsync();
         }
@@ -119,9 +119,9 @@ namespace Parameters_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RequestBodyNoResponseBody_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
             RequestContent content = null;
             Response response = await client.RequestBodyNoResponseBodyAsync(content);
@@ -131,9 +131,9 @@ namespace Parameters_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RequestBodyNoResponseBody_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create("<stringBody>");
             Response response = await client.RequestBodyNoResponseBodyAsync(content);
@@ -143,9 +143,9 @@ namespace Parameters_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OptionalPathParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
             Response response = await client.OptionalPathParametersAsync(1234, "start", 1234);
         }
@@ -154,9 +154,9 @@ namespace Parameters_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OptionalPathParameters_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
             Response response = await client.OptionalPathParametersAsync(1234, "start", 1234);
         }
@@ -165,9 +165,9 @@ namespace Parameters_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OptionalPathParametersWithMixedSequence_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
             Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234, "start", default);
         }
@@ -176,9 +176,9 @@ namespace Parameters_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OptionalPathParametersWithMixedSequence_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
             Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234, "start", default);
         }
@@ -187,9 +187,9 @@ namespace Parameters_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OptionalPathBodyParametersWithMixedSequence_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
             RequestContent content = null;
             Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(default, "<name>", 1234, default, content);
@@ -199,9 +199,9 @@ namespace Parameters_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OptionalPathBodyParametersWithMixedSequence_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -215,9 +215,9 @@ namespace Parameters_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RepeatableAction_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
             RequestContent content = null;
             Response response = await client.RepeatableActionAsync(default, "<name>", content);
@@ -227,9 +227,9 @@ namespace Parameters_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RepeatableAction_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {

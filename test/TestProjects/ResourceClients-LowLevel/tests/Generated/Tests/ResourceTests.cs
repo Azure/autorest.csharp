@@ -24,9 +24,9 @@ namespace ResourceClients_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetItem_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Resource client = CreateResourceServiceClient(credential, endpoint).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Resource client = CreateResourceServiceClient(endpoint, credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
             Response response = await client.GetItemAsync(null);
         }
@@ -35,9 +35,9 @@ namespace ResourceClients_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetItem_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Resource client = CreateResourceServiceClient(credential, endpoint).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            Resource client = CreateResourceServiceClient(endpoint, credential).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
             Response response = await client.GetItemAsync(null);
         }

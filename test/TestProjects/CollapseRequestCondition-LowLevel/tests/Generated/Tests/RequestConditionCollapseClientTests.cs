@@ -25,9 +25,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CollapsePut_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
             RequestContent content = null;
             Response response = await client.CollapsePutAsync(content);
@@ -37,9 +37,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CollapsePut_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.CollapsePutAsync(content, requestConditions: null);
@@ -49,9 +49,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CollapseGet_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
             Response response = await client.CollapseGetAsync();
         }
@@ -60,9 +60,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CollapseGet_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
             Response response = await client.CollapseGetAsync(requestConditions: null);
         }
@@ -71,9 +71,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task MissIfNoneMatchGet_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
             Response response = await client.MissIfNoneMatchGetAsync();
         }
@@ -82,9 +82,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task MissIfNoneMatchGet_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
             Response response = await client.MissIfNoneMatchGetAsync(requestConditions: null);
         }
@@ -93,9 +93,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task MissIfMatchGet_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
             Response response = await client.MissIfMatchGetAsync();
         }
@@ -104,9 +104,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task MissIfMatchGet_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
             Response response = await client.MissIfMatchGetAsync(requestConditions: null);
         }
@@ -115,9 +115,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task MissIfModifiedSinceGet_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
             Response response = await client.MissIfModifiedSinceGetAsync();
         }
@@ -126,9 +126,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task MissIfModifiedSinceGet_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
             Response response = await client.MissIfModifiedSinceGetAsync(requestConditions: null);
         }
@@ -137,9 +137,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task MissIfUnmodifiedSinceGet_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
             Response response = await client.MissIfUnmodifiedSinceGetAsync();
         }
@@ -148,9 +148,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task MissIfUnmodifiedSinceGet_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
             Response response = await client.MissIfUnmodifiedSinceGetAsync(requestConditions: null);
         }
@@ -159,9 +159,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task MissIfMatchIfNoneMatchGet_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
             Response response = await client.MissIfMatchIfNoneMatchGetAsync();
         }
@@ -170,9 +170,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task MissIfMatchIfNoneMatchGet_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
             Response response = await client.MissIfMatchIfNoneMatchGetAsync(requestConditions: null);
         }
@@ -181,9 +181,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task IfModifiedSinceGet_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
             Response response = await client.IfModifiedSinceGetAsync();
         }
@@ -192,9 +192,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task IfModifiedSinceGet_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
             Response response = await client.IfModifiedSinceGetAsync(requestConditions: null);
         }
@@ -203,9 +203,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task IfUnmodifiedSinceGet_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
             Response response = await client.IfUnmodifiedSinceGetAsync();
         }
@@ -214,9 +214,9 @@ namespace CollapseRequestCondition_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task IfUnmodifiedSinceGet_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            RequestConditionCollapseClient client = CreateRequestConditionCollapseClient(endpoint, credential);
 
             Response response = await client.IfUnmodifiedSinceGetAsync(requestConditions: null);
         }
