@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace PetStore.Models
 {
     /// <summary> Model factory for models. </summary>
