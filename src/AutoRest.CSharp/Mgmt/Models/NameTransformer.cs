@@ -113,8 +113,13 @@ namespace AutoRest.CSharp.Mgmt.Models
                 detailStep.Add(step);
                 match = _regex.Match(strToMatch);
             }
+            if (strToMatch.Length > 0)
+            {
+                propertyNameBuilder.Append(strToMatch);
+                parameterNameBuilder.Append(strToMatch);
+            }
 
-            result = new AppliedCache(detailStep.Last().NewName, detailStep);
+            result = new AppliedCache(new NameInfo(propertyNameBuilder.ToString(), parameterNameBuilder.ToString()), detailStep);
             _wordCache.TryAdd(name, result);
             _wordCache.TryAdd(result.NewName.Name, result); // in some other scenarios we might need to use the property name as keys
 

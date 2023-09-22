@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.Utilities
             string? tempName = name;
             var newName = NameTransformer.Instance.EnsureNameCase(name, (applyStep) =>
             {
-                ReportManager.Instance.AddTransformLogForApplyChange("acronym-mapping", applyStep.MappingKey, applyStep.MappingValue.RawValue, $"Variables.{name}",
+                TransformStore.Instance.AddTransformLogForApplyChange(MgmtConfiguration.ConfigName.AcronymMapping, applyStep.MappingKey, applyStep.MappingValue.RawValue, $"Variables.{name}",
                     "ApplyAcronymMapping", tempName, applyStep.NewName.Name);
                 tempName = applyStep.NewName.Name;
             });

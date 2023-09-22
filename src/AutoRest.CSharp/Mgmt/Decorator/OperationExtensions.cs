@@ -10,6 +10,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Utilities;
 
@@ -53,7 +54,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <returns></returns>
         public static bool TryGetConfigOperationName(this Operation operation, [MaybeNullWhen(false)] out string name)
         {
-            return Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operation.OperationId!, out name);
+            if (Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operation.OperationId!, out name))
+            {
+                TransformStore.Instance.AddTransformLog(
+                    new TransformItem(MgmtConfiguration.ConfigName.OverrideOperationName, operation.OperationId!, name),
+                    operation.GetFullSerializedName(),
+                    $"OverrideOperationName to {name} for {operation.OperationId}");
+                return true;
+            }
+            return false;
         }
 
         public static RequestPath GetRequestPath(this Operation operation, ResourceTypeSegment? hint = null)
@@ -217,6 +226,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             return candidates;
+        }
+
+        internal static string GetFullSerializedName(this OperationGroup operationGroup)
+        {
+            return operationGroup.Language.Default.SerializedName ?? operationGroup.Language.Default.Name;
         }
 
         internal static string GetFullSerializedName(this Operation operation)

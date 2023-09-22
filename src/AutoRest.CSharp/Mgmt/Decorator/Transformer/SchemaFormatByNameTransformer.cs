@@ -111,13 +111,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 {
                     foreach (var parameter in operation.Parameters)
                     {
-                        TryUpdateParameterFormat(parameter, rules);
+                        TryUpdateParameterFormat(operation, parameter, rules);
                     }
                 }
             }
         }
 
-        private void TryUpdateParameterFormat(RequestParameter parameter, IReadOnlyList<FormatRule> rules)
+        private void TryUpdateParameterFormat(Operation operation, RequestParameter parameter, IReadOnlyList<FormatRule> rules)
         {
             if (parameter.Schema is PrimitiveSchema)
             {
@@ -133,7 +133,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                             parameter.Extensions = new RecordOfStringAndAny();
                         var oriFormat = parameter.Extensions.Format;
                         parameter.Extensions.Format = formatPattern.ExtensionType;
-                        ReportManager.Instance.AddTransformLogForApplyChange("format-by-name-rules", curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue, parameter.GetFullSerializedName(),
+                        TransformStore.Instance.AddTransformLogForApplyChange(
+                            MgmtConfiguration.ConfigName.FormatByNameRules, curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue,
+                            operation.GetFullSerializedName(parameter),
                             "ApplyNewExFormat", oriFormat, parameter.Extensions.Format);
                     }
                 }
@@ -171,7 +173,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 {
                     var oriType = schema.Type;
                     schema.Type = formatPattern.PrimitiveType!.Value;
-                    ReportManager.Instance.AddTransformLogForApplyChange("format-by-name-rules", curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue, schema.GetFullSerializedName(),
+                    TransformStore.Instance.AddTransformLogForApplyChange(MgmtConfiguration.ConfigName.FormatByNameRules, curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue,
+                        schema.GetFullSerializedName(),
                         "ApplyNewType", oriType.ToString(), schema.Type.ToString());
                 }
                 else
@@ -180,7 +183,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                         schema.Extensions = new RecordOfStringAndAny();
                     string? oriExFormat = schema.Extensions.Format;
                     schema.Extensions.Format = formatPattern.ExtensionType!;
-                    ReportManager.Instance.AddTransformLogForApplyChange("format-by-name-rules", curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue, schema.GetFullSerializedName(),
+                    TransformStore.Instance.AddTransformLogForApplyChange(MgmtConfiguration.ConfigName.FormatByNameRules, curRule.NamePattern.RawValue, curRule.FormatPattern.RawValue,
+                        schema.GetFullSerializedName(),
                         "ApplyNewExFormat", oriExFormat, schema.Extensions.Format);
                 }
             }

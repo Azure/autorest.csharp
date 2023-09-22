@@ -13,6 +13,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -864,6 +865,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         resourceDataSchema.Language.Default.SerializedName ??= schemaName;
                         schemaName = schemaName.LastWordToSingular(false);
                         resourceDataSchema.Language.Default.Name = schemaName;
+                    }
+                    else
+                    {
+                        TransformStore.Instance.AddTransformLog(
+                            new TransformItem(MgmtConfiguration.ConfigName.KeepPluralResourceData, schemaName),
+                            resourceDataSchema.GetFullSerializedName(), $"Keep ObjectName as Plural: {schemaName}");
                     }
                     // if this operation set corresponds to a SDK resource, we add it to the map
                     if (!resourceDataSchemaNameToOperationSets.TryGetValue(schemaName, out HashSet<OperationSet>? result))

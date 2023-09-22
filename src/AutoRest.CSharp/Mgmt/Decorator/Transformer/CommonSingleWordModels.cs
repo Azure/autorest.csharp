@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Report;
 using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
@@ -49,10 +50,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 string serializedName = schema.Language.Default.SerializedName ?? schema.Language.Default.Name;
                 if (_schemasToChange.Contains(serializedName))
                 {
+                    string oriName = schema.Language.Default.Name;
                     string prefix = MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : MgmtContext.RPName;
                     string suffix = serializedName.Equals("Resource") ? "Data" : string.Empty;
                     schema.Language.Default.SerializedName ??= schema.Language.Default.Name;
                     schema.Language.Default.Name = prefix + serializedName + suffix;
+                    TransformStore.Instance.AddTransformLogForApplyChange(
+                        new TransformItem(MgmtConfiguration.ConfigName.PrependRpPrefix, serializedName), schema.GetFullSerializedName(), "ApplyPrependRpPrefix", oriName, schema.Language.Default.Name);
                 }
             }
         }

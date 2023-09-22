@@ -9,6 +9,7 @@ using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
@@ -25,7 +26,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     continue;
                 string schemaName = schema.Language.Default.Name;
                 if (enumsToKeepPlural.Contains(schemaName))
+                {
+                    TransformStore.Instance.AddTransformLog(
+                        new TransformItem(MgmtConfiguration.ConfigName.KeepPluralEnums, schemaName),
+                        schema.GetOriginalName(), $"Keep Enum {schemaName} Plural");
                     continue;
+                }
                 schema.Language.Default.SerializedName ??= schemaName;
                 schema.Language.Default.Name = schemaName.LastWordToSingular(inputIsKnownToBePlural: false);
             }

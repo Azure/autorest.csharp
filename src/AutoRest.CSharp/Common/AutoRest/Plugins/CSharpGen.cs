@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
 
@@ -43,6 +44,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel);
                     if (Configuration.MgmtTestConfiguration is not null)
                         await MgmtTestTarget.ExecuteAsync(project, codeModel, sourceInputModel);
+                }
+                if (TransformStore.Instance.TransformLogs.Count > 0)
+                {
+                    project.AddGeneratedFile("transform-report.yaml", TransformStore.Instance.ToYaml());
                 }
             }
             else
