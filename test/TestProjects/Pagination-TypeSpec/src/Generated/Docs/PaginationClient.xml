@@ -72,6 +72,17 @@ await foreach (BinaryData item in client.GetPaginationLedgerEntriesAsync(content
     Console.WriteLine(result[0].GetProperty("transactionId").ToString());
 }
 ]]></code>
+This sample shows how to call GetPaginationLedgerEntriesAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+ListLedgerEntryInputBody bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
+await foreach (LedgerEntry item in client.GetPaginationLedgerEntriesAsync(bodyInput))
+{
+}
+]]></code>
 This sample shows how to call GetPaginationLedgerEntriesAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -89,6 +100,17 @@ await foreach (BinaryData item in client.GetPaginationLedgerEntriesAsync(content
     Console.WriteLine(result[0].GetProperty("contents").ToString());
     Console.WriteLine(result[0].GetProperty("collectionId").ToString());
     Console.WriteLine(result[0].GetProperty("transactionId").ToString());
+}
+]]></code>
+This sample shows how to call GetPaginationLedgerEntriesAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+ListLedgerEntryInputBody bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
+await foreach (LedgerEntry item in client.GetPaginationLedgerEntriesAsync(bodyInput))
+{
 }
 ]]></code></example>
     </member>
@@ -113,6 +135,17 @@ foreach (BinaryData item in client.GetPaginationLedgerEntries(content))
     Console.WriteLine(result[0].GetProperty("transactionId").ToString());
 }
 ]]></code>
+This sample shows how to call GetPaginationLedgerEntries.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+ListLedgerEntryInputBody bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
+foreach (LedgerEntry item in client.GetPaginationLedgerEntries(bodyInput))
+{
+}
+]]></code>
 This sample shows how to call GetPaginationLedgerEntries with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -130,6 +163,17 @@ foreach (BinaryData item in client.GetPaginationLedgerEntries(content))
     Console.WriteLine(result[0].GetProperty("contents").ToString());
     Console.WriteLine(result[0].GetProperty("collectionId").ToString());
     Console.WriteLine(result[0].GetProperty("transactionId").ToString());
+}
+]]></code>
+This sample shows how to call GetPaginationLedgerEntries with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+ListLedgerEntryInputBody bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
+foreach (LedgerEntry item in client.GetPaginationLedgerEntries(bodyInput))
+{
 }
 ]]></code></example>
     </member>
@@ -193,6 +237,16 @@ await foreach (BinaryData item in client.GetMetricDimensionValuesAsync("<testRun
     Console.WriteLine(result[0].GetProperty("value")[0].ToString());
 }
 ]]></code>
+This sample shows how to call GetMetricDimensionValuesAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+await foreach (DimensionValueListItem item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>"))
+{
+}
+]]></code>
 This sample shows how to call GetMetricDimensionValuesAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -203,6 +257,16 @@ await foreach (BinaryData item in client.GetMetricDimensionValuesAsync("<testRun
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result[0].GetProperty("value")[0].ToString());
+}
+]]></code>
+This sample shows how to call GetMetricDimensionValuesAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+await foreach (DimensionValueListItem item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>", interval: Interval.PT5S, metricName: "<metricName>", timespan: "<timespan>"))
+{
 }
 ]]></code></example>
     </member>
@@ -220,6 +284,16 @@ foreach (BinaryData item in client.GetMetricDimensionValues("<testRunId>", "<nam
     Console.WriteLine(result[0].GetProperty("value")[0].ToString());
 }
 ]]></code>
+This sample shows how to call GetMetricDimensionValues.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+foreach (DimensionValueListItem item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>"))
+{
+}
+]]></code>
 This sample shows how to call GetMetricDimensionValues with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -230,6 +304,16 @@ foreach (BinaryData item in client.GetMetricDimensionValues("<testRunId>", "<nam
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result[0].GetProperty("value")[0].ToString());
+}
+]]></code>
+This sample shows how to call GetMetricDimensionValues with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+foreach (DimensionValueListItem item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>", interval: Interval.PT5S, metricName: "<metricName>", timespan: "<timespan>"))
+{
 }
 ]]></code></example>
     </member>
@@ -295,6 +379,16 @@ await foreach (BinaryData item in client.GetLedgerEntriesAsync(null))
     Console.WriteLine(result[0].GetProperty("transactionId").ToString());
 }
 ]]></code>
+This sample shows how to call GetLedgerEntriesAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+await foreach (LedgerEntry item in client.GetLedgerEntriesAsync())
+{
+}
+]]></code>
 This sample shows how to call GetLedgerEntriesAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -307,6 +401,16 @@ await foreach (BinaryData item in client.GetLedgerEntriesAsync(null))
     Console.WriteLine(result[0].GetProperty("contents").ToString());
     Console.WriteLine(result[0].GetProperty("collectionId").ToString());
     Console.WriteLine(result[0].GetProperty("transactionId").ToString());
+}
+]]></code>
+This sample shows how to call GetLedgerEntriesAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+await foreach (LedgerEntry item in client.GetLedgerEntriesAsync())
+{
 }
 ]]></code></example>
     </member>
@@ -326,6 +430,16 @@ foreach (BinaryData item in client.GetLedgerEntries(null))
     Console.WriteLine(result[0].GetProperty("transactionId").ToString());
 }
 ]]></code>
+This sample shows how to call GetLedgerEntries.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+foreach (LedgerEntry item in client.GetLedgerEntries())
+{
+}
+]]></code>
 This sample shows how to call GetLedgerEntries with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -338,6 +452,16 @@ foreach (BinaryData item in client.GetLedgerEntries(null))
     Console.WriteLine(result[0].GetProperty("contents").ToString());
     Console.WriteLine(result[0].GetProperty("collectionId").ToString());
     Console.WriteLine(result[0].GetProperty("transactionId").ToString());
+}
+]]></code>
+This sample shows how to call GetLedgerEntries with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+foreach (LedgerEntry item in client.GetLedgerEntries())
+{
 }
 ]]></code></example>
     </member>
@@ -401,6 +525,16 @@ await foreach (BinaryData item in client.GetTextBlocklistsAsync(null))
     Console.WriteLine(result[0].GetProperty("blocklistName").ToString());
 }
 ]]></code>
+This sample shows how to call GetTextBlocklistsAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+await foreach (TextBlocklist item in client.GetTextBlocklistsAsync())
+{
+}
+]]></code>
 This sample shows how to call GetTextBlocklistsAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -412,6 +546,16 @@ await foreach (BinaryData item in client.GetTextBlocklistsAsync(null))
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result[0].GetProperty("blocklistName").ToString());
     Console.WriteLine(result[0].GetProperty("description").ToString());
+}
+]]></code>
+This sample shows how to call GetTextBlocklistsAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+await foreach (TextBlocklist item in client.GetTextBlocklistsAsync())
+{
 }
 ]]></code></example>
     </member>
@@ -429,6 +573,16 @@ foreach (BinaryData item in client.GetTextBlocklists(null))
     Console.WriteLine(result[0].GetProperty("blocklistName").ToString());
 }
 ]]></code>
+This sample shows how to call GetTextBlocklists.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+foreach (TextBlocklist item in client.GetTextBlocklists())
+{
+}
+]]></code>
 This sample shows how to call GetTextBlocklists with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -440,6 +594,16 @@ foreach (BinaryData item in client.GetTextBlocklists(null))
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result[0].GetProperty("blocklistName").ToString());
     Console.WriteLine(result[0].GetProperty("description").ToString());
+}
+]]></code>
+This sample shows how to call GetTextBlocklists with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+foreach (TextBlocklist item in client.GetTextBlocklists())
+{
 }
 ]]></code></example>
     </member>
@@ -504,6 +668,16 @@ await foreach (BinaryData item in client.GetTextBlocklistItemsAsync("<blocklistN
     Console.WriteLine(result[0].GetProperty("text").ToString());
 }
 ]]></code>
+This sample shows how to call GetTextBlocklistItemsAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+await foreach (TextBlockItem item in client.GetTextBlocklistItemsAsync("<blocklistName>"))
+{
+}
+]]></code>
 This sample shows how to call GetTextBlocklistItemsAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -516,6 +690,16 @@ await foreach (BinaryData item in client.GetTextBlocklistItemsAsync("<blocklistN
     Console.WriteLine(result[0].GetProperty("blockItemId").ToString());
     Console.WriteLine(result[0].GetProperty("description").ToString());
     Console.WriteLine(result[0].GetProperty("text").ToString());
+}
+]]></code>
+This sample shows how to call GetTextBlocklistItemsAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+await foreach (TextBlockItem item in client.GetTextBlocklistItemsAsync("<blocklistName>", maxCount: 1234, skip: 1234, maxpagesize: 1234))
+{
 }
 ]]></code></example>
     </member>
@@ -534,6 +718,16 @@ foreach (BinaryData item in client.GetTextBlocklistItems("<blocklistName>", null
     Console.WriteLine(result[0].GetProperty("text").ToString());
 }
 ]]></code>
+This sample shows how to call GetTextBlocklistItems.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+foreach (TextBlockItem item in client.GetTextBlocklistItems("<blocklistName>"))
+{
+}
+]]></code>
 This sample shows how to call GetTextBlocklistItems with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -546,6 +740,16 @@ foreach (BinaryData item in client.GetTextBlocklistItems("<blocklistName>", 1234
     Console.WriteLine(result[0].GetProperty("blockItemId").ToString());
     Console.WriteLine(result[0].GetProperty("description").ToString());
     Console.WriteLine(result[0].GetProperty("text").ToString());
+}
+]]></code>
+This sample shows how to call GetTextBlocklistItems with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+TokenCredential credential = new DefaultAzureCredential();
+PaginationClient client = new PaginationClient(endpoint, credential);
+
+foreach (TextBlockItem item in client.GetTextBlocklistItems("<blocklistName>", maxCount: 1234, skip: 1234, maxpagesize: 1234))
+{
 }
 ]]></code></example>
     </member>

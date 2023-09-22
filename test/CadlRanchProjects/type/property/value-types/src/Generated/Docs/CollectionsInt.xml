@@ -42,6 +42,12 @@ Response response = await client.GetCollectionsIntAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property")[0].ToString());
 ]]></code>
+This sample shows how to call GetCollectionsIntAsync.
+<code><![CDATA[
+CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+
+Response<CollectionsIntProperty> response = await client.GetCollectionsIntAsync();
+]]></code>
 This sample shows how to call GetCollectionsIntAsync with all parameters and parse the result.
 <code><![CDATA[
 CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
@@ -50,6 +56,12 @@ Response response = await client.GetCollectionsIntAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property")[0].ToString());
+]]></code>
+This sample shows how to call GetCollectionsIntAsync with all parameters.
+<code><![CDATA[
+CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+
+Response<CollectionsIntProperty> response = await client.GetCollectionsIntAsync();
 ]]></code></example>
     </member>
     <member name="GetCollectionsInt(RequestContext)">
@@ -63,6 +75,12 @@ Response response = client.GetCollectionsInt(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property")[0].ToString());
 ]]></code>
+This sample shows how to call GetCollectionsInt.
+<code><![CDATA[
+CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+
+Response<CollectionsIntProperty> response = client.GetCollectionsInt();
+]]></code>
 This sample shows how to call GetCollectionsInt with all parameters and parse the result.
 <code><![CDATA[
 CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
@@ -71,6 +89,12 @@ Response response = client.GetCollectionsInt(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property")[0].ToString());
+]]></code>
+This sample shows how to call GetCollectionsInt with all parameters.
+<code><![CDATA[
+CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+
+Response<CollectionsIntProperty> response = client.GetCollectionsInt();
 ]]></code></example>
     </member>
     <member name="PutAsync(CollectionsIntProperty,CancellationToken)">
@@ -139,6 +163,17 @@ RequestContent content = RequestContent.Create(new
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+
+CollectionsIntProperty body = new CollectionsIntProperty(new List<int>()
+{
+    1234
+});
+Response response = await client.PutAsync(body);
+Console.WriteLine(response.Status);
+]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
@@ -151,6 +186,17 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.PutAsync(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+
+CollectionsIntProperty body = new CollectionsIntProperty(new List<int>()
+{
+    1234
+});
+Response response = await client.PutAsync(body);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -170,6 +216,17 @@ RequestContent content = RequestContent.Create(new
 Response response = client.Put(content);
 Console.WriteLine(response.Status);
 ]]></code>
+This sample shows how to call Put.
+<code><![CDATA[
+CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+
+CollectionsIntProperty body = new CollectionsIntProperty(new List<int>()
+{
+    1234
+});
+Response response = client.Put(body);
+Console.WriteLine(response.Status);
+]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
 CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
@@ -182,6 +239,17 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.Put(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient(apiVersion: "1.0.0");
+
+CollectionsIntProperty body = new CollectionsIntProperty(new List<int>()
+{
+    1234
+});
+Response response = client.Put(body);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

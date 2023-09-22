@@ -42,6 +42,12 @@ Response response = await client.GetModelAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").GetProperty("property").ToString());
 ]]></code>
+This sample shows how to call GetModelAsync.
+<code><![CDATA[
+Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
+
+Response<ModelProperty> response = await client.GetModelAsync();
+]]></code>
 This sample shows how to call GetModelAsync with all parameters and parse the result.
 <code><![CDATA[
 Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
@@ -50,6 +56,12 @@ Response response = await client.GetModelAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").GetProperty("property").ToString());
+]]></code>
+This sample shows how to call GetModelAsync with all parameters.
+<code><![CDATA[
+Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
+
+Response<ModelProperty> response = await client.GetModelAsync();
 ]]></code></example>
     </member>
     <member name="GetModel(RequestContext)">
@@ -63,6 +75,12 @@ Response response = client.GetModel(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").GetProperty("property").ToString());
 ]]></code>
+This sample shows how to call GetModel.
+<code><![CDATA[
+Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
+
+Response<ModelProperty> response = client.GetModel();
+]]></code>
 This sample shows how to call GetModel with all parameters and parse the result.
 <code><![CDATA[
 Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
@@ -71,6 +89,12 @@ Response response = client.GetModel(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").GetProperty("property").ToString());
+]]></code>
+This sample shows how to call GetModel with all parameters.
+<code><![CDATA[
+Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
+
+Response<ModelProperty> response = client.GetModel();
 ]]></code></example>
     </member>
     <member name="PutAsync(ModelProperty,CancellationToken)">
@@ -127,6 +151,14 @@ RequestContent content = RequestContent.Create(new
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
+
+ModelProperty body = new ModelProperty(new InnerModel("<property>"));
+Response response = await client.PutAsync(body);
+Console.WriteLine(response.Status);
+]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
@@ -139,6 +171,14 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = await client.PutAsync(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
+
+ModelProperty body = new ModelProperty(new InnerModel("<property>"));
+Response response = await client.PutAsync(body);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -158,6 +198,14 @@ RequestContent content = RequestContent.Create(new
 Response response = client.Put(content);
 Console.WriteLine(response.Status);
 ]]></code>
+This sample shows how to call Put.
+<code><![CDATA[
+Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
+
+ModelProperty body = new ModelProperty(new InnerModel("<property>"));
+Response response = client.Put(body);
+Console.WriteLine(response.Status);
+]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
 Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
@@ -170,6 +218,14 @@ RequestContent content = RequestContent.Create(new
     },
 });
 Response response = client.Put(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+Model client = new ValueTypesClient().GetModelClient(apiVersion: "1.0.0");
+
+ModelProperty body = new ModelProperty(new InnerModel("<property>"));
+Response response = client.Put(body);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

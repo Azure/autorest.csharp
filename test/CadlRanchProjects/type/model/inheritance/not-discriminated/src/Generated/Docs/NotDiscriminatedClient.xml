@@ -54,6 +54,14 @@ RequestContent content = RequestContent.Create(new
 Response response = await client.PostValidAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
+This sample shows how to call PostValidAsync.
+<code><![CDATA[
+NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+Siamese input = new Siamese("<name>", 1234, true);
+Response response = await client.PostValidAsync(input);
+Console.WriteLine(response.Status);
+]]></code>
 This sample shows how to call PostValidAsync with all request content.
 <code><![CDATA[
 NotDiscriminatedClient client = new NotDiscriminatedClient();
@@ -65,6 +73,14 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = await client.PostValidAsync(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PostValidAsync with all parameters.
+<code><![CDATA[
+NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+Siamese input = new Siamese("<name>", 1234, true);
+Response response = await client.PostValidAsync(input);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -83,6 +99,14 @@ RequestContent content = RequestContent.Create(new
 Response response = client.PostValid(content);
 Console.WriteLine(response.Status);
 ]]></code>
+This sample shows how to call PostValid.
+<code><![CDATA[
+NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+Siamese input = new Siamese("<name>", 1234, true);
+Response response = client.PostValid(input);
+Console.WriteLine(response.Status);
+]]></code>
 This sample shows how to call PostValid with all request content.
 <code><![CDATA[
 NotDiscriminatedClient client = new NotDiscriminatedClient();
@@ -94,6 +118,14 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = client.PostValid(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PostValid with all parameters.
+<code><![CDATA[
+NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+Siamese input = new Siamese("<name>", 1234, true);
+Response response = client.PostValid(input);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -140,6 +172,12 @@ Console.WriteLine(result.GetProperty("smart").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
+This sample shows how to call GetValidAsync.
+<code><![CDATA[
+NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+Response<Siamese> response = await client.GetValidAsync();
+]]></code>
 This sample shows how to call GetValidAsync with all parameters and parse the result.
 <code><![CDATA[
 NotDiscriminatedClient client = new NotDiscriminatedClient();
@@ -150,6 +188,12 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("smart").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call GetValidAsync with all parameters.
+<code><![CDATA[
+NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+Response<Siamese> response = await client.GetValidAsync();
 ]]></code></example>
     </member>
     <member name="GetValid(RequestContext)">
@@ -165,6 +209,12 @@ Console.WriteLine(result.GetProperty("smart").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
+This sample shows how to call GetValid.
+<code><![CDATA[
+NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+Response<Siamese> response = client.GetValid();
+]]></code>
 This sample shows how to call GetValid with all parameters and parse the result.
 <code><![CDATA[
 NotDiscriminatedClient client = new NotDiscriminatedClient();
@@ -175,6 +225,12 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("smart").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call GetValid with all parameters.
+<code><![CDATA[
+NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+Response<Siamese> response = client.GetValid();
 ]]></code></example>
     </member>
     <member name="PutValidAsync(Siamese,CancellationToken)">
@@ -230,6 +286,13 @@ Console.WriteLine(result.GetProperty("smart").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
+This sample shows how to call PutValidAsync.
+<code><![CDATA[
+NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+Siamese input = new Siamese("<name>", 1234, true);
+Response<Siamese> response = await client.PutValidAsync(input);
+]]></code>
 This sample shows how to call PutValidAsync with all request content and parse the result.
 <code><![CDATA[
 NotDiscriminatedClient client = new NotDiscriminatedClient();
@@ -246,6 +309,13 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("smart").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call PutValidAsync with all parameters.
+<code><![CDATA[
+NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+Siamese input = new Siamese("<name>", 1234, true);
+Response<Siamese> response = await client.PutValidAsync(input);
 ]]></code></example>
     </member>
     <member name="PutValid(RequestContent,RequestContext)">
@@ -267,6 +337,13 @@ Console.WriteLine(result.GetProperty("smart").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
+This sample shows how to call PutValid.
+<code><![CDATA[
+NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+Siamese input = new Siamese("<name>", 1234, true);
+Response<Siamese> response = client.PutValid(input);
+]]></code>
 This sample shows how to call PutValid with all request content and parse the result.
 <code><![CDATA[
 NotDiscriminatedClient client = new NotDiscriminatedClient();
@@ -283,6 +360,13 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("smart").ToString());
 Console.WriteLine(result.GetProperty("age").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call PutValid with all parameters.
+<code><![CDATA[
+NotDiscriminatedClient client = new NotDiscriminatedClient();
+
+Siamese input = new Siamese("<name>", 1234, true);
+Response<Siamese> response = client.PutValid(input);
 ]]></code></example>
     </member>
   </members>

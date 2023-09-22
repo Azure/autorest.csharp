@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
         public bool IsEmpty => _isEmpty ??= !TestCases.Any();
 
         private IEnumerable<DpgTestCase>? _testCases;
-        public IEnumerable<DpgTestCase> TestCases => _testCases ??= Client.ClientMethods.SelectMany(m => m.Samples).Select(s => new DpgTestCase(s, testBase));
+        public IEnumerable<DpgTestCase> TestCases => _testCases ??= Client.ClientMethods.SelectMany(m => m.Samples).Select(s => new DpgTestCase(s, _testBaseProvider));
 
         protected override string DefaultNamespace { get; }
 

@@ -19,12 +19,17 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
             _testBaseProvider = testBase;
         }
 
-        protected override IReadOnlyList<MethodSignatureBase> GetClientInvocationChain(LowLevelClient client)
+        protected override IReadOnlyList<MethodSignatureBase> GetClientInvocationChain()
         {
-            var chain = base.GetClientInvocationChain(client).ToArray();
+            var chain = base.GetClientInvocationChain().ToArray();
 
-            // TODO -- replace this with the client factory method in test base
-            chain[0] = Client.GetEffectiveCtorWithClientOptions()!;
+            // get the root client
+            var client = Client;
+            while (client.ParentClient != null)
+            {
+                client = client.ParentClient;
+            }
+            chain[0] = _testBaseProvider.CreateClientMethods[client];
 
             return chain;
         }

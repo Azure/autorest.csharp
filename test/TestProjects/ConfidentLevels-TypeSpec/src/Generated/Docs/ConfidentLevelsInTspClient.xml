@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="UnionInRequestPropertyAsync(ModelWithUnionProperty,CancellationToken)" />
-    <member name="UnionInRequestProperty(ModelWithUnionProperty,CancellationToken)" />
     <member name="UnionInRequestPropertyAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call UnionInRequestPropertyAsync.
@@ -57,8 +55,6 @@ Response response = client.UnionInRequestProperty(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="UnionInResponsePropertyAsync(UsualModel,CancellationToken)" />
-    <member name="UnionInResponseProperty(UsualModel,CancellationToken)" />
     <member name="UnionInResponsePropertyAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call UnionInResponsePropertyAsync and parse the result.
@@ -127,8 +123,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("unionProperty").ToString());
 ]]></code></example>
     </member>
-    <member name="UnionWithSelfReferenceAsync(NonConfidentModelWithSelfReference,CancellationToken)" />
-    <member name="UnionWithSelfReference(NonConfidentModelWithSelfReference,CancellationToken)" />
     <member name="UnionWithSelfReferenceAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call UnionWithSelfReferenceAsync.
@@ -203,8 +197,6 @@ Response response = client.UnionWithSelfReference(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="UnionWithInderictAsync(NonConfidentModelWithIndirectSelfReference,CancellationToken)" />
-    <member name="UnionWithInderict(NonConfidentModelWithIndirectSelfReference,CancellationToken)" />
     <member name="UnionWithInderictAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call UnionWithInderictAsync.
@@ -293,8 +285,6 @@ Response response = client.UnionWithInderict(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="LiteralOfIntegerAsync(ModelWithIntegerLiteralTypeProperty,CancellationToken)" />
-    <member name="LiteralOfInteger(ModelWithIntegerLiteralTypeProperty,CancellationToken)" />
     <member name="LiteralOfIntegerAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call LiteralOfIntegerAsync.
@@ -353,8 +343,6 @@ Response response = client.LiteralOfInteger(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="LiteralOfFloatAsync(ModelWithFloatLiteralTypeProperty,CancellationToken)" />
-    <member name="LiteralOfFloat(ModelWithFloatLiteralTypeProperty,CancellationToken)" />
     <member name="LiteralOfFloatAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call LiteralOfFloatAsync.
@@ -470,6 +458,14 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
+This sample shows how to call ConfidentOperationWithDiscriminatorAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+Pet input = new Cat("<name>", "<meow>");
+Response<Pet> response = await client.ConfidentOperationWithDiscriminatorAsync(input);
+]]></code>
 This sample shows how to call ConfidentOperationWithDiscriminatorAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -486,6 +482,14 @@ Response response = await client.ConfidentOperationWithDiscriminatorAsync(conten
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call ConfidentOperationWithDiscriminatorAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+Pet input = new Cat("<name>", "<meow>");
+Response<Pet> response = await client.ConfidentOperationWithDiscriminatorAsync(input);
 ]]></code></example>
     </member>
     <member name="ConfidentOperationWithDiscriminator(RequestContent,RequestContext)">
@@ -507,6 +511,14 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
+This sample shows how to call ConfidentOperationWithDiscriminator.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+Pet input = new Cat("<name>", "<meow>");
+Response<Pet> response = client.ConfidentOperationWithDiscriminator(input);
+]]></code>
 This sample shows how to call ConfidentOperationWithDiscriminator with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -523,10 +535,16 @@ Response response = client.ConfidentOperationWithDiscriminator(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call ConfidentOperationWithDiscriminator with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
+
+Pet input = new Cat("<name>", "<meow>");
+Response<Pet> response = client.ConfidentOperationWithDiscriminator(input);
 ]]></code></example>
     </member>
-    <member name="PollutedBaseMethodAsync(PollutedPet,CancellationToken)" />
-    <member name="PollutedBaseMethod(PollutedPet,CancellationToken)" />
     <member name="PollutedBaseMethodAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call PollutedBaseMethodAsync and parse the result.
@@ -605,8 +623,6 @@ Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
-    <member name="PollutedDerivedMethodAsync(PollutedDog,CancellationToken)" />
-    <member name="PollutedDerivedMethod(PollutedDog,CancellationToken)" />
     <member name="PollutedDerivedMethodAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call PollutedDerivedMethodAsync and parse the result.
@@ -693,8 +709,6 @@ Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
-    <member name="UnpollutedDerivedMethodAsync(UnpollutedCat,CancellationToken)" />
-    <member name="UnpollutedDerivedMethod(UnpollutedCat,CancellationToken)" />
     <member name="UnpollutedDerivedMethodAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call UnpollutedDerivedMethodAsync and parse the result.
@@ -773,8 +787,6 @@ Console.WriteLine(result.GetProperty("kind").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
-    <member name="UseDerivedModelAsync(DerivedModel,CancellationToken)" />
-    <member name="UseDerivedModel(DerivedModel,CancellationToken)" />
     <member name="UseDerivedModelAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call UseDerivedModelAsync.
@@ -833,8 +845,6 @@ Response response = client.UseDerivedModel(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="UseDerivedModelWithUnionAsync(DerivedModelWithUnion,CancellationToken)" />
-    <member name="UseDerivedModelWithUnion(DerivedModelWithUnion,CancellationToken)" />
     <member name="UseDerivedModelWithUnionAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call UseDerivedModelWithUnionAsync.

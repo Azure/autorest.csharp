@@ -52,6 +52,14 @@ RequestContent content = RequestContent.Create(new
 Response response = await client.InputToInputOutputAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
+This sample shows how to call InputToInputOutputAsync.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+InputModel body = new InputModel("<name>");
+Response response = await client.InputToInputOutputAsync(body);
+Console.WriteLine(response.Status);
+]]></code>
 This sample shows how to call InputToInputOutputAsync with all request content.
 <code><![CDATA[
 UsageClient client = new UsageClient();
@@ -61,6 +69,14 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = await client.InputToInputOutputAsync(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call InputToInputOutputAsync with all parameters.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+InputModel body = new InputModel("<name>");
+Response response = await client.InputToInputOutputAsync(body);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -77,6 +93,14 @@ RequestContent content = RequestContent.Create(new
 Response response = client.InputToInputOutput(content);
 Console.WriteLine(response.Status);
 ]]></code>
+This sample shows how to call InputToInputOutput.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+InputModel body = new InputModel("<name>");
+Response response = client.InputToInputOutput(body);
+Console.WriteLine(response.Status);
+]]></code>
 This sample shows how to call InputToInputOutput with all request content.
 <code><![CDATA[
 UsageClient client = new UsageClient();
@@ -86,6 +110,14 @@ RequestContent content = RequestContent.Create(new
     name = "<name>",
 });
 Response response = client.InputToInputOutput(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call InputToInputOutput with all parameters.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+InputModel body = new InputModel("<name>");
+Response response = client.InputToInputOutput(body);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -130,6 +162,12 @@ Response response = await client.OutputToInputOutputAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
+This sample shows how to call OutputToInputOutputAsync.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+Response<OutputModel> response = await client.OutputToInputOutputAsync();
+]]></code>
 This sample shows how to call OutputToInputOutputAsync with all parameters and parse the result.
 <code><![CDATA[
 UsageClient client = new UsageClient();
@@ -138,6 +176,12 @@ Response response = await client.OutputToInputOutputAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call OutputToInputOutputAsync with all parameters.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+Response<OutputModel> response = await client.OutputToInputOutputAsync();
 ]]></code></example>
     </member>
     <member name="OutputToInputOutput(RequestContext)">
@@ -151,6 +195,12 @@ Response response = client.OutputToInputOutput(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
+This sample shows how to call OutputToInputOutput.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+Response<OutputModel> response = client.OutputToInputOutput();
+]]></code>
 This sample shows how to call OutputToInputOutput with all parameters and parse the result.
 <code><![CDATA[
 UsageClient client = new UsageClient();
@@ -159,6 +209,12 @@ Response response = client.OutputToInputOutput(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call OutputToInputOutput with all parameters.
+<code><![CDATA[
+UsageClient client = new UsageClient();
+
+Response<OutputModel> response = client.OutputToInputOutput();
 ]]></code></example>
     </member>
   </members>

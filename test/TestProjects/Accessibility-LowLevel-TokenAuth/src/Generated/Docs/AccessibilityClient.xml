@@ -43,7 +43,5 @@ Response response = client.Operation(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="OperationInternalAsync(RequestContent,RequestContext)" />
-    <member name="OperationInternal(RequestContent,RequestContext)" />
   </members>
 </doc>

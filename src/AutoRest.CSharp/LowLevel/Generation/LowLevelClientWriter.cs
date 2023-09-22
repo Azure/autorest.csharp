@@ -536,13 +536,8 @@ namespace AutoRest.CSharp.Generation.Writers
             WriteConvenienceMethodOmitReasonIfNecessary(clientMethod.ConvenienceMethodOmittingMessage);
 
             WriteMethodDocumentation(_writer, methodSignature, clientMethod, isAsync);
-            var docRef = GetMethodSignatureString(methodSignature);
-            _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
 
-            _xmlDocWriter.AddMember(docRef);
-            _xmlDocWriter.AddExamples(
-                clientMethod.Samples.Where(s => !s.IsConvenienceSample).Select(s => (s.GetSampleInformation(isAsync), s.GetExampleMethodSignature(isAsync).Name))
-                );
+            WriteSampleRefsIfNecessary(methodSignature, clientMethod.Samples, isAsync);
         }
 
         private void WriteConvenienceMethodOmitReasonIfNecessary(ConvenienceMethodOmittingMessage? message)
@@ -560,6 +555,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
             _writer.WriteMethodDocumentation(methodSignature);
             _writer.WriteXmlDocumentation("remarks", methodSignature.DescriptionText);
+
+            WriteSampleRefsIfNecessary(methodSignature, samples, isAsync);
+        }
+
+        private void WriteSampleRefsIfNecessary(MethodSignature methodSignature, IEnumerable<DpgOperationSample> samples, bool isAsync)
+        {
+            // do not write this part when there is no samples
+            if (!samples.Any())
+                return;
+
             var docRef = GetMethodSignatureString(methodSignature);
             _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
 

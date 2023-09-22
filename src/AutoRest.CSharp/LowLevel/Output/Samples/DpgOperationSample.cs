@@ -28,7 +28,6 @@ namespace AutoRest.CSharp.Output.Samples.Models
             Method = method;
             _inputClientParameterExamples = inputClientParameterExamples;
             _inputOperationExample = inputOperationExample;
-            ClientInvocationChain = GetClientInvocationChain(client);
             IsConvenienceSample = isConvenienceSample;
             ExampleKey = exampleKey;
             _useAllParameters = exampleKey == ExampleMockValueBuilder.MockExampleAllParameterKey; // TODO -- only work around for the response usage building.
@@ -51,15 +50,17 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         public bool IsPageable => IsConvenienceSample ? Method.ConvenienceMethod!.IsPageable : Method.PagingInfo != null;
 
-        public IReadOnlyList<MethodSignatureBase> ClientInvocationChain { get; }
+        private IReadOnlyList<MethodSignatureBase>? _clientInvocationChain;
+        public IReadOnlyList<MethodSignatureBase> ClientInvocationChain => _clientInvocationChain ??= GetClientInvocationChain();
 
         /// <summary>
         /// Get the methods to be called to get the client, it should be like `Client(...).GetXXClient(..).GetYYClient(..)`.
         /// It's composed of a constructor of non-subclient and a optional list of subclient factory methods.
         /// </summary>
         /// <returns></returns>
-        protected virtual IReadOnlyList<MethodSignatureBase> GetClientInvocationChain(LowLevelClient client)
+        protected virtual IReadOnlyList<MethodSignatureBase> GetClientInvocationChain()
         {
+            var client = Client;
             var callChain = new Stack<MethodSignatureBase>();
             while (client.FactoryMethod != null)
             {
@@ -73,7 +74,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             }
             callChain.Push(client.GetEffectiveCtor()!);
 
-            return callChain.ToList();
+            return callChain.ToArray();
         }
 
         protected virtual string GetMethodName(bool isAsync)

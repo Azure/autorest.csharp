@@ -42,6 +42,12 @@ Response response = await client.GetInt64ValueAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
+This sample shows how to call GetInt64ValueAsync.
+<code><![CDATA[
+Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, long>> response = await client.GetInt64ValueAsync();
+]]></code>
 This sample shows how to call GetInt64ValueAsync with all parameters and parse the result.
 <code><![CDATA[
 Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
@@ -50,6 +56,12 @@ Response response = await client.GetInt64ValueAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code>
+This sample shows how to call GetInt64ValueAsync with all parameters.
+<code><![CDATA[
+Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, long>> response = await client.GetInt64ValueAsync();
 ]]></code></example>
     </member>
     <member name="GetInt64Value(RequestContext)">
@@ -63,6 +75,12 @@ Response response = client.GetInt64Value(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
+This sample shows how to call GetInt64Value.
+<code><![CDATA[
+Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, long>> response = client.GetInt64Value();
+]]></code>
 This sample shows how to call GetInt64Value with all parameters and parse the result.
 <code><![CDATA[
 Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
@@ -71,6 +89,12 @@ Response response = client.GetInt64Value(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code>
+This sample shows how to call GetInt64Value with all parameters.
+<code><![CDATA[
+Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, long>> response = client.GetInt64Value();
 ]]></code></example>
     </member>
     <member name="PutAsync(IDictionary{string,long},CancellationToken)">
@@ -132,6 +156,16 @@ RequestContent content = RequestContent.Create(new
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new Dictionary<string, long>()
+{
+    ["key"] = 1234L,
+});
+Console.WriteLine(response.Status);
+]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
@@ -141,6 +175,16 @@ RequestContent content = RequestContent.Create(new
     key = 1234L,
 });
 Response response = await client.PutAsync(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new Dictionary<string, long>()
+{
+    ["key"] = 1234L,
+});
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -157,6 +201,16 @@ RequestContent content = RequestContent.Create(new
 Response response = client.Put(content);
 Console.WriteLine(response.Status);
 ]]></code>
+This sample shows how to call Put.
+<code><![CDATA[
+Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new Dictionary<string, long>()
+{
+    ["key"] = 1234L,
+});
+Console.WriteLine(response.Status);
+]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
 Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
@@ -166,6 +220,16 @@ RequestContent content = RequestContent.Create(new
     key = 1234L,
 });
 Response response = client.Put(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+Int64Value client = new DictionaryClient().GetInt64ValueClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new Dictionary<string, long>()
+{
+    ["key"] = 1234L,
+});
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

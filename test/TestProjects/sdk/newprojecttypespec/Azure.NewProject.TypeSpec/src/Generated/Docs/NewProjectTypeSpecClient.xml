@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="TopActionAsync(DateTimeOffset,CancellationToken)" />
-    <member name="TopAction(DateTimeOffset,CancellationToken)" />
     <member name="TopActionAsync(DateTimeOffset,RequestContext)">
       <example>
 This sample shows how to call TopActionAsync and parse the result.
@@ -297,8 +295,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code></example>
     </member>
-    <member name="AnonymousBodyAsync(Thing,CancellationToken)" />
-    <member name="AnonymousBody(Thing,CancellationToken)" />
     <member name="AnonymousBodyAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call AnonymousBodyAsync and parse the result.
@@ -488,6 +484,15 @@ Response response = await client.FriendlyModelAsync(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
+This sample shows how to call FriendlyModelAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Friend notFriend = new Friend("<name>");
+Response<Friend> response = await client.FriendlyModelAsync(notFriend);
+]]></code>
 This sample shows how to call FriendlyModelAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -502,6 +507,15 @@ Response response = await client.FriendlyModelAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call FriendlyModelAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Friend notFriend = new Friend("<name>");
+Response<Friend> response = await client.FriendlyModelAsync(notFriend);
 ]]></code></example>
     </member>
     <member name="FriendlyModel(RequestContent,RequestContext)">
@@ -521,6 +535,15 @@ Response response = client.FriendlyModel(content);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
+This sample shows how to call FriendlyModel.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Friend notFriend = new Friend("<name>");
+Response<Friend> response = client.FriendlyModel(notFriend);
+]]></code>
 This sample shows how to call FriendlyModel with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -535,6 +558,15 @@ Response response = client.FriendlyModel(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call FriendlyModel with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+Friend notFriend = new Friend("<name>");
+Response<Friend> response = client.FriendlyModel(notFriend);
 ]]></code></example>
     </member>
     <member name="AddTimeHeaderAsync(RequestContext)">
@@ -641,6 +673,16 @@ RequestContent content = RequestContent.Create(new
 Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
 Console.WriteLine(response.Status);
 ]]></code>
+This sample shows how to call StringFormatAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
+Console.WriteLine(response.Status);
+]]></code>
 This sample shows how to call StringFormatAsync with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -653,6 +695,16 @@ RequestContent content = RequestContent.Create(new
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
 });
 Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call StringFormatAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -672,6 +724,16 @@ RequestContent content = RequestContent.Create(new
 Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
 Console.WriteLine(response.Status);
 ]]></code>
+This sample shows how to call StringFormat.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
+Console.WriteLine(response.Status);
+]]></code>
 This sample shows how to call StringFormat with all parameters and request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -684,6 +746,16 @@ RequestContent content = RequestContent.Create(new
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
 });
 Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call StringFormat with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AzureKeyCredential credential = new AzureKeyCredential("<key>");
+NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
+
+ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -769,8 +841,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code></example>
     </member>
-    <member name="HelloAgainAsync(string,string,RoundTripModel,CancellationToken)" />
-    <member name="HelloAgain(string,string,RoundTripModel,CancellationToken)" />
     <member name="HelloAgainAsync(string,string,RequestContent,RequestContext)">
       <example>
 This sample shows how to call HelloAgainAsync and parse the result.
@@ -1383,8 +1453,6 @@ Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetPropert
 Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
 ]]></code></example>
     </member>
-    <member name="HelloDemo2Async(CancellationToken)" />
-    <member name="HelloDemo2(CancellationToken)" />
     <member name="HelloDemo2Async(RequestContext)">
       <example>
 This sample shows how to call HelloDemo2Async and parse the result.
@@ -1467,8 +1535,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code></example>
     </member>
-    <member name="CreateLiteralAsync(Thing,CancellationToken)" />
-    <member name="CreateLiteral(Thing,CancellationToken)" />
     <member name="CreateLiteralAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call CreateLiteralAsync and parse the result.
@@ -1599,8 +1665,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code></example>
     </member>
-    <member name="HelloLiteralAsync(CancellationToken)" />
-    <member name="HelloLiteral(CancellationToken)" />
     <member name="HelloLiteralAsync(RequestContext)">
       <example>
 This sample shows how to call HelloLiteralAsync and parse the result.
@@ -1733,13 +1797,5 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
-    <member name="InternalProtocolAsync(Thing,CancellationToken)" />
-    <member name="InternalProtocol(Thing,CancellationToken)" />
-    <member name="InternalProtocolAsync(RequestContent,RequestContext)" />
-    <member name="InternalProtocol(RequestContent,RequestContext)" />
-    <member name="StillConvenientValueAsync(CancellationToken)" />
-    <member name="StillConvenientValue(CancellationToken)" />
-    <member name="StillConvenientAsync(RequestContext)" />
-    <member name="StillConvenient(RequestContext)" />
   </members>
 </doc>

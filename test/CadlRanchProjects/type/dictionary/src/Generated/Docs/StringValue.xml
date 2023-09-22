@@ -42,6 +42,12 @@ Response response = await client.GetStringValueAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
+This sample shows how to call GetStringValueAsync.
+<code><![CDATA[
+StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, string>> response = await client.GetStringValueAsync();
+]]></code>
 This sample shows how to call GetStringValueAsync with all parameters and parse the result.
 <code><![CDATA[
 StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
@@ -50,6 +56,12 @@ Response response = await client.GetStringValueAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code>
+This sample shows how to call GetStringValueAsync with all parameters.
+<code><![CDATA[
+StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, string>> response = await client.GetStringValueAsync();
 ]]></code></example>
     </member>
     <member name="GetStringValue(RequestContext)">
@@ -63,6 +75,12 @@ Response response = client.GetStringValue(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
+This sample shows how to call GetStringValue.
+<code><![CDATA[
+StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, string>> response = client.GetStringValue();
+]]></code>
 This sample shows how to call GetStringValue with all parameters and parse the result.
 <code><![CDATA[
 StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
@@ -71,6 +89,12 @@ Response response = client.GetStringValue(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code>
+This sample shows how to call GetStringValue with all parameters.
+<code><![CDATA[
+StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, string>> response = client.GetStringValue();
 ]]></code></example>
     </member>
     <member name="PutAsync(IDictionary{string,string},CancellationToken)">
@@ -132,6 +156,16 @@ RequestContent content = RequestContent.Create(new
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new Dictionary<string, string>()
+{
+    ["key"] = "<body>",
+});
+Console.WriteLine(response.Status);
+]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
@@ -141,6 +175,16 @@ RequestContent content = RequestContent.Create(new
     key = "<body>",
 });
 Response response = await client.PutAsync(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new Dictionary<string, string>()
+{
+    ["key"] = "<body>",
+});
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -157,6 +201,16 @@ RequestContent content = RequestContent.Create(new
 Response response = client.Put(content);
 Console.WriteLine(response.Status);
 ]]></code>
+This sample shows how to call Put.
+<code><![CDATA[
+StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new Dictionary<string, string>()
+{
+    ["key"] = "<body>",
+});
+Console.WriteLine(response.Status);
+]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
 StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
@@ -166,6 +220,16 @@ RequestContent content = RequestContent.Create(new
     key = "<body>",
 });
 Response response = client.Put(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+StringValue client = new DictionaryClient().GetStringValueClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new Dictionary<string, string>()
+{
+    ["key"] = "<body>",
+});
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

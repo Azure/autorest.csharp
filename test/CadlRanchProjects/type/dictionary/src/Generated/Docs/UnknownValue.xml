@@ -42,6 +42,12 @@ Response response = await client.GetUnknownValueAsync(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
+This sample shows how to call GetUnknownValueAsync.
+<code><![CDATA[
+UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, BinaryData>> response = await client.GetUnknownValueAsync();
+]]></code>
 This sample shows how to call GetUnknownValueAsync with all parameters and parse the result.
 <code><![CDATA[
 UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
@@ -50,6 +56,12 @@ Response response = await client.GetUnknownValueAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code>
+This sample shows how to call GetUnknownValueAsync with all parameters.
+<code><![CDATA[
+UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, BinaryData>> response = await client.GetUnknownValueAsync();
 ]]></code></example>
     </member>
     <member name="GetUnknownValue(RequestContext)">
@@ -63,6 +75,12 @@ Response response = client.GetUnknownValue(null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").ToString());
 ]]></code>
+This sample shows how to call GetUnknownValue.
+<code><![CDATA[
+UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, BinaryData>> response = client.GetUnknownValue();
+]]></code>
 This sample shows how to call GetUnknownValue with all parameters and parse the result.
 <code><![CDATA[
 UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
@@ -71,6 +89,12 @@ Response response = client.GetUnknownValue(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<key>").ToString());
+]]></code>
+This sample shows how to call GetUnknownValue with all parameters.
+<code><![CDATA[
+UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
+
+Response<IReadOnlyDictionary<string, BinaryData>> response = client.GetUnknownValue();
 ]]></code></example>
     </member>
     <member name="PutAsync(IDictionary{string,BinaryData},CancellationToken)">
@@ -132,6 +156,16 @@ RequestContent content = RequestContent.Create(new
 Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
+This sample shows how to call PutAsync.
+<code><![CDATA[
+UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new Dictionary<string, BinaryData>()
+{
+    ["key"] = BinaryData.FromObjectAsJson(new object()),
+});
+Console.WriteLine(response.Status);
+]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
@@ -141,6 +175,16 @@ RequestContent content = RequestContent.Create(new
     key = new object(),
 });
 Response response = await client.PutAsync(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAsync with all parameters.
+<code><![CDATA[
+UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
+
+Response response = await client.PutAsync(new Dictionary<string, BinaryData>()
+{
+    ["key"] = BinaryData.FromObjectAsJson(new object()),
+});
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -157,6 +201,16 @@ RequestContent content = RequestContent.Create(new
 Response response = client.Put(content);
 Console.WriteLine(response.Status);
 ]]></code>
+This sample shows how to call Put.
+<code><![CDATA[
+UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new Dictionary<string, BinaryData>()
+{
+    ["key"] = BinaryData.FromObjectAsJson(new object()),
+});
+Console.WriteLine(response.Status);
+]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
 UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
@@ -166,6 +220,16 @@ RequestContent content = RequestContent.Create(new
     key = new object(),
 });
 Response response = client.Put(content);
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Put with all parameters.
+<code><![CDATA[
+UnknownValue client = new DictionaryClient().GetUnknownValueClient(apiVersion: "1.0.0");
+
+Response response = client.Put(new Dictionary<string, BinaryData>()
+{
+    ["key"] = BinaryData.FromObjectAsJson(new object()),
+});
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
