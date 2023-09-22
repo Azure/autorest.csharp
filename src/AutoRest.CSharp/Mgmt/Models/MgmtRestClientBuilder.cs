@@ -52,10 +52,10 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private static void ValidateMgmtOperationParameters(IReadOnlyList<RequestParameter> parameters)
         {
-            var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "$host", "apiVersion" };
+            var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "modelerfour:synthesized/host", "modelerfour:synthesized/api-version" };
             foreach (var parameter in parameters)
             {
-                var parameterName = parameter.Language.Default.Name;
+                var parameterName = parameter.Origin ?? string.Empty;
                 if (!set.Contains(parameterName))
                 {
                     throw new InvalidOperationException($"{parameterName} should be method parameter for operation");
