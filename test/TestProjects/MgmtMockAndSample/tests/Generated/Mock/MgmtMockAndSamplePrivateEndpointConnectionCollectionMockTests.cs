@@ -79,5 +79,16 @@ namespace MgmtMockAndSample.Tests.Mock
             {
             }
         }
+
+        [RecordedTest]
+        public async Task GetIfExists()
+        {
+            // Example: KeyVaultGetPrivateEndpointConnection
+
+            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-vault");
+            VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
+            var collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
+            await collection.GetIfExistsAsync("sample-pec");
+        }
     }
 }

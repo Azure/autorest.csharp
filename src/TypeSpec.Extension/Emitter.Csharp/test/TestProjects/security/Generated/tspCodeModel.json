@@ -5,27 +5,169 @@
  "ApiVersions": [
   "1.0.0"
  ],
- "Enums": [],
- "Models": [],
- "Clients": [
+ "Enums": [
   {
    "$id": "2",
+   "Name": "OAuth2FlowType",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "3",
+     "Name": "authorizationCode",
+     "Value": "authorizationCode",
+     "Description": "authorization code flow"
+    },
+    {
+     "$id": "4",
+     "Name": "implicit",
+     "Value": "implicit",
+     "Description": "implcit flow"
+    },
+    {
+     "$id": "5",
+     "Name": "password",
+     "Value": "password",
+     "Description": "password flow"
+    },
+    {
+     "$id": "6",
+     "Name": "clientCredentials",
+     "Value": "clientCredentials",
+     "Description": "client credential flow"
+    }
+   ],
+   "Namespace": "TypeSpec.Http",
+   "Description": "Describes the OAuth2 flow type",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "None"
+  },
+  {
+   "$id": "7",
+   "Name": "AuthFlow_tokenUrl",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "8",
+     "Name": "https://api.example.com/oauth2/token",
+     "Value": "https://api.example.com/oauth2/token",
+     "Description": "https://api.example.com/oauth2/token"
+    }
+   ],
+   "Namespace": "SecurityClient",
+   "Description": "The AuthFlow_tokenUrl",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "None"
+  },
+  {
+   "$id": "9",
+   "Name": "AuthFlow_refreshUrl",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "10",
+     "Name": "https://api.example.com/oauth2/refresh",
+     "Value": "https://api.example.com/oauth2/refresh",
+     "Description": "https://api.example.com/oauth2/refresh"
+    }
+   ],
+   "Namespace": "SecurityClient",
+   "Description": "The AuthFlow_refreshUrl",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "None"
+  }
+ ],
+ "Models": [
+  {
+   "$id": "11",
+   "Name": "AuthFlow",
+   "Namespace": "SecurityClient",
+   "IsNullable": false,
+   "Usage": "None",
+   "Properties": [
+    {
+     "$id": "12",
+     "Name": "type",
+     "SerializedName": "type",
+     "Description": "",
+     "Type": {
+      "$ref": "2"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "13",
+     "Name": "tokenUrl",
+     "SerializedName": "tokenUrl",
+     "Description": "",
+     "Type": {
+      "$id": "14",
+      "Name": "Literal",
+      "LiteralValueType": {
+       "$ref": "7"
+      },
+      "Value": "https://api.example.com/oauth2/token",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "15",
+     "Name": "refreshUrl",
+     "SerializedName": "refreshUrl",
+     "Description": "",
+     "Type": {
+      "$id": "16",
+      "Name": "Literal",
+      "LiteralValueType": {
+       "$ref": "9"
+      },
+      "Value": "https://api.example.com/oauth2/refresh",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "17",
+     "Name": "scopes",
+     "SerializedName": "scopes",
+     "Description": "",
+     "Type": {
+      "$id": "18",
+      "Name": "Intrinsic",
+      "Kind": "unknown",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "19",
    "Name": "SecurityClientClient",
    "Description": "Illustrates clients generated from a typespec with security.",
    "Operations": [
     {
-     "$id": "3",
+     "$id": "20",
      "Name": "genSecurity",
      "ResourceName": "SecurityClient",
      "Description": "Get security info",
      "Parameters": [
       {
-       "$id": "4",
+       "$id": "21",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "5",
+        "$id": "22",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -40,9 +182,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "6",
+        "$id": "23",
         "Type": {
-         "$id": "7",
+         "$id": "24",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -51,11 +193,11 @@
        }
       },
       {
-       "$id": "8",
+       "$id": "25",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "9",
+        "$id": "26",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -70,20 +212,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "10",
+        "$id": "27",
         "Type": {
-         "$ref": "9"
+         "$ref": "26"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "11",
+       "$id": "28",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "12",
+        "$id": "29",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -98,9 +240,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "13",
+        "$id": "30",
         "Type": {
-         "$id": "14",
+         "$id": "31",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -111,7 +253,7 @@
      ],
      "Responses": [
       {
-       "$id": "15",
+       "$id": "32",
        "StatusCodes": [
         200
        ],
@@ -130,19 +272,19 @@
     }
    ],
    "Protocol": {
-    "$id": "16"
+    "$id": "33"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "17",
+  "$id": "34",
   "ApiKey": {
-   "$id": "18",
+   "$id": "35",
    "Name": "x-ms-api-key"
   },
   "OAuth2": {
-   "$id": "19",
+   "$id": "36",
    "Scopes": [
     "https://api.example.com/.default"
    ]
