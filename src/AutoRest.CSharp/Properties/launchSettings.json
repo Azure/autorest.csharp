@@ -668,6 +668,14 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\parameters\\spread\\src\\Generated -n"
     },
+    "typespec-payload/content-negotiation": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\payload\\content-negotiation\\src\\Generated -n"
+    },
+    "typespec-payload/pageable": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\payload\\pageable\\src\\Generated -n"
+    },
     "typespec-projection/projected-name": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\projection\\projected-name\\src\\Generated -n"

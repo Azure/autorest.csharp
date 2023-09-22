@@ -310,6 +310,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseVariable:I}.Content.ToObjectFromJson<{enumType.ValueType}>().To{declaredTypeName}(), {responseVariable:I});");
                     }
                 }
+                else if (responseType.IsFrameworkType && responseType.FrameworkType == typeof(BinaryData))
+                {
+                    _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseVariable:I}.Content, {responseVariable:I});");
+                }
                 else if (responseType.IsFrameworkType)
                 {
                     _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseVariable:I}.Content.ToObjectFromJson<{responseType}>(), {responseVariable:I});");
