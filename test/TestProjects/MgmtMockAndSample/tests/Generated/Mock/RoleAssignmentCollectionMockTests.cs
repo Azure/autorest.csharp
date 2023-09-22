@@ -107,5 +107,15 @@ namespace MgmtMockAndSample.Tests.Mock
             {
             }
         }
+
+        [RecordedTest]
+        public async Task GetIfExists()
+        {
+            // Example: Get role assignment by name
+
+            ResourceIdentifier scope = new ResourceIdentifier(string.Format("/{0}", "scope"));
+            var collection = GetArmClient().GetRoleAssignments(scope);
+            await collection.GetIfExistsAsync("roleAssignmentName");
+        }
     }
 }
