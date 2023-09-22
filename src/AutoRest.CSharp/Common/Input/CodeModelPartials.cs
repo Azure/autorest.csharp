@@ -16,6 +16,9 @@ using YamlDotNet.Serialization;
 // ReSharper disable once CheckNamespace
 namespace AutoRest.CSharp.Input
 {
+    [DebuggerDisplay("Languages(Name: {Default.Name})")]
+    internal partial class Languages { }
+
     internal partial class Operation
     {
         // For some reason, booleans in dictionaries are deserialized as string instead of bool.

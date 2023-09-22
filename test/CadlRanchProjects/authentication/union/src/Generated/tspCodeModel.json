@@ -5,27 +5,134 @@
  "ApiVersions": [
   "1.0.0"
  ],
- "Enums": [],
- "Models": [],
- "Clients": [
+ "Enums": [
   {
    "$id": "2",
+   "Name": "OAuth2FlowType",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "3",
+     "Name": "authorizationCode",
+     "Value": "authorizationCode",
+     "Description": "authorization code flow"
+    },
+    {
+     "$id": "4",
+     "Name": "implicit",
+     "Value": "implicit",
+     "Description": "implcit flow"
+    },
+    {
+     "$id": "5",
+     "Name": "password",
+     "Value": "password",
+     "Description": "password flow"
+    },
+    {
+     "$id": "6",
+     "Name": "clientCredentials",
+     "Value": "clientCredentials",
+     "Description": "client credential flow"
+    }
+   ],
+   "Namespace": "TypeSpec.Http",
+   "Description": "Describes the OAuth2 flow type",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "None"
+  },
+  {
+   "$id": "7",
+   "Name": "MyFlow_authorizationUrl",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "8",
+     "Name": "https://login.microsoftonline.com/common/oauth2/authorize",
+     "Value": "https://login.microsoftonline.com/common/oauth2/authorize",
+     "Description": "https://login.microsoftonline.com/common/oauth2/authorize"
+    }
+   ],
+   "Namespace": "Authentication.Union",
+   "Description": "The MyFlow_authorizationUrl",
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "None"
+  }
+ ],
+ "Models": [
+  {
+   "$id": "9",
+   "Name": "MyFlow",
+   "Namespace": "Authentication.Union",
+   "IsNullable": false,
+   "Usage": "None",
+   "Properties": [
+    {
+     "$id": "10",
+     "Name": "type",
+     "SerializedName": "type",
+     "Description": "",
+     "Type": {
+      "$ref": "2"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "11",
+     "Name": "authorizationUrl",
+     "SerializedName": "authorizationUrl",
+     "Description": "",
+     "Type": {
+      "$id": "12",
+      "Name": "Literal",
+      "LiteralValueType": {
+       "$ref": "7"
+      },
+      "Value": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "13",
+     "Name": "scopes",
+     "SerializedName": "scopes",
+     "Description": "",
+     "Type": {
+      "$id": "14",
+      "Name": "Intrinsic",
+      "Kind": "unknown",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "15",
    "Name": "UnionClient",
    "Description": "Illustrates clients generated with ApiKey and OAuth2 authentication.",
    "Operations": [
     {
-     "$id": "3",
+     "$id": "16",
      "Name": "validKey",
      "ResourceName": "Union",
      "Description": "Check whether client is authenticated",
      "Parameters": [
       {
-       "$id": "4",
+       "$id": "17",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "5",
+        "$id": "18",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -40,9 +147,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "6",
+        "$id": "19",
         "Type": {
-         "$id": "7",
+         "$id": "20",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -51,11 +158,11 @@
        }
       },
       {
-       "$id": "8",
+       "$id": "21",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "9",
+        "$id": "22",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -70,20 +177,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "10",
+        "$id": "23",
         "Type": {
-         "$ref": "9"
+         "$ref": "22"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "11",
+       "$id": "24",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "12",
+        "$id": "25",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -98,9 +205,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "13",
+        "$id": "26",
         "Type": {
-         "$id": "14",
+         "$id": "27",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -111,7 +218,7 @@
      ],
      "Responses": [
       {
-       "$id": "15",
+       "$id": "28",
        "StatusCodes": [
         204
        ],
@@ -129,20 +236,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "16",
+     "$id": "29",
      "Name": "validToken",
      "ResourceName": "Union",
      "Description": "Check whether client is authenticated",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "17"
       },
       {
-       "$id": "17",
+       "$id": "30",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "18",
+        "$id": "31",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -157,20 +264,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "19",
+        "$id": "32",
         "Type": {
-         "$ref": "18"
+         "$ref": "31"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "11"
+       "$ref": "24"
       }
      ],
      "Responses": [
       {
-       "$id": "20",
+       "$id": "33",
        "StatusCodes": [
         204
        ],
@@ -189,19 +296,19 @@
     }
    ],
    "Protocol": {
-    "$id": "21"
+    "$id": "34"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "22",
+  "$id": "35",
   "ApiKey": {
-   "$id": "23",
+   "$id": "36",
    "Name": "x-ms-api-key"
   },
   "OAuth2": {
-   "$id": "24",
+   "$id": "37",
    "Scopes": [
     "https://security.microsoft.com/.default"
    ]
