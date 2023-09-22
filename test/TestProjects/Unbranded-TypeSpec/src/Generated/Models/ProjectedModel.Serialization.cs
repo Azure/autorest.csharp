@@ -39,8 +39,8 @@ namespace UnbrandedTypeSpec.Models
             return new ProjectedModel(name);
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="result"> The response to deserialize the model from. </param>
+        /// <summary> Deserializes the model from a raw result. </summary>
+        /// <param name="result"> The result to deserialize the model from. </param>
         internal static ProjectedModel FromResult(Result result)
         {
             using var document = JsonDocument.Parse(result.Content);

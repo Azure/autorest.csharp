@@ -5,6 +5,9 @@ using System;
 using System.ServiceModel.Rest;
 using System.ServiceModel.Rest.Core.Pipeline;
 using System.ServiceModel.Rest.Shared.Core.Pipeline;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 
@@ -12,6 +15,8 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal class SystemApiTypes : ApiTypes
     {
+        public override BaseResponseExpression GetResponseExpression(ValueExpression untyped) => new ResultExpression(untyped);
+
         public override Type ResponseType => typeof(Result);
         public override Type ResponseOfTType => typeof(Result<>);
         public override string FromResponseName => "FromResult";

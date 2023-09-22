@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -45,7 +46,7 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static RequestContextExpression RequestContext(CancellationTokenExpression cancellationToken)
                 => new(Instance(typeof(RequestContext), new Dictionary<string, ValueExpression>{ [nameof(Azure.RequestContext.CancellationToken)] = cancellationToken }));
 
-            public static ValueExpression RequestFailedException(ResponseExpression response) => Instance(typeof(RequestFailedException), response);
+            public static ValueExpression RequestFailedException(BaseResponseExpression response) => Instance(typeof(RequestFailedException), response);
 
             public static ResourceIdentifierExpression ResourceIdentifier(ValueExpression resourceData) => new(Instance(typeof(ResourceIdentifier), new MemberExpression(resourceData, "Id")));
 

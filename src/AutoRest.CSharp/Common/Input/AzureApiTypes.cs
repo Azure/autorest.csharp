@@ -2,6 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using Azure.Core;
@@ -11,6 +14,8 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal class AzureApiTypes : ApiTypes
     {
+        public override BaseResponseExpression GetResponseExpression(ValueExpression untyped) => new ResponseExpression(untyped);
+
         public override Type ResponseType => typeof(Response);
         public override Type ResponseOfTType => typeof(Response<>);
         public override string FromResponseName => "FromResponse";

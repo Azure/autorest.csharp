@@ -4,11 +4,15 @@
 using System;
 using System.ServiceModel.Rest;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 
 namespace AutoRest.CSharp.Common.Input
 {
     internal abstract class ApiTypes
     {
+        public abstract BaseResponseExpression GetResponseExpression(ValueExpression untyped);
+
         public abstract Type ResponseType { get; }
         public abstract Type ResponseOfTType { get; }
 

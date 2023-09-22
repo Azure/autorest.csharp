@@ -2,7 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -19,10 +21,10 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement UsingDeclare(string name, HttpMessageExpression value, out HttpMessageExpression variable)
             => UsingDeclare(name, value, d => new HttpMessageExpression(d), out variable);
 
-        public static DeclarationStatement Declare(CSharpType responseType, string name, ResponseExpression value, out ResponseExpression response)
+        public static DeclarationStatement Declare(CSharpType responseType, string name, BaseResponseExpression value, out BaseResponseExpression response)
         {
             var variable = new VariableReference(responseType, name);
-            response = new ResponseExpression(variable);
+            response = Configuration.ApiTypes.GetResponseExpression(variable);
             return Declare(variable, value);
         }
 
@@ -35,8 +37,8 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Declare(string name, JsonElementExpression value, out JsonElementExpression variable)
             => Declare(name, value, d => new JsonElementExpression(d), out variable);
 
-        public static DeclarationStatement Declare(string name, ResponseExpression value, out ResponseExpression variable)
-            => Declare(name, value, d => new ResponseExpression(d), out variable);
+        public static DeclarationStatement Declare(string name, BaseResponseExpression value, out BaseResponseExpression variable)
+            => Declare(name, value, d => Configuration.ApiTypes.GetResponseExpression(d), out variable);
 
         public static DeclarationStatement Declare(string name, StreamReaderExpression value, out StreamReaderExpression variable)
             => Declare(name, value, d => new StreamReaderExpression(d), out variable);
@@ -81,8 +83,8 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Var(string name, RequestExpression value, out RequestExpression variable)
             => Var(name, value, d => new RequestExpression(d), out variable);
 
-        public static DeclarationStatement Var(string name, ResponseExpression value, out ResponseExpression variable)
-            => Var(name, value, d => new ResponseExpression(d), out variable);
+        public static DeclarationStatement Var(string name, BaseResponseExpression value, out BaseResponseExpression variable)
+            => Var(name, value, d => Configuration.ApiTypes.GetResponseExpression(d), out variable);
 
         public static DeclarationStatement Var(string name, Utf8JsonRequestContentExpression value, out Utf8JsonRequestContentExpression variable)
             => Var(name, value, d => new Utf8JsonRequestContentExpression(d), out variable);

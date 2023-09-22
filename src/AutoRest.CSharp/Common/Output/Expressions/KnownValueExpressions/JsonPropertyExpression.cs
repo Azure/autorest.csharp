@@ -5,6 +5,7 @@ using System.Text.Json;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
@@ -16,6 +17,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public BoolExpression NameEquals(string value) => new(Invoke(nameof(JsonProperty.NameEquals), LiteralU8(value)));
 
         public MethodBodyStatement ThrowNonNullablePropertyIsNull()
-            => new InvokeStaticMethodStatement(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.ThrowNonNullablePropertyIsNull), new[] { Untyped }, CallAsExtension: true);
+            => new InvokeStaticMethodStatement(typeof(JsonElementExtensions), nameof(JsonElementExtensions.ThrowNonNullablePropertyIsNull), new[] { Untyped }, CallAsExtension: true);
     }
 }

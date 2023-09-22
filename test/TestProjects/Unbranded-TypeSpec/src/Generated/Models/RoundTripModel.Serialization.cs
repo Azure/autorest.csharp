@@ -457,8 +457,8 @@ namespace UnbrandedTypeSpec.Models
             return new RoundTripModel(requiredString, requiredInt, requiredCollection, requiredDictionary, requiredModel, Optional.ToNullable(intExtensibleEnum), Optional.ToList(intExtensibleEnumCollection), Optional.ToNullable(floatExtensibleEnum), Optional.ToList(floatExtensibleEnumCollection), Optional.ToNullable(floatFixedEnum), Optional.ToList(floatFixedEnumCollection), Optional.ToNullable(intFixedEnum), Optional.ToList(intFixedEnumCollection), Optional.ToNullable(stringFixedEnum), requiredUnknown, optionalUnknown.Value, requiredRecordUnknown, Optional.ToDictionary(optionalRecordUnknown), readOnlyRequiredRecordUnknown, Optional.ToDictionary(readOnlyOptionalRecordUnknown), modelWithRequiredNullable);
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="result"> The response to deserialize the model from. </param>
+        /// <summary> Deserializes the model from a raw result. </summary>
+        /// <param name="result"> The result to deserialize the model from. </param>
         internal static RoundTripModel FromResult(Result result)
         {
             using var document = JsonDocument.Parse(result.Content);

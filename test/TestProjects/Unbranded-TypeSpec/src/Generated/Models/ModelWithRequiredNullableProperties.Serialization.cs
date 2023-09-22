@@ -91,8 +91,8 @@ namespace UnbrandedTypeSpec.Models
             return new ModelWithRequiredNullableProperties(requiredNullablePrimitive, requiredExtensibleEnum, requiredFixedEnum);
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="result"> The response to deserialize the model from. </param>
+        /// <summary> Deserializes the model from a raw result. </summary>
+        /// <param name="result"> The result to deserialize the model from. </param>
         internal static ModelWithRequiredNullableProperties FromResult(Result result)
         {
             using var document = JsonDocument.Parse(result.Content);

@@ -211,8 +211,8 @@ namespace UnbrandedTypeSpec.Models
             return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, Optional.ToNullable(optionalLiteralString), Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalLiteralFloat), Optional.ToNullable(optionalLiteralBool), requiredBadDescription, Optional.ToList(optionalNullableList), requiredNullableList);
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="result"> The response to deserialize the model from. </param>
+        /// <summary> Deserializes the model from a raw result. </summary>
+        /// <param name="result"> The result to deserialize the model from. </param>
         internal static Thing FromResult(Result result)
         {
             using var document = JsonDocument.Parse(result.Content);
