@@ -16,6 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 {
     internal class MgmtRestClientBuilder : CmcRestClientBuilder
     {
+        private static HashSet<string> AllowedRequestParameterOrigins = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "modelerfour:synthesized/host", "modelerfour:synthesized/api-version" };
         private class ParameterCompareer : IEqualityComparer<RequestParameter>
         {
             public bool Equals([AllowNull] RequestParameter x, [AllowNull] RequestParameter y)
@@ -46,22 +47,16 @@ namespace AutoRest.CSharp.Mgmt.Models
             foreach (var operation in operations)
             {
                 var clientParameters = operation.Parameters.Where(p => p.Implementation == ImplementationLocation.Client);
-                foreach (var item in clientParameters)
+                foreach (var parameter in clientParameters)
                 {
-                    ValidateMgmtOperationParameters(item, operation);
-                    parameters.Add(item);
+                    if (!AllowedRequestParameterOrigins.Contains(parameter.Origin ?? string.Empty))
+                    {
+                        throw new InvalidOperationException($"{parameter.Language.Default.Name} should be method parameter for operation {operation.OperationId}");
+                    }
+                    parameters.Add(parameter);
                 }
             }
             return parameters.ToList();
-        }
-
-        private static void ValidateMgmtOperationParameters(RequestParameter parameter, Operation operation)
-        {
-            var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "modelerfour:synthesized/host", "modelerfour:synthesized/api-version" };
-            if (!set.Contains(parameter.Origin ?? string.Empty))
-            {
-                throw new InvalidOperationException($"{parameter.Language.Default.Name} should be method parameter for operation {operation.OperationId}");
-            }
         }
 
         public override Parameter BuildConstructorParameter(RequestParameter requestParameter)
