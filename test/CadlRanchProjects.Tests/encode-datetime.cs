@@ -1,10 +1,7 @@
 using System;
-using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
-using Azure.Core;
 using Encode.Datetime;
 using Encode.Datetime.Models;
 using NUnit.Framework;
@@ -13,6 +10,53 @@ namespace CadlRanchProjects.Tests
 {
     public class EncodeDateTimeTests : CadlRanchTestBase
     {
+        [Test]
+        public Task Encode_Datetime_ResponseHeader_default() => Test(async (host) =>
+        {
+            var response = await new DatetimeClient(host, null).GetResponseHeaderClient().DefaultAsync();
+            Assert.AreEqual(204, response.Status);
+
+            // we cannot use the extension method TryGetValue("value", out DateTimeOffset? header) here because it is in an internal static class
+            Assert.IsTrue(response.Headers.TryGetValue("value", out string header));
+
+            Assert.AreEqual("Fri, 26 Aug 2022 14:38:00 GMT", header);
+        });
+
+        [Test]
+        public Task Encode_Datetime_ResponseHeader_rfc3339() => Test(async (host) =>
+        {
+            var response = await new DatetimeClient(host, null).GetResponseHeaderClient().Rfc3339Async();
+            Assert.AreEqual(204, response.Status);
+
+            // we cannot use the extension method TryGetValue("value", out DateTimeOffset? header) here because it is in an internal static class
+            Assert.IsTrue(response.Headers.TryGetValue("value", out string header));
+
+            Assert.AreEqual("2022-08-26T18:38:00.000Z", header);
+        });
+
+        [Test]
+        public Task Encode_Datetime_ResponseHeader_rfc7231() => Test(async (host) =>
+        {
+            var response = await new DatetimeClient(host, null).GetResponseHeaderClient().Rfc7231Async();
+            Assert.AreEqual(204, response.Status);
+
+            // we cannot use the extension method TryGetValue("value", out DateTimeOffset? header) here because it is in an internal static class
+            Assert.IsTrue(response.Headers.TryGetValue("value", out string header));
+
+            Assert.AreEqual("Fri, 26 Aug 2022 14:38:00 GMT", header);
+        });
+
+        [Test]
+        public Task Encode_Datetime_ResponseHeader_unixTimestamp() => Test(async (host) =>
+        {
+            var response = await new DatetimeClient(host, null).GetResponseHeaderClient().UnixTimestampAsync();
+            Assert.AreEqual(204, response.Status);
+
+            Assert.IsTrue(response.Headers.TryGetValue("value", out string header));
+
+            Assert.AreEqual("1686566864", header);
+        });
+
         [Test]
         public Task Encode_DateTime_Header_Default() => Test(async (host) =>
         {

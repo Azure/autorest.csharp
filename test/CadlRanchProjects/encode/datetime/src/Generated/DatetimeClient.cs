@@ -72,5 +72,15 @@ namespace Encode.Datetime
 
             return new Header(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
+
+        /// <summary> Initializes a new instance of ResponseHeader. </summary>
+        /// <param name="apiVersion"> The String to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual ResponseHeader GetResponseHeaderClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new ResponseHeader(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
     }
 }

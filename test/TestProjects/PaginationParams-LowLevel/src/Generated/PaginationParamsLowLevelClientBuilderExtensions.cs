@@ -20,7 +20,7 @@ namespace Microsoft.Extensions.Azure
         public static IAzureClientBuilder<PaginationParamsClient, PaginationParamsClientOptions> AddPaginationParamsClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilderWithCredential
         {
-            return builder.RegisterClientFactory<PaginationParamsClient, PaginationParamsClientOptions>((options, cred) => new PaginationParamsClient(cred, endpoint, options));
+            return builder.RegisterClientFactory<PaginationParamsClient, PaginationParamsClientOptions>((options, cred) => new PaginationParamsClient(endpoint, cred, options));
         }
 
         /// <summary> Registers a <see cref="PaginationParamsClient"/> instance. </summary>

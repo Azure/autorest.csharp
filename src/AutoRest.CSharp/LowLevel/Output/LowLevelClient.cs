@@ -7,6 +7,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text.RegularExpressions;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
@@ -27,6 +28,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly string _libraryName;
         private readonly TypeFactory _typeFactory;
         private readonly IEnumerable<InputParameter> _clientParameters;
+        private readonly IReadOnlyDictionary<string, InputClientExample> _clientParameterExamples;
         private readonly InputAuth _authorization;
         private readonly IEnumerable<InputOperation> _operations;
         private readonly SourceInputModel? _sourceInputModel;
@@ -49,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models
         private bool? _isResourceClient;
         public bool IsResourceClient => _isResourceClient ??= Parameters.Any(p => p.IsResourceIdentifier);
 
-        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory)
+        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, IReadOnlyDictionary<string, InputClientExample> examples, TypeFactory typeFactory)
             : base(ns, sourceInputModel)
         {
             _libraryName = libraryName;
@@ -62,6 +64,7 @@ namespace AutoRest.CSharp.Output.Models
             ClientOptions = clientOptions;
 
             _clientParameters = clientParameters;
+            _clientParameterExamples = examples;
             _authorization = authorization;
             _operations = operations;
             _sourceInputModel = sourceInputModel;
@@ -81,7 +84,7 @@ namespace AutoRest.CSharp.Output.Models
         public ConstructorSignature[] SecondaryConstructors => Constructors.SecondaryConstructors;
 
         private IReadOnlyList<LowLevelClientMethod>? _allClientMethods;
-        private IReadOnlyList<LowLevelClientMethod> AllClientMethods => _allClientMethods ??= BuildMethods(_typeFactory, _operations, Fields, Declaration.Namespace, Declaration.Name, _sourceInputModel).ToArray();
+        private IReadOnlyList<LowLevelClientMethod> AllClientMethods => _allClientMethods ??= BuildMethods(this, _typeFactory, _operations, Fields, Declaration.Namespace, Declaration.Name, _sourceInputModel).ToArray();
 
         private IReadOnlyList<LowLevelClientMethod>? _clientMethods;
         public IReadOnlyList<LowLevelClientMethod> ClientMethods => _clientMethods ??= AllClientMethods
@@ -107,9 +110,9 @@ namespace AutoRest.CSharp.Output.Models
         }
 
 
-        public static IEnumerable<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string namespaceName, string clientName, SourceInputModel? sourceInputModel)
+        public static IEnumerable<LowLevelClientMethod> BuildMethods(LowLevelClient? client, TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string namespaceName, string clientName, SourceInputModel? sourceInputModel)
         {
-            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(o, namespaceName, clientName, fields, typeFactory, sourceInputModel));
+            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(client, o, namespaceName, clientName, fields, typeFactory, sourceInputModel, client?._clientParameterExamples));
             foreach (var (_, builder) in builders)
             {
                 builder.BuildNextPageMethod(builders);
@@ -153,13 +156,19 @@ namespace AutoRest.CSharp.Output.Models
 
             if (Fields.CredentialFields.Count == 0)
             {
-                yield return CreatePrimaryConstructor(requiredParameters.Concat(optionalToRequired).ToArray());
+                /* order the constructor paramters as (endpoint, requiredParameters, OptionalParamters).
+                 * use the OrderBy to put endpoint as the first parameter.
+                 * */
+                yield return CreatePrimaryConstructor(requiredParameters.Concat(optionalToRequired).OrderBy(parameter => !parameter.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase)).ToArray());
             }
             else
             {
                 foreach (var credentialField in Fields.CredentialFields)
                 {
-                    yield return CreatePrimaryConstructor(requiredParameters.Append(CreateCredentialParameter(credentialField!.Type)).Concat(optionalToRequired).ToArray());
+                    /* order the constructor paramters as (endpoint, requiredParameters, CredentialParamter, OptionalParamters).
+                     * use the OrderBy to put endpoint as the first parameter.
+                     * */
+                    yield return CreatePrimaryConstructor(requiredParameters.Append(CreateCredentialParameter(credentialField!.Type)).Concat(optionalToRequired).OrderBy(parameter => !parameter.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase)).ToArray());
                 }
             }
         }
@@ -171,19 +180,36 @@ namespace AutoRest.CSharp.Output.Models
                 yield return CreateMockingConstructor();
             }
 
+            /* Construct the parameter arguments to call primitive constructor.
+             * In primitive constructor, the endpoint is the first parameter,
+             * so put the endpoint as the first parameter argument if the endpoint is optional paramter.
+             * */
             var optionalParametersArguments = optionalParameters
+                .Where(p => !p.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase))
                 .Select(p => p.Initializer ?? p.Type.GetParameterInitializer(p.DefaultValue!.Value)!)
                 .ToArray();
+            var optionalEndpoint = optionalParameters.Where(p => p.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            var arguments = new List<FormattableString>();
+            if (optionalEndpoint != null)
+            {
+                arguments.Add(optionalEndpoint.Initializer ?? optionalEndpoint.Type.GetParameterInitializer(optionalEndpoint.DefaultValue!.Value)!);
+            }
+
+            arguments.AddRange(requiredParameters
+                .Select<Parameter, FormattableString>(p => $"{p.Name}"));
 
             if (Fields.CredentialFields.Count == 0)
             {
-                yield return CreateSecondaryConstructor(requiredParameters, optionalParametersArguments);
+                var allArguments = arguments.Concat(optionalParametersArguments);
+                yield return CreateSecondaryConstructor(requiredParameters, allArguments.ToArray());
             }
             else
             {
                 foreach (var credentialField in Fields.CredentialFields)
                 {
-                    yield return CreateSecondaryConstructor(requiredParameters.Append(CreateCredentialParameter(credentialField!.Type)).ToArray(), optionalParametersArguments);
+                    var credentialParameter = CreateCredentialParameter(credentialField!.Type);
+                    var allArguments = arguments.Concat(new List<FormattableString>() { $"{credentialParameter.Name}" }).Concat(optionalParametersArguments);
+                    yield return CreateSecondaryConstructor(requiredParameters.Append(credentialParameter).ToArray(), allArguments.ToArray());
                 }
             }
         }
@@ -191,12 +217,8 @@ namespace AutoRest.CSharp.Output.Models
         private ConstructorSignature CreatePrimaryConstructor(IReadOnlyList<Parameter> parameters)
             => new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters);
 
-        private ConstructorSignature CreateSecondaryConstructor(IReadOnlyList<Parameter> parameters, FormattableString[] optionalParametersArguments)
+        private ConstructorSignature CreateSecondaryConstructor(IReadOnlyList<Parameter> parameters, FormattableString[] arguments)
         {
-            var arguments = parameters
-                .Select<Parameter, FormattableString>(p => $"{p.Name}")
-                .Concat(optionalParametersArguments)
-                .ToArray();
             return new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters, Initializer: new ConstructorInitializer(false, arguments));
         }
 
@@ -204,7 +226,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             return new Parameter(
                 "credential",
-                "A credential used to authenticate to an Azure Service.",
+                $"A credential used to authenticate to an Azure Service.",
                 type,
                 null,
                 ValidationType.AssertNotNull,
@@ -217,7 +239,7 @@ namespace AutoRest.CSharp.Output.Models
         private Parameter CreateOptionsParameter()
         {
             var clientOptionsType = ClientOptions.Type.WithNullable(true);
-            return new Parameter("options", "The options for configuring the client.", clientOptionsType, Constant.Default(clientOptionsType), ValidationType.None, Constant.NewInstanceOf(clientOptionsType).GetConstantFormattable());
+            return new Parameter("options", $"The options for configuring the client.", clientOptionsType, Constant.Default(clientOptionsType), ValidationType.None, Constant.NewInstanceOf(clientOptionsType).GetConstantFormattable());
         }
 
         private ConstructorSignature BuildSubClientInternalConstructor()
@@ -256,7 +278,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private IEnumerable<Parameter> GetSubClientFactoryMethodParameters()
             => new[] { KnownParameters.ClientDiagnostics, KnownParameters.Pipeline, KnownParameters.KeyAuth, KnownParameters.TokenAuth }
-                .Concat(RestClientBuilder.GetConstructorParameters(Parameters, null, includeAPIVersion: true))
+                .Concat(RestClientBuilder.GetConstructorParameters(Parameters, null, includeAPIVersion: true).OrderBy(parameter => !parameter.Name.Equals("endpoint", StringComparison.OrdinalIgnoreCase)))
                 .Where(p => Fields.GetFieldByParameter(p) != null);
 
         internal MethodSignatureBase? GetEffectiveCtor()
@@ -301,7 +323,7 @@ namespace AutoRest.CSharp.Output.Models
                         modifiers,
                         parameters.Select(p => new Parameter(
                             p.Name,
-                            p.GetDocumentationCommentXml(),
+                            $"{p.GetDocumentationCommentXml()}",
                             ((INamedTypeSymbol)p.Type).GetCSharpType(_typeFactory)!,
                             null,
                             ValidationType.None,
@@ -314,7 +336,7 @@ namespace AutoRest.CSharp.Output.Models
             return candidates.OrderBy(c => c.Parameters.Count).FirstOrDefault();
         }
 
-        private string? GetSummaryPortion(string? xmlComment)
+        private FormattableString? GetSummaryPortion(string? xmlComment)
         {
             if (xmlComment is null)
                 return null;
@@ -327,7 +349,7 @@ namespace AutoRest.CSharp.Output.Models
             int end = span.IndexOf("</summary>");
             if (end == -1)
                 return null;
-            return span.Slice(start, end - start).Trim().ToString();
+            return $"{span.Slice(start, end - start).Trim().ToString()}";
         }
 
         private bool IsParamMatch(IReadOnlyList<Parameter> methodParameters, INamedTypeSymbol[] suppressionParameters)

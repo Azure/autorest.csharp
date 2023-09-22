@@ -324,6 +324,80 @@ namespace MgmtListMethods
             }
         }
 
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParents/{subParentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SubParents_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="subParentName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
+        public virtual async Task<NullableResponse<SubParentResource>> GetIfExistsAsync(string subParentName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
+
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _subParentRestClient.GetAsync(Id.SubscriptionId, subParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<SubParentResource>(response.GetRawResponse());
+                return Response.FromValue(new SubParentResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParents/{subParentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>SubParents_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="subParentName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
+        public virtual NullableResponse<SubParentResource> GetIfExists(string subParentName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
+
+            using var scope = _subParentClientDiagnostics.CreateScope("SubParentCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _subParentRestClient.Get(Id.SubscriptionId, subParentName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<SubParentResource>(response.GetRawResponse());
+                return Response.FromValue(new SubParentResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         IEnumerator<SubParentResource> IEnumerable<SubParentResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();

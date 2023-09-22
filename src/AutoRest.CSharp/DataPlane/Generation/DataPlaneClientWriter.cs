@@ -280,8 +280,8 @@ namespace AutoRest.CSharp.Generation.Writers
             var itemName = pagingMethod.PagingResponse.ItemPropertyName;
             var signature = new MethodSignature(
                 pagingMethod.Name,
-                pagingMethod.Method.SummaryText,
-                pagingMethod.Method.DescriptionText,
+                $"{pagingMethod.Method.SummaryText}",
+                $"{pagingMethod.Method.DescriptionText}",
                 MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
                 new CSharpType(typeof(Pageable<>), pageType),
                 null,

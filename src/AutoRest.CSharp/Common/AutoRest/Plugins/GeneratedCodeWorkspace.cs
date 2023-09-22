@@ -54,12 +54,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static Task<Project>? _cachedProject;
 
         private Project _project;
-        private Dictionary<string, string> _docFiles { get; init; }
+        private Dictionary<string, XmlDocumentFile> _xmlDocFiles { get; }
 
         private GeneratedCodeWorkspace(Project generatedCodeProject)
         {
             _project = generatedCodeProject;
-            _docFiles = new Dictionary<string, string>();
+            _xmlDocFiles = new();
         }
 
         /// <summary>
@@ -86,10 +86,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         /// Add generated doc file.
         /// </summary>
         /// <param name="name">Name of the doc file, including the relative path to the "Generated" folder.</param>
-        /// <param name="text">Content of the doc file.</param>
-        public void AddGeneratedDocFile(string name, string text)
+        /// <param name="xmlDocument">Content of the doc file.</param>
+        public void AddGeneratedDocFile(string name, XmlDocumentFile xmlDocument)
         {
-            _docFiles.Add(name, text);
+            _xmlDocFiles.Add(name, xmlDocument);
         }
 
         public async IAsyncEnumerable<(string Name, string Text)> GetGeneratedFilesAsync()
@@ -110,6 +110,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 documents.Add(Task.Run(() => ProcessDocument(compilation, document, suppressedTypeNames)));
             }
 
+            var needProcessGeneratedDocs = _xmlDocFiles.Any();
+            var generatedDocs = new Dictionary<string, SyntaxTree>();
+
             foreach (var task in documents)
             {
                 var processed = await task;
@@ -118,11 +121,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 processed = await Formatter.FormatAsync(processed);
                 var text = await processed.GetSyntaxTreeAsync();
                 yield return (processed.Name, text!.ToString());
+                if (needProcessGeneratedDocs) // TODO -- this is a workaround. In HLC, in some cases, there are multiple documents with the same name added in this list, and we get "dictionary same key has been added" exception
+                    generatedDocs.Add(processed.Name, text);
             }
 
-            foreach (var doc in _docFiles)
+            foreach (var (docName, doc) in _xmlDocFiles)
             {
-                yield return (doc.Key, doc.Value);
+                var xmlWriter = doc.XmlDocWriter;
+                var testDocument = generatedDocs[doc.TestFileName];
+                var content = await XmlFormatter.FormatAsync(xmlWriter, testDocument);
+                yield return (docName, content);
             }
         }
 
@@ -265,7 +273,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         /// <returns></returns>
         public async Task PostProcessAsync(PostProcessor? postProcessor = null)
         {
-            postProcessor ??= new PostProcessor();
+            postProcessor ??= new PostProcessor(ImmutableHashSet<string>.Empty);
             switch (Configuration.UnreferencedTypesHandling)
             {
                 case Configuration.UnreferencedTypesHandlingOption.KeepAll:
