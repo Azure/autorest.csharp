@@ -87,6 +87,7 @@ namespace Azure.Core
 
             return content;
         }
+
         public static RequestContent FromObject(object value)
         {
             var content = new Utf8JsonRequestContent();
