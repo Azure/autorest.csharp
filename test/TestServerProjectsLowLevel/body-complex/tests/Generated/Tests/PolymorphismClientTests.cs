@@ -26,9 +26,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetValid_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = CreatePolymorphismClient(endpoint, credential);
 
             Response response = await client.GetValidAsync(null);
         }
@@ -37,9 +37,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetValid_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = CreatePolymorphismClient(endpoint, credential);
 
             Response response = await client.GetValidAsync(null);
         }
@@ -48,9 +48,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValid_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = CreatePolymorphismClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -64,9 +64,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValid_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = CreatePolymorphismClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -87,9 +87,9 @@ null
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDotSyntax_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = CreatePolymorphismClient(endpoint, credential);
 
             Response response = await client.GetDotSyntaxAsync(null);
         }
@@ -98,9 +98,9 @@ null
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDotSyntax_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = CreatePolymorphismClient(endpoint, credential);
 
             Response response = await client.GetDotSyntaxAsync(null);
         }
@@ -109,9 +109,9 @@ null
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComposedWithDiscriminator_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = CreatePolymorphismClient(endpoint, credential);
 
             Response response = await client.GetComposedWithDiscriminatorAsync(null);
         }
@@ -120,9 +120,9 @@ null
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComposedWithDiscriminator_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = CreatePolymorphismClient(endpoint, credential);
 
             Response response = await client.GetComposedWithDiscriminatorAsync(null);
         }
@@ -131,9 +131,9 @@ null
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComposedWithoutDiscriminator_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = CreatePolymorphismClient(endpoint, credential);
 
             Response response = await client.GetComposedWithoutDiscriminatorAsync(null);
         }
@@ -142,9 +142,9 @@ null
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComposedWithoutDiscriminator_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = CreatePolymorphismClient(endpoint, credential);
 
             Response response = await client.GetComposedWithoutDiscriminatorAsync(null);
         }
@@ -153,9 +153,9 @@ null
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComplicated_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = CreatePolymorphismClient(endpoint, credential);
 
             Response response = await client.GetComplicatedAsync(null);
         }
@@ -164,9 +164,9 @@ null
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComplicated_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = CreatePolymorphismClient(endpoint, credential);
 
             Response response = await client.GetComplicatedAsync(null);
         }
@@ -175,9 +175,9 @@ null
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutComplicated_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = CreatePolymorphismClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -191,9 +191,9 @@ null
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutComplicated_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = CreatePolymorphismClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -226,9 +226,9 @@ null
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutMissingDiscriminator_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = CreatePolymorphismClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -242,9 +242,9 @@ null
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutMissingDiscriminator_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = CreatePolymorphismClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -277,9 +277,9 @@ null
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValidMissingRequired_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = CreatePolymorphismClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -293,9 +293,9 @@ null
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValidMissingRequired_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PolymorphismClient client = CreatePolymorphismClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {

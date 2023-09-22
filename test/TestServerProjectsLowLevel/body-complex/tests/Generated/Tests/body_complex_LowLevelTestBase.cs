@@ -19,66 +19,66 @@ namespace body_complex_LowLevel.Tests
         {
         }
 
-        protected BasicClient CreateBasicClient(AzureKeyCredential credential, Uri endpoint)
+        protected BasicClient CreateBasicClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new AutoRestComplexTestServiceClientOptions());
-            var client = new BasicClient(credential, endpoint, options: options);
+            var client = new BasicClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
 
-        protected PrimitiveClient CreatePrimitiveClient(AzureKeyCredential credential, Uri endpoint)
+        protected PrimitiveClient CreatePrimitiveClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new AutoRestComplexTestServiceClientOptions());
-            var client = new PrimitiveClient(credential, endpoint, options: options);
+            var client = new PrimitiveClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
 
-        protected ArrayClient CreateArrayClient(AzureKeyCredential credential, Uri endpoint)
+        protected ArrayClient CreateArrayClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new AutoRestComplexTestServiceClientOptions());
-            var client = new ArrayClient(credential, endpoint, options: options);
+            var client = new ArrayClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
 
-        protected DictionaryClient CreateDictionaryClient(AzureKeyCredential credential, Uri endpoint)
+        protected DictionaryClient CreateDictionaryClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new AutoRestComplexTestServiceClientOptions());
-            var client = new DictionaryClient(credential, endpoint, options: options);
+            var client = new DictionaryClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
 
-        protected InheritanceClient CreateInheritanceClient(AzureKeyCredential credential, Uri endpoint)
+        protected InheritanceClient CreateInheritanceClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new AutoRestComplexTestServiceClientOptions());
-            var client = new InheritanceClient(credential, endpoint, options: options);
+            var client = new InheritanceClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
 
-        protected PolymorphismClient CreatePolymorphismClient(AzureKeyCredential credential, Uri endpoint)
+        protected PolymorphismClient CreatePolymorphismClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new AutoRestComplexTestServiceClientOptions());
-            var client = new PolymorphismClient(credential, endpoint, options: options);
+            var client = new PolymorphismClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
 
-        protected PolymorphicrecursiveClient CreatePolymorphicrecursiveClient(AzureKeyCredential credential, Uri endpoint)
+        protected PolymorphicrecursiveClient CreatePolymorphicrecursiveClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new AutoRestComplexTestServiceClientOptions());
-            var client = new PolymorphicrecursiveClient(credential, endpoint, options: options);
+            var client = new PolymorphicrecursiveClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
 
-        protected ReadonlypropertyClient CreateReadonlypropertyClient(AzureKeyCredential credential, Uri endpoint)
+        protected ReadonlypropertyClient CreateReadonlypropertyClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new AutoRestComplexTestServiceClientOptions());
-            var client = new ReadonlypropertyClient(credential, endpoint, options: options);
+            var client = new ReadonlypropertyClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
 
-        protected FlattencomplexClient CreateFlattencomplexClient(AzureKeyCredential credential, Uri endpoint)
+        protected FlattencomplexClient CreateFlattencomplexClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new AutoRestComplexTestServiceClientOptions());
-            var client = new FlattencomplexClient(credential, endpoint, options: options);
+            var client = new FlattencomplexClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
     }

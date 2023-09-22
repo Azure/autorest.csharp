@@ -25,9 +25,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetValid_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            DictionaryClient client = CreateDictionaryClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DictionaryClient client = CreateDictionaryClient(endpoint, credential);
 
             Response response = await client.GetValidAsync(null);
         }
@@ -36,9 +36,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetValid_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            DictionaryClient client = CreateDictionaryClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DictionaryClient client = CreateDictionaryClient(endpoint, credential);
 
             Response response = await client.GetValidAsync(null);
         }
@@ -47,9 +47,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValid_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            DictionaryClient client = CreateDictionaryClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DictionaryClient client = CreateDictionaryClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutValidAsync(content);
@@ -59,9 +59,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValid_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            DictionaryClient client = CreateDictionaryClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DictionaryClient client = CreateDictionaryClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -77,9 +77,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetEmpty_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            DictionaryClient client = CreateDictionaryClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DictionaryClient client = CreateDictionaryClient(endpoint, credential);
 
             Response response = await client.GetEmptyAsync(null);
         }
@@ -88,9 +88,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetEmpty_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            DictionaryClient client = CreateDictionaryClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DictionaryClient client = CreateDictionaryClient(endpoint, credential);
 
             Response response = await client.GetEmptyAsync(null);
         }
@@ -99,9 +99,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutEmpty_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            DictionaryClient client = CreateDictionaryClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DictionaryClient client = CreateDictionaryClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutEmptyAsync(content);
@@ -111,9 +111,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutEmpty_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            DictionaryClient client = CreateDictionaryClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DictionaryClient client = CreateDictionaryClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -129,9 +129,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNull_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            DictionaryClient client = CreateDictionaryClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DictionaryClient client = CreateDictionaryClient(endpoint, credential);
 
             Response response = await client.GetNullAsync(null);
         }
@@ -140,9 +140,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNull_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            DictionaryClient client = CreateDictionaryClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DictionaryClient client = CreateDictionaryClient(endpoint, credential);
 
             Response response = await client.GetNullAsync(null);
         }
@@ -151,9 +151,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNotProvided_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            DictionaryClient client = CreateDictionaryClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DictionaryClient client = CreateDictionaryClient(endpoint, credential);
 
             Response response = await client.GetNotProvidedAsync(null);
         }
@@ -162,9 +162,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNotProvided_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            DictionaryClient client = CreateDictionaryClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            DictionaryClient client = CreateDictionaryClient(endpoint, credential);
 
             Response response = await client.GetNotProvidedAsync(null);
         }

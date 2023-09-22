@@ -25,9 +25,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetValid_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ReadonlypropertyClient client = CreateReadonlypropertyClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ReadonlypropertyClient client = CreateReadonlypropertyClient(endpoint, credential);
 
             Response response = await client.GetValidAsync(null);
         }
@@ -36,9 +36,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetValid_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ReadonlypropertyClient client = CreateReadonlypropertyClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ReadonlypropertyClient client = CreateReadonlypropertyClient(endpoint, credential);
 
             Response response = await client.GetValidAsync(null);
         }
@@ -47,9 +47,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValid_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ReadonlypropertyClient client = CreateReadonlypropertyClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ReadonlypropertyClient client = CreateReadonlypropertyClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutValidAsync(content);
@@ -59,9 +59,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValid_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ReadonlypropertyClient client = CreateReadonlypropertyClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            ReadonlypropertyClient client = CreateReadonlypropertyClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {

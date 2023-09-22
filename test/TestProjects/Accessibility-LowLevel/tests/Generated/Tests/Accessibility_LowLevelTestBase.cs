@@ -19,10 +19,10 @@ namespace Accessibility_LowLevel.Tests
         {
         }
 
-        protected AccessibilityClient CreateAccessibilityClient(AzureKeyCredential credential, Uri endpoint)
+        protected AccessibilityClient CreateAccessibilityClient(Uri endpoint, AzureKeyCredential credential)
         {
             var options = InstrumentClientOptions(new AccessibilityClientOptions());
-            var client = new AccessibilityClient(credential, endpoint, options: options);
+            var client = new AccessibilityClient(endpoint, credential, options: options);
             return InstrumentClient(client);
         }
     }

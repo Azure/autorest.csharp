@@ -25,9 +25,9 @@ namespace Accessibility_LowLevel_TokenAuth.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_Async()
         {
-            TokenCredential credential = new DefaultAzureCredential();
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AccessibilityClient client = CreateAccessibilityClient(credential, endpoint);
+            TokenCredential credential = new DefaultAzureCredential();
+            AccessibilityClient client = CreateAccessibilityClient(endpoint, credential);
 
             RequestContent content = null;
             Response response = await client.OperationAsync(content);
@@ -37,9 +37,9 @@ namespace Accessibility_LowLevel_TokenAuth.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_AllParameters_Async()
         {
-            TokenCredential credential = new DefaultAzureCredential();
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AccessibilityClient client = CreateAccessibilityClient(credential, endpoint);
+            TokenCredential credential = new DefaultAzureCredential();
+            AccessibilityClient client = CreateAccessibilityClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.OperationAsync(content);

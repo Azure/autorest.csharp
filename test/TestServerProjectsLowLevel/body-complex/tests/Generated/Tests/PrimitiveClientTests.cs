@@ -26,9 +26,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetInt_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetIntAsync(null);
         }
@@ -37,9 +37,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetInt_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetIntAsync(null);
         }
@@ -48,9 +48,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutInt_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutIntAsync(content);
@@ -60,9 +60,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutInt_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -76,9 +76,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLong_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetLongAsync(null);
         }
@@ -87,9 +87,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLong_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetLongAsync(null);
         }
@@ -98,9 +98,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutLong_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutLongAsync(content);
@@ -110,9 +110,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutLong_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -126,9 +126,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFloat_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetFloatAsync(null);
         }
@@ -137,9 +137,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFloat_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetFloatAsync(null);
         }
@@ -148,9 +148,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutFloat_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutFloatAsync(content);
@@ -160,9 +160,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutFloat_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -176,9 +176,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDouble_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetDoubleAsync(null);
         }
@@ -187,9 +187,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDouble_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetDoubleAsync(null);
         }
@@ -198,9 +198,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDouble_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDoubleAsync(content);
@@ -210,9 +210,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDouble_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -226,9 +226,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBool_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetBoolAsync(null);
         }
@@ -237,9 +237,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBool_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetBoolAsync(null);
         }
@@ -248,9 +248,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutBool_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutBoolAsync(content);
@@ -260,9 +260,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutBool_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -276,9 +276,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetString_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetStringAsync(null);
         }
@@ -287,9 +287,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetString_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetStringAsync(null);
         }
@@ -298,9 +298,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutString_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutStringAsync(content);
@@ -310,9 +310,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutString_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
@@ -327,9 +327,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDate_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetDateAsync(null);
         }
@@ -338,9 +338,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDate_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetDateAsync(null);
         }
@@ -349,9 +349,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDate_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDateAsync(content);
@@ -361,9 +361,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDate_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -377,9 +377,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDateTime_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetDateTimeAsync(null);
         }
@@ -388,9 +388,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDateTime_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetDateTimeAsync(null);
         }
@@ -399,9 +399,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDateTime_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDateTimeAsync(content);
@@ -411,9 +411,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDateTime_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -427,9 +427,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDateTimeRfc1123_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetDateTimeRfc1123Async(null);
         }
@@ -438,9 +438,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDateTimeRfc1123_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetDateTimeRfc1123Async(null);
         }
@@ -449,9 +449,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDateTimeRfc1123_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDateTimeRfc1123Async(content);
@@ -461,9 +461,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDateTimeRfc1123_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -477,9 +477,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDuration_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetDurationAsync(null);
         }
@@ -488,9 +488,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDuration_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetDurationAsync(null);
         }
@@ -499,9 +499,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDuration_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDurationAsync(content);
@@ -511,9 +511,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDuration_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {
@@ -526,9 +526,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetByte_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetByteAsync(null);
         }
@@ -537,9 +537,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetByte_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             Response response = await client.GetByteAsync(null);
         }
@@ -548,9 +548,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutByte_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutByteAsync(content);
@@ -560,9 +560,9 @@ namespace body_complex_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutByte_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            PrimitiveClient client = CreatePrimitiveClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            PrimitiveClient client = CreatePrimitiveClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create(new
             {

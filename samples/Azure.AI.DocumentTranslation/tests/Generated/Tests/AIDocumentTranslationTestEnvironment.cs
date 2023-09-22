@@ -8,9 +8,9 @@
 using Azure.Core.TestFramework;
 using Azure.Identity;
 
-namespace body_array_LowLevel.Tests
+namespace Azure.AI.DocumentTranslation.Tests
 {
-    public partial class body_array_LowLevelTestEnvironment : TestEnvironment
+    public partial class AIDocumentTranslationTestEnvironment : TestEnvironment
     {
     }
 }

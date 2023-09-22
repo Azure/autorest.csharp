@@ -25,9 +25,9 @@ namespace Accessibility_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AccessibilityClient client = CreateAccessibilityClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AccessibilityClient client = CreateAccessibilityClient(endpoint, credential);
 
             RequestContent content = null;
             Response response = await client.OperationAsync(content);
@@ -37,9 +37,9 @@ namespace Accessibility_LowLevel.Tests
         [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_AllParameters_Async()
         {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            AccessibilityClient client = CreateAccessibilityClient(credential, endpoint);
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            AccessibilityClient client = CreateAccessibilityClient(endpoint, credential);
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.OperationAsync(content);

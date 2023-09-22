@@ -7,5 +7,6 @@
     "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],
   "skip-csproj-packagereference": true,
-  "generation1-convenience-client": true
+  "generation1-convenience-client": true,
+  "generate-test-scaffolding": true
 }
