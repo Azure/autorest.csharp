@@ -5,17 +5,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
-using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using Request = Azure.Core.Request;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -247,29 +251,32 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration request, ObjectSerialization bodySerialization, FormattableString value)
         {
-            switch (bodySerialization)
+            writer.WriteMethodBodyStatement(GetRequestContentForSerialization(request, bodySerialization, value));
+        }
+
+        private static MethodBodyStatement GetRequestContentForSerialization(CodeWriterDeclaration request, ObjectSerialization serialization, FormattableString value)
+        {
+            var valueExpression = new FormattableStringToExpression(value);
+            var requestExpression = new RequestExpression(new VariableReference(typeof(Request), request));
+
+            return serialization switch
             {
-                case JsonSerialization jsonSerialization:
-                    {
-                        var content = new CodeWriterDeclaration("content");
+                JsonSerialization jsonSerialization => new[]
+                {
+                    Var("content", New.Utf8JsonRequestContent(), out var utf8JsonContent),
+                    JsonSerializationMethodsBuilder.SerializeExpression(utf8JsonContent.JsonWriter, jsonSerialization, valueExpression),
+                    Assign(requestExpression.Content, utf8JsonContent)
+                },
 
-                        writer.Line($"var {content:D} = new {typeof(Utf8JsonRequestContent)}();");
-                        writer.ToSerializeCall(jsonSerialization, value, writerName: $"{content}.{nameof(Utf8JsonRequestContent.JsonWriter)}");
-                        writer.Line($"{request}.Content = {content};");
-                        break;
-                    }
-                case XmlElementSerialization xmlSerialization:
-                    {
-                        var content = new CodeWriterDeclaration("content");
+                XmlElementSerialization xmlSerialization => new[]
+                {
+                    Var("content", New.XmlWriterContent(), out var xmlWriterContent),
+                    XmlSerializationMethodsBuilder.SerializeExpression(xmlWriterContent.XmlWriter, xmlSerialization, valueExpression),
+                    Assign(requestExpression.Content, xmlWriterContent)
+                },
 
-                        writer.Line($"var {content:D} = new {typeof(XmlWriterContent)}();");
-                        writer.ToSerializeCall(xmlSerialization, value, writerName: $"{content}.{nameof(XmlWriterContent.XmlWriter)}");
-                        writer.Line($"{request}.Content = {content};");
-                        break;
-                    }
-                default:
-                    throw new NotImplementedException(bodySerialization.ToString());
-            }
+                _ => throw new NotImplementedException()
+            };
         }
 
         private static void WriteHeader(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header, ClientFields? fields)
