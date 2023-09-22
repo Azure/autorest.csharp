@@ -203,6 +203,56 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
     }
 
     /// <summary>
+    /// Check if <paramref name="requestPath"/> is a prefix path of <paramref name="candidate"/>
+    /// While comparing, we will ignore everything inside {}
+    /// For instance, if "/subs/{subsId}/rgs/{name}/foo" and "/subs/{subsId}/rgs/{name}/foo/bar/{something}",
+    /// we are effectively comparing /subs/{}/rgs/{}/foo and /subs/{}/rgs/{}/foo/bar/{}
+    /// </summary>
+    /// <param name="requestPath"></param>
+    /// <param name="candidate"></param>
+    /// <returns></returns>
+    public static bool IsPrefix(string requestPath, string candidate)
+    {
+        // Create spans for the candidate and request path
+        ReadOnlySpan<char> candidateSpan = candidate.AsSpan();
+        ReadOnlySpan<char> requestPathSpan = requestPath.AsSpan();
+
+        int cIdx = 0, rIdx = 0;
+
+        // iterate through everything on request path
+        while (rIdx < requestPathSpan.Length)
+        {
+            // if we run out of candidate, return false because request path here is effectively longer than candidate
+            if (cIdx >= candidateSpan.Length)
+                return false;
+
+            // if we hit a {
+            char c = candidateSpan[cIdx];
+            char r = requestPathSpan[rIdx];
+
+            if (c != r)
+                return false;
+
+            if (c == '{')
+            {
+                // they both are {, skip everything until we have a } or we get to the last character of the string
+                while (cIdx < candidateSpan.Length - 1 && candidateSpan[cIdx] != '}')
+                    cIdx++;
+                while (rIdx < requestPathSpan.Length - 1 && requestPathSpan[rIdx] != '}')
+                    rIdx++;
+            }
+            else
+            {
+                // they are the same but not {
+                cIdx++;
+                rIdx++;
+            }
+        }
+
+        return true;
+    }
+
+    /// <summary>
     /// Trim this from the other and return the <see cref="RequestPath"/> that remain.
     /// The result is "other - this" by removing this as a prefix of other.
     /// If this == other, return empty request path

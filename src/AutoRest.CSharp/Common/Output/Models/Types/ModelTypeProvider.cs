@@ -27,11 +27,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal sealed class ModelTypeProvider : SerializableObjectType
     {
-        private static readonly Parameter[] _fromResponseParameters = { new Parameter("response", "The response to deserialize the model from.", new CSharpType(typeof(Response)), null, ValidationType.None, null) };
-        private MethodSignature FromResponseSignature => new MethodSignature("FromResponse", null, "Deserializes the model from a raw response.", GetFromResponseModifiers(), Type, null, _fromResponseParameters);
+        private static readonly Parameter[] _fromResponseParameters = { new Parameter("response", $"The response to deserialize the model from.", new CSharpType(typeof(Response)), null, ValidationType.None, null) };
+        private MethodSignature FromResponseSignature => new MethodSignature("FromResponse", null, $"Deserializes the model from a raw response.", GetFromResponseModifiers(), Type, null, _fromResponseParameters);
 
         private static readonly Parameter[] _toRequestContentParameters = Array.Empty<Parameter>();
-        private MethodSignature ToRequestContentSignature => new MethodSignature("ToRequestContent", null, "Convert into a Utf8JsonRequestContent.", GetToRequestContentModifiers(), typeof(RequestContent), null, _toRequestContentParameters);
+        private MethodSignature ToRequestContentSignature => new MethodSignature("ToRequestContent", null, $"Convert into a Utf8JsonRequestContent.", GetToRequestContentModifiers(), typeof(RequestContent), null, _toRequestContentParameters);
 
         private ModelTypeProviderFields? _fields;
         private ConstructorSignature? _publicConstructor;
@@ -44,6 +44,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
+        public bool IsAccessibilityOverridden { get; }
         public override bool IncludeConverter => false;
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null;
 
@@ -63,6 +64,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _sourceInputModel = sourceInputModel;
             DefaultName = GetValidIdentifier(inputModel.Name); // TODO -- this is only a workaround only to solve the anonymous model names, in other cases, the name is unchanged.
             DefaultAccessibility = inputModel.Accessibility ?? "public";
+            IsAccessibilityOverridden = inputModel.Accessibility != null;
             _deprecated = inputModel.Deprecated;
             _derivedTypes = derivedTypes;
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
@@ -111,9 +113,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             return signatures;
         }
 
-        protected override string CreateDescription()
+        protected override FormattableString CreateDescription()
         {
-            return _inputModel.Description ?? $"The {_inputModel.Name}.";
+            return _inputModel.Description != null ? (FormattableString)$"{_inputModel.Description}" : $"The {_inputModel.Name}.";
         }
 
         private ModelTypeProviderFields EnsureFields()
@@ -127,7 +129,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             //get base public ctor params
             GetConstructorParameters(Fields.PublicConstructorParameters, out var fullParameterList, out var parametersToPassToBase, true, CreatePublicConstructorParameter);
 
-            var summary = $"Initializes a new instance of {name}";
+            FormattableString summary = $"Initializes a new instance of {name}";
             var accessibility = _inputModel.Usage.HasFlag(InputModelTypeUsage.Input)
                 ? MethodSignatureModifiers.Public
                 : MethodSignatureModifiers.Internal;

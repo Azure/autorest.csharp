@@ -329,6 +329,82 @@ namespace MgmtMultipleParentResource
             }
         }
 
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Children_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="childName"> The name of the virtual machine run command. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        public virtual async Task<NullableResponse<TheParentSubParentChildResource>> GetIfExistsAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
+
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _theParentSubParentChildChildrenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<TheParentSubParentChildResource>(response.GetRawResponse());
+                return Response.FromValue(new TheParentSubParentChildResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Children_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="childName"> The name of the virtual machine run command. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        public virtual NullableResponse<TheParentSubParentChildResource> GetIfExists(string childName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
+
+            using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChildCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _theParentSubParentChildChildrenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<TheParentSubParentChildResource>(response.GetRawResponse());
+                return Response.FromValue(new TheParentSubParentChildResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         IEnumerator<TheParentSubParentChildResource> IEnumerable<TheParentSubParentChildResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();

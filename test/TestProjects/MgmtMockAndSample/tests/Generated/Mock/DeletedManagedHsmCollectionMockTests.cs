@@ -46,5 +46,16 @@ namespace MgmtMockAndSample.Tests.Mock
             var collection = subscriptionResource.GetDeletedManagedHsms();
             await collection.GetAsync(new AzureLocation("westus"), "hsm1");
         }
+
+        [RecordedTest]
+        public async Task GetIfExists()
+        {
+            // Example: Retrieve a deleted managed HSM
+
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            var collection = subscriptionResource.GetDeletedManagedHsms();
+            await collection.GetIfExistsAsync(new AzureLocation("westus"), "hsm1");
+        }
     }
 }

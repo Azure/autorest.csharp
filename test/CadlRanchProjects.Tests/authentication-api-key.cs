@@ -14,14 +14,14 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Authentication_ApiKey_valid() => Test(async (host) =>
         {
-            Response response = await new ApiKeyClient(new AzureKeyCredential("valid-key"), host, null).ValidAsync();
+            Response response = await new ApiKeyClient(host, new AzureKeyCredential("valid-key"), null).ValidAsync();
             Assert.AreEqual(204, response.Status);
         });
 
         [Test]
         public Task Authentication_ApiKey_invalid() => Test((host) =>
         {
-            var exception = Assert.ThrowsAsync<RequestFailedException>(() => new ApiKeyClient(new AzureKeyCredential("valid-key"), host, null).InvalidAsync());
+            var exception = Assert.ThrowsAsync<RequestFailedException>(() => new ApiKeyClient(host, new AzureKeyCredential("valid-key"), null).InvalidAsync());
             Assert.AreEqual(403, exception.Status);
             return Task.CompletedTask;
         });

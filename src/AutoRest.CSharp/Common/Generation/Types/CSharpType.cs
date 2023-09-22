@@ -190,7 +190,7 @@ namespace AutoRest.CSharp.Generation.Types
             var name = IsFrameworkType ? CodeWriter.GetTypeNameMapping(FrameworkType) ?? Name : Name;
             if (IsNullable && IsValueType)
                 name += "?";
-            if (Arguments is not null && Arguments.Count() > 0)
+            if (Arguments is not null && Arguments.Length > 0)
             {
                 name += useSquiggles ? "{" : "<";
                 name += string.Join(",", Arguments.Select(a => a.ConvertParamNameForDocs()));

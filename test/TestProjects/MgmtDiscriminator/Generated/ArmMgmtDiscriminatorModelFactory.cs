@@ -28,6 +28,38 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleData(id, name, resourceType, systemData, properties);
         }
 
+        /// <summary> Initializes a new instance of DeliveryRuleProperties. </summary>
+        /// <param name="order"> The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied. </param>
+        /// <param name="conditions">
+        /// The condition that must be matched for the actions to be executed
+        /// Please note <see cref="Models.DeliveryRuleCondition"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="Models.DeliveryRuleQueryStringCondition"/>, <see cref="Models.DeliveryRuleRemoteAddressCondition"/> and <see cref="Models.DeliveryRuleRequestMethodCondition"/>.
+        /// </param>
+        /// <param name="actions">
+        /// A list of actions that are executed when all the conditions of a rule are satisfied.
+        /// Please note <see cref="Models.DeliveryRuleAction"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="Models.DeliveryRuleCacheExpirationAction"/>, <see cref="Models.DeliveryRuleCacheKeyQueryStringAction"/>, <see cref="Models.DeliveryRuleRequestHeaderAction"/>, <see cref="Models.DeliveryRuleResponseHeaderAction"/>, <see cref="Models.OriginGroupOverrideAction"/>, <see cref="Models.DeliveryRuleRouteConfigurationOverrideAction"/>, <see cref="Models.UrlRedirectAction"/>, <see cref="Models.UrlRewriteAction"/> and <see cref="Models.UrlSigningAction"/>.
+        /// </param>
+        /// <param name="extraMappingInfo">
+        /// A dictionary of mapping details about the actions that are executed when all the conditions of a rule are satisfied.
+        /// Please note <see cref="Models.DeliveryRuleAction"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="Models.DeliveryRuleCacheExpirationAction"/>, <see cref="Models.DeliveryRuleCacheKeyQueryStringAction"/>, <see cref="Models.DeliveryRuleRequestHeaderAction"/>, <see cref="Models.DeliveryRuleResponseHeaderAction"/>, <see cref="Models.OriginGroupOverrideAction"/>, <see cref="Models.DeliveryRuleRouteConfigurationOverrideAction"/>, <see cref="Models.UrlRedirectAction"/>, <see cref="Models.UrlRewriteAction"/> and <see cref="Models.UrlSigningAction"/>.
+        /// </param>
+        /// <param name="pet">
+        /// A pet
+        /// Please note <see cref="Models.Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+        /// The available derived classes include <see cref="Models.Cat"/> and <see cref="Models.Dog"/>.
+        /// </param>
+        /// <param name="foo"> put a readonly property here so that this model will show up in the model factory. </param>
+        /// <returns> A new <see cref="Models.DeliveryRuleProperties"/> instance for mocking. </returns>
+        public static DeliveryRuleProperties DeliveryRuleProperties(int? order = null, DeliveryRuleCondition conditions = null, IEnumerable<DeliveryRuleAction> actions = null, IDictionary<string, DeliveryRuleAction> extraMappingInfo = null, Pet pet = null, string foo = null)
+        {
+            actions ??= new List<DeliveryRuleAction>();
+            extraMappingInfo ??= new Dictionary<string, DeliveryRuleAction>();
+
+            return new DeliveryRuleProperties(order, conditions, actions?.ToList(), extraMappingInfo, pet, foo);
+        }
+
         /// <summary> Initializes a new instance of DeliveryRuleCondition. </summary>
         /// <param name="name"> The name of the condition for the delivery rule. </param>
         /// <param name="foo"> For test. </param>

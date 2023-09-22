@@ -14,12 +14,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
 {
     internal sealed class MgmtPostProcessor : PostProcessor
     {
-        private readonly ImmutableHashSet<string> _modelsToKeep;
-
-        public MgmtPostProcessor(ImmutableHashSet<string> modelsToKeep, string? modelFactoryFullName) : base(modelFactoryFullName)
-        {
-            _modelsToKeep = modelsToKeep;
-        }
+        public MgmtPostProcessor(ImmutableHashSet<string> modelsToKeep, string? modelFactoryFullName) : base(modelsToKeep, modelFactoryFullName) { }
 
         protected override bool IsRootDocument(Document document)
         {
@@ -28,7 +23,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             // 1. the file is under `Generated` or `Generated/Extensions` which is handled by `IsMgmtRootDocument`
             // 2. the declaration has a ReferenceType or similar attribute on it which is handled by `IsReferenceType`
             // 3. the file is custom code (not generated and not shared) which is handled by `IsCustomDocument`
-            return IsMgmtRootDocument(document) || IsReferenceType(root) || GeneratedCodeWorkspace.IsCustomDocument(document) || ShouldKeepModel(root, _modelsToKeep);
+            return IsMgmtRootDocument(document) || IsReferenceType(root) || base.IsRootDocument(document);
         }
 
         private static bool IsMgmtRootDocument(Document document) => GeneratedCodeWorkspace.IsGeneratedDocument(document) && Path.GetDirectoryName(document.Name) is "Extensions" or "";
@@ -58,18 +53,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest.PostProcess
             }
 
             return false;
-        }
-
-        private static bool ShouldKeepModel(SyntaxNode? root, ImmutableHashSet<string> modelsToKeep)
-        {
-            if (root is null)
-                return false;
-
-            // use `BaseTypeDeclarationSyntax` to also include enums because `EnumDeclarationSyntax` extends `BaseTypeDeclarationSyntax`
-            // `ClassDeclarationSyntax` and `StructDeclarationSyntax` both inherit `TypeDeclarationSyntax`
-            var typeNodes = root.DescendantNodes().OfType<BaseTypeDeclarationSyntax>();
-            // there is possibility that we have multiple types defined in the same document (for instance, custom code)
-            return typeNodes.Any(t => modelsToKeep.Contains(t.Identifier.Text));
         }
 
         private static SyntaxList<AttributeListSyntax>? GetAttributeLists(SyntaxNode node)

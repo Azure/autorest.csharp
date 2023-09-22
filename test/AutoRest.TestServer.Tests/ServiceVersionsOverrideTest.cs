@@ -7,8 +7,8 @@ using System.Linq;
 using System.Reflection;
 using Azure.Core;
 using NUnit.Framework;
-using ServiceVersionOverride;
-using static ServiceVersionOverride.ServiceVersionOverrideClientOptions;
+using ServiceVersionOverride_LowLevel;
+using static ServiceVersionOverride_LowLevel.ServiceVersionOverrideClientOptions;
 
 namespace AutoRest.TestServer.Tests
 {

@@ -17,7 +17,7 @@ namespace AutoRest.TestServer.Tests
         [Ignore("Enable this test case after https://github.com/Azure/autorest.csharp/issues/1161 resolved")]
         public Task FileStreamEmpty() => Test(async (host) =>
         {
-            var result = await new FilesClient(Key, host, null).GetEmptyFileAsync(new());
+            var result = await new FilesClient(host, Key, null).GetEmptyFileAsync(new());
             Assert.AreEqual(0, await result.ContentStream.ReadAsync(new byte[10]));
         });
 
@@ -25,7 +25,7 @@ namespace AutoRest.TestServer.Tests
         [Ignore("Enable this test case after https://github.com/Azure/autorest.csharp/issues/1161 resolved")]
         public Task FileStreamNonempty() => Test(async (host) =>
         {
-            var result = await new FilesClient(Key, host, null).GetFileAsync(new());
+            var result = await new FilesClient(host, Key, null).GetFileAsync(new());
             var memoryStream = new MemoryStream();
             await result.ContentStream.CopyToAsync(memoryStream);
 
@@ -36,7 +36,7 @@ namespace AutoRest.TestServer.Tests
         [Ignore("Enable this test case after https://github.com/Azure/autorest.csharp/issues/1161 resolved")]
         public Task FileStreamVeryLarge() => Test(async (host) =>
         {
-            var result = await new FilesClient(Key, host, null).GetFileLargeAsync(new());
+            var result = await new FilesClient(host, Key, null).GetFileLargeAsync(new());
             var buffer = new byte[2 * 1024 * 1024L];
             var stream = result.ContentStream;
             long total = 0;

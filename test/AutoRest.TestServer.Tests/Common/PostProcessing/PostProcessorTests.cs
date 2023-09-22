@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.PostProcessing;
 using Microsoft.CodeAnalysis;
@@ -13,6 +14,10 @@ internal class PostProcessorTests
 {
     internal class TestPostProcessor : PostProcessor
     {
+        public TestPostProcessor(ImmutableHashSet<string> modelsToKeep) : base(modelsToKeep)
+        {
+        }
+
         protected override bool IsRootDocument(Document document)
         {
             return document.Name.EndsWith("Client.cs");
@@ -42,7 +47,7 @@ internal class PostProcessorTests
     [TestCase("TestSDK.PageableItem", true, false)]
     public async Task ValidateTypeAccessibility(string typeFullName, bool exist, bool? isInternal)
     {
-        var postProcessor = new TestPostProcessor();
+        var postProcessor = new TestPostProcessor(ImmutableHashSet<string>.Empty);
 
         _project = await postProcessor.InternalizeAsync(_project);
 
