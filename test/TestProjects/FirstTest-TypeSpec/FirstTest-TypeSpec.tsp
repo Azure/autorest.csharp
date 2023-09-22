@@ -381,3 +381,28 @@ op stringBody(@body body: string): void;
 @put
 @convenientAPI(true)
 op boolBody(@body body: boolean): void;
+
+
+@route("/dateTimeBody")
+@doc("The body parameter type is datetime.")
+@put
+@convenientAPI(true)
+op dateTimeBody(@body body: utcDateTime): void;
+
+
+@route("/returnString")
+@doc("The return type is datetime.")
+@put
+@convenientAPI(true)
+op returnString(): string;
+
+@route("/returnUnknown")
+@put
+@convenientAPI(true)
+op returnUnknown(
+): {
+  @statusCode statusCode: 200;
+  @body
+  body: unknown;
+};
+
