@@ -42,24 +42,25 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private static IReadOnlyList<RequestParameter> GetMgmtParametersFromOperations(ICollection<Operation> operations)
         {
-            var parameters = operations
-                .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
-                .Where(p => p.Implementation == ImplementationLocation.Client)
-                .Distinct(new ParameterCompareer()).ToList();
-            ValidateMgmtOperationParameters(parameters);
-            return parameters;
+            var parameters = new HashSet<RequestParameter>(new ParameterCompareer());
+            foreach (var operation in operations)
+            {
+                var clientParameters = operation.Parameters.Where(p => p.Implementation == ImplementationLocation.Client);
+                foreach (var item in clientParameters)
+                {
+                    ValidateMgmtOperationParameters(item, operation);
+                    parameters.Add(item);
+                }
+            }
+            return parameters.ToList();
         }
 
-        private static void ValidateMgmtOperationParameters(IReadOnlyList<RequestParameter> parameters)
+        private static void ValidateMgmtOperationParameters(RequestParameter parameter, Operation operation)
         {
             var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "modelerfour:synthesized/host", "modelerfour:synthesized/api-version" };
-            foreach (var parameter in parameters)
+            if (!set.Contains(parameter.Origin ?? string.Empty))
             {
-                var parameterName = parameter.Origin ?? string.Empty;
-                if (!set.Contains(parameterName))
-                {
-                    throw new InvalidOperationException($"{parameterName} should be method parameter for operation");
-                }
+                throw new InvalidOperationException($"{parameter.Language.Default.Name} should be method parameter for operation {operation.OperationId}");
             }
         }
 
