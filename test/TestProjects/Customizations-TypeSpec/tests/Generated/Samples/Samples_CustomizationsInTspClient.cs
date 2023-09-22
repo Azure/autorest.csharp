@@ -75,6 +75,7 @@ namespace CustomizationsInTsp.Samples
 
             RequestContent content = RequestContent.Create(new
             {
+                propertyExtensibleEnum = "Monday",
                 propertyModelToMakeInternal = new
                 {
                     requiredInt = 1234,
@@ -133,6 +134,7 @@ key = "<badListOfDictionaryName>",
             Response response = client.RoundTrip(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("propertyExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("optionalInt").ToString());
@@ -164,6 +166,7 @@ key = "<badListOfDictionaryName>",
 
             RequestContent content = RequestContent.Create(new
             {
+                propertyExtensibleEnum = "Monday",
                 propertyModelToMakeInternal = new
                 {
                     requiredInt = 1234,
@@ -222,6 +225,7 @@ key = "<badListOfDictionaryName>",
             Response response = await client.RoundTripAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("propertyExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("optionalInt").ToString());
@@ -253,6 +257,7 @@ key = "<badListOfDictionaryName>",
 
             RootModel input = new RootModel()
             {
+                PropertyExtensibleEnum = ExtensibleEnumWithOperator.Monday,
                 PropertyModelToRename = new RenamedModel(1234)
                 {
                     OptionalInt = 1234,
@@ -294,6 +299,7 @@ new Dictionary<string, string>()
 
             RootModel input = new RootModel()
             {
+                PropertyExtensibleEnum = ExtensibleEnumWithOperator.Monday,
                 PropertyModelToRename = new RenamedModel(1234)
                 {
                     OptionalInt = 1234,
