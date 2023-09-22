@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Xml;
 using System.Xml.Linq;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
@@ -22,9 +23,6 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class SerializationWriter
     {
-        public static readonly ModelWriter.MethodBodyImplementation JsonFromResponseMethod = WriteJsonFromResponseMethod;
-        public static readonly ModelWriter.MethodBodyImplementation JsonToRequestContentMethod = WriteJsonToRequestContentMethod;
-
         public void WriteSerialization(CodeWriter writer, TypeProvider schema)
         {
             switch (schema)
@@ -97,17 +95,15 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         if (includeDeserializer)
                         {
-                            WriteJsonDeserialize(writer, declaration, jsonSerialization);
+                            WriteJsonDeserialize(writer, declaration, jsonSerialization, model);
                         }
                     }
 
-                    foreach (var methodDefinition in model.Methods)
+                    foreach (var method in model.Methods)
                     {
-                        using (writer.WriteCommonMethod(methodDefinition.Signature, null, false, methodDefinition.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public)))
-                        {
-                            methodDefinition.BodyImplementation(writer, model);
-                        }
-                        writer.Line();
+                        writer.WriteXmlDocumentationSummary(method.Signature.Description);
+                        writer.WriteXmlDocumentationParameters(method.Signature.Parameters);
+                        writer.WriteMethod(method);
                     }
 
                     if (jsonSerialization is { IncludeConverter: true })
@@ -153,100 +149,25 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteXmlSerialize(CodeWriter writer, XmlObjectSerialization serialization)
         {
-            var nameHint = new CodeWriterDeclaration("nameHint");
-            writer.Append($"void {typeof(IXmlSerializable)}.{nameof(IXmlSerializable.Write)}({typeof(XmlWriter)} writer, {typeof(string)} {nameHint:D})");
-            using (writer.Scope())
-            {
-                writer.ToSerializeCall(serialization, nameHint);
-            }
-            writer.Line();
+            writer.WriteMethod(XmlSerializationMethodsBuilder.BuildXmlSerializableWrite(serialization));
         }
 
         private static void WriteXmlDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, XmlObjectSerialization serialization)
         {
-            var element = new CodeWriterDeclaration("element");
-            using (writer.Scope($"internal static {serialization.Type} Deserialize{declaration.Name}({typeof(XElement)} {element:D})"))
-            {
-                var propertyVariables = writer.ToDeserializeObjectCall(serialization, element);
-                var initializers = new List<PropertyInitializer>();
-                foreach (var propertyVariable in propertyVariables)
-                {
-                    var property = propertyVariable.Key;
-                    initializers.Add(new PropertyInitializer(property.PropertyName, property.PropertyType, property.ShouldSkipSerialization, $"{propertyVariable.Value.ActualName}"));
-                }
-
-                var objectType = (ObjectType)serialization.Type.Implementation;
-                writer.WriteInitialization(v => writer.Line($"return {v};"), objectType, objectType.SerializationConstructor, initializers);
-            }
-            writer.Line();
+            writer.WriteMethod(XmlSerializationMethodsBuilder.BuildDeserialize(declaration, serialization));
         }
 
-        private static void WriteJsonDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, JsonObjectSerialization serialization)
+        private static void WriteJsonDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, JsonObjectSerialization serialization, SerializableObjectType model)
         {
-            using (writer.Scope($"internal static {serialization.Type} Deserialize{declaration.Name}({typeof(JsonElement)} element)"))
+            if (JsonSerializationMethodsBuilder.BuildDeserialize(declaration, serialization, model.GetExistingType()) is {} deserialize)
             {
-                if (!serialization.Type.IsValueType) // only return null for reference type (e.g. no enum)
-                {
-                    using (writer.Scope($"if (element.{nameof(JsonElement.ValueKind)} == {typeof(JsonValueKind)}.Null)"))
-                    {
-                        writer.Line($"return null;");
-                    }
-                }
-
-                var discriminator = serialization.Discriminator;
-
-                if (discriminator is not null && discriminator.HasDescendants)
-                {
-                    using (writer.Scope($"if (element.TryGetProperty({discriminator.SerializedName:L}, out {typeof(JsonElement)} discriminator))"))
-                    {
-                        writer.Line($"switch (discriminator.GetString())");
-                        using (writer.Scope())
-                        {
-                            foreach (var implementation in discriminator.Implementations)
-                            {
-                                var implementationFormattable = JsonCodeWriterExtensions.GetDeserializeImplementationFormattable(implementation.Type.Implementation, $"element", JsonSerializationOptions.None);
-                                writer.Line($"case {implementation.Key:L}: return {implementationFormattable};");
-                            }
-                        }
-                    }
-                }
-
-                if (discriminator is not null && !serialization.Type.HasParent && !serialization.Type.Equals(discriminator.DefaultObjectType.Type))
-                {
-                    writer.Line($"return {JsonCodeWriterExtensions.GetDeserializeImplementationFormattable(discriminator.DefaultObjectType.Type.Implementation, $"element", JsonSerializationOptions.None)};");
-                }
-                else
-                {
-                    writer.WriteObjectInitialization(serialization);
-                }
+                writer.WriteMethod(deserialize);
             }
-            writer.Line();
         }
 
         private static void WriteJsonSerialize(CodeWriter writer, JsonObjectSerialization jsonSerialization)
         {
-            using (writer.Scope($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer)"))
-            {
-                writer.ToSerializeCall(jsonSerialization);
-            }
-            writer.Line();
-        }
-
-        private static void WriteJsonToRequestContentMethod(CodeWriter writer, ObjectType objectType)
-        {
-            var contentVariable = new CodeWriterDeclaration("content");
-            writer
-                .Line($"var {contentVariable:D} = new {typeof(Utf8JsonRequestContent)}();")
-                .Line($"{contentVariable:I}.{nameof(Utf8JsonRequestContent.JsonWriter)}.{nameof(Utf8JsonWriterExtensions.WriteObjectValue)}(this);")
-                .Line($"return {contentVariable:I};");
-        }
-
-        private static void WriteJsonFromResponseMethod(CodeWriter writer, ObjectType objectType)
-        {
-            var documentVariable = new CodeWriterDeclaration("document");
-            writer
-                .Line($"using var {documentVariable:D} = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}(response.{nameof(Response.Content)});")
-                .Line($"return Deserialize{objectType.Declaration.Name}({documentVariable:I}.{nameof(JsonDocument.RootElement)});");
+            writer.WriteMethod(JsonSerializationMethodsBuilder.BuildUtf8JsonSerializableWrite(jsonSerialization));
         }
 
         public static void WriteEnumSerialization(CodeWriter writer, EnumType enumType)
