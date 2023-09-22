@@ -5,25 +5,34 @@
   "2015-06-18"
  ],
  "Enums": [],
- "Models": [],
- "Clients": [
+ "Models": [
   {
    "$id": "2",
+   "Name": "Uri",
+   "Namespace": "stringFormat",
+   "IsNullable": false,
+   "Usage": "None",
+   "Properties": []
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "3",
    "Name": "stringFormatClient",
    "Description": "",
    "Operations": [
     {
-     "$id": "3",
+     "$id": "4",
      "Name": "getUtcDateTime",
      "ResourceName": "stringFormat",
      "Description": "Path parameter is string with utcDateTime format",
      "Parameters": [
       {
-       "$id": "4",
+       "$id": "5",
        "Name": "time",
        "NameInRequest": "time",
        "Type": {
-        "$id": "5",
+        "$id": "6",
         "Name": "utcDateTime",
         "Kind": "DateTime",
         "IsNullable": false
@@ -39,11 +48,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "6",
+       "$id": "7",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "7",
+        "$id": "8",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -58,20 +67,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "8",
+        "$id": "9",
         "Type": {
-         "$ref": "7"
+         "$ref": "8"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "9",
+       "$id": "10",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "10",
+        "$id": "11",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -86,9 +95,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "11",
+        "$id": "12",
         "Type": {
-         "$id": "12",
+         "$id": "13",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -99,7 +108,7 @@
      ],
      "Responses": [
       {
-       "$id": "13",
+       "$id": "14",
        "StatusCodes": [
         204
        ],
@@ -117,17 +126,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "14",
+     "$id": "15",
      "Name": "getUri",
      "ResourceName": "stringFormat",
      "Description": "path paramter is string with uri format",
      "Parameters": [
       {
-       "$id": "15",
+       "$id": "16",
        "Name": "uri",
        "NameInRequest": "uri",
        "Type": {
-        "$id": "16",
+        "$id": "17",
         "Name": "string",
         "Kind": "Uri",
         "IsNullable": false
@@ -143,11 +152,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "17",
+       "$id": "18",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "18",
+        "$id": "19",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -162,20 +171,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "19",
+        "$id": "20",
         "Type": {
-         "$ref": "18"
+         "$ref": "19"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "9"
+       "$ref": "10"
       }
      ],
      "Responses": [
       {
-       "$id": "20",
+       "$id": "21",
        "StatusCodes": [
         204
        ],
@@ -194,7 +203,7 @@
     }
    ],
    "Protocol": {
-    "$id": "21"
+    "$id": "22"
    },
    "Creatable": true
   }
