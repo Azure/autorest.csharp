@@ -393,22 +393,22 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             foreach (var attribute in element.Attributes)
             {
-                propertyVariables.Add(attribute, new VariableReference(attribute.ValueType, attribute.SerializationConstructorParameterName));
+                propertyVariables.Add(attribute, new VariableReference(attribute.Value.Type, attribute.SerializationConstructorParameterName));
             }
 
             foreach (var attribute in element.Elements)
             {
-                propertyVariables.Add(attribute, new VariableReference(attribute.ValueType, attribute.SerializationConstructorParameterName));
+                propertyVariables.Add(attribute, new VariableReference(attribute.Value.Type, attribute.SerializationConstructorParameterName));
             }
 
             foreach (var attribute in element.EmbeddedArrays)
             {
-                propertyVariables.Add(attribute, new VariableReference(attribute.ValueType, attribute.SerializationConstructorParameterName));
+                propertyVariables.Add(attribute, new VariableReference(attribute.Value.Type, attribute.SerializationConstructorParameterName));
             }
 
             if (element.ContentSerialization is {} contentSerialization)
             {
-                propertyVariables.Add(contentSerialization, new VariableReference(contentSerialization.ValueType, contentSerialization.SerializationConstructorParameterName));
+                propertyVariables.Add(contentSerialization, new VariableReference(contentSerialization.Value.Type, contentSerialization.SerializationConstructorParameterName));
             }
         }
     }

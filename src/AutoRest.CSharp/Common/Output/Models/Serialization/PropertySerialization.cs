@@ -16,11 +16,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization
         /// <summary>
         /// Value expression to be serialized. Used in serialization logic only.
         /// </summary>
-        public ValueExpression Value { get; }
-        /// <summary>
-        /// Type of the value to be serialized
-        /// </summary>
-        public CSharpType ValueType { get; }
+        public TypedValueExpression Value { get; }
 
         /// <summary>
         /// Name of the property in serialized string
@@ -35,17 +31,16 @@ namespace AutoRest.CSharp.Output.Models.Serialization
         public bool ShouldSkipSerialization { get; }
         public bool ShouldSkipDeserialization { get; }
 
-        protected PropertySerialization(string parameterName, ValueExpression value, string serializedName, CSharpType valueType, CSharpType? serializedType, bool isRequired, bool shouldSkipSerialization) :
-            this(parameterName, value, serializedName, valueType, serializedType, isRequired, shouldSkipSerialization, false)
+        protected PropertySerialization(string parameterName, TypedValueExpression value, string serializedName, CSharpType? serializedType, bool isRequired, bool shouldSkipSerialization) :
+            this(parameterName, value, serializedName, serializedType, isRequired, shouldSkipSerialization, false)
         {
         }
 
-        protected PropertySerialization(string parameterName, ValueExpression value, string serializedName, CSharpType valueType, CSharpType? serializedType, bool isRequired, bool shouldSkipSerialization, bool shouldSkipDeserialization)
+        protected PropertySerialization(string parameterName, TypedValueExpression value, string serializedName, CSharpType? serializedType, bool isRequired, bool shouldSkipSerialization, bool shouldSkipDeserialization)
         {
             SerializationConstructorParameterName = parameterName;
             Value = value;
             SerializedName = serializedName;
-            ValueType = valueType;
             SerializedType = serializedType;
             IsRequired = isRequired;
             ShouldSkipSerialization = shouldSkipSerialization;

@@ -165,14 +165,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                         continue;
 
                     var declaredName = property.Declaration.Name;
-                    var serializedName = inputModelProperty.SerializedName ?? inputModelProperty.Name;
+                    var serializedName = inputModelProperty.SerializedName;
                     var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, property.Declaration.Type, false, property.SerializationFormat);
 
                     yield return new JsonPropertySerialization(
                         declaredName.ToVariableName(),
-                        new MemberExpression(null, declaredName),
+                        new TypedMemberExpression(null, declaredName, property.Declaration.Type),
                         serializedName,
-                        property.Declaration.Type,
                         property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,
                         valueSerialization,
                         property.IsRequired,

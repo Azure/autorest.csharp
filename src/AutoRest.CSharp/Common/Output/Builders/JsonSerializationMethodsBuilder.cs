@@ -387,7 +387,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var additionalProperties = serialization.AdditionalProperties;
             if (additionalProperties != null)
             {
-                propertyVariables.Add(additionalProperties, new VariableReference(additionalProperties.ValueType, additionalProperties.SerializationConstructorParameterName));
+                propertyVariables.Add(additionalProperties, new VariableReference(additionalProperties.Value.Type, additionalProperties.SerializationConstructorParameterName));
             }
 
             bool isThisTheDefaultDerivedType = serialization.Type.Equals(serialization.Discriminator?.DefaultObjectType.Type);
@@ -771,13 +771,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static ValueExpression GetOptional(PropertySerialization jsonPropertySerialization, TypedValueExpression variable)
         {
-            var targetType = jsonPropertySerialization.ValueType;
             var sourceType = variable.Type;
             if (!sourceType.IsFrameworkType || sourceType.FrameworkType != typeof(Azure.Core.Optional<>))
             {
                 return variable;
             }
 
+            var targetType = jsonPropertySerialization.Value.Type;
             if (TypeFactory.IsList(targetType))
             {
                 return InvokeOptional.ToList(variable);
