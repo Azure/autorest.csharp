@@ -152,7 +152,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 "head-as-boolean": options["head-as-boolean"],
                 "deserialize-null-collection-as-null-value":
                     options["deserialize-null-collection-as-null-value"],
-                "branded": options["branded"]
+                branded: options["branded"]
             } as Configuration;
 
             await program.host.writeFile(

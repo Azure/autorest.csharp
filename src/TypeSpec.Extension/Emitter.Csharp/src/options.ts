@@ -31,7 +31,7 @@ export type NetEmitterOptions = {
     logLevel?: string;
     "package-dir"?: string;
     "head-as-boolean"?: boolean;
-    "branded"?: boolean;
+    branded?: boolean;
 } & SdkEmitterOptions;
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -104,7 +104,7 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         },
         "package-dir": { type: "string", nullable: true },
         "head-as-boolean": { type: "boolean", nullable: true },
-        "branded": { type: "boolean", nullable: true }
+        branded: { type: "boolean", nullable: true }
     },
     required: []
 };
@@ -127,7 +127,7 @@ const defaultOptions = {
     "methods-to-keep-client-default-value": undefined,
     "deserialize-null-collection-as-null-value": undefined,
     logLevel: LoggerLevel.INFO,
-    "branded": true
+    branded: true
 };
 
 export function resolveOptions(context: EmitContext<NetEmitterOptions>) {
