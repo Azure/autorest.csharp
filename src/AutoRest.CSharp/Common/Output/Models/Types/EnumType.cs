@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             ValueType = typeFactory.CreateType(input.EnumValueType);
             IsStringValueType = ValueType.Equals(typeof(string));
             IsIntValueType = ValueType.Equals(typeof(int)) || ValueType.Equals(typeof(long));
-            IsFloatValueType = ValueType.Equals(typeof(float));
+            IsFloatValueType = ValueType.Equals(typeof(float)) || ValueType.Equals(typeof(double));
             IsNumericValueType = IsIntValueType || IsFloatValueType;
             SerializationMethodName = IsStringValueType && IsExtensible ? "ToString" : $"ToSerial{ValueType.Name.FirstCharToUpperCase()}";
 
