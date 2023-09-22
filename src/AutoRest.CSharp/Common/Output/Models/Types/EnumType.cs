@@ -38,6 +38,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             DefaultName = input.Name.ToCleanName();
             DefaultAccessibility = input.Accessibility ?? defaultAccessibility;
+            IsAccessibilityOverridden = input.Accessibility != null;
 
             var isExtensible = input.IsExtensible;
             if (ExistingType != null)
@@ -77,6 +78,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
         protected override TypeKind TypeKind => IsExtensible ? TypeKind.Struct : TypeKind.Enum;
+        public bool IsAccessibilityOverridden { get; }
 
         public IList<EnumTypeValue> Values => _values ??= BuildValues();
 

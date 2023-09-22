@@ -7,35 +7,36 @@
 
 using System.Text.Json;
 using Azure;
+using Azure.Core;
 
-namespace Authentication.OAuth2.Models
+namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
-    public partial class InvalidAuth
+    public partial class NoDecoratorModelInPublic
     {
-        internal static InvalidAuth DeserializeInvalidAuth(JsonElement element)
+        internal static NoDecoratorModelInPublic DeserializeNoDecoratorModelInPublic(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            string error = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("error"u8))
+                if (property.NameEquals("name"u8))
                 {
-                    error = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
-            return new InvalidAuth(error);
+            return new NoDecoratorModelInPublic(name);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static InvalidAuth FromResponse(Response response)
+        internal static NoDecoratorModelInPublic FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInvalidAuth(document.RootElement);
+            return DeserializeNoDecoratorModelInPublic(document.RootElement);
         }
     }
 }

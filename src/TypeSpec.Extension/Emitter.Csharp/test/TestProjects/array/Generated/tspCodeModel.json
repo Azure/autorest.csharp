@@ -57,28 +57,66 @@
      "IsReadOnly": false
     }
    ]
+  },
+  {
+   "$id": "9",
+   "Name": "Error",
+   "Namespace": "TypeSpec.TestServer.ArrayBasic",
+   "Description": "Error",
+   "IsNullable": false,
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "10",
+     "Name": "code",
+     "SerializedName": "code",
+     "Description": "",
+     "Type": {
+      "$id": "11",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "12",
+     "Name": "message",
+     "SerializedName": "message",
+     "Description": "",
+     "Type": {
+      "$id": "13",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
   }
  ],
  "Clients": [
   {
-   "$id": "9",
+   "$id": "14",
    "Name": "ArrayBasicClient",
    "Description": "Illustrates input, output, and round-trip models with required enum type properties.",
    "Operations": [
     {
-     "$id": "10",
+     "$id": "15",
      "Name": "list",
      "ResourceName": "ArrayBasic",
      "Summary": "Manage your pets.",
      "Description": "Manage your pets. You can delete or get the Pet from pet store.",
      "Parameters": [
       {
-       "$id": "11",
+       "$id": "16",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "12",
+        "$id": "17",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -93,9 +131,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "13",
+        "$id": "18",
         "Type": {
-         "$id": "14",
+         "$id": "19",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -104,11 +142,11 @@
        }
       },
       {
-       "$id": "15",
+       "$id": "20",
        "Name": "nextLink",
        "NameInRequest": "nextLink",
        "Type": {
-        "$id": "16",
+        "$id": "21",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -124,11 +162,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "17",
+       "$id": "22",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "18",
+        "$id": "23",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -143,20 +181,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "19",
+        "$id": "24",
         "Type": {
-         "$ref": "18"
+         "$ref": "23"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "20",
+       "$id": "25",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "21",
+        "$id": "26",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -171,9 +209,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "22",
+        "$id": "27",
         "Type": {
-         "$id": "23",
+         "$id": "28",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -184,12 +222,12 @@
      ],
      "Responses": [
       {
-       "$id": "24",
+       "$id": "29",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "25",
+        "$id": "30",
         "Name": "Array",
         "ElementType": {
          "$ref": "2"
@@ -211,7 +249,7 @@
     }
    ],
    "Protocol": {
-    "$id": "26"
+    "$id": "31"
    },
    "Creatable": true
   }
