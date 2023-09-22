@@ -7,5 +7,6 @@
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
   ],
   "use-overloads-between-protocol-and-convenience": true,
-  "keep-non-overloadable-protocol-signature": true
+  "keep-non-overloadable-protocol-signature": true,
+  "branded": true
 }

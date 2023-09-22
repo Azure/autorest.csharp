@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Common.Input
         public override FormattableString GetHttpPipelineCreateMessageFormat(bool withContext)
         {
             FormattableString context = withContext ? (FormattableString)$"{KnownParameters.RequestContext.Name:I}" : $"";
-            return $"new {typeof(HttpMessage)}(_pipeline.{Configuration.ApiTypes.HttpPipelineCreateMessageName}({context}";
+            return $"_pipeline.{Configuration.ApiTypes.HttpPipelineCreateMessageName}({context}";
         }
 
         public override Type HttpMessageType => typeof(HttpMessage);

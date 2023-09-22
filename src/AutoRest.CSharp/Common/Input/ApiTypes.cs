@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Common.Input
 
         public abstract Type HttpMessageType { get; }
         public abstract string HttpMessageResponseName { get; }
-        public Type GetNextPageFuncType() => typeof(Func<>).MakeGenericType(typeof(int?), typeof(string), HttpMessageType);
+        public Type GetNextPageFuncType() => typeof(Func<,,>).MakeGenericType(typeof(int?), typeof(string), HttpMessageType);
 
         public abstract Type ClientDiagnosticsType { get; }
         public abstract string ClientDiagnosticsCreateScopeName { get; }
