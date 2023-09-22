@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using AuthoringTypeSpec;
 using AuthoringTypeSpec.Models;
@@ -24,6 +23,7 @@ namespace AuthoringTypeSpec.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CreateOrUpdate_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -36,19 +36,10 @@ namespace AuthoringTypeSpec.Tests
                 language = "<language>",
             });
             Response response = await client.CreateOrUpdateAsync("<projectName>", content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("projectName").ToString());
-            Console.WriteLine(result.GetProperty("projectKind").ToString());
-            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("language").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CreateOrUpdate_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -67,144 +58,90 @@ namespace AuthoringTypeSpec.Tests
                 language = "<language>",
             });
             Response response = await client.CreateOrUpdateAsync("<projectName>", content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("projectName").ToString());
-            Console.WriteLine(result.GetProperty("projectKind").ToString());
-            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("multilingual").ToString());
-            Console.WriteLine(result.GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("language").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetProject_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
             Response response = await client.GetProjectAsync("<projectName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("projectName").ToString());
-            Console.WriteLine(result.GetProperty("projectKind").ToString());
-            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("language").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetProject_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
             Response response = await client.GetProjectAsync("<projectName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("projectName").ToString());
-            Console.WriteLine(result.GetProperty("projectKind").ToString());
-            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("multilingual").ToString());
-            Console.WriteLine(result.GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("language").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
             Response response = await client.DeleteAsync("<projectName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("projectName").ToString());
-            Console.WriteLine(result.GetProperty("projectKind").ToString());
-            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("language").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
             Response response = await client.DeleteAsync("<projectName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("projectName").ToString());
-            Console.WriteLine(result.GetProperty("projectKind").ToString());
-            Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-            Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("multilingual").ToString());
-            Console.WriteLine(result.GetProperty("description").ToString());
-            Console.WriteLine(result.GetProperty("language").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Export_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
             Response response = await client.ExportAsync("<projectName>", "<projectFileVersion>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Export_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
             Response response = await client.ExportAsync("<projectName>", "<projectFileVersion>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Importx_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
             Response response = await client.ImportxAsync("<projectName>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Importx_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
             Response response = await client.ImportxAsync("<projectName>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Train_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -215,10 +152,10 @@ namespace AuthoringTypeSpec.Tests
                 modelLabel = "<modelLabel>",
             });
             Response response = await client.TrainAsync("<projectName>", content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Train_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -229,34 +166,30 @@ namespace AuthoringTypeSpec.Tests
                 modelLabel = "<modelLabel>",
             });
             Response response = await client.TrainAsync("<projectName>", content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDeployment_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
             Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDeployment_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
             Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DeployProject_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -264,12 +197,10 @@ namespace AuthoringTypeSpec.Tests
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DeployProject_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -277,36 +208,30 @@ namespace AuthoringTypeSpec.Tests
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DeleteDeployment_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
             Response response = await client.DeleteDeploymentAsync("<projectName>", "<deploymentName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DeleteDeployment_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
             Response response = await client.DeleteDeploymentAsync("<projectName>", "<deploymentName>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SwapDeployments_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -318,10 +243,10 @@ namespace AuthoringTypeSpec.Tests
                 secondDeploymentName = "<secondDeploymentName>",
             });
             Response response = await client.SwapDeploymentsAsync("<projectName>", content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SwapDeployments_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -333,31 +258,20 @@ namespace AuthoringTypeSpec.Tests
                 secondDeploymentName = "<secondDeploymentName>",
             });
             Response response = await client.SwapDeploymentsAsync("<projectName>", content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDeploymentStatus_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
             Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("jobId").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastUpdatedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("expirationDateTime").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("warnings")[0].GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("warnings")[0].GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("errors").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDeploymentStatusValue_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -367,29 +281,17 @@ namespace AuthoringTypeSpec.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDeploymentStatus_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
             Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("jobId").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastUpdatedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("expirationDateTime").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("warnings")[0].GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("warnings")[0].GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("errors").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDeploymentStatusValue_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -399,27 +301,17 @@ namespace AuthoringTypeSpec.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetSwapDeploymentsStatus_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
             Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("jobId").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastUpdatedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("expirationDateTime").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("warnings")[0].GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("warnings")[0].GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("errors").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetSwapDeploymentsStatusValue_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -429,29 +321,17 @@ namespace AuthoringTypeSpec.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetSwapDeploymentsStatus_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = CreateAuthoringTypeSpecClient(endpoint);
 
             Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("jobId").ToString());
-            Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-            Console.WriteLine(result.GetProperty("lastUpdatedDateTime").ToString());
-            Console.WriteLine(result.GetProperty("expirationDateTime").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("warnings")[0].GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("warnings")[0].GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("errors").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetSwapDeploymentsStatusValue_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -461,6 +341,7 @@ namespace AuthoringTypeSpec.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetProjects_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -468,19 +349,11 @@ namespace AuthoringTypeSpec.Tests
 
             await foreach (BinaryData item in client.GetProjectsAsync())
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("projectName").ToString());
-                Console.WriteLine(result[0].GetProperty("projectKind").ToString());
-                Console.WriteLine(result[0].GetProperty("storageInputContainerName").ToString());
-                Console.WriteLine(result[0].GetProperty("language").ToString());
-                Console.WriteLine(result[0].GetProperty("createdDateTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastModifiedDateTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastTrainedDateTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastDeployedDateTime").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetProjects_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -488,22 +361,11 @@ namespace AuthoringTypeSpec.Tests
 
             await foreach (BinaryData item in client.GetProjectsAsync())
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("projectName").ToString());
-                Console.WriteLine(result[0].GetProperty("projectKind").ToString());
-                Console.WriteLine(result[0].GetProperty("storageInputContainerName").ToString());
-                Console.WriteLine(result[0].GetProperty("settings").GetProperty("<key>").ToString());
-                Console.WriteLine(result[0].GetProperty("multilingual").ToString());
-                Console.WriteLine(result[0].GetProperty("description").ToString());
-                Console.WriteLine(result[0].GetProperty("language").ToString());
-                Console.WriteLine(result[0].GetProperty("createdDateTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastModifiedDateTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastTrainedDateTime").ToString());
-                Console.WriteLine(result[0].GetProperty("lastDeployedDateTime").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDeployments_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -511,12 +373,11 @@ namespace AuthoringTypeSpec.Tests
 
             await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDeployments_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -524,12 +385,11 @@ namespace AuthoringTypeSpec.Tests
 
             await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetSupportedLanguages_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -537,13 +397,11 @@ namespace AuthoringTypeSpec.Tests
 
             await foreach (BinaryData item in client.GetSupportedLanguagesAsync())
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("languageName").ToString());
-                Console.WriteLine(result[0].GetProperty("languageCode").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetSupportedLanguages_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -551,13 +409,11 @@ namespace AuthoringTypeSpec.Tests
 
             await foreach (BinaryData item in client.GetSupportedLanguagesAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("languageName").ToString());
-                Console.WriteLine(result[0].GetProperty("languageCode").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetTrainingConfigVersions_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -565,13 +421,11 @@ namespace AuthoringTypeSpec.Tests
 
             await foreach (BinaryData item in client.GetTrainingConfigVersionsAsync())
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("trainingConfigVersionStr").ToString());
-                Console.WriteLine(result[0].GetProperty("modelExpirationDate").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetTrainingConfigVersions_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -579,9 +433,6 @@ namespace AuthoringTypeSpec.Tests
 
             await foreach (BinaryData item in client.GetTrainingConfigVersionsAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("trainingConfigVersionStr").ToString());
-                Console.WriteLine(result[0].GetProperty("modelExpirationDate").ToString());
             }
         }
     }

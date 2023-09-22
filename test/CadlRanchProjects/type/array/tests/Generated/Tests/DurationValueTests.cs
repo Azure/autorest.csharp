@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using Azure;
@@ -25,18 +24,17 @@ namespace _Type._Array.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDurationValue_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             DurationValue client = CreateArrayClient(endpoint).GetDurationValueClient(apiVersion: "1.0.0");
 
             Response response = await client.GetDurationValueAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDurationValue_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -46,18 +44,17 @@ namespace _Type._Array.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDurationValue_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             DurationValue client = CreateArrayClient(endpoint).GetDurationValueClient(apiVersion: "1.0.0");
 
             Response response = await client.GetDurationValueAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDurationValue_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -67,6 +64,7 @@ namespace _Type._Array.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -77,10 +75,10 @@ namespace _Type._Array.Tests
 "PT1H23M45S"
 });
             Response response = await client.PutAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -90,10 +88,10 @@ namespace _Type._Array.Tests
 {
 XmlConvert.ToTimeSpan("PT1H23M45S")
 });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -104,10 +102,10 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
 "PT1H23M45S"
 });
             Response response = await client.PutAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -117,7 +115,6 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
 {
 XmlConvert.ToTimeSpan("PT1H23M45S")
 });
-            Console.WriteLine(response.Status);
         }
     }
 }

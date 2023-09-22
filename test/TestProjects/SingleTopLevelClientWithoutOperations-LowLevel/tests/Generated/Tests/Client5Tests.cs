@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -22,6 +21,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -29,12 +29,10 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Tests
             Client5 client = CreateTopLevelClientWithoutOperationClient(credential, endpoint).GetClient5Client();
 
             Response response = await client.OperationAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -42,9 +40,6 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Tests
             Client5 client = CreateTopLevelClientWithoutOperationClient(credential, endpoint).GetClient5Client();
 
             Response response = await client.OperationAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
     }
 }

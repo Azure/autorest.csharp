@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,6 +24,7 @@ namespace Encode.Bytes.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -35,12 +35,10 @@ namespace Encode.Bytes.Tests
                 value = new object(),
             });
             Response response = await client.DefaultAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -51,6 +49,7 @@ namespace Encode.Bytes.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -61,12 +60,10 @@ namespace Encode.Bytes.Tests
                 value = new object(),
             });
             Response response = await client.DefaultAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -77,6 +74,7 @@ namespace Encode.Bytes.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Base64_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -87,12 +85,10 @@ namespace Encode.Bytes.Tests
                 value = new object(),
             });
             Response response = await client.Base64Async(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Base64_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -103,6 +99,7 @@ namespace Encode.Bytes.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Base64_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -113,12 +110,10 @@ namespace Encode.Bytes.Tests
                 value = new object(),
             });
             Response response = await client.Base64Async(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Base64_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -129,6 +124,7 @@ namespace Encode.Bytes.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Base64url_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -139,12 +135,10 @@ namespace Encode.Bytes.Tests
                 value = new object(),
             });
             Response response = await client.Base64urlAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Base64url_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -155,6 +149,7 @@ namespace Encode.Bytes.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Base64url_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -165,12 +160,10 @@ namespace Encode.Bytes.Tests
                 value = new object(),
             });
             Response response = await client.Base64urlAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Base64url_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -181,6 +174,7 @@ namespace Encode.Bytes.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Base64urlArray_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -194,12 +188,10 @@ new object()
 },
             });
             Response response = await client.Base64urlArrayAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Base64urlArray_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -213,6 +205,7 @@ BinaryData.FromObjectAsJson(new object())
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Base64urlArray_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -226,12 +219,10 @@ new object()
 },
             });
             Response response = await client.Base64urlArrayAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Base64urlArray_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

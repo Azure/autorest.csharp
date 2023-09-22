@@ -22,6 +22,7 @@ namespace Accessibility_LowLevel_NoAuth.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -29,10 +30,10 @@ namespace Accessibility_LowLevel_NoAuth.Tests
 
             RequestContent content = null;
             Response response = await client.OperationAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -40,7 +41,6 @@ namespace Accessibility_LowLevel_NoAuth.Tests
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.OperationAsync(content);
-            Console.WriteLine(response.Status);
         }
     }
 }

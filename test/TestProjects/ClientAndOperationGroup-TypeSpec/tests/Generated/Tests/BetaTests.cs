@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -22,51 +21,43 @@ namespace ClientAndOperationGroup.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Two_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Beta client = CreateClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = await client.TwoAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Two_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Beta client = CreateClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = await client.TwoAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Three_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Beta client = CreateClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = await client.ThreeAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Three_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Beta client = CreateClientAndOperationGroupClient(endpoint).GetBetaClient();
 
             Response response = await client.ThreeAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
     }
 }

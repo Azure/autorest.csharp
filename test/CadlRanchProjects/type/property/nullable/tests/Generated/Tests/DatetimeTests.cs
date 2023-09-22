@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,19 +23,17 @@ namespace _Type.Property.Nullable.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNonNull_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Datetime client = CreateNullableClient(endpoint).GetDatetimeClient(apiVersion: "1.0.0");
 
             Response response = await client.GetNonNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNonNull_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -46,19 +43,17 @@ namespace _Type.Property.Nullable.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNonNull_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Datetime client = CreateNullableClient(endpoint).GetDatetimeClient(apiVersion: "1.0.0");
 
             Response response = await client.GetNonNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNonNull_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -68,19 +63,17 @@ namespace _Type.Property.Nullable.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNull_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Datetime client = CreateNullableClient(endpoint).GetDatetimeClient(apiVersion: "1.0.0");
 
             Response response = await client.GetNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNull_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -90,19 +83,17 @@ namespace _Type.Property.Nullable.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNull_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Datetime client = CreateNullableClient(endpoint).GetDatetimeClient(apiVersion: "1.0.0");
 
             Response response = await client.GetNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNull_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -112,6 +103,7 @@ namespace _Type.Property.Nullable.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PatchNonNull_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -123,10 +115,10 @@ namespace _Type.Property.Nullable.Tests
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PatchNonNullAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PatchNonNull_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -138,10 +130,10 @@ namespace _Type.Property.Nullable.Tests
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PatchNonNullAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PatchNull_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -153,10 +145,10 @@ namespace _Type.Property.Nullable.Tests
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PatchNullAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PatchNull_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -168,7 +160,6 @@ namespace _Type.Property.Nullable.Tests
                 nullableProperty = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.PatchNullAsync(content);
-            Console.WriteLine(response.Status);
         }
     }
 }

@@ -22,86 +22,87 @@ namespace Encode.Datetime.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Query client = CreateDatetimeClient(endpoint).GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Query client = CreateDatetimeClient(endpoint).GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Rfc3339_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Query client = CreateDatetimeClient(endpoint).GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.Rfc3339Async(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Rfc3339_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Query client = CreateDatetimeClient(endpoint).GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.Rfc3339Async(DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Rfc7231_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Query client = CreateDatetimeClient(endpoint).GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.Rfc7231Async(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Rfc7231_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Query client = CreateDatetimeClient(endpoint).GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.Rfc7231Async(DateTimeOffset.Parse("Tue, 10 May 2022 18:57:31 GMT"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnixTimestamp_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Query client = CreateDatetimeClient(endpoint).GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.UnixTimestampAsync(DateTimeOffset.FromUnixTimeSeconds(1652209051));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnixTimestamp_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Query client = CreateDatetimeClient(endpoint).GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.UnixTimestampAsync(DateTimeOffset.FromUnixTimeSeconds(1652209051));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnixTimestampArray_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -111,10 +112,10 @@ namespace Encode.Datetime.Tests
 {
 DateTimeOffset.FromUnixTimeSeconds(1652209051)
 });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnixTimestampArray_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -124,7 +125,6 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
 {
 DateTimeOffset.FromUnixTimeSeconds(1652209051)
 });
-            Console.WriteLine(response.Status);
         }
     }
 }

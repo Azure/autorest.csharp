@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,18 +23,17 @@ namespace _Type.Property.Optionality.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetAll_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             String client = CreateOptionalClient(endpoint).GetStringClient(apiVersion: "1.0.0");
 
             Response response = await client.GetAllAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetAll_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -45,18 +43,17 @@ namespace _Type.Property.Optionality.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetAll_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             String client = CreateOptionalClient(endpoint).GetStringClient(apiVersion: "1.0.0");
 
             Response response = await client.GetAllAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetAll_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -66,18 +63,17 @@ namespace _Type.Property.Optionality.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefault_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             String client = CreateOptionalClient(endpoint).GetStringClient(apiVersion: "1.0.0");
 
             Response response = await client.GetDefaultAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefault_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -87,18 +83,17 @@ namespace _Type.Property.Optionality.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefault_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             String client = CreateOptionalClient(endpoint).GetStringClient(apiVersion: "1.0.0");
 
             Response response = await client.GetDefaultAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefault_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -108,6 +103,7 @@ namespace _Type.Property.Optionality.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutAll_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -115,10 +111,10 @@ namespace _Type.Property.Optionality.Tests
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAllAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutAll_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -126,10 +122,10 @@ namespace _Type.Property.Optionality.Tests
 
             StringProperty body = new StringProperty();
             Response response = await client.PutAllAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutAll_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -140,10 +136,10 @@ namespace _Type.Property.Optionality.Tests
                 property = "<property>",
             });
             Response response = await client.PutAllAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutAll_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -154,10 +150,10 @@ namespace _Type.Property.Optionality.Tests
                 Property = "<property>",
             };
             Response response = await client.PutAllAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDefault_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -165,10 +161,10 @@ namespace _Type.Property.Optionality.Tests
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDefaultAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDefault_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -176,10 +172,10 @@ namespace _Type.Property.Optionality.Tests
 
             StringProperty body = new StringProperty();
             Response response = await client.PutDefaultAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDefault_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -190,10 +186,10 @@ namespace _Type.Property.Optionality.Tests
                 property = "<property>",
             });
             Response response = await client.PutDefaultAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDefault_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -204,7 +200,6 @@ namespace _Type.Property.Optionality.Tests
                 Property = "<property>",
             };
             Response response = await client.PutDefaultAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

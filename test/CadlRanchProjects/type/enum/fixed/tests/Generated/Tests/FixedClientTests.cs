@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,18 +23,17 @@ namespace _Type._Enum.Fixed.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetKnownValue_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FixedClient client = CreateFixedClient(endpoint);
 
             Response response = await client.GetKnownValueAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetKnownValue_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -45,18 +43,17 @@ namespace _Type._Enum.Fixed.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetKnownValue_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FixedClient client = CreateFixedClient(endpoint);
 
             Response response = await client.GetKnownValueAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetKnownValue_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -66,6 +63,7 @@ namespace _Type._Enum.Fixed.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutKnownValue_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -73,20 +71,20 @@ namespace _Type._Enum.Fixed.Tests
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutKnownValueAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutKnownValue_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FixedClient client = CreateFixedClient(endpoint);
 
             Response response = await client.PutKnownValueAsync(DaysOfWeekEnum.Monday);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutKnownValue_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -94,20 +92,20 @@ namespace _Type._Enum.Fixed.Tests
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutKnownValueAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutKnownValue_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FixedClient client = CreateFixedClient(endpoint);
 
             Response response = await client.PutKnownValueAsync(DaysOfWeekEnum.Monday);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutUnknownValue_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -115,20 +113,20 @@ namespace _Type._Enum.Fixed.Tests
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutUnknownValueAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutUnknownValue_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FixedClient client = CreateFixedClient(endpoint);
 
             Response response = await client.PutUnknownValueAsync(DaysOfWeekEnum.Monday);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutUnknownValue_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -136,17 +134,16 @@ namespace _Type._Enum.Fixed.Tests
 
             RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutUnknownValueAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutUnknownValue_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FixedClient client = CreateFixedClient(endpoint);
 
             Response response = await client.PutUnknownValueAsync(DaysOfWeekEnum.Monday);
-            Console.WriteLine(response.Status);
         }
     }
 }

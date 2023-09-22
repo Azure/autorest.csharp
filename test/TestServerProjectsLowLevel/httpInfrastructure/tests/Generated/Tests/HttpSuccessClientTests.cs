@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -23,6 +22,7 @@ namespace httpInfrastructure_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head200_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -30,10 +30,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
 
             Response response = await client.Head200Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -41,10 +41,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
 
             Response response = await client.Head200Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -52,12 +52,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
 
             Response response = await client.Get200Async(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -65,12 +63,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
 
             Response response = await client.Get200Async(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Options200_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -78,12 +74,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
 
             Response response = await client.Options200Async(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Options200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -91,12 +85,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
 
             Response response = await client.Options200Async(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put200_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -105,10 +97,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Put200Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -117,10 +109,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put200Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Patch200_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -129,10 +121,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Patch200Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Patch200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -141,10 +133,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch200Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Post200_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -153,10 +145,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Post200Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Post200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -165,10 +157,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post200Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete200_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -177,10 +169,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Delete200Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -189,10 +181,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete200Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put201_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -201,10 +193,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Put201Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put201_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -213,10 +205,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put201Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Post201_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -225,10 +217,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Post201Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Post201_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -237,10 +229,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post201Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put202_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -249,10 +241,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Put202Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put202_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -261,10 +253,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put202Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Patch202_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -273,10 +265,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Patch202Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Patch202_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -285,10 +277,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch202Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Post202_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -297,10 +289,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Post202Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Post202_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -309,10 +301,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post202Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete202_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -321,10 +313,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Delete202Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete202_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -333,10 +325,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete202Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head204_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -344,10 +336,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
 
             Response response = await client.Head204Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head204_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -355,10 +347,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
 
             Response response = await client.Head204Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put204_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -367,10 +359,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Put204Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put204_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -379,10 +371,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put204Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Patch204_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -391,10 +383,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Patch204Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Patch204_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -403,10 +395,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch204Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Post204_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -415,10 +407,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Post204Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Post204_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -427,10 +419,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post204Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete204_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -439,10 +431,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Delete204Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete204_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -451,10 +443,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete204Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head404_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -462,10 +454,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
 
             Response response = await client.Head404Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head404_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -473,7 +465,6 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
 
             Response response = await client.Head404Async();
-            Console.WriteLine(response.Status);
         }
     }
 }

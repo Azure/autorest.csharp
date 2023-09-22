@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -23,6 +22,7 @@ namespace body_complex_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -30,12 +30,10 @@ namespace body_complex_LowLevel.Tests
             ReadonlypropertyClient client = CreateReadonlypropertyClient(credential, endpoint);
 
             Response response = await client.GetValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -43,13 +41,10 @@ namespace body_complex_LowLevel.Tests
             ReadonlypropertyClient client = CreateReadonlypropertyClient(credential, endpoint);
 
             Response response = await client.GetValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -58,10 +53,10 @@ namespace body_complex_LowLevel.Tests
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -73,7 +68,6 @@ namespace body_complex_LowLevel.Tests
                 size = 1234,
             });
             Response response = await client.PutValidAsync(content);
-            Console.WriteLine(response.Status);
         }
     }
 }

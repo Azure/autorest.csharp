@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,19 +23,17 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetExtensibleModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             EnumDiscriminatorClient client = CreateEnumDiscriminatorClient(endpoint);
 
             Response response = await client.GetExtensibleModelAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("weight").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetExtensibleModel_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -46,19 +43,17 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetExtensibleModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             EnumDiscriminatorClient client = CreateEnumDiscriminatorClient(endpoint);
 
             Response response = await client.GetExtensibleModelAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("weight").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetExtensibleModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -68,6 +63,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutExtensibleModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -79,10 +75,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
                 weight = 1234,
             });
             Response response = await client.PutExtensibleModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutExtensibleModel_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -90,10 +86,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
 
             Dog input = new Golden(1234);
             Response response = await client.PutExtensibleModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutExtensibleModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -105,10 +101,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
                 weight = 1234,
             });
             Response response = await client.PutExtensibleModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutExtensibleModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -116,23 +112,20 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
 
             Dog input = new Golden(1234);
             Response response = await client.PutExtensibleModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetExtensibleModelMissingDiscriminator_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             EnumDiscriminatorClient client = CreateEnumDiscriminatorClient(endpoint);
 
             Response response = await client.GetExtensibleModelMissingDiscriminatorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("weight").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetExtensibleModelMissingDiscriminator_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -142,19 +135,17 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetExtensibleModelMissingDiscriminator_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             EnumDiscriminatorClient client = CreateEnumDiscriminatorClient(endpoint);
 
             Response response = await client.GetExtensibleModelMissingDiscriminatorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("weight").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetExtensibleModelMissingDiscriminator_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -164,19 +155,17 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetExtensibleModelWrongDiscriminator_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             EnumDiscriminatorClient client = CreateEnumDiscriminatorClient(endpoint);
 
             Response response = await client.GetExtensibleModelWrongDiscriminatorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("weight").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetExtensibleModelWrongDiscriminator_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -186,19 +175,17 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetExtensibleModelWrongDiscriminator_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             EnumDiscriminatorClient client = CreateEnumDiscriminatorClient(endpoint);
 
             Response response = await client.GetExtensibleModelWrongDiscriminatorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("weight").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetExtensibleModelWrongDiscriminator_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -208,19 +195,17 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFixedModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             EnumDiscriminatorClient client = CreateEnumDiscriminatorClient(endpoint);
 
             Response response = await client.GetFixedModelAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFixedModel_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -230,19 +215,17 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFixedModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             EnumDiscriminatorClient client = CreateEnumDiscriminatorClient(endpoint);
 
             Response response = await client.GetFixedModelAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFixedModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -252,6 +235,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutFixedModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -263,10 +247,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
                 length = 1234,
             });
             Response response = await client.PutFixedModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutFixedModel_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -274,10 +258,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
 
             Snake input = new Cobra(1234);
             Response response = await client.PutFixedModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutFixedModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -289,10 +273,10 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
                 length = 1234,
             });
             Response response = await client.PutFixedModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutFixedModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -300,23 +284,20 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
 
             Snake input = new Cobra(1234);
             Response response = await client.PutFixedModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFixedModelMissingDiscriminator_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             EnumDiscriminatorClient client = CreateEnumDiscriminatorClient(endpoint);
 
             Response response = await client.GetFixedModelMissingDiscriminatorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFixedModelMissingDiscriminator_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -326,19 +307,17 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFixedModelMissingDiscriminator_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             EnumDiscriminatorClient client = CreateEnumDiscriminatorClient(endpoint);
 
             Response response = await client.GetFixedModelMissingDiscriminatorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFixedModelMissingDiscriminator_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -348,19 +327,17 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFixedModelWrongDiscriminator_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             EnumDiscriminatorClient client = CreateEnumDiscriminatorClient(endpoint);
 
             Response response = await client.GetFixedModelWrongDiscriminatorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFixedModelWrongDiscriminator_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -370,19 +347,17 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFixedModelWrongDiscriminator_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             EnumDiscriminatorClient client = CreateEnumDiscriminatorClient(endpoint);
 
             Response response = await client.GetFixedModelWrongDiscriminatorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFixedModelWrongDiscriminator_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

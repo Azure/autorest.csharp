@@ -23,6 +23,7 @@ namespace Parameters.BodyOptionality.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Set_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -30,20 +31,20 @@ namespace Parameters.BodyOptionality.Tests
 
             RequestContent content = null;
             Response response = await client.SetAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Set_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             OptionalExplicit client = CreateBodyOptionalityClient(endpoint).GetOptionalExplicitClient();
 
             Response response = await client.SetAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Set_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -54,10 +55,10 @@ namespace Parameters.BodyOptionality.Tests
                 name = "<name>",
             });
             Response response = await client.SetAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Set_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -65,10 +66,10 @@ namespace Parameters.BodyOptionality.Tests
 
             BodyModel body = new BodyModel("<name>");
             Response response = await client.SetAsync(body: body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Omit_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -76,20 +77,20 @@ namespace Parameters.BodyOptionality.Tests
 
             RequestContent content = null;
             Response response = await client.OmitAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Omit_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             OptionalExplicit client = CreateBodyOptionalityClient(endpoint).GetOptionalExplicitClient();
 
             Response response = await client.OmitAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Omit_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -100,10 +101,10 @@ namespace Parameters.BodyOptionality.Tests
                 name = "<name>",
             });
             Response response = await client.OmitAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Omit_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -111,7 +112,6 @@ namespace Parameters.BodyOptionality.Tests
 
             BodyModel body = new BodyModel("<name>");
             Response response = await client.OmitAsync(body: body);
-            Console.WriteLine(response.Status);
         }
     }
 }

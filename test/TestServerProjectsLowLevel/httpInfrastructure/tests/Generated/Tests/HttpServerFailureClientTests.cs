@@ -22,6 +22,7 @@ namespace httpInfrastructure_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head501_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -29,10 +30,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpServerFailureClient client = CreateHttpServerFailureClient(credential, endpoint);
 
             Response response = await client.Head501Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head501_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -40,10 +41,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpServerFailureClient client = CreateHttpServerFailureClient(credential, endpoint);
 
             Response response = await client.Head501Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get501_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -51,10 +52,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpServerFailureClient client = CreateHttpServerFailureClient(credential, endpoint);
 
             Response response = await client.Get501Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get501_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -62,10 +63,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpServerFailureClient client = CreateHttpServerFailureClient(credential, endpoint);
 
             Response response = await client.Get501Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Post505_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -74,10 +75,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Post505Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Post505_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -86,10 +87,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post505Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete505_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -98,10 +99,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Delete505Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete505_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -110,7 +111,6 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete505Async(content);
-            Console.WriteLine(response.Status);
         }
     }
 }

@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,6 +24,7 @@ namespace Encode.Datetime.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -35,12 +35,10 @@ namespace Encode.Datetime.Tests
                 value = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.DefaultAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -51,6 +49,7 @@ namespace Encode.Datetime.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -61,12 +60,10 @@ namespace Encode.Datetime.Tests
                 value = "2022-05-10T14:57:31.2311892-04:00",
             });
             Response response = await client.DefaultAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -77,6 +74,7 @@ namespace Encode.Datetime.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Rfc3339_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -87,12 +85,10 @@ namespace Encode.Datetime.Tests
                 value = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = await client.Rfc3339Async(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Rfc3339_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -103,6 +99,7 @@ namespace Encode.Datetime.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Rfc3339_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -113,12 +110,10 @@ namespace Encode.Datetime.Tests
                 value = "2022-05-10T18:57:31.2311892Z",
             });
             Response response = await client.Rfc3339Async(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Rfc3339_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -129,6 +124,7 @@ namespace Encode.Datetime.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Rfc7231_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -139,12 +135,10 @@ namespace Encode.Datetime.Tests
                 value = "Tue, 10 May 2022 18:57:31 GMT",
             });
             Response response = await client.Rfc7231Async(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Rfc7231_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -155,6 +149,7 @@ namespace Encode.Datetime.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Rfc7231_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -165,12 +160,10 @@ namespace Encode.Datetime.Tests
                 value = "Tue, 10 May 2022 18:57:31 GMT",
             });
             Response response = await client.Rfc7231Async(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Rfc7231_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -181,6 +174,7 @@ namespace Encode.Datetime.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnixTimestamp_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -191,12 +185,10 @@ namespace Encode.Datetime.Tests
                 value = 1652209051,
             });
             Response response = await client.UnixTimestampAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnixTimestamp_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -207,6 +199,7 @@ namespace Encode.Datetime.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnixTimestamp_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -217,12 +210,10 @@ namespace Encode.Datetime.Tests
                 value = 1652209051,
             });
             Response response = await client.UnixTimestampAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnixTimestamp_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -233,6 +224,7 @@ namespace Encode.Datetime.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnixTimestampArray_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -246,12 +238,10 @@ namespace Encode.Datetime.Tests
 },
             });
             Response response = await client.UnixTimestampArrayAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnixTimestampArray_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -265,6 +255,7 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnixTimestampArray_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -278,12 +269,10 @@ DateTimeOffset.FromUnixTimeSeconds(1652209051)
 },
             });
             Response response = await client.UnixTimestampArrayAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnixTimestampArray_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

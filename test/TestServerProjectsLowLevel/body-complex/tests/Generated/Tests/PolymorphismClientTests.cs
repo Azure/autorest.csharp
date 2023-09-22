@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +23,7 @@ namespace body_complex_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -31,13 +31,10 @@ namespace body_complex_LowLevel.Tests
             PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
 
             Response response = await client.GetValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -45,17 +42,10 @@ namespace body_complex_LowLevel.Tests
             PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
 
             Response response = await client.GetValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -68,10 +58,10 @@ namespace body_complex_LowLevel.Tests
                 length = 123.45F,
             });
             Response response = await client.PutValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -91,10 +81,10 @@ null
 },
             });
             Response response = await client.PutValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDotSyntax_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -102,12 +92,10 @@ null
             PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
 
             Response response = await client.GetDotSyntaxAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fish.type").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDotSyntax_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -115,13 +103,10 @@ null
             PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
 
             Response response = await client.GetDotSyntaxAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("species").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComposedWithDiscriminator_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -129,12 +114,10 @@ null
             PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
 
             Response response = await client.GetComposedWithDiscriminatorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComposedWithDiscriminator_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -142,23 +125,10 @@ null
             PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
 
             Response response = await client.GetComposedWithDiscriminatorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComposedWithoutDiscriminator_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -166,12 +136,10 @@ null
             PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
 
             Response response = await client.GetComposedWithoutDiscriminatorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComposedWithoutDiscriminator_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -179,23 +147,10 @@ null
             PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
 
             Response response = await client.GetComposedWithoutDiscriminatorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("iswild").ToString());
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("iswild").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("salmons")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("sampleFish").GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("fish.type").ToString());
-            Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComplicated_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -203,12 +158,10 @@ null
             PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
 
             Response response = await client.GetComplicatedAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComplicated_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -216,19 +169,10 @@ null
             PolymorphismClient client = CreatePolymorphismClient(credential, endpoint);
 
             Response response = await client.GetComplicatedAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("iswild").ToString());
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutComplicated_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -241,10 +185,10 @@ null
                 length = 123.45F,
             });
             Response response = await client.PutComplicatedAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutComplicated_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -276,10 +220,10 @@ null
 },
             });
             Response response = await client.PutComplicatedAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutMissingDiscriminator_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -292,12 +236,10 @@ null
                 length = 123.45F,
             });
             Response response = await client.PutMissingDiscriminatorAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutMissingDiscriminator_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -329,19 +271,10 @@ null
 },
             });
             Response response = await client.PutMissingDiscriminatorAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("iswild").ToString());
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValidMissingRequired_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -354,10 +287,10 @@ null
                 length = 123.45F,
             });
             Response response = await client.PutValidMissingRequiredAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValidMissingRequired_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -377,7 +310,6 @@ null
 },
             });
             Response response = await client.PutValidMissingRequiredAsync(content);
-            Console.WriteLine(response.Status);
         }
     }
 }

@@ -22,66 +22,67 @@ namespace Encode.Bytes.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Query client = CreateBytesClient(endpoint).GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync(BinaryData.FromObjectAsJson(new object()));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Query client = CreateBytesClient(endpoint).GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync(BinaryData.FromObjectAsJson(new object()));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Base64_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Query client = CreateBytesClient(endpoint).GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.Base64Async(BinaryData.FromObjectAsJson(new object()));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Base64_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Query client = CreateBytesClient(endpoint).GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.Base64Async(BinaryData.FromObjectAsJson(new object()));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Base64url_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Query client = CreateBytesClient(endpoint).GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.Base64urlAsync(BinaryData.FromObjectAsJson(new object()));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Base64url_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Query client = CreateBytesClient(endpoint).GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.Base64urlAsync(BinaryData.FromObjectAsJson(new object()));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Base64urlArray_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -91,10 +92,10 @@ namespace Encode.Bytes.Tests
 {
 BinaryData.FromObjectAsJson(new object())
 });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Base64urlArray_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -104,7 +105,6 @@ BinaryData.FromObjectAsJson(new object())
 {
 BinaryData.FromObjectAsJson(new object())
 });
-            Console.WriteLine(response.Status);
         }
     }
 }

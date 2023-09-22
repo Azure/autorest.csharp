@@ -52,6 +52,6 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
             return builder.ToString();
         }
 
-        protected override CSharpAttribute[] Attributes => new[] { new CSharpAttribute(typeof(TestAttribute)) };
+        protected override CSharpAttribute[] Attributes => new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Skipping this test case because this is only for scaffolding the test cases") };
     }
 }

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -23,6 +22,7 @@ namespace httpInfrastructure_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head408_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -30,10 +30,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRetryClient client = CreateHttpRetryClient(credential, endpoint);
 
             Response response = await client.Head408Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head408_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -41,10 +41,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRetryClient client = CreateHttpRetryClient(credential, endpoint);
 
             Response response = await client.Head408Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put500_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -53,10 +53,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Put500Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put500_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -65,10 +65,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put500Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Patch500_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -77,10 +77,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Patch500Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Patch500_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -89,10 +89,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch500Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get502_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -100,10 +100,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRetryClient client = CreateHttpRetryClient(credential, endpoint);
 
             Response response = await client.Get502Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get502_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -111,10 +111,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRetryClient client = CreateHttpRetryClient(credential, endpoint);
 
             Response response = await client.Get502Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Options502_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -122,12 +122,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRetryClient client = CreateHttpRetryClient(credential, endpoint);
 
             Response response = await client.Options502Async(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Options502_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -135,12 +133,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRetryClient client = CreateHttpRetryClient(credential, endpoint);
 
             Response response = await client.Options502Async(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Post503_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -149,10 +145,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Post503Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Post503_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -161,10 +157,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post503Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete503_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -173,10 +169,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Delete503Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete503_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -185,10 +181,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete503Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put504_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -197,10 +193,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Put504Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put504_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -209,10 +205,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put504Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Patch504_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -221,10 +217,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Patch504Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Patch504_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -233,7 +229,6 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch504Async(content);
-            Console.WriteLine(response.Status);
         }
     }
 }

@@ -22,6 +22,7 @@ namespace Accessibility_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -30,10 +31,10 @@ namespace Accessibility_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.OperationAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -42,7 +43,6 @@ namespace Accessibility_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.OperationAsync(content);
-            Console.WriteLine(response.Status);
         }
     }
 }

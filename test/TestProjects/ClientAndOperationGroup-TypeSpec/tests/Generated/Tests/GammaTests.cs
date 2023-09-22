@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -22,51 +21,43 @@ namespace ClientAndOperationGroup.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Four_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Gamma client = CreateClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = await client.FourAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Four_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Gamma client = CreateClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = await client.FourAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Five_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Gamma client = CreateClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = await client.FiveAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Five_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Gamma client = CreateClientAndOperationGroupClient(endpoint).GetGammaClient();
 
             Response response = await client.FiveAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
     }
 }

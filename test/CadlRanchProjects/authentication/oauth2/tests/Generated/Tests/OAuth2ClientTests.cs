@@ -22,6 +22,7 @@ namespace Authentication.OAuth2.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Valid_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
@@ -29,10 +30,10 @@ namespace Authentication.OAuth2.Tests
             OAuth2Client client = CreateOAuth2Client(credential, endpoint);
 
             Response response = await client.ValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Valid_AllParameters_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
@@ -40,10 +41,10 @@ namespace Authentication.OAuth2.Tests
             OAuth2Client client = CreateOAuth2Client(credential, endpoint);
 
             Response response = await client.ValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Invalid_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
@@ -51,10 +52,10 @@ namespace Authentication.OAuth2.Tests
             OAuth2Client client = CreateOAuth2Client(credential, endpoint);
 
             Response response = await client.InvalidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Invalid_AllParameters_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
@@ -62,7 +63,6 @@ namespace Authentication.OAuth2.Tests
             OAuth2Client client = CreateOAuth2Client(credential, endpoint);
 
             Response response = await client.InvalidAsync();
-            Console.WriteLine(response.Status);
         }
     }
 }

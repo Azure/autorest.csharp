@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -23,18 +22,17 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Public_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Shared client = CreateInternalClient(endpoint).GetSharedClient();
 
             Response response = await client.PublicAsync("<name>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Public_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -44,18 +42,17 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Public_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Shared client = CreateInternalClient(endpoint).GetSharedClient();
 
             Response response = await client.PublicAsync("<name>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Public_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

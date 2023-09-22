@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +23,7 @@ namespace _Type.Model.Usage.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Input_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -34,10 +34,10 @@ namespace _Type.Model.Usage.Tests
                 requiredProp = "<requiredProp>",
             });
             Response response = await client.InputAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Input_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -45,10 +45,10 @@ namespace _Type.Model.Usage.Tests
 
             InputRecord input = new InputRecord("<requiredProp>");
             Response response = await client.InputAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Input_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -59,10 +59,10 @@ namespace _Type.Model.Usage.Tests
                 requiredProp = "<requiredProp>",
             });
             Response response = await client.InputAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Input_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -70,22 +70,20 @@ namespace _Type.Model.Usage.Tests
 
             InputRecord input = new InputRecord("<requiredProp>");
             Response response = await client.InputAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Output_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             UsageClient client = CreateUsageClient(endpoint);
 
             Response response = await client.OutputAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProp").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Output_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -95,18 +93,17 @@ namespace _Type.Model.Usage.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Output_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             UsageClient client = CreateUsageClient(endpoint);
 
             Response response = await client.OutputAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProp").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Output_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -116,6 +113,7 @@ namespace _Type.Model.Usage.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputAndOutput_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -126,12 +124,10 @@ namespace _Type.Model.Usage.Tests
                 requiredProp = "<requiredProp>",
             });
             Response response = await client.InputAndOutputAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProp").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputAndOutput_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -142,6 +138,7 @@ namespace _Type.Model.Usage.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputAndOutput_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -152,12 +149,10 @@ namespace _Type.Model.Usage.Tests
                 requiredProp = "<requiredProp>",
             });
             Response response = await client.InputAndOutputAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredProp").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputAndOutput_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

@@ -23,6 +23,7 @@ namespace Parameters.Spread.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAsRequestBody_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -33,10 +34,10 @@ namespace Parameters.Spread.Tests
                 name = "<name>",
             });
             Response response = await client.SpreadAsRequestBodyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAsRequestBody_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -44,10 +45,10 @@ namespace Parameters.Spread.Tests
 
             BodyParameter bodyParameter = new BodyParameter("<name>");
             Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAsRequestBody_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -58,10 +59,10 @@ namespace Parameters.Spread.Tests
                 name = "<name>",
             });
             Response response = await client.SpreadAsRequestBodyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAsRequestBody_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -69,7 +70,6 @@ namespace Parameters.Spread.Tests
 
             BodyParameter bodyParameter = new BodyParameter("<name>");
             Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
-            Console.WriteLine(response.Status);
         }
     }
 }

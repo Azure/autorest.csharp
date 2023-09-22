@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,18 +23,17 @@ namespace _Type.Property.ValueTypes.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetUnknownString_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             UnknownString client = CreateValueTypesClient(endpoint).GetUnknownStringClient(apiVersion: "1.0.0");
 
             Response response = await client.GetUnknownStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetUnknownString_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -45,18 +43,17 @@ namespace _Type.Property.ValueTypes.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetUnknownString_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             UnknownString client = CreateValueTypesClient(endpoint).GetUnknownStringClient(apiVersion: "1.0.0");
 
             Response response = await client.GetUnknownStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetUnknownString_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -66,6 +63,7 @@ namespace _Type.Property.ValueTypes.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -76,10 +74,10 @@ namespace _Type.Property.ValueTypes.Tests
                 property = new object(),
             });
             Response response = await client.PutAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -87,10 +85,10 @@ namespace _Type.Property.ValueTypes.Tests
 
             UnknownStringProperty body = new UnknownStringProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -101,10 +99,10 @@ namespace _Type.Property.ValueTypes.Tests
                 property = new object(),
             });
             Response response = await client.PutAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -112,7 +110,6 @@ namespace _Type.Property.ValueTypes.Tests
 
             UnknownStringProperty body = new UnknownStringProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

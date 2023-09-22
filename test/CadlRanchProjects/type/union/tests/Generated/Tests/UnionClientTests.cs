@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -23,6 +22,7 @@ namespace _Type.Union.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SendInt_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -33,10 +33,10 @@ namespace _Type.Union.Tests
                 simpleUnion = 1234,
             });
             Response response = await client.SendIntAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SendInt_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -47,10 +47,10 @@ namespace _Type.Union.Tests
                 simpleUnion = 1234,
             });
             Response response = await client.SendIntAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SendIntArray_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -61,10 +61,10 @@ namespace _Type.Union.Tests
                 simpleUnion = 1234,
             });
             Response response = await client.SendIntArrayAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SendIntArray_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -75,10 +75,10 @@ namespace _Type.Union.Tests
                 simpleUnion = 1234,
             });
             Response response = await client.SendIntArrayAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SendFirstNamedUnionValue_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -93,10 +93,10 @@ namespace _Type.Union.Tests
                 },
             });
             Response response = await client.SendFirstNamedUnionValueAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SendFirstNamedUnionValue_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -111,10 +111,10 @@ namespace _Type.Union.Tests
                 },
             });
             Response response = await client.SendFirstNamedUnionValueAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SendSecondNamedUnionValue_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -129,10 +129,10 @@ namespace _Type.Union.Tests
                 },
             });
             Response response = await client.SendSecondNamedUnionValueAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SendSecondNamedUnionValue_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -147,103 +147,86 @@ namespace _Type.Union.Tests
                 },
             });
             Response response = await client.SendSecondNamedUnionValueAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ReceiveString_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             UnionClient client = CreateUnionClient(endpoint);
 
             Response response = await client.ReceiveStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ReceiveString_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             UnionClient client = CreateUnionClient(endpoint);
 
             Response response = await client.ReceiveStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ReceiveIntArray_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             UnionClient client = CreateUnionClient(endpoint);
 
             Response response = await client.ReceiveIntArrayAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ReceiveIntArray_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             UnionClient client = CreateUnionClient(endpoint);
 
             Response response = await client.ReceiveIntArrayAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("simpleUnion").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ReceiveFirstNamedUnionValue_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             UnionClient client = CreateUnionClient(endpoint);
 
             Response response = await client.ReceiveFirstNamedUnionValueAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("namedUnion").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ReceiveFirstNamedUnionValue_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             UnionClient client = CreateUnionClient(endpoint);
 
             Response response = await client.ReceiveFirstNamedUnionValueAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("namedUnion").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ReceiveSecondNamedUnionValue_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             UnionClient client = CreateUnionClient(endpoint);
 
             Response response = await client.ReceiveSecondNamedUnionValueAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("namedUnion").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ReceiveSecondNamedUnionValue_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             UnionClient client = CreateUnionClient(endpoint);
 
             Response response = await client.ReceiveSecondNamedUnionValueAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("namedUnion").ToString());
         }
     }
 }

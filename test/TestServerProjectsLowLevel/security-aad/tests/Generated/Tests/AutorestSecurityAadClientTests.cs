@@ -22,6 +22,7 @@ namespace security_aad_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
@@ -29,10 +30,10 @@ namespace security_aad_LowLevel.Tests
             AutorestSecurityAadClient client = CreateAutorestSecurityAadClient(credential, endpoint);
 
             Response response = await client.HeadAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head_AllParameters_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
@@ -40,7 +41,6 @@ namespace security_aad_LowLevel.Tests
             AutorestSecurityAadClient client = CreateAutorestSecurityAadClient(credential, endpoint);
 
             Response response = await client.HeadAsync();
-            Console.WriteLine(response.Status);
         }
     }
 }

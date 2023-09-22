@@ -22,6 +22,7 @@ namespace Parameters.CollectionFormat.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Csv_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -31,10 +32,10 @@ namespace Parameters.CollectionFormat.Tests
 {
 "<colors>"
 });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Csv_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -44,7 +45,6 @@ namespace Parameters.CollectionFormat.Tests
 {
 "<colors>"
 });
-            Console.WriteLine(response.Status);
         }
     }
 }

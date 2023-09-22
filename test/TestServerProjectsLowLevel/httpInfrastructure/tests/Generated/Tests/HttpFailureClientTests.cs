@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -22,6 +21,7 @@ namespace httpInfrastructure_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetEmptyError_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -29,12 +29,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpFailureClient client = CreateHttpFailureClient(credential, endpoint);
 
             Response response = await client.GetEmptyErrorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetEmptyError_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -42,12 +40,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpFailureClient client = CreateHttpFailureClient(credential, endpoint);
 
             Response response = await client.GetEmptyErrorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNoModelError_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -55,12 +51,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpFailureClient client = CreateHttpFailureClient(credential, endpoint);
 
             Response response = await client.GetNoModelErrorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNoModelError_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -68,12 +62,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpFailureClient client = CreateHttpFailureClient(credential, endpoint);
 
             Response response = await client.GetNoModelErrorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNoModelEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -81,12 +73,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpFailureClient client = CreateHttpFailureClient(credential, endpoint);
 
             Response response = await client.GetNoModelEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNoModelEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -94,9 +84,6 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpFailureClient client = CreateHttpFailureClient(credential, endpoint);
 
             Response response = await client.GetNoModelEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
     }
 }

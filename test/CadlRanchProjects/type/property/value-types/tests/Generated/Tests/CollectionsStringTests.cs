@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,18 +24,17 @@ namespace _Type.Property.ValueTypes.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetCollectionsString_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             CollectionsString client = CreateValueTypesClient(endpoint).GetCollectionsStringClient(apiVersion: "1.0.0");
 
             Response response = await client.GetCollectionsStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property")[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetCollectionsString_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -46,18 +44,17 @@ namespace _Type.Property.ValueTypes.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetCollectionsString_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             CollectionsString client = CreateValueTypesClient(endpoint).GetCollectionsStringClient(apiVersion: "1.0.0");
 
             Response response = await client.GetCollectionsStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property")[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetCollectionsString_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -67,6 +64,7 @@ namespace _Type.Property.ValueTypes.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -80,10 +78,10 @@ namespace _Type.Property.ValueTypes.Tests
 },
             });
             Response response = await client.PutAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -94,10 +92,10 @@ namespace _Type.Property.ValueTypes.Tests
 "<property>"
 });
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -111,10 +109,10 @@ namespace _Type.Property.ValueTypes.Tests
 },
             });
             Response response = await client.PutAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -125,7 +123,6 @@ namespace _Type.Property.ValueTypes.Tests
 "<property>"
 });
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

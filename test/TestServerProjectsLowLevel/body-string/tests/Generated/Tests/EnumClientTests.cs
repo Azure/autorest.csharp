@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -23,6 +22,7 @@ namespace body_string_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNotExpandable_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -30,12 +30,10 @@ namespace body_string_LowLevel.Tests
             EnumClient client = CreateEnumClient(credential, endpoint);
 
             Response response = await client.GetNotExpandableAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNotExpandable_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -43,12 +41,10 @@ namespace body_string_LowLevel.Tests
             EnumClient client = CreateEnumClient(credential, endpoint);
 
             Response response = await client.GetNotExpandableAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutNotExpandable_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -57,10 +53,10 @@ namespace body_string_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("red color");
             Response response = await client.PutNotExpandableAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutNotExpandable_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -69,10 +65,10 @@ namespace body_string_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("red color");
             Response response = await client.PutNotExpandableAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetReferenced_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -80,12 +76,10 @@ namespace body_string_LowLevel.Tests
             EnumClient client = CreateEnumClient(credential, endpoint);
 
             Response response = await client.GetReferencedAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetReferenced_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -93,12 +87,10 @@ namespace body_string_LowLevel.Tests
             EnumClient client = CreateEnumClient(credential, endpoint);
 
             Response response = await client.GetReferencedAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutReferenced_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -107,10 +99,10 @@ namespace body_string_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("red color");
             Response response = await client.PutReferencedAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutReferenced_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -119,10 +111,10 @@ namespace body_string_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("red color");
             Response response = await client.PutReferencedAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetReferencedConstant_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -130,12 +122,10 @@ namespace body_string_LowLevel.Tests
             EnumClient client = CreateEnumClient(credential, endpoint);
 
             Response response = await client.GetReferencedConstantAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("ColorConstant").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetReferencedConstant_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -143,13 +133,10 @@ namespace body_string_LowLevel.Tests
             EnumClient client = CreateEnumClient(credential, endpoint);
 
             Response response = await client.GetReferencedConstantAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("ColorConstant").ToString());
-            Console.WriteLine(result.GetProperty("field1").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutReferencedConstant_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -161,10 +148,10 @@ namespace body_string_LowLevel.Tests
                 ColorConstant = "green-color",
             });
             Response response = await client.PutReferencedConstantAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutReferencedConstant_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -177,7 +164,6 @@ namespace body_string_LowLevel.Tests
                 field1 = "<field1>",
             });
             Response response = await client.PutReferencedConstantAsync(content);
-            Console.WriteLine(response.Status);
         }
     }
 }

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -21,23 +20,23 @@ namespace custom_baseUrl_more_options_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = CreatePathsClient("host", "<SubscriptionId>", credential);
 
             Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PathsClient client = CreatePathsClient("host", "<SubscriptionId>", credential);
 
             Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", keyVersion: "<keyVersion>");
-            Console.WriteLine(response.Status);
         }
     }
 }

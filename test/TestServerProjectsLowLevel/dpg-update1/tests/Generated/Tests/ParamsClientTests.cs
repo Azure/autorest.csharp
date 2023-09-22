@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -23,6 +22,7 @@ namespace dpg_update1_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task HeadNoParams_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -30,12 +30,10 @@ namespace dpg_update1_LowLevel.Tests
             ParamsClient client = CreateParamsClient(credential, endpoint);
 
             Response response = await client.HeadNoParamsAsync(null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task HeadNoParams_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -43,12 +41,10 @@ namespace dpg_update1_LowLevel.Tests
             ParamsClient client = CreateParamsClient(credential, endpoint);
 
             Response response = await client.HeadNoParamsAsync("<newParameter>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetRequired_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -56,12 +52,10 @@ namespace dpg_update1_LowLevel.Tests
             ParamsClient client = CreateParamsClient(credential, endpoint);
 
             Response response = await client.GetRequiredAsync("<parameter>", null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetRequired_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -69,12 +63,10 @@ namespace dpg_update1_LowLevel.Tests
             ParamsClient client = CreateParamsClient(credential, endpoint);
 
             Response response = await client.GetRequiredAsync("<parameter>", "<newParameter>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutRequiredOptional_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -82,12 +74,10 @@ namespace dpg_update1_LowLevel.Tests
             ParamsClient client = CreateParamsClient(credential, endpoint);
 
             Response response = await client.PutRequiredOptionalAsync("<requiredParam>", null, null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutRequiredOptional_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -95,12 +85,10 @@ namespace dpg_update1_LowLevel.Tests
             ParamsClient client = CreateParamsClient(credential, endpoint);
 
             Response response = await client.PutRequiredOptionalAsync("<requiredParam>", "<optionalParam>", "<newParameter>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PostParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -112,12 +100,10 @@ namespace dpg_update1_LowLevel.Tests
                 url = "<url>",
             });
             Response response = await client.PostParametersAsync(content, new ContentType("application/json"));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PostParameters_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -129,12 +115,10 @@ namespace dpg_update1_LowLevel.Tests
                 url = "<url>",
             });
             Response response = await client.PostParametersAsync(content, new ContentType("application/json"));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DeleteParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -142,10 +126,10 @@ namespace dpg_update1_LowLevel.Tests
             ParamsClient client = CreateParamsClient(credential, endpoint);
 
             Response response = await client.DeleteParametersAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DeleteParameters_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -153,10 +137,10 @@ namespace dpg_update1_LowLevel.Tests
             ParamsClient client = CreateParamsClient(credential, endpoint);
 
             Response response = await client.DeleteParametersAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetOptional_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -164,12 +148,10 @@ namespace dpg_update1_LowLevel.Tests
             ParamsClient client = CreateParamsClient(credential, endpoint);
 
             Response response = await client.GetOptionalAsync(null, null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetOptional_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -177,12 +159,10 @@ namespace dpg_update1_LowLevel.Tests
             ParamsClient client = CreateParamsClient(credential, endpoint);
 
             Response response = await client.GetOptionalAsync("<optionalParam>", "<newParameter>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNewOperation_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -190,12 +170,10 @@ namespace dpg_update1_LowLevel.Tests
             ParamsClient client = CreateParamsClient(credential, endpoint);
 
             Response response = await client.GetNewOperationAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNewOperation_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -203,9 +181,6 @@ namespace dpg_update1_LowLevel.Tests
             ParamsClient client = CreateParamsClient(credential, endpoint);
 
             Response response = await client.GetNewOperationAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
     }
 }

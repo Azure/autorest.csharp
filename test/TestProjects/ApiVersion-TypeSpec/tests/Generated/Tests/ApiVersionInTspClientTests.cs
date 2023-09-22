@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using ApiVersionInTsp;
 using ApiVersionInTsp.Models;
@@ -23,6 +22,7 @@ namespace ApiVersionInTsp.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBatchDetectionResult_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -30,12 +30,10 @@ namespace ApiVersionInTsp.Tests
             ApiVersionInTspClient client = CreateApiVersionInTspClient(endpoint, credential);
 
             Response response = await client.GetBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("resultId").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBatchDetectionResult_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -46,6 +44,7 @@ namespace ApiVersionInTsp.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBatchDetectionResult_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -53,12 +52,10 @@ namespace ApiVersionInTsp.Tests
             ApiVersionInTspClient client = CreateApiVersionInTspClient(endpoint, credential);
 
             Response response = await client.GetBatchDetectionResultAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("resultId").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBatchDetectionResult_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -23,18 +22,17 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoDecoratorInPublic_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PublicOperation client = CreateAccessClient(endpoint).GetPublicOperationClient(apiVersion: "1.0.0");
 
             Response response = await client.NoDecoratorInPublicAsync("<name>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoDecoratorInPublic_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -44,18 +42,17 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoDecoratorInPublic_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PublicOperation client = CreateAccessClient(endpoint).GetPublicOperationClient(apiVersion: "1.0.0");
 
             Response response = await client.NoDecoratorInPublicAsync("<name>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoDecoratorInPublic_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -65,18 +62,17 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PublicDecoratorInPublic_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PublicOperation client = CreateAccessClient(endpoint).GetPublicOperationClient(apiVersion: "1.0.0");
 
             Response response = await client.PublicDecoratorInPublicAsync("<name>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PublicDecoratorInPublic_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -86,18 +82,17 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PublicDecoratorInPublic_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PublicOperation client = CreateAccessClient(endpoint).GetPublicOperationClient(apiVersion: "1.0.0");
 
             Response response = await client.PublicDecoratorInPublicAsync("<name>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PublicDecoratorInPublic_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

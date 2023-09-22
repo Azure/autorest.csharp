@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -23,53 +22,47 @@ namespace MixApiVersion.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = CreateMixApiVersionClient(endpoint);
 
             Response response = await client.DeleteAsync("<name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = CreateMixApiVersionClient(endpoint);
 
             Response response = await client.DeleteAsync("<name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Read_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = CreateMixApiVersionClient(endpoint);
 
             Response response = await client.ReadAsync(1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Read_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = CreateMixApiVersionClient(endpoint);
 
             Response response = await client.ReadAsync(1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("tag").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Create_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -80,13 +73,10 @@ namespace MixApiVersion.Tests
                 age = 1234,
             });
             Response response = await client.CreateAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Create_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -98,14 +88,10 @@ namespace MixApiVersion.Tests
                 age = 1234,
             });
             Response response = await client.CreateAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("tag").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetPets_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -113,14 +99,11 @@ namespace MixApiVersion.Tests
 
             await foreach (BinaryData item in client.GetPetsAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("petId").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetPets_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -128,10 +111,6 @@ namespace MixApiVersion.Tests
 
             await foreach (BinaryData item in client.GetPetsAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("petId").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
             }
         }
     }

@@ -23,6 +23,7 @@ namespace Parameters.BodyOptionality.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RequiredExplicit_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -33,10 +34,10 @@ namespace Parameters.BodyOptionality.Tests
                 name = "<name>",
             });
             Response response = await client.RequiredExplicitAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RequiredExplicit_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -44,10 +45,10 @@ namespace Parameters.BodyOptionality.Tests
 
             BodyModel body = new BodyModel("<name>");
             Response response = await client.RequiredExplicitAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RequiredExplicit_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -58,10 +59,10 @@ namespace Parameters.BodyOptionality.Tests
                 name = "<name>",
             });
             Response response = await client.RequiredExplicitAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RequiredExplicit_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -69,10 +70,10 @@ namespace Parameters.BodyOptionality.Tests
 
             BodyModel body = new BodyModel("<name>");
             Response response = await client.RequiredExplicitAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RequiredImplicit_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -83,10 +84,10 @@ namespace Parameters.BodyOptionality.Tests
                 name = "<name>",
             });
             Response response = await client.RequiredImplicitAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RequiredImplicit_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -94,10 +95,10 @@ namespace Parameters.BodyOptionality.Tests
 
             BodyModel bodyModel = new BodyModel("<name>");
             Response response = await client.RequiredImplicitAsync(bodyModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RequiredImplicit_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -108,10 +109,10 @@ namespace Parameters.BodyOptionality.Tests
                 name = "<name>",
             });
             Response response = await client.RequiredImplicitAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RequiredImplicit_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -119,7 +120,6 @@ namespace Parameters.BodyOptionality.Tests
 
             BodyModel bodyModel = new BodyModel("<name>");
             Response response = await client.RequiredImplicitAsync(bodyModel);
-            Console.WriteLine(response.Status);
         }
     }
 }

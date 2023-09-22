@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,17 +22,16 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UpdateConvenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.UpdateConvenienceAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UpdateConvenience_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -43,17 +40,16 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UpdateConvenience_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.UpdateConvenienceAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UpdateConvenience_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -62,6 +58,7 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalBeforeRequired_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -71,20 +68,20 @@ namespace ConvenienceInCadl.Tests
                 id = "<id>",
             });
             Response response = await client.ConvenienceOptionalBeforeRequiredAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalBeforeRequired_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Model required = new Model("<id>");
             Response response = await client.ConvenienceOptionalBeforeRequiredAsync(required);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalBeforeRequired_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -94,42 +91,38 @@ namespace ConvenienceInCadl.Tests
                 id = "<id>",
             });
             Response response = await client.ConvenienceOptionalBeforeRequiredAsync(content, optional: 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalBeforeRequired_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Model required = new Model("<id>");
             Response response = await client.ConvenienceOptionalBeforeRequiredAsync(required, optional: 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoConvenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.NoConvenienceAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoConvenience_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.NoConvenienceAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoConvenienceRequiredBody_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -139,10 +132,10 @@ namespace ConvenienceInCadl.Tests
                 id = "<id>",
             });
             Response response = await client.NoConvenienceRequiredBodyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoConvenienceRequiredBody_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -152,20 +145,20 @@ namespace ConvenienceInCadl.Tests
                 id = "<id>",
             });
             Response response = await client.NoConvenienceRequiredBodyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoConvenienceOptionalBody_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             RequestContent content = null;
             Response response = await client.NoConvenienceOptionalBodyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoConvenienceOptionalBody_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -175,21 +168,19 @@ namespace ConvenienceInCadl.Tests
                 id = "<id>",
             });
             Response response = await client.NoConvenienceOptionalBodyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Protocol_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ProtocolAsync();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolValue_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -198,17 +189,16 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Protocol_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ProtocolAsync();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolValue_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -217,17 +207,16 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceWithOptional_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ConvenienceWithOptionalAsync();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceWithOptionalValue_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -236,17 +225,16 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceWithOptional_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ConvenienceWithOptionalAsync();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceWithOptionalValue_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -255,17 +243,16 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceWithRequired_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ConvenienceWithRequiredAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceWithRequired_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -274,17 +261,16 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceWithRequired_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ConvenienceWithRequiredAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceWithRequired_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -293,53 +279,52 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceShouldNotGenerate_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ConvenienceShouldNotGenerateAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceShouldNotGenerate_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ConvenienceShouldNotGenerateAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolShouldNotGenerateConvenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ProtocolShouldNotGenerateConvenienceAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolShouldNotGenerateConvenience_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ProtocolShouldNotGenerateConvenienceAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolOptionalQuery_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ProtocolOptionalQueryAsync();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolOptionalQueryValue_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -348,17 +333,16 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolOptionalQuery_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ProtocolOptionalQueryAsync(optional: 1234);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolOptionalQueryValue_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -367,17 +351,16 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolRequiredQuery_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ProtocolRequiredQueryAsync(1234);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolRequiredQueryValue_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -386,17 +369,16 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolRequiredQuery_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ProtocolRequiredQueryAsync(1234);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolRequiredQueryValue_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -405,25 +387,26 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolOptionalModel_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             RequestContent content = null;
             Response response = await client.ProtocolOptionalModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolOptionalModel_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ProtocolOptionalModelAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolOptionalModel_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -433,20 +416,20 @@ namespace ConvenienceInCadl.Tests
                 id = "<id>",
             });
             Response response = await client.ProtocolOptionalModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolOptionalModel_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Model optional = new Model("<id>");
             Response response = await client.ProtocolOptionalModelAsync(optional: optional);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolRequiredModel_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -456,20 +439,20 @@ namespace ConvenienceInCadl.Tests
                 id = "<id>",
             });
             Response response = await client.ProtocolRequiredModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolRequiredModel_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Model required = new Model("<id>");
             Response response = await client.ProtocolRequiredModelAsync(required);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolRequiredModel_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -479,31 +462,29 @@ namespace ConvenienceInCadl.Tests
                 id = "<id>",
             });
             Response response = await client.ProtocolRequiredModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolRequiredModel_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Model required = new Model("<id>");
             Response response = await client.ProtocolRequiredModelAsync(required);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalQueryWithOptional_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ConvenienceOptionalQueryWithOptionalAsync();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalQueryWithOptionalValue_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -512,17 +493,16 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalQueryWithOptional_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ConvenienceOptionalQueryWithOptionalAsync(optional: 1234);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalQueryWithOptionalValue_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -531,17 +511,16 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceRequiredQueryWithOptional_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ConvenienceRequiredQueryWithOptionalAsync(1234);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceRequiredQueryWithOptionalValue_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -550,17 +529,16 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceRequiredQueryWithOptional_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ConvenienceRequiredQueryWithOptionalAsync(1234);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceRequiredQueryWithOptionalValue_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -569,17 +547,16 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalQueryWithRequired_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ConvenienceOptionalQueryWithRequiredAsync(null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalQueryWithRequired_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -588,17 +565,16 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalQueryWithRequired_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ConvenienceOptionalQueryWithRequiredAsync(1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalQueryWithRequired_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -607,17 +583,16 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceRequiredQueryWithRequired_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ConvenienceRequiredQueryWithRequiredAsync(1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceRequiredQueryWithRequired_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -626,17 +601,16 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceRequiredQueryWithRequired_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ConvenienceRequiredQueryWithRequiredAsync(1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceRequiredQueryWithRequired_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -645,25 +619,26 @@ namespace ConvenienceInCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalModelWithOptional_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             RequestContent content = null;
             Response response = await client.ConvenienceOptionalModelWithOptionalAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalModelWithOptional_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ConvenienceOptionalModelWithOptionalAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalModelWithOptional_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -673,20 +648,20 @@ namespace ConvenienceInCadl.Tests
                 id = "<id>",
             });
             Response response = await client.ConvenienceOptionalModelWithOptionalAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalModelWithOptional_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Model optional = new Model("<id>");
             Response response = await client.ConvenienceOptionalModelWithOptionalAsync(optional: optional);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceRequiredModelWithOptional_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -696,20 +671,20 @@ namespace ConvenienceInCadl.Tests
                 id = "<id>",
             });
             Response response = await client.ConvenienceRequiredModelWithOptionalAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceRequiredModelWithOptional_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Model required = new Model("<id>");
             Response response = await client.ConvenienceRequiredModelWithOptionalAsync(required);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceRequiredModelWithOptional_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -719,39 +694,39 @@ namespace ConvenienceInCadl.Tests
                 id = "<id>",
             });
             Response response = await client.ConvenienceRequiredModelWithOptionalAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceRequiredModelWithOptional_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Model required = new Model("<id>");
             Response response = await client.ConvenienceRequiredModelWithOptionalAsync(required);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalModelWithRequired_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             RequestContent content = null;
             Response response = await client.ConvenienceOptionalModelWithRequiredAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalModelWithRequired_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Response response = await client.ConvenienceOptionalModelWithRequiredAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalModelWithRequired_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -761,20 +736,20 @@ namespace ConvenienceInCadl.Tests
                 id = "<id>",
             });
             Response response = await client.ConvenienceOptionalModelWithRequiredAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConvenienceOptionalModelWithRequired_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Model optional = new Model("<id>");
             Response response = await client.ConvenienceOptionalModelWithRequiredAsync(optional: optional);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolOptionalBeforeRequired_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -784,20 +759,20 @@ namespace ConvenienceInCadl.Tests
                 id = "<id>",
             });
             Response response = await client.ProtocolOptionalBeforeRequiredAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolOptionalBeforeRequired_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Model required = new Model("<id>");
             Response response = await client.ProtocolOptionalBeforeRequiredAsync(required);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolOptionalBeforeRequired_AllParameters_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
@@ -807,17 +782,16 @@ namespace ConvenienceInCadl.Tests
                 id = "<id>",
             });
             Response response = await client.ProtocolOptionalBeforeRequiredAsync(content, optional: 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ProtocolOptionalBeforeRequired_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = CreateConvenienceInCadlClient();
 
             Model required = new Model("<id>");
             Response response = await client.ProtocolOptionalBeforeRequiredAsync(required, optional: 1234);
-            Console.WriteLine(response.Status);
         }
     }
 }

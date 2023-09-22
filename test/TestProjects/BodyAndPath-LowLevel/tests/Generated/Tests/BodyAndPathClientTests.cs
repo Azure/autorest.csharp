@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,6 +24,7 @@ namespace BodyAndPath_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Create_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -33,10 +33,10 @@ namespace BodyAndPath_LowLevel.Tests
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateAsync("<itemName>", content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Create_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -45,10 +45,10 @@ namespace BodyAndPath_LowLevel.Tests
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateAsync("<itemName>", content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CreateStream_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -57,10 +57,10 @@ namespace BodyAndPath_LowLevel.Tests
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.CreateStreamAsync("<itemNameStream>", content, new ContentType("application/json"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CreateStream_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -72,10 +72,10 @@ namespace BodyAndPath_LowLevel.Tests
 {
 "<excluded>"
 });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CreateEnum_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -84,10 +84,10 @@ namespace BodyAndPath_LowLevel.Tests
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateEnumAsync("current", "latest", content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CreateEnum_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -96,10 +96,10 @@ namespace BodyAndPath_LowLevel.Tests
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.CreateEnumAsync("current", "latest", content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBodyAndPaths_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -107,12 +107,10 @@ namespace BodyAndPath_LowLevel.Tests
             BodyAndPathClient client = CreateBodyAndPathClient(credential, endpoint);
 
             Response response = await client.GetBodyAndPathsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBodyAndPaths_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -120,12 +118,10 @@ namespace BodyAndPath_LowLevel.Tests
             BodyAndPathClient client = CreateBodyAndPathClient(credential, endpoint);
 
             Response response = await client.GetBodyAndPathsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetItems_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -133,12 +129,10 @@ namespace BodyAndPath_LowLevel.Tests
             BodyAndPathClient client = CreateBodyAndPathClient(credential, endpoint);
 
             Response response = await client.GetItemsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetItems_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -146,12 +140,10 @@ namespace BodyAndPath_LowLevel.Tests
             BodyAndPathClient client = CreateBodyAndPathClient(credential, endpoint);
 
             Response response = await client.GetItemsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Update_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -160,10 +152,10 @@ namespace BodyAndPath_LowLevel.Tests
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.UpdateAsync("<item3>", "<item2>", "value", "<item4>", content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Update_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -175,7 +167,6 @@ namespace BodyAndPath_LowLevel.Tests
                 ["invalid-int-name"] = 1234,
             });
             Response response = await client.UpdateAsync("<item3>", "<item2>", "value", "<item4>", content, item5: "<item5>");
-            Console.WriteLine(response.Status);
         }
     }
 }

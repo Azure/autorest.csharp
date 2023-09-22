@@ -21,6 +21,7 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head200_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -28,10 +29,10 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
             HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
 
             Response<bool> response = await client.Head200Async();
-            Console.WriteLine(response.GetRawResponse().Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -39,10 +40,10 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
             HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
 
             Response<bool> response = await client.Head200Async();
-            Console.WriteLine(response.GetRawResponse().Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head204_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -50,10 +51,10 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
             HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
 
             Response<bool> response = await client.Head204Async();
-            Console.WriteLine(response.GetRawResponse().Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head204_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -61,10 +62,10 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
             HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
 
             Response<bool> response = await client.Head204Async();
-            Console.WriteLine(response.GetRawResponse().Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head404_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -72,10 +73,10 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
             HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
 
             Response<bool> response = await client.Head404Async();
-            Console.WriteLine(response.GetRawResponse().Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head404_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -83,7 +84,6 @@ namespace HeadAsBooleanTrue_LowLevel.Tests
             HttpSuccessClient client = CreateHttpSuccessClient(credential, endpoint);
 
             Response<bool> response = await client.Head404Async();
-            Console.WriteLine(response.GetRawResponse().Status);
         }
     }
 }

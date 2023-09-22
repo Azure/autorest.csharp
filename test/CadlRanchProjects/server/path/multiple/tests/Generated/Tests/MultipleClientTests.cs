@@ -21,43 +21,43 @@ namespace Server.Path.Multiple.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoOperationParams_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleClient client = CreateMultipleClient(endpoint);
 
             Response response = await client.NoOperationParamsAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoOperationParams_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleClient client = CreateMultipleClient(endpoint);
 
             Response response = await client.NoOperationParamsAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task WithOperationPathParam_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleClient client = CreateMultipleClient(endpoint);
 
             Response response = await client.WithOperationPathParamAsync("<keyword>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task WithOperationPathParam_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleClient client = CreateMultipleClient(endpoint);
 
             Response response = await client.WithOperationPathParamAsync("<keyword>");
-            Console.WriteLine(response.Status);
         }
     }
 }

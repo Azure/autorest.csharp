@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using Azure;
@@ -26,6 +25,7 @@ namespace Encode.Duration.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -36,12 +36,10 @@ namespace Encode.Duration.Tests
                 value = "PT1H23M45S",
             });
             Response response = await client.DefaultAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -52,6 +50,7 @@ namespace Encode.Duration.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -62,12 +61,10 @@ namespace Encode.Duration.Tests
                 value = "PT1H23M45S",
             });
             Response response = await client.DefaultAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -78,6 +75,7 @@ namespace Encode.Duration.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Iso8601_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -88,12 +86,10 @@ namespace Encode.Duration.Tests
                 value = "PT1H23M45S",
             });
             Response response = await client.Iso8601Async(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Iso8601_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -104,6 +100,7 @@ namespace Encode.Duration.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Iso8601_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -114,12 +111,10 @@ namespace Encode.Duration.Tests
                 value = "PT1H23M45S",
             });
             Response response = await client.Iso8601Async(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Iso8601_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -130,6 +125,7 @@ namespace Encode.Duration.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Int32Seconds_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -140,12 +136,10 @@ namespace Encode.Duration.Tests
                 value = 10,
             });
             Response response = await client.Int32SecondsAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Int32Seconds_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -156,6 +150,7 @@ namespace Encode.Duration.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Int32Seconds_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -166,12 +161,10 @@ namespace Encode.Duration.Tests
                 value = 10,
             });
             Response response = await client.Int32SecondsAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Int32Seconds_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -182,6 +175,7 @@ namespace Encode.Duration.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task FloatSeconds_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -192,12 +186,10 @@ namespace Encode.Duration.Tests
                 value = 10F,
             });
             Response response = await client.FloatSecondsAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task FloatSeconds_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -208,6 +200,7 @@ namespace Encode.Duration.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task FloatSeconds_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -218,12 +211,10 @@ namespace Encode.Duration.Tests
                 value = 10F,
             });
             Response response = await client.FloatSecondsAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task FloatSeconds_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -234,6 +225,7 @@ namespace Encode.Duration.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task FloatSecondsArray_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -247,12 +239,10 @@ namespace Encode.Duration.Tests
 },
             });
             Response response = await client.FloatSecondsArrayAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task FloatSecondsArray_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -266,6 +256,7 @@ TimeSpan.FromSeconds(10F)
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task FloatSecondsArray_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -279,12 +270,10 @@ TimeSpan.FromSeconds(10F)
 },
             });
             Response response = await client.FloatSecondsArrayAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task FloatSecondsArray_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

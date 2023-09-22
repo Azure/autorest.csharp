@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -22,6 +21,7 @@ namespace httpInfrastructure_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200Model204NoModelDefaultError200Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -29,12 +29,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200Model204NoModelDefaultError200ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200Model204NoModelDefaultError200Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -42,12 +40,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200Model204NoModelDefaultError200ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200Model204NoModelDefaultError204Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -55,12 +51,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200Model204NoModelDefaultError204ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200Model204NoModelDefaultError204Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -68,12 +62,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200Model204NoModelDefaultError204ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200Model204NoModelDefaultError201Invalid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -81,12 +73,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200Model204NoModelDefaultError201InvalidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200Model204NoModelDefaultError201Invalid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -94,12 +84,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200Model204NoModelDefaultError201InvalidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200Model204NoModelDefaultError202None_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -107,12 +95,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200Model204NoModelDefaultError202NoneAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200Model204NoModelDefaultError202None_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -120,12 +106,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200Model204NoModelDefaultError202NoneAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200Model204NoModelDefaultError400Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -133,12 +117,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200Model204NoModelDefaultError400ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200Model204NoModelDefaultError400Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -146,12 +128,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200Model204NoModelDefaultError400ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200Model201ModelDefaultError200Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -159,12 +139,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200Model201ModelDefaultError200ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200Model201ModelDefaultError200Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -172,12 +150,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200Model201ModelDefaultError200ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200Model201ModelDefaultError201Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -185,12 +161,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200Model201ModelDefaultError201ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200Model201ModelDefaultError201Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -198,12 +172,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200Model201ModelDefaultError201ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200Model201ModelDefaultError400Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -211,12 +183,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200Model201ModelDefaultError400ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200Model201ModelDefaultError400Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -224,12 +194,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200Model201ModelDefaultError400ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA201ModelC404ModelDDefaultError200Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -237,12 +205,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA201ModelC404ModelDDefaultError200Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -250,12 +216,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA201ModelC404ModelDDefaultError201Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -263,12 +227,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA201ModelC404ModelDDefaultError201Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -276,12 +238,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA201ModelC404ModelDDefaultError404Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -289,12 +249,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA201ModelC404ModelDDefaultError404Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -302,12 +260,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA201ModelC404ModelDDefaultError400Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -315,12 +271,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA201ModelC404ModelDDefaultError400Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -328,12 +282,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get202None204NoneDefaultError202None_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -341,10 +293,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get202None204NoneDefaultError202NoneAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get202None204NoneDefaultError202None_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -352,10 +304,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get202None204NoneDefaultError202NoneAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get202None204NoneDefaultError204None_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -363,10 +315,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get202None204NoneDefaultError204NoneAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get202None204NoneDefaultError204None_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -374,10 +326,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get202None204NoneDefaultError204NoneAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get202None204NoneDefaultError400Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -385,10 +337,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get202None204NoneDefaultError400ValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get202None204NoneDefaultError400Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -396,10 +348,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get202None204NoneDefaultError400ValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get202None204NoneDefaultNone202Invalid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -407,10 +359,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get202None204NoneDefaultNone202InvalidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get202None204NoneDefaultNone202Invalid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -418,10 +370,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get202None204NoneDefaultNone202InvalidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get202None204NoneDefaultNone204None_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -429,10 +381,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get202None204NoneDefaultNone204NoneAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get202None204NoneDefaultNone204None_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -440,10 +392,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get202None204NoneDefaultNone204NoneAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get202None204NoneDefaultNone400None_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -451,10 +403,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get202None204NoneDefaultNone400NoneAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get202None204NoneDefaultNone400None_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -462,10 +414,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get202None204NoneDefaultNone400NoneAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get202None204NoneDefaultNone400Invalid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -473,10 +425,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get202None204NoneDefaultNone400InvalidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get202None204NoneDefaultNone400Invalid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -484,10 +436,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get202None204NoneDefaultNone400InvalidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefaultModelA200Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -495,12 +447,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.GetDefaultModelA200ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefaultModelA200Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -508,12 +458,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.GetDefaultModelA200ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefaultModelA200None_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -521,12 +469,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.GetDefaultModelA200NoneAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefaultModelA200None_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -534,12 +480,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.GetDefaultModelA200NoneAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefaultModelA400Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -547,10 +491,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.GetDefaultModelA400ValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefaultModelA400Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -558,10 +502,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.GetDefaultModelA400ValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefaultModelA400None_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -569,10 +513,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.GetDefaultModelA400NoneAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefaultModelA400None_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -580,10 +524,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.GetDefaultModelA400NoneAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefaultNone200Invalid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -591,10 +535,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.GetDefaultNone200InvalidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefaultNone200Invalid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -602,10 +546,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.GetDefaultNone200InvalidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefaultNone200None_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -613,10 +557,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.GetDefaultNone200NoneAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefaultNone200None_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -624,10 +568,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.GetDefaultNone200NoneAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefaultNone400Invalid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -635,10 +579,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.GetDefaultNone400InvalidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefaultNone400Invalid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -646,10 +590,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.GetDefaultNone400InvalidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefaultNone400None_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -657,10 +601,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.GetDefaultNone400NoneAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDefaultNone400None_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -668,10 +612,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.GetDefaultNone400NoneAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA200None_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -679,12 +623,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA200NoneAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA200None_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -692,12 +634,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA200NoneAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA200Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -705,12 +645,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA200ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA200Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -718,12 +656,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA200ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA200Invalid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -731,12 +667,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA200InvalidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA200Invalid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -744,12 +678,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA200InvalidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA400None_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -757,12 +689,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA400NoneAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA400None_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -770,12 +700,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA400NoneAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA400Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -783,12 +711,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA400ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA400Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -796,12 +722,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA400ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA400Invalid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -809,12 +733,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA400InvalidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA400Invalid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -822,12 +744,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA400InvalidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA202Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -835,12 +755,10 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA202ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get200ModelA202Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -848,9 +766,6 @@ namespace httpInfrastructure_LowLevel.Tests
             MultipleResponsesClient client = CreateMultipleResponsesClient(credential, endpoint);
 
             Response response = await client.Get200ModelA202ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("statusCode").ToString());
         }
     }
 }

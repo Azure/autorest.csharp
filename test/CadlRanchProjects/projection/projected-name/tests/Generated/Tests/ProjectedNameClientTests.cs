@@ -21,43 +21,43 @@ namespace Projection.ProjectedName.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ProjectedNameClient client = CreateProjectedNameClient(endpoint);
 
             Response response = await client.OperationAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ProjectedNameClient client = CreateProjectedNameClient(endpoint);
 
             Response response = await client.OperationAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Parameter_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ProjectedNameClient client = CreateProjectedNameClient(endpoint);
 
             Response response = await client.ParameterAsync("<default-name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Parameter_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ProjectedNameClient client = CreateProjectedNameClient(endpoint);
 
             Response response = await client.ParameterAsync("<default-name>");
-            Console.WriteLine(response.Status);
         }
     }
 }

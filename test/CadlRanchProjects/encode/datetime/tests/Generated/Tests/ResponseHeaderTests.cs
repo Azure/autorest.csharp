@@ -21,83 +21,83 @@ namespace Encode.Datetime.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ResponseHeader client = CreateDatetimeClient(endpoint).GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ResponseHeader client = CreateDatetimeClient(endpoint).GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Rfc3339_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ResponseHeader client = CreateDatetimeClient(endpoint).GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Rfc3339Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Rfc3339_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ResponseHeader client = CreateDatetimeClient(endpoint).GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Rfc3339Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Rfc7231_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ResponseHeader client = CreateDatetimeClient(endpoint).GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Rfc7231Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Rfc7231_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ResponseHeader client = CreateDatetimeClient(endpoint).GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Rfc7231Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnixTimestamp_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ResponseHeader client = CreateDatetimeClient(endpoint).GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.UnixTimestampAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnixTimestamp_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ResponseHeader client = CreateDatetimeClient(endpoint).GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.UnixTimestampAsync();
-            Console.WriteLine(response.Status);
         }
     }
 }

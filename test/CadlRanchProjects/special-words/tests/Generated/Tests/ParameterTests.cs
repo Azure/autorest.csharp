@@ -21,43 +21,43 @@ namespace SpecialWords.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetWithIf_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Parameter client = CreateSpecialWordsClient(endpoint).GetParameterClient(apiVersion: "1.0.0");
 
             Response response = await client.GetWithIfAsync("<if>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetWithIf_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Parameter client = CreateSpecialWordsClient(endpoint).GetParameterClient(apiVersion: "1.0.0");
 
             Response response = await client.GetWithIfAsync("<if>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetWithFilter_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Parameter client = CreateSpecialWordsClient(endpoint).GetParameterClient(apiVersion: "1.0.0");
 
             Response response = await client.GetWithFilterAsync("<filter>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetWithFilter_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Parameter client = CreateSpecialWordsClient(endpoint).GetParameterClient(apiVersion: "1.0.0");
 
             Response response = await client.GetWithFilterAsync("<filter>");
-            Console.WriteLine(response.Status);
         }
     }
 }

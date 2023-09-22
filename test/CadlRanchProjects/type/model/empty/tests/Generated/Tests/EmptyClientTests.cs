@@ -23,6 +23,7 @@ namespace _Type.Model.Empty.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutEmpty_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -30,10 +31,10 @@ namespace _Type.Model.Empty.Tests
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutEmptyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutEmpty_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -41,10 +42,10 @@ namespace _Type.Model.Empty.Tests
 
             EmptyInput input = new EmptyInput();
             Response response = await client.PutEmptyAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutEmpty_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -52,10 +53,10 @@ namespace _Type.Model.Empty.Tests
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutEmptyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutEmpty_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -63,21 +64,20 @@ namespace _Type.Model.Empty.Tests
 
             EmptyInput input = new EmptyInput();
             Response response = await client.PutEmptyAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetEmpty_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             EmptyClient client = CreateEmptyClient(endpoint);
 
             Response response = await client.GetEmptyAsync(null);
-
-            Console.WriteLine(response.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetEmpty_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -87,17 +87,17 @@ namespace _Type.Model.Empty.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetEmpty_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             EmptyClient client = CreateEmptyClient(endpoint);
 
             Response response = await client.GetEmptyAsync(null);
-
-            Console.WriteLine(response.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetEmpty_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -107,6 +107,7 @@ namespace _Type.Model.Empty.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PostRoundTripEmpty_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -114,11 +115,10 @@ namespace _Type.Model.Empty.Tests
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PostRoundTripEmptyAsync(content);
-
-            Console.WriteLine(response.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PostRoundTripEmpty_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -129,6 +129,7 @@ namespace _Type.Model.Empty.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PostRoundTripEmpty_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -136,11 +137,10 @@ namespace _Type.Model.Empty.Tests
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PostRoundTripEmptyAsync(content);
-
-            Console.WriteLine(response.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PostRoundTripEmpty_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

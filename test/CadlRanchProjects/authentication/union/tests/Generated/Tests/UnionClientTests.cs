@@ -21,6 +21,7 @@ namespace Authentication.Union.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ValidKey_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -28,10 +29,10 @@ namespace Authentication.Union.Tests
             UnionClient client = CreateUnionClient(credential, endpoint);
 
             Response response = await client.ValidKeyAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ValidKey_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -39,10 +40,10 @@ namespace Authentication.Union.Tests
             UnionClient client = CreateUnionClient(credential, endpoint);
 
             Response response = await client.ValidKeyAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ValidToken_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -50,10 +51,10 @@ namespace Authentication.Union.Tests
             UnionClient client = CreateUnionClient(credential, endpoint);
 
             Response response = await client.ValidTokenAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ValidToken_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -61,7 +62,6 @@ namespace Authentication.Union.Tests
             UnionClient client = CreateUnionClient(credential, endpoint);
 
             Response response = await client.ValidTokenAsync();
-            Console.WriteLine(response.Status);
         }
     }
 }

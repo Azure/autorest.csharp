@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -22,6 +21,7 @@ namespace ResourceClients_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetItem_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -29,12 +29,10 @@ namespace ResourceClients_LowLevel.Tests
             Resource client = CreateResourceServiceClient(credential, endpoint).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
             Response response = await client.GetItemAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetItem_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -42,9 +40,6 @@ namespace ResourceClients_LowLevel.Tests
             Resource client = CreateResourceServiceClient(credential, endpoint).GetResourceGroup("<GroupId>").GetResource("<ItemId>");
 
             Response response = await client.GetItemAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
     }
 }

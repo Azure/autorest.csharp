@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,19 +23,17 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleDiscriminatorClient client = CreateSingleDiscriminatorClient(endpoint);
 
             Response response = await client.GetModelAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetModel_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -46,19 +43,17 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleDiscriminatorClient client = CreateSingleDiscriminatorClient(endpoint);
 
             Response response = await client.GetModelAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -68,6 +63,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -79,10 +75,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
                 wingspan = 1234,
             });
             Response response = await client.PutModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutModel_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -90,10 +86,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
 
             Bird input = new SeaGull(1234);
             Response response = await client.PutModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -105,10 +101,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
                 wingspan = 1234,
             });
             Response response = await client.PutModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -116,23 +112,20 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
 
             Bird input = new SeaGull(1234);
             Response response = await client.PutModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetRecursiveModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleDiscriminatorClient client = CreateSingleDiscriminatorClient(endpoint);
 
             Response response = await client.GetRecursiveModelAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetRecursiveModel_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -142,19 +135,17 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetRecursiveModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleDiscriminatorClient client = CreateSingleDiscriminatorClient(endpoint);
 
             Response response = await client.GetRecursiveModelAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetRecursiveModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -164,6 +155,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutRecursiveModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -175,10 +167,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
                 wingspan = 1234,
             });
             Response response = await client.PutRecursiveModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutRecursiveModel_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -186,10 +178,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
 
             Bird input = new SeaGull(1234);
             Response response = await client.PutRecursiveModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutRecursiveModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -201,10 +193,10 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
                 wingspan = 1234,
             });
             Response response = await client.PutRecursiveModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutRecursiveModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -212,23 +204,20 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
 
             Bird input = new SeaGull(1234);
             Response response = await client.PutRecursiveModelAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMissingDiscriminator_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleDiscriminatorClient client = CreateSingleDiscriminatorClient(endpoint);
 
             Response response = await client.GetMissingDiscriminatorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMissingDiscriminator_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -238,19 +227,17 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMissingDiscriminator_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleDiscriminatorClient client = CreateSingleDiscriminatorClient(endpoint);
 
             Response response = await client.GetMissingDiscriminatorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMissingDiscriminator_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -260,19 +247,17 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetWrongDiscriminator_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleDiscriminatorClient client = CreateSingleDiscriminatorClient(endpoint);
 
             Response response = await client.GetWrongDiscriminatorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetWrongDiscriminator_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -282,19 +267,17 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetWrongDiscriminator_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleDiscriminatorClient client = CreateSingleDiscriminatorClient(endpoint);
 
             Response response = await client.GetWrongDiscriminatorAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("wingspan").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetWrongDiscriminator_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -304,19 +287,17 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLegacyModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleDiscriminatorClient client = CreateSingleDiscriminatorClient(endpoint);
 
             Response response = await client.GetLegacyModelAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLegacyModel_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -326,19 +307,17 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLegacyModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleDiscriminatorClient client = CreateSingleDiscriminatorClient(endpoint);
 
             Response response = await client.GetLegacyModelAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLegacyModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -22,6 +21,7 @@ namespace ParameterSequence_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetItem_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -29,12 +29,10 @@ namespace ParameterSequence_LowLevel.Tests
             ParameterSequenceClient client = CreateParameterSequenceClient(credential, endpoint);
 
             Response response = await client.GetItemAsync("<itemName>", "<origin>", null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetItem_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -42,12 +40,10 @@ namespace ParameterSequence_LowLevel.Tests
             ParameterSequenceClient client = CreateParameterSequenceClient(credential, endpoint);
 
             Response response = await client.GetItemAsync("<itemName>", "<origin>", "<version>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SelectItem_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -55,12 +51,10 @@ namespace ParameterSequence_LowLevel.Tests
             ParameterSequenceClient client = CreateParameterSequenceClient(credential, endpoint);
 
             Response response = await client.SelectItemAsync("<itemName>", "<origin>", null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SelectItem_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -68,9 +62,6 @@ namespace ParameterSequence_LowLevel.Tests
             ParameterSequenceClient client = CreateParameterSequenceClient(credential, endpoint);
 
             Response response = await client.SelectItemAsync("<itemName>", "<origin>", "<version>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
     }
 }

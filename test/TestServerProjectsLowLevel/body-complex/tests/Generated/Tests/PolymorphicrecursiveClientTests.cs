@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +23,7 @@ namespace body_complex_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -31,13 +31,10 @@ namespace body_complex_LowLevel.Tests
             PolymorphicrecursiveClient client = CreatePolymorphicrecursiveClient(credential, endpoint);
 
             Response response = await client.GetValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -45,17 +42,10 @@ namespace body_complex_LowLevel.Tests
             PolymorphicrecursiveClient client = CreatePolymorphicrecursiveClient(credential, endpoint);
 
             Response response = await client.GetValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("length").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -68,10 +58,10 @@ namespace body_complex_LowLevel.Tests
                 length = 123.45F,
             });
             Response response = await client.PutValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -91,7 +81,6 @@ null
 },
             });
             Response response = await client.PutValidAsync(content);
-            Console.WriteLine(response.Status);
         }
     }
 }

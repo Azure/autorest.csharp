@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +23,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PostValid_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -36,10 +36,10 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Tests
                 name = "<name>",
             });
             Response response = await client.PostValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PostValid_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -47,10 +47,10 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Tests
 
             Siamese input = new Siamese("<name>", 1234, true);
             Response response = await client.PostValidAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PostValid_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -63,10 +63,10 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Tests
                 name = "<name>",
             });
             Response response = await client.PostValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PostValid_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -74,24 +74,20 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Tests
 
             Siamese input = new Siamese("<name>", 1234, true);
             Response response = await client.PostValidAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetValid_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             NotDiscriminatedClient client = CreateNotDiscriminatedClient(endpoint);
 
             Response response = await client.GetValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("smart").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetValid_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -101,20 +97,17 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetValid_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             NotDiscriminatedClient client = CreateNotDiscriminatedClient(endpoint);
 
             Response response = await client.GetValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("smart").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetValid_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -124,6 +117,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValid_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -136,14 +130,10 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Tests
                 name = "<name>",
             });
             Response response = await client.PutValidAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("smart").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValid_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -154,6 +144,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValid_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -166,14 +157,10 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Tests
                 name = "<name>",
             });
             Response response = await client.PutValidAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("smart").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutValid_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

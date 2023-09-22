@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,18 +23,17 @@ namespace _Specs_.Azure.Core.Traits.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SmokeTest_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TraitsClient client = CreateTraitsClient(endpoint);
 
             Response response = await client.SmokeTestAsync(1234, "<foo>", null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SmokeTest_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -45,19 +43,17 @@ namespace _Specs_.Azure.Core.Traits.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SmokeTest_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TraitsClient client = CreateTraitsClient(endpoint);
 
             Response response = await client.SmokeTestAsync(1234, "<foo>", null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SmokeTest_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -67,6 +63,7 @@ namespace _Specs_.Azure.Core.Traits.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RepeatableAction_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -77,12 +74,10 @@ namespace _Specs_.Azure.Core.Traits.Tests
                 userActionValue = "<userActionValue>",
             });
             Response response = await client.RepeatableActionAsync(1234, content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("userActionResult").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RepeatableAction_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -93,6 +88,7 @@ namespace _Specs_.Azure.Core.Traits.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RepeatableAction_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -103,12 +99,10 @@ namespace _Specs_.Azure.Core.Traits.Tests
                 userActionValue = "<userActionValue>",
             });
             Response response = await client.RepeatableActionAsync(1234, content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("userActionResult").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RepeatableAction_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

@@ -24,6 +24,7 @@ namespace SpreadTypeSpec.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -35,10 +36,10 @@ namespace SpreadTypeSpec.Tests
                 age = 1234,
             });
             Response response = await client.SpreadModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadModel_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -46,10 +47,10 @@ namespace SpreadTypeSpec.Tests
 
             Thing thing = new Thing("<name>", 1234);
             Response response = await client.SpreadModelAsync(thing);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -61,10 +62,10 @@ namespace SpreadTypeSpec.Tests
                 age = 1234,
             });
             Response response = await client.SpreadModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -72,10 +73,10 @@ namespace SpreadTypeSpec.Tests
 
             Thing thing = new Thing("<name>", 1234);
             Response response = await client.SpreadModelAsync(thing);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAlias_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -87,20 +88,20 @@ namespace SpreadTypeSpec.Tests
                 age = 1234,
             });
             Response response = await client.SpreadAliasAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAlias_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
             Response response = await client.SpreadAliasAsync("<name>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAlias_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -112,20 +113,20 @@ namespace SpreadTypeSpec.Tests
                 age = 1234,
             });
             Response response = await client.SpreadAliasAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAlias_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
             Response response = await client.SpreadAliasAsync("<name>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadMultiTargetAlias_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -137,20 +138,20 @@ namespace SpreadTypeSpec.Tests
                 age = 1234,
             });
             Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadMultiTargetAlias_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
             Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, "<name>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadMultiTargetAlias_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -162,20 +163,20 @@ namespace SpreadTypeSpec.Tests
                 age = 1234,
             });
             Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadMultiTargetAlias_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
             Response response = await client.SpreadMultiTargetAliasAsync("<id>", 1234, "<name>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAliasWithModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -187,10 +188,10 @@ namespace SpreadTypeSpec.Tests
                 age = 1234,
             });
             Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAliasWithModel_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -198,10 +199,10 @@ namespace SpreadTypeSpec.Tests
 
             Thing thing = new Thing("<name>", 1234);
             Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, thing);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAliasWithModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -213,10 +214,10 @@ namespace SpreadTypeSpec.Tests
                 age = 1234,
             });
             Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAliasWithModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -224,10 +225,10 @@ namespace SpreadTypeSpec.Tests
 
             Thing thing = new Thing("<name>", 1234);
             Response response = await client.SpreadAliasWithModelAsync("<id>", 1234, thing);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAliasWithSpreadAlias_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -239,20 +240,20 @@ namespace SpreadTypeSpec.Tests
                 age = 1234,
             });
             Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAliasWithSpreadAlias_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
             Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, "<name>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAliasWithSpreadAlias_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -264,20 +265,20 @@ namespace SpreadTypeSpec.Tests
                 age = 1234,
             });
             Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAliasWithSpreadAlias_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = CreateSpreadTypeSpecClient(endpoint);
 
             Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, "<name>", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAliasWithOptionalProps_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -292,10 +293,10 @@ namespace SpreadTypeSpec.Tests
 },
             });
             Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAliasWithOptionalProps_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -305,10 +306,10 @@ namespace SpreadTypeSpec.Tests
 {
 1234
 });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAliasWithOptionalProps_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -329,10 +330,10 @@ namespace SpreadTypeSpec.Tests
 },
             });
             Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAliasWithOptionalProps_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -345,10 +346,10 @@ namespace SpreadTypeSpec.Tests
 {
 "<elements>"
 });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAliasWithCollections_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -362,10 +363,10 @@ namespace SpreadTypeSpec.Tests
 },
             });
             Response response = await client.SpreadAliasWithCollectionsAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAliasWithCollections_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -375,10 +376,10 @@ namespace SpreadTypeSpec.Tests
 {
 "<requiredStringList>"
 });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAliasWithCollections_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -396,10 +397,10 @@ namespace SpreadTypeSpec.Tests
 },
             });
             Response response = await client.SpreadAliasWithCollectionsAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAliasWithCollections_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -412,7 +413,6 @@ namespace SpreadTypeSpec.Tests
 {
 "<optionalStringList>"
 });
-            Console.WriteLine(response.Status);
         }
     }
 }

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -23,6 +22,7 @@ namespace dpg_customization_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetModel_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -30,12 +30,10 @@ namespace dpg_customization_LowLevel.Tests
             DPGClient client = CreateDPGClient(credential, endpoint);
 
             Response response = await client.GetModelAsync("<mode>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("received").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetModel_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -43,12 +41,10 @@ namespace dpg_customization_LowLevel.Tests
             DPGClient client = CreateDPGClient(credential, endpoint);
 
             Response response = await client.GetModelAsync("<mode>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("received").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PostModel_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -60,12 +56,10 @@ namespace dpg_customization_LowLevel.Tests
                 hello = "<hello>",
             });
             Response response = await client.PostModelAsync("<mode>", content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("received").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PostModel_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -77,12 +71,10 @@ namespace dpg_customization_LowLevel.Tests
                 hello = "<hello>",
             });
             Response response = await client.PostModelAsync("<mode>", content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("received").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetPages_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -91,12 +83,11 @@ namespace dpg_customization_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetPagesAsync("<mode>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("received").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetPages_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -105,12 +96,11 @@ namespace dpg_customization_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetPagesAsync("<mode>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("received").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Lro_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -119,13 +109,10 @@ namespace dpg_customization_LowLevel.Tests
 
             Operation<BinaryData> operation = await client.LroAsync(WaitUntil.Completed, "<mode>", null);
             BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("provisioningState").ToString());
-            Console.WriteLine(result.GetProperty("received").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Lro_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -134,10 +121,6 @@ namespace dpg_customization_LowLevel.Tests
 
             Operation<BinaryData> operation = await client.LroAsync(WaitUntil.Completed, "<mode>", null);
             BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("provisioningState").ToString());
-            Console.WriteLine(result.GetProperty("received").ToString());
         }
     }
 }

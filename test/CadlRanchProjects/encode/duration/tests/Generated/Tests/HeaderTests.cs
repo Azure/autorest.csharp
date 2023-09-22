@@ -23,46 +23,47 @@ namespace Encode.Duration.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Header client = CreateDurationClient(endpoint).GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync(XmlConvert.ToTimeSpan("PT1H23M45S"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Default_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Header client = CreateDurationClient(endpoint).GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync(XmlConvert.ToTimeSpan("PT1H23M45S"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Iso8601_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Header client = CreateDurationClient(endpoint).GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Iso8601Async(XmlConvert.ToTimeSpan("PT1H23M45S"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Iso8601_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Header client = CreateDurationClient(endpoint).GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Iso8601Async(XmlConvert.ToTimeSpan("PT1H23M45S"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Iso8601Array_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -72,10 +73,10 @@ namespace Encode.Duration.Tests
 {
 XmlConvert.ToTimeSpan("PT1H23M45S")
 });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Iso8601Array_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -85,47 +86,46 @@ XmlConvert.ToTimeSpan("PT1H23M45S")
 {
 XmlConvert.ToTimeSpan("PT1H23M45S")
 });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Int32Seconds_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Header client = CreateDurationClient(endpoint).GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Int32SecondsAsync(TimeSpan.FromSeconds(10));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Int32Seconds_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Header client = CreateDurationClient(endpoint).GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Int32SecondsAsync(TimeSpan.FromSeconds(10));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task FloatSeconds_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Header client = CreateDurationClient(endpoint).GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.FloatSecondsAsync(TimeSpan.FromSeconds(10F));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task FloatSeconds_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Header client = CreateDurationClient(endpoint).GetHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.FloatSecondsAsync(TimeSpan.FromSeconds(10F));
-            Console.WriteLine(response.Status);
         }
     }
 }

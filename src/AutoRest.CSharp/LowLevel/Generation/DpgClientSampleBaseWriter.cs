@@ -25,6 +25,8 @@ namespace AutoRest.CSharp.LowLevel.Generation
             _writer = new CodeWriter();
         }
 
+        protected abstract bool ShouldWriteResponse { get; }
+
         public abstract void Write();
 
         protected void WriteTestMethod(DpgOperationSample sample, bool isAsync)
@@ -90,7 +92,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
                 .Append($"foreach ({itemType} {item:D} in {operation}.Value)");
             using (_writer.Scope())
             {
-                WriteNormalOperationResponse(sample, $"{item}", $"{item}.ToStream()");
+                WriteNormalOperationResponse(sample, itemType, $"{item}", $"{item}.ToStream()");
             }
         }
 
@@ -119,7 +121,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
                 var responseData = new CodeWriterDeclaration("responseData");
                 var typeOfResult = GetReturnType(methodSignature.ReturnType).Arguments.Single();
                 _writer.Line($"{typeOfResult} {responseData:D} = {operation}.Value;");
-                WriteNormalOperationResponse(sample, $"{responseData}", $"{responseData}.ToStream()");
+                WriteNormalOperationResponse(sample, typeOfResult, $"{responseData}", $"{responseData}.ToStream()");
             }
         }
 
@@ -136,7 +138,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
             using (_writer.Scope())
             {
-                WriteNormalOperationResponse(sample, $"{item}", $"{item}.ToStream()");
+                WriteNormalOperationResponse(sample, itemType, $"{item}", $"{item}.ToStream()");
             }
         }
 
@@ -153,25 +155,27 @@ namespace AutoRest.CSharp.LowLevel.Generation
             WriteOperationInvocation(parameters, sample, methodSignature);
             _writer.LineRaw(";");
 
-            if (sample.HasResponseBody)
-                WriteNormalOperationResponse(sample, $"{response}", $"{response}.ContentStream");
-            else
+            WriteNormalOperationResponse(sample, returnType, $"{response}", $"{response}.ContentStream");
+        }
+
+        private void WriteNormalOperationResponse(DpgOperationSample sample, CSharpType returnType, FormattableString resultVar, FormattableString jsonVar)
+        {
+            if (!ShouldWriteResponse)
+                return;
+
+            if (sample.IsResponseStream)
+                WriteStreamResponse(resultVar);
+            else if (!sample.HasResponseBody)
             {
                 if (returnType.EqualsIgnoreNullable(typeof(Azure.Response)))
                 {
-                    _writer.ConsoleWriteLine($"{response}.Status");
+                    _writer.ConsoleWriteLine($"{resultVar}.Status");
                 }
                 else
                 {
-                    _writer.ConsoleWriteLine($"{response}.GetRawResponse().Status");
+                    _writer.ConsoleWriteLine($"{resultVar}.GetRawResponse().Status");
                 }
             }
-        }
-
-        private void WriteNormalOperationResponse(DpgOperationSample sample, FormattableString resultVar, FormattableString jsonVar)
-        {
-            if (sample.IsResponseStream)
-                WriteStreamResponse(resultVar);
             else
             {
                 WriteOtherResponse(sample, resultVar, jsonVar);

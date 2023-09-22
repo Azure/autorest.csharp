@@ -22,6 +22,7 @@ namespace httpInfrastructure_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head300_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -29,10 +30,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRedirectsClient client = CreateHttpRedirectsClient(credential, endpoint);
 
             Response response = await client.Head300Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head300_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -40,10 +41,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRedirectsClient client = CreateHttpRedirectsClient(credential, endpoint);
 
             Response response = await client.Head300Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get300_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -51,10 +52,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRedirectsClient client = CreateHttpRedirectsClient(credential, endpoint);
 
             Response response = await client.Get300Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get300_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -62,10 +63,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRedirectsClient client = CreateHttpRedirectsClient(credential, endpoint);
 
             Response response = await client.Get300Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head301_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -73,10 +74,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRedirectsClient client = CreateHttpRedirectsClient(credential, endpoint);
 
             Response response = await client.Head301Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head301_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -84,10 +85,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRedirectsClient client = CreateHttpRedirectsClient(credential, endpoint);
 
             Response response = await client.Head301Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get301_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -95,10 +96,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRedirectsClient client = CreateHttpRedirectsClient(credential, endpoint);
 
             Response response = await client.Get301Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get301_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -106,10 +107,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRedirectsClient client = CreateHttpRedirectsClient(credential, endpoint);
 
             Response response = await client.Get301Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put301_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -118,10 +119,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Put301Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put301_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -130,10 +131,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put301Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head302_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -141,10 +142,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRedirectsClient client = CreateHttpRedirectsClient(credential, endpoint);
 
             Response response = await client.Head302Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head302_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -152,10 +153,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRedirectsClient client = CreateHttpRedirectsClient(credential, endpoint);
 
             Response response = await client.Head302Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get302_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -163,10 +164,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRedirectsClient client = CreateHttpRedirectsClient(credential, endpoint);
 
             Response response = await client.Get302Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get302_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -174,10 +175,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRedirectsClient client = CreateHttpRedirectsClient(credential, endpoint);
 
             Response response = await client.Get302Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Patch302_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -186,10 +187,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Patch302Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Patch302_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -198,10 +199,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch302Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Post303_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -210,10 +211,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Post303Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Post303_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -222,10 +223,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post303Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head307_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -233,10 +234,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRedirectsClient client = CreateHttpRedirectsClient(credential, endpoint);
 
             Response response = await client.Head307Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head307_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -244,10 +245,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRedirectsClient client = CreateHttpRedirectsClient(credential, endpoint);
 
             Response response = await client.Head307Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get307_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -255,10 +256,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRedirectsClient client = CreateHttpRedirectsClient(credential, endpoint);
 
             Response response = await client.Get307Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get307_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -266,10 +267,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRedirectsClient client = CreateHttpRedirectsClient(credential, endpoint);
 
             Response response = await client.Get307Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Options307_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -277,10 +278,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRedirectsClient client = CreateHttpRedirectsClient(credential, endpoint);
 
             Response response = await client.Options307Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Options307_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -288,10 +289,10 @@ namespace httpInfrastructure_LowLevel.Tests
             HttpRedirectsClient client = CreateHttpRedirectsClient(credential, endpoint);
 
             Response response = await client.Options307Async();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put307_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -300,10 +301,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Put307Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put307_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -312,10 +313,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Put307Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Patch307_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -324,10 +325,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Patch307Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Patch307_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -336,10 +337,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Patch307Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Post307_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -348,10 +349,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Post307Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Post307_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -360,10 +361,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Post307Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete307_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -372,10 +373,10 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.Delete307Async(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete307_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -384,7 +385,6 @@ namespace httpInfrastructure_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("true");
             Response response = await client.Delete307Async(content);
-            Console.WriteLine(response.Status);
         }
     }
 }

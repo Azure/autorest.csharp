@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,18 +24,17 @@ namespace ModelsTypeSpec.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetOutputDiscriminatorModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
             Response response = await client.GetOutputDiscriminatorModelAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetOutputDiscriminatorModel_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -46,18 +44,17 @@ namespace ModelsTypeSpec.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetOutputDiscriminatorModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
             Response response = await client.GetOutputDiscriminatorModelAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetOutputDiscriminatorModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -67,6 +64,7 @@ namespace ModelsTypeSpec.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputToRoundTrip_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -128,29 +126,10 @@ null
 },
             });
             Response response = await client.InputToRoundTripAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
-            Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredBytes").ToString());
-            Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableStringList")[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputToRoundTrip_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -194,6 +173,7 @@ null
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputToRoundTrip_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -281,41 +261,10 @@ null
 },
             });
             Response response = await client.InputToRoundTripAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredString").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableString").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableInt").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableString").ToString());
-            Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredReadonlyInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("requiredBytes").ToString());
-            Console.WriteLine(result.GetProperty("optionalBytes").ToString());
-            Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalUint8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalInt8Array")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredNullableStringList")[0].ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("nonRequiredNullableStringList")[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputToRoundTrip_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -387,6 +336,7 @@ null
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputToRoundTripPrimitive_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -448,21 +398,10 @@ null
 },
             });
             Response response = await client.InputToRoundTripPrimitiveAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt64").ToString());
-            Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredFloat").ToString());
-            Console.WriteLine(result.GetProperty("required_Double").ToString());
-            Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
-            Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
-            Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputToRoundTripPrimitive_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -506,6 +445,7 @@ null
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputToRoundTripPrimitive_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -593,21 +533,10 @@ null
 },
             });
             Response response = await client.InputToRoundTripPrimitiveAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt64").ToString());
-            Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
-            Console.WriteLine(result.GetProperty("requiredFloat").ToString());
-            Console.WriteLine(result.GetProperty("required_Double").ToString());
-            Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
-            Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
-            Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
-            Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputToRoundTripPrimitive_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -679,6 +608,7 @@ null
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputToRoundTripOptional_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -686,12 +616,10 @@ null
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.InputToRoundTripOptionalAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputToRoundTripOptional_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -702,6 +630,7 @@ null
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputToRoundTripOptional_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -771,23 +700,10 @@ null
 },
             });
             Response response = await client.InputToRoundTripOptionalAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("optionalString").ToString());
-            Console.WriteLine(result.GetProperty("optionalInt").ToString());
-            Console.WriteLine(result.GetProperty("optionalStringList")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalModelWithPropertiesOnBase").GetProperty("optionalPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
-            Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
-            Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalPlainDate").ToString());
-            Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
-            Console.WriteLine(result.GetProperty("optionalCollectionWithNullableIntElement")[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputToRoundTripOptional_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -848,6 +764,7 @@ null
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RoundTripToOutput_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -915,13 +832,10 @@ null
 },
             });
             Response response = await client.RoundTripToOutputAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RoundTripToOutput_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -962,6 +876,7 @@ null
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RoundTripToOutput_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1052,13 +967,10 @@ null
 },
             });
             Response response = await client.RoundTripToOutputAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("requiredString").ToString());
-            Console.WriteLine(result.GetProperty("requiredInt").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RoundTripToOutput_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1126,6 +1038,7 @@ null
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputRecursive_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1136,10 +1049,10 @@ null
                 message = "<message>",
             });
             Response response = await client.InputRecursiveAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputRecursive_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1147,10 +1060,10 @@ null
 
             InputRecursiveModel input = new InputRecursiveModel("<message>");
             Response response = await client.InputRecursiveAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputRecursive_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1161,10 +1074,10 @@ null
                 message = "<message>",
             });
             Response response = await client.InputRecursiveAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputRecursive_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1175,10 +1088,10 @@ null
                 Inner = null,
             };
             Response response = await client.InputRecursiveAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RoundTripRecursive_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1189,12 +1102,10 @@ null
                 message = "<message>",
             });
             Response response = await client.RoundTripRecursiveAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RoundTripRecursive_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1205,6 +1116,7 @@ null
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RoundTripRecursive_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1215,13 +1127,10 @@ null
                 message = "<message>",
             });
             Response response = await client.RoundTripRecursiveAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("inner").GetProperty("message").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RoundTripRecursive_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1235,18 +1144,17 @@ null
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SelfReference_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
             Response response = await client.SelfReferenceAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SelfReference_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1256,19 +1164,17 @@ null
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SelfReference_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
             Response response = await client.SelfReferenceAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("innerError").GetProperty("message").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SelfReference_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1278,6 +1184,7 @@ null
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RoundTripToOutputWithNoUseBase_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1304,12 +1211,10 @@ null
                 baseModelProp = "<baseModelProp>",
             });
             Response response = await client.RoundTripToOutputWithNoUseBaseAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("baseModelProp").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RoundTripToOutputWithNoUseBase_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1329,6 +1234,7 @@ null
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RoundTripToOutputWithNoUseBase_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1355,12 +1261,10 @@ null
                 baseModelProp = "<baseModelProp>",
             });
             Response response = await client.RoundTripToOutputWithNoUseBaseAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("baseModelProp").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RoundTripToOutputWithNoUseBase_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1380,19 +1284,17 @@ null
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task AnalyzeConversation_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
             Response response = await client.AnalyzeConversationAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task AnalyzeConversation_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1402,20 +1304,17 @@ null
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task AnalyzeConversation_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
             Response response = await client.AnalyzeConversationAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
-            Console.WriteLine(result.GetProperty("optionalPropertyOnBase").ToString());
-            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task AnalyzeConversation_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1425,19 +1324,17 @@ null
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetSingleBase_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
             Response response = await client.GetSingleBaseAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetSingleBase_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1447,19 +1344,17 @@ null
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetSingleBase_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
 
             Response response = await client.GetSingleBaseAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetSingleBase_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1469,6 +1364,7 @@ null
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GenericType_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1485,10 +1381,10 @@ null
                 field = "<field>",
             });
             Response response = await client.GenericTypeAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GenericType_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1499,10 +1395,10 @@ null
 1234
 }, 1234);
             Response response = await client.GenericTypeAsync(input);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GenericType_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1519,10 +1415,10 @@ null
                 field = "<field>",
             });
             Response response = await client.GenericTypeAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GenericType_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1533,7 +1429,6 @@ null
 1234
 }, 1234);
             Response response = await client.GenericTypeAsync(input);
-            Console.WriteLine(response.Status);
         }
     }
 }

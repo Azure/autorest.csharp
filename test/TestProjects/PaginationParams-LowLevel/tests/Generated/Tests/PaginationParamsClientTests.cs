@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
@@ -22,6 +21,7 @@ namespace PaginationParams_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetPaginationParams_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
@@ -30,12 +30,11 @@ namespace PaginationParams_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetPaginationParamsAsync(null, null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetPaginationParams_AllParameters_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
@@ -44,14 +43,11 @@ namespace PaginationParams_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetPaginationParamsAsync(1234, 1234, 1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("type").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get2s_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
@@ -60,12 +56,11 @@ namespace PaginationParams_LowLevel.Tests
 
             await foreach (BinaryData item in client.Get2sAsync(null, null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get2s_AllParameters_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
@@ -74,14 +69,11 @@ namespace PaginationParams_LowLevel.Tests
 
             await foreach (BinaryData item in client.Get2sAsync(1234, 1234, 1234L, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("type").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get3s_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
@@ -90,12 +82,11 @@ namespace PaginationParams_LowLevel.Tests
 
             await foreach (BinaryData item in client.Get3sAsync(null, null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get3s_AllParameters_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
@@ -104,14 +95,11 @@ namespace PaginationParams_LowLevel.Tests
 
             await foreach (BinaryData item in client.Get3sAsync(1234, 1234, 1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("type").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get4s_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
@@ -120,12 +108,11 @@ namespace PaginationParams_LowLevel.Tests
 
             await foreach (BinaryData item in client.Get4sAsync(null, null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Get4s_AllParameters_Async()
         {
             TokenCredential credential = new DefaultAzureCredential();
@@ -134,10 +121,6 @@ namespace PaginationParams_LowLevel.Tests
 
             await foreach (BinaryData item in client.Get4sAsync(1234, 1234, 123.45F, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("type").ToString());
             }
         }
     }

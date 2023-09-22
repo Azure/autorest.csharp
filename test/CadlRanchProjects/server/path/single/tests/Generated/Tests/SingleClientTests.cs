@@ -21,23 +21,23 @@ namespace Server.Path.Single.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task MyOp_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleClient client = CreateSingleClient(endpoint);
 
             Response response = await client.MyOpAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task MyOp_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleClient client = CreateSingleClient(endpoint);
 
             Response response = await client.MyOpAsync();
-            Console.WriteLine(response.Status);
         }
     }
 }

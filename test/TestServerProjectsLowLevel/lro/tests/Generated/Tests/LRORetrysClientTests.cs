@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -23,6 +22,7 @@ namespace lro_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put201CreatingSucceeded200_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -32,12 +32,10 @@ namespace lro_LowLevel.Tests
             RequestContent content = null;
             Operation<BinaryData> operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put201CreatingSucceeded200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -58,18 +56,10 @@ namespace lro_LowLevel.Tests
             });
             Operation<BinaryData> operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("type").ToString());
-            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutAsyncRelativeRetrySucceeded_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -79,12 +69,10 @@ namespace lro_LowLevel.Tests
             RequestContent content = null;
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutAsyncRelativeRetrySucceeded_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -105,18 +93,10 @@ namespace lro_LowLevel.Tests
             });
             Operation<BinaryData> operation = await client.PutAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("type").ToString());
-            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DeleteProvisioning202Accepted200Succeeded_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -125,12 +105,10 @@ namespace lro_LowLevel.Tests
 
             Operation<BinaryData> operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, null);
             BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DeleteProvisioning202Accepted200Succeeded_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -139,18 +117,10 @@ namespace lro_LowLevel.Tests
 
             Operation<BinaryData> operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, null);
             BinaryData responseData = operation.Value;
-
-            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningState").ToString());
-            Console.WriteLine(result.GetProperty("properties").GetProperty("provisioningStateValues").ToString());
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("type").ToString());
-            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete202Retry200_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -161,6 +131,7 @@ namespace lro_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete202Retry200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -171,6 +142,7 @@ namespace lro_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DeleteAsyncRelativeRetrySucceeded_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -181,6 +153,7 @@ namespace lro_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DeleteAsyncRelativeRetrySucceeded_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -191,6 +164,7 @@ namespace lro_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Post202Retry200_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -202,6 +176,7 @@ namespace lro_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Post202Retry200_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -224,6 +199,7 @@ namespace lro_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PostAsyncRelativeRetrySucceeded_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -235,6 +211,7 @@ namespace lro_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PostAsyncRelativeRetrySucceeded_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");

@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +23,7 @@ namespace body_array_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -31,12 +31,10 @@ namespace body_array_LowLevel.Tests
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -44,12 +42,10 @@ namespace body_array_LowLevel.Tests
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetInvalid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -57,12 +53,10 @@ namespace body_array_LowLevel.Tests
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetInvalidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetInvalid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -70,12 +64,10 @@ namespace body_array_LowLevel.Tests
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetInvalidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -83,12 +75,10 @@ namespace body_array_LowLevel.Tests
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -96,12 +86,10 @@ namespace body_array_LowLevel.Tests
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -113,10 +101,10 @@ namespace body_array_LowLevel.Tests
 "<arrayBody>"
 });
             Response response = await client.PutEmptyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -128,10 +116,10 @@ namespace body_array_LowLevel.Tests
 "<arrayBody>"
 });
             Response response = await client.PutEmptyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBooleanTfft_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -139,12 +127,10 @@ namespace body_array_LowLevel.Tests
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetBooleanTfftAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBooleanTfft_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -152,12 +138,10 @@ namespace body_array_LowLevel.Tests
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetBooleanTfftAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutBooleanTfft_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -169,10 +153,10 @@ namespace body_array_LowLevel.Tests
 true
 });
             Response response = await client.PutBooleanTfftAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutBooleanTfft_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -184,10 +168,10 @@ true
 true
 });
             Response response = await client.PutBooleanTfftAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBooleanInvalidNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -195,12 +179,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetBooleanInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBooleanInvalidNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -208,12 +190,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetBooleanInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBooleanInvalidString_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -221,12 +201,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetBooleanInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBooleanInvalidString_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -234,12 +212,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetBooleanInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetIntegerValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -247,12 +223,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetIntegerValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetIntegerValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -260,12 +234,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetIntegerValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutIntegerValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -277,10 +249,10 @@ true
 1234
 });
             Response response = await client.PutIntegerValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutIntegerValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -292,10 +264,10 @@ true
 1234
 });
             Response response = await client.PutIntegerValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetIntInvalidNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -303,12 +275,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetIntInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetIntInvalidNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -316,12 +286,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetIntInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetIntInvalidString_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -329,12 +297,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetIntInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetIntInvalidString_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -342,12 +308,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetIntInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLongValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -355,12 +319,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetLongValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLongValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -368,12 +330,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetLongValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutLongValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -385,10 +345,10 @@ true
 1234L
 });
             Response response = await client.PutLongValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutLongValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -400,10 +360,10 @@ true
 1234L
 });
             Response response = await client.PutLongValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLongInvalidNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -411,12 +371,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetLongInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLongInvalidNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -424,12 +382,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetLongInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLongInvalidString_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -437,12 +393,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetLongInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLongInvalidString_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -450,12 +404,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetLongInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFloatValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -463,12 +415,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetFloatValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFloatValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -476,12 +426,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetFloatValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutFloatValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -493,10 +441,10 @@ true
 123.45F
 });
             Response response = await client.PutFloatValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutFloatValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -508,10 +456,10 @@ true
 123.45F
 });
             Response response = await client.PutFloatValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFloatInvalidNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -519,12 +467,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetFloatInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFloatInvalidNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -532,12 +478,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetFloatInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFloatInvalidString_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -545,12 +489,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetFloatInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFloatInvalidString_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -558,12 +500,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetFloatInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDoubleValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -571,12 +511,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDoubleValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDoubleValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -584,12 +522,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDoubleValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDoubleValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -601,10 +537,10 @@ true
 123.45
 });
             Response response = await client.PutDoubleValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDoubleValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -616,10 +552,10 @@ true
 123.45
 });
             Response response = await client.PutDoubleValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDoubleInvalidNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -627,12 +563,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDoubleInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDoubleInvalidNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -640,12 +574,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDoubleInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDoubleInvalidString_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -653,12 +585,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDoubleInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDoubleInvalidString_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -666,12 +596,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDoubleInvalidStringAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetStringValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -679,12 +607,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetStringValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetStringValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -692,12 +618,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetStringValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutStringValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -709,10 +633,10 @@ true
 "<arrayBody>"
 });
             Response response = await client.PutStringValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutStringValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -724,10 +648,10 @@ true
 "<arrayBody>"
 });
             Response response = await client.PutStringValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetEnumValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -735,12 +659,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetEnumValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetEnumValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -748,12 +670,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetEnumValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutEnumValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -765,10 +685,10 @@ true
 "foo1"
 });
             Response response = await client.PutEnumValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutEnumValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -780,10 +700,10 @@ true
 "foo1"
 });
             Response response = await client.PutEnumValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetStringEnumValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -791,12 +711,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetStringEnumValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetStringEnumValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -804,12 +722,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetStringEnumValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutStringEnumValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -821,10 +737,10 @@ true
 "foo1"
 });
             Response response = await client.PutStringEnumValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutStringEnumValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -836,10 +752,10 @@ true
 "foo1"
 });
             Response response = await client.PutStringEnumValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetStringWithNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -847,12 +763,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetStringWithNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetStringWithNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -860,12 +774,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetStringWithNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetStringWithInvalid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -873,12 +785,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetStringWithInvalidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetStringWithInvalid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -886,12 +796,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetStringWithInvalidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetUuidValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -899,12 +807,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetUuidValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetUuidValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -912,12 +818,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetUuidValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutUuidValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -929,10 +833,10 @@ true
 "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
 });
             Response response = await client.PutUuidValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutUuidValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -944,10 +848,10 @@ true
 "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
 });
             Response response = await client.PutUuidValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetUuidInvalidChars_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -955,12 +859,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetUuidInvalidCharsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetUuidInvalidChars_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -968,12 +870,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetUuidInvalidCharsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDateValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -981,12 +881,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDateValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDateValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -994,12 +892,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDateValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDateValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1011,10 +907,10 @@ true
 "2022-05-10"
 });
             Response response = await client.PutDateValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDateValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1026,10 +922,10 @@ true
 "2022-05-10"
 });
             Response response = await client.PutDateValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDateInvalidNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1037,12 +933,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDateInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDateInvalidNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1050,12 +944,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDateInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDateInvalidChars_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1063,12 +955,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDateInvalidCharsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDateInvalidChars_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1076,12 +966,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDateInvalidCharsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDateTimeValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1089,12 +977,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDateTimeValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDateTimeValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1102,12 +988,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDateTimeValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDateTimeValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1119,10 +1003,10 @@ true
 "2022-05-10T18:57:31.2311892Z"
 });
             Response response = await client.PutDateTimeValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDateTimeValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1134,10 +1018,10 @@ true
 "2022-05-10T18:57:31.2311892Z"
 });
             Response response = await client.PutDateTimeValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDateTimeInvalidNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1145,12 +1029,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDateTimeInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDateTimeInvalidNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1158,12 +1040,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDateTimeInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDateTimeInvalidChars_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1171,12 +1051,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDateTimeInvalidCharsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDateTimeInvalidChars_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1184,12 +1062,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDateTimeInvalidCharsAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDateTimeRfc1123Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1197,12 +1073,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDateTimeRfc1123ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDateTimeRfc1123Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1210,12 +1084,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDateTimeRfc1123ValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDateTimeRfc1123Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1227,10 +1099,10 @@ true
 "Tue, 10 May 2022 18:57:31 GMT"
 });
             Response response = await client.PutDateTimeRfc1123ValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDateTimeRfc1123Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1242,10 +1114,10 @@ true
 "Tue, 10 May 2022 18:57:31 GMT"
 });
             Response response = await client.PutDateTimeRfc1123ValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDurationValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1253,12 +1125,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDurationValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDurationValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1266,12 +1136,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDurationValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDurationValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1283,10 +1151,10 @@ true
 "PT1H23M45S"
 });
             Response response = await client.PutDurationValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDurationValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1298,10 +1166,10 @@ true
 "PT1H23M45S"
 });
             Response response = await client.PutDurationValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetByteValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1309,12 +1177,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetByteValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetByteValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1322,12 +1188,10 @@ true
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetByteValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutByteValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1339,10 +1203,10 @@ true
 new object()
 });
             Response response = await client.PutByteValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutByteValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1354,10 +1218,10 @@ new object()
 new object()
 });
             Response response = await client.PutByteValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetByteInvalidNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1365,12 +1229,10 @@ new object()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetByteInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetByteInvalidNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1378,12 +1240,10 @@ new object()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetByteInvalidNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBase64Url_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1391,12 +1251,10 @@ new object()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetBase64UrlAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBase64Url_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1404,12 +1262,10 @@ new object()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetBase64UrlAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComplexNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1417,12 +1273,10 @@ new object()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetComplexNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComplexNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1430,13 +1284,10 @@ new object()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetComplexNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("integer").ToString());
-            Console.WriteLine(result[0].GetProperty("string").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComplexEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1444,12 +1295,10 @@ new object()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetComplexEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComplexEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1457,13 +1306,10 @@ new object()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetComplexEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("integer").ToString());
-            Console.WriteLine(result[0].GetProperty("string").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComplexItemNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1471,12 +1317,10 @@ new object()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetComplexItemNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComplexItemNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1484,13 +1328,10 @@ new object()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetComplexItemNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("integer").ToString());
-            Console.WriteLine(result[0].GetProperty("string").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComplexItemEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1498,12 +1339,10 @@ new object()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetComplexItemEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComplexItemEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1511,13 +1350,10 @@ new object()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetComplexItemEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("integer").ToString());
-            Console.WriteLine(result[0].GetProperty("string").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComplexValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1525,12 +1361,10 @@ new object()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetComplexValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetComplexValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1538,13 +1372,10 @@ new object()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetComplexValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("integer").ToString());
-            Console.WriteLine(result[0].GetProperty("string").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutComplexValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1556,10 +1387,10 @@ new object()
 new object()
 });
             Response response = await client.PutComplexValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutComplexValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1575,10 +1406,10 @@ new Dictionary<string, object>()
 }
 });
             Response response = await client.PutComplexValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetArrayNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1586,12 +1417,10 @@ new Dictionary<string, object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetArrayNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetArrayNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1599,12 +1428,10 @@ new Dictionary<string, object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetArrayNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetArrayEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1612,12 +1439,10 @@ new Dictionary<string, object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetArrayEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetArrayEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1625,12 +1450,10 @@ new Dictionary<string, object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetArrayEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetArrayItemNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1638,12 +1461,10 @@ new Dictionary<string, object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetArrayItemNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetArrayItemNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1651,12 +1472,10 @@ new Dictionary<string, object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetArrayItemNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetArrayItemEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1664,12 +1483,10 @@ new Dictionary<string, object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetArrayItemEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetArrayItemEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1677,12 +1494,10 @@ new Dictionary<string, object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetArrayItemEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetArrayValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1690,12 +1505,10 @@ new Dictionary<string, object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetArrayValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetArrayValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1703,12 +1516,10 @@ new Dictionary<string, object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetArrayValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0][0].ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutArrayValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1723,10 +1534,10 @@ new List<object>()
 }
 });
             Response response = await client.PutArrayValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutArrayValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1741,10 +1552,10 @@ new List<object>()
 }
 });
             Response response = await client.PutArrayValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDictionaryNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1752,12 +1563,10 @@ new List<object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDictionaryNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDictionaryNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1765,12 +1574,10 @@ new List<object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDictionaryNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDictionaryEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1778,12 +1585,10 @@ new List<object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDictionaryEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDictionaryEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1791,12 +1596,10 @@ new List<object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDictionaryEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDictionaryItemNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1804,12 +1607,10 @@ new List<object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDictionaryItemNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDictionaryItemNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1817,12 +1618,10 @@ new List<object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDictionaryItemNullAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDictionaryItemEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1830,12 +1629,10 @@ new List<object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDictionaryItemEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDictionaryItemEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1843,12 +1640,10 @@ new List<object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDictionaryItemEmptyAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDictionaryValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1856,12 +1651,10 @@ new List<object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDictionaryValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetDictionaryValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1869,12 +1662,10 @@ new List<object>()
             ArrayClient client = CreateArrayClient(credential, endpoint);
 
             Response response = await client.GetDictionaryValidAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].GetProperty("<key>").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDictionaryValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1889,10 +1680,10 @@ key = "<arrayBody>",
 }
 });
             Response response = await client.PutDictionaryValidAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutDictionaryValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1907,7 +1698,6 @@ key = "<arrayBody>",
 }
 });
             Response response = await client.PutDictionaryValidAsync(content);
-            Console.WriteLine(response.Status);
         }
     }
 }

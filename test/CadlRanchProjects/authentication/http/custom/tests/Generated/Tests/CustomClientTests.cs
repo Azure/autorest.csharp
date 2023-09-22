@@ -21,6 +21,7 @@ namespace Authentication.Http.Custom.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Valid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -28,10 +29,10 @@ namespace Authentication.Http.Custom.Tests
             CustomClient client = CreateCustomClient(credential, endpoint);
 
             Response response = await client.ValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Valid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -39,10 +40,10 @@ namespace Authentication.Http.Custom.Tests
             CustomClient client = CreateCustomClient(credential, endpoint);
 
             Response response = await client.ValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Invalid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -50,10 +51,10 @@ namespace Authentication.Http.Custom.Tests
             CustomClient client = CreateCustomClient(credential, endpoint);
 
             Response response = await client.InvalidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Invalid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -61,7 +62,6 @@ namespace Authentication.Http.Custom.Tests
             CustomClient client = CreateCustomClient(credential, endpoint);
 
             Response response = await client.InvalidAsync();
-            Console.WriteLine(response.Status);
         }
     }
 }

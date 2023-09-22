@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
@@ -23,6 +22,7 @@ namespace Pagination.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetPaginationLedgerEntries_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -36,14 +36,11 @@ namespace Pagination.Tests
             });
             await foreach (BinaryData item in client.GetPaginationLedgerEntriesAsync(content))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("contents").ToString());
-                Console.WriteLine(result[0].GetProperty("collectionId").ToString());
-                Console.WriteLine(result[0].GetProperty("transactionId").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetPaginationLedgerEntries_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -57,6 +54,7 @@ namespace Pagination.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetPaginationLedgerEntries_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -70,14 +68,11 @@ namespace Pagination.Tests
             });
             await foreach (BinaryData item in client.GetPaginationLedgerEntriesAsync(content))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("contents").ToString());
-                Console.WriteLine(result[0].GetProperty("collectionId").ToString());
-                Console.WriteLine(result[0].GetProperty("transactionId").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetPaginationLedgerEntries_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -91,6 +86,7 @@ namespace Pagination.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMetricDimensionValues_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -99,12 +95,11 @@ namespace Pagination.Tests
 
             await foreach (BinaryData item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>", null, null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("value")[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMetricDimensionValues_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -117,6 +112,7 @@ namespace Pagination.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMetricDimensionValues_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -125,12 +121,11 @@ namespace Pagination.Tests
 
             await foreach (BinaryData item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>", "PT5S", "<metricName>", "<timespan>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("value")[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMetricDimensionValues_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -143,6 +138,7 @@ namespace Pagination.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLedgerEntries_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -151,14 +147,11 @@ namespace Pagination.Tests
 
             await foreach (BinaryData item in client.GetLedgerEntriesAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("contents").ToString());
-                Console.WriteLine(result[0].GetProperty("collectionId").ToString());
-                Console.WriteLine(result[0].GetProperty("transactionId").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLedgerEntries_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -171,6 +164,7 @@ namespace Pagination.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLedgerEntries_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -179,14 +173,11 @@ namespace Pagination.Tests
 
             await foreach (BinaryData item in client.GetLedgerEntriesAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("contents").ToString());
-                Console.WriteLine(result[0].GetProperty("collectionId").ToString());
-                Console.WriteLine(result[0].GetProperty("transactionId").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLedgerEntries_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -199,6 +190,7 @@ namespace Pagination.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetTextBlocklists_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -207,12 +199,11 @@ namespace Pagination.Tests
 
             await foreach (BinaryData item in client.GetTextBlocklistsAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("blocklistName").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetTextBlocklists_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -225,6 +216,7 @@ namespace Pagination.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetTextBlocklists_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -233,13 +225,11 @@ namespace Pagination.Tests
 
             await foreach (BinaryData item in client.GetTextBlocklistsAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("blocklistName").ToString());
-                Console.WriteLine(result[0].GetProperty("description").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetTextBlocklists_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -252,6 +242,7 @@ namespace Pagination.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetTextBlocklistItems_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -260,13 +251,11 @@ namespace Pagination.Tests
 
             await foreach (BinaryData item in client.GetTextBlocklistItemsAsync("<blocklistName>", null, null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("blockItemId").ToString());
-                Console.WriteLine(result[0].GetProperty("text").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetTextBlocklistItems_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -279,6 +268,7 @@ namespace Pagination.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetTextBlocklistItems_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -287,14 +277,11 @@ namespace Pagination.Tests
 
             await foreach (BinaryData item in client.GetTextBlocklistItemsAsync("<blocklistName>", 1234, 1234, 1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("blockItemId").ToString());
-                Console.WriteLine(result[0].GetProperty("description").ToString());
-                Console.WriteLine(result[0].GetProperty("text").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetTextBlocklistItems_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

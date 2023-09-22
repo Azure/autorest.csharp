@@ -22,6 +22,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CollapseGetWithHead_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -29,10 +30,10 @@ namespace CollapseRequestCondition_LowLevel.Tests
             MatchConditionCollapseClient client = CreateMatchConditionCollapseClient(credential, endpoint);
 
             Response response = await client.CollapseGetWithHeadAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CollapseGetWithHead_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -40,10 +41,10 @@ namespace CollapseRequestCondition_LowLevel.Tests
             MatchConditionCollapseClient client = CreateMatchConditionCollapseClient(credential, endpoint);
 
             Response response = await client.CollapseGetWithHeadAsync(otherHeader: "<otherHeader>", matchConditions: null);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CollapsePut_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -52,10 +53,10 @@ namespace CollapseRequestCondition_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.CollapsePutAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CollapsePut_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -64,10 +65,10 @@ namespace CollapseRequestCondition_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.CollapsePutAsync(content, matchConditions: null);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CollapseGet_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -75,10 +76,10 @@ namespace CollapseRequestCondition_LowLevel.Tests
             MatchConditionCollapseClient client = CreateMatchConditionCollapseClient(credential, endpoint);
 
             Response response = await client.CollapseGetAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CollapseGet_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -86,7 +87,6 @@ namespace CollapseRequestCondition_LowLevel.Tests
             MatchConditionCollapseClient client = CreateMatchConditionCollapseClient(credential, endpoint);
 
             Response response = await client.CollapseGetAsync(matchConditions: null);
-            Console.WriteLine(response.Status);
         }
     }
 }

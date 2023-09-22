@@ -22,6 +22,7 @@ namespace CollapseRequestCondition_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task IfMatchPut_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -30,10 +31,10 @@ namespace CollapseRequestCondition_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.IfMatchPutAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task IfMatchPut_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -42,10 +43,10 @@ namespace CollapseRequestCondition_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.IfMatchPutAsync(content, ifMatch: new ETag("<ifMatch>"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task IfNoneMatchPut_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -54,10 +55,10 @@ namespace CollapseRequestCondition_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.IfNoneMatchPutAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task IfNoneMatchPut_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -66,7 +67,6 @@ namespace CollapseRequestCondition_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.IfNoneMatchPutAsync(content, ifNoneMatch: new ETag("<ifNoneMatch>"));
-            Console.WriteLine(response.Status);
         }
     }
 }

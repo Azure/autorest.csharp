@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,6 +24,7 @@ namespace _Specs_.Azure.Core.Basic.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CreateOrUpdate_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -35,14 +35,10 @@ namespace _Specs_.Azure.Core.Basic.Tests
                 name = "<name>",
             });
             Response response = await client.CreateOrUpdateAsync(1234, content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CreateOrUpdate_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -61,17 +57,10 @@ detail = "<detail>",
 },
             });
             Response response = await client.CreateOrUpdateAsync(1234, content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CreateOrReplace_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -82,14 +71,10 @@ detail = "<detail>",
                 name = "<name>",
             });
             Response response = await client.CreateOrReplaceAsync(1234, content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CreateOrReplace_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -100,6 +85,7 @@ detail = "<detail>",
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CreateOrReplace_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -118,17 +104,10 @@ detail = "<detail>",
 },
             });
             Response response = await client.CreateOrReplaceAsync(1234, content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task CreateOrReplace_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -145,20 +124,17 @@ new UserOrder(1234,"<detail>")
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetUser_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             BasicClient client = CreateBasicClient(endpoint);
 
             Response response = await client.GetUserAsync(1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetUser_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -168,23 +144,17 @@ new UserOrder(1234,"<detail>")
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetUser_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             BasicClient client = CreateBasicClient(endpoint);
 
             Response response = await client.GetUserAsync(1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetUser_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -194,40 +164,37 @@ new UserOrder(1234,"<detail>")
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             BasicClient client = CreateBasicClient(endpoint);
 
             Response response = await client.DeleteAsync(1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             BasicClient client = CreateBasicClient(endpoint);
 
             Response response = await client.DeleteAsync(1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Export_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             BasicClient client = CreateBasicClient(endpoint);
 
             Response response = await client.ExportAsync(1234, "<format>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Export_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -237,23 +204,17 @@ new UserOrder(1234,"<detail>")
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Export_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             BasicClient client = CreateBasicClient(endpoint);
 
             Response response = await client.ExportAsync(1234, "<format>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-            Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Export_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -263,6 +224,7 @@ new UserOrder(1234,"<detail>")
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetUsers_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -270,14 +232,11 @@ new UserOrder(1234,"<detail>")
 
             await foreach (BinaryData item in client.GetUsersAsync(null, null, null, null, null, null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetUsers_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -289,6 +248,7 @@ new UserOrder(1234,"<detail>")
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetUsers_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -305,17 +265,11 @@ new UserOrder(1234,"<detail>")
 "<expand>"
 }, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetUsers_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -336,6 +290,7 @@ new UserOrder(1234,"<detail>")
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetWithPage_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -343,14 +298,11 @@ new UserOrder(1234,"<detail>")
 
             await foreach (BinaryData item in client.GetWithPageAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetWithPage_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -362,6 +314,7 @@ new UserOrder(1234,"<detail>")
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetWithPage_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -369,17 +322,11 @@ new UserOrder(1234,"<detail>")
 
             await foreach (BinaryData item in client.GetWithPageAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetWithPage_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -391,6 +338,7 @@ new UserOrder(1234,"<detail>")
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetWithCustomPageModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -398,14 +346,11 @@ new UserOrder(1234,"<detail>")
 
             await foreach (BinaryData item in client.GetWithCustomPageModelAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetWithCustomPageModel_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -417,6 +362,7 @@ new UserOrder(1234,"<detail>")
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetWithCustomPageModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -424,17 +370,11 @@ new UserOrder(1234,"<detail>")
 
             await foreach (BinaryData item in client.GetWithCustomPageModelAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetWithCustomPageModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

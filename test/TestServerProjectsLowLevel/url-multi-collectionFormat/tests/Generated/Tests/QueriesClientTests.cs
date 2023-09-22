@@ -22,6 +22,7 @@ namespace url_multi_collectionFormat_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringMultiNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -29,10 +30,10 @@ namespace url_multi_collectionFormat_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.ArrayStringMultiNullAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringMultiNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -43,10 +44,10 @@ namespace url_multi_collectionFormat_LowLevel.Tests
 {
 "<arrayQuery>"
 });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringMultiEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -54,10 +55,10 @@ namespace url_multi_collectionFormat_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.ArrayStringMultiEmptyAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringMultiEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -68,10 +69,10 @@ namespace url_multi_collectionFormat_LowLevel.Tests
 {
 "<arrayQuery>"
 });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringMultiValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -79,10 +80,10 @@ namespace url_multi_collectionFormat_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.ArrayStringMultiValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringMultiValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -93,7 +94,6 @@ namespace url_multi_collectionFormat_LowLevel.Tests
 {
 "<arrayQuery>"
 });
-            Console.WriteLine(response.Status);
         }
     }
 }

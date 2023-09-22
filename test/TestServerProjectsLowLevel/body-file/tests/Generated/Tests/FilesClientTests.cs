@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.IO;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -22,6 +21,7 @@ namespace body_file_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFile_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -29,16 +29,10 @@ namespace body_file_LowLevel.Tests
             FilesClient client = CreateFilesClient(credential, endpoint);
 
             Response response = await client.GetFileAsync(null);
-            if (response.ContentStream != null)
-            {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
-            }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFile_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -46,16 +40,10 @@ namespace body_file_LowLevel.Tests
             FilesClient client = CreateFilesClient(credential, endpoint);
 
             Response response = await client.GetFileAsync(null);
-            if (response.ContentStream != null)
-            {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
-            }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFileLarge_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -63,16 +51,10 @@ namespace body_file_LowLevel.Tests
             FilesClient client = CreateFilesClient(credential, endpoint);
 
             Response response = await client.GetFileLargeAsync(null);
-            if (response.ContentStream != null)
-            {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
-            }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFileLarge_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -80,16 +62,10 @@ namespace body_file_LowLevel.Tests
             FilesClient client = CreateFilesClient(credential, endpoint);
 
             Response response = await client.GetFileLargeAsync(null);
-            if (response.ContentStream != null)
-            {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
-            }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetEmptyFile_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -97,16 +73,10 @@ namespace body_file_LowLevel.Tests
             FilesClient client = CreateFilesClient(credential, endpoint);
 
             Response response = await client.GetEmptyFileAsync(null);
-            if (response.ContentStream != null)
-            {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
-            }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetEmptyFile_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -114,13 +84,6 @@ namespace body_file_LowLevel.Tests
             FilesClient client = CreateFilesClient(credential, endpoint);
 
             Response response = await client.GetEmptyFileAsync(null);
-            if (response.ContentStream != null)
-            {
-                using (Stream outFileStream = File.OpenWrite("<filepath>"))
-                {
-                    response.ContentStream.CopyTo(outFileStream);
-                }
-            }
         }
     }
 }

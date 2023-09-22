@@ -23,17 +23,17 @@ namespace _Type.Property.ValueTypes.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNever_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Never client = CreateValueTypesClient(endpoint).GetNeverClient(apiVersion: "1.0.0");
 
             Response response = await client.GetNeverAsync(null);
-
-            Console.WriteLine(response.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNever_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -43,17 +43,17 @@ namespace _Type.Property.ValueTypes.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNever_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Never client = CreateValueTypesClient(endpoint).GetNeverClient(apiVersion: "1.0.0");
 
             Response response = await client.GetNeverAsync(null);
-
-            Console.WriteLine(response.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNever_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -63,6 +63,7 @@ namespace _Type.Property.ValueTypes.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -70,10 +71,10 @@ namespace _Type.Property.ValueTypes.Tests
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -81,10 +82,10 @@ namespace _Type.Property.ValueTypes.Tests
 
             NeverProperty body = new NeverProperty();
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -92,10 +93,10 @@ namespace _Type.Property.ValueTypes.Tests
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Put_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -103,7 +104,6 @@ namespace _Type.Property.ValueTypes.Tests
 
             NeverProperty body = new NeverProperty();
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

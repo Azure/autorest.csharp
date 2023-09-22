@@ -7,7 +7,6 @@
 
 using System;
 using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +23,7 @@ namespace media_types_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task AnalyzeBody_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -32,12 +32,10 @@ namespace media_types_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.AnalyzeBodyAsync(content, new ContentType("application/pdf"));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task AnalyzeBody_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -46,12 +44,10 @@ namespace media_types_LowLevel.Tests
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.AnalyzeBodyAsync(content, new ContentType("application/pdf"));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task AnalyzeBodyNoAcceptHeader_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -60,10 +56,10 @@ namespace media_types_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.AnalyzeBodyNoAcceptHeaderAsync(content, new ContentType("application/pdf"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task AnalyzeBodyNoAcceptHeader_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -72,10 +68,10 @@ namespace media_types_LowLevel.Tests
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.AnalyzeBodyNoAcceptHeaderAsync(content, new ContentType("application/pdf"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ContentTypeWithEncoding_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -84,12 +80,10 @@ namespace media_types_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.ContentTypeWithEncodingAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ContentTypeWithEncoding_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -98,12 +92,10 @@ namespace media_types_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("<input>");
             Response response = await client.ContentTypeWithEncodingAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task BinaryBodyWithTwoContentTypes_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -112,12 +104,10 @@ namespace media_types_LowLevel.Tests
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.BinaryBodyWithTwoContentTypesAsync(content, new ContentType("application/json"));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task BinaryBodyWithTwoContentTypes_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -126,12 +116,10 @@ namespace media_types_LowLevel.Tests
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.BinaryBodyWithTwoContentTypesAsync(content, new ContentType("application/json"));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task BinaryBodyWithThreeContentTypes_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -140,12 +128,10 @@ namespace media_types_LowLevel.Tests
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.BinaryBodyWithThreeContentTypesAsync(content, new ContentType("application/json"));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task BinaryBodyWithThreeContentTypes_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -154,12 +140,10 @@ namespace media_types_LowLevel.Tests
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.BinaryBodyWithThreeContentTypesAsync(content, new ContentType("application/json"));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task BodyThreeTypes_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -168,12 +152,10 @@ namespace media_types_LowLevel.Tests
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.BodyThreeTypesAsync(content, new ContentType("application/octet-stream"));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task BodyThreeTypes_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -182,12 +164,10 @@ namespace media_types_LowLevel.Tests
 
             RequestContent content = RequestContent.Create(File.OpenRead("<filePath>"));
             Response response = await client.BodyThreeTypesAsync(content, new ContentType("application/octet-stream"));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutTextAndJsonBody_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -196,12 +176,10 @@ namespace media_types_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("<message>");
             Response response = await client.PutTextAndJsonBodyAsync(content, new ContentType("application/json"));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PutTextAndJsonBody_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -210,9 +188,6 @@ namespace media_types_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("<message>");
             Response response = await client.PutTextAndJsonBodyAsync(content, new ContentType("application/json"));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
     }
 }

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,6 +23,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputToInputOutput_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -34,10 +34,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Tests
                 name = "<name>",
             });
             Response response = await client.InputToInputOutputAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputToInputOutput_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -45,10 +45,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Tests
 
             InputModel body = new InputModel("<name>");
             Response response = await client.InputToInputOutputAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputToInputOutput_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -59,10 +59,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Tests
                 name = "<name>",
             });
             Response response = await client.InputToInputOutputAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task InputToInputOutput_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -70,22 +70,20 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Tests
 
             InputModel body = new InputModel("<name>");
             Response response = await client.InputToInputOutputAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OutputToInputOutput_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             UsageClient client = CreateUsageClient(endpoint);
 
             Response response = await client.OutputToInputOutputAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OutputToInputOutput_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -95,18 +93,17 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OutputToInputOutput_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             UsageClient client = CreateUsageClient(endpoint);
 
             Response response = await client.OutputToInputOutputAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OutputToInputOutput_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

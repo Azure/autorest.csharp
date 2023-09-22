@@ -23,6 +23,7 @@ namespace Projection.ProjectedName.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Json_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -33,10 +34,10 @@ namespace Projection.ProjectedName.Tests
                 wireName = true,
             });
             Response response = await client.JsonAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Json_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -44,10 +45,10 @@ namespace Projection.ProjectedName.Tests
 
             JsonProjectedNameModel jsonProjectedNameModel = new JsonProjectedNameModel(true);
             Response response = await client.JsonAsync(jsonProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Json_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -58,10 +59,10 @@ namespace Projection.ProjectedName.Tests
                 wireName = true,
             });
             Response response = await client.JsonAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Json_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -69,10 +70,10 @@ namespace Projection.ProjectedName.Tests
 
             JsonProjectedNameModel jsonProjectedNameModel = new JsonProjectedNameModel(true);
             Response response = await client.JsonAsync(jsonProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Client_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -83,10 +84,10 @@ namespace Projection.ProjectedName.Tests
                 defaultName = true,
             });
             Response response = await client.ClientAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Client_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -94,10 +95,10 @@ namespace Projection.ProjectedName.Tests
 
             ClientProjectedNameModel clientProjectedNameModel = new ClientProjectedNameModel(true);
             Response response = await client.ClientAsync(clientProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Client_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -108,10 +109,10 @@ namespace Projection.ProjectedName.Tests
                 defaultName = true,
             });
             Response response = await client.ClientAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Client_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -119,10 +120,10 @@ namespace Projection.ProjectedName.Tests
 
             ClientProjectedNameModel clientProjectedNameModel = new ClientProjectedNameModel(true);
             Response response = await client.ClientAsync(clientProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Language_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -133,10 +134,10 @@ namespace Projection.ProjectedName.Tests
                 defaultName = true,
             });
             Response response = await client.LanguageAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Language_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -144,10 +145,10 @@ namespace Projection.ProjectedName.Tests
 
             LanguageProjectedNameModel languageProjectedNameModel = new LanguageProjectedNameModel(true);
             Response response = await client.LanguageAsync(languageProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Language_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -158,10 +159,10 @@ namespace Projection.ProjectedName.Tests
                 defaultName = true,
             });
             Response response = await client.LanguageAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Language_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -169,10 +170,10 @@ namespace Projection.ProjectedName.Tests
 
             LanguageProjectedNameModel languageProjectedNameModel = new LanguageProjectedNameModel(true);
             Response response = await client.LanguageAsync(languageProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task JsonAndClient_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -183,10 +184,10 @@ namespace Projection.ProjectedName.Tests
                 wireName = true,
             });
             Response response = await client.JsonAndClientAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task JsonAndClient_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -194,10 +195,10 @@ namespace Projection.ProjectedName.Tests
 
             JsonAndClientProjectedNameModel jsonAndClientProjectedNameModel = new JsonAndClientProjectedNameModel(true);
             Response response = await client.JsonAndClientAsync(jsonAndClientProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task JsonAndClient_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -208,10 +209,10 @@ namespace Projection.ProjectedName.Tests
                 wireName = true,
             });
             Response response = await client.JsonAndClientAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task JsonAndClient_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -219,7 +220,6 @@ namespace Projection.ProjectedName.Tests
 
             JsonAndClientProjectedNameModel jsonAndClientProjectedNameModel = new JsonAndClientProjectedNameModel(true);
             Response response = await client.JsonAndClientAsync(jsonAndClientProjectedNameModel);
-            Console.WriteLine(response.Status);
         }
     }
 }

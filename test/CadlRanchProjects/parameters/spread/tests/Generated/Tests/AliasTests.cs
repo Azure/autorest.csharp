@@ -22,6 +22,7 @@ namespace Parameters.Spread.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAsRequestBody_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -32,20 +33,20 @@ namespace Parameters.Spread.Tests
                 name = "<name>",
             });
             Response response = await client.SpreadAsRequestBodyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAsRequestBody_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Alias client = CreateSpreadClient(endpoint).GetAliasClient(apiVersion: "1.0.0");
 
             Response response = await client.SpreadAsRequestBodyAsync("<name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAsRequestBody_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -56,20 +57,20 @@ namespace Parameters.Spread.Tests
                 name = "<name>",
             });
             Response response = await client.SpreadAsRequestBodyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAsRequestBody_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Alias client = CreateSpreadClient(endpoint).GetAliasClient(apiVersion: "1.0.0");
 
             Response response = await client.SpreadAsRequestBodyAsync("<name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAsRequestParameter_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -80,20 +81,20 @@ namespace Parameters.Spread.Tests
                 name = "<name>",
             });
             Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAsRequestParameter_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Alias client = CreateSpreadClient(endpoint).GetAliasClient(apiVersion: "1.0.0");
 
             Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", "<name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAsRequestParameter_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -104,20 +105,20 @@ namespace Parameters.Spread.Tests
                 name = "<name>",
             });
             Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadAsRequestParameter_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Alias client = CreateSpreadClient(endpoint).GetAliasClient(apiVersion: "1.0.0");
 
             Response response = await client.SpreadAsRequestParameterAsync("<id>", "<x-ms-test-header>", "<name>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadWithMultipleParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -133,20 +134,20 @@ namespace Parameters.Spread.Tests
                 prop6 = "<prop6>",
             });
             Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadWithMultipleParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Alias client = CreateSpreadClient(endpoint).GetAliasClient(apiVersion: "1.0.0");
 
             Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadWithMultipleParameters_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -162,17 +163,16 @@ namespace Parameters.Spread.Tests
                 prop6 = "<prop6>",
             });
             Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task SpreadWithMultipleParameters_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Alias client = CreateSpreadClient(endpoint).GetAliasClient(apiVersion: "1.0.0");
 
             Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<x-ms-test-header>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
-            Console.WriteLine(response.Status);
         }
     }
 }

@@ -22,6 +22,7 @@ namespace url_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBooleanTrue_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -29,10 +30,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.GetBooleanTrueAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBooleanTrue_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -40,10 +41,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.GetBooleanTrueAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBooleanFalse_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -51,10 +52,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.GetBooleanFalseAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBooleanFalse_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -62,10 +63,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.GetBooleanFalseAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBooleanNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -73,10 +74,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.GetBooleanNullAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetBooleanNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -84,10 +85,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.GetBooleanNullAsync(boolQuery: true);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetIntOneMillion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -95,10 +96,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.GetIntOneMillionAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetIntOneMillion_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -106,10 +107,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.GetIntOneMillionAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetIntNegativeOneMillion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -117,10 +118,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.GetIntNegativeOneMillionAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetIntNegativeOneMillion_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -128,10 +129,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.GetIntNegativeOneMillionAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetIntNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -139,10 +140,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.GetIntNullAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetIntNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -150,10 +151,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.GetIntNullAsync(intQuery: 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetTenBillion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -161,10 +162,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.GetTenBillionAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetTenBillion_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -172,10 +173,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.GetTenBillionAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNegativeTenBillion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -183,10 +184,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.GetNegativeTenBillionAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNegativeTenBillion_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -194,10 +195,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.GetNegativeTenBillionAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLongNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -205,10 +206,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.GetLongNullAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLongNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -216,10 +217,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.GetLongNullAsync(longQuery: 1234L);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task FloatScientificPositive_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -227,10 +228,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.FloatScientificPositiveAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task FloatScientificPositive_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -238,10 +239,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.FloatScientificPositiveAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task FloatScientificNegative_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -249,10 +250,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.FloatScientificNegativeAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task FloatScientificNegative_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -260,10 +261,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.FloatScientificNegativeAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task FloatNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -271,10 +272,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.FloatNullAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task FloatNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -282,10 +283,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.FloatNullAsync(floatQuery: 123.45F);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DoubleDecimalPositive_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -293,10 +294,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.DoubleDecimalPositiveAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DoubleDecimalPositive_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -304,10 +305,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.DoubleDecimalPositiveAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DoubleDecimalNegative_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -315,10 +316,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.DoubleDecimalNegativeAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DoubleDecimalNegative_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -326,10 +327,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.DoubleDecimalNegativeAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DoubleNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -337,10 +338,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.DoubleNullAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DoubleNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -348,10 +349,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.DoubleNullAsync(doubleQuery: 123.45);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task StringUnicode_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -359,10 +360,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.StringUnicodeAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task StringUnicode_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -370,10 +371,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.StringUnicodeAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task StringUrlEncoded_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -381,10 +382,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.StringUrlEncodedAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task StringUrlEncoded_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -392,10 +393,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.StringUrlEncodedAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task StringEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -403,10 +404,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.StringEmptyAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task StringEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -414,10 +415,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.StringEmptyAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task StringNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -425,10 +426,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.StringNullAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task StringNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -436,10 +437,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.StringNullAsync(stringQuery: "<stringQuery>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task EnumValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -447,10 +448,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.EnumValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task EnumValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -458,10 +459,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.EnumValidAsync(enumQuery: "red color");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task EnumNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -469,10 +470,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.EnumNullAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task EnumNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -480,10 +481,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.EnumNullAsync(enumQuery: "red color");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ByteMultiByte_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -491,10 +492,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.ByteMultiByteAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ByteMultiByte_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -502,10 +503,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.ByteMultiByteAsync(byteQuery: BinaryData.FromObjectAsJson(new object()));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ByteEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -513,10 +514,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.ByteEmptyAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ByteEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -524,10 +525,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.ByteEmptyAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ByteNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -535,10 +536,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.ByteNullAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ByteNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -546,10 +547,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.ByteNullAsync(byteQuery: BinaryData.FromObjectAsJson(new object()));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DateValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -557,10 +558,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.DateValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DateValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -568,10 +569,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.DateValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DateNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -579,10 +580,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.DateNullAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DateNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -590,10 +591,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.DateNullAsync(dateQuery: DateTimeOffset.Parse("2022-05-10"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DateTimeValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -601,10 +602,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.DateTimeValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DateTimeValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -612,10 +613,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.DateTimeValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DateTimeNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -623,10 +624,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.DateTimeNullAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DateTimeNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -634,10 +635,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.DateTimeNullAsync(dateTimeQuery: DateTimeOffset.Parse("2022-05-10T18:57:31.2311892Z"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringCsvValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -645,10 +646,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.ArrayStringCsvValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringCsvValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -659,10 +660,10 @@ namespace url_LowLevel.Tests
 {
 "<arrayQuery>"
 });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringCsvNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -670,10 +671,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.ArrayStringCsvNullAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringCsvNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -684,10 +685,10 @@ namespace url_LowLevel.Tests
 {
 "<arrayQuery>"
 });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringCsvEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -695,10 +696,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.ArrayStringCsvEmptyAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringCsvEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -709,10 +710,10 @@ namespace url_LowLevel.Tests
 {
 "<arrayQuery>"
 });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringNoCollectionFormatEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -720,10 +721,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.ArrayStringNoCollectionFormatEmptyAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringNoCollectionFormatEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -734,10 +735,10 @@ namespace url_LowLevel.Tests
 {
 "<arrayQuery>"
 });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringSsvValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -745,10 +746,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.ArrayStringSsvValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringSsvValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -759,10 +760,10 @@ namespace url_LowLevel.Tests
 {
 "<arrayQuery>"
 });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringTsvValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -770,10 +771,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.ArrayStringTsvValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringTsvValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -784,10 +785,10 @@ namespace url_LowLevel.Tests
 {
 "<arrayQuery>"
 });
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringPipesValid_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -795,10 +796,10 @@ namespace url_LowLevel.Tests
             QueriesClient client = CreateQueriesClient(credential, endpoint);
 
             Response response = await client.ArrayStringPipesValidAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ArrayStringPipesValid_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -809,7 +810,6 @@ namespace url_LowLevel.Tests
 {
 "<arrayQuery>"
 });
-            Console.WriteLine(response.Status);
         }
     }
 }

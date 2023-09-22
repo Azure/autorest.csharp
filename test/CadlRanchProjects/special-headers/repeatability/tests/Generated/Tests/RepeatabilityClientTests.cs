@@ -21,23 +21,23 @@ namespace SpecialHeaders.Repeatability.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ImmediateSuccess_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RepeatabilityClient client = CreateRepeatabilityClient(endpoint);
 
             Response response = await client.ImmediateSuccessAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ImmediateSuccess_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RepeatabilityClient client = CreateRepeatabilityClient(endpoint);
 
             Response response = await client.ImmediateSuccessAsync();
-            Console.WriteLine(response.Status);
         }
     }
 }

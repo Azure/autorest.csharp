@@ -15,6 +15,8 @@ namespace AutoRest.CSharp.LowLevel.Generation.TestGeneration
             _testProvider = testProvider;
         }
 
+        protected override bool ShouldWriteResponse => false;
+
         public override void Write()
         {
             // since our generator source code does not have the Azure.Identity dependency, we have to add this dependency separately

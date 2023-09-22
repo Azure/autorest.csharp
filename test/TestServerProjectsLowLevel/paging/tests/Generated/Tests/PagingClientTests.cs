@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -23,6 +22,7 @@ namespace paging_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNoItemNamePages_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -31,12 +31,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetNoItemNamePagesAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNoItemNamePages_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -45,13 +44,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetNoItemNamePagesAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetEmptyNextLinkNamePages_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -60,12 +57,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetEmptyNextLinkNamePagesAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetEmptyNextLinkNamePages_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -74,13 +70,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetEmptyNextLinkNamePagesAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNullNextLinkNamePages_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -89,12 +83,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetNullNextLinkNamePagesAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetNullNextLinkNamePages_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -103,13 +96,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetNullNextLinkNamePagesAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetSinglePages_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -118,12 +109,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetSinglePagesAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetSinglePages_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -132,13 +122,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetSinglePagesAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetSinglePagesWithBodyParams_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -148,12 +136,11 @@ namespace paging_LowLevel.Tests
             RequestContent content = RequestContent.Create(new object());
             await foreach (BinaryData item in client.GetSinglePagesWithBodyParamsAsync(content))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetSinglePagesWithBodyParams_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -166,13 +153,11 @@ namespace paging_LowLevel.Tests
             });
             await foreach (BinaryData item in client.GetSinglePagesWithBodyParamsAsync(content))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task FirstResponseEmpty_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -181,12 +166,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.FirstResponseEmptyAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task FirstResponseEmpty_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -195,13 +179,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.FirstResponseEmptyAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMultiplePages_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -210,12 +192,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetMultiplePagesAsync(null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMultiplePages_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -224,13 +205,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetMultiplePagesAsync(1234, 1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetWithQueryParams_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -239,12 +218,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetWithQueryParamsAsync(1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetWithQueryParams_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -253,13 +231,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetWithQueryParamsAsync(1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DuplicateParams_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -268,12 +244,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.DuplicateParamsAsync(null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DuplicateParams_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -282,13 +257,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.DuplicateParamsAsync("<filter>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PageWithMaxPageSize_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -297,12 +270,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.PageWithMaxPageSizeAsync(null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PageWithMaxPageSize_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -311,13 +283,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.PageWithMaxPageSizeAsync("5", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NextOperationWithQueryParams_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -326,12 +296,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.NextOperationWithQueryParamsAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NextOperationWithQueryParams_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -340,13 +309,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.NextOperationWithQueryParamsAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetOdataMultiplePages_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -355,12 +322,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetOdataMultiplePagesAsync(null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetOdataMultiplePages_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -369,13 +335,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetOdataMultiplePagesAsync(1234, 1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMultiplePagesWithOffset_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -384,12 +348,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetMultiplePagesWithOffsetAsync(1234, null, null, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMultiplePagesWithOffset_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -398,13 +361,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetMultiplePagesWithOffsetAsync(1234, 1234, 1234, null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMultiplePagesRetryFirst_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -413,12 +374,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetMultiplePagesRetryFirstAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMultiplePagesRetryFirst_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -427,13 +387,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetMultiplePagesRetryFirstAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMultiplePagesRetrySecond_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -442,12 +400,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetMultiplePagesRetrySecondAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMultiplePagesRetrySecond_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -456,13 +413,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetMultiplePagesRetrySecondAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetSinglePagesFailure_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -471,12 +426,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetSinglePagesFailureAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetSinglePagesFailure_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -485,13 +439,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetSinglePagesFailureAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMultiplePagesFailure_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -500,12 +452,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetMultiplePagesFailureAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMultiplePagesFailure_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -514,13 +465,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetMultiplePagesFailureAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMultiplePagesFailureUri_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -529,12 +478,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetMultiplePagesFailureUriAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMultiplePagesFailureUri_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -543,13 +491,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetMultiplePagesFailureUriAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMultiplePagesFragmentNextLink_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -558,12 +504,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetMultiplePagesFragmentNextLinkAsync("<tenant>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMultiplePagesFragmentNextLink_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -572,13 +517,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetMultiplePagesFragmentNextLinkAsync("<tenant>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMultiplePagesFragmentWithGroupingNextLink_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -587,12 +530,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetMultiplePagesFragmentWithGroupingNextLinkAsync("<tenant>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMultiplePagesFragmentWithGroupingNextLink_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -601,13 +543,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetMultiplePagesFragmentWithGroupingNextLinkAsync("<tenant>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task AppendApiVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -616,12 +556,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.AppendApiVersionAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task AppendApiVersion_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -630,13 +569,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.AppendApiVersionAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ReplaceApiVersion_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -645,12 +582,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.ReplaceApiVersionAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ReplaceApiVersion_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -659,13 +595,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.ReplaceApiVersionAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NextFragment_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -674,12 +608,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.NextFragmentAsync("<tenant>", "<nextLink>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NextFragment_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -688,13 +621,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.NextFragmentAsync("<tenant>", "<nextLink>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NextFragmentWithGrouping_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -703,12 +634,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.NextFragmentWithGroupingAsync("<tenant>", "<nextLink>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NextFragmentWithGrouping_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -717,13 +647,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.NextFragmentWithGroupingAsync("<tenant>", "<nextLink>", "<apiVersion>", null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetPagingModelWithItemNameWithXMSClientName_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -732,12 +660,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetPagingModelWithItemNameWithXMSClientNameAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetPagingModelWithItemNameWithXMSClientName_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -746,13 +673,11 @@ namespace paging_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetPagingModelWithItemNameWithXMSClientNameAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMultiplePagesLRO_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -762,12 +687,11 @@ namespace paging_LowLevel.Tests
             Operation<AsyncPageable<BinaryData>> operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, null, null, null);
             await foreach (BinaryData item in operation.Value)
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetMultiplePagesLRO_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -777,9 +701,6 @@ namespace paging_LowLevel.Tests
             Operation<AsyncPageable<BinaryData>> operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, 1234, 1234, null);
             await foreach (BinaryData item in operation.Value)
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("properties").GetProperty("name").ToString());
             }
         }
     }

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -22,6 +21,7 @@ namespace ResourceClients_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetGroup_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -29,12 +29,10 @@ namespace ResourceClients_LowLevel.Tests
             ResourceGroup client = CreateResourceServiceClient(credential, endpoint).GetResourceGroup("<GroupId>");
 
             Response response = await client.GetGroupAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetGroup_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -42,12 +40,10 @@ namespace ResourceClients_LowLevel.Tests
             ResourceGroup client = CreateResourceServiceClient(credential, endpoint).GetResourceGroup("<GroupId>");
 
             Response response = await client.GetGroupAsync(null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetItems_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -56,12 +52,11 @@ namespace ResourceClients_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetItemsAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetItems_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -70,8 +65,6 @@ namespace ResourceClients_LowLevel.Tests
 
             await foreach (BinaryData item in client.GetItemsAsync(null))
             {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].ToString());
             }
         }
     }

@@ -21,23 +21,23 @@ namespace ServiceVersionOverride_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceVersionOverrideClient client = CreateServiceVersionOverrideClient(endpoint);
 
             Response response = await client.OperationAsync("2.0");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ServiceVersionOverrideClient client = CreateServiceVersionOverrideClient(endpoint);
 
             Response response = await client.OperationAsync("2.0");
-            Console.WriteLine(response.Status);
         }
     }
 }

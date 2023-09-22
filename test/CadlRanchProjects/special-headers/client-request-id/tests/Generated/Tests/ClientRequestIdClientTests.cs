@@ -21,23 +21,23 @@ namespace SpecialHeaders.ClientRequestId.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetClientRequestId_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientRequestIdClient client = CreateClientRequestIdClient(endpoint);
 
             Response response = await client.GetClientRequestIdAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetClientRequestId_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientRequestIdClient client = CreateClientRequestIdClient(endpoint);
 
             Response response = await client.GetClientRequestIdAsync();
-            Console.WriteLine(response.Status);
         }
     }
 }

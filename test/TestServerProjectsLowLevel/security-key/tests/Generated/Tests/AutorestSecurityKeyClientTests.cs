@@ -21,6 +21,7 @@ namespace security_key_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -28,10 +29,10 @@ namespace security_key_LowLevel.Tests
             AutorestSecurityKeyClient client = CreateAutorestSecurityKeyClient(credential, endpoint);
 
             Response response = await client.HeadAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Head_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -39,7 +40,6 @@ namespace security_key_LowLevel.Tests
             AutorestSecurityKeyClient client = CreateAutorestSecurityKeyClient(credential, endpoint);
 
             Response response = await client.HeadAsync();
-            Console.WriteLine(response.Status);
         }
     }
 }

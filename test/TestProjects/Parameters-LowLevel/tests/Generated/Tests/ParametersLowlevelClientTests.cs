@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -23,6 +22,7 @@ namespace Parameters_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoRequestBodyResponseBody_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -30,12 +30,10 @@ namespace Parameters_LowLevel.Tests
             ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
 
             Response response = await client.NoRequestBodyResponseBodyAsync(1234, default, null, null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoRequestBodyResponseBody_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -43,12 +41,10 @@ namespace Parameters_LowLevel.Tests
             ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
 
             Response response = await client.NoRequestBodyResponseBodyAsync(1234, default, 1234, "start", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RequestBodyResponseBody_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -57,12 +53,10 @@ namespace Parameters_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.RequestBodyResponseBodyAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RequestBodyResponseBody_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -75,13 +69,10 @@ namespace Parameters_LowLevel.Tests
                 Status = "<Status>",
             });
             Response response = await client.RequestBodyResponseBodyAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("Code").ToString());
-            Console.WriteLine(result.GetProperty("Status").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DeleteNoRequestBodyResponseBody_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -89,12 +80,10 @@ namespace Parameters_LowLevel.Tests
             ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
 
             Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task DeleteNoRequestBodyResponseBody_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -102,12 +91,10 @@ namespace Parameters_LowLevel.Tests
             ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
 
             Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoRequestBodyNoResponseBody_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -115,10 +102,10 @@ namespace Parameters_LowLevel.Tests
             ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
 
             Response response = await client.NoRequestBodyNoResponseBodyAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task NoRequestBodyNoResponseBody_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -126,10 +113,10 @@ namespace Parameters_LowLevel.Tests
             ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
 
             Response response = await client.NoRequestBodyNoResponseBodyAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RequestBodyNoResponseBody_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -138,10 +125,10 @@ namespace Parameters_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.RequestBodyNoResponseBodyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RequestBodyNoResponseBody_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -150,10 +137,10 @@ namespace Parameters_LowLevel.Tests
 
             RequestContent content = RequestContent.Create("<stringBody>");
             Response response = await client.RequestBodyNoResponseBodyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OptionalPathParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -161,10 +148,10 @@ namespace Parameters_LowLevel.Tests
             ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
 
             Response response = await client.OptionalPathParametersAsync(1234, "start", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OptionalPathParameters_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -172,10 +159,10 @@ namespace Parameters_LowLevel.Tests
             ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
 
             Response response = await client.OptionalPathParametersAsync(1234, "start", 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OptionalPathParametersWithMixedSequence_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -183,10 +170,10 @@ namespace Parameters_LowLevel.Tests
             ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
 
             Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234, "start", default);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OptionalPathParametersWithMixedSequence_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -194,10 +181,10 @@ namespace Parameters_LowLevel.Tests
             ParametersLowlevelClient client = CreateParametersLowlevelClient(credential, endpoint);
 
             Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234, "start", default);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OptionalPathBodyParametersWithMixedSequence_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -206,10 +193,10 @@ namespace Parameters_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(default, "<name>", 1234, default, content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OptionalPathBodyParametersWithMixedSequence_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -222,10 +209,10 @@ namespace Parameters_LowLevel.Tests
                 Status = "<Status>",
             });
             Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(default, "<name>", 1234, default, content, top: 1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RepeatableAction_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -234,10 +221,10 @@ namespace Parameters_LowLevel.Tests
 
             RequestContent content = null;
             Response response = await client.RepeatableActionAsync(default, "<name>", content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task RepeatableAction_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -250,7 +237,6 @@ namespace Parameters_LowLevel.Tests
                 Status = "<Status>",
             });
             Response response = await client.RepeatableActionAsync(default, "<name>", content);
-            Console.WriteLine(response.Status);
         }
     }
 }

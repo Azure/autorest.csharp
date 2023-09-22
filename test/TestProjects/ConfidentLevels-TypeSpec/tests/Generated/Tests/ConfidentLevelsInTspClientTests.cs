@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -25,6 +24,7 @@ namespace ConfidentLevelsInTsp.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnionInRequestProperty_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -35,10 +35,10 @@ namespace ConfidentLevelsInTsp.Tests
                 unionProperty = "<unionProperty>",
             });
             Response response = await client.UnionInRequestPropertyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnionInRequestProperty_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -49,10 +49,10 @@ namespace ConfidentLevelsInTsp.Tests
                 unionProperty = "<unionProperty>",
             });
             Response response = await client.UnionInRequestPropertyAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnionInResponseProperty_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -64,12 +64,10 @@ namespace ConfidentLevelsInTsp.Tests
                 age = 1234,
             });
             Response response = await client.UnionInResponsePropertyAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("unionProperty").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnionInResponseProperty_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -82,12 +80,10 @@ namespace ConfidentLevelsInTsp.Tests
                 size = 123.45,
             });
             Response response = await client.UnionInResponsePropertyAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("unionProperty").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnionWithSelfReference_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -103,10 +99,10 @@ null
                 unionProperty = "<unionProperty>",
             });
             Response response = await client.UnionWithSelfReferenceAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnionWithSelfReference_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -122,10 +118,10 @@ null
                 unionProperty = "<unionProperty>",
             });
             Response response = await client.UnionWithSelfReferenceAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnionWithInderict_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -136,10 +132,10 @@ null
                 name = "<name>",
             });
             Response response = await client.UnionWithInderictAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnionWithInderict_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -167,10 +163,10 @@ unionProperty = "<unionProperty>",
 },
             });
             Response response = await client.UnionWithInderictAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task LiteralOfInteger_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -182,10 +178,10 @@ unionProperty = "<unionProperty>",
                 id = 1,
             });
             Response response = await client.LiteralOfIntegerAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task LiteralOfInteger_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -197,10 +193,10 @@ unionProperty = "<unionProperty>",
                 id = 1,
             });
             Response response = await client.LiteralOfIntegerAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task LiteralOfFloat_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -212,10 +208,10 @@ unionProperty = "<unionProperty>",
                 id = 3.141592F,
             });
             Response response = await client.LiteralOfFloatAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task LiteralOfFloat_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -227,10 +223,10 @@ unionProperty = "<unionProperty>",
                 id = 3.141592F,
             });
             Response response = await client.LiteralOfFloatAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConfidentOperationWithDiscriminator_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -243,13 +239,10 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.ConfidentOperationWithDiscriminatorAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConfidentOperationWithDiscriminator_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -260,6 +253,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConfidentOperationWithDiscriminator_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -272,13 +266,10 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.ConfidentOperationWithDiscriminatorAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task ConfidentOperationWithDiscriminator_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -289,6 +280,7 @@ unionProperty = "<unionProperty>",
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PollutedBaseMethod_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -302,13 +294,10 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.PollutedBaseMethodAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PollutedBaseMethod_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -322,13 +311,10 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.PollutedBaseMethodAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PollutedDerivedMethod_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -342,15 +328,10 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.PollutedDerivedMethodAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("woof").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task PollutedDerivedMethod_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -364,15 +345,10 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.PollutedDerivedMethodAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("woof").ToString());
-            Console.WriteLine(result.GetProperty("color").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnpollutedDerivedMethod_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -385,14 +361,10 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.UnpollutedDerivedMethodAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("meow").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UnpollutedDerivedMethod_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -405,14 +377,10 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.UnpollutedDerivedMethodAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("meow").ToString());
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UseDerivedModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -423,10 +391,10 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.UseDerivedModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UseDerivedModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -439,10 +407,10 @@ unionProperty = "<unionProperty>",
                 size = 123.45,
             });
             Response response = await client.UseDerivedModelAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UseDerivedModelWithUnion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -454,10 +422,10 @@ unionProperty = "<unionProperty>",
                 name = "<name>",
             });
             Response response = await client.UseDerivedModelWithUnionAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task UseDerivedModelWithUnion_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -470,7 +438,6 @@ unionProperty = "<unionProperty>",
                 size = 123.45,
             });
             Response response = await client.UseDerivedModelWithUnionAsync(content);
-            Console.WriteLine(response.Status);
         }
     }
 }

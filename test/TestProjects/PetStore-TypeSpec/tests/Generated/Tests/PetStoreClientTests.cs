@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -24,39 +23,37 @@ namespace PetStore.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
 
             Response response = await client.DeleteAsync(1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Delete_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
 
             Response response = await client.DeleteAsync(1234);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Read_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
 
             Response response = await client.ReadAsync(1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Read_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -66,20 +63,17 @@ namespace PetStore.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Read_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
 
             Response response = await client.ReadAsync(1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("tag").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Read_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -89,6 +83,7 @@ namespace PetStore.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Create_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -100,13 +95,10 @@ namespace PetStore.Tests
                 age = 1234,
             });
             Response response = await client.CreateAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Create_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -117,6 +109,7 @@ namespace PetStore.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Create_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -129,14 +122,10 @@ namespace PetStore.Tests
                 age = 1234,
             });
             Response response = await client.CreateAsync(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("tag").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Create_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -150,19 +139,17 @@ namespace PetStore.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetPetByKind_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
 
             Response response = await client.GetPetByKindAsync("dog");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetPetByKind_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -172,20 +159,17 @@ namespace PetStore.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetPetByKind_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
 
             Response response = await client.GetPetByKindAsync("dog");
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("tag").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetPetByKind_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -195,19 +179,17 @@ namespace PetStore.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFirstPet_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
 
             Response response = await client.GetFirstPetAsync(null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFirstPet_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -217,20 +199,17 @@ namespace PetStore.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFirstPet_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
 
             Response response = await client.GetFirstPetAsync(1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("tag").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFirstPet_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -240,19 +219,17 @@ namespace PetStore.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFish_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
 
             Response response = await client.GetFishAsync(null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFish_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -262,19 +239,17 @@ namespace PetStore.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFish_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = CreatePetStoreClient(endpoint);
 
             Response response = await client.GetFishAsync("<kind>", null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("size").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetFish_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

@@ -21,23 +21,23 @@ namespace SpecialWords.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task For_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Operation client = CreateSpecialWordsClient(endpoint).GetOperationClient(apiVersion: "1.0.0");
 
             Response response = await client.ForAsync();
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task For_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Operation client = CreateSpecialWordsClient(endpoint).GetOperationClient(apiVersion: "1.0.0");
 
             Response response = await client.ForAsync();
-            Console.WriteLine(response.Status);
         }
     }
 }

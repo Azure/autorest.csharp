@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -23,17 +21,16 @@ namespace ParametersCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_Async()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
 
             Response response = await client.OperationAsync(1234, null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_Convenience_Async()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
@@ -42,17 +39,16 @@ namespace ParametersCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_AllParameters_Async()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
 
             Response response = await client.OperationAsync(1234, 1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation_AllParameters_Convenience_Async()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
@@ -61,17 +57,16 @@ namespace ParametersCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation2_Async()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
 
             Response response = await client.Operation2Async(1234, null, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation2_Convenience_Async()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
@@ -80,17 +75,16 @@ namespace ParametersCadl.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation2_AllParameters_Async()
         {
             ParametersCadlClient client = CreateParametersCadlClient();
 
             Response response = await client.Operation2Async(1234, 1234, null);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task Operation2_AllParameters_Convenience_Async()
         {
             ParametersCadlClient client = CreateParametersCadlClient();

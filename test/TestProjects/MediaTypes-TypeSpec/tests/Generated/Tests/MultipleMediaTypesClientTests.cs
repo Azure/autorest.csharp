@@ -23,6 +23,7 @@ namespace MultipleMediaTypes.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OneBinaryBodyTwoContentTypes_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -30,20 +31,20 @@ namespace MultipleMediaTypes.Tests
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.OneBinaryBodyTwoContentTypesAsync(content, new ContentType("application/json"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OneBinaryBodyTwoContentTypes_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
 
             Response response = await client.OneBinaryBodyTwoContentTypesAsync(BinaryData.FromObjectAsJson(new object()), new ContentType("application/json"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OneBinaryBodyTwoContentTypes_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -51,20 +52,20 @@ namespace MultipleMediaTypes.Tests
 
             RequestContent content = RequestContent.Create(new object());
             Response response = await client.OneBinaryBodyTwoContentTypesAsync(content, new ContentType("application/json"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OneBinaryBodyTwoContentTypes_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
 
             Response response = await client.OneBinaryBodyTwoContentTypesAsync(BinaryData.FromObjectAsJson(new object()), new ContentType("application/json"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OneStringBodyThreeContentTypes_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -72,20 +73,20 @@ namespace MultipleMediaTypes.Tests
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.OneStringBodyThreeContentTypesAsync(content, new ContentType("application/json"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OneStringBodyThreeContentTypes_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
 
             Response response = await client.OneStringBodyThreeContentTypesAsync("<body>", new ContentType("application/json"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OneStringBodyThreeContentTypes_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -93,20 +94,20 @@ namespace MultipleMediaTypes.Tests
 
             RequestContent content = RequestContent.Create("<body>");
             Response response = await client.OneStringBodyThreeContentTypesAsync(content, new ContentType("application/json"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OneStringBodyThreeContentTypes_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = CreateMultipleMediaTypesClient(endpoint);
 
             Response response = await client.OneStringBodyThreeContentTypesAsync("<body>", new ContentType("application/json"));
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OneModelBodyOneContentType_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -117,10 +118,10 @@ namespace MultipleMediaTypes.Tests
                 id = "<id>",
             });
             Response response = await client.OneModelBodyOneContentTypeAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OneModelBodyOneContentType_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -128,10 +129,10 @@ namespace MultipleMediaTypes.Tests
 
             Body body = new Body("<id>");
             Response response = await client.OneModelBodyOneContentTypeAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OneModelBodyOneContentType_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -142,10 +143,10 @@ namespace MultipleMediaTypes.Tests
                 id = "<id>",
             });
             Response response = await client.OneModelBodyOneContentTypeAsync(content);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task OneModelBodyOneContentType_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -153,7 +154,6 @@ namespace MultipleMediaTypes.Tests
 
             Body body = new Body("<id>");
             Response response = await client.OneModelBodyOneContentTypeAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

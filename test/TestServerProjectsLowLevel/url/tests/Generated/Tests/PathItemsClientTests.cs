@@ -21,6 +21,7 @@ namespace url_LowLevel.Tests
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetAllWithValues_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -28,10 +29,10 @@ namespace url_LowLevel.Tests
             PathItemsClient client = CreatePathItemsClient("<GlobalStringPath>", credential, endpoint, null);
 
             Response response = await client.GetAllWithValuesAsync("<pathItemStringPath>", "<localStringPath>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetAllWithValues_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -39,10 +40,10 @@ namespace url_LowLevel.Tests
             PathItemsClient client = CreatePathItemsClient("<GlobalStringPath>", credential, endpoint, "<GlobalStringQuery>");
 
             Response response = await client.GetAllWithValuesAsync("<pathItemStringPath>", "<localStringPath>", pathItemStringQuery: "<pathItemStringQuery>", localStringQuery: "<localStringQuery>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetGlobalQueryNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -50,10 +51,10 @@ namespace url_LowLevel.Tests
             PathItemsClient client = CreatePathItemsClient("<GlobalStringPath>", credential, endpoint, null);
 
             Response response = await client.GetGlobalQueryNullAsync("<pathItemStringPath>", "<localStringPath>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetGlobalQueryNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -61,10 +62,10 @@ namespace url_LowLevel.Tests
             PathItemsClient client = CreatePathItemsClient("<GlobalStringPath>", credential, endpoint, "<GlobalStringQuery>");
 
             Response response = await client.GetGlobalQueryNullAsync("<pathItemStringPath>", "<localStringPath>", pathItemStringQuery: "<pathItemStringQuery>", localStringQuery: "<localStringQuery>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetGlobalAndLocalQueryNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -72,10 +73,10 @@ namespace url_LowLevel.Tests
             PathItemsClient client = CreatePathItemsClient("<GlobalStringPath>", credential, endpoint, null);
 
             Response response = await client.GetGlobalAndLocalQueryNullAsync("<pathItemStringPath>", "<localStringPath>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetGlobalAndLocalQueryNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -83,10 +84,10 @@ namespace url_LowLevel.Tests
             PathItemsClient client = CreatePathItemsClient("<GlobalStringPath>", credential, endpoint, "<GlobalStringQuery>");
 
             Response response = await client.GetGlobalAndLocalQueryNullAsync("<pathItemStringPath>", "<localStringPath>", pathItemStringQuery: "<pathItemStringQuery>", localStringQuery: "<localStringQuery>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLocalPathItemQueryNull_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -94,10 +95,10 @@ namespace url_LowLevel.Tests
             PathItemsClient client = CreatePathItemsClient("<GlobalStringPath>", credential, endpoint, null);
 
             Response response = await client.GetLocalPathItemQueryNullAsync("<pathItemStringPath>", "<localStringPath>");
-            Console.WriteLine(response.Status);
         }
 
         [Test]
+        [Ignore("Skipping this test case because this is only for scaffolding the test cases")]
         public async Task GetLocalPathItemQueryNull_AllParameters_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -105,7 +106,6 @@ namespace url_LowLevel.Tests
             PathItemsClient client = CreatePathItemsClient("<GlobalStringPath>", credential, endpoint, "<GlobalStringQuery>");
 
             Response response = await client.GetLocalPathItemQueryNullAsync("<pathItemStringPath>", "<localStringPath>", pathItemStringQuery: "<pathItemStringQuery>", localStringQuery: "<localStringQuery>");
-            Console.WriteLine(response.Status);
         }
     }
 }
